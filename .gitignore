@@ -131,5 +131,5 @@ dmypy.json
 # venv dir
 greenhouse/
 
-# Secret settings
-private_settings.py
+# Private settings file
+.env
