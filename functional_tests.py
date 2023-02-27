@@ -3,14 +3,14 @@ import pytest
 
 browser = webdriver.Firefox()
 
-class Customer:
+class Plant:
     def __init__(self, name):
         self.name = name
 
-# User navigates to the homepage of the rotomi-app
+# User navigates to the homepage of the greenlab-app
 browser.get('http://localhost:8000')
 
-# User notices the page title and header mention rotomi
+# User notices the page title and header mention Django
 assert 'Django' in browser.title
 
-# User is prompted to login
+# User is prompted to enter plant
