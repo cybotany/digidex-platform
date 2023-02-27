@@ -133,3 +133,6 @@ greenhouse/
 
 # Private settings file
 .env
+
+# data dir
+data/*.csv
