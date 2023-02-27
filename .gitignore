@@ -136,3 +136,4 @@ greenhouse/
 
 # data dir
 data/*.csv
+data/*.sqlite
