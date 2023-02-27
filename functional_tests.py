@@ -13,4 +13,4 @@ browser.get('http://localhost:8000')
 # User notices the page title and header mention Django
 assert 'Django' in browser.title
 
-# User is prompted to enter plant
+# User is prompted to 
