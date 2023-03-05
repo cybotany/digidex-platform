@@ -49,7 +49,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'greenlab.urls'
+ROOT_URLCONF = 'eukix.urls'
 
 TEMPLATES = [
     {
@@ -67,7 +67,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'greenlab.wsgi.application'
+WSGI_APPLICATION = 'eukix.wsgi.application'
 
 
 # Database
