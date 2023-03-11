@@ -4,13 +4,15 @@ import pytest
 browser = webdriver.Firefox()
 
 class Plant:
-    def __init__(self, name):
-        self.name = name
+    def __init__(self, plant_id, tax_id):
+        self.id = id
 
-# User navigates to the homepage of the greenlab-app
-browser.get('http://localhost:8000')
+# User scans plant container which directs them to the app.
+browser.get('http://localhost:8000/plant')
 
-# User notices the page title and header mention Django
-assert 'Django' in browser.title
+# User is prompted to create an account or log-in.
 
-# User is prompted to 
+# User logs in to their account and is redirected to the plant registration view
+
+# User is prompted to fill in values regarding plant with UID automatically generated
+
