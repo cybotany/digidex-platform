@@ -3,6 +3,8 @@ from decouple import config
 import pytest
 
 class TestUser:
+    __test__ = False
+
     def __init__(self, browser):
         self.browser = browser
     
@@ -14,7 +16,7 @@ class TestUser:
 
 @pytest.fixture
 def firefox_user():
-    return TestUser(webdriver.Firefox())
+    return webdriver.Firefox()
 
 WEBSITE_URL = config("WEBSITE_URL")
 
@@ -48,4 +50,4 @@ def test_ff_user_story(firefox_user):
     # She visits that URL - her to-do list is still there.
 
     # Satisfied, she goes back to sleep
-test_ff_user_story()
+    ff_user.quit_browser()
