@@ -16,20 +16,17 @@ class TestUser:
 def firefox_user():
     return TestUser(webdriver.Firefox())
 
-def main():
+WEBSITE_URL = config("WEBSITE_URL")
 
-    WEBSITE_URL = config("WEBSITE_URL")
-
-    # User purchased a GL-NFC tag and scans it.
-    # After scanning they are prompted to open the web app
-    def test_page_launch(firefox_user):
-        ff_user = TestUser(firefox_user)
-        ff_user.browser_navigation(WEBSITE_URL)
-        ff_user.quit()
-
+def test_ff_user_story(firefox_user):
+    #User purchased a GL-NFC tag and scans it.
+    #After scanning they are prompted to open the web app
+    ff_user = TestUser(firefox_user)
+    ff_user.browser_navigation(WEBSITE_URL)
+        
     # The user notices the page title and header mention cataloging
     # their plant.
-    #assert 'Plant Catalog' in browser.title
+    assert 'Plant Catalog' in ff_user.browser.title
 
     # She is invited to enter a to-do item straight away
 
@@ -51,6 +48,4 @@ def main():
     # She visits that URL - her to-do list is still there.
 
     # Satisfied, she goes back to sleep
-
-if __name__ == '__main__':
-    main()
+test_ff_user_story()
