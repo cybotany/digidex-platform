@@ -7,7 +7,7 @@ class TestUser:
         self.browser = browser
     
     def browser_navigation(self, website):
-        self.browser.get(config("WEBSITE_URL"))
+        self.browser.get(website)
 
     def quit_browser(self):
         self.browser.quit()
@@ -18,13 +18,14 @@ def firefox_user():
 
 def main():
 
-    # User purchased a GL-NFC tag and scans it to register
-    # it. After scanning, a web-app launches.
+    WEBSITE_URL = config("WEBSITE_URL")
 
+    # User purchased a GL-NFC tag and scans it.
+    # After scanning they are prompted to open the web app
     def test_page_launch(firefox_user):
-        test_ff_user = TestUser(firefox_user)
-        test_ff_user.browser_navigation()
-        test_ff_user.quit()
+        ff_user = TestUser(firefox_user)
+        ff_user.browser_navigation(WEBSITE_URL)
+        ff_user.quit()
 
     # The user notices the page title and header mention cataloging
     # their plant.
