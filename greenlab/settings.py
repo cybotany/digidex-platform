@@ -25,7 +25,7 @@ from decouple import config
 SECRET_KEY = config("SECRET_KEY")
 DEBUG = True
 
-ALLOWED_HOSTS = ["10.0.0.218"]
+ALLOWED_HOSTS = ["ALLOWED_HOSTS"]
 
 
 # Application definition
