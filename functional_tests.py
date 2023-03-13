@@ -38,22 +38,21 @@ def test_ff_user_story(firefox_user):
     page_header = ff_user.browser.find_element(By.TAG_NAME, 'h1').text
     assert 'Plant Catalog' in page_header
 
-    # They're invited to enter a to-do item straight away
+    # They're invited to enter a plant
     inputbox = ff_user.browser.find_element(By.ID, 'id_new_item')   
-    assert inputbox.get_attribute('placeholder') == 'Enter a to-do item'
+    assert inputbox.get_attribute('placeholder') == 'Enter a plant'
 
-    # They type "Buy peacock feathers" into a text box (Edith's hobby
-    # is tying fly-fishing lures)
-    inputbox.send_keys('Buy peacock feathers')
+    # They type Scindapsus pictus into a text box
+    inputbox.send_keys('Scindapsus pictus')
     
-    # When she hits enter, the page updates, and now the page lists
-    # "1: Buy peacock feathers" as an item in a to-do list
+    # When they hit enter, the page updates, and now the page lists
+    # "1: Scindapsus pictus" 
     inputbox.send_keys(Keys.ENTER)  
     time.sleep(1)  
 
-    table = ff_user.browser.find_element(By.ID, 'id_list_table')
+    table = ff_user.browser.find_element(By.ID, 'id_plant_table')
     rows = table.find_elements(By.TAG_NAME, 'tr')  
-    assert any(row.text == '1: Buy peacock feathers' for row in rows) is True
+    assert any(row.text == '1: Scindapsus pictus' for row in rows) is True
 
     # There is still a text box inviting her to add another item. She
     # enters "Use peacock feathers to make a fly" (Edith is very methodical)
