@@ -3,4 +3,4 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return HttpResponse("<html><title>Plant Catalog</title></html>")
+    return render(request, 'home.html')
