@@ -5,5 +5,5 @@ from catalog.views import index
 class CatalogHomePageTest(TestCase):
 
     def test_root_url_resolves_to_home_page_view(self):
-        found = resolve('/catalog/')  
+        found = resolve('/')  
         self.assertEqual(found.func, index)  
