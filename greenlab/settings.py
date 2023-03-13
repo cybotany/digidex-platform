@@ -24,7 +24,6 @@ from decouple import config
 
 SECRET_KEY = config("SECRET_KEY")
 DEBUG = True
-
 ALLOWED_HOSTS = [config("ALLOWED_HOSTS")]
 
 
@@ -75,11 +74,13 @@ WSGI_APPLICATION = 'greenlab.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'OPTIONS': {
+            'service': 'my_service',
+            'passfile': '.my_pgpass',
+        },
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
