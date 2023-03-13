@@ -30,9 +30,9 @@ def test_ff_user_story(firefox_user):
     # their plant.
     assert 'Plant Catalog' in ff_user.browser.title
 
-    # She is invited to enter a to-do item straight away
+    # They're invited to enter a to-do item straight away
 
-    # She types "Buy peacock feathers" into a text box (Edith's hobby
+    # They type "Buy peacock feathers" into a text box (Edith's hobby
     # is tying fly-fishing lures)
 
     # When she hits enter, the page updates, and now the page lists
