@@ -136,4 +136,4 @@ greenhouse/
 .env
 
 # Pytest ini file
-pytest.ini
+*.ini
