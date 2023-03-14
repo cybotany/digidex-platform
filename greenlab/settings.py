@@ -73,13 +73,14 @@ WSGI_APPLICATION = 'greenlab.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'OPTIONS': {
-            'service': 'my_service',
-            'passfile': '.my_pgpass',
-        },
-    }
+  'default': {
+    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    'NAME': 'DATABASE_NAME',
+    'USER': 'USERNAME',
+    'PASSWORD': 'PASSWORD',
+    'HOST': 'END_POINT',
+    'PORT': '3306',
+  }
 }
 
 # Password validation
