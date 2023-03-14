@@ -135,6 +135,5 @@ greenhouse/
 # Private settings file
 .env
 
-# data dir
-data/*.csv
-data/*.sqlite
+# Pytest ini file
+pytest.ini
