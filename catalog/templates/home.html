@@ -6,6 +6,7 @@
         <h1>Your Plant Catalog</h1>
         <form  method="POST">
             <input name="plant_name" id="id_new_plant" placeholder="Enter a plant"/>
+            {% csrf_token %}
         </form>
         <table id="id_plant_table">
         </table> 

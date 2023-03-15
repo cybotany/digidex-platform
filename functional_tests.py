@@ -39,7 +39,7 @@ def test_ff_user_story(firefox_user):
     assert 'Plant Catalog' in page_header
 
     # They're invited to enter a plant
-    inputbox = ff_user.browser.find_element(By.ID, 'id_new_item')   
+    inputbox = ff_user.browser.find_element(By.ID, 'id_new_plant')   
     assert inputbox.get_attribute('placeholder') == 'Enter a plant'
 
     # They type Scindapsus pictus into a text box
