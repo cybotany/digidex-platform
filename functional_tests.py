@@ -52,7 +52,7 @@ def test_ff_user_story(firefox_user):
 
     table = ff_user.browser.find_element(By.ID, 'id_plant_table')
     rows = table.find_elements(By.TAG_NAME, 'tr')  
-    assert any(row.text == '1: Scindapsus pictus' for row in rows) is True
+    assert '1: Scindapsus pictus' in [row.text for row in rows] is True
 
     # There is still a text box prompting the user to enter another plant so
     # they enter Philodendron micans
