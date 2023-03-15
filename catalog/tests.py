@@ -7,6 +7,7 @@ from catalog.views import index
 
 class CatalogHomePageTest(TestCase):
 
-    def test_home_page_returns_correct_html(self):
-        response = self.client.get('/') 
+    def test_POST_request_saved(self):
+        response = self.client.post('/',  data={'plant_entry': 'A new plant'})
+        assert 'A new plant' in response.content.decode()
         self.assertTemplateUsed(response, 'home.html')
