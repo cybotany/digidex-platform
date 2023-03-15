@@ -54,16 +54,16 @@ def test_ff_user_story(firefox_user):
     rows = table.find_elements(By.TAG_NAME, 'tr')  
     assert any(row.text == '1: Scindapsus pictus' for row in rows) is True
 
-    # There is still a text box inviting her to add another item. She
-    # enters "Use peacock feathers to make a fly" (Edith is very methodical)
+    # There is still a text box prompting the user to enter another plant so
+    # they enter Philodendron micans
 
-    # The page updates again, and now shows both items on her list
+    # The page updates again, and now shows both items on their list
 
-    # Edith wonders whether the site will remember her list. Then she sees
-    # that the site has generated a unique URL for her -- there is some
+    # User wonders whether the site will remember their list. Then they sees
+    # that the site has generated a unique URL for them -- there is some
     # explanatory text to that effect.
 
-    # She visits that URL - her to-do list is still there.
+    # They visits that URL - their plant catalog is still there.
 
-    # Satisfied, she goes back to sleep
+    # Satisfied, the user closes the app
     ff_user.quit_browser()
