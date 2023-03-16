@@ -52,12 +52,19 @@ def test_ff_user_story(firefox_user):
 
     table = ff_user.browser.find_element(By.ID, 'id_plant_table')
     rows = table.find_elements(By.TAG_NAME, 'tr')  
-    assert '1: Scindapsus pictus' in [row.text for row in rows] is True
+    assert '1: Scindapsus pictus' in [row.text for row in rows]
 
     # There is still a text box prompting the user to enter another plant so
     # they enter Philodendron micans
+    inputbox = ff_user.browser.find_element(By.ID, 'id_new_plant')   
+    inputbox.send_keys('Philodendron micans')
+    inputbox.send_keys(Keys.ENTER)  
+    time.sleep(1)  
 
     # The page updates again, and now shows both items on their list
+    table = ff_user.browser.find_element(By.ID, 'id_plant_table')
+    rows = table.find_elements(By.TAG_NAME, 'tr')  
+    assert '2: Philodendron micans' in [row.text for row in rows]
 
     # User wonders whether the site will remember their list. Then they sees
     # that the site has generated a unique URL for them -- there is some
