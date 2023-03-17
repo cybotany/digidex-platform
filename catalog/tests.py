@@ -11,8 +11,20 @@ class CatalogHomePageTest(TestCase):
 
     def test_POST_request_saved(self):
         response = self.client.post('/',  data={'plant_entry': 'A new plant'})
-        assert 'A new plant' in response.content.decode()
-        self.assertTemplateUsed(response, 'home.html')
+
+        assert Plant.objects.count() == 1  
+        new_plant = Plant.objects.first()  
+        assert new_plant.name, 'A new plant'
+
+        assert response.status_code == 302
+        assert response['location'] == '/'
+
+        #assert 'A new plant' in response.content.decode()
+        #self.assertTemplateUsed(response, 'home.html')
+
+    def test_only_necessary_saves(self):
+        self.client.get('/')
+        assert Plant.objects.count() == 0
 
 
 class CatalogModelTest(TestCase):

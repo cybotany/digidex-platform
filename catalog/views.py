@@ -1,10 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
+from catalog.models import Plant
 
 
 def index(request):
-    return render(
-        request,
-        'home.html',
-        {'new_plant_entry': request.POST.get('plant_entry', ''), }
-    )
+    if request.method == 'POST':
+        Plant.objects.create(name=request.POST['plant_entry'])
+        return redirect('/')
+    return render(request, 'home.html')
