@@ -12,22 +12,27 @@ class TestUser:
     def __init__(self, browser):
         self.browser = browser
     
+
     def browser_navigation(self, website):
         self.browser.get(website)
+
+
+    def 
 
     def quit_browser(self):
         self.browser.quit()
 
 @pytest.fixture
-def firefox_user():
+def ff_driver():
     return webdriver.Firefox()
 
 WEBSITE_URL = config("WEBSITE_URL")
 
-def test_ff_user_story(firefox_user):
+
+def test_ff_user_story(ff_driver):
     #User purchased a GL-NFC tag and scans it.
     #After scanning they are prompted to open the web app
-    ff_user = TestUser(firefox_user)
+    ff_user = TestUser(ff_driver)
     ff_user.browser_navigation(WEBSITE_URL)
         
     # The user notices the page title and header mention cataloging
@@ -42,21 +47,21 @@ def test_ff_user_story(firefox_user):
     inputbox = ff_user.browser.find_element(By.ID, 'id_new_plant')   
     assert inputbox.get_attribute('placeholder') == 'Enter a plant'
 
-    # They type Scindapsus pictus into a text box
+    # They type Scindapsus pictus into a text box and hit enter
     inputbox.send_keys('Scindapsus pictus')
+    inputbox.send_keys(Keys.ENTER)
+    time.sleep(1)
     
-    # When they hit enter, the page updates, and now the page lists
-    # "1: Scindapsus pictus" 
-    inputbox.send_keys(Keys.ENTER)  
-    time.sleep(1)  
-
+    # The page updates and now lists:
+    # 1: Scindapsus pictus     
     table = ff_user.browser.find_element(By.ID, 'id_plant_table')
     rows = table.find_elements(By.TAG_NAME, 'tr')  
     assert '1: Scindapsus pictus' in [row.text for row in rows]
 
-    # There is still a text box prompting the user to enter another plant so
-    # they enter Philodendron micans
-    inputbox = ff_user.browser.find_element(By.ID, 'id_new_plant')   
+    # There is still a text box prompting the user to enter another plant
+    inputbox = ff_user.browser.find_element(By.ID, 'id_new_plant')
+
+    # They type Philodendron micans and hit enter.  
     inputbox.send_keys('Philodendron micans')
     inputbox.send_keys(Keys.ENTER)  
     time.sleep(1)  

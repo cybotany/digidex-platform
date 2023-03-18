@@ -10,7 +10,7 @@
         </form>
         <table id="id_plant_table">
             {% for plant in plants %}
-                <tr><td>1: {{ plant.name }}</td></tr> 
+                <tr><td>{{ forloop.counter  }}: {{ plant.name }}</td></tr> 
             {% endfor %}
         </table> 
     </body>
