@@ -34,6 +34,16 @@ class HomePageTest(TestCase):
         assert Plant.objects.count() == 0
 
 
+    def test_all_plants_displayed(self):
+        Plant.objects.create(name='SomePlant1')
+        Plant.objects.create(name='SomePlant2')
+
+        response = self.client.get('/')
+
+        assert 'SomePlant1' in response.content.decode()
+        assert 'SomePlant2' in response.content.decode()
+
+
 class PlantModelTest(TestCase):
     ''' Test class for Plant model.'''
 
