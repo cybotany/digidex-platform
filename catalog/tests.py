@@ -3,33 +3,40 @@ from django.urls import resolve
 from django.http import HttpRequest
 from django.template.loader import render_to_string
 
-from catalog.views import index
+from catalog.views import home_page
 from catalog.models import Plant
 
 
-class CatalogHomePageTest(TestCase):
+class HomePageTest(TestCase):
+    '''Test class for app home page.'''
+
+    def test_home_template_used(self):
+        response = self.client.get('/')
+        self.assertTemplateUsed(response, 'home.html')
+
 
     def test_POST_request_saved(self):
         response = self.client.post('/',  data={'plant_entry': 'A new plant'})
 
         assert Plant.objects.count() == 1  
         new_plant = Plant.objects.first()  
-        assert new_plant.name, 'A new plant'
+        assert new_plant.name == 'A new plant'
 
-        assert response.status_code == 302
-        assert response['location'] == '/'
+        #assert response.status_code == 302
+        #assert response['location'] == '/'
 
-        #assert 'A new plant' in response.content.decode()
-        #self.assertTemplateUsed(response, 'home.html')
+        assert 'A new plant' in response.content.decode()
 
-    def test_only_necessary_saves(self):
+
+    def test_only_necessary_requests_saved(self):
         self.client.get('/')
         assert Plant.objects.count() == 0
 
 
-class CatalogModelTest(TestCase):
+class PlantModelTest(TestCase):
+    ''' Test class for Plant model.'''
 
-    def test_plants_saved(self):
+    def test_plants_saved_and_received(self):
         first_plant = Plant()
         first_plant.name = 'Scindapsus pictus'
         first_plant.save()
