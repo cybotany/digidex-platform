@@ -67,7 +67,7 @@ def test_ff_user_story(ff_driver):
     # The page updates again, and now shows both items on their list
     table = ff_user.browser.find_element(By.ID, 'id_plant_table')
     rows = table.find_elements(By.TAG_NAME, 'tr')  
-    assert '8: Philodendron micans' in [row.text for row in rows]
+    assert '2: Philodendron micans' in [row.text for row in rows]
 
     # User wonders whether the site will remember their list. Then they sees
     # that the site has generated a unique URL for them -- there is some
