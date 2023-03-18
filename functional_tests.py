@@ -17,8 +17,6 @@ class TestUser:
         self.browser.get(website)
 
 
-    def 
-
     def quit_browser(self):
         self.browser.quit()
 
@@ -50,7 +48,7 @@ def test_ff_user_story(ff_driver):
     # They type Scindapsus pictus into a text box and hit enter
     inputbox.send_keys('Scindapsus pictus')
     inputbox.send_keys(Keys.ENTER)
-    time.sleep(1)
+    time.sleep(5)
     
     # The page updates and now lists:
     # 1: Scindapsus pictus     
@@ -64,12 +62,12 @@ def test_ff_user_story(ff_driver):
     # They type Philodendron micans and hit enter.  
     inputbox.send_keys('Philodendron micans')
     inputbox.send_keys(Keys.ENTER)  
-    time.sleep(1)  
+    time.sleep(5)  
 
     # The page updates again, and now shows both items on their list
     table = ff_user.browser.find_element(By.ID, 'id_plant_table')
     rows = table.find_elements(By.TAG_NAME, 'tr')  
-    assert '2: Philodendron micans' in [row.text for row in rows]
+    assert '8: Philodendron micans' in [row.text for row in rows]
 
     # User wonders whether the site will remember their list. Then they sees
     # that the site has generated a unique URL for them -- there is some
