@@ -1,50 +1,67 @@
-from django.test import TestCase
-from django.urls import resolve
-from django.http import HttpRequest
-from django.template.loader import render_to_string
+import pytest
+from pytest_django.asserts import assertTemplateUsed
+
+from django.test import Client 
 
 from catalog.views import home_page
 from catalog.models import Plant
 
 
-class HomePageTest(TestCase):
-    '''Test class for app home page.'''
+class HomePageTest(Client):
+    '''Test class for web-app home page.'''
 
     def test_home_template_used(self):
-        response = self.client.get('/')
-        self.assertTemplateUsed(response, 'home.html')
+        '''
+        Make sure the correct template is served to the client when
+        they navigate to the root website url.
+        '''
+        response = self.get('/')
+        assertTemplateUsed(response, 'home.html')
 
 
     def test_POST_request_saved(self):
-        response = self.client.post('/', data={'plant_entry': 'A new plant'})
+        '''
+        Make sure the POST request submitted by the client is saved to the
+        server using Django's ORM
+        '''
+        self.post('/', data={'plant_entry': 'A new plant'})
         assert Plant.objects.count() == 1 
- 
         new_plant = Plant.objects.first()  
         assert new_plant.name == 'A new plant'
 
 
     def test_redirected_after_POST(self):
-        response = self.client.post('/', data={'plant_entry': 'A new plant'})
+        ''' 
+        Make sure the client is redirected after submitting
+        a POST request to the server.
+        '''
+        response = self.post('/', data={'plant_entry': 'A new plant'})
         assert response.status_code == 302
         assert response['location'] == '/'
 
 
     def test_only_necessary_requests_saved(self):
-        self.client.get('/')
+        '''
+        Make sure only submitted plant entries are saved.
+        '''
+        self.get('/')
         assert Plant.objects.count() == 0
 
 
     def test_all_plants_displayed(self):
+        '''
+        Make sure the user is able to see all of their plants at once.
+        '''
         Plant.objects.create(name='SomePlant1')
         Plant.objects.create(name='SomePlant2')
 
-        response = self.client.get('/')
+        response = self.get('/')
 
         assert 'SomePlant1' in response.content.decode()
         assert 'SomePlant2' in response.content.decode()
 
 
-class PlantModelTest(TestCase):
+class PlantModelTest():
     ''' Test class for Plant model.'''
 
     def test_plants_saved_and_received(self):
