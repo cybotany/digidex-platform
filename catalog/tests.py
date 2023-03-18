@@ -17,15 +17,16 @@ class HomePageTest(TestCase):
 
     def test_POST_request_saved(self):
         response = self.client.post('/', data={'plant_entry': 'A new plant'})
-
-        assert Plant.objects.count() == 1  
+        assert Plant.objects.count() == 1 
+ 
         new_plant = Plant.objects.first()  
         assert new_plant.name == 'A new plant'
 
-        #assert response.status_code == 302
-        #assert response['location'] == '/'
 
-        assert 'A new plant' in response.content.decode()
+    def test_redirected_after_POST(self):
+        response = self.client.post('/', data={'plant_entry': 'A new plant'})
+        assert response.status_code == 302
+        assert response['location'] == '/'
 
 
     def test_only_necessary_requests_saved(self):
