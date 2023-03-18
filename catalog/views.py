@@ -7,4 +7,5 @@ def home_page(request):
         new_plant_entry = request.POST['plant_entry']
         Plant.objects.create(name=new_plant_entry)
         return redirect('/')
-    return render(request, 'home.html')
+    plants = Plant.objects.all()
+    return render(request, 'home.html', {'plants': plants})
