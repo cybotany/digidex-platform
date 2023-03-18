@@ -16,7 +16,7 @@ class HomePageTest(TestCase):
 
 
     def test_POST_request_saved(self):
-        response = self.client.post('/',  data={'plant_entry': 'A new plant'})
+        response = self.client.post('/', data={'plant_entry': 'A new plant'})
 
         assert Plant.objects.count() == 1  
         new_plant = Plant.objects.first()  
