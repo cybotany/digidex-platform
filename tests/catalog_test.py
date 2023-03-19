@@ -2,14 +2,20 @@ import pytest
 from pytest_django.asserts import assertTemplateUsed
 
 from django.test import Client 
+from django.test import LiveServerTestCase
 
 from catalog.views import home_page
 from catalog.models import Plant
 
 
+# Arrange
+# Act
+# Assert
+
 class TestCatalogView():
     '''Test class for web-app home page.'''
 
+    @pytest.mark.django_db
     def test_home_template_used(self):
         '''
         Make sure the correct template is served to the client when
@@ -20,6 +26,7 @@ class TestCatalogView():
         assertTemplateUsed(response, 'home.html')
 
 
+    @pytest.mark.django_db
     def test_POST_request_saved(self):
         '''
         Make sure the POST request submitted by the client is saved to the
@@ -32,6 +39,7 @@ class TestCatalogView():
         assert new_plant.name == 'A new plant'
 
 
+    @pytest.mark.django_db
     def test_redirected_after_POST(self):
         ''' 
         Make sure the client is redirected after submitting
@@ -43,6 +51,7 @@ class TestCatalogView():
         assert response['location'] == '/'
 
 
+    @pytest.mark.django_db
     def test_only_necessary_requests_saved(self):
         '''
         Make sure only submitted plant entries are saved.
@@ -52,6 +61,7 @@ class TestCatalogView():
         assert Plant.objects.count() == 0
 
 
+    @pytest.mark.django_db
     def test_all_plants_displayed(self):
         '''
         Make sure the user is able to see all of their plants at once.
@@ -70,6 +80,7 @@ class TestCatalogView():
 class TestPlantModel():
     ''' Test class for Plant model.'''
 
+    @pytest.mark.django_db
     def test_plants_saved_and_received(self):
         first_plant = Plant()
         first_plant.name = 'Scindapsus pictus'
