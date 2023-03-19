@@ -26,7 +26,7 @@ def ff_driver():
 
 WEBSITE_URL = config("WEBSITE_URL")
 
-
+@pytest.mark.django_db
 def test_ff_user_story(ff_driver):
     #User purchased a GL-NFC tag and scans it.
     #After scanning they are prompted to open the web app
