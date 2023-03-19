@@ -7,7 +7,7 @@ from catalog.views import home_page
 from catalog.models import Plant
 
 
-class HomePageTest(Client):
+class TestCatalogView():
     '''Test class for web-app home page.'''
 
     def test_home_template_used(self):
@@ -15,7 +15,8 @@ class HomePageTest(Client):
         Make sure the correct template is served to the client when
         they navigate to the root website url.
         '''
-        response = self.get('/')
+        client = Client()
+        response = client.get('/')
         assertTemplateUsed(response, 'home.html')
 
 
@@ -24,7 +25,8 @@ class HomePageTest(Client):
         Make sure the POST request submitted by the client is saved to the
         server using Django's ORM
         '''
-        self.post('/', data={'plant_entry': 'A new plant'})
+        client = Client()
+        client.post('/', data={'plant_entry': 'A new plant'})
         assert Plant.objects.count() == 1 
         new_plant = Plant.objects.first()  
         assert new_plant.name == 'A new plant'
@@ -35,7 +37,8 @@ class HomePageTest(Client):
         Make sure the client is redirected after submitting
         a POST request to the server.
         '''
-        response = self.post('/', data={'plant_entry': 'A new plant'})
+        client = Client()
+        response = client.post('/', data={'plant_entry': 'A new plant'})
         assert response.status_code == 302
         assert response['location'] == '/'
 
@@ -44,7 +47,8 @@ class HomePageTest(Client):
         '''
         Make sure only submitted plant entries are saved.
         '''
-        self.get('/')
+        client = Client()
+        client.get('/')
         assert Plant.objects.count() == 0
 
 
@@ -55,13 +59,15 @@ class HomePageTest(Client):
         Plant.objects.create(name='SomePlant1')
         Plant.objects.create(name='SomePlant2')
 
-        response = self.get('/')
+        client = Client()
+
+        response = client.get('/')
 
         assert 'SomePlant1' in response.content.decode()
         assert 'SomePlant2' in response.content.decode()
 
 
-class PlantModelTest():
+class TestPlantModel():
     ''' Test class for Plant model.'''
 
     def test_plants_saved_and_received(self):
