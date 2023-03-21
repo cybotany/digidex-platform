@@ -1,38 +1,31 @@
 import pytest
 from pytest_django.asserts import assertTemplateUsed
 
-from django.test import Client 
-from django.test import LiveServerTestCase
-
 from catalog.views import home_page
 from catalog.models import Plant
 
-
-# Arrange
-# Act
-# Assert
-
 class TestCatalogView():
-    '''Test class for web-app home page.'''
+    '''
+    Test class for web-app home page.
+    client is a fixture provided by the pytest-django plugin
+    '''
 
     @pytest.mark.django_db
-    def test_home_template_used(self):
+    def test_home_template_used(self, client):
         '''
         Make sure the correct template is served to the client when
         they navigate to the root website url.
         '''
-        client = Client()
         response = client.get('/')
         assertTemplateUsed(response, 'home.html')
 
 
     @pytest.mark.django_db
-    def test_POST_request_saved(self):
+    def test_POST_request_saved(self, client):
         '''
         Make sure the POST request submitted by the client is saved to the
         server using Django's ORM
         '''
-        client = Client()
         client.post('/', data={'plant_entry': 'A new plant'})
         assert Plant.objects.count() == 1 
         new_plant = Plant.objects.first()  
@@ -40,36 +33,32 @@ class TestCatalogView():
 
 
     @pytest.mark.django_db
-    def test_redirected_after_POST(self):
+    def test_redirected_after_POST(self, client):
         ''' 
         Make sure the client is redirected after submitting
         a POST request to the server.
         '''
-        client = Client()
         response = client.post('/', data={'plant_entry': 'A new plant'})
         assert response.status_code == 302
         assert response['location'] == '/'
 
 
     @pytest.mark.django_db
-    def test_only_necessary_requests_saved(self):
+    def test_only_necessary_requests_saved(self, client):
         '''
         Make sure only submitted plant entries are saved.
         '''
-        client = Client()
         client.get('/')
         assert Plant.objects.count() == 0
 
 
     @pytest.mark.django_db
-    def test_all_plants_displayed(self):
+    def test_all_plants_displayed(self, client):
         '''
         Make sure the user is able to see all of their plants at once.
         '''
         Plant.objects.create(name='SomePlant1')
         Plant.objects.create(name='SomePlant2')
-
-        client = Client()
 
         response = client.get('/')
 

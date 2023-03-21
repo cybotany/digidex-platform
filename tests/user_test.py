@@ -2,9 +2,11 @@ import time
 from decouple import config
 import pytest
 
-from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+
+
+WEBSITE_URL = config("WEBSITE_URL")
 
 class TestUser:
     __test__ = False
@@ -20,13 +22,7 @@ class TestUser:
     def quit_browser(self):
         self.browser.quit()
 
-@pytest.fixture
-def ff_driver():
-    return webdriver.Firefox()
 
-WEBSITE_URL = config("WEBSITE_URL")
-
-@pytest.mark.django_db
 def test_ff_user_story(ff_driver):
     #User purchased a GL-NFC tag and scans it.
     #After scanning they are prompted to open the web app
