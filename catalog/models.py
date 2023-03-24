@@ -3,7 +3,6 @@ from django.db import models
 
 class Plant(models.Model):
     name = models.CharField(max_length=50, default='')
-    #tag
 
 '''
 class Question(models.Model):

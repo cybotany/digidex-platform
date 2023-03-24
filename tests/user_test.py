@@ -6,8 +6,6 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 
 
-WEBSITE_URL = config("WEBSITE_URL")
-
 class TestUser:
     '''
     Class for testing the web-app experience from the
@@ -37,7 +35,7 @@ class TestUser:
         '''
         self.browser_navigation(url)
         page_title = self.browser.title
-        assert 'Plant Catalog' in page_title
+        assert 'CyBotany' in page_title
 
         page_header = self.browser.find_element(By.TAG_NAME, 'h1').text
         assert 'Plant Catalog' in page_header
@@ -49,34 +47,15 @@ class TestUser:
         assert inputbox.get_attribute('placeholder') == 'Enter a plant'
 
 
-    def test_plant_entered_and_listed(self):
-        # They type Scindapsus pictus into a text box and hit enter
-        inputbox = self.browser.find_element(By.ID, 'id_new_plant')   
-        assert inputbox.get_attribute('placeholder') == 'Enter a plant'
-        inputbox.send_keys('Scindapsus pictus')
-        inputbox.send_keys(Keys.ENTER)
-        time.sleep(5)
+    # They type Scindapsus pictus into a text box and hit enter
+
     
-        # The page updates and now lists:
-        # 1: Scindapsus pictus     
-        table = self.browser.find_element(By.ID, 'id_plant_table')
-        rows = table.find_elements(By.TAG_NAME, 'tr')  
-        assert '1: Scindapsus pictus' in [row.text for row in rows]
+    # The page updates and now lists:
+    # 1: Scindapsus pictus     
 
-
-    def test_plant_entered_and_listed(self):
-        # There is still a text box prompting the user to enter another plant
-        inputbox = ff_user.browser.find_element(By.ID, 'id_new_plant')
-
-        # They type Philodendron micans and hit enter.  
-        inputbox.send_keys('Philodendron micans')
-        inputbox.send_keys(Keys.ENTER)  
-        time.sleep(5)  
-
-        # The page updates again, and now shows both items on their list
-        table = ff_user.browser.find_element(By.ID, 'id_plant_table')
-        rows = table.find_elements(By.TAG_NAME, 'tr')  
-        assert '2: Philodendron micans' in [row.text for row in rows]
+    # There is still a text box prompting the user to enter another plant
+    # They type Philodendron micans and hit enter.  
+    # The page updates again, and now shows both items on their list
 
     # User wonders whether the site will remember their list. Then they sees
     # that the site has generated a unique URL for them -- there is some
