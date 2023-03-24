@@ -5,6 +5,7 @@ Just some custom fixtures to use in other tests.
 from decouple import config
 from selenium import webdriver
 import pytest
+from django.test import TransactionTestCase
 
 
 @pytest.fixture
