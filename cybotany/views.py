@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from catalog.models import Plant
+from cybotany.models import Plant
 
 
 def home_page(request):
