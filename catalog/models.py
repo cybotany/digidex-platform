@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.files.base import ContentFile
 
 
 class Plant(models.Model):
