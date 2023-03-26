@@ -25,15 +25,17 @@ def signup(request):
 
 def login(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
+        username = request.POST.get('username')
+        password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
             return redirect('dashboard')
         else:
-            return render(request, 'login.html', {'error': 'Invalid credentials'})
-    return render(request, 'login.html')
+            error = 'Invalid username or password'
+    else:
+        error = ''
+    return render(request, 'login.html', {'error': error})
 
 
 @login_required
