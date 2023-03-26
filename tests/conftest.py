@@ -5,12 +5,15 @@ Just some custom fixtures to use in other tests.
 from decouple import config
 from selenium import webdriver
 import pytest
-from django.test import TransactionTestCase
 
 
-@pytest.fixture
-def ff_driver():
-    return webdriver.Firefox()
+@pytest.fixture(scope='class')
+def ff_driver(request):
+    driver = webdriver.Firefox()
+    request.cls.browser = driver
+    yield driver
+    driver.quit()
+
 
 @pytest.fixture
 def website_url():
