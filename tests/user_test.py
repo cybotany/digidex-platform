@@ -3,9 +3,16 @@ import pytest
 
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
+from django.contrib.auth.models import User
+from django.urls import reverse
+from django.test import Client
+
+@pytest.fixture
+def client():
+    return Client()
 
 class TestUser:
     '''
@@ -35,6 +42,18 @@ class TestUser:
             browser.get(website_url)
             page_title = browser.title
             assert 'CyBotany' in page_title
+
+
+    @pytest.mark.django_db
+    class TestSignup:
+        def test_signup_redirects_to_dashboard(self, client):
+            response = client.post(reverse('signup'), {
+                'username': 'testuser',
+                'password1': 'testpassword',
+                'password2': 'testpassword',
+            })
+            assert response.status_code == 302
+            assert response.url == reverse('dashboard')
 
 
     @pytest.mark.usefixtures("website_url", "browser")
