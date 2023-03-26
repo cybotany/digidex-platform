@@ -1,11 +1,16 @@
-from django.shortcuts import redirect, render
-from cybotany.models import Plant
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect
 
 
-def home_page(request):
+def home(request):
+    return render(request, 'home.html')
+
+def signup(request):
     if request.method == 'POST':
-        new_plant_entry = request.POST['plant_entry']
-        Plant.objects.create(name=new_plant_entry)
-        return redirect('/')
-    plants = Plant.objects.all()
-    return render(request, 'home.html', {'plants': plants})
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = UserCreationForm()
+    return render(request, 'signup.html', {'form': form})

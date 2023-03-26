@@ -3,15 +3,7 @@
         <title>CyBotany</title>
     </head>
     <body>
-        <h1>Your Plant Catalog</h1>
-        <form  method="POST">
-            <input name="plant_entry" id="id_new_plant" placeholder="Enter a plant"/>
-            {% csrf_token %}
-        </form>
-        <table id="id_plant_table">
-            {% for plant in plants %}
-                <tr><td>{{ forloop.counter  }}: {{ plant.name }}</td></tr> 
-            {% endfor %}
-        </table> 
+        <h1>Welcome to CyBotany</h1>
+        <p>Please login or signup</p>
     </body>
 </html>
