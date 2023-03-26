@@ -1,12 +1,10 @@
-<!-- home.html -->
-
 {% extends 'base.html' %}
 
-{% block title %}
-Home
-{% endblock %}
-
 {% block content %}
-<h1>Welcome to CyBotany!</h1>
-<p>Please login or signup to continue.</p>
+    <h1>Welcome to CyBotany!</h1>
+    <p>Please login or signup to continue:</p>
+    <div>
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'signup' %}">Signup</a>
+      </div>
 {% endblock %}
