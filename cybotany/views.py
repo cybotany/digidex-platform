@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'cybotany/home.html')
 
 
 def signup(request):
@@ -17,7 +17,7 @@ def signup(request):
             return redirect('dashboard')
     else:
         form = UserCreationForm()
-    return render(request, 'signup.html', {'form': form})
+    return render(request, 'cybotany/signup.html', {'form': form})
 
 
 def login(request):
@@ -27,14 +27,14 @@ def login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             auth_login(request, user)
-            return redirect('dashboard')
+            return redirect('cybotany/dashboard')
         else:
             error = 'Invalid username or password'
     else:
         error = ''
-    return render(request, 'login.html', {'error': error})
+    return render(request, 'cybotany/login.html', {'error': error})
 
 
 @login_required
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    return render(request, 'cybotany/dashboard.html')
