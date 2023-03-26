@@ -1,11 +1,15 @@
-<!-- base.html -->
-
 <!DOCTYPE html>
-<html>
-    <head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CyBotany - {% block title %}{% endblock %}</title>
-    </head>
-    <body>
-        {% block content %}{% endblock %}
-    </body>
+    <!-- Add your CSS and JS files here -->
+</head>
+<body>
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
 </html>
