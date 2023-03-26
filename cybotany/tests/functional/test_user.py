@@ -41,6 +41,33 @@ class TestUser:
         page_title = browser.title
         assert 'CyBotany' in page_title
 
+    def test_user_can_navigate_to_signup_and_fill_info(self, website_url, browser):
+        # User visits the home page
+        browser.get(website_url)
+        
+        # User sees a link to the signup page and clicks it
+        signup_link = browser.find_element(By.ID, "signup-link")
+        signup_link.click()
+        
+        # User is redirected to the signup page
+        assert browser.current_url == website_url + "signup/"
+        
+        # User fills in their information and submits the form
+        username_input = browser.find_element(By.NAME, "username")
+        email_input = browser.find_element(By.NAME, "email")
+        password1_input = browser.find_element(By.NAME, "password1")
+        password2_input = browser.find_element(By.NAME, "password2")
+        
+        username_input.send_keys("new_user")
+        email_input.send_keys("new_user@example.com")
+        password1_input.send_keys("valid_password")
+        password2_input.send_keys("valid_password")
+        password2_input.send_keys(Keys.RETURN)
+        
+        # User is redirected to the separate page to fill in their info
+        assert browser.current_url == website_url + "signup/info/"
+
+
     @pytest.mark.django_db
     def test_signup_redirects_to_dashboard(self, client):
         response = client.post(reverse('signup'), {
