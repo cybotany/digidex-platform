@@ -8,7 +8,7 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             auth_login(request, user)
-            return redirect('dashboard')
+            return redirect('signup_info')
     else:
         form = UserCreationForm()
     return render(request, 'cybotany/signup.html', {'form': form})
