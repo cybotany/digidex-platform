@@ -8,6 +8,9 @@ Signup
 <h1>Signup</h1>
 <form method="post">
     {% csrf_token %}
+    <label for="username">Username:</label>
+    <input type="username" name="username" id="username" required />
+
     <label for="email">Email:</label>
     <input type="email" name="email" id="email" required />
   
