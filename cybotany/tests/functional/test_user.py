@@ -55,28 +55,18 @@ class TestUser:
         # User fills in their information and submits the form
         username_input = browser.find_element(By.NAME, "username")
         email_input = browser.find_element(By.NAME, "email")
-        password1_input = browser.find_element(By.NAME, "password1")
-        password2_input = browser.find_element(By.NAME, "password2")
+        password_input = browser.find_element(By.NAME, "password")
+        password_confirm_input = browser.find_element(By.NAME, "confirm_password")
         
         username_input.send_keys("new_user")
         email_input.send_keys("new_user@example.com")
-        password1_input.send_keys("valid_password")
-        password2_input.send_keys("valid_password")
-        password2_input.send_keys(Keys.RETURN)
+        password_input.send_keys("valid_password")
+        password_confirm_input.send_keys("valid_password")
+        password_confirm_input.send_keys(Keys.RETURN)
         
         # User is redirected to the separate page to fill in their info
         assert browser.current_url == website_url + "signup/info/"
 
-
-    @pytest.mark.django_db
-    def test_signup_redirects_to_dashboard(self, client):
-        response = client.post(reverse('signup'), {
-            'username': 'testuser',
-            'password1': 'testpassword',
-            'password2': 'testpassword',
-        })
-        assert response.status_code == 302
-        assert response.url == reverse('dashboard')
 
     def test_login_page_displays(self, website_url, browser):
         '''
