@@ -1,10 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Welcome to CyBotany!</h1>
-    <p>Please login or signup to continue:</p>
-    <div>
-        <a href="{% url 'login' %}">Login</a>
-        <a href="{% url 'signup' %}" id="signup-link">Sign up</a>
-      </div>
+  <h1>Welcome to CyBotany!</h1>
+    <p>Enter your email and password to access your dashboard or create an account.</p>
+    <form action="/login-or-signup/" method="post">
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" placeholder="example@example.com" required>
+        
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" required>
+        
+        <button type="submit">Login or Signup</button>
+    </form>
 {% endblock %}
