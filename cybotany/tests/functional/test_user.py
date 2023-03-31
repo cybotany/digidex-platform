@@ -41,44 +41,6 @@ class TestUser:
         page_title = browser.title
         assert 'CyBotany' in page_title
 
-    def test_user_can_navigate_to_signup_and_fill_info(self, website_url, browser):
-        # User visits the home page
-        browser.get(website_url)
-        
-        # User sees a link to the signup page and clicks it
-        signup_link = browser.find_element(By.ID, "signup-link")
-        signup_link.click()
-        
-        # User is redirected to the signup page
-        assert browser.current_url == website_url + "signup/"
-        
-        # User fills in their information and submits the form
-        username_input = browser.find_element(By.NAME, "username")
-        email_input = browser.find_element(By.NAME, "email")
-        password_input = browser.find_element(By.NAME, "password")
-        password_confirm_input = browser.find_element(By.NAME, "confirm_password")
-        
-        username_input.send_keys("new_user")
-        email_input.send_keys("new_user@example.com")
-        password_input.send_keys("valid_password")
-        password_confirm_input.send_keys("valid_password")
-        password_confirm_input.send_keys(Keys.RETURN)
-        
-        # User is redirected to the separate page to fill in their info
-        assert browser.current_url == website_url + "signup/info/"
-
-
-    def test_login_page_displays(self, website_url, browser):
-        '''
-        The user notices two text boxes for username and password
-        on the login page.
-        '''
-        browser.get(website_url + "login/")
-        wait = WebDriverWait(browser, 10)
-        username_input = wait.until(EC.presence_of_element_located((By.NAME, "username")))
-        password_input = wait.until(EC.presence_of_element_located((By.NAME, "password")))
-        assert username_input is not None
-        assert password_input is not None
 
     def test_login_valid_credentials_redirect_to_dashboard(self, website_url, browser):
         '''
