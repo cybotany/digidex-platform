@@ -1,0 +1,24 @@
+:root {
+  --primary-color: #00693E; /* A deep green for a natural touch */
+  --secondary-color: #1DB954; /* A vibrant green to complement the primary color */
+  --accent-color: #8AD7A0; /* A light green to be used as an accent color */
+  --neutral-light: #F2F2F2; /* A light gray for backgrounds and light text */
+  --neutral-dark: #333333; /* A dark gray for text and other dark elements */
+  --error-color: #E53935; /* A red color for error messages */
+  --warning-color: #FFC107; /* A yellow color for warning messages */
+  --success-color: #4CAF50; /* A green color for success messages */
+  --info-color: #2196F3; /* A blue color for informational messages */
+}
+
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+body {
+    font-family: 'Open Sans', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto', sans-serif;
+  }
+  
