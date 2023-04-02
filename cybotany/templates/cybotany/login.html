@@ -4,13 +4,22 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <h2>Login</h2>
-            <form method="post">
+            <form method="post" class="card" novalidate>
                 {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="btn btn-primary">Login</button>
+              <h2 class="text-center">Log in to your account</h2>
+              {% for field in form %}
+                      {{ field.label_tag }} 
+                      {{ field }}
+                      {% if field.errors %}
+                          <small>{{ field.errors|striptags }}</small> 
+                      {% endif %}
+              {% endfor %}
+
+                <input type="submit" value="Login" class="btn btn-primary full-width">
+                <hr>
+                <p class="text-center">Forgot your password?<a href="{% url 'signup' %}">Reset Password</a></p>
+                <p class="text-center">Don't have an account?<a href="{% url 'signup' %}">Join Now</a></p>
             </form>
-            <p>Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
         </div>
     </div>
 </div>
