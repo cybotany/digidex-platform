@@ -46,8 +46,7 @@ class TestUser:
     def test_signup_creates_new_user(self, website_url, browser):
         '''
         The user clicks on the Sign Up option in the navigation bar and is redirected
-        to the signup page. They enter a valid username, password, email, first name,
-        and last name and successfully create a new account.
+        to the signup page. They enter a valid username and password and successfully create a new account.
         '''
         browser.get(website_url)
         wait = WebDriverWait(browser, 10)
@@ -58,16 +57,10 @@ class TestUser:
         username_input = wait.until(EC.presence_of_element_located((By.NAME, "username")))
         password1_input = wait.until(EC.presence_of_element_located((By.NAME, "password1")))
         password2_input = wait.until(EC.presence_of_element_located((By.NAME, "password2")))
-        email_input = wait.until(EC.presence_of_element_located((By.NAME, "email")))
-        first_name_input = wait.until(EC.presence_of_element_located((By.NAME, "first_name")))
-        last_name_input = wait.until(EC.presence_of_element_located((By.NAME, "last_name")))
 
         username_input.send_keys("valid_username")
         password1_input.send_keys("ValidPassword123!")
         password2_input.send_keys("ValidPassword123!")
-        email_input.send_keys("valid@example.com")
-        first_name_input.send_keys("John")
-        last_name_input.send_keys("Doe")
 
         password2_input.send_keys(Keys.RETURN)
 
