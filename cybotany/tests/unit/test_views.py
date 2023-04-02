@@ -9,7 +9,7 @@ class TestSignupView(TestCase):
         self.client = Client()
         self.signup_url = reverse('signup')
 
-    def test_signup_creates_new_user(self):
+    def test_user_is_saved(self):
             """
             Test that a new user is created after submitting the signup form with valid data.
             """
