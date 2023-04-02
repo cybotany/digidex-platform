@@ -5,7 +5,7 @@
 <div class="center">
     <form method="post" class="card" novalidate>
         {% csrf_token %}
-        <h2 class="text-center">Sign up for an account</h2>
+        <h2 class="text-center">Create an account</h2>
         {% for field in form %}
             <div class="form-group">
                 {{ field.label_tag }} 
@@ -17,20 +17,14 @@
                 {% endif %}
             </div>
         {% endfor %}
-
+        <div class="form-group">
+            <p class="text-muted">Username can only contain letters, numbers, underscores, and periods. There is a 15-character limit for usernames. Username is not case-sensitive.</p>
+            <p class="text-muted">Password must be between 8 and 20 characters and can contain letters, numbers, and special symbols.</p>
+        </div>
         <input type="submit" value="Sign Up" class="btn btn-primary full-width">
         <hr>
-        <p class="text-center">Already have an account? <a href="{% url 'login' %}">Log in</a></p>
+        <p class="text-center">Already have an account? <a href="{% url 'login' %}">Log In</a></p>
     </form>
-    <div class="policy">
-        <ul>
-            <li>Username can only contain letters, numbers, underscores, and periods.</li>
-            <li>There is a 15-character limit for usernames.</li>
-            <li>Username is not case-sensitive.</li>
-            <li>Password must be between 8 and 20 characters.</li>
-            <li>Password can contain letters, numbers, and special symbols.</li>
-        </ul>
-    </div>
 </div>
 
 {% endblock content %}
