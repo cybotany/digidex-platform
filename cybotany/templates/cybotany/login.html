@@ -6,6 +6,13 @@
             <form method="post" class="card" novalidate>
                 {% csrf_token %}
               <h2 class="text-center">Log in to your account</h2>
+
+              {% if form.non_field_errors %}
+                <div class="alert alert-danger">
+                  <small>{{ form.non_field_errors|striptags }}</small>
+                </div>
+              {% endif %}
+
               {% for field in form %}
                       {{ field.label_tag }} 
                       {{ field }}
