@@ -1,10 +1,13 @@
 from django.urls import path
-from .views import account_dashboard_view, account_login_view, account_signup_view, home_view
+from cybotany.views.home_view import HomeView
+from cybotany.views.account_login_view import AccountLoginView
+from cybotany.views.account_signup_view import AccountSignupView
+from cybotany.views.account_dashboard_view import AccountDashboardView
 
 
 urlpatterns = [
-    path('', home_view.as_view(), name='home'),
-    path('login/', account_login_view.as_view(), name='login'),   
-    path('signup/', account_signup_view.as_view(), name='signup'),      
-    path('dashboard/', account_dashboard_view.as_view(), name='dashboard'),
+    path('', HomeView.as_view(), name='home'),
+    path('login/', AccountLoginView.as_view(), name='login'),   
+    path('signup/', AccountSignupView.as_view(), name='signup'),      
+    path('dashboard/', AccountDashboardView.as_view(), name='dashboard'),
 ]
