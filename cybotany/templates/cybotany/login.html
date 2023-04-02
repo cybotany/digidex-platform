@@ -1,6 +1,7 @@
 {% extends 'cybotany/base.html' %}
 
 {% block content %}
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
@@ -17,10 +18,10 @@
 
                 <input type="submit" value="Login" class="btn btn-primary full-width">
                 <hr>
-                <p class="text-center">Forgot your password?<a href="{% url 'signup' %}">Reset Password</a></p>
-                <p class="text-center">Don't have an account?<a href="{% url 'signup' %}">Join Now</a></p>
+                <p class="text-center">Forgot your password? <a href="{% url 'signup' %}">Reset Password</a></p>
+                <p class="text-center">Don't have an account? <a href="{% url 'signup' %}">Join Now</a></p>
             </form>
         </div>
     </div>
 </div>
-{% endblock %}
+{% endblock content%}
