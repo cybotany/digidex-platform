@@ -2,6 +2,7 @@
 <html lang="en">
 
 {% load static %}
+{% load i18n %}
 
 <head>
     <meta charset="UTF-8">
@@ -15,24 +16,19 @@
 <body>
     <header>
         <!-- Add your navigation bar here -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <!-- ... -->
-          
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav">
-                <!-- ... -->
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Account
-                  </a>
-                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
-                    <li><a class="dropdown-item" href="{% url 'signup' %}">Sign Up</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </nav>        
+        <nav>
+          <!-- ... -->
+          <div class="navbar-nav">
+            {% if user.is_authenticated %}
+              <span class="nav-item nav-link">{{ user.username }}</span>
+              <a class="nav-item nav-link" href="{% url 'logout' %}">{% trans "Logout" %}</a>
+            {% else %}
+              <a class="nav-item nav-link" href="{% url 'login' %}">{% trans "Login" %}</a>
+              <a class="nav-item nav-link" href="{% url 'signup' %}">{% trans "Sign Up" %}</a>
+            {% endif %}
+          </div>
+          <!-- ... -->
+        </nav>    
     </header>
 
     <main>
