@@ -2,9 +2,7 @@
 
 {% block content %}
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
+<div class="center">
             <form method="post" class="card" novalidate>
                 {% csrf_token %}
               <h2 class="text-center">Log in to your account</h2>
@@ -21,7 +19,5 @@
                 <p class="text-center">Forgot your password? <a href="{% url 'signup' %}">Reset Password</a></p>
                 <p class="text-center">Don't have an account? <a href="{% url 'signup' %}">Join Now</a></p>
             </form>
-        </div>
-    </div>
 </div>
 {% endblock content%}
