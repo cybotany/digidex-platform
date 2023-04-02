@@ -10,7 +10,9 @@
                       {{ field.label_tag }} 
                       {{ field }}
                       {% if field.errors %}
-                          <small>{{ field.errors|striptags }}</small> 
+                        <div class="alert alert-danger">
+                            <small>{{ field.errors|striptags }}</small>
+                        </div>
                       {% endif %}
               {% endfor %}
 
