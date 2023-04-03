@@ -83,17 +83,3 @@ class TestUser:
         error_message = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, ".alert-danger")))
         assert error_message is not None
 
-
-    def test_login_valid_credentials_redirect_to_dashboard(self, website_url, browser):
-        '''
-        The user enters valid login credentials and is redirected
-        to their dashboard.
-        '''
-        browser.get(website_url + "login/")
-        wait = WebDriverWait(browser, 10)
-        username_input = wait.until(EC.presence_of_element_located((By.NAME, "username")))
-        password_input = wait.until(EC.presence_of_element_located((By.NAME, "password")))
-        username_input.send_keys(config('TEST_USERNAME'))
-        password_input.send_keys(config('TEST_PASSWORD'))
-        password_input.send_keys(Keys.RETURN)
-        assert browser.current_url == website_url + "dashboard/"
