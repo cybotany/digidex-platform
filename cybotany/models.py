@@ -8,7 +8,7 @@ class Plant(models.Model):
     image = models.ImageField(upload_to='plants/')
     name = models.CharField(max_length=100, blank=True, null=True)
     health_status = models.CharField(max_length=100, blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True, default=datetime.now())
+    created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
