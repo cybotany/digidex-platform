@@ -5,13 +5,28 @@ from django.contrib.contenttypes.models import ContentType
 
 
 # Base Models for inheritance
-class Plant(models.Model):
+class Organism(models.Model):
     common_name = models.CharField(max_length=255)
     scientific_name = models.CharField(max_length=255)
-    # Add any other common attributes for plants here
-
+    kingdom = models.CharField(max_length=255)
+    phylum = models.CharField(max_length=255, blank=True, null=True)
+    class_name = models.CharField('class', max_length=255, blank=True, null=True)
+    order = models.CharField(max_length=255, blank=True, null=True)
+    family = models.CharField(max_length=255, blank=True, null=True)
+    genus = models.CharField(max_length=255, blank=True, null=True)
+    species = models.CharField(max_length=255, blank=True, null=True)
+    itis_tsn = models.IntegerField('ITIS TSN', blank=True, null=True)
+    
     class Meta:
         abstract = True
+
+
+class Plant(Organism):
+    growth_habit = models.CharField(max_length=255)
+
+
+class Animal(Organism):
+    diet = models.CharField(max_length=255)
 
 
 class UserPlant(models.Model):
@@ -53,15 +68,12 @@ class UserExperiment(Experiment):
 
 
 class CEA(models.Model):
-    name = models.CharField(max_length=100)
-    location = models.PointField()
-    researcher = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+    location = models.CharField(max_length=255)
 
     class Meta:
         abstract = True
-
-    def __str__(self):
-        return self.name
 
 
 class Greenhouse(CEA):
@@ -145,6 +157,11 @@ class UserCEA(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    address = models.CharField(max_length=255)
+    city = models.CharField(max_length=100)
+    country = models.CharField(max_length=100)
+    postal_code = models.CharField(max_length=20)    
+    
     consent_data_processing = models.BooleanField(default=False)
     email_preferences = models.JSONField(default=dict)
     bio = models.TextField(blank=True, null=True)
