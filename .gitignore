@@ -137,3 +137,6 @@ greenhouse/
 
 # Pytest ini file
 *.ini
+
+# Data inserts
+data/insert_*.sql
