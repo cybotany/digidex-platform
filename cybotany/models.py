@@ -3,70 +3,6 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 
-
-# Base Models for inheritance
-class Organism(models.Model):
-    common_name = models.CharField(max_length=255)
-    scientific_name = models.CharField(max_length=255)
-    kingdom = models.CharField(max_length=255)
-    phylum = models.CharField(max_length=255, blank=True, null=True)
-    class_name = models.CharField('class', max_length=255, blank=True, null=True)
-    order = models.CharField(max_length=255, blank=True, null=True)
-    family = models.CharField(max_length=255, blank=True, null=True)
-    genus = models.CharField(max_length=255, blank=True, null=True)
-    species = models.CharField(max_length=255, blank=True, null=True)
-    itis_tsn = models.IntegerField('ITIS TSN', blank=True, null=True)
-    
-    class Meta:
-        abstract = True
-
-
-class Plant(Organism):
-    growth_habit = models.CharField(max_length=255)
-
-
-class Animal(Organism):
-    diet = models.CharField(max_length=255)
-
-
-class UserPlant(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='plant_pictures/', blank=True, null=True)
-    name = models.CharField(max_length=100, blank=True, null=True)
-    health_status = models.CharField(max_length=100, blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    growing_medium = models.ForeignKey(GrowingMedium, on_delete=models.SET_NULL, blank=True, null=True)
-    experiment = models.ForeignKey(Experiment, on_delete=models.SET_NULL, null=True)
-    scientific_name = models.CharField(max_length=100, null=True, blank=True)
-    cultivar_name = models.CharField(max_length=100, null=True, blank=True)
-
-
-    def __str__(self):
-        return self.name or f"Plant {self.pk}"
-
-        # You can add any additional processing or validation here
-
-
-class Experiment(models.Model):
-    title = models.CharField(max_length=255)
-    start_date = models.DateField()
-    end_date = models.DateField()
-    # Add any other common attributes for experiments here
-
-    # New field
-    peer_reviewed_publication = models.BooleanField(default=False)
-
-    class Meta:
-        abstract = True
-
-
-class UserExperiment(Experiment):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    user_plant = models.ForeignKey(UserPlant, on_delete=models.CASCADE)
-    # Add any user-specific experiment attributes here
-
-
 class CEA(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
@@ -119,6 +55,76 @@ class GrowingMedium(models.Model):
 
     def __str__(self):
         return self.name
+
+# Base Models for inheritance
+class Organism(models.Model):
+    common_name = models.CharField(max_length=255)
+    scientific_name = models.CharField(max_length=255)
+    kingdom = models.CharField(max_length=255)
+    phylum = models.CharField(max_length=255, blank=True, null=True)
+    class_name = models.CharField('class', max_length=255, blank=True, null=True)
+    order = models.CharField(max_length=255, blank=True, null=True)
+    family = models.CharField(max_length=255, blank=True, null=True)
+    genus = models.CharField(max_length=255, blank=True, null=True)
+    species = models.CharField(max_length=255, blank=True, null=True)
+    itis_tsn = models.IntegerField('ITIS TSN', blank=True, null=True)
+    
+    class Meta:
+        abstract = True
+
+
+class Plant(Organism):
+    growing_medium = models.ForeignKey(GrowingMedium, on_delete=models.CASCADE)
+
+
+class Seed(Organism):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    plant = models.ForeignKey(Plant, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    date_added = models.DateField(auto_now_add=True)
+    germination_rate = models.DecimalField(max_digits=5, decimal_places=2)
+    seed_count = models.IntegerField()
+
+
+class UserPlant(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='plant_pictures/', blank=True, null=True)
+    name = models.CharField(max_length=100, blank=True, null=True)
+    health_status = models.CharField(max_length=100, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    growing_medium = models.ForeignKey(GrowingMedium, on_delete=models.SET_NULL, blank=True, null=True)
+    experiment = models.ForeignKey(Experiment, on_delete=models.SET_NULL, null=True)
+    scientific_name = models.CharField(max_length=100, null=True, blank=True)
+    cultivar_name = models.CharField(max_length=100, null=True, blank=True)
+
+
+    def __str__(self):
+        return self.name or f"Plant {self.pk}"
+
+        # You can add any additional processing or validation here
+
+
+class Experiment(models.Model):
+    title = models.CharField(max_length=255)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    # Add any other common attributes for experiments here
+
+    # New field
+    peer_reviewed_publication = models.BooleanField(default=False)
+
+    class Meta:
+        abstract = True
+
+
+class UserExperiment(Experiment):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_plant = models.ForeignKey(UserPlant, on_delete=models.CASCADE)
+    # Add any user-specific experiment attributes here
+
+
+
 
 
 class PlantImage(models.Model):
