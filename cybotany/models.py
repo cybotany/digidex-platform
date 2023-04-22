@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 
+
 class CEA(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
@@ -104,7 +105,7 @@ class Organism(models.Model):
     genus = models.CharField(max_length=255, blank=True, null=True)
     species = models.CharField(max_length=255, blank=True, null=True)
     itis_tsn = models.IntegerField('ITIS TSN', blank=True, null=True)
-    
+
     class Meta:
         abstract = True
 
@@ -122,35 +123,13 @@ class UserPlant(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     growing_medium = models.ForeignKey(GrowingMedium, on_delete=models.SET_NULL, blank=True, null=True)
-    experiment = models.ForeignKey(Experiment, on_delete=models.SET_NULL, null=True)
     scientific_name = models.CharField(max_length=100, null=True, blank=True)
     cultivar_name = models.CharField(max_length=100, null=True, blank=True)
-
 
     def __str__(self):
         return self.name or f"Plant {self.pk}"
 
         # You can add any additional processing or validation here
-
-
-class Experiment(models.Model):
-    title = models.CharField(max_length=255)
-    start_date = models.DateField()
-    end_date = models.DateField()
-    # Add any other common attributes for experiments here
-
-    # New field
-    peer_reviewed_publication = models.BooleanField(default=False)
-
-    class Meta:
-        abstract = True
-
-
-class UserExperiment(Experiment):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    user_plant = models.ForeignKey(UserPlant, on_delete=models.CASCADE)
-    # Add any user-specific experiment attributes here
-
 
 
 class PlantImage(models.Model):
@@ -162,38 +141,12 @@ class PlantImage(models.Model):
         return f"Plant Image {self.pk}"
 
 
-# Fact tables (central tables with quantitative data)
-class UserPlantLog(models.Model):
-    user_plant = models.ForeignKey(UserPlant, on_delete=models.CASCADE)
-    log_type = models.CharField(max_length=100)
-    date = models.DateField()
-    notes = models.TextField(blank=True, null=True)
-
-    class Meta:
-        ordering = ['-date']
-
-    def __str__(self):
-        return f"{self.user_plant.nickname} {self.log_type} on {self.date}"
-    
-
-class UserCEA(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
-    cea = GenericForeignKey('content_type', 'object_id')
-    role = models.CharField(max_length=50, choices=[("owner", "Owner"), ("researcher", "Researcher"), ("assistant", "Assistant")])
-
-    def __str__(self):
-        return f"{self.user.username} - {self.cea} - {self.role}"
-
-
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     address = models.CharField(max_length=255)
     city = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
-    postal_code = models.CharField(max_length=20)    
-    
+    postal_code = models.CharField(max_length=20)
     consent_data_processing = models.BooleanField(default=False)
     email_preferences = models.JSONField(default=dict)
     bio = models.TextField(blank=True, null=True)
@@ -206,5 +159,3 @@ class UserProfile(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)  # Ensure the parent class save() method is called
-
-        # You can add any additional processing or validation here
