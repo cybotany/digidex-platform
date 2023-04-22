@@ -37,26 +37,62 @@ class GreenhouseSection(models.Model):
     bench_area = models.DecimalField(max_digits=6, decimal_places=2)
     eave_height = models.DecimalField(max_digits=4, decimal_places=2)
     ridge_height = models.DecimalField(max_digits=4, decimal_places=2)
-    # ... other fields ...
 
     def __str__(self):
         return f"{self.greenhouse.name} - {self.name}"
 
 
 class GrowingMedium(models.Model):
+    TRADITIONAL_CHOICES = [
+        ('soil', 'Soil'),
+        ('compost', 'Compost'),
+        ('peat moss', 'Peat Moss'),
+        ('coco coir', 'Coco Coir'),
+        ('perlite', 'Perlite'),
+        ('vermiculite', 'Vermiculite'),
+        ('sand', 'Sand'),
+        ('bark', 'Bark'),
+        ('other', 'Other'),
+    ]
+    HYDROPONIC_CHOICES = [
+        ('coco coir', 'Coco Coir'),
+        ('perlite', 'Perlite'),
+        ('vermiculite', 'Vermiculite'),
+        ('rockwool', 'Rockwool'),
+        ('leca', 'LECA'),
+        ('other', 'Other'),
+    ]
     name = models.CharField(max_length=100, unique=True)
     description = models.TextField(blank=True, null=True)
-    water_retention = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True, help_text='Percentage of water retention capacity')
-    air_porosity = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True, help_text='Percentage of air porosity')
-    ph_range = models.CharField(max_length=50, blank=True, null=True, help_text='Range of pH values, e.g., "5.5-6.5"')
-    bulk_density = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True, help_text='Bulk density in g/cm³')
+    composite_material = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
 
-# Base Models for inheritance
+
+class PropogationMethod(models.Model):
+    PROPAGATION_CHOICES = [
+        ('cutting', 'Cutting'),
+        ('division', 'Division'),
+        ('grafting', 'Grafting'),
+        ('layering', 'Layering'),
+        ('seed', 'Seed'),
+        ('storage organs', 'Storage Organs'),
+        ('offsets', 'Offsets'),
+        ('micropropogation', 'Micropropogation'),
+    ]
+
+    propagation_method = models.CharField(max_length=50, choices=PROPAGATION_CHOICES)
+    description = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Organism(models.Model):
     common_name = models.CharField(max_length=255)
     scientific_name = models.CharField(max_length=255)
@@ -74,16 +110,8 @@ class Organism(models.Model):
 
 
 class Plant(Organism):
+    propogation_method = models.ForeignKey(PropogationMethod, on_delete=models.CASCADE)
     growing_medium = models.ForeignKey(GrowingMedium, on_delete=models.CASCADE)
-
-
-class Seed(Organism):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    plant = models.ForeignKey(Plant, on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
-    date_added = models.DateField(auto_now_add=True)
-    germination_rate = models.DecimalField(max_digits=5, decimal_places=2)
-    seed_count = models.IntegerField()
 
 
 class UserPlant(models.Model):
@@ -122,8 +150,6 @@ class UserExperiment(Experiment):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     user_plant = models.ForeignKey(UserPlant, on_delete=models.CASCADE)
     # Add any user-specific experiment attributes here
-
-
 
 
 
