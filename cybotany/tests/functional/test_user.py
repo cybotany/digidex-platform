@@ -38,7 +38,6 @@ class TestUser:
         page_title = browser.title
         assert 'CyBotany' in page_title
 
-
     def test_login_invalid_credentials_displays_error(self, website_url, browser):
         '''
         The user enters invalid login credentials and an error message
