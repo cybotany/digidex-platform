@@ -29,11 +29,10 @@ class TissueCultureFacility(CEA):
     facility_area = models.DecimalField(max_digits=6, decimal_places=2)
 
 
-class GreenhouseSection(models.Model):
+class GreenhouseSection(CEA):
+    greenhouse = models.ForeignKey(Greenhouse, on_delete=models.CASCADE)
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
-    cea = GenericForeignKey('content_type', 'object_id')
-    name = models.CharField(max_length=100)
     floor_area = models.DecimalField(max_digits=6, decimal_places=2)
     bench_area = models.DecimalField(max_digits=6, decimal_places=2)
     eave_height = models.DecimalField(max_digits=4, decimal_places=2)
