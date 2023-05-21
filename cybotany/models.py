@@ -8,12 +8,6 @@ class CEA(models.Model):
     description = models.TextField()
     location = models.CharField(max_length=255)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    light_sensor = models.CharField(max_length=255)
-    temperature_sensor = models.CharField(max_length=255)
-    humidity_sensor = models.CharField(max_length=255)
-    air_speed_sensor = models.CharField(max_length=255)
-    ndir_co2_sensor = models.CharField(max_length=255)
-    voc_sensor = models.CharField(max_length=255)
 
     class Meta:
         abstract = True
@@ -48,23 +42,3 @@ class GrowthChamber(CEA):
             count = GrowthChamber.objects.filter(user=self.user).count()
             self.name = f'GrowthChamber{count + 1}'
         super().save(*args, **kwargs)
-
-
-class Greenhouse(CEA):
-    floor_area = models.DecimalField(max_digits=6, decimal_places=2)
-
-    def __str__(self):
-        return self.name
-
-
-class GreenhouseSection(CEA):
-    greenhouse = models.ForeignKey(Greenhouse, on_delete=models.CASCADE)
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
-    bench_area = models.DecimalField(max_digits=6, decimal_places=2)
-    eave_height = models.DecimalField(max_digits=4, decimal_places=2)
-    ridge_height = models.DecimalField(max_digits=4, decimal_places=2)
-
-    def __str__(self):
-        return f"{self.greenhouse.name} - {self.name}"
-
