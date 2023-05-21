@@ -1,7 +1,8 @@
 from rest_framework import viewsets
-from .models import Plant
-from .serializers import PlantSerializer
+from django.contrib.auth.models import User
+from .serializers import UserSerializer
 
-class PlantViewSet(viewsets.ModelViewSet):
-    queryset = Plant.objects.all().order_by('name')
-    serializer_class = PlantSerializer
+# ViewSets define the view behavior.
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer

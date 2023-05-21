@@ -1,7 +1,8 @@
 from rest_framework import serializers
-from .models import Plant
+from django.contrib.auth.models import User
 
-class PlantSerializer(serializers.ModelSerializer):
+# Serializers define the API representation.
+class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Plant
-        fields = ['id', 'name', 'growth_stage', 'last_watered']
+        model = User
+        fields = ['url', 'username', 'email', 'is_staff']
