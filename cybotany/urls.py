@@ -1,7 +1,6 @@
 from django.urls import path
 from cybotany.views import HomeView, AccountLoginView, AccountSignupView, AccountLogoutView, AccountDashboardView, AccountProfileView
 from django.contrib.auth import views as auth_views
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
@@ -16,7 +15,4 @@ urlpatterns = [
 
     path('profile/', AccountProfileView.as_view(), name='profile'),
     path('dashboard/', AccountDashboardView.as_view(), name='dashboard'),
-
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
