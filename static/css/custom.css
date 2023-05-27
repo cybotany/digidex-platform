@@ -158,3 +158,38 @@ h1, h2, h3, h4, h5, h6 {
 .dropdown:hover .dropbtn {
   background-color: var(--secondary-color);
 }
+
+.chatbox {
+  height: 500px;
+  width: 80%;
+  border: 1px solid #ccc;
+  margin: 0 auto;
+  padding: 10px;
+  overflow-y: scroll;
+}
+
+.chat-input {
+  width: 70%;
+  height: 30px;
+  margin: 10px 0;
+  padding: 5px;
+}
+
+.chat-submit {
+  height: 30px;
+  margin: 10px 0;
+}
+
+/* style for the user's messages */
+.user-message {
+  text-align: right;
+  color: #4A90E2;
+  margin: 5px 0;
+}
+
+/* style for the chatbot's messages */
+.chatbot-message {
+  text-align: left;
+  color: #333;
+  margin: 5px 0;
+}
