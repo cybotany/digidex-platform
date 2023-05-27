@@ -15,5 +15,5 @@ urlpatterns = [
 
     path('profile/', AccountProfileView.as_view(), name='profile'),
     path('dashboard/', AccountDashboardView.as_view(), name='dashboard'),
-    path('cybotany/chatbot/', AccountChatbotView.as_view(), name='chatbot'),
+    path('chatbot/', AccountChatbotView.as_view(), name='chatbot'),
 ]
