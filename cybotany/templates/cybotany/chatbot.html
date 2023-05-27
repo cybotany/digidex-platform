@@ -39,7 +39,7 @@
             success: function(data) {
                 // Append chatbot's response to chatbox
                 var chatbotMessageElem = document.createElement('div');
-                chatbotMessageElem.innerText = 'Chatbot: ' + data.response;
+                chatbotMessageElem.innerText = 'Chatbot: ' + data.message;
                 chatbox.appendChild(chatbotMessageElem);
             },
             error: function(jqXHR, textStatus, errorThrown) {
