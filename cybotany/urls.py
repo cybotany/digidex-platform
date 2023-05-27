@@ -1,5 +1,5 @@
 from django.urls import path
-from cybotany.views import HomeView, AccountLoginView, AccountSignupView, AccountLogoutView, AccountDashboardView, AccountProfileView, AccountCybotView
+from cybotany.views import HomeView, AccountLoginView, AccountSignupView, AccountLogoutView, AccountDashboardView, AccountProfileView, AccountChatbotView
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -15,5 +15,5 @@ urlpatterns = [
 
     path('profile/', AccountProfileView.as_view(), name='profile'),
     path('dashboard/', AccountDashboardView.as_view(), name='dashboard'),
-    path('chatbot/', AccountCybotView.as_view(), name='cybot'),
+    path('cybotany/chatbot/', AccountChatbotView.as_view(), name='chatbot'),
 ]
