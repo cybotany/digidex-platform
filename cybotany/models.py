@@ -1,5 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
+
+
+class Sensors(models.Model):
+    SENSOR_TYPES = (
+        ('TE', 'Temperature'),
+        ('RH', 'Humidity'),
+        ('VOC', 'Air Quality'),
+        ('PAR', 'Light Intensity'),
+    )
+
+    sensor_type = models.CharField(max_length=3, choices=SENSOR_TYPES)
+    name = models.CharField(max_length=100)
 
 
 class CEA(models.Model):
@@ -23,6 +36,11 @@ class GrowthChamber(CEA):
     chamber_height = models.DecimalField(max_digits=6, decimal_places=2)
     chamber_length = models.DecimalField(max_digits=6, decimal_places=2)
 
+    temperature_sensor = models.CharField(max_length=2, choices=MEASUREMENT_CHOICES, default='cm')
+    humidity_sensor = models.CharField(max_length=2, choices=MEASUREMENT_CHOICES, default='cm')
+    air_quality_sensor = models.CharField(max_length=2, choices=MEASUREMENT_CHOICES, default='cm')
+    light_sensor = models.CharField(max_length=2, choices=MEASUREMENT_CHOICES, default='cm')
+
     @property
     def chamber_volume(self):
         volume = self.chamber_width * self.chamber_height * self.chamber_length
@@ -40,22 +58,6 @@ class GrowthChamber(CEA):
         if not self.name:
             count = GrowthChamber.objects.filter(user=self.user).count()
             self.name = f'GrowthChamber{count + 1}'
+        if not self.device_type:
+            self.device_type = ContentType.objects.get_for_model(self.__class__)
         super().save(*args, **kwargs)
-
-
-class Plant(models.Model):
-    name = models.CharField(max_length=200)
-
-    def __str__(self):
-        return self.name
-
-
-class UserPlant(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    plant = models.ForeignKey(Plant, on_delete=models.CASCADE)
-    nickname = models.CharField(max_length=200)
-    date_planted = models.DateField()
-    image = models.ImageField(upload_to='user_plants/')
-
-    def __str__(self):
-        return self.nickname
