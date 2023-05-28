@@ -1,0 +1,11 @@
+{% extends 'cybotany/base.html' %}
+
+{% block content %}
+<h2>Register a Device</h2>
+
+<form method="post">
+   {% csrf_token %}
+   <!-- Your form fields here -->
+   <button type="submit">Register</button>
+</form>
+{% endblock content %}

@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <h1>Welcome to your dashboard</h1>
 <p>This is where you can manage your plants and other data.</p>
+
+<a href="{% url 'setup_device' %}">
+    <img src="{% static '/img/device_setup.png' %}" alt="Setup your Device">
+</a>
+ 
+
 {% endblock %}
