@@ -1,15 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
 {% load static %}
 
 <h1>Welcome to your dashboard</h1>
-<p>This is where you can manage your plants and other data.</p>
 
-<a href="{% url 'setup_device' %}">
-    <img src="{% static '/img/device_setup.png' %}" alt="Setup your Device">
-</a>
- 
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2>Your Growth Chambers</h2>
+            {% for growth_chamber in growth_chambers %}
+                <p>{{ growth_chamber.name }}</p>
+            {% endfor %}
+            <a href="{% url '/add_growth_chamber' %}">Add a new Growth Chamber</a>
+        </div>
+
+        <div class="col">
+            <h2>Your Plants</h2>
+            {% for user_plant in user_plants %}
+                <p>{{ user_plant.name }}</p>
+            {% endfor %}
+            <a href="{% url 'add_plant' %}">Add a new Plant</a>
+        </div>
+    </div>
+</div>
+
 
 {% endblock %}
