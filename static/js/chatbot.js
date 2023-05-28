@@ -11,8 +11,9 @@ function typeMessage(message, element) {
             i++;
         } else {
             clearInterval(typing);
-            // When the bot finishes typing, show the chat input box
+            // When the bot finishes typing, show the chat input box and send button
             chatInput.style.display = "block";
+            sendButton.style.display = "block";
         }
     }, 50); // This is the typing speed in milliseconds
 }
@@ -22,13 +23,15 @@ chatForm.addEventListener('submit', function(event) {
     var message = chatInput.value;
     chatInput.value = '';
 
-    // Add user's message to chatbox
+    // User message
     var userMessageElem = document.createElement('div');
-    userMessageElem.innerText = 'You: ' + message;
+    userMessageElem.innerText = message;
+    userMessageElem.className = 'message user-message';
     chatbox.appendChild(userMessageElem);
 
-    // Create and display "Bot is typing..." message
+    // Typing message
     var typingMessageElem = document.createElement('div');
+    typingMessageElem.className = 'message chatbot-message';
     typingMessageElem.innerText = 'Chatbot is typing...';
     chatbox.appendChild(typingMessageElem);
 
@@ -47,9 +50,10 @@ chatForm.addEventListener('submit', function(event) {
             // Remove "Bot is typing..." message
             chatbox.removeChild(typingMessageElem);
 
-            // Append chatbot's response to chatbox
+            // Chatbot message
             var chatbotMessageElem = document.createElement('div');
-            chatbotMessageElem.innerText = 'Chatbot: ';
+            chatbotMessageElem.className = 'message chatbot-message';
+            chatbotMessageElem.innerText = '';
             chatbox.appendChild(chatbotMessageElem);
 
             // Type the chatbot's response progressively
@@ -59,8 +63,9 @@ chatForm.addEventListener('submit', function(event) {
             // Remove "Bot is typing..." message
             chatbox.removeChild(typingMessageElem);
 
-            // Show the chat input box in case of an error
+            // Show the chat input box and send button in case of an error
             chatInput.style.display = "block";
+            sendButton.style.display = "block";
 
             // Append an error message to the chatbox
             var errorMessageElem = document.createElement('div');

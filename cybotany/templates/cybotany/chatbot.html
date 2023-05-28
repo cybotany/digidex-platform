@@ -2,11 +2,11 @@
 {% load static %}
 
 {% block content %}
-<h2>Chat with our Bot</h2>
+<h2>Chat with cyBot</h2>
 
 <div id="chatbox">
    {% for message in messages %}
-      <p>{{ message }}</p>
+      <div class="message {% if forloop.first %}user-message{% else %}chatbot-message{% endif %}">{{ message }}</div>
    {% endfor %}
 </div>
 
