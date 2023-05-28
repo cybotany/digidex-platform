@@ -14,14 +14,6 @@
             {% endfor %}
             <a href="{% url '/add_growth_chamber' %}">Add a new Growth Chamber</a>
         </div>
-
-        <div class="col">
-            <h2>Your Plants</h2>
-            {% for user_plant in user_plants %}
-                <p>{{ user_plant.name }}</p>
-            {% endfor %}
-            <a href="{% url 'add_plant' %}">Add a new Plant</a>
-        </div>
     </div>
 </div>
 
