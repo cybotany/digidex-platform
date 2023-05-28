@@ -3,18 +3,6 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 
 
-class Sensors(models.Model):
-    SENSOR_TYPES = (
-        ('TE', 'Temperature'),
-        ('RH', 'Humidity'),
-        ('VOC', 'Air Quality'),
-        ('PAR', 'Light Intensity'),
-    )
-
-    sensor_type = models.CharField(max_length=3, choices=SENSOR_TYPES)
-    name = models.CharField(max_length=100)
-
-
 class CEA(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
@@ -35,11 +23,6 @@ class GrowthChamber(CEA):
     chamber_width = models.DecimalField(max_digits=6, decimal_places=2)
     chamber_height = models.DecimalField(max_digits=6, decimal_places=2)
     chamber_length = models.DecimalField(max_digits=6, decimal_places=2)
-
-    temperature_sensor = models.CharField(max_length=2, choices=MEASUREMENT_CHOICES, default='cm')
-    humidity_sensor = models.CharField(max_length=2, choices=MEASUREMENT_CHOICES, default='cm')
-    air_quality_sensor = models.CharField(max_length=2, choices=MEASUREMENT_CHOICES, default='cm')
-    light_sensor = models.CharField(max_length=2, choices=MEASUREMENT_CHOICES, default='cm')
 
     @property
     def chamber_volume(self):
