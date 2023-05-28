@@ -12,9 +12,12 @@
 
 <form id="chat-form" method="post">
    {% csrf_token %}
-   <input id="chat-input" type="text" name="message">
-   <button type="submit">Send</button>
+   <div class="input-group">
+       <input id="chat-input" type="text" name="message">
+       <button type="submit" class="send-button"><img src="{% static '/images/send-icon.png' %}" alt="Send"></button>
+   </div>
 </form>
+
 
 <script src="{% static '/js/chatbot.js' %}"></script>
 
