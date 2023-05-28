@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib.contenttypes.models import ContentType
 
 
 class CEA(models.Model):
@@ -42,3 +41,21 @@ class GrowthChamber(CEA):
             count = GrowthChamber.objects.filter(user=self.user).count()
             self.name = f'GrowthChamber{count + 1}'
         super().save(*args, **kwargs)
+
+
+class Plant(models.Model):
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
+
+
+class UserPlant(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    plant = models.ForeignKey(Plant, on_delete=models.CASCADE)
+    nickname = models.CharField(max_length=200)
+    date_planted = models.DateField()
+    image = models.ImageField(upload_to='user_plants/')
+
+    def __str__(self):
+        return self.nickname
