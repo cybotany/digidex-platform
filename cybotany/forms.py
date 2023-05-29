@@ -25,7 +25,6 @@ class SensorForm(forms.ModelForm):
         fields = ['name', 'type', 'description', 'location', 'min_value', 'max_value', 'value_unit']
 
 
-
 class InstrumentForm(forms.ModelForm):
     class Meta:
         model = Instrument
