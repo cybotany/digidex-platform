@@ -1,12 +1,53 @@
 {% extends 'cybotany/base.html' %}
 
 {% block content %}
+  <div class="container mt-5">
+    <div class="row">
+      <!-- Left column -->
+      <div class="col-md-4">
+        <div class="text-center">
+          <img src="{{ user.profile.avatar.url }}" class="rounded-circle" alt="User Avatar">
+        </div>
+        <h2 class="text-center mt-3">{{ user.username }}</h2>
+        <p class="text-center">{{ user.profile.location }}</p>
+
+        <!-- Social Media Links -->
+        <div class="d-flex justify-content-around mt-3">
+          <a href="{{ user.profile.facebook_url }}" class="btn btn-primary">Facebook</a>
+          <a href="{{ user.profile.twitter_url }}" class="btn btn-info">Twitter</a>
+          <a href="{{ user.profile.linkedin_url }}" class="btn btn-primary">LinkedIn</a>
+          <a href="{{ user.profile.tiktok_url }}" class="btn btn-primary">TikTok</a>
+        </div>
+      </div>
+
+      <!-- Right column -->
+      <div class="col-md-8">
+        <h3>Recent Activities</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Activity</th>
+              <th scope="col">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for activity in user.recent_activities.all %}
+              <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ activity.name }}</td>
+                <td>{{ activity.date }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block content %}
 <div class="container">
-    <h1>Profile</h1>
     <p><strong>Username:</strong> {{ user.username }}</p>
-    <p><strong>First name:</strong> {{ user.first_name }}</p>
-    <p><strong>Last name:</strong> {{ user.last_name }}</p>
-    <p><strong>Email:</strong> {{ user.email }}</p>
-    <p><strong>Last login:</strong> {{ user.last_login|date:"F j, Y, P" }}</p>
 </div>
 {% endblock %}
