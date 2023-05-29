@@ -8,7 +8,7 @@ class DeviceSetupView(LoginRequiredMixin, View):
     template_name = 'device_setup.html'
 
     def get(self, request):
-        form = GrowthChamberForm()  # create an empty form
+        form = GrowthChamberForm() 
         return render(request, self.template_name, {'form': form})
 
     def post(self, request):
