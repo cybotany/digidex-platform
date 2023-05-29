@@ -22,13 +22,13 @@ class NewUserForm(UserCreationForm):
 class SensorForm(forms.ModelForm):
     class Meta:
         model = Sensor
-        fields = ['name', 'type', 'description', 'location', 'min_value', 'max_value', 'value_unit']
+        fields = ['name', 'type', 'description', 'min_value', 'max_value', 'value_unit']
 
 
 class InstrumentForm(forms.ModelForm):
     class Meta:
         model = Instrument
-        fields = ['name', 'type', 'description', 'location']
+        fields = ['name', 'type', 'description']
 
 
 class GrowthChamberForm(forms.ModelForm):

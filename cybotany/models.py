@@ -9,8 +9,11 @@ class Sensor(models.Model):
         ('light', 'Light'),
         ('voc', 'Air Quality'),
     ]
-    type = models.CharField(max_length=10, choices=SENSOR_TYPE_CHOICES)
     name = models.CharField(max_length=255)
+    type = models.CharField(max_length=10, choices=SENSOR_TYPE_CHOICES)
+    description = models.TextField()
+    min_value = models.DecimalField(max_digits=6, decimal_places=2)
+    max_value = models.DecimalField(max_digits=6, decimal_places=2)
 
     def __str__(self):
         return self.name
@@ -22,8 +25,9 @@ class Instrument(models.Model):
         ('light', 'Light'),
         ('fan', 'Fan'),
     ]
-    type = models.CharField(max_length=10, choices=INSTRUMENT_TYPE_CHOICES)
     name = models.CharField(max_length=255)
+    type = models.CharField(max_length=10, choices=INSTRUMENT_TYPE_CHOICES)
+    description = models.TextField()
 
     def __str__(self):
         return self.name
