@@ -5,4 +5,4 @@ from .account_dashboard_view import AccountDashboardView
 from .account_profile_view import AccountProfileView
 from .home_view import HomeView
 from .account_chatbot_view import AccountChatbotView
-from .device_setup_view import DeviceSetupView
+from .sensor_setup_view import SensorSetupView
