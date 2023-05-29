@@ -1,7 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib.contenttypes.models import ContentType
-
 
 
 class Sensor(models.Model):
@@ -60,7 +58,6 @@ class GrowthChamber(CEA):
             return volume  # return volume in cubic inches
         else:
             return volume / 16.387  # convert cubic inches to cubic centimeters
-
 
     def save(self, *args, **kwargs):
         '''

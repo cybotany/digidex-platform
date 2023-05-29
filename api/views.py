@@ -9,7 +9,7 @@ import openai
 
 
 class CybotView(APIView):
-    #permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
 
     def post(self, request, *args, **kwargs):
 
@@ -18,8 +18,8 @@ class CybotView(APIView):
 
         # Make an API call to OpenAI with the user's message
         response = openai.ChatCompletion.create(
-          model="gpt-3.5-turbo",
-          messages=[
+            model="gpt-3.5-turbo",
+            messages=[
                 {"role": "system", "content": "You are a knowledgeable assistant."},
                 {"role": "user", "content": message}
             ]
@@ -30,7 +30,7 @@ class CybotView(APIView):
 
         # Send the assistant's message back to the front-end
         return Response({'message': assistant_message})
-    
+
 
 class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
