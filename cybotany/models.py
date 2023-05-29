@@ -2,9 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from utils.constants import MEASUREMENT_CHOICES, SENSOR_TYPE_CHOICES, INSTRUMENT_TYPE_CHOICES
-from utils.helpers import calculate_chamber_volume
-from utils.storage_backends import AvatarStorage
+from cybotany.utils.constants import MEASUREMENT_CHOICES, SENSOR_TYPE_CHOICES, INSTRUMENT_TYPE_CHOICES
+from cybotany.utils.helpers import calculate_chamber_volume
+from cybotany.utils.storage_backends import AvatarStorage
 
 
 class UserProfile(models.Model):
