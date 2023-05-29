@@ -1,23 +1,32 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from ..forms import GrowthChamberForm
+from ..forms import SensorForm, InstrumentForm
 
 
 class DeviceSetupView(LoginRequiredMixin, View):
     template_name = 'device_setup.html'
+    redirect_pattern = reverse('profile')
 
-    def get(self, request):
-        form = GrowthChamberForm() 
-        return render(request, self.template_name, {'form': form})
+    def get(self, request, *args, **kwargs):
+        if not request.user.groups.filter(name='DeviceAdmins').exists():
+            return redirect(self.redirect_pattern)
+
+        sensor_form = SensorForm()
+        instrument_form = InstrumentForm()
+        context = {
+            'sensor_form': sensor_form,
+            'instrument_form': instrument_form,
+        }
+        return render(request, self.template_name, context)
 
     def post(self, request):
-        form = GrowthChamberForm(request.POST)  # create a form with the submitted data
+        form = SensorForm(request.POST)
         if form.is_valid():
             growth_chamber = form.save(commit=False)
-            growth_chamber.user = request.user  # set the current user as the owner
-            growth_chamber.save()  # save the growth chamber to the database
-            return redirect('dashboard')  # redirect the user to the dashboard page
+            growth_chamber.user = request.user
+            growth_chamber.save()
+            return redirect(self.redirect_pattern)
         else:
-            # if the form data is invalid, re-render the form with error messages
             return render(request, self.template_name, {'form': form})

@@ -4,4 +4,5 @@ from django.views import View
 
 class AccountChatbotView(View):
     def get(self, request):
-        return render(request, 'cybotany/chatbot.html')
+        template_name = 'cybotany/chatbot.html'
+        return render(request, self.template_name)

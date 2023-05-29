@@ -5,9 +5,11 @@ from django.views import View
 
 
 class AccountSignupView(View):
+    template_name = 'cybotany/signup.html'
+
     def get(self, request):
         form = NewUserForm()
-        return render(request, 'cybotany/signup.html', {'form': form})
+        return render(request, self.template_name, {'form': form})
 
     def post(self, request):
         form = NewUserForm(request.POST)
@@ -15,4 +17,4 @@ class AccountSignupView(View):
             user = form.save()
             login(request, user)
             return redirect('dashboard')
-        return render(request, 'cybotany/signup.html', {'form': form})
+        return render(request, self.template_name, {'form': form})
