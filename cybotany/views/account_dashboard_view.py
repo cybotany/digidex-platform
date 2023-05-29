@@ -1,14 +1,23 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
-from django.views.generic import TemplateView
-from ..models import GrowthChamber
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views import View
+from ..models import Plant, Trial
 
 
-class AccountDashboardView(LoginRequiredMixin, TemplateView):
+class DashboardView(LoginRequiredMixin, View):
     template_name = 'cybotany/dashboard.html'
 
-    def get(self, request):
-        # Get user's growth chambers and plants
-        growth_chambers = GrowthChamber.objects.filter(user=request.user)
+    def get(self, request, *args, **kwargs):
+        # Get the current user
+        user = request.user
 
-        return render(request, self.template_name, {'growth_chambers': growth_chambers})
+        # Get the plants and trials associated with the current user
+        plants = Plant.objects.filter(user=user)
+        trials = Trial.objects.filter(user=user)
+
+        context = {
+            'plants': plants,
+            'trials': trials,
+        }
+
+        return render(request, self.template_name, context)

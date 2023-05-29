@@ -3,11 +3,12 @@
 {% block content %}
   <div class="container mt-5">
     <div class="row">
+
       <!-- Left column -->
       <div class="col-md-4">
-        <div class="text-center">
-          <img src="{{ user.profile.avatar.url }}" class="rounded-circle" alt="User Avatar">
-        </div>
+        <div class="text-center"><img src="{{ user.profile.avatar.url }}" class="rounded-circle" alt="User Avatar"></div>
+
+        <!-- User Info -->
         <h2 class="text-center mt-3">{{ user.username }}</h2>
         <p class="text-center">{{ user.profile.location }}</p>
 
