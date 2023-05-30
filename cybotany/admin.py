@@ -1,4 +1,4 @@
 from django.contrib import admin
-from .models import UserProfile
+from cybotany.models import Profile
 
-admin.site.register(UserProfile)
+admin.site.register(Profile)
