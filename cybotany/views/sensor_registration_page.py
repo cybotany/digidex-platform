@@ -5,7 +5,7 @@ from ..forms import SensorForm
 
 
 class SensorSetupView(LoginRequiredMixin, View):
-    template_name = 'device_setup.html'
+    template_name = 'sensor_registration.html'
 
     def get(self, request, *args, **kwargs):
         if not request.user.groups.filter(name='DeviceAdmins').exists():

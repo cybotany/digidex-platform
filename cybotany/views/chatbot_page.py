@@ -3,7 +3,7 @@ from django.views import View
 
 
 class AccountChatbotView(View):
-    template_name = 'cybotany/chatbot.html'
+    template_name = 'chatbot.html'
 
     def get(self, request):
         return render(request, self.template_name)

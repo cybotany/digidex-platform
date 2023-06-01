@@ -5,7 +5,7 @@ from ..models import Plant, Trial
 
 
 class DashboardView(LoginRequiredMixin, View):
-    template_name = 'cybotany/dashboard.html'
+    template_name = 'dashboard.html'
 
     def get(self, request, *args, **kwargs):
         # Get the current user

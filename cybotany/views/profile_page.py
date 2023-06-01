@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 
 class AccountProfileView(LoginRequiredMixin, View):
-    template_name = 'cybotany/profile.html'
+    template_name = 'profile.html'
 
     def get(self, request, *args, **kwargs):
         context = {'user': request.user}

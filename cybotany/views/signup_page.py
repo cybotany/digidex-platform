@@ -5,7 +5,7 @@ from django.views import View
 
 
 class AccountSignupView(View):
-    template_name = 'cybotany/signup.html'
+    template_name = 'signup.html'
 
     def get(self, request):
         form = NewUserForm()

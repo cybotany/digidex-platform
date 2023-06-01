@@ -3,6 +3,6 @@ from django.urls import reverse_lazy
 
 
 class AccountLoginView(LoginView):
-    template_name = 'cybotany/login.html'
+    template_name = 'login.html'
     redirect_authenticated_user = True
     success_url = reverse_lazy('dashboard')
