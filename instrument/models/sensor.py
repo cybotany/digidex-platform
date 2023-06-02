@@ -1,5 +1,5 @@
 from django.db import models
-from plants.utils.constants import SENSOR_TYPE_CHOICES
+from ...utils.constants import SENSOR_TYPE_CHOICES
 
 
 class Sensor(models.Model):

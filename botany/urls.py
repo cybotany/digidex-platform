@@ -15,7 +15,6 @@ urlpatterns = [
 
     path('profile/', AccountProfileView.as_view(), name='profile'),
     path('dashboard/', DashboardView.as_view(), name='dashboard'),
-    path('sensor-setup/', SensorSetupView.as_view(), name='sensor_setup'),
 
     path('chatbot/', AccountChatbotView.as_view(), name='chatbot'),
 ]
