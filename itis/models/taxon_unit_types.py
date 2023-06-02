@@ -11,7 +11,7 @@ class TaxonUnitTypes(models.Model):
     rank_name: The label associated with the specific level of a taxonomic hierarchy.
     dir_parent_rank_id: The unique identifier for the rank of the closest parent of an occurrence of Taxonomic Units as defined by the kingdom's rank rules.
     req_parent_rank_id: The unique identifier for the closest, required parent of an occurrence of Taxonomic Units as established by the respective kingdom's rank rules.
-    update_date: The date  on which the record was last updated. The purpose of this element is to provide assistance to those downloading data on a periodic basis.    
+    update_date: The date  on which the record was last updated. The purpose of this element is to provide assistance to those downloading data on a periodic basis.
     '''
     kingdom_id = models.IntegerField(primary_key=True)
     rank_id = models.SmallIntegerField(primary_key=True)

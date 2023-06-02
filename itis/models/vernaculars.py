@@ -4,7 +4,7 @@ from django.db import models
 class Vernaculars(models.Model):
     '''
     Common names associated with an occurrence in Taxonomic Units.
-    
+
     tsn: Taxonomic Serial Number. The unique identifier for an occurrence of Taxonomic Units.
     vernacular_name: A common name associated with an occurrence of Taxonomic Units.
     language: Native language from which the vernacular name originates; e.g. English, French, Spanish, Portuguese, etc.

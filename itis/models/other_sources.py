@@ -6,8 +6,8 @@ class OtherSources(models.Model):
     References, other than persons or publications, that are taxonomically significant for
     additions or changes to occurrences of the Taxonomic_units table and/or associated data,
     or that provide credibility for vernacular names.
-    
-    source_id_prefix: A prefix attached to a serial id to identify the record as an Other Source..
+
+    source_id_prefix: A prefix attached to a serial id to identify the record as an Other Source.
     source_id: The unique identifier for a supplier of information, other than a person or publication, lending credence to the establishment of or changes to an occurrence of Taxonomic Units.
     source_type: The designation of the kind of supplier providing information to the ITIS (other than a person or publication); e.g. database.
     source: The name of the supplier of information, other than a person or publication, to the ITIS database. Examples include, among others, Catalogue of the Vascular Plants of Madagascar and Hawaiian Arthropod Checklist Database.

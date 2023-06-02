@@ -5,7 +5,7 @@ class VernRefLinks(models.Model):
     '''
     An intersection table that provides a link between occurrences of Vernaculars and
     occurrences of Publications, Experts, or Other_Sources.
-    
+
     tsn: Taxonomic Serial Number. The unique identifier for an occurrence of Taxonomic Units.
     doc_id_prefix: A designation affixed to the documentation_id identifying the reference as a publication, expert or other source.
     documentation_id: The serial portion of the identifier created for either the Publications table, the Experts table or the Other_Sources table used with the documentation_id_prefix to provide the reference link with an instance from the vernaculars table.

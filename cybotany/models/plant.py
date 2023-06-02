@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-from .itis import TaxonomicUnits
 
 
 class Plant(models.Model):
@@ -9,7 +8,6 @@ class Plant(models.Model):
     image = models.ImageField(upload_to='plants/', null=True, blank=True)
     registration_date = models.DateTimeField(auto_now_add=True)
     last_updated = models.DateTimeField(auto_now=True)
-    tsn = models.ForeignKey(TaxonomicUnits, on_delete=models.SET_NULL, null=True)
 
     class Meta:
         verbose_name = 'Plant'

@@ -5,7 +5,8 @@ per-file-ignores =
     # Ignoring imported but unused in __init__
     cybotany/views/__init__.py:F401,
     cybotany/models/__init__.py:F401,
-    cybotany/forms/__init__.py:F401
+    cybotany/forms/__init__.py:F401,
+    itis/models/__init__.py:F401
 exclude = 
     # No need to traverse our git directory
     .git,
