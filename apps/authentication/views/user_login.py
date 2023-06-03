@@ -1,8 +1,7 @@
 from django.contrib.auth.views import LoginView
-from django.urls import reverse_lazy
+from django.contrib.auth.forms import AuthenticationForm
 
 
 class UserLogin(LoginView):
+    form_class = AuthenticationForm
     template_name = 'authentication/login.html'
-    redirect_authenticated_user = True
-    success_url = reverse_lazy('home')

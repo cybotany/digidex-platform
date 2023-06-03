@@ -34,7 +34,6 @@ INSTALLED_APPS = [
     'apps.botany',
     'apps.cea',
     'apps.chatbot',
-    'apps.itis',
     'apps.utils',
 ]
 
