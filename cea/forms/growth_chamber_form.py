@@ -1,5 +1,5 @@
 from django import forms
-from plants.models import GrowthChamber
+from ..models import GrowthChamber
 
 
 class GrowthChamberForm(forms.ModelForm):
