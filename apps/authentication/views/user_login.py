@@ -3,6 +3,6 @@ from django.urls import reverse_lazy
 
 
 class UserLogin(LoginView):
-    template_name = 'login.html'
+    template_name = 'authentication/login.html'
     redirect_authenticated_user = True
-    success_url = reverse_lazy('dashboard')
+    success_url = reverse_lazy('home')

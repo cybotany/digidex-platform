@@ -5,7 +5,7 @@ from ..forms import SignupForm
 
 
 class UserSignup(View):
-    template_name = 'signup.html'
+    template_name = 'authentication/signup.html'
 
     def get(self, request):
         form = SignupForm()

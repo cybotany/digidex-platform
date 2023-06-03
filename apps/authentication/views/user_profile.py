@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 
 class UserProfile(LoginRequiredMixin, View):
-    template_name = 'profile.html'
+    template_name = 'authentication/profile.html'
 
     def get(self, request, *args, **kwargs):
         context = {'user': request.user}
