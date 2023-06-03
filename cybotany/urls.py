@@ -24,11 +24,10 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('admin/', admin.site.urls),
     path('api/', include('apps.api.urls')),
+    path('authentication/', include('apps.authentication.urls')),
     path('botany/', include('apps.botany.urls')),
     path('cea/', include('apps.cea.urls')),
     path('chatbot/', include('apps.chatbot.urls')),
-    path('itis/', include('apps.itis.urls')),
-    path('user/', include('apps.user.urls')),
 ]
 
 if settings.DEBUG:

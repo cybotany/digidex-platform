@@ -1,5 +1,5 @@
 from django.urls import path
-from cea.views import RegisterGrowthChamber, DisplayGrowthChamber
+from .views import RegisterGrowthChamber, DisplayGrowthChamber
 
 urlpatterns = [
     path('growth_chamber', DisplayGrowthChamber.as_view(), name='growth_chamber'),
