@@ -1,1 +1,0 @@
-from.sensor_registration_page import SensorSetupView

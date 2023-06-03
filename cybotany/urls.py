@@ -27,9 +27,6 @@ urlpatterns = [
     path('botany/', include('apps.botany.urls')),
     path('cea/', include('apps.cea.urls')),
     path('chatbot/', include('apps.chatbot.urls')),
-    path('dashboard/', include('apps.dashboard.urls')),
-    path('experiment/', include('apps.experiment.urls')),
-    path('instrument/', include('apps.instrument.urls')),
     path('itis/', include('apps.itis.urls')),
     path('user/', include('apps.user.urls')),
 ]
