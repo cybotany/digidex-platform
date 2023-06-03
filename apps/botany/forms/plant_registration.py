@@ -4,7 +4,7 @@ from ..models import Plant
 class PlantRegistrationForm(forms.ModelForm):
     class Meta:
         model = Plant
-        fields = ('name')
+        fields = ('name',)
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)

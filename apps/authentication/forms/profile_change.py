@@ -5,4 +5,4 @@ from ..models import Profile
 class ProfileChangeForm(UserChangeForm):
     class Meta:
         model = Profile
-        fields = ('bio', 'location', 'birth_date')
+        fields = ('bio', 'location', 'birth_date',)
