@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import UserList, CybotView
+from .views import UserList, ChatbotAPIView
 
 
 urlpatterns = [
-    path('api/user_info/', UserList.as_view(), name='user_info'),
-    path('api/cybot/', CybotView.as_view(), name='cybot'),
+    path('user_info/', UserList.as_view(), name='user_info'),
+    path('chatbot/', ChatbotAPIView.as_view(), name='chatbot'),
 ]

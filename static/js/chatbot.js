@@ -1,74 +1,63 @@
-var chatForm = document.getElementById('chat-form');
-var chatInput = document.getElementById('chat-input');
-var chatbox = document.getElementById('chatbox');
+const chatForm = document.getElementById('chat-form');
+const chatInput = document.getElementById('chat-input');
+const chatbox = document.getElementById('chatbox');
+const sendButton = document.getElementById('send-button');
 
-// This function will append the characters one by one
 function typeMessage(message, element) {
-    var i = 0;
-    var typing = setInterval(function() {
-        if(i < message.length){
+    let i = 0;
+    const typing = setInterval(() => {
+        if (i < message.length) {
             element.textContent += message.charAt(i);
             i++;
         } else {
             clearInterval(typing);
-            // When the bot finishes typing, show the chat input box and send button
             chatInput.style.display = "block";
             sendButton.style.display = "block";
         }
-    }, 50); // This is the typing speed in milliseconds
+    }, 50);
 }
 
-chatForm.addEventListener('submit', function(event) {
+chatForm.addEventListener('submit', (event) => {
     event.preventDefault();
-    var message = chatInput.value;
+    const message = chatInput.value;
     chatInput.value = '';
 
     // User message
-    var userMessageElem = document.createElement('div');
+    const userMessageElem = document.createElement('div');
     userMessageElem.innerText = message;
     userMessageElem.className = 'message user-message';
     chatbox.appendChild(userMessageElem);
 
     // Typing message
-    var typingMessageElem = document.createElement('div');
+    const typingMessageElem = document.createElement('div');
     typingMessageElem.className = 'message chatbot-message';
     typingMessageElem.innerText = 'Chatbot is typing...';
     chatbox.appendChild(typingMessageElem);
-
-    // Hide the chat input box while the bot is typing
     chatInput.style.display = "none";
 
-    // Make AJAX request to chatbot backend
-    $.ajax({
-        url: '/api/cybot/',
-        method: 'POST',
-        data: JSON.stringify({
-            'message': message
-        }),
-        contentType: 'application/json',
-        success: function(data) {
-            // Remove "Bot is typing..." message
-            chatbox.removeChild(typingMessageElem);
+    // CSRF Token
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
-            // Chatbot message
-            var chatbotMessageElem = document.createElement('div');
+    // AJAX Request
+    $.ajax({
+        url: '/api/chatbot/',
+        method: 'POST',
+        headers: {'X-CSRFToken': csrftoken},
+        data: JSON.stringify({'message': message}),
+        contentType: 'application/json',
+        success: (data) => {
+            chatbox.removeChild(typingMessageElem);
+            const chatbotMessageElem = document.createElement('div');
             chatbotMessageElem.className = 'message chatbot-message';
             chatbotMessageElem.innerText = '';
             chatbox.appendChild(chatbotMessageElem);
-
-            // Type the chatbot's response progressively
             typeMessage(data.message, chatbotMessageElem);
         },
-        error: function(jqXHR, textStatus, errorThrown) {
-            // Remove "Bot is typing..." message
+        error: (jqXHR, textStatus, errorThrown) => {
             chatbox.removeChild(typingMessageElem);
-
-            // Show the chat input box and send button in case of an error
             chatInput.style.display = "block";
             sendButton.style.display = "block";
-
-            // Append an error message to the chatbox
-            var errorMessageElem = document.createElement('div');
+            const errorMessageElem = document.createElement('div');
             errorMessageElem.innerText = 'Error: ' + errorThrown;
             chatbox.appendChild(errorMessageElem);
         }
