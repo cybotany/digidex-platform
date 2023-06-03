@@ -1,2 +1,2 @@
-from .UserCreationForm import UserCreationForm
-from .UserChangeForm import UserChangeForm
+from .creation_form import CreationForm
+from .change_form import ChangeForm

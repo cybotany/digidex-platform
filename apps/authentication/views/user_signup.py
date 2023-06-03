@@ -1,20 +1,20 @@
 from django.shortcuts import render, redirect
-from ..forms import UserForm
 from django.contrib.auth import login
 from django.views import View
+from ..forms import UserCreationForm
 
 
-class AccountSignupView(View):
+class UserSignup(View):
     template_name = 'signup.html'
 
     def get(self, request):
-        form = UserForm()
+        form = UserCreationForm()
         return render(request, self.template_name, {'form': form})
 
     def post(self, request):
-        form = UserForm(request.POST)
+        form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('dashboard')
+            return redirect('home')
         return render(request, self.template_name, {'form': form})

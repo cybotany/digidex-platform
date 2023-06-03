@@ -1,9 +1,9 @@
 from django import forms
-from ..models import User
 from django.contrib.auth.forms import UserCreationForm
+from ..models import User
 
 
-class UserCreationForm(UserCreationForm):
+class CreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
 
     class Meta:
@@ -11,7 +11,7 @@ class UserCreationForm(UserCreationForm):
         fields = ("first_name", "last_name", "username", "email", "password1", "password2")
 
     def save(self, commit=True):
-        user = super(UserCreationForm, self).save(commit=False)
+        user = super(CreationForm, self).save(commit=False)
         user.email = self.cleaned_data['email']
         if commit:
             user.save()
