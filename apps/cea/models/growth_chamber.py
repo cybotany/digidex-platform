@@ -1,9 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-from plants.utils.constants import MEASUREMENT_CHOICES
-from plants.utils.helpers import calculate_chamber_volume
-from .instrument import Instrument
-from .sensor import Sensor
+from ...utils.constants import MEASUREMENT_CHOICES
+from ...utils.helpers import calculate_chamber_volume
 
 
 class GrowthChamber(models.Model):
@@ -15,8 +13,6 @@ class GrowthChamber(models.Model):
     chamber_width = models.DecimalField(max_digits=6, decimal_places=2)
     chamber_height = models.DecimalField(max_digits=6, decimal_places=2)
     chamber_length = models.DecimalField(max_digits=6, decimal_places=2)
-    sensors = models.ManyToManyField(Sensor, blank=True)
-    instruments = models.ManyToManyField(Instrument, blank=True)
 
     @property
     def chamber_volume(self):
