@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Your Growth Chambers</h2>
+  {% if growth_chambers %}
+    {% for chamber in growth_chambers %}
+      <p>{{ chamber.name }}</p>
+      <!-- include other details as needed -->
+    {% endfor %}
+  {% else %}
+    <p>You don't have any registered growth chambers yet.</p>
+  {% endif %}
+
+  <a href="{% url 'growth_chamber_registration' %}">Register a Growth Chamber</a>
+
+{% endblock %}

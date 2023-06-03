@@ -1,1 +1,1 @@
-from chatbot_page import ChatbotView
+from apps.chatbot.views.chat_page import ChatView

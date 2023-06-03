@@ -9,7 +9,8 @@ class UserSignup(View):
 
     def get(self, request):
         form = SignupForm()
-        return render(request, self.template_name, {'form': form})
+        context = {'form': form}
+        return render(request, self.template_name, context)
 
     def post(self, request):
         form = SignupForm(request.POST)
@@ -17,4 +18,5 @@ class UserSignup(View):
             user = form.save()
             login(request, user)
             return redirect('home')
-        return render(request, self.template_name, {'form': form})
+        context = {'form': form}
+        return render(request, self.template_name, context)

@@ -2,21 +2,21 @@
 {% load static %}
 
 {% block content %}
-<h2>Chat with cyBot</h2>
+  <h2>Chat with cyBot</h2>
 
-<div id="chatbox">
-   {% for message in messages %}
+  <div id="chatbox">
+    {% for message in messages %}
       <div class="message {% if forloop.first %}user-message{% else %}chatbot-message{% endif %}">{{ message }}</div>
-   {% endfor %}
-</div>
+    {% endfor %}
+  </div>
 
-<form id="chat-form" method="post">
-   {% csrf_token %}
-   <div class="input-group">
-       <input id="chat-input" type="text" name="message">
-       <button type="submit" class="send-button"><img src="{% static '/images/send-icon.png' %}" alt="Send"></button>
-   </div>
-</form>
+  <form id="chat-form" method="post">
+  {% csrf_token %}
+    <div class="input-group">
+      <input id="chat-input" type="text" name="message">
+      <button type="submit" class="send-button"><img src="{% static '/images/send-icon.png' %}" alt="Send"></button>
+    </div>
+  </form>
 
 
 <script src="{% static '/js/chatbot.js' %}"></script>

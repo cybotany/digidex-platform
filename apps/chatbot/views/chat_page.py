@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import View
 
 
-class ChatbotView(View):
+class ChatView(View):
     template_name = 'chatbot/chat.html'
 
     def get(self, request):
