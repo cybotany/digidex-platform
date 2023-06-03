@@ -10,7 +10,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('plants', '0002_plant_name'),
+        ('botany', '0002_plant_name'),
     ]
 
     operations = [
