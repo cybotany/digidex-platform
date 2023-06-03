@@ -29,13 +29,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'storages',
     'rest_framework',
+    'apps.api',
     'apps.authentication',
     'apps.botany',
-    'apps.api',
     'apps.cea',
     'apps.chatbot',
     'apps.itis',
-    'apps.user',
     'apps.utils',
 ]
 
@@ -54,7 +53,7 @@ ROOT_URLCONF = 'cybotany.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'cybotany/templates/cybotany')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
