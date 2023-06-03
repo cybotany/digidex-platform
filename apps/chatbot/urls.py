@@ -1,5 +1,5 @@
 from django.urls import path
-from user.views import AccountLoginView, AccountSignupView, AccountLogoutView, DashboardView, AccountProfileView, SensorSetupView, AccountChatbotView
+from authentication.views import AccountLoginView, AccountSignupView, AccountLogoutView, DashboardView, AccountProfileView, SensorSetupView, AccountChatbotView
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [

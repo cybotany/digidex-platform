@@ -34,9 +34,6 @@ INSTALLED_APPS = [
     'apps.api',
     'apps.cea',
     'apps.chatbot',
-    'apps.dashboard',
-    'apps.experiment',
-    'apps.instrument',
     'apps.itis',
     'apps.user',
     'apps.utils',
@@ -128,5 +125,5 @@ REST_FRAMEWORK = {
     )
 }
 
-LOGIN_REDIRECT_URL = 'dashboard'
+LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'login'
