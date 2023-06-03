@@ -23,8 +23,15 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('admin/', admin.site.urls),
-    path('', include('cybotany.urls')),
-    path('', include('api.urls')),
+    path('api/', include('apps.api.urls')),
+    path('botany/', include('apps.botany.urls')),
+    path('cea/', include('apps.cea.urls')),
+    path('chatbot/', include('apps.chatbot.urls')),
+    path('dashboard/', include('apps.dashboard.urls')),
+    path('experiment/', include('apps.experiment.urls')),
+    path('instrument/', include('apps.instrument.urls')),
+    path('itis/', include('apps.itis.urls')),
+    path('user/', include('apps.user.urls')),
 ]
 
 if settings.DEBUG:

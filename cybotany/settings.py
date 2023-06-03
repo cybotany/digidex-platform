@@ -28,8 +28,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'storages',
-    'cybotany',
     'rest_framework',
+    'apps.users',
+    'apps.botany',
+    'apps.api',
+    'apps.cea',
+    'apps.chatbot',
+    'apps.dashboard',
+    'apps.experiment',
+    'apps.instrument',
+    'apps.itis',
+    'apps.user',
+    'apps.utils',
 ]
 
 MIDDLEWARE = [
