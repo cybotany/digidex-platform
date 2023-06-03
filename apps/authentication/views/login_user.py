@@ -2,6 +2,6 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import AuthenticationForm
 
 
-class UserLogin(LoginView):
+class LoginUser(LoginView):
     form_class = AuthenticationForm
     template_name = 'authentication/login.html'

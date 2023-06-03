@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from ..models import GrowthChamber
 
 
-class UserGrowthChamberView(LoginRequiredMixin, ListView):
+class DisplayGrowthChamber(LoginRequiredMixin, ListView):
     model = GrowthChamber
     template_name = 'cea/user_growth_chambers.html'
     context_object_name = 'growth_chambers'

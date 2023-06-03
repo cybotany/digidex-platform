@@ -4,7 +4,7 @@ from django.views import View
 from ..forms import SignupForm
 
 
-class UserSignup(View):
+class SignupUser(View):
     template_name = 'authentication/signup.html'
 
     def get(self, request):

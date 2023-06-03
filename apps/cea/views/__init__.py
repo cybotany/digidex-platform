@@ -1,2 +1,2 @@
-from .growth_chamber_registration import GrowthChamberRegistrationView
-from .user_growth_chamber import UserGrowthChamberView
+from .register_growth_chamber import RegisterGrowthChamber
+from .display_growth_chamber import DisplayGrowthChamber

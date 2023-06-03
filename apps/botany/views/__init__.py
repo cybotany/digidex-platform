@@ -1,1 +1,2 @@
-from .home_page import HomeView
+from .home import Home
+from .register_plant import RegisterPlant

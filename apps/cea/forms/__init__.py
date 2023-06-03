@@ -1,1 +1,1 @@
-from .growth_chamber_form import GrowthChamberForm
+from .growth_chamber_registration import GrowthChamberRegistrationForm

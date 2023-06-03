@@ -3,7 +3,7 @@ from django.views import View
 from django.shortcuts import render
 
 
-class UserProfile(LoginRequiredMixin, View):
+class DisplayUser(LoginRequiredMixin, View):
     template_name = 'authentication/profile.html'
 
     def get(self, request, *args, **kwargs):
