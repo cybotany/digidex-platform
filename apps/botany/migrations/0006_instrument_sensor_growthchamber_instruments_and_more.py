@@ -29,11 +29,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='growthchamber',
             name='instruments',
-            field=models.ManyToManyField(blank=True, to='cybotany.instrument'),
+            field=models.ManyToManyField(blank=True, to='botany.instrument'),
         ),
         migrations.AddField(
             model_name='growthchamber',
             name='sensors',
-            field=models.ManyToManyField(blank=True, to='cybotany.sensor'),
+            field=models.ManyToManyField(blank=True, to='botany.sensor'),
         ),
     ]
