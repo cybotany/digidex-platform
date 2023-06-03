@@ -1,3 +1,5 @@
+from .comments import Comments
+from .experts import Experts
 from .geographic_div import GeographicDiv
 from .hierarchy import Hierarchy
 from .jurisdiction import Jurisdiction
