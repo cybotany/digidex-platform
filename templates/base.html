@@ -16,21 +16,12 @@
 
 <body>
     <header>
-        <!-- Add your navigation bar here -->
+        <!-- Navigation bar here -->
         <nav>          
           <div class="dropdown">
             <button class="dropbtn">Menu</button>
             <div class="dropdown-content">
-                <a href="{% url 'home' %}">Home</a>
-                {% if user.is_authenticated %}
-                    <a href="{% url 'dashboard' %}">{{ user.username }}'s Dashboard</a>
-                    <a href="{% url 'profile' %}">Profile</a>
-                    <a href="{% url 'chatbot' %}">CyBot</a>
-                    <a href="{% url 'logout' %}">Logout</a>
-                {% else %}
-                    <a href="{% url 'login' %}">Log in</a>
-                    <a href="{% url 'signup' %}">Sign up</a>
-                {% endif %}
+                {% block nav_links %}{% endblock %}
             </div>
           </div>
         </nav>    
@@ -38,12 +29,12 @@
 
     <main>
         {% block content %}
-        <!-- Page-specific content will go here -->
+        <!-- Page-specific content goes here -->
         {% endblock %}
     </main>
 
     <footer>
-        <!-- Add your footer here -->
+        <!-- Footer goes here -->
     </footer>
 
     <!-- Bootstrap JS -->

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Welcome to CyBotany{% endblock %}
+
+{% load static %}
+
+{% block content %}
+    <section class="container text-center py-5">
+        <h1 class="mb-4">Welcome to CyBotany!</h1>
+        <p class="lead mb-5">Your go-to platform for managing and growing your plants with the help of artificial intelligence.</p>
+    </section>
+
+    <section class="container">
+    <!-- Features Section -->
+    <div class="container">
+        <h2 class="text-center mb-4">Key Features</h2>
+        <div class="row">
+
+        <!-- Botany -->
+          <div class="col-12 col-md-4">
+            <div class="card mb-4 shadow-sm">
+            <img src="{% static '/img/plant_management.jpg' %}" class="card-img-top" alt="Plant Management"> 
+            <div class="card-body">
+                <h5 class="card-title">Plant Management</h5>
+                <p class="card-text">Manage your plants.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                <button type="button" class="btn btn-sm btn-outline-secondary">Learn more</button>
+                </div>
+            </div>
+            </div>
+          </div>        
+
+        <!-- CEA -->
+          <div class="card">
+            <img src="{% static '/img/cea.jpg' %}" class="card-img-top" alt="Controlled Environmental Agriculture (CEA) Management">
+            <div class="card-body">
+              <h5 class="card-title">Controlled Environmental Agriculture (CEA) Management</h5>
+              <p class="card-text">Register and manage your CEA from anywhere.</p>
+            </div>
+          </div>
+          
+        
+        <!-- Chatbot -->
+          <div class="card">
+            <img src="{% static '/img/cybot.jpg' %}" class="card-img-top" alt="cyBot">
+            <div class="card-body">
+              <h5 class="card-title">cyBot</h5>
+              <p class="card-text">Enjoy an interactive, user-friendly experience with cyBot, our large language model interface for plant management, care, and more.</p>
+            </div>
+          </div>
+          
+
+        </div>
+    </div>
+
+    </section>
+{% endblock %}
