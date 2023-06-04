@@ -2,7 +2,7 @@ from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from .views import UserList, ChatbotAPIView
 
-
+app_name = 'api'
 urlpatterns = [
     path('user_info/', UserList.as_view(), name='user_info'),
     path('chatbot/', ChatbotAPIView.as_view(), name='chatbot'),
