@@ -1,1 +1,1 @@
-from .plants import Plant
+from .plant import Plant

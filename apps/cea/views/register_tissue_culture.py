@@ -1,23 +1,23 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
-from ..forms import GrowthChamberRegistrationForm
+from ..forms import TissueCultureRegistrationForm
 
 
-class RegisterGrowthChamber(LoginRequiredMixin, View):
-    template_name = 'cea/new_growth_chamber.html'
+class RegisterTissueCultureChamber(LoginRequiredMixin, View):
+    template_name = 'cea/new_tissue_culture_chamber.html'
 
     def get(self, request):
-        form = GrowthChamberRegistrationForm()
+        form = TissueCultureRegistrationForm()
         context = {'form': form}
         return render(request, self.template_name, context)
 
     def post(self, request):
-        form = GrowthChamberRegistrationForm(request.POST)
+        form = TissueCultureRegistrationForm(request.POST)
         if form.is_valid():
-            growth_chamber = form.save(commit=False)
-            growth_chamber.user = request.user
-            growth_chamber.save()
+            tissue_culture_chamber = form.save(commit=False)
+            tissue_culture_chamber.user = request.user
+            tissue_culture_chamber.save()
             return redirect('home')
         context = {'form': form}
         return render(request, self.template_name, context)

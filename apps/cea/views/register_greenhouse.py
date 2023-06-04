@@ -1,23 +1,23 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
-from ..forms import GrowthChamberRegistrationForm
+from ..forms import GreenhouseRegistrationForm
 
 
-class RegisterGrowthChamber(LoginRequiredMixin, View):
-    template_name = 'cea/new_growth_chamber.html'
+class RegisterGreenhouse(LoginRequiredMixin, View):
+    template_name = 'cea/new_greenhouse.html'
 
     def get(self, request):
-        form = GrowthChamberRegistrationForm()
+        form = GreenhouseRegistrationForm()
         context = {'form': form}
         return render(request, self.template_name, context)
 
     def post(self, request):
-        form = GrowthChamberRegistrationForm(request.POST)
+        form = GreenhouseRegistrationForm(request.POST)
         if form.is_valid():
-            growth_chamber = form.save(commit=False)
-            growth_chamber.user = request.user
-            growth_chamber.save()
+            greenhouse = form.save(commit=False)
+            greenhouse.user = request.user
+            greenhouse.save()
             return redirect('home')
         context = {'form': form}
         return render(request, self.template_name, context)

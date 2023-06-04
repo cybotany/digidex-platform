@@ -1,56 +1,34 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
-{% block title %}Plant Management{% endblock %}
-
-{% load static %}
+{% block title %}
+Botany Home - CyBotany
+{% endblock %}
 
 {% block content %}
-    <section class="container text-center py-5">
-        <h1 class="mb-4">Welcome to the plant management module!</h1>
-        <p class="lead mb-5">Here you can register a new plant or manage your current collection.</p>
-    </section>
-
-    <section class="container">
-    <!-- Features Section -->
-    <div class="container">
-        <h2 class="text-center mb-4">Key Features</h2>
-        <div class="row">
-        <!-- Feature Card:(3.1) Plant Identification & Health Assessment -->
-          <div class="col-12 col-md-4">
-            <div class="card mb-4 shadow-sm">
-            <img src="{% static '/img/plant_identification.jpg' %}" class="card-img-top" alt="Plant Identification & Health Assessment"> 
-            <div class="card-body">
-                <h5 class="card-title">Plant Identification & Health Assessment</h5>
-                <p class="card-text">Identify your plants and monitor their health using advanced machine learning algorithms. Our app makes it easy to detect and address potential issues.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                <button type="button" class="btn btn-sm btn-outline-secondary">Learn more</button>
+<div class="container mt-4">
+    {% for group in plant_groups %}
+    <div class="row mb-4">
+        <h2>{{ group.name }}</h2>
+        {% for plant in group.plants %}
+        <div class="col-md-4">
+            <div class="card">
+                <img src="{{ plant.image }}" class="card-img-top" alt="Image of {{ plant.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ plant.name }}</h5>
+                    <p class="card-text">{{ plant.description }}</p>
+                    <a href="{% url 'botany:plant_detail' plant.id %}" class="btn btn-primary">See more</a>
                 </div>
             </div>
-            </div>
-          </div>        
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
 
-        <!-- Feature Card:(3.6) Automated Data Managment -->
-          <div class="card">
-            <img src="{% static '/img/data-management.jpg' %}" class="card-img-top" alt="Automated data management">
-            <div class="card-body">
-              <h5 class="card-title">Automated Data Management</h5>
-              <p class="card-text">Streamline your research with automated data collection, reporting, and comparison for controlled environment plant growth facilities.</p>
-            </div>
-          </div>
-          
-        
-        <!-- Feature Card:(3.7) LLM Interface: Cybot -->
-          <div class="card">
-            <img src="{% static '/img/cybot.jpg' %}" class="card-img-top" alt="LLM Interface: CyBot">
-            <div class="card-body">
-              <h5 class="card-title">LLM Interface: CyBot</h5>
-              <p class="card-text">Enjoy an interactive, user-friendly experience with CyBot, our large language model interface for plant management, care, and more.</p>
-            </div>
-          </div>
-          
-
+    <!-- Registration link -->
+    <div class="row my-4">
+        <div class="col-lg-4 col-md-6 mb-4">
+            <a href="{% url 'botany:new_plant' %}" class="btn btn-primary">Register New Plant</a>
         </div>
     </div>
-
-    </section>
+</div>
 {% endblock %}

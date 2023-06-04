@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from ..forms import PlantRegistrationForm
 
 class RegisterPlant(View):
-    template_name = 'botany/plant_form.html'
+    template_name = 'botany/new_plant.html'
 
     def get(self, request):
         form = PlantRegistrationForm(user=request.user)
