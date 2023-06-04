@@ -20,11 +20,11 @@ from django.contrib import admin
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('apps.api.urls')),
     path('authentication/', include('apps.authentication.urls')),
     path('botany/', include('apps.botany.urls')),
     path('cea/', include('apps.cea.urls')),
     path('chatbot/', include('apps.chatbot.urls')),
+    path('api/', include('apps.api.urls')),
 ]
 
 if settings.DEBUG:
