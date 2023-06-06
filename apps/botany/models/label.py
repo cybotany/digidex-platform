@@ -10,3 +10,7 @@ class Label(models.Model):
 
     def __str__(self):
         return self.name
+
+    @property
+    def plants(self):
+        return self.plant_set.all()
