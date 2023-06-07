@@ -1,19 +1,21 @@
 from django.views import View
 from django.shortcuts import render, redirect
-from ..forms import PlantRegistrationForm
+from ..forms import PlantLabelForm
 
-class RegisterPlant(View):
-    template_name = 'botany/new_plant.html'
+class CreateLabel(View):
+    template_name = 'botany/new_label.html'
 
     def get(self, request):
-        form = PlantRegistrationForm(user=request.user)
+        form = PlantLabelForm()
         context = {'form': form}
         return render(request, self.template_name, context)
 
     def post(self, request):
-        form = PlantRegistrationForm(request.POST, user=request.user)
+        form = PlantLabelForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('botany:plant_list')
+            label = form.save(commit=False)
+            label.user = request.user
+            label.save()
+            return redirect('botany:label_list')
         context = {'form': form}
         return render(request, self.template_name, context)

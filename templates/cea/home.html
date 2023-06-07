@@ -1,56 +1,43 @@
 {% extends 'base.html' %}
 
-{% block title %}Welcome to CyBotany{% endblock %}
-
-{% load static %}
+{% block title %}CEA Home{% endblock %}
 
 {% block content %}
-    <section class="container text-center py-5">
-        <h1 class="mb-4">Welcome to CyBotany!</h1>
-        <p class="lead mb-5">Your go-to platform for managing and growing your plants with the help of artificial intelligence.</p>
-    </section>
+<div class="container">
+  <h1 class="my-4">Controlled Environment Agriculture</h1>
 
-    <section class="container">
-    <!-- Features Section -->
-    <div class="container">
-        <h2 class="text-center mb-4">Key Features</h2>
-        <div class="row">
-        <!-- Feature Card:(3.1) Plant Identification & Health Assessment -->
-          <div class="col-12 col-md-4">
-            <div class="card mb-4 shadow-sm">
-            <img src="{% static '/img/plant_identification.jpg' %}" class="card-img-top" alt="Plant Identification & Health Assessment"> 
-            <div class="card-body">
-                <h5 class="card-title">Plant Identification & Health Assessment</h5>
-                <p class="card-text">Identify your plants and monitor their health using advanced machine learning algorithms. Our app makes it easy to detect and address potential issues.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                <button type="button" class="btn btn-sm btn-outline-secondary">Learn more</button>
-                </div>
-            </div>
-            </div>
-          </div>        
-
-        <!-- Feature Card:(3.6) Automated Data Managment -->
-          <div class="card">
-            <img src="{% static '/img/data-management.jpg' %}" class="card-img-top" alt="Automated data management">
-            <div class="card-body">
-              <h5 class="card-title">Automated Data Management</h5>
-              <p class="card-text">Streamline your research with automated data collection, reporting, and comparison for controlled environment plant growth facilities.</p>
-            </div>
+  {% for type, chambers in cea_chambers.items %}
+  <div class="row my-4">
+    <h2>{{ type }}</h2>
+    {% for chamber in chambers %}
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h4 class="card-title">
+              <a href="{% url 'cea:chamber_detail' chamber.id %}">{{ chamber.name }}</a>
+            </h4>
+            <!-- Include more information about the chamber here if needed -->
           </div>
-          
-        
-        <!-- Feature Card:(3.7) LLM Interface: Cybot -->
-          <div class="card">
-            <img src="{% static '/img/cybot.jpg' %}" class="card-img-top" alt="LLM Interface: CyBot">
-            <div class="card-body">
-              <h5 class="card-title">LLM Interface: CyBot</h5>
-              <p class="card-text">Enjoy an interactive, user-friendly experience with CyBot, our large language model interface for plant management, care, and more.</p>
-            </div>
-          </div>
-          
-
         </div>
-    </div>
+      </div>
+    {% empty %}
+      <p>You don't have any {{ type.lower() }} yet.</p>
+    {% endfor %}
+  </div>
+  {% endfor %}
 
-    </section>
+  <!-- Registration links -->
+  <div class="row my-4">
+    <h2>Register New CEA</h2>
+    <div class="col-lg-4 col-md-6 mb-4">
+      <a href="{% url 'cea:new_growth_chamber' %}" class="btn btn-primary">Register New Growth Chamber</a>
+    </div>
+    <div class="col-lg-4 col-md-6 mb-4">
+      <a href="{% url 'cea:new_greenhouse' %}" class="btn btn-primary">Register New Greenhouse</a>
+    </div>
+    <div class="col-lg-4 col-md-6 mb-4">
+      <a href="{% url 'cea:new_tissue_culture_chamber' %}" class="btn btn-primary">Register New Tissue Culture Chamber</a>
+    </div>
+  </div>
+</div>
 {% endblock %}

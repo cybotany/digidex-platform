@@ -1,14 +1,10 @@
 from django.db import models
-from django.contrib.auth.models import User
+from .base_cea import BaseCEA
 from ...utils.constants import MEASUREMENT_CHOICES
 from ...utils.helpers import calculate_chamber_volume
 
 
-class GrowthChamber(models.Model):
-    name = models.CharField(max_length=255)
-    description = models.TextField()
-    location = models.CharField(max_length=255)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+class GrowthChamber(BaseCEA):
     measurement_system = models.CharField(max_length=2, choices=MEASUREMENT_CHOICES, default='cm')
     chamber_width = models.DecimalField(max_digits=6, decimal_places=2)
     chamber_height = models.DecimalField(max_digits=6, decimal_places=2)

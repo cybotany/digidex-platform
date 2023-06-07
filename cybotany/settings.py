@@ -10,14 +10,17 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 # SECURITY WARNING: don't run with debug turned on in production!
 SECRET_KEY = config('DJANGO_SECRET_KEY')
-openai.api_key = config('OPENAI_API_KEY')
 DEBUG = True
 ALLOWED_HOSTS = [config('ALLOWED_HOSTS')]
 
+
+# API Keys
+openai.api_key = config('OPENAI_API_KEY')
+OPEN_WEATHER_MAP_API_KEY = config('OPEN_WEATHER_MAP_API_KEY')
+PLANT_ID_API_KEY = config('PLANT_ID_API_KEY')
 
 # Application definition
 INSTALLED_APPS = [

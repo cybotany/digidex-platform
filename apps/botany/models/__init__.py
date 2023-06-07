@@ -1,1 +1,2 @@
-from .plants import Plant
+from .plant import Plant
+from .label import Label

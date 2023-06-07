@@ -1,2 +1,4 @@
+from .cea_home import CEAHome
 from .register_growth_chamber import RegisterGrowthChamber
-from .display_growth_chamber import DisplayGrowthChamber
+from .register_greenhouse import RegisterGreenhouse
+from .register_tissue_culture import RegisterTissueCultureChamber
