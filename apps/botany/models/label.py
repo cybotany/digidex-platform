@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
+
 class Label(models.Model):
     name = models.CharField(max_length=200)
     user = models.ForeignKey(User, on_delete=models.CASCADE)

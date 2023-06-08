@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from ..models import GrowthChamber, Greenhouse, TissueCultureChamber
 
+
 class CEAHome(LoginRequiredMixin, View):
     template_name = 'cea/home.html'
 

@@ -2,6 +2,7 @@ from django.views import View
 from django.shortcuts import render, redirect
 from ..forms import PlantLabelForm
 
+
 class CreateLabel(View):
     template_name = 'botany/new_label.html'
 

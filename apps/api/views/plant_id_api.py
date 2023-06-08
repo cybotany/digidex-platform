@@ -11,7 +11,7 @@ class PlantIdentificationView(View):
         # Ensure the request has an image file
         if 'image' not in request.FILES:
             return JsonResponse({'error': 'No image provided'}, status=400)
-        
+
         # Read the image file
         image = request.FILES['image'].read()
 

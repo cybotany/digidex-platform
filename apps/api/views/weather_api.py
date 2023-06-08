@@ -2,9 +2,10 @@ from django.views import View
 from django.http import JsonResponse
 import requests
 from django.conf import settings
-
+from ..models import Label
 
 api_key = settings.OPEN_WEATHER_MAP_API_KEY
+
 
 class WeatherView(View):
     def get(self, request, *args, **kwargs):

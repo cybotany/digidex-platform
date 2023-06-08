@@ -23,7 +23,7 @@ class ChatbotAPIView(APIView):
                     {"role": "user", "content": message}
                 ]
             )
-        except Exception as e:
+        except Exception:
             # You might want to log the exception here
             return Response({"error": "Failed to process your request. Please try again later."},
                             status=status.HTTP_503_SERVICE_UNAVAILABLE)
