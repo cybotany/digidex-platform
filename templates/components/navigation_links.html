@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 
 {% block nav_links %}
-    <a href="{% url 'home' %}">Home</a>
+    <a href="{% url '' %}">Home</a>
     {% if user.is_authenticated %}
-        <a href="{% url 'dashboard' %}">{{ user.username }}'s Dashboard</a>
         <a href="{% url 'profile' %}">Profile</a>
         <a href="{% url 'chatbot' %}">CyBot</a>
         <a href="{% url 'logout' %}">Logout</a>
