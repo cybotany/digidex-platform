@@ -16,15 +16,8 @@
 
 <body>
     <header>
-        <!-- Navigation bar here -->
-        <nav>          
-          <div class="dropdown">
-            <button class="dropbtn">Menu</button>
-            <div class="dropdown-content">
-                {% block nav_links %}{% endblock %}
-            </div>
-          </div>
-        </nav>    
+        <!-- Navbar goes here -->
+        {% include "components/navigation_links.html" %}
     </header>
 
     <main>
