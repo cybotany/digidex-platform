@@ -8,8 +8,7 @@ api_key = settings.OPEN_WEATHER_MAP_API_KEY
 
 class WeatherView(View):
     def get(self, request, *args, **kwargs):
-        label_id = kwargs['label_id']  # Get the label ID from the URL parameters
-        location = ""  # Build the location string
+        location = kwargs['label_id']  # Get the label ID from the URL parameters
 
         # Send a GET request to the OpenWeatherMap API
         response = requests.get(f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={api_key}")
