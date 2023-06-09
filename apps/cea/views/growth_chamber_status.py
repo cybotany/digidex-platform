@@ -4,4 +4,4 @@ from ..models import GrowthChamber
 
 class GrowthChamberStatus(DetailView):
     model = GrowthChamber
-    template_name = 'cea/growth_chamber_detail.html'
+    template_name = 'cea/growth_chamber_status.html'
