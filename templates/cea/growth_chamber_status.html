@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>{{ object.name }}</h1>
+  
+  <p><strong>Description: </strong>{{ object.description }}</p>
+
+  <p><strong>Date Registered: </strong>{{ object.created_at }}</p>
+
+{% endblock %}
