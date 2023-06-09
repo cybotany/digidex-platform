@@ -2,7 +2,7 @@ from django.db import models
 from .growth_chamber import GrowthChamber
 
 
-class SensorData(models.Model):
+class GrowthChamberInstrumentData(models.Model):
     growth_chamber = models.ForeignKey(GrowthChamber, on_delete=models.CASCADE, related_name='sensor_data')
     timestamp = models.DateTimeField(auto_now_add=True)
     humidity = models.DecimalField(max_digits=5, decimal_places=2)
