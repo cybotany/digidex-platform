@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 
-class CEARegister(APIView):
+class CEAIdentification(APIView):
     def post(self, request):
         ip_address = request.data.get('ip_address')
         identifier = request.data.get('identifier')
