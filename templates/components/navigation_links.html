@@ -1,20 +1,20 @@
 {% block nav_links %}
-<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Menu
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li><a class="dropdown-item" href="{% url 'home' %}">Home</a></li>
-    {% if user.is_authenticated %}
-        <li><a class="dropdown-item" href="{% url 'authentication:profile' %}">Profile</a></li>
-        <li><a class="dropdown-item" href="{% url 'botany:home' %}">Botany</a></li>
-        <li><a class="dropdown-item" href="{% url 'cea:home' %}">CEA</a></li>
-        <li><a class="dropdown-item" href="{% url 'chatbot:home' %}">Chatbot</a></li>
-        <li><a class="dropdown-item" href="{% url 'authentication:logout' %}">Logout</a></li>
-    {% else %}
-        <li><a class="dropdown-item" href="{% url 'authentication:login' %}">Log in</a></li>
-        <li><a class="dropdown-item" href="{% url 'authentication:signup' %}">Sign up</a></li>
-    {% endif %}
-  </ul>
-</div>
+<nav>  
+  <div class="dropdown">
+    <button class="dropbtn">Menu</button>
+    <div class="dropdown-content">
+      <a href="{% url 'home' %}">Home</a>
+      {% if user.is_authenticated %}
+          <a href="{% url 'authentication:profile' %}">Profile</a>
+          <a href="{% url 'botany:home' %}">Botany</a>
+          <a href="{% url 'cea:home' %}">CEA</a>
+          <a href="{% url 'chatbot:home' %}">Chatbot</a>
+          <a href="{% url 'authentication:logout' %}">Logout</a>
+      {% else %}
+          <a href="{% url 'authentication:login' %}">Log in</a>
+          <a href="{% url 'authentication:signup' %}">Sign up</a>
+      {% endif %}
+    </div>
+  </div>
+</nav>
 {% endblock %}
