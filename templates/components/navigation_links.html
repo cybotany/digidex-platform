@@ -1,13 +1,20 @@
 {% block nav_links %}
-    <a href="{% url 'home' %}">Home</a>
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Menu
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="{% url 'home' %}">Home</a>
     {% if user.is_authenticated %}
-        <a href="{% url 'authentication:profile' %}">Profile</a>
-        <a href="{% url 'botany:home' %}">Botany</a>
-        <a href="{% url 'cea:home' %}">CEA</a>
-        <a href="{% url 'chatbot:home' %}">Chatbot</a>
-        <a href="{% url 'authentication:logout' %}">Logout</a>
+        <a class="dropdown-item" href="{% url 'authentication:profile' %}">Profile</a>
+        <a class="dropdown-item" href="{% url 'botany:home' %}">Botany</a>
+        <a class="dropdown-item" href="{% url 'cea:home' %}">CEA</a>
+        <a class="dropdown-item" href="{% url 'chatbot:home' %}">Chatbot</a>
+        <a class="dropdown-item" href="{% url 'authentication:logout' %}">Logout</a>
     {% else %}
-        <a href="{% url 'authentication:login' %}">Log in</a>
-        <a href="{% url 'authentication:signup' %}">Sign up</a>
+        <a class="dropdown-item" href="{% url 'authentication:login' %}">Log in</a>
+        <a class="dropdown-item" href="{% url 'authentication:signup' %}">Sign up</a>
     {% endif %}
+  </div>
+</div>
 {% endblock %}
