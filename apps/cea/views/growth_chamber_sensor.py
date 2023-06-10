@@ -9,7 +9,7 @@ class GrowthChamberInstruments(APIView):
         growth_chamber_id = request.data.get('growth_chamber_id')
         growth_chamber = GrowthChamber.objects.get(id=growth_chamber_id)
 
-        sensor_data = GrowthChamberInstrumentData.objects.create(
+        GrowthChamberInstrumentData.objects.create(
             growth_chamber=growth_chamber,
             humidity=request.data.get('humidity'),
             temperature=request.data.get('temperature'),
