@@ -122,7 +122,7 @@ AWS_S3_OBJECT_PARAMETERS = {
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    ),
 }
 
 LOGIN_REDIRECT_URL = 'home'
