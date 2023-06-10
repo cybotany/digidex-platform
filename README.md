@@ -1,6 +1,6 @@
 # CyBotany
 
-CyBotany is a versatile plant identification and tracking system designed for Controlled Environment Agriculture (CEA) applications. The project aims to provide a plug-and-play module that can be easily integrated into a variety of CEAs, ranging from DIY Ikea greenhouses to enterprise-level vertical farming systems.
+The vision of cyBotany is to be the leading global platform that revolutionizes the way individuals and communities interact with and share plant data.
 
 ## Features
 
