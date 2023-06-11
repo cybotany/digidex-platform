@@ -7,7 +7,17 @@ class PlantRegistrationForm(forms.ModelForm):
 
     class Meta:
         model = Plant
-        fields = ('name', 'label', 'common_names', 'description', 'edible_parts', 'gbif_species_id', 'propagation_methods', 'scientific_name', 'synonyms', 'taxonomy', 'url',)
+        fields = ('name',
+                  'label',
+                  'common_names',
+                  'description',
+                  'edible_parts',
+                  'gbif_species_id',
+                  'propagation_methods',
+                  'scientific_name',
+                  'synonyms',
+                  'taxonomy',
+                  'image',)
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
