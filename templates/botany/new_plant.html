@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 
+{% load static %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="{% static 'js/plant_registration_method.js' %}"></script>
+
+
 {% block content %}
   <h2>Register a new Plant</h2>
   
@@ -8,5 +13,5 @@
 
   <div id="autoRegistrationForm" style="display: none;"></div>
   <div id="manualRegistrationForm" style="display: none;"></div>
-  
+
 {% endblock content %}
