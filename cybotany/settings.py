@@ -3,24 +3,20 @@ Django settings for cybotany project.
 """
 import os
 import openai
-from decouple import config
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
-# SECURITY WARNING: don't run with debug turned on in production!
-SECRET_KEY = config('DJANGO_SECRET_KEY')
-DEBUG = True
-ALLOWED_HOSTS = [config('ALLOWED_HOSTS')]
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', None)
+DEBUG = os.getenv('DJANGO_SECRET_KEY', False)
+ALLOWED_HOSTS = [os.getenv('ALLOWED_HOSTS', None)]
 
 
 # API Keys
-openai.api_key = config('OPENAI_API_KEY')
-OPEN_WEATHER_MAP_API_KEY = config('OPEN_WEATHER_MAP_API_KEY')
-PLANT_ID_API_KEY = config('PLANT_ID_API_KEY')
+openai.api_key = os.getenv('OPENAI_API_KEY', None)
+OPEN_WEATHER_MAP_API_KEY = os.getenv('OPEN_WEATHER_MAP_API_KEY', None)
+PLANT_ID_API_KEY = os.getenv('PLANT_ID_API_KEY', None)
 
 # Application definition
 INSTALLED_APPS = [
@@ -74,11 +70,11 @@ WSGI_APPLICATION = 'cybotany.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': config('DATABASE_NAME'),
-        'USER': config('DATABASE_USER'),
-        'PASSWORD': config('DATABASE_PASSWORD'),
-        'HOST': config('DATABASE_HOST'),
-        'PORT': config('DATABASE_PORT'),
+        'NAME': os.getenv('DATABASE_NAME'),
+        'USER': os.getenv('DATABASE_USER'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
+        'HOST': os.getenv('DATABASE_HOST'),
+        'PORT': os.getenv('DATABASE_PORT'),
     }
 }
 
@@ -110,14 +106,18 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Amazon S3 Settings
-AWS_ACCESS_KEY_ID = config('AWS_S3_ACCESS_KEY')
-AWS_SECRET_ACCESS_KEY = config('AWS_S3_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
-AWS_DEFAULT_ACL = None
-AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME')
+AWS_ACCESS_KEY_ID = os.getenv('AWS_S3_ACCESS_KEY', None)
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_S3_SECRET_ACCESS_KEY', None)
+AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME', None)
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+AWS_S3_REGION_NAME = os.getenv('AWS_S3_REGION_NAME', None)
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
+
+AWS_DEFAULT_ACL = 'public-read'
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
