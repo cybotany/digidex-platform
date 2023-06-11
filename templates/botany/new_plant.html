@@ -2,9 +2,15 @@
 
 {% block content %}
   <h2>Register a new Plant</h2>
-  <form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Register</button>
-  </form>
+  
+  <button id="chooseImageUpload">Upload an Image</button>
+  <button id="chooseManualEntry">Enter Details Manually</button>
+
+  <div id="imageUploadForm" style="display: none;">
+    <!-- Image upload form goes here -->
+  </div>
+
+  <div id="manualEntryForm" style="display: none;">
+    <!-- Manual entry form goes here -->
+  </div>
 {% endblock content %}
