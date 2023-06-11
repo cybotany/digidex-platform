@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $('#chooseImageUpload').click(function() {
         $('#manualEntryForm').fadeOut('slow', function() {
-            $('#imageUploadForm').load('/image_upload_form/', function() {
+            $('#imageUploadForm').load('/auto_plant_registration/', function() {
                 $(this).fadeIn('slow');
             });
         });
@@ -9,7 +9,7 @@ $(document).ready(function() {
 
     $('#chooseManualEntry').click(function() {
         $('#imageUploadForm').fadeOut('slow', function() {
-            $('#manualEntryForm').load('/manual_entry_form/', function() {
+            $('#manualEntryForm').load('/manual_plant_registration/', function() {
                 $(this).fadeIn('slow');
             });
         });
