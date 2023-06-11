@@ -16,8 +16,7 @@ Botany Home - CyBotany
                 <div class="card-body">
                     <h5 class="card-title">{{ plant.name }}</h5>
                     <p class="card-text">{{ plant.description }}</p>
-                    <a href="{% url 'botany:plant_detail' plant.id %}" class="btn btn-primary">See more</a>
-                </div>
+                    <a href="{% url 'botany:plant_detail' pk=plant.id %}" class="btn btn-primary">See more</a>
             </div>
         </div>
         {% endfor %}
