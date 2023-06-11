@@ -10,7 +10,7 @@ from rest_framework.permissions import IsAuthenticated
 @method_decorator(csrf_exempt, name='dispatch')
 class CEAIdentification(APIView):
     authentication_classes = [JWTAuthentication]
-    #permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         ip_address = request.data.get('ip_address')
