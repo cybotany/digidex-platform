@@ -1,12 +1,15 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView
-from ..models import Label
+from django.views.generic import TemplateView
+from ..models import Plant, Label
 
 
-class BotanyHomeView(LoginRequiredMixin, ListView):
-    model = Label
+class BotanyHomeView(LoginRequiredMixin, TemplateView):
     template_name = 'botany/home.html'
-    context_object_name = 'plant_groups'
 
-    def get_queryset(self):
-        return Label.objects.filter(user=self.request.user).prefetch_related('plants')
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # fetch labeled plant groups
+        context['plant_groups'] = Label.objects.filter(user=self.request.user).prefetch_related('plants')
+        # fetch unlabeled plants
+        context['unlabeled_plants'] = Plant.objects.filter(owner=self.request.user, label=None)
+        return context
