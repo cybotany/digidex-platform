@@ -12,5 +12,5 @@ class AutoPlantRegistration(FormView):
         '''
         This method is called when valid form data has been POSTed.
         '''
-        form.instance.image = self.request.FILES['image']
+        form.save()
         return super().form_valid(form)

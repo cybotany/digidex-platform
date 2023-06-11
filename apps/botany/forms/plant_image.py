@@ -1,5 +1,8 @@
 from django import forms
+from ..models import Plant
 
 
-class PlantImageForm(forms.Form):
-    image = forms.ImageField(widget=forms.FileInput)
+class PlantImageForm(forms.ModelForm):
+    class Meta:
+            model = Plant
+            fields = ('image')
