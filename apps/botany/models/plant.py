@@ -7,14 +7,14 @@ User = get_user_model()
 
 
 class Plant(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, null=True, blank=True)
     label = models.ForeignKey(Label, on_delete=models.SET_NULL, null=True)
     common_names = models.TextField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     edible_parts = models.TextField(null=True, blank=True)
     gbif_species_id = models.CharField(max_length=200, null=True, blank=True)
     propagation_methods = models.TextField(null=True, blank=True)
-    scientific_name = models.CharField(max_length=200)
+    scientific_name = models.CharField(max_length=200, null=True, blank=True)
     synonyms = models.TextField(null=True, blank=True)
     taxonomy = models.TextField(null=True, blank=True)
     url = models.URLField(max_length=200)
