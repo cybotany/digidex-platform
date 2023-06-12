@@ -17,7 +17,7 @@ def user_directory_path(instance, filename):
     # generate a UUID for the new filename
     filename = f'{uuid.uuid4()}.{ext}'
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
-    return os.path.join(f'user_{instance.user.id}', filename)
+    return os.path.join(f'owner_{instance.owner.id}', filename)
 
 User = get_user_model()
 
