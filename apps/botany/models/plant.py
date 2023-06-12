@@ -38,5 +38,11 @@ class Plant(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     added_on = models.DateTimeField(auto_now_add=True)
 
+    def save(self, *args, **kwargs):
+        if not self.name:
+            total_plants = Plant.objects.filter(owner=self.owner).count()
+            self.name = f'Plant-{total_plants + 1}'
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return self.name
