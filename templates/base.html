@@ -17,9 +17,8 @@
 </head>
 
 <body>
-    <header>
-        {% include "components/navigation_links.html" %}
-    </header>
+
+    {% include "components/header.html" %}
 
     <main>
         {% block content %}
@@ -27,9 +26,7 @@
         {% endblock %}
     </main>
 
-    <footer>
-        <!-- Footer goes here -->
-    </footer>
+    {% include "components/footer.html" %}
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBud7M5zD6Uv7sPlwkTJyPFK13Iz2x7xJ6VAz6T5J7Bf7GWI" crossorigin="anonymous"></script>
