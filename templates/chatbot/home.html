@@ -1,56 +1,60 @@
 {% extends 'base.html' %}
 
-{% block title %}cyBot{% endblock %}
+{% block title %}Welcome to CyBotany{% endblock %}
 
 {% load static %}
 
 {% block content %}
+
     <section class="container text-center py-5">
         <h1 class="mb-4">Welcome to CyBotany!</h1>
         <p class="lead mb-5">Your go-to platform for managing and growing your plants with the help of artificial intelligence.</p>
     </section>
 
     <section class="container">
-    <!-- Features Section -->
-    <div class="container">
-        <h2 class="text-center mb-4">Key Features</h2>
+        <!-- Module Section -->
         <div class="row">
-        <!-- Feature Card:(3.1) Plant Identification & Health Assessment -->
-          <div class="col-12 col-md-4">
-            <div class="card mb-4 shadow-sm">
-            <img src="{% static '/img/plant_identification.jpg' %}" class="card-img-top" alt="Plant Identification & Health Assessment"> 
-            <div class="card-body">
-                <h5 class="card-title">Plant Identification & Health Assessment</h5>
-                <p class="card-text">Identify your plants and monitor their health using advanced machine learning algorithms. Our app makes it easy to detect and address potential issues.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                <button type="button" class="btn btn-sm btn-outline-secondary">Learn more</button>
+
+            <!-- Botany -->
+            <div class="col-12 col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img src="{% static 'img/plant.jpg' %}" class="card-img-top" alt="Plant Management"> 
+                    <div class="card-body">
+                        <h5 class="card-title">Plant Management</h5>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="{% url 'botany:home' %}" class="btn btn-sm btn-outline-secondary">Learn more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>        
+
+            <!-- CEA -->
+            <div class="col-12 col-md-4">
+                <div class="card">
+                    <img src="{% static 'img/cea.jpg' %}" class="card-img-top" alt="Controlled Environmental Agriculture (CEA) Management">
+                    <div class="card-body">
+                        <h5 class="card-title">CEA Management</h5>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="{% url 'cea:home' %}" class="btn btn-sm btn-outline-secondary">Learn more</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            </div>
-          </div>        
 
-        <!-- Feature Card:(3.6) Automated Data Managment -->
-          <div class="card">
-            <img src="{% static '/img/data-management.jpg' %}" class="card-img-top" alt="Automated data management">
-            <div class="card-body">
-              <h5 class="card-title">Automated Data Management</h5>
-              <p class="card-text">Streamline your research with automated data collection, reporting, and comparison for controlled environment plant growth facilities.</p>
+            <!-- Chatbot -->
+            <div class="col-12 col-md-4">
+                <div class="card">
+                    <img src="{% static 'img/chatbot.jpg' %}" class="card-img-top" alt="Chatbot">
+                    <div class="card-body">
+                        <h5 class="card-title">Chatbot</h5>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="{% url 'chatbot:home' %}" class="btn btn-sm btn-outline-secondary">Learn more</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          
-        
-        <!-- Feature Card:(3.7) LLM Interface: Cybot -->
-          <div class="card">
-            <img src="{% static '/img/cybot.jpg' %}" class="card-img-top" alt="LLM Interface: CyBot">
-            <div class="card-body">
-              <h5 class="card-title">LLM Interface: CyBot</h5>
-              <p class="card-text">Enjoy an interactive, user-friendly experience with CyBot, our large language model interface for plant management, care, and more.</p>
-            </div>
-          </div>
-          
 
         </div>
-    </div>
-
     </section>
+
 {% endblock %}
