@@ -1,55 +1,56 @@
 {% extends 'base.html' %}
 
-{% block title %}Welcome to CyBotany{% endblock %}
+{% block title %}cyBot{% endblock %}
 
 {% load static %}
 
 {% block content %}
-
     <section class="container text-center py-5">
         <h1 class="mb-4">Welcome to CyBotany!</h1>
         <p class="lead mb-5">Your go-to platform for managing and growing your plants with the help of artificial intelligence.</p>
     </section>
 
     <section class="container">
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="{% static 'img/plant.jpg' %}" class="d-block w-100" alt="...">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Plant Management</h5>
-                        <p><a href="{% url 'botany:home' %}" class="btn btn-sm btn-outline-secondary">Learn more</a></p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="{% static 'img/cea.jpg' %}" class="d-block w-100" alt="...">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>CEA Management</h5>
-                        <p><a href="{% url 'cea:home' %}" class="btn btn-sm btn-outline-secondary">Learn more</a></p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="{% static 'img/chatbot.jpg' %}" class="d-block w-100" alt="...">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Chatbot</h5>
-                        <p><a href="{% url 'chatbot:home' %}" class="btn btn-sm btn-outline-secondary">Learn more</a></p>
-                    </div>
+    <!-- Features Section -->
+    <div class="container">
+        <h2 class="text-center mb-4">Key Features</h2>
+        <div class="row">
+        <!-- Feature Card:(3.1) Plant Identification & Health Assessment -->
+          <div class="col-12 col-md-4">
+            <div class="card mb-4 shadow-sm">
+            <img src="{% static '/img/plant_identification.jpg' %}" class="card-img-top" alt="Plant Identification & Health Assessment"> 
+            <div class="card-body">
+                <h5 class="card-title">Plant Identification & Health Assessment</h5>
+                <p class="card-text">Identify your plants and monitor their health using advanced machine learning algorithms. Our app makes it easy to detect and address potential issues.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                <button type="button" class="btn btn-sm btn-outline-secondary">Learn more</button>
                 </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-    </section>
+            </div>
+          </div>        
 
+        <!-- Feature Card:(3.6) Automated Data Managment -->
+          <div class="card">
+            <img src="{% static '/img/data-management.jpg' %}" class="card-img-top" alt="Automated data management">
+            <div class="card-body">
+              <h5 class="card-title">Automated Data Management</h5>
+              <p class="card-text">Streamline your research with automated data collection, reporting, and comparison for controlled environment plant growth facilities.</p>
+            </div>
+          </div>
+          
+        
+        <!-- Feature Card:(3.7) LLM Interface: Cybot -->
+          <div class="card">
+            <img src="{% static '/img/cybot.jpg' %}" class="card-img-top" alt="LLM Interface: CyBot">
+            <div class="card-body">
+              <h5 class="card-title">LLM Interface: CyBot</h5>
+              <p class="card-text">Enjoy an interactive, user-friendly experience with CyBot, our large language model interface for plant management, care, and more.</p>
+            </div>
+          </div>
+          
+
+        </div>
+    </div>
+
+    </section>
 {% endblock %}
