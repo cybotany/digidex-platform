@@ -1,5 +1,22 @@
 <header style="background-color: var(--accent-color);">
-    <!-- insert your header content here -->
-    {% include "components/navigation_links.html" %}
+    <div class="container">
+        <div class="row align-items-center">
+            <!-- Logo -->
+            <div class="col-lg-4">
+                <a href="{% url 'home' %}"> <img src="{% static 'img/logo.png' %}" alt="CyBotany Logo" /> </a>
+            </div>
+            
+            <!-- Central Links -->
+            <div class="col-lg-4 text-center">
+                <a href="{% url 'botany:home' %}"  class="btn btn-outline-light"> Plants  </a>
+                <a href="{% url 'cea:home' %}"     class="btn btn-outline-light"> CEAs    </a>
+                <a href="{% url 'chatbot:home' %}" class="btn btn-outline-light"> Chatbot </a>
+            </div>
+
+            <!-- Profile Links -->
+            <div class="col-lg-4">
+                {% include "components/navigation_links.html" %}
+            </div>
+        </div>
+    </div>
 </header>
-  
