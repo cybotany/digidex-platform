@@ -12,43 +12,48 @@
     </section>
 
     <section class="container">
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <!-- Module Section -->
+        <div class="row">
+
+            <!-- Botany -->
+            <div class="col-12 col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img src="{% static 'img/plant.jpg' %}" class="card-img-top" alt="Plant Management"> 
+                    <div class="card-body">
+                        <h5 class="card-title">Plant Management</h5>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="{% url 'botany:home' %}" class="btn btn-sm btn-outline-secondary">Learn more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>        
+
+            <!-- CEA -->
+            <div class="col-12 col-md-4">
+                <div class="card">
+                    <img src="{% static 'img/cea.jpg' %}" class="card-img-top" alt="CEA Management">
+                    <div class="card-body">
+                        <h5 class="card-title">CEA Management</h5>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="{% url 'cea:home' %}" class="btn btn-sm btn-outline-secondary">Learn more</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="{% static 'img/plant.jpg' %}" class="d-block w-100" alt="...">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Plant Management</h5>
-                        <p><a href="{% url 'botany:home' %}" class="btn btn-sm btn-outline-secondary">Learn more</a></p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="{% static 'img/cea.jpg' %}" class="d-block w-100" alt="...">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>CEA Management</h5>
-                        <p><a href="{% url 'cea:home' %}" class="btn btn-sm btn-outline-secondary">Learn more</a></p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="{% static 'img/chatbot.jpg' %}" class="d-block w-100" alt="...">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Chatbot</h5>
-                        <p><a href="{% url 'chatbot:home' %}" class="btn btn-sm btn-outline-secondary">Learn more</a></p>
+
+            <!-- Chatbot -->
+            <div class="col-12 col-md-4">
+                <div class="card">
+                    <img src="{% static 'img/chatbot.jpg' %}" class="card-img-top" alt="Chatbot">
+                    <div class="card-body">
+                        <h5 class="card-title">Chatbot</h5>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="{% url 'chatbot:home' %}" class="btn btn-sm btn-outline-secondary">Learn more</a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+
         </div>
     </section>
 
