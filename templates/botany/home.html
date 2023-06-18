@@ -4,8 +4,18 @@
 Botany Home - CyBotany
 {% endblock %}
 
+{% load messages %}
+
 {% block content %}
 <div class="container mt-4">
+    {% if messages %}
+        <div class="alert alert-info">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
     {% for group in plant_groups %}
     <div class="row mb-4">
         <h2>{{ group.name }}</h2>
