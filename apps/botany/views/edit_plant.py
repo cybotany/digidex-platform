@@ -1,9 +1,11 @@
 from django.views.generic import UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
+from django.urls import reverse_lazy
 from ..models import Plant
 
-class PlantUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+
+class EditPlant(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Plant
     fields = ['name', 'description', 'image']
     template_name = 'botany/plant_edit.html'
