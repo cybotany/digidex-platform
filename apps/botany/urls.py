@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import BotanyHomeView, RegisterPlant, CreateLabel, AutoPlantRegistration, ManualPlantRegistration, PlantDetail, EditPlant
+from .views import BotanyHomeView, RegisterPlant, CreateLabel, AutoPlantRegistration, ManualPlantRegistration, PlantDetail, EditPlant, DeletePlant
 
 app_name = 'botany'
 urlpatterns = [
@@ -10,4 +10,5 @@ urlpatterns = [
     path('manual_plant_registration', ManualPlantRegistration.as_view(), name='manual_plant_form'),
     path('plants/<int:pk>/', PlantDetail.as_view(), name='plant_detail'),
     path('plants/<int:pk>/edit/', EditPlant.as_view(), name='plant_edit'),
+    path('plants/<int:pk>/delete/', DeletePlant.as_view(), name='plant_delete'),
 ]

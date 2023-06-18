@@ -7,4 +7,9 @@
         {{ form.as_p }}
         <button type="submit">Update</button>
     </form>
+
+    <form method="POST" action="{% url 'botany:plant_delete' plant.id %}">
+      {% csrf_token %}
+      <input type="submit" value="Delete Plant" class="btn btn-danger">
+    </form>
 {% endblock %}
