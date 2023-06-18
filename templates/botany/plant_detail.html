@@ -1,11 +1,14 @@
 {% extends "base.html" %}
 
 {% block title %}
-{{ plant.name }} - CyBotany
+    {{ plant.name }} - CyBotany
 {% endblock %}
 
 {% block content %}
-<h1>{{ plant.name }}</h1>
-<img src="{{ plant.image.url }}" alt="Image of {{ plant.name }}">
-<p>{{ plant.description }}</p>
+    <div class="container mt-4">
+        <h1> {{ plant.name }} </h1>
+        <img src="{{ plant.image.url }}" alt="Image of {{ plant.name }}">
+        <p> {{ plant.description }} </p>
+        <a href="{% url 'botany:plant_edit' plant.id %}" class="btn btn-primary">Edit Plant</a>
+    </div>
 {% endblock %}
