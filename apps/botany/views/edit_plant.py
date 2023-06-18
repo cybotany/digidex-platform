@@ -8,7 +8,7 @@ from ..models import Plant
 class EditPlant(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Plant
     fields = ['name', 'description', 'image']
-    template_name = 'botany/plant_edit.html'
+    template_name = 'botany/edit_plant.html'
     success_url = reverse_lazy('botany:home')
 
     def test_func(self):
