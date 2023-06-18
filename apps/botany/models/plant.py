@@ -1,23 +1,8 @@
-import os
-import uuid
+
 from django.db import models
 from django.contrib.auth import get_user_model
-from django.core.exceptions import ValidationError
 from .label import Label
-
-def validate_file_extension(value):
-    ext = os.path.splitext(value.name)[1]  # [0] returns path+filename
-    valid_extensions = ['.jpg', '.png', '.jpeg']
-    if not ext.lower() in valid_extensions:
-        raise ValidationError('Unsupported file extension.')
-
-def user_directory_path(instance, filename):
-    # get the file extension
-    ext = filename.split('.')[-1]
-    # generate a UUID for the new filename
-    filename = f'{uuid.uuid4()}.{ext}'
-    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
-    return os.path.join(f'owner_{instance.owner.id}', filename)
+from apps.utils.helpers import user_directory_path, validate_file_extension
 
 User = get_user_model()
 

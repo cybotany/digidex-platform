@@ -20,7 +20,7 @@ Botany Home - CyBotany
         {% for plant in group.plants.all %}
         <div class="col-md-4">
             <div class="card">
-                <img src="{{ plant.image }}" class="card-img-top" alt="Image of {{ plant.name }}">
+                <img src="{{ plant.image.url }}" class="card-img-top" alt="Image of {{ plant.name }}">
                 <div class="card-body">
                     <h5 class="card-title">{{ plant.name }}</h5>
                     <p class="card-text">{{ plant.description }}</p>
@@ -37,7 +37,7 @@ Botany Home - CyBotany
         {% for plant in unlabeled_plants %}
         <div class="col-md-4">
             <div class="card">
-                <img src="{{ plant.image }}" class="card-img-top" alt="Image of {{ plant.name }}">
+                <img src="{{ plant.image.url }}" class="card-img-top" alt="Image of {{ plant.name }}">
                 <div class="card-body">
                     <h5 class="card-title">{{ plant.name }}</h5>
                     <p class="card-text">{{ plant.description }}</p>
