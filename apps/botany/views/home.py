@@ -11,14 +11,5 @@ class BotanyHomeView(LoginRequiredMixin, TemplateView):
         # fetch labeled plant groups
         plant_groups = Label.objects.filter(user=self.request.user).prefetch_related('plants')
         
-        # fetch unlabeled plants
-        unlabeled_plants = Plant.objects.filter(owner=self.request.user, label=None)
-        
-        # create an unlabeled group
-        unlabeled_group = Label(name='', user=self.request.user)
-        unlabeled_group.unlabeled_plants = unlabeled_plants
-
-        # combine labeled groups and unlabeled group
-        context['plant_groups'] = list(plant_groups) + [unlabeled_group]
+        context['plant_groups'] = list(plant_groups)
         return context
-
