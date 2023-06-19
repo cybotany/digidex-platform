@@ -1,15 +1,25 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h2>Update Plant Details</h2>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Update</button>
-    </form>
+<div class="container mt-4">
+    <h2> {{ plant.name }} </h2>
 
-    <form method="POST" action="{% url 'botany:plant_delete' plant.id %}">
-      {% csrf_token %}
-      <input type="submit" value="Delete Plant" class="btn btn-danger">
-    </form>
+    <!-- Plant update form -->
+    <div class="row mb-4">
+      <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit">Update</button>
+      </form>
+    </div>
+
+    <!-- Plant deletion button -->
+    <div class="row mb-4">
+      <form method="POST" action="{% url 'botany:plant_delete' plant.id %}">
+        {% csrf_token %}
+        <input type="submit" value="Delete Plant" class="btn btn-danger">
+      </form>
+    </div>
+  
+</div>
 {% endblock %}

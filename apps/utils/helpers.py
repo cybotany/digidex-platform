@@ -1,4 +1,5 @@
 import os
+import base64
 import uuid
 from django.core.exceptions import ValidationError
 from .constants import MEASUREMENT_CHOICES
@@ -67,3 +68,8 @@ def user_directory_path(instance, filename):
     ext = filename.split('.')[-1]
     filename = f'{uuid.uuid4()}.{ext}'
     return os.path.join(f'owner_{instance.owner.id}', filename)
+
+
+def encode_image_file(file):
+    """Encode image file to base64."""
+    return base64.b64encode(file.read()).decode("ascii")

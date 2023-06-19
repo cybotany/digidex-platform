@@ -1,16 +1,11 @@
 {% extends 'base.html' %}
 
-{% load static %}
-<script src="{% static 'js/plant_registration_method.js' %}"></script>
+{% block title %}New Plant{% endblock title %}
 
 
 {% block content %}
-  <h2>Register a new Plant</h2>
-  
-  <button id="chooseAutoRegistration">Upload an Image</button>
-  <button id="chooseManualRegistration">Enter Details Manually</button>
-
-  <div id="autoRegistrationForm" style="display: none;"></div>
-  <div id="manualRegistrationForm" style="display: none;"></div>
+  <div class="container mt-4">
+    <h2>Register a new Plant</h2>
+  </div>
 
 {% endblock content %}

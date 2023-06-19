@@ -15,6 +15,6 @@ class RegisterPlant(View):
         form = PlantRegistrationForm(request.POST, user=request.user)
         if form.is_valid():
             form.save()
-            return redirect('botany:plant_list')
+            return redirect('botany:home')
         context = {'form': form}
         return render(request, self.template_name, context)
