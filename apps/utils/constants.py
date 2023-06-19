@@ -13,3 +13,13 @@ INSTRUMENT_TYPE_CHOICES = [
     ('light', 'Light'),
     ('fan', 'Fan'),
 ]
+COMMON_LABELS = [
+    'Living Room',
+    'Kitchen',
+    'Balcony',
+    'Patio',
+    'Garden',
+    'Bedroom',
+    'Bathroom',
+    'Office'
+]

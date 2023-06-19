@@ -23,8 +23,9 @@ class PlantRegistrationForm(forms.ModelForm):
         self.user = kwargs.pop('user')
         super().__init__(*args, **kwargs)
 
-        # To populate the label field with the current user's labels
-        self.fields['label'].queryset = Label.objects.filter(user=self.user)
+        user_labels = Label.objects.filter(user=self.user)
+        common_labels = Label.get_common_labels()
+        self.fields['label'].queryset = user_labels | common_labels
 
     def save(self, commit=True):
         plant = super().save(commit=False)

@@ -26,7 +26,7 @@ class Plant(models.Model):
     def save(self, *args, **kwargs):
         if not self.name:
             total_plants = Plant.objects.filter(owner=self.owner).count()
-            self.name = f'Plant-{total_plants + 1}'
+            self.name = f'Plant-{total_plants + 1}'     
         super().save(*args, **kwargs)
 
     def __str__(self):
