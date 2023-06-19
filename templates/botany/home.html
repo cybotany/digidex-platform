@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}
-Botany Home - CyBotany
-{% endblock %}
+{% block title %} CyBotany {% endblock %}
 
 {% block content %}
 <div class="container mt-4">
@@ -20,35 +18,22 @@ Botany Home - CyBotany
         {% for plant in group.plants.all %}
         <div class="col-md-4">
             <div class="card">
-                <img src="{{ plant.image.url }}" class="card-img-top" alt="Image of {{ plant.name }}">
+                <a href="{% url 'botany:plant_detail' pk=plant.id %}">
+                    <img src="{{ plant.image.url }}" class="card-img-top" alt="Image of {{ plant.name }}">
+                </a>
                 <div class="card-body">
                     <h5 class="card-title">{{ plant.name }}</h5>
                     <p class="card-text">{{ plant.description }}</p>
-                    <a href="{% url 'botany:plant_detail' pk=plant.id %}" class="btn btn-primary">See more</a>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-    {% endfor %}
-    
-    <!-- Unlabeled plants -->
-    <div class="row mb-4">
-        <h2>Unlabeled Plants</h2>
-        {% for plant in unlabeled_plants %}
-        <div class="col-md-4">
-            <div class="card">
-                <img src="{{ plant.image.url }}" class="card-img-top" alt="Image of {{ plant.name }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ plant.name }}</h5>
-                    <p class="card-text">{{ plant.description }}</p>
-                    <a href="{% url 'botany:plant_detail' plant.id %}" class="btn btn-primary">See more</a>
                 </div>
             </div>
         </div>
         {% empty %}
-        <p>No unlabeled plants.</p>
+        <p>No plants in this group.</p>
         {% endfor %}
     </div>
+    {% empty %}
+    <p>No plant groups.</p>
+    {% endfor %}
 
     <!-- Registration link -->
     <div class="row my-4">

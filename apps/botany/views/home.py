@@ -9,7 +9,16 @@ class BotanyHomeView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # fetch labeled plant groups
-        context['plant_groups'] = Label.objects.filter(user=self.request.user).prefetch_related('plants')
+        plant_groups = Label.objects.filter(user=self.request.user).prefetch_related('plants')
+        
         # fetch unlabeled plants
-        context['unlabeled_plants'] = Plant.objects.filter(owner=self.request.user, label=None)
+        unlabeled_plants = Plant.objects.filter(owner=self.request.user, label=None)
+        
+        # create an unlabeled group
+        unlabeled_group = Label(name='', user=self.request.user)
+        unlabeled_group.plants = unlabeled_plants
+
+        # combine labeled groups and unlabeled group
+        context['plant_groups'] = list(plant_groups) + [unlabeled_group]
         return context
+

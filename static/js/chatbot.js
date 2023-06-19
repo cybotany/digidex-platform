@@ -31,7 +31,7 @@ chatForm.addEventListener('submit', (event) => {
     // Typing message
     const typingMessageElem = document.createElement('div');
     typingMessageElem.className = 'message chatbot-message';
-    typingMessageElem.innerText = 'Chatbot is typing...';
+    typingMessageElem.innerText = 'cybot is thiking...';
     chatbox.appendChild(typingMessageElem);
     chatInput.style.display = "none";
 
