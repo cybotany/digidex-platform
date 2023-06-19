@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 
 
 @method_decorator(csrf_exempt, name='dispatch')
-class CEAIdentification(APIView):
+class CEAIdentificationView(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 

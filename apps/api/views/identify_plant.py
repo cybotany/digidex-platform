@@ -1,26 +1,25 @@
 from django.views.generic.edit import FormView
 from django.conf import settings
 import requests
-from apps.utils.helpers import encode_image_file, process_location
-from ..forms import PlantIdentificationForm
+import time
+from apps.utils.helpers import encode_image_file
+from apps.botany.forms import PlantIdentificationForm
 
 
-class PlantIdentification(FormView):
+class PlantIdentificationView(FormView):
     template_name = 'identify_plant.html'
     form_class = PlantIdentificationForm
     success_url = '/botany/identify-plant'
 
     def form_valid(self, form):
-        location = form.cleaned_data.get('location')
         images = form.cleaned_data.get('images')
         encoded_images = [encode_image_file(img) for img in images]
 
-        latitude, longitude = process_location(location)
+        current_datetime = int(time.time())
+
         params = {
             "images": encoded_images,
-            "latitude": latitude,
-            "longitude": longitude,
-            "datetime": 1582830233,
+            "datetime": current_datetime,
             "modifiers": ["crops_fast", "similar_images"],
         }
 
