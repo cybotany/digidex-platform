@@ -16,7 +16,7 @@ class BotanyHomeView(LoginRequiredMixin, TemplateView):
         
         # create an unlabeled group
         unlabeled_group = Label(name='', user=self.request.user)
-        unlabeled_group.plants = unlabeled_plants
+        unlabeled_group.unlabeled_plants = unlabeled_plants
 
         # combine labeled groups and unlabeled group
         context['plant_groups'] = list(plant_groups) + [unlabeled_group]
