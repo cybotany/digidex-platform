@@ -8,8 +8,6 @@ class PlantHomepageView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # fetch labeled plant groups
-        plant_groups = Label.objects.filter(user=self.request.user).prefetch_related('plant_set')
-
+        plant_groups = Label.objects.filter(user=self.request.user, plant__isnull=False).distinct().prefetch_related('plant_set')
         context['plant_groups'] = list(plant_groups)
         return context

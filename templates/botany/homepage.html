@@ -12,24 +12,37 @@
         </div>
     {% endif %}
 
-    {% for group in plant_groups %}
-    <div class="row mb-4">
-        <h2>{{ group.name }}</h2>
-        {% for plant in group.plants.all %}
-        <div class="col-md-4">
-            <div class="card">
-                <a href="{% url 'botany:describe_plant' pk=plant.id %}">
-                    <img src="{{ plant.image.url }}" class="card-img-top" alt="Image of {{ plant.name }}">
-                </a>
-                <div class="card-body">
-                    <h5 class="card-title">{{ plant.name }}</h5>
-                    <p class="card-text">{{ plant.description }}</p>
+    <!-- Tab navigation -->
+    <ul class="nav nav-tabs" id="plantGroupTab" role="tablist">
+        {% for group in plant_groups %}
+            <li class="nav-item" role="presentation">
+                <a class="nav-link {% if forloop.first %}active{% endif %}" id="{{ group.name|slugify }}-tab" data-bs-toggle="tab" href="#{{ group.name|slugify }}" role="tab" aria-controls="{{ group.name|slugify }}" aria-selected="true">{{ group.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <!-- Tab content -->
+    <div class="tab-content" id="plantGroupTabContent">
+        {% for group in plant_groups %}
+            <div class="tab-pane fade show {% if forloop.first %}active{% endif %}" id="{{ group.name|slugify }}" role="tabpanel" aria-labelledby="{{ group.name|slugify }}-tab">
+                <div class="row mb-4">
+                    {% for plant in group.plants.all %}
+                    <div class="col-md-4">
+                        <div class="card">
+                            <a href="{% url 'botany:describe_plant' pk=plant.id %}">
+                                <img src="{{ plant.image.url }}" class="card-img-top" alt="Image of {{ plant.name }}">
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title">{{ plant.name }}</h5>
+                                <p class="card-text">{{ plant.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
-        </div>
         {% endfor %}
     </div>
-    {% endfor %}
 
     <!-- Registration link -->
     <div class="row my-4">
