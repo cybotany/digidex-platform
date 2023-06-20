@@ -9,7 +9,7 @@ class Label(models.Model):
     name = models.CharField(max_length=50)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     is_common = models.BooleanField(default=False)
-    
+
     class Meta:
         unique_together = (('name', 'user'),)  # label names must be unique per user
 

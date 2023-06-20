@@ -41,17 +41,14 @@ class PlantIdentificationAPIView(FormView):
         }
 
         response = requests.post("https://api.plant.id/v2/enqueue_identification",
-                                json=params,
-                                headers=headers).json()
-        
+                                 json=params,
+                                 headers=headers).json()
+
         # Store the ID in the session so it can be accessed in the result view
         self.request.session['identification_id'] = response["id"]
-        
         return redirect(reverse('botany:new_plant'))
-
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = PlantRegistrationForm()
         return context
-    

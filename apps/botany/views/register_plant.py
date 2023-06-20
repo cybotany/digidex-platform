@@ -13,7 +13,7 @@ class RegisterPlantView(View):
 
     def get(self, request, *args, **kwargs):
         form = PlantRegistrationForm()
-        return render(request, template_name, {'form': form})
+        return render(request, self.template_name, {'form': form})
 
     def post(self, request, *args, **kwargs):
         form = PlantRegistrationForm(request.POST)
@@ -22,4 +22,4 @@ class RegisterPlantView(View):
             request.session['plant_details'] = form.cleaned_data
             return redirect('select_plant')  # assuming the url pattern name for the select plant view is 'select_plant'
         else:
-            return render(request, template_name, {'form': form})
+            return render(request, self.template_name, {'form': form})
