@@ -9,10 +9,9 @@ class RegisterPlantView(View):
     template_name = 'botany/register_plant.html'
     model = Plant
     form_class = PlantRegistrationForm
-    success_url = '/botany/home'
 
     def get(self, request, *args, **kwargs):
-        form = PlantRegistrationForm()
+        form = PlantRegistrationForm(user=request.user)
         return render(request, self.template_name, {'form': form})
 
     def post(self, request, *args, **kwargs):

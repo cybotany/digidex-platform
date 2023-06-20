@@ -4,3 +4,4 @@ from .delete_plant import DeletePlantView
 from .edit_plant import EditPlantView
 from .homepage import PlantHomepageView
 from .register_plant import RegisterPlantView
+from .select_plant import SelectPlantView
