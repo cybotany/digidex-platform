@@ -9,17 +9,17 @@ from apps.botany.forms import PlantIdentificationForm, PlantRegistrationForm
 
 
 class PlantIdentificationAPIView(FormView):
-    template_name = 'identify_plant.html'
+    template_name = 'botany/identify_plant.html'
     form_class = PlantIdentificationForm
 
     def form_valid(self, form):
-        images = form.cleaned_data.get('images')
-        encoded_images = [encode_image_file(img) for img in images]
+        image = form.cleaned_data.get('image')
+        encoded_image = encode_image_file(image)
 
         current_datetime = int(time.time())
 
         params = {
-            "images": encoded_images,
+            "images": [encoded_image],
             "datetime": current_datetime,
             "modifiers": ["crops_fast", "similar_images"],
             "plant_details": ["common_names",
@@ -44,7 +44,6 @@ class PlantIdentificationAPIView(FormView):
                                  json=params,
                                  headers=headers).json()
 
-        # Store the ID in the session so it can be accessed in the result view
         self.request.session['identification_id'] = response["id"]
         return redirect(reverse('botany:new_plant'))
 
