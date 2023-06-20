@@ -21,6 +21,17 @@ class PlantIdentificationView(FormView):
             "images": encoded_images,
             "datetime": current_datetime,
             "modifiers": ["crops_fast", "similar_images"],
+            "plant_details": ["common_names",
+                              "edible_parts",
+                              "gbif_id",
+                              "name_authority",
+                              "propagation_methods",
+                              "synonyms",
+                              "taxonomy",
+                              "url",
+                              "wiki_description",
+                              "wiki_image",
+                              ],
         }
 
         headers = {
