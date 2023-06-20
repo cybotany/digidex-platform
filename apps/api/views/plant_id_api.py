@@ -9,7 +9,7 @@ from apps.botany.forms import PlantIdentificationForm, PlantRegistrationForm
 
 
 class PlantIdentificationAPIView(FormView):
-    template_name = 'botany/identify_plant.html'
+    template_name = 'api/identify_plant.html'
     form_class = PlantIdentificationForm
 
     def form_valid(self, form):
@@ -45,7 +45,7 @@ class PlantIdentificationAPIView(FormView):
                                  headers=headers).json()
 
         self.request.session['identification_id'] = response["id"]
-        return redirect(reverse('botany:new_plant'))
+        return redirect(reverse('botany:register_plant'))
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
