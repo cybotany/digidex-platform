@@ -1,12 +1,13 @@
 from django.urls import path
-from .views import BotanyHomeView, RegisterPlant, CreateLabel, PlantDetail, EditPlant, DeletePlant
+from .views import CreateLabelView, DescribePlantView, DeletePlantView, EditPlantView, PlantHomepageView, RegisterPlantView
+
 
 app_name = 'botany'
 urlpatterns = [
-    path('', BotanyHomeView.as_view(), name='home'),
-    path('new_label', CreateLabel.as_view(), name='new_label'),
-    path('new_plant', RegisterPlant.as_view(), name='new_plant'),
-    path('plants/<int:pk>/', PlantDetail.as_view(), name='plant_detail'),
-    path('plants/<int:pk>/edit/', EditPlant.as_view(), name='plant_edit'),
-    path('plants/<int:pk>/delete/', DeletePlant.as_view(), name='plant_delete'),
+    path('', PlantHomepageView.as_view(), name='home'),
+    path('create-label', CreateLabelView.as_view(), name='create_label'),
+    path('register-plant', RegisterPlantView.as_view(), name='register_plant'),
+    path('plants/<int:pk>/describe', DescribePlantView.as_view(), name='describe_plant'),
+    path('plants/<int:pk>/edit', EditPlantView.as_view(), name='edit_plant'),
+    path('plants/<int:pk>/delete', DeletePlantView.as_view(), name='delete_plant'),
 ]

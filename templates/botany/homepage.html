@@ -18,7 +18,7 @@
         {% for plant in group.plants.all %}
         <div class="col-md-4">
             <div class="card">
-                <a href="{% url 'botany:plant_detail' pk=plant.id %}">
+                <a href="{% url 'botany:describe_plant' pk=plant.id %}">
                     <img src="{{ plant.image.url }}" class="card-img-top" alt="Image of {{ plant.name }}">
                 </a>
                 <div class="card-body">
@@ -34,7 +34,7 @@
     <!-- Registration link -->
     <div class="row my-4">
         <div class="col-lg-4 col-md-6 mb-4">
-            <a href="{% url 'botany:new_plant' %}" class="btn btn-primary">Register New Plant</a>
+            <a href="{% url 'botany:register_plant' %}" class="btn btn-primary">Register New Plant</a>
         </div>
     </div>
 </div>

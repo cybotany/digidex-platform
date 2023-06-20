@@ -2,6 +2,6 @@ from django.views.generic import DetailView
 from ..models import Plant
 
 
-class PlantDetail(DetailView):
+class DescribePlantView(DetailView):
     model = Plant
-    template_name = 'botany/plant_detail.html'
+    template_name = 'botany/describe_plant.html'

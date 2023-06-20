@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from ..models import Plant
 
 
-class EditPlant(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class EditPlantView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Plant
     fields = ['name', 'description', 'image']
     template_name = 'botany/edit_plant.html'

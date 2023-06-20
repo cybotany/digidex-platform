@@ -3,8 +3,8 @@ from django.shortcuts import render, redirect
 from ..forms import PlantLabelForm
 
 
-class CreateLabel(View):
-    template_name = 'botany/new_label.html'
+class CreateLabelView(View):
+    template_name = 'botany/create_label.html'
 
     def get(self, request):
         form = PlantLabelForm()
@@ -17,6 +17,6 @@ class CreateLabel(View):
             label = form.save(commit=False)
             label.user = request.user
             label.save()
-            return redirect('botany:label_list')
+            return redirect('botany:home')
         context = {'form': form}
         return render(request, self.template_name, context)

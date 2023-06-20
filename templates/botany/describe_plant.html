@@ -10,6 +10,6 @@
         <p>
             {{ plant.description }}
         </p>
-        <a href="{% url 'botany:plant_edit' plant.id %}" class="btn btn-primary">Edit Plant</a>
+        <a href="{% url 'botany:edit_plant' plant.id %}" class="btn btn-primary">Edit Plant</a>
     </div>
 {% endblock %}

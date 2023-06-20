@@ -15,7 +15,7 @@
 
     <!-- Plant deletion button -->
     <div class="row mb-4">
-      <form method="POST" action="{% url 'botany:plant_delete' plant.id %}">
+      <form method="POST" action="{% url 'botany:delete_plant' plant.id %}">
         {% csrf_token %}
         <input type="submit" value="Delete Plant" class="btn btn-danger">
       </form>

@@ -2,14 +2,15 @@ from django.views.generic.edit import FormView
 from django.conf import settings
 import requests
 import time
+from django.shortcuts import redirect
+from django.urls import reverse
 from apps.utils.helpers import encode_image_file
-from apps.botany.forms import PlantIdentificationForm
+from apps.botany.forms import PlantIdentificationForm, PlantRegistrationForm
 
 
 class PlantIdentificationView(FormView):
     template_name = 'identify_plant.html'
     form_class = PlantIdentificationForm
-    success_url = '/botany/identify-plant'
 
     def form_valid(self, form):
         images = form.cleaned_data.get('images')
@@ -45,4 +46,12 @@ class PlantIdentificationView(FormView):
         
         # Store the ID in the session so it can be accessed in the result view
         self.request.session['identification_id'] = response["id"]
-        return super().form_valid(form)
+        
+        return redirect(reverse('botany:new_plant'))
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = PlantRegistrationForm()
+        return context
+    

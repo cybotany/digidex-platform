@@ -3,8 +3,8 @@ from django.views.generic import TemplateView
 from ..models import Plant, Label
 
 
-class BotanyHomeView(LoginRequiredMixin, TemplateView):
-    template_name = 'botany/home.html'
+class PlantHomepageView(LoginRequiredMixin, TemplateView):
+    template_name = 'botany/homepage.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
