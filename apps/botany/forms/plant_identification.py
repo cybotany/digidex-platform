@@ -2,7 +2,7 @@ from django import forms
 
 
 class PlantIdentificationForm(forms.Form):
-    images = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
+    images = forms.FileField(widget=forms.FileInput(attrs={'multiple': True}))
 
     def clean_images(self):
         images = self.files.getlist('images')
