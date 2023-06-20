@@ -8,7 +8,7 @@ from apps.utils.helpers import encode_image_file
 from apps.botany.forms import PlantIdentificationForm, PlantRegistrationForm
 
 
-class PlantIdentificationView(FormView):
+class PlantIdentificationAPIView(FormView):
     template_name = 'identify_plant.html'
     form_class = PlantIdentificationForm
 

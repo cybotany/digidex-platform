@@ -1,3 +1,3 @@
-from .chatbot_assistance import ChatbotAPIView
-from .identify_plant import PlantIdentification
-from .register_cea import CEAIdentification
+from .chatbot_api import ChatbotAPIView
+from .plant_id_api import PlantIdentificationAPIView
+from .cea_mapping_api import CEAMappingAPIView

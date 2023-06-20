@@ -1,12 +1,12 @@
 from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from .views import UserList, ChatbotAPIView, CEAIdentification, PlantIdentification
+from .views import ChatbotAPIView, CEAMappingAPIView, PlantIdentificationAPIView
 
 app_name = 'api'
 urlpatterns = [
-    path('user_info/', UserList.as_view(), name='user_info'),
-    path('identify_cea/', CEAIdentification.as_view(), name='identify_cea'),
-    path('chatbot/', ChatbotAPIView.as_view(), name='chatbot'),
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('cea-mapping/', CEAMappingAPIView.as_view(), name='map_cea'),
+    path('chatbot/', ChatbotAPIView.as_view(), name='chatbot'),
+    path('plant-id/', PlantIdentificationAPIView.as_view(), name='plant_id_api'),
 ]
