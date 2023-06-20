@@ -15,10 +15,10 @@ class RegisterPlantView(View):
         return render(request, self.template_name, {'form': form})
 
     def post(self, request, *args, **kwargs):
-        form = PlantRegistrationForm(request.POST)
+        form = PlantRegistrationForm(request.POST, request.FILES, user=request.user)
         if form.is_valid():
             # Store plant details in session and redirect to choose plant form
             request.session['plant_details'] = form.cleaned_data
-            return redirect('select_plant')  # assuming the url pattern name for the select plant view is 'select_plant'
+            return redirect('botany:select_plant')  # assuming the url pattern name for the select plant view is 'select_plant'
         else:
             return render(request, self.template_name, {'form': form})
