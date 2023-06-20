@@ -19,6 +19,6 @@ class RegisterPlantView(View):
         if form.is_valid():
             # Store plant details in session and redirect to choose plant form
             request.session['plant_details'] = form.cleaned_data
-            return redirect('botany:select_plant')  # assuming the url pattern name for the select plant view is 'select_plant'
+            return redirect('botany:home')
         else:
             return render(request, self.template_name, {'form': form})
