@@ -17,8 +17,7 @@ class RegisterPlantView(View):
     def post(self, request, *args, **kwargs):
         form = PlantRegistrationForm(request.POST, request.FILES, user=request.user)
         if form.is_valid():
-            # Store plant details in session and redirect to choose plant form
-            request.session['plant_details'] = form.cleaned_data
+            form.save()
             return redirect('botany:home')
         else:
             return render(request, self.template_name, {'form': form})
