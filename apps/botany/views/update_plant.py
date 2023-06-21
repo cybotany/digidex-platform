@@ -14,11 +14,9 @@ class UpdatePlantView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if self.request.POST:
-            context['image_form'] = PlantImageForm(self.request.POST, self.request.FILES)
-        else:
-            context['image_form'] = PlantImageForm()
+        context['image_form'] = PlantImageForm()
         return context
+
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()

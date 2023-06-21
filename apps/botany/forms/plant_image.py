@@ -21,6 +21,3 @@ class PlantImageForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         super(PlantImageForm, self).__init__(*args, **kwargs)
-        
-        # Limit the plant field to only the plants owned by the logged in user
-        self.fields['plant'].queryset = Plant.objects.filter(owner=self.request.user)
