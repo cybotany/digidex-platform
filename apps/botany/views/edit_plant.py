@@ -7,7 +7,7 @@ from apps.botany.models import Plant
 
 class EditPlantView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Plant
-    fields = ['name', 'description', 'image']
+    fields = ['name', 'description',]
     template_name = 'botany/edit_plant.html'
     success_url = reverse_lazy('botany:home')
 
