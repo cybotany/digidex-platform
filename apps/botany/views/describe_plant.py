@@ -1,5 +1,5 @@
 from django.views.generic import DetailView
-from ..models import Plant
+from apps.botany.models import Plant
 
 
 class DescribePlantView(DetailView):

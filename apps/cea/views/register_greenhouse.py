@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
-from ..forms import GreenhouseRegistrationForm
+from apps.cea.forms import GreenhouseRegistrationForm
 
 
 class RegisterGreenhouse(LoginRequiredMixin, View):

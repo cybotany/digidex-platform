@@ -1,5 +1,5 @@
 from django import forms
-from ..models import TissueCultureChamber
+from apps.cea.models import TissueCultureChamber
 
 
 class TissueCultureRegistrationForm(forms.ModelForm):

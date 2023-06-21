@@ -1,8 +1,7 @@
 
 from django.db import models
 from django.contrib.auth import get_user_model
-from .label import Label
-from apps.utils.helpers import user_directory_path, validate_file_extension
+from apps.botany.models import Label
 
 User = get_user_model()
 
@@ -18,7 +17,6 @@ class Plant(models.Model):
     scientific_name = models.CharField(max_length=200, null=True, blank=True)
     synonyms = models.TextField(null=True, blank=True)
     taxonomy = models.TextField(null=True, blank=True)
-    image = models.ImageField(upload_to=user_directory_path, validators=[validate_file_extension], null=True, blank=True)
 
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     added_on = models.DateTimeField(auto_now_add=True)

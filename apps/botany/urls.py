@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CreateLabelView, DescribePlantView, DeletePlantView, EditPlantView, PlantHomepageView, RegisterPlantView, SelectPlantView
+from apps.botany.views import CreateLabelView, DescribePlantView, DeletePlantView, EditPlantView, PlantHomepageView, RegisterPlantView, SelectPlantView
 
 
 app_name = 'botany'

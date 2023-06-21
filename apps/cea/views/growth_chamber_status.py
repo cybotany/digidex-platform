@@ -1,5 +1,5 @@
 from django.views.generic.detail import DetailView
-from ..models import GrowthChamber
+from apps.cea.models import GrowthChamber
 
 
 class GrowthChamberStatus(DetailView):

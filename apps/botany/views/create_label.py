@@ -1,6 +1,6 @@
 from django.views import View
 from django.shortcuts import render, redirect
-from ..forms import PlantLabelForm
+from apps.botany.forms import PlantLabelForm
 
 
 class CreateLabelView(View):

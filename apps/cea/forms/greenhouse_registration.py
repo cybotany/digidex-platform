@@ -1,5 +1,5 @@
 from django import forms
-from ..models import Greenhouse
+from apps.cea.models import Greenhouse
 
 
 class GreenhouseRegistrationForm(forms.ModelForm):

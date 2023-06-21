@@ -1,8 +1,8 @@
 from django.conf import settings
 from django.views import View
 from django.shortcuts import render, redirect
-from ..models import Plant
-from ..forms import PlantRegistrationForm
+from apps.botany.models import Plant
+from apps.botany.forms import PlantRegistrationForm
 
 
 class RegisterPlantView(View):

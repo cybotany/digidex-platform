@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
-from ..models import GrowthChamber, Greenhouse, TissueCultureChamber
+from apps.cea.models import GrowthChamber, Greenhouse, TissueCultureChamber
 
 
 class CEAHome(LoginRequiredMixin, View):

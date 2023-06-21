@@ -1,6 +1,6 @@
 from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from .views import ChatbotAPIView, CEAMappingAPIView, PlantIdentificationAPIView
+from apps.api.views import ChatbotAPIView, CEAMappingAPIView, PlantIdentificationAPIView
 
 app_name = 'api'
 urlpatterns = [

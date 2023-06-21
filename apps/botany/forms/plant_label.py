@@ -1,5 +1,5 @@
 from django import forms
-from ..models import Label
+from apps.botany.models import Label
 
 
 class PlantLabelForm(forms.ModelForm):

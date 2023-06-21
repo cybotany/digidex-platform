@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CEAHome, RegisterGrowthChamber, RegisterGreenhouse, RegisterTissueCultureChamber, GrowthChamberStatus
+from apps.cea.views import CEAHome, RegisterGrowthChamber, RegisterGreenhouse, RegisterTissueCultureChamber, GrowthChamberStatus
 
 app_name = 'cea'
 urlpatterns = [

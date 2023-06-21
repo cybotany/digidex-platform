@@ -1,5 +1,5 @@
 from django import forms
-from ..models import GrowthChamber
+from apps.cea.models import GrowthChamber
 
 
 class GrowthChamberRegistrationForm(forms.ModelForm):

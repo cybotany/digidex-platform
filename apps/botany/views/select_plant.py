@@ -1,5 +1,5 @@
 from django.views.generic.edit import FormView
-from ..forms import PlantSelectionForm
+from apps.botany.forms import PlantSelectionForm
 from django.shortcuts import redirect
 from django.urls import reverse
 
