@@ -5,6 +5,10 @@ from django.urls import reverse
 
 
 class SelectPlantView(FormView):
+    """
+    View for rendering the page used to list plant options (if any)
+    returned by the plant.id API for identification service.
+    """
     template_name = 'botany/select_plant.html'
     form_class = PlantSelectionForm
 

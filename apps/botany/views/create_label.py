@@ -5,6 +5,9 @@ from apps.botany.forms import PlantLabelForm
 
 
 class CreateLabelView(View):
+    """
+    View for rendering the page used to create plant labels.
+    """
     template_name = 'botany/create_label.html'
 
     def get(self, request):

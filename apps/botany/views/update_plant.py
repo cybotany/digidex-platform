@@ -9,6 +9,9 @@ from apps.botany.forms import PlantImageForm
 
 
 class UpdatePlantView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    """
+    View for rendering the page used to update plant details.
+    """
     model = Plant
     fields = ['name', 'description']
     template_name = 'botany/update_plant.html'

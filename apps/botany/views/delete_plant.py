@@ -7,6 +7,9 @@ from apps.botany.models import Plant
 
 
 class DeletePlantView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
+    """
+    View for rendering the page used for deleting registered plants.
+    """
     template_name = 'botany/delete_plant.html'
 
     def get(self, request, *args, **kwargs):
