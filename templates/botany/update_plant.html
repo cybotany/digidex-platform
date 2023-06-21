@@ -11,14 +11,6 @@
       {{ image_form.as_p }}
       <button type="submit">Update</button>
   </form>  
-
-    <!-- Plant deletion button -->
-    <div class="row mb-4">
-      <form method="POST" action="{% url 'botany:delete_plant' plant.id %}">
-        {% csrf_token %}
-        <input type="submit" value="Delete Plant" class="btn btn-danger">
-      </form>
-    </div>
   
 </div>
 {% endblock %}
