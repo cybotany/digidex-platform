@@ -26,4 +26,4 @@ class RegisterPlantView(View):
         return render(self.request, self.template_name, {'form': form})
 
     def redirect_to_image_upload(self, plant):
-        return redirect('botany:upload_plant_image', plant_id=plant.id)
+        return redirect('botany:upload_plant_image', pk=plant.id)
