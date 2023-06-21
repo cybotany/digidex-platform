@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-from apps.botany.models import Plant
 from apps.utils.helpers import user_directory_path, validate_file_extension
+from .plant import Plant
 
 User = get_user_model()
 

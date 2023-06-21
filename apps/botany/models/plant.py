@@ -1,7 +1,7 @@
 
 from django.db import models
 from django.contrib.auth import get_user_model
-from apps.botany.models import Label
+from .label import Label
 
 User = get_user_model()
 
