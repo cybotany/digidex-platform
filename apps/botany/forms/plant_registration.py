@@ -16,8 +16,7 @@ class PlantRegistrationForm(forms.ModelForm):
                   'propagation_methods',
                   'scientific_name',
                   'synonyms',
-                  'taxonomy',
-                  'image',)
+                  'taxonomy',)
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
