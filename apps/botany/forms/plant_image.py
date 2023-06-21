@@ -1,11 +1,11 @@
 from django import forms
-from apps.botany.models import Plant, PlantImage
+from apps.botany.models import PlantImage
 
 
 class PlantImageForm(forms.ModelForm):
     class Meta:
         model = PlantImage
-        fields = ('image', 'plant',)
+        fields = ('image',)
 
     def clean_image(self):
         image = self.cleaned_data.get('image')
