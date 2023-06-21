@@ -7,14 +7,12 @@ from apps.botany.forms import PlantImageForm
 class UploadPlantImageView(View):
     template_name = 'botany/upload_plant_image.html'
 
-    def get(self, request, *args, **kwargs):
-        plant_id = kwargs['plant_id']
+    def get(self, request, plant_id, *args, **kwargs):
         plant = get_object_or_404(Plant, id=plant_id)
         form = PlantImageForm()
         return render(request, self.template_name, {'form': form, 'plant': plant})
 
-    def post(self, request, *args, **kwargs):
-        plant_id = kwargs['plant_id']
+    def post(self, request, plant_id, *args, **kwargs):
         plant = get_object_or_404(Plant, id=plant_id)
         form = PlantImageForm(request.POST, request.FILES)
         if form.is_valid():
