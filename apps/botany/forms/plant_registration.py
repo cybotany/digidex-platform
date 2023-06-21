@@ -10,13 +10,7 @@ class PlantRegistrationForm(forms.ModelForm):
         fields = ('name',
                   'label',
                   'common_names',
-                  'description',
-                  'edible_parts',
-                  'gbif_species_id',
-                  'propagation_methods',
-                  'scientific_name',
-                  'synonyms',
-                  'taxonomy',)
+                  'description',)
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')

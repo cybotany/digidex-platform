@@ -15,9 +15,9 @@ class RegisterPlantView(View):
         return render(request, self.template_name, {'form': form})
 
     def post(self, request, *args, **kwargs):
-        form = PlantRegistrationForm(request.POST, request.FILES, user=request.user)
-        if form.is_valid():
-            form.save()
-            return redirect('botany:home')
-        else:
-            return render(request, self.template_name, {'form': form})
+            form = PlantRegistrationForm(request.POST, request.FILES, user=request.user)
+            if form.is_valid():
+                new_plant = form.save()
+                return redirect('botany:upload_plant_image', plant_id=new_plant.id)
+            else:
+                return render(request, self.template_name, {'form': form})

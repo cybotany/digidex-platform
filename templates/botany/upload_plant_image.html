@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
-{% block title %}Create Label{% endblock %}
+{% block title %}Upload Plant Image{% endblock %}
 
 {% block content %}
 <div class="container">
-  <h1 class="my-4">Create Label</h1>
+  <h1 class="my-4">Upload Plant Image</h1>
 
-  <form method="post">
+  <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
 
@@ -16,7 +16,7 @@
       </p>
     {% endif %}
 
-    <button type="submit" class="btn btn-primary">Create Label</button>
+    <button type="submit" class="btn btn-primary">Upload Image</button>
   </form>
 
 </div>

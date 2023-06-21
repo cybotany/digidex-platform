@@ -11,13 +11,6 @@ class Plant(models.Model):
     label = models.ForeignKey(Label, on_delete=models.SET_NULL, null=True)
     common_names = models.TextField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)
-    edible_parts = models.TextField(null=True, blank=True)
-    gbif_species_id = models.CharField(max_length=200, null=True, blank=True)
-    propagation_methods = models.TextField(null=True, blank=True)
-    scientific_name = models.CharField(max_length=200, null=True, blank=True)
-    synonyms = models.TextField(null=True, blank=True)
-    taxonomy = models.TextField(null=True, blank=True)
-
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     added_on = models.DateTimeField(auto_now_add=True)
 
