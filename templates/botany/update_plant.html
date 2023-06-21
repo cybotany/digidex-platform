@@ -4,14 +4,13 @@
 <div class="container mt-4">
     <h2> {{ plant.name }} </h2>
 
-    <!-- Plant update form -->
-    <div class="row mb-4">
-      <form method="post" enctype="multipart/form-data">
-          {% csrf_token %}
-          {{ form.as_p }}
-          <button type="submit">Update</button>
-      </form>
-    </div>
+    <!-- Plant update form -->   
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      {{ image_form.as_p }}
+      <button type="submit">Update</button>
+  </form>  
 
     <!-- Plant deletion button -->
     <div class="row mb-4">
