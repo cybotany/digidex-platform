@@ -3,24 +3,41 @@
 {% block content %}
 <div class="container mt-4">
     <!-- Plant Header -->
-    <div class="d-flex justify-content-between align-items-center">
-        <h2 class="mb-4">{{ plant.name }}</h2>
-        <div>
-            <a href="{% url 'botany:update_plant' plant.id %}" class="btn btn-primary me-2">Update Plant</a>
-            <form method="POST" action="{% url 'botany:delete_plant' plant.id %}" class="d-inline">
-                {% csrf_token %}
-                <input type="submit" value="Delete Plant" class="btn btn-danger">
-            </form>
-        </div>
-    </div>
+    <h1 class="mb-4 text-center">{{ plant.name }}</h1>
 
     <!-- Plant Details -->
     <div class="card mb-4">
-        <img src="{{ plant.image.url }}" class="card-img-top" alt="Image of {{ plant.name }}">
+        <!-- Slideshow for Images -->
+        <div id="plantCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for image in plant.images.all %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <img src="{{ image.image.url }}" class="d-block w-100" alt="Image of {{ plant.name }}">
+                </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#plantCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#plantCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
         <div class="card-body">
             <h5 class="card-title">{{ plant.name }}</h5>
             <p class="card-text">{{ plant.description }}</p>
         </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="row justify-content-center mb-4">
+        <a href="{% url 'botany:update_plant' plant.id %}" class="btn btn-primary me-2">Update Plant</a>
+        <form method="POST" action="{% url 'botany:delete_plant' plant.id %}">
+            {% csrf_token %}
+            <input type="submit" value="Delete Plant" class="btn btn-danger">
+        </form>
     </div>
 
     <!-- Add more details as desired -->
