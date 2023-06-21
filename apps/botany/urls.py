@@ -10,6 +10,6 @@ urlpatterns = [
     path('select-plant', SelectPlantView.as_view(), name='select_plant'),
     path('upload-plant-image', UploadPlantImageView.as_view(), name='upload_plant_image'),
     path('plants/<int:pk>/describe', DescribePlantView.as_view(), name='describe_plant'),
-    path('plants/<int:pk>/edit', UpdatePlantView.as_view(), name='update_plant'),
+    path('plants/<int:pk>/update', UpdatePlantView.as_view(), name='update_plant'),
     path('plants/<int:pk>/delete', DeletePlantView.as_view(), name='delete_plant'),
 ]

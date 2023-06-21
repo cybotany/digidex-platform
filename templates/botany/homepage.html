@@ -27,17 +27,32 @@
             <div class="tab-pane fade show {% if forloop.first %}active{% endif %}" id="{{ group.name|slugify }}" role="tabpanel" aria-labelledby="{{ group.name|slugify }}-tab">
                 <div class="row mb-4">
                     {% for plant in group.plants.all %}
-                    <div class="col-md-4">
-                        <div class="card">
-                            <a href="{% url 'botany:describe_plant' pk=plant.id %}">
-                                <img src="{{ plant.image.url }}" class="card-img-top" alt="Image of {{ plant.name }}">
-                            </a>
-                            <div class="card-body">
-                                <h5 class="card-title">{{ plant.name }}</h5>
-                                <p class="card-text">{{ plant.description }}</p>
+                        <div class="col-md-4">
+                            <div class="card">
+                                {% if plant.images.all %}
+                                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                                        <div class="carousel-inner">
+                                            {% for image in plant.images.all %}
+                                                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                                    <img src="{{ image.image.url }}" class="d-block w-100" alt="Image of {{ plant.name }}">
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <img src="{% static 'no_image_available.jpg' %}" class="card-img-top" alt="No image available">
+                                {% endif %}
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ plant.name }}</h5>
+                                    <p class="card-text">{{ plant.description }}</p>
+                                    <a href="{% url 'botany:describe_plant' pk=plant.id %}" class="btn btn-primary">View Details</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    {% empty %}
+                        <div class="col-md-12">
+                            <p>No plants found in this group.</p>
+                        </div>
                     {% endfor %}
                 </div>
             </div>
