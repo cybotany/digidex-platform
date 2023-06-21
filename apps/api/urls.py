@@ -1,6 +1,6 @@
 from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from apps.api.views import ChatbotAPIView, CEAMappingAPIView, PlantIdentificationAPIView
+from apps.api.views import ChatbotAPIView, CEAMappingAPIView
 
 app_name = 'api'
 urlpatterns = [
@@ -8,5 +8,4 @@ urlpatterns = [
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('cea-mapping/', CEAMappingAPIView.as_view(), name='map_cea'),
     path('chatbot/', ChatbotAPIView.as_view(), name='chatbot'),
-    path('plant-id/', PlantIdentificationAPIView.as_view(), name='identify_plant'),
 ]
