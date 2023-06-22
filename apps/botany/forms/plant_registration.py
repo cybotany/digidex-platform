@@ -5,11 +5,11 @@ from apps.botany.models import Plant, Label, PlantImage
 
 class PlantRegistrationForm(forms.ModelForm):
     label = forms.ModelChoiceField(queryset=Label.objects.none(), required=False)
-    images = forms.ImageField(required=False)
+    image = forms.ImageField(required=False)
 
     class Meta:
         model = Plant
-        fields = ('name', 'label', 'common_names', 'description', 'images')
+        fields = ('name', 'label', 'common_names', 'description', 'image')
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
@@ -22,9 +22,13 @@ class PlantRegistrationForm(forms.ModelForm):
     def save(self, commit=True):
         plant = super().save(commit=False)
         plant.owner = self.user
+
         if commit:
             plant.save()
-            # Save the uploaded images
-            for image in self.cleaned_data.get('images', []):
+
+            # Save the uploaded image
+            image = self.cleaned_data.get('image')
+            if image:
                 PlantImage.objects.create(plant=plant, image=image)
+
         return plant

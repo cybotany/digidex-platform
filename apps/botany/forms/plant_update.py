@@ -4,14 +4,19 @@ from apps.botany.models import Plant, PlantImage
 
 
 class PlantUpdateForm(forms.ModelForm):
-    images = forms.ImageField(required=False)
+    image = forms.ImageField(required=False)
 
     class Meta:
         model = Plant
-        fields = ['name', 'description', 'images']
+        fields = ['name', 'description', 'image']
     
     def save(self, commit=True):
         instance = super().save(commit)
-        for image in self.cleaned_data.get('images', []):
+
+        # Get the uploaded image
+        image = self.cleaned_data.get('image')
+
+        # Save the image to the PlantImage model if it exists
+        if image:
             PlantImage.objects.create(plant=instance, image=image)
         return instance
