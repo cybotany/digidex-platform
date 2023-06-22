@@ -23,7 +23,7 @@ class DeletePlantView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
     def post(self, request, *args, **kwargs):
         """
         Handles the POST requests.
-        Deletes the selected plant, displays a success message, 
+        Deletes the selected plant, displays a success message,
         and redirects to the homepage.
         """
         self.delete_plant()

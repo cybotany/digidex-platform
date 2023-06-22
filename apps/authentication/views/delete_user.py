@@ -12,7 +12,7 @@ class DeleteUserView(LoginRequiredMixin, DeleteView):
 
     def get_object(self, queryset=None):
         return self.request.user
-    
+
     def delete(self, request, *args, **kwargs):
         messages.success(request, 'Your user profile has been successfully deleted.')
         return super(DeleteUserView, self).delete(request, *args, **kwargs)

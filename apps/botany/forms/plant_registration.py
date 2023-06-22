@@ -22,7 +22,7 @@ class PlantRegistrationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         """
         Initialize the form.
-        
+
         Pop the user from kwargs and initializes the queryset for the label
         field to include labels specific to the user as well as common labels.
         """
@@ -39,7 +39,7 @@ class PlantRegistrationForm(forms.ModelForm):
     def save(self, commit=True):
         """
         Save the form.
-        
+
         Associates the plant with the owner (user) and saves the uploaded image.
         """
         # Associate the plant with the owner (logged in user)

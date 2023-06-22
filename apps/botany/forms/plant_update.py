@@ -9,7 +9,7 @@ class PlantUpdateForm(forms.ModelForm):
     class Meta:
         model = Plant
         fields = ['name', 'description', 'image']
-    
+
     def save(self, commit=True):
         instance = super().save(commit)
 
