@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: Continuous Integration (CI)
 
 on:
   push:
@@ -28,8 +28,8 @@ jobs:
 
     - name: Lint with flake8
       run: |
-        flake8 cybotany
+        flake8
 
     - name: Test with pytest
       run: |
-        pytest cybotany
+        pytest
