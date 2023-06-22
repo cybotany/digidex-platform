@@ -15,6 +15,9 @@ class RegisterPlantView(FormView):
         """
         If the submitted form is valid, save the info to the database and
         redirect the user to the plant detail page.
+
+        Returns:
+            Redirects user to the plant detail page of the submitted plant.
         """
         new_plant = form.save()
         return redirect(new_plant.get_absolute_url())

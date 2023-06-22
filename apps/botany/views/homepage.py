@@ -22,7 +22,8 @@ class PlantHomepageView(LoginRequiredMixin, TemplateView):
         return list(
             Label.objects.filter(
                 user=self.request.user,
-                plant__isnull=False
+                plant__isnull=False,
+                plant__owner=self.request.user
             )
             .distinct()
             .prefetch_related('plant_set')
