@@ -1,23 +1,30 @@
-from django.views.generic import FormView
-from django.shortcuts import redirect
+from django import forms
 
-from apps.botany.forms import PlantRegistrationForm
+from apps.botany.models import Plant, Label, PlantImage
 
 
-class RegisterPlantView(FormView):
-    """
-    View for registering new plants.
-    """
-    template_name = 'botany/register_plant.html'
-    form_class = PlantRegistrationForm
+class PlantRegistrationForm(forms.ModelForm):
+    label = forms.ModelChoiceField(queryset=Label.objects.none(), required=False)
+    images = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True}), required=False)
 
-    def form_valid(self, form):
-        # Save the plant and associated images
-        new_plant = form.save()
-        return redirect(new_plant.get_absolute_url())
+    class Meta:
+        model = Plant
+        fields = ('name', 'label', 'common_names', 'description', 'images')
 
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        # Add the user to the form kwargs
-        kwargs['user'] = self.request.user
-        return kwargs
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user')
+        super().__init__(*args, **kwargs)
+
+        user_labels = Label.objects.filter(user=self.user)
+        common_labels = Label.get_common_labels()
+        self.fields['label'].queryset = user_labels | common_labels
+
+    def save(self, commit=True):
+        plant = super().save(commit=False)
+        plant.owner = self.user
+        if commit:
+            plant.save()
+            # Save the uploaded images
+            for image in self.cleaned_data.get('images', []):
+                PlantImage.objects.create(plant=plant, image=image)
+        return plant

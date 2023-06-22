@@ -12,10 +12,12 @@ class RegisterPlantView(FormView):
     form_class = PlantRegistrationForm
 
     def form_valid(self, form):
+        # Save the plant and associated images
         new_plant = form.save()
-        return redirect('botany:upload_plant_image', pk=new_plant.id)
+        return redirect(new_plant.get_absolute_url())
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
+        # Add the user to the form kwargs
         kwargs['user'] = self.request.user
         return kwargs
