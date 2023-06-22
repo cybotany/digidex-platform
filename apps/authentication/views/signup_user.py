@@ -1,22 +1,17 @@
-from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.contrib.auth import login
-from django.views import View
-from ..forms import SignupForm
+from django.views.generic.edit import FormView
+
+from apps.authentication.forms import SignupForm
 
 
-class SignupUser(View):
-    template_name = 'authentication/signup.html'
+class SignupUserView(FormView):
+    template_name = 'authentication/signup_user.html'
+    form_class = SignupForm
+    success_url = reverse_lazy('home')
 
-    def get(self, request):
-        form = SignupForm()
-        context = {'form': form}
-        return render(request, self.template_name, context)
-
-    def post(self, request):
-        form = SignupForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('home')
-        context = {'form': form}
-        return render(request, self.template_name, context)
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        user = form.save()
+        login(self.request, user)
+        return super(SignupUserView, self).form_valid(form)

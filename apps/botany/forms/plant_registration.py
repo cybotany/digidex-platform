@@ -4,6 +4,9 @@ from apps.botany.models import Plant, Label, PlantImage
 
 
 class PlantRegistrationForm(forms.ModelForm):
+    """
+    Form for users to register their plant.
+    """
     label = forms.ModelChoiceField(queryset=Label.objects.none(), required=False)
     image = forms.ImageField(required=False)
 
@@ -22,10 +25,8 @@ class PlantRegistrationForm(forms.ModelForm):
     def save(self, commit=True):
         plant = super().save(commit=False)
         plant.owner = self.user
-
         if commit:
             plant.save()
-
             # Save the uploaded image
             image = self.cleaned_data.get('image')
             if image:

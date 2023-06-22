@@ -3,8 +3,8 @@ from django.views import View
 from django.shortcuts import render
 
 
-class DisplayUser(LoginRequiredMixin, View):
-    template_name = 'authentication/profile.html'
+class DisplayUserView(LoginRequiredMixin, View):
+    template_name = 'authentication/display_user.html'
 
     def get(self, request, *args, **kwargs):
         context = {'user': request.user}

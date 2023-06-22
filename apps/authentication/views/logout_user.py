@@ -1,5 +1,5 @@
 from django.contrib.auth.views import LogoutView
 
 
-class LogoutUser(LogoutView):
+class LogoutUserView(LogoutView):
     next_page = 'home'
