@@ -1,6 +1,8 @@
 
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.urls import reverse
+
 from .label import Label
 
 User = get_user_model()
@@ -22,3 +24,6 @@ class Plant(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('plant_detail', args=[str(self.id)])
