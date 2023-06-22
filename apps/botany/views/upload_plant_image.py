@@ -1,40 +1,55 @@
-from django.views import View
-from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import FormView
+from django.shortcuts import get_object_or_404
 
 from apps.botany.models import Plant
 from apps.botany.forms import PlantImageForm
 
 
-class UploadPlantImageView(View):
+class UploadPlantImageView(FormView):
     """
-    View for uploading an image for a specific plant.
+    View for uploading images for a plant.
     """
     template_name = 'botany/upload_plant_image.html'
     form_class = PlantImageForm
 
-    def get(self, request, plant_id):
-        plant = self.get_plant(plant_id)
-        form = self.form_class()
-        return self.render_form(form, plant)
+    def get_form_kwargs(self):
+        """
+        Returns the keyword arguments for instantiating the form.
 
-    def post(self, request, plant_id):
-        plant = self.get_plant(plant_id)
-        form = self.form_class(request.POST, request.FILES)
-        if form.is_valid():
-            self.save_plant_image(form, plant)
-            return self.redirect_to_home()
-        return self.render_form(form, plant)
+        Returns:
+            A dictionary of keyword arguments.
+        """
+        kwargs = super().get_form_kwargs()
+        kwargs['plant'] = self.get_plant()
+        return kwargs
 
-    def get_plant(self, plant_id):
-        return get_object_or_404(Plant, id=plant_id)
+    def get_plant(self):
+        """
+        Returns the plant object.
 
-    def save_plant_image(self, form, plant):
-        plant_image = form.save(commit=False)
-        plant_image.plant = plant
-        plant_image.save()
+        Returns:
+            The plant object.
+        """
+        return get_object_or_404(Plant, id=self.kwargs['pk'])
 
-    def render_form(self, form, plant):
-        return render(self.request, self.template_name, {'form': form, 'plant': plant})
+    def form_valid(self, form):
+        """
+        Called when the form is valid. Saves the new plant image.
 
-    def redirect_to_home(self):
-        return redirect('botany:home')
+        Args:
+            form: The valid form.
+
+        Returns:
+            The response from the parent form_valid method.
+        """
+        form.save()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        """
+        Returns the URL to redirect to after a successful form submission.
+
+        Returns:
+            The URL to redirect to after a successful form submission.
+        """
+        return self.get_plant().get_absolute_url()
