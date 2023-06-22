@@ -1,6 +1,6 @@
 from django.urls import path
 
-from apps.botany.views import CreateLabelView, DescribePlantView, DeletePlantView, UpdatePlantView, PlantHomepageView, RegisterPlantView, SelectPlantView, UploadPlantImageView
+from apps.botany.views import CreateLabelView, DescribePlantView, DeletePlantView, UpdatePlantView, PlantHomepageView, RegisterPlantView, SelectPlantView
 
 
 app_name = 'botany'
@@ -12,5 +12,4 @@ urlpatterns = [
     path('plants/<int:pk>/describe/', DescribePlantView.as_view(), name='describe_plant'),
     path('plants/<int:pk>/delete/', DeletePlantView.as_view(), name='delete_plant'),
     path('plants/<int:pk>/update/', UpdatePlantView.as_view(), name='update_plant'),
-    path('plants/<int:pk>/upload-image/', UploadPlantImageView.as_view(), name='upload_plant_image'),
 ]
