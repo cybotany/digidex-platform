@@ -17,7 +17,7 @@ class PlantRegistrationForm(forms.ModelForm):
 
     class Meta:
         model = Plant
-        fields = ('name', 'label', 'common_names', 'description', 'image')
+        fields = ('name', 'label', 'description', 'image')
 
     def __init__(self, *args, **kwargs):
         """

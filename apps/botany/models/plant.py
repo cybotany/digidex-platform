@@ -1,4 +1,3 @@
-
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
@@ -11,7 +10,6 @@ User = get_user_model()
 class Plant(models.Model):
     name = models.CharField(max_length=100, null=True, blank=True)
     label = models.ForeignKey(Label, on_delete=models.SET_NULL, null=True)
-    common_names = models.TextField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     added_on = models.DateTimeField(auto_now_add=True)
