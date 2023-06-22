@@ -26,4 +26,4 @@ class Plant(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('plant_detail', args=[str(self.id)])
+        return reverse('describe_plant', args=[str(self.id)])
