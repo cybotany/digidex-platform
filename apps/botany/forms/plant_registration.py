@@ -5,7 +5,7 @@ from apps.botany.models import Plant, Label, PlantImage
 
 class PlantRegistrationForm(forms.ModelForm):
     label = forms.ModelChoiceField(queryset=Label.objects.none(), required=False)
-    images = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True}), required=False)
+    images = forms.ImageField(required=False)
 
     class Meta:
         model = Plant

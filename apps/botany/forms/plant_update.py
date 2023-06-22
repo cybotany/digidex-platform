@@ -4,7 +4,7 @@ from apps.botany.models import Plant, PlantImage
 
 
 class PlantUpdateForm(forms.ModelForm):
-    images = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True}), required=False)
+    images = forms.ImageField(required=False)
 
     class Meta:
         model = Plant
