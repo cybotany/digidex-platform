@@ -12,14 +12,10 @@ class RegisterPlantView(FormView):
     form_class = PlantRegistrationForm
 
     def form_valid(self, form):
-        """
-        Called when the form is valid. Saves the new plant and redirects to the image upload page.
-
-        Args:
-            form: The valid form.
-
-        Returns:
-            A redirect to the image upload page for the new plant.
-        """
         new_plant = form.save()
         return redirect('botany:upload_plant_image', plant_id=new_plant.id)
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
