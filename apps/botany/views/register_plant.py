@@ -22,4 +22,4 @@ class RegisterPlantView(FormView):
             A redirect to the image upload page for the new plant.
         """
         new_plant = form.save()
-        return redirect('botany:upload_plant_image', pk=new_plant.id)
+        return redirect('botany:upload_plant_image', plant_id=new_plant.id)
