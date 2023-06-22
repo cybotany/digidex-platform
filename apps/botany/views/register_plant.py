@@ -13,7 +13,7 @@ class RegisterPlantView(FormView):
 
     def form_valid(self, form):
         new_plant = form.save()
-        return redirect('botany:upload_plant_image', plant_id=new_plant.id)
+        return redirect('botany:upload_plant_image', pk=new_plant.id)
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
