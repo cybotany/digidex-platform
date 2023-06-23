@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <body>
+        <h1>Looking for nearby CEAs...</h1>
+
+        <!-- Optional: Show a loader icon here -->
+
+        <!-- Include a script to make an AJAX call -->
+        <script>
+            // Make an AJAX call to the API to look for nearby CEAs
+            fetch('/api/cea_mapping/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ /* Whatever data is needed for looking up CEAs */ }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response data here
+                // For example, update the DOM to show the CEAs
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        </script>
+    </body>
+{% endblock %}

@@ -1,1 +1,1 @@
-from .chat import Chat
+from .chatbot import ChatbotView

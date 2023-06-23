@@ -4,7 +4,7 @@ from django.views import View
 from apps.cea.models import GrowthChamber, Greenhouse, TissueCultureChamber
 
 
-class CEAHome(LoginRequiredMixin, View):
+class CEAHomepageView(LoginRequiredMixin, View):
     template_name = 'cea/home.html'
 
     def get(self, request, *args, **kwargs):

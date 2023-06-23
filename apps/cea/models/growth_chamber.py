@@ -1,7 +1,8 @@
 from django.db import models
-from .base_cea import BaseCEA
 from apps.utils.constants import MEASUREMENT_CHOICES
 from apps.utils.helpers import calculate_chamber_volume
+
+from .base_cea import BaseCEA
 
 
 class GrowthChamber(BaseCEA):
