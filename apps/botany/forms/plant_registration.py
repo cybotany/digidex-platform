@@ -1,43 +1,52 @@
 from django import forms
 
-from apps.botany.models import Plant, PlantImage
+from apps.botany.models import Plant, Label, PlantImage
 
 
-class PlantUpdateForm(forms.ModelForm):
+class PlantRegistrationForm(forms.ModelForm):
     """
-    Form for updating an existing plant's details including uploading an image.
+    Form for users to register their plant.
 
-    Attributes:
-        image (ImageField): Optional image to be uploaded for the plant.
+    This form allows users to register a new plant with attributes
+    such as name, label, common names, and description.
+    Users can also upload an image of the plant.
     """
+
+    label = forms.ModelChoiceField(queryset=Label.objects.none(), required=False)
     image = forms.ImageField(required=False)
 
     class Meta:
-        """
-        Meta class for the PlantUpdateForm.
-
-        Attributes:
-            model (Model): The model class to associate with this form.
-            fields (list): Fields to be included in this form.
-        """
         model = Plant
-        fields = ['name', 'description', 'image']
+        fields = ('name', 'label', 'description', 'image')
+
+    def __init__(self, *args, **kwargs):
+        """
+        Initialize the form.
+
+        Pop the user from kwargs and initializes the queryset for the label
+        field to include labels specific to the user as well as common labels.
+        """
+        self.user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
+
+        if self.user:
+            user_labels = Label.objects.filter(user=self.user)
+            common_labels = Label.get_common_labels()
+            self.fields['label'].queryset = user_labels | common_labels
 
     def save(self, commit=True):
         """
-        Save the form's fields to the associated model.
+        Save the form.
 
-        Args:
-            commit (bool): Whether to commit the changes to the database.
-
-        Returns:
-            instance (Model): The model instance updated with form's data.
+        Associates the plant with the owner (user) and saves the uploaded image.
         """
+        plant = super().save(commit=False)
+        plant.owner = self.user
 
-        instance = super().save(commit)
-        image = self.cleaned_data.get('image')
+        if commit:
+            plant.save()
+            image = self.cleaned_data.get('image')
+            if image:
+                PlantImage.objects.create(plant=plant, image=image)
 
-        if image:
-            PlantImage.objects.create(plant=instance, image=image)
-        
-        return instance
+        return plant

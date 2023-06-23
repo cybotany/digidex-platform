@@ -10,7 +10,7 @@ class PlantLabelForm(forms.ModelForm):
     Attributes:
         name (CharField): The name of the label.
     """
-    
+
     name = forms.CharField(
         max_length=100,
         widget=forms.TextInput(
@@ -34,6 +34,6 @@ class PlantLabelForm(forms.ModelForm):
             model (Model): The model class to associate with this form.
             fields (tuple): Fields to be included in this form.
         """
-        
+
         model = Label
         fields = ('name',)
