@@ -9,9 +9,39 @@ User = get_user_model()
 
 
 class PlantImage(models.Model):
-    plant = models.ForeignKey(Plant, related_name='images', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to=PlantImageStorage(user_directory_path), validators=[validate_file_extension])
-    uploaded_at = models.DateTimeField(auto_now_add=True)
+    """
+    Represents an image of a plant.
+
+    Attributes:
+        plant (ForeignKey): The plant associated with this image.
+        image (ImageField): The image file.
+        uploaded_at (DateTimeField): The date and time when the image was uploaded.
+    """
+
+    plant = models.ForeignKey(
+        Plant,
+        related_name='images',
+        on_delete=models.CASCADE,
+        help_text="The plant associated with this image."
+    )
+
+    image = models.ImageField(
+        upload_to=PlantImageStorage(user_directory_path),
+        validators=[validate_file_extension],
+        help_text="The image file. Only .jpg, .png, and .jpeg extensions are allowed."
+    )
+
+    uploaded_at = models.DateTimeField(
+        auto_now_add=True,
+        help_text="The date and time when the image was uploaded."
+    )
 
     def __str__(self):
+        """
+        Returns a string representation of the image,
+        indicating which plant it is associated with.
+
+        Returns:
+            str: A string representation of the plant image.
+        """
         return f'Image for {self.plant.name}'
