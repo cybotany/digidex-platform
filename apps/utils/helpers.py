@@ -2,7 +2,8 @@ import os
 import base64
 import uuid
 from django.core.exceptions import ValidationError
-from .constants import MEASUREMENT_CHOICES
+
+from apps.utils.constants import MEASUREMENT_CHOICES
 
 
 def calculate_chamber_volume(width, height, length, measurement_system):
@@ -73,7 +74,3 @@ def user_directory_path(instance, filename):
 def encode_image_file(file):
     """Encode image file to base64."""
     return base64.b64encode(file.read()).decode("ascii")
-
-
-def process_location(file):
-    return
