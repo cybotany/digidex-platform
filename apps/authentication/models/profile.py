@@ -1,27 +1,44 @@
 from django.db import models
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 from django.contrib.auth import get_user_model
-
-User = get_user_model()
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    bio = models.TextField(max_length=500, blank=True)
-    location = models.CharField(max_length=30, blank=True)
-    birth_date = models.DateField(null=True, blank=True)
+    """
+    User profile model for storing additional user information.
+
+    Fields:
+        user (OneToOneField): A one-to-one reference to the User model.
+        bio (TextField): A text field for user biography, maximum length 500 characters.
+        location (CharField): A char field for user location, maximum length 30 characters.
+        birth_date (DateField): A date field for user's birth date.
+    """
+
+    user = models.OneToOneField(
+        get_user_model(),
+        on_delete=models.CASCADE,
+        help_text='The user associated with this profile.'
+    )
+    bio = models.TextField(
+        max_length=500,
+        blank=True,
+        help_text='A short biography of the user.'
+    )
+    location = models.CharField(
+        max_length=30,
+        blank=True,
+        help_text='The location of the user.'
+    )
+    birth_date = models.DateField(
+        null=True,
+        blank=True,
+        help_text='The birth date of the user.'
+    )
 
     def __str__(self):
-        return self.user.username
+        """
+        Returns a string representation of the user's profile.
 
-
-@receiver(post_save, sender=User)
-def create_or_update_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-    else:
-        try:
-            instance.profile.save()
-        except Profile.DoesNotExist:
-            Profile.objects.create(user=instance)
+        Returns:
+            str: A string in the format "<username>'s Profile".
+        """
+        return f"{self.user.username}'s Profile"
