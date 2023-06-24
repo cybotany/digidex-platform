@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
+from apps.utils.helpers import user_directory_path, validate_file_extension
+from apps.utils.custom_storage import AvatarStorage
+
 
 class Profile(models.Model):
     """
@@ -11,6 +14,7 @@ class Profile(models.Model):
         bio (TextField): A text field for user biography, maximum length 500 characters.
         location (CharField): A char field for user location, maximum length 30 characters.
         birth_date (DateField): A date field for user's birth date.
+        avatar (ImageField): An image field for user's profile picture.
     """
 
     user = models.OneToOneField(
@@ -32,6 +36,13 @@ class Profile(models.Model):
         null=True,
         blank=True,
         help_text='The birth date of the user.'
+    )
+    avatar = models.ImageField(
+        upload_to=AvatarStorage(user_directory_path),
+        validators=[validate_file_extension],
+        null=True,
+        blank=True,
+        help_text='The profile picture of the user.'
     )
 
     def __str__(self):

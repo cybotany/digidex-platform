@@ -34,7 +34,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'apps.api',
     'apps.authentication',
-    'apps.authentication.apps.AuthenticationConfig',
     'apps.botany',
     'apps.cea',
     'apps.chatbot',
