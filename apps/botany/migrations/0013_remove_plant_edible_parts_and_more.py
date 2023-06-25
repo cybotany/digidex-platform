@@ -45,7 +45,7 @@ class Migration(migrations.Migration):
             name='PlantImage',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image', models.ImageField(upload_to=apps.utils.custom_storage.PlantImageStorage(apps.utils.helpers.user_directory_path), validators=[apps.utils.helpers.validate_file_extension])),
+                ('image', models.ImageField(upload_to=apps.utils.custom_storage.PlantImageStorage(apps.utils.helpers.user_directory_path))),
                 ('uploaded_at', models.DateTimeField(auto_now_add=True)),
                 ('plant', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='images', to='botany.plant')),
             ],

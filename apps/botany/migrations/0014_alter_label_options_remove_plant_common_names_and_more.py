@@ -41,7 +41,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='plantimage',
             name='image',
-            field=models.ImageField(help_text='The image file. Only .jpg, .png, and .jpeg extensions are allowed.', upload_to=apps.utils.custom_storage.PlantImageStorage(apps.utils.helpers.user_directory_path), validators=[apps.utils.helpers.validate_file_extension]),
+            field=models.ImageField(help_text='The image file. Only .jpg, .png, and .jpeg extensions are allowed.', upload_to=apps.utils.custom_storage.PlantImageStorage(apps.utils.helpers.user_directory_path)),
         ),
         migrations.AlterField(
             model_name='plantimage',
