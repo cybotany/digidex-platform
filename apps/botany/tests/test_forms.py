@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.contrib.auth import get_user_model
+from django.db.models import Q
 
 from apps.botany.models import Plant, Label, PlantImage
 from apps.botany.forms import PlantLabelForm, PlantRegistrationForm, PlantUpdateForm
@@ -9,7 +10,7 @@ User = get_user_model()
 
 
 class PlantLabelFormTest(TestCase):
-    
+
     def test_valid_data(self):
         form = PlantLabelForm({'name': 'Fern'})
         self.assertTrue(form.is_valid())
@@ -27,12 +28,12 @@ class PlantLabelFormTest(TestCase):
 
 
 class PlantRegistrationFormTest(TestCase):
-    
+
     def setUp(self):
         self.user = User.objects.create_user(username='testuser', password='testpassword')
         self.common_label = Label.objects.create(name='Common', is_common=True)
         self.user_label = Label.objects.create(name='Personal', user=self.user)
-    
+
     def test_valid_data(self):
         form = PlantRegistrationForm(
             data={'name': 'Rose', 'label': self.user_label.id, 'description': 'A beautiful rose'},
