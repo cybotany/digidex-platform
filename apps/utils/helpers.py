@@ -1,7 +1,6 @@
 import os
 import base64
 import uuid
-from django.core.exceptions import ValidationError
 
 from apps.utils.constants import MEASUREMENT_CHOICES
 
@@ -37,22 +36,6 @@ def get_measurement_system_choice_display(measurement_system):
         The display string for the given measurement system choice.
     """
     return next((choice[1] for choice in MEASUREMENT_CHOICES if choice[0] == measurement_system), '')
-
-
-def validate_file_extension(value):
-    """
-    Validates that the file extension of the given file is one of the supported extensions.
-
-    Args:
-        value: The file to validate.
-
-    Raises:
-        ValidationError: If the file extension is not one of the supported extensions.
-    """
-    ext = os.path.splitext(value.name)[1].lower()
-    valid_extensions = ['.jpg', '.png', '.jpeg']
-    if ext not in valid_extensions:
-        raise ValidationError('Unsupported file extension. Only {} are supported.'.format(', '.join(valid_extensions)))
 
 
 def user_directory_path(instance, filename):

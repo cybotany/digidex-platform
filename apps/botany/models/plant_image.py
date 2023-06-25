@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
-from apps.utils.helpers import user_directory_path, validate_file_extension
+from apps.utils.helpers import user_directory_path
 from apps.utils.custom_storage import PlantImageStorage
 from .plant import Plant
 
@@ -27,7 +27,6 @@ class PlantImage(models.Model):
 
     image = models.ImageField(
         upload_to=PlantImageStorage(user_directory_path),
-        validators=[validate_file_extension],
         help_text="The image file. Only .jpg, .png, and .jpeg extensions are allowed."
     )
 

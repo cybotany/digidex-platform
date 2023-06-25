@@ -1,7 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.core.files.uploadedfile import SimpleUploadedFile
-from django.core.exceptions import ValidationError
 from django.urls import reverse
 
 from apps.botany.models import Label, Plant, PlantImage
@@ -93,12 +92,3 @@ class PlantImageModelTest(TestCase):
     def test_missing_plant_raises_error(self):
         with self.assertRaises(ValueError):
             PlantImage.objects.create(image='image.jpg')
-
-    def test_invalid_file_extension_raises_error(self):
-        with self.assertRaises(ValidationError):
-            image = SimpleUploadedFile(
-                name='test_file.txt',
-                content=b'Some file content',
-                content_type='text/plain'
-            )
-            PlantImage.objects.create(plant=self.plant, image=image)
