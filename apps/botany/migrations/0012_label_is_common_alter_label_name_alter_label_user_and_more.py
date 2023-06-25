@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='plant',
             name='image',
-            field=models.ImageField(blank=True, null=True, upload_to=apps.utils.helpers.user_directory_path, validators=[apps.utils.helpers.validate_file_extension]),
+            field=models.ImageField(blank=True, null=True, upload_to=apps.utils.helpers.user_directory_path),
         ),
         migrations.AlterUniqueTogether(
             name='label',

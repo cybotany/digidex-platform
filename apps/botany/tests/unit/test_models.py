@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.urls import reverse
+from django.db import IntegrityError
 
 from apps.botany.models import Label, Plant, PlantImage
 
@@ -81,8 +82,8 @@ class PlantImageModelTest(TestCase):
     def test_create_plant_image(self):
         # Create an in-memory image file for testing
         image = SimpleUploadedFile(
-            name='test_image.jpg',
-            content=open('path_to_some_test_image.jpg', 'rb').read(),
+            name='test_plant.jpg',
+            content=open('static/img/test_plant.jpg', 'rb').read(),
             content_type='image/jpeg'
         )
         plant_image = PlantImage.objects.create(plant=self.plant, image=image)
@@ -90,5 +91,5 @@ class PlantImageModelTest(TestCase):
         self.assertIsNotNone(plant_image.uploaded_at)
 
     def test_missing_plant_raises_error(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaises(IntegrityError):
             PlantImage.objects.create(image='image.jpg')
