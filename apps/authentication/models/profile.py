@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
-from apps.utils.helpers import user_directory_path, validate_file_extension
+from apps.utils.helpers import user_directory_path
 from apps.utils.custom_storage import AvatarStorage
 
 
@@ -39,7 +39,6 @@ class Profile(models.Model):
     )
     avatar = models.ImageField(
         upload_to=AvatarStorage(user_directory_path),
-        validators=[validate_file_extension],
         null=True,
         blank=True,
         help_text='The profile picture of the user.'
