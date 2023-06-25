@@ -33,7 +33,7 @@ INSTALLED_APPS = [
     'storages',
     'rest_framework',
     'apps.api',
-    'apps.authentication',
+    'apps.accounts',
     'apps.botany',
     'apps.cea',
     'apps.chatbot',

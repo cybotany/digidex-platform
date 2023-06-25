@@ -2,7 +2,7 @@ from storages.backends.s3boto3 import S3Boto3Storage
 
 
 class UserSpecificS3Boto3Storage(S3Boto3Storage):
-    # This is a base class to handle the user subdirectory
+    # Base class to handle the user subdirectory
 
     def __init__(self, user_directory_path, *args, **kwargs):
         self.user_directory_path = user_directory_path

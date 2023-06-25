@@ -10,7 +10,7 @@ from apps.core.views import HomePageView
 urlpatterns = [
     path('', HomePageView.as_view(), name='home'),
     path('admin/', admin.site.urls),
-    path('user/', include('apps.authentication.urls')),
+    path('user/', include('apps.accounts.urls')),
     path('botany/', include('apps.botany.urls')),
     path('cea/', include('apps.cea.urls')),
     path('chatbot/', include('apps.chatbot.urls')),

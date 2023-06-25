@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 
 class DisplayUserView(LoginRequiredMixin, View):
-    template_name = 'authentication/display_user.html'
+    template_name = 'accounts/display_user.html'
 
     def get(self, request, *args, **kwargs):
         context = {'user': request.user}
