@@ -6,8 +6,12 @@
 
       <!-- Left column -->
       <div class="col-md-4">
-        <div class="text-center"><img src="{{ user.profile.avatar.url }}" class="rounded-circle" alt="User Avatar"></div>
-
+        {% if user.avatar %}
+          <img src="{{ user.avatar.url }}" alt="User avatar">
+        {% else %}
+          <img src="{% static 'default-avatar.png' %}" alt="Default avatar">
+        {% endif %}
+    
         <!-- User Info -->
         <h2 class="text-center mt-3">{{ user.username }}</h2>
         <p class="text-center">{{ user.profile.location }}</p>
