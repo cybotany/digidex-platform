@@ -218,5 +218,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .send-button img {
-  width: 24px; /* Or any other size that fits your design */
+  width: 24px;
+}
+
+.avatar-image {
+  border-radius: 50%;
+  width: 128px;
+  height: 128px;
 }
