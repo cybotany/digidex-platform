@@ -132,4 +132,4 @@ REST_FRAMEWORK = {
 }
 
 LOGIN_REDIRECT_URL = 'home'
-LOGIN_URL = '/accouts/login/'
+LOGIN_URL = '/accounts/login/'
