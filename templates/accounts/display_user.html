@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% include static %}
 
 {% block content %}
   <div class="container mt-5">
@@ -9,7 +10,7 @@
         {% if user.avatar %}
           <img src="{{ user.avatar.url }}" alt="User avatar">
         {% else %}
-          <img src="{% static 'default-avatar.png' %}" alt="Default avatar">
+          <img src="{% static 'test-avatar.jpg' %}" alt="Default avatar">
         {% endif %}
     
         <!-- User Info -->

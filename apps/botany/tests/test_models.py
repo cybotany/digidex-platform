@@ -83,7 +83,7 @@ class PlantImageModelTest(TestCase):
         # Create an in-memory image file for testing
         image = SimpleUploadedFile(
             name='test_plant.jpg',
-            content=open('static/img/test_plant.jpg', 'rb').read(),
+            content=open('static/img/test-plant.jpg', 'rb').read(),
             content_type='image/jpeg'
         )
         plant_image = PlantImage.objects.create(plant=self.plant, image=image)
