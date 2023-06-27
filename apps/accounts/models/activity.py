@@ -31,11 +31,19 @@ class Activity(models.Model):
     content = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
 
+    def save(self, *args, **kwargs):
+        """
+        Override the save method to set a default content if not provided.
+        """
+        if not self.content:
+            self.content = f"{self.user.username} {self.activity_status} a {self.activity_type}"
+        super().save(*args, **kwargs)
+
     def __str__(self):
         """
         Returns a string representation of the user activity.
         """
-        return f"{self.user.username} {self.activity_status} a {self.activity_type}"
+        return self.content
 
     class Meta:
         ordering = ['-timestamp']
