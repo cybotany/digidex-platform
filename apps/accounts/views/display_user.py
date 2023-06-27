@@ -9,7 +9,7 @@ class DisplayUserView(LoginRequiredMixin, View):
     template_name = 'accounts/display_user.html'
 
     def get(self, request, *args, **kwargs):
-        recent_activities = Activity.objects.filter(user=request.user).order_by('-timestamp')
+        recent_activities = Activity.objects.filter(user=request.user).order_by('timestamp')
         context = {
             'user': request.user,
             'recent_activities': recent_activities,
