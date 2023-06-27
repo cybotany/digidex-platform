@@ -1,6 +1,7 @@
 from django.views.generic import FormView
 from django.shortcuts import redirect
 
+from apps.accounts.models import Activity
 from apps.botany.forms import PlantRegistrationForm
 
 
@@ -20,6 +21,12 @@ class RegisterPlantView(FormView):
             Redirects user to the plant detail page of the submitted plant.
         """
         new_plant = form.save()
+        Activity.objects.create(
+            user=self.request.user,
+            activity_status='register',
+            activity_type='plant',
+            content=f'Registered a new plant: {self.object.name}',
+        )
         return redirect(new_plant.get_absolute_url())
 
     def get_form_kwargs(self):

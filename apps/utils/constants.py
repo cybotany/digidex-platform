@@ -1,3 +1,15 @@
+ACTIVITY_STATUS = [
+    ('register', 'Registered'),
+    ('update', 'Updated'),
+    ('delete', 'Deleted'),
+]
+ACTIVITY_TYPE = [
+    ('plant', 'Plant'),
+    ('label grouping', 'Label Grouping'),
+    ('greenhouse', 'Greenhouse'),
+    ('growth chamber', 'Growth Chamber'),
+    ('tissue culture chamber', 'Tissue Culture Chamber'),
+]
 MEASUREMENT_CHOICES = [
     ('in', 'Inches'),
     ('cm', 'Centimeters'),
