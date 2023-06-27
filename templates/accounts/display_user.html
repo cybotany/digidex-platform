@@ -41,7 +41,7 @@
           </thead>
 
           <tbody>
-            {% for activity in user.recent_activities %}
+            {% for activity in recent_activities %}
               <tr>
                 <th scope="row">{{ forloop.counter }}</th>
                 <td>{{ activity.content }}</td>
