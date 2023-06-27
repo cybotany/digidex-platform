@@ -21,11 +21,12 @@ class RegisterPlantView(FormView):
             Redirects user to the plant detail page of the submitted plant.
         """
         new_plant = form.save()
+
         Activity.objects.create(
             user=self.request.user,
             activity_status='register',
             activity_type='plant',
-            content=f'Registered a new plant: {self.object.name}',
+            content=f'Registered a new plant: {new_plant.name}',
         )
         return redirect(new_plant.get_absolute_url())
 
