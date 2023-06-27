@@ -2,10 +2,19 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from django.shortcuts import render
 
+from apps.accounts.models import Activity
+
 
 class DisplayUserView(LoginRequiredMixin, View):
     template_name = 'accounts/display_user.html'
 
     def get(self, request, *args, **kwargs):
-        context = {'user': request.user}
+        # Fetch the activities related to the user
+        user_activities = Activity.objects.filter(user=request.user).order_by('-timestamp')
+        
+        # Include the activities in the context
+        context = {
+            'user': request.user,
+            'user_activities': user_activities,
+        }
         return render(request, self.template_name, context)
