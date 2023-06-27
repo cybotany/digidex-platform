@@ -10,11 +10,11 @@ class DisplayUserView(LoginRequiredMixin, View):
 
     def get(self, request, *args, **kwargs):
         # Fetch the activities related to the user
-        user_activities = Activity.objects.filter(user=request.user).order_by('-timestamp')
+        recent_activities = Activity.objects.filter(user=request.user).order_by('-timestamp')
         
         # Include the activities in the context
         context = {
             'user': request.user,
-            'user_activities': user_activities,
+            'recent_activities': recent_activities,
         }
         return render(request, self.template_name, context)
