@@ -30,6 +30,7 @@
       <!-- Right column -->
       <div class="col-md-8">
         <h3>Recent Activities</h3>
+
         <table class="table">
           <thead>
             <tr>
@@ -38,8 +39,9 @@
               <th scope="col">Date</th>
             </tr>
           </thead>
+
           <tbody>
-            {% for activity in user.recent_activities.all %}
+            {% for activity in user.recent_activities %}
               <tr>
                 <th scope="row">{{ forloop.counter }}</th>
                 <td>{{ activity.content }}</td>
@@ -48,6 +50,7 @@
             {% endfor %}
           </tbody>
         </table>
+
       </div>
     </div>
   </div>
