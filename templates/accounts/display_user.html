@@ -42,8 +42,8 @@
             {% for activity in user.recent_activities.all %}
               <tr>
                 <th scope="row">{{ forloop.counter }}</th>
-                <td>{{ activity.name }}</td>
-                <td>{{ activity.date }}</td>
+                <td>{{ activity.__str__ }}</td>
+                <td>{{ activity.timestamp }}</td>
               </tr>
             {% endfor %}
           </tbody>

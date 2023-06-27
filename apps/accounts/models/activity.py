@@ -35,7 +35,7 @@ class Activity(models.Model):
         """
         Returns a string representation of the user activity.
         """
-        return f"{self.user.username} {self.activity_status} a {self.activity_type} - {self.timestamp}"
+        return f"{self.user.username} {self.activity_status} a {self.activity_type}"
 
     class Meta:
         ordering = ['-timestamp']
