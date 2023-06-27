@@ -5,7 +5,7 @@ from apps.cea.models import GrowthChamber, Greenhouse, TissueCultureChamber
 
 
 class CEAHomepageView(LoginRequiredMixin, View):
-    template_name = 'cea/home.html'
+    template_name = 'cea/homepage.html'
 
     def get(self, request, *args, **kwargs):
         cea_chambers = {
