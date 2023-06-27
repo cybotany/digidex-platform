@@ -20,14 +20,12 @@ class PlantHomepageView(LoginRequiredMixin, TemplateView):
         """
         Return the plants grouped by label for the currently logged-in user.
         """
-        # Prefetch the plants for each label
         plants_prefetch = Prefetch(
             'plant_set',
             queryset=Plant.objects.filter(owner=self.request.user),
             to_attr='plants'
         )
 
-        # Get the labels with prefetched plants
         return list(
             Label.objects.filter(
                 user=self.request.user,
