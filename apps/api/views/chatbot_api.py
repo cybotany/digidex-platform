@@ -24,7 +24,7 @@ class ChatbotAPIView(APIView):
         
         # Initialize LangChain
         self.chatgpt_chain = LLMChain(
-            llm=OpenAI(temperature=0),
+            llm=OpenAI(temperature=0, openai_api_key=config('OPENAI_API_KEY')),
             prompt=self.prompt,
             verbose=True,
             memory=ConversationBufferWindowMemory(k=2)
