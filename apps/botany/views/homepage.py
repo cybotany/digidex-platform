@@ -11,26 +11,17 @@ class PlantHomepageView(LoginRequiredMixin, TemplateView):
     """
     template_name = 'botany/homepage.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['plant_groups'] = self.get_plant_groups_for_user()
-        return context
-
     def get_plant_groups_for_user(self):
         """
         Return the plants grouped by label for the currently logged-in user.
         """
-        plants_prefetch = Prefetch(
-            'plant_set',
-            queryset=Plant.objects.filter(owner=self.request.user),
-            to_attr='plants'
-        )
+        # Prefetch the plants related to each label
+        plants_prefetch = Prefetch('plants', queryset=Plant.objects.filter(owner=self.request.user))
 
-        return list(
-            Label.objects.filter(
-                user=self.request.user,
-                plant__isnull=False
-            )
-            .distinct()
-            .prefetch_related(plants_prefetch)
-        )
+        # Query for the labels related to the user, and prefetch the related plants
+        return Label.objects.filter(user=self.request.user).prefetch_related(plants_prefetch)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['plant_groups'] = self.get_plant_groups_for_user()
+        return context
