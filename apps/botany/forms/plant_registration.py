@@ -41,7 +41,7 @@ class PlantRegistrationForm(forms.ModelForm):
         Associates the plant with the owner (user) and saves the uploaded image.
         """
         plant = super().save(commit=False)
-        plant.owner = self.user
+        plant.user = self.user
 
         if commit:
             plant.save()
