@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 from apps.botany.models import Plant
+from apps.accounts.models import Activity
 
 
 class DeletePlantView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
@@ -23,10 +24,18 @@ class DeletePlantView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
     def post(self, request, *args, **kwargs):
         """
         Handles the POST requests.
-        Deletes the selected plant, displays a success message,
-        and redirects to the homepage.
+        Deletes the selected plant, creates an activity log,
+        displays a success message, and redirects to the homepage.
         """
+        plant = self.get_object()
+        plant_name = plant.name
         self.delete_plant()
+        Activity.objects.create(
+            user=self.request.user,
+            activity_status='delete',
+            activity_type='plant',
+            content=f'Deleted a plant: {plant_name}',
+        )
         self.add_success_message()
         return self.redirect_to_home()
 

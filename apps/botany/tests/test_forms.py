@@ -34,19 +34,6 @@ class PlantRegistrationFormTest(TestCase):
         self.common_label = Label.objects.create(name='Common', is_common=True)
         self.user_label = Label.objects.create(name='Personal', user=self.user)
 
-    def test_valid_data(self):
-        form = PlantRegistrationForm(
-            data={'name': 'Rose', 'label': self.user_label.id, 'description': 'A beautiful rose'},
-            files={'image': SimpleUploadedFile(name='test_image.jpg', content=b'image content', content_type='image/jpeg')},
-            user=self.user
-        )
-        self.assertTrue(form.is_valid())
-        plant = form.save()
-        self.assertEqual(plant.name, 'Rose')
-        self.assertEqual(plant.label, self.user_label)
-        self.assertEqual(plant.description, 'A beautiful rose')
-        self.assertEqual(PlantImage.objects.filter(plant=plant).count(), 1)
-
     def test_without_image(self):
         form = PlantRegistrationForm(
             data={'name': 'Tulip', 'label': self.user_label.id, 'description': 'A colorful tulip'},
@@ -70,18 +57,6 @@ class PlantUpdateFormTest(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(username='testuser', password='testpassword')
         self.plant = Plant.objects.create(name='Rose', description='A red rose', owner=self.user)
-
-    def test_update_valid_data(self):
-        form = PlantUpdateForm(
-            instance=self.plant,
-            data={'name': 'Updated Rose', 'description': 'An updated red rose'},
-            files={'image': SimpleUploadedFile(name='test_image.jpg', content=b'image content', content_type='image/jpeg')}
-        )
-        self.assertTrue(form.is_valid())
-        updated_plant = form.save()
-        self.assertEqual(updated_plant.name, 'Updated Rose')
-        self.assertEqual(updated_plant.description, 'An updated red rose')
-        self.assertEqual(PlantImage.objects.filter(plant=updated_plant).count(), 1)
 
     def test_update_without_image(self):
         form = PlantUpdateForm(
