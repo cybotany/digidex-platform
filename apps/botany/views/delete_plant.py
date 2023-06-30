@@ -46,7 +46,7 @@ class DeletePlantView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
         return get_object_or_404(Plant, pk=self.kwargs['pk'])
 
     def test_func(self):
-        return self.request.user == self.get_object().owner
+        return self.request.user == self.get_object().user
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

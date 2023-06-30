@@ -46,7 +46,7 @@ class Label(models.Model):
         Returns:
             QuerySet: A QuerySet of plants associated with this label belonging to the same user.
         """
-        return self.plant_set.filter(owner=self.user)
+        return self.plant_set.filter(user=self.user)
 
     def __str__(self):
         """

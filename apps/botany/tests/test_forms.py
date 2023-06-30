@@ -56,7 +56,7 @@ class PlantUpdateFormTest(TestCase):
 
     def setUp(self):
         self.user = User.objects.create_user(username='testuser', password='testpassword')
-        self.plant = Plant.objects.create(name='Rose', description='A red rose', owner=self.user)
+        self.plant = Plant.objects.create(name='Rose', description='A red rose', user=self.user)
 
     def test_update_without_image(self):
         form = PlantUpdateForm(

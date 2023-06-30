@@ -43,4 +43,4 @@ class UpdatePlantView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         Returns:
             True if the user is the owner of the plant, False otherwise.
         """
-        return self.request.user == self.get_object().owner
+        return self.request.user == self.get_object().user

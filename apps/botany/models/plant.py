@@ -30,7 +30,7 @@ class Plant(models.Model):
         Override the save method to set a default name if not provided.
         """
         if not self.name:
-            total_plants = Plant.objects.filter(owner=self.user).count()
+            total_plants = Plant.objects.filter(user=self.user).count()
             self.name = f'Plant-{total_plants + 1}'
         super().save(*args, **kwargs)
 
