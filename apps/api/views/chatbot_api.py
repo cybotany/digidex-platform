@@ -10,7 +10,7 @@ class ChatbotAPIView(APIView):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        
+
         # Define the template for the conversation
         template = """
         Assistant is a large language model trained by OpenAI.
@@ -18,10 +18,10 @@ class ChatbotAPIView(APIView):
         {history}
         Human: {human_input}
         Assistant:"""
-        
+
         # Initialize the PromptTemplate
         self.prompt = PromptTemplate(input_variables=["history", "human_input"], template=template)
-        
+
         # Initialize LangChain
         self.chatgpt_chain = LLMChain(
             llm=OpenAI(temperature=0, openai_api_key=config('OPENAI_API_KEY')),
@@ -42,7 +42,7 @@ class ChatbotAPIView(APIView):
             output = self.chatgpt_chain.predict(human_input=message)
         except Exception as e:
             # You might want to log the exception here
-            return Response({"error": "Failed to process your request. Please try again later."},
+            return Response({"error": f"Failed to process your request due to {e}. Please try again later."},
                             status=status.HTTP_503_SERVICE_UNAVAILABLE)
 
         # Send the assistant's message back to the front-end

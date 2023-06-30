@@ -15,10 +15,7 @@ class PlantHomepageView(LoginRequiredMixin, TemplateView):
         """
         Return the plants grouped by label for the currently logged-in user.
         """
-        # Prefetch the plants related to each label
         plants_prefetch = Prefetch('plants', queryset=Plant.objects.filter(owner=self.request.user))
-
-        # Query for the labels related to the user, and prefetch the related plants
         return Label.objects.filter(user=self.request.user).prefetch_related(plants_prefetch)
 
     def get_context_data(self, **kwargs):

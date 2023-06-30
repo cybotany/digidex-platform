@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 
 from apps.utils.constants import ACTIVITY_STATUS, ACTIVITY_TYPE
 
+
 class Activity(models.Model):
     """
     Represents an activity performed by a user. Should be upated whenever a user creates, updates, or deletes a plant.
