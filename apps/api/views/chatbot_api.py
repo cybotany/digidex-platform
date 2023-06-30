@@ -2,10 +2,33 @@ from decouple import config
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-import openai
+from langchain import OpenAI, ConversationChain, LLMChain, PromptTemplate
+from langchain.memory import ConversationBufferWindowMemory
 
 
 class ChatbotAPIView(APIView):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        # Define the template for the conversation
+        template = """
+        Assistant is a large language model trained by OpenAI.
+
+        {history}
+        Human: {human_input}
+        Assistant:"""
+        
+        # Initialize the PromptTemplate
+        self.prompt = PromptTemplate(input_variables=["history", "human_input"], template=template)
+        
+        # Initialize LangChain
+        self.chatgpt_chain = LLMChain(
+            llm=OpenAI(temperature=0),
+            prompt=self.prompt,
+            verbose=True,
+            memory=ConversationBufferWindowMemory(k=2)
+        )
 
     def post(self, request, *args, **kwargs):
         message = request.data.get('message')
@@ -15,21 +38,12 @@ class ChatbotAPIView(APIView):
             return Response({"error": "Message is required"}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
-            # Make an API call to OpenAI with the user's message
-            response = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo",
-                messages=[
-                    {"role": "system", "content": "You are a knowledgeable assistant."},
-                    {"role": "user", "content": message}
-                ]
-            )
-        except Exception:
+            # Use LangChain to handle the conversation
+            output = self.chatgpt_chain.predict(human_input=message)
+        except Exception as e:
             # You might want to log the exception here
             return Response({"error": "Failed to process your request. Please try again later."},
                             status=status.HTTP_503_SERVICE_UNAVAILABLE)
 
-        # Extract the assistant's message from the response
-        assistant_message = response['choices'][0]['message']['content']
-
         # Send the assistant's message back to the front-end
-        return Response({'message': assistant_message})
+        return Response({'message': output})
