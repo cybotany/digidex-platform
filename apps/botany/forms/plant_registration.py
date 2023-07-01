@@ -31,8 +31,7 @@ class PlantRegistrationForm(forms.ModelForm):
 
         if self.user:
             user_labels = Label.objects.filter(user=self.user)
-            common_labels = Label.get_common_labels()
-            self.fields['label'].queryset = user_labels | common_labels
+            self.fields['label'].queryset = user_labels
 
     def save(self, commit=True):
         """
