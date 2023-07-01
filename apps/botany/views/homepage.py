@@ -1,8 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
-from django.db.models import Prefetch
 
-from apps.botany.models import Label, Plant
+from apps.botany.models import Plant, Label
 
 
 class PlantHomepageView(LoginRequiredMixin, TemplateView):
@@ -15,7 +14,17 @@ class PlantHomepageView(LoginRequiredMixin, TemplateView):
         """
         Return the plants grouped by label for the currently logged-in user.
         """
-        return Plant.objects.select_related('label').filter(label__user=self.request.user)
+        labels = Label.objects.filter(user=self.request.user)
+        plant_groups = []
+
+        for label in labels:
+            plants = Plant.objects.filter(label=label, label__user=self.request.user)
+            plant_groups.append({
+                'name': label.name,
+                'plants': plants
+            })
+
+        return plant_groups
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

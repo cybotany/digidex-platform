@@ -27,7 +27,7 @@
         {% for group in plant_groups %}
             <div class="tab-pane fade show {% if forloop.first %}active{% endif %}" id="{{ group.name|slugify }}" role="tabpanel" aria-labelledby="{{ group.name|slugify }}-tab">
                 <div class="row mb-4">
-                    {% for plant in group.plants.all %}
+                    {% for plant in group.plants %}
                         <div class="col-md-4">
                             <div class="card">
                                 {% if plant.images.all %}
