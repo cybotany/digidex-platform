@@ -2,7 +2,7 @@ from decouple import config
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from langchain import OpenAI, ConversationChain, PromptTemplate
+from langchain import OpenAI, ConversationChain, LLMChain, PromptTemplate
 from langchain.memory import ConversationBufferWindowMemory
 
 
@@ -22,7 +22,7 @@ class ChatbotAPIView(APIView):
         self.prompt = PromptTemplate(input_variables=["history", "human_input"], template=template)
 
         # Initialize LangChain
-        self.chatgpt_chain = ConversationChain(
+        self.chatgpt_chain = LLMChain(
             llm=OpenAI(temperature=0, openai_api_key=config('OPENAI_API_KEY')),
             prompt=self.prompt,
             verbose=True,
