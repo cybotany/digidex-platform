@@ -6,10 +6,10 @@ from apps.accounts.models import Profile
 from apps.accounts.forms import ProfileChangeForm
 
 
-class ProfileUpdateView(LoginRequiredMixin, UpdateView):
+class ChangeProfileView(LoginRequiredMixin, UpdateView):
     model = Profile
     form_class = ProfileChangeForm
-    template_name = 'accounts/edit_profile.html'
+    template_name = 'accounts/change_profile.html'
     success_url = reverse_lazy('profile_detail')
 
     def get_object(self, queryset=None):
