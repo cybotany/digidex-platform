@@ -17,11 +17,27 @@ class Plant(models.Model):
         added_on (datetime): The date and time when the plant was added.
     """
 
-    name = models.CharField(max_length=100, null=True, blank=True)
-    label = models.ForeignKey(Label, on_delete=models.SET_NULL, null=True)
-    description = models.TextField(null=True, blank=True)
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    added_on = models.DateTimeField(auto_now_add=True)
+    name = models.CharField(
+        max_length=100,
+        null=True,
+        blank=True
+    )
+    label = models.ForeignKey(
+        Label,
+        on_delete=models.SET_NULL,
+        null=True
+    )
+    description = models.TextField(
+        null=True,
+        blank=True
+    )
+    user = models.ForeignKey(
+        get_user_model(),
+        on_delete=models.CASCADE
+    )
+    added_on = models.DateTimeField(
+        auto_now_add=True
+    )
 
     def save(self, *args, **kwargs):
         """

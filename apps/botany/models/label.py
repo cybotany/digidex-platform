@@ -13,7 +13,10 @@ class Label(models.Model):
         is_common (BooleanField): Whether this label is common across the application.
     """
 
-    name = models.CharField(max_length=50, help_text='The name of the label.')
+    name = models.CharField(
+        max_length=50,
+        help_text='The name of the label.'
+    )
     user = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE,
@@ -21,7 +24,10 @@ class Label(models.Model):
         blank=True,
         help_text='The user who created the label. Null for common labels.',
     )
-    is_common = models.BooleanField(default=False, help_text='Is this a common label.')
+    is_common = models.BooleanField(
+        default=False,
+        help_text='Is this a common label.'
+    )
 
     class Meta:
         unique_together = ('name', 'user')
