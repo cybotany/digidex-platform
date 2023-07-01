@@ -47,7 +47,7 @@ class PlantRegistrationFormTest(TestCase):
         form = PlantRegistrationForm(user=self.user)
         self.assertQuerysetEqual(
             form.fields['label'].queryset.order_by('name'),
-            Label.objects.filter(Q(user=self.user) | Q(is_common=True)).order_by('name'),
+            Label.objects.filter(Q(user=self.user)).order_by('name'),
             transform=lambda x: x
         )
 
