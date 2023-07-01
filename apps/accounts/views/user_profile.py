@@ -5,7 +5,7 @@ from django.shortcuts import render
 from apps.accounts.models import Activity
 
 
-class DisplayUserView(LoginRequiredMixin, View):
+class UserProfileView(LoginRequiredMixin, View):
     template_name = 'accounts/display_user.html'
 
     def get(self, request, *args, **kwargs):
