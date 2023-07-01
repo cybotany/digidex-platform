@@ -10,21 +10,23 @@ class PlantHomepageView(LoginRequiredMixin, TemplateView):
     """
     template_name = 'botany/homepage.html'
 
-    def get_plant_groups_for_user(self):
-        """
-        Return the plants grouped by label for the currently logged-in user.
-        """
-        labels = Label.objects.filter(user=self.request.user)
-        plant_groups = []
+def get_plant_groups_for_user(self):
+    """
+    Return the plants grouped by label for the currently logged-in user if there is at least one plant.
+    """
+    labels = Label.objects.filter(user=self.request.user)
+    plant_groups = []
 
-        for label in labels:
-            plants = Plant.objects.filter(label=label, label__user=self.request.user)
+    for label in labels:
+        plants = Plant.objects.filter(label=label, label__user=self.request.user)
+        if plants.count() > 0:
             plant_groups.append({
                 'name': label.name,
                 'plants': plants
             })
 
-        return plant_groups
+    return plant_groups
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
