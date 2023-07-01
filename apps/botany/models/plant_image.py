@@ -1,11 +1,8 @@
 from django.db import models
-from django.contrib.auth import get_user_model
 
 from apps.utils.helpers import user_directory_path
 from apps.utils.custom_storage import PlantImageStorage
 from .plant import Plant
-
-User = get_user_model()
 
 
 class PlantImage(models.Model):

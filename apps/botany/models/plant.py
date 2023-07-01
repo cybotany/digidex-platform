@@ -4,8 +4,6 @@ from django.urls import reverse
 
 from .label import Label
 
-User = get_user_model()
-
 
 class Plant(models.Model):
     """
@@ -22,7 +20,7 @@ class Plant(models.Model):
     name = models.CharField(max_length=100, null=True, blank=True)
     label = models.ForeignKey(Label, on_delete=models.SET_NULL, null=True)
     description = models.TextField(null=True, blank=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     added_on = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):
