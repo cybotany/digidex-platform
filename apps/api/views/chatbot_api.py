@@ -47,6 +47,7 @@ class ChatbotAPIView(APIView):
         message = request.data.get('message')
         user = request.user
 
+        # Input validation
         if not message:
             return Response({"error": "Message is required"}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -61,20 +62,24 @@ class ChatbotAPIView(APIView):
             user_experience=user_experience
         )
 
-        # Retrieve conversation history
-        chat_history = ChatMessage.objects.filter(user=user).order_by('-created_at')
-        history_text = '\n'.join([msg.content for msg in chat_history])
-
         # Populate chat memory with historical chat messages
+        chat_history = ChatMessage.objects.filter(user=user).order_by('-created_at')
         for msg in chat_history:
             if msg.user == 'Human':
                 self.memory.chat_memory.add_user_message(msg.content)
             else:
                 self.memory.chat_memory.add_ai_message(msg.content)
 
+        # Format the input data
+        input_data = {
+            'user_input': message,
+            'user_interest': user_interest,
+            'user_experience': user_experience
+        }
+
         try:
             # Use LangChain to handle the conversation
-            output = self.conversation.predict(history=history_text)
+            output = self.conversation.predict(input=input_data)
         except Exception as e:
             # You might want to log the exception here
             return Response({"error": f"Failed to process your request due to {e}. Please try again later."},
@@ -86,3 +91,4 @@ class ChatbotAPIView(APIView):
 
         # Send the assistant's message back to the front-end
         return Response({'message': output})
+

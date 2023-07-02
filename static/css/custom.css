@@ -242,3 +242,25 @@ h1, h2, h3, h4, h5, h6 {
   margin: 5px 0;
   font-size: 14px;
 }
+
+.navbar {
+  background-color: #ffffff;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .navbar-brand {
+  color: #333333;
+}
+
+.navbar .navbar-nav .nav-link {
+  color: #333333;
+}
+
+.navbar .navbar-nav .nav-link.dropdown-toggle::after {
+  display: none;
+}
+
+.navbar .navbar-nav .dropdown-menu {
+  border: none;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+}

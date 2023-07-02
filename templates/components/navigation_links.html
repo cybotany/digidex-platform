@@ -1,17 +1,31 @@
 {% block nav_links %}
-<nav>  
-  <div class="dropdown">
-    <button class="dropbtn">Menu</button>
-    <div class="dropdown-content">
-      <a href="{% url 'home' %}">Home</a>
-      {% if user.is_authenticated %}
-          <a href="{% url 'accounts:profile' %}">Profile</a>
-          <a href="{% url 'accounts:logout' %}">Logout</a>
-      {% else %}
-          <a href="{% url 'accounts:login' %}">Log in</a>
-          <a href="{% url 'accounts:signup' %}">Sign up</a>
-      {% endif %}
-    </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="{% url 'home' %}">Your Brand</a>
+  <div class="navbar-collapse">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <div class="d-flex align-items-center">
+            <div class="mr-2">
+              <img src="{{ user.avatar_url }}" alt="User avatar" style="width: 40px; height: 40px; border-radius: 50%;">
+            </div>
+            <div>
+              <div><strong>{{ user.username }}</strong></div>
+              <div class="small text-muted">Profile text</div>
+            </div>
+          </div>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+          {% if user.is_authenticated %}
+            <a class="dropdown-item" href="{% url 'accounts:profile' %}">Profile</a>
+            <a class="dropdown-item" href="{% url 'accounts:logout' %}">Logout</a>
+          {% else %}
+            <a class="dropdown-item" href="{% url 'accounts:login' %}">Log in</a>
+            <a class="dropdown-item" href="{% url 'accounts:signup' %}">Sign up</a>
+          {% endif %}
+        </div>
+      </li>
+    </ul>
   </div>
 </nav>
 {% endblock %}
