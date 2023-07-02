@@ -2,15 +2,21 @@ from decouple import config
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import ConversationChain
 from langchain.memory import ConversationBufferWindowMemory
 from langchain.prompts.chat import (
     ChatPromptTemplate,
     SystemMessagePromptTemplate,
+    AIMessagePromptTemplate,
     HumanMessagePromptTemplate,
 )
-
+from langchain.schema import (
+    AIMessage,
+    HumanMessage,
+    SystemMessage
+)
 from apps.chatbot.models import ChatMessage
 
 
@@ -19,18 +25,25 @@ class ChatbotAPIView(APIView):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+        # Define the chat memory for the user
+        self.chat_memory = ConversationBufferWindowMemory(return_messages=True, k=2)
+
         # Define the system template for the chatbot
-        self.system_template = "You are an experienced head grower at an agritech consulting company assisting a(n) {user_experience}-{user_role}."
+        self.system_template = "You are an experienced head grower at an agritech consulting company assisting a(n) {user_interest} with a {user_experience}-level knowledge of the subject."
         self.system_message_prompt = SystemMessagePromptTemplate.from_template(self.system_template)
-    
+
         # Define the human template for the chatbot
         self.human_template = "{user_input}"
         self.human_message_prompt = HumanMessagePromptTemplate.from_template(self.human_template)
 
         # Define the chat prompt
         self.chat_prompt = ChatPromptTemplate.from_messages([self.system_message_prompt, self.human_message_prompt])
-
-        # Defin the chat memory for the user
+        self.chat_prompt.format_prompt(
+            user_interest="indoor grower",
+            user_experience="intermediate",
+            user_input="What is the best way to grow tomatoes indoors?"
+        )
+        # Define the chat memory for the user
         self.chat_memory = ConversationBufferWindowMemory(return_messages=True, k=2)
 
         # Initialize LangChain
@@ -39,9 +52,7 @@ class ChatbotAPIView(APIView):
             prompt=self.chat_prompt,
             verbose=True,
             memory=self.chat_memory
-            )
-        
-        self.conversation.run(user_experience="Beginner", user_role="Houseplant Hobbyist", user_input="How many plants exist?")
+        )
 
     def post(self, request, *args, **kwargs):
         message = request.data.get('message')

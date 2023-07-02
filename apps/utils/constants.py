@@ -67,3 +67,17 @@ GROWING_METHOD_MEDIUM_MAP = {
     'Hydroponics': ['Coco Coir', 'Rockwool', 'Clay Pellets', 'Perlite', 'Vermiculite'],
     'Aquaponics': ['Coco Coir', 'Clay Pellets', 'Perlite', 'Vermiculite'],
 }
+
+INTERESTS_CHOICES = [
+    ('gardening', 'Gardening'),
+    ('hydroponics', 'Hydroponics'),
+    ('botany', 'Botany'),
+    ('farming', 'Farming')
+]
+
+EXPERIENCE_CHOICES = [
+    ('beginner', 'Beginner'),
+    ('intermediate', 'Intermediate'),
+    ('advanced', 'Advanced'),
+    ('expert', 'Expert')
+]
