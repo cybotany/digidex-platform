@@ -61,7 +61,6 @@ GROWING_MEDIUMS = [
     ('Peat Moss', 'Peat Moss'),
 ]
 
-# Mapping between growing methods and their possible growing mediums
 GROWING_METHOD_MEDIUM_MAP = {
     'Traditional': ['Soil'],
     'Hydroponics': ['Coco Coir', 'Rockwool', 'Clay Pellets', 'Perlite', 'Vermiculite'],

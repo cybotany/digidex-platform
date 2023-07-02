@@ -17,8 +17,8 @@ class Profile(models.Model):
         location (CharField): A char field for user location, maximum length 30 characters.
         birth_date (DateField): A date field for user's birth date.
         avatar (ImageField): An image field for user's profile picture.
-        interests (TextField): A text field for user's interests.
-        experience (TextField): A text field for user's experience.
+        interests (CharField): A char field for user's interests.
+        experience (CharField): A char field for user's experience.
     """
 
     user = models.OneToOneField(
