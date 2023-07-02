@@ -1,6 +1,5 @@
 from django import forms
-
-from apps.botany.models import Plant, Label, PlantImage
+from apps.botany.models import Plant, Label, PlantImage, GrowingMethod, GrowingMedium
 
 
 class PlantRegistrationForm(forms.ModelForm):
@@ -14,10 +13,12 @@ class PlantRegistrationForm(forms.ModelForm):
 
     label = forms.ModelChoiceField(queryset=Label.objects.none(), required=False)
     image = forms.ImageField(required=False)
+    growing_method = forms.ModelChoiceField(queryset=GrowingMethod.objects.all(), required=False)
+    growing_medium = forms.ModelChoiceField(queryset=GrowingMedium.objects.all(), required=False)
 
     class Meta:
         model = Plant
-        fields = ('name', 'label', 'description', 'image')
+        fields = ('name', 'label', 'description', 'image', 'growing_method', 'growing_medium')
 
     def __init__(self, *args, **kwargs):
         """

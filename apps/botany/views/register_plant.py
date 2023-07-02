@@ -1,6 +1,5 @@
 from django.views.generic import FormView
 from django.shortcuts import redirect
-
 from apps.accounts.models import Activity
 from apps.botany.forms import PlantRegistrationForm
 

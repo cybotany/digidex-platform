@@ -1,9 +1,7 @@
-# In your views.py file
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import UpdateView
-
 from apps.botany.models import Plant
 from apps.botany.forms import PlantUpdateForm
 

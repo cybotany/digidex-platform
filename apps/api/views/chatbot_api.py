@@ -55,7 +55,7 @@ class ChatbotAPIView(APIView):
         profile = Profile.objects.get(user=user)
         user_interest = profile.interests
         user_experience = profile.experience
-        
+
         # Add interest and experience to the system prompt template
         self.chat_prompt.format_prompt(
             user_interest=user_interest,
@@ -91,4 +91,3 @@ class ChatbotAPIView(APIView):
 
         # Send the assistant's message back to the front-end
         return Response({'message': output})
-

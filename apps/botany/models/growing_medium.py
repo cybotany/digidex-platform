@@ -1,6 +1,6 @@
 from django.db import models
-
 from apps.utils.constants import GROWING_MEDIUMS
+
 from .growing_method import GrowingMethod
 
 

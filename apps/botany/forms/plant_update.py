@@ -1,6 +1,5 @@
 from django import forms
-
-from apps.botany.models import Plant, PlantImage
+from apps.botany.models import Plant, PlantImage, Label, GrowingMethod, GrowingMedium
 
 
 class PlantUpdateForm(forms.ModelForm):
@@ -12,6 +11,9 @@ class PlantUpdateForm(forms.ModelForm):
     """
 
     image = forms.ImageField(required=False)
+    label = forms.ModelChoiceField(queryset=Label.objects.all(), required=False)
+    growing_method = forms.ModelChoiceField(queryset=GrowingMethod.objects.all(), required=False)
+    growing_medium = forms.ModelChoiceField(queryset=GrowingMedium.objects.all(), required=False)
 
     class Meta:
         """
@@ -22,7 +24,7 @@ class PlantUpdateForm(forms.ModelForm):
             fields (list): Fields to be included in this form.
         """
         model = Plant
-        fields = ['name', 'description', 'image']
+        fields = ['name', 'label', 'description', 'image', 'growing_method', 'growing_medium']
 
     def save(self, commit=True):
         """

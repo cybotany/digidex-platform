@@ -1,5 +1,4 @@
 from django.db import models
-
 from apps.utils.constants import GROWING_METHODS
 
 

@@ -1,5 +1,4 @@
 from django.urls import path
-
 from apps.botany.views import CreateLabelView, DescribePlantView, DeletePlantView, UpdatePlantView, PlantHomepageView, RegisterPlantView
 
 

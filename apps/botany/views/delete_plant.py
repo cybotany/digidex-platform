@@ -2,7 +2,6 @@ from django.views.generic import TemplateView
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-
 from apps.botany.models import Plant
 from apps.accounts.models import Activity
 
