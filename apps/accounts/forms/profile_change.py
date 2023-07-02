@@ -15,8 +15,7 @@ class ProfileChangeForm(forms.ModelForm):
         interests = cleaned_data.get('interests')
         experience = cleaned_data.get('experience')
 
-        # Check if experience is provided but interests is not
-        if experience and not interests:
-            raise ValidationError("Experience can only be provided if interests are selected.")
+        if bool(interests) != bool(experience):
+            raise ValidationError("Both interests and experience must be provided, or both must be left empty.")
 
         return cleaned_data

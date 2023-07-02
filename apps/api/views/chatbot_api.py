@@ -9,14 +9,10 @@ from langchain.memory import ConversationBufferWindowMemory
 from langchain.prompts.chat import (
     ChatPromptTemplate,
     SystemMessagePromptTemplate,
-    AIMessagePromptTemplate,
     HumanMessagePromptTemplate,
 )
-from langchain.schema import (
-    AIMessage,
-    HumanMessage,
-    SystemMessage
-)
+
+from apps.accounts.models import Profile
 from apps.chatbot.models import ChatMessage
 
 
@@ -26,7 +22,7 @@ class ChatbotAPIView(APIView):
         super().__init__(*args, **kwargs)
 
         # Define the chat memory for the user
-        self.chat_memory = ConversationBufferWindowMemory(return_messages=True, k=2)
+        self.memory = ConversationBufferWindowMemory(return_messages=True, k=2)
 
         # Define the system template for the chatbot
         self.system_template = "You are an experienced head grower at an agritech consulting company assisting a(n) {user_interest} with a {user_experience}-level knowledge of the subject."
@@ -38,37 +34,47 @@ class ChatbotAPIView(APIView):
 
         # Define the chat prompt
         self.chat_prompt = ChatPromptTemplate.from_messages([self.system_message_prompt, self.human_message_prompt])
-        self.chat_prompt.format_prompt(
-            user_interest="indoor grower",
-            user_experience="intermediate",
-            user_input="What is the best way to grow tomatoes indoors?"
-        )
-        # Define the chat memory for the user
-        self.chat_memory = ConversationBufferWindowMemory(return_messages=True, k=2)
 
         # Initialize LangChain
         self.conversation = ConversationChain(
             llm=ChatOpenAI(temperature=0, openai_api_key=config('OPENAI_API_KEY')),
             prompt=self.chat_prompt,
             verbose=True,
-            memory=self.chat_memory
+            memory=self.memory
         )
 
     def post(self, request, *args, **kwargs):
         message = request.data.get('message')
         user = request.user
 
-        # Input validation
         if not message:
             return Response({"error": "Message is required"}, status=status.HTTP_400_BAD_REQUEST)
 
+        # Fetch user's profile and info
+        profile = Profile.objects.get(user=user)
+        user_interest = profile.interests
+        user_experience = profile.experience
+        
+        # Add interest and experience to the system prompt template
+        self.chat_prompt.format_prompt(
+            user_interest=user_interest,
+            user_experience=user_experience
+        )
+
         # Retrieve conversation history
-        history = ChatMessage.objects.filter(user=user).order_by('created_at')
-        history_text = '\n'.join([msg.content for msg in history])
+        chat_history = ChatMessage.objects.filter(user=user).order_by('-created_at')
+        history_text = '\n'.join([msg.content for msg in chat_history])
+
+        # Populate chat memory with historical chat messages
+        for msg in chat_history:
+            if msg.user == 'Human':
+                self.memory.chat_memory.add_user_message(msg.content)
+            else:
+                self.memory.chat_memory.add_ai_message(msg.content)
 
         try:
             # Use LangChain to handle the conversation
-            output = self.chatgpt_chain.predict(history=history_text, human_input=message)
+            output = self.conversation.predict(history=history_text)
         except Exception as e:
             # You might want to log the exception here
             return Response({"error": f"Failed to process your request due to {e}. Please try again later."},
