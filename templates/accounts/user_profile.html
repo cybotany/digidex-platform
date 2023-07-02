@@ -13,22 +13,23 @@
           <img src="{% static 'img/test-avatar.jpg' %}" alt="Default avatar" class="avatar-image">
         {% endif %}
       
-    
         <!-- User Info -->
-        <h2 class="text-center mt-3">{{ user.username }}</h2>
-        <p class="text-center">{{ user.profile.location }}</p>
+        <div class="user-info text-center mt-3">
+          <h2>{{ user.username }}</h2>
+          <div class="user-details">
+              {% if user_profile.interests %}
+                  <p>Interests: {{ user_profile.interests }}</p>
+              {% endif %}
+              {% if user_profile.experience %}
+                  <p>Experience: {{ user_profile.experience }}</p>
+              {% endif %}
+              <p>Location: {{ user.profile.location }}</p>
+          </div>
+        </div>
 
         <!-- Edit Profile Link -->
         <div class="text-center mt-2">
           <a href="{% url 'accounts:profile_change' %}" class="btn btn-secondary">Edit Profile</a>
-        </div>
-
-        <!-- Social Media Links -->
-        <div class="d-flex justify-content-around mt-3">
-          <a href="{{ user.profile.facebook_url }}" class="btn btn-primary">Facebook</a>
-          <a href="{{ user.profile.instagram_url }}" class="btn btn-primary">Instagram</a>
-          <a href="{{ user.profile.etsy_url }}" class="btn btn-primary">Etsy</a>
-          <a href="{{ user.profile.tiktok_url }}" class="btn btn-primary">TikTok</a>
         </div>
       </div>
 
