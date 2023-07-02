@@ -20,7 +20,6 @@ class Profile(models.Model):
         interests (CharField): A char field for user's interests.
         experience (CharField): A char field for user's experience.
     """
-
     user = models.OneToOneField(
         get_user_model(),
         on_delete=models.CASCADE,
