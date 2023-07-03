@@ -44,10 +44,9 @@ COMMON_LABELS = [
 GROWING_METHODS = [
     ('Traditional', 'Traditional'),
     ('Hydroponics', 'Hydroponics'),
-    ('Aquaponics', 'Aquaponics'),
 ]
 
-GROWING_MEDIUMS = [
+GROWING_MEDIUM_COMPONENT = [
     ('Soil', 'Soil'),
     ('Coco Coir', 'Coco Coir'),
     ('Pine Coir', 'Pine Coir'),
@@ -60,12 +59,6 @@ GROWING_MEDIUMS = [
     ('Sphagnum Moss', 'Sphagnum Moss'),
     ('Peat Moss', 'Peat Moss'),
 ]
-
-GROWING_METHOD_MEDIUM_MAP = {
-    'Traditional': ['Soil'],
-    'Hydroponics': ['Coco Coir', 'Rockwool', 'Clay Pellets', 'Perlite', 'Vermiculite'],
-    'Aquaponics': ['Coco Coir', 'Clay Pellets', 'Perlite', 'Vermiculite'],
-}
 
 INTERESTS_CHOICES = [
     ('gardening', 'Gardening'),

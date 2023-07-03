@@ -1,5 +1,4 @@
 from django.db import models
-from apps.utils.constants import GROWING_MEDIUMS
 
 from .growing_method import GrowingMethod
 
@@ -14,7 +13,6 @@ class GrowingMedium(models.Model):
     """
     name = models.CharField(
         max_length=100,
-        choices=GROWING_MEDIUMS,
         blank=True,
         help_text='Growing mediums for plants.'
     )
