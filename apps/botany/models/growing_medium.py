@@ -1,7 +1,5 @@
 from django.db import models
 
-from .growing_method import GrowingMethod
-
 
 class GrowingMedium(models.Model):
     """
@@ -9,14 +7,17 @@ class GrowingMedium(models.Model):
 
     Fields:
         name (CharField): A char field for growing medium, maximum length 100 characters.
-        growing_methods (ManyToManyField): A many to many field for growing method this medium is used in.
+        description (TextField): A text field used for describing the growing medium.
     """
     name = models.CharField(
         max_length=100,
         blank=True,
-        help_text='Growing mediums for plants.'
+        help_text='Name of the growing medium for plants.'
     )
-    growing_methods = models.ManyToManyField(
-        GrowingMethod,
-        related_name="growing_mediums"
+    description = models.TextField(
+        blank=True,
+        help_text='Description for the growing medium.'
     )
+
+    def __str__(self):
+        return self.name
