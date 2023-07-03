@@ -13,7 +13,7 @@ class GrowingMediumComposition(models.Model):
         growing_medium (ForeignKey): A reference to the GrowingMedium model, representing
             the growing medium in which the component is used. This field cannot be blank
             or null and will cascade on deletion.
-        component (ForeignKey): A reference to the GrowingMediumComponent model,
+        growing_medium_component (ForeignKey): A reference to the GrowingMediumComponent model,
             representing the component used in the growing medium. This field cannot be blank
             or null and will cascade on deletion.
         percentage (DecimalField): A decimal field representing the percentage of the 
@@ -27,7 +27,7 @@ class GrowingMediumComposition(models.Model):
         null=False,
         help_text='Reference to the growing medium in which the component is used.'
     )
-    component = models.ForeignKey(
+    growing_medium_component = models.ForeignKey(
         GrowingMediumComponent,
         on_delete=models.CASCADE,
         blank=False,
@@ -43,4 +43,4 @@ class GrowingMediumComposition(models.Model):
     )
 
     def __str__(self):
-        return f"{self.component} ({self.percentage}%) in {self.growing_medium}"
+        return f"{self.growing_medium_component} ({self.percentage}%) in {self.growing_medium}"
