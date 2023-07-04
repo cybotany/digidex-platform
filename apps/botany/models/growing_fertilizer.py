@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 
 
-class Fertilizer(models.Model):
+class GrowingFertilizer(models.Model):
     """
     Represents a fertilizer with nutrient composition.
 

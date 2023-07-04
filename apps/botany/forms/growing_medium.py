@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import inlineformset_factory
 
-from apps.botany.models import GrowingMedium, GrowingComponent, GrowingMediumComposition
+from apps.botany.models import GrowingMedium, GrowingComponent, GrowingComposition
 
 
 class GrowingMediumForm(forms.ModelForm):
@@ -12,7 +12,7 @@ class GrowingMediumForm(forms.ModelForm):
 
 GrowingComponentFormSet = inlineformset_factory(
     GrowingMedium,  # parent model
-    GrowingMediumComposition,  # inline model
+    GrowingComposition,  # inline model
     fields=('growing_component', 'percentage'),
     extra=1,
     can_delete=True

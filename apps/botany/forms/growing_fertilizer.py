@@ -1,5 +1,5 @@
 from django import forms
-from apps.botany.models import Fertilizer
+from apps.botany.models import GrowingFertilizer
 
 
 class GrowingFertilizerForm(forms.ModelForm):
@@ -60,12 +60,12 @@ class GrowingFertilizerForm(forms.ModelForm):
 
     class Meta:
         """
-        Meta class for the FertilizerMixForm.
+        Meta class for the GrowingFertilizerForm.
 
         Attributes:
             model (Model): The model class to associate with this form.
             fields (tuple): Fields to be included in this form.
         """
 
-        model = FertilizerMix
+        model = GrowingFertilizer
         fields = ('name', 'description', 'components', 'nutrient_content')

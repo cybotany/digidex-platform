@@ -1,6 +1,6 @@
 from django.views import View
 from django.shortcuts import render, redirect
-from apps.botany.forms import PlantLabelForm
+from apps.botany.forms import GrowingLabelForm
 
 
 class RegisterLabelView(View):
@@ -14,7 +14,7 @@ class RegisterLabelView(View):
         return self.render_form(form)
 
     def get_form(self):
-        return PlantLabelForm()
+        return GrowingLabelForm()
 
     def render_form(self, form):
         context = {'form': form}
@@ -28,7 +28,7 @@ class RegisterLabelView(View):
         return self.render_form(form)
 
     def get_form_from_post_request(self):
-        return PlantLabelForm(self.request.POST)
+        return GrowingLabelForm(self.request.POST)
 
     def save_label(self, form):
         label = form.save(commit=False)

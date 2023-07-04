@@ -1,5 +1,5 @@
 from django import forms
-from apps.botany.models import Label
+from apps.botany.models import GrowingLabel
 
 
 class GrowingLabelForm(forms.ModelForm):
@@ -34,5 +34,5 @@ class GrowingLabelForm(forms.ModelForm):
             fields (tuple): Fields to be included in this form.
         """
 
-        model = Label
+        model = GrowingLabel
         fields = ('name',)

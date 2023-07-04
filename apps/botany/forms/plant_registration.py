@@ -1,5 +1,5 @@
 from django import forms
-from apps.botany.models import Plant, Label, PlantImage, GrowingMethod, GrowingMedium
+from apps.botany.models import Plant, GrowingLabel, PlantImage, GrowingMethod, GrowingMedium
 
 
 class PlantRegistrationForm(forms.ModelForm):
@@ -11,7 +11,7 @@ class PlantRegistrationForm(forms.ModelForm):
     Users can also upload an image of the plant.
     """
 
-    label = forms.ModelChoiceField(queryset=Label.objects.none(), required=False)
+    label = forms.ModelChoiceField(queryset=GrowingLabel.objects.none(), required=False)
     image = forms.ImageField(required=False)
     growing_method = forms.ModelChoiceField(queryset=GrowingMethod.objects.all(), required=False)
     growing_medium = forms.ModelChoiceField(queryset=GrowingMedium.objects.all(), required=False)
@@ -31,7 +31,7 @@ class PlantRegistrationForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
         if self.user:
-            user_labels = Label.objects.filter(user=self.user)
+            user_labels = GrowingLabel.objects.filter(user=self.user)
             self.fields['label'].queryset = user_labels
 
     def save(self, commit=True):

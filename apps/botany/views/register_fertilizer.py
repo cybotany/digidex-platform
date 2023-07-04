@@ -1,7 +1,7 @@
 from django.views.generic import FormView
 from django.shortcuts import redirect
 from apps.accounts.models import Activity
-from apps.botany.forms import PlantFertilizerForm
+from apps.botany.forms import GrowingFertilizerForm
 
 
 class RegisterFertilizerView(FormView):
@@ -9,7 +9,7 @@ class RegisterFertilizerView(FormView):
     View for registering a new fertilizer mix.
     """
     template_name = 'botany/register_fertilizer.html'
-    form_class = PlantFertilizerForm
+    form_class = GrowingFertilizerForm
 
     def form_valid(self, form):
         """

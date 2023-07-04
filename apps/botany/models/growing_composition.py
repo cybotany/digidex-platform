@@ -4,7 +4,7 @@ from .growing_medium import GrowingMedium
 from .growing_component import GrowingComponent
 
 
-class GrowingMediumComposition(models.Model):
+class GrowingComposition(models.Model):
     """
     Represents the relationship between a GrowingMedium and a GrowingMediumComponent
     and stores the ratio of that component in the medium.

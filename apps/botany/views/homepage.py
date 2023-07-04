@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
-from apps.botany.models import Plant, Label
+from apps.botany.models import Plant, GrowingLabel
 
 
 class PlantHomepageView(LoginRequiredMixin, TemplateView):
@@ -13,7 +13,7 @@ class PlantHomepageView(LoginRequiredMixin, TemplateView):
         """
         Return the plants grouped by label for the currently logged-in user.
         """
-        labels = Label.objects.filter(user=self.request.user)
+        labels = GrowingLabel.objects.filter(user=self.request.user)
         plant_groups = []
 
         for label in labels:

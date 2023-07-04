@@ -3,8 +3,8 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 
-from apps.botany.models import Plant, Label, PlantImage
-from apps.botany.forms import PlantLabelForm, PlantRegistrationForm, PlantUpdateForm
+from apps.botany.models import Plant, GrowingLabel, PlantImage
+from apps.botany.forms import GrowingLabelForm, PlantRegistrationForm, PlantUpdateForm
 
 User = get_user_model()
 
@@ -12,17 +12,17 @@ User = get_user_model()
 class PlantLabelFormTest(TestCase):
 
     def test_valid_data(self):
-        form = PlantLabelForm({'name': 'Fern'})
+        form = GrowingLabelForm({'name': 'Fern'})
         self.assertTrue(form.is_valid())
 
     def test_missing_name(self):
-        form = PlantLabelForm({})
+        form = GrowingLabelForm({})
         self.assertFalse(form.is_valid())
         self.assertEqual(form.errors['name'], ['Please provide a label name.'])
 
     def test_max_length_exceeded(self):
         name = 'a' * 101  # 101 characters
-        form = PlantLabelForm({'name': name})
+        form = GrowingLabelForm({'name': name})
         self.assertFalse(form.is_valid())
         self.assertEqual(form.errors['name'], ['Label name should not exceed 100 characters.'])
 
@@ -31,8 +31,8 @@ class PlantRegistrationFormTest(TestCase):
 
     def setUp(self):
         self.user = User.objects.create_user(username='testuser', password='testpassword')
-        self.common_label = Label.objects.create(name='Common', is_common=True)
-        self.user_label = Label.objects.create(name='Personal', user=self.user)
+        self.common_label = GrowingLabel.objects.create(name='Common', is_common=True)
+        self.user_label = GrowingLabel.objects.create(name='Personal', user=self.user)
 
     def test_without_image(self):
         form = PlantRegistrationForm(
@@ -47,7 +47,7 @@ class PlantRegistrationFormTest(TestCase):
         form = PlantRegistrationForm(user=self.user)
         self.assertQuerysetEqual(
             form.fields['label'].queryset.order_by('name'),
-            Label.objects.filter(Q(user=self.user)).order_by('name'),
+            GrowingLabel.objects.filter(Q(user=self.user)).order_by('name'),
             transform=lambda x: x
         )
 

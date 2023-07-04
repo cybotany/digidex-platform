@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 
 
-class Label(models.Model):
+class GrowingLabel(models.Model):
     """
     Label model to represent plant labels. Labels can be unique to a user
     or common across the application.

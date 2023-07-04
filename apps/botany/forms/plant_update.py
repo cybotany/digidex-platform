@@ -1,5 +1,5 @@
 from django import forms
-from apps.botany.models import Plant, PlantImage, Label, GrowingMethod, GrowingMedium
+from apps.botany.models import Plant, PlantImage, GrowingLabel, GrowingMethod, GrowingMedium
 
 
 class PlantUpdateForm(forms.ModelForm):
@@ -11,7 +11,7 @@ class PlantUpdateForm(forms.ModelForm):
     """
 
     image = forms.ImageField(required=False)
-    label = forms.ModelChoiceField(queryset=Label.objects.all(), required=False)
+    label = forms.ModelChoiceField(queryset=GrowingLabel.objects.all(), required=False)
     growing_method = forms.ModelChoiceField(queryset=GrowingMethod.objects.all(), required=False)
     growing_medium = forms.ModelChoiceField(queryset=GrowingMedium.objects.all(), required=False)
 
