@@ -1,15 +1,15 @@
 from django.views.generic import FormView
 from django.shortcuts import redirect
 from apps.accounts.models import Activity
-from apps.botany.forms import GrowingMediumComponentForm
+from apps.botany.forms import GrowingComponentForm
 
 
-class CreateGrowingMediumComponentView(FormView):
+class CreateGrowingComponentView(FormView):
     """
     View for creating a new growing medium component.
     """
-    template_name = 'botany/create_growing_medium_component.html'
-    form_class = GrowingMediumComponentForm
+    template_name = 'botany/create_growing_component.html'
+    form_class = GrowingComponentForm
 
     def form_valid(self, form):
         """

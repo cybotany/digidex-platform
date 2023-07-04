@@ -2,7 +2,7 @@ from django import forms
 from apps.botany.models import GrowingMediumComponent
 
 
-class GrowingMediumComponentForm(forms.ModelForm):
+class GrowingComponentForm(forms.ModelForm):
     """
     Form for creating a new growing medium component.
 

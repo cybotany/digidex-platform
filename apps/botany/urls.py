@@ -1,7 +1,7 @@
 from django.urls import path
 from apps.botany.views import (
     CreateLabelView,
-    CreateGrowingMediumComponentView,
+    CreateGrowingComponentView,
     DescribePlantView,
     DeletePlantView,
     UpdatePlantView,
@@ -14,7 +14,7 @@ app_name = 'botany'
 urlpatterns = [
     path('', PlantHomepageView.as_view(), name='home'),
     path('create-label/', CreateLabelView.as_view(), name='create_label'),
-    path('create-growing-component/', CreateGrowingMediumComponentView.as_view(), name='create_growing_component'),
+    path('create-growing-component/', CreateGrowingComponentView.as_view(), name='create_growing_component'),
     path('register-plant/', RegisterPlantView.as_view(), name='register_plant'),
     path('plants/<int:pk>/describe/', DescribePlantView.as_view(), name='describe_plant'),
     path('plants/<int:pk>/delete/', DeletePlantView.as_view(), name='delete_plant'),
