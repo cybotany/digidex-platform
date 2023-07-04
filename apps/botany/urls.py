@@ -1,22 +1,26 @@
 from django.urls import path
 from apps.botany.views import (
-    CreateLabelView,
-    CreateGrowingComponentView,
+    RegisterLabelView,
+    RegisterComponentView,
+    RegisterMediumView,
+    RegisterFertilizerView,
+    RegisterPlantView,
     DescribePlantView,
     DeletePlantView,
     UpdatePlantView,
     PlantHomepageView,
-    RegisterPlantView
 )
 
 
 app_name = 'botany'
 urlpatterns = [
     path('', PlantHomepageView.as_view(), name='home'),
-    path('create-label/', CreateLabelView.as_view(), name='create_label'),
-    path('create-growing-component/', CreateGrowingComponentView.as_view(), name='create_growing_component'),
-    path('register-plant/', RegisterPlantView.as_view(), name='register_plant'),
-    path('plants/<int:pk>/describe/', DescribePlantView.as_view(), name='describe_plant'),
-    path('plants/<int:pk>/delete/', DeletePlantView.as_view(), name='delete_plant'),
-    path('plants/<int:pk>/update/', UpdatePlantView.as_view(), name='update_plant'),
+    path('register/growing/label/', RegisterLabelView.as_view(), name='register_label'),
+    path('register/growing/component/', RegisterComponentView.as_view(), name='register_component'),
+    path('register/growing/medium/', RegisterMediumView.as_view(), name='register_medium'),
+    path('register/growing/fertilizer/', RegisterFertilizerView.as_view(), name='register_fertilizer'),
+    path('register/plant/', RegisterPlantView.as_view(), name='register_plant'),
+    path('plant/<int:pk>/describe/', DescribePlantView.as_view(), name='describe_plant'),
+    path('plant/<int:pk>/delete/', DeletePlantView.as_view(), name='delete_plant'),
+    path('plant/<int:pk>/update/', UpdatePlantView.as_view(), name='update_plant'),
 ]

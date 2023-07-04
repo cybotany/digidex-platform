@@ -4,11 +4,11 @@ from apps.accounts.models import Activity
 from apps.botany.forms import GrowingComponentForm
 
 
-class CreateGrowingComponentView(FormView):
+class RegisterComponentView(FormView):
     """
-    View for creating a new growing medium component.
+    View for registering a new growing medium component.
     """
-    template_name = 'botany/create_growing_component.html'
+    template_name = 'botany/register_component.html'
     form_class = GrowingComponentForm
 
     def form_valid(self, form):
@@ -23,17 +23,16 @@ class CreateGrowingComponentView(FormView):
 
         Activity.objects.create(
             user=self.request.user,
-            activity_status='created',
-            activity_type='growing_medium_component',
-            content=f'Created a new growing medium component: {new_component.component}',
+            activity_status='registered',
+            activity_type='growing_component',
+            content=f'Registered a new growing medium component: {new_component.component}',
         )
 
-        # Assuming the GrowingMediumComponent model has a get_absolute_url method
         return redirect(new_component.get_absolute_url())
 
     def get_form_kwargs(self):
         """
-        Pass the logged on user object to the GrowingMediumComponentForm.
+        Pass the logged on user object to the GrowingComponentForm.
 
         Returns:
             kwargs dictionary with the key 'user' assigned to value self.request.user

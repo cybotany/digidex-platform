@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %}Create Label{% endblock %}
+{% block title %}Medium{% endblock %}
 
 {% block content %}
 <div class="container">
-  <h1 class="my-4">Create Label</h1>
+  <h1 class="my-4">Register Growing Medium</h1>
 
   <form method="post">
     {% csrf_token %}
@@ -16,7 +16,7 @@
       </p>
     {% endif %}
 
-    <button type="submit" class="btn btn-primary">Create Label</button>
+    <button type="submit" class="btn btn-primary">Register Medium</button>
   </form>
 
 </div>

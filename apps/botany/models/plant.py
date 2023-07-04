@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 
-from .label import Label
+from .growing_label import GrowingLabel
 from .growing_method import GrowingMethod
 from .growing_medium import GrowingMedium
 
@@ -27,7 +27,7 @@ class Plant(models.Model):
         blank=True
     )
     label = models.ForeignKey(
-        Label,
+        GrowingLabel,
         on_delete=models.SET_NULL,
         null=True
     )

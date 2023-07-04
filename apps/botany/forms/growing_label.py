@@ -2,7 +2,7 @@ from django import forms
 from apps.botany.models import Label
 
 
-class PlantLabelForm(forms.ModelForm):
+class GrowingLabelForm(forms.ModelForm):
     """
     Form for creating a new label for plants.
 
@@ -27,7 +27,7 @@ class PlantLabelForm(forms.ModelForm):
 
     class Meta:
         """
-        Meta class for the PlantLabelForm.
+        Meta class for the GrowingLabelForm.
 
         Attributes:
             model (Model): The model class to associate with this form.

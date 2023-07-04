@@ -3,11 +3,11 @@ from django.shortcuts import render, redirect
 from apps.botany.forms import PlantLabelForm
 
 
-class CreateLabelView(View):
+class RegisterLabelView(View):
     """
-    View for rendering the page used to create plant labels.
+    View for rendering the page used to register plant labels.
     """
-    template_name = 'botany/create_label.html'
+    template_name = 'botany/register_label.html'
 
     def get(self, request):
         form = self.get_form()

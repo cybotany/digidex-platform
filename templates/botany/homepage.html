@@ -13,58 +13,65 @@
         </div>
     {% endif %}
 
-    <!-- Tab navigation -->
-    <ul class="nav nav-tabs" id="plantGroupTab" role="tablist">
-        {% for group in plant_groups %}
-            <li class="nav-item" role="presentation">
-                <a class="nav-link {% if forloop.first %}active{% endif %}" id="{{ group.name|slugify }}-tab" data-bs-toggle="tab" href="#{{ group.name|slugify }}" role="tab" aria-controls="{{ group.name|slugify }}" aria-selected="true">{{ group.name }}</a>
-            </li>
-        {% endfor %}
-    </ul>
+    <!-- Left Container -->
+    <div id="left-container" class="mr-5" style="float:left; width:70%;">
 
-    <!-- Tab content -->
-    <div class="tab-content" id="plantGroupTabContent">
-        {% for group in plant_groups %}
-            <div class="tab-pane fade show {% if forloop.first %}active{% endif %}" id="{{ group.name|slugify }}" role="tabpanel" aria-labelledby="{{ group.name|slugify }}-tab">
-                <div class="row mb-4">
-                    {% for plant in group.plants %}
-                        <div class="col-md-4">
-                            <div class="card">
-                                {% if plant.images.all %}
-                                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                                        <div class="carousel-inner">
-                                            {% for image in plant.images.all %}
-                                                <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                                    <img src="{{ image.image.url }}" class="d-block w-100" alt="Image of {{ plant.name }}">
-                                                </div>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-                                {% else %}
-                                    <img src="{% static 'no_image_available.jpg' %}" class="card-img-top" alt="No image available">
-                                {% endif %}
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ plant.name }}</h5>
-                                    <p class="card-text">{{ plant.description }}</p>
-                                    <a href="{% url 'botany:describe_plant' pk=plant.id %}" class="btn btn-primary">View Details</a>
+        <!-- Tab navigation -->
+        <ul class="nav nav-tabs" id="plantGroupTab" role="tablist">
+            {% for group in plant_groups %}
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link {% if forloop.first %}active{% endif %}" id="{{ group.name|slugify }}-tab" data-bs-toggle="tab" href="#{{ group.name|slugify }}" role="tab" aria-controls="{{ group.name|slugify }}" aria-selected="true">{{ group.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <!-- Tab content -->
+        <div class="tab-content" id="plantGroupTabContent">
+            {% for group in plant_groups %}
+                <div class="tab-pane fade show {% if forloop.first %}active{% endif %}" id="{{ group.name|slugify }}" role="tabpanel" aria-labelledby="{{ group.name|slugify }}-tab">
+                    <div class="row mb-4">
+                        {% for plant in group.plants %}
+                            <div class="col-md-4">
+                                <div class="card">
+                                    {% if plant.images.all %}
+                                        <!-- ... existing code ... -->
+                                    {% else %}
+                                        <!-- ... existing code ... -->
+                                    {% endif %}
+                                    <!-- ... existing code ... -->
                                 </div>
                             </div>
-                        </div>
-                    {% empty %}
-                        <div class="col-md-12">
-                            <p>No plants found in this group.</p>
-                        </div>
-                    {% endfor %}
+                        {% empty %}
+                            <!-- ... existing code ... -->
+                        {% endfor %}
+                    </div>
                 </div>
+            {% endfor %}
+        </div>
+
+        <!-- Registration link -->
+        <div class="row my-4">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <a href="{% url 'botany:register_plant' %}" class="btn btn-primary">Upload New Plant</a>
             </div>
-        {% endfor %}
+        </div>
+
     </div>
 
-    <!-- Registration link -->
-    <div class="row my-4">
-        <div class="col-lg-4 col-md-6 mb-4">
-            <a href="{% url 'botany:register_plant' %}" class="btn btn-primary">Upload New Plant</a>
+    <!-- Right Container -->
+    <div id="right-container" style="float:left; width:25%;">
+
+        <div class="box" id="register-label">
+            <a href="{% url 'botany:register_label' %}" class="btn btn-secondary btn-block my-2">Register New Label</a>
         </div>
+        <div class="box" id="register-growing-medium">
+            <a href="{% url 'botany:register_growing_medium' %}" class="btn btn-secondary btn-block my-2">Register Component for Plant Growing Medium</a>
+        </div>
+        <div class="box" id="register-fertilizer-mix">
+            <a href="{% url 'botany:register_fertilizer_mix' %}" class="btn btn-secondary btn-block my-2">Register New Fertilizer Mix</a>
+        </div>
+
     </div>
+    <div style="clear:both;"></div>
 </div>
 {% endblock %}

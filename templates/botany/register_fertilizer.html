@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %}Create Growing Medium Component{% endblock %}
+{% block title %}Fertilizer{% endblock %}
 
 {% block content %}
 <div class="container">
-  <h1 class="my-4">Create Growing Component</h1>
+  <h1 class="my-4">Register Growing Fertilizer</h1>
 
   <form method="post">
     {% csrf_token %}
@@ -16,7 +16,7 @@
       </p>
     {% endif %}
 
-    <button type="submit" class="btn btn-primary">Create Growing Medium Component</button>
+    <button type="submit" class="btn btn-primary">Register Fertilizer</button>
   </form>
 
 </div>
