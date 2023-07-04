@@ -1,5 +1,5 @@
 from django import forms
-from apps.botany.models import GrowingMediumComponent
+from apps.botany.models import GrowingComponent
 
 
 class GrowingComponentForm(forms.ModelForm):
@@ -13,7 +13,7 @@ class GrowingComponentForm(forms.ModelForm):
         particle_size_unit (CharField): The unit of measurement for the particle size.
     """
     component = forms.ChoiceField(
-        choices=GrowingMediumComponent.component.field.choices,
+        choices=GrowingComponent.component.field.choices,
         widget=forms.Select(
             attrs={
                 'class': 'form-control',
@@ -46,7 +46,7 @@ class GrowingComponentForm(forms.ModelForm):
         required=False,
     )
     particle_size_unit = forms.ChoiceField(
-        choices=GrowingMediumComponent.particle_size_unit.field.choices,
+        choices=GrowingComponent.particle_size_unit.field.choices,
         widget=forms.Select(
             attrs={
                 'class': 'form-control',
@@ -65,5 +65,5 @@ class GrowingComponentForm(forms.ModelForm):
             model (Model): The model class to associate with this form.
             fields (tuple): Fields to be included in this form.
         """
-        model = GrowingMediumComponent
+        model = GrowingComponent
         fields = ('component', 'description', 'particle_size', 'particle_size_unit')

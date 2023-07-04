@@ -2,7 +2,7 @@ from django.db import models
 from apps.utils.constants import GROWING_MEDIUM_COMPONENT, MEASUREMENT_CHOICES
 
 
-class GrowingMediumComponent(models.Model):
+class GrowingComponent(models.Model):
     """
     Represents a single type of growing medium component.
 
