@@ -15,7 +15,7 @@ class Fertilizer(models.Model):
         potassium (DecimalField): The percentage of potassium content.
         added_on (DateTimeField): The date and time when the fertilizer was added.
     """
-    
+
     user = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE,

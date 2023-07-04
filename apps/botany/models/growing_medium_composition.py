@@ -16,7 +16,7 @@ class GrowingMediumComposition(models.Model):
         growing_medium_component (ForeignKey): A reference to the GrowingMediumComponent model,
             representing the component used in the growing medium. This field cannot be blank
             or null and will cascade on deletion.
-        percentage (DecimalField): A decimal field representing the percentage of the 
+        percentage (DecimalField): A decimal field representing the percentage of the
             growing_medium_component in the growing_medium. This field cannot be blank or null,
             has a maximum of 5 digits and 2 decimal places.
     """

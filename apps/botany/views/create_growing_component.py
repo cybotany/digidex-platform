@@ -27,7 +27,7 @@ class CreateGrowingComponentView(FormView):
             activity_type='growing_medium_component',
             content=f'Created a new growing medium component: {new_component.component}',
         )
-        
+
         # Assuming the GrowingMediumComponent model has a get_absolute_url method
         return redirect(new_component.get_absolute_url())
 
