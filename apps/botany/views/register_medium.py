@@ -16,8 +16,11 @@ class RegisterMediumView(FormView):
         if self.request.POST:
             data["formset"] = GrowingComponentFormSet(self.request.POST, instance=self.object)
         else:
+            if not hasattr(self, 'object'):
+                self.object = None
             data["formset"] = GrowingComponentFormSet(instance=self.object)
         return data
+
 
     def form_valid(self, form):
         """
