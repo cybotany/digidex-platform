@@ -30,11 +30,10 @@ class RegisterMediumView(FormView):
         Returns:
             Redirects user to the growing medium detail page of the submitted medium.
         """
+        self.object = form.save()  # set self.object here
         context = self.get_context_data()
-        formset = context["formset"]
-
+        formset = context['formset']
         if formset.is_valid():
-            self.object = form.save()
             formset.instance = self.object
             formset.save()
 
