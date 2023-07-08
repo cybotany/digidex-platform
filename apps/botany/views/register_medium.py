@@ -1,7 +1,7 @@
 from django.views.generic import FormView
 from django.shortcuts import redirect
 from apps.accounts.models import Activity
-from apps.botany.forms import GrowingMediumForm, GrowingComponentForm
+from apps.botany.forms import GrowingMediumForm, GrowingComponentFormSet
 
 
 class RegisterMediumView(FormView):
@@ -12,12 +12,12 @@ class RegisterMediumView(FormView):
     form_class = GrowingMediumForm
 
     def get_context_data(self, **kwargs):
-        context = super(RegisterMediumView, self).get_context_data(**kwargs)
+        data = super().get_context_data(**kwargs)
         if self.request.POST:
-            context['formset'] = GrowingComponentForm(self.request.POST)
+            data["formset"] = GrowingComponentFormSet(self.request.POST, instance=self.object)
         else:
-            context['formset'] = GrowingComponentForm()
-        return context
+            data["formset"] = GrowingComponentFormSet(instance=self.object)
+        return data
 
     def form_valid(self, form):
         """
@@ -28,20 +28,21 @@ class RegisterMediumView(FormView):
             Redirects user to the growing medium detail page of the submitted medium.
         """
         context = self.get_context_data()
-        formset = context['formset']
+        formset = context["formset"]
+
         if formset.is_valid():
-            new_growing_medium = form.save()
-            formset.instance = new_growing_medium
+            self.object = form.save()
+            formset.instance = self.object
             formset.save()
 
             Activity.objects.create(
                 user=self.request.user,
                 activity_status='registered',
                 activity_type='growing_medium',
-                content=f'Registered a new growing medium: {new_growing_medium.name}',
+                content=f'Registered a new growing medium: {self.object.name}',
             )
 
-            return redirect(new_growing_medium.get_absolute_url())
+            return redirect(self.object.get_absolute_url())
         else:
             return self.render_to_response(self.get_context_data(form=form))
 
