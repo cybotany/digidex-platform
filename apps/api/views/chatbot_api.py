@@ -5,12 +5,8 @@ from rest_framework import status
 
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import ConversationChain
-from langchain.memory import ConversationBufferWindowMemory
-from langchain.prompts.chat import (
-    ChatPromptTemplate,
-    SystemMessagePromptTemplate,
-    HumanMessagePromptTemplate,
-)
+from langchain.memory import ConversationSummaryBufferMemory
+from langchain.prompts.prompt import PromptTemplate
 
 from apps.accounts.models import Profile
 from apps.chatbot.models import ChatMessage
@@ -21,24 +17,26 @@ class ChatbotAPIView(APIView):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        # Define the chat memory for the user
-        self.memory = ConversationBufferWindowMemory(return_messages=True, k=2)
+        self.template = """
+        This is a friendly conversatiion between a human and an AI.
+        The AI is talkative and provides lots of specific details from its context.
+        If the AI does not know the answer to a question, it truthfully says it does not know.
 
-        # Define the system template for the chatbot
-        self.system_template = "You are an experienced head grower at an agritech consulting company assisting a(n) {user_interest} with a {user_experience}-level knowledge of the subject."
-        self.system_message_prompt = SystemMessagePromptTemplate.from_template(self.system_template)
+        Current Conversation:
+        {history}
+        Human: {input}
+        AI Assistant:
+        """
 
-        # Define the human template for the chatbot
-        self.human_template = "{user_input}"
-        self.human_message_prompt = HumanMessagePromptTemplate.from_template(self.human_template)
-
-        # Define the chat prompt
-        self.chat_prompt = ChatPromptTemplate.from_messages([self.system_message_prompt, self.human_message_prompt])
+        # Define the prompt
+        self.prompt = PromptTemplate(input_variables=['history', 'input'], template=self.template)
+        self.llm = ChatOpenAI(temperature=0.0, openai_api_key=config('OPENAI_API_KEY'))
+        self.memory = ConversationSummaryBufferMemory(llm=self.llm, max_tokens=0)
 
         # Initialize LangChain
         self.conversation = ConversationChain(
-            llm=ChatOpenAI(temperature=0, openai_api_key=config('OPENAI_API_KEY')),
-            prompt=self.chat_prompt,
+            llm=self.llm,
+            prompt=self.prompt,
             verbose=True,
             memory=self.memory
         )
@@ -56,30 +54,9 @@ class ChatbotAPIView(APIView):
         user_interest = profile.interests
         user_experience = profile.experience
 
-        # Add interest and experience to the system prompt template
-        self.chat_prompt.format_prompt(
-            user_interest=user_interest,
-            user_experience=user_experience
-        )
-
-        # Populate chat memory with historical chat messages
-        chat_history = ChatMessage.objects.filter(user=user).order_by('-created_at')
-        for msg in chat_history:
-            if msg.user == 'Human':
-                self.memory.chat_memory.add_user_message(msg.content)
-            else:
-                self.memory.chat_memory.add_ai_message(msg.content)
-
-        # Format the input data
-        input_data = {
-            'user_input': message,
-            'user_interest': user_interest,
-            'user_experience': user_experience
-        }
-
         try:
             # Use LangChain to handle the conversation
-            output = self.conversation.predict(input=input_data)
+            output = self.conversation.predict(input=message)
         except Exception as e:
             # You might want to log the exception here
             return Response({"error": f"Failed to process your request due to {e}. Please try again later."},
@@ -87,7 +64,7 @@ class ChatbotAPIView(APIView):
 
         # Save user input and AI's response to the database
         ChatMessage.objects.create(user=user, content=f'Human: {message}')
-        ChatMessage.objects.create(user=user, content=f'Assistant: {output}')
+        ChatMessage.objects.create(user=user, content=f'AI: {output}')
 
         # Send the assistant's message back to the front-end
         return Response({'message': output})

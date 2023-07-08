@@ -22,7 +22,6 @@ class RegisterMediumView(FormView):
             data["formset"] = GrowingComponentFormSet(instance=self.object)
         return data
 
-
     def form_valid(self, form):
         """
         If the submitted form is valid, save the info to the database and
