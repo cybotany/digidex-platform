@@ -3,13 +3,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
-from langchain.chat_models import ChatOpenAI
+from langchain.chat_models import OpenAI
 from langchain.chains import ConversationChain
 from langchain.memory import ConversationSummaryBufferMemory
 from langchain.prompts.prompt import PromptTemplate
-
-from apps.accounts.models import Profile
-from apps.chatbot.models import ChatMessage
 
 
 class ChatbotAPIView(APIView):
@@ -30,7 +27,7 @@ class ChatbotAPIView(APIView):
 
         # Define the prompt
         self.prompt = PromptTemplate(input_variables=['history', 'input'], template=self.template)
-        self.llm = ChatOpenAI(temperature=0.0, openai_api_key=config('OPENAI_API_KEY'))
+        self.llm = OpenAI(temperature=0.0, openai_api_key=config('OPENAI_API_KEY'))
         self.memory = ConversationSummaryBufferMemory(llm=self.llm, max_tokens=0)
 
         # Initialize LangChain
@@ -44,13 +41,13 @@ class ChatbotAPIView(APIView):
     def post(self, request, *args, **kwargs):
         message = request.data.get('message')
 
-        # Input validation
         if not message:
             return Response({"error": "Message is required"}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
             output = self.conversation.predict(input=message)
         except Exception as e:
+            print(e)
             return Response({"error": f"Failed to process your request due to {e}. Please try again later."},
                             status=status.HTTP_503_SERVICE_UNAVAILABLE)
 
