@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.views.generic import FormView
 from django.shortcuts import redirect
 from apps.accounts.models import Activity
@@ -30,7 +31,7 @@ class RegisterMediumView(FormView):
         Returns:
             Redirects user to the growing medium detail page of the submitted medium.
         """
-        self.object = form.save()  # set self.object here
+        self.object = form.save()
         context = self.get_context_data()
         formset = context['formset']
         if formset.is_valid():
@@ -44,7 +45,7 @@ class RegisterMediumView(FormView):
                 content=f'Registered a new growing medium: {self.object.name}',
             )
 
-            return redirect(self.object.get_absolute_url())
+            return redirect('botany:home')
         else:
             return self.render_to_response(self.get_context_data(form=form))
 

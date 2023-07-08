@@ -11,7 +11,7 @@ class UpdatePlantView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     View for rendering the page used to update plant details and upload images.
     """
     model = Plant
-    form_class = PlantUpdateForm  # Use the custom form we created
+    form_class = PlantUpdateForm
     template_name = 'botany/update_plant.html'
     success_url = reverse_lazy('botany:home')
 

@@ -10,9 +10,9 @@ class GrowingFertilizer(models.Model):
         user (ForeignKey): Reference to the user who added this fertilizer.
         name (CharField): The brand name of the fertilizer.
         description (TextField): A description of the fertilizer.
-        nitrogen (DecimalField): The percentage of nitrogen content.
-        phosphorus (DecimalField): The percentage of phosphorus content.
-        potassium (DecimalField): The percentage of potassium content.
+        nitrogen (DecimalField): The percentage of nitrogen(N) content.
+        phosphorus (DecimalField): The percentage of phosphorus(P) content.
+        potassium (DecimalField): The percentage of potassium(K) content.
         added_on (DateTimeField): The date and time when the fertilizer was added.
     """
 

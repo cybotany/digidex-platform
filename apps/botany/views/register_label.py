@@ -1,39 +1,31 @@
-from django.views import View
-from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.views.generic.edit import FormView
+from django.shortcuts import redirect
+from apps.accounts.models import Activity
 from apps.botany.forms import GrowingLabelForm
 
 
-class RegisterLabelView(View):
-    """
-    View for rendering the page used to register plant labels.
-    """
+class RegisterLabelView(FormView):
     template_name = 'botany/register_label.html'
+    form_class = GrowingLabelForm
 
-    def get(self, request):
-        form = self.get_form()
-        return self.render_form(form)
+    def form_valid(self, form):
+        new_label = form.save(commit=False)
+        new_label.user = self.request.user
+        new_label.save()
 
-    def get_form(self):
-        return GrowingLabelForm()
+        Activity.objects.create(
+            user=self.request.user,
+            activity_status='registered',
+            activity_type='fertilizer',
+            content=f'Registered a new fertilizer: {new_label.name}',
+        )
 
-    def render_form(self, form):
-        context = {'form': form}
-        return render(self.request, self.template_name, context)
+        messages.success(self.request, f'Label "{new_label.name}" was successfully added.')
 
-    def post(self, request):
-        form = self.get_form_from_post_request()
-        if form.is_valid():
-            self.save_label(form)
-            return self.redirect_to_home()
-        return self.render_form(form)
-
-    def get_form_from_post_request(self):
-        return GrowingLabelForm(self.request.POST)
-
-    def save_label(self, form):
-        label = form.save(commit=False)
-        label.user = self.request.user
-        label.save()
-
-    def redirect_to_home(self):
         return redirect('botany:home')
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs

@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.views.generic import FormView
 from django.shortcuts import redirect
 from apps.accounts.models import Activity
@@ -28,7 +29,8 @@ class RegisterComponentView(FormView):
             content=f'Registered a new growing medium component: {new_component.component}',
         )
 
-        return redirect(new_component.get_absolute_url())
+        messages.success(self.request, f'Fertilizer "{new_component.name}" was successfully added.')
+        return redirect('botany:home')
 
     def get_form_kwargs(self):
         """

@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.views.generic import FormView
 from django.shortcuts import redirect
 from apps.accounts.models import Activity
@@ -14,11 +15,12 @@ class RegisterFertilizerView(FormView):
         Activity.objects.create(
             user=self.request.user,
             activity_status='registered',
-            activity_type='fertilizer',
+            activity_type='growing_fertilizer',
             content=f'Registered a new fertilizer: {new_fertilizer.name}',
         )
 
-        return redirect(new_fertilizer.get_absolute_url())
+        messages.success(self.request, f'Fertilizer "{new_fertilizer.name}" was successfully added.')
+        return redirect('botany:home')
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
