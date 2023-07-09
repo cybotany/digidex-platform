@@ -8,14 +8,14 @@ from langchain.chains import ConversationChain
 from langchain.memory import ConversationBufferMemory
 from langchain.prompts.prompt import PromptTemplate
 
+from apps.chatbot.models import ChatMessage
+from django.db import transaction
 
-class ChatbotAPIView(APIView):
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
+class ChatService:
+    def __init__(self):
         self.template = """
-        This is a friendly conversatiion between a human and an AI.
+        This is a friendly conversation between a human and an AI.
         The AI is talkative and provides lots of specific details from its context.
         If the AI does not know the answer to a question, it truthfully says it does not know.
 
@@ -36,14 +36,40 @@ class ChatbotAPIView(APIView):
             memory=self.memory
         )
 
+    def converse(self, message):
+        return self.conversation.predict(input=message)
+
+    @staticmethod
+    @transaction.atomic
+    def save_message(conversation_id, message, is_user_message):
+        chat_message = ChatMessage(
+            conversation_id=conversation_id,
+            message=message,
+            is_user_message=is_user_message,
+        )
+        chat_message.save()
+
+
+class ChatbotAPIView(APIView):
     def post(self, request, *args, **kwargs):
+        conversation_id = request.data.get('conversation_id')
         message = request.data.get('message')
 
         if not message:
             return Response({"error": "Message is required"}, status=status.HTTP_400_BAD_REQUEST)
 
+        chat_service = ChatService()
+
         try:
-            output = self.conversation.predict(input=message)
+            # Generate AI's response
+            output = chat_service.converse(message)
+
+            # Save incoming user message
+            chat_service.save_message(conversation_id, message, True)
+
+            # Save AI's response
+            chat_service.save_message(conversation_id, output, False)
+
         except Exception as e:
             print(e)
             return Response({"error": f"Failed to process your request due to {e}. Please try again later."},
