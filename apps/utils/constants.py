@@ -73,3 +73,14 @@ EXPERIENCE_CHOICES = [
     ('advanced', 'Advanced'),
     ('expert', 'Expert')
 ]
+
+CHAT_TEMPLATE = """
+    This is a friendly conversation between a human and an AI.
+    The AI is talkative and provides lots of specific details from its context.
+    If the AI does not know the answer to a question, it truthfully says it does not know.
+
+    Current Conversation:
+    {history}
+    Human: {input}
+    AI Assistant:
+"""
