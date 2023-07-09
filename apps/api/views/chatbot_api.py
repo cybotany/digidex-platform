@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
-from langchain.chat_models import ChatOpenAI
+from langchain import OpenAI
 from langchain.chains import ConversationChain
 from langchain.memory import ConversationBufferMemory
 from langchain.prompts.prompt import PromptTemplate
@@ -25,12 +25,10 @@ class ChatbotAPIView(APIView):
         AI Assistant:
         """
 
-        # Define the prompt
         self.prompt = PromptTemplate(input_variables=['history', 'input'], template=self.template)
-        self.llm = ChatOpenAI(temperature=0.0, openai_api_key=config('OPENAI_API_KEY'))
+        self.llm = OpenAI(temperature=0.0, openai_api_key=config('OPENAI_API_KEY'))
         self.memory = ConversationBufferMemory(return_message=True, ai_prefix="AI Assistant")
 
-        # Initialize LangChain
         self.conversation = ConversationChain(
             llm=self.llm,
             prompt=self.prompt,
@@ -51,4 +49,5 @@ class ChatbotAPIView(APIView):
             return Response({"error": f"Failed to process your request due to {e}. Please try again later."},
                             status=status.HTTP_503_SERVICE_UNAVAILABLE)
 
+        print(output)
         return Response({'message': output})
