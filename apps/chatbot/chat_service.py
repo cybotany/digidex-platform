@@ -28,10 +28,10 @@ class ChatService:
 
     @staticmethod
     @transaction.atomic
-    def save_message(conversation_id, message, is_user_message):
+    def save_message(session_id, user, message):
         chat_message = ChatMessage(
-            conversation_id=conversation_id,
+            session_id=session_id,
+            user=user,
             message=message,
-            is_user_message=is_user_message,
         )
         chat_message.save()

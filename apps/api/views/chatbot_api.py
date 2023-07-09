@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from apps.utils.chat_service import ChatService
+from apps.chatbot.chat_service import ChatService
 
 
 class ChatbotAPIView(APIView):
@@ -16,8 +16,8 @@ class ChatbotAPIView(APIView):
 
         try:
             output = chat_service.converse(message)
-            chat_service.save_message(conversation_id, message, True)
-            chat_service.save_message(conversation_id, output, False)
+            chat_service.save_message(conversation_id, 'User', message)
+            chat_service.save_message(conversation_id, 'AI', output)
 
         except Exception as e:
             print(e)
