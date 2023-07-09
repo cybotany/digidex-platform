@@ -27,7 +27,7 @@ class ChatbotAPIView(APIView):
 
         self.prompt = PromptTemplate(input_variables=['history', 'input'], template=self.template)
         self.llm = OpenAI(temperature=0.0, openai_api_key=config('OPENAI_API_KEY'))
-        self.memory = ConversationBufferMemory(return_message=True, ai_prefix="AI Assistant")
+        self.memory = ConversationBufferMemory(memory_key='history', ai_prefix="AI Assistant")
 
         self.conversation = ConversationChain(
             llm=self.llm,
