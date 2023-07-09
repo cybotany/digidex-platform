@@ -5,7 +5,7 @@ from rest_framework import status
 
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import ConversationChain
-from langchain.memory import ConversationSummaryBufferMemory
+from langchain.memory import ConversationBufferMemory
 from langchain.prompts.prompt import PromptTemplate
 
 
@@ -28,7 +28,7 @@ class ChatbotAPIView(APIView):
         # Define the prompt
         self.prompt = PromptTemplate(input_variables=['history', 'input'], template=self.template)
         self.llm = ChatOpenAI(temperature=0.0, openai_api_key=config('OPENAI_API_KEY'))
-        self.memory = ConversationSummaryBufferMemory(llm=self.llm, max_tokens=0)
+        self.memory = ConversationBufferMemory(ai_prefix="AI Assistant")
 
         # Initialize LangChain
         self.conversation = ConversationChain(
