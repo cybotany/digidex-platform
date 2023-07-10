@@ -80,7 +80,7 @@ CHAT_TEMPLATE = """
     If the AI does not know the answer to a question, it truthfully says it does not know.
 
     Current Conversation:
-    {history}
-    Human: {input}
+    {chat_history}
+    Human: {human_input}
     AI Assistant:
 """

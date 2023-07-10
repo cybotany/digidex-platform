@@ -6,7 +6,6 @@ from apps.chatbot.chat_service import ChatService
 
 class ChatbotAPIView(APIView):
     def post(self, request, *args, **kwargs):
-        conversation_id = request.data.get('conversation_id')
         message = request.data.get('message')
 
         if not message:
@@ -16,8 +15,8 @@ class ChatbotAPIView(APIView):
 
         try:
             output = chat_service.converse(message)
-            chat_service.save_message(conversation_id, 'User', message)
-            chat_service.save_message(conversation_id, 'AI', output)
+            chat_service.save_message('User', message)
+            chat_service.save_message('AI', output)
 
         except Exception as e:
             print(e)
