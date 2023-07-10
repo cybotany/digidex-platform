@@ -25,6 +25,10 @@ class GrowingLabelForm(forms.ModelForm):
         },
     )
 
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super(GrowingLabelForm, self).__init__(*args, **kwargs)
+
     class Meta:
         """
         Meta class for the GrowingLabelForm.
