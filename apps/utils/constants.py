@@ -6,7 +6,10 @@ ACTIVITY_STATUS = [
 
 ACTIVITY_TYPE = [
     ('plant', 'Plant'),
-    ('label grouping', 'Label Grouping'),
+    ('growing_fertilizer', 'Growing Fertilizer'),
+    ('growing_label', 'Growing Label'),
+    ('growing_medium', 'Growing Medium'),
+    ('growing_component', 'Growing Component'),
     ('greenhouse', 'Greenhouse'),
     ('growth chamber', 'Growth Chamber'),
     ('tissue culture chamber', 'Tissue Culture Chamber'),

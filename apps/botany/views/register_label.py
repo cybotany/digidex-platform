@@ -17,8 +17,8 @@ class RegisterLabelView(FormView):
         Activity.objects.create(
             user=self.request.user,
             activity_status='registered',
-            activity_type='fertilizer',
-            content=f'Registered a new fertilizer: {new_label.name}',
+            activity_type='growing_label',
+            content=f'Registered a new label group: {new_label.name}',
         )
 
         messages.success(self.request, f'Label "{new_label.name}" was successfully added.')
