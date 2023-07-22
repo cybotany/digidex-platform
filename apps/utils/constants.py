@@ -77,6 +77,12 @@ EXPERIENCE_CHOICES = [
     ('expert', 'Expert')
 ]
 
+MESSAGE_TYPES = [
+    ('H', 'Human'),
+    ('A', 'AI'),
+    ('G', 'Agent'),
+]
+
 CHAT_TEMPLATE = """
     This is a friendly conversation between a human and an AI.
     The AI is talkative and provides lots of specific details from its context.
