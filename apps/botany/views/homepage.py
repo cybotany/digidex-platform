@@ -18,7 +18,7 @@ class PlantHomepageView(LoginRequiredMixin, TemplateView):
         plant_groups = []
 
         for label in labels:
-            plants = Plant.objects.filter(label=label, label__user=self.request.user, is_active=True=True)
+            plants = Plant.objects.filter(label=label, label__user=self.request.user, is_active=True)
             if plants.exists():
                 plant_groups.append({
                     'name': label.name,
