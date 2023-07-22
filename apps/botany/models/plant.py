@@ -19,6 +19,7 @@ class Plant(models.Model):
         growing_medium (GrowingMedium): The growing medium of the plant.
         user (User): The user who owns the plant.
         added_on (datetime): The date and time when the plant was added.
+        is_active (bool): Whether the plant is currently active.
     """
 
     name = models.CharField(
@@ -53,6 +54,10 @@ class Plant(models.Model):
     )
     added_on = models.DateTimeField(
         auto_now_add=True
+    )
+    is_active = models.BooleanField(
+        default=True,
+        help_text='Designates whether this plant is active.'
     )
 
     def save(self, *args, **kwargs):

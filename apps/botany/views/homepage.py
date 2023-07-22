@@ -12,16 +12,18 @@ class PlantHomepageView(LoginRequiredMixin, TemplateView):
     def get_plant_groups_for_user(self):
         """
         Return the plants grouped by label for the currently logged-in user.
+        Only include labels that have an associated active plant.
         """
         labels = GrowingLabel.objects.filter(user=self.request.user)
         plant_groups = []
 
         for label in labels:
-            plants = Plant.objects.filter(label=label, label__user=self.request.user)
-            plant_groups.append({
-                'name': label.name,
-                'plants': plants
-            })
+            plants = Plant.objects.filter(label=label, label__user=self.request.user, is_active=True=True)
+            if plants.exists():
+                plant_groups.append({
+                    'name': label.name,
+                    'plants': plants
+                })
 
         return plant_groups
 
