@@ -29,7 +29,7 @@ class RegisterComponentView(FormView):
             content=f'Registered a new growing medium component: {new_component.component}',
         )
 
-        messages.success(self.request, f'Fertilizer "{new_component.name}" was successfully added.')
+        messages.success(self.request, f'Component "{new_component.name}" was successfully added.')
         return redirect('botany:home')
 
     def get_form_kwargs(self):

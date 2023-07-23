@@ -1,0 +1,58 @@
+/* CSS styles for Chatbot app */
+
+.chatbox {
+  height: 500px;
+  width: 80%;
+  border: 1px solid #ccc;
+  margin: 0 auto;
+  padding: 10px;
+  overflow-y: scroll;
+}
+
+#chatbox {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-input {
+  width: 70%;
+  height: 30px;
+  margin: 10px 0;
+  padding: 5px;
+}
+
+.chat-submit {
+  height: 30px;
+  margin: 10px 0;
+}
+
+.message {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  color: #000;
+}
+
+.user-message {
+  background-color: #eef;
+  align-self: flex-end;
+}
+
+.chatbot-message {
+  background-color: #eee;
+  align-self: flex-start;
+}
+
+.send-button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.send-button img {
+  width: 24px;
+}

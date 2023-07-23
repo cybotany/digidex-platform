@@ -186,19 +186,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .message {
-  margin-bottom: 15px;  /* Add space between messages */
-  padding: 10px;  /* Add some space inside each message */
-  border-radius: 5px;  /* Round the corners a bit */
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 .user-message {
-  background-color: #eef;  /* A light blue background for user messages */
+  background-color: #eef;
   align-self: flex-end;
   color: #000;
 }
 
 .chatbot-message {
-  background-color: #eee;  /* A light gray background for chatbot messages */
+  background-color: #eee;
   align-self: flex-start;
   color: #000;
 }

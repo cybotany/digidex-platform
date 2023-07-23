@@ -1,0 +1,22 @@
+/* User Info Section */
+
+.avatar-image {
+    border-radius: 50%;
+    width: 128px;
+    height: 128px;
+    object-fit: cover;
+}
+
+.user-info {
+    margin-bottom: 20px;
+}
+  
+.user-info h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+  
+.user-details p {
+    margin: 5px 0;
+    font-size: 14px;
+}
