@@ -5,17 +5,19 @@ from langchain.chains import ConversationChain
 from langchain.memory import ConversationSummaryMemory, ConversationBufferMemory, ChatMessageHistory
 from langchain.prompts.prompt import PromptTemplate
 
-from apps.chatbot.models import ChatMessage, ChatHistory
+from apps.chatbot.models import ChatMessage
 from apps.utils.constants import CHAT_TEMPLATE
 
 
 class ChatService:
-    def __init__(self, session_id):
+    def __init__(self):
 
         self.prompt = PromptTemplate(input_variables=['chat_history', 'human_input'], template=CHAT_TEMPLATE)
         self.llm = OpenAI(temperature=0.0, openai_api_key=config('OPENAI_API_KEY'))
 
-        self.message_history = ChatHistory(session_id=session_id)
+        # Load user-specific chat history to provide context
+        self.message_history = ''#ChatHistory()
+
         self.memory = ConversationBufferMemory(
             ai_prefix='AI Assistant',
             chat_memory=self.message_history,
@@ -37,6 +39,6 @@ class ChatService:
     def save_message(user, message):
         chat_message = ChatMessage(
             user=user,
-            message=message,
+            content=message,
         )
         chat_message.save()
