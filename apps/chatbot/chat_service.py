@@ -16,7 +16,7 @@ class ChatService:
         self.llm = OpenAI(temperature=0.0, openai_api_key=config('OPENAI_API_KEY'))
 
         # Load user-specific chat history to provide context
-        self.message_history = ''#ChatHistory()
+        self.message_history = ''
 
         self.memory = ConversationBufferMemory(
             ai_prefix='AI Assistant',
