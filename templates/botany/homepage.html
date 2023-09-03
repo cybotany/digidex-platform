@@ -5,65 +5,45 @@
 {% block content %}
 {% load static %}
 <div class="container mt-4">
-    <!-- Left Container -->
-    <div id="left-container" class="mr-5" style="float:left; width:70%;">
+    <!-- Tab navigation -->
+    <ul class="nav nav-tabs" id="plantGroupTab" role="tablist">
+        {% for group in plant_groups %}
+            <li class="nav-item" role="presentation">
+                <a class="nav-link {% if forloop.first %}active{% endif %}" id="{{ group.name|slugify }}-tab" data-bs-toggle="tab" href="#{{ group.name|slugify }}" role="tab" aria-controls="{{ group.name|slugify }}" aria-selected="true">{{ group.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
 
-        <!-- Tab navigation -->
-        <ul class="nav nav-tabs" id="plantGroupTab" role="tablist">
-            {% for group in plant_groups %}
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link {% if forloop.first %}active{% endif %}" id="{{ group.name|slugify }}-tab" data-bs-toggle="tab" href="#{{ group.name|slugify }}" role="tab" aria-controls="{{ group.name|slugify }}" aria-selected="true">{{ group.name }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-
-        <!-- Tab content -->
-        <div class="tab-content" id="plantGroupTabContent">
-            {% for group in plant_groups %}
-                <div class="tab-pane fade show {% if forloop.first %}active{% endif %}" id="{{ group.name|slugify }}" role="tabpanel" aria-labelledby="{{ group.name|slugify }}-tab">
-                    <div class="row mb-4">
-                        {% for plant in group.plants %}
-                            <div class="col-md-4">
-                                <div class="card">
-                                    {% if plant.images.all %}
-                                        <!-- ... existing code ... -->
-                                    {% else %}
-                                        <!-- ... existing code ... -->
-                                    {% endif %}
+    <!-- Tab content -->
+    <div class="tab-content" id="plantGroupTabContent">
+        {% for group in plant_groups %}
+            <div class="tab-pane fade show {% if forloop.first %}active{% endif %}" id="{{ group.name|slugify }}" role="tabpanel" aria-labelledby="{{ group.name|slugify }}-tab">
+                <div class="row mb-4">
+                    {% for plant in group.plants %}
+                        <div class="col-md-4">
+                            <div class="card">
+                                {% if plant.images.all %}
                                     <!-- ... existing code ... -->
-                                </div>
+                                {% else %}
+                                    <!-- ... existing code ... -->
+                                {% endif %}
+                                    <!-- ... existing code ... -->
                             </div>
-                        {% empty %}
-                            <!-- ... existing code ... -->
-                        {% endfor %}
-                    </div>
+                        </div>
+                    {% empty %}
+                        <!-- ... existing code ... -->
+                    {% endfor %}
                 </div>
-            {% endfor %}
-        </div>
-
-        <!-- Registration link -->
-        <div class="row my-4">
-            <div class="col-lg-4 col-md-6 mb-4">
-                <a href="{% url 'botany:register_plant' %}" class="btn btn-primary">Upload New Plant</a>
             </div>
-        </div>
-
+        {% endfor %}
     </div>
 
-    <!-- Right Container -->
-    <div id="right-container" style="float:left; width:25%;">
-
-        <div class="box" id="register-label">
-            <a href="{% url 'botany:register_label' %}" class="btn btn-secondary btn-block my-2">Register New Label</a>
+    <!-- Registration link -->
+    <div class="row my-4">
+        <div class="col-lg-4 col-md-6 mb-4">
+            <a href="{% url 'botany:register_plant' %}" class="btn btn-primary">Upload New Plant</a>
         </div>
-        <div class="box" id="register-medium">
-            <a href="{% url 'botany:register_medium' %}" class="btn btn-secondary btn-block my-2">Register New Growing Medium</a>
-        </div>
-        <div class="box" id="register-fertilizer">
-            <a href="{% url 'botany:register_fertilizer' %}" class="btn btn-secondary btn-block my-2">Register New Fertilizer</a>
-        </div>
-
     </div>
-    <div style="clear:both;"></div>
+
 </div>
 {% endblock %}
