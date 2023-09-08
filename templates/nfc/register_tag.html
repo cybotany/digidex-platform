@@ -1,16 +1,29 @@
 {% extends 'base.html' %}
-{% load static %}
+
+{% block title %}Register NFC Tag{% endblock %}
 
 {% block content %}
-  <h2>NFC Registration</h2>
+  <div class="container">
+    <h1 class="my-4">Register NFC Tag</h1>
 
-  <form id="chat-form" method="post">
-  {% csrf_token %}
-    <div class="input-group">
-      <input id="chat-input" type="text" name="message">
-      <button type="submit" class="send-button"><img src="{% static 'img/send-icon.png' %}" alt="Send"></button>
-    </div>
-  </form>
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="{{ form.tag_id.id_for_label }}">Tag ID:</label>
+        {{ form.tag_id }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.created_by.id_for_label }}">Created By:</label>
+        {{ form.created_by }}
+      </div>
 
+      {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+          Your submission has errors. Please correct them and try again.
+        </div>
+      {% endif %}
 
-{% endblock content %}
+      <button type="submit" class="btn btn-primary">Register NFC Tag</button>
+    </form>
+  </div>
+{% endblock %}
