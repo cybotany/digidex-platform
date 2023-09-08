@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <h2>NFC Registration</h2>
+
+  <form id="chat-form" method="post">
+  {% csrf_token %}
+    <div class="input-group">
+      <input id="chat-input" type="text" name="message">
+      <button type="submit" class="send-button"><img src="{% static 'img/send-icon.png' %}" alt="Send"></button>
+    </div>
+  </form>
+
+
+{% endblock content %}

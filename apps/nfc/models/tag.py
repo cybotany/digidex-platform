@@ -8,7 +8,6 @@ class NFCTag(models.Model):
 
     Attributes:
         tag_id (str): The ID of the NFC tag.
-        description (str): The description of the NFC tag.
         created_at (datetime): The date and time when the NFC tag was created.
         updated_at (datetime): The date and time when the NFC tag was last updated.
         created_by (User): The user who created the NFC tag.
@@ -17,12 +16,8 @@ class NFCTag(models.Model):
     tag_id = models.CharField(
         max_length=255,
         unique=True,
+        primary_key=True,
         verbose_name="Tag ID"
-    )
-    description = models.CharField(
-        max_length=255,
-        blank=True,
-        verbose_name="Description"
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
