@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'apps.cea',
     'apps.chatbot',
     'apps.utils',
+    'apps.nfc',
     'bootstrap5',
 ]
 
