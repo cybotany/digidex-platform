@@ -15,6 +15,7 @@ urlpatterns = [
     path('cea/', include('apps.cea.urls')),
     path('chatbot/', include('apps.chatbot.urls')),
     path('api/', include('apps.api.urls')),
+    path('nfc/', include('apps.nfc.urls')),
 ]
 
 if settings.DEBUG:
