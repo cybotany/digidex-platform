@@ -11,6 +11,7 @@ class NFCTag(models.Model):
         created_at (datetime): The date and time when the NFC tag was created.
         updated_at (datetime): The date and time when the NFC tag was last updated.
         created_by (User): The user who created the NFC tag.
+        active (bool): Whether the NFC tag is currently active.
     """
 
     tag_id = models.CharField(
@@ -30,6 +31,10 @@ class NFCTag(models.Model):
     created_by = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE
+    )
+    active = models.BooleanField(
+        default=False,
+        verbose_name="Active"
     )
 
     def __str__(self):
