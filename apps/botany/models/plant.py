@@ -2,8 +2,6 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 
-from .growing_label import GrowingLabel
-
 
 class Plant(models.Model):
     """
@@ -11,7 +9,6 @@ class Plant(models.Model):
 
     Attributes:
         name (str): The name of the plant.
-        label (Label): The label associated with the plant.
         description (str): The description of the plant.
         user (User): The user who owns the plant.
         added_on (datetime): The date and time when the plant was added.
@@ -24,11 +21,6 @@ class Plant(models.Model):
         max_length=100,
         null=True,
         blank=True
-    )
-    label = models.ForeignKey(
-        GrowingLabel,
-        on_delete=models.SET_NULL,
-        null=True
     )
     description = models.TextField(
         null=True,

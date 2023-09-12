@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
-from apps.botany.models import Plant, GrowingLabel
+from apps.botany.models import Plant
 
 
 class PlantHomepageView(LoginRequiredMixin, TemplateView):
@@ -9,25 +9,14 @@ class PlantHomepageView(LoginRequiredMixin, TemplateView):
     """
     template_name = 'botany/homepage.html'
 
-    def get_plant_groups_for_user(self):
+    def get_plants_for_user(self):
         """
-        Return the plants grouped by label for the currently logged-in user.
-        Only include labels that have an associated active plant.
+        Return all plants for the currently logged-in user.
         """
-        labels = GrowingLabel.objects.filter(user=self.request.user)
-        plant_groups = []
-
-        for label in labels:
-            plants = Plant.objects.filter(label=label, label__user=self.request.user, is_active=True)
-            if plants.exists():
-                plant_groups.append({
-                    'name': label.name,
-                    'plants': plants
-                })
-
-        return plant_groups
+        plants = Plant.objects.filter(user=self.request.user, is_active=True)
+        return plants
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['plant_groups'] = self.get_plant_groups_for_user()
+        context['plants'] = self.get_plants_for_user()
         return context
