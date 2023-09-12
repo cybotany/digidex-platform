@@ -26,7 +26,7 @@ class PlantRegistrationForm(forms.ModelForm):
 
     class Meta:
         model = Plant
-        fields = ('name', 'label', 'description', 'image', 'nfc_tag')
+        fields = ('name', 'description', 'image', 'nfc_tag')
 
     def __init__(self, *args, **kwargs):
             """
@@ -38,6 +38,8 @@ class PlantRegistrationForm(forms.ModelForm):
             self.nfc_tag = kwargs.pop('nfc_tag', None)
             super().__init__(*args, **kwargs)
 
+            if self.nfc_tag:
+                self.fields['nfc_tag'].initial = self.nfc_tag
 
     def save(self, commit=True):
         """
