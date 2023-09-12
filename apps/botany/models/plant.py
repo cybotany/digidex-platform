@@ -20,6 +20,8 @@ class Plant(models.Model):
         user (User): The user who owns the plant.
         added_on (datetime): The date and time when the plant was added.
         is_active (bool): Whether the plant is currently active.
+        nfc_tag (str): The NFC tag associated with the plant.
+        quantity (int): The quantity of the plant being managed.
     """
 
     name = models.CharField(
@@ -58,6 +60,15 @@ class Plant(models.Model):
     is_active = models.BooleanField(
         default=True,
         help_text='Designates whether this plant is active.'
+    )
+    nfc_tag = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True
+    )
+    quantity = models.PositiveIntegerField(
+        default=1,
+        help_text='The quantity of the plant.'
     )
 
     def save(self, *args, **kwargs):
