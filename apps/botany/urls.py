@@ -23,4 +23,5 @@ urlpatterns = [
     path('plant/<int:pk>/describe/', DescribePlantView.as_view(), name='describe_plant'),
     path('plant/<int:pk>/delete/', DeletePlantView.as_view(), name='delete_plant'),
     path('plant/<int:pk>/update/', UpdatePlantView.as_view(), name='update_plant'),
+    path('register/plant/<str:nfc_tag>/', RegisterPlantView.as_view(), name='register_plant_with_nfc_tag'),
 ]

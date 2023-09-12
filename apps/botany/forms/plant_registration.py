@@ -15,24 +15,29 @@ class PlantRegistrationForm(forms.ModelForm):
     image = forms.ImageField(required=False)
     growing_method = forms.ModelChoiceField(queryset=GrowingMethod.objects.all(), required=False)
     growing_medium = forms.ModelChoiceField(queryset=GrowingMedium.objects.all(), required=False)
+    nfc_tag = forms.CharField(required=False)
 
     class Meta:
         model = Plant
-        fields = ('name', 'label', 'description', 'image', 'growing_method', 'growing_medium')
+        fields = ('name', 'label', 'description', 'image', 'growing_method', 'growing_medium', 'nfc_tag')
 
     def __init__(self, *args, **kwargs):
-        """
-        Initialize the form.
+            """
+            Initialize the form.
 
-        Pop the user from kwargs and initializes the queryset for the label
-        field to include labels specific to the user as well as common labels.
-        """
-        self.user = kwargs.pop('user', None)
-        super().__init__(*args, **kwargs)
+            Pop the user and id from kwargs and initializes the queryset for the label
+            field to include labels specific to the user as well as common labels.
+            """
+            self.user = kwargs.pop('user', None)
+            self.nfc_tag = kwargs.pop('id', None)
+            super().__init__(*args, **kwargs)
 
-        if self.user:
-            user_labels = GrowingLabel.objects.filter(user=self.user)
-            self.fields['label'].queryset = user_labels
+            if self.user:
+                user_labels = GrowingLabel.objects.filter(user=self.user)
+                self.fields['label'].queryset = user_labels
+
+            if self.nfc_tag:
+                self.fields['nfc_tag'].initial = self.nfc_tag
 
     def save(self, commit=True):
         """
