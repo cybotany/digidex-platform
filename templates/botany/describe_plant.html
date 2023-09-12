@@ -27,6 +27,7 @@
         </div>
         <div class="card-body">
             <h5 class="card-title">{{ plant.name }}</h5>
+            <p class="card-text">{{ plant.nfc_tag }}</p>
             <p class="card-text">{{ plant.description }}</p>
         </div>
     </div>
@@ -37,6 +38,5 @@
         <a href="{% url 'botany:delete_plant' plant.id %}" class="btn btn-danger">Delete Plant</a>
     </div>
 
-    <!-- Add more details as desired -->
 </div>
 {% endblock %}
