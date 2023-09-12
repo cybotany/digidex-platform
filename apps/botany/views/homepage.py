@@ -13,10 +13,11 @@ class PlantHomepageView(LoginRequiredMixin, TemplateView):
         """
         Return all plants for the currently logged-in user.
         """
-        plants = Plant.objects.filter(user=self.request.user)
+        plants = Plant.objects.filter(user=self.request.user, is_active=True)
         return plants
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['plants'] = self.get_plants_for_user()
+        print(context['plants'])
         return context
