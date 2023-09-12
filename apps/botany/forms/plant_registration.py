@@ -1,6 +1,6 @@
 from django import forms
 from django.forms.widgets import TextInput
-from apps.botany.models import Plant, GrowingLabel, PlantImage, GrowingMethod, GrowingMedium
+from apps.botany.models import Plant, GrowingLabel, PlantImage
 
 
 class ReadOnlyTextInput(TextInput):
@@ -24,12 +24,10 @@ class PlantRegistrationForm(forms.ModelForm):
     nfc_tag = forms.CharField(widget=ReadOnlyTextInput, required=False)
     label = forms.ModelChoiceField(queryset=GrowingLabel.objects.none(), required=False)
     image = forms.ImageField(required=False)
-    growing_method = forms.ModelChoiceField(queryset=GrowingMethod.objects.all(), required=False)
-    growing_medium = forms.ModelChoiceField(queryset=GrowingMedium.objects.all(), required=False)
 
     class Meta:
         model = Plant
-        fields = ('name', 'label', 'description', 'image', 'growing_method', 'growing_medium', 'nfc_tag')
+        fields = ('name', 'label', 'description', 'image', 'nfc_tag')
 
     def __init__(self, *args, **kwargs):
             """

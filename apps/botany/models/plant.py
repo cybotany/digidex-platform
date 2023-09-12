@@ -3,8 +3,6 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse
 
 from .growing_label import GrowingLabel
-from .growing_method import GrowingMethod
-from .growing_medium import GrowingMedium
 
 
 class Plant(models.Model):
@@ -15,8 +13,6 @@ class Plant(models.Model):
         name (str): The name of the plant.
         label (Label): The label associated with the plant.
         description (str): The description of the plant.
-        growing_method (GrowingMethod): The growing method of the plant.
-        growing_medium (GrowingMedium): The growing medium of the plant.
         user (User): The user who owns the plant.
         added_on (datetime): The date and time when the plant was added.
         is_active (bool): Whether the plant is currently active.
@@ -35,18 +31,6 @@ class Plant(models.Model):
         null=True
     )
     description = models.TextField(
-        null=True,
-        blank=True
-    )
-    growing_method = models.ForeignKey(
-        GrowingMethod,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True
-    )
-    growing_medium = models.ForeignKey(
-        GrowingMedium,
-        on_delete=models.SET_NULL,
         null=True,
         blank=True
     )
