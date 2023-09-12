@@ -29,7 +29,7 @@ class PlantRegistrationForm(forms.ModelForm):
             field to include labels specific to the user as well as common labels.
             """
             self.user = kwargs.pop('user', None)
-            self.nfc_tag = kwargs.pop('id', None)
+            self.nfc_tag = kwargs.pop('nfc_tag', None)
             super().__init__(*args, **kwargs)
 
             if self.user:
