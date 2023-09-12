@@ -9,12 +9,10 @@
         {% for plant in plants %}
             <div class="col-md-4">
                 <div class="card">
-                    {% if plant.images.all %}
-                        <!-- ... existing code ... -->
-                    {% else %}
-                        <!-- ... existing code ... -->
-                    {% endif %}
-                        <!-- ... existing code ... -->
+                    <div class="card-body">
+                        <h5 class="card-title">{{ plant.name }}</h5>
+                        <p class="card-text">{{ plant.description }}</p>
+                    </div>
                 </div>
             </div>
         {% empty %}
