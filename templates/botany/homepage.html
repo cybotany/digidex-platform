@@ -10,7 +10,7 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">{{ plant.name }}</h5>
+                        <h5 class="card-title"><a href="{{ plant.get_absolute_url }}">{{ plant.name }}</a></h5>
                         <p class="card-text">{{ plant.description }}</p>
                     </div>
                 </div>
