@@ -5,36 +5,20 @@
 {% block content %}
 {% load static %}
 <div class="container mt-4">
-    <!-- Tab navigation -->
-    <ul class="nav nav-tabs" id="plantGroupTab" role="tablist">
-        {% for group in plant_groups %}
-            <li class="nav-item" role="presentation">
-                <a class="nav-link {% if forloop.first %}active{% endif %}" id="{{ group.name|slugify }}-tab" data-bs-toggle="tab" href="#{{ group.name|slugify }}" role="tab" aria-controls="{{ group.name|slugify }}" aria-selected="true">{{ group.name }}</a>
-            </li>
-        {% endfor %}
-    </ul>
-
-    <!-- Tab content -->
-    <div class="tab-content" id="plantGroupTabContent">
-        {% for group in plant_groups %}
-            <div class="tab-pane fade show {% if forloop.first %}active{% endif %}" id="{{ group.name|slugify }}" role="tabpanel" aria-labelledby="{{ group.name|slugify }}-tab">
-                <div class="row mb-4">
-                    {% for plant in group.plants %}
-                        <div class="col-md-4">
-                            <div class="card">
-                                {% if plant.images.all %}
-                                    <!-- ... existing code ... -->
-                                {% else %}
-                                    <!-- ... existing code ... -->
-                                {% endif %}
-                                    <!-- ... existing code ... -->
-                            </div>
-                        </div>
-                    {% empty %}
+    <div class="row mb-4">
+        {% for plant in plants %}
+            <div class="col-md-4">
+                <div class="card">
+                    {% if plant.images.all %}
                         <!-- ... existing code ... -->
-                    {% endfor %}
+                    {% else %}
+                        <!-- ... existing code ... -->
+                    {% endif %}
+                        <!-- ... existing code ... -->
                 </div>
             </div>
+        {% empty %}
+            <p>No plants found.</p>
         {% endfor %}
     </div>
 
