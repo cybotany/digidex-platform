@@ -12,7 +12,7 @@ class PlantRegistrationForm(forms.ModelForm):
     """
 
     nfc_tag = forms.CharField(required=False)
-    #image = forms.ImageField(required=False)
+    image = forms.ImageField(required=False)
 
     class Meta:
         model = Plant
