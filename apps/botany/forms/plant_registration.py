@@ -1,15 +1,5 @@
 from django import forms
-from django.forms.widgets import TextInput
 from apps.botany.models import Plant, PlantImage
-
-
-class ReadOnlyTextInput(TextInput):
-    """
-    A read-only text input widget.
-    """
-    def __init__(self, *args, **kwargs):
-        kwargs['attrs'] = {'readonly': 'readonly'}
-        super().__init__(*args, **kwargs)
 
 
 class PlantRegistrationForm(forms.ModelForm):
@@ -21,7 +11,7 @@ class PlantRegistrationForm(forms.ModelForm):
     Users can also upload an image of the plant.
     """
 
-    nfc_tag = forms.CharField(widget=ReadOnlyTextInput, required=False)
+    nfc_tag = forms.CharField(required=False)
     image = forms.ImageField(required=False)
 
     class Meta:

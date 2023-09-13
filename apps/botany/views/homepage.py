@@ -19,5 +19,4 @@ class PlantHomepageView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['plants'] = self.get_plants_for_user()
-        print(context['plants'])
         return context
