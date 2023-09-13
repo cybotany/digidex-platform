@@ -11,8 +11,8 @@ class PlantRegistrationForm(forms.ModelForm):
     Users can also upload an image of the plant.
     """
 
-    nfc_tag = forms.CharField(required=False)
-    image = forms.ImageField(required=False)
+    #nfc_tag = forms.CharField(required=False)
+    #image = forms.ImageField(required=False)
 
     class Meta:
         model = Plant
