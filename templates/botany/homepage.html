@@ -9,8 +9,8 @@
         {% for plant in plants %}
             <div class="col-md-4">
                 <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">{{ plant.name }}</h5>
+                    <div class="card-body"> 
+                        <h5 class="card-title text-center"><a href="{{ plant.get_absolute_url }}">{{ plant.name }}</a></h5> 
                         <div class="plant-images">
                             {% for image in plant.images.all %}
                                 <img src="{{ image.image.url }}" class="d-block w-100" alt="Image of {{ plant.name }}">
