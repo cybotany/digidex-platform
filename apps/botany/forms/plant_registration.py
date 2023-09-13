@@ -13,6 +13,7 @@ class PlantRegistrationForm(forms.ModelForm):
 
     nfc_tag = forms.CharField(required=False)
     image = forms.ImageField(required=False)
+    sow_date = forms.DateTimeField(required=False)
 
     class Meta:
         model = Plant
@@ -30,6 +31,28 @@ class PlantRegistrationForm(forms.ModelForm):
 
             if self.nfc_tag:
                 self.fields['nfc_tag'].initial = self.nfc_tag
+
+            self.fields['sow_date'].widget = forms.HiddenInput()
+            self.fields['sow_date'].required = False
+
+            if self.instance.grouping == 'Seed':
+                self.fields['sow_date'].widget = forms.DateTimeInput()
+                self.fields['sow_date'].required = True
+
+    def clean(self):
+        """
+        Clean the form.
+
+        If the grouping is 'Seed', ensure that the sow_date is provided.
+        """
+        cleaned_data = super().clean()
+        grouping = cleaned_data.get('grouping')
+        sow_date = cleaned_data.get('sow_date')
+
+        if grouping == 'Seed' and not sow_date:
+            self.add_error('sow_date', 'Sow date is required.')
+
+        return cleaned_data
 
     def save(self, commit=True):
         """
