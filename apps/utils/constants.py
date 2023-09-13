@@ -77,6 +77,15 @@ EXPERIENCE_CHOICES = [
     ('expert', 'Expert')
 ]
 
+PLANT_GROUPING = [
+    ('seed', 'Seed'),
+    ('sprout', 'Sprout'),
+    ('small', 'Small'),
+    ('medium', 'Medium'),
+    ('large', 'Large'),
+    ('discarded', 'Discarded'), 
+]
+
 MESSAGE_TYPES = [
     ('H', 'Human'),
     ('A', 'AI'),
