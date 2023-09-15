@@ -1,1 +1,1 @@
-from .tag_registration import RegisterTagView
+from .nfc_handling import HandleNFCView
