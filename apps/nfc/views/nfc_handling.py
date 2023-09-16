@@ -9,4 +9,4 @@ class HandleNFCView(View):
             plant = Plant.objects.get(nfc_tag=nfc_sn)
             return redirect('botany:describe_plant', pk=plant.id)
         except Plant.DoesNotExist:
-            return redirect('botany:register_plant', nfc_tag=nfc_sn)
+            return redirect('botany:register_plant/', nfc_tag=nfc_sn)
