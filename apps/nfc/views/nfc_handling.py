@@ -7,7 +7,6 @@ class HandleNFCView(View):
     def get(self, request, nfc_sn):
         try:
             plant = Plant.objects.get(nfc_tag=nfc_sn)
-            return redirect('plant_detail_view', plant_id=plant.id)  # Assuming you have a detail view for plants.
+            return redirect('botany:describe_plant', pk=plant.id)
         except Plant.DoesNotExist:
-            # If the NFC tag isn't associated with any plant
-            return redirect('plant_registration_form', nfc_tag=nfc_sn)
+            return redirect('botany:register_plant', nfc_tag=nfc_sn)
