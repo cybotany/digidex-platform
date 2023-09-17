@@ -20,7 +20,6 @@ urlpatterns = [
     path('register/growing/medium/', RegisterMediumView.as_view(), name='register_medium'),
     path('register/growing/fertilizer/', RegisterFertilizerView.as_view(), name='register_fertilizer'),
     path('register/plant/', RegisterPlantView.as_view(), name='register_plant'),
-    path('register/plant/<str:nfc_sn>/', RegisterPlantView.as_view(), name='register_plant_nfc'),
     path('plant/<int:pk>/describe/', DescribePlantView.as_view(), name='describe_plant'),
     path('plant/<int:pk>/delete/', DeletePlantView.as_view(), name='delete_plant'),
     path('plant/<int:pk>/update/', UpdatePlantView.as_view(), name='update_plant'),
