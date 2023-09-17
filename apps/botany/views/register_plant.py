@@ -38,20 +38,4 @@ class RegisterPlantView(FormView):
         """
         kwargs = super().get_form_kwargs()
         kwargs['user'] = self.request.user
-        kwargs['nfc_tag'] = self.nfc_tag
         return kwargs
-
-    def get(self, request, *args, **kwargs):
-        """
-        Override the get method to capture the nfc_tag parameter.
-
-        Returns:
-            Renders the form with the nfc_tag parameter.
-        """
-        nfc_tag = request.GET.get('nfc_tag')
-        if nfc_tag:
-            form_class = self.get_form_class()
-            form = self.get_form(form_class)
-            return self.render_to_response(self.get_context_data(form=form, nfc_tag=nfc_tag))
-        else:
-            return super().get(request, *args, **kwargs)
