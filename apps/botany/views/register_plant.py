@@ -38,5 +38,4 @@ class RegisterPlantView(FormView):
         """
         kwargs = super().get_form_kwargs()
         kwargs['user'] = self.request.user
-        kwargs['nfc_tag'] = self.request.nfc_tag
         return kwargs
