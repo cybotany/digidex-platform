@@ -11,7 +11,7 @@ from apps.utils.constants import CHAT_TEMPLATE
 class ChatService:
     def __init__(self):
 
-        self.prompt = PromptTemplate(input_variables=['history', 'human_input'], template=CHAT_TEMPLATE)
+        self.prompt = PromptTemplate(input_variables=['chat_history', 'human_input'], template=CHAT_TEMPLATE)
         self.llm = OpenAI(temperature=0.0, openai_api_key=config('OPENAI_API_KEY'))
 
         self.conversation = ConversationChain(
