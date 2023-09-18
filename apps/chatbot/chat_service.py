@@ -2,7 +2,6 @@ from decouple import config
 from django.db import transaction
 from langchain.llms import OpenAI
 from langchain.chains import ConversationChain
-from langchain.memory import ConversationSummaryMemory, ConversationBufferMemory, ChatMessageHistory
 from langchain.prompts.prompt import PromptTemplate
 
 from apps.chatbot.models import ChatMessage
@@ -18,8 +17,7 @@ class ChatService:
         self.conversation = ConversationChain(
             llm=self.llm,
             prompt=self.prompt,
-            verbose=True,
-            memory=self.memory
+            verbose=True
         )
 
     def converse(self, message):
