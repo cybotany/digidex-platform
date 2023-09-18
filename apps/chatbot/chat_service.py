@@ -15,15 +15,6 @@ class ChatService:
         self.prompt = PromptTemplate(input_variables=['chat_history', 'human_input'], template=CHAT_TEMPLATE)
         self.llm = OpenAI(temperature=0.0, openai_api_key=config('OPENAI_API_KEY'))
 
-        # Load user-specific chat history to provide context
-        self.message_history = ''
-
-        self.memory = ConversationBufferMemory(
-            ai_prefix='AI Assistant',
-            chat_memory=self.message_history,
-            memory_key='chat_history'
-        )
-
         self.conversation = ConversationChain(
             llm=self.llm,
             prompt=self.prompt,
