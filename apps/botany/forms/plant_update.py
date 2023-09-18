@@ -11,9 +11,8 @@ class PlantUpdateForm(forms.ModelForm):
     """
 
     image = forms.ImageField(required=False)
-    label = forms.ModelChoiceField(queryset=GrowingLabel.objects.all(), required=False)
-    growing_method = forms.ModelChoiceField(queryset=GrowingMethod.objects.all(), required=False)
-    growing_medium = forms.ModelChoiceField(queryset=GrowingMedium.objects.all(), required=False)
+    image = forms.ImageField(required=False)
+    sow_date = forms.DateTimeField(required=False)
 
     class Meta:
         """
@@ -24,7 +23,7 @@ class PlantUpdateForm(forms.ModelForm):
             fields (list): Fields to be included in this form.
         """
         model = Plant
-        fields = ['name', 'label', 'description', 'image', 'growing_method', 'growing_medium']
+        fields = ('name', 'description', 'image', 'quantity', 'nfc_tag', 'grouping')
 
     def save(self, commit=True):
         """
