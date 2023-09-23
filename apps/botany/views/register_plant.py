@@ -19,7 +19,9 @@ class RegisterPlantView(FormView):
         Returns:
             Redirects user to the plant detail page of the submitted plant.
         """
-        new_plant = form.save()
+        new_plant = form.save(commit=False)
+        new_plant.user = self.request.user
+        new_plant.save()
 
         Activity.objects.create(
             user=self.request.user,
