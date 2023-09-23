@@ -17,7 +17,7 @@ class ChatService:
         self.conversation = ConversationChain(
             llm=self.llm,
             prompt=self.prompt,
-            verbose=True
+            verbose=True,
         )
 
     def converse(self, message):
