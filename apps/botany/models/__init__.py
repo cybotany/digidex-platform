@@ -6,3 +6,4 @@ from .growing_method import GrowingMethod
 from .growing_medium import GrowingMedium
 from .plant import Plant
 from .plant_image import PlantImage
+from .plant_watering import PlantWatering
