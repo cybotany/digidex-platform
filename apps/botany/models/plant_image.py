@@ -12,7 +12,7 @@ class PlantImage(models.Model):
     Attributes:
         plant (ForeignKey): The plant associated with this image.
         image (ImageField): The image file.
-        uploaded_at (DateTimeField): The date and time when the image was uploaded.
+        timestamp (DateTimeField): The date and time when the image was uploaded.
     """
 
     plant = models.ForeignKey(
@@ -27,7 +27,7 @@ class PlantImage(models.Model):
         help_text="The image file. Only .jpg, .png, and .jpeg extensions are allowed."
     )
 
-    uploaded_at = models.DateTimeField(
+    timestamp = models.DateTimeField(
         auto_now_add=True,
         help_text="The date and time when the image was uploaded."
     )

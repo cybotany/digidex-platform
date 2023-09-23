@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from .plant import Plant
 
 
@@ -9,8 +10,7 @@ class PlantWatering(models.Model):
     Attributes:
         plant (ForeignKey): The plant associated with this watering event.
         watered (BooleanField): Whether the plant was watered.
-        watering_date (DateField): The date when the plant was watered.
-        notes (TextField): Optional notes about the watering event.
+        timestamp (DateTimeField): The date and time when the plant was watered.
     """
 
     plant = models.ForeignKey(
@@ -25,13 +25,9 @@ class PlantWatering(models.Model):
         help_text="Whether the plant was watered."
     )
 
-    watering_date = models.DateField(
-        help_text="The date when the plant was watered."
-    )
-
-    notes = models.TextField(
-        blank=True,
-        help_text="Optional notes about the watering event."
+    timestamp = models.DateTimeField(
+        default=timezone.now,
+        help_text="The date and time when the plant was watered."
     )
 
     def __str__(self):
@@ -42,4 +38,4 @@ class PlantWatering(models.Model):
         Returns:
             str: A string representation of the plant watering event.
         """
-        return f'Watering for {self.plant.name} on {self.watering_date}'
+        return f'Watering for {self.plant.name} on {self.timestamp}'

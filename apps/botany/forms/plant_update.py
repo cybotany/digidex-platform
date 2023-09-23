@@ -8,9 +8,11 @@ class PlantUpdateForm(forms.ModelForm):
 
     Attributes:
         image (ImageField): Optional image to be uploaded for the plant.
+        watered (BooleanField): Whether the plant was watered.
     """
 
     image = forms.ImageField(required=False)
+    watered = forms.BooleanField(required=True)
 
     class Meta:
         """
@@ -21,7 +23,7 @@ class PlantUpdateForm(forms.ModelForm):
             fields (list): Fields to be included in this form.
         """
         model = Plant
-        fields = ('name', 'description', 'image', 'quantity', 'grouping')
+        fields = ('name', 'description', 'image', 'quantity', 'grouping', 'watered')
 
     def save(self, commit=True):
         """
@@ -35,8 +37,12 @@ class PlantUpdateForm(forms.ModelForm):
         """
         instance = super().save(commit)
         image = self.cleaned_data.get('image')
+        watered = self.cleaned_data.get('watered')
 
         if image:
             PlantImage.objects.create(plant=instance, image=image)
+
+        if watered:
+            PlantWatering.objects.create(plant=instance, watered=watered)
 
         return instance
