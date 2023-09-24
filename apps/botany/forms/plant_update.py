@@ -12,7 +12,7 @@ class PlantUpdateForm(forms.ModelForm):
     """
 
     image = forms.ImageField(required=False)
-    watered = forms.BooleanField(required=True)
+    watered = forms.BooleanField(required=False)
 
     class Meta:
         """
