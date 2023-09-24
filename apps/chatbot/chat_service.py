@@ -1,8 +1,6 @@
 from decouple import config
-from django.db import transaction
 from langchain.llms import OpenAI
 from langchain.chains import ConversationChain
-from apps.chatbot.models import ChatMessage
 
 
 class ChatService:
@@ -18,12 +16,3 @@ class ChatService:
 
     def converse(self, message):
         return self.conversation.predict(input=message)
-
-    @staticmethod
-    @transaction.atomic
-    def save_message(user, message):
-        chat_message = ChatMessage(
-            user=user,
-            content=message,
-        )
-        chat_message.save()
