@@ -36,4 +36,4 @@ class UpdatePlantView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def test_func(self):
         plant = self.get_object()
-        return self.request.user == plant.owner
+        return self.request.user == plant.user
