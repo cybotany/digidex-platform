@@ -33,3 +33,7 @@ class UpdatePlantView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         Shows a success message.
         """
         messages.success(self.request, 'Your plant was successfully updated!')
+
+    def test_func(self):
+        plant = self.get_object()
+        return self.request.user == plant.owner
