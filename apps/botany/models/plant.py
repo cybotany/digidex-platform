@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
-from apps.utils.constants import PLANT_GROUPING
 
 
 class Plant(models.Model):
@@ -15,7 +14,6 @@ class Plant(models.Model):
         added_on (datetime): The date and time when the plant was added.
         nfc_tag (str): The NFC tag associated with the plant.
         quantity (int): The quantity of the plant being managed.
-        grouping (str): The grouping of the plant.
     """
 
     name = models.CharField(
@@ -42,13 +40,6 @@ class Plant(models.Model):
     quantity = models.PositiveIntegerField(
         default=1,
         help_text='The quantity of the plant.'
-    )
-    grouping = models.CharField(
-        max_length=50,
-        choices=PLANT_GROUPING,
-        null=True,
-        blank=True,
-        help_text='The grouping of the plant.'
     )
 
     def save(self, *args, **kwargs):

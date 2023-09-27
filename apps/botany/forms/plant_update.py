@@ -23,7 +23,7 @@ class PlantUpdateForm(forms.ModelForm):
             fields (list): Fields to be included in this form.
         """
         model = Plant
-        fields = ('name', 'description', 'image', 'quantity', 'grouping', 'watered')
+        fields = ('name', 'description', 'image', 'quantity', 'watered')
 
     def save(self, commit=True):
         """
