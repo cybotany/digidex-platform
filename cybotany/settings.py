@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'apps.chatbot',
     'apps.utils',
     'apps.nfc',
+    'apps.itis',
     'bootstrap5',
 ]
 
