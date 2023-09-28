@@ -3,4 +3,4 @@ from django.apps import AppConfig
 
 class ItisConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'itis'
+    name = 'apps.itis'
