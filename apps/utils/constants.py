@@ -92,6 +92,23 @@ MESSAGE_TYPES = [
     ('G', 'Agent'),
 ]
 
+ORIGIN_CHOICES = [
+    ('Native', 'Native'),
+    ('Introduced', 'Introduced'),
+    ('Native & Introduced', 'Native & Introduced'),
+    ('Incidental', 'Incidental')
+]
+
+KINGDOM_CHOICES = [
+    (1, 'Bacteria'),
+    (2, 'Protozoa'),
+    (3, 'Plantae'),
+    (4, 'Fungi'),
+    (5, 'Animalia'),
+    (6, 'Chromista'),
+    (7, 'Archaea')
+]
+
 CHAT_TEMPLATE = """
     This is a friendly conversation between a human and an AI.
     The AI is talkative and provides lots of specific details from its context.
