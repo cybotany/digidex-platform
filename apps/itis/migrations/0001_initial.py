@@ -34,7 +34,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='GeographicDivision',
             fields=[
-                ('tsn', models.IntegerField(primary_key=True, serialize=False, verbose_name='Taxonomic Serial Number')),
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('tsn', models.IntegerField(serialize=False, verbose_name='Taxonomic Serial Number')),
                 ('geographic_value', models.CharField(max_length=45, verbose_name='Geographic Value')),
                 ('update_date', models.DateTimeField(auto_now=True, verbose_name='Update Date')),
             ],
@@ -42,7 +43,6 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Hierarchy',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('hierarchy_string', models.CharField(help_text='The concatenated TSNs, delimited with a hyphen, which represents the hierarchy from Kingdom to TSN of concern.', max_length=300, unique=True, verbose_name='Hierarchy String')),
                 ('tsn', models.IntegerField(help_text='The TSN for the hierarchy entry. The unique identifier for an occurrence of Taxonomic Units.', verbose_name='Taxonomic Serial Number')),
                 ('parent_tsn', models.IntegerField(blank=True, help_text='The direct parent TSN of hierarchy.TSN.', null=True, verbose_name='Parent TSN')),

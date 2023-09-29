@@ -17,7 +17,6 @@ class Jurisdiction(models.Model):
     """
 
     tsn = models.IntegerField(
-        primary_key=True,
         verbose_name="Taxonomic Serial Number"
     )
     jurisdiction_value = models.CharField(
@@ -37,6 +36,9 @@ class Jurisdiction(models.Model):
         auto_now=True,
         verbose_name="Update Date"
     )
+
+    class Meta:
+        unique_together = ('tsn', 'jurisdiction_value')
 
     def __str__(self):
         """

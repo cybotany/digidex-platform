@@ -13,7 +13,8 @@ class GeographicDivision(models.Model):
     """
 
     tsn = models.IntegerField(
-        primary_key=True,
+        null=False,
+        blank=False,
         verbose_name="Taxonomic Serial Number"
     )
     geographic_value = models.CharField(
@@ -26,6 +27,9 @@ class GeographicDivision(models.Model):
         auto_now=True,
         verbose_name="Update Date"
     )
+
+    class Meta:
+        unique_together = [['tsn', 'geographic_value']]
 
     def __str__(self):
         """
