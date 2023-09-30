@@ -33,7 +33,7 @@ class TaxonomicUnits(models.Model):
                                   modern species (extant or recently extinct) for that taxon
                                   were incorporated into ITIS at the time of review.
         currency_rating (str): A rating designation reflecting the year of revision/source for a group.
-        phylo_sort_sequence (int): A sequence for an occurrence of Taxonomic Units with ranks
+        phylo_sort_seq (int): A sequence for an occurrence of Taxonomic Units with ranks
                                    between kingdom and order, inclusive, that will allow output
                                    to be displayed in phylogenetic order.
         initial_time_stamp (datetime): Date and time at which an occurrence of Taxonomic Units is
@@ -132,7 +132,7 @@ class TaxonomicUnits(models.Model):
         null=True,
         blank=True
     )
-    phylo_sort_sequence = models.SmallIntegerField(
+    phylo_sort_seq = models.SmallIntegerField(
         null=True,
         blank=True
     )
