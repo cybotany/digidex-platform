@@ -21,7 +21,7 @@ class TaxonomicUnits(models.Model):
         unit_ind4 (str): A category indicator located within a polynomial taxonomic name.
         unit_name4 (str): The fourth part of a scientifically accepted label for a
                           polynomial occurrence of Taxonomic Units.
-        usage (str): Current standing of an occurrence of a Taxonomic Unit. Note that the usage
+        n_usage (str): Current standing of an occurrence of a Taxonomic Unit. Note that the usage
                      column is deprecated and will be removed in the future. This attribute has
                      been replaced by name_usage.
         unaccept_reason (str): The cause for an occurrence of Taxonomic Units being identified as
@@ -102,7 +102,12 @@ class TaxonomicUnits(models.Model):
         null=True,
         blank=True
     )
-    usage = models.CharField(
+    unnamed_taxon_ind = models.CharField(
+        max_length=7,
+        null=True,
+        blank=True
+    )
+    n_usage = models.CharField(
         max_length=12,
         null=True,
         blank=True

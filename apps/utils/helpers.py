@@ -57,3 +57,46 @@ def user_directory_path(instance, filename):
 def encode_image_file(file):
     """Encode image file to base64."""
     return base64.b64encode(file.read()).decode("ascii")
+
+
+def convert_copy_to_insert(filename):
+    with open(filename, 'r') as file:
+        lines = file.readlines()
+
+    # Find the start and end of the COPY block
+    start = None
+    end = None
+    for i, line in enumerate(lines):
+        if line.startswith("COPY"):
+            start = i
+        if line.startswith("\\."):
+            end = i
+            break
+
+    if start is None or end is None:
+        print("No valid COPY block found.")
+        return
+
+    # Extract column names from the COPY command
+    columns_line = lines[start].split("(")[1].split(")")[0]
+    columns = [col.strip() for col in columns_line.split(",")]
+
+    # Process each data line
+    insert_statements = []
+    for line in lines[start + 1:end]:
+        values = line.split("\t")
+        # Replace \N with NULL
+        values = ['NULL' if val == '\\N' else f"'{val.strip()}'" for val in values]
+        insert_statements.append(f"INSERT INTO itis_taxonomicunits ({', '.join(columns)}) VALUES ({', '.join(values)});")
+
+    # Replace the COPY block with the INSERT statements
+    output = lines[:start] + insert_statements + lines[end + 1:]
+
+    # Write the result to a new file
+    with open("output.sql", 'w') as file:
+        file.writelines(output)
+
+    print("Conversion completed. Check output.sql.")
+
+if __name__ == "__main__":
+    convert_copy_to_insert("input.sql")
