@@ -24,7 +24,6 @@ class TaxonUnitTypes(models.Model):
         verbose_name="Kingdom ID"
     )
     rank_id = models.SmallIntegerField(
-        primary_key=True,
         verbose_name="Rank ID"
     )
     rank_name = models.CharField(
