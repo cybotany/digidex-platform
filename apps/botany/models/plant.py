@@ -14,6 +14,7 @@ class Plant(models.Model):
         added_on (datetime): The date and time when the plant was added.
         nfc_tag (str): The NFC tag associated with the plant.
         quantity (int): The quantity of the plant being managed.
+        tsn (int): The TSN (Taxonomic Serial Number) of the plant.
     """
 
     name = models.CharField(
@@ -40,6 +41,11 @@ class Plant(models.Model):
     quantity = models.PositiveIntegerField(
         default=1,
         help_text='The quantity of the plant.'
+    )
+    tsn = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        help_text='The TSN (Taxonomic Serial Number) of the plant.'
     )
 
     def save(self, *args, **kwargs):
