@@ -13,16 +13,17 @@ class PlantRegistrationForm(forms.ModelForm):
 
     nfc_tag = forms.CharField(required=False)
     image = forms.ImageField(required=False)
+    tsn = forms.IntegerField(required=False)
 
     class Meta:
         model = Plant
-        fields = ('name', 'description', 'image', 'quantity', 'nfc_tag')
+        fields = ('name', 'description', 'image', 'quantity', 'nfc_tag', 'tsn')
 
     def __init__(self, *args, **kwargs):
             """
             Initialize the form.
 
-            Pop the user and nfc_tag from kwargs.
+            Pop the user, nfc_tag, and tsn from kwargs.
             """
             self.user = kwargs.pop('user', None)
             self.nfc_tag = kwargs.pop('nfc_tag', None)
