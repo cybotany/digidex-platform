@@ -13,7 +13,7 @@ class PlantHomepageView(LoginRequiredMixin, TemplateView):
         """
         Return all plants for the currently logged-in user.
         """
-        plants = Plant.objects.filter(user=self.request.user).order_by('update_date')
+        plants = Plant.objects.filter(user=self.request.user)
         return plants
 
     def get_context_data(self, **kwargs):
