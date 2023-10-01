@@ -16,6 +16,7 @@ urlpatterns = [
     path('chatbot/', include('apps.chatbot.urls')),
     path('api/', include('apps.api.urls')),
     path('nfc/', include('apps.nfc.urls')),
+    path('itis/', include('apps.itis.urls')),
 ]
 
 if settings.DEBUG:
