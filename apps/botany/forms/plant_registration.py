@@ -14,12 +14,12 @@ class PlantRegistrationForm(forms.ModelForm):
 
     nfc_tag = forms.CharField(required=False)
     image = forms.ImageField(required=False)
-    tsn = forms.ModelChoiceField(
-        queryset=TaxonomicUnits.objects.filter(kingdom_id=3, rank_id=220),
-        empty_label=None,
-        required=False,
-        label='Genus/Species'
-    )
+    #tsn = forms.ModelChoiceField(
+    #    queryset=TaxonomicUnits.objects.filter(kingdom_id=3, rank_id=220),
+    #    empty_label=None,
+    #    required=False,
+    #    label='Genus/Species'
+    #)
 
     class Meta:
         model = Plant
