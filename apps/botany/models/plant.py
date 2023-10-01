@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
-from apps.itis.models import TaxonomicUnits
 
 
 class Plant(models.Model):
@@ -15,7 +14,6 @@ class Plant(models.Model):
         added_on (datetime): The date and time when the plant was added.
         nfc_tag (str): The NFC tag associated with the plant.
         quantity (int): The quantity of the plant being managed.
-        tsn (int): The TSN of the plant in the ITIS database.
     """
 
     name = models.CharField(
@@ -42,13 +40,6 @@ class Plant(models.Model):
     quantity = models.PositiveIntegerField(
         default=1,
         help_text='The quantity of the plant.'
-    )
-    tsn = models.ForeignKey(
-        TaxonomicUnits,
-        null=True,
-        blank=True,
-        on_delete=models.CASCADE,
-        help_text="The TSN of the plant in the ITIS database."
     )
 
     def save(self, *args, **kwargs):
