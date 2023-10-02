@@ -5,26 +5,25 @@
 {% block content %}
 {% load static %}
 <div class="container mt-4">
-    <div class="row mb-4">
-        {% for plant in plants %}
-        <div class="row mb-12">
-            <div class="card">
-                <!-- Plant Image -->
-                <div class="col-md-4">
-                    <div class="card-plant-images">
+    {% for plant in plants %}
+        <div class="row mb-4">
+            <div class="card w-100">
+                <div class="row no-gutters">
+                    <!-- Plant Image -->
+                    <div class="col-md-4">
                         {% for image in plant.images.all %}
-                            <img src="{{ image.image.url }}" class="d-block w-100 mb-2" alt="Image of {{ plant.name }}">
+                            <img src="{{ image.image.url }}" class="card-img" alt="Image of {{ plant.name }}">
                         {% endfor %}
                     </div>
-                </div>
-                <!-- Plant Details -->
-                <div class="col-md-7">
-                    <div class="card-body">
-                        <h5 class="card-title"><a href="{{ plant.get_absolute_url }}">{{ plant.name }}</a></h5>
-                        <p class="card-text">TSN: {{ plant.tsn }}</p>
-                        <p class="card-text">NFC Tag: {{ plant.nfc_tag }}</p>
-                        <p class="card-text">Quantity: {{ plant.quantity }}</p>
-                        <p class="card-text">Description: {{ plant.description }}</p>
+                    <!-- Plant Details -->
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="{{ plant.get_absolute_url }}">{{ plant.name }}</a></h5>
+                            <p class="card-text">TSN: {{ plant.tsn }}</p>
+                            <p class="card-text">NFC Tag: {{ plant.nfc_tag }}</p>
+                            <p class="card-text">Quantity: {{ plant.quantity }}</p>
+                            <p class="card-text">Description: {{ plant.description }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -32,7 +31,6 @@
     {% empty %}
         <p>No plants found.</p>
     {% endfor %}
-    </div>
 
     <!-- Pagination Controls -->
     <div class="row justify-content-center">
