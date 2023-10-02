@@ -9,6 +9,7 @@ class PlantHomepageView(LoginRequiredMixin, TemplateView):
     View for rendering the plant module homepage.
     """
     template_name = 'botany/homepage.html'
+    paginate_by = 10
 
     def get_plants_for_user(self):
         """
