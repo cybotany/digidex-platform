@@ -7,22 +7,29 @@
 <div class="container mt-4">
     <div class="row mb-4">
         {% for plant in plants %}
+        <div class="row mb-4">
             <div class="col-md-4">
+                <div class="plant-images">
+                    {% for image in plant.images.all %}
+                        <img src="{{ image.image.url }}" class="d-block w-100 mb-2" alt="Image of {{ plant.name }}">
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-md-8">
                 <div class="card">
-                    <div class="card-body"> 
-                        <h5 class="card-title text-center"><a href="{{ plant.get_absolute_url }}">{{ plant.name }}</a></h5> 
-                        <div class="plant-images">
-                            {% for image in plant.images.all %}
-                                <img src="{{ image.image.url }}" class="d-block w-100" alt="Image of {{ plant.name }}">
-                            {% endfor %}
-                        </div>
-                        <p class="card-text">{{ plant.tsn }}</p>
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="{{ plant.get_absolute_url }}">{{ plant.name }}</a></h5>
+                        <p class="card-text">TSN: {{ plant.tsn }}</p>
+                        <p class="card-text">NFC Tag: {{ plant.nfc_tag }}</p>
+                        <p class="card-text">Quantity: {{ plant.quantity }}</p>
+                        <p class="card-text">Description: {{ plant.description }}</p>
                     </div>
                 </div>
             </div>
-        {% empty %}
-            <p>No plants found.</p>
-        {% endfor %}
+        </div>
+    {% empty %}
+        <p>No plants found.</p>
+    {% endfor %}
     </div>
 
     <!-- Pagination Controls -->
