@@ -25,6 +25,41 @@
         {% endfor %}
     </div>
 
+    <!-- Pagination Controls -->
+    <div class="row justify-content-center">
+        <nav>
+            <ul class="pagination">
+                {% if plants.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1">First</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ plants.previous_page_number }}">Previous</a>
+                    </li>
+                {% endif %}
+                {% for i in plants.paginator.page_range %}
+                    {% if plants.number == i %}
+                        <li class="page-item active">
+                            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                {% if plants.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ plants.next_page_number }}">Next</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ plants.paginator.num_pages }}">Last</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+
     <!-- Registration link -->
     <div class="row my-4">
         <div class="col-lg-4 col-md-6 mb-4">
