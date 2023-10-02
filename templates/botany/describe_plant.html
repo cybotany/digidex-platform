@@ -32,6 +32,29 @@
         </div>
     </div>
 
+    <!-- Watering Events Table -->
+    <h3 class="mb-3">Watering Events</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Date and Time</th>
+                <th>Watered</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in plant.waterings.all %}
+            <tr>
+                <td>{{ event.timestamp }}</td>
+                <td>{{ event.watered|yesno:"Yes,No" }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="2" class="text-center">No watering events recorded.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
     <!-- Buttons -->
     <div class="row justify-content-center mb-4">
         <a href="{% url 'botany:update_plant' plant.id %}" class="btn btn-primary me-2">Update Plant</a>
