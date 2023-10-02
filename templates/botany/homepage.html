@@ -7,16 +7,18 @@
 <div class="container mt-4">
     <div class="row mb-4">
         {% for plant in plants %}
-        <div class="row mb-4">
-            <div class="col-md-4">
-                <div class="plant-images">
-                    {% for image in plant.images.all %}
-                        <img src="{{ image.image.url }}" class="d-block w-100 mb-2" alt="Image of {{ plant.name }}">
-                    {% endfor %}
+        <div class="row mb-12">
+            <div class="card">
+                <!-- Plant Image -->
+                <div class="col-md-4">
+                    <div class="card-plant-images">
+                        {% for image in plant.images.all %}
+                            <img src="{{ image.image.url }}" class="d-block w-100 mb-2" alt="Image of {{ plant.name }}">
+                        {% endfor %}
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-8">
-                <div class="card">
+                <!-- Plant Details -->
+                <div class="col-md-7">
                     <div class="card-body">
                         <h5 class="card-title"><a href="{{ plant.get_absolute_url }}">{{ plant.name }}</a></h5>
                         <p class="card-text">TSN: {{ plant.tsn }}</p>
