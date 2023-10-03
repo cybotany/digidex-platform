@@ -33,19 +33,16 @@
     </div>
 
     <!-- Watering Events Table -->
-    <h3 class="mb-3">Watering Events</h3>
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Date and Time</th>
-                <th>Watered</th>
+                <th>Watering Date and Time</th>
             </tr>
         </thead>
         <tbody>
             {% for event in plant.waterings.all %}
             <tr>
                 <td>{{ event.timestamp }}</td>
-                <td>{{ event.watered|yesno:"Yes,No" }}</td>
             </tr>
             {% empty %}
             <tr>
