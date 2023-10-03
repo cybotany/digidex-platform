@@ -2,7 +2,6 @@ from django.db import models
 from django.utils import timezone
 from .plant import Plant
 
-
 class PlantWatering(models.Model):
     """
     Represents a watering event for a plant.
@@ -11,6 +10,7 @@ class PlantWatering(models.Model):
         plant (ForeignKey): The plant associated with this watering event.
         watered (BooleanField): Whether the plant was watered.
         timestamp (DateTimeField): The date and time when the plant was watered.
+        duration_since_last_watering (DurationField): Duration since the last watering event.
     """
 
     plant = models.ForeignKey(
@@ -29,6 +29,21 @@ class PlantWatering(models.Model):
         default=timezone.now,
         help_text="The date and time when the plant was watered."
     )
+
+    duration_since_last_watering = models.DurationField(
+        null=True,
+        blank=True,
+        help_text="Duration since the last watering event."
+    )
+
+    def save(self, *args, **kwargs):
+        """
+        Override the save method to calculate the duration since the last watering event.
+        """
+        last_watering = PlantWatering.objects.filter(plant=self.plant).order_by('-timestamp').first()
+        if last_watering:
+            self.duration_since_last_watering = self.timestamp - last_watering.timestamp
+        super().save(*args, **kwargs)
 
     def __str__(self):
         """
