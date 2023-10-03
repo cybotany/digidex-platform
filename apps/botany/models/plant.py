@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
+from django.db.models import Max, F, ExpressionWrapper, fields
+from django.utils import timezone
 
 
 class Plant(models.Model):
@@ -74,3 +76,22 @@ class Plant(models.Model):
             str: The URL to view the details of this plant.
         """
         return reverse('botany:describe_plant', args=[str(self.id)])
+
+    def days_since_last_watering(self):
+        """
+        Returns the number of days since the last watering event for this plant using annotation.
+
+        Returns:
+            int: Number of days since the last watering.
+        """
+        # Annotate the plant with the timestamp of its last watering
+        plant_with_last_watering = Plant.objects.filter(id=self.id).annotate(
+            last_watering_timestamp=Max('waterings__timestamp')
+        ).first()
+
+        if not plant_with_last_watering or not plant_with_last_watering.last_watering_timestamp:
+            return None  # or return a default value if there's no watering record
+
+        # Calculate the days since the last watering
+        delta = timezone.now() - plant_with_last_watering.last_watering_timestamp
+        return delta.days
