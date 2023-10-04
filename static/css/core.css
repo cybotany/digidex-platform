@@ -145,3 +145,21 @@ h1, h2, h3, h4, h5, h6 {
 .dropdown:hover .dropbtn {
     background-color: var(--secondary-color);
 }
+
+.plant-card-image {
+    width: 100%;      /* Ensures the image takes the full width of its container */
+    height: 200px;    /* Set a fixed height */
+    object-fit: cover; /* Ensures the image covers the entire content box */
+    margin: 10px;     /* Adds space around the image */
+}
+
+/* Styling for the NFC_Tag bubble */
+.plant-link-bubble {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
