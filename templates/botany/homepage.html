@@ -8,6 +8,9 @@
     {% for plant in plants %}
         <div class="row mb-4">
             <div class="card w-100">
+                <div class="card-header">
+                    <h5>{{ plant.name }}</h5>
+                </div>
                 <div class="row no-gutters">
                     <!-- Plant Image -->
                     <div class="col-md-4">
@@ -18,12 +21,12 @@
                     <!-- Plant Details -->
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title"><a href="{{ plant.get_absolute_url }}">{{ plant.name }}</a></h5>
                             <p class="card-text">TSN: {{ plant.tsn }}</p>
                             <p class="card-text">NFC Tag: {{ plant.nfc_tag }}</p>
                             <p class="card-text">Quantity: {{ plant.quantity }}</p>
                             <p class="card-text">Description: {{ plant.description }}</p>
                             <p class="card-text">Days since last watering: {{ plant.days_since_last_watering }}</p>
+                            <a href="{{ plant.get_absolute_url }}" class="btn btn-primary">View Details</a>
                         </div>
                     </div>
                 </div>
