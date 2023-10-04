@@ -32,11 +32,11 @@
             <!-- Plant Details -->
             <div class="col-md-8">
                 <div class="card-body">
-                    <p class="card-text">TSN: {{ plant.tsn }}</p>
+                    <p class="card-text">Complete Name:</p>
                     <p class="card-text">NFC Tag: {{ plant.nfc_tag }}</p>
                     <p class="card-text">Quantity: {{ plant.quantity }}</p>
-                    <p class="card-text">Description: {{ plant.description }}</p>
                     <p class="card-text">Days since last watering: {{ plant.days_since_last_watering }}</p>
+                    <p class="card-text">Description: {{ plant.description }}</p>
                     <a href="{{ plant.get_absolute_url }}" class="btn btn-outline-primary mt-2">View Details</a>
                 </div>
             </div>
