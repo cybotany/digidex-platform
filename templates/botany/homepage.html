@@ -8,7 +8,7 @@
     {% for plant in plants %}
     <div class="card w-100">
         <div class="card-header">
-            <h5 class="card-title"><a href="{{ plant.get_absolute_url }}">{{ plant.name }}</a></h5>
+            <h5 class="card-title">{{ plant.tsn }} - <a href="{{ plant.get_absolute_url }}">{{ plant.name }}</a></h5>
         </div>
         <div class="row no-gutters">
             <!-- Plant Image -->
