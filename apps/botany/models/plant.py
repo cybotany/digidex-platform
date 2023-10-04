@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse
 from django.db.models import Max, F, ExpressionWrapper, fields
 from django.utils import timezone
+from apps.itis.models import TaxonomicUnits
 
 
 class Plant(models.Model):
@@ -44,10 +45,13 @@ class Plant(models.Model):
         default=1,
         help_text='The quantity of the plant.'
     )
-    tsn = models.PositiveIntegerField(
+    tsn = models.ForeignKey(
+        TaxonomicUnits,
+        on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        help_text='The TSN (Taxonomic Serial Number) of the plant.'
+        help_text='The TSN (Taxonomic Serial Number) of the plant.',
+        related_name='plants'
     )
 
     def save(self, *args, **kwargs):
