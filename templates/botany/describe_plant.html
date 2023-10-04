@@ -25,9 +25,9 @@
         <!-- Plant Information -->
         <div class="card-body">
             <p class="card-text">{{ plant.name }}</p>
-            <p class="card-text">{{ plant.tsn.complete_name }}</p>
+            <p class="card-text">Complete name: {{ plant.tsn.complete_name }}</p>
             <p class="card-text">Added on: {{ plant.added_on }}</p>
-            <p class="card-text">{{ plant.quantity }}</p>
+            <p class="card-text">Quantity: {{ plant.quantity }}</p>
             <p class="card-text">
                 {% if plant.nfc_tag %}
                     <span class="plant-link-bubble">Linked</span>
