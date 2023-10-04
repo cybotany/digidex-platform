@@ -6,20 +6,20 @@
 {% load static %}
 <div class="container mt-4">
     {% for plant in plants %}
-    <div class="card w-100">
+    <div class="card w-100 mb-4 shadow-sm"> <!-- Added shadow and margin -->
         <!-- Card Header -->
-        <div class="card-header">
+        <div class="card-header bg-light"> <!-- Updated background color -->
             <div class="row">
                 <!-- TSN on the left -->
-                <div class="col-md-4 text-left">
-                    {{ plant.tsn }}
+                <div class="col-md-4 text-left font-weight-bold"> <!-- Increased font weight -->
+                    TSN: {{ plant.tsn }}
                 </div>
                 <!-- Plant name with hyperlink in the center -->
-                <div class="col-md-4 text-center">
-                    <a href="{{ plant.get_absolute_url }}">{{ plant.name }}</a>
+                <div class="col-md-4 text-center font-weight-bold"> <!-- Increased font weight -->
+                    <a href="{{ plant.get_absolute_url }}" class="text-dark">{{ plant.name }}</a> <!-- Text color update -->
                 </div>
                 <!-- Placeholder text "Family" on the right -->
-                <div class="col-md-4 text-right">
+                <div class="col-md-4 text-right font-weight-bold"> <!-- Increased font weight -->
                     Family
                 </div>
             </div>
@@ -29,7 +29,7 @@
             <!-- Plant Image -->
             <div class="col-md-4">
                 {% for image in plant.images.all %}
-                    <img src="{{ image.image.url }}" class="card-img" alt="Image of {{ plant.name }}">
+                    <img src="{{ image.image.url }}" class="card-img rounded" alt="Image of {{ plant.name }}"> <!-- Added border-radius -->
                 {% endfor %}
             </div>
             <!-- Plant Details -->
@@ -40,7 +40,7 @@
                     <p class="card-text">Quantity: {{ plant.quantity }}</p>
                     <p class="card-text">Description: {{ plant.description }}</p>
                     <p class="card-text">Days since last watering: {{ plant.days_since_last_watering }}</p>
-                    <a href="{{ plant.get_absolute_url }}" class="btn btn-primary">View Details</a>
+                    <a href="{{ plant.get_absolute_url }}" class="btn btn-outline-primary mt-2">View Details</a> <!-- Updated button style -->
                 </div>
             </div>
         </div>
