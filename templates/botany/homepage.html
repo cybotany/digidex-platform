@@ -6,31 +6,32 @@
 {% load static %}
 <div class="container mt-4">
     {% for plant in plants %}
-    <div class="card w-100 mb-4 shadow-sm"> <!-- Added shadow and margin -->
+    <div class="card w-100 mb-4 shadow-sm">
         <!-- Card Header -->
-        <div class="card-header bg-light"> <!-- Updated background color -->
+        <div class="card-header bg-light">
             <div class="row">
-                <!-- TSN on the left -->
-                <div class="col-md-4 text-left font-weight-bold"> <!-- Increased font weight -->
+                <div class="col-md-4 text-left font-weight-bold">
                     TSN: {{ plant.tsn }}
                 </div>
-                <!-- Plant name with hyperlink in the center -->
-                <div class="col-md-4 text-center font-weight-bold"> <!-- Increased font weight -->
-                    {{ plant.name }} <!-- Text color update -->
+                <div class="col-md-4 text-center font-weight-bold">
+                    {{ plant.name }}
                 </div>
-                <!-- Placeholder text "Family" on the right -->
-                <div class="col-md-4 text-right font-weight-bold"> <!-- Increased font weight -->
-                    Family
+                <div class="col-md-4 text-right font-weight-bold">
+                    Family: 
                 </div>
             </div>
         </div>
         <!-- Card Body -->
         <div class="row no-gutters">
-            <!-- Plant Image -->
+            <!-- Plant Image Carousel -->
             <div class="col-md-4">
-                {% for image in plant.images.all %}
-                    <img src="{{ image.image.url }}" class="card-img rounded plant-image" alt="Image of {{ plant.name }}"> <!-- Added border-radius -->
-                {% endfor %}
+                <div class="image-carousel">
+                    {% for image in plant.images.all %}
+                        <div class="carousel-item">
+                            <img src="{{ image.image.url }}" class="card-img rounded plant-card-image" alt="Image of {{ plant.name }}">
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
             <!-- Plant Details -->
             <div class="col-md-8">
@@ -40,7 +41,7 @@
                     <p class="card-text">Quantity: {{ plant.quantity }}</p>
                     <p class="card-text">Description: {{ plant.description }}</p>
                     <p class="card-text">Days since last watering: {{ plant.days_since_last_watering }}</p>
-                    <a href="{{ plant.get_absolute_url }}" class="btn btn-outline-primary mt-2">View Details</a> <!-- Updated button style -->
+                    <a href="{{ plant.get_absolute_url }}" class="btn btn-outline-primary mt-2">View Details</a>
                 </div>
             </div>
         </div>

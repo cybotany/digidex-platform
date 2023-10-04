@@ -1,23 +1,6 @@
 /* CSS styles for Botany app */
 
-#left-container {
-    float: left;
-    width: 65%;
-    padding: 20px;
-    background-color: var(--accent-color);
-    border-radius: 15px;
-    margin-right: 2%;
-}
-  
-#right-container {
-    float: right;
-    width: 30%;
-    padding: 20px;
-    background-color: var(--secondary-color);
-    border-radius: 15px;
-}
-
-.plant-image {
+.plant-card-image {
     width: 100%;      /* Ensures the image takes the full width of its container */
     height: 200px;    /* Set a fixed height */
     object-fit: cover; /* Ensures the image covers the entire content box */
