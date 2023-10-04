@@ -36,15 +36,16 @@ class PlantRegistrationForm(forms.ModelForm):
         """
         Save the form.
 
-        Associates the plant with the owner (user) and saves the uploaded image.
+        Associates the plant instance with the owner (user) and saves the uploaded image.
         """
-        plant = super().save(commit=False)
-        plant.user = self.user
+        instance = super().save(commit=False)
+        instance.user = self.user
 
         if commit:
-            plant.save()
-            image = self.cleaned_data.get('image')
-            if image:
-                PlantImage.objects.create(plant=plant, image=image)
+            instance.save()
+        
+        image = self.cleaned_data.get('image')
+        if image:
+            PlantImage.objects.create(plant=instance, image=image)
 
-        return plant
+        return instance
