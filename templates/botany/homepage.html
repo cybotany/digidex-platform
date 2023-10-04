@@ -29,7 +29,7 @@
             <!-- Plant Image -->
             <div class="col-md-4">
                 {% for image in plant.images.all %}
-                    <img src="{{ image.image.url }}" class="card-img rounded" alt="Image of {{ plant.name }}"> <!-- Added border-radius -->
+                    <img src="{{ image.image.url }}" class="card-img rounded plant-image" alt="Image of {{ plant.name }}"> <!-- Added border-radius -->
                 {% endfor %}
             </div>
             <!-- Plant Details -->
