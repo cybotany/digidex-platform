@@ -2,12 +2,9 @@
 
 {% block content %}
 <div class="container mt-4">
-    <!-- Plant Header -->
-    <h1 class="mb-4 text-center">{{ plant.name }}</h1>
-
     <!-- Plant Details -->
     <div class="card mb-4">
-        <!-- Slideshow for Images -->
+        <!-- Plant Image Slideshow -->
         <div id="plantCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 {% for image in plant.images.all %}
@@ -25,9 +22,19 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
+        <!-- Plant Information -->
         <div class="card-body">
-            <p class="card-text">{{ plant.tsn }}</p>
-            <p class="card-text">{{ plant.nfc_tag }}</p>
+            <p class="card-text">{{ plant.name }}</p>
+            <p class="card-text">{{ plant.tsn.complete_name }}</p>
+            <p class="card-text">Added on: {{ plant.added_on }}</p>
+            <p class="card-text">{{ plant.quantity }}</p>
+            <p class="card-text">
+                {% if plant.nfc_tag %}
+                    <span class="plant-link-bubble">Linked</span>
+                {% else %}
+                    Not Linked
+                {% endif %}
+            </p>
             <p class="card-text">{{ plant.description }}</p>
         </div>
     </div>
