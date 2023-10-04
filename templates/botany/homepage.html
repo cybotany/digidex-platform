@@ -17,22 +17,18 @@
                     {{ plant.name }}
                 </div>
                 <div class="col-md-4 text-right font-weight-bold">
-                    Family: 
+                    Family
                 </div>
             </div>
         </div>
         <!-- Card Body -->
         <div class="row no-gutters">
-            <!-- Plant Image Carousel -->
+            <!-- Plant Image -->
             <div class="col-md-4">
-                <div class="image-carousel">
-                    {% for image in plant.images.all %}
-                        <div class="carousel-item">
-                            <img src="{{ image.image.url }}" class="card-img rounded plant-card-image" alt="Image of {{ plant.name }}">
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
+                {% for image in plant.images.all %}
+                    <img src="{{ image.image.url }}" class="card-img rounded plant-card-image" alt="Image of {{ plant.name }}"> <!-- Added border-radius -->
+                {% endfor %}
+            </div>            
             <!-- Plant Details -->
             <div class="col-md-8">
                 <div class="card-body">
