@@ -7,11 +7,24 @@
 <div class="container mt-4">
     {% for plant in plants %}
     <div class="card w-100">
+        <!-- Card Header -->
         <div class="card-header">
-            <h5 class="card-title-name">
-                {{ plant.tsn }} <a href="{{ plant.get_absolute_url }}">{{ plant.name }}</a>
-            </h5>
+            <div class="row">
+                <!-- TSN on the left -->
+                <div class="col-md-4 text-left">
+                    {{ plant.tsn }}
+                </div>
+                <!-- Plant name with hyperlink in the center -->
+                <div class="col-md-4 text-center">
+                    <a href="{{ plant.get_absolute_url }}">{{ plant.name }}</a>
+                </div>
+                <!-- Placeholder text "Family" on the right -->
+                <div class="col-md-4 text-right">
+                    Family
+                </div>
+            </div>
         </div>
+        <!-- Card Body -->
         <div class="row no-gutters">
             <!-- Plant Image -->
             <div class="col-md-4">
