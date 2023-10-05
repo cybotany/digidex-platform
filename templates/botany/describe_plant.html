@@ -8,13 +8,9 @@
         <div id="plantCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 {% for image in plant.images.all %}
-                <div class="position-relative">
                     <div class="carousel-item {% if forloop.first %}active{% endif %}">
                         <img src="{{ image.image.url }}" class="d-block w-100" alt="Image of {{ plant.name }}">
                     </div>
-                    <!-- Delete Button placed outside the carousel item -->
-                    <a href="{% url 'botany:delete_plant_image' image.id %}" class="btn btn-danger position-absolute" style="top: -10px; right: 10px;" onclick="event.stopPropagation();">Delete</a>
-                </div>
                 {% endfor %}
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#plantCarousel" data-bs-slide="prev">
