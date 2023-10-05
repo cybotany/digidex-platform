@@ -8,7 +8,8 @@ class ChatService:
 
         self.llm = OpenAI(
             temperature=0.0,
-            openai_api_key=config('OPENAI_API_KEY')
+            openai_api_key=config('OPENAI_API_KEY'),
+            model_name='gpt-3.5-turbo',
         )
         self.conversation = ConversationChain(
             llm=self.llm
