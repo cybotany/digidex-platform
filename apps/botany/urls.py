@@ -9,6 +9,7 @@ from apps.botany.views import (
     DeletePlantView,
     UpdatePlantView,
     PlantHomepageView,
+    DeletePlantImageView,
 )
 
 
@@ -23,4 +24,5 @@ urlpatterns = [
     path('plant/<int:pk>/describe/', DescribePlantView.as_view(), name='describe_plant'),
     path('plant/<int:pk>/delete/', DeletePlantView.as_view(), name='delete_plant'),
     path('plant/<int:pk>/update/', UpdatePlantView.as_view(), name='update_plant'),
+    path('plant/<int:pk>/delete/image', DeletePlantImageView.as_view(), name='delete_plant_image'),
 ]
