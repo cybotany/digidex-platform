@@ -11,7 +11,7 @@
                 <div class="carousel-item {% if forloop.first %}active{% endif %}">
                     <img src="{{ image.image.url }}" class="d-block w-100" alt="Image of {{ plant.name }}">
                     <!-- Delete Button -->
-                    <a href="{% url 'botany:delete_plant_image' image.id %}" class="btn btn-danger position-absolute top-0 end-0 m-2" data-bs-slide="false">Delete</a>
+                    <a href="{% url 'botany:delete_plant_image' image.id %}" class="btn btn-danger position-absolute" style="top: -30px; right: 10px;" data-bs-slide="false">Delete</a>
                 </div>
                 {% endfor %}
             </div>
