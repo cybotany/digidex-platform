@@ -15,7 +15,7 @@ class PlantHomepageView(LoginRequiredMixin, TemplateView):
         """
         Return all plants for the currently logged-in user.
         """
-        plants = Plant.objects.filter(user=self.request.user).order_by('tsn')
+        plants = Plant.objects.filter(user=self.request.user).order_by('added_on')
         paginator = Paginator(plants, self.paginate_by)
         page = self.request.GET.get('page')
         return paginator.get_page(page)
