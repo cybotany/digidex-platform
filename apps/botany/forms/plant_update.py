@@ -13,6 +13,7 @@ class PlantUpdateForm(forms.ModelForm):
 
     image = forms.ImageField(required=False)
     watered = forms.BooleanField(required=False)
+    tsn = forms.IntegerField(required=True, label="TSN (Taxonomic Serial Number)")
 
     class Meta:
         """
@@ -23,7 +24,7 @@ class PlantUpdateForm(forms.ModelForm):
             fields (list): Fields to be included in this form.
         """
         model = Plant
-        fields = ('name', 'description', 'image', 'quantity', 'watered')
+        fields = ('name', 'description', 'image', 'quantity', 'watered', 'tsn')
 
     def save(self, commit=True):
         """
