@@ -30,10 +30,10 @@
         <div class="row no-gutters">
             <!-- Plant Image -->
             <div class="col-md-4">
-                {% for image in plant.images.all %}
-                    <img src="{{ image.image.url }}" class="card-img rounded plant-card-image" alt="Image of {{ plant.name }}"> <!-- Added border-radius -->
-                {% endfor %}
-            </div>            
+                {% if plant.images.all %}
+                    <img src="{{ plant.images.last.image.url }}" class="card-img rounded plant-card-image" alt="Image of {{ plant.name }}"> <!-- Display only the latest image -->
+                {% endif %}
+            </div>          
             <!-- Plant Details -->
             <div class="col-md-8">
                 <div class="card-body">
