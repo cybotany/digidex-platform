@@ -1,5 +1,6 @@
 from django import forms
 from apps.botany.models import Plant, PlantImage, PlantWatering
+from apps.itis.models import TaxonomicUnits
 
 
 class PlantUpdateForm(forms.ModelForm):
@@ -9,11 +10,12 @@ class PlantUpdateForm(forms.ModelForm):
     Attributes:
         image (ImageField): Optional image to be uploaded for the plant.
         watered (BooleanField): Whether the plant was watered.
+        tsn (ModelChoiceField): Dropdown to select a TaxonomicUnits instance.
     """
 
     image = forms.ImageField(required=False)
     watered = forms.BooleanField(required=False)
-    tsn = forms.IntegerField(required=True, label="TSN (Taxonomic Serial Number)")
+    tsn = forms.ModelChoiceField(queryset=TaxonomicUnits.objects.filter(kingdom_id=3), required=False, label="TSN (Taxonomic Serial Number)")
 
     class Meta:
         """
@@ -24,7 +26,7 @@ class PlantUpdateForm(forms.ModelForm):
             fields (list): Fields to be included in this form.
         """
         model = Plant
-        fields = ('name', 'description', 'image', 'quantity', 'watered', 'tsn')
+        fields = ('name', 'description', 'image', 'quantity', 'watered')
 
     def save(self, commit=True):
         """
