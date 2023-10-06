@@ -61,6 +61,6 @@ trio==0.22.0
 trio-websocket==0.10.2
 typing-inspect==0.9.0
 typing_extensions==4.6.3
-urllib3==1.26.16
+urllib3==1.26.17
 wsproto==1.2.0
 yarl==1.9.2
