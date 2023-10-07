@@ -40,27 +40,53 @@
         </div>
     </div>
 
-    <!-- Watering Events -->
-    <div class="mb-5">
-        <h3 class="mb-3">Watering Events</h3>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Watering Date and Time</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for event in plant.waterings.all %}
-                <tr>
-                    <td>{{ event.timestamp }}</td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td class="text-center">No watering events recorded.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    <!-- Watering and Fertilization Events -->
+    <div class="row mb-5">
+        <!-- Watering Events -->
+        <div class="col-md-6">
+            <h3 class="mb-3">Watering Events</h3>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Watering Date and Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for event in plant.waterings.all %}
+                    <tr>
+                        <td>{{ event.timestamp }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td class="text-center">No watering events recorded.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Fertilization Events -->
+        <div class="col-md-6">
+            <h3 class="mb-3">Fertilization Events</h3>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Fertilization Date and Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for event in plant.fertilizations.all %}
+                    <tr>
+                        <td>{{ event.timestamp }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td class="text-center">No fertilization events recorded.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <!-- Buttons -->

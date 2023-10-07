@@ -1,98 +1,94 @@
 {% extends "base.html" %}
 
+{% block title %} CyBotany {% endblock %}
+
 {% block content %}
-<div class="container mt-5">
-    <!-- Plant Details -->
-    <div class="mb-5">
-        <!-- Plant Image Slideshow -->
-        <div id="plantCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                {% for image in plant.images.all %}
-                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                        <img src="{{ image.image.url }}" class="d-block w-100 rounded" alt="Image of {{ plant.name }}" style="max-height: 500px; object-fit: cover;">
-                    </div>
-                {% endfor %}
+{% load static %}
+
+<!-- Registration link -->
+<div class="row my-4">
+    <div class="col-lg-4 col-md-6 mb-4">
+        <a href="{% url 'botany:register_plant' %}" class="btn btn-primary">Upload New Plant</a>
+    </div>
+</div>
+
+<div class="container mt-4">
+    {% for plant in plants %}
+    <div class="card w-100 mb-4 shadow-sm">
+        <!-- Card Header -->
+        <div class="card-header bg-light">
+            <div class="row">
+                <div class="col-md-4 text-left font-weight-bold">
+                    TSN: {{ plant.tsn.tsn }}
+                </div>
+                <div class="col-md-4 text-center font-weight-bold">
+                    {{ plant.name }}
+                </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#plantCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#plantCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
         </div>
-
-        <!-- Plant Information -->
-        <div class="mt-4">
-            <h2 class="mb-3">{{ plant.name }}</h2>
-            <p><strong>Complete name:</strong> {{ plant.tsn.complete_name }}</p>
-            <p><strong>Added on:</strong> {{ plant.added_on }}</p>
-            <p><strong>Quantity:</strong> {{ plant.quantity }}</p>
-            <p>
-                {% if plant.nfc_tag %}
-                    <span class="badge bg-success">Linked</span>
-                {% else %}
-                    <span class="badge bg-warning">Not Linked</span>
+        <!-- Card Body -->
+        <div class="row no-gutters">
+            <!-- Plant Image -->
+            <div class="col-md-4">
+                {% if plant.images.all %}
+                    <img src="{{ plant.images.last.image.url }}" class="card-img rounded plant-card-image" alt="Image of {{ plant.name }}"> <!-- Display only the latest image -->
                 {% endif %}
-            </p>
-            <p>{{ plant.description }}</p>
+            </div>          
+            <!-- Plant Details -->
+            <div class="col-md-8">
+                <div class="card-body">
+                    <p class="card-text">Complete Name: {{ plant.tsn.complete_name }}</p>
+                    <p class="card-text">Date Added: {{ plant.added_on }}</p>
+                    <p class="card-text">
+                        {% if plant.nfc_tag %}
+                            <span class="plant-link-bubble">Linked</span>
+                        {% else %}
+                            Not Linked
+                        {% endif %}
+                    </p>
+                    <p class="card-text">Days since last watering: {{ plant.days_since_last_watering }}</p>
+                    <a href="{{ plant.get_absolute_url }}" class="btn btn-outline-primary mt-2">View Details</a>
+                </div>
+            </div>
         </div>
     </div>
+    {% empty %}
+        <p>No plants found.</p>
+    {% endfor %}
 
-    <!-- Watering and Fertilization Events -->
-    <div class="row mb-5">
-        <!-- Watering Events -->
-        <div class="col-md-6">
-            <h3 class="mb-3">Watering Events</h3>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Watering Date and Time</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for event in plant.waterings.all %}
-                    <tr>
-                        <td>{{ event.timestamp }}</td>
-                    </tr>
-                    {% empty %}
-                    <tr>
-                        <td class="text-center">No watering events recorded.</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Fertilization Events -->
-        <div class="col-md-6">
-            <h3 class="mb-3">Fertilization Events</h3>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Fertilization Date and Time</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for event in plant.fertilizations.all %}
-                    <tr>
-                        <td>{{ event.timestamp }}</td>
-                    </tr>
-                    {% empty %}
-                    <tr>
-                        <td class="text-center">No fertilization events recorded.</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <!-- Buttons -->
-    <div class="row justify-content-center mb-5">
-        <a href="{% url 'botany:update_plant' plant.id %}" class="btn btn-primary btn-lg me-3 shadow">Update Plant</a>
-        <a href="{% url 'botany:delete_plant' plant.id %}" class="btn btn-danger btn-lg shadow">Delete Plant</a>
+    <!-- Pagination Controls -->
+    <div class="row justify-content-center">
+        <nav>
+            <ul class="pagination">
+                {% if plants.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1">First</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ plants.previous_page_number }}">Previous</a>
+                    </li>
+                {% endif %}
+                {% for i in plants.paginator.page_range %}
+                    {% if plants.number == i %}
+                        <li class="page-item active">
+                            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                {% if plants.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ plants.next_page_number }}">Next</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ plants.paginator.num_pages }}">Last</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
     </div>
 </div>
 {% endblock %}
