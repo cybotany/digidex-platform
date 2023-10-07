@@ -1,6 +1,5 @@
 from django import forms
-from apps.botany.models import Plant, PlantImage, PlantWatering
-from apps.itis.models import TaxonomicUnits
+from apps.botany.models import Plant, PlantImage, PlantWatering, PlantFertilization
 
 
 class PlantUpdateForm(forms.ModelForm):
@@ -10,10 +9,12 @@ class PlantUpdateForm(forms.ModelForm):
     Attributes:
         image (ImageField): Optional image to be uploaded for the plant.
         watered (BooleanField): Whether the plant was watered.
+        fertilized (BooleanField): Whether the plant was fertilized.
     """
 
     image = forms.ImageField(required=False)
     watered = forms.BooleanField(required=False)
+    fertilized = forms.BooleanField(required=False)
 
     class Meta:
         """
@@ -24,7 +25,7 @@ class PlantUpdateForm(forms.ModelForm):
             fields (list): Fields to be included in this form.
         """
         model = Plant
-        fields = ('name', 'description', 'image', 'quantity', 'watered')
+        fields = ('name', 'description', 'image', 'quantity', 'watered', 'fertilized')
 
     def save(self, commit=True):
         """
@@ -39,11 +40,15 @@ class PlantUpdateForm(forms.ModelForm):
         instance = super().save(commit)
         image = self.cleaned_data.get('image')
         watered = self.cleaned_data.get('watered')
+        fertilized = self.cleaned_data.get('fertilized')
 
         if image:
             PlantImage.objects.create(plant=instance, image=image)
 
         if watered:
             PlantWatering.objects.create(plant=instance, watered=watered)
+
+        if fertilized:
+            PlantFertilization.objects.create(plant=instance, fertilized=fertilized)
 
         return instance
