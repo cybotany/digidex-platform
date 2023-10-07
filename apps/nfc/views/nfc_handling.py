@@ -6,7 +6,6 @@ from apps.botany.models import Plant
 
 class HandleNFCView(LoginRequiredMixin, View):
     login_url = 'accounts:login'
-    redirect_field_name = 'next'
 
     def get(self, request, nfc_sn):
         try:

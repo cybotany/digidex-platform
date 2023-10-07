@@ -12,4 +12,5 @@ class DescribePlantView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['watering_events'] = self.object.waterings.all().order_by('-timestamp')
+        context['fertilization_events'] = self.object.fertilizations.all().order_by('-timestamp')
         return context
