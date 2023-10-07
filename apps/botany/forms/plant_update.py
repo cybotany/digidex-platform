@@ -10,12 +10,10 @@ class PlantUpdateForm(forms.ModelForm):
     Attributes:
         image (ImageField): Optional image to be uploaded for the plant.
         watered (BooleanField): Whether the plant was watered.
-        tsn (ModelChoiceField): Dropdown to select a TaxonomicUnits instance.
     """
 
     image = forms.ImageField(required=False)
     watered = forms.BooleanField(required=False)
-    tsn = forms.ModelChoiceField(queryset=TaxonomicUnits.objects.filter(kingdom_id=3), required=False, label="TSN (Taxonomic Serial Number)")
 
     class Meta:
         """

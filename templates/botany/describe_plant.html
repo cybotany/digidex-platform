@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container mt-4">
+<div class="container mt-5">
     <!-- Plant Details -->
-    <div class="card mb-4">
+    <div class="mb-5">
         <!-- Plant Image Slideshow -->
         <div id="plantCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 {% for image in plant.images.all %}
                     <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                        <img src="{{ image.image.url }}" class="d-block w-100" alt="Image of {{ plant.name }}">
+                        <img src="{{ image.image.url }}" class="d-block w-100 rounded" alt="Image of {{ plant.name }}" style="max-height: 500px; object-fit: cover;">
                     </div>
                 {% endfor %}
             </div>
@@ -22,48 +22,51 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
+
         <!-- Plant Information -->
-        <div class="card-body">
-            <p class="card-text">{{ plant.name }}</p>
-            <p class="card-text">Complete name: {{ plant.tsn.complete_name }}</p>
-            <p class="card-text">Added on: {{ plant.added_on }}</p>
-            <p class="card-text">Quantity: {{ plant.quantity }}</p>
-            <p class="card-text">
+        <div class="mt-4">
+            <h2 class="mb-3">{{ plant.name }}</h2>
+            <p><strong>Complete name:</strong> {{ plant.tsn.complete_name }}</p>
+            <p><strong>Added on:</strong> {{ plant.added_on }}</p>
+            <p><strong>Quantity:</strong> {{ plant.quantity }}</p>
+            <p>
                 {% if plant.nfc_tag %}
-                    <span class="plant-link-bubble">Linked</span>
+                    <span class="badge bg-success">Linked</span>
                 {% else %}
-                    Not Linked
+                    <span class="badge bg-warning">Not Linked</span>
                 {% endif %}
             </p>
-            <p class="card-text">{{ plant.description }}</p>
+            <p>{{ plant.description }}</p>
         </div>
     </div>
 
-    <!-- Watering Events Table -->
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Watering Date and Time</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for event in plant.waterings.all %}
-            <tr>
-                <td>{{ event.timestamp }}</td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="2" class="text-center">No watering events recorded.</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-    <!-- Buttons -->
-    <div class="row justify-content-center mb-4">
-        <a href="{% url 'botany:update_plant' plant.id %}" class="btn btn-primary me-2">Update Plant</a>
-        <a href="{% url 'botany:delete_plant' plant.id %}" class="btn btn-danger">Delete Plant</a>
+    <!-- Watering Events -->
+    <div class="mb-5">
+        <h3 class="mb-3">Watering Events</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Watering Date and Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in plant.waterings.all %}
+                <tr>
+                    <td>{{ event.timestamp }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td class="text-center">No watering events recorded.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 
+    <!-- Buttons -->
+    <div class="row justify-content-center mb-5">
+        <a href="{% url 'botany:update_plant' plant.id %}" class="btn btn-primary btn-lg me-3 shadow">Update Plant</a>
+        <a href="{% url 'botany:delete_plant' plant.id %}" class="btn btn-danger btn-lg shadow">Delete Plant</a>
+    </div>
 </div>
 {% endblock %}
