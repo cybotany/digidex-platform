@@ -1,4 +1,3 @@
-from .geographic_division  import GeographicDivision
 from .hierarchy import Hierarchy
 from .kingdoms import Kingdoms
 from .taxon_unit_types import TaxonUnitTypes

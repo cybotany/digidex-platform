@@ -2,23 +2,22 @@ from django.db import models
 from django.contrib.auth import get_user_model
 
 
-class NFCTag(models.Model):
+class Tag(models.Model):
     """
     Represents an NFC tag.
 
     Attributes:
-        tag_id (str): The ID of the NFC tag.
+        serial_number (str): The serial number of the NFC tag.
         created_at (datetime): The date and time when the NFC tag was created.
         updated_at (datetime): The date and time when the NFC tag was last updated.
         created_by (User): The user who created the NFC tag.
         active (bool): Whether the NFC tag is currently active.
     """
 
-    tag_id = models.CharField(
+    serial_number = models.CharField(
         max_length=255,
         unique=True,
-        primary_key=True,
-        verbose_name="Tag ID"
+        verbose_name="Tag Serial Number"
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
@@ -39,12 +38,12 @@ class NFCTag(models.Model):
 
     def __str__(self):
         """
-        Returns a string representation of the NFC tag, using its tag ID.
+        Returns a string representation of the NFC tag, using its serial number.
 
         Returns:
             str: A string representation of the NFC tag.
         """
-        return self.tag_id
+        return self.serial_number
 
     class Meta:
         verbose_name = "NFC Tag"

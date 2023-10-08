@@ -1,1 +1,1 @@
-from .tag import NFCTag
+from .tag import Tag
