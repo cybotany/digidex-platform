@@ -1,15 +1,14 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block content %}
 <div class="container mt-4">
     <h2> {{ plant.name }} </h2>
 
-    <!-- Plant update form -->   
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
       {{ form.as_p }}
       {{ image_form.as_p }}
-      <button type="submit">Update</button>
+      <button type="submit" class="btn btn-primary">Update</button>
   </form>  
   
 </div>

@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
-{% block title %}New Plant{% endblock title %}
-
 {% block content %}
-  <div class="container mt-4">
-    <h2>Register a new Plant</h2>
+<div class="container mt-4">
+    <h2> Register a new plant </h2>
+  
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
       {{ form.as_p }}
+      {{ image_form.as_p }}
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-  </div>
+</div>
 {% endblock content %}
