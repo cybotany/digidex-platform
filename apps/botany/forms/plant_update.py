@@ -17,38 +17,25 @@ class PlantUpdateForm(forms.ModelForm):
     fertilized = forms.BooleanField(required=False)
 
     class Meta:
-        """
-        Meta class for the PlantUpdateForm.
-
-        Attributes:
-            model (Model): The model class to associate with this form.
-            fields (list): Fields to be included in this form.
-        """
         model = Plant
         fields = ('name', 'description', 'image', 'quantity', 'watered', 'fertilized')
 
     def save(self, commit=True):
         """
         Save the form's fields to the associated model.
-
-        Args:
-            commit (bool): Whether to commit the changes to the database.
-
-        Returns:
-            instance (Model): The model instance updated with form's data.
         """
-        instance = super().save(commit)
+        plant = super().save(commit)
         image = self.cleaned_data.get('image')
         watered = self.cleaned_data.get('watered')
         fertilized = self.cleaned_data.get('fertilized')
 
         if image:
-            PlantImage.objects.create(plant=instance, image=image)
+            PlantImage.objects.create(plant=plant, image=image)
 
         if watered:
-            PlantWatering.objects.create(plant=instance, watered=watered)
+            PlantWatering.objects.create(plant=plant, watered=watered)
 
         if fertilized:
-            PlantFertilization.objects.create(plant=instance, fertilized=fertilized)
+            PlantFertilization.objects.create(plant=plant, fertilized=fertilized)
 
-        return instance
+        return plant
