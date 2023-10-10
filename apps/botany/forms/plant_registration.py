@@ -17,7 +17,7 @@ class PlantRegistrationForm(forms.ModelForm):
 
     class Meta:
         model = Plant
-        fields = ('user', 'nfc_tag', 'name', 'description', 'image', 'quantity', 'tsn')
+        fields = ('name', 'description', 'image', 'quantity', 'nfc_tag', 'tsn')
 
     def __init__(self, *args, **kwargs):
             """
@@ -29,19 +29,23 @@ class PlantRegistrationForm(forms.ModelForm):
             self.nfc_tag = kwargs.pop('nfc_tag', None)
             super().__init__(*args, **kwargs)
 
-            self.fields['user'].initial = self.user
-
             if self.nfc_tag:
                 self.fields['nfc_tag'].initial = self.nfc_tag
 
     def save(self, commit=True):
         """
+        Save the form.
+
         Associates the plant with the owner (user) and saves the uploaded image.
         """
-        plant = super().save(commit)
-        image = self.cleaned_data.get('image')
-        
-        if image:
-            PlantImage.objects.create(plant=plant, image=image)
+        plant = super().save(commit=False)
+        plant.user = self.user
+
+        if commit:
+            plant.save()
+            image = self.cleaned_data.get('image')
+            if image:
+                PlantImage.objects.create(plant=plant, image=image)
                 
+
         return plant
