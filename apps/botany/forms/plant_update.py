@@ -18,7 +18,7 @@ class PlantUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Plant
-        fields = ('name', 'description', 'image', 'quantity', 'watered', 'fertilized')
+        fields = ('name', 'description', 'image', 'quantity', 'watered', 'fertilized', 'tsn')
 
     def save(self, commit=True):
         """
