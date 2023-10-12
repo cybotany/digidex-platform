@@ -1,1 +1,1 @@
-from .kingdom_selection import KingdomDropdownView
+from .get_tsn import GetTSNView
