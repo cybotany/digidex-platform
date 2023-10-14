@@ -3,13 +3,11 @@
 {% block content %}
 <div class="container mt-4">
     <h2> {{ plant.name }} </h2>
-
-    {% include 'components/tsn_select.html' %}
-
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
       {{ form.as_p }}
       {{ image_form.as_p }}
+      {% include 'components/tsn_select.html' %}
       <button type="submit" class="btn btn-primary">Update</button>
   </form>  
 </div>
