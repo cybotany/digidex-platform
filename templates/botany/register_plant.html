@@ -4,11 +4,36 @@
 <div class="container mt-4">
     <h2> Register a new plant </h2> 
     <form method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      {{ form.as_p }}
-      {{ image_form.as_p }}
-      {% include 'components/tsn_select.html' %}
-      <button type="submit" class="btn btn-primary">Submit</button>
+        {% csrf_token %}
+
+        <p>
+            {{ form.name.label_tag }}: {{ form.name }}
+        </p>
+        <p>
+            {{ form.description.label_tag }}: {{ form.description }}
+        </p>
+        <p>
+            {{ form.image.label_tag }}: {{ form.image }}
+        </p>
+        <p>
+            {{ form.quantity.label_tag }}: {{ form.quantity }}
+        </p>
+        <p>
+            {{ form.nfc_tag.label_tag }}: {{ form.nfc_tag }}
+        </p>
+        <p>
+            {{ form.tsn.label_tag }}: {{ form.tsn }}
+        </p>
+
+        <!-- Including the TSN select component -->
+        {% include 'components/tsn_select.html' %}
+
+        <!-- Your additional image form -->
+        <p>
+            {{ image_form.as_p }}
+        </p>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
 {% endblock %}
