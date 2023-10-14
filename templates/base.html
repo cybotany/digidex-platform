@@ -3,23 +3,23 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="cybotany">
         {% load i18n %}
         {% load static %}
-        <link rel="stylesheet" href="{% static 'css/core.css' %}">
         
-        <title>
-            {% block title %}CyBotany{% endblock %}
-        </title>
-
-        <!-- jQuery JS -->
-        <script
-            src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
-        </script>
-
+        <!-- Bootstrap CSS -->
         {% load bootstrap5 %}
         {% bootstrap_css %}
-        {% bootstrap_javascript %}
+        
+        <!-- select2 CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="{% static 'css/core.css' %}">
+    
+        <title>{% block title %}CyBotany{% endblock %}</title>
     </head>
+    
     <body>
         {% include "components/header.html" %}
 

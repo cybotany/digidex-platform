@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <select id="tsnField" style="width:300px;">
+        <!-- This can be left empty, options will be populated via AJAX -->
+    </select>
+
+    <script src="{% static 'js/tsn_field.js' %}"></script>
+{% endblock content %}
