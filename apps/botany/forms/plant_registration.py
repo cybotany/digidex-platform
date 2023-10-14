@@ -13,7 +13,10 @@ class PlantRegistrationForm(forms.ModelForm):
 
     nfc_tag = forms.CharField(required=False)
     image = forms.ImageField(required=False)
-    tsn = forms.IntegerField(required=False)
+    tsn = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={'id': 'tsnField'})
+    )
 
     class Meta:
         model = Plant
