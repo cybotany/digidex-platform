@@ -32,6 +32,9 @@ class PlantRegistrationForm(forms.ModelForm):
             if self.nfc_tag:
                 self.fields['nfc_tag'].initial = self.nfc_tag
 
+            # Set the ID for the tsn field
+            self.fields['tsn'].widget.attrs.update({'id': 'tsnField'})
+
     def save(self, commit=True):
         """
         Save the form.

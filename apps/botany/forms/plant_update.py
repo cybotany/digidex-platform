@@ -20,6 +20,11 @@ class PlantUpdateForm(forms.ModelForm):
         model = Plant
         fields = ('name', 'description', 'image', 'quantity', 'watered', 'fertilized', 'tsn')
 
+    def __init__(self, *args, **kwargs):
+        super(PlantUpdateForm, self).__init__(*args, **kwargs)
+        # Set the ID for the tsn field
+        self.fields['tsn'].widget.attrs.update({'id': 'tsnField'})
+
     def save(self, commit=True):
         """
         Save the form's fields to the associated model.
