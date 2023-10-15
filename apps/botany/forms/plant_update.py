@@ -5,13 +5,7 @@ from apps.botany.models import Plant, PlantImage, PlantWatering, PlantFertilizat
 class PlantUpdateForm(forms.ModelForm):
     """
     Form for updating an existing plant's details including uploading an image.
-
-    Attributes:
-        image (ImageField): Optional image to be uploaded for the plant.
-        watered (BooleanField): Whether the plant was watered.
-        fertilized (BooleanField): Whether the plant was fertilized.
     """
-
     image = forms.ImageField(required=False)
     watered = forms.BooleanField(required=False)
     fertilized = forms.BooleanField(required=False)

@@ -25,6 +25,9 @@
             {{ form.tsn.label_tag }}: {{ form.tsn }}
         </p>
 
+        <!-- Including the TSN select component -->
+        {% include 'components/tsn_select.html' %}
+
         <!-- Your additional image form -->
         <p>
             {{ image_form.as_p }}
