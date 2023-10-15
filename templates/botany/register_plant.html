@@ -7,22 +7,22 @@
         {% csrf_token %}
 
         <p>
-            {{ form.name.label_tag }}: {{ form.name }}
+            {{ form.name.label_tag }} {{ form.name }}
         </p>
         <p>
-            {{ form.description.label_tag }}: {{ form.description }}
+            {{ form.description.label_tag }} {{ form.description }}
         </p>
         <p>
-            {{ form.image.label_tag }}: {{ form.image }}
+            {{ form.image.label_tag }} {{ form.image }}
         </p>
         <p>
-            {{ form.quantity.label_tag }}: {{ form.quantity }}
+            {{ form.quantity.label_tag }} {{ form.quantity }}
         </p>
         <p>
-            {{ form.nfc_tag.label_tag }}: {{ form.nfc_tag }}
+            {{ form.nfc_tag.label_tag }} {{ form.nfc_tag }}
         </p>
         <p>
-            {{ form.tsn.label_tag }}: {{ form.tsn }}
+            {{ form.tsn.label_tag }} {{ form.tsn }}
         </p>
 
         <!-- Including the TSN select component -->
