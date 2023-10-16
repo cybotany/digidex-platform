@@ -22,11 +22,9 @@
             {{ form.nfc_tag.label_tag }} {{ form.nfc_tag }}
         </p>
         <p>
-            {{ form.tsn.label_tag }} {{ form.tsn }}
+            {{ form.tsn.label_tag }} {% include 'components/tsn_select.html' %}
         </p>
-
-        <!-- Including the TSN select component -->
-        {% include 'components/tsn_select.html' %}
+        
 
         <!-- Your additional image form -->
         <p>
