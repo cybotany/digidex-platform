@@ -22,9 +22,12 @@
             {{ form.nfc_tag.label_tag }} {{ form.nfc_tag }}
         </p>
         <p>
-            {{ form.tsn.label_tag }} {% include 'components/tsn_select.html' %}
+            {{ form.tsn.label_tag }}
+            <select name="{{ form.tsn.name }}" id="tsnField" style="width:300px;">
+                <!-- This can be left empty, options will be populated via AJAX -->
+            </select>
         </p>
-        
+        <script src="{% static 'js/tsn_field.js' %}"></script>
 
         <!-- Your additional image form -->
         <p>
