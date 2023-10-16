@@ -28,4 +28,6 @@ const select2Config = {
 };
 
 // Initialize select2
-$(tsnField).select2(select2Config);
+$(document).ready(function() {
+    $(tsnField).select2(select2Config);
+});
