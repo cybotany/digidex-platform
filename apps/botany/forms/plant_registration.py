@@ -39,6 +39,17 @@ class PlantRegistrationForm(forms.ModelForm):
             # Set the ID for the tsn field
             self.fields['tsn'].widget.attrs.update({'id': 'tsnField'})
 
+    def clean(self):
+        cleaned_data = super().clean()
+        tsn_value = cleaned_data.get('tsn')
+        if tsn_value:
+            try:
+                taxonomic_unit = TaxonomicUnits.objects.get(tsn=tsn_value)
+                cleaned_data['tsn'] = taxonomic_unit
+            except TaxonomicUnits.DoesNotExist:
+                raise forms.ValidationError(f"TSN {tsn_value} does not exist!")
+        return cleaned_data
+
     def save(self, commit=True):
         """
         Save the form.
@@ -49,17 +60,6 @@ class PlantRegistrationForm(forms.ModelForm):
         plant = super().save(commit=False)
         plant.user = self.user
 
-        # Fetch the TaxonomicUnits instance based on the TSN value
-        tsn_value = self.cleaned_data.get('tsn')
-        if tsn_value:
-            try:
-                taxonomic_unit = TaxonomicUnits.objects.get(tsn=tsn_value)
-                plant.tsn = taxonomic_unit
-            except TaxonomicUnits.DoesNotExist:
-                # Handle this scenario based on your requirements. 
-                # For instance, you could raise a validation error or log the issue.
-                raise forms.ValidationError(f"TSN {tsn_value} does not exist!")
-
         if commit:
             plant.save()
             image = self.cleaned_data.get('image')
@@ -67,4 +67,3 @@ class PlantRegistrationForm(forms.ModelForm):
                 PlantImage.objects.create(plant=plant, image=image)
 
         return plant
-
