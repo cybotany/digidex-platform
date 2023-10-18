@@ -1,5 +1,6 @@
 from django import forms
 from apps.botany.models import Plant, PlantImage
+from apps.itis.models import TaxonomicUnits
 
 
 class PlantRegistrationForm(forms.ModelForm):
@@ -43,15 +44,27 @@ class PlantRegistrationForm(forms.ModelForm):
         Save the form.
 
         Associates the plant with the owner (user) and saves the uploaded image.
+        Also ensures that the TSN value is converted to a TaxonomicUnits instance.
         """
         plant = super().save(commit=False)
         plant.user = self.user
+
+        # Fetch the TaxonomicUnits instance based on the TSN value
+        tsn_value = self.cleaned_data.get('tsn')
+        if tsn_value:
+            try:
+                taxonomic_unit = TaxonomicUnits.objects.get(tsn=tsn_value)
+                plant.tsn = taxonomic_unit
+            except TaxonomicUnits.DoesNotExist:
+                # Handle this scenario based on your requirements. 
+                # For instance, you could raise a validation error or log the issue.
+                raise forms.ValidationError(f"TSN {tsn_value} does not exist!")
 
         if commit:
             plant.save()
             image = self.cleaned_data.get('image')
             if image:
                 PlantImage.objects.create(plant=plant, image=image)
-                
 
         return plant
+
