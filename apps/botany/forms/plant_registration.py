@@ -6,12 +6,7 @@ from apps.itis.models import TaxonomicUnits
 class PlantRegistrationForm(forms.ModelForm):
     """
     Form for users to register their plant.
-
-    This form allows users to register a new plant with attributes
-    such as name, label, common names, and description.
-    Users can also upload an image of the plant.
     """
-
     nfc_tag = forms.CharField(required=False)
     image = forms.ImageField(required=False)
     tsn = forms.CharField(
@@ -36,7 +31,6 @@ class PlantRegistrationForm(forms.ModelForm):
             if self.nfc_tag:
                 self.fields['nfc_tag'].initial = self.nfc_tag
 
-            # Set the ID for the tsn field
             self.fields['tsn'].widget.attrs.update({'id': 'tsnField'})
 
     def clean(self):

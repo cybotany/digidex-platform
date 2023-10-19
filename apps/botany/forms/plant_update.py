@@ -1,5 +1,6 @@
 from django import forms
 from apps.botany.models import Plant, PlantImage, PlantWatering, PlantFertilization
+from apps.itis.models import TaxonomicUnits
 
 
 class PlantUpdateForm(forms.ModelForm):
@@ -20,8 +21,18 @@ class PlantUpdateForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(PlantUpdateForm, self).__init__(*args, **kwargs)
-        # Set the ID for the tsn field
         self.fields['tsn'].widget.attrs.update({'id': 'tsnField'})
+
+    def clean(self):
+        cleaned_data = super().clean()
+        tsn_value = cleaned_data.get('tsn')
+        if tsn_value:
+            try:
+                taxonomic_unit = TaxonomicUnits.objects.get(tsn=tsn_value)
+                cleaned_data['tsn'] = taxonomic_unit
+            except TaxonomicUnits.DoesNotExist:
+                raise forms.ValidationError(f"TSN {tsn_value} does not exist!")
+        return cleaned_data
 
     def save(self, commit=True):
         """
