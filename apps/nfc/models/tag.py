@@ -13,7 +13,6 @@ class Tag(models.Model):
         created_by (User): The user who created the NFC tag.
         active (bool): Whether the NFC tag is currently active.
     """
-
     serial_number = models.CharField(
         max_length=255,
         unique=True,
