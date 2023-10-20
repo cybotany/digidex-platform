@@ -10,7 +10,7 @@ class HandleNFCView(LoginRequiredMixin, View):
 
     def get(self, request, nfc_sn):
         # Get or create the NFC Tag
-        tag, created = Tag.objects.get_or_create(nfc_sn=nfc_sn)
+        tag, created = Tag.objects.get_or_create(serial_number=nfc_sn)
         
         if created:
             # Handle the case where the Tag was newly created, if needed
