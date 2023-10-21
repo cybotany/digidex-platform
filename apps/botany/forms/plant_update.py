@@ -26,7 +26,10 @@ class PlantUpdateForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super().clean()
         tsn_value = cleaned_data.get('tsn')
-        if tsn_value:
+        
+        if not tsn_value:
+            cleaned_data['tsn'] = None
+        else:
             try:
                 taxonomic_unit = TaxonomicUnits.objects.get(tsn=tsn_value)
                 cleaned_data['tsn'] = taxonomic_unit
