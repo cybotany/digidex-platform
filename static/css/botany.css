@@ -17,3 +17,22 @@
     font-size: 0.8rem;
     margin-top: 5px;
 }
+
+/*  */
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+    background-color: #007bff;
+}
+
+/*  */
+.custom-checkbox .custom-control-label::before {
+    border-radius: 0.25rem;
+    width: 24px;
+    height: 24px;
+}
+
+/*  */
+.custom-checkbox .custom-control-label {
+    padding-left: 36px;
+    line-height: 24px;
+    cursor: pointer;
+}
