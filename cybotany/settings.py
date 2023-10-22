@@ -6,16 +6,16 @@ import openai
 from decouple import config
 from pathlib import Path
 
+# Fetch the environment variable indicating the environment.
+DJANGO_ENV = config('DJANGO_ENV', default='development')
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 # SECURITY WARNING: don't run with debug turned on in production!
 SECRET_KEY = config('DJANGO_SECRET_KEY')
-DEBUG = True
 ALLOWED_HOSTS = [config('ALLOWED_HOSTS')]
-
 
 # API Keys
 openai.api_key = config('OPENAI_API_KEY')
@@ -71,7 +71,6 @@ TEMPLATES = [
     },
 ]
 
-
 WSGI_APPLICATION = 'cybotany.wsgi.application'
 
 DATABASES = {
@@ -106,8 +105,11 @@ USE_I18N = True
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -123,9 +125,22 @@ AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
 AWS_DEFAULT_ACL = None
-
 MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
 
+# Environment specific settings
+if DJANGO_ENV == 'production':
+    DEBUG = False
+    # Add any other production-specific settings here.
+    # E.g., database settings, cache settings, etc.
+    
+    # Use Amazon S3 for static files in production
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/static/"
+    # Add any other production-specific static settings here.
+
+else:
+    DEBUG = True
+    STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
