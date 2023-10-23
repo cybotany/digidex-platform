@@ -96,13 +96,20 @@ def get_secret(secret_name, region_name=None):
 
         try:
             get_secret_value_response = client.get_secret_value(SecretId=secret_name)
+            # Parse the SecretString into a dictionary
+            secret = json.loads(get_secret_value_response['SecretString'])
         except Exception as e:
             # Handle exceptions
             print(e)
             return None
         else:
-            # Decrypts secret and returns the value
-            return get_secret_value_response['SecretString']
+            return secret
 
     else:  # For non-production environment, fetch from .env
-        return config(secret_name, default=None)
+        secret_str = config(secret_name, default="{}")
+        try:
+            # Try parsing the string as JSON
+            return json.loads(secret_str)
+        except json.JSONDecodeError:
+            print(f"Error decoding JSON for secret {secret_name}")
+            return None
