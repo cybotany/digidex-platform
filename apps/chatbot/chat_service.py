@@ -7,7 +7,7 @@ class ChatService:
     def __init__(self):
         self.llm = OpenAI(
             temperature=0.0,
-            openai_api_key=settings.OPENAI_API_KEY,  # Reading the API key from Django settings
+            openai_api_key=settings.OPENAI_API_KEY,
             model_name='gpt-3.5-turbo',
         )
         self.conversation = ConversationChain(
