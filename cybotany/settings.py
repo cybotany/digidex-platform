@@ -12,10 +12,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DJANGO_ENV = os.environ.get('DJANGO_ENV', 'development')
 
 # Fetching grouped secrets
-api_secrets = get_secret('cybotany-api')
-db_secrets = get_secret('cybotany-db')
-aws_secrets = get_secret('cybotany-keys')
-host_secrets = get_secret('cybotany-host')
+api_secrets = get_secret('cybotany-api', environment=DJANGO_ENV)
+db_secrets = get_secret('cybotany-db', environment=DJANGO_ENV)
+aws_secrets = get_secret('cybotany-keys', environment=DJANGO_ENV)
+host_secrets = get_secret('cybotany-host', environment=DJANGO_ENV)
 
 # AWS S3secrets
 SECRET_KEY = aws_secrets['DJANGO_SECRET_KEY']

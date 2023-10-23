@@ -84,24 +84,29 @@ def parse_and_export_sql_file(filename):
 
     print(f"Exported {len(segments) // 2} SQL files.")
 
-def get_secret(secret_name, region_name=None):
-    """Fetch the secret value from AWS Secrets Manager or .env depending on the environment."""
-    
-    DJANGO_ENV = os.environ.get('DJANGO_ENV', 'development')
-    
-    if DJANGO_ENV == 'production':
+
+def get_secret(secret_name, environment=None, region_name=None):
+    """
+    Fetch the secret value from AWS Secrets Manager or .env depending on the environment.
+    """
+    if not environment:
+        environment = os.environ.get('DJANGO_ENV', 'development')
+
+    if environment == 'production':
+        if not region_name:
+            raise ValueError("AWS region must be specified when fetching secrets in production.")
+
         # Fetch the secret from AWS Secrets Manager
         session = boto3.session.Session(region_name=region_name)
         client = session.client(service_name='secretsmanager')
 
         try:
             get_secret_value_response = client.get_secret_value(SecretId=secret_name)
+            secret_string = get_secret_value_response.get('SecretString', "{}")
             # Parse the SecretString into a dictionary
-            secret = json.loads(get_secret_value_response['SecretString'])
+            secret = json.loads(secret_string)
         except Exception as e:
-            # Handle exceptions
-            print(e)
-            return None
+            raise RuntimeError(f"Failed to fetch secret {secret_name} from AWS: {str(e)}") from e
         else:
             return secret
 
@@ -111,5 +116,4 @@ def get_secret(secret_name, region_name=None):
             # Try parsing the string as JSON
             return json.loads(secret_str)
         except json.JSONDecodeError:
-            print(f"Error decoding JSON for secret {secret_name}")
-            return None
+            raise ValueError(f"Error decoding JSON for secret {secret_name}") from None
