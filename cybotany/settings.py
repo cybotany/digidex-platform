@@ -11,13 +11,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Fetch the environment variable indicating the environment.
 DJANGO_ENV = os.environ.get('DJANGO_ENV', 'development')
 
-# Fetch grouped secrets
+# Fetching grouped secrets
 api_secrets = get_secret('cybotany-api')
 db_secrets = get_secret('cybotany-db')
 aws_secrets = get_secret('cybotany-keys')
+host_secrets = get_secret('cybotany-host')
 
 # AWS S3secrets
-SECRET_KEY = aws_secrets('DJANGO_SECRET_KEY')
+SECRET_KEY = aws_secrets['DJANGO_SECRET_KEY']
 AWS_ACCESS_KEY_ID = aws_secrets['AWS_S3_ACCESS_KEY']
 AWS_SECRET_ACCESS_KEY = aws_secrets['AWS_S3_SECRET_ACCESS_KEY']
 AWS_STORAGE_BUCKET_NAME = aws_secrets['AWS_STORAGE_BUCKET_NAME']
@@ -29,7 +30,7 @@ AWS_S3_OBJECT_PARAMETERS = {
 AWS_DEFAULT_ACL = None
 MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
 
-ALLOWED_HOSTS = [get_secret('ALLOWED_HOSTS')]
+ALLOWED_HOSTS = [host_secrets['APP_HOST']]
 
 # API secrets
 OPENAI_API_KEY = api_secrets['OPENAI_API_KEY']
@@ -118,13 +119,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
-
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
@@ -146,6 +140,12 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
 }
+
+# Static files (CSS, JavaScript, Images)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = '/accounts/login/'
