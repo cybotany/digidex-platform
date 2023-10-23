@@ -2,6 +2,10 @@ import os
 import base64
 import uuid
 import re
+import boto3
+from botocore.exceptions import ClientError
+import json
+from decouple import config
 
 from apps.utils.constants import MEASUREMENT_CHOICES
 
@@ -79,3 +83,26 @@ def parse_and_export_sql_file(filename):
             output_file.write(sql_content)
 
     print(f"Exported {len(segments) // 2} SQL files.")
+
+def get_secret(secret_name, region_name=None):
+    """Fetch the secret value from AWS Secrets Manager or .env depending on the environment."""
+    
+    DJANGO_ENV = os.environ.get('DJANGO_ENV', 'development')
+    
+    if DJANGO_ENV == 'production':
+        # Fetch the secret from AWS Secrets Manager
+        session = boto3.session.Session(region_name=region_name)
+        client = session.client(service_name='secretsmanager')
+
+        try:
+            get_secret_value_response = client.get_secret_value(SecretId=secret_name)
+        except Exception as e:
+            # Handle exceptions
+            print(e)
+            return None
+        else:
+            # Decrypts secret and returns the value
+            return get_secret_value_response['SecretString']
+
+    else:  # For non-production environment, fetch from .env
+        return config(secret_name, default=None)
