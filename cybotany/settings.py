@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Fetch the environment variable indicating the environment.
 DJANGO_ENV = os.environ.get('DJANGO_ENV', 'development')
-REGION_NAME = os.environ.get('REGION_NAME', 'us-east-1')
+REGION_NAME = os.environ.get('REGION_NAME', 'us-east-1d')
 
 # Fetching grouped secrets
 api_secrets = get_secret('cybotany-api', environment=DJANGO_ENV, region_name=REGION_NAME)
