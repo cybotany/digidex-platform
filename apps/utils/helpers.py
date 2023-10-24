@@ -85,7 +85,7 @@ def parse_and_export_sql_file(filename):
     print(f"Exported {len(segments) // 2} SQL files.")
 
 
-def get_secret(secret_name, environment=None, region_name=None):
+def get_secret(secret_name, environment=None, region_name='us-east-1'):
     """
     Fetch the secret value from AWS Secrets Manager or .env depending on the environment.
     """
