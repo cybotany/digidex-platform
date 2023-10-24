@@ -38,6 +38,17 @@ OPENAI_API_KEY = api_secrets['OPENAI_API_KEY']
 OPEN_WEATHER_MAP_API_KEY = api_secrets['OPEN_WEATHER_MAP_API_KEY']
 PLANT_ID_API_KEY = api_secrets['PLANT_ID_API_KEY']
 
+# Environment specific settings
+if DJANGO_ENV == 'production':
+    DEBUG = False
+    # Use Amazon S3 for static files in production
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/static/"
+else:
+    DEBUG = True
+    STATIC_URL = '/static/'
+
+
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -123,18 +134,6 @@ USE_TZ = True
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-# Environment specific settings
-if DJANGO_ENV == 'production':
-    DEBUG = False
-    # Use Amazon S3 for static files in production
-    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-    STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/static/"
-    # Add any other production-specific static settings here.
-
-else:
-    DEBUG = True
-    STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
