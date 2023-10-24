@@ -85,35 +85,39 @@ def parse_and_export_sql_file(filename):
     print(f"Exported {len(segments) // 2} SQL files.")
 
 
-def get_secret(secret_name, environment=None, region_name='us-east-1'):
+def get_secret(secret_name, environment=None, region_name=None):
     """
     Fetch the secret value from AWS Secrets Manager or .env depending on the environment.
     """
+    # Determine environment
     if not environment:
         environment = os.environ.get('DJANGO_ENV', 'development')
 
+    # Fetching secret for production
     if environment == 'production':
         if not region_name:
             raise ValueError("AWS region must be specified when fetching secrets in production.")
-
-        # Fetch the secret from AWS Secrets Manager
-        session = boto3.session.Session(region_name=region_name)
-        client = session.client(service_name='secretsmanager')
+        
+        # Create a Secrets Manager client
+        client = boto3.client('secretsmanager', region_name=region_name)
 
         try:
-            get_secret_value_response = client.get_secret_value(SecretId=secret_name)
-            secret_string = get_secret_value_response.get('SecretString', "{}")
-            # Parse the SecretString into a dictionary
-            secret = json.loads(secret_string)
+            response = client.get_secret_value(SecretId=secret_name)
+            # Check if SecretString exists in the response
+            if 'SecretString' in response:
+                secret = response['SecretString']
+                # Return parsed JSON of the secret
+                return json.loads(secret)
+            else:
+                raise ValueError("SecretString not found in the response from Secrets Manager")
         except Exception as e:
             raise RuntimeError(f"Failed to fetch secret {secret_name} from AWS: {str(e)}") from e
-        else:
-            return secret
 
-    else:  # For non-production environment, fetch from .env
+    # Fetching secret for non-production environments
+    else:
         secret_str = config(secret_name, default="{}")
         try:
-            # Try parsing the string as JSON
+            # Parse and return the secret string as JSON
             return json.loads(secret_str)
         except json.JSONDecodeError:
             raise ValueError(f"Error decoding JSON for secret {secret_name}") from None

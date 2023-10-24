@@ -10,14 +10,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Fetch the environment variable indicating the environment.
 DJANGO_ENV = os.environ.get('DJANGO_ENV', 'development')
+REGION_NAME = os.environ.get('REGION_NAME', 'us-east-1')
 
 # Fetching grouped secrets
-api_secrets = get_secret('cybotany-api', environment=DJANGO_ENV)
-db_secrets = get_secret('cybotany-db', environment=DJANGO_ENV)
-aws_secrets = get_secret('cybotany-keys', environment=DJANGO_ENV)
-host_secrets = get_secret('cybotany-host', environment=DJANGO_ENV)
+api_secrets = get_secret('cybotany-api', environment=DJANGO_ENV, region_name=REGION_NAME)
+db_secrets = get_secret('cybotany-db', environment=DJANGO_ENV, region_name=REGION_NAME)
+aws_secrets = get_secret('cybotany-keys', environment=DJANGO_ENV, region_name=REGION_NAME)
+host_secrets = get_secret('cybotany-host', environment=DJANGO_ENV, region_name=REGION_NAME)
 
-# AWS S3secrets
+# AWS S3 secrets
 SECRET_KEY = aws_secrets['DJANGO_SECRET_KEY']
 AWS_ACCESS_KEY_ID = aws_secrets['AWS_S3_ACCESS_KEY']
 AWS_SECRET_ACCESS_KEY = aws_secrets['AWS_S3_SECRET_ACCESS_KEY']
