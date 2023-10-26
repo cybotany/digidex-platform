@@ -110,7 +110,6 @@ def get_secret(secret_name, environment=None, region_name=None):
             # Check if SecretString exists in the response
             if 'SecretString' in response:
                 secret = response['SecretString']
-                print(json.loads(secret))
                 return json.loads(secret)
             else:
                 raise ValueError("SecretString not found in the response from Secrets Manager")
