@@ -99,14 +99,18 @@ def get_secret(secret_name, environment=None, region_name=None):
             raise ValueError("AWS region must be specified when fetching secrets in production.")
         
         # Create a Secrets Manager client
-        client = boto3.client('secretsmanager', region_name=region_name)
+        session = boto3.session.Session()
+        client = session.client(
+            service_name='secretsmanager',
+            region_name=region_name
+        )
 
         try:
             response = client.get_secret_value(SecretId=secret_name)
             # Check if SecretString exists in the response
             if 'SecretString' in response:
                 secret = response['SecretString']
-                # Return parsed JSON of the secret
+                print(json.loads(secret))
                 return json.loads(secret)
             else:
                 raise ValueError("SecretString not found in the response from Secrets Manager")
