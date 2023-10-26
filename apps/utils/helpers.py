@@ -120,7 +120,6 @@ def get_secret(secret_name, environment=None, region_name=None):
     else:
         secret_str = config(secret_name, default="{}")
         try:
-            # Parse and return the secret string as JSON
             return json.loads(secret_str)
         except json.JSONDecodeError:
             raise ValueError(f"Error decoding JSON for secret {secret_name}") from None
