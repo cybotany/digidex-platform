@@ -18,6 +18,11 @@ db_secrets = get_secret('cybotany-db', environment=DJANGO_ENV, region_name=REGIO
 aws_secrets = get_secret('cybotany-keys', environment=DJANGO_ENV, region_name=REGION_NAME)
 host_secrets = get_secret('cybotany-host', environment=DJANGO_ENV, region_name=REGION_NAME)
 
+# API secrets
+OPENAI_API_KEY = api_secrets['OPENAI_API_KEY']
+OPEN_WEATHER_MAP_API_KEY = api_secrets['OPEN_WEATHER_MAP_API_KEY']
+PLANT_ID_API_KEY = api_secrets['PLANT_ID_API_KEY']
+
 # AWS S3 secrets
 SECRET_KEY = aws_secrets['DJANGO_SECRET_KEY']
 AWS_ACCESS_KEY_ID = aws_secrets['AWS_S3_ACCESS_KEY']
@@ -32,11 +37,6 @@ AWS_DEFAULT_ACL = None
 MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
 
 ALLOWED_HOSTS = [host_secrets['APP_HOST']]
-
-# API secrets
-OPENAI_API_KEY = api_secrets['OPENAI_API_KEY']
-OPEN_WEATHER_MAP_API_KEY = api_secrets['OPEN_WEATHER_MAP_API_KEY']
-PLANT_ID_API_KEY = api_secrets['PLANT_ID_API_KEY']
 
 # Environment specific settings
 if DJANGO_ENV == 'production':
