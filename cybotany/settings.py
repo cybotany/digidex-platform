@@ -19,11 +19,11 @@ aws_secrets = get_secret('cybotany-keys', environment=DJANGO_ENV, region_name=RE
 host_secrets = get_secret('cybotany-host', environment=DJANGO_ENV, region_name=REGION_NAME)
 
 # AWS S3 secrets
-SECRET_KEY = aws_secrets['django_secret_key'] # DJANGO_SECRET_KEY 
-AWS_ACCESS_KEY_ID = aws_secrets['aws_s3_access_key'] # AWS_S3_ACCESS_KEY
-AWS_SECRET_ACCESS_KEY = aws_secrets['aws_s3_secret_access_key'] # AWS_S3_SECRET_ACCESS_KEY
-AWS_STORAGE_BUCKET_NAME = aws_secrets['aws_storage_bucket'] # AWS_STORAGE_BUCKET_NAME
-AWS_S3_REGION_NAME = aws_secrets['aws_s3_region_name'] # AWS_S3_REGION_NAME
+SECRET_KEY = aws_secrets['DJANGO_SECRET_KEY']  
+AWS_ACCESS_KEY_ID = aws_secrets['AWS_S3_ACCESS_KEY']
+AWS_SECRET_ACCESS_KEY = aws_secrets['AWS_S3_SECRET_ACCESS_KEY']
+AWS_STORAGE_BUCKET_NAME = aws_secrets['AWS_STORAGE_BUCKET_NAME'] 
+AWS_S3_REGION_NAME = aws_secrets['AWS_S3_REGION_NAME'] 
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
