@@ -15,8 +15,8 @@ COPY requirements.txt /app/
 RUN pip install --upgrade pip && \
     pip install gunicorn && \
     pip install -r requirements.txt && \
-    echo 'export DJANGO_ENV="production"' >> /root/.bashrc && \
-    echo 'export REGION_NAME="us-east-1"' >> /root/.bashrc
+    echo 'export DJANGO_ENV="production"' >> ~/.bashrc && \
+    echo 'export REGION_NAME="us-east-1"' >> ~/.bashrc
 
 # Copy the content of the local src directory to the working directory
 COPY . /app/
