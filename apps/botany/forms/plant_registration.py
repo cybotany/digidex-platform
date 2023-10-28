@@ -7,16 +7,21 @@ class PlantRegistrationForm(forms.ModelForm):
     """
     Form for users to register their plant.
     """
-    nfc_tag = forms.CharField(required=False)
-    image = forms.ImageField(required=False)
+    nfc_tag = forms.CharField(
+        required=True,
+        widget=forms.HiddenInput()
+    )
     tsn = forms.CharField(
         required=False,
         widget=forms.TextInput(attrs={'id': 'tsnField'})
     )
+    image = forms.ImageField(
+        required=False
+    )
 
     class Meta:
         model = Plant
-        fields = ('name', 'description', 'image', 'quantity', 'nfc_tag', 'tsn')
+        fields = ('name', 'description', 'image', 'quantity', 'tsn')
 
     def __init__(self, *args, **kwargs):
             """
@@ -36,7 +41,11 @@ class PlantRegistrationForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super().clean()
         tsn_value = cleaned_data.get('tsn')
-        
+        nfc_value = cleaned_data.get('nfc_tag')
+
+        if not nfc_value:
+            raise forms.ValidationError("An NFC Tag is required!")
+
         if not tsn_value:
             cleaned_data['tsn'] = None
         else:
