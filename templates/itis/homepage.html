@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="container mt-5">
+        <!-- Kingdoms Tabs -->
+        <ul class="nav nav-tabs" id="kingdomTabs" role="tablist">
+            {% for kingdom in kingdoms %}
+            <li class="nav-item" role="presentation">
+                <a class="nav-link{% if forloop.first %} active{% endif %}" id="{{ kingdom.name|slugify }}-tab" data-toggle="tab" href="#{{ kingdom.name|slugify }}" role="tab" aria-controls="{{ kingdom.name|slugify }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">{{ kingdom.kingdom_name }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <!-- Kingdoms Content -->
+        <div class="tab-content" id="kingdomTabsContent">
+            {% for kingdom in kingdoms %}
+            <div class="tab-pane fade{% if forloop.first %} show active{% endif %}" id="{{ kingdom.name|slugify }}" role="tabpanel" aria-labelledby="{{ kingdom.name|slugify }}-tab">
+                <!-- Content for each kingdom can go here -->
+                <h2>{{ kingdom.kingdom_name }}</h2>
+                <p>Description or content related to the {{ kingdom.kingdom_name }} kingdom.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
