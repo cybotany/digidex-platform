@@ -11,20 +11,16 @@
     --core-info-color: #2196F3;
 
     /* Taxonomy app colors */
-    --taxonomy-primary-color: #F7F9FC;
-    --taxonomy-secondary-color: #4CAF50;
+    --taxonomy-primary-color: #4CAF50;
 
     /* Device app colors */
-    --devices-primary-color: #2D2D2D;
-    --devices-secondary-color: #007BFF;
+    --devices-primary-color: #007BFF;
 
     /* Party app colors */
-    --party-primary-color: #FFD700;
-    --party-secondary-color: #FF69B4;
+    --party-primary-color: #E76D6B;
 
     /* Chatbot app colors */
     --chatbot-primary-color: #1A1A2E;
-    --chatbot-secondary-color: #21BF73;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
