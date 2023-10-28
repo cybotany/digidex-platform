@@ -12,11 +12,10 @@
             {% endfor %}
         </ul>
 
-        <!-- Kingdoms Content -->
+        <!-- Kingdom Content -->
         <div class="tab-content" id="kingdomTabsContent">
             {% for kingdom in kingdoms %}
             <div class="tab-pane fade{% if forloop.first %} show active{% endif %}" id="{{ kingdom.name|slugify }}" role="tabpanel" aria-labelledby="{{ kingdom.name|slugify }}-tab">
-                <!-- Content for each kingdom can go here -->
                 <h2>{{ kingdom.kingdom_name }}</h2>
                 <p>Description or content related to the {{ kingdom.kingdom_name }} kingdom.</p>
             </div>
