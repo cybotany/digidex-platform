@@ -9,28 +9,28 @@
     --success-color: #4CAF50;
     --info-color: #2196F3;
 }
-  
-  
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
-  
+
 body {
     font-family: 'Open Sans', sans-serif;
     background-color: var(--neutral-light);
     color: var(--neutral-dark);
     line-height: 1.6;
 }
-  
+
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Roboto', sans-serif;
 }
-  
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 15px;
 }
-  
+
+/* Navigation Styles */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -38,17 +38,18 @@ h1, h2, h3, h4, h5, h6 {
     background-color: var(--primary-color);
     padding: 1rem 0;
 }
-  
-.navbar a {
+
+.navbar a, .footer a {
     color: white;
     text-decoration: none;
     padding: 0 1rem;
 }
-  
-.navbar a:hover {
+
+.navbar a:hover, .footer a:hover {
     color: var(--accent-color);
 }
-  
+
+/* Hero Section */
 .hero {
     background-image: url("static/img/test-plant.jpg");
     background-size: cover;
@@ -61,17 +62,18 @@ h1, h2, h3, h4, h5, h6 {
     color: white;
     padding: 0 2rem;
 }
-  
+
 .hero h1 {
     font-size: 4rem;
 }
-  
+
 .hero p {
     font-size: 1.5rem;
     max-width: 800px;
     margin: 0 auto;
 }
-  
+
+/* Button Styles */
 .btn {
     background-color: var(--secondary-color);
     color: white;
@@ -82,33 +84,25 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1rem;
     transition: background-color 0.3s;
 }
-  
+
 .btn:hover {
     background-color: var(--accent-color);
 }
-  
+
+/* Footer Styles */
 .footer {
     background-color: var(--primary-color);
     color: white;
     padding: 1rem 0;
     text-align: center;
 }
-  
-.footer a {
-    color: white;
-    text-decoration: none;
-    margin: 0 0.5rem;
-}
-  
-.footer a:hover {
-    color: var(--accent-color);
-}
-    
+
+/* Dropdown Styles */
 .dropdown {
     position: relative;
     display: inline-block;
 }
-  
+
 .dropbtn {
     background-color: var(--primary-color);
     color: white;
@@ -117,7 +111,7 @@ h1, h2, h3, h4, h5, h6 {
     border: none;
     cursor: pointer;
 }
-  
+
 .dropdown-content {
     display: none;
     position: absolute;
@@ -126,34 +120,34 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
-  
+
 .dropdown-content a {
     color: var(--neutral-dark);
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
-  
+
 .dropdown-content a:hover {
     background-color: var(--accent-color);
 }
-  
+
 .dropdown:hover .dropdown-content {
     display: block;
 }
-  
+
 .dropdown:hover .dropbtn {
     background-color: var(--secondary-color);
 }
 
+/* Other Styles */
 .plant-card-image {
-    width: 100%;      /* Ensures the image takes the full width of its container */
-    height: 200px;    /* Set a fixed height */
-    object-fit: cover; /* Ensures the image covers the entire content box */
-    margin: 10px;     /* Adds space around the image */
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    margin: 10px;
 }
 
-/* Styling for the NFC_Tag bubble */
 .plant-link-bubble {
     display: inline-block;
     padding: 5px 10px;
@@ -162,4 +156,18 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 15px;
     font-size: 0.8rem;
     margin-top: 5px;
+}
+
+.row-equal-height {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.column-equal-width {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
