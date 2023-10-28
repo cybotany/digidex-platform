@@ -1,13 +1,30 @@
 :root {
-    --primary-color: #00693E;
-    --secondary-color: #1DB954;
-    --accent-color: #8AD7A0;
-    --neutral-light: #F2F2F2;
-    --neutral-dark: #333333;
-    --error-color: #E53935;
-    --warning-color: #FFC107;
-    --success-color: #4CAF50;
-    --info-color: #2196F3;
+    /* Core app colors */
+    --core-primary-color: #00693E;
+    --core-secondary-color: #1DB954;
+    --core-accent-color: #8AD7A0;
+    --core-neutral-light: #F2F2F2;
+    --core-neutral-dark: #333333;
+    --core-error-color: #E53935;
+    --core-warning-color: #FFC107;
+    --core-success-color: #4CAF50;
+    --core-info-color: #2196F3;
+
+    /* Taxonomy app colors */
+    --taxonomy-primary-color: #F7F9FC;
+    --taxonomy-secondary-color: #4CAF50;
+
+    /* Device app colors */
+    --devices-primary-color: #2D2D2D;
+    --devices-secondary-color: #007BFF;
+
+    /* Party app colors */
+    --party-primary-color: #FFD700;
+    --party-secondary-color: #FF69B4;
+
+    /* Chatbot app colors */
+    --chatbot-primary-color: #1A1A2E;
+    --chatbot-secondary-color: #21BF73;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
@@ -177,24 +194,23 @@ h1, h2, h3, h4, h5, h6 {
     height: 100%;
     width: 100%;
     text-decoration: none;
-    color: white; /* Text color set to white */
+    color: white;
     padding: 2rem;
-    border-radius: 5px; /* Adds rounded corners to the tiles */
+    border-radius: 5px;
 }
 
-/* Individual tile background colors using variables */
 .tile-link.taxonomy {
-    background-color: var(--primary-color); /* Using primary color for taxonomy tile */
+    background-color: var(--taxonomy-primary-color);
 }
 
 .tile-link.devices {
-    background-color: var(--secondary-color); /* Using secondary color for devices tile */
+    background-color: var(--devices-primary-color);
 }
 
 .tile-link.party {
-    background-color: var(--accent-color); /* Using accent color for party tile */
+    background-color: var(--party-primary-color);
 }
 
 .tile-link.chatbot {
-    background-color: var(--info-color); /* Using info color for chatbot tile */
+    background-color: var(--chatbot-primary-color);
 }
