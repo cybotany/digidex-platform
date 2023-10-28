@@ -6,9 +6,8 @@
     <!-- First row -->
     <div class="row row-equal-height mb-5">
         <div class="col">
-            <a href="{% url 'botany:home' %}" class="tile-link"> <!-- Update to link to itis:home-->
+            <a href="{% url 'botany:home' %}" class="tile-link taxonomy"> <!-- Update to link to itis:home-->
                 <h1 class="mb-4">Taxonomy</h1>
-                <p class="lead mb-5">Navigates to ITIS app</p>
             </a>
         </div>
     </div>
@@ -16,15 +15,13 @@
     <!-- Middle row with two columns -->
     <div class="row row-equal-height mb-5">
         <div class="col column-equal-width">
-            <a href="{% url 'cea:home' %}" class="tile-link">
+            <a href="{% url 'cea:home' %}" class="tile-link devices">
                 <h1 class="mb-4">Devices</h1>
-                <p class="lead mb-5">Devices linked to this user</p>
             </a>
         </div>
         <div class="col column-equal-width">
-            <a href="{% url 'botany:home' %}" class="tile-link">
+            <a href="{% url 'botany:home' %}" class="tile-link party">
                 <h1 class="mb-4">Party</h1>
-                <p class="lead mb-5">Party of linked pets or plants</p>
             </a>
         </div>
     </div>
@@ -32,9 +29,8 @@
     <!-- Third row -->
     <div class="row row-equal-height">
         <div class="col">
-            <a href="{% url 'chatbot:home' %}" class="tile-link">
+            <a href="{% url 'chatbot:home' %}" class="tile-link chatbot">
                 <h1 class="mb-4">Chatbot</h1>
-                <p class="lead mb-5">A.I assistant</p>
             </a>
         </div>
     </div>
