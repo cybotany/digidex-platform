@@ -6,25 +6,33 @@
     <!-- First row -->
     <div class="row row-equal-height mb-5">
         <div class="col">
-            <!-- You can add some content or an image here for the top row -->
+            <a href="{% url 'itis_app_url_name' %}" class="tile-link">
+                <!-- You can add some content or an image here for the top row -->
+            </a>
         </div>
     </div>
 
     <!-- Middle row with two columns -->
     <div class="row row-equal-height mb-5">
         <div class="col column-equal-width">
-            <h1 class="mb-4">Welcome to CyBotany!</h1>
-            <p class="lead mb-5">Your go-to platform for managing and growing your plants with the help of artificial intelligence.</p>
+            <a href="{% url 'cybotany_app_url_name' %}" class="tile-link">
+                <h1 class="mb-4">Welcome to CyBotany!</h1>
+                <p class="lead mb-5">Your go-to platform for managing and growing your plants with the help of artificial intelligence.</p>
+            </a>
         </div>
         <div class="col column-equal-width">
-            <!-- You can add another content section or a relevant image here for better user engagement -->
+            <a href="{% url 'other_app_url_name' %}" class="tile-link">
+                <!-- You can add another content section or a relevant image here for better user engagement -->
+            </a>
         </div>
     </div>
 
     <!-- Third row -->
     <div class="row row-equal-height">
         <div class="col">
-            <!-- You can add some content or a CTA (Call to Action) button here for the bottom row -->
+            <a href="{% url 'chatbot_app_url_name' %}" class="tile-link">
+                <!-- You can add some content or a CTA (Call to Action) button here for the bottom row -->
+            </a>
         </div>
     </div>
 </div>
