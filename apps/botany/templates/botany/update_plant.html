@@ -1,0 +1,49 @@
+{% extends 'botany/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2> Update Plant </h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <p>
+            {{ form.name.label_tag }} {{ form.name }}
+        </p>
+        <p>
+            {{ form.description.label_tag }} {{ form.description }}
+        </p>
+        <p>
+            {{ form.image.label_tag }} {{ form.image }}
+        </p>
+        <p>
+            {{ form.quantity.label_tag }} {{ form.quantity }}
+        </p>
+        <p>
+            {{ form.nfc_tag.label_tag }} {{ form.nfc_tag }}
+        </p>
+        <p>
+            {{ form.watered.label_tag }} {{ form.watered }}
+        </p>
+        <p>
+            {{ form.fertilized.label_tag }} {{ form.fertilized }}
+        </p>
+        <p>
+            {{ form.tsn.label_tag }}
+            <select name="{{ form.tsn.name }}" id="tsnField" style="width:300px;">
+                <!-- This can be left empty, options will be populated via AJAX -->
+                <!-- Optionally, you can preselect the current TSN value -->
+                <option value="{{ plant.tsn.tsn }}" selected>{{ plant.tsn.some_descriptive_field }}</option>
+            </select>
+        </p>
+        <script src="{% static 'js/tsn_field.js' %}"></script>
+
+        <!-- Your additional image form -->
+        <p>
+            {{ image_form.image.label_tag }} {{ image_form.image }}
+        </p>
+
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+</div>
+{% endblock %}

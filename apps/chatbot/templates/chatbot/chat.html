@@ -1,0 +1,28 @@
+{% extends 'chatbot/base.html' %}
+{% load static %}
+
+{% block content %}
+  <h2>Chatbot</h2>
+
+  <div id="chatbox">
+    {% for message in messages %}
+      <div class="message {% if forloop.first %}user-message{% else %}chatbot-message{% endif %}">{{ message }}</div>
+    {% endfor %}
+  </div>
+
+  <form id="chat-form" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+    <div class="input-group">
+      <input id="chat-input" type="text" name="message">
+      
+      <!-- For uploading an image -->
+      <label for="image-upload" class="upload-label">Upload or Take a Photo</label>
+      <input id="image-upload" type="file" name="image" accept="image/*" capture>
+      
+      <button type="submit" class="send-button"></button>
+    </div>
+  </form>
+
+  <script src="{% static 'js/chatbot.js' %}"></script>
+
+{% endblock content %}

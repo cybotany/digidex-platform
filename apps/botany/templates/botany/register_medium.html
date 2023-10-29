@@ -1,0 +1,23 @@
+{% extends 'botany/base.html' %}
+
+{% block title %}Medium{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1 class="my-4">Register Growing Medium</h1>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    {% if form.errors %}
+      <p style="color: red;">
+        Your submission has errors. Please correct them and try again.
+      </p>
+    {% endif %}
+
+    <button type="submit" class="btn btn-primary">Register Medium</button>
+  </form>
+
+</div>
+{% endblock %}

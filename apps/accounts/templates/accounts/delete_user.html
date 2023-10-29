@@ -1,0 +1,20 @@
+{% extends "accounts/base.html" %}
+
+{% block title %} Delete User Profile {% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Delete User Proile</h1>
+
+    <p>Are you sure you want to delete your profile? This action cannot be undone.</p>
+
+    <div class="d-flex justify-content-center">
+        <form method="post">
+            {% csrf_token %}
+            <input type="submit" value="Yes, Delete My Profile">
+        </form>
+        
+        <a href="{% url 'accounts:profile' %}">No, Keep My Profile</a>
+    </div>
+</div>
+{% endblock %}

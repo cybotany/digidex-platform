@@ -1,0 +1,39 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+
+{% block content %}
+    <div class="container text-center py-5">
+        <!-- First row (Party) -->
+        <div class="row row-equal-height">
+            <div class="col">
+                <a href="{% url 'botany:home' %}" class="tile-link party">
+                    <h1 class="mb-4">Party</h1>
+                </a>
+            </div>
+        </div>
+
+        <!-- Middle row (Devices and Taxonomy) -->
+        <div class="row row-equal-height">
+            <div class="col-md-6 column-equal-width">
+                <a href="{% url 'cea:home' %}" class="tile-link devices">
+                    <h1 class="mb-4">Devices</h1>
+                </a>
+            </div>
+            <div class="col-md-6 column-equal-width">
+                <a href="{% url 'itis:home' %}" class="tile-link taxonomy">
+                    <h1 class="mb-4">Taxonomy</h1>
+                </a>
+            </div>
+        </div>
+
+        <!-- Third row (Chatbot)-->
+        <div class="row row-equal-height">
+            <div class="col">
+                <a href="{% url 'chatbot:home' %}" class="tile-link chatbot">
+                    <h1 class="mb-4">Chatbot</h1>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

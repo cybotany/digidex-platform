@@ -1,0 +1,19 @@
+{% extends "botany/base.html" %}
+
+{% block title %} Delete Plant {% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Delete Plant</h1>
+
+    <p>Are you sure you want to delete the plant "{{ plant.name }}"?</p>
+
+    <div class="d-flex justify-content-center">
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger me-2">Yes, delete</button>
+            <a href="{% url 'botany:describe_plant' plant.id %}" class="btn btn-secondary">No, go back</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
