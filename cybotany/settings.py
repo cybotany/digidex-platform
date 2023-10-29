@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     'apps.utils',
     'apps.nfc',
     'apps.itis',
+    'apps.core',
     'bootstrap5',
 ]
 
