@@ -7,7 +7,7 @@ class ITISHomepageView(LoginRequiredMixin, TemplateView):
     """
     View for rendering the plant module homepage.
     """
-    template_name = 'homepage.html'
+    template_name = 'itis/homepage.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

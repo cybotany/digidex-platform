@@ -9,7 +9,7 @@ class RegisterMediumView(FormView):
     """
     View for registering a new growing medium.
     """
-    template_name = 'register_medium.html'
+    template_name = 'botany/register_medium.html'
     form_class = GrowingMediumForm
 
     def get_context_data(self, **kwargs):

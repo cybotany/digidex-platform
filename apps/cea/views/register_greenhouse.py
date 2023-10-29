@@ -6,7 +6,7 @@ from apps.cea.forms import GreenhouseRegistrationForm
 
 
 class RegisterGreenhouseView(LoginRequiredMixin, View):
-    template_name = 'new_greenhouse.html'
+    template_name = 'cea/new_greenhouse.html'
 
     def get(self, request):
         form = GreenhouseRegistrationForm()
