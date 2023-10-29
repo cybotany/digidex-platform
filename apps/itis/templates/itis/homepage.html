@@ -7,7 +7,7 @@
   <ul class="nav nav-tabs" id="kingdomTabs" role="tablist">
     {% for kingdom in kingdoms %}
       <li class="nav-item" role="presentation">
-        <a class="nav-link{% if forloop.first %} active{% endif %}" id="{{ kingdom.kingdom_name|slugify }}-tab" data-toggle="tab" href="#{{ kingdom.kingdom_name|slugify }}" role="tab" aria-controls="{{ kingdom.kingdom_name|slugify }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">{{ kingdom.kingdom_name }}</a>
+        <a class="nav-link{% if forloop.first %} active{% endif %}" id="{{ kingdom.kingdom_name|slugify }}-tab" data-bs-toggle="tab" href="#{{ kingdom.kingdom_name|slugify }}" role="tab" aria-controls="{{ kingdom.kingdom_name|slugify }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">{{ kingdom.kingdom_name }}</a>
       </li>
     {% endfor %}
   </ul>
