@@ -143,9 +143,7 @@ REST_FRAMEWORK = {
 
 # Static files (CSS, JavaScript, Images)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
+
 
 LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = '/accounts/login/'
