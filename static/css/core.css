@@ -11,13 +11,13 @@
     --core-info-color: #2196F3;
 
     /* Taxonomy app colors */
-    --taxonomy-primary-color: #4CAF50;
+    --taxonomy-primary-color: #E76D6B;
 
     /* Device app colors */
     --devices-primary-color: #007BFF;
 
     /* Party app colors */
-    --party-primary-color: #E76D6B;
+    --party-primary-color: #4CAF50; 
 
     /* Chatbot app colors */
     --chatbot-primary-color: #FFE38E;
