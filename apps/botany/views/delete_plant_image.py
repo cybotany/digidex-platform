@@ -9,7 +9,7 @@ class DeletePlantImageView(DeleteView):
     """
     model = PlantImage
     context_object_name = 'image'
-    template_name = 'botany/delete_image.html'
+    template_name = 'delete_image.html'
 
     def get_success_url(self):
         """

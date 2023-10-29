@@ -9,7 +9,7 @@ class RegisterPlantView(FormView):
     """
     View for registering new plants.
     """
-    template_name = 'botany/register_plant.html'
+    template_name = 'register_plant.html'
     form_class = PlantRegistrationForm
 
     def form_valid(self, form):

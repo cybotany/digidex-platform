@@ -10,7 +10,7 @@ class DeletePlantView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
     """
     View for rendering the page used to confirm the deletion of registered plants.
     """
-    template_name = 'botany/delete_plant.html'
+    template_name = 'delete_plant.html'
 
     def get(self, request, *args, **kwargs):
         """

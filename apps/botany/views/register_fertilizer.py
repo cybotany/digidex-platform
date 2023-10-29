@@ -6,7 +6,7 @@ from apps.botany.forms import GrowingFertilizerForm
 
 
 class RegisterFertilizerView(FormView):
-    template_name = 'botany/register_fertilizer.html'
+    template_name = 'register_fertilizer.html'
     form_class = GrowingFertilizerForm
 
     def form_valid(self, form):

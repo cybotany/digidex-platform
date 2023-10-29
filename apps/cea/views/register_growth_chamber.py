@@ -6,7 +6,7 @@ from apps.cea.forms import GrowthChamberRegistrationForm
 
 
 class RegisterGrowthChamberView(LoginRequiredMixin, View):
-    template_name = 'cea/new_growth_chamber.html'
+    template_name = 'new_growth_chamber.html'
 
     def get(self, request):
         form = GrowthChamberRegistrationForm()

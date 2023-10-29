@@ -12,7 +12,7 @@ class UpdatePlantView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     """
     model = Plant
     form_class = PlantUpdateForm
-    template_name = 'botany/update_plant.html'
+    template_name = 'update_plant.html'
     success_url = reverse_lazy('botany:home')
 
     def form_valid(self, form):

@@ -9,7 +9,7 @@ class RegisterComponentView(FormView):
     """
     View for registering a new growing medium component.
     """
-    template_name = 'botany/register_component.html'
+    template_name = 'register_component.html'
     form_class = GrowingComponentForm
 
     def form_valid(self, form):
