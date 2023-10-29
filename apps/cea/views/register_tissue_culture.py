@@ -6,7 +6,7 @@ from apps.cea.forms import TissueCultureRegistrationForm
 
 
 class RegisterTissueCultureChamberView(LoginRequiredMixin, View):
-    template_name = 'new_tissue_culture_chamber.html'
+    template_name = 'cea/new_tissue_culture_chamber.html'
 
     def get(self, request):
         form = TissueCultureRegistrationForm()

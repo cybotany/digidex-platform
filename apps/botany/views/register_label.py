@@ -7,7 +7,7 @@ from apps.botany.forms import GrowingLabelForm
 
 
 class RegisterLabelView(FormView):
-    template_name = 'register_label.html'
+    template_name = 'botany/register_label.html'
     form_class = GrowingLabelForm
 
     def form_valid(self, form):
