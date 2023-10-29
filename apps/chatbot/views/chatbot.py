@@ -6,7 +6,7 @@ from apps.chatbot.models import ChatSession
 
 
 class ChatbotView(LoginRequiredMixin, View):
-    template_name = 'chatbot/chat.html'
+    template_name = 'chat.html'
 
     def get(self, request):
         # Create a session_id if doesn't exist already

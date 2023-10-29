@@ -9,7 +9,7 @@ from apps.accounts.forms import ProfileChangeForm
 class ChangeProfileView(LoginRequiredMixin, UpdateView):
     model = Profile
     form_class = ProfileChangeForm
-    template_name = 'accounts/change_profile.html'
+    template_name = 'change_profile.html'
     success_url = reverse_lazy('accounts:profile')
 
     def get_object(self, queryset=None):
