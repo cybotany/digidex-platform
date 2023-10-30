@@ -23,6 +23,8 @@ class Hierarchy(models.Model):
     )
     taxonomic_unit = models.ForeignKey(
         'TaxonomicUnits',
+        null=True,
+        blank=True,
         on_delete=models.CASCADE,
         verbose_name="Taxonomic Serial Number",
         help_text="The TSN for the hierarchy entry. The unique identifier for an occurrence of Taxonomic Units."
