@@ -18,6 +18,8 @@ class TaxonUnitTypes(models.Model):
 
     kingdom = models.ForeignKey(
         'Kingdoms',
+        null=True,
+        blank=True,
         on_delete=models.CASCADE,
         verbose_name="Kingdom"
     )
