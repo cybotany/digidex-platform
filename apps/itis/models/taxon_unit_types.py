@@ -21,10 +21,13 @@ class TaxonUnitTypes(models.Model):
         null=True,
         blank=True,
         on_delete=models.CASCADE,
-        verbose_name="Kingdom"
+        verbose_name="Kingdom",
+        db_column='kingdom_id'
     )
     rank_id = models.SmallIntegerField(
-        primary_key=True,
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE,
         verbose_name="Rank ID"
     )
     rank_name = models.CharField(
