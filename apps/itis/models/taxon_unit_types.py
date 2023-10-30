@@ -1,6 +1,5 @@
 from django.db import models
 from django.urls import reverse
-from apps.utils.constants import KINGDOM_CHOICES
 
 
 class TaxonUnitTypes(models.Model):
@@ -9,21 +8,21 @@ class TaxonUnitTypes(models.Model):
     rank order for an occurrence of the Taxonomic Units.
 
     Attributes:
-        kingdom_id (int): A unique identifier for the highest level of the taxonomic hierarchy structure.
+        kingdom (ForeignKey): A reference to the Kingdoms model.
         rank_id (int): A unique identifier for a specific level within the taxonomic hierarchy.
         rank_name (str): The label associated with the specific level of a taxonomic hierarchy.
-        direct_parent_rank_id (int): The taxonomic serial number for the direct parent of the subject occurrence of Taxonomic Units.
-        required_parent_rank_id (int): A unique identifier for a specific level within the taxonomic hierarchy.
-        update_date (datetime): The date on which a record is modified. The purpose of this element is to provide assistance to those downloading data on a periodic basis.
+        direct_parent_rank (ForeignKey): A reference to another TaxonUnitTypes which is the direct parent rank.
+        required_parent_rank (ForeignKey): A reference to another TaxonUnitTypes which is the required parent rank.
+        update_date (datetime): The date on which a record is modified.
     """
 
-    kingdom_id = models.IntegerField(
-        choices=KINGDOM_CHOICES,
-        null=False,
-        blank=False,
-        verbose_name="Kingdom ID"
+    kingdom = models.ForeignKey(
+        'Kingdoms',
+        on_delete=models.CASCADE,
+        verbose_name="Kingdom"
     )
     rank_id = models.SmallIntegerField(
+        primary_key=True,
         verbose_name="Rank ID"
     )
     rank_name = models.CharField(
@@ -32,15 +31,21 @@ class TaxonUnitTypes(models.Model):
         blank=False,
         verbose_name="Rank Name"
     )
-    direct_parent_rank_id = models.SmallIntegerField(
+    direct_parent_rank = models.ForeignKey(
+        'self',
         null=True,
         blank=True,
-        verbose_name="Direct Parent Rank ID"
+        on_delete=models.SET_NULL,
+        related_name='direct_children',
+        verbose_name="Direct Parent Rank"
     )
-    required_parent_rank_id = models.SmallIntegerField(
+    required_parent_rank = models.ForeignKey(
+        'self',
         null=True,
         blank=True,
-        verbose_name="Required Parent Rank ID"
+        on_delete=models.SET_NULL,
+        related_name='required_children',
+        verbose_name="Required Parent Rank"
     )
     update_date = models.DateTimeField(
         auto_now=True,

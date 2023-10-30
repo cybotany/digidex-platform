@@ -139,9 +139,13 @@ class TaxonomicUnits(models.Model):
     initial_time_stamp = models.DateTimeField(
         auto_now_add=True
     )
-    parent_tsn = models.IntegerField(
+    parent = models.ForeignKey(
+        'self',
+        on_delete=models.SET_NULL,
         null=True,
-        blank=True
+        blank=True,
+        related_name='children',
+        db_column='parent_tsn'
     )
     taxon_author_id = models.IntegerField(
         null=True,
@@ -151,13 +155,21 @@ class TaxonomicUnits(models.Model):
         null=True,
         blank=True
     )
-    kingdom_id = models.SmallIntegerField(
+    kingdom = models.ForeignKey(
+        'Kingdoms',
+        on_delete=models.SET_NULL,
         null=True,
-        blank=True
+        blank=True,
+        related_name='taxonomic_units',
+        db_column='kingdom_id'
     )
-    rank_id = models.SmallIntegerField(
+    rank = models.ForeignKey(
+        'TaxonUnitTypes',
+        on_delete=models.SET_NULL,
         null=True,
-        blank=True
+        blank=True,
+        related_name='taxonomic_units',
+        db_column='rank_id'
     )
     update_date = models.DateTimeField(
         auto_now=True

@@ -9,9 +9,9 @@ class Hierarchy(models.Model):
 
     Attributes:
         hierarchy_string (str): The concatenated TSNs, delimited with a hyphen, which represents the hierarchy from Kingdom to TSN of concern.
-        tsn (int): Taxonomic Serial Number. The unique identifier for an occurrence of Taxonomic Units.
-        parent_tsn (int): The direct parent TSN of hierarchy.TSN.
-        level (int): The distance down the hierarchy from Kingdom to TSN of concern for the hierarchy entry. For example, TSN 51, Schizomycetes, a Bacteria Class, has a level of 2.
+        taxonomic_unit (ForeignKey): The Taxonomic Unit associated with this hierarchy.
+        parent_taxonomic_unit (ForeignKey): The direct parent Taxonomic Unit of the given Taxonomic Unit.
+        level (int): The distance down the hierarchy from Kingdom to TSN of concern for the hierarchy entry.
         children_count (int): The number of total children a particular TSN has, from its direct children to the bottom of the hierarchy.
     """
 
@@ -21,13 +21,18 @@ class Hierarchy(models.Model):
         verbose_name="Hierarchy String",
         help_text="The concatenated TSNs, delimited with a hyphen, which represents the hierarchy from Kingdom to TSN of concern."
     )
-    tsn = models.IntegerField(
+    taxonomic_unit = models.ForeignKey(
+        'TaxonomicUnits',
+        on_delete=models.CASCADE,
         verbose_name="Taxonomic Serial Number",
         help_text="The TSN for the hierarchy entry. The unique identifier for an occurrence of Taxonomic Units."
     )
-    parent_tsn = models.IntegerField(
+    parent_taxonomic_unit = models.ForeignKey(
+        'TaxonomicUnits',
         null=True,
         blank=True,
+        on_delete=models.SET_NULL,
+        related_name='child_taxonomic_units',
         verbose_name="Parent TSN",
         help_text="The direct parent TSN of hierarchy.TSN."
     )
