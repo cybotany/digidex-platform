@@ -27,7 +27,6 @@ class TaxonUnitTypes(models.Model):
     rank_id = models.SmallIntegerField(
         null=True,
         blank=True,
-        on_delete=models.CASCADE,
         verbose_name="Rank ID"
     )
     rank_name = models.CharField(
