@@ -35,21 +35,15 @@ class TaxonUnitTypes(models.Model):
         blank=False,
         verbose_name="Rank Name"
     )
-    direct_parent_rank = models.ForeignKey(
-        'self',
+    direct_parent_rank_id = models.IntegerField(
         null=True,
         blank=True,
-        on_delete=models.SET_NULL,
-        related_name='direct_children',
-        verbose_name="Direct Parent Rank"
+        verbose_name="Direct Parent Rank",
     )
-    required_parent_rank = models.ForeignKey(
-        'self',
+    required_parent_rank_id = models.IntegerField(
         null=True,
         blank=True,
-        on_delete=models.SET_NULL,
-        related_name='required_children',
-        verbose_name="Required Parent Rank"
+        verbose_name="Required Parent Rank",
     )
     update_date = models.DateTimeField(
         auto_now=True,
