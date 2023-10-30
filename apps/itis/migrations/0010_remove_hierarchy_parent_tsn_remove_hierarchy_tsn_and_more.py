@@ -33,19 +33,7 @@ class Migration(migrations.Migration):
         ),
         migrations.RemoveField(
             model_name='taxonunittypes',
-            name='direct_parent_rank_id',
-        ),
-        migrations.RemoveField(
-            model_name='taxonunittypes',
-            name='id',
-        ),
-        migrations.RemoveField(
-            model_name='taxonunittypes',
             name='kingdom_id',
-        ),
-        migrations.RemoveField(
-            model_name='taxonunittypes',
-            name='required_parent_rank_id',
         ),
         migrations.AddField(
             model_name='hierarchy',
@@ -74,22 +62,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='taxonunittypes',
-            name='direct_parent_rank',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='direct_children', to='itis.taxonunittypes', verbose_name='Direct Parent Rank'),
-        ),
-        migrations.AddField(
-            model_name='taxonunittypes',
             name='kingdom',
             field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='itis.kingdoms', verbose_name='Kingdom'),
-        ),
-        migrations.AddField(
-            model_name='taxonunittypes',
-            name='required_parent_rank',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='required_children', to='itis.taxonunittypes', verbose_name='Required Parent Rank'),
-        ),
-        migrations.AlterField(
-            model_name='taxonunittypes',
-            name='rank_id',
-            field=models.SmallIntegerField(primary_key=True, serialize=False, verbose_name='Rank ID'),
         ),
     ]
