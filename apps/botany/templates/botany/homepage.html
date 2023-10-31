@@ -12,7 +12,7 @@
 <div class="container app-fullscreen-container">
   <!-- Plant Card -->
   {% for plant in plants %}
-    <div class="card plant-card mb-4 shadow-sm">
+    <div class="card plant-card mb-4">
       <!-- Plant Image -->
       {% if plant.images.all %}
         <img src="{{ plant.images.last.image.url }}" class="card-img-top" alt="Image of {{ plant.name }}">
@@ -23,13 +23,13 @@
       <div class="card-body">
         <h5 class="card-title text-center">{{ plant.name }}</h5>
       </div>
-    </div>
       <!-- Plant Link Bubble -->
       {% if plant.nfc_tag %}
         <div class="plant-link-bubble-wrapper">
           <span class="plant-link-bubble">Linked</span>
         </div>
       {% endif %}
+    </div>
   {% empty %}
     <p>No plants found.</p>
   {% endfor %}

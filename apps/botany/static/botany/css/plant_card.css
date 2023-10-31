@@ -2,12 +2,23 @@
     position: relative;
     max-width: 250px;
     margin: 0 auto;
+    background-color: var(--neutral-light);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
+
 .plant-card .card-img-top {
     width: 100%;
     height: 200px;
     object-fit: cover;
+    transition: transform .2s;
 }
+
+.plant-card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
 .no-image-placeholder {
     width: 100%;
     height: 200px;
@@ -18,22 +29,27 @@
     font-size: 16px;
     font-weight: bold;
 }
+
 .card-body {
-    padding: 12px;
+    padding: 16px;
 }
+
 .card-title {
     margin-bottom: 0;
     font-size: 18px;
+    color: var(--neutral-dark);
 }
+
 .plant-link-bubble {
     display: inline-block;
     padding: 5px 10px;
-    background-color: #2196F3;
+    background-color: var(--info-color);
     color: white;
     border-radius: 15px;
     font-size: 0.8rem;
     margin-top: 5px;
 }
+
 .plant-link-bubble-wrapper {
     position: absolute;
     bottom: 10px;

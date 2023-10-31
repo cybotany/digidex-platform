@@ -9,11 +9,17 @@
     --success-color: #4CAF50;
     --info-color: #2196F3;
 
-    --app-primary-color: #4CAF50;
+    --app-primary-color: #A8E6CF;
+    --app-secondary-color: #76D7C4;
 }
+
 .app-fullscreen-container {
     min-height: 100vh;
     width: 100%;
     padding: 2rem;
-    background-color: var(--app-primary-color);
+    background: linear-gradient(135deg, var(--app-primary-color) 0%, var(--app-secondary-color) 100%);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
 }
