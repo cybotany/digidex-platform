@@ -1,0 +1,19 @@
+:root {
+    --primary-color: #00693E;
+    --secondary-color: #1DB954;
+    --accent-color: #8AD7A0;
+    --neutral-light: #F2F2F2;
+    --neutral-dark: #333333;
+    --error-color: #E53935;
+    --warning-color: #FFC107;
+    --success-color: #4CAF50;
+    --info-color: #2196F3;
+
+    --app-primary-color: #007BFF;
+}
+.app-fullscreen-container {
+    min-height: 100vh;
+    width: 100%;
+    padding: 2rem;
+    background-color: var(--app-primary-color);
+}

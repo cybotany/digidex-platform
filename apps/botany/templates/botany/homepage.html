@@ -1,87 +1,68 @@
 {% extends "botany/base.html" %}
-
-{% block title %} CyBotany {% endblock %}
-
-{% block content %}
 {% load static %}
-
-<div class="container mt-4">
-    {% for plant in plants %}
-    <div class="card w-100 mb-4 shadow-sm">
-        <!-- Card Header -->
-        <div class="card-header bg-light">
-            <div class="row">
-                <div class="col-md-4 text-left font-weight-bold">
-                    TSN: {{ plant.tsn.tsn }}
-                </div>
-                <div class="col-md-4 text-center font-weight-bold">
-                    {{ plant.name }}
-                </div>
-            </div>
+<link rel="stylesheet" href="{% static 'botany/css/styles.css' %}">
+<link rel="stylesheet" href="{% static 'botany/css/plant_card.css' %}">
+{% block title %} CyBotany {% endblock %}
+{% block content %}
+<div class="container app-fullscreen-container">
+  
+  <!-- Plant Card -->
+  {% for plant in plants %}
+    <div class="card plant-card mb-4 shadow-sm">
+      <!-- Plant Image -->
+      {% if plant.images.all %}
+        <img src="{{ plant.images.last.image.url }}" class="card-img-top" alt="Image of {{ plant.name }}">
+      {% else %}
+        <div class="no-image-placeholder">No Image</div>
+      {% endif %}
+      <!-- Plant Link Bubble -->
+      {% if plant.nfc_tag %}
+        <div class="plant-link-bubble-wrapper">
+          <span class="plant-link-bubble">Linked</span>
         </div>
-        <!-- Card Body -->
-        <div class="row no-gutters">
-            <!-- Plant Image -->
-            <div class="col-md-4">
-                {% if plant.images.all %}
-                    <img src="{{ plant.images.last.image.url }}" class="card-img rounded plant-card-image" alt="Image of {{ plant.name }}"> <!-- Display only the latest image -->
-                {% endif %}
-            </div>          
-            <!-- Plant Details -->
-            <div class="col-md-8">
-                <div class="card-body">
-                    <p class="card-text">Complete Name: {{ plant.tsn.complete_name }}</p>
-                    <p class="card-text">Date Added: {{ plant.added_on }}</p>
-                    <p class="card-text">
-                        {% if plant.nfc_tag %}
-                            <span class="plant-link-bubble">Linked</span>
-                        {% else %}
-                            Not Linked
-                        {% endif %}
-                    </p>
-                    <p class="card-text">Days since last watering: {{ plant.days_since_last_watering }}</p>
-                    <a href="{{ plant.get_absolute_url }}" class="btn btn-outline-primary mt-2">View Details</a>
-                </div>
-            </div>
-        </div>
+      {% endif %}
+      <!-- Plant Name -->
+      <div class="card-body">
+        <h5 class="card-title text-center">{{ plant.name }}</h5>
+      </div>
     </div>
-    {% empty %}
-        <p>No plants found.</p>
-    {% endfor %}
+  {% empty %}
+    <p>No plants found.</p>
+  {% endfor %}
 
-    <!-- Pagination Controls -->
-    <div class="row justify-content-center">
-        <nav>
-            <ul class="pagination">
-                {% if plants.has_previous %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page=1">First</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ plants.previous_page_number }}">Previous</a>
-                    </li>
-                {% endif %}
-                {% for i in plants.paginator.page_range %}
-                    {% if plants.number == i %}
-                        <li class="page-item active">
-                            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
-                        </li>
-                    {% else %}
-                        <li class="page-item">
-                            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
-                        </li>
-                    {% endif %}
-                {% endfor %}
-                {% if plants.has_next %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ plants.next_page_number }}">Next</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ plants.paginator.num_pages }}">Last</a>
-                    </li>
-                {% endif %}
-            </ul>
-        </nav>
-    </div>
+  <!-- Pagination Controls -->
+  <div class="row justify-content-center">
+    <nav>
+      <ul class="pagination">
+        {% if plants.has_previous %}
+            <li class="page-item">
+            <a class="page-link" href="?page=1">First</a>
+            </li>
+            <li class="page-item">
+            <a class="page-link" href="?page={{ plants.previous_page_number }}">Previous</a>
+            </li>
+        {% endif %}
+        {% for i in plants.paginator.page_range %}
+            {% if plants.number == i %}
+            <li class="page-item active">
+                <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+            </li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+            </li>
+            {% endif %}
+        {% endfor %}
+        {% if plants.has_next %}
+            <li class="page-item">
+            <a class="page-link" href="?page={{ plants.next_page_number }}">Next</a>
+            </li>
+            <li class="page-item">
+            <a class="page-link" href="?page={{ plants.paginator.num_pages }}">Last</a>
+            </li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
 </div>
 {% endblock %}

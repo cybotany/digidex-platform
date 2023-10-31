@@ -11,40 +11,9 @@
 
     --app-primary-color: #4CAF50;
 }
-
-.plant-card-image {
-    width: 100%;      /* Ensures the image takes the full width of its container */
-    height: 200px;    /* Set a fixed height */
-    object-fit: cover; /* Ensures the image covers the entire content box */
-    margin: 10px;     /* Adds space around the image */
-}
-
-/* Styling for the NFC_Tag bubble */
-.plant-link-bubble {
-    display: inline-block;
-    padding: 5px 10px;
-    background-color: #007BFF;
-    color: white;
-    border-radius: 15px;
-    font-size: 0.8rem;
-    margin-top: 5px;
-}
-
-/*  */
-.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: #007bff;
-}
-
-/*  */
-.custom-checkbox .custom-control-label::before {
-    border-radius: 0.25rem;
-    width: 24px;
-    height: 24px;
-}
-
-/*  */
-.custom-checkbox .custom-control-label {
-    padding-left: 36px;
-    line-height: 24px;
-    cursor: pointer;
+.app-fullscreen-container {
+    min-height: 100vh;
+    width: 100%;
+    padding: 2rem;
+    background-color: var(--app-primary-color);
 }
