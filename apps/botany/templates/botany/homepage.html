@@ -12,24 +12,25 @@
 <div class="container app-fullscreen-container">
   <!-- Plant Card -->
   {% for plant in plants %}
-    <div class="card plant-card mb-4">
-      <!-- Plant Image -->
-      {% if plant.images.all %}
-        <img src="{{ plant.images.last.image.url }}" class="card-img-top" alt="Image of {{ plant.name }}">
-      {% else %}
-        <div class="no-image-placeholder">No Image</div>
-      {% endif %}
-      <!-- Plant Name -->
-      <div class="card-body">
-        <h5 class="card-title text-center">{{ plant.name }}</h5>
-      </div>
-      <!-- Plant Link Bubble -->
-      {% if plant.nfc_tag %}
-        <div class="plant-link-bubble-wrapper">
-          <span class="plant-link-bubble">Linked</span>
+    <a href="{{ plant.get_absolute_url }}" class="plant-card-link"></a>
+      <div class="card plant-card mb-4">
+        <!-- Plant Image -->
+        {% if plant.images.all %}
+          <img src="{{ plant.images.last.image.url }}" class="card-img-top" alt="Image of {{ plant.name }}">
+        {% else %}
+          <div class="no-image-placeholder">No Image</div>
+        {% endif %}
+        <!-- Plant Body -->
+        <div class="card-body">
+          <h5 class="card-title text-center">{{ plant.name }}</h5>
+           {% if plant.nfc_tag %}
+           <div class="plant-link-bubble-wrapper">
+             <span class="plant-link-bubble">Linked</span>
+           </div>
+           {% endif %}
         </div>
-      {% endif %}
-    </div>
+      </div>
+    </a>
   {% empty %}
     <p>No plants found.</p>
   {% endfor %}
