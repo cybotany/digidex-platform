@@ -48,13 +48,10 @@
 
 .plant-link-bubble {
     display: inline-block;
-    padding: 5px 10px;
+    width: 10px;
+    height: 10px;
     background-color: var(--info-color);
-    color: white;
-    border-radius: 15px;
-    font-size: 0.8rem;
-    margin-top: 5px;
-    transition: all 0.3s ease-out;
+    border-radius: 50%;
 }
 
 .plant-link-bubble:hover {
