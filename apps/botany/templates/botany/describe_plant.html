@@ -47,46 +47,53 @@
         <p>
           {{ plant.description }}
         </p>
-      <!-- Watering Table -->
-      <h3 class="mb-3">Watering Events</h3>
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>Watering Date and Time</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for event in plant.waterings.all %}
-            <tr>
-              <td>{{ event.timestamp }}</td>
-            </tr>
-            {% empty %}
-            <tr>
-              <td class="text-center">No watering events recorded.</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      <!-- Fertilization Table -->
-      <h3 class="mb-3">Fertilization Events</h3>
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>Fertilization Date and Time</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for event in plant.fertilizations.all %}
-            <tr>
-              <td>{{ event.timestamp }}</td>
-            </tr>
-            {% empty %}
+
+      <!-- Button to display plant care -->
+      <button class="btn btn-info mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#plantCare" aria-expanded="false" aria-controls="plantCare">
+        Show Plant Care Log
+      </button>
+
+      <!-- Plant Care Log -->
+      <div class="collapse" id="plantCare">
+        <h3 class="mb-3">Watering Events</h3>
+          <table class="table table-bordered">
+            <thead>
               <tr>
-                <td class="text-center">No fertilization events recorded.</td>
+                <th>Watering Date and Time</th>
               </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {% for event in plant.waterings.all %}
+              <tr>
+                <td>{{ event.timestamp }}</td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td class="text-center">No watering events recorded.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        <h3 class="mb-3">Fertilization Events</h3>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Fertilization Date and Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for event in plant.fertilizations.all %}
+              <tr>
+                <td>{{ event.timestamp }}</td>
+              </tr>
+              {% empty %}
+                <tr>
+                  <td class="text-center">No fertilization events recorded.</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+      </div>
       <!-- Buttons -->
       <div class="row justify-content-center mb-5">
         <a href="{% url 'botany:update_plant' plant.id %}" class="btn btn-primary btn-lg me-3 shadow">Update Plant</a>
