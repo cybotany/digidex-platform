@@ -49,17 +49,18 @@
 
       <!-- Button to display plant taxonomy -->
       <button class="btn btn-info mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#plantTaxonomy" aria-expanded="false" aria-controls="plantTaxonomy">
-        Toggle Plant Taxonomy
+        Taxonomy
       </button>
 
       <!-- Plant Taxonomy -->
       <div class="collapse" id="plantTaxonomy">
         <p><strong>Complete name:</strong> {{ plant.tsn.complete_name }}</p>
+        <p><strong>Taxonomic Serial Number:</strong> {{ plant.tsn.tsn }}</p>
       </div>
 
       <!-- Button to display plant care -->
       <button class="btn btn-info mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#plantCare" aria-expanded="false" aria-controls="plantCare">
-        Toggle Plant Care Log
+        Plant Log
       </button>
 
       <!-- Plant Care Log -->
