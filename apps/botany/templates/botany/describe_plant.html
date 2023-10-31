@@ -11,7 +11,7 @@
 {% block content %}
 <div class="container app-fullscreen-container">
   <!-- Plant detail container --> 
-  <div class="plant-detail-container mb-5">
+  <div class="plant-detail-container mb-5 d-flex">
     <!-- Plant Image Slideshow -->
     <div id="plantCarousel" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
@@ -47,21 +47,17 @@
         {{ plant.description }}
       </p>
 
-      <!-- Button to display plant taxonomy -->
-      <button class="btn btn-info mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#plantTaxonomy" aria-expanded="false" aria-controls="plantTaxonomy">
-        Taxonomy
-      </button>
+      <!-- Toggle Buttons -->
+      <div class="d-flex mb-3">
+        <button class="btn btn-outline-info mr-2 flex-grow-1" type="button" data-bs-toggle="collapse" data-bs-target="#plantTaxonomy" aria-expanded="false" aria-controls="plantTaxonomy">Taxonomy</button>
+        <button class="btn btn-outline-info flex-grow-1" type="button" data-bs-toggle="collapse" data-bs-target="#plantCare" aria-expanded="false" aria-controls="plantCare">Plant Log</button>
+      </div>
 
       <!-- Plant Taxonomy -->
       <div class="collapse" id="plantTaxonomy">
         <p><strong>Complete name:</strong> {{ plant.tsn.complete_name }}</p>
         <p><strong>Taxonomic Serial Number:</strong> {{ plant.tsn.tsn }}</p>
       </div>
-
-      <!-- Button to display plant care -->
-      <button class="btn btn-info mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#plantCare" aria-expanded="false" aria-controls="plantCare">
-        Plant Log
-      </button>
 
       <!-- Plant Care Log -->
       <div class="collapse" id="plantCare">
@@ -105,9 +101,9 @@
         </table>
       </div>
 
-      <!-- Buttons -->
-      <div class="row justify-content-center mb-5">
-        <a href="{% url 'botany:update_plant' plant.id %}" class="btn btn-primary btn-lg me-3 shadow">Update Plant</a>
+      <!-- Buttons to update or delete plant -->
+      <div class="rd-flex justify-content-between mb-5">
+        <a href="{% url 'botany:update_plant' plant.id %}" class="btn btn-primary btn-lg shadow">Update Plant</a>
         <a href="{% url 'botany:delete_plant' plant.id %}" class="btn btn-danger btn-lg shadow">Delete Plant</a>
       </div>
     </div>
