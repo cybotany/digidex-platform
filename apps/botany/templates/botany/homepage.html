@@ -1,11 +1,15 @@
 {% extends "botany/base.html" %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'botany/css/styles.css' %}">
-<link rel="stylesheet" href="{% static 'botany/css/plant_card.css' %}">
-{% block title %} CyBotany {% endblock %}
+
+<!-- CSS styling specific to Botany app -->
+{% block app_styles %}
+  <link rel="stylesheet" href="{% static 'botany/css/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'botany/css/plant_card.css' %}">
+{% endblock %}
+
+<!-- Botany app container -->
 {% block content %}
 <div class="container app-fullscreen-container">
-  
   <!-- Plant Card -->
   {% for plant in plants %}
     <div class="card plant-card mb-4 shadow-sm">
@@ -15,17 +19,17 @@
       {% else %}
         <div class="no-image-placeholder">No Image</div>
       {% endif %}
+      <!-- Plant Name -->
+      <div class="card-body">
+        <h5 class="card-title text-center">{{ plant.name }}</h5>
+      </div>
+    </div>
       <!-- Plant Link Bubble -->
       {% if plant.nfc_tag %}
         <div class="plant-link-bubble-wrapper">
           <span class="plant-link-bubble">Linked</span>
         </div>
       {% endif %}
-      <!-- Plant Name -->
-      <div class="card-body">
-        <h5 class="card-title text-center">{{ plant.name }}</h5>
-      </div>
-    </div>
   {% empty %}
     <p>No plants found.</p>
   {% endfor %}
