@@ -22,4 +22,8 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-out;
 }

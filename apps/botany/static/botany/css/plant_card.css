@@ -3,20 +3,20 @@
     max-width: 250px;
     margin: 0 auto;
     background-color: var(--neutral-light);
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
     overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.plant-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .plant-card .card-img-top {
     width: 100%;
     height: 200px;
     object-fit: cover;
-    transition: transform .2s;
-}
-
-.plant-card:hover .card-img-top {
-    transform: scale(1.05);
 }
 
 .no-image-placeholder {
@@ -48,6 +48,11 @@
     border-radius: 15px;
     font-size: 0.8rem;
     margin-top: 5px;
+    transition: all 0.3s ease-out;
+}
+
+.plant-link-bubble:hover {
+    background-color: rgba(33, 150, 243, 0.8);
 }
 
 .plant-link-bubble-wrapper {
