@@ -1,0 +1,28 @@
+.plant-detail-container {
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+.carousel img {
+    max-height: 500px;
+    object-fit: cover;
+}
+
+.plant-link-bubble {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: var(--info-color);
+    border-radius: 50%;
+}
+
+.plant-link-bubble:hover {
+    background-color: rgba(33, 150, 243, 0.8);
+}
+
+.plant-link-bubble-wrapper {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 1;
+}

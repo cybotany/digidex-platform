@@ -11,7 +11,7 @@
 {% block content %}
 <div class="container app-fullscreen-container">
   <!-- Plant detail container --> 
-  <div class="mb-5">
+  <div class="plant-detail-container mb-5">
     <!-- Plant Image Slideshow -->
     <div id="plantCarousel" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
@@ -39,9 +39,9 @@
         <p><strong>Quantity:</strong> {{ plant.quantity }}</p>
         <p>
           {% if plant.nfc_tag %}
-            <span class="badge bg-success">Linked</span>
-          {% else %}
-            <span class="badge bg-warning">Not Linked</span>
+          <div class="plant-link-bubble-wrapper">
+            <span class="plant-link-bubble"></span>
+          </div>
           {% endif %}
         </p>
         <p>
