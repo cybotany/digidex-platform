@@ -1,66 +1,66 @@
 .plant-card {
-    position: relative;
-    max-width: 250px;
-    margin: 0 auto;
-    background-color: var(--neutral-light);
-    border-radius: 15px;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  max-width: 250px;
+  margin: 0 auto;
+  background-color: var(--neutral-light);
+  border-radius: 15px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .plant-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .plant-card .card-img-top {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
 }
 
 .plant-card-link {
-    display: block;
-    text-decoration: none;
-    color: inherit;
+  display: block;
+  text-decoration: none;
+  color: inherit;
 }
 
 .no-image-placeholder {
-    width: 100%;
-    height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #e0e0e0;
-    font-size: 16px;
-    font-weight: bold;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e0e0e0;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .card-body {
-    padding: 16px;
+  padding: 16px;
 }
 
 .card-title {
-    margin-bottom: 0;
-    font-size: 18px;
-    color: var(--neutral-dark);
+  margin-bottom: 0;
+  font-size: 18px;
+  color: var(--neutral-dark);
 }
 
 .plant-link-bubble {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    background-color: var(--info-color);
-    border-radius: 50%;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: var(--info-color);
+  border-radius: 50%;
 }
 
 .plant-link-bubble:hover {
-    background-color: rgba(33, 150, 243, 0.8);
+  background-color: rgba(33, 150, 243, 0.8);
 }
 
 .plant-link-bubble-wrapper {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    z-index: 1;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 1;
 }

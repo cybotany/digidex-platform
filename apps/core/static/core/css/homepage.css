@@ -1,0 +1,118 @@
+:root {
+  --primary-color: #00693E;
+  --secondary-color: #1DB954;
+  --accent-color: #8AD7A0;
+  --neutral-light: #F2F2F2;
+  --neutral-dark: #333333;
+  --error-color: #E53935;
+  --warning-color: #FFC107;
+  --success-color: #4CAF50;
+  --info-color: #2196F3;
+
+  --taxonomy-primary-color: #E76D6B;
+  --devices-primary-color: #007BFF;
+  --party-primary-color: #4CAF50; 
+  --chatbot-primary-color: #FFE38E;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+.tile-link {
+  display: block;
+  height: 100%;
+  width: 100%;
+  text-decoration: none;
+  color: white;
+  padding: 2rem;
+  border-radius: 5px;
+}
+
+.tile-link.taxonomy {
+  background-color: var(--taxonomy-primary-color);
+}
+
+.tile-link.devices {
+  background-color: var(--devices-primary-color);
+}
+
+.tile-link.party {
+  background-color: var(--party-primary-color);
+}
+
+.tile-link.chatbot {
+  background-color: var(--chatbot-primary-color);
+}
+
+.tile-link {
+  display: block;
+  height: 100%;
+  width: 100%;
+  text-decoration: none;
+  color: white;
+  padding: 2rem;
+  border-radius: 5px;
+}
+
+.tile-link.taxonomy {
+  background-color: var(--taxonomy-primary-color);
+}
+
+.tile-link.devices {
+  background-color: var(--devices-primary-color);
+}
+
+.tile-link.party {
+  background-color: var(--party-primary-color);
+}
+
+.tile-link.chatbot {
+  background-color: var(--chatbot-primary-color);
+}
+
+.core-header {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #333;
+}
+  
+.core-card {
+  border-radius: 15px;
+  background: #fff;
+  padding: 20px;
+  margin: 15px;
+  box-shadow: 0px 5px 10px rgba(0,0,0,0.2);
+  text-align: center;
+  height: 100%;
+}
+  
+.core-link {
+  display: block;
+  height: 100%;
+  color: #333;
+  text-decoration: none;
+}
+  
+.core-link h2 {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.5;
+}
+  
+.party-card {
+  background-color: #F2B705;
+}
+  
+.devices-card {
+  background-color: #20A39E;
+}
+  
+.taxonomy-card {
+  background-color: #EF5B5B;
+}
+  
+.chatbot-card {
+  background-color: #6A057F;
+  color: white;
+}
+  

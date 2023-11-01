@@ -1,29 +1,29 @@
 :root {
-    --primary-color: #00693E;
-    --secondary-color: #1DB954;
-    --accent-color: #8AD7A0;
-    --neutral-light: #F2F2F2;
-    --neutral-dark: #333333;
-    --error-color: #E53935;
-    --warning-color: #FFC107;
-    --success-color: #4CAF50;
-    --info-color: #2196F3;
+  --primary-color: #00693E;
+  --secondary-color: #1DB954;
+  --accent-color: #8AD7A0;
+  --neutral-light: #F2F2F2;
+  --neutral-dark: #333333;
+  --error-color: #E53935;
+  --warning-color: #FFC107;
+  --success-color: #4CAF50;
+  --info-color: #2196F3;
 
-    --app-primary-color: #A8E6CF;
-    --app-secondary-color: #76D7C4;
+  --app-primary-color: #A8E6CF;
+  --app-secondary-color: #76D7C4;
 }
 
 .app-fullscreen-container {
-    min-height: 100vh;
-    width: 100%;
-    padding: 2rem;
-    background: linear-gradient(135deg, var(--app-primary-color) 0%, var(--app-secondary-color) 100%);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease-out;
+  min-height: 100vh;
+  width: 100%;
+  padding: 2rem;
+  background: linear-gradient(135deg, var(--app-primary-color) 0%, var(--app-secondary-color) 100%);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-out;
 }
