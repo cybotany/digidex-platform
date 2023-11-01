@@ -1,20 +1,3 @@
-:root {
-  --primary-color: #00693E;
-  --secondary-color: #1DB954;
-  --accent-color: #8AD7A0;
-  --neutral-light: #F2F2F2;
-  --neutral-dark: #333333;
-  --error-color: #E53935;
-  --warning-color: #FFC107;
-  --success-color: #4CAF50;
-  --info-color: #2196F3;
-
-  --taxonomy-primary-color: #E76D6B;
-  --devices-primary-color: #007BFF;
-  --party-primary-color: #4CAF50; 
-  --chatbot-primary-color: #FFE38E;
-}
-
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 

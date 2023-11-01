@@ -1,38 +1,53 @@
-{% extends 'core/base.html' %}
+{% extends "core/base.html" %}
 {% load static %}
 
+{% block app_styles %}
+  <link rel="stylesheet" href="{% static 'core/css/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'core/css/tiles.css' %}">
+{% endblock %}
+
 {% block content %}
-<div class="container py-5">
+<div class="container core-container py-5">
   <div class="text-center">
     <h1 class="core-header">Modern Management</h1>
   </div>
-  <div class="row">
-    <div class="col-md-4">
-      <div class="core-card party-card">
-        <a href="{% url 'botany:home' %}" class="core-link">
-          <h2>Party</h2>
-        </a>
+  <!-- Tiles Container -->
+  <div class="tiles-container">
+    <!-- First Row -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="core-card party-card hover-effect">
+          <a href="{% url 'botany:home' %}" class="core-link">
+            <h2>Party</h2>
+          </a>
+        </div>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="core-card devices-card">
-        <a href="{% url 'cea:home' %}" class="core-link">
-          <h2>Devices</h2>
-        </a>
+    <!-- Second Row -->
+    <div class="row">
+      <div class="col-md-6">
+        <div class="core-card devices-card hover-effect">
+          <a href="{% url 'cea:home' %}" class="core-link">
+            <h2>Devices</h2>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="core-card taxonomy-card hover-effect">
+          <a href="{% url 'itis:home' %}" class="core-link">
+            <h2>Taxonomy</h2>
+          </a>
+        </div>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="core-card taxonomy-card">
-        <a href="{% url 'itis:home' %}" class="core-link">
-          <h2>Taxonomy</h2>
-        </a>
-      </div>
-    </div>
-    <div class="col-md-12">
-      <div class="core-card chatbot-card">
-        <a href="{% url 'chatbot:home' %}" class="core-link">
-          <h2>Chatbot</h2>
-        </a>
+    <!-- Third Row -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="core-card chatbot-card hover-effect">
+          <a href="{% url 'chatbot:home' %}" class="core-link">
+            <h2>Chatbot</h2>
+          </a>
+        </div>
       </div>
     </div>
   </div>
