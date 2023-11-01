@@ -50,17 +50,21 @@
         <p>
           {{ plant.description }}
         </p>
+      </div>
+
+      <!-- Toggle Buttons and Content Sections -->
+      <div class="accordion" id="plantDetailAccordion">
 
         <!-- Toggle Buttons -->
         <div class="d-flex mb-3">
-          <button class="btn btn-outline-info flex-grow-1" type="button" data-bs-toggle="collapse" data-bs-target="#plantCare" aria-expanded="false" aria-controls="plantCare">Plant Log</button>
-          <button class="btn btn-outline-info mr-2 flex-grow-1" type="button" data-bs-toggle="collapse" data-bs-target="#plantTaxonomy" aria-expanded="false" aria-controls="plantTaxonomy">Taxonomy</button>
+            <button class="btn btn-outline-info flex-grow-1" type="button" data-bs-toggle="collapse" data-bs-target="#plantCare" aria-expanded="false" aria-controls="plantCare" data-bs-parent="#plantDetailAccordion">Plant Log</button>
+            <button class="btn btn-outline-info mr-2 flex-grow-1" type="button" data-bs-toggle="collapse" data-bs-target="#plantTaxonomy" aria-expanded="false" aria-controls="plantTaxonomy" data-bs-parent="#plantDetailAccordion">Taxonomy</button>
         </div>
 
         <!-- Plant Taxonomy -->
         <div class="collapse" id="plantTaxonomy">
-          <p><strong>Complete name:</strong> {{ plant.tsn.complete_name }}</p>
-          <p><strong>Taxonomic Serial Number:</strong> {{ plant.tsn.tsn }}</p>
+            <p><strong>Complete name:</strong> {{ plant.tsn.complete_name }}</p>
+            <p><strong>Taxonomic Serial Number:</strong> {{ plant.tsn.tsn }}</p>
         </div>
 
         <!-- Plant Care Log -->
@@ -74,38 +78,38 @@
             </thead>
             <tbody>
               {% for event in plant.waterings.all %}
-              <tr>
-                <td>{{ event.timestamp }}</td>
-              </tr>
-              {% empty %}
-              <tr>
-                <td class="text-center">No watering events recorded.</td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-          <h3 class="mb-3">Fertilization Events</h3>
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>Fertilization Date and Time</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for event in plant.fertilizations.all %}
-              <tr>
-                <td>{{ event.timestamp }}</td>
-              </tr>
+                <tr>
+                  <td>{{ event.timestamp }}</td>
+                </tr>
               {% empty %}
                 <tr>
-                  <td class="text-center">No fertilization events recorded.</td>
+                  <td class="text-center">No watering events recorded.</td>
                 </tr>
               {% endfor %}
             </tbody>
           </table>
+          
+          <h3 class="mb-3">Fertilization Events</h3>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Fertilization Date and Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for event in plant.fertilizations.all %}
+                  <tr>
+                    <td>{{ event.timestamp }}</td>
+                  </tr>
+                {% empty %}
+                  <tr>
+                    <td class="text-center">No fertilization events recorded.</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
         </div>
       </div>
-    </div>
     
     <!-- Buttons to update or delete plant -->
     <div class="rd-flex justify-content-between mb-5">
