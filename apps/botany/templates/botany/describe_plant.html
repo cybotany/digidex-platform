@@ -49,13 +49,51 @@
 
     <!-- Plant Care Log -->
     <div class="collapse w-100 mb-3 text-center" id="plantCare">
-      <!-- [Your existing plant care log content can go here] -->
+      <h3 class="mb-3">Watering Events</h3>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Watering Date and Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for event in plant.waterings.all %}
+            <tr>
+              <td>{{ event.timestamp }}</td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td class="text-center">No watering events recorded.</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      
+      <h3 class="mb-3">Fertilization Events</h3>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Fertilization Date and Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for event in plant.fertilizations.all %}
+            <tr>
+              <td>{{ event.timestamp }}</td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td class="text-center">No fertilization events recorded.</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
 
     <!-- Buttons to update or delete plant -->
     <div class="d-flex justify-content-center mb-5 w-100">
-      <a href="{% url 'botany:update_plant' plant.id %}" class="btn btn-primary btn-lg shadow mx-2">Update Plant</a>
-      <a href="{% url 'botany:delete_plant' plant.id %}" class="btn btn-danger btn-lg shadow mx-2">Delete Plant</a>
+      <a href="{% url 'botany:update_plant' plant.id %}" class="btn btn-primary btn-lg shadow mx-2">Update</a>
+      <a href="{% url 'botany:delete_plant' plant.id %}" class="btn btn-danger btn-lg shadow mx-2">Delete</a>
     </div>
 
   </div> <!-- End of plant-detail-container -->
