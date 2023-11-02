@@ -1,52 +1,55 @@
 {% extends "core/base.html" %}
 {% load static %}
 
+<!-- CSS styling specific to Core Module -->
 {% block app_styles %}
   <link rel="stylesheet" href="{% static 'core/css/styles.css' %}">
   <link rel="stylesheet" href="{% static 'core/css/tiles.css' %}">
 {% endblock %}
 
+<!-- App Container -->
 {% block content %}
-<div class="container .app-fullscreen-container"> 
-  <!-- Tiles Container -->
-  <div class="tiles-container">
-    <!-- First Row -->
-    <div class="row">
-      <div class="col-md-12">
+<div class="container .app-fullscreen-container">
+
+  <!-- Core App Homepage -->
+  <div class="row">
+    <div class="col-md-12">
+      <a href="{% url 'botany:home' %}" class="core-link">
         <div class="core-card party-card hover-effect">
-          <a href="{% url 'botany:home' %}" class="core-link">
-            <h2>Party</h2>
-          </a>
+          <h2>Party</h2>
         </div>
-      </div>
-    </div>
-    <!-- Second Row -->
-    <div class="row">
-      <div class="col-md-6">
-        <div class="core-card inventory-card hover-effect">
-          <a href="{% url 'cea:home' %}" class="core-link">
-            <h2>Devices</h2>
-          </a>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="core-card taxonomy-card hover-effect">
-          <a href="{% url 'itis:home' %}" class="core-link">
-            <h2>Taxonomy</h2>
-          </a>
-        </div>
-      </div>
-    </div>
-    <!-- Third Row -->
-    <div class="row">
-      <div class="col-md-12">
-        <div class="core-card chatbot-card hover-effect">
-          <a href="{% url 'chatbot:home' %}" class="core-link">
-            <h2>Chatbot</h2>
-          </a>
-        </div>
-      </div>
+      </a>
     </div>
   </div>
+
+  <!-- Second Row -->
+  <div class="row">
+    <div class="col-md-6">
+      <a href="{% url 'cea:home' %}" class="core-link">
+        <div class="core-card inventory-card hover-effect">
+          <h2>Devices</h2>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-6">
+      <a href="{% url 'itis:home' %}" class="core-link">
+        <div class="core-card taxonomy-card hover-effect">
+          <h2>Taxonomy</h2>
+        </div>
+      </a>
+    </div>
+  </div>
+  
+  <!-- Third Row -->
+  <div class="row">
+    <div class="col-md-12">
+      <a href="{% url 'chatbot:home' %}" class="core-link">
+        <div class="core-card chatbot-card hover-effect">
+          <h2>Chatbot</h2>
+        </div>
+      </a>
+    </div>
+  </div>
+
 </div>
 {% endblock %}
