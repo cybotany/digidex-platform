@@ -5,24 +5,17 @@
 }
 
 .tile {
-  border-radius: 15px;
+  border-radius: 1px;
   background: #fff;
   padding: 20px;
   margin: 15px;
   box-shadow: 0px 2px 4px rgba(0,0,0,0.1);
   text-align: center;
-  transition: all 0.3s ease;
 }
 
 .tile:hover {
   box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
   transform: scale(1.05);
-}
-  
-.tile-link h2 {
-  margin: 0;
-  font-size: 24px;
-  line-height: 1.5;
 }
 
 .tile-link {
@@ -33,20 +26,4 @@
   color: white;
   padding: 2rem;
   border-radius: 5px;
-}
-
-.tile-link.taxonomy {
-  background-color: var(--core-primary-color);
-}
-
-.tile-link.inventory {
-  background-color: var(--core-primary-color);
-}
-
-.tile-link.party {
-  background-color: var(--core-primary-color);
-}
-
-.tile-link.chatbot {
-  background-color: var(--core-primary-color);
 }
