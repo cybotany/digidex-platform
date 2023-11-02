@@ -1,14 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-/* Headers */
-.core-header {
+.tile-header {
   font-size: 36px;
   margin-bottom: 20px;
   color: #333;
 }
 
-/* Core Card Styles */
-.core-card {
+.tile {
   border-radius: 15px;
   background: #fff;
   padding: 20px;
@@ -18,26 +16,17 @@
   transition: all 0.3s ease;
 }
 
-.core-card:hover {
+.tile:hover {
   box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
   transform: scale(1.05);
 }
-
- /* Core Links */ 
-.core-link {
-  display: block;
-  height: 100%;
-  color: inherit;
-  text-decoration: none;
-}
   
-.core-link h2 {
+.tile-link h2 {
   margin: 0;
   font-size: 24px;
   line-height: 1.5;
 }
 
-/* Tile Links */
 .tile-link {
   display: block;
   height: 100%;
@@ -49,17 +38,17 @@
 }
 
 .tile-link.taxonomy {
-  background-color: var(--taxonomy-primary-color);
+  background-color: var(--core-primary-color);
 }
 
 .tile-link.inventory {
-  background-color: var(--inventory-primary-color);
+  background-color: var(--core-primary-color);
 }
 
 .tile-link.party {
-  background-color: var(--party-primary-color);
+  background-color: var(--core-primary-color);
 }
 
 .tile-link.chatbot {
-  background-color: var(--chatbot-primary-color);
+  background-color: var(--core-primary-color);
 }
