@@ -1,43 +1,28 @@
 :root {
-    --core-primary-color: #00693E;
-    --core-secondary-color: #1DB954;
-    --core-accent-color: #8AD7A0;
-    --core-neutral-light: #F2F2F2;
-    --core-neutral-dark: #333333;
-    --core-error-color: #E53935;
-    --core-warning-color: #FFC107;
-    --core-success-color: #4CAF50;
-    --core-info-color: #2196F3;
-  
-    --taxonomy-primary-color: #00693E;
-    --taxonomy-secondary-color: #1DB954;
-    
-    --party-primary-color: #00693E;
-    --party-secondary-color: #1DB954;
-    
-    --inventory-primary-color: #00693E;
-    --inventory-secondary-color: #1DB954;
-  
-    --chatbot-primary-color: #00693E;
-    --chatbot-secondary-color: #1DB954;
-  
-  }
-  
-  @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
-  
-  .app-fullscreen-container {
-    min-height: 100vh;
-    width: 100%;
-    padding: 2rem;
-    background: linear-gradient(135deg, var(--core-primary-color) 0%, var(--core-secondary-color) 100%);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease-out;
-  }
-    
+  --core-primary-color: #00693E;
+  --core-secondary-color: #1DB954;
+  --core-accent-color: #8AD7A0;
+  --core-neutral-light: #F2F2F2;
+  --core-neutral-dark: #333333;
+  --core-error-color: #E53935;
+  --core-warning-color: #FFC107;
+  --core-success-color: #4CAF50;
+  --core-info-color: #2196F3;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.app-fullscreen-container {
+  min-height: 100vh;
+  width: 100%;
+  padding: 2rem;
+  background: linear-gradient(135deg, var(--core-primary-color) 0%, var(--core-secondary-color) 100%);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-out;
+}
