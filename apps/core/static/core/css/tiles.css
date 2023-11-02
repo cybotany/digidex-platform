@@ -1,15 +1,23 @@
 .tile {
-  border-radius: 1px;
-  background: #fff;
+  border-radius: 10px;
+  background: var(--core-secondary-color);
   padding: 20px;
   margin: 15px;
   box-shadow: 0px 2px 4px rgba(0,0,0,0.1);
   text-align: center;
+  transition: all 0.3s ease-out;
+}
+
+.tile h2 {
+  margin-top: 0;
+  color: var(--core-neutral-light);
+  font-size: 24px;
 }
 
 .tile:hover {
   box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
   transform: scale(1.05);
+  background: var(--core-primary-color);
 }
 
 .tile-link {
@@ -17,7 +25,11 @@
   height: 100%;
   width: 100%;
   text-decoration: none;
-  color: white;
   padding: 2rem;
-  border-radius: 5px;
+  border-radius: 10px;
+}
+
+.tile-link:focus .tile, 
+.tile-link:hover .tile {
+  background: var(--core-primary-color);
 }
