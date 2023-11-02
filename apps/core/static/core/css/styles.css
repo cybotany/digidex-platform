@@ -3,7 +3,6 @@
   --core-secondary-color: #1DB954;
   --core-accent-color: #8AD7A0;
   --core-neutral-light: #F2F2F2;
-  --core-neutral-color: #B0B0B0;
   --core-neutral-dark: #333333;
   --core-error-color: #E53935;
   --core-warning-color: #FFC107;
@@ -25,7 +24,6 @@ h1, h2, h3, h4, h5, h6 {
   min-height: 100vh;
   width: 100%;
   padding: 5rem 2rem;
-  background: var(--core-neutral-color);
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
