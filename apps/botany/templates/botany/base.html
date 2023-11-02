@@ -19,6 +19,9 @@
     <!-- Load Select2 and CSS -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <!-- Load base styles -->
+    <link rel="stylesheet" href="{% static 'botany/css/styles.css' %}">
         
     {% block app_styles %}
       <!-- CSS stylesheets imported in each template -->
@@ -40,7 +43,7 @@
       </div>
     {% endif %}
       
-    <header style="background-color: var(--core-primary-color);">
+    <header style="background-color: var(--core-accent-color);">
       <div class="container">
         <div class="row align-items-center">
           <!-- Logo -->
@@ -82,7 +85,7 @@
       {% endblock %}
     </main>
 
-    <footer style="background-color: var(--accent-color);">
+    <footer style="background-color: var(--core-accent-color);">
     <!-- insert your footer content here -->
       <div>
         <!-- footer details -->
