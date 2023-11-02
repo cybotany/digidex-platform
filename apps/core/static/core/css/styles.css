@@ -11,6 +11,15 @@
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Caveat', cursive;
+}
 
 .app-fullscreen-container {
   min-height: 100vh;
@@ -28,4 +37,45 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-out;
 }
-  
+
+.app-fullscreen-container:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transform: scale(1.02);
+}
+
+.app-header-container {
+  background: linear-gradient(180deg, var(--core-neutral-light) 0%, var(--core-neutral-dark) 100%);
+  padding: 1rem 2rem; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease-out;
+}
+
+.app-header-container:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(175deg, var(--core-neutral-light) 0%, var(--core-neutral-dark) 100%);
+  transform: translateY(-5px); 
+}
+
+.app-footer-container {
+  background-color: var(--core-neutral-dark);
+  padding: 1rem 2rem;
+  color: var(--core-neutral-light);
+  transition: all 0.3s ease-out;
+
+  /* For links in the footer */
+  a {
+    color: var(--core-accent-color);
+    text-decoration: none;
+    transition: color 0.3s ease-out;
+  }
+
+  a:hover {
+    color: var(--core-secondary-color);
+  }
+}
+
+.app-footer-container:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  background-color: rgba(var(--core-neutral-dark), 0.9);
+  transform: translateY(-5px);
+}
