@@ -1,16 +1,20 @@
 {% extends "botany/base.html" %}
 {% load static %}
 
-<!-- CSS styling specific to Botany Module -->
 {% block app_styles %}
   <link rel="stylesheet" href="{% static 'botany/css/tiles.css' %}">
 {% endblock %}
 
-<!-- App Container -->
+<!-- Botany App Homepage -->
 {% block content %}
 <div class="container app-fullscreen-container">
+  <!-- First Row -->
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Box</h2>
+    </div>
+  </div>
 
-  <!-- Botany App Homepage -->
   {% for plant in plants %}
     <a href="{{ plant.get_absolute_url }}" class="plant-card-link">
       <div class="card plant-card mb-4">

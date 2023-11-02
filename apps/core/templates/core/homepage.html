@@ -5,30 +5,22 @@
   <link rel="stylesheet" href="{% static 'core/css/tiles.css' %}">
 {% endblock %}
 
+<!-- Core App Container -->
 {% block content %}
 <div class="container app-fullscreen-container">
-
-  <!-- Core App Homepage -->
+  <!-- First Row -->
   <div class="row">
     <div class="col-md-12">
       <a href="{% url 'botany:home' %}" class="tile-link">
         <div class="tile">
-          <h2>Party</h2>
+          <h2>Plants</h2>
         </div>
       </a>
     </div>
   </div>
-
   <!-- Second Row -->
   <div class="row">
-    <div class="col-md-6">
-      <a href="{% url 'cea:home' %}" class="tile-link">
-        <div class="tile">
-          <h2>Inventory</h2>
-        </div>
-      </a>
-    </div>
-    <div class="col-md-6">
+    <div class="col-md-12">
       <a href="{% url 'itis:home' %}" class="tile-link">
         <div class="tile">
           <h2>Taxonomy</h2>
@@ -36,17 +28,15 @@
       </a>
     </div>
   </div>
-  
   <!-- Third Row -->
   <div class="row">
     <div class="col-md-12">
       <a href="{% url 'chatbot:home' %}" class="tile-link">
         <div class="tile">
-          <h2>Chatbot</h2>
+          <h2>AI Assistant</h2>
         </div>
       </a>
     </div>
   </div>
-
 </div>
 {% endblock %}

@@ -12,11 +12,18 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto', sans-serif;
+}
+
 .app-fullscreen-container {
   min-height: 100vh;
   width: 100%;
   padding: 5rem 2rem;
-  background: linear-gradient(135deg, var(--core-primary-color) 0%, var(--core-secondary-color) 100%);
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
@@ -28,4 +35,10 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-out;
 }
-  
+
+.app-header-container {
+  background: var(--core-accent-color);
+  padding: 1rem 2rem; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease-out;
+}
