@@ -11,14 +11,13 @@
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
 
 body {
   font-family: 'Roboto', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Caveat', cursive;
+  font-family: 'Roboto', sans-serif;
 }
 
 .app-fullscreen-container {
@@ -62,7 +61,6 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--core-neutral-light);
   transition: all 0.3s ease-out;
 
-  /* For links in the footer */
   a {
     color: var(--core-accent-color);
     text-decoration: none;
