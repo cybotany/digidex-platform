@@ -15,32 +15,44 @@
     </div>
   </div>
 
-  {% for plant in plants %}
-    <a href="{{ plant.get_absolute_url }}" class="plant-card-link">
-      <div class="card plant-card mb-4">
-        <!-- Plant Image -->
-        {% if plant.images.all %}
-          <img src="{{ plant.images.last.image.url }}" class="card-img-top" alt="Image of {{ plant.name }}">
-        {% else %}
-          <div class="no-image-placeholder">No Image</div>
-        {% endif %}
-        <!-- Plant Body -->
-        <div class="card-body">
-          <h5 class="card-title text-center">{{ plant.name }}</h5>
-           {% if plant.nfc_tag %}
-           <div class="plant-link-bubble-wrapper">
-             <span class="plant-link-bubble"></span>
-           </div>
-           {% endif %}
-        </div>
+  <!-- Plant Grid -->
+  <div class="row">
+    {% for plant in plants %}
+      <div class="col-md-4 mb-4"> <!-- 3 cards in a row on medium to larger screens -->
+        <a href="{{ plant.get_absolute_url }}" class="plant-card-link">
+          <div class="card plant-card">
+            <!-- Plant Image -->
+            {% if plant.images.all %}
+              <img src="{{ plant.images.last.image.url }}" class="card-img-top" alt="Image of {{ plant.name }}">
+            {% else %}
+              <div class="no-image-placeholder">No Image</div>
+            {% endif %}
+            <!-- Plant Body -->
+            <div class="card-body">
+              <h5 class="card-title text-center">{{ plant.name }}</h5>
+              {% if plant.nfc_tag %}
+                <div class="plant-link-bubble-wrapper">
+                  <span class="plant-link-bubble"></span>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </a>
       </div>
-    </a>
-  {% empty %}
-    <p>No plants found.</p>
-  {% endfor %}
+      <!-- After every 3 plants, close the row and start a new row -->
+      {% if forloop.counter|divisibleby:3 %}
+        </div>
+        <div class="row">
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  {% if plants|length == 0 %}
+    <p class="text-center">No plants found.</p>
+  {% endif %}
 
   <!-- Pagination Controls -->
-  <div class="row justify-content-center">
+  <div class="row justify-content-center mt-4">
     <nav>
       <ul class="pagination">
         {% if plants.has_previous %}

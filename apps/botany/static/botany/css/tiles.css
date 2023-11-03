@@ -1,7 +1,5 @@
 .plant-card {
   position: relative;
-  max-width: 250px;
-  margin: 0 auto;
   background-color: var(--neutral-light);
   border-radius: 15px;
   overflow: hidden;
@@ -11,6 +9,7 @@
 .plant-card:hover {
   transform: scale(1.05);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  z-index: 10;
 }
 
 .plant-card .card-img-top {
