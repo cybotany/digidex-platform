@@ -1,25 +1,28 @@
 <a href="{{ plant.get_absolute_url }}" class="card-link">
   <div class="card">
     <!-- Card Header -->
-    <div class="card-header">
+    <div class="card-header d-flex align-items-center">
       {% if plant.nfc_tag %}
-        <div class="link-bubble-wrapper">
+        <div class="link-bubble-wrapper mr-2">
           <span class="link-bubble"></span>
         </div>
       {% endif %}
-      {{ plant.name }}
+      <span class="mx-auto">{{ plant.name }}</span>
     </div>
-        <!-- Plant Image -->
-        {% if plant.images.all %}
-            <img src="{{ plant.images.last.image.url }}" class="card-img-top" alt="Image of {{ plant.name }}">
-        {% else %}
-            <div class="no-image-placeholder">No Image</div>
-        {% endif %}
-        <!-- Card Body -->
-        <div class="card-body">
-            <p class="card-text">{{ plant.description }}</p>
-        </div>
-        <!-- Card Footer -->
-        <div class="card-footer text-center">Plant Details or Any Other Info</div>
+    <!-- Plant Image -->
+    <div class="card-image-wrapper">
+      {% if plant.images.all %}
+        <img src="{{ plant.images.last.image.url }}" class="card-img" alt="Image of {{ plant.name }}">
+      {% else %}
+        <div class="no-image-placeholder">No Image</div>
+      {% endif %}
     </div>
+    <!-- Card Body -->
+    <div class="card-body">
+      <p class="card-text">{{ plant.description }}</p>
+    </div>
+    <!-- Card Footer -->
+    <div class="card-footer text-center">Plant Details or Any Other Info</div>
+  </div>
 </a>
+  
