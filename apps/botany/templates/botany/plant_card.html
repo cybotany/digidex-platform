@@ -19,10 +19,14 @@
     </div>
     <!-- Card Body -->
     <div class="card-body">
-      <p class="card-text">{{ plant.description }}</p>
+      {% if plant.days_since_last_watering %}
+        <p class="card-text">Days since last watering: {{ plant.days_since_last_watering }}</p>
+      {% else %}
+        <p class="card-text">This plant has not been watered yet.</p>
+      {% endif %}
     </div>
     <!-- Card Footer -->
-    <div class="card-footer text-center">Plant Details or Any Other Info</div>
+    <div class="card-footer text-center">{{ plant.tsn.complete_name }}</div>
   </div>
 </a>
   
