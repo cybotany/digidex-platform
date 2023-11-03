@@ -20,8 +20,9 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
+    <!-- Load base styles -->
     <link rel="stylesheet" href="{% static 'itis/css/styles.css' %}">
-
+        
     {% block app_styles %}
       <!-- CSS stylesheets imported in each template -->
     {% endblock %}
@@ -42,7 +43,7 @@
       </div>
     {% endif %}
       
-    <header style="background-color: var(--core-primary-color);">
+    <header class="app-header-container">
       <div class="container">
         <div class="row align-items-center">
           <!-- Logo -->
@@ -84,10 +85,9 @@
       {% endblock %}
     </main>
 
-    <footer style="background-color: var(--accent-color);">
-    <!-- insert your footer content here -->
-      <div>
-        <!-- footer details -->
+    <footer class="app-footer-container">
+      <div class="container">
+        <!-- rest of the footer content -->
       </div>
     </footer>
   </body>
