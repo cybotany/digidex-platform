@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block app_styles %}
-  <link rel="stylesheet" href="{% static 'botany/css/tiles.css' %}">
+  <link rel="stylesheet" href="{% static 'botany/css/cards.css' %}">
 {% endblock %}
 
 <!-- Botany App Homepage -->
@@ -18,7 +18,7 @@
   <!-- Plant Grid -->
   <div class="row">
     {% for plant in plants %}
-      <div class="col-md-4 mb-4"> <!-- 3 cards in a row on medium to larger screens -->
+      <div class="col-md-4 mb-4">
         <a href="{{ plant.get_absolute_url }}" class="plant-card-link">
           <div class="card plant-card">
             <!-- Plant Image -->
