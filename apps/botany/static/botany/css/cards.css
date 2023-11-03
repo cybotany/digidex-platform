@@ -2,7 +2,7 @@
   height:  350px;
   width:  250px;
   position: relative;
-  background-color: var(--neutral-light);
+  background-color: var(--core-primary-color);
   border-radius: 15px;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -30,12 +30,13 @@
 .card-img-wrapper {
   max-height: 150px;
   overflow: hidden;
+  padding: 15px 0;
 }
 
 .card-header {
   margin-bottom: 0;
   font-size: 16px;
-  color: var(--neutral-dark);
+  color: var(--core-neutral-dark);
 }
 
 .card-body {
@@ -49,7 +50,7 @@
 .card-footer {
   margin-top: 0;
   font-size: 12px;
-  color: var(--neutral-dark);
+  color: var(--core-neutral-dark);
 }
 
 .link-bubble {
