@@ -88,14 +88,12 @@ class Plant(models.Model):
         Returns:
             int: Number of days since the last watering.
         """
-        # Annotate the plant with the timestamp of its last watering
         plant_with_last_watering = Plant.objects.filter(id=self.id).annotate(
             last_watering_timestamp=Max('waterings__timestamp')
         ).first()
 
         if not plant_with_last_watering or not plant_with_last_watering.last_watering_timestamp:
-            return None  # or return a default value if there's no watering record
+            return None
 
-        # Calculate the days since the last watering
         delta = timezone.now() - plant_with_last_watering.last_watering_timestamp
         return delta.days
