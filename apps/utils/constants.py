@@ -33,17 +33,6 @@ INSTRUMENT_TYPE_CHOICES = [
     ('fan', 'Fan'),
 ]
 
-COMMON_LABELS = [
-    'Living Room',
-    'Kitchen',
-    'Balcony',
-    'Patio',
-    'Garden',
-    'Bedroom',
-    'Bathroom',
-    'Office'
-]
-
 GROWING_METHODS = [
     ('Traditional', 'Traditional'),
     ('Hydroponics', 'Hydroponics'),
