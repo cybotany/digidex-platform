@@ -41,7 +41,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 1rem 2rem; 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease-out;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .app-footer-container {
@@ -49,5 +49,5 @@ h1, h2, h3, h4, h5, h6 {
   padding: 1rem 2rem; 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease-out;
-  margin-top: 10px;
+  margin-top: 20px;
 }
