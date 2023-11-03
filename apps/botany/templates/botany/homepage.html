@@ -18,12 +18,13 @@
   <!-- Plant Grid -->
   <div class="row">
     {% for plant in plants %}
+      <!-- Plant Card -->
       <div class="col-md-4 mb-4">
-        <a href="{{ plant.get_absolute_url }}" class="plant-card-link">
-          <div class="card plant-card">
+        <a href="{{ plant.get_absolute_url }}" class="card-link">
+          <div class="card">
             <!-- Plant Image -->
             {% if plant.images.all %}
-              <img src="{{ plant.images.last.image.url }}" class="card-img-top" alt="Image of {{ plant.name }}">
+              <img src="{{ plant.images.last.image.url }}" class="card-img" alt="Image of {{ plant.name }}">
             {% else %}
               <div class="no-image-placeholder">No Image</div>
             {% endif %}
@@ -39,8 +40,9 @@
           </div>
         </a>
       </div>
+    
       <!-- After every 3 plants, close the row and start a new row -->
-      {% if forloop.counter|divisibleby:3 %}
+      {% if forloop.counter|divisibleby:3 and not forloop.last %}
         </div>
         <div class="row">
       {% endif %}
