@@ -56,7 +56,7 @@
   display: inline-block;
   width: 10px;
   height: 10px;
-  background-color: var(--info-color);
+  background-color: var(--core-info-color);
   border-radius: 50%;
 }
 
