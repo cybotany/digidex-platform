@@ -1,3 +1,0 @@
-from .growth_chamber_registration import GrowthChamberRegistrationForm
-from .greenhouse_registration import GreenhouseRegistrationForm
-from .tissue_culture_registration import TissueCultureRegistrationForm

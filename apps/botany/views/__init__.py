@@ -1,7 +1,4 @@
 from .homepage import PlantHomepageView
-from .register_component import RegisterComponentView
-from .register_medium import RegisterMediumView
-from .register_fertilizer import RegisterFertilizerView
 from .register_plant import RegisterPlantView
 from .describe_plant import DescribePlantView
 from .delete_plant import DeletePlantView

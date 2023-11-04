@@ -63,7 +63,6 @@ INSTALLED_APPS = [
     #'apps.accounts',
     'apps.accounts.apps.AccountConfig',
     'apps.botany',
-    'apps.cea',
     'apps.chatbot',
     'apps.utils',
     'apps.nfc',
