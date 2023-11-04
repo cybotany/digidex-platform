@@ -1,4 +1,4 @@
-from .growing_label import GrowingLabel
+from .group import Group
 from .growing_component import GrowingComponent
 from .growing_composition import GrowingComposition
 from .growing_fertilizer import GrowingFertilizer
