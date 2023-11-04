@@ -46,6 +46,7 @@ if DJANGO_ENV == 'production':
     STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/static/"
 else:
     DEBUG = True
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
     STATIC_URL = '/static/'
 
 
@@ -86,7 +87,7 @@ ROOT_URLCONF = 'cybotany.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [[os.path.join(BASE_DIR, 'templates')]],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
