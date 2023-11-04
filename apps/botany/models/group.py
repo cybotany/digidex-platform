@@ -33,10 +33,10 @@ class Group(models.Model):
     )
 
     class Meta:
-        unique_together = (('name', 'user'))#, ('position', 'user'))
+        unique_together = (('name', 'user'), ('position', 'user'))
         verbose_name = 'group'
         verbose_name_plural = 'groups'
-        #ordering = ['position']
+        ordering = ['position']
 
     @property
     def plants(self):
