@@ -2,7 +2,6 @@
   height:  350px;
   width:  250px;
   position: relative;
-  background-color: var(--core-primary-color);
   border-radius: 15px;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -45,6 +44,7 @@
   flex-direction: column;
   justify-content: flex-end;
   height: 100%;
+  background-color: var(--core-primary-color);
 }
 
 .card-footer {

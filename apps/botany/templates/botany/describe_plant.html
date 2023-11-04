@@ -1,99 +1,20 @@
 {% extends "botany/base.html" %}
 {% load static %}
 
-<!-- CSS styling specific to app -->
 {% block app_styles %}
-  <link rel="stylesheet" href="{% static 'botany/css/styles.css' %}">
-  <link rel="stylesheet" href="{% static 'botany/css/summary.css' %}">
+  <link rel="stylesheet" href="{% static 'botany/css/plant_summary.css' %}">
 {% endblock %}
 
 <!-- Botany app container -->
 {% block content %}
 <div class="container app-fullscreen-container">
-  <!-- Plant detail container --> 
-  <div class="plant-detail-container mb-5 d-flex flex-column align-items-center">
 
-    <!-- Plant Image Slideshow -->
-    <div id="plantCarousel" class="carousel slide w-100 mb-3" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        {% for image in plant.images.all %}
-          <div class="carousel-item {% if forloop.first %}active{% endif %}">
-            <img src="{{ image.image.url }}" class="d-block w-100 rounded" alt="Image of {{ plant.name }}" style="max-height: 500px; object-fit: cover;">
-          </div>
-        {% endfor %}
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#plantCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#plantCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
-
-    <!-- Plant Name -->
-    <h2 class="mb-3 text-center w-100">{{ plant.name }}</h2>
-
-    <!-- Toggle Buttons -->
-    <div class="d-flex mb-3 justify-content-center w-100">
-      <button class="btn btn-outline-info mx-2" type="button" data-bs-toggle="collapse" data-bs-target="#plantCare" aria-expanded="false" aria-controls="plantCare">Plant Log</button>
-      <button class="btn btn-outline-info mx-2" type="button" data-bs-toggle="collapse" data-bs-target="#plantTaxonomy" aria-expanded="false" aria-controls="plantTaxonomy">Taxonomy</button>
-    </div>
-
-    <!-- Plant Taxonomy -->
-    <div class="collapse w-100 mb-3 text-center" id="plantTaxonomy">
-      <p><strong>Complete name:</strong> {{ plant.tsn.complete_name }}</p>
-      <p><strong>Taxonomic Serial Number:</strong> {{ plant.tsn.tsn }}</p>
-    </div>
-
-    <!-- Plant Care Log -->
-    <div class="collapse w-100 mb-3 text-center" id="plantCare">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Watering Date and Time</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for event in plant.waterings.all %}
-            <tr>
-              <td>{{ event.timestamp }}</td>
-            </tr>
-          {% empty %}
-            <tr>
-              <td class="text-center">No watering events recorded.</td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-      
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Fertilization Date and Time</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for event in plant.fertilizations.all %}
-            <tr>
-              <td>{{ event.timestamp }}</td>
-            </tr>
-          {% empty %}
-            <tr>
-              <td class="text-center">No fertilization events recorded.</td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Buttons to update or delete plant -->
-    <div class="d-flex justify-content-center mb-5 w-100">
+  {% include "botany/plant_summary.html" %}
+  <!-- Buttons to update or delete plant -->
+  
+  <div class="d-flex justify-content-center mb-5 w-100">
       <a href="{% url 'botany:update_plant' plant.id %}" class="btn btn-primary btn-lg shadow mx-2">Update</a>
       <a href="{% url 'botany:delete_plant' plant.id %}" class="btn btn-danger btn-lg shadow mx-2">Delete</a>
-    </div>
-
-  </div> <!-- End of plant-detail-container -->
-</div> <!-- End of app-fullscreen-container -->
+  </div>
+</div>
 {% endblock %}
