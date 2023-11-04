@@ -25,6 +25,11 @@ class UpdatePlantView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         Returns:
             The response from the parent form_valid method.
         """
+        group = form.cleaned_data.get('group')
+        if group:
+            plant = form.save(commit=False)
+            plant.group = group
+            plant.save()
         self.show_success_message()
         return super().form_valid(form)
 

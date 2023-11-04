@@ -1,5 +1,5 @@
 from django import forms
-from apps.botany.models import Plant, PlantImage, PlantWatering, PlantFertilization
+from apps.botany.models import Plant, PlantImage, PlantWatering, PlantFertilization, Group
 from apps.itis.models import TaxonomicUnits
 
 
@@ -14,13 +14,21 @@ class PlantUpdateForm(forms.ModelForm):
         required=False,
         widget=forms.TextInput(attrs={'id': 'tsnField'})
     )
+    group = forms.ModelChoiceField(
+        queryset=Group.objects.all(),
+        required=False,
+        widget=forms.Select(attrs={'id': 'groupField'})
+    )
 
     class Meta:
         model = Plant
-        fields = ('name', 'description', 'image', 'quantity', 'watered', 'fertilized', 'tsn')
+        fields = ('name', 'description', 'image', 'quantity', 'watered', 'fertilized', 'tsn', 'group')
 
     def __init__(self, *args, **kwargs):
         super(PlantUpdateForm, self).__init__(*args, **kwargs)
+        user = kwargs['instance'].user
+        self.fields['group'].queryset = Group.objects.filter(user=user)
+
         self.fields['tsn'].widget.attrs.update({'id': 'tsnField'})
 
     def clean(self):
