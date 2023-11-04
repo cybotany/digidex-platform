@@ -24,19 +24,19 @@ class PlantRegistrationForm(forms.ModelForm):
         fields = ('name', 'description', 'image', 'quantity', 'tsn')
 
     def __init__(self, *args, **kwargs):
-            """
-            Initialize the form.
+        """
+        Initialize the form.
 
-            Pop the user, nfc_tag, and tsn from kwargs.
-            """
-            self.user = kwargs.pop('user', None)
-            self.nfc_tag = kwargs.pop('nfc_tag', None)
-            super().__init__(*args, **kwargs)
+        Pop the user, nfc_tag, and tsn from kwargs.
+        """
+        self.user = kwargs.pop('user', None)
+        self.nfc_tag = kwargs.pop('nfc_tag', None)
+        super().__init__(*args, **kwargs)
 
-            if self.nfc_tag:
-                self.fields['nfc_tag'].initial = self.nfc_tag
+        if self.nfc_tag:
+            self.fields['nfc_tag'].initial = self.nfc_tag
 
-            self.fields['tsn'].widget.attrs.update({'id': 'tsnField'})
+        self.fields['tsn'].widget.attrs.update({'id': 'tsnField'})
 
     def clean(self):
         cleaned_data = super().clean()
