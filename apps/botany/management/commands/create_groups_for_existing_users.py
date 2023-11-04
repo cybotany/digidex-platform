@@ -14,7 +14,7 @@ class Command(BaseCommand):
 
             if existing_groups_count < MAX_GROUP:
                 for i in range(existing_groups_count + 1, MAX_GROUP+1):
-                    Group.objects.create(user=user, name=f'Group {i}')
+                    Group.objects.create(user=user, name=f'Group {i}', position=i)
                     self.stdout.write(self.style.SUCCESS(f'Created Group {i} for user {user.username}'))
 
                 self.stdout.write(self.style.SUCCESS(f'All {MAX_GROUP} groups created for user {user.username}'))

@@ -32,5 +32,6 @@ def manage_user_group(sender, instance, created, **kwargs):
         for i in range(1, MAX_GROUP+1):
             Group.objects.create(
                 name=f'Group {i}',
-                user=instance
+                user=instance,
+                position=i
             )

@@ -10,6 +10,8 @@ class Group(models.Model):
     Fields:
         name (CharField): The name of the group.
         user (ForeignKey): A reference to the user who created the group.
+        position (PositiveIntegerField): The position/order of the group.
+        current_count (PositiveIntegerField): The current number of plants in this group.
     """
     name = models.CharField(
         max_length=50,
@@ -22,15 +24,19 @@ class Group(models.Model):
         blank=True,
         help_text='The user who created the group.',
     )
+    position = models.PositiveIntegerField(
+        help_text="The position/order of the group."
+    )
     current_count = models.PositiveIntegerField(
         default=0,
         help_text="The current number of plants in this group."
     )
 
     class Meta:
-        unique_together = ('name', 'user')
+        unique_together = (('name', 'user'), ('position', 'user'))
         verbose_name = 'group'
         verbose_name_plural = 'groups'
+        ordering = ['position']
 
     @property
     def plants(self):
