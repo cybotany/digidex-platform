@@ -1,5 +1,4 @@
 from .homepage import PlantHomepageView
-from .register_label import RegisterLabelView
 from .register_component import RegisterComponentView
 from .register_medium import RegisterMediumView
 from .register_fertilizer import RegisterFertilizerView

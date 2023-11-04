@@ -1,6 +1,5 @@
 from django.urls import path
 from apps.botany.views import (
-    RegisterLabelView,
     RegisterComponentView,
     RegisterMediumView,
     RegisterFertilizerView,
@@ -16,7 +15,6 @@ from apps.botany.views import (
 app_name = 'botany'
 urlpatterns = [
     path('', PlantHomepageView.as_view(), name='home'),
-    path('register/growing/label/', RegisterLabelView.as_view(), name='register_label'),
     path('register/growing/component/', RegisterComponentView.as_view(), name='register_component'),
     path('register/growing/medium/', RegisterMediumView.as_view(), name='register_medium'),
     path('register/growing/fertilizer/', RegisterFertilizerView.as_view(), name='register_fertilizer'),
