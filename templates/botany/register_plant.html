@@ -2,7 +2,6 @@
 {% load static %}
 
 {% block content %}
-<div class="container mt-4">
     <h2> Register a new plant </h2> 
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -34,5 +33,4 @@
 
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-</div>
 {% endblock %}

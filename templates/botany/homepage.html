@@ -5,9 +5,7 @@
   <link rel="stylesheet" href="{% static 'botany/css/plant_card.css' %}">
 {% endblock %}
 
-<!-- Botany App Homepage -->
 {% block content %}
-<div class="container app-fullscreen-container">
   <!-- Plant Storage -->
   {% include "botany/group_header.html" %}
   <div class="row">
@@ -28,5 +26,4 @@
   {% if plants|length == 0 %}
     <p class="text-center">No plants found.</p>
   {% endif %}
-</div>
 {% endblock %}
