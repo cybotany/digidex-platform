@@ -67,6 +67,15 @@ class Group(models.Model):
             self.current_count -= 1
             self.save()
 
+    def display_name_with_count(self):
+        """
+        Returns the group name alongside its current_count in parentheses.
+
+        Returns:
+            str: The name of the group with its current_count in parentheses.
+        """
+        return f"{self.name} ({self.current_count})"
+
     def __str__(self):
         """
         Returns a string representation of the group.
