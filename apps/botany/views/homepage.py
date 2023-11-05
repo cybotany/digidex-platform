@@ -1,7 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
-from apps.botany.models import Plant, Group
-from django.db.models import Q
+from apps.botany.models import Group
 
 
 class PlantHomepageView(LoginRequiredMixin, TemplateView):
@@ -9,12 +8,6 @@ class PlantHomepageView(LoginRequiredMixin, TemplateView):
     View for rendering the plant module homepage.
     """
     template_name = 'botany/plant_grid.html'
-
-    def get_plants_for_group(self, default_group):
-        """
-        Return all plants for the currently logged-in user in the default group.
-        """
-        return Plant.objects.filter(user=self.request.user, group=default_group).order_by('added_on')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -29,6 +22,5 @@ class PlantHomepageView(LoginRequiredMixin, TemplateView):
         context['current_group'] = current_group
         context['prev_group_id'] = prev_group.id
         context['next_group_id'] = next_group.id
-        context['plants'] = self.get_plants_for_group(current_group)
 
         return context

@@ -21,23 +21,9 @@
   </div>
   <!-- Grid Container -->
   <div id="plantListContainer" data-current-group-id="{{ current_group.id }}" class="row">
-    {% for plant in plants %}
-      <!-- Plant Card -->
-      <div class="col-md-4 mb-4">
-        {% include "botany/plant_card.html" %}
-      </div>
-    
-      <!-- After every 3 plants, close the row and start a new row -->
-      {% if forloop.counter|divisibleby:3 and not forloop.last %}
-        </div>
-        <div class="row">
-      {% endif %}
-    {% endfor %}
+    <!-- Plants will be loaded here by JavaScript -->
   </div>
-
-  {% if plants|length == 0 %}
-    <p class="text-center">No plants found.</p>
-  {% endif %}
+  <p id="noPlantsMessage" class="text-center" style="display: none;">No plants found.</p>
 {% endblock %}
 
 {% block app_scripts %}

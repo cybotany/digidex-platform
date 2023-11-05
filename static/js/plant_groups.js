@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const leftArrow = document.getElementById('leftArrow');
     const rightArrow = document.getElementById('rightArrow');
     const currentGroupName = document.getElementById('currentGroupName');
-    const plantListContainer = document.getElementById('plantListContainer'); // Assuming the container ID is 'plantListContainer'
+    const plantListContainer = document.getElementById('plantListContainer'); 
 
     leftArrow.addEventListener('click', function() {
         fetchPlantsForGroup(leftArrow.getAttribute('data-group-id'));
@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         fetch(`/api/get_group/${groupId}/`)
         .then(response => response.json())
         .then(data => {
-            // Extract the 'plants' key and parse its string value into a JavaScript array
             const plantsArray = JSON.parse(data.plants);
             
             // Update the plant list
@@ -27,6 +26,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
             // Update the arrows' data-group-id
             leftArrow.setAttribute('data-group-id', data.prev_group_id);
             rightArrow.setAttribute('data-group-id', data.next_group_id);
+
+            // Show or hide the 'No plants found' message
+            const noPlantsMessage = document.getElementById('noPlantsMessage');
+            if (plantsArray.length === 0) {
+                noPlantsMessage.style.display = 'block';
+            } else {
+                noPlantsMessage.style.display = 'none';
+            }
         })
         .catch(error => {
             console.error("There was an error fetching the plants:", error);
@@ -67,4 +74,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         });
         plantListContainer.innerHTML = plantHtml;
     }
+
+    // Load the initial plant set
+    const initialGroupId = plantListContainer.getAttribute('data-current-group-id');
+    fetchPlantsForGroup(initialGroupId);
 });
