@@ -15,6 +15,8 @@
     <button type="submit" class="send-button"></button>
   </div>
 </form>
-
-<script src="{% static 'js/chatbot.js' %}"></script>
 {% endblock content %}
+
+{% block app_scripts %}
+  <script src="{% static 'js/chatbot.js' %}"></script>
+{% endblock %} 
