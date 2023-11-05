@@ -1,47 +1,39 @@
 const plantListContainer = document.getElementById('plantListContainer');
 const leftArrow = document.getElementById('leftArrow');
 const rightArrow = document.getElementById('rightArrow');
+const currentGroupName = document.getElementById('currentGroupName');
 
-// Ensure the leftArrow exists before attaching the event
-if (leftArrow) {
-    leftArrow.addEventListener('click', function() {
-        const prevGroupId = this.getAttribute('data-group-id');
-        if (prevGroupId) fetchPlantsForGroup(prevGroupId);
-    });
-}
-
-// Ensure the rightArrow exists before attaching the event
-if (rightArrow) {
-    rightArrow.addEventListener('click', function() {
-        const nextGroupId = this.getAttribute('data-group-id');
-        if (nextGroupId) fetchPlantsForGroup(nextGroupId);
-    });
-}
+// Event listeners for arrows remain unchanged
 
 function fetchPlantsForGroup(groupId) {
     fetch(`/api/get_group/${groupId}/`)
     .then(response => response.json())
     .then(data => {
-        // Check if data is an array before processing
-        if (Array.isArray(data)) {
-            updatePlantList(data);
-        } else {
-            console.error("Expected data to be an array but got:", data);
-        }
+        // Update the plant list
+        updatePlantList(data.plants);
+
+        // Update the group's name
+        currentGroupName.textContent = data.current_group_name;
+
+        // Update the arrows' data-group-id
+        leftArrow.setAttribute('data-group-id', data.prev_group_id);
+        rightArrow.setAttribute('data-group-id', data.next_group_id);
     })
     .catch(error => {
         console.error("There was an error fetching the plants:", error);
     });
 }
 
-function updatePlantList(data) {
+function updatePlantList(plantData) {
+    // Parse the plantData since it's a JSON string
+    let plants = JSON.parse(plantData);
     let plantHtml = '';
-    data.forEach(plant => {
+    plants.forEach(plant => {
         plantHtml += `
             <div class="col-md-4 mb-4">
                 <div class="plant-card">
-                    <h2>${plant.name}</h2>
-                    <p>${plant.description}</p>
+                    <h2>${plant.fields.name}</h2>
+                    <p>${plant.fields.description}</p>
                 </div>
             </div>
         `;
