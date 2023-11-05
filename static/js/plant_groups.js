@@ -1,9 +1,7 @@
-const plantListContainer = document.getElementById('plantListContainer');
 const leftArrow = document.getElementById('leftArrow');
 const rightArrow = document.getElementById('rightArrow');
 const currentGroupName = document.getElementById('currentGroupName');
 
-// Event listeners for arrows remain unchanged
 
 function fetchPlantsForGroup(groupId) {
     fetch(`/api/get_group/${groupId}/`)
@@ -25,18 +23,37 @@ function fetchPlantsForGroup(groupId) {
 }
 
 function updatePlantList(plantData) {
-    // Parse the plantData since it's a JSON string
-    let plants = JSON.parse(plantData);
     let plantHtml = '';
-    plants.forEach(plant => {
+    plantData.forEach(plant => {
+        const hasNfcTag = plant.fields.nfc_tag ? '<div class="link-bubble-wrapper mr-2"><span class="link-bubble"></span></div>' : '';
+        const plantImageUrl = plant.fields.images && plant.fields.images.length > 0 ? plant.fields.images[plant.fields.images.length-1].image.url : '';
+        const plantImage = plantImageUrl ? `<img src="${plantImageUrl}" class="card-img" alt="Image of ${plant.fields.name}">` : '<div class="no-image-placeholder">No Image</div>';
+        const wateringInfo = plant.fields.days_since_last_watering ? `Days since last watering: ${plant.fields.days_since_last_watering}` : 'This plant has not been watered yet.';
+
         plantHtml += `
             <div class="col-md-4 mb-4">
-                <div class="plant-card">
-                    <h2>${plant.fields.name}</h2>
-                    <p>${plant.fields.description}</p>
-                </div>
+                <a href="${plant.fields.get_absolute_url}" class="card-link">
+                    <div class="card">
+                        <!-- Card Header -->
+                        <div class="card-header d-flex align-items-center">
+                            ${hasNfcTag}
+                            <span class="mx-auto">${plant.fields.name}</span>
+                        </div>
+                        <!-- Plant Image -->
+                        <div class="card-image-wrapper">
+                            ${plantImage}
+                        </div>
+                        <!-- Card Body -->
+                        <div class="card-body">
+                            <p class="card-text">${wateringInfo}</p>
+                        </div>
+                        <!-- Card Footer -->
+                        <div class="card-footer text-center">${plant.fields.tsn.complete_name}</div>
+                    </div>
+                </a>
             </div>
         `;
     });
     plantListContainer.innerHTML = plantHtml;
 }
+
