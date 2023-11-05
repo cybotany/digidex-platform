@@ -8,15 +8,15 @@
 <!-- Plant Grid -->
 {% block content %}
   <!-- Grid Selector -->
-  <div class="row">
-    <div class="col-1">
-      <button id="leftArrow" class="group-arrow" data-group-id="{{ prev_group_id }}">←</button>
+  <div class="row align-items-center">
+    <div class="col-2 text-end">
+        <button id="leftArrow" class="group-arrow" data-group-id="{{ prev_group_id }}">←</button>
     </div>
-    <div class="col-10 text-center">
-      <span id="currentGroupName">{{ current_group.name }}</span>
+    <div class="col-8 text-center">
+        <span id="currentGroupName">{{ current_group.name }}</span>
     </div>
-    <div class="col-1">
-      <button id="rightArrow" class="group-arrow" data-group-id="{{ next_group_id }}">→</button>
+    <div class="col-2 text-start">
+        <button id="rightArrow" class="group-arrow" data-group-id="{{ next_group_id }}">→</button>
     </div>
   </div>
   <!-- Grid Container -->
