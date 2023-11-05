@@ -1,6 +1,5 @@
 from django import forms
 from apps.botany.models import Plant, PlantImage
-from apps.itis.models import TaxonomicUnits
 
 
 class PlantRegistrationForm(forms.ModelForm):
@@ -11,7 +10,7 @@ class PlantRegistrationForm(forms.ModelForm):
         required=True,
         widget=forms.HiddenInput()
     )
-    tsn = forms.CharField(
+    tsn = forms.ModelChoiceField(
         required=False,
         widget=forms.TextInput(attrs={'id': 'tsnField'})
     )
@@ -40,20 +39,11 @@ class PlantRegistrationForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
-        tsn_value = cleaned_data.get('tsn')
         nfc_value = cleaned_data.get('nfc_tag')
 
         if not nfc_value:
             raise forms.ValidationError("An NFC Tag is required!")
 
-        if not tsn_value:
-            cleaned_data['tsn'] = None
-        else:
-            try:
-                taxonomic_unit = TaxonomicUnits.objects.get(tsn=tsn_value)
-                cleaned_data['tsn'] = taxonomic_unit
-            except TaxonomicUnits.DoesNotExist:
-                raise forms.ValidationError(f"TSN {tsn_value} does not exist!")
         return cleaned_data
 
     def save(self, commit=True):
