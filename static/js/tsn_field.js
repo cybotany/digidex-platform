@@ -4,7 +4,7 @@ const tsnField = document.getElementById('tsnField');
 // Configurations for select2
 const select2Config = {
     ajax: {
-        url: '/itis/get_tsn/',
+        url: '/api/get_tsn/',
         dataType: 'json',
         delay: 250,
         data: function (params) {
