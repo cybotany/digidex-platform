@@ -15,8 +15,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
         fetch(`/api/get_group/${groupId}/`)
         .then(response => response.json())
         .then(data => {
+            // Extract the 'plants' key and parse its string value into a JavaScript array
+            const plantsArray = JSON.parse(data.plants);
+            
             // Update the plant list
-            updatePlantList(data.plants);
+            updatePlantList(plantsArray);
 
             // Update the group's name
             currentGroupName.textContent = data.current_group_name;
