@@ -10,12 +10,13 @@ class PlantUpdateForm(forms.ModelForm):
     image = forms.ImageField(required=False)
     watered = forms.BooleanField(required=False)
     fertilized = forms.BooleanField(required=False)
-    tsn = forms.CharField(
+    tsn = forms.ModelChoiceField(
+        queryset=TaxonomicUnits.objects.none(),
         required=False,
         widget=forms.TextInput(attrs={'id': 'tsnField'})
     )
     group = forms.ModelChoiceField(
-        queryset=Group.objects.all(),
+        queryset=Group.objects.none(),
         required=False,
         widget=forms.Select(attrs={'id': 'groupField'})
     )

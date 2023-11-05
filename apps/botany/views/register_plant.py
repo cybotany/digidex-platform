@@ -38,6 +38,11 @@ class RegisterPlantView(FormView):
                 form.add_error('tsn', f"TSN {new_plant.tsn.tsn} does not exist!")
                 return self.form_invalid(form)
 
+        group = form.cleaned_data.get('group')
+        if group:
+            new_plant = form.save(commit=False)
+            new_plant.group = group
+
         new_plant.save()
 
         image = form.cleaned_data.get('image')

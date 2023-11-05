@@ -34,11 +34,9 @@
             {{ form.tsn.label_tag }}
             <select name="{{ form.tsn.name }}" id="tsnField" style="width:300px;">
                 <!-- This can be left empty, options will be populated via AJAX -->
-                <!-- Optionally, you can preselect the current TSN value -->
-                <option value="{{ plant.tsn.tsn }}" selected>{{ plant.tsn.some_descriptive_field }}</option>
             </select>
         </p>
-        <script src="{% static 'botany/js/tsn_field.js' %}"></script>
+        <script src="{% static 'js/tsn_field.js' %}"></script>
 
         <!-- Your additional image form -->
         <p>

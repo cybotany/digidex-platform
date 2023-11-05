@@ -19,12 +19,15 @@
             {{ form.quantity.label_tag }} {{ form.quantity }}
         </p>
         <p>
+            {{ form.group.label_tag }} {{ form.group }}
+        </p>
+        <p>
             {{ form.tsn.label_tag }}
             <select name="{{ form.tsn.name }}" id="tsnField" style="width:300px;">
                 <!-- This can be left empty, options will be populated via AJAX -->
             </select>
         </p>
-        <script src="{% static 'botany/js/tsn_field.js' %}"></script>
+        <script src="{% static 'js/tsn_field.js' %}"></script>
 
         <!-- Your additional image form -->
         <p>
