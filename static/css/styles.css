@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 :root {
   --core-primary-color: #00693E;
   --core-secondary-color: #1DB954;
@@ -9,8 +11,6 @@
   --core-success-color: #4CAF50;
   --core-info-color: #2196F3;
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 body {
   font-family: 'Roboto', sans-serif;
