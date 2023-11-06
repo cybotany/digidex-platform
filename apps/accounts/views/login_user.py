@@ -15,7 +15,6 @@ class LoginUserView(LoginView):
         refresh = RefreshToken.for_user(self.request.user)
         access_token = str(refresh.access_token)
         
-        # Return JWT token in the response
         return JsonResponse({
             'access_token': access_token,
             'refresh_token': str(refresh)

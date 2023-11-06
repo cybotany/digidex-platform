@@ -21,6 +21,7 @@
         </div>
       {% endif %}
 
+      <!-- Password Field-->
       <label for="{{ form.password.id_for_label }}">Password</label>
       <input type="password" name="password" id="{{ form.password.id_for_label }}" required>
 
@@ -39,5 +40,5 @@
 {% endblock content %}
 
 {% block app_scripts %}
-  <script src="{% static 'js/get_jwt_token.js' %}"></script>
+  <script src="{% static 'js/get_login_jwt.js' %}"></script>
 {% endblock %}
