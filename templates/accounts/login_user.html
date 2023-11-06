@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
-
-{% block content %}
-
 {% load static %}
 
+{% block content %}
 <div class="center">
   <form id="loginForm" method="post" class="card" novalidate>
     {% csrf_token %}
@@ -14,14 +12,23 @@
         </div>
       {% endif %}
 
-      {% for field in form %}
-        {{ field.label_tag }} {{ field }}
-          {% if field.errors %}
-            <div class="alert alert-danger">
-              <small>{{ field.errors|striptags }}</small>
-            </div>
-          {% endif %}
-      {% endfor %}
+      <label for="{{ form.username.id_for_label }}">Username</label>
+      <input type="text" name="username" id="{{ form.username.id_for_label }}" value="{{ form.username.value }}" required>
+
+      {% if form.username.errors %}
+        <div class="alert alert-danger">
+          <small>{{ form.username.errors|striptags }}</small>
+        </div>
+      {% endif %}
+
+      <label for="{{ form.password.id_for_label }}">Password</label>
+      <input type="password" name="password" id="{{ form.password.id_for_label }}" required>
+
+      {% if form.password.errors %}
+        <div class="alert alert-danger">
+          <small>{{ form.password.errors|striptags }}</small>
+        </div>
+      {% endif %}
 
     <input type="submit" value="Login" class="btn btn-primary full-width">
     <hr>
@@ -29,7 +36,7 @@
     <p class="text-center">Don't have an account? <a href="{% url 'accounts:signup' %}">Join Now</a></p>
   </form>
 </div>
-{% endblock content%}
+{% endblock content %}
 
 {% block app_scripts %}
   <script src="{% static 'js/get_jwt_token.js' %}"></script>

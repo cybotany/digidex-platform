@@ -1,6 +1,7 @@
 const loginForm = document.getElementById("loginForm");
 
 loginForm.addEventListener("submit", async (event) => {
+    console.log("Login form submitted");
     event.preventDefault();
 
     const formData = new FormData(loginForm);
