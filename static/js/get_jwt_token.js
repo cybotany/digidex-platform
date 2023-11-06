@@ -23,7 +23,6 @@ const login = async (username, password) => {
     if (response.ok && data.access && data.refresh) {
         localStorage.setItem("accessToken", data.access);
         localStorage.setItem("refreshToken", data.refresh);
-        window.location.href = "/botany/";
     } else {
         console.error("Authentication failed:", data);
     }

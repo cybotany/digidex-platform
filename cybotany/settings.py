@@ -39,16 +39,28 @@ OPENAI_API_KEY = api_secrets['OPENAI_API_KEY']
 OPEN_WEATHER_MAP_API_KEY = api_secrets['OPEN_WEATHER_MAP_API_KEY']
 PLANT_ID_API_KEY = api_secrets['PLANT_ID_API_KEY']
 
+CORS_ALLOW_HEADERS = [
+    "content-type",
+    "authorization",
+]
+
 # Environment specific settings
 if DJANGO_ENV == 'production':
     DEBUG = False
     # Use Amazon S3 for static files in production
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/static/"
+    CORS_ALLOW_ALL_ORIGINS = False
+    CORS_ALLOWED_ORIGINS = [
+        "http://127.0.0.1:8080",
+        "https://cybotany.com"
+    ]
 else:
     DEBUG = True
     STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
     STATIC_URL = '/static/'
+    CORS_ALLOW_ALL_ORIGINS = True
+
 
 
 # Application definition
@@ -61,6 +73,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'storages',
     'rest_framework',
+    'corsheaders',
     'apps.api',
     #'apps.accounts',
     'apps.accounts.apps.AccountConfig',
@@ -81,6 +94,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'cybotany.urls'
