@@ -12,12 +12,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 
     function fetchPlantsForGroup(groupId) {
-        const jwtToken = localStorage.getItem('jwtToken');
+        const accessToken = localStorage.getItem('accessToken');
 
         fetch(`/api/get_plant_group/${groupId}/`, {
             method: "GET",
             headers: {
-                "Authorization": `Bearer ${jwtToken}`,
+                "Authorization": `Bearer ${accessToken}`,
                 "Content-Type": "application/json"
             }
         })
