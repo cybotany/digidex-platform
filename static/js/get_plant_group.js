@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         })
         .then(response => response.json())
         .then(data => {
-            const plantsArray = JSON.parse(data.plants);
+            const plantsArray = data.plants;
             
             // Update the plant list
             updatePlantList(plantsArray);
