@@ -8,14 +8,3 @@ from django.contrib.auth import login
 class LoginUserView(LoginView):
     form_class = AuthenticationForm
     template_name = 'accounts/login_user.html'
-
-    def form_valid(self, form):
-        super().form_valid(form)
-        
-        refresh = RefreshToken.for_user(self.request.user)
-        access_token = str(refresh.access_token)
-        
-        return JsonResponse({
-            'access_token': access_token,
-            'refresh_token': str(refresh)
-        })
