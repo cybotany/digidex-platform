@@ -12,7 +12,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 
     function fetchPlantsForGroup(groupId) {
-        fetch(`/api/get_plant_group/${groupId}/`)
+        const jwtToken = localStorage.getItem('jwtToken');
+
+        fetch(`/api/get_plant_group/${groupId}/`, {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${jwtToken}`,
+                "Content-Type": "application/json"
+            }
+        })
         .then(response => response.json())
         .then(data => {
             const plantsArray = JSON.parse(data.plants);
