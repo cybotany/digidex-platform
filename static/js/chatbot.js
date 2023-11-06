@@ -40,7 +40,7 @@ chatForm.addEventListener('submit', (event) => {
 
     // AJAX Request
     $.ajax({
-        url: '/api/chatbot/',
+        url: '/api/get_chat_message/',
         method: 'POST',
         headers: {'X-CSRFToken': csrftoken},
         data: JSON.stringify({'message': message}),

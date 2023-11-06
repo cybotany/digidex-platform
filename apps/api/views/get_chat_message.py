@@ -4,7 +4,7 @@ from rest_framework import status
 from apps.chatbot.chat_service import ChatService
 
 
-class ChatbotAPIView(APIView):
+class GetChatMessage(APIView):
     def post(self, request, *args, **kwargs):
         message = request.data.get('message')
         if not message:

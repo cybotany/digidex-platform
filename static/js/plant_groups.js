@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 
     function fetchPlantsForGroup(groupId) {
-        fetch(`/api/get_group/${groupId}/`)
+        fetch(`/api/get_plant_group/${groupId}/`)
         .then(response => response.json())
         .then(data => {
             const plantsArray = JSON.parse(data.plants);

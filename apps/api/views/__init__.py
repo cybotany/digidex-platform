@@ -1,3 +1,3 @@
-from .chatbot_api import ChatbotAPIView
-from .get_group import GetGroupView
-from .get_tsn import GetTSNView
+from .get_chat_message import GetChatMessage
+from .get_plant_group import GetPlantGroup
+from .get_plant_tsn import GetPlantTSN
