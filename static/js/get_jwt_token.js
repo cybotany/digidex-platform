@@ -23,26 +23,12 @@ const login = async (username, password) => {
     if (response.ok && data.access && data.refresh) {
         localStorage.setItem("accessToken", data.access);
         localStorage.setItem("refreshToken", data.refresh);
+        window.location.href = "/botany/";
     } else {
         console.error("Authentication failed:", data);
     }
 }
 
-const fetchData = async () => {
-    try {
-        const token = localStorage.getItem("accessToken");
-        const response = await fetch("/api/some-endpoint/", {
-            method: "GET",
-            headers: { "Authorization": `Bearer ${token}` },
-        });
-
-        if (!response.ok) throw new Error("Failed to fetch data.");
-
-        // Handle your response data here...
-    } catch (error) {
-        console.error("Fetch data error:", error.message);
-    }
-}
 
 const refreshToken = async () => {
     try {
