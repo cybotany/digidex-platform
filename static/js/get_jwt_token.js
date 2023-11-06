@@ -13,9 +13,10 @@ loginForm.addEventListener("submit", async (event) => {
 
 const login = async (username, password) => {
     const response = await fetch("/api/token/", {
-        method: "POST",
+        method: "POST", 
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify({ username, password }),
+        credentials: 'include'
     });
 
     const data = await response.json();
@@ -27,7 +28,6 @@ const login = async (username, password) => {
         console.error("Authentication failed:", data);
     }
 }
-
 
 const refreshToken = async () => {
     try {

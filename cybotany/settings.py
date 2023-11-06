@@ -44,6 +44,11 @@ CORS_ALLOW_HEADERS = [
     "authorization",
 ]
 
+CORS_ALLOW_METHODS = [
+    "GET",
+    "POST",
+]
+
 # Environment specific settings
 if DJANGO_ENV == 'production':
     DEBUG = False
