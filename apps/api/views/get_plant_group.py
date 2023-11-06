@@ -1,3 +1,4 @@
+from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -5,10 +6,14 @@ from django.shortcuts import get_object_or_404
 from apps.botany.models import Plant, Group
 from apps.api.serializers import PlantSerializer
 
+
 class GetPlantGroup(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, group_id, *args, **kwargs):
+        # User's authentication credentials aren't provided
+        if not request.user.is_authenticated:
+            return Response({"detail": "Authentication credentials were not provided."}, status=status.HTTP_401_UNAUTHORIZED)
         current_group = get_object_or_404(Group, id=group_id, user=request.user)
         user_groups = list(Group.objects.filter(user=request.user).order_by('position'))
 
