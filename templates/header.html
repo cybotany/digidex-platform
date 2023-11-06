@@ -1,37 +1,41 @@
 {% load static %}
 
 <header class="app-header-container">
-    <div class="container">
-        <div class="row align-items-center">
-            <!-- Logo -->
-            <div class="col-lg-8 col-md-8 col-sm-8">
-                <a href="{% url 'home' %}">
-                    <img src="{% static 'img/logo.png' %}" alt="Cybotany Logo" style="max-height: 75px;">
-                </a>
-            </div>
+  <div class="container">
+    <div class="row align-items-center">
+      <!-- Logo -->
+      <div class="col-lg-6 col-md-6 col-sm-6">
+        <a href="{% url 'home' %}">
+          <img src="{% static 'img/logo.png' %}" alt="Cybotany Logo" style="max-height: 75px;">
+        </a>
+      </div>
+
+      <!-- Profile & Authentication Links -->
+      <div class="col-lg-4 col-md-4 col-sm-4">
+        {% if user.is_authenticated %}
+          <a href="{% url 'accounts:profile' %}">
+            {% if user.avatar %}
+              <img src="{{ user.avatar.url }}" alt="User avatar" class="avatar-image" style="vertical-align: middle; max-height: 50px; margin-right: 10px;">
+            {% else %}
+              <img src="{% static 'img/test-avatar.jpg' %}" alt="Default avatar" class="avatar-image" style="vertical-align: middle; max-height: 50px; margin-right: 10px;">
+            {% endif %}
+          </a>
+          <a href="{% url 'accounts:logout' %}" class="btn btn-secondary" style="margin-right: 5px;">Logout</a>
+        {% else %}
+          <a href="{% url 'accounts:login' %}" class="btn btn-secondary" style="margin-right: 5px;">Log in</a>
+          <a href="{% url 'accounts:signup' %}" class="btn btn-secondary" style="margin-right: 5px;">Sign up</a>
+        {% endif %}
+      </div>
             
-            <!-- Profile -->
-            <div class="col-lg-2 col-md-2 col-sm-2">
-                <h1 class="mb-4">Profile</h1>
-            </div>
-            
-            <!-- Settings -->
-            <div class="col-lg-2 col-md-2 col-sm-2">
-                <nav>  
-                    <div class="dropdown">
-                        <button class="dropbtn" style="background-color: var(--core-secondary-color);">Settings</button>
-                        <div class="dropdown-content">
-                            {% if user.is_authenticated %}
-                            <a href="{% url 'accounts:profile' %}" style="color: var(--core-neutral-dark);">Profile</a>
-                            <a href="{% url 'accounts:logout' %}" style="color: var(--core-neutral-dark);">Logout</a>
-                            {% else %}
-                            <a href="{% url 'accounts:login' %}" style="color: var(--core-neutral-dark);">Log in</a>
-                            <a href="{% url 'accounts:signup' %}" style="color: var(--core-neutral-dark);">Sign up</a>
-                            {% endif %}
-                        </div>
-                    </div>
-                </nav>
-            </div>
-        </div>
+      <!-- Settings -->
+      <div class="col-lg-2 col-md-2 col-sm-2">
+        <nav>  
+          <div class="dropdown">
+            <button class="dropbtn" style="background-color: var(--core-secondary-color);">Settings</button>
+            <!-- Add dropdown content here if necessary -->
+          </div>
+        </nav>
+      </div>
     </div>
+  </div>
 </header>
