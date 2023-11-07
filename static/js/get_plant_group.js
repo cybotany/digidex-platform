@@ -51,19 +51,40 @@ document.addEventListener('DOMContentLoaded', (event) => {
     function updatePlantList(plantData) {
         let plantHtml = '';
         plantData.forEach(plant => {
-            const hasNfcTag = plant.fields.nfc_tag ? '<div class="link-bubble-wrapper mr-2"><span class="link-bubble"></span></div>' : '';
-            const plantImageUrl = plant.fields.images && plant.fields.images.length > 0 ? plant.fields.images[plant.fields.images.length-1].image.url : '';
-            const plantImage = plantImageUrl ? `<img src="${plantImageUrl}" class="card-img" alt="Image of ${plant.fields.name}">` : '<div class="no-image-placeholder">No Image</div>';
-            const wateringInfo = plant.fields.days_since_last_watering ? `Days since last watering: ${plant.fields.days_since_last_watering}` : 'This plant has not been watered yet.';
-
+            // Add checks to ensure the object and its nested properties exist before trying to access them
+            const hasNfcTag = plant && plant.fields && plant.fields.nfc_tag 
+                ? '<div class="link-bubble-wrapper mr-2"><span class="link-bubble"></span></div>' 
+                : '';
+            const plantImages = plant && plant.fields && plant.fields.images 
+                ? plant.fields.images 
+                : [];
+            const plantImageUrl = plantImages.length > 0 
+                ? plantImages[plantImages.length - 1].image.url 
+                : '';
+            const plantImage = plantImageUrl 
+                ? `<img src="${plantImageUrl}" class="card-img" alt="Image of ${plant.fields.name}">` 
+                : '<div class="no-image-placeholder">No Image</div>';
+            const wateringInfo = plant && plant.fields && plant.fields.days_since_last_watering 
+                ? `Days since last watering: ${plant.fields.days_since_last_watering}` 
+                : 'This plant has not been watered yet.';
+            const plantName = plant && plant.fields && plant.fields.name 
+                ? plant.fields.name 
+                : 'Unknown Plant';
+            const plantUrl = plant && plant.fields && plant.fields.get_absolute_url 
+                ? plant.fields.get_absolute_url 
+                : '#';
+            const plantTsnName = plant && plant.fields && plant.fields.tsn && plant.fields.tsn.complete_name 
+                ? plant.fields.tsn.complete_name 
+                : 'No TSN Available';
+    
             plantHtml += `
                 <div class="col-md-4 mb-4">
-                    <a href="${plant.fields.get_absolute_url}" class="card-link">
+                    <a href="${plantUrl}" class="card-link">
                         <div class="card">
                             <!-- Card Header -->
                             <div class="card-header d-flex align-items-center">
                                 ${hasNfcTag}
-                                <span class="mx-auto">${plant.fields.name}</span>
+                                <span class="mx-auto">${plantName}</span>
                             </div>
                             <!-- Plant Image -->
                             <div class="card-image-wrapper">
@@ -74,14 +95,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
                                 <p class="card-text">${wateringInfo}</p>
                             </div>
                             <!-- Card Footer -->
-                            <div class="card-footer text-center">${plant.fields.tsn.complete_name}</div>
+                            <div class="card-footer text-center">${plantTsnName}</div>
                         </div>
                     </a>
                 </div>
             `;
         });
         plantListContainer.innerHTML = plantHtml;
-    }
+    }    
 
     // Load the initial plant set
     const initialGroupId = plantListContainer.getAttribute('data-current-group-id');
