@@ -52,29 +52,29 @@ document.addEventListener('DOMContentLoaded', (event) => {
         let plantHtml = '';
         plantData.forEach(plant => {
             // Add checks to ensure the object and its nested properties exist before trying to access them
-            const hasNfcTag = plant && plant.fields && plant.fields.nfc_tag 
+            const hasNfcTag = plant.nfc_tag 
                 ? '<div class="link-bubble-wrapper mr-2"><span class="link-bubble"></span></div>' 
                 : '';
-            const plantImages = plant && plant.fields && plant.fields.images 
+            const plantImages = plant.images 
                 ? plant.fields.images 
                 : [];
             const plantImageUrl = plantImages.length > 0 
                 ? plantImages[plantImages.length - 1].image.url 
                 : '';
             const plantImage = plantImageUrl 
-                ? `<img src="${plantImageUrl}" class="card-img" alt="Image of ${plant.fields.name}">` 
+                ? `<img src="${plantImageUrl}" class="card-img" alt="Image of ${plant.name}">` 
                 : '<div class="no-image-placeholder">No Image</div>';
-            const wateringInfo = plant && plant.fields && plant.fields.days_since_last_watering 
-                ? `Days since last watering: ${plant.fields.days_since_last_watering}` 
+            const wateringInfo = plant.days_since_last_watering 
+                ? `Days since last watering: ${plant.days_since_last_watering}` 
                 : 'This plant has not been watered yet.';
-            const plantName = plant && plant.fields && plant.fields.name 
-                ? plant.fields.name 
+            const plantName = plant.name 
+                ? plant.name 
                 : 'Unknown Plant';
-            const plantUrl = plant && plant.fields && plant.fields.get_absolute_url 
-                ? plant.fields.get_absolute_url 
+            const plantUrl = plant.get_absolute_url 
+                ? plant.get_absolute_url 
                 : '#';
-            const plantTsnName = plant && plant.fields && plant.fields.tsn && plant.fields.tsn.complete_name 
-                ? plant.fields.tsn.complete_name 
+            const plantTsnName = plant.tsn.complete_name 
+                ? plant.tsn.complete_name 
                 : 'No TSN Available';
     
             plantHtml += `
