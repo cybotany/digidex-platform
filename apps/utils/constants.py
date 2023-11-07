@@ -1,5 +1,5 @@
 MAX_GROUP = 15
-MAX_GROUP_CAPACITY = 30
+MAX_GROUP_CAPACITY = 20
 
 ACTIVITY_STATUS = [
     ('register', 'Registered'),

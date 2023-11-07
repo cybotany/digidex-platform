@@ -1,0 +1,25 @@
+.group-header .group-arrow {
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.group-header #currentGroupName {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.group-header .col-2 {
+    padding: 0 15px;
+}
+
+@media (max-width: 768px) {
+    .group-header .group-arrow {
+        font-size: 18px;
+    }
+
+    .group-header #currentGroupName {
+        font-size: 24px;
+    }
+}
