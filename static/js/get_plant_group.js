@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 ? plant.images 
                 : [];
             const plantImageUrl = plantImages.length > 0 
-                ? plantImages[plantImages.length - 1].image.url 
+                ? plantImages[plantImages.length - 1].image 
                 : '';
             const plantImage = plantImageUrl 
                 ? `<img src="${plantImageUrl}" class="card-img" alt="Image of ${plant.name}">` 
