@@ -1,11 +1,19 @@
 from rest_framework import serializers
-from apps.botany.models import Plant
+from apps.botany.models import Plant, PlantImage
 from apps.itis.models import TaxonomicUnits
+
+
+class PlantImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PlantImage
+        fields = ['image', 'timestamp']
+
 
 class TaxonomicUnitsSerializer(serializers.ModelSerializer):
     class Meta:
         model = TaxonomicUnits
         fields = ['tsn', 'complete_name']
+
 
 class PlantSerializer(serializers.ModelSerializer):
     tsn = TaxonomicUnitsSerializer()  # Nested serialization for related TaxonomicUnits.
