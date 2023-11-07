@@ -65,27 +65,6 @@ else:
     STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
     STATIC_URL = '/static/'
     CORS_ALLOW_ALL_ORIGINS = True
-    LOGGING = {
-        'version': 1,
-        'disable_existing_loggers': False,
-        'handlers': {
-            'file': {
-                'level': 'DEBUG',
-                'class': 'logging.FileHandler',
-                'filename': 'logs/backend.log',
-            },
-        },
-        'loggers': {
-            'django': {
-                'handlers': ['file'],
-                'level': 'DEBUG',
-                'propagate': True,
-            },
-        },
-    }
-
-
-
 
 # Application definition
 INSTALLED_APPS = [
