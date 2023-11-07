@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 ? '<div class="link-bubble-wrapper mr-2"><span class="link-bubble"></span></div>' 
                 : '';
             const plantImages = plant.images 
-                ? plant.fields.images 
+                ? plant.images 
                 : [];
             const plantImageUrl = plantImages.length > 0 
                 ? plantImages[plantImages.length - 1].image.url 
