@@ -14,10 +14,78 @@
 
 body {
   font-family: 'Roboto', sans-serif;
+  background-color: var(--core-neutral-light);
+  color: var(--core-neutral-dark);
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Roboto', sans-serif;
+  color: var(--core-neutral-dark);
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+p {
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: var(--core-primary-color);
+}
+
+a:hover {
+  color: var(--core-secondary-color);
+}
+
+.btn {
+  font-weight: 500;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.75rem 1.5rem;
+  transition: background-color 0.3s ease-out, color 0.3s ease-out;
+}
+
+.btn-primary {
+  background-color: var(--core-primary-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--core-secondary-color);
+}
+
+.btn-success {
+  background-color: var(--core-success-color);
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: darken(var(--core-success-color), 10%);
+}
+
+.btn-warning {
+  background-color: var(--core-warning-color);
+  color: white;
+}
+
+.btn-warning:hover {
+  background-color: darken(var(--core-warning-color), 10%);
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
 }
 
 .app-main-container {
@@ -37,7 +105,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .app-header-container {
-  background: var(--core-accent-color);
+  background-color: var(--core-accent-color);
+  color: white;
   padding: 1rem 2rem; 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease-out;
@@ -45,9 +114,83 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .app-footer-container {
-  background: var(--core-accent-color);
+  background-color: var(--core-accent-color);
+  color: white;
   padding: 1rem 2rem; 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease-out;
   margin-top: 20px;
+}
+
+/* Additional responsive design */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+  }
+
+  .btn {
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* Utilities */
+.text-center {
+  text-align: center;
+}
+
+.text-primary {
+  color: var(--core-primary-color);
+}
+
+.text-secondary {
+  color: var(--core-secondary-color);
+}
+
+.bg-primary {
+  background-color: var(--core-primary-color);
+}
+
+.bg-secondary {
+  background-color: var(--core-secondary-color);
+}
+
+/* Shadows for elevation */
+.shadow-sm {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.shadow {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-lg {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Animations */
+.fade-in {
+  animation: fadeIn ease 2s;
+  -webkit-animation: fadeIn ease 2s;
+  -moz-animation: fadeIn ease 2s;
+  -o-animation: fadeIn ease 2s;
+  -ms-animation: fadeIn ease 2s;
+}
+
+@keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-moz-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+
+@-webkit-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
 }
