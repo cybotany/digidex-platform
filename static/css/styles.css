@@ -138,6 +138,11 @@ a:hover {
 }
 
 /* Utilities */
+.arrow {
+  font-size: 2rem;
+  color: #000;
+}
+
 .text-center {
   text-align: center;
 }
