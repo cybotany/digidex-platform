@@ -199,3 +199,148 @@ a:hover {
   0% {opacity:0;}
   100% {opacity:1;}
 }
+
+/* Modern Spacing */
+.section {
+  padding: 4rem 0; /* Increase vertical padding for each section */
+}
+
+/* Modern Card Design */
+.card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Card Title Modernization */
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+/* Card Text Modernization */
+.card-text {
+  font-size: 1rem;
+  color: var(--core-neutral-dark);
+  line-height: 1.6;
+}
+
+/* Modern Buttons */
+.btn {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Interactive Hover Effects */
+a, .btn {
+  transition: color 0.3s ease-out, background-color 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+
+/* Layout and Grid Improvements */
+.container, .container-fluid {
+  padding: 2rem; /* Consistent padding for container elements */
+}
+
+.row {
+  margin: 0 -15px; /* Adjust row margins to handle column spacing */
+}
+
+.col {
+  padding: 0 15px; /* Adjust column padding for spacing */
+}
+
+/* Responsive Typography */
+@media (max-width: 992px) {
+  h1 {
+    font-size: 2rem; /* Smaller font size for H1 on medium devices */
+  }
+
+  .card-title {
+    font-size: 1.1rem; /* Smaller font size for card titles on medium devices */
+  }
+}
+
+@media (max-width: 576px) {
+  h1 {
+    font-size: 1.75rem; /* Smaller font size for H1 on small devices */
+  }
+
+  .section {
+    padding: 3rem 1rem; /* Reduced padding for sections on small devices */
+  }
+}
+
+/* Utility for Flexbox Centering */
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Utility for Full Page Sections */
+.full-page-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Utility for Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Decorative Elements */
+.decorative-header {
+  background: linear-gradient(135deg, var(--core-primary-color), var(--core-secondary-color));
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+}
+
+/* Enhance Form Elements */
+input, select, button {
+  border-radius: 8px; /* Rounded corners for form elements */
+}
+
+/* Clean List Styles */
+ul {
+  list-style: none; /* Remove default list styling */
+  padding: 0; /* Remove default padding */
+}
+
+ul li::before {
+  content: '•'; /* Add custom bullet */
+  color: var(--core-accent-color); /* Use accent color for bullets */
+  font-weight: bold; /* Make bullets bold */
+  display: inline-block; /* Needed to add space between bullet and text */
+  width: 1em; /* Space between bullet and text */
+  margin-left: -1em; /* Align bullets with text */
+}
+
+/* Custom Scrollbar for Webkit */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--core-neutral-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--core-primary-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--core-secondary-color);
+}

@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 ? plantImages[plantImages.length - 1].image 
                 : '';
             const plantImage = plantImageUrl 
-                ? `<img src="${plantImageUrl}" class="card-img" alt="Image of ${plant.name}">` 
+                ? `<img src="${plantImageUrl}" class="plant-card-img" alt="Image of ${plant.name}">` 
                 : '<div class="no-image-placeholder">No Image</div>';
             const wateringInfo = plant.days_since_last_watering 
                 ? `Days since last watering: ${plant.days_since_last_watering}` 
@@ -79,23 +79,23 @@ document.addEventListener('DOMContentLoaded', (event) => {
     
             plantHtml += `
                 <div class="col-md-4 mb-4">
-                    <a href="${plantUrl}" class="card-link">
-                        <div class="card">
+                    <a href="${plantUrl}" class="plant-card-link">
+                        <div class="plant-card">
                             <!-- Card Header -->
-                            <div class="card-header d-flex align-items-center">
+                            <div class="plant-card-header d-flex align-items-center">
                                 ${hasNfcTag}
                                 <span class="mx-auto">${plantName}</span>
                             </div>
                             <!-- Plant Image -->
-                            <div class="card-image-wrapper">
+                            <div class="plant-card-image-wrapper">
                                 ${plantImage}
                             </div>
                             <!-- Card Body -->
-                            <div class="card-body">
-                                <p class="card-text">${wateringInfo}</p>
+                            <div class="plant-card-body">
+                                <p class="plant-card-text">${wateringInfo}</p>
                             </div>
                             <!-- Card Footer -->
-                            <div class="card-footer text-center">${plantTsnName}</div>
+                            <div class="plant-card-footer text-center">${plantTsnName}</div>
                         </div>
                     </a>
                 </div>
