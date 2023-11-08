@@ -30,7 +30,13 @@ class PlantUpdateForm(forms.ModelForm):
         user = kwargs['instance'].user
         self.fields['group'].queryset = Group.objects.filter(user=user)
 
-        self.fields['tsn'].widget.attrs.update({'id': 'tsnField'})
+        if kwargs['instance'].tsn:
+            self.fields['tsn'].queryset = TaxonomicUnits.objects.filter(
+                tsn=kwargs['instance'].tsn
+            )
+            self.fields['tsn'].initial = kwargs['instance'].tsn
+        else:
+            self.fields['tsn'].queryset = TaxonomicUnits.objects.none()
 
     def clean(self):
         cleaned_data = super().clean()

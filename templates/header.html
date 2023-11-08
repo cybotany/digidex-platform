@@ -9,7 +9,12 @@
           <img src="{% static 'img/logo.png' %}" alt="Cybotany Logo" style="max-height: 75px;">
         </a>
       </div>
-
+      <!-- Modules -->
+      <div class="col-lg-2 col-md-2 col-sm-2">
+        <a href="{% url 'botany:home' %}" class="btn btn-secondary" style="margin-right: 5px;">Plants</a>
+        <a href="{% url 'itis:home' %}" class="btn btn-secondary" style="margin-right: 5px;">Taxonomy</a>
+        <a href="{% url 'chatbot:home' %}" class="btn btn-secondary" style="margin-right: 5px;">AI Assistant</a>
+      </div>
       <!-- Profile & Authentication Links -->
       <div class="col-lg-4 col-md-4 col-sm-4">
         {% if user.is_authenticated %}
@@ -25,16 +30,6 @@
           <a href="{% url 'accounts:login' %}" class="btn btn-secondary" style="margin-right: 5px;">Log in</a>
           <a href="{% url 'accounts:signup' %}" class="btn btn-secondary" style="margin-right: 5px;">Sign up</a>
         {% endif %}
-      </div>
-            
-      <!-- Settings -->
-      <div class="col-lg-2 col-md-2 col-sm-2">
-        <nav>  
-          <div class="dropdown">
-            <button class="dropbtn" style="background-color: var(--core-secondary-color);">Settings</button>
-            <!-- Add dropdown content here if necessary -->
-          </div>
-        </nav>
       </div>
     </div>
   </div>
