@@ -1,28 +1,58 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block app_styles %}
-  <link rel="stylesheet" href="{% static 'core/css/tiles.css' %}">
-{% endblock %}
-
 <!-- Core App Container -->
 {% block content %}
 <div class="container app-fullscreen-container">
-  <!-- First Section -->
-  <div class="row">
-    <div class="col-md-12">What is it</div>
+
+  <!-- Hero Section -->
+  <div class="row align-items-center my-5">
+    <div class="col-md-6">
+      <h1>Welcome to CyBotany</h1>
+      <p class="lead">Your digital companion for plant biodiversity management and conservation.</p>
+      <a href="#how-it-works" class="btn btn-primary">Learn More</a>
+    </div>
+    <div class="col-md-6">
+      <!-- Placeholder for hero image -->
+      <img src="{% static 'images/hero-plant.jpg' %}" alt="Hero Plant" class="img-fluid">
+    </div>
   </div>
-  <!-- Second Section -->
-  <div class="row">
-    <div class="col-md-12"> How it works</div>
+
+  <!-- How It Works Section -->
+  <div class="row" id="how-it-works">
+    <div class="col-md-12">
+      <h2>How It Works</h2>
+      <p>Discover how our platform can help you easily manage and learn about your plant collection.</p>
+      <!-- Additional content or graphics can go here -->
+    </div>
   </div>
-  <!-- Third Section -->
+
+  <!-- Trust Section -->
   <div class="row">
-    <div class="col-md-12">How we build trust</div>
+    <div class="col-md-12">
+      <h2>Building Trust</h2>
+      <p>Learn about our commitment to data privacy and how we protect your information.</p>
+      <!-- Trust indicators like testimonials or certifications could be added here -->
+    </div>
   </div>
-  <!-- Fourth Section -->
+
+  <!-- About Us Section -->
   <div class="row">
-    <div class="col-md-12">Who we are and a call to action</div>
+    <div class="col-md-12">
+      <h2>Who We Are</h2>
+      <p>Meet the team behind CyBotany and our mission to revolutionize plant management.</p>
+      <a href="#contact" class="btn btn-success">Get Started</a>
+    </div>
   </div>
+
+  <!-- Call to Action Section -->
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Join the Community</h2>
+      <p>Become a part of our growing community of plant enthusiasts and experts.</p>
+      <a href="#signup" class="btn btn-warning">Sign Up Now</a>
+    </div>
+  </div>
+
 </div>
 {% endblock %}
