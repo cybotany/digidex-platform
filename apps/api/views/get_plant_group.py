@@ -8,12 +8,12 @@ from apps.api.serializers import PlantSerializer
 
 
 class GetPlantGroup(APIView):
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
 
     def get(self, request, group_id, *args, **kwargs):
         # User's authentication credentials aren't provided
-        if not request.user.is_authenticated:
-            return Response({"detail": "Authentication credentials were not provided."}, status=status.HTTP_401_UNAUTHORIZED)
+        #if not request.user.is_authenticated:
+        #    return Response({"detail": "Authentication credentials were not provided."}, status=status.HTTP_401_UNAUTHORIZED)
         current_group = get_object_or_404(Group, id=group_id, user=request.user)
         user_groups = list(Group.objects.filter(user=request.user).order_by('position'))
 
