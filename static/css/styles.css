@@ -327,3 +327,52 @@ ul li::before {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--core-secondary-color);
 }
+
+/* Header Styles */
+.app-header-container {
+  background-color: var(--core-accent-color);
+  color: white;
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease-out;
+}
+
+.header-logo .logo-img {
+  max-height: 75px;
+}
+
+.header-modules .btn-modern {
+  margin-right: 10px;
+}
+
+.header-auth .btn-modern,
+.header-auth .user-avatar-link {
+  margin-right: 10px;
+}
+
+.avatar-image {
+  vertical-align: middle;
+  max-height: 50px;
+  border-radius: 50%;
+}
+
+/* Button Styles */
+.btn-modern {
+  background-color: var(--core-primary-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn-modern:hover {
+  background-color: var(--core-secondary-color);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .header-modules, .header-auth {
+    text-align: center;
+    margin-top: 1rem;
+  }
+}

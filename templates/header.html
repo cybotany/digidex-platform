@@ -4,31 +4,31 @@
   <div class="container">
     <div class="row align-items-center">
       <!-- Logo -->
-      <div class="col-lg-6 col-md-6 col-sm-6">
-        <a href="{% url 'landing-page' %}">
-          <img src="{% static 'img/logo.png' %}" alt="Cybotany Logo" style="max-height: 75px;">
+      <div class="col-md-6">
+        <a href="{% url 'landing-page' %}" class="header-logo">
+          <img src="{% static 'img/logo.png' %}" alt="Cybotany Logo" class="logo-img">
         </a>
       </div>
       <!-- Modules -->
-      <div class="col-lg-2 col-md-2 col-sm-2">
-        <a href="{% url 'botany:home' %}" class="btn btn-secondary" style="margin-right: 5px;">Plants</a>
-        <a href="{% url 'itis:home' %}" class="btn btn-secondary" style="margin-right: 5px;">Taxonomy</a>
-        <a href="{% url 'chatbot:home' %}" class="btn btn-secondary" style="margin-right: 5px;">AI Assistant</a>
+      <div class="col-md-2 header-modules">
+        <a href="{% url 'botany:home' %}" class="btn btn-modern">Plants</a>
+        <a href="{% url 'itis:home' %}" class="btn btn-modern">Taxonomy</a>
+        <a href="{% url 'chatbot:home' %}" class="btn btn-modern">AI Assistant</a>
       </div>
       <!-- Profile & Authentication Links -->
-      <div class="col-lg-4 col-md-4 col-sm-4">
+      <div class="col-md-4 header-auth">
         {% if user.is_authenticated %}
-          <a href="{% url 'accounts:profile' %}">
+          <a href="{% url 'accounts:profile' %}" class="user-avatar-link">
             {% if user.avatar %}
-              <img src="{{ user.avatar.url }}" alt="User avatar" class="avatar-image" style="vertical-align: middle; max-height: 50px; margin-right: 10px;">
+              <img src="{{ user.avatar.url }}" alt="User avatar" class="avatar-image">
             {% else %}
-              <img src="{% static 'img/test-avatar.jpg' %}" alt="Default avatar" class="avatar-image" style="vertical-align: middle; max-height: 50px; margin-right: 10px;">
+              <img src="{% static 'img/test-avatar.jpg' %}" alt="Default avatar" class="avatar-image">
             {% endif %}
           </a>
-          <a href="{% url 'accounts:logout' %}" class="btn btn-secondary" style="margin-right: 5px;">Logout</a>
+          <a href="{% url 'accounts:logout' %}" class="btn btn-modern">Logout</a>
         {% else %}
-          <a href="{% url 'accounts:login' %}" class="btn btn-secondary" style="margin-right: 5px;">Log in</a>
-          <a href="{% url 'accounts:signup' %}" class="btn btn-secondary" style="margin-right: 5px;">Sign up</a>
+          <a href="{% url 'accounts:login' %}" class="btn btn-modern">Log in</a>
+          <a href="{% url 'accounts:signup' %}" class="btn btn-modern">Sign up</a>
         {% endif %}
       </div>
     </div>
