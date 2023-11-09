@@ -30,7 +30,6 @@ AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
 AWS_DEFAULT_ACL = None
-MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
 
 ALLOWED_HOSTS = [host_secrets['APP_HOST']]
 
@@ -52,9 +51,11 @@ CORS_ALLOW_METHODS = [
 # Environment specific settings
 if DJANGO_ENV == 'production':
     DEBUG = False
-    # Use Amazon S3 for static files in production
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/static/"
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
     CORS_ALLOW_ALL_ORIGINS = False
     CORS_ALLOWED_ORIGINS = [
         "http://127.0.0.1:8080",
@@ -64,6 +65,9 @@ else:
     DEBUG = True
     STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
     STATIC_URL = '/static/'
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    MEDIA_URL = '/media/'
     CORS_ALLOW_ALL_ORIGINS = True
 
 # Application definition
@@ -178,9 +182,6 @@ SIMPLE_JWT = {
     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
     'TOKEN_TYPE_CLAIM': 'token_type',
 }
-# Static files (CSS, JavaScript, Images)
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
 
 LOGIN_REDIRECT_URL = 'landing-page'
 LOGIN_URL = '/accounts/login/'

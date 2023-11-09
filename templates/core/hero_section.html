@@ -1,9 +1,16 @@
 {% load static %}
-<div class="section">
+
+<div class="hero-section">
+  <!-- The video element containing background video -->
+  <video autoplay loop muted playsinline class="hero-background-video">
+    <source src="{% static 'AdobeStock/digital_management.mp4' %}" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
   <div class="row align-items-center my-5">
     <div class="col-md-12">
       <h1>Your digital companion for plant management</h1>
-      <p class="lead">Connect your plant to our platform using our tap-enabled plant labels. Recieve personalized plant care from our AI-powered chatbot.</p>
+      <p class="lead">Connect your plant to our platform using our tap-enabled plant labels. Receive personalized plant care from our AI-powered chatbot.</p>
     </div>
   </div>
 </div>
