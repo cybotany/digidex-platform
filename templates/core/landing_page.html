@@ -8,7 +8,6 @@
   <body>
     {% include "messages.html" %}
     {% include "header.html" %}
-    <main class="container ">
       <!-- Core App Container -->
       {% block content %}
         <!-- Hero Section -->
@@ -22,7 +21,6 @@
         <!-- Call to Action Section -->
         {% include "core/call_to_action.html" %}
       {% endblock %}
-    </main>
     {% include "footer.html" %}
     {% block app_scripts %}{% endblock %} 
   </body>
