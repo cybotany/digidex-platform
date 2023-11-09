@@ -1,24 +1,29 @@
-{% extends "base.html" %}
-{% load static %}
-
-<!-- Core App Container -->
-{% block content %}
-<div class="container app-fullscreen-container">
-
-  <!-- Hero Section -->
-  {% include "core/hero_section.html" %}
-
-  <!-- How It Works Section-->
-  {% include "core/how_it_works.html" %}
-
-  <!-- Trust Section -->
-  {% include "core/trust_building.html" %}
-
-  <!-- About Us Section -->
-  {% include "core/about_us.html" %}
-
-  <!-- Call to Action Section -->
-  {% include "core/call_to_action.html" %}
-
-</div>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include "head.html" %}
+    {% block app_styles %}{% endblock %}
+  </head>
+    
+  <body>
+    {% include "messages.html" %}
+    {% include "header.html" %}
+    <main class="container ">
+      <!-- Core App Container -->
+      {% block content %}
+        <!-- Hero Section -->
+        {% include "core/hero_section.html" %}
+        <!-- How It Works Section-->
+        {% include "core/how_it_works.html" %}
+        <!-- Trust Section -->
+        {% include "core/trust_building.html" %}
+        <!-- About Us Section -->
+        {% include "core/about_us.html" %}
+        <!-- Call to Action Section -->
+        {% include "core/call_to_action.html" %}
+      {% endblock %}
+    </main>
+    {% include "footer.html" %}
+    {% block app_scripts %}{% endblock %} 
+  </body>
+</html>
