@@ -110,7 +110,6 @@ a:hover {
   padding: 1rem 2rem; 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease-out;
-  margin-bottom: 20px;
 }
 
 .app-footer-container {
@@ -119,7 +118,6 @@ a:hover {
   padding: 1rem 2rem; 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease-out;
-  margin-top: 20px;
 }
 
 @media (max-width: 768px) {
