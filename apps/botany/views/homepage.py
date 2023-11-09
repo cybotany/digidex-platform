@@ -12,12 +12,11 @@ class PlantHomepageView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        current_group = Group.objects.get(user=self.request.user, position=1)
-        user_groups = list(Group.objects.filter(user=self.request.user).order_by('position'))
+        user_groups = Group.objects.filter(user=self.request.user).order_by('position').all()
 
-        current_group_index = user_groups.index(current_group)
-        prev_group = user_groups[current_group_index - 1] if current_group_index > 0 else user_groups[-1]
-        next_group = user_groups[current_group_index + 1] if current_group_index < len(user_groups) - 1 else user_groups[0]
+        current_group = user_groups.first()
+        prev_group = user_groups.last() if current_group.position == 1 else user_groups[current_group.position - 2]
+        next_group = user_groups.first() if current_group.position == len(user_groups) else user_groups[current_group.position]
 
         context['current_group'] = current_group
         context['prev_group_id'] = prev_group.id
