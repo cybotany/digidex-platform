@@ -351,7 +351,9 @@ ul li::before {
 }
 
 .avatar-image {
-  vertical-align: middle;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   max-height: 50px;
   border-radius: 50%;
 }
@@ -375,4 +377,12 @@ ul li::before {
     text-align: center;
     margin-top: 1rem;
   }
+}
+
+.auth-buttons {
+  margin-top: 10px;
+}
+
+.profile-group {
+  text-align: center;
 }

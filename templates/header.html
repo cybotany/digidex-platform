@@ -18,17 +18,23 @@
       <!-- Profile & Authentication Links -->
       <div class="col-md-4 header-auth">
         {% if user.is_authenticated %}
-          <a href="{% url 'accounts:profile' %}" class="user-avatar-link">
-            {% if user.avatar %}
-              <img src="{{ user.avatar.url }}" alt="User avatar" class="avatar-image">
-            {% else %}
-              <img src="{% static 'img/test-avatar.jpg' %}" alt="Default avatar" class="avatar-image">
-            {% endif %}
-          </a>
-          <a href="{% url 'accounts:logout' %}" class="btn btn-modern">Logout</a>
+          <div class="profile-group">
+            <a href="{% url 'accounts:profile' %}" class="user-avatar-link">
+              {% if user.avatar %}
+                <img src="{{ user.avatar.url }}" alt="User avatar" class="avatar-image">
+              {% else %}
+                <img src="{% static 'img/test-avatar.jpg' %}" alt="Default avatar" class="avatar-image">
+              {% endif %}
+            </a>
+            <div class="auth-buttons">
+              <a href="{% url 'accounts:logout' %}" class="btn btn-modern">Logout</a>
+            </div>
+          </div>
         {% else %}
-          <a href="{% url 'accounts:login' %}" class="btn btn-modern">Log in</a>
-          <a href="{% url 'accounts:signup' %}" class="btn btn-modern">Sign up</a>
+          <div class="auth-buttons">
+            <a href="{% url 'accounts:login' %}" class="btn btn-modern">Log in</a>
+            <a href="{% url 'accounts:signup' %}" class="btn btn-modern">Sign up</a>
+          </div>
         {% endif %}
       </div>
     </div>
