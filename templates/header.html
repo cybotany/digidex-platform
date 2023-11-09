@@ -10,10 +10,10 @@
         </a>
       </div>
       <!-- Modules -->
-      <div class="col-md-2 header-modules">
-        <a href="{% url 'botany:home' %}" class="btn btn-modern">Plants</a>
-        <a href="{% url 'itis:home' %}" class="btn btn-modern">Taxonomy</a>
-        <a href="{% url 'chatbot:home' %}" class="btn btn-modern">AI Assistant</a>
+      <div class="col-md-2 header-modules d-flex flex-column align-items-stretch">
+        <a href="{% url 'botany:home' %}" class="btn btn-modern mb-2">Plants</a>
+        <a href="{% url 'itis:home' %}" class="btn btn-modern mb-2">Taxonomy</a>
+        <a href="{% url 'chatbot:home' %}" class="btn btn-modern mb-2">AI Assistant</a>
       </div>
       <!-- Profile & Authentication Links -->
       <div class="col-md-4 header-auth">
@@ -27,13 +27,13 @@
               {% endif %}
             </a>
             <div class="auth-buttons">
-              <a href="{% url 'accounts:logout' %}" class="btn btn-modern">Logout</a>
+              <a href="{% url 'accounts:logout' %}" class="btn btn-modern mb-2">Logout</a>
             </div>
           </div>
         {% else %}
           <div class="auth-buttons">
-            <a href="{% url 'accounts:login' %}" class="btn btn-modern">Log in</a>
-            <a href="{% url 'accounts:signup' %}" class="btn btn-modern">Sign up</a>
+            <a href="{% url 'accounts:login' %}" class="btn btn-modern mb-2">Log in</a>
+            <a href="{% url 'accounts:signup' %}" class="btn btn-modern mb-2">Sign up</a>
           </div>
         {% endif %}
       </div>
