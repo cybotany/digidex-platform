@@ -17,7 +17,6 @@ REGION_NAME = os.environ.get('REGION_NAME', 'us-east-1d')
 api_secrets = get_secret('cybotany-api', environment=DJANGO_ENV, region_name=REGION_NAME)
 db_secrets = get_secret('cybotany-db', environment=DJANGO_ENV, region_name=REGION_NAME)
 aws_secrets = get_secret('cybotany-keys', environment=DJANGO_ENV, region_name=REGION_NAME)
-host_secrets = get_secret('cybotany-host', environment=DJANGO_ENV, region_name=REGION_NAME)
 
 # AWS S3 secrets
 SECRET_KEY = aws_secrets['DJANGO_SECRET_KEY']  
@@ -31,7 +30,11 @@ AWS_S3_OBJECT_PARAMETERS = {
 }
 AWS_DEFAULT_ACL = None
 
-ALLOWED_HOSTS = [host_secrets['APP_HOST']]
+ALLOWED_HOSTS = [
+    "10.0.0.218",
+    "www.cybotany.io",
+    "cybotany.io",
+]
 
 # API secrets
 OPENAI_API_KEY = api_secrets['OPENAI_API_KEY']

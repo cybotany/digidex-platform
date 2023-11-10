@@ -2,7 +2,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
 from django.core.paginator import Paginator
 from django.http import JsonResponse
-from django.shortcuts import render
 from django.template.loader import render_to_string
 from apps.botany.models import Group
 from apps.utils.constants import MAX_GROUP
