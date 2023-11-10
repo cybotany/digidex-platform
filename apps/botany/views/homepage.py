@@ -25,10 +25,12 @@ class PlantHomepageView(LoginRequiredMixin, TemplateView):
 
         # Fetch plants for the group matching the page number
         group_id = page_obj.number
-        plants_in_group = Plant.objects.filter(user=self.request.user, group_id=group_id)
+        current_group = user_groups.filter(position=group_id)
+        plants_in_group = Plant.objects.filter(user=self.request.user, group_id=current_group.id)
 
         context['page_obj'] = page_obj
         context['plants'] = plants_in_group
+        context['group'] = current_group
         return context
 
 

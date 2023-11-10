@@ -11,11 +11,7 @@
   <!-- Current Group Name and Page Selector -->
   <div class="col-8 text-center">
     <div>
-      {% if current_group %}
-        <span id="currentGroupName">{{ current_group.name }}</span>
-      {% else %}
-        <span id="currentGroupName">Empty Group</span>
-      {% endif %}
+      <span id="currentGroupName">{{ group.name }}</span>
     </div>
     <div>
       <select id="groupPageSelector" class="group-page-selector">
