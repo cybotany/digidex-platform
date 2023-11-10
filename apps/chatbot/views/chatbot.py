@@ -1,8 +1,10 @@
 from django.shortcuts import render
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
 from django.views import View
 from apps.chatbot.models import ChatSession
+from apps.utils.helpers import show_message
 
 
 class ChatbotView(LoginRequiredMixin, View):
