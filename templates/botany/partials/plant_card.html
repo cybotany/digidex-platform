@@ -1,7 +1,7 @@
-<a href="{{ plant.get_absolute_url }}" class="card-link">
+<a href="{{ plant.get_absolute_url }}" class="plant-card-link">
   <div class="card">
     <!-- Card Header -->
-    <div class="card-header d-flex align-items-center">
+    <div class="plant-card-header d-flex align-items-center">
       {% if plant.nfc_tag %}
         <div class="link-bubble-wrapper mr-2">
           <span class="link-bubble"></span>
@@ -10,22 +10,22 @@
       <span class="mx-auto">{{ plant.name }}</span>
     </div>
     <!-- Plant Image -->
-    <div class="card-image-wrapper">
+    <div class="plant-card-image-wrapper">
       {% if plant.images.all %}
-        <img src="{{ plant.images.last.image.url }}" class="card-img" alt="Image of {{ plant.name }}">
+        <img src="{{ plant.images.last.image.url }}" class="plant-card-img" alt="Image of {{ plant.name }}">
       {% else %}
-        <div class="no-image-placeholder">No Image</div>
+        <div class="plant-no-image-placeholder">No Image</div>
       {% endif %}
     </div>
     <!-- Card Body -->
-    <div class="card-body">
+    <div class="plant-card-body">
       {% if plant.days_since_last_watering %}
-        <p class="card-text">Days since last watering: {{ plant.days_since_last_watering }}</p>
+        <p class="plant-card-text">Days since last watering: {{ plant.days_since_last_watering }}</p>
       {% else %}
-        <p class="card-text">This plant has not been watered yet.</p>
+        <p class="plant-card-text">This plant has not been watered yet.</p>
       {% endif %}
     </div>
     <!-- Card Footer -->
-    <div class="card-footer text-center">{{ plant.tsn.complete_name }}</div>
+    <div class="plant-card-footer text-center">{{ plant.tsn.complete_name }}</div>
   </div>
 </a>
