@@ -10,7 +10,6 @@ class SignupUserView(FormView):
     success_url = reverse_lazy('landing')
 
     def form_valid(self, form):
-        # This method is called when valid form data has been POSTed.
         user = form.save()
         login(self.request, user)
         return super(SignupUserView, self).form_valid(form)
