@@ -10,18 +10,35 @@
   <!-- Grid Selector -->
   <div class="row align-items-center group-header">
     <div class="col-2 text-end">
-        <button id="leftArrow" class="group-arrow" data-group-id="{{ prev_group_id }}">←</button>
+        <!-- Check if previous group exists before rendering the arrow -->
+        {% if prev_group_id %}
+            <button id="leftArrow" class="group-arrow" data-group-id="{{ prev_group_id }}">←</button>
+        {% else %}
+            <span class="group-arrow disabled">←</span>
+        {% endif %}
     </div>
     <div class="col-8 text-center">
-        <span id="currentGroupName">{{ current_group.name }}</span>
+        <!-- Handle the case where the current group might be empty -->
+        <span id="currentGroupName">{{ current_group.name|default:"Empty Group" }}</span>
     </div>
     <div class="col-2 text-start">
-        <button id="rightArrow" class="group-arrow" data-group-id="{{ next_group_id }}">→</button>
+        <!-- Check if next group exists before rendering the arrow -->
+        {% if next_group_id %}
+            <button id="rightArrow" class="group-arrow" data-group-id="{{ next_group_id }}">→</button>
+        {% else %}
+            <span class="group-arrow disabled">→</span>
+        {% endif %}
     </div>
   </div>
   <!-- Grid Container -->
   <div id="plantListContainer" data-current-group-id="{{ current_group.id }}" class="row">
     <!-- Plants will be loaded here by JavaScript -->
+    <!-- Add a placeholder for an empty group -->
+    {% if not current_group %}
+      <div class="col-12 text-center">
+        <p>This is an empty group. Add some plants!</p>
+      </div>
+    {% endif %}
   </div>
   <p id="noPlantsMessage" class="text-center" style="display: none;">No plants found.</p>
 {% endblock %}
