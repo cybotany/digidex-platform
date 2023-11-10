@@ -18,14 +18,14 @@
 }
 
 .plant-card-img {
-  width: 90%;
-  height: 100px;
+  width: 70%;
+  height: 50px;
   object-fit: cover;
   display: block;
 }
 
 .plant-card-img-wrapper {
-  max-height: 100px;
+  max-height: 50px;
   overflow: hidden;
   padding: 10px 0;
 }
@@ -68,8 +68,8 @@
 }
 
 .no-image-placeholder {
-  width: 90%;
-  height: 100px;
+  width: 70%;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
