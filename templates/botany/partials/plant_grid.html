@@ -1,13 +1,5 @@
 <!-- Plant Grid Header -->
 <div class="row align-items-center grid-header">
-  <!-- Navigation Arrow: Previous Group -->
-  <div class="col-2 text-end">
-    {% if page_obj.has_previous %}
-      <button id="leftArrow" class="grid-arrow" data-group-id="{{ page_obj.previous_page_number }}">←</button>
-    {% else %}
-      <span class="grid-arrow disabled">←</span>
-    {% endif %}
-  </div>
   <!-- Current Group Name and Page Selector -->
   <div class="col-8 text-center">
     <div>
@@ -22,14 +14,6 @@
         {% endfor %}
       </select>
     </div>
-  </div>
-  <!-- Navigation Arrow: Next Group -->
-  <div class="col-2 text-start">
-    {% if page_obj.has_next %}
-      <button id="rightArrow" class="grid-arrow" data-group-id="{{ page_obj.next_page_number }}">→</button>
-    {% else %}
-      <span class="grid-arrow disabled">→</span>
-    {% endif %}
   </div>
 </div>
 
