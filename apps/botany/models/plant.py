@@ -20,6 +20,7 @@ class Plant(models.Model):
         nfc_tag (str): The NFC tag associated with the plant.
         quantity (int): The quantity of the plant being managed.
         tsn (int): The TSN (Taxonomic Serial Number) of the plant.
+        group (int): The grouping of the plant.
     """
 
     name = models.CharField(

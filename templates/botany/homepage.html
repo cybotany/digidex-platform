@@ -10,37 +10,42 @@
   <!-- Grid Selector -->
   <div class="row align-items-center group-header">
     <div class="col-2 text-end">
-        <!-- Check if previous group exists before rendering the arrow -->
-        {% if prev_group_id %}
-            <button id="leftArrow" class="group-arrow" data-group-id="{{ prev_group_id }}">←</button>
-        {% else %}
-            <span class="group-arrow disabled">←</span>
-        {% endif %}
+      <!-- Navigation Arrow: Previous Group -->
+      {% if page_obj.has_previous %}
+        <button id="leftArrow" class="group-arrow" data-group-id="{{ page_obj.previous_page_number }}">←</button>
+      {% else %}
+        <span class="group-arrow disabled">←</span>
+      {% endif %}
     </div>
     <div class="col-8 text-center">
-        <!-- Handle the case where the current group might be empty -->
-        <span id="currentGroupName">{{ current_group.name|default:"Empty Group" }}</span>
+      <!-- Current Group Name -->
+      {% if current_group %}
+        <span id="currentGroupName">{{ current_group.name }}</span>
+      {% else %}
+        <span id="currentGroupName">Empty Group</span>
+      {% endif %}
     </div>
     <div class="col-2 text-start">
-        <!-- Check if next group exists before rendering the arrow -->
-        {% if next_group_id %}
-            <button id="rightArrow" class="group-arrow" data-group-id="{{ next_group_id }}">→</button>
-        {% else %}
-            <span class="group-arrow disabled">→</span>
-        {% endif %}
+      <!-- Navigation Arrow: Next Group -->
+      {% if page_obj.has_next %}
+        <button id="rightArrow" class="group-arrow" data-group-id="{{ page_obj.next_page_number }}">→</button>
+      {% else %}
+        <span class="group-arrow disabled">→</span>
+      {% endif %}
     </div>
   </div>
+
   <!-- Grid Container -->
-  <div id="plantListContainer" data-current-group-id="{{ current_group.id }}" class="row">
-    <!-- Plants will be loaded here by JavaScript -->
-    <!-- Add a placeholder for an empty group -->
-    {% if not current_group %}
+  <div id="plantListContainer" class="row">
+    <!-- Display Plants for the Current Group -->
+    {% for plant in plants %}
+      {% include 'botany/partials/plant_card.html' %}
+    {% empty %}
       <div class="col-12 text-center">
-        <p>This is an empty group. Add some plants!</p>
+        <p>No plants in this group.</p>
       </div>
-    {% endif %}
+    {% endfor %}
   </div>
-  <p id="noPlantsMessage" class="text-center" style="display: none;">No plants found.</p>
 {% endblock %}
 
 {% block app_scripts %}
