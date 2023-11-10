@@ -5,24 +5,26 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from django.template.loader import render_to_string
 from apps.botany.models import Group
-from apps.utils.constants import MAX_GROUP_CAPACITY
+from apps.utils.constants import MAX_GROUP
 
 
 class PlantHomepageView(LoginRequiredMixin, TemplateView):
-    template_name = 'botany/plant_grid.html'
-    paginate_by = MAX_GROUP_CAPACITY
+    template_name = 'botany/homepage.html'
+    paginate_by = MAX_GROUP
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        
         user_groups = Group.objects.filter(user=self.request.user).order_by('position')
+        user_groups = list(user_groups)
 
-        # Paginator setup
-        paginator = Paginator(user_groups, self.paginate_by)
+        paginator = Paginator(user_groups, 1)
         page_number = self.request.GET.get('page')
         page_obj = paginator.get_page(page_number)
 
         context['page_obj'] = page_obj
         return context
+
 
     def get(self, request, *args, **kwargs):
         if request.is_ajax():

@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    {% include "head.html" %}
+    {% include "core/partials/head.html" %}
     {% block app_styles %}{% endblock %}
   </head>
     
   <body>
-    {% include "messages.html" %}
-    {% include "header.html" %}
+    {% include "core/partials/messages.html" %}
+    {% include "core/partials/header.html" %}
     <main class="container app-main-container">
       {% block content %}
         <!-- Page-specific content goes here -->
       {% endblock %}
     </main>
-    {% include "footer.html" %}
+    {% include "core/partials/footer.html" %}
     {% block app_scripts %}{% endblock %} 
   </body>
 </html>
