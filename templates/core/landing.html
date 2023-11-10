@@ -1,16 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    {% include "head.html" %}
-    {% block app_styles %}{% endblock %}
-  </head>
-  <body>
-    {% include "messages.html" %}
-    {% include "core/hero_section.html" %}
-    {% include "core/how_it_works.html" %}
-    {% include "core/trust_building.html" %}
-    {% include "core/about_us.html" %}
-    {% include "core/call_to_action.html" %}
-    {% block app_scripts %}{% endblock %} 
-  </body>
-</html>
+{% extends "base.html" %}
+
+<!-- Landing Page -->
+{% block content %}
+  {% include "core/hero_section.html" %}
+  {% include "core/how_it_works.html" %}
+  {% include "core/trust_building.html" %}
+  {% include "core/about_us.html" %}
+  {% include "core/call_to_action.html" %}
+{% endblock %}
