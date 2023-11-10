@@ -18,10 +18,11 @@
 }
 
 .plant-card-img {
-  width: 70%;
-  height: 50px;
-  object-fit: cover;
   display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-height: 50px;
+  border-radius: 50%;
 }
 
 .plant-card-img-wrapper {
@@ -68,12 +69,14 @@
 }
 
 .no-image-placeholder {
-  width: 70%;
-  height: 50px;
-  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  max-height: 50px;
+  display: block;
   align-items: center;
   justify-content: center;
   background-color: #e0e0e0;
   font-size: 16px;
   font-weight: bold;
+  border-radius: 50%;
 }
