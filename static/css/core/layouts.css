@@ -30,13 +30,6 @@
   transition: all 0.3s ease-out;
 }
 
-.full-page-section {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
 .container, .container-fluid {
   padding: 2rem;
 }
