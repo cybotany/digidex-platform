@@ -7,17 +7,7 @@
 
 <!-- Plant Grid -->
 {% block content %}
-  <!-- Grid Container -->
-  <div class="row">
-    <!-- Display Plants for the Current Group -->
-    {% for plant in plants %}
-      {% include 'botany/partials/plant_card.html' %}
-    {% empty %}
-      <div class="col-12 text-center">
-        <p>No plants in this group.</p>
-      </div>
-    {% endfor %}
-  </div>
+  {% include 'botany/partials/plant_grid.html' %}
 {% endblock %}
 
 {% block app_scripts %}
