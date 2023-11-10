@@ -6,6 +6,7 @@ from django.shortcuts import render
 from django.template.loader import render_to_string
 from apps.botany.models import Group
 from apps.utils.constants import MAX_GROUP
+from apps.utils.helpers import is_ajax
 
 
 class PlantHomepageView(LoginRequiredMixin, TemplateView):
@@ -27,7 +28,7 @@ class PlantHomepageView(LoginRequiredMixin, TemplateView):
 
 
     def get(self, request, *args, **kwargs):
-        if request.is_ajax():
+        if is_ajax(request):
             context = self.get_context_data(**kwargs)
             html = render_to_string('botany/partials/group_list.html', context, request=request)
             return JsonResponse({'html': html})
