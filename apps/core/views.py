@@ -2,4 +2,4 @@ from django.views.generic import TemplateView
 
 
 class HomePageView(TemplateView):
-    template_name = 'core/landing.html'
+    template_name = 'landing/landing-page.html'
