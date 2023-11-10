@@ -1,0 +1,13 @@
+ul {
+  list-style: none; 
+  padding: 0; 
+}
+  
+ul li::before {
+  content: '•'; 
+  color: var(--core-accent-color);
+  font-weight: bold; 
+  display: inline-block; 
+  width: 1em; 
+  margin-left: -1em;
+}

@@ -1,0 +1,50 @@
+.app-main-container {
+  min-height: 100vh;
+  width: 100%;
+  padding: 5rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-out;
+}
+  
+.app-header-container {
+  background-color: var(--core-accent-color);
+  color: white;
+  padding: 1rem 2rem; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease-out;
+}
+  
+.app-footer-container {
+  background-color: var(--core-accent-color);
+  color: white;
+  padding: 1rem 2rem; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease-out;
+}
+
+.full-page-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.container, .container-fluid {
+  padding: 2rem;
+}
+
+.row {
+  margin: 0 -15px; 
+}
+  
+.col {
+  padding: 0 15px;
+}
