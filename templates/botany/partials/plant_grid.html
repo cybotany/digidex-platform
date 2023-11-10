@@ -1,0 +1,10 @@
+<!-- Plant Grid Container -->
+<div class="row">
+  {% for plant in plants %}
+    {% include 'botany/partials/plant_card.html' %}
+  {% empty %}
+    <div class="col-12 text-center">
+      <p>No plants in this group.</p>
+    </div>
+  {% endfor %}
+</div>
