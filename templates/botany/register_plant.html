@@ -41,14 +41,6 @@
         {{ form.group }}
       </div>
 
-      <!-- TSN Field -->
-      <div class="form-field">
-        {{ form.tsn.label_tag }}
-        <select name="{{ form.tsn.name }}" id="tsnField" class="form-control" style="width:300px;">
-          <!-- This can be left empty, options will be populated via AJAX -->
-        </select>
-      </div>
-
       <!-- Additional Image Form Field -->
       <div class="form-field">
         {{ image_form.as_p }}
@@ -60,6 +52,4 @@
   </div>
 {% endblock %}
 
-{% block app_scripts %}
-  <script src="{% static 'js/get_tsn_field.js' %}"></script>
-{% endblock %}
+{% block app_scripts %} {% endblock %}

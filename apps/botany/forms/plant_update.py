@@ -1,6 +1,5 @@
 from django import forms
 from apps.botany.models import Plant, PlantImage, PlantWatering, PlantFertilization, Group
-from apps.itis.models import TaxonomicUnits
 
 
 class PlantUpdateForm(forms.ModelForm):
@@ -19,12 +18,6 @@ class PlantUpdateForm(forms.ModelForm):
     fertilized = forms.BooleanField(
         required=False
     )
-    # TSN field is populated dynamically with AJAX calls
-    tsn = forms.ModelChoiceField(
-        queryset=TaxonomicUnits.objects.none(),
-        required=False,
-        widget=forms.TextInput(attrs={'id': 'tsnField'})
-    )
     # Group field is populated dynamically in the __init__ method
     group = forms.ModelChoiceField(
         queryset=Group.objects.none(),
@@ -34,7 +27,7 @@ class PlantUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Plant
-        fields = ('name', 'description', 'image', 'quantity', 'watered', 'fertilized', 'tsn', 'group')
+        fields = ('name', 'description', 'image', 'quantity', 'watered', 'fertilized', 'group')
 
     def __init__(self, *args, **kwargs):
         super(PlantUpdateForm, self).__init__(*args, **kwargs)

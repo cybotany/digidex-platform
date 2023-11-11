@@ -59,14 +59,6 @@
         {{ form.fertilized }}
       </div>
 
-      <!-- TSN Field -->
-      <div class="form-field">
-        {{ form.tsn.label_tag }}
-        <select name="{{ form.tsn.name }}" id="tsnField" class="form-control" style="width:300px;">
-          <!-- Options will be populated via AJAX -->
-        </select>
-      </div>
-
       <!-- Image Form Field -->
       <div class="form-field">
         {{ image_form.image.label_tag }}
@@ -79,6 +71,4 @@
   </div>
 {% endblock %}
 
-{% block app_scripts %}
-  <script src="{% static 'js/get_tsn_field.js' %}"></script>
-{% endblock %}
+{% block app_scripts %}{% endblock %}

@@ -1,6 +1,5 @@
 from django import forms
 from apps.botany.models import Plant, PlantImage, Group
-from apps.itis.models import TaxonomicUnits
 
 
 class PlantRegistrationForm(forms.ModelForm):
@@ -10,11 +9,6 @@ class PlantRegistrationForm(forms.ModelForm):
     nfc_tag = forms.CharField(
         required=True,
         widget=forms.HiddenInput()
-    )
-    tsn = forms.ModelChoiceField(
-        queryset=TaxonomicUnits.objects.none(),
-        required=False,
-        widget=forms.TextInput(attrs={'id': 'tsnField'})
     )
     image = forms.ImageField(
         required=False
@@ -27,7 +21,7 @@ class PlantRegistrationForm(forms.ModelForm):
 
     class Meta:
         model = Plant
-        fields = ('name', 'description', 'image', 'quantity', 'tsn', 'group')
+        fields = ('name', 'description', 'image', 'quantity', 'group')
 
     def __init__(self, *args, **kwargs):
         """
@@ -42,7 +36,6 @@ class PlantRegistrationForm(forms.ModelForm):
         if self.nfc_tag:
             self.fields['nfc_tag'].initial = self.nfc_tag
 
-        self.fields['tsn'].widget.attrs.update({'id': 'tsnField'})
         self.fields['group'].queryset = Group.objects.filter(user=self.user)
 
     def clean(self):
