@@ -1,12 +1,12 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-#from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from apps.itis.models import TaxonomicUnits
 from apps.api.serializers import TaxonomicUnitsSerializer
 
 
 class GetPlantTSN(APIView):
-    #permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def get(self, request, *args, **kwargs):
         search_term = request.GET.get('q')
