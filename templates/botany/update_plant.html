@@ -2,47 +2,79 @@
 {% load static %}
 
 {% block content %}
-  <h2> Update Plant </h2>
+  <h2>Update Plant</h2>
+  <div class="form-container">
     <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
+      {% csrf_token %}
+      
+      <!-- Name Field -->
+      <div class="form-field">
+        {{ form.name.label_tag }} 
+        {{ form.name }}
+      </div>
 
-        <p>
-            {{ form.name.label_tag }} {{ form.name }}
-        </p>
-        <p>
-            {{ form.description.label_tag }} {{ form.description }}
-        </p>
-        <p>
-            {{ form.image.label_tag }} {{ form.image }}
-        </p>
-        <p>
-            {{ form.quantity.label_tag }} {{ form.quantity }}
-        </p>
-        <p>
-            {{ form.nfc_tag.label_tag }} {{ form.nfc_tag }}
-        </p>
-        <p>
-            {{ form.group.label_tag }} {{ form.group }}
-        </p>
-        <p>
-            {{ form.watered.label_tag }} {{ form.watered }}
-        </p>
-        <p>
-            {{ form.fertilized.label_tag }} {{ form.fertilized }}
-        </p>
-        <p>
-            {{ form.tsn.label_tag }}
-            <select name="{{ form.tsn.name }}" id="tsnField" style="width:300px;">
-                <!-- This can be left empty, options will be populated via AJAX -->
-            </select>
-        </p>
-        <script src="{% static 'js/get_tsn_field.js' %}"></script>
+      <!-- Description Field -->
+      <div class="form-field">
+        {{ form.description.label_tag }}
+        {{ form.description }}
+      </div>
 
-        <!-- Your additional image form -->
-        <p>
-            {{ image_form.image.label_tag }} {{ image_form.image }}
-        </p>
+      <!-- Image Field -->
+      <div class="form-field">
+        {{ form.image.label_tag }}
+        {{ form.image }}
+      </div>
 
-        <button type="submit" class="btn btn-primary">Update</button>
+      <!-- Quantity Field -->
+      <div class="form-field">
+        {{ form.quantity.label_tag }}
+        {{ form.quantity }}
+      </div>
+
+      <!-- NFC Tag Field -->
+      <div class="form-field">
+        {{ form.nfc_tag.label_tag }}
+        {{ form.nfc_tag }}
+      </div>
+
+      <!-- Group Field -->
+      <div class="form-field">
+        {{ form.group.label_tag }}
+        {{ form.group }}
+      </div>
+
+      <!-- Watered Field -->
+      <div class="form-field">
+        {{ form.watered.label_tag }}
+        {{ form.watered }}
+      </div>
+
+      <!-- Fertilized Field -->
+      <div class="form-field">
+        {{ form.fertilized.label_tag }}
+        {{ form.fertilized }}
+      </div>
+
+      <!-- TSN Field -->
+      <div class="form-field">
+        {{ form.tsn.label_tag }}
+        <select name="{{ form.tsn.name }}" id="tsnField" class="form-control" style="width:300px;">
+          <!-- This can be left empty, options will be populated via AJAX -->
+        </select>
+      </div>
+
+      <!-- Image Form Field -->
+      <div class="form-field">
+        {{ image_form.image.label_tag }}
+        {{ image_form.image }}
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn-submit">Update</button>
     </form>
+  </div>
+{% endblock %}
+
+{% block app_scripts %}
+  <script src="{% static 'js/get_tsn_field.js' %}"></script>
 {% endblock %}

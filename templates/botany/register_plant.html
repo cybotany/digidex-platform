@@ -2,38 +2,60 @@
 {% load static %}
 
 {% block content %}
-    <h2> Register a new plant </h2> 
+  <h2>Register a New Plant</h2>
+  <div class="form-container">
     <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
+      {% csrf_token %}
 
-        <p>
-            {{ form.name.label_tag }} {{ form.name }}
-        </p>
-        <p>
-            {{ form.description.label_tag }} {{ form.description }}
-        </p>
-        <p>
-            {{ form.image.label_tag }} {{ form.image }}
-        </p>
-        <p>
-            {{ form.quantity.label_tag }} {{ form.quantity }}
-        </p>
-        <p>
-            {{ form.group.label_tag }} {{ form.group }}
-        </p>
-        <p>
-            {{ form.tsn.label_tag }}
-            <select name="{{ form.tsn.name }}" id="tsnField" style="width:300px;">
-                <!-- This can be left empty, options will be populated via AJAX -->
-            </select>
-        </p>
-        <script src="{% static 'js/get_tsn_field.js' %}"></script>
+      <!-- Name Field -->
+      <div class="form-field">
+        {{ form.name.label_tag }}
+        {{ form.name }}
+      </div>
 
-        <!-- Your additional image form -->
-        <p>
-            {{ image_form.as_p }}
-        </p>
+      <!-- Description Field -->
+      <div class="form-field">
+        {{ form.description.label_tag }}
+        {{ form.description }}
+      </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+      <!-- Image Field -->
+      <div class="form-field">
+        {{ form.image.label_tag }}
+        {{ form.image }}
+      </div>
+
+      <!-- Quantity Field -->
+      <div class="form-field">
+        {{ form.quantity.label_tag }}
+        {{ form.quantity }}
+      </div>
+
+      <!-- Group Field -->
+      <div class="form-field">
+        {{ form.group.label_tag }}
+        {{ form.group }}
+      </div>
+
+      <!-- TSN Field -->
+      <div class="form-field">
+        {{ form.tsn.label_tag }}
+        <select name="{{ form.tsn.name }}" id="tsnField" class="form-control" style="width:300px;">
+          <!-- This can be left empty, options will be populated via AJAX -->
+        </select>
+      </div>
+
+      <!-- Additional Image Form Field -->
+      <div class="form-field">
+        {{ image_form.as_p }}
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn-submit">Submit</button>
     </form>
+  </div>
+{% endblock %}
+
+{% block app_scripts %}
+  <script src="{% static 'js/get_tsn_field.js' %}"></script>
 {% endblock %}
