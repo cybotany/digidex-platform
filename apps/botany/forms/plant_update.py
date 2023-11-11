@@ -43,14 +43,6 @@ class PlantUpdateForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
-        tsn_value = cleaned_data.get('tsn')
-        
-        try:
-            taxonomic_unit = TaxonomicUnits.objects.get(tsn=tsn_value)
-            cleaned_data['tsn'] = taxonomic_unit
-        except TaxonomicUnits.DoesNotExist:
-            raise forms.ValidationError(f"TSN {tsn_value} does not exist!")
-
         return cleaned_data
 
     def save(self, commit=True):
