@@ -190,6 +190,11 @@ class TaxonomicUnits(models.Model):
         blank=True
     )
 
+    class Meta:
+        indexes = [
+            models.Index(fields=['complete_name']),
+        ]
+
     def __str__(self):
         """
         Returns a string representation of the taxonomic unit, using its complete name.
