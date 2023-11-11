@@ -5,16 +5,27 @@ from apps.itis.models import TaxonomicUnits
 
 class PlantUpdateForm(forms.ModelForm):
     """
-    Form for updating an existing plant's details including uploading an image.
+    Form for updating an existing plant's details.
     """
-    image = forms.ImageField(required=False)
-    watered = forms.BooleanField(required=False)
-    fertilized = forms.BooleanField(required=False)
+    # Optional field to upload a new image for the plant
+    image = forms.ImageField(
+        required=False
+    )
+    # Optional field to record a watering event
+    watered = forms.BooleanField(
+        required=False
+    )
+    # Optional field to record a fertilization event
+    fertilized = forms.BooleanField(
+        required=False
+    )
+    # TSN field is populated dynamically with AJAX calls
     tsn = forms.ModelChoiceField(
         queryset=TaxonomicUnits.objects.none(),
         required=False,
         widget=forms.TextInput(attrs={'id': 'tsnField'})
     )
+    # Group field is populated dynamically in the __init__ method
     group = forms.ModelChoiceField(
         queryset=Group.objects.none(),
         required=False,
@@ -34,14 +45,12 @@ class PlantUpdateForm(forms.ModelForm):
         cleaned_data = super().clean()
         tsn_value = cleaned_data.get('tsn')
         
-        if not tsn_value:
-            cleaned_data['tsn'] = None
-        else:
-            try:
-                taxonomic_unit = TaxonomicUnits.objects.get(tsn=tsn_value)
-                cleaned_data['tsn'] = taxonomic_unit
-            except TaxonomicUnits.DoesNotExist:
-                raise forms.ValidationError(f"TSN {tsn_value} does not exist!")
+        try:
+            taxonomic_unit = TaxonomicUnits.objects.get(tsn=tsn_value)
+            cleaned_data['tsn'] = taxonomic_unit
+        except TaxonomicUnits.DoesNotExist:
+            raise forms.ValidationError(f"TSN {tsn_value} does not exist!")
+
         return cleaned_data
 
     def save(self, commit=True):

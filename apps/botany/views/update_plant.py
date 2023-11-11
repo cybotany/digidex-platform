@@ -1,9 +1,9 @@
 from django.urls import reverse_lazy
-from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import UpdateView
 from apps.botany.models import Plant
 from apps.botany.forms import PlantUpdateForm
+from apps.utils.helpers import show_message
 
 
 class UpdatePlantView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -24,20 +24,10 @@ class UpdatePlantView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
         Returns:
             The response from the parent form_valid method.
-        """
-        group = form.cleaned_data.get('group')
-        if group:
-            plant = form.save(commit=False)
-            plant.group = group
-            plant.save()
-        self.show_success_message()
+        """ 
+        self.form.save()      
+        show_message(self.request, 'Your plant was successfully updated!', 'success')
         return super().form_valid(form)
-
-    def show_success_message(self):
-        """
-        Shows a success message.
-        """
-        messages.success(self.request, 'Your plant was successfully updated!')
 
     def test_func(self):
         plant = self.get_object()
