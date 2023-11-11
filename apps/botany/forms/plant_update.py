@@ -41,25 +41,21 @@ class PlantUpdateForm(forms.ModelForm):
         user = kwargs['instance'].user
         self.fields['group'].queryset = Group.objects.filter(user=user)
 
-    def clean(self):
-        cleaned_data = super().clean()
-        return cleaned_data
-
     def save(self, commit=True):
         """
         Save the form's fields to the associated model.
         """
         plant = super().save(commit)
-        image = self.cleaned_data.get('image')
-        watered = self.cleaned_data.get('watered')
-        fertilized = self.cleaned_data.get('fertilized')
 
+        image = self.cleaned_data.get('image')
         if image:
             PlantImage.objects.create(plant=plant, image=image)
-
+        
+        watered = self.cleaned_data.get('watered')
         if watered:
             PlantWatering.objects.create(plant=plant, watered=watered)
 
+        fertilized = self.cleaned_data.get('fertilized')
         if fertilized:
             PlantFertilization.objects.create(plant=plant, fertilized=fertilized)
 
