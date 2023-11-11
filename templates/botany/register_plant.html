@@ -1,6 +1,10 @@
 {% extends 'core/base.html' %}
 {% load static %}
 
+{% block app_styles %}
+  <link rel="stylesheet" href="{% static 'css/botany_styles.css' %}">
+{% endblock %}
+
 {% block content %}
   <h2>Register a New Plant</h2>
   <div class="form-container">

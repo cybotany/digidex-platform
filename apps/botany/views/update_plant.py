@@ -25,7 +25,6 @@ class UpdatePlantView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         Returns:
             The response from the parent form_valid method.
         """ 
-        self.form.save()      
         show_message(self.request, 'Your plant was successfully updated!', 'success')
         return super().form_valid(form)
 

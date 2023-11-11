@@ -2,12 +2,12 @@
 {% load static %}
 
 {% block app_styles %}
-  <link rel="stylesheet" href="{% static 'botany/css/plant_summary.css' %}">
+  <link rel="stylesheet" href="{% static 'css/botany_styles.css' %}">
 {% endblock %}
 
 <!-- Botany app container -->
 {% block content %}
-  {% include "botany/plant_summary.html" %}
+  {% include "botany/partials/plant_summary.html" %}
   <!-- Buttons to update or delete plant -->
   
   <div class="d-flex justify-content-center mb-5 w-100">
