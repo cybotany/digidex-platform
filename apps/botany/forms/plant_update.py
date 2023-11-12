@@ -31,8 +31,9 @@ class PlantUpdateForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(PlantUpdateForm, self).__init__(*args, **kwargs)
-        user = kwargs['instance'].user
-        self.fields['group'].queryset = Group.objects.filter(user=user)
+        if 'instance' in kwargs:
+            user = kwargs['instance'].user
+            self.fields['group'].queryset = Group.objects.filter(user=user)
 
     def save(self, commit=True):
         """
