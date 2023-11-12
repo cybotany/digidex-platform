@@ -10,18 +10,6 @@
   <div class="form-container">
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
-      
-      <!-- Name Field -->
-      <div class="form-field">
-        {{ form.name.label_tag }} 
-        {{ form.name }}
-      </div>
-
-      <!-- Description Field -->
-      <div class="form-field">
-        {{ form.description.label_tag }}
-        {{ form.description }}
-      </div>
 
       <!-- Image Field -->
       <div class="form-field">

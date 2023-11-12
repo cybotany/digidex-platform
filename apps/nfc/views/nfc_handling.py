@@ -18,7 +18,7 @@ class HandleNFCView(LoginRequiredMixin, View):
             pass
 
         try:
-            plant = Plant.objects.get(nfc_tag=tag) # Adjust the query if `nfc_tag` is not the field linking Plant to Tag
+            plant = Plant.objects.get(nfc_tag=tag)
             return redirect('botany:describe_plant', pk=plant.id)
         except Plant.DoesNotExist:
             request.session['nfc_tag'] = nfc_sn
