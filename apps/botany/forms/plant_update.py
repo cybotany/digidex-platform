@@ -27,7 +27,7 @@ class PlantUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Plant
-        fields = ('image', 'quantity', 'watered', 'fertilized', 'group')
+        fields = ('quantity', 'image', 'watered', 'fertilized', 'group')
 
     def __init__(self, *args, **kwargs):
         super(PlantUpdateForm, self).__init__(*args, **kwargs)

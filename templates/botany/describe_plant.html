@@ -8,4 +8,13 @@
 {% block content %}
   {% include "botany/partials/plant_summary.html" %}
   {% include "botany/partials/plant_summary_footer.html" %}
+
+  <!-- Update Form -->
+  <div class="plant-update-form">
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary">Update Plant</button>
+    </form>
+  </div>
 {% endblock %}

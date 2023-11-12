@@ -11,16 +11,16 @@
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
 
-      <!-- Image Field -->
-      <div class="form-field">
-        {{ form.image.label_tag }}
-        {{ form.image }}
-      </div>
-
       <!-- Quantity Field -->
       <div class="form-field">
         {{ form.quantity.label_tag }}
         {{ form.quantity }}
+      </div>
+
+      <!-- Image Field -->
+      <div class="form-field">
+        {{ form.image.label_tag }}
+        {{ form.image }}
       </div>
 
       <!-- NFC Tag Field -->
@@ -45,12 +45,6 @@
       <div class="form-field">
         {{ form.fertilized.label_tag }}
         {{ form.fertilized }}
-      </div>
-
-      <!-- Image Form Field -->
-      <div class="form-field">
-        {{ image_form.image.label_tag }}
-        {{ image_form.image }}
       </div>
 
       <!-- Submit Button -->
