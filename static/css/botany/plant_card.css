@@ -51,23 +51,6 @@
   color: var(--core-neutral-dark);
 }
 
-.link-bubble {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  background-color: var(--core-info-color);
-  border-radius: 50%;
-}
-
-.link-bubble:hover {
-  background-color: rgba(33, 150, 243, 0.8);
-}
-
-.link-bubble-wrapper {
-  display: inline-flex;
-  align-items: center;
-}
-
 .no-image-placeholder {
   margin-left: auto;
   margin-right: auto;
