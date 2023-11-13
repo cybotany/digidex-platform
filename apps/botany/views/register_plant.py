@@ -59,7 +59,7 @@ class RegisterPlantView(FormView):
 
         success_message = f'"{new_plant.name}" was successfully registered!'
         show_message(self.request, success_message, 'success')
-        return redirect(new_plant.get_absolute_url())
+        return redirect(new_plant.get_group_url())
 
     def get_form_kwargs(self):
         """
