@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 from apps.accounts.models import Activity
 from apps.botany.models import PlantImage
 from apps.botany.forms import PlantRegistrationForm
+from apps.utils.helpers import show_message
 
 
 class RegisterPlantView(FormView):
@@ -55,6 +56,9 @@ class RegisterPlantView(FormView):
             activity_type='plant',
             content=f'Registered a new plant: {new_plant.name}',
         )
+
+        success_message = f'"{new_plant.name}" was successfully registered!'
+        show_message(self.request, success_message, 'success')
         return redirect(new_plant.get_absolute_url())
 
     def get_form_kwargs(self):

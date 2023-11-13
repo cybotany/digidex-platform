@@ -1,9 +1,9 @@
 from django.views.generic import TemplateView
 from django.shortcuts import get_object_or_404, redirect
-from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from apps.botany.models import Plant
 from apps.accounts.models import Activity
+from apps.utils.helpers import show_message
 
 
 class DeletePlantView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
@@ -35,7 +35,8 @@ class DeletePlantView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
             activity_type='plant',
             content=f'Deleted a plant: {plant_name}',
         )
-        self.add_success_message()
+        success_message = f'"{plant_name}" was successfully updated!'
+        show_message(self.request, success_message, 'success')
         return self.redirect_to_home()
 
     def get_object(self):
@@ -54,10 +55,6 @@ class DeletePlantView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
 
     def delete_plant(self):
         self.get_object().delete()
-
-    def add_success_message(self):
-        message = 'Your plant was successfully deleted!'
-        messages.success(self.request, message)
 
     def redirect_to_home(self):
         return redirect('botany:home')

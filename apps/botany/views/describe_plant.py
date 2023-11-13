@@ -41,6 +41,8 @@ class DescribePlantView(FormMixin, DetailView):
 
     def form_valid(self, form):
         form.save()
-        show_message(self.request, 'Your plant was successfully updated!', 'success')
+        plant_name = self.object.name
+        success_message = f'"{plant_name}" was successfully updated!'
+        show_message(self.request, success_message, 'success')
         return super().form_valid(form)
 
