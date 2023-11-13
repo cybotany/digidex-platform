@@ -25,6 +25,12 @@ class DescribePlantView(FormMixin, DetailView):
         context['fertilization_events'] = self.object.fertilizations.all().order_by('-timestamp')
         return context
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        if hasattr(self, 'object'):
+            kwargs.update({'instance': self.object})
+        return kwargs
+
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         form = self.get_form()
@@ -36,3 +42,4 @@ class DescribePlantView(FormMixin, DetailView):
     def form_valid(self, form):
         show_message(self.request, 'Your plant was successfully updated!', 'success')
         return super().form_valid(form)
+
