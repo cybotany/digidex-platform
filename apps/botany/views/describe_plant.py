@@ -40,6 +40,7 @@ class DescribePlantView(FormMixin, DetailView):
             return self.form_invalid(form)
 
     def form_valid(self, form):
+        form.save()
         show_message(self.request, 'Your plant was successfully updated!', 'success')
         return super().form_valid(form)
 
