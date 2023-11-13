@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
-from .plant import Plant
+from apps.botany.models import Plant
+
 
 class PlantFertilization(models.Model):
     """
