@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.contrib.auth import get_user_model
 
 
@@ -10,7 +11,7 @@ class Tag(models.Model):
         serial_number (str): The serial number of the NFC tag.
         created_at (datetime): The date and time when the NFC tag was created.
         last_viewed (datetime): The date and time when the NFC tag was last viewed.
-        view_cout (int): The count of times the NFC tag has been viewed.
+        view_count (int): The count of times the NFC tag has been viewed.
         created_by (User): The user who created the NFC tag.
         active (bool): Whether the NFC tag is currently active.
     """
@@ -39,6 +40,14 @@ class Tag(models.Model):
         default=False,
         verbose_name="Active"
     )
+
+    def increment_view_count(self):
+        """
+        Increments the view count of the NFC tag and updates the last viewed timestamp.
+        """
+        self.view_count += 1
+        self.last_viewed = timezone.now()
+        self.save()
 
     def __str__(self):
         """

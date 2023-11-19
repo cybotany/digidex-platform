@@ -11,14 +11,18 @@ class HandleNFCView(LoginRequiredMixin, View):
 
     def get(self, request, nfc_sn):
         logged_in_user = request.user
-        tag, created = Tag.objects.get_or_create(serial_number=nfc_sn, defaults={'created_by': logged_in_user})
+        tag, created = Tag.objects.get_or_create(
+            serial_number=nfc_sn, 
+            defaults={
+                'created_by': logged_in_user,
+                'active': True
+            }
+        )
 
         if created:
-            # Handle the case where the Tag was newly created, if needed
             pass
         else:
-            tag.last_viewed = timezone.now()
-            tag.save()
+            tag.increment_view_count()
 
         try:
             plant = Plant.objects.get(nfc_tag=tag)
