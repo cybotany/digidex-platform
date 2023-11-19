@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.views import View
@@ -12,10 +13,12 @@ class HandleNFCView(LoginRequiredMixin, View):
         logged_in_user = request.user
         tag, created = Tag.objects.get_or_create(serial_number=nfc_sn, defaults={'created_by': logged_in_user})
 
-        
         if created:
             # Handle the case where the Tag was newly created, if needed
             pass
+        else:
+            tag.last_viewed = timezone.now()
+            tag.save()
 
         try:
             plant = Plant.objects.get(nfc_tag=tag)

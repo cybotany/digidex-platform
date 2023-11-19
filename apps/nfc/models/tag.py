@@ -9,7 +9,8 @@ class Tag(models.Model):
     Attributes:
         serial_number (str): The serial number of the NFC tag.
         created_at (datetime): The date and time when the NFC tag was created.
-        updated_at (datetime): The date and time when the NFC tag was last updated.
+        last_viewed (datetime): The date and time when the NFC tag was last viewed.
+        view_cout (int): The count of times the NFC tag has been viewed.
         created_by (User): The user who created the NFC tag.
         active (bool): Whether the NFC tag is currently active.
     """
@@ -22,9 +23,13 @@ class Tag(models.Model):
         auto_now_add=True,
         verbose_name="Created At"
     )
-    updated_at = models.DateTimeField(
+    last_viewed = models.DateTimeField(
         auto_now=True,
-        verbose_name="Updated At"
+        verbose_name="Last Viewed"
+    )
+    view_count = models.PositiveIntegerField(
+        default=0,
+        verbose_name="View Count"
     )
     created_by = models.ForeignKey(
         get_user_model(),
