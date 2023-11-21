@@ -15,8 +15,7 @@ class RegisterPlantView(FormView):
     form_class = PlantRegistrationForm
 
     def form_valid(self, form):
-        new_plant = form.save(commit=False)
-        new_plant.user = self.request.user
+        new_plant = form.save()
 
         #if not new_plant.tsn:
         #    default_taxonomic_unit = TaxonomicUnits.objects.get(tsn=202422)
@@ -28,8 +27,6 @@ class RegisterPlantView(FormView):
                 # Handle the exception appropriately, e.g., return an error response
         #        form.add_error('tsn', f"TSN {new_plant.tsn.tsn} does not exist!")
         #        return self.form_invalid(form)
-
-        new_plant.save()
 
         image = form.cleaned_data.get('image')
         if image:
@@ -44,7 +41,7 @@ class RegisterPlantView(FormView):
 
         success_message = f'"{new_plant.name}" was successfully registered!'
         show_message(self.request, success_message, 'success')
-        return redirect(new_plant.get_group_url())
+        return redirect(new_plant.get_absolute_url())
 
     def get_form_kwargs(self):
         """

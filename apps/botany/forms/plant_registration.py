@@ -49,8 +49,5 @@ class PlantRegistrationForm(forms.ModelForm):
 
         if commit:
             plant.save()
-            image = self.cleaned_data.get('image')
-            if image:
-                PlantImage.objects.create(plant=plant, image=image)
-
+            
         return plant
