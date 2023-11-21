@@ -24,10 +24,9 @@ class PlantRegistrationForm(forms.ModelForm):
         fields = ('name', 'description', 'image', 'quantity', 'group')
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
         self.user = kwargs.pop('user', None)
         self.nfc_tag = kwargs.pop('nfc_tag', None)
-
+        super().__init__(*args, **kwargs)
         if self.nfc_tag:
             self.fields['nfc_tag'].initial = self.nfc_tag
 
