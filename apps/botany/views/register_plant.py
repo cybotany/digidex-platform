@@ -2,7 +2,6 @@ from apps.itis.models import TaxonomicUnits
 from django.views.generic import FormView
 from django.shortcuts import redirect
 from apps.accounts.models import Activity
-from apps.botany.models import PlantImage
 from apps.botany.forms import PlantRegistrationForm
 from apps.utils.helpers import show_message
 
@@ -27,10 +26,6 @@ class RegisterPlantView(FormView):
                 # Handle the exception appropriately, e.g., return an error response
         #        form.add_error('tsn', f"TSN {new_plant.tsn.tsn} does not exist!")
         #        return self.form_invalid(form)
-
-        image = form.cleaned_data.get('image')
-        if image:
-            PlantImage.objects.create(plant=new_plant, image=image)
 
         Activity.objects.create(
             user=self.request.user,
