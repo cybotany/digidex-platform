@@ -7,8 +7,7 @@ class PlantRegistrationForm(forms.ModelForm):
     Form for users to register their plant.
     """
     nfc_tag = forms.CharField(
-        required=True,
-        widget=forms.HiddenInput()
+        required=True
     )
     image = forms.ImageField(
         required=False
