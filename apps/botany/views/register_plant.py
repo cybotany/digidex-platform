@@ -15,22 +15,13 @@ class RegisterPlantView(FormView):
     form_class = PlantRegistrationForm
 
     def form_valid(self, form):
-        """
-        If the submitted form is valid:
-          - Automatically assign the logged on user to the plant.
-          - Set a default TSN value if none is provided.
-          - Save the plant (Needed before a plant image can be mapped to plant).
-          - Save the plant image if one is provided.
-          - Log the activity.
-          - Redirect the user to the newly created plant detail page
-        """
         new_plant = form.save(commit=False)
         new_plant.user = self.request.user
 
         # Check if TSN value is provided, if not set to plant kingdom tsn (202422)
         if not new_plant.tsn:
             default_taxonomic_unit = TaxonomicUnits.objects.get(tsn=202422)
-            new_plant.tsn = default_taxonomic_unit
+            new_plant.tsn = default_taxonomic_unit.tsn
         else:
             try:
                 TaxonomicUnits.objects.get(tsn=new_plant.tsn.tsn)
@@ -41,7 +32,6 @@ class RegisterPlantView(FormView):
 
         group = form.cleaned_data.get('group')
         if group:
-            new_plant = form.save(commit=False)
             new_plant.group = group
 
         new_plant.save()

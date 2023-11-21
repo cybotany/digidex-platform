@@ -38,15 +38,6 @@ class PlantRegistrationForm(forms.ModelForm):
 
         self.fields['group'].queryset = Group.objects.filter(user=self.user)
 
-    def clean(self):
-        cleaned_data = super().clean()
-        nfc_value = cleaned_data.get('nfc_tag')
-
-        if not nfc_value:
-            raise forms.ValidationError("An NFC Tag is required!")
-
-        return cleaned_data
-
     def save(self, commit=True):
         """
         Save the form.
