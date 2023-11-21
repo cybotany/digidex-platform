@@ -33,13 +33,10 @@ class PlantRegistrationForm(forms.ModelForm):
         """
         Save the form.
         """
-        plant = super().save(commit=False)
-        plant.user = self.user
+        plant = super().save(commit)
 
-        if commit:
-            plant.save()
-            image = self.cleaned_data.get('image')
-            if image:
-                PlantImage.objects.create(plant=plant, image=image)
+        image = self.cleaned_data.get('image')
+        if image:
+            PlantImage.objects.create(plant=plant, image=image)
             
         return plant
