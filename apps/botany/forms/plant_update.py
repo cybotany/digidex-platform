@@ -6,19 +6,15 @@ class PlantUpdateForm(forms.ModelForm):
     """
     Form for updating an existing plant's details.
     """
-    # Optional field to upload a new image for the plant
     image = forms.ImageField(
         required=False
     )
-    # Optional field to record a watering event
     watered = forms.BooleanField(
         required=False
     )
-    # Optional field to record a fertilization event
     fertilized = forms.BooleanField(
         required=False
     )
-    # Group field is populated dynamically in the __init__ method
     group = forms.ModelChoiceField(
         queryset=Group.objects.none(),
         required=False,

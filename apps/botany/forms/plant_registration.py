@@ -27,7 +27,7 @@ class PlantRegistrationForm(forms.ModelForm):
         """
         Initialize the form.
 
-        Pop the user, nfc_tag, and tsn from kwargs.
+        Pop the user and nfc_tag from kwargs.
         """
         self.user = kwargs.pop('user', None)
         self.nfc_tag = kwargs.pop('nfc_tag', None)
@@ -52,7 +52,6 @@ class PlantRegistrationForm(forms.ModelForm):
         Save the form.
 
         Associates the plant with the owner (user) and saves the uploaded image.
-        Also ensures that the TSN value is converted to a TaxonomicUnits instance.
         """
         plant = super().save(commit=False)
         plant.user = self.user
