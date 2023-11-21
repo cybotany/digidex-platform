@@ -18,17 +18,16 @@ class RegisterPlantView(FormView):
         new_plant = form.save(commit=False)
         new_plant.user = self.request.user
 
-        # Check if TSN value is provided, if not set to plant kingdom tsn (202422)
-        if not new_plant.tsn:
-            default_taxonomic_unit = TaxonomicUnits.objects.get(tsn=202422)
-            new_plant.tsn = default_taxonomic_unit.tsn
-        else:
-            try:
-                TaxonomicUnits.objects.get(tsn=new_plant.tsn.tsn)
-            except TaxonomicUnits.DoesNotExist:
+        #if not new_plant.tsn:
+        #    default_taxonomic_unit = TaxonomicUnits.objects.get(tsn=202422)
+        #    new_plant.tsn = default_taxonomic_unit.tsn
+        #else:
+        #    try:
+        #        TaxonomicUnits.objects.get(tsn=new_plant.tsn.tsn)
+        #    except TaxonomicUnits.DoesNotExist:
                 # Handle the exception appropriately, e.g., return an error response
-                form.add_error('tsn', f"TSN {new_plant.tsn.tsn} does not exist!")
-                return self.form_invalid(form)
+        #        form.add_error('tsn', f"TSN {new_plant.tsn.tsn} does not exist!")
+        #        return self.form_invalid(form)
 
         group = form.cleaned_data.get('group')
         if group:
