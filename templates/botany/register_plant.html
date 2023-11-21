@@ -11,7 +11,9 @@
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
 
-      <!-- Hidden NFC Field -->
+      <!-- Hidden Fields -->
+      {{ form.user }}
+      {{ form.tsn }}
       {{ form.nfc_tag }}
       
       <!-- Name Field -->
