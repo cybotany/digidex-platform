@@ -27,9 +27,6 @@ class PlantRegistrationForm(forms.ModelForm):
         self.user = kwargs.pop('user', None)
         self.nfc_tag = kwargs.pop('nfc_tag', None)
         super().__init__(*args, **kwargs)
-        if self.nfc_tag:
-            self.fields['nfc_tag'].initial = self.nfc_tag
-
         self.fields['group'].queryset = Group.objects.filter(user=self.user)
 
     def save(self, commit=True):
