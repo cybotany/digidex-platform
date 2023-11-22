@@ -7,7 +7,6 @@
 
 {% block content %}
   {% include "botany/partials/plant_summary.html" %}
-  {% include "botany/partials/plant_summary_footer.html" %}
 
   <!-- Update Form -->
   <div class="plant-update-form">
@@ -16,5 +15,10 @@
       {{ form.as_p }}
       <button type="submit" class="btn btn-primary">Update Plant</button>
     </form>
+  </div>
+
+  <!-- Button to delete plant -->
+  <div class="d-flex justify-content-center mb-5 w-100">
+    <a href="{% url 'botany:delete_plant' plant.id %}" class="btn btn-danger btn-lg shadow mx-2">Delete</a>
   </div>
 {% endblock %}
