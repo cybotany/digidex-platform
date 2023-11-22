@@ -96,32 +96,26 @@ class Plant(models.Model):
     def __str__(self):
         """
         Returns a string representation of the plant, using its name.
-
-        Returns:
-            str: A string representation of the plant.
         """
         return self.name
 
     def get_absolute_url(self):
         """
         Get the URL to view the details of this plant.
-
-        Returns:
-            str: The URL to view the details of this plant.
         """
         return reverse('botany:describe_plant', args=[str(self.id)])
 
     def get_group_url(self):
+        """
+        Construct the URL with the page number for the plant's group.
+        """
         if not self.group:
             return None
 
-        user_groups = Group.objects.filter(user=self.user).order_by('position')  # Adjust the ordering as per your logic
+        user_groups = Group.objects.filter(user=self.user).order_by('position')
         group_position = list(user_groups).index(self.group) + 1
-
-        # Assuming 1 group per page as per 'paginate_by' setting in PlantHomepageView
         page_number = group_position
 
-        # Construct the URL with the page number
         return reverse('botany:home') + f'?page={page_number}'
 
     def days_since_last_watering(self):
