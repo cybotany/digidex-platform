@@ -12,7 +12,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('apps.accounts.urls')),
     path('botany/', include('apps.botany.urls')),
-    path('chatbot/', include('apps.chatbot.urls')),
     path('api/', include('apps.api.urls')),
     path('nfc/', include('apps.nfc.urls')),
     path('itis/', include('apps.itis.urls')),
