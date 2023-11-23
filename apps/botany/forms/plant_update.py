@@ -1,5 +1,5 @@
 from django import forms
-from apps.botany.models import Plant, PlantImage, PlantWatering, PlantFertilization, Group
+from apps.botany.models import Plant, PlantImage, PlantWatering, PlantFertilization
 
 
 class PlantUpdateForm(forms.ModelForm):
@@ -15,21 +15,13 @@ class PlantUpdateForm(forms.ModelForm):
     fertilized = forms.BooleanField(
         required=False
     )
-    group = forms.ModelChoiceField(
-        queryset=Group.objects.none(),
-        required=False,
-        widget=forms.Select(attrs={'id': 'groupField'})
-    )
 
     class Meta:
         model = Plant
-        fields = ('quantity', 'image', 'watered', 'fertilized', 'group')
+        fields = ('quantity', 'image', 'watered', 'fertilized')
 
     def __init__(self, *args, **kwargs):
         super(PlantUpdateForm, self).__init__(*args, **kwargs)
-        if 'instance' in kwargs:
-            user = kwargs['instance'].user
-            self.fields['group'].queryset = Group.objects.filter(user=user)
 
     def save(self, commit=True):
         """

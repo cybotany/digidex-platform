@@ -3,7 +3,6 @@ from django.urls import reverse
 from django.db.models import Max, F, ExpressionWrapper, fields
 from django.utils import timezone
 from django.core.exceptions import ValidationError
-from apps.itis.models import TaxonomicUnits
 
 
 class Plant(models.Model):
@@ -15,7 +14,6 @@ class Plant(models.Model):
         description (str): The description of the plant.
         added_on (datetime): The date and time when the plant was added.
         quantity (int): The quantity of the plant being managed.
-        tsn (int): The TSN (Taxonomic Serial Number) of the plant.
     """
     name = models.CharField(
         max_length=100,
@@ -33,15 +31,7 @@ class Plant(models.Model):
     quantity = models.PositiveIntegerField(
         default=1,
         help_text='The plant quantity.'
-    )
-    tsn = models.ForeignKey(
-        TaxonomicUnits,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        help_text='The TSN (Taxonomic Serial Number) of the plant.',
-        related_name='plants'
-    )        
+    )    
 
     def __str__(self):
         """

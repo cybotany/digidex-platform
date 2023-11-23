@@ -1,5 +1,5 @@
 from django import forms
-from apps.botany.models import Plant, PlantImage, Group
+from apps.botany.models import Plant, PlantImage
 
 
 class PlantRegistrationForm(forms.ModelForm):
@@ -9,22 +9,15 @@ class PlantRegistrationForm(forms.ModelForm):
     image = forms.ImageField(
         required=False
     )
-    group = forms.ModelChoiceField(
-        queryset=Group.objects.none(),
-        required=False,
-        widget=forms.Select(attrs={'id': 'groupField'})
-    )
 
     class Meta:
         model = Plant
-        fields = ('name', 'description', 'image', 'quantity', 'group')
+        fields = ('name', 'description', 'image', 'quantity')
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
         request = kwargs.pop('request', None)
         super().__init__(*args, **kwargs)
-
-        self.fields['group'].queryset = Group.objects.filter(user=self.user)
 
 
     def save(self, commit=True):

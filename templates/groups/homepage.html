@@ -2,13 +2,13 @@
 {% load static %}
 
 {% block app_styles %}
-  <link rel="stylesheet" href="{% static 'css/botany_styles.css' %}">
+  <link rel="stylesheet" href="{% static 'css/group_styles.css' %}">
 {% endblock %}
 
-<!-- Plant Grid -->
+<!-- Group Grid -->
 {% block content %}
-  {% include 'botany/partials/plant_grid_header.html' %}
-  {% include 'botany/partials/plant_grid.html' %}
+  {% include 'groups/partials/group_header.html' %}
+  {% include 'groups/partials/group_grid.html' %}
 {% endblock %}
 
 {% block app_scripts %}
