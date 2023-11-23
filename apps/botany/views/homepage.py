@@ -3,7 +3,8 @@ from django.views.generic import TemplateView
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.template.loader import render_to_string
-from apps.botany.models import Group, Plant
+from apps.botany.models import Plant
+from apps.groups.models import Group
 from apps.utils.helpers import is_ajax
 
 
