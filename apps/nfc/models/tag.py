@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth import get_user_model
+from apps.botany.models import Plant
+import uuid
 
 
 class Tag(models.Model):
@@ -14,6 +16,8 @@ class Tag(models.Model):
         view_count (int): The count of times the NFC tag has been viewed.
         created_by (User): The user who created the NFC tag.
         active (bool): Whether the NFC tag is currently active.
+        uuid (UUID): The UUID of the NFC tag.
+        plant (Plant): The plant associated with the NFC tag.
     """
     serial_number = models.CharField(
         max_length=255,
@@ -40,6 +44,20 @@ class Tag(models.Model):
         default=False,
         verbose_name="Active"
     )
+    uuid = models.UUIDField(
+        unique=True,
+        default=uuid.uuid4,
+        editable=False,
+        verbose_name="UUID"
+    )
+    plant = models.OneToOneField(
+        Plant,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='nfc_tag',
+        verbose_name="Associated Plant"
+    )
 
     def increment_view_count(self):
         """
@@ -49,14 +67,18 @@ class Tag(models.Model):
         self.last_viewed = timezone.now()
         self.save()
 
+    def generate_uuid(self):
+        """
+        Generates a new UUID for the NFC tag.
+        """
+        self.uuid = uuid.uuid4()
+        self.save()
+
     def __str__(self):
         """
-        Returns a string representation of the NFC tag, using its serial number.
-
-        Returns:
-            str: A string representation of the NFC tag.
+        Returns a string representation of the NFC tag, using its uuid.
         """
-        return self.serial_number
+        return self.uuid
 
     class Meta:
         verbose_name = "NFC Tag"

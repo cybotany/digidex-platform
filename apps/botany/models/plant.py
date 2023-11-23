@@ -1,52 +1,42 @@
 from django.db import models
-from django.contrib.auth import get_user_model
 from django.urls import reverse
 from django.db.models import Max, F, ExpressionWrapper, fields
 from django.utils import timezone
 from django.core.exceptions import ValidationError
 from apps.itis.models import TaxonomicUnits
 from apps.botany.models import Group
+from apps.nfc.models import Tag
 
 
 class Plant(models.Model):
     """
-    Represents a plant owned by a user.
+    Represents a plant owned.
 
     Attributes:
         name (str): The name of the plant.
         description (str): The description of the plant.
-        user (User): The user who owns the plant.
         added_on (datetime): The date and time when the plant was added.
         nfc_tag (str): The NFC tag associated with the plant.
         quantity (int): The quantity of the plant being managed.
         tsn (int): The TSN (Taxonomic Serial Number) of the plant.
         group (int): The grouping of the plant.
     """
-
     name = models.CharField(
         max_length=100,
         null=True,
         blank=True
     )
-    description = models.TextField(
+    description = models.CharField(
+        max_length=200,
         null=True,
         blank=True
-    )
-    user = models.ForeignKey(
-        get_user_model(),
-        on_delete=models.CASCADE
     )
     added_on = models.DateTimeField(
         auto_now_add=True
     )
-    nfc_tag = models.CharField(
-        max_length=255,
-        null=True,
-        blank=True
-    )
     quantity = models.PositiveIntegerField(
         default=1,
-        help_text='The quantity of the plant.'
+        help_text='The plant quantity.'
     )
     tsn = models.ForeignKey(
         TaxonomicUnits,
@@ -67,14 +57,8 @@ class Plant(models.Model):
     def save(self, *args, **kwargs):
         """
         Override the save method to:
-         - Set a default name if not provided.
          - Handle group count incrementation/decrementation.
         """
-
-        if not self.name:
-            total_plants = Plant.objects.filter(user=self.user).count()
-            self.name = f'Plant-{total_plants + 1}'
-        
         if self.group:
             if self.group.is_full:
                 raise ValidationError("The selected group is full!")
@@ -105,25 +89,9 @@ class Plant(models.Model):
         """
         return reverse('botany:describe_plant', args=[str(self.id)])
 
-    def get_group_url(self):
-        """
-        Construct the URL with the page number for the plant's group.
-        """
-        if not self.group:
-            return None
-
-        user_groups = Group.objects.filter(user=self.user).order_by('position')
-        group_position = list(user_groups).index(self.group) + 1
-        page_number = group_position
-
-        return reverse('botany:home') + f'?page={page_number}'
-
     def days_since_last_watering(self):
         """
         Returns the number of days since the last watering event for this plant using annotation.
-
-        Returns:
-            int: Number of days since the last watering.
         """
         plant_with_last_watering = Plant.objects.filter(id=self.id).annotate(
             last_watering_timestamp=Max('waterings__timestamp')

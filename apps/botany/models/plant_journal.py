@@ -3,7 +3,7 @@ from django.utils import timezone
 from apps.botany.models import Plant
 
 
-class PlantJournaling(models.Model):
+class PlantJournal(models.Model):
     """
     Represents a journal entry for a plant owned by a user.
 
