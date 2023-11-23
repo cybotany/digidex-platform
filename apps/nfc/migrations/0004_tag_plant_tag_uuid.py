@@ -4,6 +4,12 @@ from django.db import migrations, models
 import django.db.models.deletion
 import uuid
 
+def gen_uuid(apps, schema_editor):
+    Tag = apps.get_model('nfc', 'Tag')
+    for tag in Tag.objects.all():
+        tag.uuid = uuid.uuid4()
+        tag.save()
+
 
 class Migration(migrations.Migration):
 
@@ -23,4 +29,5 @@ class Migration(migrations.Migration):
             name='uuid',
             field=models.UUIDField(default=uuid.uuid4, editable=False, verbose_name='UUID'),
         ),
+        migrations.RunPython(gen_uuid, reverse_code=migrations.RunPython.noop),
     ]
