@@ -5,7 +5,6 @@ from django.utils import timezone
 from django.core.exceptions import ValidationError
 from apps.itis.models import TaxonomicUnits
 from apps.botany.models import Group
-from apps.nfc.models import Tag
 
 
 class Plant(models.Model):
@@ -16,7 +15,6 @@ class Plant(models.Model):
         name (str): The name of the plant.
         description (str): The description of the plant.
         added_on (datetime): The date and time when the plant was added.
-        nfc_tag (str): The NFC tag associated with the plant.
         quantity (int): The quantity of the plant being managed.
         tsn (int): The TSN (Taxonomic Serial Number) of the plant.
         group (int): The grouping of the plant.
