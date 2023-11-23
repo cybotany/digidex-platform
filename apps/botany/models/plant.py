@@ -4,7 +4,6 @@ from django.db.models import Max, F, ExpressionWrapper, fields
 from django.utils import timezone
 from django.core.exceptions import ValidationError
 from apps.itis.models import TaxonomicUnits
-from apps.botany.models import Group
 
 
 class Plant(models.Model):
@@ -17,7 +16,6 @@ class Plant(models.Model):
         added_on (datetime): The date and time when the plant was added.
         quantity (int): The quantity of the plant being managed.
         tsn (int): The TSN (Taxonomic Serial Number) of the plant.
-        group (int): The grouping of the plant.
     """
     name = models.CharField(
         max_length=100,
@@ -43,37 +41,7 @@ class Plant(models.Model):
         blank=True,
         help_text='The TSN (Taxonomic Serial Number) of the plant.',
         related_name='plants'
-    )
-    group = models.ForeignKey(
-        Group,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name="plants",
-    )
-
-    def save(self, *args, **kwargs):
-        """
-        Override the save method to:
-         - Handle group count incrementation/decrementation.
-        """
-        if self.group:
-            if self.group.is_full:
-                raise ValidationError("The selected group is full!")
-        
-        # If the plant has changed groups, decrement the count in the old group
-        old_group = Plant.objects.filter(pk=self.pk).first().group if self.pk else None
-        if old_group and old_group != self.group:
-            old_group.current_count -= 1
-            old_group.save()
-
-        # If the plant is newly associated with a group or has changed groups, increment the new group's count
-        if not old_group or (old_group and old_group != self.group):
-            self.group.current_count += 1
-            self.group.save()        
-        
-        super().save(*args, **kwargs)
-        
+    )        
 
     def __str__(self):
         """

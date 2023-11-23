@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth import get_user_model
 from apps.botany.models import Plant
+from apps.groups.models import Group
 import uuid
 
 
@@ -18,6 +19,7 @@ class Tag(models.Model):
         active (bool): Whether the NFC tag is currently active.
         uuid (UUID): The UUID of the NFC tag.
         plant (Plant): The plant associated with the NFC tag.
+        group (Group): The group associated with the NFC tag.
     """
     serial_number = models.CharField(
         max_length=255,
@@ -58,6 +60,14 @@ class Tag(models.Model):
         related_name='nfc_tag',
         verbose_name="Associated Plant"
     )
+    group = models.ForeignKey(
+        Group,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Associated Group"
+    )
+
 
     def increment_view_count(self):
         """

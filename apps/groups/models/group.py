@@ -11,7 +11,6 @@ class Group(models.Model):
         name (CharField): The name of the group.
         user (ForeignKey): A reference to the user who created the group.
         position (PositiveIntegerField): The position/order of the group.
-        current_count (PositiveIntegerField): The current number of plants in this group.
     """
     name = models.CharField(
         max_length=50,
@@ -26,10 +25,6 @@ class Group(models.Model):
     )
     position = models.PositiveIntegerField(
         help_text="The position/order of the group."
-    )
-    current_count = models.PositiveIntegerField(
-        default=0,
-        help_text="The current number of plants in this group."
     )
 
     class Meta:
@@ -49,23 +44,18 @@ class Group(models.Model):
         return self.plant_set.filter(user=self.user)
 
     @property
+    def current_count(self):
+        """
+        The current number of unique plants in this group.
+
+        Returns:
+            int: The number of unique plants in this group.
+        """
+        return self.plants.distinct().count()
+
+    @property
     def is_full(self):
         return self.current_count >= MAX_GROUP_CAPACITY
-
-    def add_plant(self, plant):
-        if self.is_full:
-            raise ValueError("Group is full!")
-        plant.group = self
-        plant.save()
-        self.current_count += 1
-        self.save()
-
-    def remove_plant(self, plant):
-        if plant.group == self:
-            plant.group = None
-            plant.save()
-            self.current_count -= 1
-            self.save()
 
     def display_name_with_count(self):
         """
