@@ -45,7 +45,7 @@ class Tag(models.Model):
         verbose_name="Active"
     )
     uuid = models.UUIDField(
-        #unique=True,
+        unique=True,
         default=uuid.uuid4,
         editable=False,
         verbose_name="UUID"
