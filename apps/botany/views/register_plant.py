@@ -15,10 +15,9 @@ class RegisterPlantView(FormView):
     def form_valid(self, form):
         new_plant = form.save()
 
-        # Associate NFC tag with the plant
-        nfc_tag_sn = self.request.session.pop('nfc_tag_sn', None)
-        if nfc_tag_sn:
-            tag = get_object_or_404(Tag, serial_number=nfc_tag_sn, created_by=self.request.user)
+        nfc_uuid = self.request.session.pop('nfc_uuid', None)
+        if nfc_uuid:
+            tag = get_object_or_404(Tag, uuid=nfc_uuid)
             tag.plant = new_plant
             tag.save()
 
@@ -32,11 +31,3 @@ class RegisterPlantView(FormView):
         success_message = f'"{new_plant.name}" was successfully registered!'
         show_message(self.request, success_message, 'success')
         return redirect(new_plant.get_absolute_url())
-
-    def get_form_kwargs(self):
-        """
-        Pass the logged on user object to the PlantRegistrationForm
-        """
-        kwargs = super().get_form_kwargs()
-        kwargs['user'] = self.request.user
-        return kwargs
