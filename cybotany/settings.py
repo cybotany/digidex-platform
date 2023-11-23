@@ -129,7 +129,7 @@ WSGI_APPLICATION = 'cybotany.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': db_secrets['DATABASE_NAME'],
         'USER': db_secrets['DATABASE_USER'],
         'PASSWORD': db_secrets['DATABASE_PASSWORD'],
