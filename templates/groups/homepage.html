@@ -1,9 +1,7 @@
 {% extends "core/base.html" %}
 {% load static %}
 
-{% block app_styles %}
-  <link rel="stylesheet" href="{% static 'css/group_styles.css' %}">
-{% endblock %}
+{% block app_styles %}{% endblock %}
 
 <!-- Group Grid -->
 {% block content %}
@@ -12,5 +10,5 @@
 {% endblock %}
 
 {% block app_scripts %}
-  <script src="{% static 'js/get_plant_group.js' %}"></script>
+  <script src="{% static 'js/get_group.js' %}"></script>
 {% endblock %}

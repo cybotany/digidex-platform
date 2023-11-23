@@ -5,7 +5,7 @@ from apps.itis.models import TaxonomicUnits
 from apps.api.serializers import TaxonomicUnitsSerializer
 
 
-class GetPlantTSN(APIView):
+class GetTSN(APIView):
     #permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):

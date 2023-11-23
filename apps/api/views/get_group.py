@@ -3,10 +3,10 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
-from apps.botany.models import Plant, Group
+from apps.groups.models import Group
 from apps.api.serializers import PlantSerializer
 
-class GetPlantGroup(APIView):
+class GetGroup(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request, group_id, *args, **kwargs):
@@ -25,16 +25,16 @@ class GetPlantGroup(APIView):
         next_group = user_groups[(current_group_index + 1) % len(user_groups)]
 
         # Prefetch related plants in a single query.
-        plants = Plant.objects.select_related('group').filter(group=current_group)
+        #plants = Plant.objects.select_related('group').filter(group=current_group)
 
         # Serialize plants using DRF serializer
-        plant_data = PlantSerializer(plants, many=True).data
+        #plant_data = PlantSerializer(plants, many=True).data
 
         response_data = {
             'current_group_name': current_group.name,
             'prev_group_id': prev_group.id,
             'next_group_id': next_group.id,
-            'plants': plant_data
+            'plants': 0
         }
 
         return Response(response_data)
