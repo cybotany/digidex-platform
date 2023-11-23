@@ -2,7 +2,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth import get_user_model
 from apps.accounts.models import Profile
-from apps.botany.models import Group
+from apps.groups.models import Group
 from apps.utils.constants import MAX_GROUP
 
 @receiver(post_save, sender=get_user_model())
