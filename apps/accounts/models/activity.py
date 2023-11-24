@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-
 from apps.utils.constants import ACTIVITY_STATUS, ACTIVITY_TYPE
 
 

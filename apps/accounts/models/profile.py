@@ -1,7 +1,5 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-
-from apps.utils.constants import INTERESTS_CHOICES, EXPERIENCE_CHOICES
 from apps.utils.helpers import user_directory_path
 from apps.utils.custom_storage import AvatarStorage
 from apps.utils.validators import validate_image_size_and_dimensions
@@ -46,18 +44,6 @@ class Profile(models.Model):
         null=True,
         blank=True,
         help_text='The profile picture of the user.'
-    )
-    interests = models.CharField(
-        max_length=100,
-        choices=INTERESTS_CHOICES,
-        blank=True,
-        help_text='Interests of the user.'
-    )
-    experience = models.CharField(
-        max_length=100,
-        choices=EXPERIENCE_CHOICES,
-        blank=True,
-        help_text='Experience of the user.'
     )
 
     def __str__(self):
