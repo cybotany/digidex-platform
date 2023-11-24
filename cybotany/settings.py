@@ -84,15 +84,13 @@ INSTALLED_APPS = [
     'storages',
     'rest_framework',
     'corsheaders',
-    'apps.api',
-    #'apps.accounts',
-    'apps.accounts.apps.AccountConfig',
-    'apps.utils',
-    'apps.nfc',
-    'apps.taxonomy',
-    'apps.core',
-    'apps.groups',
     'bootstrap5',
+    'apps.accounts.apps.AccountConfig',
+    'apps.api',
+    'apps.core',
+    'apps.inventory',
+    'apps.taxonomy',
+    'apps.utils',
 ]
 
 MIDDLEWARE = [

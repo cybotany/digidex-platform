@@ -12,7 +12,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('apps.accounts.urls')),
     path('api/', include('apps.api.urls')),
-    path('nfc/', include('apps.nfc.urls')),
+    path('inventory/', include('apps.inventory.urls')),
     path('taxonomy/', include('apps.taxonomy.urls')),
 ]
 

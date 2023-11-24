@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
-from apps.groups.models import Group
+from apps.inventory.models import Group
 
 
 class GetGroup(APIView):
