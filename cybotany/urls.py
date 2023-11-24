@@ -11,7 +11,6 @@ urlpatterns = [
     path('', HomePageView.as_view(), name='landing'),
     path('admin/', admin.site.urls),
     path('accounts/', include('apps.accounts.urls')),
-    path('botany/', include('apps.botany.urls')),
     path('api/', include('apps.api.urls')),
     path('nfc/', include('apps.nfc.urls')),
     path('taxonomy/', include('apps.taxonomy.urls')),
