@@ -9,7 +9,7 @@ class PlantImageSerializer(serializers.ModelSerializer):
         fields = ['image', 'timestamp']
 
 
-class taxonomyUnitsSerializer(serializers.ModelSerializer):
+class TaxonomyUnitsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Units
         fields = ['tsn', 'complete_name']
