@@ -164,7 +164,7 @@ class Units(models.Model):
         db_column='kingdom_id'
     )
     rank = models.ForeignKey(
-        'TaxonUnitTypes',
+        'UnitTypes',
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
