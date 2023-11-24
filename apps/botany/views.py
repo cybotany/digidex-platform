@@ -1,17 +1,17 @@
 from django.views.generic.edit import FormMixin
 from django.views.generic import DetailView
-from apps.botany.forms import PlantUpdateForm
+from apps.botany.forms import PlantForm
 from apps.botany.models import Plant
 from apps.utils.helpers import show_message
 
 
-class DescribePlantView(FormMixin, DetailView):
+class PlantView(FormMixin, DetailView):
     """
     View for rendering the page used to show details about a specific registered plant.
     """
     model = Plant
     template_name = 'botany/describe_plant.html'
-    form_class = PlantUpdateForm
+    form_class = PlantForm
     context_object_name = 'plant'
 
     def get_success_url(self):

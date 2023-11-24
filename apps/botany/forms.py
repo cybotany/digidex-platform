@@ -2,7 +2,7 @@ from django import forms
 from apps.botany.models import Plant, PlantImage, PlantWatering, PlantFertilization
 
 
-class PlantUpdateForm(forms.ModelForm):
+class PlantForm(forms.ModelForm):
     """
     Form for updating an existing plant's details.
     """
@@ -21,7 +21,7 @@ class PlantUpdateForm(forms.ModelForm):
         fields = ('quantity', 'image', 'watered', 'fertilized')
 
     def __init__(self, *args, **kwargs):
-        super(PlantUpdateForm, self).__init__(*args, **kwargs)
+        super(PlantForm, self).__init__(*args, **kwargs)
 
     def save(self, commit=True):
         """
