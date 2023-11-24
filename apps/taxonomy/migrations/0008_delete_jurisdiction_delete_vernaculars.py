@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('itis', '0007_delete_longnames'),
+        ('taxonomy', '0007_delete_longnames'),
     ]
 
     operations = [

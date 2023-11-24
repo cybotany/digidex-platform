@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('itis', '0002_delete_comments_delete_experts_delete_nodc_ids_and_more'),
+        ('taxonomy', '0002_delete_comments_delete_experts_delete_nodc_ids_and_more'),
     ]
 
     operations = [

@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('itis', '0005_rename_usage_taxonomicunits_n_usage_and_more'),
+        ('taxonomy', '0005_rename_usage_taxonomicunits_n_usage_and_more'),
     ]
 
     operations = [

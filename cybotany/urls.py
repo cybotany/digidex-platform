@@ -14,7 +14,7 @@ urlpatterns = [
     path('botany/', include('apps.botany.urls')),
     path('api/', include('apps.api.urls')),
     path('nfc/', include('apps.nfc.urls')),
-    path('itis/', include('apps.itis.urls')),
+    path('taxonomy/', include('apps.taxonomy.urls')),
 ]
 
 if settings.DEBUG:

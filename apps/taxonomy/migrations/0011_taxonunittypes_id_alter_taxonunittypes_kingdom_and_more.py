@@ -7,14 +7,14 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('itis', '0010_remove_hierarchy_parent_tsn_remove_hierarchy_tsn_and_more'),
+        ('taxonomy', '0010_remove_hierarchy_parent_tsn_remove_hierarchy_tsn_and_more'),
     ]
 
     operations = [
         migrations.AlterField(
             model_name='taxonunittypes',
             name='kingdom',
-            field=models.ForeignKey(blank=True, db_column='kingdom_id', null=True, on_delete=django.db.models.deletion.CASCADE, to='itis.kingdoms', verbose_name='Kingdom'),
+            field=models.ForeignKey(blank=True, db_column='kingdom_id', null=True, on_delete=django.db.models.deletion.CASCADE, to='taxonomy.kingdoms', verbose_name='Kingdom'),
         ),
         migrations.AlterField(
             model_name='taxonunittypes',

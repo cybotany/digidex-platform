@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('itis', '0003_hierarchy_id_alter_geographicdivision_tsn'),
+        ('taxonomy', '0003_hierarchy_id_alter_geographicdivision_tsn'),
     ]
 
     operations = [

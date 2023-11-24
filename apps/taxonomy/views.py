@@ -1,13 +1,13 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
-from apps.itis.models import Kingdoms
+from apps.taxonomy.models import Kingdoms
 
 
-class ITISHomepageView(LoginRequiredMixin, TemplateView):
+class HomepageView(LoginRequiredMixin, TemplateView):
     """
-    View for rendering the plant module homepage.
+    View for rendering the taxonomy module homepage.
     """
-    template_name = 'itis/homepage.html'
+    template_name = 'taxonomy/homepage.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

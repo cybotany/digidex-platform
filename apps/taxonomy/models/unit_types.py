@@ -2,7 +2,7 @@ from django.db import models
 from django.urls import reverse
 
 
-class TaxonUnitTypes(models.Model):
+class UnitTypes(models.Model):
     """
     Defines the levels associated with the taxonomic hierarchical structure and establishes the
     rank order for an occurrence of the Taxonomic Units.

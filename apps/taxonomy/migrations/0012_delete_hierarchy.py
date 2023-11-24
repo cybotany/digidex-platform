@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('itis', '0011_taxonunittypes_id_alter_taxonunittypes_kingdom_and_more'),
+        ('taxonomy', '0011_taxonunittypes_id_alter_taxonunittypes_kingdom_and_more'),
     ]
 
     operations = [

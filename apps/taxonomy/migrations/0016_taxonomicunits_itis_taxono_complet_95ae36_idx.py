@@ -6,12 +6,12 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('itis', '0015_alter_taxonunittypes_direct_parent_rank_id_and_more'),
+        ('taxonomy', '0015_alter_taxonunittypes_direct_parent_rank_id_and_more'),
     ]
 
     operations = [
         migrations.AddIndex(
             model_name='taxonomicunits',
-            index=models.Index(fields=['complete_name'], name='itis_taxono_complet_95ae36_idx'),
+            index=models.Index(fields=['complete_name'], name='taxonomy_taxono_complet_95ae36_idx'),
         ),
     ]

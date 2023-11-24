@@ -90,7 +90,7 @@ INSTALLED_APPS = [
     'apps.botany',
     'apps.utils',
     'apps.nfc',
-    'apps.itis',
+    'apps.taxonomy',
     'apps.core',
     'apps.groups',
     'bootstrap5',
