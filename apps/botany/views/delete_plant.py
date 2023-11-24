@@ -35,7 +35,7 @@ class DeletePlantView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
             activity_type='plant',
             content=f'Deleted a plant: {plant_name}',
         )
-        success_message = f'"{plant_name}" was successfully updated!'
+        success_message = f'"{plant_name}" was successfully deleted!'
         show_message(self.request, success_message, 'success')
         return self.redirect_to_home()
 
