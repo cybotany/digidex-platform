@@ -14,16 +14,10 @@ def gen_uuid(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('botany', '0039_rename_plantjournaling_plantjournal_and_more'),
         ('nfc', '0003_remove_tag_updated_at_tag_last_viewed_tag_view_count'),
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='tag',
-            name='plant',
-            field=models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='nfc_tag', to='botany.plant', verbose_name='Associated Plant'),
-        ),
         migrations.AddField(
             model_name='tag',
             name='uuid',
