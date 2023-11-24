@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from apps.groups.models import Group
-from apps.botany.models import Plant
 import uuid
 
 
@@ -16,7 +15,6 @@ class Tag(models.Model):
         active (bool): Whether the NFC tag is currently active.
         uuid (UUID): The UUID of the NFC tag.
         group (Group): The group associated with the NFC tag.
-        plant (Plant): The plant associated with the NFC tag.
     """
     serial_number = models.CharField(
         max_length=255,
@@ -47,13 +45,6 @@ class Tag(models.Model):
         null=True,
         blank=True,
         verbose_name="Associated Group"
-    )
-    plant = models.OneToOneField(
-        Plant,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Associated Plant"
     )
 
     def generate_uuid(self):

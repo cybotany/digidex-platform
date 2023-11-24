@@ -11,10 +11,10 @@ class HandleNFCView(LoginRequiredMixin, View):
     def get(self, request, nfc_sn):
         tag = get_object_or_404(Tag, serial_number=nfc_sn)
 
-        if tag.active and tag.plant:
-            return redirect('botany:describe_plant', pk=tag.plant.id)
-        elif tag.active and not tag.plant:
-            raise PermissionDenied("Tag is active but not associated with any plant.")
+        if tag.active:
+            pass
+            #return redirect('botany:describe_plant', pk=tag.plant.id)
         else:
             request.session['nfc_uuid'] = str(tag.uuid)
-            return redirect('botany:register_plant')
+            pass
+            #return redirect('botany:register_plant')
