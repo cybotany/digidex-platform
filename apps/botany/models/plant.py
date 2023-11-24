@@ -58,3 +58,14 @@ class Plant(models.Model):
 
         delta = timezone.now() - plant_with_last_watering.last_watering_timestamp
         return delta.days
+
+    def delete(self, *args, **kwargs):
+        """
+        Custom delete method to deactivate the associated NFC tag before deleting the plant.
+        """
+        if hasattr(self, 'nfc_tag'):
+            tag = self.nfc_tag
+            tag.active = False
+            tag.save()
+
+        super().delete(*args, **kwargs)
