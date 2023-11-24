@@ -7,7 +7,6 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('botany', '0040_remove_plant_group_remove_plant_tsn_delete_group'),
         ('nfc', '0005_tag_group_alter_tag_uuid'),
     ]
 
@@ -19,10 +18,5 @@ class Migration(migrations.Migration):
         migrations.RemoveField(
             model_name='tag',
             name='view_count',
-        ),
-        migrations.AlterField(
-            model_name='tag',
-            name='plant',
-            field=models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='botany.plant', verbose_name='Associated Plant'),
         ),
     ]
