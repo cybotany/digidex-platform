@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth import get_user_model
+from .group import Group
 
 
 class Link(models.Model):
@@ -31,6 +32,11 @@ class Link(models.Model):
     active = models.BooleanField(
         default=False,
         verbose_name="Active"
+    )
+    group = models.ForeignKey(
+        Group,
+        on_delete=models.CASCADE,
+        related_name='links'
     )
     secret = models.CharField(
         max_length=64,
