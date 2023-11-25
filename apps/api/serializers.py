@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from apps.taxonomy.models import Units
+from apps.taxonomy.models import Unit
 
 
-class TaxonomyUnitsSerializer(serializers.ModelSerializer):
+class TaxonomyUnitSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Units
+        model = Unit
         fields = ['tsn', 'complete_name']
