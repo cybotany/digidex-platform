@@ -1,4 +1,4 @@
-{% extends "core/base.html" %}
+{% extends "base.html" %}
 {% load static %}
 
 {% block app_styles %}{% endblock %}
@@ -20,7 +20,7 @@
   {% endfor %}
     <input type="submit" value="Sign Up" class="btn btn-primary full-width">
     <hr>
-    <p class="text-center">Already have an account? <a href="{% url 'accounts:login' %}">Log in</a></p>
+    <p class="text-center">Already have an account? <a href="{% url 'core:login' %}">Log in</a></p>
 </form>
     
 <div class="policy">
