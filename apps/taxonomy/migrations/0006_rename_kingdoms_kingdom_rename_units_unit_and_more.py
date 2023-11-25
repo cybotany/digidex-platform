@@ -6,7 +6,6 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0001_initial'),
         ('taxonomy', '0005_alter_hierarchy_options_and_more'),
     ]
 
