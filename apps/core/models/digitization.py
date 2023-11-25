@@ -1,6 +1,6 @@
 from django.db import models
 from apps.inventory.models import Link
-from apps.taxonomy.models import Units
+from apps.taxonomy.models import Unit
 
 
 class Digitization(models.Model):
@@ -13,7 +13,7 @@ class Digitization(models.Model):
         related_name='digitization'
     )
     taxonomic_unit = models.ForeignKey(
-        Units,
+        Unit,
         on_delete=models.CASCADE,
         related_name='digitizations'
     )
