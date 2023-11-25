@@ -159,21 +159,29 @@ class Units(models.Model):
         null=True,
         blank=True
     )
-    kingdom = models.ForeignKey(
-        'Kingdoms',
-        on_delete=models.SET_NULL,
+    #kingdom = models.ForeignKey(
+    #    'Kingdoms',
+    #    on_delete=models.SET_NULL,
+    #    null=True,
+    #    blank=True,
+    #    related_name='taxonomic_units',
+    #    db_column='kingdom_id'
+    #)
+    kingdom_id = models.IntegerField(
         null=True,
-        blank=True,
-        related_name='taxonomic_units',
-        db_column='kingdom_id'
+        blank=True
     )
-    rank = models.ForeignKey(
-        'UnitTypes',
-        on_delete=models.SET_NULL,
+    #rank = models.ForeignKey(
+    #    'UnitTypes',
+    #    on_delete=models.SET_NULL,
+    #    null=True,
+    #    blank=True,
+    #    related_name='taxonomic_units',
+    #    db_column='rank_id'
+    #)
+    rank_id = models.IntegerField(
         null=True,
-        blank=True,
-        related_name='taxonomic_units',
-        db_column='rank_id'
+        blank=True
     )
     update_date = models.DateTimeField(
         auto_now=True
