@@ -183,5 +183,5 @@ SIMPLE_JWT = {
     'TOKEN_TYPE_CLAIM': 'token_type',
 }
 
-LOGIN_REDIRECT_URL = 'landing'
-LOGIN_URL = '/core/login/'
+LOGIN_REDIRECT_URL = 'core:landing'
+LOGIN_URL = 'core:login'
