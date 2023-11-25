@@ -7,4 +7,4 @@ from django.contrib.auth import login
 
 class LoginUserView(LoginView):
     form_class = AuthenticationForm
-    template_name = 'accounts/login_user.html'
+    template_name = 'partials/accounts/login_user.html'

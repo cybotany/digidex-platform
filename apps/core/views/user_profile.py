@@ -6,7 +6,7 @@ from apps.accounts.models import Activity, Profile
 
 
 class UserProfileView(LoginRequiredMixin, View):
-    template_name = 'accounts/user_profile.html'
+    template_name = 'partials/accounts/user_profile.html'
 
     def get(self, request, *args, **kwargs):
         recent_activities = Activity.objects.filter(user=request.user).order_by('-timestamp')
