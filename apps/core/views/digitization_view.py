@@ -6,7 +6,7 @@ from django.core.exceptions import PermissionDenied
 
 
 class DigitizationView(LoginRequiredMixin, View):
-    login_url = 'accounts:login'
+    login_url = 'core:login'
 
     def get(self, request, link_sn):
         link = get_object_or_404(Link, serial_number=link_sn)
