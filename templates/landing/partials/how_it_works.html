@@ -2,44 +2,42 @@
   <div class="row" id="how-it-works">
     <div class="col-md-12 text-center">
       <h2>How It Works</h2>
-    </div>
-    
-    <!-- First card -->
-    <div class="col-md-3 d-flex flex-column align-items-center justify-content-center">
-      <div class="card">
-        <div class="card-body text-center">
-          <h5 class="card-title">Step 1: Tag Your Plant</h5>
-          <p class="card-text">Attach NFC-enabled labels to your plants.</p>
+
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" id="howItWorksTabs" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="step1-tab" data-bs-toggle="tab" href="#step1" role="tab" aria-controls="step1" aria-selected="true">Step 1: Tag Your Plant</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="step2-tab" data-bs-toggle="tab" href="#step2" role="tab" aria-controls="step2" aria-selected="false">Step 2: Sync with CyBotany</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="step3-tab" data-bs-toggle="tab" href="#step3" role="tab" aria-controls="step3" aria-selected="false">Step 3: Enjoy Your Garden</a>
+        </li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div class="tab-pane fade show active" id="step1" role="tabpanel" aria-labelledby="step1-tab">
+          <div class="card">
+            <div class="card-body text-center">
+              <p class="card-text">Attach NFC-enabled labels to your plants.</p>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    
-    <!-- Arrow between first and second card -->
-    <div class="col-md-1 d-flex align-items-center justify-content-center">
-      <i class="fas fa-arrow-right fa-2x"></i>
-    </div>
-    
-    <!-- Second card -->
-    <div class="col-md-3 d-flex flex-column align-items-center justify-content-center">
-      <div class="card">
-        <div class="card-body text-center">
-          <h5 class="card-title">Step 2: Sync with CyBotany</h5>
-          <p class="card-text">Tap the label with your smartphone to add your plant to your digital collection.</p>
+        <div class="tab-pane fade" id="step2" role="tabpanel" aria-labelledby="step2-tab">
+          <div class="card">
+            <div class="card-body text-center">
+              <p class="card-text">Tap the label with your smartphone to add your plant to your digital collection.</p>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    
-    <!-- Arrow between second and third card -->
-    <div class="col-md-1 d-flex align-items-center justify-content-center">
-      <i class="fas fa-arrow-right fa-2x"></i>
-    </div>
-    
-    <!-- Third card -->
-    <div class="col-md-3 d-flex flex-column align-items-center justify-content-center">
-      <div class="card">
-        <div class="card-body text-center">
-          <h5 class="card-title">Step 3: Enjoy Your Garden</h5>
-          <p class="card-text">Receive personalized care tips and track your plant's growth.</p>
+        <div class="tab-pane fade" id="step3" role="tabpanel" aria-labelledby="step3-tab">
+          <div class="card">
+            <div class="card-body text-center">
+              <p class="card-text">Receive personalized care tips and track your plant's growth.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
