@@ -17,7 +17,7 @@
       <div class="col-md-4 header-auth">
         {% if user.is_authenticated %}
           <div class="profile-group">
-            <a href="{% url 'accounts:profile' %}" class="user-avatar-link">
+            <a href="{% url 'core:profile' %}" class="user-avatar-link">
               {% if user.avatar %}
                 <img src="{{ user.avatar.url }}" alt="User avatar" class="avatar-image">
               {% else %}
@@ -25,13 +25,13 @@
               {% endif %}
             </a>
             <div class="auth-buttons">
-              <a href="{% url 'accounts:logout' %}" class="btn btn-modern mb-2">Logout</a>
+              <a href="{% url 'core:logout' %}" class="btn btn-modern mb-2">Logout</a>
             </div>
           </div>
         {% else %}
           <div class="auth-buttons">
-            <a href="{% url 'accounts:login' %}" class="btn btn-modern mb-2">Log in</a>
-            <a href="{% url 'accounts:signup' %}" class="btn btn-modern mb-2">Sign up</a>
+            <a href="{% url 'core:login' %}" class="btn btn-modern mb-2">Log in</a>
+            <a href="{% url 'core:signup' %}" class="btn btn-modern mb-2">Sign up</a>
           </div>
         {% endif %}
       </div>
