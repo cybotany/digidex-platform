@@ -11,7 +11,7 @@ class Hierarchy(models.Model):
         blank=True
     )
     tsn = models.ForeignKey(
-        'Units',
+        'Unit',
         on_delete=models.CASCADE,
         null=True,
         blank=True,

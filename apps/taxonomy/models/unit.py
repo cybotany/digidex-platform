@@ -2,7 +2,7 @@ from django.db import models
 from django.urls import reverse
 
 
-class Units(models.Model):
+class Unit(models.Model):
     """
     Represents a taxonomic unit in the ITIS data model.
 

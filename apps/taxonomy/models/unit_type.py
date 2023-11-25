@@ -2,22 +2,22 @@ from django.db import models
 from django.urls import reverse
 
 
-class UnitTypes(models.Model):
+class UnitType(models.Model):
     """
     Defines the levels associated with the taxonomic hierarchical structure and establishes the
     rank order for an occurrence of the Taxonomic Units.
 
     Attributes:
-        kingdom (ForeignKey): A reference to the Kingdoms model.
+        kingdom (ForeignKey): A reference to the Kingdom model.
         rank_id (int): A unique identifier for a specific level within the taxonomic hierarchy.
         rank_name (str): The label associated with the specific level of a taxonomic hierarchy.
-        direct_parent_rank (ForeignKey): A reference to another TaxonUnitTypes which is the direct parent rank.
-        required_parent_rank (ForeignKey): A reference to another TaxonUnitTypes which is the required parent rank.
+        direct_parent_rank (ForeignKey): A reference to another UnitType which is the direct parent rank.
+        required_parent_rank (ForeignKey): A reference to another UnitType which is the required parent rank.
         update_date (datetime): The date on which a record is modified.
     """
 
     kingdom = models.ForeignKey(
-        'Kingdoms',
+        'Kingdom',
         null=True,
         blank=True,
         on_delete=models.CASCADE,

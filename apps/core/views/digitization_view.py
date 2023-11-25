@@ -5,7 +5,7 @@ from apps.inventory.models import Link
 from django.core.exceptions import PermissionDenied
 
 
-class HandleLinkView(LoginRequiredMixin, View):
+class DigitizationView(LoginRequiredMixin, View):
     login_url = 'accounts:login'
 
     def get(self, request, link_sn):

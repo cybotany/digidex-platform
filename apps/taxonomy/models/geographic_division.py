@@ -11,7 +11,7 @@ class GeographicDivision(models.Model):
         update_date (datetime): The date and time when the geographic value was added.
     """
     tsn = models.ForeignKey(
-        'Units',
+        'Unit',
         null=True,
         blank=True,
         on_delete=models.CASCADE,

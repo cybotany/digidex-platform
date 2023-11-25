@@ -2,7 +2,7 @@ from django.db import models
 from django.urls import reverse
 
 
-class Kingdoms(models.Model):
+class Kingdom(models.Model):
     """
     The highest rank in the taxonomic hierarchical structure.
 
