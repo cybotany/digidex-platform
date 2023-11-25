@@ -12,7 +12,7 @@ def parse_and_export_sql_file(filename):
         entity_name = segments[idx]
         sql_content = segments[idx + 1]
 
-        output_filename = f"/home/raphael/ITIS_{entity_name}.sql"
+        output_filename = f"/home/raphael/taxonomy_{entity_name}.sql"
 
         with open(output_filename, 'w', encoding='ISO-8859-1') as output_file:
             output_file.write(f"-- Data for Name: {entity_name}; Type: TABLE DATA; Schema: public; Owner: -\n")
