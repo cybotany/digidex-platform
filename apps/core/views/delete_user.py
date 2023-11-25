@@ -8,7 +8,7 @@ from django.contrib import messages
 class DeleteUserView(LoginRequiredMixin, DeleteView):
     model = User
     template_name = 'partials/accounts/delete_user.html'
-    success_url = reverse_lazy('landing')
+    success_url = reverse_lazy('core:landing')
 
     def get_object(self, queryset=None):
         return self.request.user

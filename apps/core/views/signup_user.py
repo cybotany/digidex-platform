@@ -7,7 +7,7 @@ from apps.accounts.forms import SignupForm
 class SignupUserView(FormView):
     template_name = 'partials/accounts/signup_user.html'
     form_class = SignupForm
-    success_url = reverse_lazy('landing')
+    success_url = reverse_lazy('core:landing')
 
     def form_valid(self, form):
         user = form.save()
