@@ -11,8 +11,9 @@ class Link(models.Model):
     Attributes:
         serial_number (str): The serial number of the Link.
         created_at (datetime): The date and time when the Link was created.
-        created_by (User): The user who created the Link.
+        user (User): The user who created the Link.
         active (bool): Whether the Link is currently active.
+        group (Group): The Group to which the Link belongs.
         secret (str): A secret string used for generating the hash stored on the Link.
         secret_hash (str): The hash of the secret, stored on the Link.
     """
@@ -25,7 +26,7 @@ class Link(models.Model):
         auto_now_add=True,
         verbose_name="Created At"
     )
-    created_by = models.ForeignKey(
+    user = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE
     )
