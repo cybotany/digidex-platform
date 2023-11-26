@@ -2,31 +2,31 @@ from django.db import models
 from django.urls import reverse
 
 
-class UnitType(models.Model):
+class Rank(models.Model):
     """
     Defines the levels associated with the taxonomic hierarchical structure and establishes the
     rank order for an occurrence of the Taxonomic Units.
 
     Attributes:
         kingdom (ForeignKey): A reference to the Kingdom model.
-        rank_id (int): A unique identifier for a specific level within the taxonomic hierarchy.
-        rank_name (str): The label associated with the specific level of a taxonomic hierarchy.
-        direct_parent_rank (ForeignKey): A reference to another UnitType which is the direct parent rank.
-        required_parent_rank (ForeignKey): A reference to another UnitType which is the required parent rank.
+        rank_id (int): A unique identifier for a specific rank within the taxonomic hierarchy.
+        rank_name (str): The label associated with the specific rank of a taxonomic hierarchy.
+        direct_parent_rank (ForeignKey): A reference to another Rank which is the direct parent rank.
+        required_parent_rank (ForeignKey): A reference to another Rank which is the required parent rank.
         update_date (datetime): The date on which a record is modified.
     """
 
     kingdom = models.ForeignKey(
         'Kingdom',
-        null=True,
-        blank=True,
+        null=False,
+        blank=False,
         on_delete=models.CASCADE,
         verbose_name="Kingdom",
         db_column='kingdom_id'
     )
     rank_id = models.SmallIntegerField(
-        null=True,
-        blank=True,
+        null=False,
+        blank=False,
         verbose_name="Rank ID"
     )
     rank_name = models.CharField(
@@ -49,6 +49,9 @@ class UnitType(models.Model):
         auto_now=True,
         verbose_name="Update Date"
     )
+
+    class Meta:
+        unique_together = (('kingdom', 'rank'))
 
     def __str__(self):
         """

@@ -3,19 +3,29 @@ from django.db import models
 
 class Hierarchy(models.Model):
     """
-    Represents the hierarchy of a taxonomic unit as per ITIS data model.
+    Represents the hierarchy of a taxonomic unit as per ITIS data model documentation.
+
+    Fields:
+        hierarchy_string (TextField): A string representation of the complete hierarchy path.
+        tsn (OneToOneField): The Taxonomic Serial Number (TSN) of the taxonomic unit. 
+                          Links to a 'Unit' model.
+        parent_tsn (IntegerField): The TSN of the parent taxonomic unit.
+        level (IntegerField): The hierarchical level of the taxonomic unit.
+        children_count (IntegerField): The count of direct children under this taxonomic unit.
     """
     hierarchy_string = models.TextField(
-        verbose_name="Hierarchy String",
-        null=True,
-        blank=True
+        unique=True,
+        null=False,
+        blank=False,
+        verbose_name="Hierarchy String"
     )
-    tsn = models.ForeignKey(
+    tsn = models.OneToOneField(
         'Unit',
         on_delete=models.CASCADE,
-        null=True,
-        blank=True,
+        null=False,
+        blank=False,
         verbose_name="Taxonomic Serial Number",
+        related_name='hierarchy',
         db_column='tsn'
     )
     parent_tsn = models.IntegerField(
@@ -25,13 +35,13 @@ class Hierarchy(models.Model):
         db_column='parent_tsn'
     )
     level = models.IntegerField(
-        null=True,
-        blank=True,
+        null=False,
+        blank=False,
         verbose_name="Taxonomic Rank"
     )
     children_count = models.IntegerField(
-        null=True,
-        blank=True,
+        null=False,
+        blank=False,
         verbose_name="Taxonomic Rank"
     )
 
