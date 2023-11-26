@@ -1,6 +1,6 @@
-# CyBotany
+# Digit
 
-The vision of cyBotany is to be the leading global platform that revolutionizes the way individuals and communities interact with and share plant data.
+The vision of Digit is to be the leading global platform that revolutionizes the way individuals and communities interact with and share plant data.
 
 ## Features
 
@@ -11,11 +11,11 @@ The vision of cyBotany is to be the leading global platform that revolutionizes 
 
 ## Getting Started
 
-To get started with CyBotany, follow these steps:
+To get started with Digit, follow these steps:
 
 1. Clone the repository:
 ```
-git clone https://github.com/your_username/CyBotany.git
+git clone https://github.com/your_username/Digit.git
 ```
 
 2. Install the required dependencies:
@@ -32,7 +32,7 @@ python manage.py runserver
 
 ## Contributing
 
-We welcome contributions to the CyBotany project. If you'd like to contribute, please follow these steps:
+We welcome contributions to the Digit project. If you'd like to contribute, please follow these steps:
 
 1. Fork the repository.
 2. Create a new branch for your feature or bugfix.
@@ -43,4 +43,4 @@ Please ensure your code follows the project's style guidelines and that all test
 
 ## License
 
-CyBotany is released under the [MIT License](LICENSE).
+Digit is released under the [MIT License](LICENSE).
