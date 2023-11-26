@@ -110,7 +110,7 @@ ENV/
 env.bak/
 venv.bak/
 glenv/
-cybotany_venv/
+digit_venv/
 
 # Spyder project settings
 .spyderproject
