@@ -50,8 +50,8 @@ class Rank(models.Model):
         verbose_name="Update Date"
     )
 
-    class Meta:
-        unique_together = (('kingdom', 'rank'))
+    #class Meta:
+    #    unique_together = (('kingdom', 'rank'))
 
     def __str__(self):
         """
