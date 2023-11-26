@@ -1,5 +1,5 @@
 """
-WSGI config for cybotany project.
+WSGI config for digit project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'cybotany.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'digit.settings')
 
 application = get_wsgi_application()

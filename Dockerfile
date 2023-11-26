@@ -22,4 +22,4 @@ RUN pip install --upgrade pip && \
 COPY . /app/
 
 # Specify the command to run on container start
-CMD ["gunicorn", "cybotany.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn", "digit.wsgi:application", "--bind", "0.0.0.0:8000"]

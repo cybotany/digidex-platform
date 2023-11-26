@@ -1,5 +1,5 @@
 """
-Django settings for cybotany project.
+Django settings for digit project.
 """
 import os
 from pathlib import Path
@@ -14,9 +14,9 @@ DJANGO_ENV = os.environ.get('DJANGO_ENV', 'development')
 REGION_NAME = os.environ.get('REGION_NAME', 'us-east-1d')
 
 # Fetching grouped secrets
-api_secrets = get_secret('cybotany-api', environment=DJANGO_ENV, region_name=REGION_NAME)
-db_secrets = get_secret('cybotany-db', environment=DJANGO_ENV, region_name=REGION_NAME)
-aws_secrets = get_secret('cybotany-keys', environment=DJANGO_ENV, region_name=REGION_NAME)
+api_secrets = get_secret('digit-api', environment=DJANGO_ENV, region_name=REGION_NAME)
+db_secrets = get_secret('digit-db', environment=DJANGO_ENV, region_name=REGION_NAME)
+aws_secrets = get_secret('digit-keys', environment=DJANGO_ENV, region_name=REGION_NAME)
 
 # AWS S3 secrets
 SECRET_KEY = aws_secrets['DJANGO_SECRET_KEY']  
@@ -32,8 +32,8 @@ AWS_DEFAULT_ACL = None
 
 ALLOWED_HOSTS = [
     "10.0.0.218",
-    "www.cybotany.io",
-    "cybotany.io",
+    "www.digit.io",
+    "digit.io",
 ]
 
 # API secrets
@@ -62,7 +62,7 @@ if DJANGO_ENV == 'production':
     CORS_ALLOW_ALL_ORIGINS = False
     CORS_ALLOWED_ORIGINS = [
         "http://127.0.0.1:8080",
-        "https://cybotany.com"
+        "https://digit.io"
     ]
 else:
     DEBUG = True
@@ -104,7 +104,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
-ROOT_URLCONF = 'cybotany.urls'
+ROOT_URLCONF = 'digit.urls'
 
 TEMPLATES = [
     {
@@ -122,7 +122,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'cybotany.wsgi.application'
+WSGI_APPLICATION = 'digit.wsgi.application'
 
 DATABASES = {
     'default': {

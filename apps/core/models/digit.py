@@ -3,19 +3,19 @@ from apps.inventory.models import Link
 from apps.taxonomy.models import Unit
 
 
-class Digitization(models.Model):
+class Digit(models.Model):
     """
     Model to represent the process of converting plant data to a digital format.
     """
     link = models.OneToOneField(
         Link,
         on_delete=models.CASCADE,
-        related_name='digitization'
+        related_name='digit'
     )
     taxonomic_unit = models.ForeignKey(
         Unit,
         on_delete=models.CASCADE,
-        related_name='digitizations'
+        related_name='digits'
     )
 
     @property
@@ -26,5 +26,5 @@ class Digitization(models.Model):
         return f"{self.link} - {self.taxonomic_unit}"
 
     class Meta:
-        verbose_name = "Digitization"
-        verbose_name_plural = "Digitizations"
+        verbose_name = "Digit"
+        verbose_name_plural = "Digits"

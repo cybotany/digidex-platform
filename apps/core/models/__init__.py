@@ -1,1 +1,1 @@
-from .digitization import Digitization
+from .digit import Digit
