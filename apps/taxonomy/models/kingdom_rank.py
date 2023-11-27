@@ -17,7 +17,6 @@ class KingdomRank(models.Model):
         rank (ForeignKey): A reference to the Rank model. Defines a specific level within the 
                            taxonomic hierarchical structure.
     """
-
     kingdom = models.ForeignKey(
         Kingdom,
         on_delete=models.CASCADE,

@@ -5,7 +5,7 @@ from apps.taxonomy.models import Unit
 
 class Digit(models.Model):
     """
-    Model to represent the process of converting plant data to a digital format.
+    Model to represent the digitized plant data.
     """
     link = models.OneToOneField(
         Link,

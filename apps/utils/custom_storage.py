@@ -2,8 +2,9 @@ from storages.backends.s3boto3 import S3Boto3Storage
 
 
 class UserSpecificS3Boto3Storage(S3Boto3Storage):
-    # Base class to handle the user subdirectory
-
+    '''
+    Base class to handle the user subdirectory
+    '''
     def __init__(self, user_directory_path, *args, **kwargs):
         self.user_directory_path = user_directory_path
         super().__init__(*args, **kwargs)
@@ -20,13 +21,7 @@ class AvatarStorage(UserSpecificS3Boto3Storage):
     file_overwrite = False
 
 
-class PlantImageStorage(UserSpecificS3Boto3Storage):
-    location = 'media/plant-images'
-    default_acl = 'public-read'
-    file_overwrite = False
-
-
-class GrowthChamberStorage(UserSpecificS3Boto3Storage):
-    location = 'media/cea-images'
+class JournalImageStorage(UserSpecificS3Boto3Storage):
+    location = 'media/journal-images'
     default_acl = 'public-read'
     file_overwrite = False

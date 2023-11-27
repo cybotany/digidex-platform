@@ -1,7 +1,7 @@
 import os
 import uuid
 
-def user_directory_path(instance, filename):
+def get_user_directory_path(instance, filename):
     """
     Returns the file path for the given file, based on the owner's ID and a UUID.
 
