@@ -27,7 +27,7 @@ class Group(models.Model):
         null=False,
         blank=False,
         help_text='The user who created and owns the group.',
-        related_name='groups'
+        related_name='groupings'
     )
 
     class Meta:
