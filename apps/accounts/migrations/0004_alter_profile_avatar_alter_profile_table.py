@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='profile',
             name='avatar',
-            field=models.ImageField(blank=True, help_text='The profile picture of the user.', null=True, upload_to=apps.utils.custom_storage.AvatarStorage(apps.utils.helpers.user_directory_path), validators=[apps.utils.validators.validate_image_size_and_dimensions]),
+            field=models.ImageField(blank=True, help_text='The profile picture of the user.', null=True, upload_to=apps.utils.custom_storage.AvatarStorage(apps.utils.helpers.get_user_directory_path), validators=[apps.utils.validators.validate_image_size_and_dimensions]),
         ),
         migrations.AlterModelTable(
             name='profile',
