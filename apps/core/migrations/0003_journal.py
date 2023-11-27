@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Created At')),
                 ('entry', models.TextField(verbose_name='Content')),
-                ('image', models.ImageField(help_text='The image file. Only .jpg, .png, and .jpeg extensions are allowed.', upload_to=apps.utils.custom_storage.JournalImageStorage(apps.utils.helpers.get_user_directory_path.get_user_directory_path))),
+                ('image', models.ImageField(help_text='The image file. Only .jpg, .png, and .jpeg extensions are allowed.', upload_to=apps.utils.custom_storage.JournalImageStorage(apps.utils.helpers.get_user_directory_path))),
                 ('created_by', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Created By')),
                 ('digit', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='journal_entries', to='core.digit')),
             ],
