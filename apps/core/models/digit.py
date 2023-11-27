@@ -33,6 +33,7 @@ class Digit(models.Model):
     )
     group = models.ForeignKey(
         Group,
+        null=True,
         on_delete=models.CASCADE,
         related_name='digits',
         help_text="The group to which the digitized plant belongs."
