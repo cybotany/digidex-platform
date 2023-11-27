@@ -75,4 +75,3 @@ class Digit(models.Model):
     class Meta:
         verbose_name = "Digit"
         verbose_name_plural = "Digits"
-        help_text = "Represents digitized plants with direct links to groupings, NFC tags, and taxonomy data."
