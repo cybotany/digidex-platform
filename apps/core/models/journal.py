@@ -7,41 +7,60 @@ from apps.utils.validators import validate_image_size_and_dimensions
 
 class Journal(models.Model):
     """
-    Model to represent journal entries for digitized plants.
+    Represents journal entries associated with digitized plants.
+
+    This model is used to record observations, notes, or any relevant information about a specific digitized plant. 
+    It also supports attaching an image to each journal entry.
 
     Attributes:
-        digit (ForeignKey): The digitized plant to which the journal entry belongs.
-        created_by (ForeignKey): The user who created the journal entry.
-        created_at (DateTimeField): The date and time when the journal entry was created.
-        entry (TextField): The content of the journal entry.
+        digit (ForeignKey): A reference to the 'Digit' model, linking the journal entry to a specific digitized plant.
+        user (ForeignKey): The user who created the journal entry, linked to the user model.
+        created_at (DateTimeField): The date and time when the journal entry was created, automatically set when the journal entry is created.
+        entry (TextField): The textual content of the journal entry.
+        image (ImageField): An optional image associated with the journal entry, supporting specific file extensions.
+
+    Methods:
+        __str__: Returns a string representation of the journal entry.
     """
     digit = models.ForeignKey(
         'Digit',
         on_delete=models.CASCADE,
-        related_name='journal_entries'
+        related_name='journal_entries',
+        help_text="The digitized plant to which this journal entry is related."
     )
-    created_by = models.ForeignKey(
+    user = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE,
-        verbose_name="Created By"
+        verbose_name="User",
+        help_text="The user who created this journal entry."
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
-        verbose_name="Created At"
+        verbose_name="Created At",
+        help_text="The date and time when this journal entry was created."
     )
     entry = models.TextField(
-        verbose_name="Content"
+        verbose_name="Content",
+        help_text="The textual content of the journal entry."
     )
     image = models.ImageField(
         upload_to=JournalImageStorage(get_user_directory_path),
         validators=[validate_image_size_and_dimensions],
         null=True,
         blank=True,
-        help_text="(Optional) The image to save with a journal entry. Only .jpg, .png, and .jpeg extensions are allowed."
+        help_text="(Optional) The image to save with the journal entry. Only .jpg, .png, and .jpeg extensions are allowed."
     )
 
     def __str__(self):
-        return f"Journal Entry for {self.digit} by {self.created_by}"
+        """
+        Returns a string representation of the Journal instance.
+
+        The string representation includes information about the digitized plant and the user who created the journal entry.
+
+        Returns:
+            str: String representation of the Journal instance.
+        """
+        return f"Journal Entry for {self.digit} by {self.user}"
 
     class Meta:
         verbose_name = "Journal Entry"

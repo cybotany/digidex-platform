@@ -1,7 +1,6 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth import get_user_model
-from .group import Group
 
 
 class Link(models.Model):
@@ -10,10 +9,7 @@ class Link(models.Model):
 
     Attributes:
         serial_number (str): The serial number of the Link.
-        created_at (datetime): The date and time when the Link was created.
-        user (User): The user who created the Link.
         active (bool): Whether the Link is currently active.
-        group (Group): The Group to which the Link belongs.
         secret (str): A secret string used for generating the hash stored on the Link.
         secret_hash (str): The hash of the secret, stored on the Link.
     """
@@ -22,22 +18,9 @@ class Link(models.Model):
         unique=True,
         verbose_name="Tag Serial Number"
     )
-    created_at = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name="Created At"
-    )
-    user = models.ForeignKey(
-        get_user_model(),
-        on_delete=models.CASCADE
-    )
     active = models.BooleanField(
         default=False,
         verbose_name="Active"
-    )
-    group = models.ForeignKey(
-        Group,
-        on_delete=models.CASCADE,
-        related_name='links'
     )
     secret = models.CharField(
         max_length=64,
