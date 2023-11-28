@@ -1,11 +1,11 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from .views import DigitizationView, LandingView, SignupUserView, LoginUserView, LogoutUserView, UserProfileView, DeleteUserView, ChangeProfileView
+from .views import LinkView, LandingView, SignupUserView, LoginUserView, LogoutUserView, UserProfileView, DeleteUserView, ChangeProfileView
 
 app_name = 'core'
 urlpatterns = [
     path('', LandingView.as_view(), name='landing'),
-    path('digitization/<str:secret_hash>/', DigitizationView.as_view(), name='digitization'),
+    path('link/<str:secret_hash>/', LinkView.as_view(), name='link'),
 
     path('signup/', SignupUserView.as_view(), name='signup'),
     path('login/', LoginUserView.as_view(), name='login'),
