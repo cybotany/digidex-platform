@@ -127,11 +127,11 @@ WSGI_APPLICATION = 'digit.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': db_secrets['DATABASE_NAME'],
-        'USER': db_secrets['DATABASE_USER'],
-        'PASSWORD': db_secrets['DATABASE_PASSWORD'],
-        'HOST': db_secrets['DATABASE_HOST'],
-        'PORT': db_secrets['DATABASE_PORT'],
+        'NAME': db_secrets['DBNAME'],
+        'USER': db_secrets['USERNAME'],
+        'PASSWORD': db_secrets['PASSWORD'],
+        'HOST': db_secrets['HOST'],
+        'PORT': db_secrets['PORT'],
     }
 }
 
