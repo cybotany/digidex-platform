@@ -5,12 +5,17 @@ from django.views import View
 from apps.inventory.models import Link
 from apps.core.models import Digit
 from django.core.exceptions import PermissionDenied
+import hashlib
 
 
 class LinkView(LoginRequiredMixin, View):
     login_url = 'core:login'
 
-    def get(self, request, secret_hash):
+    def get(self, request, secret):
+        # Hash the received secret
+        secret_hash = hashlib.sha256(secret.encode()).hexdigest()
+
+        # Retrieve the link using the hashed secret
         link = get_object_or_404(Link, secret_hash=secret_hash)
 
         if link.active:

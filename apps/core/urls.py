@@ -5,7 +5,7 @@ from .views import LinkView, LandingView, SignupUserView, LoginUserView, LogoutU
 app_name = 'core'
 urlpatterns = [
     path('', LandingView.as_view(), name='landing'),
-    path('link/<str:secret_hash>/', LinkView.as_view(), name='link'),
+    path('link/<str:secret>/', LinkView.as_view(), name='link'),
 
     path('signup/', SignupUserView.as_view(), name='signup'),
     path('login/', LoginUserView.as_view(), name='login'),
