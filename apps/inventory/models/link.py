@@ -69,4 +69,3 @@ class Link(models.Model):
     class Meta:
         verbose_name = "Link"
         verbose_name_plural = "Links"
-        help_text = "Represents connections between physical objects and their digital representations in the inventory system."
