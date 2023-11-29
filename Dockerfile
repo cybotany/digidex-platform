@@ -14,7 +14,7 @@ COPY requirements.txt /app/
 # Install dependencies
 RUN pip install --upgrade pip && \
     pip install gunicorn && \
-    pip install -r requirements.txt && 
+    pip install -r requirements.txt
 
 # Copy the content of the local src directory to the working directory
 COPY . /app/
