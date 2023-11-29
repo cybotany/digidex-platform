@@ -14,9 +14,9 @@ DJANGO_ENV = os.environ.get('DJANGO_ENV', 'development')
 REGION_NAME = os.environ.get('REGION_NAME', 'us-east-1d')
 
 # Fetching grouped secrets
-api_secrets = get_secret('digit-api', environment=DJANGO_ENV, region_name=REGION_NAME)
-db_secrets = get_secret('digit-db', environment=DJANGO_ENV, region_name=REGION_NAME)
-aws_secrets = get_secret('digit-keys', environment=DJANGO_ENV, region_name=REGION_NAME)
+api_secrets = get_secret('beta/Digit/api', region_name=REGION_NAME)
+db_secrets = get_secret('beta/Digit/db', region_name=REGION_NAME)
+aws_secrets = get_secret('beta/Digit/keys', region_name=REGION_NAME)
 
 # AWS S3 secrets
 SECRET_KEY = aws_secrets['DJANGO_SECRET_KEY']  
@@ -32,8 +32,8 @@ AWS_DEFAULT_ACL = None
 
 ALLOWED_HOSTS = [
     "10.0.0.218",
-    "www.digit.io",
-    "digit.io",
+    "www.digidex.app",
+    "digidex.app",
 ]
 
 # API secrets
