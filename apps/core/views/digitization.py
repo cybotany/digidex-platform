@@ -4,7 +4,7 @@ from apps.core.models import Digit
 from apps.core.forms import CreateDigitForm
 
 
-class CreateDigitView(CreateView):
+class DigitizationView(CreateView):
     model = Digit
     form_class = CreateDigitForm
     template_name = 'create_digit.html'

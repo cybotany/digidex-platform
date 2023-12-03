@@ -1,6 +1,6 @@
 from .landing_view import LandingView
-from .link_view import LinkView
-from .create_digit import CreateDigitView
+from .linking import LinkingView
+from .digitization import DigitizationView
 
 from .login_user import LoginUserView
 from .logout_user import LogoutUserView

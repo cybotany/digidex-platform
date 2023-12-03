@@ -1,13 +1,12 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from .views import LinkView, LandingView, SignupUserView, LoginUserView, LogoutUserView, UserProfileView, DeleteUserView, ChangeProfileView
+from apps.core.views import LinkingView, DigitizationView, LandingView, SignupUserView, LoginUserView, LogoutUserView, UserProfileView, DeleteUserView, ChangeProfileView
 
 app_name = 'core'
 urlpatterns = [
     path('', LandingView.as_view(), name='landing'),
-    path('link/<str:serial_number>/', LinkView.as_view(), name='link'),
-    path('digitize/<str:serial_number>/', DigitizeView.as_view(), name='digitize'),
-    path('digit/<int:pk>/', DigitView.as_view(), name='digit'),
+    path('linking/<str:serial_number>/', LinkingView.as_view(), name='linking'),
+    path('digitization/<str:serial_number>/', DigitizationView.as_view(), name='digitization'),
 
     path('signup/', SignupUserView.as_view(), name='signup'),
     path('login/', LoginUserView.as_view(), name='login'),

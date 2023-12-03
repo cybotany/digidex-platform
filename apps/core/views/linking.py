@@ -7,7 +7,7 @@ from apps.core.models import Digit
 from django.core.exceptions import PermissionDenied
 
 
-class LinkView(LoginRequiredMixin, View):
+class LinkingView(LoginRequiredMixin, View):
     login_url = 'core:login'
 
     def get(self, request, serial_number):
