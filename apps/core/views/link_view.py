@@ -1,22 +1,18 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import redirect
 from django.urls import reverse
 from django.views import View
 from apps.inventory.models import Link
 from apps.core.models import Digit
 from django.core.exceptions import PermissionDenied
-import hashlib
 
 
 class LinkView(LoginRequiredMixin, View):
     login_url = 'core:login'
 
-    def get(self, request, secret):
-        # Hash the received secret
-        secret_hash = hashlib.sha256(secret.encode()).hexdigest()
-
-        # Retrieve the link using the hashed secret
-        link = get_object_or_404(Link, secret_hash=secret_hash)
+    def get(self, request, serial_number):
+        # Retrieve the link using the serial_number
+        link, created = Link.objects.get_or_create(serial_number=serial_number)
 
         if link.active:
             try:

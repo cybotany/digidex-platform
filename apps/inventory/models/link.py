@@ -34,12 +34,12 @@ class Link(models.Model):
         verbose_name="Active",
         help_text="Indicates whether the link is currently active and mapped to a digital object."
     )
-    secret_hash = models.CharField(
-        max_length=64,
-        editable=False,
-        verbose_name="Secret Hash",
-        help_text="The hash of a secret key for secure identification and access."
-    )
+    #secret_hash = models.CharField(
+    #    max_length=64,
+    #    editable=False,
+    #    verbose_name="Secret Hash",
+    #    help_text="The hash of a secret key for secure identification and access."
+    #)
 
     def get_absolute_url(self):
         """
@@ -51,8 +51,8 @@ class Link(models.Model):
         Returns:
             str: The absolute URL for handling this Link instance, or None if the link is inactive or lacks a secret hash.
         """
-        if self.active and self.secret_hash:
-            return reverse('inventory:link-handling', kwargs={'secret_hash': self.secret_hash})
+        if self.active:
+            return reverse('core:link', kwargs={'serial_number': self.serial_number})
         return None
 
     def __str__(self):
