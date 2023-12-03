@@ -30,8 +30,7 @@ AWS_DEFAULT_ACL = None
 
 ALLOWED_HOSTS = [
     "10.0.0.218",
-    "www.digidex.app",
-    "digidex.app",
+    "https://www.digidex.app",
 ]
 
 # API secrets
@@ -60,7 +59,7 @@ if DJANGO_ENV == 'production':
     CORS_ALLOW_ALL_ORIGINS = False
     CORS_ALLOWED_ORIGINS = [
         "http://127.0.0.1:8080",
-        "https://digit.io"
+        "https://www.digidex.app"
     ]
 else:
     DEBUG = True
