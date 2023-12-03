@@ -11,7 +11,6 @@ class LinkingView(LoginRequiredMixin, View):
     login_url = 'core:login'
 
     def get(self, request, serial_number):
-        # Retrieve the link using the serial_number
         link, created = Link.objects.get_or_create(serial_number=serial_number)
 
         if link.active:

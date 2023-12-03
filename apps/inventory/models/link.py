@@ -26,6 +26,7 @@ class Link(models.Model):
     serial_number = models.CharField(
         max_length=255,
         unique=True,
+        db_index=True,
         verbose_name="Tag Serial Number",
         help_text="The unique serial number associated with the NFC tag or identification mechanism."
     )
