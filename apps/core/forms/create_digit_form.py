@@ -3,7 +3,7 @@ from django.db import models
 from apps.core.models import Digit
 from apps.inventory.models import Link, Group
 from apps.taxonomy.models import Unit
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 
 class CreateDigitForm(forms.ModelForm):
@@ -42,7 +42,7 @@ class CreateDigitForm(forms.ModelForm):
         widget=forms.TextInput(attrs={'id': 'tsnField'})
     )
     user = models.ForeignKey(
-        User,
+        get_user_model(),
         on_delete=models.CASCADE,
         verbose_name="User",
         help_text="The user who created the digitized plant record."
