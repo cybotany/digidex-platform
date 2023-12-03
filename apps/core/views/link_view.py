@@ -19,7 +19,7 @@ class LinkView(LoginRequiredMixin, View):
                 digit = Digit.objects.get(link=link)
                 return redirect(reverse('core:digit_detail', kwargs={'pk': digit.pk}))
             except Digit.DoesNotExist:
-                raise PermissionDenied("This link is active but not associated with a digitized plant.")
+                raise PermissionDenied("This link is active but not associated with a digit.")
         else:
             request.session['link_id'] = str(link.id)
-            return redirect(reverse('core:digitize_plant'))
+            return redirect(reverse('core:digitize'))

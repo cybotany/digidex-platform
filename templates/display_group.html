@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% for group in groups %}
+    <h2>{{ group.name }}</h2>
+    <ul>
+        {% for digit in group.digits_set.all %}
+            <li>{{ digit }}</li> <!-- Replace 'digit' with how you want to display it -->
+        {% empty %}
+            <p>No digits found in this group.</p>
+        {% endfor %}
+    </ul>
+{% endfor %}
+
+{% if is_paginated %}
+    <!-- Pagination controls here -->
+{% endif %}

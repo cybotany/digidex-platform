@@ -3,9 +3,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from apps.inventory.models import Group
 
 
-class InventoryView(LoginRequiredMixin, ListView):
+class DisplayGroupView(LoginRequiredMixin, ListView):
     model = Group
-    template_name = 'inventory.html'
+    template_name = 'display_group.html'
     context_object_name = 'groups'
     paginate_by = 1
 

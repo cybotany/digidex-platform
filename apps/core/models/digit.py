@@ -46,6 +46,8 @@ class Digit(models.Model):
     )
     taxonomic_unit = models.ForeignKey(
         Unit,
+        null=True,
+        blank=True,
         on_delete=models.CASCADE,
         related_name='digits',
         help_text="The taxonomic classification of the digitized plant."
