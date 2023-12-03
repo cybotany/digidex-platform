@@ -5,8 +5,8 @@ from apps.core.views import LinkingView, DigitizationView, LandingView, SignupUs
 app_name = 'core'
 urlpatterns = [
     path('', LandingView.as_view(), name='landing'),
-    path('linking/<str:serial_number>/', LinkingView.as_view(), name='linking'),
-    path('digitization/<str:serial_number>/', DigitizationView.as_view(), name='digitization'),
+    path('link/<str:serial_number>/', LinkingView.as_view(), name='linking'),
+    path('digitize/', DigitizationView.as_view(), name='digitization'),
 
     path('signup/', SignupUserView.as_view(), name='signup'),
     path('login/', LoginUserView.as_view(), name='login'),
