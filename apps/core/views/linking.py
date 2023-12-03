@@ -20,5 +20,4 @@ class LinkingView(LoginRequiredMixin, View):
             except Digit.DoesNotExist:
                 raise PermissionDenied("This link is active but not associated with a digit.")
         else:
-            request.session['link_id'] = str(link.id)
-            return redirect('core:digitization')
+            return redirect('core:digitization', link_id=str(link.id))
