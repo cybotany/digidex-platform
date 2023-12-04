@@ -4,17 +4,24 @@
 {% block app_styles %}
 <style>
     #groupForm { display: none; }
+    .group-card {
+        /* Add styling for your group cards here */
+        cursor: pointer;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
 </style>
 {% endblock %}
 
 {% block content %}
-    <h1>Your Groups</h1>
+    <h1>{{ user.get_username }}'s Garden</h1>
     <div>
         {% for group in groups %}
-            <div>
+            <a href="{% url 'group_detail' group.id %}" class="group-card">
                 <h2>{{ group.name }}</h2>
                 <!-- Additional details about the group -->
-            </div>
+            </a>
         {% empty %}
             <p>You have no groups.</p>
         {% endfor %}
