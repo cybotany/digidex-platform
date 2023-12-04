@@ -18,9 +18,8 @@
     <h1>{{ user.get_username }}'s Garden</h1>
     <div>
         {% for group in groups %}
-            <a href="{% url 'group_detail' group.id %}" class="group-card">
+            <a href="{% url 'grouping' group.id %}" class="group-card">
                 <h2>{{ group.name }}</h2>
-                <!-- Additional details about the group -->
             </a>
         {% empty %}
             <p>You have no groups.</p>
