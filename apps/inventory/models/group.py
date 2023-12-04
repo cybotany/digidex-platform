@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
+
 class Group(models.Model):
     """
     Represents a grouping of digitized plants in the inventory system.

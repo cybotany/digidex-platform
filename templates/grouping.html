@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block app_styles %}{% endblock %}
+
+{% block content %}
+    <div class="group-list">
+        {% for group in groups %}
+            <div class="group">
+                <h2>{{ group.name }}</h2>
+                <!-- Display group details here -->
+            </div>
+        {% empty %}
+            <button onclick="location.href='{% url 'create_group' %}'">Create a Group</button>
+        {% endfor %}
+    </div>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if groups.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ groups.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ groups.number }} of {{ groups.paginator.num_pages }}.
+            </span>
+
+            {% if groups.has_next %}
+                <a href="?page={{ groups.next_page_number }}">next</a>
+                <a href="?page={{ groups.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+{% endblock %}
+
+
+{% block app_scripts %}{% endblock %}

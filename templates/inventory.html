@@ -4,43 +4,28 @@
 {% block app_styles %}{% endblock %}
 
 {% block content %}
-    <h1>My Plant Inventory</h1>
-    {% for group in groups %}
-        <div class="group">
-            <h2>{{ group.name }}</h2>
-            <p>Plant Count: {{ group.current_count }}</p>
-            <ul>
-                {% for digit in group.digits %}
-                    <li>{{ digit }}</li> <!-- Adjust this line as per your Digit model -->
-                {% empty %}
-                    <li>No plants in this group yet.</li>
-                {% endfor %}
-            </ul>
-        </div>
-    {% empty %}
-        <p>You have no groups yet.</p>
-    {% endfor %}
-
-    <div class="pagination">
-        <span class="step-links">
-            {% if groups.has_previous %}
-                <a href="?page=1">&laquo; first</a>
-                <a href="?page={{ groups.previous_page_number }}">previous</a>
-            {% endif %}
-            
-            <span class="current">
-                Page {{ groups.number }} of {{ groups.paginator.num_pages }}.
-            </span>
-            
-            {% if groups.has_next %}
-                <a href="?page={{ groups.next_page_number }}">next</a>
-                <a href="?page={{ groups.paginator.num_pages }}">last &raquo;</a>
-            {% endif %}
-        </span>
+    <h1>Your Groups</h1>
+    <div>
+        {% for group in groups %}
+            <div>
+                <h2>{{ group.name }}</h2>
+                <!-- Additional details about the group -->
+            </div>
+        {% empty %}
+            <p>You have no groups.</p>
+            <button onclick="location.href='#create-group';">Create a Group</button>
+        {% endfor %}
     </div>
+
+    <h2 id="create-group">Create a New Group</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create Group</button>
+    </form>
 {% endblock %}
 
 
-{% block app_scripts %}
-  <script src="{% static 'js/get_group.js' %}"></script>
-{% endblock %}
+{% block app_scripts %}{% endblock %}
+
+
