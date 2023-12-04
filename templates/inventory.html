@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block content %}
-    <h1>{{ user.get_username }}'s Garden</h1>
+    <h1>Your Garden</h1>
     <div>
         {% for group in groups %}
             <a href="{% url 'core:grouping' group.id %}" class="group-card">

@@ -1,12 +1,11 @@
-# views.py
-from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 from apps.inventory.models import Group
 
-class GroupingView(ListView):
+
+class GroupingView(DetailView):
     model = Group
-    template_name = 'group_list.html'
-    context_object_name = 'groups'
-    paginate_by = 1
+    template_name = 'grouping.html'
 
     def get_queryset(self):
-        return Group.objects.filter(user=self.request.user).order_by('name')
+        # Filter to ensure users can only see their own groups
+        return Group.objects.filter(user=self.request.user)

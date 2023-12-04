@@ -1,38 +1,35 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block app_styles %}{% endblock %}
+{% block app_styles %}
+<style>
+    .group {
+        margin-bottom: 20px;
+    }
+    .digits {
+        margin-left: 20px;
+    }
+</style>
+{% endblock %}
 
 {% block content %}
     <div class="group-list">
-        {% for group in groups %}
+        {% if group %}
             <div class="group">
                 <h2>{{ group.name }}</h2>
-                <!-- Display group details here -->
+                <div class="digits">
+                    {% for digit in group.digits.all %}
+                        <p>{{ digit }}</p>
+                        <!-- Replace the above with how you want to display each digit -->
+                    {% empty %}
+                        <p>No digits in this group.</p>
+                    {% endfor %}
+                </div>
             </div>
-        {% empty %}
-            <button onclick="location.href='{% url 'create_group' %}'">Create a Group</button>
-        {% endfor %}
-    </div>
-
-    <div class="pagination">
-        <span class="step-links">
-            {% if groups.has_previous %}
-                <a href="?page=1">&laquo; first</a>
-                <a href="?page={{ groups.previous_page_number }}">previous</a>
-            {% endif %}
-
-            <span class="current">
-                Page {{ groups.number }} of {{ groups.paginator.num_pages }}.
-            </span>
-
-            {% if groups.has_next %}
-                <a href="?page={{ groups.next_page_number }}">next</a>
-                <a href="?page={{ groups.paginator.num_pages }}">last &raquo;</a>
-            {% endif %}
-        </span>
+        {% else %}
+            <p>No group selected or available.</p>
+        {% endif %}
     </div>
 {% endblock %}
-
 
 {% block app_scripts %}{% endblock %}
