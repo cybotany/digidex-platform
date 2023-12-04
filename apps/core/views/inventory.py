@@ -28,7 +28,7 @@ class InventoryView(LoginRequiredMixin, ListView):
             new_group = form.save(commit=False)
             new_group.user = request.user
             new_group.save()
-            return redirect('home')
+            return redirect('core:inventory')
 
         # Handling invalid form case
         return self.get(request, form=form)
