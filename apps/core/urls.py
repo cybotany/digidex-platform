@@ -1,5 +1,5 @@
 from django.urls import path
-from apps.core.views import LandingView, LinkingView, DigitizationView, GroupingView, InventoryView, SignupUserView, LoginUserView, LogoutUserView, UserProfileView
+from apps.core.views import LandingView, LinkingView, DigitizationView, GroupingView, InventoryView, SignupUserView, LoginUserView, LogoutUserView
 
 app_name = 'core'
 urlpatterns = [
