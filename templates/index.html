@@ -28,17 +28,17 @@
   <div data-w-id="9c896d19-12ed-148e-4e5a-1c014986d7c2" data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav">
     <div class="nav-block">
       <div class="nav">
-        <a href="index.html" aria-current="page" class="brand w-nav-brand w--current"><img src="static/images/Logo.PNG" loading="lazy" sizes="88px" srcset="static/images/Logo-p-500.png 500w, static/images/Logo-p-800.png 800w, static/images/Logo.PNG 1024w" alt="" class="logo"></a>
+        <a href="{% url 'core:login' %}" aria-current="page" class="brand w-nav-brand w--current"><img src="static/images/Logo.PNG" loading="lazy" sizes="88px" srcset="static/images/Logo-p-500.png 500w, static/images/Logo-p-800.png 800w, static/images/Logo.PNG 1024w" alt="" class="logo"></a>
         <nav role="navigation" class="nav-menu w-nav-menu">
           <div class="button-mobile">
-            <a href="login.html" class="nav-button-outline w-button">Login</a>
+            <a href="{% url 'core:login' %}" class="nav-button-outline w-button">Login</a>
             <a href="get-started.html" class="nav-button w-button">Get Started</a>
           </div>
         </nav>
       </div>
       <div class="nav">
         <div class="button-desktop">
-          <a href="login.html" class="nav-button-outline w-button">Login</a>
+          <a href="{% url 'core:login' %}" class="nav-button-outline w-button">Login</a>
           <a href="get-started.html" class="nav-button w-button">Stay Updated</a>
         </div>
         <div class="menu-button w-nav-button">
