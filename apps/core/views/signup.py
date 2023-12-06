@@ -5,7 +5,7 @@ from apps.accounts.forms import SignupForm
 
 
 class SignupUserView(FormView):
-    template_name = 'partials/accounts/signup_user.html'
+    template_name = 'get-started.html'
     form_class = SignupForm
     success_url = reverse_lazy('core:landing')
 
