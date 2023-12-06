@@ -35,7 +35,7 @@
         <div class="subtitle blue">Sign in<br></div>
         <h2 class="heading-account">Account Login</h2>
         <div class="form-block w-form">
-          <form id="wf-form-Login" name="wf-form-Login" method="post" class="form">
+          <form id="wf-form-Login" name="wf-form-Login" method="post" class="card" novalidate>
             {% csrf_token %}
             <input type="text" class="text-field w-input" maxlength="256" name="username" placeholder="Username" id="Username" required="">
             <input type="password" class="text-field w-input" maxlength="256" name="password" placeholder="Password" id="Password" required="">
