@@ -26,7 +26,9 @@
   <link href="{% static 'images/webclip.PNG' %}" rel="apple-touch-icon">
 </head>
 <body>
-  <a href="index.html" class="brand-center w-nav-brand"><img src="static/images/Header-Logo.png" loading="eager" alt="" class="logo"></a>
+  <a href="{% url 'core:index' %}" class="brand-center w-nav-brand">
+    <img src="{% static 'images/Header-Logo.png' %}" loading="eager" alt="" class="logo">
+  </a>
   <section class="section-full">
     <div class="content">
       <div class="account-form">
