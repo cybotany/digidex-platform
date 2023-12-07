@@ -29,11 +29,15 @@
           <div class="username-display">
             <span>{{ request.user.username }}</span>
           </div>
-          <a href="{% url 'core:inventory' %}" class="nav-button-outline w-button">Inventory</a>
-          <a href="{% url 'core:logout' %}" class="nav-button w-button">Logout</a>
+          <div class="button-desktop">
+            <a href="{% url 'core:inventory' %}" class="nav-button-outline w-button">Inventory</a>
+            <a href="{% url 'core:logout' %}" class="nav-button w-button">Logout</a>
+          </div>
         {% else %}
-          <a href="{% url 'core:login' %}" class="nav-button-outline w-button">Login</a>
-          <a href="{% url 'core:signup' %}" class="nav-button w-button">Signup</a>
+          <div class="button-desktop">
+            <a href="{% url 'core:login' %}" class="nav-button-outline w-button">Login</a>
+            <a href="{% url 'core:signup' %}" class="nav-button w-button">Signup</a>
+          </div>
         {% endif %}
       </div>
       <div class="menu-button w-nav-button">
