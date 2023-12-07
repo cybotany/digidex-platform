@@ -1,0 +1,17 @@
+{% load static %}
+
+<section class="section-footer">
+  <div class="content">
+    <div class="w-layout-grid grid-footer">
+      <div id="w-node-d0458a27-e73f-e612-462d-65302581b228-2581b225" class="block-footer"><img src="{% static 'images/Logo.png' %}" loading="lazy" sizes="88px" srcset="{% static 'images/Logo-p-500.png' %} 500w, {% static 'images/Logo-p-800.png' %} 800w, {% static 'images/Logo.png' %} 1024w" alt="" class="logo"></div>
+      <div id="w-node-d0458a27-e73f-e612-462d-65302581b234-2581b225" class="block-footer">
+        <div class="subtitle-footer">Quick Links<br></div>
+        <a href="{% url 'core:company' %}" class="link-footer">Company</a>
+        <a href="{% url 'core:contact' %}" class="link-footer">Contact</a>
+      </div>
+    </div>
+    <div class="block-footer-down">
+      <div class="text-footer-down">All rights reserved. Powered by <a href="https://webflow.com/" target="_blank" class="link-footer-down">Webflow</a><br></div>
+    </div>
+  </div>
+</section>
