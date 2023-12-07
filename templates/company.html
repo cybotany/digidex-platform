@@ -41,14 +41,14 @@
     }(window, document);
   </script>
 
-  <link href="{% static 'images/favicon.PNG' %}" rel="shortcut icon" type="image/x-icon">
-  <link href="{% static 'images/webclip.PNG' %}" rel="apple-touch-icon">
+  <link href="{% static 'images/favicon.png' %}" rel="shortcut icon" type="image/x-icon">
+  <link href="{% static 'images/webclip.png' %}" rel="apple-touch-icon">
 </head>
 <body>
   <div data-w-id="9c896d19-12ed-148e-4e5a-1c014986d7c2" data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav">
     <div class="nav-block">
       <div class="nav">
-        <a href="{% url 'core:landing' %}" aria-current="page" class="brand w-nav-brand w--current"><img src="{% static 'images/Logo.PNG' %}" loading="lazy" sizes="88px" srcset="{% static 'images/Logo-p-500.PNG' %} 500w, {% static 'images/Logo-p-800.PNG' %} 800w, {% static 'images/Logo.PNG' %} 1024w" alt="" class="logo"></a>
+        <a href="{% url 'core:landing' %}" aria-current="page" class="brand w-nav-brand w--current"><img src="{% static 'images/Logo.png' %}" loading="lazy" sizes="88px" srcset="{% static 'images/Logo-p-500.png' %} 500w, {% static 'images/Logo-p-800.png' %} 800w, {% static 'images/Logo.png' %} 1024w" alt="" class="logo"></a>
         <nav role="navigation" class="nav-menu w-nav-menu">
           <div class="button-mobile">
             <a href="{% url 'core:login' %}" class="nav-button-outline w-button">Login</a>
@@ -117,9 +117,9 @@
             <div style="width:0%;height:1px" class="line-h"></div>
           </div>
           <div class="block-lottie">
-            <div data-w-id="ef8907ed-ca22-ade3-43fc-33a830f84102" data-is-ix2-target="1" class="lottie-animation-1" data-animation-type="lottie" data-src="static/documents/Lottie-B1-White.json" data-loop="0" data-direction="1" data-autoplay="0" data-renderer="svg" data-default-duration="2.5" data-duration="0"></div>
-            <div class="lottie-animation-2" data-w-id="ef8907ed-ca22-ade3-43fc-33a830f84103" data-animation-type="lottie" data-src="static/documents/Lottie-B2-Blue.json" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="16" data-duration="0"></div>
-            <div class="lottie-animation-2-blur" data-w-id="ef8907ed-ca22-ade3-43fc-33a830f84104" data-animation-type="lottie" data-src="static/documents/Lottie-B2-Blue.json" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="16" data-duration="0"></div>
+            <div data-w-id="ef8907ed-ca22-ade3-43fc-33a830f84102" data-is-ix2-target="1" class="lottie-animation-1" data-animation-type="lottie" data-src="{% static 'documents/Lottie-B1-White.json' %}" data-loop="0" data-direction="1" data-autoplay="0" data-renderer="svg" data-default-duration="2.5" data-duration="0"></div>
+            <div class="lottie-animation-2" data-w-id="ef8907ed-ca22-ade3-43fc-33a830f84103" data-animation-type="lottie" data-src="{% static 'documents/Lottie-B2-Blue.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="16" data-duration="0"></div>
+            <div class="lottie-animation-2-blur" data-w-id="ef8907ed-ca22-ade3-43fc-33a830f84104" data-animation-type="lottie" data-src="{% static 'documents/Lottie-B2-Blue.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="16" data-duration="0"></div>
           </div>
         </div>
       </div>
@@ -139,7 +139,7 @@
   <section class="section-footer">
     <div class="content">
       <div class="w-layout-grid grid-footer">
-        <div id="w-node-d0458a27-e73f-e612-462d-65302581b228-2581b225" class="block-footer"><img src="static/images/Logo.PNG" loading="lazy" sizes="88px" srcset="static/images/Logo-p-500.png 500w, static/images/Logo-p-800.png 800w, static/images/Logo.PNG 1024w" alt="" class="logo"></div>
+        <div id="w-node-d0458a27-e73f-e612-462d-65302581b228-2581b225" class="block-footer"><img src="{% static 'images/Logo.png' %}" loading="lazy" sizes="88px" srcset="{% static 'images/Logo-p-500.png' %} 500w, {% static 'images/Logo-p-800.png' %} 800w, {% static 'images/Logo.png' %} 1024w" alt="" class="logo"></div>
         <div id="w-node-d0458a27-e73f-e612-462d-65302581b234-2581b225" class="block-footer">
           <div class="subtitle-footer">Quick Links<br></div>
           <a href="{% url 'core:company' %}" class="link-footer">Company</a>
