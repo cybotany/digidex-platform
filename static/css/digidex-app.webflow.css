@@ -4919,3 +4919,22 @@ figcaption {
 }
 
 
+.username-display {
+  font-size: 1rem;
+  color: #4CAF50;
+  font-weight: bold;
+  padding: 0.5em;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  margin-right: 1em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 768px) {
+  .username-display {
+      font-size: 0.9rem;
+      padding: 0.3em;
+  }
+}
