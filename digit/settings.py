@@ -180,4 +180,5 @@ SIMPLE_JWT = {
     'TOKEN_TYPE_CLAIM': 'token_type',
 }
 
+LOGIN_REDIRECT_URL = 'core:inventory'
 LOGIN_URL = 'core:login'
