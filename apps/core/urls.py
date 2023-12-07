@@ -1,5 +1,5 @@
 from django.urls import path
-from apps.core.views import LandingView, LinkingView, DigitizationView, GroupingView, InventoryView, SignupUserView, LoginUserView, LogoutUserView
+from apps.core.views import ContactUsView, AboutUsView, LandingView, LinkingView, DigitizationView, GroupingView, InventoryView, SignupUserView, LoginUserView, LogoutUserView
 
 app_name = 'core'
 urlpatterns = [
@@ -11,4 +11,6 @@ urlpatterns = [
     path('signup/', SignupUserView.as_view(), name='signup'),
     path('login/', LoginUserView.as_view(), name='login'),
     path('logout/', LogoutUserView.as_view(), name='logout'),
+    path('contact/', ContactUsView.as_view(), name='contact'),
+    path('company/', AboutUsView.as_view(), name='company'),
 ]

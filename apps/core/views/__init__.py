@@ -6,3 +6,5 @@ from .landing import LandingView
 from .login import LoginUserView
 from .logout import LogoutUserView
 from .signup import SignupUserView
+from .contact_us import ContactUsView
+from .about_us import AboutUsView
