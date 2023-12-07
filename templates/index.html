@@ -47,7 +47,7 @@
   <div data-w-id="9c896d19-12ed-148e-4e5a-1c014986d7c2" data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav">
     <div class="nav-block">
       <div class="nav">
-        <a href="{% url 'core:login' %}" aria-current="page" class="brand w-nav-brand w--current"><img src="{% static 'images/Logo.PNG' %}" loading="lazy" sizes="88px" srcset="static/images/Logo-p-500.png 500w, static/images/Logo-p-800.png 800w, {% static 'images/Logo.PNG' %} 1024w" alt="" class="logo"></a>
+        <a href="{% url 'core:login' %}" aria-current="page" class="brand w-nav-brand w--current"><img src="{% static 'images/Logo.PNG' %}" loading="lazy" sizes="88px" srcset="{% static 'images/Logo-p-500.PNG' %} 500w, {% static 'images/Logo-p-800.PNG' %} 800w, {% static 'images/Logo.PNG' %} 1024w" alt="" class="logo"></a>
         <nav role="navigation" class="nav-menu w-nav-menu">
           <div class="button-mobile">
             <a href="{% url 'core:login' %}" class="nav-button-outline w-button">Login</a>
@@ -94,21 +94,21 @@
             <div style="width:0%;height:1px" class="line-h"></div>
           </div>
           <div class="block-lottie">
-            <div data-w-id="a6cc22d5-0b7b-07bd-77b0-0db7bfad6ad7" data-is-ix2-target="1" class="lottie-animation-1" data-animation-type="lottie" data-src="static/documents/Lottie-A1-White.json" data-loop="0" data-direction="1" data-autoplay="0" data-renderer="svg" data-default-duration="2.5" data-duration="0"></div>
-            <div class="lottie-animation-2" data-w-id="fcacfca9-abb0-89de-3b07-ad3baa5921ad" data-animation-type="lottie" data-src="static/documents/Lottie-A2-Blue.json" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="19.5" data-duration="0"></div>
-            <div class="lottie-animation-2-blur" data-w-id="3013fc49-fdab-99e5-1fff-418e26dc0fba" data-animation-type="lottie" data-src="static/documents/Lottie-A2-Blue.json" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="19.5" data-duration="0"></div>
+            <div data-w-id="a6cc22d5-0b7b-07bd-77b0-0db7bfad6ad7" data-is-ix2-target="1" class="lottie-animation-1" data-animation-type="lottie" data-src="{% static 'documents/Lottie-A1-White.json' %}" data-loop="0" data-direction="1" data-autoplay="0" data-renderer="svg" data-default-duration="2.5" data-duration="0"></div>
+            <div class="lottie-animation-2" data-w-id="fcacfca9-abb0-89de-3b07-ad3baa5921ad" data-animation-type="lottie" data-src="{% static 'documents/Lottie-A2-Blue.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="19.5" data-duration="0"></div>
+            <div class="lottie-animation-2-blur" data-w-id="3013fc49-fdab-99e5-1fff-418e26dc0fba" data-animation-type="lottie" data-src="{% static 'documents/Lottie-A2-Blue.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="19.5" data-duration="0"></div>
           </div>
           <div class="features-lottie">
-            <div data-w-id="dab97f38-52c1-874b-eb57-a86cf28eb073" style="-webkit-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="feature-lottie-block"><img src="static/images/bx-check.svg" loading="eager" alt="" class="icon-feature-lottie">
+            <div data-w-id="dab97f38-52c1-874b-eb57-a86cf28eb073" style="-webkit-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="feature-lottie-block"><img src="{% static 'images/bx-check.svg' %}" loading="eager" alt="" class="icon-feature-lottie">
               <div class="text-feature-lottie">Saguaro Seedlings</div>
             </div>
-            <div data-w-id="483b5f12-0aff-5df5-faf6-c944f3513cd5" style="-webkit-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="feature-lottie-block a2"><img src="static/images/bx-check.svg" loading="eager" alt="" class="icon-feature-lottie">
+            <div data-w-id="483b5f12-0aff-5df5-faf6-c944f3513cd5" style="-webkit-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="feature-lottie-block a2"><img src="{% static 'images/bx-check.svg' %}" loading="eager" alt="" class="icon-feature-lottie">
               <div class="text-feature-lottie">Melocactus Seedlings</div>
             </div>
-            <div data-w-id="3766eb39-3b62-18b7-eee6-1d9212a81349" style="-webkit-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="feature-lottie-block a3"><img src="static/images/bx-check.svg" loading="eager" alt="" class="icon-feature-lottie">
+            <div data-w-id="3766eb39-3b62-18b7-eee6-1d9212a81349" style="-webkit-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="feature-lottie-block a3"><img src="{% static 'images/bx-check.svg' %}" loading="eager" alt="" class="icon-feature-lottie">
               <div class="text-feature-lottie">Ferocactus Seedlings</div>
             </div>
-            <div data-w-id="525adc7c-9d48-0785-2434-d49c9a28cc47" style="-webkit-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="feature-lottie-block a4"><img src="static/images/close.svg" loading="eager" alt="" class="icon-feature-lottie">
+            <div data-w-id="525adc7c-9d48-0785-2434-d49c9a28cc47" style="-webkit-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="feature-lottie-block a4"><img src="{% static 'images/close.svg' %}" loading="eager" alt="" class="icon-feature-lottie">
               <div class="text-feature-lottie">Notocactus Seedlings</div>
             </div>
           </div>
@@ -122,21 +122,21 @@
         <div class="subtitle">Features<br></div>
         <h2 class="heading">Get the most from your garden</h2>
       </div>
-      <div class="w-layout-grid grid-features">
-        <div id="w-node-_73c7f32a-11c4-52e7-6886-cdc2875e5856-25cd083c" class="features">
-          <div class="block-heading-features"><img src="static/images/lightning.svg" loading="eager" alt="" class="icon-features">
+      <div class="w-layout-grid grid-features"> 
+        <div id="w-node-_73c7f32a-11c4-52e7-6886-cdc2875e5856-25cd083c" class="features"> 
+          <div class="block-heading-features"><img src="{% static 'images/lightning.svg' %}" loading="eager" alt="" class="icon-features">
             <h5 class="heading-features">Easy Digitization</h5>
           </div>
           <p class="paragraph-features">Digitize your garden onto our platform using our easy-to-use NFC stickers. Secure and durable, they ensure your plant data is always available.</p>
         </div>
-        <div id="w-node-a64c2106-90fa-a11e-de5a-7f571bc9fce5-25cd083c" class="features">
-          <div class="block-heading-features"><img src="static/images/app-connectivity.svg" loading="eager" alt="" class="icon-features">
+        <div id="w-node-a64c2106-90fa-a11e-de5a-7f571bc9fce5-25cd083c" class="features"> 
+          <div class="block-heading-features"><img src="{% static 'images/connectivity.svg' %}" loading="eager" alt="" class="icon-features">
             <h5 class="heading-features">Simplified Management</h5>
           </div>
           <p class="paragraph-features">Gather all essential plant information in one place, making it effortless to track, analyze, and nurture your garden.</p>
         </div>
         <div id="w-node-_0eca363f-fcbf-20ff-a3f9-4b4bf2a0943e-25cd083c" class="features">
-          <div class="block-heading-features"><img src="static/images/headset.svg" loading="eager" alt="" class="icon-features">
+          <div class="block-heading-features"><img src="{% static 'images/headset.svg' %}" loading="eager" alt="" class="icon-features">
             <h5 class="heading-features">Personalized AI Assistant</h5>
           </div>
           <p class="paragraph-features">Digitization enables your AI assistant to provide context-rich, customized advice, ensuring every response is attuned to your garden&#x27;s unique needs.</p>
@@ -176,9 +176,9 @@
             <div style="width:0%;height:1px" class="line-h"></div>
           </div>
           <div class="block-lottie">
-            <div data-w-id="462e3ae4-d17a-4ca9-c67e-daf8b068f91e" data-is-ix2-target="1" class="lottie-animation-1" data-animation-type="lottie" data-src="static/documents/Lottie-B1-White.json" data-loop="0" data-direction="1" data-autoplay="0" data-renderer="svg" data-default-duration="2.5" data-duration="0"></div>
-            <div class="lottie-animation-2" data-w-id="462e3ae4-d17a-4ca9-c67e-daf8b068f91f" data-animation-type="lottie" data-src="static/documents/Lottie-B2-Blue.json" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="16" data-duration="0"></div>
-            <div class="lottie-animation-2-blur" data-w-id="462e3ae4-d17a-4ca9-c67e-daf8b068f920" data-animation-type="lottie" data-src="static/documents/Lottie-B2-Blue.json" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="16" data-duration="0"></div>
+            <div data-w-id="462e3ae4-d17a-4ca9-c67e-daf8b068f91e" data-is-ix2-target="1" class="lottie-animation-1" data-animation-type="lottie" data-src="{% static 'documents/Lottie-B1-White.json' %}" data-loop="0" data-direction="1" data-autoplay="0" data-renderer="svg" data-default-duration="2.5" data-duration="0"></div>
+            <div class="lottie-animation-2" data-w-id="462e3ae4-d17a-4ca9-c67e-daf8b068f91f" data-animation-type="lottie" data-src="{% static 'documents/Lottie-B2-Blue.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="16" data-duration="0"></div>
+            <div class="lottie-animation-2-blur" data-w-id="462e3ae4-d17a-4ca9-c67e-daf8b068f920" data-animation-type="lottie" data-src="{% static 'documents/Lottie-B2-Blue.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="16" data-duration="0"></div>
           </div>
         </div>
         <div id="w-node-a033bb4d-fb8b-e335-6cb2-c443ca8c4bc8-25cd083c" class="block-right">
@@ -203,7 +203,7 @@
           <div class="accordion-item">
             <div data-w-id="958d6d01-692e-ada9-2b0d-4929c61081c3" class="accordion-header">
               <h6 class="heading-accordion">Why are we named Digit?</h6>
-              <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);background-color:rgba(57,89,255,0.07);border-color:rgba(255,255,255,0.2)" class="block-icon-accordion"><img src="static/images/close.svg" loading="eager" alt="" class="icon-accordion"></div>
+              <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);background-color:rgba(57,89,255,0.07);border-color:rgba(255,255,255,0.2)" class="block-icon-accordion"><img src="{% static 'images/close.svg' %}" loading="eager" alt="" class="icon-accordion"></div>
             </div>
             <div style="height:0px;display:none" class="accordion-content">
               <p class="paragraph-accordion">In anatomy, a &#x27;digit&#x27; refers to the distal parts of a limb, like the fingers or toes. They are essential for tactile sensation in complex organisms like humans. Each of our stickers acts as a &#x27;digit&#x27; for your personalized AI assistant, providing a touchpoint for sensing and understanding your garden&#x27;s unique needs and ensuring precise care.</p>
@@ -212,7 +212,7 @@
           <div class="accordion-item">
             <div data-w-id="69121651-e6cf-bfcf-b600-f30f0d9e0e3d" class="accordion-header">
               <h6 class="heading-accordion"><strong>Is my data secure with Digit?</strong></h6>
-              <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);background-color:rgba(57,89,255,0.07);border-color:rgba(255,255,255,0.2)" class="block-icon-accordion"><img src="static/images/close.svg" loading="eager" alt="" class="icon-accordion"></div>
+              <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);background-color:rgba(57,89,255,0.07);border-color:rgba(255,255,255,0.2)" class="block-icon-accordion"><img src="{% static 'images/close.svg' %}" loading="eager" alt="" class="icon-accordion"></div>
             </div>
             <div style="height:0px;display:none" class="accordion-content">
               <p class="paragraph-accordion">Yes, absolutely! At Digit, we prioritize the security of your data. Once a plant has been registered on our platform, its linked NFC tag becomes a gatekeeper of sorts. This means that only the registered user – that&#x27;s you – has the authority to make any updates or changes to the plant&#x27;s information. As for other users, their access is limited to viewing only what you, as the plant owner, choose to share. This ensures that your data remains secure and under your control, fostering a safe and trustworthy environment for all our users.</p>
@@ -221,7 +221,7 @@
           <div class="accordion-item">
             <div data-w-id="352d7c81-2970-801d-c173-af4bf141012f" class="accordion-header">
               <h6 class="heading-accordion"><strong>What makes Digit different from other plant care apps?</strong></h6>
-              <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);background-color:rgba(57,89,255,0.07);border-color:rgba(255,255,255,0.2)" class="block-icon-accordion"><img src="static/images/close.svg" loading="eager" alt="" class="icon-accordion"></div>
+              <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);background-color:rgba(57,89,255,0.07);border-color:rgba(255,255,255,0.2)" class="block-icon-accordion"><img src="{% static 'images/close.svg' %}" loading="eager" alt="" class="icon-accordion"></div>
             </div>
             <div style="height:0px;display:none" class="accordion-content">
               <p class="paragraph-accordion">What sets Digit apart from other plant care apps is our comprehensive approach to plant management. We&#x27;re not just about caring for your plants; we&#x27;re a versatile platform designed for plant enthusiasts to manage every aspect of their plant journey. Digit was born from a personal ambition to hybridize new cacti varieties. This required not just basic care information but a deeper understanding of taxonomic details for breeding compatibility, a structured way to organize a diverse collection, and the application of AI for insights on flowering and cross-pollination techniques. At Digit, we cater to these nuanced needs. Whether you&#x27;re a gardener, a botanist, or someone venturing into the world of plant breeding, our platform is equipped to support your goals.</p>
@@ -232,7 +232,7 @@
           <div class="accordion-item">
             <div data-w-id="539ba9ce-4f69-f850-0ad8-b7f312d9e8c9" class="accordion-header">
               <h6 class="heading-accordion"><strong>What kind of data can I store about my plants?</strong></h6>
-              <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);background-color:rgba(57,89,255,0.07);border-color:rgba(255,255,255,0.2)" class="block-icon-accordion"><img src="static/images/close.svg" loading="eager" alt="" class="icon-accordion"></div>
+              <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);background-color:rgba(57,89,255,0.07);border-color:rgba(255,255,255,0.2)" class="block-icon-accordion"><img src="{% static 'images/close.svg' %}" loading="eager" alt="" class="icon-accordion"></div>
             </div>
             <div style="height:0px;display:none" class="accordion-content">
               <p class="paragraph-accordion">Each digitized plant comes with a journal so you can log entries, upload growth images, and note care routines. This comprehensive data collection not only tracks your plant&#x27;s development but also enhances interactions with our AI assistant for personalized plant care advice.</p>
@@ -241,7 +241,7 @@
           <div class="accordion-item">
             <div data-w-id="539ba9ce-4f69-f850-0ad8-b7f312d9e8d2" class="accordion-header">
               <h6 class="heading-accordion"><strong>How does the Personalized AI Assistant help in plant care?</strong></h6>
-              <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);background-color:rgba(57,89,255,0.07);border-color:rgba(255,255,255,0.2)" class="block-icon-accordion"><img src="static/images/close.svg" loading="eager" alt="" class="icon-accordion"></div>
+              <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);background-color:rgba(57,89,255,0.07);border-color:rgba(255,255,255,0.2)" class="block-icon-accordion"><img src="{% static 'images/close.svg' %}" loading="eager" alt="" class="icon-accordion"></div>
             </div>
             <div style="height:0px;display:none" class="accordion-content">
               <p class="paragraph-accordion">By tapping into the extensive digitized data of each registered plant, your AI Assistant is uniquely equipped to provide context-rich and tailored advice. When you interact with it, the Assistant doesn&#x27;t just offer generic guidance; instead, it analyses the specific data related to your plants – such as images, species, age, growth conditions, and past care routines. This enables it to craft responses and suggestions that are not only accurate but also perfectly suited to the individual needs of each plant in your collection. It&#x27;s like having a personal plant care expert at your fingertips, ensuring that your green friends receive the best possible care.</p>
@@ -250,7 +250,7 @@
           <div class="accordion-item">
             <div data-w-id="2fad7085-a341-3448-34a6-8705f674a928" class="accordion-header">
               <h6 class="heading-accordion"><strong>What should I do if I encounter issues with the app?</strong></h6>
-              <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);background-color:rgba(57,89,255,0.07);border-color:rgba(255,255,255,0.2)" class="block-icon-accordion"><img src="static/images/close.svg" loading="eager" alt="" class="icon-accordion"></div>
+              <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);background-color:rgba(57,89,255,0.07);border-color:rgba(255,255,255,0.2)" class="block-icon-accordion"><img src="{% static 'images/close.svg' %}" loading="eager" alt="" class="icon-accordion"></div>
             </div>
             <div style="height:0px;display:none" class="accordion-content">
               <p class="paragraph-accordion">If you experience any difficulties or have questions while using our app, we&#x27;re here to help. Please don&#x27;t hesitate to reach out to us at <a href="mailto:support@digidex.app" target="_new">support@digidex.app</a>. Our dedicated support team is committed to assisting you with any issues or inquiries you may have, ensuring a smooth and enjoyable experience with our app.</p>
@@ -274,7 +274,7 @@
   <section class="section-footer">
     <div class="content">
       <div class="w-layout-grid grid-footer">
-        <div id="w-node-d0458a27-e73f-e612-462d-65302581b228-2581b225" class="block-footer"><img src="{% static 'images/Logo.PNG' %}" loading="lazy" sizes="88px" srcset="static/images/Logo-p-500.png 500w, static/images/Logo-p-800.png 800w, {% static 'images/Logo.PNG' %} 1024w" alt="" class="logo"></div>
+        <div id="w-node-d0458a27-e73f-e612-462d-65302581b228-2581b225" class="block-footer"><img src="{% static 'images/Logo.PNG' %}" loading="lazy" sizes="88px" srcset="{% static 'images/Logo-p-500.PNG' %} 500w, {% static 'images/Logo-p-800.PNG' %} 800w, {% static 'images/Logo.PNG' %} 1024w" alt="" class="logo"></div>
         <div id="w-node-d0458a27-e73f-e612-462d-65302581b234-2581b225" class="block-footer">
           <div class="subtitle-footer">Quick Links<br></div>
           <a href="{% url 'core:company' %}" class="link-footer">Company</a>
