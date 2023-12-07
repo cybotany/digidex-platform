@@ -1,0 +1,24 @@
+<div class="account-form">
+  <div class="subtitle blue">Create Group<br></div>
+  <h2 class="heading-account">Create a New Group</h2>
+       
+  <div class="form-block w-form">
+    <form method="post" class="form">
+      {% csrf_token %}
+        
+      {% for field in form %}
+        <div>
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          <input type="{{ field.field.widget.input_type }}" class="text-field w-input" name="{{ field.name }}" placeholder="{{ field.label }}" id="{{ field.id_for_label }}" required="">
+          {% if field.errors %}
+            <div class="error-message">
+              <small>{{ field.errors|striptags }}</small>
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+  
+      <input type="submit" value="Create Group" data-wait="Please wait..." class="submit-button w-button">
+    </form>
+  </div>
+</div>  
