@@ -4,9 +4,8 @@
     {% include 'partials/head.html' %}
   </head>
   <body>
-    {% load static %}
     {% include 'partials/simple_header.html' %}
-    <!-- Main Section -->
+
     <section class="section-full">
       <div class="content">
         <div class="account-form">
@@ -16,7 +15,8 @@
         </div>
       </div>
     </section>
-    <!-- Scripts -->
+  
+    {% load static %}
     <script src="{% static 'js/get_login_jwt.js' %}" type="text/javascript"></script>
   </body>
 </html>
