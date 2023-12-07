@@ -180,5 +180,5 @@ SIMPLE_JWT = {
     'TOKEN_TYPE_CLAIM': 'token_type',
 }
 
-LOGIN_REDIRECT_URL = 'core:inventory'
+LOGIN_REDIRECT_URL = 'core:inventory' # When removed it redirects to profile page
 LOGIN_URL = 'core:login'
