@@ -8,7 +8,6 @@
         
       {% for field in form %}
         <div>
-          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
           <input type="{{ field.field.widget.input_type }}" class="text-field w-input" name="{{ field.name }}" placeholder="{{ field.label }}" id="{{ field.id_for_label }}" required="">
           {% if field.errors %}
             <div class="error-message">
