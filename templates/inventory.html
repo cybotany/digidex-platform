@@ -2,12 +2,12 @@
 <html data-wf-page="6567eb537706d17425cd0847" data-wf-site="6567eb537706d17425cd07f4">
   <head>
     <meta charset="utf-8">
-    <title>Inventory - Digit</title>
-    <meta content="Your Inventory." name="description">
-    <meta content="Inventory - Digit" property="og:title">
-    <meta content="Your Inventory." property="og:description">
-    <meta content="Inventory - Digit" property="twitter:title">
-    <meta content="Your Inventory." property="twitter:description">
+    <title>Garden - Digit</title>
+    <meta content="Your Garden." name="description">
+    <meta content="Garden - Digit" property="og:title">
+    <meta content="Your Garden." property="og:description">
+    <meta content="Garden - Digit" property="twitter:title">
+    <meta content="Your Garden." property="twitter:description">
     <meta property="og:type" content="website">
     <meta content="summary_large_image" name="twitter:card">
     <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -19,28 +19,18 @@
   <body>
     {% include 'partials/header.html' %}  
     <section class="section-top">
-      <h1>Inventory</h1>
+      <h1>Your Garden</h1>
     </section>
     <section class="section">  
       <div>
-        <h3>Your Groups</h3>
         {% for group in groups %}
           <div>
-            <p>Group Name: {{ group.name }}</p>
+            <p>{{ group.name }}</p>
             <!-- Add more group details here -->
           </div>
         {% empty %}
           <p>You have no groups.</p>
         {% endfor %}
-      </div>
-      <div>
-        {% if groups.has_previous %}
-          <a href="?page={{ groups.previous_page_number }}">Previous</a>
-        {% endif %}
-        <span>Page {{ groups.number }} of {{ groups.paginator.num_pages }}</span>
-        {% if groups.has_next %}
-          <a href="?page={{ groups.next_page_number }}">Next</a>
-        {% endif %}
       </div>
     </section>  
   
