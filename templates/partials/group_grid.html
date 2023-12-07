@@ -1,0 +1,13 @@
+<div class="w-layout-grid grid-features">
+  {% for digit in digits %}
+    <a href="{% url 'core:grouping' digit.id %}" class="features">
+      <div class="block-heading-features">
+        <h5 class="heading-features">{{ digit.name }}</h5>
+      </div>
+      <!-- Add more digit details here -->
+      <p class="paragraph-features">{{ digit.description }}</p>
+    </a>
+  {% empty %}
+    <p>No Digits found in this group.</p>
+  {% endfor %}
+</div>

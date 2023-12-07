@@ -1,11 +1,12 @@
 from django.views.generic.detail import DetailView
-from apps.inventory.models import Group
-
+from apps.inventory.models import Group, Digit  # Import Digit model
 
 class GroupingView(DetailView):
     model = Group
     template_name = 'grouping.html'
 
-    def get_queryset(self):
-        # Filter to ensure users can only see their own groups
-        return Group.objects.filter(user=self.request.user)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        group = self.object
+        context['digits'] = Digit.objects.filter(group=group)
+        return context
