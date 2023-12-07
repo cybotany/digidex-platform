@@ -1,77 +1,34 @@
 <!DOCTYPE html>
 <html data-wf-page="6567eb537706d17425cd084f" data-wf-site="6567eb537706d17425cd07f4">
-<head>
-  <meta charset="utf-8">
-  <title>Login - Digit</title>
-  <meta content="Login page for Digit platform." name="description">
-  <meta content="Login - Digit" property="og:title">
-  <meta content="Login page for Digit platform." property="og:description">
-  <meta content="Login - Digit" property="twitter:title">
-  <meta content="Login page for Digit platform." property="twitter:description">
-  <meta property="og:type" content="website">
-  <meta content="summary_large_image" name="twitter:card">
-  <meta content="width=device-width, initial-scale=1" name="viewport">
-  <meta content="Webflow" name="generator">
+  <head>
+    <meta charset="utf-8">
+    <title>Login - Digit</title>
+    <meta content="Login page for Digit platform." name="description">
+    <meta content="Login - Digit" property="og:title">
+    <meta content="Login page for Digit platform." property="og:description">
+    <meta content="Login - Digit" property="twitter:title">
+    <meta content="Login page for Digit platform." property="twitter:description">
+    <meta property="og:type" content="website">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="Webflow" name="generator">
 
-  {% load static %}
-  {% include 'partials/head.html' %}
-</head>
-<body>
-  <!-- Header Section -->
-  <a href="{% url 'core:landing' %}" class="brand-center w-nav-brand">
-    <img src="{% static 'images/Header-Logo.png' %}" loading="eager" alt="Digit Logo" class="logo">
-  </a>
-
-  <!-- Main Section -->
-  <section class="section-full">
-    <div class="content">
-      <div class="account-form">
-        <div class="subtitle blue">Sign in<br></div>
-        <h2 class="heading-account">Login to your account</h2>
-        
-        <!-- Login Form -->
-        <div class="form-block w-form">
-          <form id="wf-form-Login" method="post" class="form">
-            {% csrf_token %}
-            <div>
-              <label for="Username">Username</label>
-              <input type="text" class="text-field w-input" maxlength="256" name="username" placeholder="Username" id="Username" required="">
-              {% if form.username.errors %}
-                <div class="error-message">
-                  <small>{{ form.username.errors|striptags }}</small>
-                </div>
-              {% endif %}
-            </div>
-
-            <div>
-              <label for="Password">Password</label>
-              <input type="password" class="text-field w-input" maxlength="256" name="password" placeholder="Password" id="Password" required="">
-              {% if form.password.errors %}
-                <div class="error-message">
-                  <small>{{ form.password.errors|striptags }}</small>
-                </div>
-              {% endif %}
-            </div>
-
-            <input type="submit" value="Login" data-wait="Please wait..." class="submit-button w-button">
-
-            {% if form.non_field_errors %}
-              <div class="error-message w-form-fail">
-                  {% for error in form.non_field_errors %}
-                      <div class="text-error">{{ error }}</div>
-                  {% endfor %}
-              </div>
-            {% endif %}
-          </form>
-
-          <!-- Additional Links -->
-          <div class="text-account">Not registered? <a href="{% url 'core:signup' %}" class="link-account">Create account</a></div>
+    {% load static %}
+    {% include 'partials/head.html' %}
+  </head>
+  <body>
+    {% include 'partials/simple_header.html' %}
+    <!-- Main Section -->
+    <section class="section-full">
+      <div class="content">
+        <div class="account-form">
+          <div class="subtitle blue">Sign in<br></div>
+          <h2 class="heading-account">Login to your account</h2>
+          {% include 'partials/login_form.html' %}
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Scripts -->
-  <script src="{% static 'js/get_login_jwt.js' %}" type="text/javascript"></script>
-</body>
+    </section>
+    <!-- Scripts -->
+    <script src="{% static 'js/get_login_jwt.js' %}" type="text/javascript"></script>
+  </body>
 </html>

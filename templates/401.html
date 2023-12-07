@@ -17,10 +17,7 @@
     {% include 'partials/head.html' %}
   </head>
 <body>
-  <!-- Logo and Navigation -->
-  <a href="{% url 'core:landing' %}" class="brand-center w-nav-brand">
-    <img src="{% static 'images/Logo.png' %}" loading="eager" alt="Host Logo" class="logo">
-  </a>
+  {% include 'partials/simple_header.html' %}
 
   <!-- Password Protected Page Content -->
   <div class="utility-page-wrap">
