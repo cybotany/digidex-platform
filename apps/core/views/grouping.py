@@ -1,5 +1,6 @@
 from django.views.generic.detail import DetailView
-from apps.inventory.models import Group, Digit  # Import Digit model
+from apps.inventory.models import Group
+from apps.core.models import Digit
 
 class GroupingView(DetailView):
     model = Group
