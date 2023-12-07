@@ -12,7 +12,7 @@
             <span>{{ request.user.username }}</span>
           </div>
           <div class="button-mobile">
-            <a href="{% url 'core:inventory' %}" class="nav-button-outline w-button">Inventory</a>
+            <a href="{% url 'core:garden' %}" class="nav-button-outline w-button">Garden</a>
             <a href="{% url 'core:logout' %}" class="nav-button w-button">Logout</a>
           </div>
         {% else %}
@@ -30,7 +30,7 @@
             <span>{{ request.user.username }}</span>
           </div>
           <div class="button-desktop">
-            <a href="{% url 'core:inventory' %}" class="nav-button-outline w-button">Inventory</a>
+            <a href="{% url 'core:garden' %}" class="nav-button-outline w-button">Garden</a>
             <a href="{% url 'core:logout' %}" class="nav-button w-button">Logout</a>
           </div>
         {% else %}

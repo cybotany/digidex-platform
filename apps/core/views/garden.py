@@ -5,11 +5,10 @@ from apps.inventory.forms import CreateGroupForm
 from apps.inventory.models import Group
 
 
-class InventoryView(LoginRequiredMixin, ListView):
+class GardenView(LoginRequiredMixin, ListView):
     model = Group
     context_object_name = 'groups'
-    template_name = 'inventory.html'
-    paginate_by = 15
+    template_name = 'garden.html'
 
     def get_queryset(self):
         """ Overriding to get groups for the current user """
@@ -28,7 +27,7 @@ class InventoryView(LoginRequiredMixin, ListView):
             new_group = form.save(commit=False)
             new_group.user = request.user
             new_group.save()
-            return redirect('core:inventory')
+            return redirect('core:garden')
 
         # Handling invalid form case
         return self.get(request, form=form)
