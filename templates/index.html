@@ -52,6 +52,10 @@
           </a>
           <nav role="navigation" class="nav-menu w-nav-menu">
             {% if request.user.is_authenticated %}
+              <!-- Display Username -->
+              <div class="username-display">
+                <span>{{ request.user.username }}</span>
+              </div>
               <div class="button-mobile">
                 <a href="{% url 'core:inventory' %}" class="nav-button-outline w-button">Inventory</a>
                 <a href="{% url 'core:logout' %}" class="nav-button w-button">Logout</a>
@@ -67,6 +71,10 @@
         <div class="nav">
           <div class="button-desktop">
             {% if request.user.is_authenticated %}
+              <!-- Display Username -->
+              <div class="username-display">
+                <span>{{ request.user.username }}</span>
+              </div>
               <a href="{% url 'core:inventory' %}" class="nav-button-outline w-button">Inventory</a>
               <a href="{% url 'core:logout' %}" class="nav-button w-button">Logout</a>
             {% else %}
@@ -79,7 +87,7 @@
           </div>
         </div>
       </div>
-    </div>    
+    </div>      
     <section class="section-hero">
       <div style="opacity:0" class="content">
         <div class="w-layout-grid grid-hero">

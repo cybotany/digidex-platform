@@ -26,35 +26,50 @@
   <link href="static/images//webclip.png" rel="apple-touch-icon">
 </head>
 <body>
-  <section class="section-top-bar">
-    <div class="top-bar-block">
-      <div class="top-bar">
-        <div class="info-top-bar">New customer offer: Get 25% off your first order with promo code NEW25</div>
-      </div>
-    </div>
-  </section>
   <div data-w-id="9c896d19-12ed-148e-4e5a-1c014986d7c2" data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav">
     <div class="nav-block">
       <div class="nav">
-        <a href="index.html" class="brand w-nav-brand"><img src="static/images//Logo.png" loading="lazy" sizes="88px" srcset="static/images//Logo-p-500.png 500w, static/images//Logo-p-800.png 800w, static/images//Logo.png 1024w" alt="" class="logo"></a>
+        <a href="{% url 'core:landing' %}" aria-current="page" class="brand w-nav-brand w--current">
+          <img src="{% static 'images/Logo.png' %}" loading="lazy" sizes="88px" srcset="{% static 'images/Logo-p-500.png' %} 500w, {% static 'images/Logo-p-800.png' %} 800w, {% static 'images/Logo.png' %} 1024w" alt="" class="logo">
+        </a>
         <nav role="navigation" class="nav-menu w-nav-menu">
-          <div class="button-mobile">
-            <a href="{% url 'core:login' %}" class="nav-button-outline w-button">Login</a>
-            <a href="get-started.html" class="nav-button w-button">Get Started</a>
-          </div>
+          {% if request.user.is_authenticated %}
+            <!-- Display Username -->
+            <div class="username-display">
+              <span>{{ request.user.username }}</span>
+            </div>
+            <div class="button-mobile">
+              <a href="{% url 'core:inventory' %}" class="nav-button-outline w-button">Inventory</a>
+              <a href="{% url 'core:logout' %}" class="nav-button w-button">Logout</a>
+            </div>
+          {% else %}
+            <div class="button-mobile">
+              <a href="{% url 'core:login' %}" class="nav-button-outline w-button">Login</a>
+              <a href="{% url 'core:signup' %}" class="nav-button w-button">Signup</a>
+            </div>
+          {% endif %}
         </nav>
       </div>
       <div class="nav">
         <div class="button-desktop">
-          <a href="{% url 'core:login' %}" class="nav-button-outline w-button">Login</a>
-          <a href="get-started.html" class="nav-button w-button">Stay Updated</a>
+          {% if request.user.is_authenticated %}
+            <!-- Display Username -->
+            <div class="username-display">
+              <span>{{ request.user.username }}</span>
+            </div>
+            <a href="{% url 'core:inventory' %}" class="nav-button-outline w-button">Inventory</a>
+            <a href="{% url 'core:logout' %}" class="nav-button w-button">Logout</a>
+          {% else %}
+            <a href="{% url 'core:login' %}" class="nav-button-outline w-button">Login</a>
+            <a href="{% url 'core:signup' %}" class="nav-button w-button">Signup</a>
+          {% endif %}
         </div>
         <div class="menu-button w-nav-button">
           <div class="icon-menu w-icon-nav-menu"></div>
         </div>
       </div>
     </div>
-  </div>
+  </div>  
   <section class="section-top">
     <div class="content">
       <div class="block-top">
