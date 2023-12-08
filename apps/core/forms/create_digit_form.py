@@ -26,5 +26,8 @@ class CreateDigitForm(forms.ModelForm):
         fields = ('name', 'description', 'group', 'link', 'taxonomic_unit')
 
     def __init__(self, *args, **kwargs):
-            super(CreateDigitForm, self).__init__(*args, **kwargs)
-            # Dynamically set querysets or initial values here
+        user = kwargs.pop('user', None)
+        super(CreateDigitForm, self).__init__(*args, **kwargs)
+
+        if user is not None:
+            self.fields['group'].queryset = Group.objects.filter(user=user)
