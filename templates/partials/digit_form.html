@@ -1,12 +1,21 @@
 <div class="content">
-  <div class="digit-creation-form">
-    <h2 class="heading-account">Create a New Digit</h2>
-      <form method="post">
-        {% csrf_token %}
+  <div class="account-form">
+    <div class="subtitle blue">Create Digit<br></div>
+    <h2 class="heading-account">Register Your Plant</h2>
+    <div class="form-block w-form">
+      <form method="post" class="form">
+        {% csrf_token %}  
         <input type="hidden" name="link" value="{{ link_id }}">
-        <input type="text" id="name" name="name" required><br>
-        <textarea id="description" name="description"></textarea><br>
-        <button type="submit">Create Digit</button>
+        <input type="text" class="text-field transparent w-input" maxlength="256" name="name" placeholder="Plant Name" id="name" required>
+        <textarea class="text-field transparent w-input" name="description" placeholder="Description" id="description"></textarea><br>
+        <input type="submit" value="Create Digit" data-wait="Please wait..." class="submit-button yellow w-button">
       </form>
+      <div class="success-message yellow w-form-done">
+        <div class="text-success yellow">Thank you! Your Digit has been created!</div>
+      </div>
+      <div class="error-message yellow w-form-fail">
+        <div class="text-error yellow">Oops! Something went wrong while creating your Digit.</div>
+      </div>
+    </div>
   </div>
-</div>
+</div>  
