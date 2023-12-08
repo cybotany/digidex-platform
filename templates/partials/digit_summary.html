@@ -1,0 +1,27 @@
+<div class="digit-summary">
+  <h2>{{ digit.name }} Summary</h2>
+  <p>{{ digit.description }}</p>
+
+  <!-- Loop through journal entries related to the digit -->
+  {% for journal in digit.journal_entries.all %}
+    <div class="journal-entry">
+      <h3>Journal Entry - {{ journal.created_at|date:"Y-m-d H:i" }}</h3>
+            
+      <!-- Journal Entry Content -->
+      <div class="journal-content">
+        <p>{{ journal.entry }}</p>
+      </div>
+
+      <!-- Journal Entry Image -->
+      {% if journal.image %}
+        <div class="journal-image">
+          <img src="{{ journal.image.url }}" alt="Image for journal entry">
+        </div>
+      {% else %}
+        <p>No image available for this entry.</p>
+      {% endif %}
+    </div>
+  {% empty %}
+    <p>No journal entries available for this digit.</p>
+  {% endfor %}
+</div>

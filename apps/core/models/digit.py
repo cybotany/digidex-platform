@@ -1,7 +1,9 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.urls import reverse
 from apps.inventory.models import Link, Group
 from apps.taxonomy.models import Unit
+
 
 class Digit(models.Model):
     """
@@ -74,6 +76,15 @@ class Digit(models.Model):
             str: String representation of the Digit instance.
         """
         return self.name
+
+    def get_absolute_url(self):
+        """
+        Get the URL to view the details of this digit.
+
+        Returns:
+            str: The URL to view the details of this digit.
+        """
+        return reverse('core:digit', args=[str(self.id)])
 
     class Meta:
         verbose_name = "Digit"

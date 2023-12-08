@@ -1,5 +1,6 @@
 from .linking import LinkingView
 from .digitization import DigitizationView
+from .digit import DigitView
 from .grouping import GroupingView
 from .garden import GardenView
 from .landing import LandingView

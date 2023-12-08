@@ -1,11 +1,12 @@
 from django.urls import path
-from apps.core.views import ContactUsView, AboutUsView, LandingView, LinkingView, DigitizationView, GroupingView, GardenView, SignupUserView, LoginUserView, LogoutUserView
+from apps.core.views import ContactUsView, AboutUsView, DigitView, LandingView, LinkingView, DigitizationView, GroupingView, GardenView, SignupUserView, LoginUserView, LogoutUserView
 
 app_name = 'core'
 urlpatterns = [
     path('', LandingView.as_view(), name='landing'),
     path('link/<str:serial_number>/', LinkingView.as_view(), name='linking'),
     path('digitize/<int:link_id>/', DigitizationView.as_view(), name='digitization'),
+    path('digit/<int:pk>/', DigitView.as_view(), name='digit'),
     path('grouping/<int:pk>/', GroupingView.as_view(), name='grouping'),
     path('garden/', GardenView.as_view(), name='garden'),
     path('signup/', SignupUserView.as_view(), name='signup'),
