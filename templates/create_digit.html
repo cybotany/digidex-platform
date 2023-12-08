@@ -7,10 +7,9 @@
     {% include 'partials/simple_header.html' %}
 
     <section class="section-full">
-      {% include 'partials/login_form.html' %}
+      {% include 'partials/digit_form.html' %}
     </section>
   
-    {% load static %}
-    <script src="{% static 'js/get_login_jwt.js' %}" type="text/javascript"></script>
+    {% include 'partials/external_scripts.html' %}
   </body>
 </html>

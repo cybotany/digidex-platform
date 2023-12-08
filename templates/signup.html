@@ -4,17 +4,9 @@
     {% include 'partials/head.html' %}
   </head>
   <body>
-    {% load static %}
     {% include 'partials/simple_header.html' %}
-    <!-- Main Section -->
     <section class="section-full">
-      <div style="opacity:0" class="content">
-        <div class="account-form">
-          <div class="subtitle blue">Signup<br></div>
-          <h2 class="heading-account">Create an account</h2>
-          {% include 'partials/signup_form.html' %}
-        </div>
-      </div>
+      {% include 'partials/signup_form.html' %}
     </section>
     {% include 'partials/external_scripts.html' %}
   </body>

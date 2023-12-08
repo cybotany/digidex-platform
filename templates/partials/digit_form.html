@@ -1,0 +1,12 @@
+<div class="content">
+  <div class="digit-creation-form">
+    <h2 class="heading-account">Create a New Digit</h2>
+      <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="link" value="{{ link_id }}">
+        <input type="text" id="name" name="name" required><br>
+        <textarea id="description" name="description"></textarea><br>
+        <button type="submit">Create Digit</button>
+      </form>
+  </div>
+</div>
