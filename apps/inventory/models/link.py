@@ -37,10 +37,12 @@ class Link(models.Model):
         help_text="Indicates whether the link is currently active and mapped to a digital object."
     )
     user = models.ForeignKey(
-        get_user_model,
+        get_user_model(),
         on_delete=models.CASCADE,
-        verbose_name="User",
-        help_text="The user who created or is managing the link."
+        null=True,
+        blank=True,
+        help_text='The user who created and owns the link.',
+        related_name='links'
     )
     digit = models.OneToOneField(
         Digit,
