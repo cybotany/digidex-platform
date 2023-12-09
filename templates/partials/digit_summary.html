@@ -24,9 +24,4 @@
   {% empty %}
     <p>No journal entries available for this digit.</p>
   {% endfor %}
-
-  <form action="{% url 'core:delete-digit' object.id %}" method="post">
-    {% csrf_token %}
-    <input type="submit" value="Delete Digit">
-  </form>
 </div>

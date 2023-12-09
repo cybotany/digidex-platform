@@ -1,0 +1,4 @@
+<form action="{% url 'core:delete-digit' object.id %}" method="post">
+  {% csrf_token %}
+  <input type="submit" value="Delete Digit">
+</form>

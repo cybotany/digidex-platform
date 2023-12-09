@@ -14,7 +14,6 @@ class Digit(models.Model):
         name (CharField): A human-readable name for the digitized plant.
         description (CharField): A brief description of the digitized plant.
         taxonomic_unit (ForeignKey): A relationship to the Unit model, representing the plant's taxonomic classification.
-        created_at (DateTimeField): The date and time when the digitized plant record was created.
     """
     name = models.CharField(
         max_length=50,
@@ -35,11 +34,6 @@ class Digit(models.Model):
         on_delete=models.CASCADE,
         related_name='digits',
         help_text="The taxonomic classification of the digitized plant."
-    )
-    created_at = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name="Created At",
-        help_text="The date and time when the digitized plant record was created."
     )
 
     def __str__(self):
