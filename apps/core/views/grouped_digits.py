@@ -4,7 +4,7 @@ from apps.inventory.models import Link
 from apps.core.models import Digit
 
 
-class GroupedLinksView(LoginRequiredMixin, ListView):
+class GroupedDigitsView(LoginRequiredMixin, ListView):
     context_object_name = 'digits'
     template_name = 'grouped_digits.html'
 
