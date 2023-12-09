@@ -10,6 +10,13 @@ class DigitizationView(CreateView):
     form_class = CreateDigitForm
     template_name = 'create_digit.html'
 
+    def get_form_kwargs(self):
+        # Call the base implementation first to get a context
+        kwargs = super(DigitizationView, self).get_form_kwargs()
+        # Add in the user
+        kwargs['user'] = self.request.user
+        return kwargs
+
     def form_valid(self, form):
         # Retrieve the link instance using link_id from the URL
         link_id = self.kwargs.get('link_id')
