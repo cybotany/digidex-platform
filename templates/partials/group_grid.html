@@ -10,12 +10,6 @@
       <h5 class="heading-features">Serial Number: {{ link.serial_number }}</h5>
     </div>
     
-    <p class="paragraph-features">Status: {{ link.active|yesno:"Active,Inactive" }}</p>
-
-    {% if link.group %}
-      <p class="paragraph-features">Group: {{ link.group.name }}</p>
-    {% endif %}
-    
     {% if link.active and link.digit %}
       </a>
     {% else %}
