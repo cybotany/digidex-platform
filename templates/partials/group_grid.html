@@ -1,9 +1,12 @@
 <div class="w-layout-grid grid-features">
   {% for digit in digits %}
-    <a href="{% url 'core:digit' digit.id %}" class="features">
-      <div class="block-heading-features">
-        <h5 class="heading-features">{{ digit.name }}</h5>
-        <p class="paragraph-features">{{ digit.description }}</p>
+    <a href="{% url 'core:digit' digit.id %}" class="digit-card digit-card-link">
+      <div class="digit-card-img-wrapper">
+        <!-- Placeholder for image or a no-image icon -->
+      </div>
+      <div class="digit-card-body">
+        <h5 class="digit-card-header">{{ digit.name }}</h5>
+        <p class="digit-card-footer">{{ digit.description }}</p>
       </div>
     </a>
   {% empty %}
