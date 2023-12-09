@@ -1,8 +1,11 @@
 <div class="w-layout-grid grid-features">
   {% for group in groups %}
-    <a href="{% url 'core:grouped-digits' group.id %}" class="features">
-      <div class="block-heading-features">
-        <h5 class="heading-features">{{ group.name }}</h5>
+    <a href="{% url 'core:grouped-digits' group.id %}" class="group-card group-card-link">
+      <div class="group-card-img-wrapper">
+        <!-- Placeholder for group image or icon -->
+      </div>
+      <div class="group-card-body">
+        <h5 class="group-card-header">{{ group.name }}</h5>
       </div>
     </a>
   {% empty %}
