@@ -38,7 +38,7 @@ class Group(models.Model):
         ordering = ['name']
 
     @property
-    def digits(self):
+    def links(self):
         """
         Retrieves all digitized plants associated with this group.
 
@@ -48,7 +48,7 @@ class Group(models.Model):
         Returns:
             QuerySet: A QuerySet of Digit instances associated with this group.
         """
-        return self.digits_set.all()
+        return self.links_set.all()
 
     @property
     def current_count(self):
@@ -58,7 +58,7 @@ class Group(models.Model):
         Returns:
             int: The count of Digit instances associated with this group.
         """
-        return self.digits.count()
+        return self.links.count()
 
     def __str__(self):
         """

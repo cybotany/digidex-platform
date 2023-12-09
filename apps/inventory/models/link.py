@@ -58,7 +58,7 @@ class Link(models.Model):
         null=True,
         blank=True,
         related_name='links',
-        help_text="The group to which this link belongs."
+        help_text='The group this link is associated with.'
     )
 
     def get_digit_url(self):
