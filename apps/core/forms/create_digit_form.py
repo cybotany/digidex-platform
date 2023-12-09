@@ -1,7 +1,7 @@
 from django import forms
 from django.db import models
 from apps.core.models import Digit
-from apps.inventory.models import Link, Group
+from apps.inventory.models import Group
 from apps.taxonomy.models import Unit
 from django.contrib.auth import get_user_model
 
@@ -23,7 +23,7 @@ class CreateDigitForm(forms.ModelForm):
 
     class Meta:
         model = Digit
-        fields = ('name', 'description', 'group', 'link', 'taxonomic_unit')
+        fields = ('name', 'description', 'group', 'taxonomic_unit')
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
