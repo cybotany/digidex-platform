@@ -29,5 +29,4 @@ class CreateDigitForm(forms.ModelForm):
         user = kwargs.pop('user', None)
         super(CreateDigitForm, self).__init__(*args, **kwargs)
 
-        if user is not None:
-            self.fields['group'].queryset = Group.objects.filter(user=user)
+        self.fields['group'].queryset = Group.objects.filter(user=user)
