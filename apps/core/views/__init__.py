@@ -9,3 +9,4 @@ from .logout import LogoutUserView
 from .signup import SignupUserView
 from .contact_us import ContactUsView
 from .about_us import AboutUsView
+from .delete_digit import DeleteDigitView

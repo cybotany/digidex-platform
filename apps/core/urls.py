@@ -2,6 +2,7 @@ from django.urls import path
 from apps.core.views import (ContactUsView,
                              AboutUsView,
                              DigitView,
+                             DeleteDigitView,
                              LandingView,
                              LinkingView,
                              DigitizationView,
@@ -23,5 +24,6 @@ urlpatterns = [
     path('link/<str:serial_number>/', LinkingView.as_view(), name='linking'),
     path('digitize/<int:link_id>/', DigitizationView.as_view(), name='digitization'),
     path('digit/<int:pk>/', DigitView.as_view(), name='digit'),
+    path('digit/delete/<int:pk>/', DeleteDigitView.as_view(), name='delete-digit'),
     path('grouped_digits/<int:group_id>/', GroupedDigitsView.as_view(), name='grouped-digits'),
 ]
