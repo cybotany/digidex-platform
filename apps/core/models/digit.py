@@ -1,7 +1,5 @@
 from django.db import models
-from django.contrib.auth import get_user_model
 from django.urls import reverse
-from apps.inventory.models import Link, Group
 from apps.taxonomy.models import Unit
 
 
@@ -10,15 +8,12 @@ class Digit(models.Model):
     Represents a digitized version of a plant, linking it to both the inventory system and taxonomic data.
 
     The Digit model serves as a bridge between physical plant specimens and their digital representations. 
-    It directly associates a plant specimen with a unique identifier (NFC tag), its grouping, and its corresponding taxonomic classification.
+    It directly associates a plant specimen with its corresponding taxonomic classification.
 
     Attributes:
         name (CharField): A human-readable name for the digitized plant.
         description (CharField): A brief description of the digitized plant.
-        group (ForeignKey): A relationship to the Group model, representing the grouping of the digitized plant.
-        link (OneToOneField): A relationship to the Link model, representing the NFC tag associated with the plant.
         taxonomic_unit (ForeignKey): A relationship to the Unit model, representing the plant's taxonomic classification.
-        user (ForeignKey): The user who created the digitized plant record.
         created_at (DateTimeField): The date and time when the digitized plant record was created.
     """
     name = models.CharField(
@@ -33,19 +28,6 @@ class Digit(models.Model):
         blank=True,
         help_text="A brief description of the digitized plant."
     )
-    group = models.ForeignKey(
-        Group,
-        null=True,
-        on_delete=models.CASCADE,
-        related_name='digits',
-        help_text="The group to which the digitized plant belongs."
-    )
-    link = models.OneToOneField(
-        Link,
-        on_delete=models.CASCADE,
-        related_name='digit',
-        help_text="The NFC tag link associated with the digitized plant."
-    )
     taxonomic_unit = models.ForeignKey(
         Unit,
         null=True,
@@ -53,12 +35,6 @@ class Digit(models.Model):
         on_delete=models.CASCADE,
         related_name='digits',
         help_text="The taxonomic classification of the digitized plant."
-    )
-    user = models.ForeignKey(
-        get_user_model(),
-        on_delete=models.CASCADE,
-        verbose_name="User",
-        help_text="The user who created the digitized plant record."
     )
     created_at = models.DateTimeField(
         auto_now_add=True,

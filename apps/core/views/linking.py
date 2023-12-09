@@ -13,11 +13,8 @@ class LinkingView(LoginRequiredMixin, View):
     def get(self, request, serial_number):
         link, created = Link.objects.get_or_create(serial_number=serial_number)
 
-        if link.active:
-            try:
-                digit = Digit.objects.get(link=link)
-                return redirect('core:digit_detail', kwargs={'pk': digit.pk})
-            except Digit.DoesNotExist:
-                raise PermissionDenied("This link is active but not associated with a digit.")
+        if link.active and link.digit:
+            digit_detail_url = link.get_digit_url()
+            return redirect(digit_detail_url)
         else:
             return redirect('core:digitization', link_id=str(link.id))

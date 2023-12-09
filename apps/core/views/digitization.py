@@ -15,14 +15,18 @@ class DigitizationView(CreateView):
         link_id = self.kwargs.get('link_id')
         link = get_object_or_404(Link, id=link_id)
 
-        # Set the link field of the Digit instance
-        form.instance.link = link
+        # Set the digit instance to the form's instance and save
+        digit = form.save(commit=False)
+        digit.save()
 
-        # Set the user to the current user
-        form.instance.user = self.request.user
+        # Set the digit field of the Link instance
+        link.digit = digit
+        link.user = self.request.user
 
-        # Update the link instance to be active
+        if 'group' in form.cleaned_data:
+            link.group = form.cleaned_data['group']
+
         link.active = True
         link.save()
 
-        return super().form_valid(form)
+        return super(DigitizationView, self).form_valid(form)

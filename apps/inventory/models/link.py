@@ -1,5 +1,9 @@
 from django.db import models
+from django.contrib.auth import get_user_model
+from apps.core.models import Digit
+from apps.inventory.models import Group
 from django.urls import reverse
+
 
 class Link(models.Model):
     """
@@ -15,12 +19,9 @@ class Link(models.Model):
                                    the physical NFC tag or other identification mechanism.
         active (BooleanField): A flag indicating whether the Link is active and mapped to a digital object. Inactive
                                links may represent unused or deactivated tags.
-        secret_hash (CharField): The hash of a secret key associated with the Link. This is used for
-                                 secure verification and is not the actual secret key itself.
-
-    Methods:
-        get_absolute_url: Returns the absolute URL for the Link instance, typically used for redirecting
-                          users to the appropriate view based on the link's status and associated data.
+        user (ForeignKey): A relationship to the User model, representing the user who created or is managing the link.
+        digit (OneToOneField): A relationship to the Digit model, representing the digitized plant associated with this link.
+        group (ForeignKey): A relationship to the Group model.
     """
 
     serial_number = models.CharField(
@@ -35,26 +36,37 @@ class Link(models.Model):
         verbose_name="Active",
         help_text="Indicates whether the link is currently active and mapped to a digital object."
     )
-    #secret_hash = models.CharField(
-    #    max_length=64,
-    #    editable=False,
-    #    verbose_name="Secret Hash",
-    #    help_text="The hash of a secret key for secure identification and access."
-    #)
+    user = models.ForeignKey(
+        get_user_model,
+        on_delete=models.CASCADE,
+        verbose_name="User",
+        help_text="The user who created or is managing the link."
+    )
+    digit = models.OneToOneField(
+        Digit,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='link',
+        help_text="The digitized plant associated with this NFC tag."
+    )
+    group = models.ForeignKey(
+        Group,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='links',
+        help_text="The group to which this link belongs."
+    )
 
-    def get_absolute_url(self):
+    def get_digit_url(self):
         """
-        Generates the absolute URL for the Link instance.
-
-        This method constructs a URL that can be used to handle requests related to this particular Link.
-        The URL depends on whether the Link is active and whether it has an associated secret hash.
+        Returns the URL for the digit view of the associated.
 
         Returns:
-            str: The absolute URL for handling this Link instance, or None if the link is inactive or lacks a secret hash.
+            str: URL for the digit view of the associated Digit.
         """
-        if self.active:
-            return reverse('core:link', kwargs={'serial_number': self.serial_number})
-        return None
+        return reverse('core:digit', kwargs={'pk': self.digit.pk})
 
     def __str__(self):
         """
