@@ -6,6 +6,7 @@ from apps.inventory.models import Link
 
 class GroupedLinksView(LoginRequiredMixin, ListView):
     model = Link
+    context_object_name = 'links'
     template_name = 'grouped_links.html'
 
     def get_queryset(self):

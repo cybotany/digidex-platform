@@ -1,13 +1,28 @@
 <div class="w-layout-grid grid-features">
-  {% for digit in digits %}
-    <a href="{% url 'core:grouping' digit.id %}" class="features">
-      <div class="block-heading-features">
-        <h5 class="heading-features">{{ digit.name }}</h5>
+  {% for link in links %}
+    {% if link.active and link.digit %}
+      <a href="{% url 'core:digit' link.digit.id %}" class="features">
+    {% else %}
+      <div class="features">
+    {% endif %}
+    
+    <div class="block-heading-features">
+      <h5 class="heading-features">Serial Number: {{ link.serial_number }}</h5>
+    </div>
+    
+    <p class="paragraph-features">Status: {{ link.active|yesno:"Active,Inactive" }}</p>
+
+    {% if link.group %}
+      <p class="paragraph-features">Group: {{ link.group.name }}</p>
+    {% endif %}
+    
+    {% if link.active and link.digit %}
+      </a>
+    {% else %}
       </div>
-      <!-- Add more digit details here -->
-      <p class="paragraph-features">{{ digit.description }}</p>
-    </a>
+    {% endif %}
+
   {% empty %}
-    <p>No Digits found in this group.</p>
+    <p>No Links found in this group.</p>
   {% endfor %}
 </div>
