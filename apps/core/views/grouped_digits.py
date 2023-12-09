@@ -1,6 +1,6 @@
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from apps.inventory.models import Link
+from apps.inventory.models import Link, Group
 from apps.core.models import Digit
 
 
@@ -16,4 +16,8 @@ class GroupedDigitsView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        group_id = self.kwargs.get('group_id')
+        group = Group.objects.get(pk=group_id)
+        context['group'] = group
         return context
+
