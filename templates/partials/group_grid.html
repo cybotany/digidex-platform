@@ -18,3 +18,12 @@
     {% endfor %}
   </div>
 </div>
+
+{% if digits|length == 0 %}
+  <div class="content">
+    <form action="{% url 'core:delete-group' group.id %}" method="post">
+      {% csrf_token %}
+      <input type="submit" value="Delete Group" onclick="return confirm('Are you sure you want to delete this group?');">
+    </form>
+  </div>
+{% endif %}

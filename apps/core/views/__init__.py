@@ -10,3 +10,4 @@ from .signup import SignupUserView
 from .contact_us import ContactUsView
 from .about_us import AboutUsView
 from .delete_digit import DeleteDigitView
+from .delete_group import DeleteGroupView
