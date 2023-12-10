@@ -23,7 +23,8 @@
       <tbody>
         {% for journal in digit.journal_entries.all %}
           <tr>
-            <td>{{ journal.created_at|date:"F j, Y, g:i A" }}</td>
+            <td>{{ journal.created_at|date:"F j, Y" }}</td>
+            <td>{{ journal.created_at|date:"g:i A" }}</td>
             <td>{{ journal.user.username }}</td>
             <td>{{ journal.entry }}</td>
             <td>
@@ -35,7 +36,7 @@
             </td>
           </tr>
         {% endfor %}
-      </tbody>      
+      </tbody>           
     </table>
   </div>
 </section>
