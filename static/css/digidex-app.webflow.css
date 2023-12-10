@@ -5067,3 +5067,11 @@ img {
   max-width: 100px;  /* Adjust as needed */
   height: auto;
 }
+
+.rotate-icon {
+  -webkit-transform: rotateZ(45deg);
+  -moz-transform: rotateZ(45deg);
+  -ms-transform: rotateZ(45deg);
+  transform: rotateZ(45deg);
+  transition: transform 0.3s ease;
+}
