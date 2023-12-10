@@ -23,7 +23,7 @@
       <tbody>
         {% for journal in digit.journal_entries.all %}
           <tr>
-            <td>{{ journal.created_at|date:"Y-m-d H:i" }}</td>
+            <td>{{ journal.created_at|date:"F j, Y, g:i A" }}</td>
             <td>{{ journal.user.username }}</td>
             <td>{{ journal.entry }}</td>
             <td>
@@ -34,12 +34,8 @@
               {% endif %}
             </td>
           </tr>
-        {% empty %}
-          <tr>
-            <td colspan="4">No journal entries found.</td>
-          </tr>
         {% endfor %}
-      </tbody>
+      </tbody>      
     </table>
   </div>
 </section>
