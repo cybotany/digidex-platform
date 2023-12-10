@@ -5,10 +5,7 @@
   </head>
   <body class="body">
     {% include 'partials/simple_header.html' %}
-
-    <section class="section-full">
-      {% include 'partials/login_form.html' %}
-    </section>
+    {% include 'partials/login_form.html' %}
   
     {% load static %}
     <script src="{% static 'js/get_login_jwt.js' %}" type="text/javascript"></script>
