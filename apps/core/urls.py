@@ -27,5 +27,5 @@ urlpatterns = [
     path('digit/<int:pk>/', DigitView.as_view(), name='digit'),
     path('digit/delete/<int:pk>/', DeleteDigitView.as_view(), name='delete-digit'),
     path('group/<int:group_id>/', GroupedDigitsView.as_view(), name='grouped-digits'),
-    path('group/delete/<int:group_id>/', DeleteGroupView.as_view(), name='delete-group'),
+    path('group/delete/<int:pk>/', DeleteGroupView.as_view(), name='delete-group'),
 ]
