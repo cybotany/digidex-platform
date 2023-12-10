@@ -1,6 +1,14 @@
+<section class="section-top">
+  <div style="opacity:0" class="content">
+    <div class="block-top">
+      <h2 class="heading-top">{{ group.name }}</h2>
+      <p class="paragraph-top">Description about {{ group.name }}</p>
+    </div>
+  </div>
+</section>
+
 <section class="section">
   <div class="content">
-    <h2 class="group-name-header">{{ group.name }}</h2>
     <div class="w-layout-grid grid-features">
       {% for digit in digits %}
         <a href="{% url 'core:digit' digit.id %}" class="digit-card digit-card-link">

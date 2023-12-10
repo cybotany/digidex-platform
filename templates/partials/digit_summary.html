@@ -1,30 +1,44 @@
+<section class="section-top">
+  <div style="opacity:0" class="content">
+    <div class="block-top">
+      <h2 class="heading-top">{{ digit.name }}</h2>
+      <p class="paragraph-top">{{ digit.description }}</p>
+    </div>
+  </div>
+</section>
+
 <section class="section">
   <div class="content">
-    <h2>{{ digit.name }} Summary</h2>
-    <p>{{ digit.description }}</p>
-
-    <!-- Loop through journal entries related to the digit -->
-    {% for journal in digit.journal_entries.all %}
-      <div class="journal-entry">
-        <h3>Journal Entry - {{ journal.created_at|date:"Y-m-d H:i" }}</h3>
-              
-        <!-- Journal Entry Content -->
-        <div class="journal-content">
-          <p>{{ journal.entry }}</p>
-        </div>
-
-        <!-- Journal Entry Image -->
-        {% if journal.image %}
-          <div class="journal-image">
-            <img src="{{ journal.image.url }}" alt="Image for journal entry">
-          </div>
-        {% else %}
-          <p>No image available for this entry.</p>
-        {% endif %}
-      </div>
-    {% empty %}
-      <p>No journal entries available for this digit.</p>
-    {% endfor %}
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>User</th>
+          <th>Entry</th>
+          <th>Image</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for journal in digit.journal_entries.all %}
+          <tr>
+            <td>{{ journal.created_at|date:"Y-m-d H:i" }}</td>
+            <td>{{ journal.user.username }}</td>
+            <td>{{ journal.entry }}</td>
+            <td>
+              {% if journal.image %}
+                <img src="{{ journal.image.url }}" alt="Journal Image" width="100">
+              {% else %}
+                No image
+              {% endif %}
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="4">No journal entries found.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
 </section>
 
