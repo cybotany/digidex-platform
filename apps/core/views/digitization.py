@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
 from django.views.generic.edit import CreateView
-from apps.core.models import Digit
+from apps.core.models import Digit, Journal
 from apps.core.forms import CreateDigitForm
 from apps.inventory.models import Link
 
@@ -25,6 +25,13 @@ class DigitizationView(CreateView):
         # Set the digit instance to the form's instance and save
         digit = form.save(commit=False)
         digit.save()
+
+        # Create an initial journal entry for the digitization
+        initial_journal_entry = Journal.objects.create(
+            digit=digit,
+            user=self.request.user,
+            entry="Initial journal entry for " + digit.name
+        )
 
         # Set the digit field of the Link instance
         link.digit = digit

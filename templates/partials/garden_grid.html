@@ -1,54 +1,56 @@
-<div class="content">
-  <div class="w-layout-grid grid-features">
-    {% for group in groups %}
-      <a href="{% url 'core:grouped-digits' group.id %}" class="group-card group-card-link">
-        <div class="group-card-img-wrapper">
-          <!-- Placeholder for group image or icon -->
-        </div>
-        <div class="group-card-body">
-          <h5 class="group-card-header">{{ group.name }}</h5>
-        </div>
-      </a>
-    {% empty %}
-      <p>You have no groups.</p>
-    {% endfor %}
-  </div>
-
-  <div class="account-form">
-    <h4 class="heading-account">Group plants for easier management</h2>    
-    <div class="form-block w-form">
-      <form method="post" class="form">
-        {% csrf_token %}
-        {% for field in form %}
-          <div>
-            <input type="{{ field.field.widget.input_type }}" class="text-field w-input" name="{{ field.name }}" placeholder="{{ field.label }}" id="{{ field.id_for_label }}" required="">
-            {% if field.errors %}
-              <div class="error-message">
-                <small>{{ field.errors|striptags }}</small>
-              </div>
-            {% endif %}
+<section class="section">
+  <div class="content">
+    <div class="w-layout-grid grid-features">
+      {% for group in groups %}
+        <a href="{% url 'core:grouped-digits' group.id %}" class="group-card group-card-link">
+          <div class="group-card-img-wrapper">
+            <!-- Placeholder for group image or icon -->
           </div>
-        {% endfor %}
-        <input type="submit" value="Create Group" data-wait="Please wait..." class="submit-button w-button">
-      </form>
+          <div class="group-card-body">
+            <h5 class="group-card-header">{{ group.name }}</h5>
+          </div>
+        </a>
+      {% empty %}
+        <p>You have no groups.</p>
+      {% endfor %}
+    </div>
+    <div class="account-form">
+      <h4 class="heading-account">Group plants for easier management</h2>    
+      <div class="form-block w-form">
+        <form method="post" class="form">
+          {% csrf_token %}
+          {% for field in form %}
+            <div>
+              <input type="{{ field.field.widget.input_type }}" class="text-field w-input" name="{{ field.name }}" placeholder="{{ field.label }}" id="{{ field.id_for_label }}" required="">
+              {% if field.errors %}
+                <div class="error-message">
+                  <small>{{ field.errors|striptags }}</small>
+                </div>
+              {% endif %}
+            </div>
+          {% endfor %}
+          <input type="submit" value="Create Group" data-wait="Please wait..." class="submit-button w-button">
+        </form>
+      </div>
     </div>
   </div>
-</div>
-
-<div class="content">
-  <div class="w-layout-grid grid-features">
-    {% for digit in ungrouped_digits %}
-      <a href="{% url 'core:digit' digit.id %}" class="digit-card digit-card-link">
-        <div class="digit-card-img-wrapper">
-          <!-- Placeholder for image or a no-image icon -->
-        </div>
-        <div class="digit-card-body">
-          <h5 class="digit-card-header">{{ digit.name }}</h5>
-          <p class="digit-card-footer">{{ digit.description }}</p>
-        </div>
-      </a>
-    {% empty %}
-      <p>No ungrouped Digits found.</p>
-    {% endfor %}
+</section>
+<section class="section">
+  <div class="content">
+    <div class="w-layout-grid grid-features">
+      {% for digit in ungrouped_digits %}
+        <a href="{% url 'core:digit' digit.id %}" class="digit-card digit-card-link">
+          <div class="digit-card-img-wrapper">
+            <!-- Placeholder for image or a no-image icon -->
+          </div>
+          <div class="digit-card-body">
+            <h5 class="digit-card-header">{{ digit.name }}</h5>
+            <p class="digit-card-footer">{{ digit.description }}</p>
+          </div>
+        </a>
+      {% empty %}
+        <p>No ungrouped Digits found.</p>
+      {% endfor %}
+    </div>
   </div>
-</div>  
+</section> 
