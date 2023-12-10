@@ -3,6 +3,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from apps.inventory.forms import CreateGroupForm
 from apps.inventory.models import Group
+from apps.core.models import Digit
 
 
 class GardenView(LoginRequiredMixin, ListView):
@@ -18,6 +19,7 @@ class GardenView(LoginRequiredMixin, ListView):
         """ Add form to context """
         context = super().get_context_data(**kwargs)
         context['form'] = CreateGroupForm()
+        context['ungrouped_digits'] = Digit.objects.filter(user=self.request.user, group__isnull=True)
         return context
 
     def post(self, request, *args, **kwargs):
