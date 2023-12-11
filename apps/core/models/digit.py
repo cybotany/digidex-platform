@@ -12,20 +12,20 @@ class Digit(models.Model):
 
     Attributes:
         name (CharField): A human-readable name for the digitized plant.
-        description (CharField): A brief description of the digitized plant.
+        description (TextField): A short description of the digitized plant.
         taxonomic_unit (ForeignKey): A relationship to the Unit model, representing the plant's taxonomic classification.
     """
+
     name = models.CharField(
         max_length=50,
         null=True,
         blank=True,
         help_text="A human-readable name for the digitized plant."
     )
-    description = models.CharField(
-        max_length=200,
-        null=True,
+    description = models.TextField(
+        max_length=500,
         blank=True,
-        help_text="A brief description of the digitized plant."
+        help_text="A short description of the digitized plant."
     )
     taxonomic_unit = models.ForeignKey(
         Unit,
