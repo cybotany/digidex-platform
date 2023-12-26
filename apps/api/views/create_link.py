@@ -4,12 +4,12 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from apps.inventory.models import Link
 
-
 class CreateLink(APIView):
-    permission_classes = [AllowAny]  # Or use appropriate permission classes
+    permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs):
-        uid = request.data.get('uid')
+        # Extract UID from the URL path
+        uid = kwargs.get('uid')
         if not uid:
             return Response({"error": "UID not provided."}, status=status.HTTP_400_BAD_REQUEST)
 
