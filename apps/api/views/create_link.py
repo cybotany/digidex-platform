@@ -1,25 +1,20 @@
-from rest_framework.decorators import api_view
+from rest_framework import status
+from rest_framework.views import APIView
 from rest_framework.response import Response
-from django.urls import reverse
+from rest_framework.permissions import AllowAny
 from apps.inventory.models import Link
-from apps.utils.helpers import generate_secret_and_hash
 
-@api_view(['POST'])
-def create_link(request):
-    # Extract data from request
-    serial_number = request.data.get('serial_number')
 
-    # Generate secret and its hash
-    secret, secret_hash = generate_secret_and_hash()
+class CreateLink(APIView):
+    permission_classes = [AllowAny]  # Or use appropriate permission classes
 
-    # Create Link instance
-    link = Link.objects.create(
-        serial_number=serial_number,
-        secret_hash=secret_hash
-    )
+    def post(self, request, *args, **kwargs):
+        uid = request.data.get('uid')
+        if not uid:
+            return Response({"error": "UID not provided."}, status=status.HTTP_400_BAD_REQUEST)
 
-    # Construct the URL with the secret
-    url_with_secret = request.build_absolute_uri(reverse('core:link', args=[secret]))
-
-    # Return the URL and status
-    return Response({"status": "success", "url": url_with_secret})
+        try:
+            link = Link.objects.create(serial_number=uid)
+            return Response({"status": "success", "link_id": link.id}, status=status.HTTP_201_CREATED)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
