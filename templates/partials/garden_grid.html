@@ -15,11 +15,11 @@
     </div>
 
     <div class="accordion-item">
-      <div data-w-id="group-form-accordion" class="accordion-header">
+      <div data-w-id="group-form-accordion" class="accordion-header" onclick="toggleGroupForm()">
         <h6 class="heading-accordion">Group plants for easier management</h6>
-        <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);background-color:rgba(57,89,255,0.07);border-color:rgba(255,255,255,0.2)" class="block-icon-accordion"><img src="{% static 'images/close.svg' %}" loading="eager" alt="" class="icon-accordion"></div>
+        <div class="block-icon-accordion" id="toggleGroupIcon"><img src="{% static 'images/close.svg' %}" loading="eager" alt="" class="icon-accordion"></div>
       </div>
-      <div style="height:0px;display:none" class="accordion-content">
+      <div id="groupForm" style="display:none" class="accordion-content">
         <div class="account-form"> 
           <div class="form-block w-form">
             <form method="post" class="form">
@@ -40,7 +40,7 @@
         </div>
       </div>
     </div>
-
+  
   </div>
 </section>
 <section class="section">

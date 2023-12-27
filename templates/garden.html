@@ -7,5 +7,21 @@
     {% include 'partials/header.html' %}  
     {% include 'partials/garden_grid.html' %}
     {% include 'partials/footer.html' %}
+  
+    <script>
+      function toggleGroupForm() {
+        var form = document.getElementById("groupForm");
+        var icon = document.getElementById("toggleIcon");
+
+        if (form.style.display === 'none') {
+          form.style.display = 'block';
+          icon.classList.add('rotate-icon');
+        } else {
+          form.style.display = 'none';
+          icon.classList.remove('rotate-icon');
+        }
+      }
+    </script>    
+
   </body>
 </html>
