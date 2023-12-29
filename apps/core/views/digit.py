@@ -11,18 +11,15 @@ class DigitView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['journal_entries'] = self.object.journal_entries.all()
-        context['journal_entry_form'] = CreateJournalEntry()
+        context['journal_entry_form'] = CreateJournalEntry(digit=self.object)
         return context
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        form = CreateJournalEntry(request.POST, request.FILES)
+        form = CreateJournalEntry(request.POST, request.FILES, digit=self.object, user=request.user)
 
         if form.is_valid():
-            journal_entry = form.save(commit=False)
-            journal_entry.digit = self.object  # Link the journal entry to the current Digit
-            journal_entry.user = request.user  # Set the user
-            journal_entry.save()
+            form.save()
             return redirect(self.object.get_absolute_url())  # Redirect back to the Digit detail page
 
         # If the form is not valid, re-render the page with the form errors
