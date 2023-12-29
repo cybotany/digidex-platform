@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from apps.utils.helpers import get_user_directory_path
 from apps.utils.custom_storage import JournalImageStorage
-from apps.utils.validators import validate_image_size_and_dimensions
+#from apps.utils.validators import validate_image_size_and_dimensions
 
 
 class Journal(models.Model):
@@ -45,7 +45,7 @@ class Journal(models.Model):
     )
     image = models.ImageField(
         upload_to=JournalImageStorage(get_user_directory_path),
-        validators=[validate_image_size_and_dimensions],
+        #validators=[validate_image_size_and_dimensions],
         null=True,
         blank=True,
         help_text="(Optional) The image to save with the journal entry. Only .jpg, .png, and .jpeg extensions are allowed."
