@@ -11,11 +11,3 @@ def manage_user_creation(sender, instance, created, **kwargs):
     Signal handler to create or update a user profile whenever a user instance is created or saved.
     """
     Profile.objects.get_or_create(user=instance)
-
-    if created:
-        for i in range(1, MAX_GROUP+1):
-            Group.objects.create(
-                name=f'Group {i}',
-                user=instance,
-                position=i
-            )
