@@ -4,39 +4,52 @@ Django settings for digit project.
 import os
 from pathlib import Path
 from datetime import timedelta
-from apps.utils.helpers import get_secret
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Fetch the environment variable indicating the environment.
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '')
 DJANGO_ENV = os.environ.get('DJANGO_ENV', 'development')
-REGION_NAME = os.environ.get('REGION_NAME', 'us-east-1d')
 
-# Fetching grouped secrets
-api_secrets = get_secret('beta/Digit/api', region_name=REGION_NAME)
-db_secrets = get_secret('beta/Digit/db', region_name=REGION_NAME)
-aws_secrets = get_secret('beta/Digit/keys', region_name=REGION_NAME)
+# Environment specific settings
+if DJANGO_ENV == 'production':
+    DEBUG = False
+else:
+    DEBUG = True
 
-# AWS S3 secrets
-SECRET_KEY = aws_secrets['DJANGO_SECRET_KEY']
-AWS_STORAGE_BUCKET_NAME = aws_secrets['AWS_STORAGE_BUCKET_NAME'] 
-AWS_S3_REGION_NAME = aws_secrets['AWS_S3_REGION_NAME'] 
-AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.1/howto/static-files/
+
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', '')
+
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', '')
+AWS_S3_ENDPOINT_URL = os.environ.get('AWS_S3_ENDPOINT_URL', '')
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
-AWS_DEFAULT_ACL = None
+AWS_LOCATION = 'static'
+AWS_DEFAULT_ACL = 'public-read'
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATIC_URL = '{}/{}/'.format(AWS_S3_ENDPOINT_URL, AWS_LOCATION)
+STATIC_ROOT = 'static/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 ALLOWED_HOSTS = [
     "10.0.0.218",
-    "https://www.digidex.app",
+    "digidex.app",
+    "www.digidex.app",
+    "localhost",
 ]
 
 # API secrets
-OPENAI_API_KEY = api_secrets['OPENAI_API_KEY']
-OPEN_WEATHER_MAP_API_KEY = api_secrets['OPEN_WEATHER_MAP_API_KEY']
-PLANT_ID_API_KEY = api_secrets['PLANT_ID_API_KEY']
+OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 
 CORS_ALLOW_HEADERS = [
     "content-type",
@@ -48,27 +61,11 @@ CORS_ALLOW_METHODS = [
     "POST",
 ]
 
-# Environment specific settings
-if DJANGO_ENV == 'production':
-    DEBUG = False
-    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-    STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/static/"
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
-    CORS_ALLOW_ALL_ORIGINS = False
-    CORS_ALLOWED_ORIGINS = [
-        "http://127.0.0.1:8080",
-        "https://www.digidex.app"
-    ]
-else:
-    DEBUG = True
-    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-    STATIC_URL = '/static/'
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-    MEDIA_URL = '/media/'
-    CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "10.0.0.218",
+    "digidex.app",
+    "www.digidex.app",
+]
 
 # Application definition
 INSTALLED_APPS = [
@@ -124,11 +121,11 @@ WSGI_APPLICATION = 'digit.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': db_secrets['dbname'],
-        'USER': db_secrets['username'],
-        'PASSWORD': db_secrets['password'],
-        'HOST': db_secrets['host'],
-        'PORT': db_secrets['port'],
+        'NAME': 'digidex',
+        'USER': 'django',
+        'PASSWORD': os.environ.get('password'),
+        'HOST': os.environ.get('HOST'),
+        'PORT': os.environ.get('PORT'),
     }
 }
 
