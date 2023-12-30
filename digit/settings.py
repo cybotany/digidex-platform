@@ -36,19 +36,12 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATIC_URL = '{}/{}/'.format(AWS_S3_ENDPOINT_URL, AWS_LOCATION)
 STATIC_ROOT = 'static/'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-
 ALLOWED_HOSTS = [
     "10.0.0.218",
     "digidex.app",
     "www.digidex.app",
     "localhost",
 ]
-
-# API secrets
-OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 
 CORS_ALLOW_HEADERS = [
     "content-type",
@@ -120,11 +113,11 @@ WSGI_APPLICATION = 'digit.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'digidex',
-        'USER': 'django',
-        'PASSWORD': os.environ.get('password'),
-        'HOST': os.environ.get('HOST'),
-        'PORT': os.environ.get('PORT'),
+        'NAME': os.environ.get('DATABASE_NAME'),
+        'USER': os.environ.get('DATABASE_USER'),
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
+        'HOST': os.environ.get('DATABASE_HOST'),
+        'PORT': os.environ.get('DATABASE_PORT'),
     }
 }
 
