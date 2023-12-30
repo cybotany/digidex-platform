@@ -37,10 +37,10 @@ STATIC_URL = '{}/{}/'.format(AWS_S3_ENDPOINT_URL, AWS_LOCATION)
 STATIC_ROOT = 'static/'
 
 ALLOWED_HOSTS = [
-    "10.0.0.218",
+    "10.0.0.218:8080",
+    "localhost:8080",
     "digidex.app",
     "www.digidex.app",
-    "localhost",
 ]
 
 CORS_ALLOW_HEADERS = [
@@ -54,9 +54,10 @@ CORS_ALLOW_METHODS = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "10.0.0.218",
-    "digidex.app",
-    "www.digidex.app",
+    "http://10.0.0.218:8080",
+    "http://localhost:8080",
+    "https://digidex.app",
+    "https://www.digidex.app",
 ]
 
 # Application definition
