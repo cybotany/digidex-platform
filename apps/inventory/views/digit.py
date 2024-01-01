@@ -1,7 +1,7 @@
 from django.views.generic import DetailView
 from django.shortcuts import redirect, render
 from apps.core.models import Digit
-from apps.core.forms import CreateJournalEntry
+from apps.inventory.forms import CreateJournalEntry
 
 
 class DigitView(DetailView):
