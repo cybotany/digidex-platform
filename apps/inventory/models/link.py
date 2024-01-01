@@ -6,12 +6,9 @@ from django.urls import reverse
 
 class Link(models.Model):
     """
-    Represents a link between a digitized object and the inventory system within the CyBotany application.
-
     The Link model is primarily used to connect physical objects (like plants) that have been digitized
     (through an NFC tag or similar technology) to their digital representations and metadata in the system.
-    Each link is uniquely identified by a serial number and a secret and is associated with a secret hash for secure
-    identification and access.
+    Each link is uniquely identified by a serial number for easy access.
 
     Attributes:
         serial_number (CharField): The unique serial number of the Link, typically associated with

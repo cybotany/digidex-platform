@@ -1,6 +1,6 @@
 from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from apps.api.views import GetTSN, CreateLink
+from .views import GetTSN, CreateLink
 
 app_name = 'api'
 urlpatterns = [

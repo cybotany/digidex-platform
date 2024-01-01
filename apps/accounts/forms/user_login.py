@@ -7,13 +7,13 @@ User = get_user_model()
 class LoginForm(AuthenticationForm):
 
     def clean_username(self):
+        ''' 
+        Usernames are case insensitive, so we need to convert the username to lowercase before
+        checking if it exists in the database
+        '''
         username = self.cleaned_data['username']
-
-        # Convert the username to lowercase
         username_lower = username.lower()
-
-        # Check if the lowercase username exists in the database
         if not User.objects.filter(username__iexact=username_lower).exists():
-            raise forms.ValidationError("Invalid username")
+            raise forms.ValidationError("Invalid username: %s" % username)
 
         return username_lower
