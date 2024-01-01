@@ -24,7 +24,7 @@
               {% endif %}
           </div>
           <div>
-            <input type="password" class="text-field w-input" maxlength="256" name="password1" placeholder="Password" id="Password1" required="">
+            <input type="password" class="text-field w-input" maxlength="256" name="password1" placeholder="Password" id="Password1" title="Password must be at least 8 characters long, include letters and numbers." required="">
             {% if form.password1.errors %}
               <div class="error-message">
                 <small>{{ form.password1.errors|striptags }}</small>
