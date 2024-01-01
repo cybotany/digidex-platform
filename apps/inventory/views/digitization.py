@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404
 from django.views.generic.edit import CreateView
 from apps.core.models import Digit, Journal
-from apps.core.forms import CreateDigitForm
+from apps.inventory.forms import CreateDigitForm
 from apps.inventory.models import Link
 
 
