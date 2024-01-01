@@ -7,7 +7,7 @@ class Hierarchy(models.Model):
 
     Fields:
         hierarchy_string (TextField): A string representation of the complete hierarchy path.
-        tsn (OneToOneField): The Taxonomic Serial Number (TSN) of the taxonomic unit. 
+        tsn (IntegerField): The Taxonomic Serial Number (TSN) of the taxonomic unit. 
                           Links to a 'Unit' model.
         parent_tsn (IntegerField): The TSN of the parent taxonomic unit.
         level (IntegerField): The hierarchical level of the taxonomic unit.
@@ -19,14 +19,9 @@ class Hierarchy(models.Model):
         blank=False,
         verbose_name="Hierarchy String"
     )
-    tsn = models.OneToOneField(
-        'Unit',
-        on_delete=models.CASCADE,
+    tsn = models.IntegerField(
         null=False,
-        blank=False,
-        verbose_name="Taxonomic Serial Number",
-        related_name='hierarchy',
-        db_column='tsn'
+        blank=False
     )
     parent_tsn = models.IntegerField(
         null=True,

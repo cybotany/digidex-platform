@@ -18,8 +18,6 @@ class Link(models.Model):
                                    the physical NFC tag or other identification mechanism.
         active (BooleanField): A flag indicating whether the Link is active and mapped to a digital object. Inactive
                                links may represent unused or deactivated tags.
-        secret_hash (CharField): The hash of a secret key associated with the Link. This is used for
-                                 secure verification.
         user (ForeignKey): A relationship to the User model, representing the user who created or is managing the link.
         digit (OneToOneField): A relationship to the Digit model, representing the digitized plant associated with this link.
     """
@@ -36,12 +34,6 @@ class Link(models.Model):
         verbose_name="Active",
         help_text="Indicates whether the link is currently active and mapped to a digital object."
     )
-    #secret_hash = models.CharField(
-    #    max_length=64,
-    #    editable=False,
-    #    verbose_name="Secret Hash",
-    #    help_text="The hash of a secret key for secure identification and access."
-    #)
     user = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE,

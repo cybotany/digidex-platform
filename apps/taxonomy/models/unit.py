@@ -139,12 +139,9 @@ class Unit(models.Model):
     initial_time_stamp = models.DateTimeField(
         auto_now_add=True
     )
-    parent = models.ForeignKey(
-        'self',
-        on_delete=models.SET_NULL,
+    parent = models.IntegerField(
         null=True,
         blank=True,
-        related_name='children',
         db_column='parent_tsn'
     )
     taxon_author_id = models.IntegerField(
@@ -162,9 +159,7 @@ class Unit(models.Model):
         blank=True,
         db_column='kingdom_id'
     )
-    rank = models.ForeignKey(
-        'Rank',
-        on_delete=models.SET_NULL,
+    rank = models.IntegerField(
         null=True,
         blank=True,
         db_column='rank_id'
