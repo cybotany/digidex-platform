@@ -15,16 +15,8 @@ DJANGO_ENV = os.environ.get('DJANGO_ENV', 'development')
 # Environment specific settings
 if DJANGO_ENV == 'production':
     DEBUG = False
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
-    SECURE_SSL_REDIRECT = True
 else:
     DEBUG = True
-    SECURE_PROXY_SSL_HEADER = None
-    SESSION_COOKIE_SECURE = False
-    CSRF_COOKIE_SECURE = False
-    SECURE_SSL_REDIRECT = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
@@ -82,6 +74,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'bootstrap5',
+    'sslserver',
     'apps.accounts.apps.AccountConfig',
     'apps.api',
     'apps.core',
@@ -182,6 +175,11 @@ SIMPLE_JWT = {
 
 LOGIN_REDIRECT_URL = 'core:garden' # When removed it redirects to profile page
 LOGIN_URL = 'core:login'
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
 
 SECURE_HSTS_SECONDS = 31536000 # 1 year
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
