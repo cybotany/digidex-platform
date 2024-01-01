@@ -2,8 +2,6 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth import get_user_model
 from apps.accounts.models import Profile
-from apps.inventory.models import Group
-from apps.utils.constants import MAX_GROUP
 
 @receiver(post_save, sender=get_user_model())
 def manage_user_creation(sender, instance, created, **kwargs):
