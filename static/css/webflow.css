@@ -1815,9 +1815,3 @@ textarea.w-select {
 .wf-layout-layout {
   display: grid;
 }
-.username-hint {
-  display: block;
-  margin-top: 5px;
-  font-size: 0.8em;
-  color: #6c757d; 
-}
