@@ -24,6 +24,7 @@ class Digit(models.Model):
     )
     description = models.TextField(
         max_length=500,
+        null=True,
         blank=True,
         help_text="A short description of the digitized plant."
     )
