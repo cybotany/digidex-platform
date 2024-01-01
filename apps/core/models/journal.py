@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from apps.utils.helpers import get_user_directory_path
 from apps.utils.custom_storage import JournalImageStorage
-#from apps.utils.validators import validate_image_size_and_dimensions
 
 
 class Journal(models.Model):

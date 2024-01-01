@@ -1,7 +1,6 @@
 from .linking import LinkingView
 from .digitization import DigitizationView
 from .digit import DigitView
-from .grouped_digits import GroupedDigitsView
 from .garden import GardenView
 from .landing import LandingView
 from .login import LoginUserView
@@ -10,4 +9,3 @@ from .signup import SignupUserView
 from .contact_us import ContactUsView
 from .about_us import AboutUsView
 from .delete_digit import DeleteDigitView
-from .delete_group import DeleteGroupView

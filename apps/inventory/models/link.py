@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from apps.core.models import Digit
-from apps.inventory.models import Group
 from django.urls import reverse
 
 
@@ -19,11 +18,10 @@ class Link(models.Model):
                                    the physical NFC tag or other identification mechanism.
         active (BooleanField): A flag indicating whether the Link is active and mapped to a digital object. Inactive
                                links may represent unused or deactivated tags.
-    secret_hash (CharField): The hash of a secret key associated with the Link. This is used for
-                                    secure verification.
+        secret_hash (CharField): The hash of a secret key associated with the Link. This is used for
+                                 secure verification.
         user (ForeignKey): A relationship to the User model, representing the user who created or is managing the link.
         digit (OneToOneField): A relationship to the Digit model, representing the digitized plant associated with this link.
-        group (ForeignKey): A relationship to the Group model.
     """
 
     serial_number = models.CharField(
@@ -59,14 +57,6 @@ class Link(models.Model):
         blank=True,
         related_name='link',
         help_text="The digitized plant associated with this NFC tag."
-    )
-    group = models.ForeignKey(
-        Group,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name='links',
-        help_text='The group this link is associated with.'
     )
 
     def get_digit_url(self):
