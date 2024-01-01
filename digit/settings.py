@@ -40,9 +40,8 @@ STATICFILES_DIRS = [
 STATIC_URL = '{}/{}/'.format(AWS_S3_ENDPOINT_URL, AWS_LOCATION)
 STATIC_ROOT = '/var/www/digidex.app/static'
 
-
-#STATIC_ROOT = 'static/'
 ALLOWED_HOSTS = [
+    "10.0.0.218",
     "localhost",
     "digidex.app",
     "www.digidex.app",
