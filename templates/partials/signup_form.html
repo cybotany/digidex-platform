@@ -9,6 +9,7 @@
           {% csrf_token %}
           <div>
             <input type="text" class="text-field w-input" maxlength="256" name="username" placeholder="Username" id="Username" required="">
+            <small class="username-hint">Usernames are case-insensitive.</small>
             {% if form.username.errors %}
               <div class="error-message">
                 <small>{{ form.username.errors|striptags }}</small>
