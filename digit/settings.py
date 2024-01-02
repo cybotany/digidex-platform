@@ -79,6 +79,7 @@ INSTALLED_APPS = [
     'apps.api',
     'apps.core',
     'apps.inventory',
+    'apps.nfc',
     'apps.taxonomy',
     'apps.utils',
 ]
