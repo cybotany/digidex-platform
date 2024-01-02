@@ -76,7 +76,7 @@
 
 <section class="section">
   <div class="content">
-    <form action="{% url 'core:delete-digit' object.id %}" method="post">
+    <form action="{% url 'inventory:delete-digit' object.id %}" method="post">
       {% csrf_token %}
       <input type="submit" value="Delete Digit">
     </form>

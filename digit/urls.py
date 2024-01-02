@@ -8,6 +8,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('apps.accounts.urls')),
     path('api/', include('apps.api.urls')),
-    path('', include('apps.core.urls')),
+    path('', include('apps.main.urls')),
     path('inventory/', include('apps.inventory.urls')),
 ]

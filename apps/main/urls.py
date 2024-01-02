@@ -1,5 +1,5 @@
 from django.urls import path
-from apps.core.views import (ContactUsView,
+from apps.main.views import (ContactUsView,
                              AboutUsView,
                              LandingView)
 

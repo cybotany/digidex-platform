@@ -2,7 +2,7 @@
 
 <div data-w-id="9c896d19-12ed-148e-4e5a-1c014986d7c2" data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav">
   <div class="nav-block">
-    <a href="{% url 'core:landing' %}" aria-current="page" class="brand w-nav-brand w--current">
+    <a href="{% url 'main:landing' %}" aria-current="page" class="brand w-nav-brand w--current">
       <img src="{% static 'images/Logo.png' %}" loading="lazy" sizes="88px" srcset="{% static 'images/Logo-p-500.png' %} 500w, {% static 'images/Logo-p-800.png' %} 800w, {% static 'images/Logo.png' %} 1024w" alt="" class="logo">
     </a>
     <div class="nav">
@@ -12,13 +12,13 @@
             <span>{{ request.user.username }}</span>
           </div>
           <div class="button-mobile">
-            <a href="{% url 'core:garden' %}" class="nav-button-outline w-button">Garden</a>
-            <a href="{% url 'core:logout' %}" class="nav-button w-button">Logout</a>
+            <a href="{% url 'inventory:garden' %}" class="nav-button-outline w-button">Garden</a>
+            <a href="{% url 'main:logout' %}" class="nav-button w-button">Logout</a>
           </div>
         {% else %}
           <div class="button-mobile">
-            <a href="{% url 'core:login' %}" class="nav-button-outline w-button">Login</a>
-            <a href="{% url 'core:signup' %}" class="nav-button w-button">Signup</a>
+            <a href="{% url 'main:login' %}" class="nav-button-outline w-button">Login</a>
+            <a href="{% url 'main:signup' %}" class="nav-button w-button">Signup</a>
           </div>
         {% endif %}
       </nav>
@@ -30,13 +30,13 @@
             <span>{{ request.user.username }}</span>
           </div>
           <div class="button-desktop">
-            <a href="{% url 'core:garden' %}" class="nav-button-outline w-button">Garden</a>
-            <a href="{% url 'core:logout' %}" class="nav-button w-button">Logout</a>
+            <a href="{% url 'inventory:garden' %}" class="nav-button-outline w-button">Garden</a>
+            <a href="{% url 'main:logout' %}" class="nav-button w-button">Logout</a>
           </div>
         {% else %}
           <div class="button-desktop">
-            <a href="{% url 'core:login' %}" class="nav-button-outline w-button">Login</a>
-            <a href="{% url 'core:signup' %}" class="nav-button w-button">Signup</a>
+            <a href="{% url 'main:login' %}" class="nav-button-outline w-button">Login</a>
+            <a href="{% url 'main:signup' %}" class="nav-button w-button">Signup</a>
           </div>
         {% endif %}
       </nav>
