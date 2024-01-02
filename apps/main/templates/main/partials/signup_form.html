@@ -1,0 +1,57 @@
+<section class="section-full">
+  <div class="content">
+    <div class="account-form">
+      <div class="subtitle blue">Signup<br></div>
+      <h2 class="heading-account">Create an account</h2>
+
+      <div class="form-block w-form">
+        <form id="wf-form-Signup" method="post" class="form">
+          {% csrf_token %}
+          <div>
+            <input type="text" class="text-field w-input" maxlength="256" name="username" placeholder="Username" id="Username" required="">
+            {% if form.username.errors %}
+              <div class="error-message">
+                <small>{{ form.username.errors|striptags }}</small>
+              </div>
+            {% endif %}
+          </div>
+          <div>
+            <input type="email" class="text-field w-input" maxlength="256" name="email" placeholder="Email address" id="Email-Address" required="">
+              {% if form.email.errors %}
+                <div class="error-message">
+                  <small>{{ form.email.errors|striptags }}</small>
+                </div>
+              {% endif %}
+          </div>
+          <div>
+            <input type="password" class="text-field w-input" maxlength="256" name="password1" placeholder="Password" id="Password1" title="Password must be at least 8 characters long, include letters and numbers." required="">
+            {% if form.password1.errors %}
+              <div class="error-message">
+                <small>{{ form.password1.errors|striptags }}</small>
+              </div>
+            {% endif %}
+          </div>
+          <div>
+            <input type="password" class="text-field w-input" maxlength="256" name="password2" placeholder="Confirm Password" id="Password2" required="">
+            {% if form.password2.errors %}
+              <div class="error-message">
+                <small>{{ form.password2.errors|striptags }}</small>
+              </div>
+            {% endif %}
+          </div>
+          <input type="submit" value="Submit" data-wait="Please wait..." class="submit-button yellow w-button">
+
+          {% if form.non_field_errors %}
+          <div class="error-message yellow w-form-fail">
+            {% for error in form.non_field_errors %}
+              <div class="text-error yellow">{{ error }}</div>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </form>
+
+        <div class="text-account">Already have an account? <a href="{% url 'accounts:login' %}" class="link-account">Login</a></div>
+      </div>
+    </div>
+  </div>
+</section>
