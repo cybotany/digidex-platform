@@ -13,12 +13,12 @@
           </div>
           <div class="button-mobile">
             <a href="{% url 'inventory:garden' %}" class="nav-button-outline w-button">Garden</a>
-            <a href="{% url 'main:logout' %}" class="nav-button w-button">Logout</a>
+            <a href="{% url 'accounts:logout' %}" class="nav-button w-button">Logout</a>
           </div>
         {% else %}
           <div class="button-mobile">
-            <a href="{% url 'main:login' %}" class="nav-button-outline w-button">Login</a>
-            <a href="{% url 'main:signup' %}" class="nav-button w-button">Signup</a>
+            <a href="{% url 'accounts:login' %}" class="nav-button-outline w-button">Login</a>
+            <a href="{% url 'accounts:signup' %}" class="nav-button w-button">Signup</a>
           </div>
         {% endif %}
       </nav>
@@ -31,12 +31,12 @@
           </div>
           <div class="button-desktop">
             <a href="{% url 'inventory:garden' %}" class="nav-button-outline w-button">Garden</a>
-            <a href="{% url 'main:logout' %}" class="nav-button w-button">Logout</a>
+            <a href="{% url 'accounts:logout' %}" class="nav-button w-button">Logout</a>
           </div>
         {% else %}
           <div class="button-desktop">
-            <a href="{% url 'main:login' %}" class="nav-button-outline w-button">Login</a>
-            <a href="{% url 'main:signup' %}" class="nav-button w-button">Signup</a>
+            <a href="{% url 'accounts:login' %}" class="nav-button-outline w-button">Login</a>
+            <a href="{% url 'accounts:signup' %}" class="nav-button w-button">Signup</a>
           </div>
         {% endif %}
       </nav>
