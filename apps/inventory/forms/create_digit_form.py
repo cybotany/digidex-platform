@@ -1,5 +1,5 @@
 from django import forms
-from apps.core.models import Digit
+from apps.inventory.models import Digit
 
 
 class CreateDigitForm(forms.ModelForm):

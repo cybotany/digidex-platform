@@ -1,6 +1,6 @@
 from django.views.generic import DetailView
 from django.shortcuts import redirect, render
-from apps.core.models import Digit
+from apps.inventory.models import Digit
 from apps.inventory.forms import CreateJournalEntry
 
 

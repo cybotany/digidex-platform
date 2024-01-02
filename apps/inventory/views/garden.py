@@ -1,8 +1,8 @@
 from django.views.generic.list import ListView
 from django.shortcuts import redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
-from apps.inventory.models import Link
-from apps.core.models import Digit
+from apps.nfc.models import Link
+from apps.inventory.models import Digit
 
 
 class GardenView(LoginRequiredMixin, ListView):

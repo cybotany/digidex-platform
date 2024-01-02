@@ -1,5 +1,5 @@
 from django import forms
-from apps.core.models import Journal
+from apps.inventory.models import Journal
 
 
 class CreateJournalEntry(forms.ModelForm):

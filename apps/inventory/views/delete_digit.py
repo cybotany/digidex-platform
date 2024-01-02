@@ -1,7 +1,7 @@
 from django.views import View
 from django.shortcuts import get_object_or_404, redirect
-from apps.core.models import Digit
-from apps.inventory.models import Link
+from apps.inventory.models import Digit
+from apps.nfc.models import Link
 from django.db import transaction
 
 
