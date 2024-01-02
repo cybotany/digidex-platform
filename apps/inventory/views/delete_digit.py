@@ -15,4 +15,4 @@ class DeleteDigitView(View):
             link.save()
 
             digit.delete()
-        return redirect('core:garden')
+        return redirect('inventory:garden')

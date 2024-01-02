@@ -8,7 +8,7 @@ from apps.inventory.models import Digit
 class GardenView(LoginRequiredMixin, ListView):
     model = Digit
     context_object_name = 'digits'
-    template_name = 'garden.html'
+    template_name = 'inventory/garden.html'
 
     def get_queryset(self):
         """ Overriding to get Digits for the current user """

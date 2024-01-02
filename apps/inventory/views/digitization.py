@@ -8,7 +8,7 @@ from apps.nfc.models import Link
 class DigitizationView(CreateView):
     model = Digit
     form_class = CreateDigitForm
-    template_name = 'create_digit.html'
+    template_name = 'inventory/create_digit.html'
 
     def get_form_kwargs(self):
         # Call the base implementation first to get a context

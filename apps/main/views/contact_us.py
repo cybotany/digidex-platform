@@ -2,4 +2,4 @@ from django.views.generic import TemplateView
 
 
 class ContactUsView(TemplateView):
-    template_name = 'contact.html'
+    template_name = 'main/contact.html'

@@ -3,4 +3,4 @@ from apps.accounts.forms import LoginForm
 
 class LoginUserView(LoginView):
     form_class = LoginForm
-    template_name = 'login.html'
+    template_name = 'accounts/login.html'
