@@ -1,6 +1,9 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth import get_user_model
 from apps.taxonomy.models import Unit
+from apps.nfc.models import Link
+
 
 class Digit(models.Model):
     """
@@ -13,6 +16,8 @@ class Digit(models.Model):
         name (CharField): A human-readable name for the digitized plant.
         description (TextField): A short description of the digitized plant.
         taxonomic_unit (ForeignKey): A relationship to the Unit model, representing the plant's taxonomic classification.
+        user (ForeignKey): The user who created the journal entry, linked to the user model.
+        nfc_link (OneToOneField): A relationship to the Link model, representing the NFC link for the digitized plant.
         created_at (DateTimeField): The date and time when the Digit instance was created.
         last_modified (DateTimeField): The date and time when the Digit instance was last modified.
     """
@@ -36,6 +41,20 @@ class Digit(models.Model):
         on_delete=models.CASCADE,
         related_name='digits',
         help_text="The taxonomic classification of the digitized plant."
+    )
+    user = models.ForeignKey(
+        get_user_model(),
+        on_delete=models.CASCADE,
+        verbose_name="User",
+        help_text="The owner of the digitized plant."
+    )
+    nfc_link = models.OneToOneField(
+        Link,
+        on_delete=models.CASCADE,
+        related_name='digit',
+        null=True,
+        blank=True,
+        help_text="NFC link for the digitized plant."
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
@@ -66,7 +85,7 @@ class Digit(models.Model):
         Returns:
             str: The URL to view the details of this digit.
         """
-        return reverse('core:digit', args=[str(self.id)])
+        return reverse('inventory:digit', args=[str(self.id)])
 
     class Meta:
         verbose_name = "Digit"

@@ -17,12 +17,9 @@ class LinkingView(LoginRequiredMixin, View):
                 # Fetch the Link object based on UID
                 try:
                     link = Link.objects.get(uid=decoded_uid)
-                    link.counter += 1
-                    link.save()
 
                     # Redirect to the desired page with the link id
-                    #return redirect('inventory:digitization', link_id=str(link.id))
-                    return HttpResponse("Link has been found found!", status=200)
+                    return redirect('inventory:digitization', link_id=str(link.id))
                 except Link.DoesNotExist:
                     # Handle the case where no Link object is found for the given UID
                     return HttpResponse("Link not found", status=404)

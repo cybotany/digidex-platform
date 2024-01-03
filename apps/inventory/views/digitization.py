@@ -1,19 +1,17 @@
 from django.shortcuts import get_object_or_404
 from django.views.generic.edit import CreateView
 from apps.inventory.models import Digit, Journal
-from apps.inventory.forms import CreateDigitForm
+from apps.inventory.forms import DigitizationForm
 from apps.nfc.models import Link
 
 
 class DigitizationView(CreateView):
     model = Digit
-    form_class = CreateDigitForm
-    template_name = 'inventory/create_digit.html'
+    form_class = DigitizationForm
+    template_name = 'inventory/digitization.html'
 
     def get_form_kwargs(self):
-        # Call the base implementation first to get a context
         kwargs = super(DigitizationView, self).get_form_kwargs()
-        # Add in the user
         kwargs['user'] = self.request.user
         return kwargs
 
@@ -32,13 +30,6 @@ class DigitizationView(CreateView):
             user=self.request.user,
             entry="Initial journal entry for " + digit.name
         )
-
-        # Set the digit field of the Link instance
-        link.digit = digit
-        link.user = self.request.user
-
-        if 'group' in form.cleaned_data:
-            link.group = form.cleaned_data['group']
 
         link.active = True
         link.save()

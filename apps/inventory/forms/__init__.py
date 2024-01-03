@@ -1,2 +1,2 @@
-from .create_digit_form import CreateDigitForm
+from .digitization_form import DigitizationForm
 from .create_journal_entry import CreateJournalEntry
