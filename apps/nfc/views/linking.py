@@ -7,33 +7,28 @@ from django.http import HttpResponse
 
 class LinkingView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
-        mirrored_data = request.GET.get('data')
+        uid = request.GET.get('uid')
 
-        if mirrored_data:
+        if uid:
             try:
-                # Decode the ASCII encoded string
-                decoded_data = bytes.fromhex(mirrored_data).decode('ascii')
-
-                # Split the UID and counter values
-                uid, counter_str = decoded_data.split('x')
-                counter = int(counter_str)
+                # Decode the ASCII encoded UID
+                decoded_uid = bytes.fromhex(uid).decode('ascii')
 
                 # Fetch the Link object based on UID
                 try:
-                    link = Link.objects.get(uid=uid)
-                    # Update the counter field
-                    link.counter = counter
+                    link = Link.objects.get(uid=decoded_uid)
+                    link.counter += 1
                     link.save()
 
                     # Redirect to the desired page with the link id
                     #return redirect('inventory:digitization', link_id=str(link.id))
-                    return HttpResponse("Link has been found found!", status=404)
+                    return HttpResponse("Link has been found found!", status=200)
                 except Link.DoesNotExist:
                     # Handle the case where no Link object is found for the given UID
                     return HttpResponse("Link not found", status=404)
             
             except ValueError:
-                # Handle decoding error or split error
-                return HttpResponse("Invalid data format", status=400)
+                # Handle decoding error
+                return HttpResponse("Invalid UID format", status=400)
         else:
-            return HttpResponse("No data provided", status=400)
+            return HttpResponse("No UID provided", status=400)
