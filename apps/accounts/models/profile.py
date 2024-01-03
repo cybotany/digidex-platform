@@ -17,6 +17,8 @@ class Profile(models.Model):
         avatar (ImageField): An image field for user's profile picture.
         interests (CharField): A char field for user's interests.
         experience (CharField): A char field for user's experience.
+        created_at (DateTimeField): The date and time when the profile was created.
+        last_modified (DateTimeField): The date and time when the profile was last modified.
     """
     user = models.OneToOneField(
         get_user_model(),
@@ -45,6 +47,16 @@ class Profile(models.Model):
         blank=True,
         help_text='The profile picture of the user.'
     )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name="Created At",
+        help_text="The date and time when the profile was created."
+    )
+    last_modified = models.DateTimeField(
+        auto_now=True,
+        verbose_name="Last Modified",
+        help_text="The date and time when the profile was last modified."
+    )
 
     def __str__(self):
         """
@@ -54,3 +66,7 @@ class Profile(models.Model):
             str: A string in the format "<username>'s Profile".
         """
         return f"{self.user.username}'s Profile"
+
+    class Meta:
+        verbose_name = "Profile"
+        verbose_name_plural = "Profiles"

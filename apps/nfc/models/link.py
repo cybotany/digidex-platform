@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class Link(models.Model):
     """
     The Link model is primarily used to connect physical objects (like plants) that have been digitized
@@ -9,12 +8,13 @@ class Link(models.Model):
 
     Attributes:
         uid (CharField): The unique identifier or serial number of the Link, typically associated with
-                                   the physical NFC tag or other identification mechanism.
+                         the physical NFC tag or other identification mechanism.
         active (BooleanField): A flag indicating whether the Link is active and mapped to a digital object. Inactive
                                links may represent unused or deactivated tags.
         counter (IntegerField): The numerical counter value associated with the NFC tag. This value is
                                 automatically triggered at each read command.
-
+        created_at (DateTimeField): The date and time when the Link instance was created.
+        last_modified (DateTimeField): The date and time when the Link instance was last modified.
     """
 
     uid = models.CharField(
@@ -33,6 +33,16 @@ class Link(models.Model):
         default=0,
         verbose_name="Counter Value",
         help_text="The numerical counter value associated with the NFC tag."
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name="Created At",
+        help_text="The date and time when the link instance was created."
+    )
+    last_modified = models.DateTimeField(
+        auto_now=True,
+        verbose_name="Last Modified",
+        help_text="The date and time when the link instance was last modified."
     )
 
     def __str__(self):

@@ -2,7 +2,6 @@ from django.db import models
 from django.urls import reverse
 from apps.taxonomy.models import Unit
 
-
 class Digit(models.Model):
     """
     Represents a digitized version of a plant, linking it to both the inventory system and taxonomic data.
@@ -14,6 +13,8 @@ class Digit(models.Model):
         name (CharField): A human-readable name for the digitized plant.
         description (TextField): A short description of the digitized plant.
         taxonomic_unit (ForeignKey): A relationship to the Unit model, representing the plant's taxonomic classification.
+        created_at (DateTimeField): The date and time when the Digit instance was created.
+        last_modified (DateTimeField): The date and time when the Digit instance was last modified.
     """
 
     name = models.CharField(
@@ -35,6 +36,16 @@ class Digit(models.Model):
         on_delete=models.CASCADE,
         related_name='digits',
         help_text="The taxonomic classification of the digitized plant."
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name="Created At",
+        help_text="The date and time when the digit instance was created."
+    )
+    last_modified = models.DateTimeField(
+        auto_now=True,
+        verbose_name="Last Modified",
+        help_text="The date and time when the digit instance was last modified."
     )
 
     def __str__(self):
