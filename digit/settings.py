@@ -171,8 +171,8 @@ SIMPLE_JWT = {
     'TOKEN_TYPE_CLAIM': 'token_type',
 }
 
-LOGIN_REDIRECT_URL = 'core:garden' # When removed it redirects to profile page
-LOGIN_URL = 'core:login'
+LOGIN_REDIRECT_URL = 'inventory:garden' # When removed it redirects to profile page
+LOGIN_URL = 'accounts:login'
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SESSION_COOKIE_SECURE = True
