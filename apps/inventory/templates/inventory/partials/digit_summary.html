@@ -10,54 +10,20 @@
 
 <section class="section">
   <div class="content">
-    <h4 class="heading-account">Journal</h4>
-    <table>
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Time</th>
-          <th>User</th>
-          <th>Entry</th>
-          <th>Image</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for journal in digit.journal_entries.all %}
-          <tr>
-            <td>{{ journal.created_at|date:"F j, Y" }}</td>
-            <td>{{ journal.created_at|date:"g:i A" }}</td>
-            <td>{{ journal.user.username }}</td>
-            <td>{{ journal.entry }}</td>
-            <td>
-              {% if journal.image %}
-                <img src="{{ journal.image.url }}" alt="Journal Image" width="100">
-              {% else %}
-                No image
-              {% endif %}
-            </td>
-          </tr>
-        {% endfor %}
-      </tbody>           
-    </table>
-  </div>
-</section>
-
-<section class="section">
-  <div class="content">
     <div class="account-form">
       <!-- Clickable header for toggling the form -->
-      <div class="accordion-header" onclick="toggleJournalForm()">
-        <h4 class="heading-account">Create a New Journal Entry</h4>
+      <div class="accordion-header" onclick="toggleDigitForm()">
+        <h4 class="heading-account">Edit Digit</h4>
         <div class="block-icon-accordion" id="toggleIcon">
           <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);background-color:rgba(57,89,255,0.07);border-color:rgba(255,255,255,0.2)" class="block-icon-accordion"><img src="{% static 'images/close.svg' %}" loading="eager" alt="" class="icon-accordion"></div>
         </div>
       </div>
       <!-- Form, initially hidden -->
-      <div id="journalForm" style="display:none" class="form-block w-form">
+      <div id="digitForm" style="display:none" class="form-block w-form">
         <form method="post" enctype="multipart/form-data" class="form">
           {% csrf_token %}
           <!-- Form fields -->
-          {% for field in journal_entry_form %}
+          {% for field in digitization_form %}
             <div>
               <input type="{{ field.field.widget.input_type }}" class="text-field w-input" name="{{ field.name }}" placeholder="{{ field.label }}" id="{{ field.id_for_label }}" {% if field.is_required %}required=""{% endif %}>
               {% if field.errors %}
@@ -67,10 +33,10 @@
               {% endif %}
             </div>
           {% endfor %}
-          <input type="submit" value="Submit Journal Entry" data-wait="Please wait..." class="submit-button w-button">
+          <input type="submit" value="Submit Digit Updates" data-wait="Please wait..." class="submit-button w-button">
         </form>
       </div>
-    </div> 
+    </div>
   </div>
 </section>
 
