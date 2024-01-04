@@ -4,9 +4,9 @@ from apps.inventory.models import Digit
 from apps.inventory.forms import DigitizationForm
 
 
-class DigitView(DetailView):
+class DigitDetailsView(DetailView):
     model = Digit
-    template_name = 'inventory/digit.html'
+    template_name = 'inventory/digit_details.html'
 
     def link_is_active(self):
         """Check if the associated Link is active."""

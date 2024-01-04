@@ -1,9 +1,9 @@
 from django.urls import path
-from .views import (GardenView, DigitView, DeleteDigitView)
+from .views import (DigitStorageView, DigitDetailsView, DigitDeletionView)
 
 app_name = 'inventory'
 urlpatterns = [
-    path('garden/', GardenView.as_view(), name='garden'),
-    path('digit/<int:pk>/', DigitView.as_view(), name='digit'),
-    path('digit/delete/<int:pk>/', DeleteDigitView.as_view(), name='delete-digit'),
+    path('', DigitStorageView.as_view(), name='storage'),
+    path('<int:pk>', DigitDetailsView.as_view(), name='details'),
+    path('delete/<int:pk>', DigitDeletionView.as_view(), name='deletion'),
 ]

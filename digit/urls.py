@@ -9,5 +9,5 @@ urlpatterns = [
     path('accounts/', include('apps.accounts.urls')),
     path('api/', include('apps.api.urls')),
     path('', include('apps.main.urls')),
-    path('inventory/', include('apps.inventory.urls')),
+    path('digits/', include('apps.inventory.urls')),
 ]

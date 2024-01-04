@@ -1,3 +1,3 @@
-from .digit import DigitView
-from .garden import GardenView
-from .delete_digit import DeleteDigitView
+from .digit_details import DigitDetailsView
+from .digit_storage import DigitStorageView
+from .digit_deletion import DigitDeletionView

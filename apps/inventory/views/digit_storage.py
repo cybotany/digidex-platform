@@ -3,10 +3,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from apps.inventory.models import Digit
 
 
-class GardenView(LoginRequiredMixin, ListView):
+class DigitStorageView(LoginRequiredMixin, ListView):
     model = Digit
     context_object_name = 'digits'
-    template_name = 'inventory/garden.html'
+    template_name = 'inventory/digit_storage.html'
 
     def get_queryset(self):
         """ Overriding to get Digits for the current user """

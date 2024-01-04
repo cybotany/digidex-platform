@@ -5,7 +5,7 @@ from apps.nfc.models import Link
 from django.db import transaction
 
 
-class DeleteDigitView(View):
+class DigitDeletionView(View):
     def post(self, request, pk):
         with transaction.atomic():
             # Get the Digit and associated Link
@@ -21,4 +21,4 @@ class DeleteDigitView(View):
 
             # Create a new Digit and associate it with the Link
             new_digit = Digit.objects.create(nfc_link=link)
-        return redirect('main:landing')
+        return redirect('inventory:storage')
