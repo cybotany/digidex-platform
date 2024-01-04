@@ -1,14 +1,14 @@
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from apps.nfc.models import Link
 from apps.inventory.models import Digit
 from django.db import IntegrityError
 
 
 class CreateLink(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny] #[IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
         uid = kwargs.get('uid')
