@@ -8,11 +8,17 @@ from django.db import transaction
 class DeleteDigitView(View):
     def post(self, request, pk):
         with transaction.atomic():
+            # Get the Digit and associated Link
             digit = get_object_or_404(Digit, pk=pk)
-
             link = get_object_or_404(Link, digit=digit)
+
+            # Delete the old Digit
+            digit.delete()
+
+            # Set Link to inactive
             link.active = False
             link.save()
 
-            digit.delete()
-        return redirect('inventory:garden')
+            # Create a new Digit and associate it with the Link
+            new_digit = Digit.objects.create(nfc_link=link)
+        return redirect('main:landing')

@@ -17,7 +17,7 @@ class CreateLink(APIView):
         try:
             link, created = Link.objects.get_or_create(uid=uid)
             if created:
-                digit = Digit.objects.create(nfc_link=link, user=request.user)
+                digit = Digit.objects.create(nfc_link=link)
                 digit_url = request.build_absolute_uri(digit.get_absolute_url())
                 return Response({"digit_url": digit_url}, status=status.HTTP_201_CREATED)
             else:

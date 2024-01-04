@@ -45,6 +45,8 @@ class Digit(models.Model):
     user = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE,
+        null=True,
+        blank=True,
         verbose_name="User",
         help_text="The owner of the digitized plant."
     )
