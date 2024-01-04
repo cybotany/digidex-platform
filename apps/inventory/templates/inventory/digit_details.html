@@ -8,8 +8,22 @@
     {% include 'inventory/partials/header.html' %}  
     {% include 'inventory/partials/digit_summary.html' %}
     {% include 'inventory/partials/footer.html' %}
-   
-    <script src="{% static 'inventory/js/toggleDigitForm.js' %}"></script>
   
+    <script>
+      function toggleDigitForm() {
+        console.log("Toggle function called");  // Debugging line
+        var form = document.getElementById('digitForm');
+        var icon = document.getElementById('toggleIcon');
+    
+        if (form.style.display === 'none' || form.style.display === '') {
+            form.style.display = 'block';
+            icon.classList.add('rotate-icon');
+        } else {
+            form.style.display = 'none';
+            icon.classList.remove('rotate-icon');
+        }
+      }
+    </script>
+
   </body>
 </html>

@@ -21,7 +21,7 @@ class DigitDetailsView(DetailView):
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
 
-        form = DigitizationForm(request.POST, request.FILES, instance=self.object)
+        form = DigitizationForm(request.POST, instance=self.object)
         if form.is_valid():
             form.save()
             return redirect(self.object.get_absolute_url())

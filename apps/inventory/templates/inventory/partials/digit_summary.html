@@ -20,7 +20,7 @@
       </div>
       <!-- Form, initially hidden -->
       <div id="digitForm" style="display:none" class="form-block w-form">
-        <form method="post" enctype="multipart/form-data" class="form">
+        <form method="post" class="form">
           {% csrf_token %}
           <!-- Form fields -->
           {% for field in digitization_form %}
