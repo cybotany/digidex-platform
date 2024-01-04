@@ -1,11 +1,12 @@
 from django.views import View
 from django.shortcuts import get_object_or_404, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 from apps.inventory.models import Digit
 from apps.nfc.models import Link
 from django.db import transaction
 
 
-class DigitDeletionView(View):
+class DigitDeletionView(LoginRequiredMixin, View):
     def post(self, request, pk):
         with transaction.atomic():
             # Get the Digit and associated Link

@@ -1,10 +1,11 @@
 from django.views.generic import DetailView
 from django.shortcuts import redirect, render
+from django.contrib.auth.mixins import LoginRequiredMixin
 from apps.inventory.models import Digit
 from apps.inventory.forms import DigitizationForm
 
 
-class DigitDetailsView(DetailView):
+class DigitDetailsView(LoginRequiredMixin, DetailView):
     model = Digit
     template_name = 'inventory/digit_details.html'
 
