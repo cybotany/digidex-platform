@@ -10,4 +10,5 @@ urlpatterns = [
     path('api/', include('apps.api.urls')),
     path('', include('apps.main.urls')),
     path('digits/', include('apps.inventory.urls')),
+    path('nfc/', include('apps.nfc.urls')),
 ]
