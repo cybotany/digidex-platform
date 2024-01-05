@@ -9,7 +9,7 @@ class CreateDigitForm(forms.ModelForm):
 
     class Meta:
         model = Digit
-        fields = ('name', 'description')
+        fields = ('name', 'description', 'taxonomic_unit', 'nfc_link')
 
     def __init__(self, *args, **kwargs):
         super(CreateDigitForm, self).__init__(*args, **kwargs)

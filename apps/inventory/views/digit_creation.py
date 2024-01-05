@@ -13,7 +13,6 @@ class DigitCreationView(CreateView):
 
     def get_form_kwargs(self):
         kwargs = super(DigitCreationView, self).get_form_kwargs()
-        kwargs['user'] = self.request.user
         return kwargs
 
     def form_valid(self, form):
@@ -22,7 +21,9 @@ class DigitCreationView(CreateView):
         link = get_object_or_404(Link, id=link_id)
 
         with transaction.atomic():
-            digit = form.save()
+            digit = form.save(commit=False)
+            digit.nfc_link = link
+            digit.save()
             
             # Update the Link objects
             link.user = self.request.user
