@@ -20,6 +20,7 @@ class CreateLink(APIView):
                 link_url = request.build_absolute_uri(link.get_absolute_url())
                 return Response({"link_url": link_url}, status=status.HTTP_201_CREATED)
             else:
+                link_url = request.build_absolute_uri(link.get_absolute_url())
                 return Response({"link_url": link_url}, status=status.HTTP_200_OK)
         except IntegrityError as e:
             return Response({"error": "Database integrity error - possibly duplicate UID."}, status=status.HTTP_409_CONFLICT)
