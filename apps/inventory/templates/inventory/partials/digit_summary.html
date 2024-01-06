@@ -3,6 +3,7 @@
     <div class="block-top">
       <h2 class="heading-top">{{ digit.name }}</h2>
       <p class="paragraph-top">{{ digit.description }}</p>
+      <p class="paragraph">{{ digit.taxonomic_unit.complete_name|default:"No Taxonomic Name" }}</p>
     </div>
   </div>
 </section>
