@@ -10,8 +10,9 @@
                         <div>
                             {% if field.name == 'taxonomic_unit' %}
                                 <!-- Select2 field for taxonomic_unit -->
-                                <select class="w-input" name="{{ field.name }}" id="{{ field.id_for_label }}" {% if field.is_required %}required=""{% endif %}></select>
-                            {% else %}
+                                <div class="select-container">
+                                    <select class="w-input" name="{{ field.name }}" id="{{ field.id_for_label }}" {% if field.is_required %}required=""{% endif %}></select>
+                                </div>                            {% else %}
                                 <!-- Standard fields for name and description -->
                                 <input type="{{ field.field.widget.input_type }}" class="text-field w-input" name="{{ field.name }}" placeholder="{{ field.label }}" id="{{ field.id_for_label }}" {% if field.is_required %}required=""{% endif %}>
                             {% endif %}
