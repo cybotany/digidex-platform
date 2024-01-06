@@ -1,12 +1,12 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-#from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from apps.taxonomy.models import Unit
 from apps.api.serializers import TaxonomyUnitSerializer
 
 
 class GetTSN(APIView):
-    #permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny] # [IsAuthenticated] 
 
     def get(self, request, *args, **kwargs):
         search_term = request.GET.get('q')

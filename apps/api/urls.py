@@ -6,6 +6,6 @@ app_name = 'api'
 urlpatterns = [
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('get/tsn/', GetTSN.as_view(), name='get-tsn'),
+    path('tsn/', GetTSN.as_view(), name='get-tsn'),
     path('create/link/<str:uid>/', CreateLink.as_view(), name='create-link'),
 ]

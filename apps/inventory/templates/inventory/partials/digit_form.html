@@ -1,24 +1,66 @@
 {% load static %}
 <section class="section">
     <div class="content">
-      <div class="account-form">
-        <div id="digitForm" class="form-block w-form">
-          <form method="post" class="form">
-            {% csrf_token %}
-            <!-- Form fields -->
-            {% for field in form %}
-              <div>
-                <input type="{{ field.field.widget.input_type }}" class="text-field w-input" name="{{ field.name }}" placeholder="{{ field.label }}" id="{{ field.id_for_label }}" {% if field.is_required %}required=""{% endif %}>
-                {% if field.errors %}
-                  <div class="error-message">
-                    <small>{{ field.errors|striptags }}</small>
-                  </div>
-                {% endif %}
-              </div>
-            {% endfor %}
-            <input type="submit" value="Submit Digit Updates" data-wait="Please wait..." class="submit-button w-button">
-          </form>
+        <div class="account-form">
+            <div id="digitForm" class="form-block w-form">
+                <form method="post" class="form">
+                    {% csrf_token %}
+                    <!-- Form fields -->
+                    {% for field in form %}
+                        <div>
+                            {% if field.name == 'taxonomic_unit' %}
+                                <!-- Select2 field for taxonomic_unit -->
+                                <select class="text-field w-input" name="{{ field.name }}" id="{{ field.id_for_label }}" {% if field.is_required %}required=""{% endif %}></select>
+                            {% else %}
+                                <!-- Standard fields for name and description -->
+                                <input type="{{ field.field.widget.input_type }}" class="text-field w-input" name="{{ field.name }}" placeholder="{{ field.label }}" id="{{ field.id_for_label }}" {% if field.is_required %}required=""{% endif %}>
+                            {% endif %}
+                            {% if field.errors %}
+                                <div class="error-message">
+                                    <small>{{ field.errors|striptags }}</small>
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <input type="submit" value="Submit Digit Updates" data-wait="Please wait..." class="submit-button w-button">
+                </form>
+            </div>
         </div>
-      </div>
     </div>
-  </section>
+</section>
+
+<script>
+  const taxonomicUnitField = document.getElementById('id_taxonomic_unit');
+
+  // Configurations for select2
+  const select2Config = {
+      ajax: {
+          url: '/api/tsn/',
+          dataType: 'json',
+          delay: 250,
+          data: function (params) {
+              return {
+                  q: params.term, // search term
+                  page: params.page // pagination
+              };
+          },
+          processResults: function (data) {
+              return {
+                  results: data.items, // items from the server
+              };
+          },
+          cache: true,
+          beforeSend: function(xhr) {
+              const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+              xhr.setRequestHeader("X-CSRFToken", csrftoken);
+          }
+      },
+      minimumInputLength: 1
+  };
+
+  // Initialize select2
+  $(document).ready(function() {
+      $(taxonomicUnitField).select2(select2Config);
+  });
+</script>
+
