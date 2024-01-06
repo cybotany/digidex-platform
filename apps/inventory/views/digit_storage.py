@@ -10,4 +10,4 @@ class DigitStorageView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         """ Overriding to get Digits for the current user """
-        return Digit.objects.filter(user=self.request.user)
+        return Digit.objects.filter(nfc_link__user=self.request.user)
