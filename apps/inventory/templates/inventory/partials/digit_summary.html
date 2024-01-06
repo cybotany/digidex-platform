@@ -3,7 +3,19 @@
     <div class="block-top">
       <h2 class="heading-top">{{ digit.name }}</h2>
       <p class="paragraph-top">{{ digit.description }}</p>
+      {% if digit.taxonomic_unit.tsn %}
+        <p class="paragraph">
+          <a href="{{ digit.taxonomic_unit.get_absolute_url }}">
+            TSN: {{ digit.taxonomic_unit.tsn }}
+          </a>
+        </p>
+      {% else %}
+        <p class="paragraph">None</p>
+      {% endif %} 
       <p class="paragraph">{{ digit.taxonomic_unit.complete_name|default:"No Taxonomic Name" }}</p>
+      <p class="paragraph">{{ digit.created_at }}</p>
+      <p class="paragraph">{{ digit.last_modified }}</p>
+
     </div>
   </div>
 </section>

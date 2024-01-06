@@ -199,9 +199,9 @@ class Unit(models.Model):
 
     def get_absolute_url(self):
         """
-        Get the URL to view the details of this taxonomic unit.
+        Generates a URL to the ITIS (Integrated Taxonomic Information System) website using the TSN.
 
         Returns:
-            str: The URL to view the details of this taxonomic unit.
+            str: The ITIS URL if TSN is available, otherwise an empty string.
         """
-        return reverse('taxonomy:describe_taxonomic_unit', args=[str(self.tsn)])
+        return f"https://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&search_value={self.tsn}#null"
