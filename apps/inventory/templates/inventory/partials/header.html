@@ -8,10 +8,8 @@
     <div class="nav">
       <nav role="navigation" class="nav-menu w-nav-menu">
         {% if request.user.is_authenticated %}
-          <div class="username-mobile">
-            <span>{{ request.user.username }}</span>
-          </div>
           <div class="button-mobile">
+            <a href="{% url 'accounts:profile' %}" class="nav-button-outline w-button">{{ request.user.username }}</a>
             <a href="{% url 'inventory:storage' %}" class="nav-button-outline w-button">Inventory</a>
             <a href="{% url 'accounts:logout' %}" class="nav-button w-button">Logout</a>
           </div>
@@ -26,10 +24,8 @@
     <div class="nav">
       <nav role="navigation" class="nav-menu w-nav-menu">
         {% if request.user.is_authenticated %}
-          <div class="username-desktop">
-            <span>{{ request.user.username }}</span>
-          </div>
           <div class="button-desktop">
+            <a href="{% url 'accounts:profile' %}" class="nav-button-outline w-button">{{ request.user.username }}</a>
             <a href="{% url 'inventory:storage' %}" class="nav-button-outline w-button">Inventory</a>
             <a href="{% url 'accounts:logout' %}" class="nav-button w-button">Logout</a>
           </div>
