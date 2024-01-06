@@ -17,8 +17,8 @@ class DigitCreationView(CreateView):
 
     def form_valid(self, form):
         # Retrieve the link instance using link_id from the URL
-        link_id = self.kwargs.get('link_id')
-        link = get_object_or_404(Link, id=link_id)
+        link_pk = self.kwargs.get('pk')
+        link = get_object_or_404(Link, pk=link_pk)
 
         with transaction.atomic():
             digit = form.save(commit=False)
