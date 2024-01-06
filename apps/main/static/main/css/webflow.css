@@ -1815,3 +1815,8 @@ textarea.w-select {
 .wf-layout-layout {
   display: grid;
 }
+
+.centered-text {
+  text-align: center;
+  margin-bottom: 10px;
+}

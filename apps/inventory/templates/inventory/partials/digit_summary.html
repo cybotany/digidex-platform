@@ -13,8 +13,8 @@
         <p class="paragraph">None</p>
       {% endif %} 
       <p class="paragraph">{{ digit.taxonomic_unit.complete_name|default:"No Taxonomic Name" }}</p>
-      <p class="paragraph">{{ digit.created_at }}</p>
-      <p class="paragraph">{{ digit.last_modified }}</p>
+      <p class="paragraph">Created: {{ digit.created_at }}</p>
+      <p class="paragraph">Last Edited: {{ digit.last_modified }}</p>
 
     </div>
   </div>
