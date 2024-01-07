@@ -42,7 +42,7 @@ if DJANGO_ENV == 'production':
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 else:
     DEBUG = True
-    ALLOWED_HOSTS = ["localhost", "10.0.0.218:8080"]
+    ALLOWED_HOSTS = ["localhost", "10.0.0.218"]
 
     # Local static files settings
     STATIC_URL = '/static/'
