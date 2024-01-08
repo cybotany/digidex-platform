@@ -2,7 +2,6 @@ MAX_GROUP = 15
 MAX_GROUP_CAPACITY = 20
 
 PLANT = 'plant'
-ANIMAL = 'animal'
 
 ACTIVITY_STATUS = [
     ('register', 'Registered'),
@@ -12,5 +11,4 @@ ACTIVITY_STATUS = [
 
 ACTIVITY_TYPE = [
     (PLANT, 'Plant'),
-    (ANIMAL, 'Animal'),
 ]

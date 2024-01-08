@@ -57,6 +57,17 @@ class Digit(models.Model):
         help_text="The date and time when the digit instance was last modified."
     )
 
+    def save(self, *args, **kwargs):
+        """
+        Overrides the save method of the model. If name is not provided, it sets a default name 
+        based on the count of Digits the user has.
+        """
+        if not self.name:
+            user_digit_count = Digit.objects.filter(nfc_link__user=self.nfc_link.user).count()
+            self.name = f'Digit {user_digit_count + 1}'
+
+        super().save(*args, **kwargs)
+
     def __str__(self):
         """
         Returns a string representation of the Digit instance.

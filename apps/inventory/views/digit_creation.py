@@ -4,6 +4,7 @@ from apps.inventory.forms import CreateDigitForm
 from apps.inventory.models import Digit
 from apps.nfc.models import Link
 from django.db import transaction
+from apps.accounts.models import Activity
 
 
 class DigitCreationView(CreateView):
@@ -29,5 +30,12 @@ class DigitCreationView(CreateView):
             link.user = self.request.user
             link.active = True
             link.save()
+
+            Activity.objects.create(
+                user=self.request.user,
+                activity_type='Plant',
+                activity_status='Registered',
+                content=f'Registered Plant {digit.name}'
+            )
 
         return redirect('inventory:details', pk=digit.pk)
