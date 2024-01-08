@@ -6,4 +6,4 @@ class ProfileChangeForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ('bio', 'location', 'birth_date', 'avatar',)
+        fields = ('bio', 'location', 'avatar',)
