@@ -5,35 +5,51 @@ from apps.utils.constants import ACTIVITY_STATUS, ACTIVITY_TYPE
 
 class Activity(models.Model):
     """
-    Represents an activity performed by a user. Should be upated whenever a user creates, updates, or deletes a plant.
-
+    Represents an activity performed by a user, such as creating, updating, or deleting an item (e.g., a plant).
+    
     Attributes:
-        user (ForeignKey): A foreign key reference to the User model.
-        activity_type (str): The account type (e.g., 'plant', 'cea').
-        activity_status (str): The status of activity performed (e.g., 'created', 'updated', 'deleted').
-        content (str): A brief description of the activity.
-        timestamp (datetime): The date and time when the activity occurred.
+        user (ForeignKey): A reference to the User model, indicating which user performed the activity.
+        activity_type (CharField): Describes the type of item involved in the activity. The type is limited to 
+                                   predefined choices, such as 'plant' or 'cea'.
+        activity_status (CharField): Indicates the nature of the activity (e.g., 'created', 'updated', 'deleted'). 
+                                     This field uses predefined choices.
+        content (TextField): A brief textual description of the activity, detailing what was done.
+        timestamp (DateTimeField): Records the date and time when the activity occurred, automatically set to the 
+                                   current time when the activity is created.
+
+    Methods:
+        save: Overrides the save method to automatically set the content field if it is not provided.
+        __str__: Returns a string representation of the activity, which is the content of the activity.
     """
 
     user = models.ForeignKey(
         get_user_model(),
         related_name='recent_activities',
-        on_delete=models.CASCADE
-    )
-    activity_status = models.CharField(
-        max_length=20,
-        choices=ACTIVITY_STATUS
+        on_delete=models.CASCADE,
+        help_text='Reference to the user who performed the activity.'
     )
     activity_type = models.CharField(
         max_length=25,
-        choices=ACTIVITY_TYPE
+        choices=ACTIVITY_TYPE,
+        help_text='Type of the item involved in the activity, such as "plant" or "cea".'
     )
-    content = models.TextField()
-    timestamp = models.DateTimeField(auto_now_add=True)
+    activity_status = models.CharField(
+        max_length=20,
+        choices=ACTIVITY_STATUS,
+        help_text='Nature of the activity (e.g., "created", "updated", "deleted").'
+    )
+    content = models.TextField(
+        help_text='Detailed description of the activity.'
+    )
+    timestamp = models.DateTimeField(
+        auto_now_add=True,
+        help_text='The date and time when the activity was recorded.'
+    )
 
     def save(self, *args, **kwargs):
         """
-        Override the save method to set a default content if not provided.
+        Overrides the save method of the model. If content is not provided, it sets a default content 
+        based on the user's username, activity status, and type.
         """
         if not self.content:
             self.content = f"{self.user.username} {self.activity_status} a {self.activity_type}"
@@ -41,7 +57,7 @@ class Activity(models.Model):
 
     def __str__(self):
         """
-        Returns a string representation of the user activity.
+        Returns a string representation of the user activity, which is primarily the content of the activity.
         """
         return self.content
 

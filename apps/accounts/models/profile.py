@@ -11,6 +11,7 @@ class Profile(models.Model):
 
     Fields:
         user (OneToOneField): A one-to-one reference to the User model.
+        email_confirmed (BooleanField): Indicates whether the user has confirmed their email address.
         bio (TextField): A text field for user biography, maximum length 500 characters.
         location (CharField): A char field for user location, maximum length 30 characters.
         birth_date (DateField): A date field for user's birth date.
@@ -24,6 +25,10 @@ class Profile(models.Model):
         get_user_model(),
         on_delete=models.CASCADE,
         help_text='The user associated with this profile.'
+    )
+    email_confirmed = models.BooleanField(
+        default=False,
+        help_text='Indicates whether the user has confirmed their email address.'
     )
     bio = models.TextField(
         max_length=500,
