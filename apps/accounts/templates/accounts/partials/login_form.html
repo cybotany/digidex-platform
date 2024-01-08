@@ -8,7 +8,7 @@
         <form id="loginForm" method="post" class="form">
           {% csrf_token %}
           <div>
-            <input type="text" class="text-field w-input" maxlength="256" name="username" placeholder="Username" id="Username" required="">
+            <input type="text" class="text-field w-input" maxlength="256" name="username" placeholder="Username" id="username" required="">
               {% if form.username.errors %}
                 <div class="error-message">
                   <small>{{ form.username.errors|striptags }}</small>
@@ -16,7 +16,7 @@
               {% endif %}
           </div>
           <div>
-            <input type="password" class="text-field w-input" maxlength="256" name="password" placeholder="Password" id="Password" required="">
+            <input type="password" class="text-field w-input" maxlength="256" name="password" placeholder="Password" id="password" required="">
               {% if form.password.errors %}
                 <div class="error-message">
                   <small>{{ form.password.errors|striptags }}</small>
