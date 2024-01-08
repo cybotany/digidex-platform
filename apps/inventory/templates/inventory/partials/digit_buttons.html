@@ -1,0 +1,39 @@
+<!-- Clickable header for toggling the form -->
+<div class="accordion-header" onclick="toggleDigitButtons()">
+    <h4 class="heading-account">Edit Digit</h4>
+    <div class="block-icon-accordion" id="toggleIcon"></div>
+</div>
+
+<!-- Container for update and delete buttons -->
+<div id="digitButtons" style="display: none;">
+    <section class="section">
+        <div class="content">
+            <a href="{% url 'inventory:modification' digit.id %}" class="button">Update Digit</a>
+        </div>
+    </section>
+    
+    <section class="section">
+        <div class="content">
+            <form action="{% url 'inventory:deletion' digit.id %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Delete Digit">
+            </form>
+        </div>
+    </section>
+</div>
+
+<script>
+    function toggleDigitButtons() {
+        console.log("Toggle function called");
+        var digitButtons = document.getElementById('digitButtons');
+        var toggleIcon = document.getElementById('toggleIcon');
+
+        if (digitButtons.style.display === 'none' || digitButtons.style.display === '') {
+            digitButtons.style.display = 'block';
+            toggleIcon.classList.add('rotate-icon');
+        } else {
+            digitButtons.style.display = 'none';
+            toggleIcon.classList.remove('rotate-icon');
+        }
+    }
+</script>

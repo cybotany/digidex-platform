@@ -19,19 +19,3 @@
     </div>
   </div>
 </section>
-
-<section class="section">
-  <div class="content">
-    <a href="{% url 'inventory:modification' digit.id %}" class="button">Update Digit</a>
-  </div>
-</section>
-
-
-<section class="section">
-  <div class="content">
-    <form action="{% url 'inventory:deletion' object.id %}" method="post">
-      {% csrf_token %}
-      <input type="submit" value="Delete Digit">
-    </form>
-  </div>
-</section>
