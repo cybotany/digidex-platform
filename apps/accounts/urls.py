@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import (SignupUserView, LoginUserView, LogoutUserView, UserProfileView)
+from .views import (SignupUserView, LoginUserView, LogoutUserView, UserProfileView, EmailVerificationView, EmailConfirmationView)
 
 app_name = 'accounts'
 urlpatterns = [
@@ -7,4 +7,6 @@ urlpatterns = [
     path('login/', LoginUserView.as_view(), name='login'),
     path('logout/', LogoutUserView.as_view(), name='logout'),
     path('profile/', UserProfileView.as_view(), name='profile'),
+    path('confirmation/', EmailConfirmationView.as_view(), name='confirm-email'),
+    path('verification/<str:token>/', EmailVerificationView.as_view(), name='verify-email'),
 ]
