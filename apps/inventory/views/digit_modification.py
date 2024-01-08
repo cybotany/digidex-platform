@@ -1,8 +1,9 @@
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.edit import UpdateView
-from django.urls import reverse_lazy
+from django.db import transaction
 from apps.inventory.forms import DigitForm
 from apps.inventory.models import Digit
+from apps.accounts.models import Activity
 
 
 class DigitModificationView(UpdateView):
@@ -15,6 +16,15 @@ class DigitModificationView(UpdateView):
         return get_object_or_404(Digit, pk=digit_id)
 
     def form_valid(self, form):
-        # Save the form and then redirect
-        form.save()
+        with transaction.atomic():
+            # Save the Digit instance
+            self.object = form.save()
+
+            Activity.objects.create(
+                user=self.request.user,
+                activity_type='Plant',
+                activity_status='Updated',
+                content=f'Updated Plant {self.object.name}'
+            )
+
         return redirect('inventory:details', pk=self.object.pk)

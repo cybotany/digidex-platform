@@ -22,7 +22,7 @@
 
 <section class="section">
   <div class="content">
-    <form action="{% url 'inventory:modification' object.id %}" method="post">
+    <form action="{% url 'inventory:modification' digit.id %}" method="post">
       {% csrf_token %}
       <input type="submit" value="Update Digit">
     </form>
