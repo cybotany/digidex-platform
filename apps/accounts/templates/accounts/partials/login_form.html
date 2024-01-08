@@ -5,7 +5,7 @@
       <h2 class="heading-account">Login to your account</h2>
 
       <div class="form-block w-form">
-        <form id="wf-form-Login" method="post" class="form">
+        <form id="loginForm" method="post" class="form">
           {% csrf_token %}
           <div>
             <input type="text" class="text-field w-input" maxlength="256" name="username" placeholder="Username" id="Username" required="">
