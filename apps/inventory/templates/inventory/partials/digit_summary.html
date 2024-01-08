@@ -22,12 +22,10 @@
 
 <section class="section">
   <div class="content">
-    <form action="{% url 'inventory:modification' digit.id %}" method="post">
-      {% csrf_token %}
-      <input type="submit" value="Update Digit">
-    </form>
+    <a href="{% url 'inventory:modification' digit.id %}" class="button">Update Digit</a>
   </div>
 </section>
+
 
 <section class="section">
   <div class="content">
