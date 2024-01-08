@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import (DigitCreationView, DigitStorageView, DigitDetailsView, DigitDeletionView)
+from .views import (DigitCreationView, DigitStorageView, DigitDetailsView, DigitDeletionView, DigitModificationView)
 
 app_name = 'inventory'
 urlpatterns = [
@@ -7,4 +7,5 @@ urlpatterns = [
     path('<int:pk>/', DigitDetailsView.as_view(), name='details'),
     path('create/<int:pk>/', DigitCreationView.as_view(), name='creation'),
     path('delete/<int:pk>/', DigitDeletionView.as_view(), name='deletion'),
+    path('modify/<int:pk>/', DigitModificationView.as_view(), name='modification'),
 ]

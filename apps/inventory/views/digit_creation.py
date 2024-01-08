@@ -1,15 +1,15 @@
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.edit import CreateView
-from apps.inventory.forms import CreateDigitForm
+from django.db import transaction
+from apps.inventory.forms import DigitForm
 from apps.inventory.models import Digit
 from apps.nfc.models import Link
-from django.db import transaction
 from apps.accounts.models import Activity
 
 
 class DigitCreationView(CreateView):
     model = Digit
-    form_class = CreateDigitForm
+    form_class = DigitForm
     template_name = 'inventory/digit_creation.html'
 
     def get_form_kwargs(self):
