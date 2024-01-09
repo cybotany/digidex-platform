@@ -1,6 +1,6 @@
 {% load static %}
 <section class="section">
-  <div style="opacity:0" class="content">
+  <div class="content">
     <div class="w-layout-grid grid">
 
       <div id="w-node-a033bb4d-fb8b-e335-6cb2-c443ca8c4bc8-25cd083c" class="block-right">
@@ -9,7 +9,7 @@
           {% if user.avatar %}
             <img src="{{ user.avatar.url }}" alt="User avatar" class="avatar-image">
           {% else %}
-            <img src="{% static 'accounts/images/Logo.png' %}" alt="Default avatar" class="avatar-image">
+            <img src="{% static 'accounts/images/placeholder.svg' %}" alt="No Image Available" class="avatar-image">
           {% endif %}
 
           {% if user.profile.location %}

@@ -6,6 +6,7 @@
         <a href="{% url 'inventory:details' digit.id %}" class="digit-card digit-card-link">
           <div class="digit-card-img-wrapper">
             <!-- Placeholder for image or a no-image icon -->
+            <img src="{% static 'inventory/images/placeholder.svg' %}" alt="No Image Available" class="digit-card-img-wrapper">
           </div>
           <div class="digit-card-body">
             <h5 class="digit-card-header">{{ digit.name }}</h5>
