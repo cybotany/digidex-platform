@@ -8,8 +8,9 @@ from apps.accounts.models import Profile
 class EmailVerificationView(View):
 
     def get(self, request, *args, **kwargs):
-        token = kwargs.get('token')
-        user = get_object_or_404(User, email=request.GET.get('email'))
+        token = request.GET.get('token')
+        email = request.GET.get('email')
+        user = get_object_or_404(User, email=email)
         token_generator = PasswordResetTokenGenerator()
 
         if token_generator.check_token(user, token):

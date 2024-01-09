@@ -1,4 +1,5 @@
 from django.urls import reverse_lazy, reverse
+from django.utils.http import urlencode
 from django.http import HttpResponseRedirect
 from django.views.generic.edit import FormView
 from django.conf import settings
@@ -26,8 +27,10 @@ class SignupUserView(FormView):
 
     def send_verification_email(self, user):
         token = PasswordResetTokenGenerator().make_token(user)
-        verification_url = reverse('accounts:verify-email', kwargs={'token': token})
-        full_url = f'http://{self.request.get_host()}{verification_url}'
+        base_url = reverse('accounts:verify-email')
+        query_string = urlencode({'token': token, 'email': user.email})
+        full_url = f'http://{self.request.get_host()}{base_url}?{query_string}'
+
         send_mail(
             'Verify your email',
             f'Please click the following link to verify your email: {full_url}',
