@@ -4,6 +4,7 @@ from django.views.generic.edit import FormView
 from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.db import transaction
 from apps.accounts.forms import SignupForm
 
 
@@ -13,12 +14,14 @@ class SignupUserView(FormView):
     success_url = reverse_lazy('main:landing')
 
     def form_valid(self, form):
-        user = form.save(commit=False)
-        user.is_active = False
-        user.save()
+        with transaction.atomic():
+            user = form.save(commit=False)
+            user.is_active = False
+            user.save()
 
-        # Send verification email
-        self.send_verification_email(user)
+            # Send verification email
+            self.send_verification_email(user)
+
         return HttpResponseRedirect(reverse('accounts:confirm-email'))
 
     def send_verification_email(self, user):
