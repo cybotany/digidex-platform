@@ -1,12 +1,12 @@
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import IsAuthenticated
 from apps.nfc.models import Link
 
 
 class CreateLink(APIView):
-    permission_classes = [AllowAny]  # [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
         uid = kwargs.get('uid')

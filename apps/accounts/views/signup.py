@@ -18,7 +18,7 @@ class SignupUserView(FormView):
 
         # Send verification email
         self.send_verification_email(user)
-        return HttpResponseRedirect(reverse('email_confirmation'))
+        return HttpResponseRedirect(reverse('accounts:confirm-email'))
 
     def send_verification_email(self, user):
         token = PasswordResetTokenGenerator().make_token(user)
