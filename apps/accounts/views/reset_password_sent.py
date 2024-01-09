@@ -1,5 +1,5 @@
 from django.contrib.auth.views import PasswordResetDoneView
 
 
-class PasswordResetSentView(PasswordResetDoneView):
+class DigitPasswordResetSentView(PasswordResetDoneView):
     template_name = 'accounts/password_reset_sent.html'

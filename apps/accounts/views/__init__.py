@@ -4,7 +4,7 @@ from .signup import SignupUserView
 from .profile import UserProfileView
 from .email_sent_confirmation import EmailConfirmationView
 from .email_verification import EmailVerificationView
-from .reset_password import PasswordResetView
-from .reset_password_sent import PasswordResetSentView
-from .reset_password_confirm import PasswordResetConfirmationView
-from .reset_password_complete import PasswordResetCompleteView
+from .reset_password import DigitPasswordResetView
+from .reset_password_sent import DigitPasswordResetSentView
+from .reset_password_confirm import DigitPasswordResetConfirmationView
+from .reset_password_complete import DigitPasswordResetCompleteView
