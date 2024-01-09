@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html data-wf-page="6567eb537706d17425cd0842" data-wf-site="6567eb537706d17425cd07f4">
+  <head>  
+    {% include 'main/partials/head.html' %}
+  </head>
+  <body class="body">
+    {% include 'main/partials/simple_header.html' %}
+
+    <div class="utility-page-wrap">
+      <div class="utility-page-content">
+        <div class="subtitle blue">Email Verification Failed<br></div>
+        <h2 class="heading-account">Unable to Verify Your Email</h2>
+        <p class="paragraph-account">
+          We're sorry, but we were unable to verify your email address. This may be due to an expired or invalid link.
+        </p>
+        <p class="paragraph-account">
+          Please try requesting a new verification email, or contact support if you continue to experience issues.
+        </p>
+        <a href="{% url 'accounts:request_new_verification' %}" class="button w-button">Request New Verification Email</a>
+        <a href="{% url 'accounts:login' %}" class="button w-button">Back to Home</a>
+      </div>
+    </div>
+  </body>
+</html>
