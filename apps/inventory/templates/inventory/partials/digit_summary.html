@@ -5,6 +5,18 @@
       <div class="block-hero">
         <h1 class="heading-hero">{{ digit.name }}</h1>
         <p class="paragraph-hero">{{ digit.description }}</p>
+
+        {% if digit.taxonomic_unit.tsn %}
+          <p class="paragraph-hero">
+            <a href="{{ digit.taxonomic_unit.get_absolute_url }}">
+              TSN: {{ digit.taxonomic_unit.tsn }}
+            </a>
+          </p>
+          <p class="paragraph-hero">
+            Complete Scientific Name: {{ digit.taxonomic_unit.complete_name}}
+          </p>
+        {% endif %}
+
       </div>
       <div class="lottie"> </div>
     </div>
@@ -13,22 +25,7 @@
 
 <section class="section">
   <div class="content">
-    <div class="block-left">   
-      <h2 class="heading">Taxonomy Information</h2>
-      {% if digit.taxonomic_unit.tsn %}
-        <p class="paragraph">
-          <a href="{{ digit.taxonomic_unit.get_absolute_url }}">
-            TSN: {{ digit.taxonomic_unit.tsn }}
-          </a>
-        </p>
-        <p class="paragraph">
-          Complete Scientific Name: {{ digit.taxonomic_unit.complete_name}}
-        </p>
-      {% else %}
-        <p class="paragraph">None</p>
-      {% endif %} 
-    </div>
-    <div class="block-right">   
+    <div class="block-heading">   
       <h2 class="heading">Journal Entries</h2>
       <p class="paragraph">Created: {{ digit.created_at }}</p>
       <p class="paragraph">Last Edited: {{ digit.last_modified }}</p>
