@@ -1,21 +1,58 @@
-<section class="section-top">
+<section class="section-hero">
   <div class="content">
-    <div class="block-top">
-      <h2 class="heading-top">{{ digit.name }}</h2>
-      <p class="paragraph-top">{{ digit.description }}</p>
+    <div class="w-layout-grid grid-hero">
+      <div class="block-hero">
+        <h1 class="heading-hero">{{ digit.name }}</h1>
+        <p class="paragraph-hero">{{ digit.description }}</p>
+      </div>
+      <div class="lottie"> </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="content">
+    <div class="block-left">   
+      <h2 class="heading">Taxonomy Information</h2>
       {% if digit.taxonomic_unit.tsn %}
         <p class="paragraph">
           <a href="{{ digit.taxonomic_unit.get_absolute_url }}">
             TSN: {{ digit.taxonomic_unit.tsn }}
           </a>
         </p>
+        <p class="paragraph">
+          Complete Scientific Name: {{ digit.taxonomic_unit.complete_name}}
+        </p>
       {% else %}
         <p class="paragraph">None</p>
       {% endif %} 
-      <p class="paragraph">{{ digit.taxonomic_unit.complete_name|default:"No Taxonomic Name" }}</p>
+    </div>
+    <div class="block-right">   
+      <h2 class="heading">{{ digit.name }}'s' journal</h2>
       <p class="paragraph">Created: {{ digit.created_at }}</p>
       <p class="paragraph">Last Edited: {{ digit.last_modified }}</p>
+    </div>
+  </div>
+</section>
 
+<section class="section">
+  <div class="content">
+    <div class="w-layout-grid grid-about">
+      <div class="about blue">
+        <div class="block-icon-about"><img src="{% static 'inventory/images/water.svg' %}" loading="eager" alt="" class="icon-about"></div>
+        <h4 class="heading-about">Watering Details</h4>
+        <p class="paragraph-about">Last Watered:</p>
+      </div>
+      <div class="about green"> 
+        <div class="block-icon-about green"><img src="{% static 'inventory/images/food.svg' %}" loading="eager" alt="" class="icon-about"></div>
+        <h4 class="heading-about green">Fertilizating Details</h4>
+        <p class="paragraph-about green">Last Fertilized:</p>
+      </div>
+      <div class="about red">
+        <div class="block-icon-about red"><img src="{% static 'inventory/images/clean.svg' %}" loading="eager" alt="" class="icon-about"></div>
+        <h4 class="heading-about red">Cleaning Details</h4>
+        <p class="paragraph-about red">Last Cleaned:</p>
+      </div>
     </div>
   </div>
 </section>
