@@ -2754,21 +2754,9 @@ figcaption {
   height: 2em;
 }
 
-.heading-about,
-.paragraph-about {
+.heading-about, .paragraph-about, .heading-about.green, .paragraph-about.green, .heading-about.red, .paragraph-about.red {
   color: var(--core-primary-color);
 }
-
-.heading-about.green,
-.paragraph-about.green {
-  color: #00FF00;
-}
-
-.heading-about.red,
-.paragraph-about.red {
-  color: #FF0000;
-}
-
 
 .heading-quote {
   margin-bottom: 1.4em;

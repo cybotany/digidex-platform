@@ -19,7 +19,6 @@
           <input type="submit" value="Delete Digit" onclick="return confirm('Are you sure you want to delete this Digit? This action cannot be undone.');">
         </form>
       </div>
-
       <div class="button-desktop">
         <a href="{% url 'inventory:modification' digit.id %}" class="button">Update Digit</a>
         <form action="{% url 'inventory:deletion' digit.id %}" class="button" method="post">

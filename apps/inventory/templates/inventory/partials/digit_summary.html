@@ -25,16 +25,6 @@
 
 <section class="section">
   <div class="content">
-    <div class="page-body">   
-      <h2 class="heading">Journal Entries</h2>
-      <p class="paragraph">Created: {{ digit.created_at }}</p>
-      <p class="paragraph">Last Edited: {{ digit.last_modified }}</p>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="content">
     <div class="w-layout-grid grid-about">
       <div class="about blue">
         <div class="block-icon-about"><img src="{% static 'inventory/images/water.svg' %}" loading="eager" alt="" class="icon-about"></div>
@@ -51,6 +41,16 @@
         <h4 class="heading-about red">Cleaning</h4>
         <p class="paragraph-about red">Last Cleaned:</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="content">
+    <div class="page-body">   
+      <h2 class="heading">Journal Entries</h2>
+      <p class="paragraph">Created: {{ digit.created_at }}</p>
+      <p class="paragraph">Last Edited: {{ digit.last_modified }}</p>
     </div>
   </div>
 </section>

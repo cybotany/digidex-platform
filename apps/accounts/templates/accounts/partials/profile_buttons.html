@@ -12,20 +12,20 @@
 
     <!-- Container for update and delete buttons -->
     <div id="userButtons" style="display: none;">
-      <section class="section">
-        <div class="content">
-          <a href="{% url 'accounts:modify-profile' %}" class="button">Update Account</a>
-        </div>
-      </section>
-        
-      <section class="section">
-        <div class="content">
-          <form action="{% url 'accounts:delete' %}" method="post">
-            {% csrf_token %}
-            <input type="submit" value="Delete Account" onclick="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
-          </form>
-        </div>
-      </section>
+      <div class="button-mobile">
+        <a href="{% url 'accounts:modify-profile' %}" class="button">Update Account</a>
+        <form action="{% url 'accounts:delete' %}" method="post">
+          {% csrf_token %}
+          <input type="submit" value="Delete Account" onclick="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
+        </form>
+      </div>
+      <div class="button-desktop">
+        <a href="{% url 'accounts:modify-profile' %}" class="button">Update Account</a>
+        <form action="{% url 'accounts:delete' %}" method="post">
+          {% csrf_token %}
+          <input type="submit" value="Delete Account" onclick="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
+        </form>
+      </div> 
     </div>
 
   </div>
