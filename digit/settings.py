@@ -86,6 +86,7 @@ INSTALLED_APPS = [
     'apps.accounts.apps.AccountConfig',
     'apps.api',
     'apps.inventory',
+    'apps.journal',
     'apps.main',
     'apps.nfc',
     'apps.taxonomy',
