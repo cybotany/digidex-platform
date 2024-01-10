@@ -1,4 +1,6 @@
 from datetime import datetime
+from django.shortcuts import redirect
+from django.urls import reverse
 from django.views.generic import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from apps.inventory.models import Digit
@@ -43,3 +45,20 @@ class DigitDetailsView(LoginRequiredMixin, DetailView):
         context['last_image'] = last_image_entry.image if last_image_entry else None
 
         return context
+
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = CreateJournalEntry(request.POST, request.FILES)
+
+        if form.is_valid():
+            journal_entry = form.save(commit=False)
+            journal_entry.digit = self.object
+            journal_entry.user = request.user
+            journal_entry.save()
+
+            return redirect(reverse('inventory:details', kwargs={'pk': self.object.pk}))
+
+        context = self.get_context_data()
+        context['journal_form'] = form
+        return self.render_to_response(context)
