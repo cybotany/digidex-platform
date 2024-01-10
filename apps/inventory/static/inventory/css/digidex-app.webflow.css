@@ -2971,6 +2971,11 @@ figcaption {
   border-radius: .87em;
 }
 
+
+.image-journal {
+  position: relative;
+}
+
 .contact {
   z-index: 50;
   width: 100%;

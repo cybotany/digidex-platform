@@ -1,27 +1,55 @@
 {% load static %}
-<section class="section-footer">
+<section class="section">
   <div class="content">
-
-    <!-- Clickable header for toggling the form -->
-    <div class="accordion-header" onclick="toggleJournalEntry()">
-      <h4 class="heading-account">Create Journal Entry</h4>
-      <div class="block-icon-accordion" id="toggleIcon">
-        <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);background-color:rgba(57,89,255,0.07);border-color:rgba(255,255,255,0.2)" class="block-icon-accordion"><img src="{% static 'inventory/images/close.svg' %}" loading="eager" alt="" class="icon-accordion"></div>
+    <div class="accordion-item">
+      <!-- Clickable header for toggling the form -->
+      <div class="accordion-header" onclick="toggleJournalEntry()">
+        <h4 class="heading-accordion">Create Journal Entry</h4>
+        <div class="block-icon-accordion" id="toggleIcon">
+          <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);background-color:rgba(57,89,255,0.07);border-color:rgba(255,255,255,0.2)" class="block-icon-accordion"><img src="{% static 'inventory/images/close.svg' %}" loading="eager" alt="" class="icon-accordion"></div>
+        </div>
+      </div>
+      <!-- Container for Journal Form -->
+      <div id="journalEntry" style="display: none;">
+        <div class="account-form">
+          <div class="subtitle blue">Journal Entry<br></div>
+          <h2 class="heading-account">Create a New Entry</h2>
+            <div class="form-block w-form">
+              <form id="journalForm" method="post" class="form" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div>
+                  <textarea class="text-field w-input" maxlength="1000" name="content" placeholder="Your entry content" id="content" required=""></textarea>
+                    {% if form.content.errors %}
+                      <div class="error-message">
+                        <small>{{ form.content.errors|striptags }}</small>
+                      </div>
+                    {% endif %}
+                </div>
+                <div>
+                  <input type="file" class="text-field w-input" name="image" id="image">
+                    {% if form.image.errors %}
+                      <div class="error-message">
+                        <small>{{ form.image.errors|striptags }}</small>
+                      </div>
+                    {% endif %}
+                </div>
+                <div>
+                  <label>
+                    <input type="checkbox" name="watered" id="watered"> Watered
+                  </label>
+                  <label>
+                    <input type="checkbox" name="fertilized" id="fertilized"> Fertilized
+                  </label>
+                  <label>
+                    <input type="checkbox" name="cleaned" id="cleaned"> Cleaned
+                  </label>
+                </div>
+                <input type="submit" value="Submit Entry" data-wait="Please wait..." class="submit-button w-button">
+              </form>
+            </div>
+        </div>
       </div>
     </div>
-
-    <!-- Container for Journal Form -->
-    <div id="journalEntry" style="display: none;">
-      <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <!-- Render the fields of the form here -->
-        {{ journal_form.as_p }}
-
-        <!-- Submit button -->
-        <button type="submit" class="button">Submit Journal Entry</button>
-      </form>
-    </div>
-
   </div>
 </section>
 

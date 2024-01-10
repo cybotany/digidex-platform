@@ -25,18 +25,21 @@ class DigitDetailsView(LoginRequiredMixin, DetailView):
         journal_entries = Entry.objects.filter(digit=self.object)
         context['journal_entries'] = journal_entries
 
+        today = datetime.now().date()
+
         last_watering_entry = journal_entries.filter(watered=True).order_by('-created_at').first()
         context['last_watering_date'] = last_watering_entry.created_at if last_watering_entry else None
+        context['days_since_last_watering'] = (today - last_watering_entry.created_at.date()).days if last_watering_entry else None
 
         last_fertilizing_entry = journal_entries.filter(fertilized=True).order_by('-created_at').first()
         context['last_fertilizing_date'] = last_fertilizing_entry.created_at if last_fertilizing_entry else None
+        context['days_since_last_fertilizing'] = (today - last_fertilizing_entry.created_at.date()).days if last_fertilizing_entry else None
         
         last_cleaning_entry = journal_entries.filter(cleaned=True).order_by('-created_at').first()
         context['last_cleaning_date'] = last_cleaning_entry.created_at if last_cleaning_entry else None
-
-        today = datetime.now().date()
-        context['days_since_last_watering'] = (today - last_watering_entry.created_at.date()).days if last_watering_entry else None
-        context['days_since_last_fertilizing'] = (today - last_fertilizing_entry.created_at.date()).days if last_fertilizing_entry else None
         context['days_since_last_cleaning'] = (today - last_cleaning_entry.created_at.date()).days if last_cleaning_entry else None
+
+        last_image_entry = journal_entries.filter(image__isnull=False).order_by('-created_at').first()
+        context['last_image'] = last_image_entry.image if last_image_entry else None
 
         return context
