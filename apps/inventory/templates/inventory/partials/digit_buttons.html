@@ -10,14 +10,19 @@
 <!-- Container for update and delete buttons -->
 <div id="digitButtons" style="display: none;">
   <section class="section">
-    <div class="content">
+    <div class="button-mobile">
       <a href="{% url 'inventory:modification' digit.id %}" class="button">Update Digit</a>
+      <form action="{% url 'inventory:deletion' digit.id %}" class="button" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Delete Digit" onclick="return confirm('Are you sure you want to delete this Digit? This action cannot be undone.');">
+      </form>
     </div>
   </section>
-    
+
   <section class="section">
-    <div class="content">
-      <form action="{% url 'inventory:deletion' digit.id %}" method="post">
+    <div class="button-desktop">
+      <a href="{% url 'inventory:modification' digit.id %}" class="button">Update Digit</a>
+      <form action="{% url 'inventory:deletion' digit.id %}" class="button" method="post">
         {% csrf_token %}
         <input type="submit" value="Delete Digit" onclick="return confirm('Are you sure you want to delete this Digit? This action cannot be undone.');">
       </form>
