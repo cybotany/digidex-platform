@@ -1313,7 +1313,7 @@ figcaption {
 
 .section-top-bar {
   background-color: var(--core-primary-color);
-  color: var(--secondary-color\<deleted\|variable-92021d0a-286c-26ec-3d41-32ee026cc680\>);
+  color: var(--core-primary-color);
   flex-direction: column;
   justify-content: center;
   align-items: center;
