@@ -1,0 +1,42 @@
+{% load static %}
+<section class="section-footer">
+  <div class="content">
+
+    <!-- Clickable header for toggling the form -->
+    <div class="accordion-header" onclick="toggleJournalEntry()">
+      <h4 class="heading-account">Create Journal Entry</h4>
+      <div class="block-icon-accordion" id="toggleIcon">
+        <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);background-color:rgba(57,89,255,0.07);border-color:rgba(255,255,255,0.2)" class="block-icon-accordion"><img src="{% static 'inventory/images/close.svg' %}" loading="eager" alt="" class="icon-accordion"></div>
+      </div>
+    </div>
+
+    <!-- Container for Journal Form -->
+    <div id="journalEntry" style="display: none;">
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!-- Render the fields of the form here -->
+        {{ journal_form.as_p }}
+
+        <!-- Submit button -->
+        <button type="submit" class="button">Submit Journal Entry</button>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  function toggleJournalEntry() {
+    console.log("Toggle function called");
+    var journalEntry = document.getElementById('journalEntry');
+    var toggleIcon = document.getElementById('toggleIcon');
+
+    if (journalEntry.style.display === 'none' || journalEntry.style.display === '') {
+        journalEntry.style.display = 'block';
+        toggleIcon.classList.add('rotate-icon');
+    } else {
+        journalEntry.style.display = 'none';
+        toggleIcon.classList.remove('rotate-icon');
+    }
+  }
+</script>
