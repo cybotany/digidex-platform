@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from apps.inventory.models import Digit
 from apps.utils.helpers import get_user_directory_path
 from apps.utils.custom_storage import JournalImageStorage
 from apps.utils.validators import validate_image_size_and_dimensions
@@ -26,7 +27,7 @@ class Entry(models.Model):
         __str__: Returns a string representation of the journal entry.
     """
     digit = models.ForeignKey(
-        'Digit',
+        Digit,
         on_delete=models.CASCADE,
         related_name='journal_entries',
         help_text="The digitized plant to which this journal entry is related."
