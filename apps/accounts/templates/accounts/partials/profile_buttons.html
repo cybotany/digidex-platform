@@ -1,29 +1,35 @@
 {% load static %}
-<!-- Clickable header for toggling the form -->
-<div class="accordion-header" onclick="toggleUserButtons()">
-  <h4 class="heading-account">Update or Delete Account</h4>
-  <div class="block-icon-accordion" id="toggleIcon">
-    <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);background-color:rgba(57,89,255,0.07);border-color:rgba(255,255,255,0.2)" class="block-icon-accordion"><img src="{% static 'accounts/images/close.svg' %}" loading="eager" alt="" class="icon-accordion"></div>
-  </div>
-</div>
+<section class="section-footer">
+  <div class="content">
 
-<!-- Container for update and delete buttons -->
-<div id="userButtons" style="display: none;">
-  <section class="section">
-    <div class="content">
-      <a href="{% url 'accounts:modify-profile' %}" class="button">Update Account</a>
+    <!-- Clickable header for toggling the form -->
+    <div class="accordion-header" onclick="toggleUserButtons()">
+      <h4 class="heading-account">Update or Delete Account</h4>
+      <div class="block-icon-accordion" id="toggleIcon">
+        <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);background-color:rgba(57,89,255,0.07);border-color:rgba(255,255,255,0.2)" class="block-icon-accordion"><img src="{% static 'accounts/images/close.svg' %}" loading="eager" alt="" class="icon-accordion"></div>
+      </div>
     </div>
-  </section>
-    
-  <section class="section">
-    <div class="content">
-      <form action="{% url 'accounts:delete' %}" method="post">
-        {% csrf_token %}
-        <input type="submit" value="Delete Account" onclick="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
-      </form>
+
+    <!-- Container for update and delete buttons -->
+    <div id="userButtons" style="display: none;">
+      <section class="section">
+        <div class="content">
+          <a href="{% url 'accounts:modify-profile' %}" class="button">Update Account</a>
+        </div>
+      </section>
+        
+      <section class="section">
+        <div class="content">
+          <form action="{% url 'accounts:delete' %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Delete Account" onclick="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
+          </form>
+        </div>
+      </section>
     </div>
-  </section>
-</div>
+
+  </div>
+</section>
 
 <script>
     function toggleUserButtons() {
