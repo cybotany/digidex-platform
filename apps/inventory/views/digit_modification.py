@@ -12,8 +12,8 @@ class DigitModificationView(UpdateView):
     template_name = 'inventory/digit_modification.html'
 
     def get_object(self, queryset=None):
-        digit_id = self.kwargs.get('pk')
-        return get_object_or_404(Digit, pk=digit_id)
+        digit_uuid = self.kwargs.get('uuid')
+        return get_object_or_404(Digit, uuid=digit_uuid)
 
     def form_valid(self, form):
         with transaction.atomic():

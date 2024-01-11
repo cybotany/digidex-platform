@@ -4,8 +4,8 @@ from .views import (DigitCreationView, DigitStorageView, DigitDetailsView, Digit
 app_name = 'inventory'
 urlpatterns = [
     path('', DigitStorageView.as_view(), name='storage'),
-    path('<int:pk>/', DigitDetailsView.as_view(), name='details'),
-    path('create/<int:pk>/', DigitCreationView.as_view(), name='creation'),
-    path('delete/<int:pk>/', DigitDeletionView.as_view(), name='deletion'),
-    path('modify/<int:pk>/', DigitModificationView.as_view(), name='modification'),
+    path('<uuid:uuid>/', DigitDetailsView.as_view(), name='details'),
+    path('create/<uuid:uuid>/', DigitCreationView.as_view(), name='creation'),
+    path('delete/<uuid:uuid>/', DigitDeletionView.as_view(), name='deletion'),
+    path('modify/<uuid:uuid>/', DigitModificationView.as_view(), name='modification'),
 ]

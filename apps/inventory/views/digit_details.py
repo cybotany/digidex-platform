@@ -56,7 +56,7 @@ class DigitDetailsView(LoginRequiredMixin, DetailView):
             journal_entry.user = request.user
             journal_entry.save()
 
-            return redirect(reverse('inventory:details', kwargs={'pk': self.object.pk}))
+            return redirect(reverse('inventory:details', kwargs={'uuid': self.object.uuid}))
 
         context = self.get_context_data()
         context['journal_form'] = form

@@ -7,9 +7,9 @@ from apps.accounts.models import Activity
 
 
 class DigitDeletionView(LoginRequiredMixin, View):
-    def post(self, request, pk):
+    def post(self, request, uuid):
         with transaction.atomic():
-            digit = get_object_or_404(Digit, pk=pk)
+            digit = get_object_or_404(Digit, uuid=uuid)
 
             if digit.nfc_link:
                 link = digit.nfc_link

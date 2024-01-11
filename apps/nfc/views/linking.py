@@ -8,20 +8,20 @@ from apps.inventory.models import Digit
 
 class LinkingView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
-        link_pk = kwargs.get('pk')
+        link_uuid = kwargs.get('uuid')
 
-        if not link_pk:
+        if not link_uuid:
             return HttpResponse("No PK provided", status=400)
 
-        link = get_object_or_404(Link, pk=link_pk)
+        link = get_object_or_404(Link, uuid=link_uuid)
         link.counter += 1
         link.save()
 
         if not link.active:
-            return redirect('inventory:creation', pk=link_pk)
+            return redirect('inventory:creation', uuid=link_uuid)
         else:
             if request.user == link.user:
                 digit = get_object_or_404(Digit, nfc_link=link)
-                return redirect('inventory:details', pk=link_pk)
+                return redirect('inventory:details', uuid=link_uuid)
             else:
                 return HttpResponse("Unauthorized access", status=403)

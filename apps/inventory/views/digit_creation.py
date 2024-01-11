@@ -18,8 +18,8 @@ class DigitCreationView(CreateView):
 
     def form_valid(self, form):
         # Retrieve the link instance using link_id from the URL
-        link_pk = self.kwargs.get('pk')
-        link = get_object_or_404(Link, pk=link_pk)
+        link_uuid = self.kwargs.get('uuid')
+        link = get_object_or_404(Link, uuid=link_uuid)
 
         with transaction.atomic():
             digit = form.save(commit=False)
@@ -38,4 +38,4 @@ class DigitCreationView(CreateView):
                 content=f'Registered Plant {digit.name}'
             )
 
-        return redirect('inventory:details', pk=digit.pk)
+        return redirect('inventory:details', uuid=digit.uuid)

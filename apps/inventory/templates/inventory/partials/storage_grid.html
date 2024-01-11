@@ -3,7 +3,7 @@
   <div class="content">
     <div class="w-layout-grid grid-features">
       {% for digit in digits %}
-        <a href="{% url 'inventory:details' digit.id %}" class="digit-card digit-card-link">
+        <a href="{% url 'inventory:details' digit.uuid %}" class="digit-card digit-card-link">
           <div class="digit-card-img-wrapper">
             <!-- Placeholder for image or a no-image icon -->
             <img src="{% static 'inventory/images/placeholder.svg' %}" alt="No Image Available" class="digit-card-img-wrapper">

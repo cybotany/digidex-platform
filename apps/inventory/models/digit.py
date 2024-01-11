@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 from django.urls import reverse
 from apps.taxonomy.models import Unit
@@ -16,6 +17,7 @@ class Digit(models.Model):
         description (TextField): A short description of the digitized plant.
         taxonomic_unit (ForeignKey): A relationship to the Unit model, representing the plant's taxonomic classification.
         nfc_link (OneToOneField): A relationship to the Link model, representing the NFC link for the digitized plant.
+        uuid (UUIDField): The unique identifier associated with the NFC tag or identification mechanism.
         created_at (DateTimeField): The date and time when the Digit instance was created.
         last_modified (DateTimeField): The date and time when the Digit instance was last modified.
     """
@@ -45,6 +47,13 @@ class Digit(models.Model):
         on_delete=models.CASCADE,
         related_name='digit',
         help_text="NFC link for the digitized plant."
+    )
+    uuid = models.UUIDField(
+        default=uuid.uuid4,
+        unique=True,
+        db_index=True,
+        verbose_name="Tag UID",
+        help_text="The unique identifier associated with the NFC tag or identification mechanism."
     )
     #thumbnail = models.ImageField(
     #    upload_to='thumbnails/',
@@ -92,7 +101,7 @@ class Digit(models.Model):
         Returns:
             str: The URL to view the details of this digit.
         """
-        return reverse('inventory:details', args=[str(self.id)])
+        return reverse('inventory:details', kwargs={'uuid': self.uuid})
 
     class Meta:
         verbose_name = "Digit"
