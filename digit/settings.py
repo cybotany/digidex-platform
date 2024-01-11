@@ -38,7 +38,6 @@ if DJANGO_ENV == 'production':
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     AWS_LOCATION = 'static'
     STATIC_URL = f'{AWS_S3_ENDPOINT_URL}/{AWS_LOCATION}/'
-    STATIC_ROOT = '/var/www/digidex.app/static'
 
 else:
     DEBUG = True
@@ -53,6 +52,8 @@ else:
     SESSION_COOKIE_SECURE = False
     CSRF_COOKIE_SECURE = False
     SECURE_SSL_REDIRECT = False
+
+STATIC_ROOT = '/var/www/digidex.app/static'
 
 # Public media settings
 MEDIA_URL = f'https://{AWS_S3_ENDPOINT_URL}/'
