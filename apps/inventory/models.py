@@ -46,12 +46,12 @@ class Digit(models.Model):
         related_name='digit',
         help_text="NFC link for the digitized plant."
     )
-    thumbnail = models.ImageField(
-        upload_to='thumbnails/',
-        null=True,
-        blank=True,
-        help_text="Thumbnail image for the digitized plant."
-    )
+    #thumbnail = models.ImageField(
+    #    upload_to='thumbnails/',
+    #    null=True,
+    #    blank=True,
+    #    help_text="Thumbnail image for the digitized plant."
+    #)
     created_at = models.DateTimeField(
         auto_now_add=True,
         verbose_name="Created At",
