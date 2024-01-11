@@ -6,7 +6,6 @@ from apps.nfc.models import Link
 from apps.inventory.models import Digit
 
 
-
 class LinkingView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         link_pk = kwargs.get('pk')
@@ -26,6 +25,3 @@ class LinkingView(LoginRequiredMixin, View):
                 return redirect('inventory:details', pk=link_pk)
             else:
                 return HttpResponse("Unauthorized access", status=403)
-
-        # Catch-all response if none of the conditions are met
-        return HttpResponse("Unable to process request", status=400)

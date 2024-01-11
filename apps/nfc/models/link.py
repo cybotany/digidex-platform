@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+import uuid
 from django.contrib.auth import get_user_model
 
 
@@ -10,8 +11,9 @@ class Link(models.Model):
     Each link is uniquely identified by a uid for easy access.
 
     Attributes:
-        uid (CharField): The unique identifier or serial number of the Link, typically associated with
-                         the physical NFC tag or other identification mechanism.
+        serial_number (CharField): The unique serial number associated with the NFC tag.
+        uuid (UUIDField): The unique identifier associated with the NFC tag or identification mechanism.
+        counter (IntegerField): The number of times the tag has been scanned.
         user (ForeignKey): The user who created the journal entry, linked to the user model.
         active (BooleanField): A flag indicating whether the Link is active and mapped to a digital object. Inactive
                                links may represent unused or deactivated tags.
@@ -19,8 +21,15 @@ class Link(models.Model):
         last_modified (DateTimeField): The date and time when the Link instance was last modified.
     """
 
-    uid = models.CharField(
-        max_length=255,
+    serial_number = models.CharField(
+        max_length=8,
+        unique=True,
+        db_index=True,
+        verbose_name="Tag Serial Number",
+        help_text="The unique serial number associated with the NFC tag."
+    )
+    uuid = models.UUIDField(
+        default=uuid.uuid4,
         unique=True,
         db_index=True,
         verbose_name="Tag UID",
@@ -72,7 +81,7 @@ class Link(models.Model):
         Returns:
             str: The absolute URL for the Link instance.
         """
-        return reverse('nfc:linking', kwargs={'pk': self.pk})
+        return reverse('nfc:linking', kwargs={'uuid': self.uuid})
 
     def __str__(self):
         """
