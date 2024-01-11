@@ -20,5 +20,8 @@ class UserAdmin(BaseUserAdmin):
     list_filter = ('is_staff', 'is_superuser', 'is_active', 'email_confirmed')
     search_fields = ('username', 'first_name', 'last_name', 'email', 'uuid')
 
+    # Make uuid field read-only
+    readonly_fields = ('uuid',)
+
 # Register your custom user admin
 admin.site.register(User, UserAdmin)
