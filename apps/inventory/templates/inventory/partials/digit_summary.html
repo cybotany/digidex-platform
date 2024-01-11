@@ -10,9 +10,74 @@
         {% if last_image %}
           <img src="{{ last_image.url }}" alt="Recent image of {{ digit.name }}">
         {% else %}
-        <img src="{% static 'inventory/images/placeholder.svg' %}" alt="Placeholder for no image">
+          <img src="{% static 'inventory/images/placeholder.svg' %}" alt="Placeholder for no image">
         {% endif %}
       </div>
+    </div>
+  </div>
+</section>
+
+{% if digit.taxonomic_unit %}
+  <section class="section">
+    <div class="content">
+      <div class="block-heading">
+        <div class="subtitle">Taxonomy<br></div>
+        <h2 class="heading">{{ digit.taxonomic_unit.complete_name }}</h2>
+      </div>
+      <div class="grid-features">
+        <div class="features">
+          <div class="block-heading-features">
+            <h5 class="heading-features">Taxonomy 1</h5><img src="{% static 'main/images/lightning.svg' %}" loading="eager" alt="" class="icon-features">
+          </div>
+          <p class="paragraph-features">Taxonomy 1 Detail</p>
+        </div>
+        <div class="features">
+          <div class="block-heading-features">
+            <h5 class="heading-features">Taxonomy 2</h5><img src="{% static 'main/images/lightning.svg' %}" loading="eager" alt="" class="icon-features">
+          </div>
+          <p class="paragraph-features">Taxonomy 2 Detail</p>
+        </div>
+        <div class="features">
+          <div class="block-heading-features">
+            <h5 class="heading-features">Taxonomy 3</h5><img src="{% static 'main/images/lightning.svg' %}" loading="eager" alt="" class="icon-features">
+          </div>
+          <p class="paragraph-features">Taxonomy 3 Detail</p>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+<section class="section">
+  <div class="content">
+    <div class="w-layout-grid grid-about">
+    <div class="about blue">
+        <div class="block-icon-about"><img src="{% static 'inventory/images/water.svg' %}" loading="eager" alt="" class="icon-about"></div>
+        <h4 class="heading-about">Watering</h4>
+        {% if last_watering_date %}
+          <p class="paragraph-about">Last Watered: {{ last_watering_date|date:"Y-m-d" }} ({{ days_since_last_watering }} days ago)</p>
+        {% else %}
+          <p class="paragraph-about">No watering entries recorded.</p>
+        {% endif %}
+    </div>
+    <div class="about green"> 
+        <div class="block-icon-about green"><img src="{% static 'inventory/images/food.svg' %}" loading="eager" alt="" class="icon-about"></div>
+        <h4 class="heading-about green">Fertilizing</h4>
+        {% if last_fertilizing_date %}
+          <p class="paragraph-about green">Last Fertilized: {{ last_fertilizing_date|date:"Y-m-d" }} ({{ days_since_last_fertilizing }} days ago)</p>
+        {% else %}
+          <p class="paragraph-about green">No fertilizing entries recorded.</p>
+        {% endif %}
+    </div>
+    <div class="about red">
+        <div class="block-icon-about red"><img src="{% static 'inventory/images/clean.svg' %}" loading="eager" alt="" class="icon-about"></div>
+        <h4 class="heading-about red">Cleaning</h4>
+        {% if last_cleaning_date %}
+          <p class="paragraph-about red">Last Cleaned: {{ last_cleaning_date|date:"Y-m-d" }} ({{ days_since_last_cleaning }} days ago)</p>
+        {% else %}
+          <p class="paragraph-about red">No cleaning entries recorded.</p>
+        {% endif %}
+    </div>    
     </div>
   </div>
 </section>
@@ -96,40 +161,6 @@
           </tbody>
         </table>
       </div>   
-    </div>
-  </div>
-</section>
-
-<section class="section-footer">
-  <div class="content">
-    <div class="w-layout-grid grid-about">
-    <div class="about blue">
-        <div class="block-icon-about"><img src="{% static 'inventory/images/water.svg' %}" loading="eager" alt="" class="icon-about"></div>
-        <h4 class="heading-about">Watering</h4>
-        {% if last_watering_date %}
-          <p class="paragraph-about">Last Watered: {{ last_watering_date|date:"Y-m-d" }} ({{ days_since_last_watering }} days ago)</p>
-        {% else %}
-          <p class="paragraph-about">No watering entries recorded.</p>
-        {% endif %}
-    </div>
-    <div class="about green"> 
-        <div class="block-icon-about green"><img src="{% static 'inventory/images/food.svg' %}" loading="eager" alt="" class="icon-about"></div>
-        <h4 class="heading-about green">Fertilizing</h4>
-        {% if last_fertilizing_date %}
-          <p class="paragraph-about green">Last Fertilized: {{ last_fertilizing_date|date:"Y-m-d" }} ({{ days_since_last_fertilizing }} days ago)</p>
-        {% else %}
-          <p class="paragraph-about green">No fertilizing entries recorded.</p>
-        {% endif %}
-    </div>
-    <div class="about red">
-        <div class="block-icon-about red"><img src="{% static 'inventory/images/clean.svg' %}" loading="eager" alt="" class="icon-about"></div>
-        <h4 class="heading-about red">Cleaning</h4>
-        {% if last_cleaning_date %}
-          <p class="paragraph-about red">Last Cleaned: {{ last_cleaning_date|date:"Y-m-d" }} ({{ days_since_last_cleaning }} days ago)</p>
-        {% else %}
-          <p class="paragraph-about red">No cleaning entries recorded.</p>
-        {% endif %}
-    </div>    
     </div>
   </div>
 </section>
