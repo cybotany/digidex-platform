@@ -1,5 +1,5 @@
 from django import forms
-from .models import Entry
+from apps.journal.models import Entry
 
 
 class CreateJournalEntry(forms.ModelForm):

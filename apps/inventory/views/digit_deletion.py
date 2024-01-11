@@ -1,8 +1,8 @@
+from django.db import transaction
 from django.views import View
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from apps.inventory.models import Digit
-from django.db import transaction
 from apps.accounts.models import Activity
 
 
