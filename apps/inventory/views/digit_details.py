@@ -23,8 +23,8 @@ class DigitDetailsView(LoginRequiredMixin, DetailView):
                 'user': self.request.user
             })
 
-        journal_entries = Entry.objects.filter(digit=self.object)
-        context['journal_entries'] = journal_entries
+        journal_entries = self.object.journal_entries.all()
+        context['journal_entries'] = journal_entries[:10]
 
         today = datetime.now().date()
 

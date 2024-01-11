@@ -5,18 +5,6 @@
       <div class="block-hero">
         <h1 class="heading-hero">{{ digit.name }}</h1>
         <p class="paragraph-hero">{{ digit.description }}</p>
-
-        {% if digit.taxonomic_unit.tsn %}
-          <p class="paragraph-hero">
-            <a href="{{ digit.taxonomic_unit.get_absolute_url }}">
-              TSN: {{ digit.taxonomic_unit.tsn }}
-            </a>
-          </p>
-          <p class="paragraph-hero">
-            Complete Scientific Name: {{ digit.taxonomic_unit.complete_name}}
-          </p>
-        {% endif %}
-
       </div>
       <div class="image-journal">
         {% if last_image %}
@@ -30,6 +18,44 @@
 </section>
 
 <section class="section">
+  <div class="content">
+    <div class="grid">
+      <div class="page-body">   
+        <h3 class="heading">Digit Details</h3>
+        <p class="paragraph">Created: {{ digit.created_at }}</p>
+        <p class="paragraph">TSN: {{ digit.taxonomic_unit.tsn }}</p>
+        <p class="paragraph">Scientific Name: {{ digit.taxonomic_unit.complete_name }}</p>
+      </div>
+      <div class="lottie">
+        <h3>Journal Entries</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Content</th>
+              <th scope="col">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for entry in digit.journal_entries.all %}
+              <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ entry.content }}</td>
+                <td>{{ entry.created_at }}</td>
+              </tr>
+            {% empty %}
+              <tr>
+                <td colspan="4">No journal entries found.</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>    
+    </div>
+  </div>
+</section>
+
+<section class="section-footer">
   <div class="content">
     <div class="w-layout-grid grid-about">
     <div class="about blue">
@@ -59,16 +85,6 @@
           <p class="paragraph-about red">No cleaning entries recorded.</p>
         {% endif %}
     </div>    
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="content">
-    <div class="page-body">   
-      <h2 class="heading">Journal Entries</h2>
-      <p class="paragraph">Created: {{ digit.created_at }}</p>
-      <p class="paragraph">Last Edited: {{ digit.last_modified }}</p>
     </div>
   </div>
 </section>
