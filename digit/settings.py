@@ -19,6 +19,8 @@ AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', '')
 AWS_S3_ENDPOINT_URL = os.environ.get('AWS_S3_ENDPOINT_URL', '')
 AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
 
+STATIC_ROOT = '/var/www/digidex.app/static'
+
 # Environment specific settings
 if DJANGO_ENV == 'production':
     DEBUG = False
@@ -37,7 +39,6 @@ if DJANGO_ENV == 'production':
     # Deployed Static files settings
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     AWS_LOCATION = 'static'
-    STATIC_ROOT = '/var/www/digidex.app/static'
     STATIC_URL = f'{AWS_S3_ENDPOINT_URL}/{AWS_LOCATION}/'
 
 else:
@@ -45,7 +46,6 @@ else:
     ALLOWED_HOSTS = ["localhost", "10.0.0.218"]
 
     # Local static files settings
-    STATIC_ROOT = '/var/www/digidex.app/static'
     STATIC_URL = '/static/'
     STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 
@@ -89,7 +89,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'bootstrap5',
-    'sslserver',
     'apps.accounts.apps.AccountConfig',
     'apps.api',
     'apps.inventory',
