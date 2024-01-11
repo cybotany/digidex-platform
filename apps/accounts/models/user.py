@@ -36,8 +36,6 @@ class User(AbstractUser):
         default=False,
         help_text='Indicates whether the user has confirmed their email address.'
     )
-    class Meta:
-        db_table = 'auth_user'
 
     def __str__(self):
         return self.username
