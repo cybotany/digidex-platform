@@ -26,31 +26,33 @@
         <p class="paragraph">TSN: {{ digit.taxonomic_unit.tsn }}</p>
         <p class="paragraph">Scientific Name: {{ digit.taxonomic_unit.complete_name }}</p>
       </div>
-      <div class="lottie">
-        <h3>Journal Entries</h3>
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Content</th>
-              <th scope="col">Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for entry in digit.journal_entries.all %}
+      <div class="block-right">
+        <div class="lottie">
+          <h3>Journal Entries</h3>
+          <table class="table">
+            <thead>
               <tr>
-                <th scope="row">{{ forloop.counter }}</th>
-                <td>{{ entry.content }}</td>
-                <td>{{ entry.created_at }}</td>
+                <th scope="col">#</th>
+                <th scope="col">Content</th>
+                <th scope="col">Date</th>
               </tr>
-            {% empty %}
-              <tr>
-                <td colspan="4">No journal entries found.</td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>    
+            </thead>
+            <tbody>
+              {% for entry in digit.journal_entries.all %}
+                <tr>
+                  <th scope="row">{{ forloop.counter }}</th>
+                  <td>{{ entry.content }}</td>
+                  <td>{{ entry.created_at }}</td>
+                </tr>
+              {% empty %}
+                <tr>
+                  <td colspan="4">No journal entries found.</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div> 
+      </div>   
     </div>
   </div>
 </section>

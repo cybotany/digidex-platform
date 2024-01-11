@@ -4531,10 +4531,6 @@ figcaption {
     grid-template-columns: 1fr;
   }
 
-  .block-right {
-    padding-left: 0%;
-  }
-
   .grid-numbers {
     width: 100%;
     font-size: 1em;
