@@ -1,4 +1,5 @@
 from datetime import datetime
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.views.generic import DetailView
@@ -12,6 +13,11 @@ class DigitDetailsView(LoginRequiredMixin, DetailView):
     model = Digit
     template_name = 'inventory/digit_details.html'
 
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset=queryset)
+        if obj.nfc_link.user != self.request.user:
+            raise PermissionDenied
+        return obj
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
