@@ -1,7 +1,7 @@
 import uuid
 from django.db import models
 from django.urls import reverse
-from django.contrib.auth import get_user_model
+from apps.accounts.models import User
 
 
 class Link(models.Model):
@@ -32,7 +32,7 @@ class Link(models.Model):
         default=uuid.uuid4,
         unique=True,
         db_index=True,
-        verbose_name="Tag UID",
+        verbose_name="Tag UUID",
         help_text="The unique identifier associated with the NFC tag or identification mechanism."
     )
     counter = models.IntegerField(
@@ -41,7 +41,7 @@ class Link(models.Model):
         help_text="The number of times the tag has been scanned."
     )
     user = models.ForeignKey(
-        get_user_model(),
+        User,
         null=True,
         blank=True,
         on_delete=models.CASCADE,

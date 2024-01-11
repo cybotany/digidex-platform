@@ -1,8 +1,7 @@
 from django.views import View
 from django.shortcuts import get_object_or_404, redirect, render
-from django.contrib.auth.models import User
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from apps.accounts.models import Profile
+from apps.accounts.models import User
 
 
 class EmailVerificationView(View):
@@ -15,11 +14,8 @@ class EmailVerificationView(View):
 
         if token_generator.check_token(user, token):
             user.is_active = True
+            user.email_confirmed = True
             user.save()
-
-            profile, created = Profile.objects.get_or_create(user=user)
-            profile.email_confirmed = True
-            profile.save()
 
             return redirect('inventory:storage')
         else:

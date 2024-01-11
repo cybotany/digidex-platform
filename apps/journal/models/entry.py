@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth import get_user_model
+from apps.accounts.models import User
 from apps.inventory.models import Digit
 from apps.utils.custom_storage import PrivateMediaStorage
 from apps.utils.validators import validate_image_size_and_dimensions
@@ -33,7 +33,7 @@ class Entry(models.Model):
         help_text="The digitized plant to which this journal entry is related."
     )
     user = models.ForeignKey(
-        get_user_model(),
+        User,
         on_delete=models.CASCADE,
         verbose_name="User",
         help_text="The user who created this journal entry."

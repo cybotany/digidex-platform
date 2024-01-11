@@ -188,6 +188,8 @@ SIMPLE_JWT = {
     'TOKEN_TYPE_CLAIM': 'token_type',
 }
 
+AUTH_USER_MODEL = "apps.accounts.User"
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.office365.com'
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')

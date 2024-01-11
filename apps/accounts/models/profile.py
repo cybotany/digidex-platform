@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth import get_user_model
+from apps.accounts.models import User
 from apps.utils.custom_storage import PublicMediaStorage
 from apps.utils.validators import validate_image_size_and_dimensions
 from apps.utils.helpers import get_unique_filename
@@ -11,10 +11,8 @@ class Profile(models.Model):
 
     Fields:
         user (OneToOneField): A one-to-one reference to the User model.
-        email_confirmed (BooleanField): Indicates whether the user has confirmed their email address.
         bio (TextField): A text field for user biography, maximum length 500 characters.
         location (CharField): A char field for user location, maximum length 30 characters.
-        birth_date (DateField): A date field for user's birth date.
         avatar (ImageField): An image field for user's profile picture.
         interests (CharField): A char field for user's interests.
         experience (CharField): A char field for user's experience.
@@ -22,13 +20,9 @@ class Profile(models.Model):
         last_modified (DateTimeField): The date and time when the profile was last modified.
     """
     user = models.OneToOneField(
-        get_user_model(),
+        User,
         on_delete=models.CASCADE,
         help_text='The user associated with this profile.'
-    )
-    email_confirmed = models.BooleanField(
-        default=False,
-        help_text='Indicates whether the user has confirmed their email address.'
     )
     bio = models.TextField(
         max_length=500,
@@ -39,11 +33,6 @@ class Profile(models.Model):
         max_length=30,
         blank=True,
         help_text='The location of the user.'
-    )
-    birth_date = models.DateField(
-        null=True,
-        blank=True,
-        help_text='The birth date of the user.'
     )
     avatar = models.ImageField(
         upload_to=get_unique_filename,
