@@ -23,7 +23,6 @@ class DigitDetailsView(LoginRequiredMixin, DetailView):
                 'user': self.request.user
             })
 
-        # Retrieve all journal entries for this digit
         journal_entries = Entry.objects.filter(digit=self.object)
         context['journal_entries'] = journal_entries
 

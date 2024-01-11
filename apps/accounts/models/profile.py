@@ -1,8 +1,8 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-from apps.utils.helpers import get_user_directory_path
-from apps.utils.custom_storage import AvatarStorage
+from apps.utils.custom_storage import PublicMediaStorage
 from apps.utils.validators import validate_image_size_and_dimensions
+from apps.utils.helpers import get_unique_filename
 
 
 class Profile(models.Model):
@@ -46,7 +46,8 @@ class Profile(models.Model):
         help_text='The birth date of the user.'
     )
     avatar = models.ImageField(
-        upload_to=AvatarStorage(get_user_directory_path),
+        upload_to=get_unique_filename,
+        storage=PublicMediaStorage(), 
         validators=[validate_image_size_and_dimensions],
         null=True,
         blank=True,

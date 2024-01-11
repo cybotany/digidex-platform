@@ -33,13 +33,13 @@ if DJANGO_ENV == 'production':
     AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', '')
     AWS_S3_ENDPOINT_URL = os.environ.get('AWS_S3_ENDPOINT_URL', '')
     AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
-    AWS_LOCATION = 'static'
-    AWS_DEFAULT_ACL = 'public-read'
-
+    
+    # Static files settings
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    AWS_LOCATION = 'static'
     STATIC_URL = f'{AWS_S3_ENDPOINT_URL}/{AWS_LOCATION}/'
     STATIC_ROOT = '/var/www/digidex.app/static'
-    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
 else:
     DEBUG = True
     ALLOWED_HOSTS = ["localhost", "10.0.0.218"]
@@ -54,6 +54,12 @@ else:
     CSRF_COOKIE_SECURE = False
     SECURE_SSL_REDIRECT = False
 
+# Public media settings
+MEDIA_URL = f'https://{AWS_S3_ENDPOINT_URL}/'
+DEFAULT_FILE_STORAGE = 'apps.utils.custom_storage.PublicMediaStorage'
+
+# Private media settings
+PRIVATE_FILE_STORAGE = 'apps.utils.custom_storage.PrivateMediaStorage'
 
 CORS_ALLOW_HEADERS = [
     "content-type",
@@ -157,7 +163,6 @@ USE_TZ = True
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
