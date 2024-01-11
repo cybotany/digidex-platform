@@ -12,6 +12,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '')
 DJANGO_ENV = os.environ.get('DJANGO_ENV', 'development')
 
+# AWS settings for static and media files
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', '')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', '')
+AWS_S3_ENDPOINT_URL = os.environ.get('AWS_S3_ENDPOINT_URL', '')
+AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+
 # Environment specific settings
 if DJANGO_ENV == 'production':
     DEBUG = False
@@ -26,15 +33,8 @@ if DJANGO_ENV == 'production':
     SECURE_HSTS_SECONDS = 31536000 # 1 year
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
-
-    # AWS settings for static and media files
-    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '')
-    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', '')
-    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', '')
-    AWS_S3_ENDPOINT_URL = os.environ.get('AWS_S3_ENDPOINT_URL', '')
-    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
     
-    # Static files settings
+    # Deployed Static files settings
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     AWS_LOCATION = 'static'
     STATIC_URL = f'{AWS_S3_ENDPOINT_URL}/{AWS_LOCATION}/'
