@@ -1313,7 +1313,7 @@ figcaption {
 
 .section-top-bar {
   background-color: var(--core-primary-color);
-  color: var(--secondary-color\<deleted\|variable-92021d0a-286c-26ec-3d41-32ee026cc680\>);
+  color: var(--core-primary-color);
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -2754,7 +2754,7 @@ figcaption {
   height: 2em;
 }
 
-.heading-about, .heading-about.green, .heading-about.red, .paragraph-about, .paragraph-about.green, .paragraph-about.red {
+.heading-about, .paragraph-about, .heading-about.green, .paragraph-about.green, .heading-about.red, .paragraph-about.red {
   color: var(--core-primary-color);
 }
 
@@ -2969,6 +2969,11 @@ figcaption {
   width: 100%;
   object-fit: cover;
   border-radius: .87em;
+}
+
+
+.image-journal {
+  position: relative;
 }
 
 .contact {
@@ -4524,10 +4529,6 @@ figcaption {
     grid-column-gap: 2.5em;
     grid-row-gap: 2.5em;
     grid-template-columns: 1fr;
-  }
-
-  .block-right {
-    padding-left: 0%;
   }
 
   .grid-numbers {
