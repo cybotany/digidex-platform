@@ -22,6 +22,6 @@ class LinkingView(LoginRequiredMixin, View):
         else:
             if request.user == link.user:
                 digit = get_object_or_404(Digit, nfc_link=link)
-                return redirect('inventory:details', uuid=link_uuid)
+                return redirect('inventory:details', uuid=digit.uuid)
             else:
                 return HttpResponse("Unauthorized access", status=403)
