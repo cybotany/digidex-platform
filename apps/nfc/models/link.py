@@ -22,7 +22,7 @@ class Link(models.Model):
     """
 
     serial_number = models.CharField(
-        max_length=8,
+        max_length=32,
         unique=True,
         db_index=True,
         verbose_name="Tag Serial Number",
