@@ -7,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from apps.inventory.models import Digit
 from apps.journal.forms import CreateJournalEntry
 from apps.journal.models import Entry
+from django.shortcuts import get_object_or_404
 
 
 class DigitDetailsView(LoginRequiredMixin, DetailView):
@@ -14,7 +15,9 @@ class DigitDetailsView(LoginRequiredMixin, DetailView):
     template_name = 'inventory/digit_details.html'
 
     def get_object(self, queryset=None):
-        obj = super().get_object(queryset=queryset)
+        uuid = self.kwargs.get('uuid')
+        obj = get_object_or_404(Digit, uuid=uuid)
+
         if obj.nfc_link.user != self.request.user:
             raise PermissionDenied
         return obj
