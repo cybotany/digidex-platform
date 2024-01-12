@@ -73,6 +73,7 @@ CORS_ALLOW_METHODS = [
 CORS_ALLOWED_ORIGINS = [
     "https://digidex.app",
     "https://www.digidex.app",
+    "https://cdn.digidex.app",
 ]
 
 # Application definition
