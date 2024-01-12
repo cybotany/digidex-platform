@@ -2,7 +2,7 @@ from django.db import models
 from apps.accounts.models import User
 from apps.inventory.models import Digit
 from apps.utils.custom_storage import PrivateMediaStorage
-from apps.utils.validators import validate_image_size_and_dimensions
+#from apps.utils.validators import validate_image_size_and_dimensions
 from apps.utils.helpers import get_unique_filename
 
 
@@ -50,7 +50,7 @@ class Entry(models.Model):
     image = models.ImageField(
         upload_to=get_unique_filename,
         storage=PrivateMediaStorage(), 
-        validators=[validate_image_size_and_dimensions],
+#        validators=[validate_image_size_and_dimensions],
         null=True,
         blank=True,
         help_text="(Optional) The image to save with the journal entry. Only .jpg, .png, and .jpeg extensions are allowed."
