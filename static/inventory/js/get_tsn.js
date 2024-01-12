@@ -1,6 +1,3 @@
-// DOM Elements
-const tsnField = document.getElementById('tsnField');
-
 // Configurations for select2
 const select2Config = {
     ajax: {
@@ -22,7 +19,10 @@ const select2Config = {
         beforeSend: function(xhr) {
             const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
             xhr.setRequestHeader("X-CSRFToken", csrftoken);
-        }
+        },
+        xhrFields: {
+            withCredentials: true
+        },
     },
     minimumInputLength: 1
 };

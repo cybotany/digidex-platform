@@ -60,16 +60,15 @@ DEFAULT_FILE_STORAGE = 'apps.utils.custom_storage.PublicMediaStorage'
 # Private media settings
 PRIVATE_FILE_STORAGE = 'apps.utils.custom_storage.PrivateMediaStorage'
 
+CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = [
     "content-type",
     "authorization",
 ]
-
 CORS_ALLOW_METHODS = [
     "GET",
     "POST",
 ]
-
 CORS_ALLOWED_ORIGINS = [
     "https://digidex.app",
     "https://www.digidex.app",

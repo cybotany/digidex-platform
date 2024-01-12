@@ -6,7 +6,7 @@ from apps.api.serializers import TaxonomyUnitSerializer
 
 
 class GetTSN(APIView):
-    #permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
         search_term = request.GET.get('q')
