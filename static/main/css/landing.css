@@ -1,0 +1,41 @@
+.section-hero {
+  justify-content: center;
+  align-items: center;
+  padding: 3.5em 2em 3.75em;
+  display: flex;
+}
+
+.grid-hero {
+  grid-column-gap: 0em;
+  grid-row-gap: 0em;
+  grid-template-rows: auto;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: center;
+}
+
+.block-hero {
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  display: flex;
+}
+
+.heading-hero {
+  max-width: 11.5em;
+  margin-bottom: .38em;
+}
+
+.paragraph-hero {
+  max-width: 26em;
+  margin-bottom: 2em;
+  font-size: 1.125em;
+  line-height: 160%;
+}
+
+.button-hero {
+  grid-column-gap: .5em;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
