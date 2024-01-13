@@ -64,6 +64,7 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = [
     "content-type",
     "authorization",
+    'x-requested-with'
 ]
 CORS_ALLOW_METHODS = [
     "GET",
