@@ -15,10 +15,6 @@
   display: flex;
 }
 
-.body {
-  display: block;
-}
-
 .subtitle {
   background-color: var(--white);
   color: var(--heading);

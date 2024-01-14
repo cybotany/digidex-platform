@@ -123,8 +123,12 @@ th {
 }
 
 img {
-  max-width: 100px;  /* Adjust as needed */
+  max-width: 100px;
   height: auto;
+}
+
+.body {
+  display: block;
 }
 
 @media screen and (max-width: 991px) {
