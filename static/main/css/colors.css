@@ -1,0 +1,14 @@
+.hex-color {
+  opacity: .5;
+  color: var(--heading);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
+}
+
+.hex-color.white {
+  color: var(--white);
+}

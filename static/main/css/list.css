@@ -1,0 +1,8 @@
+.list {
+  grid-column-gap: .7em;
+  grid-row-gap: .7em;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}

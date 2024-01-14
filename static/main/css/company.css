@@ -1,11 +1,3 @@
-.grid-about {
-  grid-column-gap: 1.5em;
-  grid-row-gap: 1.5em;
-  grid-template-rows: auto;
-  grid-template-columns: 1fr 1fr 1fr;
-  align-items: start;
-}
-
 .about {
   grid-row-gap: 1.2em;
   background-color: var(--accent-b1);
@@ -26,75 +18,8 @@
   background-color: var(--accent-b2);
 }
 
-.block-icon-about {
-  width: 4.5em;
-  height: 4.5em;
-  background-color: var(--core-primary-color);
-  border-radius: .87em;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-}
-
-.block-icon-about.green, .block-icon-about.red {
-  background-color: var(--core-primary-color);
-}
-
-.icon-about {
-  width: 2em;
-  height: 2em;
-}
-
-.heading-about, .heading-about.green, .heading-about.red, .paragraph-about, .paragraph-about.green, .paragraph-about.red {
-  color: var(--core-primary-color);
-}
-
-.heading-quote {
-  margin-bottom: 1.4em;
-}
-
-.block-quote {
-  grid-column-gap: 1.25em;
-  grid-row-gap: 1.25em;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  display: flex;
-}
-
-.block-name {
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  display: flex;
-}
-
-.heading-name {
-  margin-bottom: .3em;
-  line-height: 120%;
-}
-
-.text-role {
-  color: rgba(20, 23, 24, .7);
-  letter-spacing: .05em;
-  text-transform: uppercase;
-  font-family: IBM Plex Mono, sans-serif;
-  font-size: .7em;
-  font-weight: 500;
-  line-height: 130%;
-}
-
 .signature {
   height: 3.7em;
-}
-
-.grid-team {
-  grid-column-gap: 1.5em;
-  grid-row-gap: 1.5em;
-  grid-template-rows: auto;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  align-items: start;
 }
 
 .team {
@@ -107,12 +32,4 @@
 .image-team {
   object-fit: cover;
   border-radius: .6em;
-}
-
-.block-team {
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 1.3em 1em .6em;
-  display: flex;
 }

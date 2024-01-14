@@ -1,0 +1,43 @@
+.clients {
+  text-align: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 3.6em;
+  display: flex;
+}
+
+.subtitle-clients {
+  opacity: .7;
+  color: var(--heading);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  margin-bottom: 2.3em;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
+}
+
+.gradient-clients {
+  z-index: 50;
+  background-image: linear-gradient(to right, var(--background) 5%, rgba(244, 246, 247, 0) 20%, rgba(244, 246, 247, 0) 80%, var(--background) 95%);
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}
+
+.clients-wrapper {
+  flex: none;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+
+.logo-client {
+  max-height: 2.7em;
+  margin-left: 2.7em;
+  margin-right: 2.7em;
+}

@@ -1,0 +1,37 @@
+.image-template {
+  object-fit: cover;
+  border-radius: .6em;
+}
+
+.image-post-thumbnail {
+  width: 100%;
+  height: 15em;
+  object-fit: cover;
+  border-radius: .87em;
+}
+
+.image-post-thumbnail.large {
+  height: auto;
+  max-height: 40em;
+}
+
+.image-main-post {
+  width: 100%;
+  object-fit: cover;
+  border-radius: .87em;
+}
+
+.image-cart-item {
+  width: 3.5em;
+  height: 3.5em;
+  background-color: var(--accent-b1);
+  object-fit: cover;
+  border-radius: .62em;
+  padding: .9em;
+}
+
+@media screen and (max-width: 991px) {
+  .image-post-thumbnail {
+    height: 28vw;
+  }
+}

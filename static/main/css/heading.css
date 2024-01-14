@@ -1,0 +1,92 @@
+.heading {
+  max-width: 9em;
+  align-self: center;
+  margin-bottom: .5em;
+}
+
+.heading.large {
+  max-width: 13em;
+}
+
+.heading-top {
+  max-width: 11.5em;
+  margin-bottom: .38em;
+}
+
+.heading.banner {
+  color: var(--white);
+  text-align: center;
+  align-self: auto;
+  margin-bottom: .7em;
+}
+
+.heading-template {
+  margin-bottom: .8em;
+}
+
+.heading-hero {
+  max-width: 11.5em;
+  margin-bottom: .38em;
+}
+
+.heading-list.blue {
+  color: var(--core-primary-color);
+}
+
+.heading-list.green {
+  color: var(--core-accent-color);
+}
+
+.heading-numbers {
+  color: var(--core-primary-color);
+  font-weight: 500;
+}
+
+.heading-numbers.green {
+  color: var(--core-accent-color);
+}
+
+.heading-about, .heading-about.green, .heading-about.red{
+  color: var(--core-primary-color);
+}
+
+.heading-quote {
+  margin-bottom: 1.4em;
+}
+
+.heading-name {
+  margin-bottom: .3em;
+  line-height: 120%;
+}
+
+.heading-contact-lottie {
+  color: var(--core-primary-color);
+  font-weight: 500;
+}
+
+.heading-accordion {
+  margin-top: .3em;
+  margin-bottom: .3em;
+}
+
+.heading-solution-large {
+  color: var(--core-primary-color);
+}
+
+.heading-solution-large.green {
+  color: var(--core-accent-color);
+}
+
+.heading-utility {
+  max-width: 9em;
+  margin-bottom: .3em;
+}
+
+.heading-account {
+  max-width: 9em;
+  margin-bottom: .3em;
+}
+
+.heading-account.white {
+  color: var(--white);
+}

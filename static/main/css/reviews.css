@@ -1,0 +1,69 @@
+.review-left {
+  width: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  display: flex;
+}
+
+.review {
+  grid-column-gap: .94em;
+  grid-row-gap: .94em;
+  background-color: var(--white);
+  border-radius: .87em;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: .44em;
+  margin-bottom: .44em;
+  padding: 2em;
+  display: flex;
+  box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
+}
+
+.review-name {
+  color: var(--heading);
+  letter-spacing: -.02em;
+  font-size: .87em;
+  font-weight: 500;
+  line-height: 130%;
+}
+
+.stars {
+  grid-column-gap: .25em;
+  grid-row-gap: .25em;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+
+.reviews-wrapper {
+  width: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  display: flex;
+}
+
+.reviews-wrapper.right {
+  justify-content: flex-end;
+}
+
+.review-right {
+  width: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  display: flex;
+}
+
+.gradient-reviews {
+  z-index: 50;
+  background-image: linear-gradient(to bottom, var(--background), rgba(244, 246, 247, 0) 10%, rgba(244, 246, 247, 0) 90%, var(--background));
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}

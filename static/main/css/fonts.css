@@ -1,0 +1,11 @@
+.font-template {
+  background-color: var(--accent-b1);
+  border-radius: .87em;
+  margin-top: .7em;
+  padding: 1.3em 1.8em;
+}
+
+.ibm-plex-mono {
+  font-family: IBM Plex Mono, sans-serif;
+  font-weight: 500;
+}
