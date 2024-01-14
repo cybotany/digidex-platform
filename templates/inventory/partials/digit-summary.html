@@ -1,17 +1,43 @@
 {% load static %}
-<section class="section-hero">
-  <div class="content">
-    <div class="w-layout-grid grid-hero">
-      <div class="block-hero">
-        <h1 class="heading-hero">{{ digit.name }}</h1>
-        <p class="paragraph-hero">{{ digit.description }}</p>
-      </div>
-      <div class="image-journal">
-        {% if last_image %}
-          <img src="{{ last_image.url }}" alt="Recent image of {{ digit.name }}">
-        {% else %}
-          <img src="{% static 'main/images/placeholder.svg' %}" alt="Placeholder for no image">
-        {% endif %}
+<section class="section-top">
+  <div style="opacity:0" class="content">
+    <div class="block-top">
+      <h1 class="heading-top">{{ digit.name }}</h1>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="content narrow">
+    <div class="page-body">
+      <div class="rich-text-block w-richtext">
+        <figure style="max-width:882pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image">
+          {% if last_image %}
+            <div>
+              <img src="{{ last_image.url }}"  loading="lazy" alt="Recent image of {{ digit.name }}">
+            </div>
+          {% else %}
+            <div>
+              <img src="{% static 'main/images/placeholder.svg' %}"  loading="lazy" alt="">
+            </div>
+          {% endif %}
+          <figcaption>
+            {{ digit.description }}
+          </figcaption>
+        </figure>
+        
+        <p>Paragraph</p>
+        <blockquote>Amet nisi ut ultrices lacus. Fermentum mattis metus nam id nam nunc fermentum tortor pellentesque. Sit lacus pharetra bibendum velit. Urna lacus ut sed maecenas nisi tempor magna.</blockquote>
+        <p>Paragraph</p>
+        <ul role="list">
+          <li>Bullet Point 1</li>
+          <li>Bullet Point 2</li>
+          <li>Bullet Point 3</li>
+        </ul>
+        <ol start="" role="list">
+          <li>Point 1</li>
+          <li>Point 2</li>
+          <li>Point 3</li>
+        </ol>
       </div>
     </div>
   </div>
@@ -24,7 +50,7 @@
         <div class="subtitle">Taxonomy<br></div>
         <h2 class="heading">{{ digit.taxonomic_unit.complete_name }}</h2>
       </div>
-      <div class="w-layout-grid grid-features">
+      <div class="layout-grid grid-features">
         <div class="features">
           <div class="block-heading-features">
             <h5 class="heading-features">Taxonomy 1</h5><img src="{% static 'main/images/lightning.svg' %}" loading="eager" alt="" class="icon-features">
@@ -50,7 +76,7 @@
 
 <section class="section">
   <div class="content">
-    <div class="w-layout-grid grid-about">
+    <div class="layout-grid grid-about">
     <div class="about blue">
         <div class="block-icon-about"><img src="{% static 'main/images/water.svg' %}" loading="eager" alt="" class="icon-about"></div>
         <h4 class="heading-about">Watering</h4>
@@ -84,7 +110,7 @@
 
 <section class="section">
   <div class="content">
-    <div class="w-layout-grid grid">
+    <div class="layout-grid grid">
       <div class="accordion-item">
         <!-- Clickable header for toggling the form -->
         <div class="accordion-header" onclick="toggleJournalEntry()">

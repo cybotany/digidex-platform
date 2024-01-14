@@ -1,15 +1,13 @@
 {% load static %}
 <section class="section">
-  <div class="content">
-    <div class="w-layout-grid grid-features">
+  <div class="page-body">
+    <h3 class="heading-template">Digits</h3>
+    <div class="layout-grid grid-colors">
       {% for digit in digits %}
         <a href="{% url 'inventory:details' digit.uuid %}" class="digit-card digit-card-link">
-          <div class="digit-card-img-wrapper">
-            <img src="{% static 'main/images/placeholder.svg' %}" alt="No Image Available" class="digit-card-img-wrapper">
-          </div>
-          <div class="digit-card-body">
-            <h5 class="digit-card-header">{{ digit.name }}</h5>
-            <p class="digit-card-footer">{{ digit.description }}</p>
+          <div class="block-color">
+            <div class="text-color">{{ digit.name }}</div>
+            <div class="hex-color">{{ digit.description }}</div>
           </div>
         </a>
       {% empty %}
