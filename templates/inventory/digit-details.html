@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
   <head>  
@@ -5,6 +6,196 @@
   </head>
   <body class="body">
     {% include 'main/partials/header.html' %}  
-    {% include 'inventory/partials/digit-summary.html' %}
+    <section class="section-top">
+      <div class="content">
+        <div class="block-top">
+          <h1 class="heading-top">{{ digit.name }}</h1>
+        </div>
+      </div>
+    </section>
+    <!-- Digit Image Section -->
+    <section class="section">
+      <div class="content narrow">
+        <div class="page-body">
+          <div class="rich-text-block w-richtext">
+            <figure style="max-width:882pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image">
+              {% if last_image %}
+                <div>
+                  <img src="{{ last_image.url }}"  loading="lazy" alt="Recent image of {{ digit.name }}">
+                </div>
+              {% else %}
+                <div>
+                  <img src="{% static 'main/images/placeholder.svg' %}"  loading="lazy" alt="">
+                </div>
+              {% endif %}
+              <figcaption>
+                {{ digit.description }}
+              </figcaption>
+            </figure>
+            
+            <p class="paragraph">Paragraph</p>
+            <blockquote>Amet nisi ut ultrices lacus. Fermentum mattis metus nam id nam nunc fermentum tortor pellentesque. Sit lacus pharetra bibendum velit. Urna lacus ut sed maecenas nisi tempor magna.</blockquote>
+            <p class="paragraph">Paragraph</p>
+            <ul role="list">
+              <li>Bullet Point 1</li>
+              <li>Bullet Point 2</li>
+              <li>Bullet Point 3</li>
+            </ul>
+            <ol start="" role="list">
+              <li>Point 1</li>
+              <li>Point 2</li>
+              <li>Point 3</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Digit Taxonomic Section -->
+    {% if digit.taxonomic_unit %}
+      <section class="section">
+        <div class="content narrow">
+          <div class="block-heading">
+            <div class="subtitle">Taxonomy<br></div>
+            <h2 class="heading">{{ digit.taxonomic_unit.complete_name }}</h2>
+          </div>
+          <div class="layout-grid grid-features">
+            <div class="features">
+              <div class="block-heading-features">
+                <h5 class="heading-features">Taxonomy 1</h5><img src="{% static 'main/images/lightning.svg' %}" loading="eager" alt="" class="icon-features">
+              </div>
+              <p class="paragraph-features">Taxonomy 1 Detail</p>
+            </div>
+            <div class="features">
+              <div class="block-heading-features">
+                <h5 class="heading-features">Taxonomy 2</h5><img src="{% static 'main/images/lightning.svg' %}" loading="eager" alt="" class="icon-features">
+              </div>
+              <p class="paragraph-features">Taxonomy 2 Detail</p>
+            </div>
+            <div class="features">
+              <div class="block-heading-features">
+                <h5 class="heading-features">Taxonomy 3</h5><img src="{% static 'main/images/lightning.svg' %}" loading="eager" alt="" class="icon-features">
+              </div>
+              <p class="paragraph-features">Taxonomy 3 Detail</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    {% endif %}
+    <!-- Digit Care Section -->
+    <section class="section">
+      <div class="content-narrow">
+        <div class="layout-grid grid-about">
+        <div class="about blue">
+            <div class="block-icon-about"><img src="{% static 'main/images/water.svg' %}" loading="eager" alt="" class="icon-about"></div>
+            <h4 class="heading-about">Watering</h4>
+            {% if last_watering_date %}
+              <p class="paragraph-about">Last Watered: {{ last_watering_date|date:"Y-m-d" }} ({{ days_since_last_watering }} days ago)</p>
+            {% else %}
+              <p class="paragraph-about">No watering entries recorded.</p>
+            {% endif %}
+        </div>
+        <div class="about green"> 
+            <div class="block-icon-about green"><img src="{% static 'main/images/food.svg' %}" loading="eager" alt="" class="icon-about"></div>
+            <h4 class="heading-about green">Fertilizing</h4>
+            {% if last_fertilizing_date %}
+              <p class="paragraph-about green">Last Fertilized: {{ last_fertilizing_date|date:"Y-m-d" }} ({{ days_since_last_fertilizing }} days ago)</p>
+            {% else %}
+              <p class="paragraph-about green">No fertilizing entries recorded.</p>
+            {% endif %}
+        </div>
+        <div class="about red">
+            <div class="block-icon-about red"><img src="{% static 'main/images/clean.svg' %}" loading="eager" alt="" class="icon-about"></div>
+            <h4 class="heading-about red">Cleaning</h4>
+            {% if last_cleaning_date %}
+              <p class="paragraph-about red">Last Cleaned: {{ last_cleaning_date|date:"Y-m-d" }} ({{ days_since_last_cleaning }} days ago)</p>
+            {% else %}
+              <p class="paragraph-about red">No cleaning entries recorded.</p>
+            {% endif %}
+        </div>    
+        </div>
+      </div>
+    </section>
+    <!-- Digit Journal Entries -->
+    <section class="section">
+      <div class="content">
+        <div class="layout-grid grid">
+          <div class="accordion-item">
+            <!-- Clickable header for toggling the form -->
+            <div class="accordion-header" onclick="toggleJournalEntry()">
+              <h4 class="heading-accordion">Create Journal Entry</h4>
+              <div class="block-icon-accordion" id="toggleIcon">
+                <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);background-color:rgba(57,89,255,0.07);border-color:rgba(255,255,255,0.2)" class="block-icon-accordion"><img src="{% static 'main/images/close.svg' %}" loading="eager" alt="" class="icon-accordion"></div>
+              </div>
+            </div>
+            <!-- Container for Journal Form -->
+            <div id="journalEntry" style="display: none;">
+              <div class="account-form">
+                <div class="subtitle blue">Journal Entry<br></div>
+                <h2 class="heading-account">Create a New Entry</h2>
+                  <div class="form-block w-form">
+                    <form id="journalForm" method="post" class="form" enctype="multipart/form-data">
+                      {% csrf_token %}
+                      <div>
+                        <textarea class="text-field w-input" maxlength="1000" name="content" placeholder="Your entry content" id="content" required=""></textarea>
+                          {% if form.content.errors %}
+                            <div class="error-message">
+                              <small>{{ form.content.errors|striptags }}</small>
+                            </div>
+                          {% endif %}
+                      </div>
+                      <div>
+                        <input type="file" class="text-field w-input" name="image" id="image">
+                          {% if form.image.errors %}
+                            <div class="error-message">
+                              <small>{{ form.image.errors|striptags }}</small>
+                            </div>
+                          {% endif %}
+                      </div>
+                      <div>
+                        <label>
+                          <input type="checkbox" name="watered" id="watered"> Watered
+                        </label>
+                        <label>
+                          <input type="checkbox" name="fertilized" id="fertilized"> Fertilized
+                        </label>
+                        <label>
+                          <input type="checkbox" name="cleaned" id="cleaned"> Cleaned
+                        </label>
+                      </div>
+                      <input type="submit" value="Submit Entry" data-wait="Please wait..." class="submit-button w-button">
+                    </form>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div class="lottie">
+            <h3>Journal Entries</h3>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Content</th>
+                  <th scope="col">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for entry in digit.journal_entries.all %}
+                  <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ entry.content }}</td>
+                    <td>{{ entry.created_at }}</td>
+                  </tr>
+                {% empty %}
+                  <tr>
+                    <td colspan="4">No journal entries found.</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>   
+        </div>
+      </div>
+    </section>
+    <script src="{% static 'inventory/js/toggle-journal-entry.js' %}"></script>
   </body>
 </html>

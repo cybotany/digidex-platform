@@ -24,20 +24,3 @@
   align-items: center;
   justify-content: center;
 }
-
-.digit-card-header {
-  margin-bottom: 10px;
-  font-size: 18px;
-  color: #333;
-  padding: 0 15px;
-}
-
-.digit-card-body {
-  padding: 15px;
-}
-
-.digit-card-footer {
-  font-size: 14px;
-  color: #666;
-  padding: 0 15px;
-}

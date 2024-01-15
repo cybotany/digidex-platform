@@ -39,11 +39,11 @@
           <input type="submit" value="Save Changes" data-wait="Please wait..." class="submit-button w-button">
       
           {% if form.non_field_errors %}
-          <div class="error-message w-form-fail">
-            {% for error in form.non_field_errors %}
-              <div class="text-error">{{ error }}</div>
-            {% endfor %}
-          </div>
+            <div class="error-message w-form-fail">
+              {% for error in form.non_field_errors %}
+                <div class="text-error">{{ error }}</div>
+              {% endfor %}
+            </div>
           {% endif %}
         </form>
       </div>

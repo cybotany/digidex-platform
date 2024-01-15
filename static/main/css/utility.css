@@ -21,6 +21,16 @@
   box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
 }
 
+.utility-heading {
+  max-width: 9em;
+  margin-bottom: .3em;
+}
+
+.utility-paragraph {
+  max-width: 23em;
+  margin-bottom: 1.8em;
+}
+
 .utility-page-form {
   width: 100%;
   flex-direction: column;

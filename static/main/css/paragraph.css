@@ -1,15 +1,3 @@
-.paragraph {
-  max-width: 30em;
-  margin-bottom: 2.2em;
-}
-
-.paragraph-top {
-  max-width: 32em;
-  margin-bottom: 2em;
-  font-size: 1.125em;
-  line-height: 160%;
-}
-
 .paragraph-template {
   margin-bottom: 2.4em;
 }
@@ -21,22 +9,9 @@
   line-height: 160%;
 }
 
-.paragraph-features {
-  max-width: 20em;
-}
-
-.paragraph-about, .paragraph-about.green, .paragraph-about.red {
-  color: var(--core-primary-color);
-}
-
 .paragraph-accordion {
   max-width: 90%;
   margin-bottom: 1.6em;
-}
-
-.paragraph-utility {
-  max-width: 23em;
-  margin-bottom: 1.8em;
 }
 
 .paragraph-review {
@@ -81,32 +56,4 @@
   margin-bottom: 2.1em;
   font-size: .87em;
   line-height: 155%;
-}
-
-.paragraph-footer {
-  max-width: 26em;
-  color: rgba(20, 23, 24, .5);
-  letter-spacing: .05em;
-  text-transform: uppercase;
-  margin-bottom: 2.2em;
-  font-family: IBM Plex Mono, sans-serif;
-  font-size: .7em;
-  font-weight: 500;
-  line-height: 165%;
-}
-
-@media screen and (max-width: 991px) {
-  .paragraph-hero {
-    font-size: 1em;
-  }
-
-  .paragraph-top {
-    font-size: 1em;
-  }
-}
-
-@media screen and (max-width: 479px) {
-  .paragraph-account {
-    margin-bottom: 1em;
-  }
 }

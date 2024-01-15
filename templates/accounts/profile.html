@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
   <head>  
@@ -5,6 +7,55 @@
   </head>
   <body class="body">
     {% include 'main/partials/header.html' %}
-    {% include 'accounts/partials/profile-content.html' %}
+      <!-- Profile Content-->
+    <section class="section">
+      <div class="content">
+        <div class="layout-grid grid">
+
+          <div class="block-right">
+            <div class="subtitle">Profile<br></div>
+            <h2 class="heading">{{ user.username }}</h2>
+              {% if user.avatar %}
+                <img src="{{ user.avatar.url }}" alt="User avatar" class="avatar-image">
+              {% else %}
+                <img src="{% static 'accounts/images/placeholder.svg' %}" alt="No Image Available" class="avatar-image">
+              {% endif %}
+    
+              {% if user.profile.location %}
+                <p class="paragraph">Location: {{ user.profile.location }}</p>
+              {% endif %}
+              {% if user_profile.interests %}
+                <p class="paragraph">Interests: {{ user_profile.interests }}</p>
+              {% endif %}
+              {% if user_profile.experience %}
+                <p class="paragraph">Experience: {{ user_profile.experience }}</p>
+              {% endif %}
+          </div>
+            
+          <div class="lottie">
+            <h3>Recent Activities</h3>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Activity</th>
+                  <th scope="col">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for activity in recent_activities %}
+                  <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ activity.content }}</td>
+                    <td>{{ activity.timestamp }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% include 'accounts/partials/profile_buttons.html' %}
   </body>
 </html>

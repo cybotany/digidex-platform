@@ -6,11 +6,50 @@
   <body class="body">
     {% load static %}
     {% include 'main/partials/header.html' %}
-
-    {% include 'main/partials/contact-header.html' %}  
-    {% include 'main/partials/contact-form.html' %} 
-      
+    <!-- Email Confirmation Content-->  
+    <section class="section-top">
+      <div class="content">
+        <div class="block-top">
+          <h1 class="heading-top">Have questions? Contact us for assistance</h1>
+          <p class="paragraph-top">We&#x27;re here to help every step of the way</p>
+        </div>
+      </div>
+    </section>
+    <!-- Email Confirmation Content-->
+    <section class="section">
+      <div class="content">
+        <div class="contact">
+          <div class="subtitle blue">contact form<br></div>
+          <h2 class="heading">Wanna Talk More?</h2>
+          <div class="form-block w-form">
+            <form method="post" class="form" action="{% url 'your_form_submission_view' %}">
+              {% csrf_token %}
+              {{ form.name }}
+              {{ form.email }}
+              {{ form.message }}
+    
+              <input type="submit" value="Submit" class="submit-button w-button">
+    
+              {% if form.non_field_errors %}
+                <div class="error-message w-form-fail">
+                  {% for error in form.non_field_errors %}
+                    <div class="text-error">{{ error }}</div>
+                  {% endfor %}
+                </div>
+              {% endif %}
+    
+              {% if messages %}
+                {% for message in messages %}
+                  <div class="w-form-done">
+                    <div class="text-success">{{ message }}</div>
+                  </div>
+                {% endfor %}
+              {% endif %}
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>    
     {% include 'main/partials/footer.html' %}
-    {% include 'main/partials/external-scripts.html' %}
   </body>
 </html>
