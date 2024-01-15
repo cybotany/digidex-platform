@@ -36,40 +36,6 @@
         </div>
       </div>
     </section>
-    
-    <script>
-      const taxonomicUnitField = document.getElementById('id_taxonomic_unit');
-    
-      // Configurations for select2
-      const select2Config = {
-          ajax: {
-              url: '/api/tsn/',
-              dataType: 'json',
-              delay: 250,
-              data: function (params) {
-                  return {
-                      q: params.term, // search term
-                      page: params.page // pagination
-                  };
-              },
-              processResults: function (data) {
-                  return {
-                      results: data.items, // items from the server
-                  };
-              },
-              cache: true,
-              beforeSend: function(xhr) {
-                  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-                  xhr.setRequestHeader("X-CSRFToken", csrftoken);
-              }
-          },
-          minimumInputLength: 1
-      };
-    
-      // Initialize select2
-      $(document).ready(function() {
-          $(taxonomicUnitField).select2(select2Config);
-      });
-    </script>    
+    <script src="{% static 'inventory/js/get-tsn.js' %}"></script>    
   </body>
 </html>

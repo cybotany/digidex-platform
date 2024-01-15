@@ -1,3 +1,6 @@
+// DOM Elements
+const tsnField = document.getElementById('tsnField');
+
 // Configurations for select2
 const select2Config = {
     ajax: {
