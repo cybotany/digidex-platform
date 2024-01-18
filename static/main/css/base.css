@@ -2271,6 +2271,89 @@ textarea.w-input, textarea.w-select {
   display: flex;
 }
 
+.avatar-image {
+  border-radius: 50%;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  max-width: 150px;
+  margin-bottom: 15px;
+}
+
+.user-info h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.user-details p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+/* Custom styles for the Select2 container */
+.select-container {
+  margin-bottom: 10px; /* Adjust this value as needed for spacing */
+}
+
+/* Styles to make Select2 field match other input fields */
+.select2-container--default .select2-selection--single {
+  height: 38px;
+  padding: 8px 12px;
+  border: 1px solid #cccccc;
+  border-radius: 0;
+  background-color: #ffffff;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333333;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  line-height: 22px; /* Center the text vertically */
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 36px; /* Match the height of the input fields */
+}
+
+/* Optional: Styles for the dropdown items */
+.select2-container--default .select2-results__option {
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333333;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background-color: #eeeeee; /* Highlight color for selected item */
+}
+
+.digit-card {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.digit-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+.digit-card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.digit-card-img-wrapper {
+  height: 150px;
+  background-color: #f4f4f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @media screen and (max-width: 991px) {
   h1 {
     font-size: 3.5em;
