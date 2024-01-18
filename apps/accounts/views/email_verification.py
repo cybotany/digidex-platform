@@ -19,4 +19,4 @@ class EmailVerificationView(View):
 
             return redirect('inventory:storage')
         else:
-            return render(request, 'accounts/failed_verification.html')
+            return render(request, 'accounts/failed-verification.html')

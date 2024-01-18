@@ -9,7 +9,7 @@ from apps.accounts.models import Activity
 class DigitModificationView(UpdateView):
     model = Digit
     form_class = DigitForm
-    template_name = 'inventory/digit_modification.html'
+    template_name = 'inventory/digit-modification.html'
 
     def get_object(self, queryset=None):
         digit_uuid = self.kwargs.get('uuid')

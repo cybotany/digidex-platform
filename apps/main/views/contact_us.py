@@ -25,5 +25,5 @@ class ContactUsView(View):
                 fail_silently=False,
             )
 
-        return redirect('main:thank_you_page_name')
+        return redirect('main:thanks')
 
