@@ -1,0 +1,252 @@
+.block-icon-product {
+  width: 4.2em;
+  height: 4.2em;
+  background-color: var(--accent-b1);
+  border-radius: .87em;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.3em;
+  display: flex;
+}
+
+.block-features-product {
+  grid-column-gap: .7em;
+  grid-row-gap: .7em;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 2.2em;
+  display: flex;
+}
+
+.grid-product {
+  grid-column-gap: 1.5em;
+  grid-row-gap: 1.5em;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 2fr;
+  align-items: start;
+  position: relative;
+}
+
+.icon-cart {
+  width: 1.37em;
+  height: 1.37em;
+  flex: none;
+}
+
+.icon-cart-quantity {
+  height: auto;
+  min-width: auto;
+  background-color: var(--white);
+  color: var(--heading);
+  border-radius: 50em;
+  margin-left: 0;
+  padding: .3em .6em .1em;
+  font-size: .71em;
+  font-weight: 500;
+  line-height: 130%;
+  position: absolute;
+  top: -15%;
+  bottom: auto;
+  left: auto;
+  right: -20%;
+  box-shadow: 0 5px 5px rgba(20, 23, 24, .05);
+}
+
+.icon-product {
+  width: 1.7em;
+  height: 1.7em;
+  object-fit: cover;
+}
+
+.icon-features-product {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.icon-category {
+  width: 1.7em;
+  height: 1.7em;
+}
+
+.image-cart-item {
+  width: 3.5em;
+  height: 3.5em;
+  background-color: var(--accent-b1);
+  object-fit: cover;
+  border-radius: .62em;
+  padding: .9em;
+}
+
+.link-product {
+  margin-bottom: .15em;
+  text-decoration: none;
+}
+
+.link-category {
+  grid-column-gap: .63em;
+  grid-row-gap: .63em;
+  color: var(--heading);
+  border-radius: .87em;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 1.2em 1.4em;
+  text-decoration: none;
+  transition: color .3s cubic-bezier(.25, .46, .45, .94);
+  display: flex;
+}
+
+.link-category:hover {
+  color: var(--core-primary-color);
+}
+
+.link-category.w--current {
+  background-color: var(--white);
+  box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
+}
+
+.features-product {
+  grid-column-gap: .5em;
+  grid-row-gap: .5em;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+
+.paragraph-description {
+  margin-bottom: 2.1em;
+  font-size: .87em;
+  line-height: 155%;
+}
+
+.text-field-ecommerce {
+  height: 3.75em;
+  border: 1px solid var(--border);
+  background-color: var(--background);
+  color: var(--heading);
+  border-radius: .87em;
+  margin-bottom: 1.12em;
+  padding: 1em 1.2em;
+  font-size: 1em;
+  line-height: 130%;
+  transition: border-color .3s cubic-bezier(.25, .46, .45, .94);
+}
+
+.text-field-ecommerce:focus, .text-field-ecommerce.-wfp-focus {
+  border-color: var(--core-primary-color);
+}
+
+.text-field-ecommerce::-ms-input-placeholder {
+  color: rgba(20, 23, 24, .6);
+}
+
+.text-field-ecommerce::placeholder {
+  color: rgba(20, 23, 24, .6);
+}
+
+.text-price {
+  color: var(--core-primary-color);
+  letter-spacing: -.01em;
+  font-size: 1.2em;
+  font-weight: 600;
+  line-height: 120%;
+}
+
+.text-cart-empty {
+  color: var(--heading);
+  margin-bottom: 1em;
+  font-size: 1em;
+  line-height: 130%;
+}
+
+.text-subtotal {
+  color: var(--heading);
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+.text-category {
+  letter-spacing: -.02em;
+  font-size: 1em;
+  font-weight: 600;
+  line-height: 140%;
+}
+
+.block-icon-list {
+  width: 1.625em;
+  height: 1.625em;
+  background-color: var(--accent-b1);
+  border-radius: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.block-icon-list.green {
+  background-color: var(--accent-b3);
+}
+
+.block-list {
+  grid-column-gap: .56em;
+  grid-row-gap: .56em;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  display: flex;
+}
+
+.heading-list.blue {
+  color: var(--core-primary-color);
+}
+
+.heading-list.green {
+  color: var(--core-accent-color);
+}
+
+@media screen and (max-width: 991px) {
+  .grid-product {
+    grid-template-columns: 1fr;
+  }
+  
+  .link-category {
+    padding: 1em 1.2em;
+  }
+
+  .product-sticky {
+    padding: 3.1em;
+    position: relative;
+    top: auto;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .ecommerce-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .cart-container {
+    min-width: auto;
+    border-radius: 0;
+    margin-top: 0;
+  }
+  
+  .product {
+    padding: 1.5em;
+  }
+  
+  .block-price {
+    flex-direction: column;
+  }
+  
+  .block-categories {
+    font-size: .9em;
+  }
+  
+  .text-field-ecommerce {
+    margin-bottom: .9em;
+  }
+}

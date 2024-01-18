@@ -1,3 +1,21 @@
+.image-post-thumbnail {
+  width: 100%;
+  height: 15em;
+  object-fit: cover;
+  border-radius: .87em;
+}
+
+.image-post-thumbnail.large {
+  height: auto;
+  max-height: 40em;
+}
+
+.image-main-post {
+  width: 100%;
+  object-fit: cover;
+  border-radius: .87em;
+}
+
 .collection-list-posts {
   grid-column-gap: 1.5em;
   grid-row-gap: 3.4em;
@@ -92,6 +110,61 @@
   color: var(--heading);
 }
 
+.block-post {
+  background-color: var(--white);
+  border-radius: .87em;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  display: flex;
+  box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
+}
+
+.block-post.large {
+  grid-column-gap: 0em;
+  grid-row-gap: 0em;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-columns: 1fr;
+  display: grid;
+}
+
+.paragraph-post {
+  margin-bottom: 1.4em;
+}
+
+.paragraph-post.large {
+  max-width: 25em;
+  margin-bottom: 1.6em;
+}
+
+.paragraph-top.blog-post {
+  font-size: 1.125em;
+  line-height: 160%;
+  max-width: 36em;
+  margin-bottom: .5em;
+}
+
+.link-heading-post {
+  margin-bottom: 1.3em;
+  text-decoration: none;
+}
+
+.link-heading-post.large {
+  margin-bottom: 1.4em;
+}
+
+.link-post-thumbnail {
+  width: 100%;
+}
+
+.link-post-thumbnail.large {
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  display: flex;
+}
+
 @media screen and (max-width: 991px) {
   .collection-list-posts {
     grid-column-gap: 1.13em;
@@ -111,6 +184,10 @@
     padding-left: 10%;
     padding-right: 10%;
   }
+
+  .image-post-thumbnail {
+    height: 28vw;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -121,6 +198,25 @@
 
   .collection-list-shop, .ecommerce-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .collection-list-posts {
+    grid-row-gap: 1.5em;
+  }
+
+  .collection-list-wrapper-posts.large {
+    margin-bottom: 1.5em;
+  }
+
+  .post, .post.large {
+    padding: 1.8em 2.2em;
+  }
+
+  .post-body {
+    padding-top: 2.5em;
+    padding-bottom: 2.5em;
   }
 }
 
