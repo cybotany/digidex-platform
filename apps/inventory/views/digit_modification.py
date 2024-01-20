@@ -1,3 +1,4 @@
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.edit import UpdateView
 from django.db import transaction
@@ -13,7 +14,11 @@ class DigitModificationView(UpdateView):
 
     def get_object(self, queryset=None):
         digit_uuid = self.kwargs.get('uuid')
-        return get_object_or_404(Digit, uuid=digit_uuid)
+        obj = get_object_or_404(Digit, uuid=digit_uuid)
+
+        if obj.nfc_link.user != self.request.user:
+            raise PermissionDenied
+        return obj
 
     def form_valid(self, form):
         with transaction.atomic():

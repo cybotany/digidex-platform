@@ -12,12 +12,31 @@
         <div class="block-heading">
           <h1 class="heading-top">Update {{ digit.name }}</h1>
         </div>
-        <div class="form-block w-form">
-          <form method="post" enctype="multipart/form-data" class="form">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Save Changes" class="submit-button w-button">
-          </form>
+        <div class="account-form">
+          <div id="digitForm" class="form-block w-form">
+            <form method="post" class="form">
+              {% csrf_token %}
+              {% for field in form %}
+                <div>
+                  {% if field.name == 'taxonomic_unit' %}
+                    <!-- Select2 field for taxonomic_unit -->
+                    <div class="select-container">
+                      <select class="w-input" name="{{ field.name }}" id="{{ field.id_for_label }}" {% if field.is_required %}required=""{% endif %}></select>
+                    </div>                            
+                  {% else %}
+                    <!-- Standard fields for name and description -->
+                    <input type="{{ field.field.widget.input_type }}" class="text-field w-input" name="{{ field.name }}" placeholder="{{ field.label }}" id="{{ field.id_for_label }}" {% if field.is_required %}required=""{% endif %}>
+                  {% endif %}
+                  {% if field.errors %}
+                    <div class="error-message">
+                      <small>{{ field.errors|striptags }}</small>
+                    </div>
+                  {% endif %}
+                </div>
+              {% endfor %}
+              <input type="submit" value="Submit Digit Updates" data-wait="Please wait..." class="submit-button w-button">
+            </form>
+          </div>
         </div>
       </div>
     </section>
@@ -27,8 +46,13 @@
         <div class="block">
           <h1 class="heading">Delete {{ digit.name }}</h1>
         </div>
-        <div class="form-block w-form">
-          <p class="paragraph">This action is irreversible. Please be certain.</p>
+        <div class="button-mobile">
+          <form action="{% url 'inventory:deletion' digit.uuid %}" class="button" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Delete Digit" onclick="return confirm('Are you sure you want to delete this Digit? This action cannot be undone.');">
+          </form>
+        </div>
+        <div class="button-desktop">
           <form action="{% url 'inventory:deletion' digit.uuid %}" class="button" method="post">
             {% csrf_token %}
             <input type="submit" value="Delete Digit" onclick="return confirm('Are you sure you want to delete this Digit? This action cannot be undone.');">
@@ -36,5 +60,6 @@
         </div>
       </div>
     </section>
+    <script src="{% static 'inventory/js/get-tsn.js' %}"></script>    
   </body>
 </html>

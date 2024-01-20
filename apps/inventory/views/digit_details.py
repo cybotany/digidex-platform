@@ -6,7 +6,6 @@ from django.views.generic import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from apps.inventory.models import Digit
 from apps.journal.forms import CreateJournalEntry
-from apps.journal.models import Entry
 from django.shortcuts import get_object_or_404
 
 
