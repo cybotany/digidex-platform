@@ -10,6 +10,7 @@
       <div class="content">
         <div class="block-top">
           <h1 class="heading-top">{{ digit.name }}</h1>
+          <div class="text-account">Need to make an update? <a href="{% url 'inventory:modification' digit.uuid %}" class="link-account">Edit or Delete Digit</a></div>
         </div>
       </div>
     </section>
@@ -32,7 +33,6 @@
                 {{ digit.description }}
               </figcaption>
             </figure>
-            <div class="text-account">Need to make an update? <a href="{% url 'inventory:modification' digit.uuid %}" class="link-account">Edit or delete Digit</a></div>
             
             <p class="paragraph">Paragraph</p>
             <ol start="" role="list">

@@ -6,15 +6,14 @@
   </head>
   <body class="body">
     {% include 'main/partials/header.html' %}  
-
-    <!-- Update Plant Section -->
+    <!-- Update Digit Section -->
     <section class="section">
       <div class="content narrow">
         <div class="block-heading">
           <h1 class="heading-top">Update {{ digit.name }}</h1>
         </div>
         <div class="form-block w-form">
-          <form method="post" enctype="multipart/form-data" action="{% url 'inventory:modification' digit.uuid %}" class="form">
+          <form method="post" enctype="multipart/form-data" class="form">
             {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" value="Save Changes" class="submit-button w-button">
@@ -22,28 +21,20 @@
         </div>
       </div>
     </section>
-
-    <!-- Delete Plant Section -->
+    <!-- Delete Digit Section -->
     <section class="section">
       <div class="content narrow">
-        <div class="block-heading">
-          <h1 class="heading-top">Delete {{ digit.name }}</h1>
+        <div class="block">
+          <h1 class="heading">Delete {{ digit.name }}</h1>
         </div>
         <div class="form-block w-form">
-          <p class="paragraph">Deleting this plant is irreversible. Please be certain.</p>
-          <form method="post" action="{% url 'inventory:deletion' digit.uuid %}" class="form" onsubmit="return confirmDelete()">
+          <p class="paragraph">This action is irreversible. Please be certain.</p>
+          <form action="{% url 'inventory:deletion' digit.uuid %}" class="button" method="post">
             {% csrf_token %}
-            <input type="hidden" name="uuid" value="{{ digit.uuid }}">
-            <input type="submit" value="Delete Plant" class="submit-button w-button btn-danger">
+            <input type="submit" value="Delete Digit" onclick="return confirm('Are you sure you want to delete this Digit? This action cannot be undone.');">
           </form>
         </div>
       </div>
     </section>
-
-    <script>
-      function confirmDelete() {
-        return confirm('Are you sure you want to delete this Digit? This action cannot be undone.');
-      }
-    </script>
   </body>
 </html>
