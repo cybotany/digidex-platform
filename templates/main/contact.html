@@ -6,7 +6,7 @@
   <body class="body">
     {% load static %}
     {% include 'main/partials/header.html' %}
-    <!-- Email Confirmation Content-->  
+    <!-- Contact Us Header-->  
     <section class="section-top">
       <div class="content">
         <div class="block-top">
@@ -15,19 +15,39 @@
         </div>
       </div>
     </section>
-    <!-- Email Confirmation Content-->
+    <!-- Contact Us Form-->
     <section class="section">
       <div class="content">
-        <div class="contact">
-          <div class="subtitle blue">contact form<br></div>
-          <h2 class="heading">Wanna Talk More?</h2>
+        <div class="account-form">
+          <div class="subtitle blue">Contact Us<br></div>
+          <h2 class="heading-account">Wanna Talk More?</h2>
           <div class="form-block w-form">
             <form method="post" class="form" action="{% url 'main:thanks' %}">
               {% csrf_token %}
-              {{ form.name }}
-              {{ form.email }}
-              {{ form.message }}
-    
+              <div>
+                <input type="text" class="text-field w-input" maxlength="256" name="{{ form.name.name }}" placeholder="Your Name" id="name" required="">
+                  {% if form.name.errors %}
+                    <div class="error-message">
+                      <small>{{ form.name.errors|striptags }}</small>
+                    </div>
+                  {% endif %}
+              </div>
+              <div>
+                <input type="email" class="text-field w-input" maxlength="256" name="{{ form.email.name }}" placeholder="Email" id="email" required="">
+                  {% if form.email.errors %}
+                    <div class="error-message">
+                      <small>{{ form.email.errors|striptags }}</small>
+                    </div>
+                  {% endif %}
+              </div>
+              <div>
+                <textarea class="text-field w-input" maxlength="500" name="{{ form.message.html_name }}" placeholder="Message" id="{{ form.message.id_for_label }}" required=""></textarea>
+                {% if form.message.errors %}
+                  <div class="error-message">
+                    <small>{{ form.message.errors|striptags }}</small>
+                  </div>
+                {% endif %}
+              </div>
               <input type="submit" value="Submit" class="submit-button w-button">
     
               {% if form.non_field_errors %}
