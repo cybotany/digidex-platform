@@ -10,7 +10,7 @@
     <section class="section">
       <div class="content narrow">
         <div class="block-heading">
-          <h1 class="heading-top">Update {{ digit.name }}</h1>
+          <h3 class="heading-top">Update {{ digit.name }}</h3>
         </div>
         <div class="account-form">
           <div id="digitForm" class="form-block w-form">
@@ -44,7 +44,7 @@
     <section class="section">
       <div class="content narrow">
         <div class="block">
-          <h1 class="heading">Delete {{ digit.name }}</h1>
+          <h3 class="heading">Delete {{ digit.name }}</h3>
         </div>
         <div class="button-mobile">
           <form action="{% url 'inventory:deletion' digit.uuid %}" class="button" method="post">

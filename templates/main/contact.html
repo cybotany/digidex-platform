@@ -22,7 +22,7 @@
           <div class="subtitle blue">contact form<br></div>
           <h2 class="heading">Wanna Talk More?</h2>
           <div class="form-block w-form">
-            <form method="post" class="form" action="{% url 'your_form_submission_view' %}">
+            <form method="post" class="form" action="{% url 'main:thanks' %}">
               {% csrf_token %}
               {{ form.name }}
               {{ form.email }}
