@@ -1,0 +1,40 @@
+.grid-taxonomy {
+  display: grid;
+  grid-gap: 20px;
+  grid-column-gap: 2em;
+  grid-row-gap: 1.8em;
+  grid-template-rows: auto;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.taxonomy {
+  grid-column-gap: 1.3em;
+  grid-row-gap: 1.3em;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-top: 1.2em;
+  padding-bottom: 1.2em;
+  display: flex;
+}
+
+.block-heading-taxonomy {
+  grid-column-gap: 1em;
+  grid-row-gap: 1em;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+
+.heading-taxonomy {
+  color: var(--core-primary-color);
+}
+
+.paragraph-taxonomy {
+  max-width: 20em;
+}
+
+.icon-taxonomy {
+  width: 2em;
+  height: 2em;
+}

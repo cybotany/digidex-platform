@@ -6,44 +6,60 @@
   </head>
   <body class="body">
     {% include 'main/partials/header.html' %}  
-    <section class="section-top">
+    <section class="section-top padding-0">
       <div class="content">
         <div class="block-top">
+          <div class="date-top">{{ digit.created_at }}</div>
           <h1 class="heading-top">{{ digit.name }}</h1>
-          <div class="text-account">Need to make an update? <a href="{% url 'inventory:modification' digit.uuid %}" class="link-account">Edit or Delete Digit</a></div>
+          <p class="paragraph-top">{{ digit.description }}</p>
         </div>
       </div>
     </section>
-    <!-- Digit Image Section -->
+
+    <!-- Detail Section -->
     <section class="section">
       <div class="content narrow">
-        <div class="page-body">
-          <div class="rich-text-block w-richtext">
-            <figure style="max-width:882pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image">
-              {% if last_image %}
-                <div>
-                  <img src="{{ last_image.url }}"  loading="lazy" alt="Recent image of {{ digit.name }}">
-                </div>
-              {% else %}
-                <div>
-                  <img src="{% static 'main/images/placeholder.svg' %}"  loading="lazy" alt="">
-                </div>
-              {% endif %}
-              <figcaption>
-                {{ digit.description }}
-              </figcaption>
-            </figure>
-            
-            <p class="paragraph">Paragraph</p>
-            <ol start="" role="list">
-              <li>Point 1</li>
-              <li>Point 2</li>
-              <li>Point 3</li>
-            </ol>
+        <!-- Digit Images -->
+        <figure style="max-width:882px" class="rich-text-align-fullwidth rich-text-figure-type-image image-main-digit">
+          {% if last_image %}
+            <div>
+              <img src="{{ last_image.url }}" loading="lazy" alt="Recent image of {{ digit.name }}">
+            </div>
+          {% else %}
+            <div>
+              <img src="{% static 'main/images/placeholder.svg' %}"  loading="lazy" alt="">
+            </div>
+          {% endif %}
+          <figcaption>
+            <a href="{% url 'inventory:modification' digit.uuid %}" class="link-digit-caption">Edit or Delete Digit</a>
+          </figcaption>
+        </figure>
+        <div class="digit-body">
+          <div class="rich-text-block rich-text">
+            <!-- Journal Entries -->
+            <div class="journal-container">
+              <ol start="" role="list">
+                {% for entry in journal_entries %}
+                  <li>
+                    <div class="journal-entry">
+                      <div class="journal-entry-header">
+                        <span class="journal-entry-number">{{ forloop.counter }}.</span>
+                        <span class="journal-entry-date">Date: {{ entry.created_at|date:"Y-m-d H:i" }}</span>
+                        <span class="journal-entry-author">Author: {{ entry.user }}</span>
+                      </div>
+                      <p class="journal-entry-content">{{ entry.content }}</p>
+                    </div>
+                  </li>
+                {% empty %}
+                  <li>No journal entries available.</li>
+                {% endfor %}
+              </ol>
+            </div>            
           </div>
         </div>
       </div>
     </section>
+
     <!-- Digit Taxonomic Section -->
     {% if digit.taxonomic_unit %}
       <section class="section">
@@ -52,64 +68,60 @@
             <div class="subtitle blue">Taxonomy<br></div>
             <h2 class="heading">{{ digit.taxonomic_unit.complete_name }}</h2>
           </div>
-          <div class="layout-grid grid-features">
-            <div class="features">
-              <div class="block-heading-features">
-                <h5 class="heading-features">Taxonomy 1</h5><img src="{% static 'main/images/lightning.svg' %}" loading="eager" alt="" class="icon-features">
+          <div class="layout-grid grid-taxonomy">
+            <div class="taxonomy">
+              <div class="block-heading-taxonomy">
+                <h5 class="heading-taxonomy">Taxonomy Class</h5><img src="{% static 'main/images/lightning.svg' %}" loading="eager" alt="" class="icon-taxonomy">
               </div>
-              <p class="paragraph-features">Taxonomy 1 Detail</p>
+              <p class="paragraph-taxonomy">Taxonomy Class Details</p>
             </div>
-            <div class="features">
-              <div class="block-heading-features">
-                <h5 class="heading-features">Taxonomy 2</h5><img src="{% static 'main/images/lightning.svg' %}" loading="eager" alt="" class="icon-features">
+            <div class="taxonomy">
+              <div class="block-heading-taxonomy">
+                <h5 class="heading-taxonomy">Taxonomy Geographic Division</h5><img src="{% static 'main/images/lightning.svg' %}" loading="eager" alt="" class="icon-taxonomy">
               </div>
-              <p class="paragraph-features">Taxonomy 2 Detail</p>
-            </div>
-            <div class="features">
-              <div class="block-heading-features">
-                <h5 class="heading-features">Taxonomy 3</h5><img src="{% static 'main/images/lightning.svg' %}" loading="eager" alt="" class="icon-features">
-              </div>
-              <p class="paragraph-features">Taxonomy 3 Detail</p>
+              <p class="paragraph-taxonomy">Taxonomy Geographic Division Details</p>
             </div>
           </div>
         </div>
       </section>
     {% endif %}
-    <!-- Digit Care Section -->
+
+    <!-- Care Section -->
     <section class="section">
       <div class="content-narrow">
-        <div class="layout-grid grid-about">
-        <div class="about blue">
-            <div class="block-icon-about"><img src="{% static 'main/images/water.svg' %}" loading="eager" alt="" class="icon-about"></div>
-            <h4 class="heading-about">Watering</h4>
+        <div class="layout-grid grid-care">
+          <div class="care blue">
+            <div class="block-icon-care"><img src="{% static 'main/images/water.svg' %}" loading="eager" alt="" class="icon-care"></div>
+            <h4 class="heading-care">Watering</h4>
             {% if last_watering_date %}
-              <p class="paragraph-about">Last Watered: {{ last_watering_date|date:"Y-m-d" }} ({{ days_since_last_watering }} days ago)</p>
+              <p class="paragraph-care">Last Watered: {{ last_watering_date|date:"Y-m-d" }} ({{ days_since_last_watering }} days ago)</p>
             {% else %}
-              <p class="paragraph-about">No watering entries recorded.</p>
+              <p class="paragraph-care">No watering entries recorded.</p>
             {% endif %}
-        </div>
-        <div class="about green"> 
-            <div class="block-icon-about green"><img src="{% static 'main/images/food.svg' %}" loading="eager" alt="" class="icon-about"></div>
-            <h4 class="heading-about green">Fertilizing</h4>
+          </div>
+          <div class="care green"> 
+            <div class="block-icon-care green"><img src="{% static 'main/images/food.svg' %}" loading="eager" alt="" class="icon-care"></div>
+            <h4 class="heading-care green">Fertilizing</h4>
             {% if last_fertilizing_date %}
-              <p class="paragraph-about green">Last Fertilized: {{ last_fertilizing_date|date:"Y-m-d" }} ({{ days_since_last_fertilizing }} days ago)</p>
+              <p class="paragraph-care green">Last Fertilized: {{ last_fertilizing_date|date:"Y-m-d" }} ({{ days_since_last_fertilizing }} days ago)</p>
             {% else %}
-              <p class="paragraph-about green">No fertilizing entries recorded.</p>
+              <p class="paragraph-care green">No fertilizing entries recorded.</p>
             {% endif %}
-        </div>
-        <div class="about red">
-            <div class="block-icon-about red"><img src="{% static 'main/images/clean.svg' %}" loading="eager" alt="" class="icon-about"></div>
-            <h4 class="heading-about red">Cleaning</h4>
+          </div>
+          <div class="care red">
+            <div class="block-icon-care red"><img src="{% static 'main/images/clean.svg' %}" loading="eager" alt="" class="icon-care"></div>
+            <h4 class="heading-care red">Cleaning</h4>
             {% if last_cleaning_date %}
-              <p class="paragraph-about red">Last Cleaned: {{ last_cleaning_date|date:"Y-m-d" }} ({{ days_since_last_cleaning }} days ago)</p>
+              <p class="paragraph-care red">Last Cleaned: {{ last_cleaning_date|date:"Y-m-d" }} ({{ days_since_last_cleaning }} days ago)</p>
             {% else %}
-              <p class="paragraph-about red">No cleaning entries recorded.</p>
+              <p class="paragraph-care red">No cleaning entries recorded.</p>
             {% endif %}
-        </div>    
+          </div>    
         </div>
       </div>
     </section>
-    <!-- Digit Journal Entries -->
+
+    <!-- Journal Entry Form -->
     <section class="section">
       <div class="content">
         <div class="layout-grid grid">
@@ -123,11 +135,11 @@
             </div>
             <!-- Container for Journal Form -->
             <div id="journalEntry" style="display: none;">
-              <div class="account-form">
+              <div class="journal-entry-form">
                 <div class="subtitle blue">Journal Entry<br></div>
-                <h2 class="heading-account">Create a New Entry</h2>
+                <h2 class="heading-journal-entry">Create a New Entry</h2>
                   <div class="form-block w-form">
-                    <form id="journalForm" method="post" class="form" enctype="multipart/form-data">
+                    <form method="post" class="form" enctype="multipart/form-data">
                       {% csrf_token %}
                       <div>
                         <textarea class="text-field w-input" maxlength="1000" name="content" placeholder="Your entry content" id="content" required=""></textarea>
@@ -162,34 +174,10 @@
               </div>
             </div>
           </div>
-          <div class="lottie">
-            <h3>Journal Entries</h3>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Content</th>
-                  <th scope="col">Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for entry in digit.journal_entries.all %}
-                  <tr>
-                    <th scope="row">{{ forloop.counter }}</th>
-                    <td>{{ entry.content }}</td>
-                    <td>{{ entry.created_at }}</td>
-                  </tr>
-                {% empty %}
-                  <tr>
-                    <td colspan="4">No journal entries found.</td>
-                  </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>   
         </div>
       </div>
     </section>
-    <script src="{% static 'inventory/js/toggle-journal-entry.js' %}"></script>
+    <script src="{% static 'journal/js/toggle-journal-entry.js' %}" type="text/javascript"></script>
+    {% include 'main/partials/footer.html' %}
   </body>
 </html>
