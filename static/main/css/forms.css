@@ -1,3 +1,11 @@
+.section-full {
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  padding: 3.75em 2em;
+  display: flex;
+}
+
 .base-form {
   margin: 0 0 15px;
 }
@@ -34,44 +42,6 @@
   width: 100%;
   margin-top: .4em;
   margin-bottom: 0;
-}
-
-.icon-slider-right:before {
-  content: "\e600";
-}
-
-.icon-slider-left:before {
-  content: "\e601";
-}
-
-.radio {
-  display: block;
-  margin-bottom: 5px;
-  padding-left: 20px;
-}
-
-.radio:before, .radio:after {
-  content: " ";
-  display: table;
-  grid-column-start: 1;
-  grid-row-start: 1;
-  grid-column-end: 2;
-  grid-row-end: 2;
-}
-
-.radio:after {
-  clear: both;
-}
-
-.radio-input {
-  margin: 4px 0 0;
-  line-height: normal;
-  float: left;
-  margin-left: -20px;
-}
-
-.radio-input {
-  margin-top: 3px;
 }
 
 .file-upload {

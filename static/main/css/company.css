@@ -1,0 +1,109 @@
+/* About Us Section */
+.grid-about {
+  grid-column-gap: 1.5em;
+  grid-row-gap: 1.5em;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: start;
+}
+
+.about {
+  grid-row-gap: 1.2em;
+  background-color: var(--accent-b1);
+  border-radius: .87em;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 3.1em;
+  display: flex;
+  position: relative;
+}
+
+.about.green {
+  background-color: var(--accent-b3);
+}
+
+.about.red {
+  background-color: var(--accent-b2);
+}
+
+.block-icon-about {
+  width: 4.5em;
+  height: 4.5em;
+  background-color: var(--core-primary-color);
+  border-radius: .87em;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.block-icon-about.green, .block-icon-about.red {
+  background-color: var(--core-primary-color);
+}
+
+.icon-about {
+  width: 2em;
+  height: 2em;
+}
+
+.heading-about, .heading-about.green, .heading-about.red{
+  color: var(--core-primary-color);
+}
+
+.paragraph-about, .paragraph-about.green, .paragraph-about.red {
+  color: var(--core-primary-color);
+}
+
+/* Company Lottie Section */
+.lines-b1 {
+  z-index: 5;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  padding-left: 4%;
+  padding-right: 13%;
+  display: flex;
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}
+
+.lines-b2 {
+  z-index: 5;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  padding-top: 12%;
+  padding-bottom: 12%;
+  display: flex;
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}
+
+@media screen and (max-width: 991px) {
+  .grid-about {
+    grid-column-gap: 1.13em;
+    grid-row-gap: 1.13em;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .grid-about {
+    grid-column-gap: .87em;
+    grid-row-gap: .87em;
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .about {
+    padding: 2em;
+  }
+}

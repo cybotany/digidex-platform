@@ -1,3 +1,20 @@
+/* Detail Section Styles */
+.journal-container {
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.empty-state {
+  background-color: var(--white);
+  text-align: center;
+  border-radius: .87em;
+  padding: 1em 1.4em;
+  box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
+}
+
 .digit-body {
   width: 100%;
   background-color: var(--white);
@@ -19,6 +36,76 @@
   
 .digit-caption-link.large {
   margin-bottom: 1.4em;
+}
+
+.base-list-unstyled {
+  padding-left: 0;
+  list-style: none;
+}
+
+/* Taxonomy Secction */
+.grid-taxonomy {
+  grid-column-gap: 2em;
+  grid-row-gap: 1.8em;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+/* Care Section */
+.grid-care {
+  grid-column-gap: 1.5em;
+  grid-row-gap: 1.5em;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: start;
+}
+
+.care {
+  grid-row-gap: 1.2em;
+  background-color: var(--accent-b1);
+  border-radius: .87em;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 3.1em;
+  display: flex;
+  position: relative;
+}
+
+.care.green {
+  background-color: var(--accent-b3);
+}
+
+.care.red {
+  background-color: var(--accent-b2);
+}
+
+.block-icon-care {
+  width: 4.5em;
+  height: 4.5em;
+  background-color: var(--core-primary-color);
+  border-radius: .87em;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.block-icon-care.green, .block-icon-care.red {
+  background-color: var(--core-primary-color);
+}
+
+.heading-care, .heading-care.green, .heading-care.red{
+  color: var(--core-primary-color);
+}
+
+.paragraph-care, .paragraph-care.green, .paragraph-care.red {
+  color: var(--core-primary-color);
+}
+
+.icon-care {
+  width: 2em;
+  height: 2em;
 }
 
 @media screen and (max-width: 991px) {  
