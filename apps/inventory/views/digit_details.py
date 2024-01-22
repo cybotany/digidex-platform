@@ -1,4 +1,7 @@
 from datetime import datetime
+from PIL import Image
+from io import BytesIO
+from django.core.files.base import ContentFile
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect
 from django.urls import reverse
@@ -6,6 +9,7 @@ from django.views.generic import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from apps.inventory.models import Digit
 from apps.journal.forms import CreateJournalEntry
+from apps.utils.constants import MAX_DIGIT_THUMBNAIL_DIMMENSIONS
 from django.shortcuts import get_object_or_404
 
 
@@ -63,6 +67,24 @@ class DigitDetailsView(LoginRequiredMixin, DetailView):
             journal_entry.digit = self.object
             journal_entry.user = request.user
             journal_entry.save()
+
+            if 'image' in request.FILES:
+                image = request.FILES['image']
+                img = Image.open(image)
+                img.thumbnail(MAX_DIGIT_THUMBNAIL_DIMMENSIONS, Image.ANTIALIAS)
+
+                # Save the processed image to a BytesIO object
+                in_memory_image = BytesIO()
+                img_format = 'PNG' if img.mode == 'RGBA' else 'JPEG'
+                img.save(in_memory_image, format=img_format)
+                in_memory_image.seek(0)
+
+                # Create a new Django File from the BytesIO object
+                new_image_file = ContentFile(in_memory_image.read())
+                new_image_file.name = image.name
+
+                # Update the Digit's thumbnail with the validated image
+                self.object.thumbnail.save(new_image_file.name, new_image_file, save=True)
 
             return redirect(reverse('inventory:details', kwargs={'uuid': self.object.uuid}))
 

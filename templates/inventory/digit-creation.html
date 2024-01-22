@@ -12,24 +12,40 @@
           <div id="digitForm" class="form-block w-form">
             <form method="post" class="form">
               {% csrf_token %}
-              {% for field in form %}
-                <div>
-                  {% if field.name == 'taxonomic_unit' %}
-                    <!-- Select2 field for taxonomic_unit -->
-                    <div class="select-container">
-                      <select class="w-input" name="{{ field.name }}" id="{{ field.id_for_label }}" {% if field.is_required %}required=""{% endif %}></select>
-                    </div>                            
-                  {% else %}
-                    <!-- Standard fields for name and description -->
-                    <input type="{{ field.field.widget.input_type }}" class="text-field w-input" name="{{ field.name }}" placeholder="{{ field.label }}" id="{{ field.id_for_label }}" {% if field.is_required %}required=""{% endif %}>
-                  {% endif %}
-                  {% if field.errors %}
-                    <div class="error-message">
-                      <small>{{ field.errors|striptags }}</small>
-                    </div>
-                  {% endif %}
+              <!-- Handling the name field -->
+              <div class="form-group">
+                <label for="{{ form.name.id_for_label }}">Name</label>
+                <input type="text" class="text-field w-input name-field" name="{{ form.name.name }}" placeholder="Enter name" id="{{ form.name.id_for_label }}" {% if form.name.is_required %}required=""{% endif %} value="{{ form.name.value }}">
+                {% if form.name.errors %}
+                  <div class="error-message">
+                    <small>{{ form.name.errors|striptags }}</small>
+                  </div>
+                {% endif %}
+              </div>
+              <!-- Handling the description field -->
+              <div class="form-group">
+                <label for="{{ form.description.id_for_label }}">Description</label>
+                <textarea class="textarea-field w-input description-field" name="{{ form.description.name }}" placeholder="Enter description" id="{{ form.description.id_for_label }}" {% if form.description.is_required %}required=""{% endif %}>{{ form.description.value }}</textarea>
+                {% if form.description.errors %}
+                  <div class="error-message">
+                    <small>{{ form.description.errors|striptags }}</small>
+                  </div>
+                {% endif %}
+              </div>
+              <!-- Handling the taxonomic_unit field -->
+              <div class="form-group">
+                <label for="{{ form.taxonomic_unit.id_for_label }}">Taxonomic Unit</label>
+                <div class="select-container">
+                  <div class="select-container">
+                    <select class="w-input" name="{{ field.name }}" id="{{ field.id_for_label }}" {% if field.is_required %}required=""{% endif %}></select>
+                  </div>     
                 </div>
-              {% endfor %}
+                {% if form.taxonomic_unit.errors %}
+                    <div class="error-message">
+                        <small>{{ form.taxonomic_unit.errors|striptags }}</small>
+                    </div>
+                {% endif %}
+              </div>
               <input type="submit" value="Submit Digit Updates" data-wait="Please wait..." class="submit-button w-button">
             </form>
           </div>

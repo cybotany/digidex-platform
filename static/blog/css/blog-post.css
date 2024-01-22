@@ -191,6 +191,10 @@
 }
 
 @media screen and (max-width: 767px) {
+  .image-post-thumbnail, .image-post-thumbnail.large {
+    height: 50vw;
+  }
+  
   .collection-list-posts {
     grid-row-gap: 2em;
     grid-template-columns: 1fr;

@@ -1486,6 +1486,31 @@ textarea.w-input, textarea.w-select {
   max-height: 40em;
 }
 
+.link-digit-thumbnail {
+  width: 100%;
+}
+
+.link-digit-thumbnail.large {
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  display: flex;
+}
+
+.digit {
+  width: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 2.5em 2.8em;
+  display: flex;
+}
+
+.digit.large {
+  justify-content: center;
+  padding: 4.3em 4.5em;
+}
+
 .link {
   border-bottom: 1px solid var(--core-primary-color);
   color: var(--core-primary-color);
@@ -2517,10 +2542,6 @@ textarea.w-input, textarea.w-select {
 
   .section-hero {
     padding-bottom: 3em;
-  }
-
-  .image-post-thumbnail, .image-post-thumbnail.large {
-    height: 50vw;
   }
 
   .post-body {

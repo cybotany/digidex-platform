@@ -4,7 +4,7 @@ from apps.inventory.models import Digit
 
 class DigitForm(forms.ModelForm):
     """
-    Form for updating an existing digit's details.
+    Form for creating or modifying an existing digit's details.
     """
 
     class Meta:
