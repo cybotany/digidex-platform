@@ -15,7 +15,7 @@ from django.shortcuts import get_object_or_404
 
 class DigitDetailsView(LoginRequiredMixin, DetailView):
     model = Digit
-    template_name = 'inventory/digit-details.html'
+    template_name = 'inventory/NEW-digit-details.html'
 
     def get_object(self, queryset=None):
         uuid = self.kwargs.get('uuid')

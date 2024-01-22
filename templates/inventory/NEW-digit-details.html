@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>  
+    {% include 'main/partials/head.html' %}
+  </head>
+  <body class="body">
+    {% include 'main/partials/header.html' %}  
+    <section class="section-top padding-0">
+      <div class="content">
+        <div class="block-top">
+          <div class="date-top">{{ digit.created_at }}</div>
+          <h1 class="heading-top">{{ digit.name }}</h1>
+          <p class="paragraph-top blog-post">{{ digit.description }}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Digit Details -->
+    <section class="section">
+      <div class="content narrow">
+        <div class="post-body">
+          <div class="rich-text-block w-richtext">
+            <figure style="max-width:882pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image">
+              {% if last_image %}
+                <div>
+                  <img src="{{ last_image.url }}"  loading="lazy" alt="Recent image of {{ digit.name }}">
+                </div>
+              {% else %}
+                <div>
+                  <img src="{% static 'main/images/placeholder.svg' %}"  loading="lazy" alt="">
+                </div>
+              {% endif %}
+              <figcaption>
+                <a href="{% url 'inventory:modification' digit.uuid %}" class="link-account">Edit or Delete Digit</a>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
