@@ -1,8 +1,14 @@
+import os
 import uuid
 from django.db import models
 from django.urls import reverse
 from apps.taxonomy.models import Unit
 from apps.nfc.models import Link
+from apps.utils.validators import validate_digit_thumbnail
+
+def digit_thumbnail_directory_path(instance, filename):
+    ext = os.path.splitext(filename)[1]
+    return f'digit-{instance.id}/thumbnail{ext}'
 
 
 class Digit(models.Model):
@@ -55,12 +61,13 @@ class Digit(models.Model):
         verbose_name="Tag UID",
         help_text="The unique identifier associated with the NFC tag or identification mechanism."
     )
-    #thumbnail = models.ImageField(
-    #    upload_to='thumbnails/',
-    #    null=True,
-    #    blank=True,
-    #    help_text="Thumbnail image for the digitized plant."
-    #)
+    thumbnail = models.ImageField(
+        upload_to=digit_thumbnail_directory_path,
+        validators=[validate_digit_thumbnail],
+        null=True,
+        blank=True,
+        help_text="Thumbnail image for the digitized plant."
+    )
     created_at = models.DateTimeField(
         auto_now_add=True,
         verbose_name="Created At",

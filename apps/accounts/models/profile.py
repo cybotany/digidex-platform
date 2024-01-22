@@ -1,8 +1,10 @@
 from django.db import models
 from apps.accounts.models import User
 from apps.utils.custom_storage import PublicMediaStorage
-from apps.utils.validators import validate_image_size_and_dimensions
-from apps.utils.helpers import get_unique_filename
+from apps.utils.validators import validate_profile_avatar
+
+def profile_avatar_directory_path(instance, filename):
+    return f'profile_{instance.id}/avatar.jpeg'
 
 
 class Profile(models.Model):
@@ -35,12 +37,12 @@ class Profile(models.Model):
         help_text='The location of the user.'
     )
     avatar = models.ImageField(
-        upload_to=get_unique_filename,
+        upload_to=profile_avatar_directory_path,
         storage=PublicMediaStorage(), 
-        validators=[validate_image_size_and_dimensions],
+        validators=[validate_profile_avatar],
         null=True,
         blank=True,
-        help_text='The profile picture of the user.'
+        help_text='The avatar image of the profile.'
     )
     created_at = models.DateTimeField(
         auto_now_add=True,

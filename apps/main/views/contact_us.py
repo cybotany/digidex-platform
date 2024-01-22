@@ -26,4 +26,3 @@ class ContactUsView(View):
             )
 
         return redirect('main:thanks')
-
