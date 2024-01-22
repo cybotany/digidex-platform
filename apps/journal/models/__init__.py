@@ -1,1 +1,1 @@
-from .entry import Entry
+from .entry import Entry, journal_entry_directory_path
