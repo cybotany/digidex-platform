@@ -31,7 +31,7 @@
             </div>
           {% endif %}
           <figcaption>
-            <a href="{% url 'inventory:modification' digit.uuid %}" class="link-digit-caption">Edit or Delete Digit</a>
+            <a href="{% url 'inventory:modification' digit.uuid %}" class="digit-caption-link">Edit or Delete Digit</a>
           </figcaption>
         </figure>
         <div class="digit-body">
@@ -138,7 +138,7 @@
               <div class="journal-entry-form">
                 <div class="subtitle blue">Journal Entry<br></div>
                 <h2 class="heading-journal-entry">Create a New Entry</h2>
-                  <div class="form-block w-form">
+                  <div class="form-block base-form">
                     <form method="post" class="form" enctype="multipart/form-data">
                       {% csrf_token %}
                       <div>
