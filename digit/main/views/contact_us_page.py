@@ -6,7 +6,7 @@ from digit.main.forms import ContactForm
 
 
 class ContactUsView(View):
-    template_name = 'main/contact.html'
+    template_name = 'main/contact-page.html'
 
     def get(self, request, *args, **kwargs):
         form = ContactForm()
