@@ -10,12 +10,12 @@
       <div class="content">
         <div class="account-form">
           <div class="subtitle blue">Sign in<br></div>
-          <h2 class="heading-account">Login to your account</h2>
-          <div class="form-block w-form">
-            <form id="loginForm" method="post" class="form">
+          <h2 class="account-heading">Login to your account</h2>
+          <div class="form-block base-form">
+            <form method="post" class="form">
               {% csrf_token %}
               <div>
-                <input type="text" class="text-field w-input" maxlength="256" name="username" placeholder="Username" id="username" required="">
+                <input type="text" class="text-field base-input" maxlength="256" name="username" placeholder="Username" id="username" required="">
                   {% if form.username.errors %}
                     <div class="error-message">
                       <small>{{ form.username.errors|striptags }}</small>
@@ -23,24 +23,24 @@
                   {% endif %}
               </div>
               <div>
-                <input type="password" class="text-field w-input" maxlength="256" name="password" placeholder="Password" id="password" required="">
+                <input type="password" class="text-field base-input" maxlength="256" name="password" placeholder="Password" id="password" required="">
                   {% if form.password.errors %}
                     <div class="error-message">
                       <small>{{ form.password.errors|striptags }}</small>
                     </div>
                   {% endif %}
               </div>
-              <input type="submit" value="Login" data-wait="Please wait..." class="submit-button w-button">
+              <input type="submit" value="Login" data-wait="Please wait..." class="submit-button base-button">
               {% if form.non_field_errors %}
-              <div class="error-message w-form-fail">
+              <div class="error-message base-form-fail">
                 {% for error in form.non_field_errors %}
                   <div class="text-error">{{ error }}</div>
                 {% endfor %}
               </div>
               {% endif %}
             </form>
-            <div class="text-account">Forgot your password? <a href="{% url 'reset_password' %}" class="link-account">Reset password</a></div>
-            <div class="text-account">Not registered? <a href="{% url 'accounts:signup' %}" class="link-account">Create account</a></div>
+            <div class="account-text">Forgot your password? <a href="{% url 'reset_password' %}" class="account-link">Reset password</a></div>
+            <div class="account-text">Not registered? <a href="{% url 'accounts:signup' %}" class="account-link">Create account</a></div>
           </div>
         </div>
       </div>

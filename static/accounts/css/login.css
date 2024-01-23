@@ -1,5 +1,6 @@
-
-
+/*******************************
+ * Login Page - Account Form
+ *******************************/
 .account-form {
   z-index: 50;
   width: 100%;
@@ -23,16 +24,16 @@
   box-shadow: none;
 }
 
-.heading-account {
+.account-heading {
   max-width: 9em;
   margin-bottom: .3em;
 }
 
-.heading-account.white {
+.account-heading.white {
   color: var(--white);
 }
 
-.text-account {
+.account-text {
   width: 100%;
   max-width: 32em;
   color: rgba(20, 23, 24, .6);
@@ -44,23 +45,23 @@
   line-height: 140%;
 }
 
-.text-account.white {
+.account-text.white {
   color: rgba(255, 255, 255, .5);
 }
 
-.link-account {
+.account-link {
   color: rgba(20, 23, 24, .6);
   transition: color .3s cubic-bezier(.25, .46, .45, .94);
 }
 
-.link-account:hover {
+.account-link:hover {
   color: var(--core-primary-color);
 }
 
-.link-account.white {
+.account-link.white {
   color: rgba(255, 255, 255, .5);
 }
 
-.link-account.white:hover {
+.account-link.white:hover {
   color: var(--white);
 }

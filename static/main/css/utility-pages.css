@@ -34,6 +34,9 @@
   color: var(--core-primary-color);
 }
 
+/****************************************************
+ * Utility Pages - Base Utility Styles
+ ****************************************************/
 .utility-page-wrap {
   width: 100%;
   flex: 1;
@@ -131,4 +134,42 @@
 
 .utility-paragraph.page-thank-you {
   margin-bottom: .9em;
+}
+
+/****************************************************
+ * Failed Email Verification Page
+ ****************************************************/
+ .utility-page-wrap.page-failed-verification {
+  padding: 1em 1em;
+}
+
+.utility-page-content.page-failed-verification {
+  padding: 1.1em;
+}
+
+.utility-heading.page-failed-verification {
+  margin-bottom: .9em;
+}
+
+.utility-paragraph.page-failed-verification {
+  margin-top: .6em;
+}
+
+/****************************************************
+ * Email Sent Confirmation Page
+ ****************************************************/
+ .utility-page-wrap.page-email-confirmation {
+  padding: 1em 1em;
+}
+
+.utility-page-content.page-email-confirmation {
+  padding: 1.1em;
+}
+
+.utility-heading.page-email-confirmation {
+  margin-bottom: .9em;
+}
+
+.utility-paragraph.page-email-confirmation {
+  margin-top: .6em;
 }
