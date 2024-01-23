@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from django.shortcuts import render
-from accounts.models import Activity, Profile
+from digit.accounts.models import Activity, Profile
 
 
 class UserProfileView(LoginRequiredMixin, View):

@@ -1,6 +1,6 @@
 from django.db import models
-from accounts.models import User
-from utils.constants import ACTIVITY_STATUS, ACTIVITY_TYPE
+from digit.accounts.models import User
+from digit.utils.constants import ACTIVITY_STATUS, ACTIVITY_TYPE
 
 
 class Activity(models.Model):

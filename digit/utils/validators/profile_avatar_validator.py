@@ -1,5 +1,5 @@
 from django.core.exceptions import ValidationError
-from utils.constants import MAX_PROFILE_AVATAR_SIZE, MAX_PROFILE_AVATAR_DIMMENSIONS
+from digit.utils.constants import MAX_PROFILE_AVATAR_SIZE, MAX_PROFILE_AVATAR_DIMMENSIONS
 
 def validate_profile_avatar(image):
     # Check file size

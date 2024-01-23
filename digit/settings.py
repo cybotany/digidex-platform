@@ -55,10 +55,10 @@ else:
 
 # Public media settings
 MEDIA_URL = f'https://{AWS_S3_ENDPOINT_URL}/'
-DEFAULT_FILE_STORAGE = 'utils.custom_storage.PublicMediaStorage'
+DEFAULT_FILE_STORAGE = 'digit.utils.custom_storage.PublicMediaStorage'
 
 # Private media settings
-PRIVATE_FILE_STORAGE = 'utils.custom_storage.PrivateMediaStorage'
+PRIVATE_FILE_STORAGE = 'digit.utils.custom_storage.PrivateMediaStorage'
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = [
@@ -88,14 +88,14 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'bootstrap5',
-    'accounts.apps.AccountConfig',
-    'api',
-    'inventory',
-    'journal',
-    'main',
-    'nfc',
-    'taxonomy',
-    'utils',
+    'digit.accounts.apps.AccountConfig',
+    'digit.api',
+    'digit.inventory',
+    'digit.journal',
+    'digit.main',
+    'digit.nfc',
+    'digit.taxonomy',
+    'digit.utils',
 ]
 
 MIDDLEWARE = [
@@ -187,7 +187,7 @@ SIMPLE_JWT = {
     'TOKEN_TYPE_CLAIM': 'token_type',
 }
 
-AUTH_USER_MODEL = "accounts.User"
+AUTH_USER_MODEL = "digit.accounts.User"
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.office365.com'

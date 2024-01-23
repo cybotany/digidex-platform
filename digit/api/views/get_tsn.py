@@ -1,8 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from taxonomy.models import Unit
-from api.serializers import TaxonomyUnitSerializer
+from digit.taxonomy.models import Unit
+from digit.api.serializers import TaxonomyUnitSerializer
 
 
 class GetTSN(APIView):

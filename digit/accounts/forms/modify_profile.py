@@ -2,7 +2,7 @@ from PIL import Image
 from io import BytesIO
 from django import forms
 from django.core.files.base import ContentFile
-from accounts.models import Profile
+from digit.accounts.models import Profile
 
 
 class ProfileForm(forms.ModelForm):

@@ -1,5 +1,5 @@
 from django.contrib.auth.views import LoginView
-from accounts.forms import LoginForm
+from digit.accounts.forms import LoginForm
 
 class LoginUserView(LoginView):
     form_class = LoginForm

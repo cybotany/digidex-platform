@@ -1,10 +1,10 @@
 import os
 from datetime import datetime
 from django.db import models
-from accounts.models import User
-from inventory.models import Digit
-from utils.custom_storage import PrivateMediaStorage
-from utils.validators import validate_journal_entry
+from digit.accounts.models import User
+from digit.inventory.models import Digit
+from digit.utils.custom_storage import PrivateMediaStorage
+from digit.utils.validators import validate_journal_entry
 
 def journal_entry_directory_path(instance, filename):
     """

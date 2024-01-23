@@ -1,7 +1,7 @@
 from django.db import models
-from accounts.models import User
-from utils.custom_storage import PublicMediaStorage
-from utils.validators import validate_profile_avatar
+from digit.accounts.models import User
+from digit.utils.custom_storage import PublicMediaStorage
+from digit.utils.validators import validate_profile_avatar
 
 def profile_avatar_directory_path(instance, filename):
     return f'profile_{instance.id}/avatar.jpeg'

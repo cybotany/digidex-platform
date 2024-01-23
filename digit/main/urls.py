@@ -4,7 +4,7 @@ from main.views import (ContactUsView,
                         LandingView,
                         ThankYouView)
 
-app_name = 'main'
+app_name = 'digit.main'
 urlpatterns = [
     path('', LandingView.as_view(), name='landing'),
     path('contact/', ContactUsView.as_view(), name='contact'),

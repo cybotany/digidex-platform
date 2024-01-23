@@ -1,10 +1,10 @@
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.edit import CreateView
 from django.db import transaction
-from inventory.forms import DigitForm
-from inventory.models import Digit
-from nfc.models import Link
-from accounts.models import Activity
+from digit.inventory.forms import DigitForm
+from digit.inventory.models import Digit
+from digit.nfc.models import Link
+from digit.accounts.models import Activity
 
 
 class DigitCreationView(CreateView):

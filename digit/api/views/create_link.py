@@ -2,7 +2,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from nfc.models import Link
+from digit.nfc.models import Link
 
 
 class CreateLink(APIView):

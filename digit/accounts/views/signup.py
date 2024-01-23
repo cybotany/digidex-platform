@@ -6,7 +6,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.db import transaction
-from accounts.forms import SignupForm
+from digit.accounts.forms import SignupForm
 
 
 class SignupUserView(FormView):

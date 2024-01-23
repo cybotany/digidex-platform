@@ -1,7 +1,7 @@
 import uuid
 from django.db import models
 from django.urls import reverse
-from accounts.models import User
+from digit.accounts.models import User
 
 
 class Link(models.Model):

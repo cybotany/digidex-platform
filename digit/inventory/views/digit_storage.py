@@ -1,6 +1,6 @@
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from inventory.models import Digit
+from digit.inventory.models import Digit
 
 
 class DigitStorageView(LoginRequiredMixin, ListView):

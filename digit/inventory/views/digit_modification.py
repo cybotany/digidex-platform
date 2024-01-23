@@ -2,9 +2,9 @@ from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.edit import UpdateView
 from django.db import transaction
-from inventory.forms import DigitForm
-from inventory.models import Digit
-from accounts.models import Activity
+from digit.inventory.forms import DigitForm
+from digit.inventory.models import Digit
+from digit.accounts.models import Activity
 
 
 class DigitModificationView(UpdateView):

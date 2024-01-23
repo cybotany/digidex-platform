@@ -2,8 +2,8 @@ from django.db import transaction
 from django.views import View
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
-from inventory.models import Digit
-from accounts.models import Activity
+from digit.inventory.models import Digit
+from digit.accounts.models import Activity
 
 
 class DigitDeletionView(LoginRequiredMixin, View):

@@ -2,7 +2,7 @@ from django.views import View
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.conf import settings
-from main.forms import ContactForm
+from digit.main.forms import ContactForm
 
 
 class ContactUsView(View):

@@ -1,5 +1,5 @@
 from django.core.exceptions import ValidationError
-from utils.constants import MAX_JOURNAL_ENTRY_SIZE, MAX_JOURNAL_ENTRY_DIMMENSIONS
+from digit.utils.constants import MAX_JOURNAL_ENTRY_SIZE, MAX_JOURNAL_ENTRY_DIMMENSIONS
 
 def validate_journal_entry(image):
     # Check file size

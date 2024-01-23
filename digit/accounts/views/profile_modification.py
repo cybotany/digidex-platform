@@ -1,8 +1,8 @@
 from django.urls import reverse_lazy
 from django.views.generic.edit import UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from accounts.models import Profile
-from accounts.forms import ProfileForm
+from digit.accounts.models import Profile
+from digit.accounts.forms import ProfileForm
 
 
 class ModifyProfileView(LoginRequiredMixin, UpdateView):

@@ -1,7 +1,7 @@
 from django.views import View
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from accounts.models import User
+from digit.accounts.models import User
 
 
 class EmailVerificationView(View):

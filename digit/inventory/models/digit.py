@@ -2,9 +2,9 @@ import os
 import uuid
 from django.db import models
 from django.urls import reverse
-from taxonomy.models import Unit
-from nfc.models import Link
-from utils.validators import validate_digit_thumbnail
+from digit.taxonomy.models import Unit
+from digit.nfc.models import Link
+from digit.utils.validators import validate_digit_thumbnail
 
 def digit_thumbnail_directory_path(instance, filename):
     ext = os.path.splitext(filename)[1]

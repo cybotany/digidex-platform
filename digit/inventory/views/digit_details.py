@@ -7,10 +7,10 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.views.generic import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from inventory.models import Digit
-from journal.forms import CreateJournalEntry
-from utils.constants import MAX_DIGIT_THUMBNAIL_DIMMENSIONS
 from django.shortcuts import get_object_or_404
+from digit.inventory.models import Digit
+from digit.journal.forms import CreateJournalEntry
+from digit.utils.constants import MAX_DIGIT_THUMBNAIL_DIMMENSIONS
 
 
 class DigitDetailsView(LoginRequiredMixin, DetailView):

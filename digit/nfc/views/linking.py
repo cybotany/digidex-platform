@@ -2,8 +2,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, get_object_or_404
 from django.views import View
 from django.http import HttpResponse
-from nfc.models import Link
-from inventory.models import Digit
+from digit.nfc.models import Link
+from digit.inventory.models import Digit
 
 
 class LinkingView(LoginRequiredMixin, View):

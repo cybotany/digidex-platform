@@ -1,5 +1,5 @@
 from django.core.exceptions import ValidationError
-from utils.constants import MAX_DIGIT_THUMBNAIL_SIZE, MAX_DIGIT_THUMBNAIL_DIMMENSIONS
+from digit.utils.constants import MAX_DIGIT_THUMBNAIL_SIZE, MAX_DIGIT_THUMBNAIL_DIMMENSIONS
 
 def validate_digit_thumbnail(image):
     # Check file size
