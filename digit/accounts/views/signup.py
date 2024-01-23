@@ -10,7 +10,7 @@ from digit.accounts.forms import SignupForm
 
 
 class SignupUserView(FormView):
-    template_name = 'accounts/signup.html'
+    template_name = 'main/signup.html'
     form_class = SignupForm
     success_url = reverse_lazy('main:landing')
 

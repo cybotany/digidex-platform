@@ -8,7 +8,7 @@ from digit.accounts.forms import ProfileForm
 class ModifyProfileView(LoginRequiredMixin, UpdateView):
     model = Profile
     form_class = ProfileForm
-    template_name = 'accounts/profile-modification.html'
+    template_name = 'main/profile-modification.html'
 
     def get_object(self, queryset=None):
         """
