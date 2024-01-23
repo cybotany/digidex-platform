@@ -673,6 +673,19 @@ input.base-button {
   flex: none;
 }
 
+.icon-close {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.rotate-icon {
+  -webkit-transform: rotateZ(45deg);
+  -moz-transform: rotateZ(45deg);
+  -ms-transform: rotateZ(45deg);
+  transform: rotateZ(45deg);
+  transition: transform 0.3s ease;
+}
+
 .accordion-content {
   display: block;
   overflow: hidden;
