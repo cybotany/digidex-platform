@@ -2,7 +2,7 @@
 
 import digit.utils.custom_storage
 import digit.utils.validators
-from journal.models import journal_entry_directory_path
+from digit.journal.models import journal_entry_directory_path
 from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion

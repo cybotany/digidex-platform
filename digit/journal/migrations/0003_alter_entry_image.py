@@ -16,6 +16,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='entry',
             name='image',
-            field=models.ImageField(blank=True, help_text='(Optional) The image to save with the journal entry. Only .jpg, .png, and .jpeg extensions are allowed.', null=True, storage=digit.utils.custom_storage.PrivateMediaStorage(), upload_to=journal.models.entry.journal_entry_directory_path, validators=[digit.utils.validators.journal_entry_validator.validate_journal_entry]),
+            field=models.ImageField(blank=True, help_text='(Optional) The image to save with the journal entry. Only .jpg, .png, and .jpeg extensions are allowed.', null=True, storage=digit.utils.custom_storage.PrivateMediaStorage(), upload_to=digit.journal.models.entry.journal_entry_directory_path, validators=[digit.utils.validators.journal_entry_validator.validate_journal_entry]),
         ),
     ]
