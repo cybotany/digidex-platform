@@ -55,10 +55,10 @@ else:
 
 # Public media settings
 MEDIA_URL = f'https://{AWS_S3_ENDPOINT_URL}/'
-DEFAULT_FILE_STORAGE = 'apps.utils.custom_storage.PublicMediaStorage'
+DEFAULT_FILE_STORAGE = 'utils.custom_storage.PublicMediaStorage'
 
 # Private media settings
-PRIVATE_FILE_STORAGE = 'apps.utils.custom_storage.PrivateMediaStorage'
+PRIVATE_FILE_STORAGE = 'utils.custom_storage.PrivateMediaStorage'
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = [
@@ -88,14 +88,14 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'bootstrap5',
-    'apps.accounts.apps.AccountConfig',
-    'apps.api',
-    'apps.inventory',
-    'apps.journal',
-    'apps.main',
-    'apps.nfc',
-    'apps.taxonomy',
-    'apps.utils',
+    'accounts.apps.AccountConfig',
+    'api',
+    'inventory',
+    'journal',
+    'main',
+    'nfc',
+    'taxonomy',
+    'utils',
 ]
 
 MIDDLEWARE = [
