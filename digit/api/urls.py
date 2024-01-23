@@ -1,6 +1,6 @@
 from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from .views import GetTSN, CreateLink
+from digit.api.views import GetTSN, CreateLink
 
 app_name = 'digit.api'
 urlpatterns = [

@@ -1,8 +1,8 @@
 from django.urls import path
-from main.views import (ContactUsView,
-                        AboutUsView,
-                        LandingView,
-                        ThankYouView)
+from digit.main.views import (ContactUsView,
+                              AboutUsView,
+                              LandingView,
+                              ThankYouView)
 
 app_name = 'digit.main'
 urlpatterns = [

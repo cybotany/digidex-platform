@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from taxonomy.models import Unit
+from digit.taxonomy.models import Unit
 
 
 class TaxonomyUnitSerializer(serializers.ModelSerializer):
