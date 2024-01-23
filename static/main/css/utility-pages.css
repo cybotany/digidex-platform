@@ -52,7 +52,7 @@ body {
   background-color: rgba(255, 255, 255, .1);
 }
 
-.subtitle.blue {
+.subtitle.green {
   background-color: var(--accent-b1);
   color: var(--core-primary-color);
 }

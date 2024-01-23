@@ -1,3 +1,11 @@
+.empty-state {
+  background-color: var(--white);
+  text-align: center;
+  border-radius: .87em;
+  padding: 1em 1.4em;
+  box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
+}
+
 .collection-list-digits {
   grid-column-gap: 1.5em;
   grid-row-gap: 3.4em;

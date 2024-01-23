@@ -5,7 +5,7 @@
     {% include 'main/partials/head.html' %}
   </head>
   <body class="body">
-    {% include 'main/partials/header.html' %}
+    {% include 'main/partials/navigation-bar.html' %}
     <!-- Digit Header Section --> 
     <section class="section-top padding-0">
       <div class="content">
@@ -67,7 +67,7 @@
         <div class="content narrow">
           <div class="rich-text-block base-rich-text">
             <div class="block-heading">
-              <div class="subtitle blue">Taxonomy<br></div>
+              <div class="subtitle green">Taxonomy<br></div>
               <h2 class="heading">{{ digit.taxonomic_unit.complete_name }}</h2>
             </div>
             <div class="layout-grid grid-taxonomy">
@@ -91,7 +91,7 @@
 
     <!-- Care Section -->
     <section class="section">
-      <div class="content-narrow">
+      <div class="'content narrow">
         <div class="layout-grid grid-care">
           <div class="care red">
             <div class="block-icon-care red"><img src="{% static 'main/images/clean.svg' %}" loading="eager" alt="" class="icon-care"></div>
@@ -126,7 +126,7 @@
 
     <!-- Journal Entry Form -->
     <section class="section">
-      <div class="content-narrow">
+      <div class="'content narrow">
         <div class="page-body">
           <div class="accordion-item">
             <!-- Clickable header for toggling the form -->
@@ -139,7 +139,7 @@
             <!-- Container for Journal Form -->
             <div id="journalEntry" style="display: none;">
               <div class="journal-entry-form">
-                <div class="subtitle blue">Journal Entry<br></div>
+                <div class="subtitle green">Journal Entry<br></div>
                 <h2 class="heading-journal-entry">Create a New Entry</h2>
                   <div class="form-block base-form">
                     <form method="post" class="form" enctype="multipart/form-data">

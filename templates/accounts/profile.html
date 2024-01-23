@@ -6,14 +6,14 @@
     {% include 'main/partials/head.html' %}
   </head>
   <body class="body">
-    {% include 'main/partials/header.html' %}
+    {% include 'main/partials/navigation-bar.html' %}
       <!-- Profile Content-->
     <section class="section">
       <div class="content">
         <div class="layout-grid grid">
 
           <div class="block-right">
-            <div class="subtitle blue">Profile<br></div>
+            <div class="subtitle green">Profile<br></div>
             <h2 class="heading">{{ user.username }}</h2>
               {% if user.avatar %}
                 <img src="{{ user.avatar.url }}" alt="User avatar" class="avatar-image">

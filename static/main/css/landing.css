@@ -37,7 +37,7 @@ img {
 h1, h2, h3, h4, h5, h6, strong {
   color: var(--heading);
   margin-top: 20;
-  margin-bottom: 0;
+  margin-bottom: 0em;
   letter-spacing: -.05em;
   font-weight: 700;
 }
@@ -90,13 +90,6 @@ figcaption {
   padding: 1.2em 7%;
   font-size: .87em;
   line-height: 145%;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-  vertical-align: middle;
-  display: inline-block;
 }
 
 ul, ol {
@@ -178,11 +171,36 @@ th {
   display: grid;
 }
 
-.block-heading {
+.body {
+  display: block;
+}
+
+.body-blue {
+  background-color: #0d32f5;
+}
+
+.section {
+  border-radius: 0;
+  justify-content: center;
+  align-items: center;
+  padding: 3.75em 2em;
+  display: flex;
+}
+
+.content {
+  width: 100%;
+  max-width: 75em;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.content.narrow {
+  max-width: 60em;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-start;
-  margin-bottom: 1em;
+  align-items: stretch;
   display: flex;
 }
 
@@ -191,9 +209,40 @@ th {
   align-items: center;
 }
 
-.paragraph {
-  max-width: 30em;
-  margin-bottom: 2.2em;
+.subtitle {
+  background-color: var(--white);
+  color: var(--heading);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  border-radius: .6em;
+  margin-bottom: .7em;
+  padding: .5em 1em;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
+  box-shadow: 0 10px 20px -10px rgba(20, 23, 24, .05);
+}
+
+.subtitle.white {
+  color: var(--white);
+  background-color: rgba(255, 255, 255, .1);
+}
+
+.subtitle.green {
+  background-color: var(--accent-b1);
+  color: var(--core-primary-color);
+}
+
+.date {
+  color: rgba(20, 23, 24, .5);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  margin-bottom: .8em;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
 }
 
 .heading {
@@ -204,6 +253,11 @@ th {
 
 .heading.large {
   max-width: 13em;
+}
+
+.paragraph {
+  max-width: 30em;
+  margin-bottom: 2.2em;
 }
 
 .button {
@@ -271,6 +325,32 @@ input.base-button {
   height: 1px;
   background-image: linear-gradient(to right, rgba(15, 100, 146, 0), var(--border) 10%, var(--border) 90%, rgba(15, 100, 146, 0));
 }
+
+.lottie-animation-1 {
+  width: 100%;
+}
+
+.lottie-animation-2 {
+  z-index: 10;
+  width: 100%;
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}
+
+.lottie-animation-2-blur {
+  z-index: 5;
+  width: 100%;
+  filter: blur(50px);
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}
+
 /****************************************************
  * Landing Page - Hero Call To Action Section
  ****************************************************/
@@ -349,31 +429,6 @@ input.base-button {
   right: 0%;
 }
 
-.lottie-animation-1 {
-  width: 100%;
-}
-
-.lottie-animation-2 {
-  z-index: 10;
-  width: 100%;
-  position: absolute;
-  top: 0%;
-  bottom: 0%;
-  left: 0%;
-  right: 0%;
-}
-
-.lottie-animation-2-blur {
-  z-index: 5;
-  width: 100%;
-  filter: blur(50px);
-  position: absolute;
-  top: 0%;
-  bottom: 0%;
-  left: 0%;
-  right: 0%;
-}
-
 .features-lottie {
   z-index: 20;
   grid-row-gap: 2.7em;
@@ -429,6 +484,14 @@ input.base-button {
 /****************************************************
  * Landing Page - Features Section
  ****************************************************/
+.block-heading {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 1em;
+  display: flex;
+}
+
 .grid-features {
   grid-column-gap: 2em;
   grid-row-gap: 1.8em;
@@ -468,7 +531,15 @@ input.base-button {
 /****************************************************
  * Landing Page - How it Works Section
  ****************************************************/
-
+.block-left {
+  border-radius: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-left: 0%;
+  padding-right: 15%;
+  display: flex;
+}
 
 /****************************************************
  * Landing Page - About Us Section
@@ -480,6 +551,45 @@ input.base-button {
   align-items: center;
 }
 
+.lines-b1 {
+  z-index: 5;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  padding-left: 4%;
+  padding-right: 13%;
+  display: flex;
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}
+
+.lines-b2 {
+  z-index: 5;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  padding-top: 12%;
+  padding-bottom: 12%;
+  display: flex;
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}
+
+.block-right {
+  border-radius: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-left: 0%;
+  padding-right: 15%;
+  display: flex;
+}
 
 /****************************************************
  * Landing Page - FAQs Section
@@ -580,6 +690,10 @@ input.base-button {
 
   .section-hero {
     padding-bottom: 3em;
+  }
+
+  .paragraph-hero {
+    font-size: 1em;
   }
 
   .grid-features {
