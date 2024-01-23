@@ -1,7 +1,7 @@
 from django.urls import path
 from digit.accounts.views import (SignupUserView, LoginUserView, LogoutUserView, UserProfileView, DeleteUserView, ModifyProfileView, EmailVerificationView, EmailConfirmationView)
 
-app_name = 'digit.accounts'
+app_name = 'accounts'
 urlpatterns = [
     path('signup/', SignupUserView.as_view(), name='signup'),
     path('login/', LoginUserView.as_view(), name='login'),
