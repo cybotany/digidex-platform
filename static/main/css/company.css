@@ -1,7 +1,30 @@
 /****************************************************
- * Company Page - Base Styles
- ****************************************************/
- .button {
+           Company Page - Misc. Styles
+*****************************************************/
+html {
+  height: 100%;
+}
+
+html.base-mod-touch * {
+  background-attachment: scroll !important;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--paragraph);
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  font-family: Space Grotesk, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 155%;
+  display: flex;
+  margin: 0;
+  min-height: 100%;
+}
+
+.button {
   background-color: var(--core-primary-color);
   color: var(--white);
   letter-spacing: -.02em;
@@ -50,6 +73,30 @@
 
 input.base-button {
   -webkit-appearance: button;
+}
+
+.lottie {
+  position: relative;
+}
+
+.block-lottie {
+  z-index: 10;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  display: flex;
+  position: relative;
+}
+
+.line-w {
+  width: 1px;
+  background-image: linear-gradient(to bottom, rgba(15, 100, 146, 0), var(--border) 10%, var(--border) 90%, rgba(15, 100, 146, 0));
+}
+
+.line-h {
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(15, 100, 146, 0), var(--border) 10%, var(--border) 90%, rgba(15, 100, 146, 0));
 }
 
 /****************************************************

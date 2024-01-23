@@ -1,10 +1,461 @@
-/* Detail Section Styles */
+/***********************************************************************************************
+ *  Digit Page - Misc. Styles
+ **********************************************************************************************/ 
+html {
+  height: 100%;
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+html.base-mod-touch * {
+  background-attachment: scroll !important;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--paragraph);
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  font-family: Space Grotesk, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 155%;
+  display: flex;
+  margin: 0;
+  min-height: 100%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+h1, h2, h3, h4, h5, h6, strong {
+  color: var(--heading);
+  margin-top: 20;
+  margin-bottom: 0;
+  letter-spacing: -.05em;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 4.12em;
+  line-height: 110%;
+}
+
+h2 {
+  font-size: 3.12em;
+  line-height: 115%;
+}
+
+h3 {
+  font-size: 2.37em;
+  line-height: 120%;
+}
+
+h4 {
+  font-size: 1.75em;
+  line-height: 125%;
+}
+
+h5 {
+  font-size: 1.37em;
+  line-height: 128%;
+}
+
+h6 {
+  letter-spacing: -.02em;
+  font-size: 1em;
+  font-weight: 600;
+  line-height: 140%;
+}
+
+figure {
+  border-radius: .87em;
+  margin: 0;
+  margin-top: 2.7em;
+  margin-bottom: 2.7em;
+  overflow: hidden;
+}
+
+figcaption {
+  text-align: center;
+  background-color: #e4ebee;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 1.2em 7%;
+  font-size: .87em;
+  line-height: 145%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+ul, ol {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  padding-left: 2.2em;
+}
+
+em {
+  font-style: italic;
+}
+
+blockquote {
+  color: var(--core-primary-color);
+  border-left: 2px solid rgba(57, 89, 255, .2);
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  margin-left: 1em;
+  padding: .1em 0 .1em 1.3em;
+  font-size: 1.125em;
+  font-weight: 500;
+  line-height: 160%;
+}
+
+fieldset {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+a {
+  text-decoration: underline;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 10;
+}
+
+li {
+  padding: .3em .5em;
+}
+
+strong {
+  color: var(--heading);
+  font-weight: 700;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+.base-layout-layout {
+  display: grid;
+}
+
+.layout-grid {
+  grid-row-gap: 16px;
+  grid-column-gap: 16px;
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-columns: 1fr;
+  display: grid;
+}
+
+.rich-text-block p {
+  margin-bottom: 1.4em;
+}
+  
+.rich-text-block h1 {
+  margin-bottom: .4em;
+}
+  
+.rich-text-block h2, .rich-text-block h3, .rich-text-block h4, .rich-text-block h5, .rich-text-block h6 {
+  margin-top: 1em;
+  margin-bottom: .4em;
+}
+  
+.rich-text-block a {
+  border-bottom: 1px solid var(--core-primary-color);
+  color: var(--core-primary-color);
+  text-decoration: none;
+  transition: border-color .3s cubic-bezier(.25, .46, .45, .94), color .3s cubic-bezier(.25, .46, .45, .94);
+}
+  
+.rich-text-block a:hover {
+  border-bottom-color: var(--heading);
+  color: var(--heading);
+}
+
+.base-rich-text:before,
+.base-rich-text:after {
+  content: " ";
+  display: table;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  grid-column-end: 2;
+  grid-row-end: 2;
+}
+
+.base-rich-text:after {
+  clear: both;
+}
+
+.base-rich-text ol,
+.base-rich-text ul {
+  overflow: hidden;
+}
+
+.base-rich-text figure {
+  position: relative;
+  max-width: 60%;
+}
+
+.base-rich-text figure div {
+  font-size: 0px;
+  color: transparent;
+}
+
+.base-rich-text figure > div:before {
+  cursor: default!important;
+}
+
+.base-rich-text figure img {
+  width: 100%;
+}
+
+.base-rich-text figure figcaption.base-rich-text-figcaption-placeholder {
+  opacity: 0.6;
+}
+
+.base-rich-text-figure-type-image {
+  margin-bottom: 1.5em;
+}
+
+.base-rich-text-align-fullwidth {
+  text-align: center;
+}
+
+.base-rich-text figure.base-rich-text-align-normal {
+  clear: both;
+}
+
+.base-rich-text figure.base-rich-text-align-fullwidth {
+  width: 100%;
+  max-width: 100%;
+  text-align: center;
+  clear: both;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.base-rich-text figure.base-rich-text-align-fullwidth > div {
+  display: inline-block;
+  padding-bottom: inherit;
+}
+
+.base-rich-text figure.base-rich-text-align-fullwidth > figcaption {
+  display: block;
+}
+
+.base-rich-text figure.base-rich-text-align-floatleft {
+  float: left;
+  margin-right: 15px;
+  clear: none;
+}
+
+.base-rich-text figure.base-rich-text-align-floatright {
+  float: right;
+  margin-left: 15px;
+  clear: none;
+}
+
+.base-rich-text[contenteditable="true"]:before,
+.base-rich-text[contenteditable="true"]:after {
+  white-space: initial;
+}
+
+.base-rich-text .base-rich-text-figure-selected.base-rich-text-figure-type-video div:after,
+.base-rich-text .base-rich-text-figure-selected[data-rt-type="video"] div:after {
+  outline: 2px solid #2895f7;
+}
+
+.base-rich-text .base-rich-text-figure-selected.base-rich-text-figure-type-image div,
+.base-rich-text .base-rich-text-figure-selected[data-rt-type="image"] div {
+  outline: 2px solid #2895f7;
+}
+
+.base-rich-text figure.base-rich-text-figure-type-video > div:after,
+.base-rich-text figure[data-rt-type="video"] > div:after {
+  content: '';
+  position: absolute;
+  display: none;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.base-rich-text figure.base-rich-text-figure-type-image,
+.base-rich-text figure[data-rt-type="image"] {
+  display: table;
+}
+
+.base-rich-text figure.base-rich-text-figure-type-image > div,
+.base-rich-text figure[data-rt-type="image"] > div {
+  display: inline-block;
+}
+
+.base-rich-text figure.base-rich-text-figure-type-image > figcaption,
+.base-rich-text figure[data-rt-type="image"] > figcaption {
+  display: table-caption;
+  caption-side: bottom;
+}
+
+.base-rich-text figure.base-rich-text-figure-type-video,
+.base-rich-text figure[data-rt-type="video"] {
+  width: 60%;
+  height: 0;
+}
+
+.base-rich-text figure.base-rich-text-figure-type-video iframe,
+.base-rich-text figure[data-rt-type="video"] iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.base-rich-text figure.base-rich-text-figure-type-video > div,
+.base-rich-text figure[data-rt-type="video"] > div {
+  width: 100%;
+}
+
+.base-rich-text figure.base-rich-text-align-center {
+  margin-right: auto;
+  margin-left: auto;
+  clear: both;
+}
+
+.base-rich-text figure.base-rich-text-align-center.base-rich-text-figure-type-image > div,
+.base-rich-text figure.base-rich-text-align-center[data-rt-type="image"] > div {
+  max-width: 100%;
+}
+
+/***********************************************************************************************
+ *  Digit Page - Digit Header Section
+ **********************************************************************************************/
+.section-top {
+  justify-content: center;
+  align-items: center;
+  padding: 6em 2em 1.5em;
+  display: flex;
+}
+
+.section-top.padding-0 {
+  padding-bottom: 0;
+}
+
+.content {
+  width: 100%;
+  max-width: 75em;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.block-top {
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.date-top {
+  color: rgba(20, 23, 24, .5);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  margin-bottom: .8em;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
+}
+
+.heading-top {
+  max-width: 11.5em;
+  margin-bottom: .38em;
+}
+
+.paragraph-top {
+  max-width: 32em;
+  margin-bottom: 2em;
+  font-size: 1.125em;
+  line-height: 160%;
+}
+
+/***********************************************************************************************
+ *  Digit Page - Detail Section
+ **********************************************************************************************/
+.section {
+  border-radius: 0;
+  justify-content: center;
+  align-items: center;
+  padding: 3.75em 2em;
+  display: flex;
+}
+
+.content.narrow {
+  max-width: 60em;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  display: flex;
+}
+
+.image-main-digit {
+  width: 100%;
+  object-fit: cover;
+  border-radius: .87em;
+}
+
 .journal-container {
   max-height: 400px;
   overflow-y: auto;
   padding: 10px;
   border: 1px solid #ccc;
   margin-bottom: 20px;
+}
+
+.date {
+  color: rgba(20, 23, 24, .5);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  margin-bottom: .8em;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
 }
 
 .empty-state {
@@ -29,12 +480,12 @@
   border-radius: .87em;
 }
 
-.digit-caption-link {
+.digit-modification-link {
   margin-bottom: 1.3em;
   text-decoration: none;
 }
   
-.digit-caption-link.large {
+.digit-modification-link.large {
   margin-bottom: 1.4em;
 }
 
@@ -43,15 +494,53 @@
   list-style: none;
 }
 
-/* Taxonomy Secction */
+/***********************************************************************************************
+ *  Digit Page - Taxonomy Section
+ **********************************************************************************************/
 .grid-taxonomy {
+  display: grid;
+  grid-gap: 20px;
   grid-column-gap: 2em;
   grid-row-gap: 1.8em;
   grid-template-rows: auto;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 
-/* Care Section */
+.taxonomy {
+  grid-column-gap: 1.3em;
+  grid-row-gap: 1.3em;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-top: 1.2em;
+  padding-bottom: 1.2em;
+  display: flex;
+}
+
+.block-heading-taxonomy {
+  grid-column-gap: 1em;
+  grid-row-gap: 1em;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+
+.heading-taxonomy {
+  color: var(--core-primary-color);
+}
+
+.paragraph-taxonomy {
+  max-width: 20em;
+}
+
+.icon-taxonomy {
+  width: 2em;
+  height: 2em;
+}
+
+/***********************************************************************************************
+ *  Digit Page - Care Section
+ **********************************************************************************************/
 .grid-care {
   grid-column-gap: 1.5em;
   grid-row-gap: 1.5em;

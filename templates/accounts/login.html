@@ -32,12 +32,16 @@
               </div>
               <input type="submit" value="Login" data-wait="Please wait..." class="submit-button base-button">
               {% if form.non_field_errors %}
-              <div class="error-message base-form-fail">
-                {% for error in form.non_field_errors %}
-                  <div class="text-error">{{ error }}</div>
-                {% endfor %}
-              </div>
-              {% endif %}
+                <div class="error-message base-form-fail">
+                  {% for error in form.non_field_errors %}
+                    <div class="text-error">{{ error }}</div>
+                  {% endfor %}
+                </div>
+              {% else %}
+                <div class="success-message base-form-done">
+                  <div class="text-success">Your operation was successful!</div>
+                </div>
+              {% endif %}            
             </form>
             <div class="account-text">Forgot your password? <a href="{% url 'reset_password' %}" class="account-link">Reset password</a></div>
             <div class="account-text">Not registered? <a href="{% url 'accounts:signup' %}" class="account-link">Create account</a></div>

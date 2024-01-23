@@ -5,7 +5,8 @@
     {% include 'main/partials/head.html' %}
   </head>
   <body class="body">
-    {% include 'main/partials/header.html' %}  
+    {% include 'main/partials/header.html' %}
+    <!-- Digit Header Section --> 
     <section class="section-top padding-0">
       <div class="content">
         <div class="block-top">
@@ -19,23 +20,23 @@
     <!-- Detail Section -->
     <section class="section">
       <div class="content narrow">
-        <!-- Digit Images -->
-        <figure style="max-width:882px" class="rich-text-align-fullwidth rich-text-figure-type-image image-main-digit">
-          {% if last_image %}
-            <div>
-              <img src="{{ last_image.url }}" loading="lazy" alt="Recent image of {{ digit.name }}">
-            </div>
-          {% else %}
-            <div>
-              <img src="{% static 'main/images/placeholder.svg' %}"  loading="lazy" alt="">
-            </div>
-          {% endif %}
-          <figcaption>
-            <a href="{% url 'inventory:modification' digit.uuid %}" class="digit-caption-link">Edit or Delete Digit</a>
-          </figcaption>
-        </figure>
-        <div class="digit-body">
-          <div class="rich-text-block rich-text">
+        <div class="rich-text-block base-rich-text">
+          <!-- Digit Images -->
+          <figure style="max-width:882px" class="base-rich-text-align-fullwidth base-rich-text-figure-type-image image-main-digit">
+            {% if last_image %}
+              <div>
+                <img src="{{ last_image.url }}" loading="lazy" alt="Recent image of {{ digit.name }}">
+              </div>
+            {% else %}
+              <div>
+                <img src="{% static 'main/images/placeholder.svg' %}"  loading="lazy" alt="">
+              </div>
+            {% endif %}
+            <figcaption>
+              <a href="{% url 'inventory:modification' digit.uuid %}" class="digit-caption-link">Edit or Delete Digit</a>
+            </figcaption>
+          </figure>
+          <div class="digit-body">
             <!-- Journal Entries -->
             <div class="journal-container">
               <ol start="" role="list">
@@ -64,22 +65,24 @@
     {% if digit.taxonomic_unit %}
       <section class="section">
         <div class="content narrow">
-          <div class="block-heading">
-            <div class="subtitle blue">Taxonomy<br></div>
-            <h2 class="heading">{{ digit.taxonomic_unit.complete_name }}</h2>
-          </div>
-          <div class="layout-grid grid-taxonomy">
-            <div class="taxonomy">
-              <div class="block-heading-taxonomy">
-                <h5 class="heading-taxonomy">Taxonomy Class</h5><img src="{% static 'main/images/lightning.svg' %}" loading="eager" alt="" class="icon-taxonomy">
-              </div>
-              <p class="paragraph-taxonomy">Taxonomy Class Details</p>
+          <div class="rich-text-block base-rich-text">
+            <div class="block-heading">
+              <div class="subtitle blue">Taxonomy<br></div>
+              <h2 class="heading">{{ digit.taxonomic_unit.complete_name }}</h2>
             </div>
-            <div class="taxonomy">
-              <div class="block-heading-taxonomy">
-                <h5 class="heading-taxonomy">Taxonomy Geographic Division</h5><img src="{% static 'main/images/lightning.svg' %}" loading="eager" alt="" class="icon-taxonomy">
+            <div class="layout-grid grid-taxonomy">
+              <div class="taxonomy">
+                <div class="block-heading-taxonomy">
+                  <h5 class="heading-taxonomy">Taxonomy Class</h5><img src="{% static 'main/images/lightning.svg' %}" loading="eager" alt="" class="icon-taxonomy">
+                </div>
+                <p class="paragraph-taxonomy">Taxonomy Class Details</p>
               </div>
-              <p class="paragraph-taxonomy">Taxonomy Geographic Division Details</p>
+              <div class="taxonomy">
+                <div class="block-heading-taxonomy">
+                  <h5 class="heading-taxonomy">Taxonomy Geographic Division</h5><img src="{% static 'main/images/lightning.svg' %}" loading="eager" alt="" class="icon-taxonomy">
+                </div>
+                <p class="paragraph-taxonomy">Taxonomy Geographic Division Details</p>
+              </div>
             </div>
           </div>
         </div>
@@ -123,8 +126,8 @@
 
     <!-- Journal Entry Form -->
     <section class="section">
-      <div class="content">
-        <div class="layout-grid grid">
+      <div class="content-narrow">
+        <div class="page-body">
           <div class="accordion-item">
             <!-- Clickable header for toggling the form -->
             <div class="accordion-header" onclick="toggleJournalEntry()">
@@ -142,7 +145,7 @@
                     <form method="post" class="form" enctype="multipart/form-data">
                       {% csrf_token %}
                       <div>
-                        <textarea class="text-field w-input" maxlength="1000" name="content" placeholder="Your entry content" id="content" required=""></textarea>
+                        <textarea class="text-field textarea" maxlength="1000" name="content" placeholder="Your entry content" id="content" required=""></textarea>
                           {% if form.content.errors %}
                             <div class="error-message">
                               <small>{{ form.content.errors|striptags }}</small>
@@ -150,7 +153,7 @@
                           {% endif %}
                       </div>
                       <div>
-                        <input type="file" class="text-field w-input" name="image" id="image">
+                        <input type="file" class="text-field file-upload-input" name="image" id="image">
                           {% if form.image.errors %}
                             <div class="error-message">
                               <small>{{ form.image.errors|striptags }}</small>
@@ -158,18 +161,25 @@
                           {% endif %}
                       </div>
                       <div>
-                        <label>
-                          <input type="checkbox" name="watered" id="watered"> Watered
-                        </label>
-                        <label>
-                          <input type="checkbox" name="fertilized" id="fertilized"> Fertilized
-                        </label>
-                        <label>
-                          <input type="checkbox" name="cleaned" id="cleaned"> Cleaned
+                        <label class="checkbox-label">
+                          <input type="checkbox" class="checkbox-input" name="watered" id="id_watered">
+                          Watered
                         </label>
                       </div>
-                      <input type="submit" value="Submit Entry" data-wait="Please wait..." class="submit-button w-button">
-                    </form>
+                      <div>
+                        <label class="checkbox-label">
+                            <input type="checkbox" class="checkbox-input" name="fertilized" id="id_fertilized">
+                          Fertilized
+                        </label>
+                      </div>
+                      <div>
+                        <label class="checkbox-label">
+                            <input type="checkbox" class="checkbox-input" name="cleaned" id="id_cleaned">
+                            Cleaned
+                        </label>
+                      </div>
+                      <input type="submit" value="Submit Entry" data-wait="Please wait..." class="submit-button">
+                    </form>                    
                   </div>
               </div>
             </div>
