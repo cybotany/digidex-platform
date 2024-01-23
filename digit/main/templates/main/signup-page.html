@@ -35,7 +35,68 @@
   </head>
   <body class="body">
     {% include 'main/partials/simple-navigation-bar.html' %}
-    <!-- Signup Section -->
+    <!-- Signup Form Section -->
+    <section class="section-full">
+      <div class="content">
+        <div class="account-form">
+          <div class="subtitle green">Sign up<br></div>
+          <h2 class="account-heading">Get Started</h2>
+          <p class="paragraph-account white">Enter your email to receive updates on the launch of Digit! </p>
+          <div class="form-block base-form">
+            <form method="post" class="form">
+              <form method="post">
+                {% csrf_token %}
+                <div>
+                  <input type="text" class="text-field base-input" maxlength="256" name="username" placeholder="Username" id="username" required="">
+                  {% if form.username.errors %}
+                    <div class="error-message">
+                      <small>{{ form.username.errors|striptags }}</small>
+                    </div>
+                  {% endif %}
+                </div>
+                <div>
+                  <input type="email" class="text-field base-input" maxlength="256" name="email" placeholder="Email" id="email" required="">
+                  {% if form.email.errors %}
+                    <div class="error-message">
+                      <small>{{ form.email.errors|striptags }}</small>
+                    </div>
+                  {% endif %}
+                </div>
+                <div>
+                  <input type="password" class="text-field base-input" maxlength="256" name="password1" placeholder="Password" id="password1" required="">
+                  {% if form.password1.errors %}
+                    <div class="error-message">
+                      <small>{{ form.password1.errors|striptags }}</small>
+                    </div>
+                  {% endif %}
+                </div>
+                <div>
+                  <input type="password" class="text-field base-input" maxlength="256" name="password2" placeholder="Confirm Password" id="password2" required="">
+                  {% if form.password2.errors %}
+                    <div class="error-message">
+                      <small>{{ form.password2.errors|striptags }}</small>
+                    </div>
+                  {% endif %}
+                </div>
+                <input type="submit" value="Sign Up" class="submit-button base-button">
+                {% if form.non_field_errors %}
+                  <div class="error-message base-form-fail">
+                    {% for error in form.non_field_errors %}
+                      <div class="text-error">{{ error }}</div>
+                    {% endfor %}
+                  </div>
+                {% else %}
+                  <div class="success-message base-form-done">
+                    <div class="text-success">Your operation was successful!</div>
+                  </div>
+                {% endif %}
+              </form>              
+            <div class="account-text">Forgot your password? <a href="{% url 'reset_password' %}" class="account-link">Reset password</a></div>
+            <div class="account-text">Not registered? <a href="{% url 'accounts:signup' %}" class="account-link">Create account</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
     {% include 'main/partials/page-footer.html' %}
   </body>
 </html>
