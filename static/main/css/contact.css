@@ -1,0 +1,237 @@
+/****************************************************
+ * Contact Us Page - Base Styles
+ ****************************************************/
+.button {
+  background-color: var(--core-primary-color);
+  color: var(--white);
+  letter-spacing: -.02em;
+  border-radius: 50em;
+  flex-direction: row;
+  padding: .9em 1.8em;
+  font-size: 1.12em;
+  font-weight: 500;
+  line-height: 120%;
+  transition: box-shadow .3s cubic-bezier(.25, .46, .45, .94), background-color .3s cubic-bezier(.25, .46, .45, .94);
+  display: flex;
+}
+
+.button:hover {
+  box-shadow: 0 15px 40px -10px var(--core-primary-color);
+}
+
+.button.yellow {
+  background-color: var(--core-info-color);
+  color: var(--heading);
+}
+
+.button.yellow:hover {
+  box-shadow: 0 15px 40px -10px var(--core-info-color);
+}
+
+.button.dark {
+  background-color: var(--heading);
+}
+
+.button.dark:hover {
+  background-color: var(--core-primary-color);
+}
+
+.base-button {
+  display: inline-block;
+  padding: 9px 15px;
+  background-color: #3898EC;
+  color: var(--white);
+  border: 0;
+  line-height: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+input.base-button {
+  -webkit-appearance: button;
+}
+
+/****************************************************
+ * Contact Us Page - Lottie Section
+ ****************************************************/
+.lottie-wrapper {
+  width: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+  position: relative;
+}
+
+.contact-lottie {
+  z-index: 20;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 6%;
+  padding-bottom: 6%;
+  display: flex;
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}
+
+.contact-lottie-link {
+  min-width: 18em;
+  grid-column-gap: 1.44em;
+  background-color: var(--accent-b1);
+  -webkit-backdrop-filter: blur(30px);
+  backdrop-filter: blur(30px);
+  border-radius: .64em;
+  justify-content: flex-start;
+  align-items: center;
+  margin-right: 28%;
+  padding-top: .87em;
+  padding-bottom: .87em;
+  padding-right: 2em;
+  text-decoration: none;
+  transition: box-shadow .3s cubic-bezier(.25, .46, .45, .94);
+  display: flex;
+}
+
+.contact-lottie-link:hover {
+  box-shadow: inset 0 0 0 2px var(--core-primary-color);
+}
+
+.contact-lottie-link.a2 {
+  margin-right: -33%;
+}
+
+.contact-lottie-link.a3 {
+  margin-right: 16%;
+}
+
+.base-inline-block {
+  max-width: 100%;
+  display: inline-block;
+}
+
+.block-icon-contact-lottie {
+  background-color: var(--white);
+  border-radius: .87em;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: -.94em;
+  padding: 1.1em;
+  display: flex;
+  box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
+}
+
+.icon-contact-lottie {
+  width: 2em;
+  height: 2em;
+}
+
+.block-heading-contact-lottie {
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  display: flex;
+}
+
+.heading-contact-lottie {
+  color: var(--core-primary-color);
+  font-weight: 500;
+}
+
+.text-contact-lottie {
+  max-width: 11em;
+  opacity: .5;
+  color: var(--core-primary-color);
+  letter-spacing: -.02em;
+  font-size: .87em;
+  font-weight: 500;
+  line-height: 130%;
+}
+
+.lines-c1 {
+  z-index: 5;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  padding-left: 22%;
+  padding-right: 22%;
+  display: flex;
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}
+
+.lines-c2 {
+  z-index: 5;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  padding-top: 15%;
+  padding-bottom: 15%;
+  display: flex;
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}
+
+/****************************************************
+ * Contact Us Page - Contact Us Form Section
+ ****************************************************/
+.contact-form {
+  z-index: 50;
+  width: 100%;
+  max-width: 32em;
+  background-color: var(--white);
+  text-align: center;
+  border-radius: .87em;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 3.1em;
+  display: flex;
+  position: relative;
+  box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
+}
+
+.contact-form.blue {
+  background-color: var(--core-primary-color);
+  box-shadow: none;
+}
+
+.heading-contact {
+  max-width: 9em;
+  margin-bottom: .3em;
+}
+
+.heading-contact.white {
+  color: var(--white);
+}
+
+@media screen and (max-width: 479px) {
+  .contact-lottie-link {
+    min-width: 15em;
+    grid-column-gap: 1em;
+    grid-row-gap: 1em;
+    margin-right: 0%;
+    font-size: .9em;
+  }
+
+  .contact-lottie-link.a2, .contact-lottie-link.a3 {
+    margin-right: 0%;
+  }
+
+  .contact {
+    padding: 2em;
+  }
+}

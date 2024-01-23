@@ -1,0 +1,134 @@
+/****************************************************
+ * Utility Pages - Base Styles
+ ****************************************************/
+.body {
+  display: block;
+}
+
+.body-green {
+  background-color: #0d32f5;
+}
+
+.subtitle {
+  background-color: var(--white);
+  color: var(--heading);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  border-radius: .6em;
+  margin-bottom: .7em;
+  padding: .5em 1em;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
+  box-shadow: 0 10px 20px -10px rgba(20, 23, 24, .05);
+}
+
+.subtitle.white {
+  color: var(--white);
+  background-color: rgba(255, 255, 255, .1);
+}
+
+.subtitle.blue {
+  background-color: var(--accent-b1);
+  color: var(--core-primary-color);
+}
+
+.utility-page-wrap {
+  width: 100%;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  padding: 3em 1em;
+  display: flex;
+}
+
+.utility-page-content {
+  width: 100%;
+  max-width: 24em;
+  background-color: var(--white);
+  text-align: center;
+  border-radius: .87em;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0;
+  padding: 3.1em;
+  display: flex;
+  box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
+}
+
+.utility-heading {
+  max-width: 9em;
+  margin-bottom: .3em;
+}
+
+.utility-paragraph {
+  max-width: 23em;
+  margin-bottom: 1.8em;
+}
+
+.utility-page-form {
+  width: 100%;
+  flex-direction: column;
+  align-items: stretch;
+  margin-top: .8em;
+  display: flex;
+}
+
+/****************************************************
+ * HTTP 401 Page
+ ****************************************************/
+.utility-page-wrap.page-401 {
+  padding: 1em 1em;
+}
+
+.utility-page-content.page-401 {
+  padding: 1.1em;
+}
+
+.utility-heading.page-401 {
+  margin-bottom: .9em;
+}
+
+.utility-page-form.page-401 {
+  margin-top: .6em;
+}
+
+/****************************************************
+ * HTTP 404 Page
+ ****************************************************/
+.utility-page-wrap.page-404 {
+  padding: 2em 2em;
+}
+
+.utility-page-content.page-404 {
+  padding: 2.2em;
+}
+
+.utility-heading.page-404 {
+  max-width: 6em;
+}
+
+.utility-paragraph.page-404 {
+  margin-bottom: 2.7em;
+}
+
+/****************************************************
+ * Thank You Page
+ ****************************************************/
+.utility-page-wrap.page-thank-you {
+  padding: 3em 3em;
+}
+
+.utility-page-content.page-thank-you {
+  padding: 3.3em;
+}
+
+.utility-heading.page-thank-you {
+  max-width: 6em;
+  margin-bottom: .9em;
+}
+
+.utility-paragraph.page-thank-you {
+  margin-bottom: .9em;
+}

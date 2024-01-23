@@ -15,17 +15,58 @@
         </div>
       </div>
     </section>
-    <!-- Contact Us Form-->
+    <!-- Contact Us Lottie-->
     <section class="section">
       <div class="content">
-        <div class="account-form">
+        <div class="lottie-wrapper">
+          <div class="contact-lottie">
+            <a href="mailto:support@yoursite.com" class="contact-lottie-link a2 base-inline-block">
+              <div class="block-icon-contact-lottie"><img src="{% static 'main/images/email.svg' %}" loading="eager" alt="" class="icon-contact-lottie"></div>
+              <div class="block-heading-contact-lottie">
+                <h4 class="heading-contact-lottie">Email us</h4>
+                <div class="text-contact-lottie">support@digidex.app</div>
+              </div>
+            </a>
+            <a href="tel:+1(888)123-4567" class="contact-lottie-link a3 base-inline-block">
+              <div class="block-icon-contact-lottie"><img src="{% static 'main/images/phone-voice.svg' %}" loading="eager" alt="" class="icon-contact-lottie"></div>
+              <div class="block-heading-contact-lottie">
+                <h4 class="heading-contact-lottie">Call us</h4>
+                <div class="text-contact-lottie">+1 (347)-376-1166</div>
+              </div>
+            </a>
+          </div>
+          <div class="lottie">
+            <div class="lines-c1">
+              <div style="width:1px;height:0%" class="line-w"></div>
+              <div style="width:1px;height:0%" class="line-w"></div>
+              <div style="width:1px;height:0%" class="line-w"></div>
+            </div>
+            <div class="lines-c2">
+              <div style="width:0%;height:1px" class="line-h"></div>
+              <div style="width:0%;height:1px" class="line-h"></div>
+              <div style="width:0%;height:1px" class="line-h"></div>
+              <div style="width:0%;height:1px" class="line-h"></div>
+              <div style="width:0%;height:1px" class="line-h"></div>
+              <div style="width:0%;height:1px" class="line-h"></div>
+              <div style="width:0%;height:1px" class="line-h"></div>
+              <div style="width:0%;height:1px" class="line-h"></div>
+            </div>
+            <div class="block-lottie">
+              <div class="lottie-animation-1" data-animation-type="lottie" data-src="{% static 'main/documents/Lottie-C1-White.json' %}" data-loop="0" data-direction="1" data-autoplay="0" data-is-ix2-target="1" data-renderer="svg" data-default-duration="2.5" data-duration="0"></div>
+              <div class="lottie-animation-2" data-animation-type="lottie" data-src="{% static 'main/documents/Lottie-C2-Blue.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="12.5" data-duration="0"></div>
+              <div class="lottie-animation-2-blur" data-animation-type="lottie" data-src="{% static 'main/documents/Lottie-C2-Blue.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="12.5" data-duration="0"></div>
+            </div>
+          </div>
+        </div>
+        <!-- Contact Us Form-->
+        <div class="contact">
           <div class="subtitle blue">Contact Us<br></div>
-          <h2 class="heading-account">Wanna Talk More?</h2>
-          <div class="form-block w-form">
-            <form method="post" class="form" action="{% url 'main:thanks' %}">
+          <h2 class="heading-contact">Wanna Talk More?</h2>
+          <div class="form-block base-form">
+            <form method="post" class="contact-form form" action="{% url 'main:thanks' %}">
               {% csrf_token %}
               <div>
-                <input type="text" class="text-field w-input" maxlength="256" name="{{ form.name.name }}" placeholder="Your Name" id="name" required="">
+                <input type="text" class="text-field base-input" maxlength="256" name="{{ form.name.name }}" placeholder="Your Name" id="name" required="">
                   {% if form.name.errors %}
                     <div class="error-message">
                       <small>{{ form.name.errors|striptags }}</small>
@@ -33,7 +74,7 @@
                   {% endif %}
               </div>
               <div>
-                <input type="email" class="text-field w-input" maxlength="256" name="{{ form.email.name }}" placeholder="Email" id="email" required="">
+                <input type="email" class="text-field base-input" maxlength="256" name="{{ form.email.name }}" placeholder="Email" id="email" required="">
                   {% if form.email.errors %}
                     <div class="error-message">
                       <small>{{ form.email.errors|striptags }}</small>
@@ -41,26 +82,25 @@
                   {% endif %}
               </div>
               <div>
-                <textarea class="text-field w-input" maxlength="500" name="{{ form.message.html_name }}" placeholder="Message" id="{{ form.message.id_for_label }}" required=""></textarea>
-                {% if form.message.errors %}
-                  <div class="error-message">
-                    <small>{{ form.message.errors|striptags }}</small>
-                  </div>
-                {% endif %}
+                <textarea class="text-field base-input" maxlength="500" name="{{ form.message.html_name }}" placeholder="Message" id="{{ form.message.id_for_label }}" required=""></textarea>
+                  {% if form.message.errors %}
+                    <div class="error-message">
+                      <small>{{ form.message.errors|striptags }}</small>
+                    </div>
+                  {% endif %}
               </div>
-              <input type="submit" value="Submit" class="submit-button w-button">
-    
+              <input type="submit" value="Submit" class="submit-button base-button">
+        
               {% if form.non_field_errors %}
-                <div class="error-message w-form-fail">
+                <div class="error-message base-form-fail">
                   {% for error in form.non_field_errors %}
                     <div class="text-error">{{ error }}</div>
                   {% endfor %}
                 </div>
               {% endif %}
-    
               {% if messages %}
                 {% for message in messages %}
-                  <div class="w-form-done">
+                  <div class="base-form-done">
                     <div class="text-success">{{ message }}</div>
                   </div>
                 {% endfor %}
@@ -69,7 +109,8 @@
           </div>
         </div>
       </div>
+      </div>
     </section>    
-    {% include 'main/partials/footer.html' %}
+  {% include 'main/partials/footer.html' %}
   </body>
 </html>

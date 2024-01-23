@@ -160,6 +160,58 @@
   width: 76px;
 }
 
+.base-input, .base-select {
+  display: block;
+  width: 100%;
+  height: 38px;
+  padding: 8px 12px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333333;
+  vertical-align: middle;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+}
+
+.base-input:-moz-placeholder, .base-select:-moz-placeholder {
+  color: #999;
+}
+
+.base-input::-moz-placeholder, .base-select::-moz-placeholder {
+  color: #999;
+  opacity: 1;
+}
+
+.base-input::-webkit-input-placeholder, .base-select::-webkit-input-placeholder {
+  color: #999;
+}
+
+.base-input:focus, .base-select:focus {
+  border-color: #3898EC;
+  outline: 0;
+}
+
+.base-input[disabled], .base-select[disabled], .base-input[readonly], .base-select[readonly], fieldset[disabled] .base-input, fieldset[disabled] .base-select {
+  cursor: not-allowed;
+}
+
+.base-input[disabled]:not(.base-input-disabled), .base-select[disabled]:not(.base-input-disabled), .base-input[readonly], .base-select[readonly], fieldset[disabled]:not(.base-input-disabled) .base-input, fieldset[disabled]:not(.base-input-disabled) .base-select {
+  background-color: #eeeeee;
+}
+
+textarea.base-input, textarea.base-select {
+  height: auto;
+}
+
+.base-select {
+  background-color: #f3f3f3;
+}
+
+.base-select[multiple] {
+  height: auto;
+}
+
 .slider {
   position: relative;
   height: 300px;
