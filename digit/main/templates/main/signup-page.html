@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
   <head>  
@@ -12,7 +13,6 @@
     <meta content="summary_large_image" name="twitter:card">
     <meta content="width=device-width, initial-scale=1" name="viewport">
     
-    {% load static %}
     <link href="{% static 'main/css/partials/navigation-bar.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'main/css/partials/page-header.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'accounts/css/signup-page.css' %}" rel="stylesheet" type="text/css">
@@ -34,7 +34,9 @@
     <link href="{% static 'main/images/webclip.png' %}" rel="apple-touch-icon">
   </head>
   <body class="body">
-    {% include 'main/partials/simple-navigation-bar.html' %}
+    <a href="{% url 'main:landing' %}" class="brand-center base-nav-brand">
+      <img src="{% static 'main/images/logo.png' %}" loading="eager" alt="Host Logo" class="logo">
+    </a>
     <!-- Signup Form Section -->
     <section class="section-full">
       <div class="content">

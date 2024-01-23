@@ -47,7 +47,13 @@
           {% endif %}
         </form>
       </div>
-
+      <div>
+        <form method="post" action="{% url 'accounts:delete' %}">
+          {% csrf_token %}
+          <p>Are you sure you want to delete your account? This action cannot be undone.</p>
+          <button type="submit">Delete my account</button>
+        </form>
+      </div>      
     </div>
   </div>
 </section>
