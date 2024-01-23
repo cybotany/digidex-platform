@@ -33,6 +33,15 @@
   color: var(--white);
 }
 
+.account-paragraph {
+  max-width: 23em;
+  margin-bottom: 1.8em;
+}
+
+.account-paragraph.white {
+  color: rgba(255, 255, 255, .8);
+}
+
 .account-text {
   width: 100%;
   max-width: 32em;
@@ -64,4 +73,14 @@
 
 .account-link.white:hover {
   color: var(--white);
+}
+
+@media screen and (max-width: 479px) {
+  .account-form {
+    padding: 2em;
+  }
+
+  .paragraph-account {
+    margin-bottom: 1em;
+  }
 }

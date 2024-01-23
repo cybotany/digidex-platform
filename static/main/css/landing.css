@@ -278,6 +278,15 @@ th {
   box-shadow: 0 15px 40px -10px var(--core-primary-color);
 }
 
+.button.yellow {
+  background-color: var(--core-info-color);
+  color: var(--heading);
+}
+
+.button.yellow:hover {
+  box-shadow: 0 15px 40px -10px var(--core-info-color);
+}
+
 .button.dark {
   background-color: var(--heading);
 }
@@ -641,6 +650,11 @@ input.base-button {
   margin-bottom: .3em;
 }
 
+.paragraph-accordion {
+  max-width: 90%;
+  margin-bottom: 1.6em;
+}
+
 .block-icon-accordion {
   width: 2.12em;
   height: 2.12em;
@@ -674,6 +688,14 @@ input.base-button {
   .paragraph-hero {
     font-size: 1em;
   }
+
+  .block-right {
+    padding-left: 10%;
+  }
+
+  .block-left {
+    padding-right: 10%;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -696,8 +718,32 @@ input.base-button {
     font-size: 1em;
   }
 
+  .section {
+    padding-top: 3em;
+    padding-bottom: 3em;
+  }
+
   .grid-features {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .block-right {
+    padding-left: 0%;
+  }
+
+  .grid {
+    grid-column-gap: 2.5em;
+    grid-row-gap: 2.5em;
+    grid-template-columns: 1fr;
+  }
+
+  .grid-faq, .block-faq {
+    grid-column-gap: .87em;
+    grid-row-gap: .87em;
+  }
+
+  .block-left {
+    padding-right: 0%;
   }
 }
 
@@ -709,6 +755,10 @@ input.base-button {
   .button-hero {
     grid-row-gap: .5em;
     flex-direction: column;
+  }
+
+  .section {
+    padding: 2.5em 1.5em;
   }
   
   .grid-features {
@@ -733,5 +783,9 @@ input.base-button {
 
   .feature-lottie-block.a3 {
     margin-right: 38%;
+  }
+
+  .grid-faq {
+    grid-template-columns: 1fr;
   }
 }

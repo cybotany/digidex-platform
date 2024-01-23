@@ -278,6 +278,15 @@ th {
   box-shadow: 0 15px 40px -10px var(--core-primary-color);
 }
 
+.button.yellow {
+  background-color: var(--core-info-color);
+  color: var(--heading);
+}
+
+.button.yellow:hover {
+  box-shadow: 0 15px 40px -10px var(--core-info-color);
+}
+
 .button.dark {
   background-color: var(--heading);
 }

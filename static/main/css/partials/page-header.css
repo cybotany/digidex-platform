@@ -42,3 +42,33 @@
   font-size: 1.125em;
   line-height: 160%;
 }
+
+
+@media screen and (max-width: 991px) {
+  .section-top {
+    padding-top: 4.5em;
+    padding-bottom: 0;
+  }
+  
+  .paragraph-top {
+    font-size: 1em;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .section-top {
+    padding-top: 3.5em;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .section-top {
+    padding-top: 3em;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+  }
+
+  .paragraph-top {
+    margin-bottom: 1.2em;
+  }
+}

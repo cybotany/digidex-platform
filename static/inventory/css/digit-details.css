@@ -278,6 +278,15 @@ th {
   box-shadow: 0 15px 40px -10px var(--core-primary-color);
 }
 
+.button.yellow {
+  background-color: var(--core-info-color);
+  color: var(--heading);
+}
+
+.button.yellow:hover {
+  box-shadow: 0 15px 40px -10px var(--core-info-color);
+}
+
 .button.dark {
   background-color: var(--heading);
 }
@@ -768,6 +777,11 @@ input.base-button {
     grid-column-gap: .87em;
     grid-row-gap: .87em;
     grid-template-columns: 1fr;
+  }
+
+  .digit-body {
+    padding-top: 2.9em;
+    padding-bottom: 2.9em;
   }
 }
 

@@ -75,6 +75,15 @@ body {
   box-shadow: 0 15px 40px -10px var(--core-primary-color);
 }
 
+.button.yellow {
+  background-color: var(--core-info-color);
+  color: var(--heading);
+}
+
+.button.yellow:hover {
+  box-shadow: 0 15px 40px -10px var(--core-info-color);
+}
+
 .button.dark {
   background-color: var(--heading);
 }
@@ -237,4 +246,88 @@ input.base-button {
 
 .utility-paragraph.page-email-confirmation {
   margin-top: .6em;
+}
+
+@media screen and (max-width: 479px) {
+  h1 {
+    font-size: 2.4em;
+  }
+
+  h2 {
+    font-size: 1.9em;
+  }
+
+  h3 {
+    font-size: 1.6em;
+  }
+
+  h4 {
+    font-size: 1.3em;
+  }
+
+  h5 {
+    font-size: 1.15em;
+  }
+
+  .section-top {
+    padding-top: 3em;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+  }
+
+  .section-top-bar {
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+  }
+
+  .section-full {
+    padding-top: 3em;
+  }
+
+  .paragraph-account {
+    margin-bottom: 1em;
+  }
+
+  .grid-faq {
+    grid-template-columns: 1fr;
+  }
+
+  .top-bar {
+    grid-row-gap: .6em;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .grid-faq {
+    grid-template-columns: 1fr;
+  }
+
+  .paragraph-top {
+    margin-bottom: 1.2em;
+  }
+
+  .text-field {
+    margin-bottom: .9em;
+  }
+
+  .account-form {
+    padding: 2em;
+  }
+
+  .paragraph-account {
+    margin-bottom: 1em;
+  }
+
+  .block-button {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .utility-page-wrap {
+    padding-top: 2em;
+  }
+
+  .utility-page-content, .product-content, .product-sticky {
+    padding: 2em;
+  }
 }
