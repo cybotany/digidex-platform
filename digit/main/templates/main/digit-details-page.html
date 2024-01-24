@@ -42,7 +42,7 @@
           <div class="date-top">Created on: {{ digit.created_at }}</div>
           <h1 class="heading-top">{{ digit.name }}</h1>
           <p class="paragraph-top">{{ digit.description }}</p>
-          <a href="{% url 'inventory:modification' digit.uuid %}" class="digit-caption-link">Edit or Delete Digit</a>
+          <div class="account-text">Need to make an update? <a href="{% url 'inventory:modification' digit.uuid %}" class="account-link">Edit or Delete Digit</a></div>
         </div>
       </div>
     </section>
@@ -63,6 +63,7 @@
               </div>
             {% endif %}
             <figcaption>
+            <div class="account-text">Not registered? <a href="{% url 'accounts:signup' %}" class="account-link">Create account</a></div>
               <p class="base-rich-text-figcaption">Recent image of {{ digit.name }}</p>
             </figcaption>
           </figure>
