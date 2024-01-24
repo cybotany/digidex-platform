@@ -1,6 +1,6 @@
 .section-top-bar {
   background-color: var(--primary-color);
-  color: var(--secondary-color);
+  color: var(--white);
   flex-direction: column;
   justify-content: center;
   align-items: center;

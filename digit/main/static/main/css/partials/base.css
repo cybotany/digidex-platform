@@ -12,10 +12,10 @@
   --accent-b3: rgba(0, 135, 38, .07);
   --primary-color: #00693e;
   --secondary-color: #1db954;
-  --info-color: #2196f3;
   --accent-color: #8ad7a0;
   --neutral-dark: #333;
   --neutral-light: #f2f2f2;
+  --info-color: #2196f3;
   --error-color: #e53935;
   --warning-color: #ffc107;
   --success-color: #4caf50;
@@ -1653,8 +1653,8 @@ input.base-button {
   display: block;
 }
 
-.body-blue {
-  background-color: #0d32f5;
+.body-green {
+  background-color: var(--accent-color);
 }
 
 .section {
@@ -1703,12 +1703,12 @@ input.base-button {
 }
 
 .subtitle.white {
-  color: var(--white);
   background-color: rgba(255, 255, 255, .1);
+  color: var(--white);
 }
 
 .subtitle.green {
-  background-color: var(--accent-b1);
+  background-color: var(--accent-color);
   color: var(--primary-color);
 }
 
@@ -2187,7 +2187,7 @@ input.base-button {
   box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
 }
 
-.account-form.blue {
+.account-form.green {
   background-color: var(--primary-color);
   box-shadow: none;
 }
