@@ -1557,7 +1557,7 @@ input.base-button {
 }
 
 .text-field:focus {
-  border-color: var(--core-primary-color);
+  border-color: var(--primary-color);
 }
 
 .text-field::-ms-input-placeholder {
@@ -1603,7 +1603,7 @@ input.base-button {
 }
 
 .textarea:focus {
-  border-color: var(--core-primary-color);
+  border-color: var(--primary-color);
 }
 
 .textarea::-ms-input-placeholder {

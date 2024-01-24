@@ -40,8 +40,7 @@
             <form method="post" class="form">
               {% csrf_token %}
               <div>
-                <label for="{{ form.name.id_for_label }}">Name</label>
-                <input type="text" class="text-field base-input" maxlength="256" name="name" placeholder="Name" id="name" required="">
+                <input type="text" class="text-field base-input" maxlength="256" name="name" placeholder="Name of the Digit" id="name" required="">
                   {% if form.name.errors %}
                     <div class="error-message">
                       <small>{{ form.name.errors|striptags }}</small>
@@ -49,8 +48,7 @@
                   {% endif %}
               </div>
               <div>
-                <label for="{{ form.description.id_for_label }}">Description</label>
-                <textarea class="textarea-field base-input description-field" name="{{ form.description.name }}" placeholder="Enter description" id="{{ form.description.id_for_label }}" {% if form.description.is_required %}required=""{% endif %}>{{ form.description.value }}</textarea>
+                <textarea class="text-field textarea" name="{{ form.description.name }}" placeholder="Enter description" id="{{ form.description.id_for_label }}" {% if form.description.is_required %}required=""{% endif %}>{{ form.description.value }}</textarea>
                 {% if form.description.errors %}
                   <div class="error-message">
                     <small>{{ form.description.errors|striptags }}</small>
@@ -58,7 +56,6 @@
                 {% endif %}
               </div>
               <div>
-                <label for="{{ form.taxonomic_unit.id_for_label }}">Taxonomic Unit</label>
                 <div class="select-container">
                   <div class="select-container">
                     <select class="base-input" name="{{ field.name }}" id="{{ field.id_for_label }}" {% if field.is_required %}required=""{% endif %}></select>
