@@ -490,6 +490,44 @@ input.base-button {
   list-style: none;
 }
 
+.form-block {
+  width: 100%;
+  margin-top: .4em;
+  margin-bottom: 0;
+}
+
+.base-form {
+  margin: 0 0 15px;
+}
+
+.base-form-done {
+  display: none;
+  padding: 20px;
+  text-align: center;
+  background-color: #dddddd;
+}
+
+.base-form-fail {
+  display: none;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #ffdede;
+}
+
+.base-form-label {
+  display: inline-block;
+  cursor: pointer;
+  font-weight: normal;
+  margin-bottom: 0px;
+}
+
+.form {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  display: flex;
+}
+
 @media screen and (max-width: 991px) {
   .base-nav[data-collapse="medium"] .base-nav-menu {
     display: none;
