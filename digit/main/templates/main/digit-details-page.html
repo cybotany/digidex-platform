@@ -124,6 +124,15 @@
     <section class="section">
       <div class="'content narrow">
         <div class="layout-grid grid-care">
+          <div class="care"> 
+            <div class="block-icon-care"><img src="{% static 'main/images/food.svg' %}" loading="eager" alt="" class="icon-care"></div>
+            <h4 class="heading-care">Fertilizing</h4>
+            {% if last_fertilizing_date %}
+              <p class="paragraph-care">Last Fertilized: {{ last_fertilizing_date|date:"Y-m-d" }} ({{ days_since_last_fertilizing }} days ago)</p>
+            {% else %}
+              <p class="paragraph-care">No fertilizing entries recorded.</p>
+            {% endif %}
+          </div>  
           <div class="care red">
             <div class="block-icon-care red"><img src="{% static 'main/images/clean.svg' %}" loading="eager" alt="" class="icon-care"></div>
             <h4 class="heading-care red">Cleaning</h4>
@@ -141,16 +150,7 @@
             {% else %}
               <p class="paragraph-care blue">No watering entries recorded.</p>
             {% endif %}
-          </div>
-          <div class="care green"> 
-            <div class="block-icon-care green"><img src="{% static 'main/images/food.svg' %}" loading="eager" alt="" class="icon-care"></div>
-            <h4 class="heading-care green">Fertilizing</h4>
-            {% if last_fertilizing_date %}
-              <p class="paragraph-care green">Last Fertilized: {{ last_fertilizing_date|date:"Y-m-d" }} ({{ days_since_last_fertilizing }} days ago)</p>
-            {% else %}
-              <p class="paragraph-care green">No fertilizing entries recorded.</p>
-            {% endif %}
-          </div>   
+          </div> 
         </div>
       </div>
     </section>
