@@ -93,7 +93,7 @@
           <div class="subtitle green">Contact Us<br></div>
           <h2 class="heading-contact">Wanna Talk More?</h2>
           <div class="form-block base-form">
-            <form method="post" class="contact-form form" action="{% url 'main:thanks' %}">
+            <form method="post" class="contact-form form" action="{% url 'main:contact' %}">
               {% csrf_token %}
               <div>
                 <input type="text" class="text-field base-input" maxlength="256" name="{{ form.name.name }}" placeholder="Your Name" id="name" required="">
