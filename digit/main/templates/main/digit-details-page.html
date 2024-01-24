@@ -41,8 +41,7 @@
         <div class="block-top">
           <h1 class="heading-top">{{ digit.name }}</h1>
           <p class="paragraph-top">{{ digit.description }}</p>
-          <div class="date-top">Created on: {{ digit.created_at }}</div>
-          <div class="date-top">Last modified: {{ digit.last_modified }}</div>
+          <div class="date-top">Created: {{ digit.created_at }}</div>
           <div class="account-text">Need to make an update? <a href="{% url 'inventory:modification' digit.uuid %}" class="account-link">Edit or Delete Digit</a></div>
         </div>
       </div>
