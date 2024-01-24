@@ -2,17 +2,15 @@
 <section class="section-footer">
   <div class="content">
     <div class="base-layout-grid grid-footer">
-      <div class="block-footer">
-        <img src="{% static 'main/images/logo.png' %}" loading="lazy" sizes="88px" srcset="{% static 'main/images/logo-p-500.png' %} 500w, {% static 'main/images/logo-p-800.png' %} 800w, {% static 'main/images/logo.png' %} 1024w" alt="" class="logo-footer">
-      </div>
+      <div class="block-footer"><img src="{% static 'main/images/logo.png' %}" loading="lazy" sizes="88px" srcset="{% static 'main/images/logo-p-500.png' %} 500w, {% static 'main/images/logo-p-800.png' %} 800w, {% static 'main/images/logo.png' %} 1024w" alt="" class="logo-footer"></div>
       <div class="block-footer">
         <div class="subtitle-footer">Quick Links<br></div>
-        <a href="{% url 'main:company' %}" class="link-footer">Company</a>
-        <a href="{% url 'main:contact' %}" class="link-footer">Contact</a>
+          <a href="{% url 'main:company' %}" class="link-footer">Company</a>
+          <a href="{% url 'main:contact' %}" class="link-footer">Contact</a>
       </div>
     </div>
-  </div>
-  <div class="block-footer-down">
-    <div class="text-footer-down">All rights reserved. Powered by<a href="https://webflow.com/" target="_blank" class="link-footer-down">Webflow</a><br></div>
+    <div class="block-footer-down">
+      <div class="text-footer-down">All rights reserved. Powered by <a href="https://webflow.com/" target="_blank" class="link-footer-down">Webflow</a><br></div>
+    </div>
   </div>
 </section>
