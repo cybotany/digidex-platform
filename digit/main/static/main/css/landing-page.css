@@ -121,7 +121,7 @@
 }
 
 .text-feature-lottie {
-  color: var(--core-primary-color);
+  color: var(--primary-color);
   letter-spacing: -.02em;
   font-size: 1em;
   font-weight: 500;

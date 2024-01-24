@@ -45,15 +45,15 @@
 }
 
 .block-icon-about.red {
-  background-color: var(--core-primary-color);
+  background-color: var(--primary-color);
 }
 
 .block-icon-about.blue {
-  background-color: var(--core-primary-color);
+  background-color: var(--primary-color);
 }
 
 .block-icon-about.green {
-  background-color: var(--core-primary-color);
+  background-color: var(--primary-color);
 }
 
 .icon-about {
@@ -62,27 +62,27 @@
 }
 
 .heading-about.red{
-  color: var(--core-primary-color);
+  color: var(--primary-color);
 }
 
 .heading-about.blue{
-  color: var(--core-primary-color);
+  color: var(--primary-color);
 }
 
 .heading-about.green{
-  color: var(--core-primary-color);
+  color: var(--primary-color);
 }
 
 .paragraph-about.red {
-  color: var(--core-primary-color);
+  color: var(--primary-color);
 }
 
 .paragraph-about.blue {
-  color: var(--core-primary-color);
+  color: var(--primary-color);
 }
 
 .paragraph-about.green {
-  color: var(--core-primary-color);
+  color: var(--primary-color);
 }
 
 /****************************************************
