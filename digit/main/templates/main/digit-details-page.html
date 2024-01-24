@@ -39,9 +39,10 @@
     <section class="section-top padding-0">
       <div class="content">
         <div class="block-top">
-          <div class="date-top">{{ digit.created_at }}</div>
+          <div class="date-top">Created on: {{ digit.created_at }}</div>
           <h1 class="heading-top">{{ digit.name }}</h1>
           <p class="paragraph-top">{{ digit.description }}</p>
+          <a href="{% url 'inventory:modification' digit.uuid %}" class="digit-caption-link">Edit or Delete Digit</a>
         </div>
       </div>
     </section>
@@ -62,7 +63,7 @@
               </div>
             {% endif %}
             <figcaption>
-              <a href="{% url 'inventory:modification' digit.uuid %}" class="digit-caption-link">Edit or Delete Digit</a>
+              <p class="base-rich-text-figcaption">Recent image of {{ digit.name }}</p>
             </figcaption>
           </figure>
           <div class="digit-body">
