@@ -1,7 +1,27 @@
 /***********************************************************************************************
- *  Login Page - Misc. Styles
+ *  DigiDex App - Base Styles
  **********************************************************************************************/ 
- html {
+:root {
+  --white: white;
+  --background: #f4f6f7;
+  --heading: #141718;
+  --paragraph: rgba(20, 23, 24, .8);
+  --border: rgba(15, 100, 146, .2);
+  --accent-b1: rgba(188, 0, 135, .07);
+  --accent-b2: rgba(57, 89, 255, .07);
+  --accent-b3: rgba(0, 135, 38, .07);
+  --core-primary-color: #00693e;
+  --core-secondary-color: #1db954;
+  --core-info-color: #2196f3;
+  --core-accent-color: #8ad7a0;
+  --core-neutral-dark: #333;
+  --core-neutral-light: #f2f2f2;
+  --core-error-color: #e53935;
+  --core-warning-color: #ffc107;
+  --core-success-color: #4caf50;
+}
+
+html {
   height: 100%;
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -535,6 +555,188 @@ input.base-button {
   color: var(--heading);
 }
 
+.rich-text-block p {
+  margin-bottom: 1.4em;
+}
+  
+.rich-text-block h1 {
+  margin-bottom: .4em;
+}
+  
+.rich-text-block h2, .rich-text-block h3, .rich-text-block h4, .rich-text-block h5, .rich-text-block h6 {
+  margin-top: 1em;
+  margin-bottom: .4em;
+}
+  
+.rich-text-block a {
+  border-bottom: 1px solid var(--core-primary-color);
+  color: var(--core-primary-color);
+  text-decoration: none;
+  transition: border-color .3s cubic-bezier(.25, .46, .45, .94), color .3s cubic-bezier(.25, .46, .45, .94);
+}
+  
+.rich-text-block a:hover {
+  border-bottom-color: var(--heading);
+  color: var(--heading);
+}
+
+.base-rich-text:before,
+.base-rich-text:after {
+  content: " ";
+  display: table;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  grid-column-end: 2;
+  grid-row-end: 2;
+}
+
+.base-rich-text:after {
+  clear: both;
+}
+
+.base-rich-text ol,
+.base-rich-text ul {
+  overflow: hidden;
+}
+
+.base-rich-text figure {
+  position: relative;
+  max-width: 60%;
+}
+
+.base-rich-text figure div {
+  font-size: 0px;
+  color: transparent;
+}
+
+.base-rich-text figure > div:before {
+  cursor: default!important;
+}
+
+.base-rich-text figure img {
+  width: 100%;
+}
+
+.base-rich-text figure figcaption.base-rich-text-figcaption-placeholder {
+  opacity: 0.6;
+}
+
+.base-rich-text-figure-type-image {
+  margin-bottom: 1.5em;
+}
+
+.base-rich-text-align-fullwidth {
+  text-align: center;
+}
+
+.base-rich-text figure.base-rich-text-align-normal {
+  clear: both;
+}
+
+.base-rich-text figure.base-rich-text-align-fullwidth {
+  width: 100%;
+  max-width: 100%;
+  text-align: center;
+  clear: both;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.base-rich-text figure.base-rich-text-align-fullwidth > div {
+  display: inline-block;
+  padding-bottom: inherit;
+}
+
+.base-rich-text figure.base-rich-text-align-fullwidth > figcaption {
+  display: block;
+}
+
+.base-rich-text figure.base-rich-text-align-floatleft {
+  float: left;
+  margin-right: 15px;
+  clear: none;
+}
+
+.base-rich-text figure.base-rich-text-align-floatright {
+  float: right;
+  margin-left: 15px;
+  clear: none;
+}
+
+.base-rich-text[contenteditable="true"]:before,
+.base-rich-text[contenteditable="true"]:after {
+  white-space: initial;
+}
+
+.base-rich-text .base-rich-text-figure-selected.base-rich-text-figure-type-video div:after,
+.base-rich-text .base-rich-text-figure-selected[data-rt-type="video"] div:after {
+  outline: 2px solid #2895f7;
+}
+
+.base-rich-text .base-rich-text-figure-selected.base-rich-text-figure-type-image div,
+.base-rich-text .base-rich-text-figure-selected[data-rt-type="image"] div {
+  outline: 2px solid #2895f7;
+}
+
+.base-rich-text figure.base-rich-text-figure-type-video > div:after,
+.base-rich-text figure[data-rt-type="video"] > div:after {
+  content: '';
+  position: absolute;
+  display: none;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.base-rich-text figure.base-rich-text-figure-type-image,
+.base-rich-text figure[data-rt-type="image"] {
+  display: table;
+}
+
+.base-rich-text figure.base-rich-text-figure-type-image > div,
+.base-rich-text figure[data-rt-type="image"] > div {
+  display: inline-block;
+}
+
+.base-rich-text figure.base-rich-text-figure-type-image > figcaption,
+.base-rich-text figure[data-rt-type="image"] > figcaption {
+  display: table-caption;
+  caption-side: bottom;
+}
+
+.base-rich-text figure.base-rich-text-figure-type-video,
+.base-rich-text figure[data-rt-type="video"] {
+  width: 60%;
+  height: 0;
+}
+
+.base-rich-text figure.base-rich-text-figure-type-video iframe,
+.base-rich-text figure[data-rt-type="video"] iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.base-rich-text figure.base-rich-text-figure-type-video > div,
+.base-rich-text figure[data-rt-type="video"] > div {
+  width: 100%;
+}
+
+.base-rich-text figure.base-rich-text-align-center {
+  margin-right: auto;
+  margin-left: auto;
+  clear: both;
+}
+
+.base-rich-text figure.base-rich-text-align-center.base-rich-text-figure-type-image > div,
+.base-rich-text figure.base-rich-text-align-center[data-rt-type="image"] > div {
+  max-width: 100%;
+}
+
 .base-ix-emptyfix:after {
   content: "";
 }
@@ -576,34 +778,9 @@ input.base-button {
   background-image: linear-gradient(to right, rgba(15, 100, 146, 0), var(--border) 10%, var(--border) 90%, rgba(15, 100, 146, 0));
 }
 
-.lottie-animation-1 {
-  width: 100%;
-}
-
-.lottie-animation-2 {
-  z-index: 10;
-  width: 100%;
-  position: absolute;
-  top: 0%;
-  bottom: 0%;
-  left: 0%;
-  right: 0%;
-}
-
-.lottie-animation-2-blur {
-  z-index: 5;
-  width: 100%;
-  filter: blur(50px);
-  position: absolute;
-  top: 0%;
-  bottom: 0%;
-  left: 0%;
-  right: 0%;
-}
-
-/*******************************
- * Login Page - Account Form
- *******************************/
+/****************************************************
+ * Account Form Styles
+ ****************************************************/
 .account-form {
   z-index: 50;
   width: 100%;
@@ -678,12 +855,159 @@ input.base-button {
   color: var(--white);
 }
 
+/****************************************************
+ * Call To Action Styles
+ ****************************************************/
+ .grid-banner {
+  grid-column-gap: 0em;
+  grid-row-gap: 0em;
+  background-color: var(--core-primary-color);
+  border-radius: .87em;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.block-banner {
+  z-index: 50;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2em;
+  display: flex;
+  position: relative;
+}
+
+.heading.banner {
+  color: var(--white);
+  text-align: center;
+  align-self: auto;
+  margin-bottom: .7em;
+}
+
+/****************************************************
+ * Digit Creation/Modification select2 Styles
+ ****************************************************/
+.select2-container--default .select2-selection--single {
+  height: 38px;
+  padding: 8px 12px;
+  border: 1px solid #cccccc;
+  border-radius: 0;
+  background-color: #ffffff;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333333;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  line-height: 22px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 36px;
+}
+
+.select2-container--default .select2-results__option {
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333333;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background-color: #eeeeee;
+}
+
+@media screen and (max-width: 991px) {
+  h1 {
+    font-size: 3.5em;
+  }
+
+  h2 {
+    font-size: 2.7em;
+  }
+
+  h3 {
+    font-size: 2em;
+  }
+
+  h4 {
+    font-size: 1.6em;
+  }
+
+  h5 {
+    font-size: 1.25em;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  h1 {
+    font-size: 3em;
+  }
+
+  h2 {
+    font-size: 2.3em;
+  }
+
+  h3 {
+    font-size: 1.8em;
+  }
+
+  h4 {
+    font-size: 1.4em;
+  }
+
+  h5 {
+    font-size: 1.2em;
+  }
+
+  .grid-banner {
+    grid-template-columns: 1fr;
+  }
+
+  .block-banner {
+    padding: 4em 10%;
+  }
+
+  .lottie-banner {
+    position: relative;
+    top: 0%;
+  }
+}
+
 @media screen and (max-width: 479px) {
+  h1 {
+    font-size: 2.4em;
+  }
+
+  h2 {
+    font-size: 1.9em;
+  }
+
+  h3 {
+    font-size: 1.6em;
+  }
+
+  h4 {
+    font-size: 1.3em;
+  }
+
+  h5 {
+    font-size: 1.15em;
+  }
+
   .account-form {
     padding: 2em;
   }
 
   .paragraph-account {
     margin-bottom: 1em;
+  }
+
+  .block-banner {
+    padding-top: 2.5em;
+    padding-bottom: 2.5em;
   }
 }
