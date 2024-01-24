@@ -1,39 +1,35 @@
 {% load static %}
 <div role="banner" class="navbar base-nav">
   <div class="nav-block">
-    <a href="{% url 'main:landing' %}" aria-current="page" class="brand base-nav-brand">
-      <img src="{% static 'main/images/logo.png' %}" loading="lazy" sizes="88px" srcset="{% static 'main/images/logo-p-500.png' %} 500w, {% static 'main/images/logo-p-800.png' %} 800w, {% static 'main/images/logo.png' %} 1024w" alt="" class="logo">
-    </a>
     <div class="nav">
+      <a href="{% url 'main:landing' %}" aria-current="page" class="brand base-nav-brand">
+        <img src="{% static 'main/images/logo.png' %}" loading="lazy" sizes="88px" srcset="{% static 'main/images/logo-p-500.png' %} 500w, {% static 'main/images/logo-p-800.png' %} 800w, {% static 'main/images/logo.png' %} 1024w" alt="" class="logo">
+      </a>
       <nav role="navigation" class="nav-menu base-nav-menu">
-        {% if request.user.is_authenticated %}
-          <div class="button-mobile">
+        <div class="button-mobile">
+          {% if request.user.is_authenticated %}
             <a href="{% url 'accounts:profile' %}" class="nav-button-outline base-button">{{ request.user.username }}</a>
             <a href="{% url 'inventory:storage' %}" class="nav-button-outline base-button">Inventory</a>
             <a href="{% url 'accounts:logout' %}" class="nav-button base-button">Logout</a>
-          </div>
-        {% else %}
-          <div class="button-mobile">
+          {% else %}
             <a href="{% url 'accounts:login' %}" class="nav-button-outline base-button">Login</a>
             <a href="{% url 'accounts:signup' %}" class="nav-button base-button">Signup</a>
-          </div>
-        {% endif %}
+          {% endif %}
+        </div>
       </nav>
     </div>
     <div class="nav">
       <nav role="navigation" class="nav-menu base-nav-menu">
-        {% if request.user.is_authenticated %}
-          <div class="button-desktop">
+        <div class="button-desktop">
+          {% if request.user.is_authenticated %}
             <a href="{% url 'accounts:profile' %}" class="nav-button-outline base-button">{{ request.user.username }}</a>
             <a href="{% url 'inventory:storage' %}" class="nav-button-outline base-button">Inventory</a>
             <a href="{% url 'accounts:logout' %}" class="nav-button base-button">Logout</a>
-          </div>
-        {% else %}
-          <div class="button-desktop">
+          {% else %}
             <a href="{% url 'accounts:login' %}" class="nav-button-outline base-button">Login</a>
             <a href="{% url 'accounts:signup' %}" class="nav-button base-button">Signup</a>
-          </div>
-        {% endif %}
+          {% endif %}
+        </div>
       </nav>
       <div class="menu-button base-nav-button">
         <div class="icon-menu base-icon-nav-menu"></div>
