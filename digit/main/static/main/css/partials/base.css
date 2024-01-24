@@ -2316,7 +2316,10 @@ input.base-button {
   background-color: #eeeeee;
 }
 
-.section-footer {
+/****************************************************
+ * Page Footer Styles
+ ****************************************************/
+ .section-footer {
   justify-content: center;
   align-items: center;
   margin-top: auto;
@@ -2324,10 +2327,7 @@ input.base-button {
   display: flex;
 }
 
-/****************************************************
- * Page Footer Styles
- ****************************************************/
-.grid-footer {
+ .grid-footer {
   grid-column-gap: 1.4em;
   grid-row-gap: 0em;
   grid-template: "Area"

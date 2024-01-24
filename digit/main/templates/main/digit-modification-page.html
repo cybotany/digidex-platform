@@ -14,8 +14,6 @@
     <meta content="width=device-width, initial-scale=1" name="viewport">
 
     <link href="{% static 'main/css/partials/base.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'main/css/digit-modification-page.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'main/css/partials/page-footer.css' %}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
     
@@ -41,32 +39,29 @@
           <div id="digitForm" class="form-block base-form">
             <form method="post" class="form">
               {% csrf_token %}
-              <!-- Handling the name field -->
-              <div class="form-group">
+              <div>
                 <label for="{{ form.name.id_for_label }}">Name</label>
-                <input type="text" class="text-field w-input name-field" name="{{ form.name.name }}" placeholder="Enter name" id="{{ form.name.id_for_label }}" {% if form.name.is_required %}required=""{% endif %} value="{{ form.name.value }}">
-                {% if form.name.errors %}
-                  <div class="error-message">
-                    <small>{{ form.name.errors|striptags }}</small>
-                  </div>
-                {% endif %}
+                <input type="text" class="text-field base-input" maxlength="256" name="name" placeholder="Name" id="name" required="">
+                  {% if form.name.errors %}
+                    <div class="error-message">
+                      <small>{{ form.name.errors|striptags }}</small>
+                    </div>
+                  {% endif %}
               </div>
-              <!-- Handling the description field -->
-              <div class="form-group">
+              <div>
                 <label for="{{ form.description.id_for_label }}">Description</label>
-                <textarea class="textarea-field w-input description-field" name="{{ form.description.name }}" placeholder="Enter description" id="{{ form.description.id_for_label }}" {% if form.description.is_required %}required=""{% endif %}>{{ form.description.value }}</textarea>
+                <textarea class="textarea-field base-input description-field" name="{{ form.description.name }}" placeholder="Enter description" id="{{ form.description.id_for_label }}" {% if form.description.is_required %}required=""{% endif %}>{{ form.description.value }}</textarea>
                 {% if form.description.errors %}
                   <div class="error-message">
                     <small>{{ form.description.errors|striptags }}</small>
                   </div>
                 {% endif %}
               </div>
-              <!-- Handling the taxonomic_unit field -->
-              <div class="form-group">
+              <div>
                 <label for="{{ form.taxonomic_unit.id_for_label }}">Taxonomic Unit</label>
                 <div class="select-container">
                   <div class="select-container">
-                    <select class="w-input" name="{{ field.name }}" id="{{ field.id_for_label }}" {% if field.is_required %}required=""{% endif %}></select>
+                    <select class="base-input" name="{{ field.name }}" id="{{ field.id_for_label }}" {% if field.is_required %}required=""{% endif %}></select>
                   </div>     
                 </div>
                 {% if form.taxonomic_unit.errors %}
@@ -75,7 +70,7 @@
                     </div>
                 {% endif %}
               </div>
-              <input type="submit" value="Submit Digit Updates" data-wait="Please wait..." class="submit-button w-button">
+              <input type="submit" value="Submit Digit Updates" data-wait="Please wait..." class="submit-button base-button">
             </form>
           </div>
         </div>
@@ -101,7 +96,6 @@
         </div>
       </div>
     </section>
-    {% include 'main/partials/page-footer.html' %}
     <script src="{% static 'inventory/js/get-tsn.js' %}"></script>
   </body>
 </html>
