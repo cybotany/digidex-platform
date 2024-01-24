@@ -43,8 +43,8 @@
           <p class="paragraph-top">{{ digit.description }}</p>
           <div class="date-top">Created: {{ digit.created_at }}</div>
         </div>
+        <div class="account-text">Need to make an update? <a href="{% url 'inventory:modification' digit.uuid %}" class="account-link">Edit or Delete Digit</a></div>
       </div>
-      <div class="account-text">Need to make an update? <a href="{% url 'inventory:modification' digit.uuid %}" class="account-link">Edit or Delete Digit</a></div>
     </section>
 
     <!-- Digit Detail Page - Detail Section -->
