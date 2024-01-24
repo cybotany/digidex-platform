@@ -40,7 +40,7 @@
             <form method="post" class="form">
               {% csrf_token %}
               <div>
-                <input type="text" class="text-field base-input" maxlength="256" name="name" placeholder="Name of the Digit" id="name" required="">
+                <input type="text" class="text-field base-input" maxlength="256" name="name" placeholder="Enter name id="name" required="">
                   {% if form.name.errors %}
                     <div class="error-message">
                       <small>{{ form.name.errors|striptags }}</small>
@@ -48,7 +48,7 @@
                   {% endif %}
               </div>
               <div>
-                <textarea class="text-field textarea" name="{{ form.description.name }}" placeholder="Enter description" id="{{ form.description.id_for_label }}" {% if form.description.is_required %}required=""{% endif %}>{{ form.description.value }}</textarea>
+                <textarea class="text-field textarea" name="{{ form.description.name }}" placeholder="Enter description" id="{{ form.description.id_for_label }}" {% if form.description.is_required %}required=""{% endif %}></textarea>
                 {% if form.description.errors %}
                   <div class="error-message">
                     <small>{{ form.description.errors|striptags }}</small>
