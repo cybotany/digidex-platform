@@ -262,17 +262,9 @@
     grid-row-gap: 1.13em;
     grid-template-columns: 1fr 1fr;
   }
-
-  .page-body {
-    padding: 4em 10%;
-  }
 }
 
 @media screen and (max-width: 767px) {
-  .grid-features {
-    grid-template-columns: 1fr 1fr;
-  }
-
   .grid-care {
     grid-column-gap: .87em;
     grid-row-gap: .87em;
@@ -293,10 +285,5 @@
 
   .care {
     padding: 2em;
-  }
-
-  .page-body {
-    padding-top: 2em;
-    padding-bottom: 2em;
   }
 }
