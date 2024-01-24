@@ -5,16 +5,16 @@
   --white: white;
   --background: #f4f6f7;
   --heading: #141718;
-  --paragraph: #434546;
-  --border: #cfe0e9;
+  --paragraph: rgba(20, 23, 24, .8);
+  --border: rgba(15, 100, 146, .2);
 
-  --accent-red: #bc0087;
-  --accent-blue: #3959ff;
-  --accent-green: #008726;
+  --accent-red: rgba(188, 0, 135, .07); /* #bc0087 */
+  --accent-blue: rgba(57, 89, 255, .07); /* #3959ff */
+  --accent-green: rgba(0, 135, 38, .07); /* #008726 */
 
-  --strong-red: #9a006b;
-  --strong-blue: #2c47cc;
-  --strong-green: #00691d;
+  --strong-red: rgb(204, 0, 127); /* #cc007f */
+  --strong-blue: rgb(91, 110, 255); /* #5b6eff */
+  --strong-green: rgb(0, 167, 74); /* #00a74a */
 
   --primary-color: #00693e;
   --secondary-color: #1db954;
