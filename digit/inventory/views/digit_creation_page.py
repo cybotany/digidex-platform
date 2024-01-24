@@ -10,7 +10,7 @@ from digit.accounts.models import Activity
 class DigitCreationView(CreateView):
     model = Digit
     form_class = DigitForm
-    template_name = 'main/digit-creation.html'
+    template_name = 'main/digit-creation-page.html'
 
     def get_form_kwargs(self):
         kwargs = super(DigitCreationView, self).get_form_kwargs()

@@ -10,7 +10,7 @@ from digit.accounts.models import Activity
 class DigitModificationView(UpdateView):
     model = Digit
     form_class = DigitForm
-    template_name = 'main/digit-modification.html'
+    template_name = 'main/digit-modification-page.html'
 
     def get_object(self, queryset=None):
         digit_uuid = self.kwargs.get('uuid')

@@ -15,7 +15,7 @@ from digit.utils.constants import MAX_DIGIT_THUMBNAIL_DIMMENSIONS
 
 class DigitDetailsView(LoginRequiredMixin, DetailView):
     model = Digit
-    template_name = 'main/digit-details.html'
+    template_name = 'main/digit-details-page.html'
 
     def get_object(self, queryset=None):
         uuid = self.kwargs.get('uuid')
