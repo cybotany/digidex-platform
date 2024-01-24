@@ -65,20 +65,20 @@
   color: var(--strong-red);
 }
 
+.paragraph-about.red {
+  color: var(--strong-red);
+}
+
 .heading-about.blue{
+  color: var(--strong-blue);
+}
+
+.paragraph-about.blue {
   color: var(--strong-blue);
 }
 
 .heading-about.green{
   color: var(--strong-green);
-}
-
-.paragraph-about.red {
-  color: var(--strong-red);
-}
-
-.paragraph-about.blue {
-  color: var(--strong-blue);
 }
 
 .paragraph-about.green {
