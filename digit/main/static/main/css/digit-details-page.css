@@ -129,11 +129,11 @@
 }
 
 .block-icon-care.red {
-  background-color: var(--primary-color);
+  background-color: var(--error-color);
 }
 
 .block-icon-care.blue {
-  background-color: var(--primary-color);
+  background-color: var(--info-color);
 }
 
 .block-icon-care.green {
@@ -146,11 +146,11 @@
 }
 
 .heading-care.red{
-  color: var(--primary-color);
+  color: var(--error-color);
 }
 
 .heading-care.blue{
-  color: var(--primary-color);
+  color: var(--info-color);
 }
 
 .heading-care.green{
@@ -158,11 +158,11 @@
 }
 
 .paragraph-care.red {
-  color: var(--primary-color);
+  color: var(--error-color);
 }
 
 .paragraph-care.blue {
-  color: var(--primary-color);
+  color: var(--info-color);
 }
 
 .paragraph-care.green {

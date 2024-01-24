@@ -45,11 +45,11 @@
 }
 
 .block-icon-about.red {
-  background-color: var(--primary-color);
+  background-color: var(--error-color);
 }
 
 .block-icon-about.blue {
-  background-color: var(--primary-color);
+  background-color: var(--info-color);
 }
 
 .block-icon-about.green {
@@ -62,11 +62,11 @@
 }
 
 .heading-about.red{
-  color: var(--primary-color);
+  color: var(--error-color);
 }
 
 .heading-about.blue{
-  color: var(--primary-color);
+  color: var(--info-color);
 }
 
 .heading-about.green{
@@ -74,11 +74,11 @@
 }
 
 .paragraph-about.red {
-  color: var(--primary-color);
+  color: var(--error-color);
 }
 
 .paragraph-about.blue {
-  color: var(--primary-color);
+  color: var(--info-color);
 }
 
 .paragraph-about.green {
