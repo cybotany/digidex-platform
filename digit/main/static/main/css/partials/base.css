@@ -970,24 +970,6 @@ input.base-button {
   display: flex;
 }
 
-.brand {
-  flex: none;
-  margin-right: .5em;
-  padding: .5em .3em;
-}
-
-.brand-center {
-  flex: none;
-  margin-top: 1.2em;
-  margin-left: auto;
-  margin-right: auto;
-  padding: .5em .3em;
-}
-
-.logo {
-  height: 5.5em;
-}
-
 .nav {
   grid-column-gap: .5em;
   justify-content: center;
@@ -1101,6 +1083,32 @@ input.base-button {
 /****************************************************
  * Account Form Styles
  ****************************************************/
+.section-full {
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  padding: 3.75em 2em;
+  display: flex;
+}
+
+.brand {
+  flex: none;
+  margin-right: .5em;
+  padding: .5em .3em;
+}
+
+.brand-center {
+  flex: none;
+  margin-top: 1.2em;
+  margin-left: auto;
+  margin-right: auto;
+  padding: .5em .3em;
+}
+
+.logo {
+  height: 5.5em;
+}
+
 .account-form {
   z-index: 50;
   width: 100%;
