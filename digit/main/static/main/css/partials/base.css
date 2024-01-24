@@ -1695,6 +1695,21 @@ input.base-button {
   align-items: center;
 }
 
+.heading {
+  max-width: 9em;
+  align-self: center;
+  margin-bottom: .5em;
+}
+
+.heading.large {
+  max-width: 13em;
+}
+
+.paragraph {
+  max-width: 30em;
+  margin-bottom: 2.2em;
+}
+
 .subtitle {
   background-color: var(--white);
   color: var(--heading);
@@ -1729,21 +1744,6 @@ input.base-button {
   font-size: .7em;
   font-weight: 500;
   line-height: 130%;
-}
-
-.heading {
-  max-width: 9em;
-  align-self: center;
-  margin-bottom: .5em;
-}
-
-.heading.large {
-  max-width: 13em;
-}
-
-.paragraph {
-  max-width: 30em;
-  margin-bottom: 2.2em;
 }
 
 .button {
