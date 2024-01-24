@@ -14,7 +14,6 @@
     <meta content="width=device-width, initial-scale=1" name="viewport">
 
     <link href="{% static 'main/css/partials/base.css' %}" rel="stylesheet" type="text/css">    
-    <link href="{% static 'main/css/partials/page-footer.css' %}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
     
@@ -31,9 +30,9 @@
     <link href="{% static 'main/images/favicon.png' %}" rel="shortcut icon" type="image/x-icon">
     <link href="{% static 'main/images/webclip.png' %}" rel="apple-touch-icon">
   </head>
-  <body class="body">
+  <body>
     <a href="{% url 'main:landing' %}" class="brand-center base-nav-brand">
-      <img src="{% static 'main/images/logo.png' %}" loading="eager" alt="Host Logo" class="logo">
+      <img src="{% static 'main/images/logo.png' %}" loading="eager" alt="" class="logo">
     </a>
     <!-- Signup Form Section -->
     <section class="section-full">
@@ -97,6 +96,5 @@
         </div>
       </div>
     </section>
-    {% include 'main/partials/page-footer.html' %}
   </body>
 </html>

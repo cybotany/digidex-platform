@@ -31,7 +31,7 @@
     <link href="{% static 'main/images/favicon.png' %}" rel="shortcut icon" type="image/x-icon">
     <link href="{% static 'main/images/webclip.png' %}" rel="apple-touch-icon">
   </head>
-  <body class="body">
+  <body>
     <a href="{% url 'main:landing' %}" class="brand-center base-nav-brand">
       <img src="{% static 'main/images/logo.png' %}" loading="eager" alt="Host Logo" class="logo">
     </a>
@@ -45,6 +45,5 @@
           <p class="utility-paragraph page-email-confirmation">If you don't see the email, check your spam or junk folder.</p>
       </div>
     </div>
-    {% include 'main/partials/page-footer.html' %}
   </body>
 </html>
