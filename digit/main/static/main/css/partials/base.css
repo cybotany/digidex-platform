@@ -5,16 +5,24 @@
   --white: white;
   --background: #f4f6f7;
   --heading: #141718;
-  --paragraph: rgba(20, 23, 24, .8);
-  --border: rgba(15, 100, 146, .2);
-  --accent-b1: rgba(188, 0, 135, .07);
-  --accent-b2: rgba(57, 89, 255, .07);
-  --accent-b3: rgba(0, 135, 38, .07);
+  --paragraph: #434546;
+  --border: #cfe0e9;
+
+  --accent-red: #bc0087;
+  --accent-blue: #3959ff;
+  --accent-green: #008726;
+
+  --strong-red: #9a006b;
+  --strong-blue: #2c47cc;
+  --strong-green: #00691d;
+
   --primary-color: #00693e;
   --secondary-color: #1db954;
   --accent-color: #8ad7a0;
+
   --neutral-dark: #333;
   --neutral-light: #f2f2f2;
+
   --info-color: #2196f3;
   --error-color: #e53935;
   --warning-color: #ffc107;
@@ -413,7 +421,7 @@ textarea.base-select {
 
 .base-file-upload-error-msg {
   display: inline-block;
-  color: #ea384c;
+  color: var(--error-color);
   padding: 2px 0;
 }
 

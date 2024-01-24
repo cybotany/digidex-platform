@@ -146,27 +146,27 @@
 }
 
 .heading-care.red{
-  color: var(--error-color);
+  color: var(--strong-red);
 }
 
 .heading-care.blue{
-  color: var(--info-color);
+  color: var(--strong-blue);
 }
 
 .heading-care.green{
-  color: var(--primary-color);
+  color: var(--strong-green);
 }
 
 .paragraph-care.red {
-  color: var(--error-color);
+  color: var(--strong-red);
 }
 
 .paragraph-care.blue {
-  color: var(--info-color);
+  color: var(--strong-blue);
 }
 
 .paragraph-care.green {
-  color: var(--primary-color);
+  color: var(--strong-green);
 }
 
 /***********************************************************************************************
@@ -231,7 +231,7 @@
 .block-icon-accordion {
   width: 2.12em;
   height: 2.12em;
-  background-color: var(--accent-b1);
+  background-color: var(--accent-red);
   border: 1px solid rgba(255, 255, 255, .2);
   border-radius: 100%;
   flex: none;
