@@ -105,7 +105,7 @@ html.base-mod-touch * {
   display: inline-block;
   padding: 9px 15px;
   background-color: #3898EC;
-  color: var(--white);
+  color: white;
   border: 0;
   line-height: inherit;
   text-decoration: none;
@@ -548,7 +548,7 @@ textarea.base-select {
 
 .base-file-upload-error-msg {
   display: inline-block;
-  color: var(--error-color);
+  color: #e53935;
   padding: 2px 0;
 }
 
