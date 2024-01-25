@@ -37,26 +37,22 @@
     {% include 'main/partials/navigation-bar.html' %}  
     <!-- Digit Storage System Page - Storage System Section-->
     <section class="section">
-      <div class="content narrow">
-        <div class="digit-storage-page-body"> 
-          <div class="rich-text-block base-rich-text">
-            <div class="layout-grid grid-digits">
-              {% for digit in digits %}
-                <div class="block-digit">
-                  <a class="digit-link" href="{% url 'inventory:details' digit.uuid %}">  
-                    <figure class="base-rich-text-align-fullwidth base-rich-text-figure-type-image">
-                      <img src="{% static 'main/images/placeholder.svg' %}" alt="Image Description">
-                      <figcaption>
-                        <p class="base-rich-text-figcaption">{{ digit.name }}</p>
-                      </figcaption>
-                    </figure> 
-                  </a>
-                </div>
-              {% empty %}
-                <p class="paragraph">No digits found.</p>
-              {% endfor %}
-            </div> 
-          </div>
+      <div class="digit-storage-page-body"> 
+        <div class="rich-text-block base-rich-text">
+          <div class="layout-grid grid-digits">
+            {% for digit in digits %}
+              <div class="block-digit">
+                <a class="digit-link" href="{% url 'inventory:details' digit.uuid %}">  
+                  <figure class="base-rich-text-align-fullwidth base-rich-text-figure-type-image">
+                    <div><img src="{% static 'main/images/placeholder.svg' %}" alt="Image Description"></div>
+                    <figcaption>{{ digit.name }}</figcaption>
+                  </figure> 
+                </a>
+              </div>
+            {% empty %}
+              <p class="paragraph">No digits found.</p>
+            {% endfor %}
+          </div> 
         </div>
       </div>
     </section> 
