@@ -32,4 +32,4 @@ class DigitModificationView(UpdateView):
                 content=f'Updated Plant {self.object.name}'
             )
 
-        return redirect('inventory:details', pk=self.object.pk)
+        return redirect('inventory:details', uuid=self.object.uuid)
