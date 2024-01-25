@@ -40,18 +40,16 @@
       <div class="digit-storage-page-body"> 
         <div class="layout-grid grid-digits">
           {% for digit in digits %}
-            <div class="block-digit">
-              <a class="digit-link" href="{% url 'inventory:details' digit.uuid %}">
-                <div class="digit rich-text-block base-rich-text">
-                  <figure class="base-rich-text-align-fullwidth base-rich-text-figure-type-image">
-                    <img class="digit-thumbnail" src="{% static 'main/images/placeholder.svg' %}" alt="Image Description">
-                    <figcaption>
-                      <p class="base-rich-text-figcaption">{{ digit.name }}</p>
-                    </figcaption>
-                  </figure> 
-                </div>
-              </a>
-            </div>
+            <a class="digit-link" href="{% url 'inventory:details' digit.uuid %}">
+              <div class="block-digit rich-text-block base-rich-text">
+                <figure class="base-rich-text-align-fullwidth base-rich-text-figure-type-image">
+                  <img class="digit-thumbnail" src="{% static 'main/images/placeholder.svg' %}" alt="Image Description">
+                  <figcaption>
+                    <p class="base-rich-text-figcaption">{{ digit.name }}</p>
+                  </figcaption>
+                </figure> 
+              </div>
+            </a>
           {% empty %}
             <p class="paragraph">No digits found.</p>
           {% endfor %}
