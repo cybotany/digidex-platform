@@ -41,14 +41,14 @@
         <h3 class="heading-template">Digits</h3>
         <div class="layout-grid grid-digits">
           {% for digit in digits %}
-            <a href="{% url 'inventory:details' digit.uuid %}" class="account-link">
-              <div class="block-digits">
-                <figure>
-                  <img src="{% static 'main/images/placeholder.svg' %}" alt="Image Description">
-                  <figcaption>{{ digit.name }}</figcaption>
+            <div class="block-digit">
+              <a href="{% url 'inventory:details' digit.uuid %}" class="digit-link">
+                <figure class="digit">
+                  <img class="digit-thumbnail" src="{% static 'main/images/placeholder.svg' %}" alt="Image Description">
+                  <figcaption class="digit-caption">{{ digit.name }}</figcaption>
                 </figure>
-              </div>
-            </a>
+              </a>
+            </div>
           {% empty %}
             <p class="paragraph">No digits found.</p>
           {% endfor %}
