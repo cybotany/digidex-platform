@@ -20,14 +20,6 @@ AWS_S3_ENDPOINT_URL = os.environ.get('AWS_S3_ENDPOINT_URL', '')
 AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
 AWS_S3_CUSTOM_URL = os.environ.get('AWS_S3_CUSTOM_URL', '')
 
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
-AWS_LOCATION = 'static'
-STATIC_URL = f'{AWS_S3_CUSTOM_URL}/{AWS_LOCATION}/'
-STATIC_ROOT = '/var/www/digidex.app/static'
-
 # Environment specific settings
 if DJANGO_ENV == 'production':
     DEBUG = False
@@ -43,6 +35,11 @@ if DJANGO_ENV == 'production':
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
 
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    AWS_LOCATION = 'static'
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_URL}/{AWS_LOCATION}/'
+    STATIC_ROOT = '/var/www/digidex.app/static'
+
 else:
     DEBUG = True
     ALLOWED_HOSTS = ["localhost", "10.0.0.218"]
@@ -52,6 +49,12 @@ else:
     SESSION_COOKIE_SECURE = False
     CSRF_COOKIE_SECURE = False
     SECURE_SSL_REDIRECT = False
+
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static'),
+    ]
+    STATIC_URL = '/static/'
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Public media settings
 MEDIA_URL = f'https://{AWS_S3_ENDPOINT_URL}/'
