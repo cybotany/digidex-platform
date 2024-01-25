@@ -3,11 +3,11 @@
 <html>
   <head>  
     <meta charset="utf-8">
-    <title>Digit Storage System - Digidex</title>
+    <title>Digit Storage System</title>
     <meta content="A platform for gardeners to cultivate their curiosity." name="description">
-    <meta content="Digit Storage System - Digidex" property="og:title">
+    <meta content="Digit Storage System" property="og:title">
     <meta content="A platform for gardeners to cultivate their curiosity." property="og:description">
-    <meta content="Digit Storage System - Digidex" property="twitter:title">
+    <meta content="Digit Storage System" property="twitter:title">
     <meta content="A platform for gardeners to cultivate their curiosity." property="twitter:description">
     <meta property="og:type" content="website">
     <meta content="summary_large_image" name="twitter:card">
@@ -44,23 +44,22 @@
         </div>
       </div>
     </section>
-
     <!-- Digit Storage System Page - Storage System Section-->
     <section class="section">
       <div class="digit-storage-page-body"> 
-        <div class="rich-text-block base-rich-text">
-          <div class="layout-grid grid-digits">
-            {% for digit in digits %}
-              <div class="block-digit">
-                <a class="digit-link" href="{% url 'inventory:details' digit.uuid %}">  
+        <div class="layout-grid grid-digits">
+          {% for digit in digits %}
+            <div class="block-digit">
+              <a class="digit-link" href="{% url 'inventory:details' digit.uuid %}">
+                <div class="rich-text-block base-rich-text">
                   <figure class="base-rich-text-align-fullwidth base-rich-text-figure-type-image">
                     <img src="{% static 'main/images/placeholder.svg' %}" alt="Image Description">
                     <figcaption>{{ digit.name }}</figcaption>
                   </figure> 
-                </a>
-              </div>
-            {% endfor %}
-          </div> 
+                </div>
+              </a>
+            </div> 
+          {% endfor %}
         </div>
       </div>
     </section> 
