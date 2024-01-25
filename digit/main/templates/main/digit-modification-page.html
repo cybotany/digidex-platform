@@ -58,7 +58,7 @@
             <form method="post" class="form">
               {% csrf_token %}
               <div>
-                <input type="text" class="text-field base-input" maxlength="256" name="{{ form.name.name }}" placeholder="Name" id="{{ form.name.id_for_label }}" required="">
+                <input type="text" class="text-field base-input" maxlength="256" name="{{ form.name.name }}" placeholder="Name" id="{{ form.name.id_for_label }}" required="" value="{{ form.name.value }}">
                   {% if form.name.errors %}
                     <div class="error-message">
                       <small>{{ form.name.errors|striptags }}</small>
@@ -66,7 +66,7 @@
                   {% endif %}
               </div>
               <div>
-                <textarea class="text-field textarea" name="{{ form.description.name }}" placeholder="Description" id="{{ form.description.id_for_label }}" {% if form.description.is_required %}required=""{% endif %}></textarea>
+                <textarea class="text-field textarea" name="{{ form.description.name }}" placeholder="Description" id="{{ form.description.id_for_label }}" {% if form.description.is_required %}required=""{% endif %}>{{ form.description.value }}</textarea>
                 {% if form.description.errors %}
                   <div class="error-message">
                     <small>{{ form.description.errors|striptags }}</small>
