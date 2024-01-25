@@ -37,22 +37,26 @@
     {% include 'main/partials/navigation-bar.html' %}  
     <!-- Digit Storage System Page - Storage System Section-->
     <section class="section">
-      <div class="page-body">
+      <div class="page-body"> 
         <h3 class="heading-template">Digits</h3>
         <div class="layout-grid grid-digits">
           {% for digit in digits %}
             <div class="block-digit">
               <a href="{% url 'inventory:details' digit.uuid %}" class="digit-link">
-                <figure class="digit">
-                  <img class="digit-thumbnail" src="{% static 'main/images/placeholder.svg' %}" alt="Image Description">
-                  <figcaption class="digit-caption">{{ digit.name }}</figcaption>
-                </figure>
+                <div class="rich-text-block base-rich-text">
+                  <figure class="base-rich-text-align-fullwidth base-rich-text-figure-type-image digit-figure">
+                    <img class="digit-thumbnail" src="{% static 'main/images/placeholder.svg' %}" alt="Image Description">
+                    <figcaption>
+                      <p class="digit-figcaption base-rich-text-figcaption">{{ digit.name }}</p>
+                    </figcaption>
+                  </figure> 
+                </div>
               </a>
             </div>
           {% empty %}
             <p class="paragraph">No digits found.</p>
           {% endfor %}
-        </div>
+        </div> 
       </div>
     </section> 
     {% include 'main/partials/page-footer.html' %}
