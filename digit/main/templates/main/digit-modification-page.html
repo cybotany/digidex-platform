@@ -67,7 +67,8 @@
                 {% endif %}
               </div>
               <div>
-                <div class="select-container">
+              <select id="tsnField" style="width:300px;"></select>
+              <!-- <div class="select-container">
                   <select class="base-input" name="{{ field.name }}" id="tsnField" {% if field.is_required %}required=""{% endif %}></select>
                 </div>     
                 {% if form.taxonomic_unit.errors %}
@@ -75,7 +76,7 @@
                         <small>{{ form.taxonomic_unit.errors|striptags }}</small>
                     </div>
                 {% endif %}
-              </div>
+              </div>--> 
               <input type="submit" value="Submit Digit Updates" class="submit-button base-button">
             </form>
           </div>
