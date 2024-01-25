@@ -37,23 +37,27 @@
     {% include 'main/partials/navigation-bar.html' %}  
     <!-- Digit Storage System Page - Storage System Section-->
     <section class="section">
-      <div class="digit-storage-page-body"> 
-        <div class="layout-grid grid-digits">
-          {% for digit in digits %}
-            <a class="digit-link" href="{% url 'inventory:details' digit.uuid %}">
-              <div class="block-digit rich-text-block base-rich-text">
-                <figure class="base-rich-text-align-fullwidth base-rich-text-figure-type-image">
-                  <img class="digit-thumbnail" src="{% static 'main/images/placeholder.svg' %}" alt="Image Description">
-                  <figcaption>
-                    <p class="base-rich-text-figcaption">{{ digit.name }}</p>
-                  </figcaption>
-                </figure> 
-              </div>
-            </a>
-          {% empty %}
-            <p class="paragraph">No digits found.</p>
-          {% endfor %}
-        </div> 
+      <div class="content narrow">
+        <div class="digit-storage-page-body"> 
+          <div class="rich-text-block base-rich-text">
+            <div class="layout-grid grid-digits">
+              {% for digit in digits %}
+                <div class="block-digit">
+                  <a class="digit-link" href="{% url 'inventory:details' digit.uuid %}">  
+                    <figure class="base-rich-text-align-fullwidth base-rich-text-figure-type-image">
+                      <img class="digit-thumbnail" src="{% static 'main/images/placeholder.svg' %}" alt="Image Description">
+                      <figcaption>
+                        <p class="base-rich-text-figcaption">{{ digit.name }}</p>
+                      </figcaption>
+                    </figure> 
+                  </a>
+                </div>
+              {% empty %}
+                <p class="paragraph">No digits found.</p>
+              {% endfor %}
+            </div> 
+          </div>
+        </div>
       </div>
     </section> 
     {% include 'main/partials/page-footer.html' %}
