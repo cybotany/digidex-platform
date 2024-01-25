@@ -8,24 +8,19 @@
   --neutral-dark: #333;
   --neutral-light: #f2f2f2;
 
-  --strong-green: rgb(0, 167, 74);
-  --strong-red: rgb(204, 0, 127);
-  --strong-blue: rgb(91, 110, 255);
+  --strong-green: #00693e;
+  --strong-red: #bc0087;
+  --strong-blue: #3959ff;
 
   --accent-green: rgba(0, 135, 38, .07);
   --accent-red: rgba(188, 0, 135, .07);
   --accent-blue: rgba(57, 89, 255, .07);
-
-  --complementary-color: #3b6f95;
-
-  --alt-primary-color: #8B4513;
-  --alt-accent-color: #f5f5dc;
-
+  --accent-yellow: rgba(255, 193, 7, .07);
   
-  --info-color: #2196f3;
+  --info-color: #3b6f95;
   --error-color: #e53935;
   --warning-color: #ffc107;
-  --success-color: #4caf50;
+  --success-color: #8ad7a0;
 }
 
 .layout-grid {
@@ -2748,23 +2743,23 @@ figcaption {
 .block-icon-list {
   width: 1.625em;
   height: 1.625em;
-  background-color: var(--accent-blue);
+  background-color: var(--accent-green);
   border-radius: 100%;
   justify-content: center;
   align-items: center;
   display: flex;
 }
 
-.block-icon-list.green {
-  background-color: var(--accent-green);
+.block-icon-list.blue {
+  background-color: var(--accent-blue);
+}
+
+.heading-list {
+  color: var(--strong-green);
 }
 
 .heading-list.blue {
   color: var(--strong-blue);
-}
-
-.heading-list.green {
-  color: var(--strong-green);
 }
 
 .block-list {
@@ -2841,6 +2836,10 @@ figcaption {
 
 .heading-about.blue{
   color: var(--strong-blue);
+}
+
+.paragraph-about {
+  color: var(--strong-green);
 }
 
 .paragraph-about.red {
@@ -3143,13 +3142,13 @@ figcaption {
   box-shadow: 0 15px 40px -10px var(--strong-green);
 }
 
-.submit-button.blue {
-  background-color: var(--complementary-color);
+.submit-button.yellow {
+  background-color: var(--accent-yellow);
   color: var(--heading);
 }
 
-.submit-button.blue:hover {
-  box-shadow: 0 15px 40px -10px var(--complementary-color);
+.submit-button.yellow:hover {
+  box-shadow: 0 15px 40px -10px var(--accent-yellow);
 }
 
 .form {
@@ -3744,7 +3743,7 @@ color: rgba(20, 23, 24, .6);
 }
 
 .yellow-tag-product {
-  background-color: var(--warning-color);
+  background-color: var(--accent-yellow);
   color: var(--heading);
   letter-spacing: .05em;
   text-transform: uppercase;
@@ -3934,12 +3933,12 @@ color: rgba(20, 23, 24, .6);
 }
 
 .buy-now-button.yellow {
-  background-color: var(--warning-color);
+  background-color: var(--accent-yellow);
   color: var(--heading);
 }
 
 .buy-now-button.yellow:hover {
-  box-shadow: 0 15px 40px -10px var(--warning-color);
+  box-shadow: 0 15px 40px -10px var(--accent-yellow);
 }
 
 .default-state {
