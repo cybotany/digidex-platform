@@ -1,14 +1,15 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import APIException
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import SessionAuthentication
 from django.db.models import Q
 from digit.taxonomy.models import Unit
 from digit.api.serializers import TaxonomyUnitSerializer
 
-
 class GetTSN(APIView):
-    #permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication]
 
     def get(self, request, *args, **kwargs):
         search_term = request.GET.get('q', '').strip()
