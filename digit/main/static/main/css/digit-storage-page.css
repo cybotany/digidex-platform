@@ -10,12 +10,10 @@
   box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
 }
 
-
 .grid-digits {
-  grid-column-gap: .6em;
-  grid-row-gap: .6em;
+  grid-gap: .6em;
   grid-template-rows: auto;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .block-digit {
@@ -25,6 +23,7 @@
   background-color: var(--white);
   border-radius: .5em;
   padding: 0;
+  margin: 0;
   display: flex;
   box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
   position: relative;
@@ -74,7 +73,6 @@
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1;
 }
 
 .digit-figcaption {

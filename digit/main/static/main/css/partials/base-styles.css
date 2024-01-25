@@ -83,19 +83,16 @@ html.base-mod-touch * {
   display: inline-block;
 }
 
-.base-clearfix:before,
-.base-clearfix:after {
+.base-clearfix::before,
+.base-clearfix::after {
   content: " ";
   display: table;
-  grid-column-start: 1;
-  grid-row-start: 1;
-  grid-column-end: 2;
-  grid-row-end: 2;
 }
 
-.base-clearfix:after {
+.base-clearfix::after {
   clear: both;
 }
+
 
 .base-hidden {
   display: none;
