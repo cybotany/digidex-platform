@@ -62,7 +62,8 @@ else:
     STATIC_URL = '/static/'
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-    CORS_ALLOWED_ORIGINS = ["http://10.0.0.218:8080"]
+    #CORS_ALLOWED_ORIGINS = ["http://10.0.0.218:8080"]
+    CORS_ALLOW_ALL_ORIGINS = True
 
 # Public media settings
 MEDIA_URL = f'https://{AWS_S3_ENDPOINT_URL}/'

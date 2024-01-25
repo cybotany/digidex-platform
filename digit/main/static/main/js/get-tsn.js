@@ -23,9 +23,9 @@ const select2Config = {
             const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
             xhr.setRequestHeader("X-CSRFToken", csrftoken);
         },
-        xhrFields: {
-            withCredentials: true
-        },
+        //xhrFields: {
+        //    withCredentials: true
+        //},
     },
     minimumInputLength: 1
 };
