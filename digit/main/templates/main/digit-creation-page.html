@@ -67,9 +67,7 @@
               <div class="form-group">
                 <label for="{{ form.taxonomic_unit.id_for_label }}">Taxonomic Unit</label>
                 <div class="select-container">
-                  <div class="select-container">
-                    <select class="w-input" name="{{ field.name }}" id="{{ field.id_for_label }}" {% if field.is_required %}required=""{% endif %}></select>
-                  </div>     
+                  <select class="w-input" name="{{ field.name }}" id="{{ field.id_for_label }}" {% if field.is_required %}required=""{% endif %}></select>
                 </div>
                 {% if form.taxonomic_unit.errors %}
                     <div class="error-message">
