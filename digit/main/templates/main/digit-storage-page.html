@@ -43,8 +43,10 @@
           {% for digit in digits %}
             <a href="{% url 'inventory:details' digit.uuid %}" class="digit-card digit-card-link">
               <div class="block-digits">
-                <div class="text-digits">{{ digit.name }}</div>
-                <div class="hex-digits">{{ digit.description }}</div>
+                <figure>
+                  <img src="{% static 'main/images/placeholder.svg' %}" alt="Image Description">
+                  <figcaption>{{ digit.name }}</figcaption>
+                </figure>
               </div>
             </a>
           {% empty %}
