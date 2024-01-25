@@ -1993,7 +1993,7 @@ figcaption {
 .numbers {
   grid-column-gap: .5em;
   grid-row-gap: .5em;
-  background-color: var(--accent-green);
+  background-color: var(--accent-blue);
   border-radius: .64em;
   flex-direction: column;
   justify-content: flex-start;
@@ -2012,7 +2012,7 @@ figcaption {
 }
 
 .heading-numbers {
-  color: var(--strong-green);
+  color: var(--strong-blue);
   font-weight: 500;
 }
 
@@ -2022,7 +2022,7 @@ figcaption {
 
 .text-numbers {
   max-width: 11em;
-  color: var(--accent-green);
+  color: var(--accent-blue);
   letter-spacing: -.02em;
   font-size: .87em;
   font-weight: 500;
@@ -2030,7 +2030,7 @@ figcaption {
 }
 
 .text-numbers.green {
-  color: var(--strong-green);
+  color: var(--accent-green);
 }
 
 .lottie-wrapper {
@@ -2519,7 +2519,6 @@ figcaption {
 .link-footer-down:hover {
   color: var(--strong-green);
 }
-
 
 .block-reviews {
   height: 40em;
