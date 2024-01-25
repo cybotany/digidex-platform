@@ -41,7 +41,7 @@
         <h3 class="heading-template">Digits</h3>
         <div class="layout-grid grid-digits">
           {% for digit in digits %}
-            <a href="{% url 'inventory:details' digit.uuid %}" class="digit-card digit-card-link">
+            <a href="{% url 'inventory:details' digit.uuid %}" class="account-link">
               <div class="block-digits">
                 <figure>
                   <img src="{% static 'main/images/placeholder.svg' %}" alt="Image Description">
