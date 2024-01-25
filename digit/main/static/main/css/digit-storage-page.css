@@ -38,13 +38,13 @@
   justify-content: flex-start;
   align-items: flex-start;
   text-align: center;
-  padding: 2.5em 2.8em;
+  padding: 1em;
   display: flex;
 }
   
 .digit.large {
   justify-content: center;
-  padding: 4.3em 4.5em;
+  padding: 2em;
 }
 
 .digit-link {
@@ -53,7 +53,7 @@
 }
 
 .digit-caption {
-  background-color: transparent;
+  background-color: var(--success-color);
 }
 
 .digit-thumbnail {
