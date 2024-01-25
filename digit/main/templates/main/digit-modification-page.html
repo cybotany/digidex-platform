@@ -28,7 +28,18 @@
         }
       });
     </script>
+    {% load i18n %}
+    <script src="{% static 'main/js/jquery/jquery.js' %}"></script>
     
+    <!-- Bootstrap CSS and Javascript-->
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+        
+    <!-- Load Select2 and CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> 
     <link href="{% static 'main/images/favicon.png' %}" rel="shortcut icon" type="image/x-icon">
     <link href="{% static 'main/images/webclip.png' %}" rel="apple-touch-icon">
   </head>
@@ -67,8 +78,7 @@
                 {% endif %}
               </div>
               <div>
-              <select id="tsnField" style="width:300px;"></select>
-              <!-- <div class="select-container">
+                <div class="select-container">
                   <select class="base-input" name="{{ field.name }}" id="tsnField" {% if field.is_required %}required=""{% endif %}></select>
                 </div>     
                 {% if form.taxonomic_unit.errors %}
@@ -76,7 +86,7 @@
                         <small>{{ form.taxonomic_unit.errors|striptags }}</small>
                     </div>
                 {% endif %}
-              </div>--> 
+              </div>
               <input type="submit" value="Submit Digit Updates" class="submit-button base-button">
             </form>
           </div>
