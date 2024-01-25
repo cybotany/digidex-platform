@@ -34,12 +34,17 @@
   </head>
   <body class="body">
     {% include 'main/partials/navigation-bar.html' %}  
+    <!-- Digit Modification Page - Header Section --> 
+    <section class="section-top padding-0">
+      <div class="content">
+        <div class="block-top">
+          <h2 class="heading-top">Update or Delete {{ digit.name }}</h2>
+        </div>
+      </div>
+    </section>
     <!-- Digit Modification Page - Modification Form Section --> 
     <section class="section">
       <div class="content narrow">
-        <div class="block">
-          <h3 class="heading">Update {{ digit.name }}</h3>
-        </div>
         <div class="account-form">
           <div id="digitForm" class="form-block base-form">
             <form method="post" class="form">
@@ -79,9 +84,6 @@
     <!-- Digit Modification Page - Delete Digit Section --> 
     <section class="section">
       <div class="content narrow">
-        <div class="block">
-          <h4 class="heading">Delete {{ digit.name }}</h4>
-        </div>
         <div class="button-mobile">
           <form action="{% url 'inventory:deletion' digit.uuid %}" class="button" method="post">
             {% csrf_token %}
