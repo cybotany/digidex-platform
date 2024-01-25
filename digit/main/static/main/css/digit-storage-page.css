@@ -83,7 +83,6 @@
 
 .digit-thumbnail {
   object-fit: cover;
-  border-radius: .87em;
   transition: transform 0.3s ease;
 }
 
