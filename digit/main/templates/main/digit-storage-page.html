@@ -41,19 +41,18 @@
         <div class="rich-text-block base-rich-text">
           <div class="layout-grid grid-digits">
             {% for digit in digits %}
-              <a class="digit-link" href="{% url 'inventory:details' digit.uuid %}">  
-                <figure class="block-digit base-rich-text-align-fullwidth base-rich-text-figure-type-image">
-                  <img src="{% static 'main/images/placeholder.svg' %}" alt="Image Description">
-                  <figcaption>{{ digit.name }}</figcaption>
-                </figure> 
-              </a>
-            {% empty %}
-              <p class="paragraph">No digits found.</p>
+              <div class="block-digit">
+                <a class="digit-link" href="{% url 'inventory:details' digit.uuid %}">  
+                  <figure class="base-rich-text-align-fullwidth base-rich-text-figure-type-image">
+                    <img src="{% static 'main/images/placeholder.svg' %}" alt="Image Description">
+                    <figcaption>{{ digit.name }}</figcaption>
+                  </figure> 
+                </a>
+              </div>
             {% endfor %}
           </div> 
         </div>
       </div>
     </section> 
-    {% include 'main/partials/page-footer.html' %}
   </body>
 </html>
