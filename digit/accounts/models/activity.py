@@ -1,5 +1,4 @@
 from django.db import models
-from digit.accounts.models import User
 from digit.utils.constants import ACTIVITY_STATUS, ACTIVITY_TYPE
 
 
@@ -23,7 +22,7 @@ class Activity(models.Model):
     """
 
     user = models.ForeignKey(
-        User,
+        'accounts.User',
         related_name='recent_activities',
         on_delete=models.CASCADE,
         help_text='Reference to the user who performed the activity.'

@@ -1,5 +1,4 @@
 from django.db import models
-from digit.accounts.models import User
 from digit.utils.custom_storage import PublicMediaStorage
 from digit.utils.validators import validate_profile_avatar
 
@@ -22,7 +21,7 @@ class Profile(models.Model):
         last_modified (DateTimeField): The date and time when the profile was last modified.
     """
     user = models.OneToOneField(
-        User,
+        'accounts.User',
         on_delete=models.CASCADE,
         help_text='The user associated with this profile.'
     )

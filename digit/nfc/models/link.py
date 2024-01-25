@@ -1,7 +1,6 @@
 import uuid
 from django.db import models
 from django.urls import reverse
-from digit.accounts.models import User
 
 
 class Link(models.Model):
@@ -41,7 +40,7 @@ class Link(models.Model):
         help_text="The number of times the tag has been scanned."
     )
     user = models.ForeignKey(
-        User,
+        'accounts.User',
         null=True,
         blank=True,
         on_delete=models.CASCADE,

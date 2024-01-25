@@ -1,8 +1,6 @@
 import os
 from datetime import datetime
 from django.db import models
-from digit.accounts.models import User
-from digit.inventory.models import Digit
 from digit.utils.custom_storage import PrivateMediaStorage
 from digit.utils.validators import validate_journal_entry
 
@@ -44,13 +42,13 @@ class Entry(models.Model):
         __str__: Returns a string representation of the journal entry.
     """
     digit = models.ForeignKey(
-        Digit,
+        'inventory.Digit', 
         on_delete=models.CASCADE,
         related_name='journal_entries',
         help_text="The digitized plant to which this journal entry is related."
     )
     user = models.ForeignKey(
-        User,
+        'accounts.User',
         on_delete=models.CASCADE,
         verbose_name="User",
         help_text="The user who created this journal entry."

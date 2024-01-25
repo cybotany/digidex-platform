@@ -2,8 +2,6 @@ import os
 import uuid
 from django.db import models
 from django.urls import reverse
-from digit.taxonomy.models import Unit
-from digit.nfc.models import Link
 from digit.utils.validators import validate_digit_thumbnail
 
 def digit_thumbnail_directory_path(instance, filename):
@@ -41,7 +39,7 @@ class Digit(models.Model):
         help_text="A short description of the digitized plant."
     )
     taxonomic_unit = models.ForeignKey(
-        Unit,
+        'taxonomy.Unit',
         null=True,
         blank=True,
         on_delete=models.CASCADE,
@@ -49,7 +47,7 @@ class Digit(models.Model):
         help_text="The taxonomic classification of the digitized plant."
     )
     nfc_link = models.OneToOneField(
-        Link,
+        'nfc.Link',
         on_delete=models.CASCADE,
         related_name='digit',
         help_text="NFC link for the digitized plant."
