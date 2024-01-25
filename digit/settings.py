@@ -40,6 +40,12 @@ if DJANGO_ENV == 'production':
     STATIC_URL = f'https://{AWS_S3_CUSTOM_URL}/{AWS_LOCATION}/'
     STATIC_ROOT = '/var/www/digidex.app/static'
 
+    CORS_ALLOWED_ORIGINS = [
+        "https://digidex.app",
+        "https://www.digidex.app",
+        "https://cdn.digidex.app",
+    ]
+
 else:
     DEBUG = True
     ALLOWED_HOSTS = ["localhost", "10.0.0.218"]
@@ -55,6 +61,8 @@ else:
     ]
     STATIC_URL = '/static/'
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+    CORS_ALLOWED_ORIGINS = ["http://10.0.0.218:8080"]
 
 # Public media settings
 MEDIA_URL = f'https://{AWS_S3_ENDPOINT_URL}/'
@@ -72,11 +80,6 @@ CORS_ALLOW_HEADERS = [
 CORS_ALLOW_METHODS = [
     "GET",
     "POST",
-]
-CORS_ALLOWED_ORIGINS = [
-    "https://digidex.app",
-    "https://www.digidex.app",
-    "https://cdn.digidex.app",
 ]
 
 # Application definition
