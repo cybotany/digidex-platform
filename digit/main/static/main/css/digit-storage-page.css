@@ -1,6 +1,16 @@
 /***********************************************************************************************
  *  Digit System Storage Page - Collection Styles
  **********************************************************************************************/ 
+.digit-storage-page-body {
+  width: 100%;
+  background-color: var(--white);
+  border-radius: .87em;
+  margin-bottom: 1em;
+  padding: 3em 10%;
+  box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
+}
+
+
 .grid-digits {
   grid-column-gap: .6em;
   grid-row-gap: .6em;
@@ -44,13 +54,9 @@
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-.digit:focus {
-  outline: 2px solid var(--info-color) ;
-  outline-offset: 2px;
-}
-
 .digit figure {
   margin: 0;
+  width: 100%;
 }
   
 .digit.large {

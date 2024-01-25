@@ -33,12 +33,11 @@
     <link href="{% static 'main/images/favicon.png' %}" rel="shortcut icon" type="image/x-icon">
     <link href="{% static 'main/images/webclip.png' %}" rel="apple-touch-icon">
   </head>
-  <body class="body">
+  <body>
     {% include 'main/partials/navigation-bar.html' %}  
     <!-- Digit Storage System Page - Storage System Section-->
     <section class="section">
-      <div class="page-body"> 
-        <h3 class="heading-template">Digits</h3>
+      <div class="digit-storage-page-body"> 
         <div class="layout-grid grid-digits">
           {% for digit in digits %}
             <div class="block-digit">
