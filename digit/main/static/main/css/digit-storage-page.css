@@ -41,6 +41,11 @@
   padding: 1em;
   display: flex;
 }
+
+.digit figure {
+  margin-top: 0;
+  margin-bottom: 0;
+}
   
 .digit.large {
   justify-content: center;
