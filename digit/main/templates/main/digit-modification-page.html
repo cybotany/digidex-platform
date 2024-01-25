@@ -68,7 +68,7 @@
               </div>
               <div>
                 <div class="select-container">
-                  <select class="base-input" name="{{ field.name }}" id="{{ field.id_for_label }}" {% if field.is_required %}required=""{% endif %}></select>
+                  <select class="base-input" name="{{ field.name }}" id="tsnField" {% if field.is_required %}required=""{% endif %}></select>
                 </div>     
                 {% if form.taxonomic_unit.errors %}
                     <div class="error-message">
