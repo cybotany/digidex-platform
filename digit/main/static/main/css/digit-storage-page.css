@@ -39,6 +39,16 @@
   text-align: center;
 }
 
+.digit:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.digit:focus {
+  outline: 2px solid var(--info-color) ;
+  outline-offset: 2px;
+}
+
 .digit figure {
   margin: 0;
 }
@@ -76,16 +86,6 @@
 .digit-thumbnail.large {
   height: auto;
   max-height: 40em;
-}
-
-.digit-thumbnail:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-.digit-thumbnail:focus {
-  outline: 2px solid var(--info-color) ;
-  outline-offset: 2px;
 }
 
 

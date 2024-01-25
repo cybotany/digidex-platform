@@ -44,12 +44,14 @@
             <div class="block-digit">
               <a href="{% url 'inventory:details' digit.uuid %}" class="digit-link">
                 <div class="rich-text-block base-rich-text">
-                  <figure class="base-rich-text-align-fullwidth base-rich-text-figure-type-image digit-figure">
-                    <img class="digit-thumbnail" src="{% static 'main/images/placeholder.svg' %}" alt="Image Description">
-                    <figcaption>
-                      <p class="digit-figcaption base-rich-text-figcaption">{{ digit.name }}</p>
-                    </figcaption>
-                  </figure> 
+                  <div class="digit">
+                    <figure class="base-rich-text-align-fullwidth base-rich-text-figure-type-image">
+                      <img class="digit-thumbnail" src="{% static 'main/images/placeholder.svg' %}" alt="Image Description">
+                      <figcaption>
+                        <p class="base-rich-text-figcaption">{{ digit.name }}</p>
+                      </figcaption>
+                    </figure> 
+                  </div>
                 </div>
               </a>
             </div>
