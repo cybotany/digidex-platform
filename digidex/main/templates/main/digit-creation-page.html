@@ -17,6 +17,7 @@
     <link href="{% static 'main/css/partials/base-styles.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'main/css/partials/digidex-styles.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'main/css/digit-creation-page.css' %}" rel="stylesheet" type="text/css">
+  
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
     
@@ -29,7 +30,15 @@
         }
       });
     </script>
-    
+
+    {% load i18n %}
+    <script src="{% static 'main/js/jquery/jquery.js' %}"></script>
+        
+    <!-- Load Select2 and CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> 
+
+
     <link href="{% static 'main/images/favicon.png' %}" rel="shortcut icon" type="image/x-icon">
     <link href="{% static 'main/images/webclip.png' %}" rel="apple-touch-icon">
   </head>
@@ -46,39 +55,37 @@
             <div id="digitForm" class="form-block base-form">
               <form method="post" class="form">
                 {% csrf_token %}
-                <!-- Handling the name field -->
-                <div class="form-group">
-                  <label for="{{ form.name.id_for_label }}">Name</label>
-                  <input type="text" class="text-field base-input name-field" name="{{ form.name.name }}" placeholder="Enter name" id="{{ form.name.id_for_label }}" {% if form.name.is_required %}required=""{% endif %} value="{{ form.name.value }}">
-                  {% if form.name.errors %}
-                    <div class="error-message">
-                      <small>{{ form.name.errors|striptags }}</small>
-                    </div>
-                  {% endif %}
-                </div>
-                <!-- Handling the description field -->
-                <div class="form-group">
-                  <label for="{{ form.description.id_for_label }}">Description</label>
-                  <textarea class="textarea-field base-input description-field" name="{{ form.description.name }}" placeholder="Enter description" id="{{ form.description.id_for_label }}" {% if form.description.is_required %}required=""{% endif %}>{{ form.description.value }}</textarea>
-                  {% if form.description.errors %}
-                    <div class="error-message">
-                      <small>{{ form.description.errors|striptags }}</small>
-                    </div>
-                  {% endif %}
-                </div>
-                <!-- Handling the taxonomic_unit field -->
-                <div class="form-group">
-                  <label for="{{ form.taxonomic_unit.id_for_label }}">Taxonomic Unit</label>
-                  <div class="select-container">
-                    <select class="base-input" name="{{ field.name }}" id="{{ field.id_for_label }}" {% if field.is_required %}required=""{% endif %}></select>
-                  </div>
-                  {% if form.taxonomic_unit.errors %}
+                  <div class="form-group">
+                    <input type="text" class="text-field base-input" maxlength="256" name="{{ form.name.name }}" placeholder="Name" id="{{ form.name.id_for_label }}" required="" value="{{ form.name.value }}">
+                    {% if form.name.errors %}
                       <div class="error-message">
-                          <small>{{ form.taxonomic_unit.errors|striptags }}</small>
+                        <small>{{ form.name.errors|striptags }}</small>
                       </div>
-                  {% endif %}
+                    {% endif %}
+                  </div>
+                  <div class="form-group">
+                    <textarea class="text-field textarea" name="{{ form.description.name }}" placeholder="Description" id="{{ form.description.id_for_label }}" required="">{{ form.description.value }}</textarea>
+                    {% if form.description.errors %}
+                      <div class="error-message">
+                        <small>{{ form.description.errors|striptags }}</small>
+                      </div>
+                    {% endif %}
+                  </div>
+                  <div class="form-group">
+                    <div class="select-container">
+                      <select class="text-field base-input" name="taxonomic_unit" id="tsnField" required>
+                        {% if digit.taxonomic_unit %}
+                          <option value="{{ digit.taxonomic_unit.id }}" selected="selected">{{ digit.taxonomic_unit }}</option>
+                        {% endif %}
+                      </select>
+                    </div>
+                    {% if form.taxonomic_unit.errors %}
+                      <div class="error-message">
+                        <small>{{ form.taxonomic_unit.errors|striptags }}</small>
+                      </div>
+                    {% endif %}
                 </div>
-                <input type="submit" value="Submit Digit Updates" data-wait="Please wait..." class="submit-button base-button">
+                <input type="submit" value="Submit Digit Updates" class="submit-button base-button">
               </form>
             </div>
           </div>

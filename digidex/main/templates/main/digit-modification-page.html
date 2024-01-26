@@ -17,6 +17,7 @@
     <link href="{% static 'main/css/partials/base-styles.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'main/css/partials/digidex-styles.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'main/css/digit-modification-page.css' %}" rel="stylesheet" type="text/css">
+  
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
     
@@ -88,10 +89,10 @@
               </form>
             </div>
           </div>
-          <div class="button base-button">
-            <form action="{% url 'inventory:deletion' digit.uuid %}" class="button" method="post">
-              {% csrf_token %}
-              <input type="submit" value="Delete Digit" onclick="return confirm('Are you sure you want to delete this Digit? This action cannot be undone.');">
+          <div class="delete-digit">
+            <form action="{% url 'inventory:delete_digit' digit.uuid %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Delete Digit" class="delete-button base-button" onclick="return confirm('Are you sure you want to delete this Digit? This action cannot be undone.');">
             </form>
           </div>
         </div>
