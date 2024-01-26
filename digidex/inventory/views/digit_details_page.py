@@ -30,7 +30,7 @@ class DigitDetailsView(LoginRequiredMixin, DetailView):
 
         # Initialize the form with the current digit and user
         if self.request.method == 'GET':
-            context['journal_form'] = CreateJournalEntry()
+            context['journal_form'] = CreateJournalEntry(initial={'digit': self.object, 'user': self.request.user})
 
         journal_entries = self.object.journal_entries.all()
         context['journal_entries'] = journal_entries[:10]
