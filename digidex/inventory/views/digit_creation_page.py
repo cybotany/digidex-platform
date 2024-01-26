@@ -1,13 +1,13 @@
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.edit import CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
 from digidex.inventory.forms import CreateDigitForm
-from digidex.inventory.models import Digit
-from digidex.nfc.models import Link
+from digidex.inventory.models import Digit, Link
 from digidex.accounts.models import Activity
 
 
-class DigitCreationView(CreateView):
+class DigitCreationView(LoginRequiredMixin, CreateView):
     model = Digit
     form_class = CreateDigitForm
     template_name = 'main/digit-creation-page.html'
@@ -17,8 +17,8 @@ class DigitCreationView(CreateView):
         return kwargs
 
     def form_valid(self, form):
-        # Retrieve the link instance using link_id from the URL
-        link_uuid = self.kwargs.get('uuid')
+        # Retrieve the link instance using link-id from the URL
+        link_uuid = self.kwargs.get('link-uuid')
         link = get_object_or_404(Link, uuid=link_uuid)
 
         with transaction.atomic():

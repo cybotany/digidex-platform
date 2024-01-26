@@ -18,7 +18,7 @@ class DigitDetailsView(LoginRequiredMixin, DetailView):
     template_name = 'main/digit-details-page.html'
 
     def get_object(self, queryset=None):
-        uuid = self.kwargs.get('uuid')
+        uuid = self.kwargs.get('digit-uuid')
         obj = get_object_or_404(Digit, uuid=uuid)
 
         if obj.nfc_link.user != self.request.user:
@@ -82,7 +82,7 @@ class DigitDetailsView(LoginRequiredMixin, DetailView):
                 # Update the Digit's thumbnail with the validated image
                 #self.object.thumbnail.save(new_image_file.name, new_image_file, save=True)
 
-            return redirect(reverse('inventory:details', kwargs={'uuid': self.object.uuid}))
+            return redirect(reverse('inventory:details', kwargs={'digit-uuid': self.object.uuid}))
 
         context = self.get_context_data()
         context['journal_form'] = form

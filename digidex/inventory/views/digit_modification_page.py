@@ -1,19 +1,20 @@
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.edit import UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
 from digidex.inventory.forms import ModifyDigitForm
 from digidex.inventory.models import Digit
 from digidex.accounts.models import Activity
 
 
-class DigitModificationView(UpdateView):
+class DigitModificationView(LoginRequiredMixin, UpdateView):
     model = Digit
     form_class = ModifyDigitForm
     template_name = 'main/digit-modification-page.html'
 
     def get_object(self, queryset=None):
-        digit_uuid = self.kwargs.get('uuid')
+        digit_uuid = self.kwargs.get('digit-uuid')
         obj = get_object_or_404(Digit, uuid=digit_uuid)
 
         if obj.nfc_link.user != self.request.user:

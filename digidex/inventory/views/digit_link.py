@@ -2,13 +2,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, get_object_or_404
 from django.views import View
 from django.http import HttpResponse
-from digidex.nfc.models import Link
-from digidex.inventory.models import Digit
+from digidex.inventory.models import Digit, Link
 
 
-class LinkingView(LoginRequiredMixin, View):
+class DigitLinkView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
-        link_uuid = kwargs.get('uuid')
+        link_uuid = kwargs.get('link-uuid')
 
         if not link_uuid:
             return HttpResponse("No PK provided", status=400)
