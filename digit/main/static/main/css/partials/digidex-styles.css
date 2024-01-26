@@ -2403,11 +2403,11 @@ figcaption {
   display: flex;
 }
 
- .grid-footer {
+.grid-footer {
   grid-column-gap: 1.4em;
   grid-row-gap: 0em;
-  grid-template: "Area"
-  / 2.4fr 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-columns: 2.4fr 1fr 1fr 1fr;
   margin-bottom: 7.5em;
 }
 
