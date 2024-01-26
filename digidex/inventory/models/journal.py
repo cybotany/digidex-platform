@@ -31,7 +31,6 @@ class Journal(models.Model):
 
     Attributes:
         digit (ForeignKey): A reference to the 'Digit' model, linking the journal entry to a specific digitized plant.
-        user (ForeignKey): The user who created the journal entry, linked to the user model.
         created_at (DateTimeField): The date and time when the journal entry was created, automatically set when the journal entry is created.
         content (TextField): The textual content of the journal entry.
         image (ImageField): An optional image associated with the journal entry, supporting specific file extensions.
@@ -47,17 +46,6 @@ class Journal(models.Model):
         on_delete=models.CASCADE,
         related_name='journal_entries',
         help_text="The digitized plant to which this journal entry is related."
-    )
-    user = models.ForeignKey(
-        'accounts.User',
-        on_delete=models.CASCADE,
-        verbose_name="User",
-        help_text="The user who created this journal entry."
-    )
-    created_at = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name="Created At",
-        help_text="The date and time when this journal entry was created."
     )
     content = models.TextField(
         verbose_name="Content",
@@ -86,17 +74,22 @@ class Journal(models.Model):
         verbose_name="Cleaned",
         help_text="Indicates whether the digitized plant was cleaned in this journal entry."
     )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name="Created At",
+        help_text="The date and time when this journal entry was created."
+    )
 
     def __str__(self):
         """
         Returns a string representation of the Journal Entry instance.
 
-        The string representation includes information about the digitized plant and the user who created the journal entry.
+        The string representation includes information about the digitized plant.
 
         Returns:
             str: String representation of the Journal Entry instance.
         """
-        return f"Journal Entry for {self.digit} by {self.user}"
+        return f"Journal Entry for {self.digit}"
 
     class Meta:
         verbose_name = "Journal Entry"

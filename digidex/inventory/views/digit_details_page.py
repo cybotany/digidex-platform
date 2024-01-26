@@ -30,7 +30,7 @@ class DigitDetailsView(LoginRequiredMixin, DetailView):
 
         # Initialize the form with the current digit and user
         if self.request.method == 'GET':
-            context['journal_form'] = CreateJournalEntry(initial={'digit': self.object, 'user': self.request.user})
+            context['journal_form'] = CreateJournalEntry()
 
         journal_entries = self.object.journal_entries.all()
         context['journal_entries'] = journal_entries[:10]
@@ -62,7 +62,6 @@ class DigitDetailsView(LoginRequiredMixin, DetailView):
         if form.is_valid():
             journal_entry = form.save(commit=False)
             journal_entry.digit = self.object
-            journal_entry.user = request.user
             journal_entry.save()
 
             if 'image' in request.FILES:
