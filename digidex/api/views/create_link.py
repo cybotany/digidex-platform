@@ -11,9 +11,9 @@ class CreateLink(APIView):
     authentication_classes = [JWTAuthentication]
 
     def post(self, request, *args, **kwargs):
-        serial_number = kwargs.get('serial_number')
-        if not serial_number:
+        link_serial_number = kwargs.get('serial_number')
+        if not link_serial_number:
             return Response({"error": "Serial Number not provided."}, status=status.HTTP_400_BAD_REQUEST)
-        link, created = Link.objects.get_or_create(serial_number=serial_number)
+        link, created = Link.objects.get_or_create(serial_number=link_serial_number)
         link_url = request.build_absolute_uri(link.get_absolute_url())
         return Response({"link_url": link_url}, status=status.HTTP_201_CREATED)

@@ -91,7 +91,7 @@ class Link(models.Model):
         Returns:
             str: The serial number of the Link, representing its unique identification.
         """
-        return self.uid
+        return self.serial_number
 
     class Meta:
         verbose_name = "Link"
