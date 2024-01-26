@@ -30,10 +30,7 @@ class DigitDetailsView(LoginRequiredMixin, DetailView):
 
         # Initialize the form with the current digit and user
         if self.request.method == 'GET':
-            context['journal_form'] = JournalEntryForm(initial={
-                'digit': self.object,
-                'user': self.request.user
-            })
+            context['journal_form'] = JournalEntryForm()
 
         journal_entries = self.object.journal_entries.all()
         context['journal_entries'] = journal_entries[:10]
@@ -84,7 +81,7 @@ class DigitDetailsView(LoginRequiredMixin, DetailView):
                 new_image_file.name = image.name
 
                 # Update the Digit's thumbnail with the validated image
-                self.object.thumbnail.save(new_image_file.name, new_image_file, save=True)
+                #self.object.thumbnail.save(new_image_file.name, new_image_file, save=True)
 
             return redirect(reverse('inventory:details', kwargs={'uuid': self.object.uuid}))
 
