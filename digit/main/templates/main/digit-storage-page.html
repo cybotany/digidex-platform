@@ -35,31 +35,31 @@
   </head>
   <body>
     {% include 'main/partials/navigation-bar.html' %}
-    <!-- Digit Storage System Page - Header Section --> 
-    <section class="section-top padding-0">
-      <div class="content">
-        <div class="block-top">
-          <h3 class="heading-top">Box n</h3>
-          <p class="paragraph-top">Details about Box n</p>
-        </div>
-      </div>
-    </section>
     <!-- Digit Storage System Page - Storage System Section-->
-    <section class="section">
-      <div class="digit-storage-page-body"> 
-        <div class="layout-grid grid-digits">
-          {% for digit in digits %}
-            <div class="block-digit">
-              <a class="digit-link" href="{% url 'inventory:details' digit.uuid %}">
-                <div class="rich-text-block base-rich-text">
-                  <figure class="base-rich-text-align-fullwidth base-rich-text-figure-type-image">
-                    <img src="{% static 'main/images/placeholder.svg' %}" alt="Image Description">
-                    <figcaption>{{ digit.name }}</figcaption>
-                  </figure> 
+    <section class="section-full">
+      <div class="content narrow">
+        <div class="digit-storage-body">
+          <div class="rich-text-block base-rich-text">
+            <div class="layout-grid grid-digits">
+              <div class="block-heading center">
+                <div class="subtitle">
+                  <a href="{% url 'inventory:modification' digit.uuid %}" class="account-link">Edit or Delete</a>
                 </div>
-              </a>
-            </div> 
-          {% endfor %}
+                <h3 class="heading">Box n</h3>
+                <p class="paragraph">Details about Box n</p>
+              </div>
+              {% for digit in digits %}
+                <div class="block-digit">
+                  <a class="digit-link" href="{% url 'inventory:details' digit.uuid %}">
+                      <figure class="base-rich-text-align-fullwidth base-rich-text-figure-type-image">
+                        <img src="{% static 'main/images/placeholder.svg' %}" alt="Image Description">
+                        <figcaption>{{ digit.name }}</figcaption>
+                      </figure> 
+                  </a>
+                </div> 
+              {% endfor %}
+            </div>
+          </div>
         </div>
       </div>
     </section> 

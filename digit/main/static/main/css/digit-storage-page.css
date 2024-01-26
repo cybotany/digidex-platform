@@ -1,7 +1,7 @@
 /***********************************************************************************************
  *  Digit System Storage Page - Collection Styles
  **********************************************************************************************/ 
-.digit-storage-page-body {
+.digit-storage-body {
   width: 100%;
   background-color: var(--white);
   border-radius: .87em;

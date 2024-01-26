@@ -18,7 +18,7 @@
   --accent-blue: rgba(57, 89, 255, .07);
 
   --navbar-background: rgba(138, 215, 160, 0.8);
-  --navbar-border: rgba(138, 215, 160, 0.3);
+  --navbar-border: 1px solid rgba(138, 215, 160, 0.3);
   
   --info-color: #3b6f95;
   --error-color: #e53935;
@@ -1205,8 +1205,8 @@ figcaption {
  .navbar {
   -webkit-backdrop-filter: blur(40px);
   backdrop-filter: blur(40px);
-  background-color: var(--navbar-background);
-  border-bottom: 1px solid var(--navbar-border);
+  background-color: rgba(0, 0, 0, 0);
+  border-bottom: 1px solid rgba(0, 0, 0, 0);
   flex-direction: column;
   justify-content: center;
   align-items: center;
