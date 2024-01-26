@@ -35,48 +35,52 @@
   </head>
   <body>
     {% include 'main/partials/navigation-bar.html' %}
-  
-    <!-- Digit Creation Page - Creation Form Section-->
-    <section class="section-full">
-      <div class="content">
-        <div class="account-form">
-          <div id="digitForm" class="form-block base-form">
-            <form method="post" class="form">
-              {% csrf_token %}
-              <!-- Handling the name field -->
-              <div class="form-group">
-                <label for="{{ form.name.id_for_label }}">Name</label>
-                <input type="text" class="text-field w-input name-field" name="{{ form.name.name }}" placeholder="Enter name" id="{{ form.name.id_for_label }}" {% if form.name.is_required %}required=""{% endif %} value="{{ form.name.value }}">
-                {% if form.name.errors %}
-                  <div class="error-message">
-                    <small>{{ form.name.errors|striptags }}</small>
-                  </div>
-                {% endif %}
-              </div>
-              <!-- Handling the description field -->
-              <div class="form-group">
-                <label for="{{ form.description.id_for_label }}">Description</label>
-                <textarea class="textarea-field w-input description-field" name="{{ form.description.name }}" placeholder="Enter description" id="{{ form.description.id_for_label }}" {% if form.description.is_required %}required=""{% endif %}>{{ form.description.value }}</textarea>
-                {% if form.description.errors %}
-                  <div class="error-message">
-                    <small>{{ form.description.errors|striptags }}</small>
-                  </div>
-                {% endif %}
-              </div>
-              <!-- Handling the taxonomic_unit field -->
-              <div class="form-group">
-                <label for="{{ form.taxonomic_unit.id_for_label }}">Taxonomic Unit</label>
-                <div class="select-container">
-                  <select class="w-input" name="{{ field.name }}" id="{{ field.id_for_label }}" {% if field.is_required %}required=""{% endif %}></select>
-                </div>
-                {% if form.taxonomic_unit.errors %}
+    <section class="section">
+      <div class="content-narrow">
+        <div class="digit-body creation">
+          <div class="block-heading center">
+            <h3 class="heading">Create a new digit</h3>
+            <p class="paragraph">Some text here</p>
+          </div>
+          <div class="account-form">
+            <div id="digitForm" class="form-block base-form">
+              <form method="post" class="form">
+                {% csrf_token %}
+                <!-- Handling the name field -->
+                <div class="form-group">
+                  <label for="{{ form.name.id_for_label }}">Name</label>
+                  <input type="text" class="text-field base-input name-field" name="{{ form.name.name }}" placeholder="Enter name" id="{{ form.name.id_for_label }}" {% if form.name.is_required %}required=""{% endif %} value="{{ form.name.value }}">
+                  {% if form.name.errors %}
                     <div class="error-message">
-                        <small>{{ form.taxonomic_unit.errors|striptags }}</small>
+                      <small>{{ form.name.errors|striptags }}</small>
                     </div>
-                {% endif %}
-              </div>
-              <input type="submit" value="Submit Digit Updates" data-wait="Please wait..." class="submit-button w-button">
-            </form>
+                  {% endif %}
+                </div>
+                <!-- Handling the description field -->
+                <div class="form-group">
+                  <label for="{{ form.description.id_for_label }}">Description</label>
+                  <textarea class="textarea-field base-input description-field" name="{{ form.description.name }}" placeholder="Enter description" id="{{ form.description.id_for_label }}" {% if form.description.is_required %}required=""{% endif %}>{{ form.description.value }}</textarea>
+                  {% if form.description.errors %}
+                    <div class="error-message">
+                      <small>{{ form.description.errors|striptags }}</small>
+                    </div>
+                  {% endif %}
+                </div>
+                <!-- Handling the taxonomic_unit field -->
+                <div class="form-group">
+                  <label for="{{ form.taxonomic_unit.id_for_label }}">Taxonomic Unit</label>
+                  <div class="select-container">
+                    <select class="base-input" name="{{ field.name }}" id="{{ field.id_for_label }}" {% if field.is_required %}required=""{% endif %}></select>
+                  </div>
+                  {% if form.taxonomic_unit.errors %}
+                      <div class="error-message">
+                          <small>{{ form.taxonomic_unit.errors|striptags }}</small>
+                      </div>
+                  {% endif %}
+                </div>
+                <input type="submit" value="Submit Digit Updates" data-wait="Please wait..." class="submit-button base-button">
+              </form>
+            </div>
           </div>
         </div>
       </div>

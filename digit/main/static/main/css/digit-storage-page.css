@@ -1,12 +1,11 @@
 /***********************************************************************************************
  *  Digit System Storage Page - Collection Styles
  **********************************************************************************************/ 
-.digit-storage-body {
+.digit-body.storage {
   width: 100%;
   background-color: var(--white);
   border-radius: .87em;
-  margin-bottom: 1em;
-  padding: 3em 10%;
+  padding: 4em 13%;
   box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
 }
 

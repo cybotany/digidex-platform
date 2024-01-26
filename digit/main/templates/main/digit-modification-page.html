@@ -41,72 +41,57 @@
   </head>
   <body>
     {% include 'main/partials/navigation-bar.html' %}  
-    <!-- Digit Modification Page - Header Section --> 
-    <section class="section-top padding-0">
-      <div class="content">
-        <div class="block-top">
-          <h3 class="heading-top">{{ digit.name }}</h3>
-          <p class="paragraph-top">Update as needed or delete your digit here.</p>
-        </div>
-      </div>
-    </section>
-    <!-- Digit Modification Page - Modification Form Section --> 
     <section class="section">
       <div class="content narrow">
-        <div class="account-form">
-          <div id="digitForm" class="form-block base-form">
-            <form method="post" class="form">
-              {% csrf_token %}
-                <div class="form-group">
-                  <input type="text" class="text-field base-input" maxlength="256" name="{{ form.name.name }}" placeholder="Name" id="{{ form.name.id_for_label }}" required="" value="{{ form.name.value }}">
-                  {% if form.name.errors %}
-                    <div class="error-message">
-                      <small>{{ form.name.errors|striptags }}</small>
-                    </div>
-                  {% endif %}
-                </div>
-                <div class="form-group">
-                  <textarea class="text-field textarea" name="{{ form.description.name }}" placeholder="Description" id="{{ form.description.id_for_label }}" required="">{{ form.description.value }}</textarea>
-                  {% if form.description.errors %}
-                    <div class="error-message">
-                      <small>{{ form.description.errors|striptags }}</small>
-                    </div>
-                  {% endif %}
-                </div>
-                <div class="form-group">
-                  <div class="select-container">
-                    <select class="text-field base-input" name="taxonomic_unit" id="tsnField" required>
-                      {% if digit.taxonomic_unit %}
-                        <option value="{{ digit.taxonomic_unit.id }}" selected="selected">{{ digit.taxonomic_unit }}</option>
-                      {% endif %}
-                    </select>
+        <div class="digit-body modification">
+          <div class="block-heading center">
+            <h3 class="heading">{{ digit.name }}</h3>
+            <p class="paragraph">Update or delete this digit</p>
+          </div>
+          <div class="account-form">
+            <div id="digitForm" class="form-block base-form">
+              <form method="post" class="form">
+                {% csrf_token %}
+                  <div class="form-group">
+                    <input type="text" class="text-field base-input" maxlength="256" name="{{ form.name.name }}" placeholder="Name" id="{{ form.name.id_for_label }}" required="" value="{{ form.name.value }}">
+                    {% if form.name.errors %}
+                      <div class="error-message">
+                        <small>{{ form.name.errors|striptags }}</small>
+                      </div>
+                    {% endif %}
                   </div>
-                  {% if form.taxonomic_unit.errors %}
-                    <div class="error-message">
-                      <small>{{ form.taxonomic_unit.errors|striptags }}</small>
+                  <div class="form-group">
+                    <textarea class="text-field textarea" name="{{ form.description.name }}" placeholder="Description" id="{{ form.description.id_for_label }}" required="">{{ form.description.value }}</textarea>
+                    {% if form.description.errors %}
+                      <div class="error-message">
+                        <small>{{ form.description.errors|striptags }}</small>
+                      </div>
+                    {% endif %}
+                  </div>
+                  <div class="form-group">
+                    <div class="select-container">
+                      <select class="text-field base-input" name="taxonomic_unit" id="tsnField" required>
+                        {% if digit.taxonomic_unit %}
+                          <option value="{{ digit.taxonomic_unit.id }}" selected="selected">{{ digit.taxonomic_unit }}</option>
+                        {% endif %}
+                      </select>
                     </div>
-                  {% endif %}
-              </div>
-              <input type="submit" value="Submit Digit Updates" class="submit-button base-button">
+                    {% if form.taxonomic_unit.errors %}
+                      <div class="error-message">
+                        <small>{{ form.taxonomic_unit.errors|striptags }}</small>
+                      </div>
+                    {% endif %}
+                </div>
+                <input type="submit" value="Submit Digit Updates" class="submit-button base-button">
+              </form>
+            </div>
+          </div>
+          <div class="button base-button">
+            <form action="{% url 'inventory:deletion' digit.uuid %}" class="button" method="post">
+              {% csrf_token %}
+              <input type="submit" value="Delete Digit" onclick="return confirm('Are you sure you want to delete this Digit? This action cannot be undone.');">
             </form>
           </div>
-        </div>
-      </div>
-    </section>
-    <!-- Digit Modification Page - Delete Digit Section --> 
-    <section class="section">
-      <div class="content narrow">
-        <div class="button-mobile">
-          <form action="{% url 'inventory:deletion' digit.uuid %}" class="button" method="post">
-            {% csrf_token %}
-            <input type="submit" value="Delete Digit" onclick="return confirm('Are you sure you want to delete this Digit? This action cannot be undone.');">
-          </form>
-        </div>
-        <div class="button-desktop">
-          <form action="{% url 'inventory:deletion' digit.uuid %}" class="button" method="post">
-            {% csrf_token %}
-            <input type="submit" value="Delete Digit" onclick="return confirm('Are you sure you want to delete this Digit? This action cannot be undone.');">
-          </form>
         </div>
       </div>
     </section>
