@@ -38,4 +38,4 @@ class DigitCreationView(LoginRequiredMixin, CreateView):
                 content=f'Registered Plant {digit.name}'
             )
 
-        return redirect('inventory:details', uuid=digit.uuid)
+        return redirect('inventory:details', digit_uuid=digit.uuid)

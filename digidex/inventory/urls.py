@@ -9,5 +9,4 @@ urlpatterns = [
     path('delete-digit/<uuid:digit_uuid>/', DigitDeletionView.as_view(), name='deletion'),
     path('view-digit/<uuid:digit_uuid>/', DigitDetailsView.as_view(), name='details'),
     path('modify-digit/<uuid:digit_uuid>/', DigitModificationView.as_view(), name='modification'),
-
 ]

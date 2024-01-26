@@ -33,4 +33,4 @@ class DigitModificationView(LoginRequiredMixin, UpdateView):
                 content=f'Updated Plant {self.object.name}'
             )
 
-        return redirect('inventory:details', uuid=self.object.uuid)
+        return redirect('inventory:details', digit_uuid=self.object.uuid)

@@ -82,7 +82,7 @@ class DigitDetailsView(LoginRequiredMixin, DetailView):
                 # Update the Digit's thumbnail with the validated image
                 #self.object.thumbnail.save(new_image_file.name, new_image_file, save=True)
 
-            return redirect(reverse('inventory:details', kwargs={'digit-uuid': self.object.uuid}))
+            return redirect(reverse('inventory:details', kwargs={'digit_uuid': self.object.uuid}))
 
         context = self.get_context_data()
         context['journal_form'] = form
