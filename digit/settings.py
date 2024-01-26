@@ -98,7 +98,6 @@ INSTALLED_APPS = [
     'digit.accounts.apps.AccountConfig',
     'digit.api',
     'digit.inventory',
-    'digit.journal',
     'digit.main',
     'digit.nfc',
     'digit.taxonomy',

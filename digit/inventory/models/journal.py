@@ -4,13 +4,13 @@ from django.db import models
 from digit.utils.custom_storage import PrivateMediaStorage
 from digit.utils.validators import validate_journal_entry
 
-def journal_entry_directory_path(instance, filename):
+def journal_image_directory_path(instance, filename):
     """
     Generates a unique filename using a combination of the instance's ID
     and a unique identifier.
 
     Args:
-        instance: The model instance (Profile or Entry).
+        instance: The model instance.
         filename: The original filename of the image.
 
     Returns:
@@ -21,7 +21,8 @@ def journal_entry_directory_path(instance, filename):
     timestamp = datetime.now().strftime('%Y%m%d%H%M%S%f')
     return f'digit-{instance.digit.id}/entry-{timestamp}{ext}'
 
-class Entry(models.Model):
+
+class Journal(models.Model):
     """
     Represents journal entries associated with digitized plants.
 
@@ -42,7 +43,7 @@ class Entry(models.Model):
         __str__: Returns a string representation of the journal entry.
     """
     digit = models.ForeignKey(
-        'inventory.Digit', 
+        'Journal', 
         on_delete=models.CASCADE,
         related_name='journal_entries',
         help_text="The digitized plant to which this journal entry is related."
@@ -63,7 +64,7 @@ class Entry(models.Model):
         help_text="The textual content of the journal entry."
     )
     image = models.ImageField(
-        upload_to=journal_entry_directory_path,
+        upload_to=journal_image_directory_path,
         storage=PrivateMediaStorage(), 
         validators=[validate_journal_entry],
         null=True,

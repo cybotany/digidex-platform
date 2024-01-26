@@ -9,7 +9,7 @@ from django.views.generic import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
 from digit.inventory.models import Digit
-from digit.journal.forms import CreateJournalEntry
+from digit.inventory.forms import JournalEntryForm
 from digit.utils.constants import MAX_DIGIT_THUMBNAIL_DIMMENSIONS
 
 
@@ -30,7 +30,7 @@ class DigitDetailsView(LoginRequiredMixin, DetailView):
 
         # Initialize the form with the current digit and user
         if self.request.method == 'GET':
-            context['journal_form'] = CreateJournalEntry(initial={
+            context['journal_form'] = JournalEntryForm(initial={
                 'digit': self.object,
                 'user': self.request.user
             })
@@ -60,7 +60,7 @@ class DigitDetailsView(LoginRequiredMixin, DetailView):
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        form = CreateJournalEntry(request.POST, request.FILES)
+        form = JournalEntryForm(request.POST, request.FILES)
 
         if form.is_valid():
             journal_entry = form.save(commit=False)
