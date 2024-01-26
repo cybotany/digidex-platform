@@ -9,7 +9,7 @@ from django.views.generic import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
 from digidex.inventory.models import Digit
-from digidex.inventory.forms import JournalEntryForm
+from digidex.inventory.forms import CreateJournalEntry
 from digidex.utils.constants import MAX_DIGIT_THUMBNAIL_DIMMENSIONS
 
 
@@ -30,7 +30,7 @@ class DigitDetailsView(LoginRequiredMixin, DetailView):
 
         # Initialize the form with the current digit and user
         if self.request.method == 'GET':
-            context['journal_form'] = JournalEntryForm()
+            context['journal_form'] = CreateJournalEntry()
 
         journal_entries = self.object.journal_entries.all()
         context['journal_entries'] = journal_entries[:10]
@@ -57,7 +57,7 @@ class DigitDetailsView(LoginRequiredMixin, DetailView):
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        form = JournalEntryForm(request.POST, request.FILES)
+        form = CreateJournalEntry(request.POST, request.FILES)
 
         if form.is_valid():
             journal_entry = form.save(commit=False)

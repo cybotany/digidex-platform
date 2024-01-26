@@ -2,7 +2,7 @@ from django import forms
 from digidex.inventory.models import Journal
 
 
-class JournalEntryForm(forms.ModelForm):
+class CreateJournalEntry(forms.ModelForm):
     """
     Form for creating a new journal entry.
     """
@@ -12,4 +12,4 @@ class JournalEntryForm(forms.ModelForm):
         fields = ('content', 'image', 'watered', 'fertilized', 'cleaned')
 
     def __init__(self, *args, **kwargs):
-        super(JournalEntryForm, self).__init__(*args, **kwargs)
+        super(CreateJournalEntry, self).__init__(*args, **kwargs)
