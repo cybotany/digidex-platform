@@ -62,81 +62,83 @@
                 <p class="base-rich-text-figcaption">Recent image of {{ digit.name }}</p>
               </figcaption>
             </figure>
-            <!-- Journal Entries -->
-            <div class="journal-container">
-              <ol start="" role="list">
-                {% for entry in journal_entries %}
-                  <li>
-                    <div class="journal-entry">
-                      <div class="journal-entry-header">
-                        <span class="journal-entry-number">{{ forloop.counter }}.</span>
-                        <span class="journal-entry-date">Date: {{ entry.created_at|date:"Y-m-d H:i" }}</span>
-                        <span class="journal-entry-author">Author: {{ entry.user }}</span>
+            <div class="journal-body">
+              <!-- Journal Entries -->
+              <div class="journal-container">
+                <ol start="" role="list">
+                  {% for entry in journal_entries %}
+                    <li>
+                      <div class="journal-entry">
+                        <div class="journal-entry-header">
+                          <span class="journal-entry-number">{{ forloop.counter }}.</span>
+                          <span class="journal-entry-date">Date: {{ entry.created_at|date:"Y-m-d H:i" }}</span>
+                          <span class="journal-entry-author">Author: {{ entry.user }}</span>
+                        </div>
+                        <p class="journal-entry-content">{{ entry.content }}</p>
                       </div>
-                      <p class="journal-entry-content">{{ entry.content }}</p>
-                    </div>
-                  </li>
-                {% empty %}
-                  <li>No journal entries available.</li>
-                {% endfor %}
-              </ol>
-            </div>
-            <!-- Journal Entry Form -->
-            <div class="accordion-item">
-              <!-- Clickable header for toggling the form -->
-              <div class="accordion-header" onclick="toggleJournalEntry()">
-                <h4 class="heading-accordion">Create Journal Entry</h4>
-                <div class="block-icon-accordion" id="toggleIcon">
-                  <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);background-color:rgba(57,89,255,0.07);border-color:rgba(255,255,255,0.2)" class="block-icon-accordion"><img src="{% static 'main/images/close.svg' %}" loading="eager" alt="" class="icon-accordion"></div>
+                    </li>
+                  {% empty %}
+                    <li>No journal entries available.</li>
+                  {% endfor %}
+                </ol>
+              </div>
+              <!-- Journal Entry Form -->
+              <div class="accordion-item">
+                <!-- Clickable header for toggling the form -->
+                <div class="accordion-header" onclick="toggleJournalEntry()">
+                  <h4 class="heading-accordion">Create Journal Entry</h4>
+                  <div class="block-icon-accordion" id="toggleIcon">
+                    <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(45deg) skew(0, 0);background-color:rgba(57,89,255,0.07);border-color:rgba(255,255,255,0.2)" class="block-icon-accordion"><img src="{% static 'main/images/close.svg' %}" loading="eager" alt="" class="icon-accordion"></div>
+                  </div>
+                </div>
+                <!-- Container for Journal Form -->
+                <div id="journalEntry" style="display: none;">
+                  <div class="journal-entry-form">
+                    <h5 class="heading-journal-entry">New Journal Entry</h5>
+                      <div class="form-block base-form">
+                        <form method="post" class="form" enctype="multipart/form-data">
+                          {% csrf_token %}
+                          <div>
+                            <label class="checkbox-label">
+                              <input type="checkbox" class="checkbox-input" name="watered" id="id_watered">
+                              Watered
+                            </label>
+                          </div>
+                          <div>
+                            <label class="checkbox-label">
+                                <input type="checkbox" class="checkbox-input" name="fertilized" id="id_fertilized">
+                              Fertilized
+                            </label>
+                          </div>
+                          <div>
+                            <label class="checkbox-label">
+                                <input type="checkbox" class="checkbox-input" name="cleaned" id="id_cleaned">
+                                Cleaned
+                            </label>
+                          </div>
+                          <div class="form-group">
+                            <textarea class="text-field textarea" maxlength="1000" name="content" placeholder="Your entry content" id="content" required=""></textarea>
+                              {% if form.content.errors %}
+                                <div class="error-message">
+                                  <small>{{ form.content.errors|striptags }}</small>
+                                </div>
+                              {% endif %}
+                          </div>
+                          <div class="form-group">
+                            <input type="file" class="text-field file-upload-input" name="image" id="image">
+                              {% if form.image.errors %}
+                                <div class="error-message">
+                                  <small>{{ form.image.errors|striptags }}</small>
+                                </div>
+                              {% endif %}
+                          </div>
+                          <input type="submit" value="Submit Entry" data-wait="Please wait..." class="submit-button">
+                        </form>                    
+                      </div>
+                  </div>
                 </div>
               </div>
-              <!-- Container for Journal Form -->
-              <div id="journalEntry" style="display: none;">
-                <div class="journal-entry-form">
-                  <h5 class="heading-journal-entry">New Journal Entry</h5>
-                    <div class="form-block base-form">
-                      <form method="post" class="form" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <div>
-                          <label class="checkbox-label">
-                            <input type="checkbox" class="checkbox-input" name="watered" id="id_watered">
-                            Watered
-                          </label>
-                        </div>
-                        <div>
-                          <label class="checkbox-label">
-                              <input type="checkbox" class="checkbox-input" name="fertilized" id="id_fertilized">
-                            Fertilized
-                          </label>
-                        </div>
-                        <div>
-                          <label class="checkbox-label">
-                              <input type="checkbox" class="checkbox-input" name="cleaned" id="id_cleaned">
-                              Cleaned
-                          </label>
-                        </div>
-                        <div class="form-group">
-                          <textarea class="text-field textarea" maxlength="1000" name="content" placeholder="Your entry content" id="content" required=""></textarea>
-                            {% if form.content.errors %}
-                              <div class="error-message">
-                                <small>{{ form.content.errors|striptags }}</small>
-                              </div>
-                            {% endif %}
-                        </div>
-                        <div class="form-group">
-                          <input type="file" class="text-field file-upload-input" name="image" id="image">
-                            {% if form.image.errors %}
-                              <div class="error-message">
-                                <small>{{ form.image.errors|striptags }}</small>
-                              </div>
-                            {% endif %}
-                        </div>
-                        <input type="submit" value="Submit Entry" data-wait="Please wait..." class="submit-button">
-                      </form>                    
-                    </div>
-                </div>
-              </div>
-            </div>          
+            </div>     
           </div>
         </div>
       </div>

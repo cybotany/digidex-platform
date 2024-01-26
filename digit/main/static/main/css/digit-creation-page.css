@@ -5,3 +5,40 @@
   padding: 4em 13%;
   box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
 }
+
+@media screen and (max-width: 991px) {  
+  .digit-body.creation {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+
+  .grid-care {
+    grid-column-gap: 1.13em;
+    grid-row-gap: 1.13em;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .digit-body.creation {
+    padding-top: 2.9em;
+    padding-bottom: 2.9em;
+  }
+
+  .grid-care {
+    grid-column-gap: .87em;
+    grid-row-gap: .87em;
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .digit-body.creation {
+    padding-top: 2.5em;
+    padding-bottom: 2.5em;
+  }
+
+  .care {
+    padding: 2em;
+  }
+}

@@ -65,6 +65,11 @@
 }
 
 @media screen and (max-width: 991px) {
+  .digit-body.storage {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+
   .grid-digit {
     grid-template-columns: 1fr 1fr 1fr;
   }
@@ -79,6 +84,11 @@
 }
 
 @media screen and (max-width: 767px) {
+  .digit-body.storage {
+    padding-top: 2.9em;
+    padding-bottom: 2.9em;
+  }
+
   .grid-digits {
     grid-template-columns: 1fr 1fr;
   }
@@ -89,6 +99,11 @@
 }
 
 @media screen and (max-width: 479px) {
+  .digit-body.storage {
+    padding-top: 2.5em;
+    padding-bottom: 2.5em;
+  }
+
   .grid-digits {
     grid-template-columns: 1fr;
   }

@@ -6,11 +6,6 @@
   box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
 }
 
-
-
-/***********************************************************************************************
- *  Digit Page - Detail Section
- **********************************************************************************************/
 .image-main-digit {
   width: 100%;
   object-fit: cover;
@@ -23,14 +18,6 @@
   padding: 10px;
   border: 1px solid #ccc;
   margin-bottom: 20px;
-}
-
-.digit-body {
-  width: 100%;
-  background-color: var(--white);
-  border-radius: .87em;
-  padding: 4em 13%;
-  box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
 }
 
 .digit-main-image {
@@ -48,6 +35,23 @@
   margin-bottom: 1.4em;
 }
 
+.journal-entry-form {
+  z-index: 50;
+  width: 100%;
+  max-width: 32em;
+  background-color: var(--white);
+  text-align: center;
+  border-radius: .87em;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 3.1em;
+  display: flex;
+  position: relative;
+  box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
+}
 /***********************************************************************************************
  *  Digit Page - Taxonomy Section
  **********************************************************************************************/
@@ -126,7 +130,7 @@
 .block-icon-care {
   width: 4.5em;
   height: 4.5em;
-  background-color: var(--accent-green);
+  background-color: var(--strong-green);
   border-radius: .87em;
   flex-direction: column;
   justify-content: center;
@@ -169,88 +173,6 @@
 
 .paragraph-care.blue {
   color: var(--strong-blue);
-}
-
-/***********************************************************************************************
- *  Digit Page - Journal Entry Section
- **********************************************************************************************/
-.page-body {
-  width: 100%;
-  background-color: var(--white);
-  border-radius: .87em;
-  margin-bottom: 1em;
-  padding: 5em 13%;
-  box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
-}
-
-.grid-faq {
-  grid-column-gap: 1.13em;
-  grid-row-gap: 1.13em;
-  grid-template-rows: auto;
-  align-items: start;
-}
-
-.block-faq {
-  grid-column-gap: 1.13em;
-  grid-row-gap: 1.13em;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: stretch;
-  display: flex;
-}
-
-.accordion-item {
-  width: 100%;
-  background-color: var(--white);
-  border-radius: .87em;
-  padding-left: 1.8em;
-  padding-right: 1.2em;
-  box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
-}
-
-.accordion-header {
-  grid-column-gap: 1em;
-  cursor: pointer;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 1em;
-  padding-bottom: 1em;
-  transition: padding .3s cubic-bezier(.25, .46, .45, .94);
-  display: flex;
-}
-
-.accordion-header:hover {
-  padding-left: .3em;
-  padding-right: .3em;
-}
-
-.heading-accordion {
-  margin-top: .3em;
-  margin-bottom: .3em;
-}
-
-.block-icon-accordion {
-  width: 2.12em;
-  height: 2.12em;
-  background-color: var(--accent-red);
-  border: 1px solid rgba(255, 255, 255, .2);
-  border-radius: 100%;
-  flex: none;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-}
-
-.icon-accordion {
-  width: 1.5em;
-  height: 1.5em;
-  flex: none;
-}
-
-.accordion-content {
-  display: block;
-  overflow: hidden;
 }
 
 @media screen and (max-width: 991px) {  

@@ -2228,6 +2228,7 @@ figcaption {
   align-items: stretch;
   display: flex;
 }
+
 .accordion-item {
   width: 100%;
   background-color: var(--white);
@@ -4367,6 +4368,17 @@ color: rgba(20, 23, 24, .6);
 
 .utility-paragraph.page-email-confirmation {
   margin-top: .6em;
+}
+
+/****************************************************
+ * Inventory App - Base Styles
+ ****************************************************/
+.digit-body {
+  width: 100%;
+  background-color: var(--white);
+  border-radius: .87em;
+  padding: 4em 13%;
+  box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
 }
 
 @media screen and (max-width: 991px) {
