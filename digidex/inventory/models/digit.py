@@ -47,7 +47,7 @@ class Digit(models.Model):
         help_text="The taxonomic classification of the digitized plant."
     )
     nfc_link = models.OneToOneField(
-        'nfc.Link',
+        'Link',
         on_delete=models.CASCADE,
         related_name='digit',
         help_text="NFC link for the digitized plant."
@@ -106,7 +106,7 @@ class Digit(models.Model):
         Returns:
             str: The URL to view the details of this digit.
         """
-        return reverse('inventory:details', kwargs={'uuid': self.uuid})
+        return reverse('inventory:details', kwargs={'digit_uuid': self.uuid})
 
     class Meta:
         verbose_name = "Digit"

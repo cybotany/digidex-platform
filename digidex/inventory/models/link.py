@@ -80,7 +80,7 @@ class Link(models.Model):
         Returns:
             str: The absolute URL for the Link instance.
         """
-        return reverse('nfc:linking', kwargs={'uuid': self.uuid})
+        return reverse('inventory:linking', kwargs={'link_uuid': self.uuid})
 
     def __str__(self):
         """
