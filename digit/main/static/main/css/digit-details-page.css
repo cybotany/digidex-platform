@@ -6,18 +6,13 @@
   box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
 }
 
-.image-main-digit {
-  width: 100%;
-  object-fit: cover;
-  border-radius: .87em;
+.digit-modification-link {
+  margin-bottom: 1.3em;
+  text-decoration: none;
 }
-
-.journal-container {
-  max-height: 400px;
-  overflow-y: auto;
-  padding: 10px;
-  border: 1px solid #ccc;
-  margin-bottom: 20px;
+  
+.digit-modification-link.large {
+  margin-bottom: 1.4em;
 }
 
 .digit-main-image {
@@ -26,13 +21,57 @@
   border-radius: .87em;
 }
 
-.digit-modification-link {
-  margin-bottom: 1.3em;
-  text-decoration: none;
+.journal-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1em;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
 }
-  
-.digit-modification-link.large {
-  margin-bottom: 1.4em;
+
+.journal-container ol {
+  padding: 0;
+  list-style: none;
+}
+
+.journal-entry {
+  border-bottom: 1px solid #eee; /* Light separator for each entry */
+  padding: 1em 0;
+}
+
+.journal-entry-header {
+  font-size: 0.9em;
+  color: #666; /* Subdued color for meta info */
+  margin-bottom: 0.5em;
+}
+
+.journal-entry-date, .journal-entry-author {
+  display: block; /* Or inline-block, based on preference */
+  margin-right: 1em;
+}
+
+.journal-entry-content {
+  font-size: 1em; /* Adjust as needed */
+  color: var(--strong-green); /* Or another primary color */
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .journal-entry-header {
+    font-size: 0.8em;
+  }
+
+  .journal-entry-content {
+    font-size: 0.95em;
+  }
+}
+
+/* Styling for 'No journal entries available' */
+.journal-container li {
+  color: #888; /* Subtle color indicating no content */
 }
 
 .journal-entry-form {

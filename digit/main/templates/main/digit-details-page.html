@@ -48,7 +48,7 @@
               <p class="paragraph">{{ digit.description }}</p>
             </div>
             <!-- Digit Images -->
-            <figure style="max-width:882px" class="base-rich-text-align-fullwidth base-rich-text-figure-type-image image-main-digit">
+            <figure style="max-width:882px" class="base-rich-text-align-fullwidth base-rich-text-figure-type-image main-digit-image">
               {% if last_image %}
                 <div>
                   <img src="{{ last_image.url }}" loading="lazy" alt="Recent image of {{ digit.name }}">
@@ -70,7 +70,6 @@
                     <li>
                       <div class="journal-entry">
                         <div class="journal-entry-header">
-                          <span class="journal-entry-number">{{ forloop.counter }}.</span>
                           <span class="journal-entry-date">Date: {{ entry.created_at|date:"Y-m-d H:i" }}</span>
                           <span class="journal-entry-author">Author: {{ entry.user }}</span>
                         </div>
