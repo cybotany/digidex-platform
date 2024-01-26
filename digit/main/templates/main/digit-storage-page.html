@@ -36,27 +36,27 @@
   <body>
     {% include 'main/partials/navigation-bar.html' %}
     <!-- Digit Storage System Page - Storage System Section-->
-    <section class="section-full">
+    <section class="section">
       <div class="content narrow">
         <div class="digit-storage-body">
-          <div class="rich-text-block base-rich-text">
-            <div class="layout-grid grid-digits">
-              <div class="block-heading center">
-                <div class="subtitle">Storage System</div>
-                <h3 class="heading">Box n</h3>
-                <p class="paragraph">Details about Box n</p>
-              </div>
-              {% for digit in digits %}
-                <div class="block-digit">
+          <div class="block-heading center">
+            <div class="subtitle">Storage System</div>
+            <h3 class="heading">Box n</h3>
+            <p class="paragraph">Details about Box n</p>
+          </div>
+          <div class="layout-grid grid-digits">
+            {% for digit in digits %}
+              <div class="block-digit">
+                <div class="rich-text-block base-rich-text">
                   <a class="digit-link" href="{% url 'inventory:details' digit.uuid %}">
-                      <figure class="base-rich-text-align-fullwidth base-rich-text-figure-type-image">
-                        <img src="{% static 'main/images/placeholder.svg' %}" alt="Image Description">
-                        <figcaption>{{ digit.name }}</figcaption>
-                      </figure> 
+                    <figure class="base-rich-text-align-fullwidth base-rich-text-figure-type-image">
+                      <img src="{% static 'main/images/placeholder.svg' %}" alt="Image Description">
+                      <figcaption>{{ digit.name }}</figcaption>
+                    </figure> 
                   </a>
                 </div> 
+              </div>
               {% endfor %}
-            </div>
           </div>
         </div>
       </div>
