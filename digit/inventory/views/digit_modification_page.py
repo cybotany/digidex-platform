@@ -2,14 +2,14 @@ from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.edit import UpdateView
 from django.db import transaction
-from digit.inventory.forms import DigitForm
+from digit.inventory.forms import ModifyDigitForm
 from digit.inventory.models import Digit
 from digit.accounts.models import Activity
 
 
 class DigitModificationView(UpdateView):
     model = Digit
-    form_class = DigitForm
+    form_class = ModifyDigitForm
     template_name = 'main/digit-modification-page.html'
 
     def get_object(self, queryset=None):

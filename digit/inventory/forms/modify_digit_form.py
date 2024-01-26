@@ -2,9 +2,9 @@ from django import forms
 from digit.inventory.models import Digit
 
 
-class DigitForm(forms.ModelForm):
+class ModifyDigitForm(forms.ModelForm):
     """
-    Form for creating or modifying an existing digit's details.
+    Form for modifying an existing digit's details.
     """
 
     class Meta:
@@ -12,4 +12,4 @@ class DigitForm(forms.ModelForm):
         fields = ('name', 'description', 'taxonomic_unit',)
 
     def __init__(self, *args, **kwargs):
-        super(DigitForm, self).__init__(*args, **kwargs)
+        super(ModifyDigitForm, self).__init__(*args, **kwargs)

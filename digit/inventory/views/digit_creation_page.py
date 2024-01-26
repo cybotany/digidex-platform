@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.edit import CreateView
 from django.db import transaction
-from digit.inventory.forms import DigitForm
+from digit.inventory.forms import CreateDigitForm
 from digit.inventory.models import Digit
 from digit.nfc.models import Link
 from digit.accounts.models import Activity
@@ -9,7 +9,7 @@ from digit.accounts.models import Activity
 
 class DigitCreationView(CreateView):
     model = Digit
-    form_class = DigitForm
+    form_class = CreateDigitForm
     template_name = 'main/digit-creation-page.html'
 
     def get_form_kwargs(self):
