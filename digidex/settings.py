@@ -99,7 +99,6 @@ INSTALLED_APPS = [
     'digidex.api',
     'digidex.inventory',
     'digidex.main',
-    'digidex.nfc',
     'digidex.taxonomy',
     'digidex.utils',
 ]

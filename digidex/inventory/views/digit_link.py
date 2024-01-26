@@ -7,7 +7,7 @@ from digidex.inventory.models import Digit, Link
 
 class DigitLinkView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
-        link_uuid = kwargs.get('link-uuid')
+        link_uuid = kwargs.get('link_uuid')
 
         if not link_uuid:
             return HttpResponse("No PK provided", status=400)

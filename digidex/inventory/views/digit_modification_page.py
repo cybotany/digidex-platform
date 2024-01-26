@@ -14,7 +14,7 @@ class DigitModificationView(LoginRequiredMixin, UpdateView):
     template_name = 'main/digit-modification-page.html'
 
     def get_object(self, queryset=None):
-        digit_uuid = self.kwargs.get('digit-uuid')
+        digit_uuid = self.kwargs.get('digit_uuid')
         obj = get_object_or_404(Digit, uuid=digit_uuid)
 
         if obj.nfc_link.user != self.request.user:
