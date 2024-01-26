@@ -8,21 +8,20 @@
 
 @media screen and (max-width: 991px) {  
   .digit-body.modification {
-    padding-left: 10%;
-    padding-right: 10%;
+    padding: 4em 10%;
   }
 }
 
 @media screen and (max-width: 767px) {
   .digit-body.modification {
-    padding-top: 2.9em;
-    padding-bottom: 2.9em;
+    padding-top: 3em;
+    padding-bottom: 3em;
   }
 }
 
 @media screen and (max-width: 479px) {
   .digit-body.modification {
-    padding-top: 2.5em;
-    padding-bottom: 2.5em;
+    padding-top: 2em;
+    padding-bottom: 2em;
   }
 }
