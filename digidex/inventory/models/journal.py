@@ -43,7 +43,7 @@ class Journal(models.Model):
         __str__: Returns a string representation of the journal entry.
     """
     digit = models.ForeignKey(
-        'Journal', 
+        'Digit', 
         on_delete=models.CASCADE,
         related_name='journal_entries',
         help_text="The digitized plant to which this journal entry is related."
