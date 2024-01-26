@@ -1,1 +1,1 @@
-from .contact_us import ContactModel
+from .contact_us import Contact

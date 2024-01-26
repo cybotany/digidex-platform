@@ -1,10 +1,10 @@
 from django import forms
-from digidex.main.models import ContactModel
+from digidex.main.models import Contact
 
 
 class ContactForm(forms.ModelForm):
     class Meta:
-        model = ContactModel
+        model = Contact
         fields = ['name', 'email', 'message']
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Name'}),
