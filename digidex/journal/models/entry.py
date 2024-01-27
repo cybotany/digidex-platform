@@ -23,12 +23,11 @@ class Entry(models.Model):
     It also supports attaching an image to each journal entry.
 
     Attributes:
-        watered (BooleanField): Indicates whether the digitized plant was watered in this journal entry.
-        fertilized (BooleanField): Indicates whether the digitized plant was fertilized in this journal entry.
-        cleaned (BooleanField): Indicates whether the digitized plant was cleaned in this journal entry.
-        created_at (DateTimeField): The date and time when the journal entry was created, automatically set when the journal entry is created.
+        collection (ForeignKey): The Journal Collection this entry is a part of.
         content (TextField): The textual content of the journal entry.
         image (ImageField): An optional image associated with the journal entry, supporting specific file extensions.
+        created_at (DateTimeField): The date and time when the journal entry was created, automatically set when the journal entry is created.
+        last_modified (DateTimeField): The date and time when the journal entry was last modified, automatically set whenever the journal entry is edited.
 
     Methods:
         __str__: Returns a string representation of the journal entry.
@@ -39,25 +38,8 @@ class Entry(models.Model):
         related_name='journal_entries',
         help_text="The collection to which this journal entry belongs."
     )
-    watered = models.BooleanField(
-        default=False,
-        verbose_name="Watered",
-        help_text="Indicates whether the digitized plant was watered in this journal entry."
-    )
-    fertilized = models.BooleanField(
-        default=False,
-        verbose_name="Fertilized",
-        help_text="Indicates whether the digitized plant was fertilized in this journal entry."
-    )
-    cleaned = models.BooleanField(
-        default=False,
-        verbose_name="Cleaned",
-        help_text="Indicates whether the digitized plant was cleaned in this journal entry."
-    )
     content = models.TextField(
         verbose_name="Content",
-        null=True,
-        blank=True,
         help_text="The textual content of the journal entry."
     )
     image = models.ImageField(

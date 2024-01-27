@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
 from digidex.inventory.forms import DigitForm
 from digidex.inventory.models import Digit, Link
+from digidex.journal.models import Collection
 from digidex.accounts.models import Activity
 
 
@@ -22,11 +23,16 @@ class DigitCreationView(LoginRequiredMixin, CreateView):
         link = get_object_or_404(Link, uuid=link_uuid)
 
         with transaction.atomic():
+            # Prepare the Digit instance but don't save it yet
             digit = form.save(commit=False)
             digit.nfc_link = link
+
+            # Create a new Journal Collection instance
+            journal_collection = Collection.objects.create()
+            digit.journal_collection = journal_collection
             digit.save()
-            
-            # Update the Link objects
+
+            # Update the Link object
             link.user = self.request.user
             link.active = True
             link.save()
