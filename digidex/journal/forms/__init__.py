@@ -1,1 +1,1 @@
-from .create_entry_form import CreateEntryForm
+from .create_journal_entry import JournalEntryForm
