@@ -2,7 +2,7 @@ from django import forms
 from digidex.inventory.models import Digit
 
 
-class CreateDigitForm(forms.ModelForm):
+class DigitForm(forms.ModelForm):
     """
     Form for creating a digit.
     """
@@ -12,4 +12,4 @@ class CreateDigitForm(forms.ModelForm):
         fields = ('name', 'description', 'taxonomic_unit',)
 
     def __init__(self, *args, **kwargs):
-        super(CreateDigitForm, self).__init__(*args, **kwargs)
+        super(DigitForm, self).__init__(*args, **kwargs)

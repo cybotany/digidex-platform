@@ -1,16 +1,8 @@
-from datetime import datetime
-from PIL import Image
-from io import BytesIO
-from django.core.files.base import ContentFile
 from django.core.exceptions import PermissionDenied
-from django.shortcuts import redirect
-from django.urls import reverse
 from django.views.generic import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
 from digidex.inventory.models import Digit
-from digidex.inventory.forms import CreateJournalEntry
-from digidex.utils.constants import MAX_DIGIT_THUMBNAIL_DIMMENSIONS
 
 
 class DigitDetailsView(LoginRequiredMixin, DetailView):
@@ -25,7 +17,7 @@ class DigitDetailsView(LoginRequiredMixin, DetailView):
             raise PermissionDenied
         return obj
 
-    def get_context_data(self, **kwargs):
+''' def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         # Initialize the form with the current digit and user
@@ -87,3 +79,4 @@ class DigitDetailsView(LoginRequiredMixin, DetailView):
         context = self.get_context_data()
         context['journal_form'] = form
         return self.render_to_response(context)
+'''

@@ -1,0 +1,16 @@
+<div class="journal-container">
+  <ol start="" role="list">
+    {% for entry in journal_entries %}
+      <li>
+        <div class="journal-entry">
+          <div class="journal-entry-header"></div>
+          <span class="journal-entry-date">Date: {{ entry.created_at|date:"Y-m-d H:i" }}</span>
+          <span class="journal-entry-author">Author: {{ entry.user }}</span>
+          <p class="journal-entry-content">{{ entry.content }}</p>
+        </div>
+      </li>
+    {% empty %}
+      <li>No journal entries available.</li>
+    {% endfor %}
+  </ol>
+</div>

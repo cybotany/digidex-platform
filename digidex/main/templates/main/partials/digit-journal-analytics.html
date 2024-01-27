@@ -1,0 +1,34 @@
+{% load static %}
+<section class="section">
+  <div class="'content narrow">
+    <div class="layout-grid grid-care">
+      <div class="care"> 
+        <div class="block-icon-care"><img src="{% static 'main/images/food.svg' %}" loading="eager" alt="" class="icon-care"></div>
+        <h4 class="heading-care">Fertilizing</h4>
+        {% if last_fertilizing_date %}
+          <p class="paragraph-care">Last Fertilized: {{ last_fertilizing_date|date:"Y-m-d" }} ({{ days_since_last_fertilizing }} days ago)</p>
+        {% else %}
+          <p class="paragraph-care">No fertilizing entries recorded.</p>
+        {% endif %}
+      </div>  
+      <div class="care red">
+        <div class="block-icon-care red"><img src="{% static 'main/images/clean.svg' %}" loading="eager" alt="" class="icon-care"></div>
+        <h4 class="heading-care red">Cleaning</h4>
+        {% if last_cleaning_date %}
+          <p class="paragraph-care red">Last Cleaned: {{ last_cleaning_date|date:"Y-m-d" }} ({{ days_since_last_cleaning }} days ago)</p>
+        {% else %}
+          <p class="paragraph-care red">No cleaning entries recorded.</p>
+        {% endif %}
+      </div> 
+      <div class="care blue">
+        <div class="block-icon-care blue"><img src="{% static 'main/images/water.svg' %}" loading="eager" alt="" class="icon-care"></div>
+        <h4 class="heading-care blue">Watering</h4>
+        {% if last_watering_date %}
+          <p class="paragraph-care blue">Last Watered: {{ last_watering_date|date:"Y-m-d" }} ({{ days_since_last_watering }} days ago)</p>
+        {% else %}
+          <p class="paragraph-care blue">No watering entries recorded.</p>
+        {% endif %}
+      </div> 
+    </div>
+  </div>
+</section>

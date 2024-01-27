@@ -1,12 +1,6 @@
-import os
 import uuid
 from django.db import models
 from django.urls import reverse
-from digidex.utils.validators import validate_digit_thumbnail
-
-def digit_thumbnail_directory_path(instance, filename):
-    ext = os.path.splitext(filename)[1]
-    return f'digit-{instance.id}/thumbnail{ext}'
 
 
 class Digit(models.Model):
@@ -21,6 +15,7 @@ class Digit(models.Model):
         description (TextField): A short description of the digitized plant.
         taxonomic_unit (ForeignKey): A relationship to the Unit model, representing the plant's taxonomic classification.
         nfc_link (OneToOneField): A relationship to the Link model, representing the NFC link for the digitized plant.
+        journal_collection (OneToOneField): A relationship to the Link model, representing the NFC link for the digitized plant.
         uuid (UUIDField): The unique identifier associated with the NFC tag or identification mechanism.
         created_at (DateTimeField): The date and time when the Digit instance was created.
         last_modified (DateTimeField): The date and time when the Digit instance was last modified.
@@ -52,19 +47,18 @@ class Digit(models.Model):
         related_name='digit',
         help_text="NFC link for the digitized plant."
     )
+    journal_collection = models.OneToOneField(
+        'journal.Collection',
+        on_delete=models.CASCADE,
+        related_name='digit',
+        help_text="The journal for the digitized plant."
+    )
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
         db_index=True,
-        verbose_name="Tag UID",
+        verbose_name="Digit UUID",
         help_text="The unique identifier associated with the NFC tag or identification mechanism."
-    )
-    thumbnail = models.ImageField(
-        upload_to=digit_thumbnail_directory_path,
-        validators=[validate_digit_thumbnail],
-        null=True,
-        blank=True,
-        help_text="Thumbnail image for the digitized plant."
     )
     created_at = models.DateTimeField(
         auto_now_add=True,

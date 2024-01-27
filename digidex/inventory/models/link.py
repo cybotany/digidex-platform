@@ -19,7 +19,6 @@ class Link(models.Model):
         created_at (DateTimeField): The date and time when the Link instance was created.
         last_modified (DateTimeField): The date and time when the Link instance was last modified.
     """
-
     serial_number = models.CharField(
         max_length=32,
         unique=True,

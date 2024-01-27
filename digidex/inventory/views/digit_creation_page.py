@@ -2,14 +2,14 @@ from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
-from digidex.inventory.forms import CreateDigitForm
+from digidex.inventory.forms import DigitForm
 from digidex.inventory.models import Digit, Link
 from digidex.accounts.models import Activity
 
 
 class DigitCreationView(LoginRequiredMixin, CreateView):
     model = Digit
-    form_class = CreateDigitForm
+    form_class = DigitForm
     template_name = 'main/digit-creation-page.html'
 
     def get_form_kwargs(self):
