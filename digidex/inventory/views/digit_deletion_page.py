@@ -4,7 +4,6 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
 from digidex.inventory.models import Digit
-from digidex.accounts.models import Activity
 
 
 class DigitDeletionView(LoginRequiredMixin, DeleteView):
@@ -12,8 +11,8 @@ class DigitDeletionView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('inventory:storage')
 
     def get_object(self, queryset=None):
-        digit_uuid = self.kwargs.get('digit_uuid')
-        return get_object_or_404(Digit, uuid=digit_uuid)
+        uuid = self.kwargs.get('uuid')
+        return get_object_or_404(Digit, uuid=uuid)
 
     def delete(self, request, *args, **kwargs):
         # Start a transaction
@@ -23,13 +22,6 @@ class DigitDeletionView(LoginRequiredMixin, DeleteView):
             if digit.nfc_link:
                 link = digit.nfc_link
                 link.reset_to_default()
-
-            Activity.objects.create(
-                user=request.user,
-                activity_type='Plant',
-                activity_status='Deleted',
-                content=f'Deleted Plant {digit.name}'
-            )
 
             response = super(DigitDeletionView, self).delete(request, *args, **kwargs)
 

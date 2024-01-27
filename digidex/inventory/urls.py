@@ -4,9 +4,9 @@ from .views import (DigitStorageView, DigitLinkView, DigitCreationView, DigitDet
 app_name = 'inventory'
 urlpatterns = [
     path('digit-storage', DigitStorageView.as_view(), name='storage'),
-    path('link/<uuid:link_uuid>/', DigitLinkView.as_view(), name='linking'),
-    path('create-digit/<uuid:link_uuid>/', DigitCreationView.as_view(), name='creation'),
-    path('view-digit/<uuid:digit_uuid>/', DigitDetailsView.as_view(), name='details'),
-    path('modify-digit/<uuid:digit_uuid>/', DigitModificationView.as_view(), name='modification'),
-    path('delete-digit/<uuid:digit_uuid>/', DigitDeletionView.as_view(), name='deletion'),
+    path('link/<str:serial_number>/', DigitLinkView.as_view(), name='linking'),
+    path('create-digit/<str:serial_number>/', DigitCreationView.as_view(), name='creation'),
+    path('view-digit/<uuid:uuid>/', DigitDetailsView.as_view(), name='details'),
+    path('modify-digit/<uuid:uuid>/', DigitModificationView.as_view(), name='modification'),
+    path('delete-digit/<uuid:uuid>/', DigitDeletionView.as_view(), name='deletion'),
 ]

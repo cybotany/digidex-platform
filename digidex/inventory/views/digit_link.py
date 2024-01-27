@@ -7,20 +7,20 @@ from digidex.inventory.models import Digit, Link
 
 class DigitLinkView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
-        link_uuid = kwargs.get('link_uuid')
+        serial_number = kwargs.get('serial_number')
 
-        if not link_uuid:
+        if not serial_number:
             return HttpResponse("No PK provided", status=400)
 
-        link = get_object_or_404(Link, uuid=link_uuid)
+        link = get_object_or_404(Link, serial_number=serial_number)
         link.counter += 1
         link.save()
 
         if not link.active:
-            return redirect('inventory:creation', link_uuid=link_uuid)
+            return redirect('inventory:creation', serial_number=serial_number)
         else:
             if request.user == link.user:
                 digit = get_object_or_404(Digit, nfc_link=link)
-                return redirect('inventory:details', digit_uuid=digit.uuid)
+                return redirect('inventory:details', uuid=digit.uuid)
             else:
                 return HttpResponse("Unauthorized access", status=403)

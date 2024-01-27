@@ -10,7 +10,7 @@ class DigitDetailsView(LoginRequiredMixin, DetailView):
     template_name = 'main/digit-details-page.html'
 
     def get_object(self, queryset=None):
-        uuid = self.kwargs.get('digit_uuid')
+        uuid = self.kwargs.get('uuid')
         obj = get_object_or_404(Digit, uuid=uuid)
 
         if obj.nfc_link.user != self.request.user:

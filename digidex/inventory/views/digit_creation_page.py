@@ -5,7 +5,6 @@ from django.db import transaction
 from digidex.inventory.forms import DigitForm
 from digidex.inventory.models import Digit, Link
 from digidex.journal.models import Collection
-from digidex.accounts.models import Activity
 
 
 class DigitCreationView(LoginRequiredMixin, CreateView):
@@ -18,9 +17,9 @@ class DigitCreationView(LoginRequiredMixin, CreateView):
         return kwargs
 
     def form_valid(self, form):
-        # Retrieve the link instance using link_uuid from the URL
-        link_uuid = self.kwargs.get('link_uuid')
-        link = get_object_or_404(Link, uuid=link_uuid)
+        # Retrieve the link instance using serial_number from the URL
+        serial_number = self.kwargs.get('serial_number')
+        link = get_object_or_404(Link, serial_number=serial_number)
 
         with transaction.atomic():
             # Prepare the Digit instance but don't save it yet
@@ -37,11 +36,4 @@ class DigitCreationView(LoginRequiredMixin, CreateView):
             link.active = True
             link.save()
 
-            Activity.objects.create(
-                user=self.request.user,
-                activity_type='Plant',
-                activity_status='Registered',
-                content=f'Registered Plant {digit.name}'
-            )
-
-        return redirect('inventory:details', digit_uuid=digit.uuid)
+        return redirect('inventory:details', uuid=digit.uuid)
