@@ -32,7 +32,7 @@ class DigitDetailsView(LoginRequiredMixin, DetailView):
         if self.request.method == 'GET':
             context['journal_form'] = CreateJournalEntry()
 
-        journal_entries = self.object.journal.all()
+        journal_entries = self.object.journal_entries.all()
         context['journal_entries'] = journal_entries[:10]
 
         today = datetime.now().date()
