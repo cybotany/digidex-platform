@@ -98,6 +98,7 @@ INSTALLED_APPS = [
     'digidex.accounts.apps.AccountConfig',
     'digidex.api',
     'digidex.inventory',
+    'digidex.journal',
     'digidex.main',
     'digidex.taxonomy',
     'digidex.utils',
