@@ -31,12 +31,12 @@ class Journal(models.Model):
 
     Attributes:
         digit (ForeignKey): A reference to the 'Digit' model, linking the journal entry to a specific digitized plant.
-        created_at (DateTimeField): The date and time when the journal entry was created, automatically set when the journal entry is created.
-        content (TextField): The textual content of the journal entry.
-        image (ImageField): An optional image associated with the journal entry, supporting specific file extensions.
         watered (BooleanField): Indicates whether the digitized plant was watered in this journal entry.
         fertilized (BooleanField): Indicates whether the digitized plant was fertilized in this journal entry.
         cleaned (BooleanField): Indicates whether the digitized plant was cleaned in this journal entry.
+        created_at (DateTimeField): The date and time when the journal entry was created, automatically set when the journal entry is created.
+        content (TextField): The textual content of the journal entry.
+        image (ImageField): An optional image associated with the journal entry, supporting specific file extensions.
 
     Methods:
         __str__: Returns a string representation of the journal entry.
@@ -44,20 +44,8 @@ class Journal(models.Model):
     digit = models.ForeignKey(
         'Digit', 
         on_delete=models.CASCADE,
-        related_name='journal_entries',
+        related_name='journal',
         help_text="The digitized plant to which this journal entry is related."
-    )
-    content = models.TextField(
-        verbose_name="Content",
-        help_text="The textual content of the journal entry."
-    )
-    image = models.ImageField(
-        upload_to=journal_image_directory_path,
-        storage=PrivateMediaStorage(), 
-        validators=[validate_journal_entry],
-        null=True,
-        blank=True,
-        help_text="(Optional) The image to save with the journal entry. Only .jpg, .png, and .jpeg extensions are allowed."
     )
     watered = models.BooleanField(
         default=False,
@@ -73,6 +61,20 @@ class Journal(models.Model):
         default=False,
         verbose_name="Cleaned",
         help_text="Indicates whether the digitized plant was cleaned in this journal entry."
+    )
+    content = models.TextField(
+        verbose_name="Content",
+        null=True,
+        blank=True,
+        help_text="The textual content of the journal entry."
+    )
+    image = models.ImageField(
+        upload_to=journal_image_directory_path,
+        storage=PrivateMediaStorage(), 
+        validators=[validate_journal_entry],
+        null=True,
+        blank=True,
+        help_text="(Optional) The image to save with the journal entry. Only .jpg, .png, and .jpeg extensions are allowed."
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
