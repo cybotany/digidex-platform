@@ -2,7 +2,6 @@ from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.edit import UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db import transaction
 from digidex.inventory.forms import DigitForm
 from digidex.inventory.models import Digit
 
@@ -21,7 +20,4 @@ class DigitModificationView(LoginRequiredMixin, UpdateView):
         return obj
 
     def form_valid(self, form):
-        with transaction.atomic():
-            # Save the Digit instance
-            self.object = form.save()
-        return redirect('inventory:details', uuid=self.object.uuid)
+        return redirect('inventory:digit-link', uuid=self.object.nfc_link.uuid)
