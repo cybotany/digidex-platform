@@ -96,7 +96,7 @@ class Link(models.Model):
         Returns:
             str: The absolute URL for the Link instance.
         """
-        return reverse('inventory:linking', kwargs={'uuid': self.uuid})
+        return reverse('inventory:digit-link', kwargs={'uuid': self.uuid})
 
     def __str__(self):
         """
