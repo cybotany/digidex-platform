@@ -1,3 +1,4 @@
+'''
 from django.views import View
 from django.http import Http404
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -61,3 +62,4 @@ class DigitLinkView(LoginRequiredMixin, SingleObjectMixin, View):
         return render(request, 'main/digit-details-page.html', {'digit': digit})
 
 
+'''
