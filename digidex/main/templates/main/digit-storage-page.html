@@ -46,7 +46,7 @@
             {% for digit in digits %}
               <div class="block-digit">
                 <div class="rich-text-block base-rich-text">
-                  <a class="digit-link" href="{% url 'inventory:details' digit.uuid %}">
+                  <a class="digit-link" href="{% url 'inventory:digit-link' digit.uuid %}">
                     <figure class="base-rich-text-align-fullwidth base-rich-text-figure-type-image">
                       <img src="{% static 'main/images/placeholder.svg' %}" alt="Image Description">
                       <figcaption>{{ digit.name }}</figcaption>

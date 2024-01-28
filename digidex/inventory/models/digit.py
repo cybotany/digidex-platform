@@ -16,8 +16,8 @@ class Digit(models.Model):
         description (TextField): A short description of the digitized plant.
         taxonomic_unit (ForeignKey): A relationship to the Unit model, representing the plant's taxonomic classification.
         nfc_link (OneToOneField): A relationship to the Link model, representing the NFC link for the digitized plant.
-        journal_collection (OneToOneField): A relationship to the Link model, representing the NFC link for the digitized plant.
-        uuid (UUIDField): The unique identifier associated with the NFC tag or identification mechanism.
+        journal_collection (OneToOneField): A relationship to the Collection model, representing the entire journal collection link for the digitized plant.
+        uuid (UUIDField): The unique identifier associated with the Digit instance.
         created_at (DateTimeField): The date and time when the Digit instance was created.
         last_modified (DateTimeField): The date and time when the Digit instance was last modified.
     """

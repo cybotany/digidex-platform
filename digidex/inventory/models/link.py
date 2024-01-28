@@ -11,8 +11,7 @@ class Link(models.Model):
         serial_number (CharField): The unique serial number associated with the NFC tag.
         counter (IntegerField): The number of times the tag has been scanned.
         user (ForeignKey): The user who created the journal entry, linked to the user model.
-        active (BooleanField): A flag indicating whether the Link is active and mapped to a digital object. Inactive
-                               links may represent unused or deactivated tags.
+        active (BooleanField): A flag indicating whether the Link is active and mapped to a digital object.
         created_at (DateTimeField): The date and time when the Link instance was created.
         last_modified (DateTimeField): The date and time when the Link instance was last modified.
     """

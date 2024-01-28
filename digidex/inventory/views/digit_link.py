@@ -2,13 +2,13 @@ from django.views import View
 from django.http import Http404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.detail import SingleObjectMixin
-from django.http import HttpResponse, HttpResponseForbidden
-from django.shortcuts import redirect, get_object_or_404, render
+from django.http import HttpResponseForbidden
+from django.shortcuts import get_object_or_404, render
 from digidex.inventory.models import Digit, Link
 from digidex.inventory.forms import DigitForm
 
 
-class LinkDigitView(LoginRequiredMixin, SingleObjectMixin, View):
+class DigitLinkView(LoginRequiredMixin, SingleObjectMixin, View):
     model = Link
     slug_field = 'serial_number'
     slug_url_kwarg = 'serial_number'
