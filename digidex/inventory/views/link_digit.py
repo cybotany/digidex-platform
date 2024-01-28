@@ -35,16 +35,17 @@ class LinkDigitView(LoginRequiredMixin, SingleObjectMixin, View):
         else:
             return self.handle_digit_details(request, link)
 
+    def post(self, request, *args, **kwargs):
+        link = self.get_object()
+        # Directly call the handle_digit_creation method for POST requests
+        return self.handle_digit_creation(request, link)
+
     def handle_digit_creation(self, request, link):
-        if request.method == 'POST':
-            form = DigitForm(request.POST)
-            if form.is_valid():
-                digit = Digit.create_digit(form.cleaned_data, link, request.user)
-                return redirect('inventory:details', uuid=digit.uuid)
-            else:
-                return HttpResponse("Invalid form", status=400)
+        form = DigitForm(request.POST)
+        if form.is_valid():
+            digit = Digit.create_digit(form.cleaned_data, link, request.user)
+            return redirect('inventory:details', uuid=digit.uuid)
         else:
-            form = DigitForm()
             return render(request, 'main/digit-creation-page.html', {'form': form})
 
     def handle_digit_details(self, request, link):
