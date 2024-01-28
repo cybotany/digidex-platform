@@ -44,7 +44,7 @@ class LinkDigitView(LoginRequiredMixin, SingleObjectMixin, View):
         form = DigitForm(request.POST)
         if form.is_valid():
             digit = Digit.create_digit(form.cleaned_data, link, request.user)
-            return redirect('inventory:details', uuid=digit.uuid)
+            return render(request, 'main/digit-details-page.html', {'digit': digit})
         else:
             return render(request, 'main/digit-creation-page.html', {'form': form})
 
