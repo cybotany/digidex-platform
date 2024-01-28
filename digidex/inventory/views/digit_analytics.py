@@ -1,3 +1,4 @@
+''' 
 from django.core.exceptions import PermissionDenied
 from django.views.generic import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -17,7 +18,7 @@ class DigitDetailsView(LoginRequiredMixin, DetailView):
             raise PermissionDenied
         return obj
 
-''' def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         # Initialize the form with the current digit and user
