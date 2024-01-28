@@ -1,1 +1,1 @@
-from digidex.link.models import NFC
+from .nfc import NFC
