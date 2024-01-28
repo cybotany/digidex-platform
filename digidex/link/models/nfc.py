@@ -3,10 +3,10 @@ from django.db import models
 from django.urls import reverse
 
 
-class Link(models.Model):
+class NFC(models.Model):
     """
-    The Link model is primarily used to connect physical objects (like plants) that have been digitized
-    (through an NFC tag or similar technology) to their digital representations and metadata in the system.
+    The NFC (Near Field Communication) model is primarily used to connect physical objects (like plants) that have been digitized
+    through an NTAG213 to their digital representations and metadata in the system.
 
     Attributes:
         serial_number (CharField): The unique serial number associated with the NFC tag.
@@ -90,23 +90,23 @@ class Link(models.Model):
 
     def get_absolute_url(self):
         """
-        Returns the absolute URL for the Link instance.
+        Returns the absolute URL for the NFC instance.
         
-        This URL is unique for each Link and can be used to access specific resources or views related to the Link.
+        This URL is unique for each NFC link and can be used to access specific resources or views related to it.
 
         Returns:
-            str: The absolute URL for the Link instance.
+            str: The absolute URL for the NFC instance.
         """
         return reverse('inventory:digit-link', kwargs={'uuid': self.uuid})
 
     def __str__(self):
         """
-        Returns a string representation of the Link instance.
+        Returns a string representation of the NFC instance.
 
-        This representation is primarily based on the unique serial number of the Link.
+        This representation is primarily based on the unique serial number of the NTAG213.
 
         Returns:
-            str: The serial number of the Link, representing its unique identification.
+            str: The serial number of the NTAG213, representing its unique identification.
         """
         return self.serial_number
 

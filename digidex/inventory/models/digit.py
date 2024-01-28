@@ -41,7 +41,7 @@ class Digit(models.Model):
         help_text="The taxonomic classification of the digitized plant."
     )
     nfc_link = models.OneToOneField(
-        'Link',
+        'link.NFC',
         on_delete=models.CASCADE,
         related_name='digit',
         help_text="NFC link for the digitized plant."
@@ -76,7 +76,6 @@ class Digit(models.Model):
                 journal_collection=Collection.objects.create(),
                 **form_data
             )
-
             link.user = user
             link.active = True
             link.save()
