@@ -27,6 +27,7 @@ class Link(models.Model):
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
+        editable=False,
         db_index=True,
         verbose_name="Digit UUID",
         help_text="The unique identifier associated with the NFC tag or identification mechanism."
