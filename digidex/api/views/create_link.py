@@ -1,4 +1,3 @@
-'''
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -17,4 +16,3 @@ class CreateLink(APIView):
         nfc, created = NFC.objects.get_or_create(serial_number=ntag_serial_number)
         nfc_url = request.build_absolute_uri(nfc.get_absolute_url())
         return Response({"nfc_url": nfc_url}, status=status.HTTP_201_CREATED)
-'''
