@@ -1,4 +1,3 @@
-'''
 from django.views import View
 from django.http import Http404
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -60,6 +59,3 @@ class DigitLinkView(LoginRequiredMixin, SingleObjectMixin, View):
         digit = get_object_or_404(Digit, nfc_link=nfc)
         # Render the digit details template (you can use a different template if needed)
         return render(request, 'main/digit-details-page.html', {'digit': digit})
-
-
-'''
