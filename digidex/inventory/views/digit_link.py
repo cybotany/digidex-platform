@@ -19,8 +19,7 @@ class DigitLinkView(LoginRequiredMixin, SingleObjectMixin, View):
         if uuid is None:
             raise Http404("No uuid provided")
         try:
-            # Get the single item from the filtered queryset
-            obj = queryset.get(**{self.uuid: uuid})
+            obj = queryset.get(uuid=uuid)
         except queryset.model.DoesNotExist:
             raise Http404("No NFC found matching the query")
         return obj
