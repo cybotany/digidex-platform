@@ -12,7 +12,7 @@ class DigitDeletionView(LoginRequiredMixin, DeleteView):
 
     def get_object(self, queryset=None):
         uuid = self.kwargs.get('uuid')
-        return get_object_or_404(Digit, uuid=uuid)
+        return get_object_or_404(Digit, nfc_link__uuid=uuid)
 
     def delete(self, request, *args, **kwargs):
         # Start a transaction

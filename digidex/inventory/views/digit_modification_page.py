@@ -14,7 +14,7 @@ class DigitModificationView(LoginRequiredMixin, UpdateView):
 
     def get_object(self, queryset=None):
         uuid = self.kwargs.get('uuid')
-        obj = get_object_or_404(Digit, uuid=uuid)
+        obj = get_object_or_404(Digit, nfc_link__uuid=uuid)
 
         if obj.nfc_link.user != self.request.user:
             raise PermissionDenied
