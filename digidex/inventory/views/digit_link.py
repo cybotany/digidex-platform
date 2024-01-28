@@ -10,18 +10,16 @@ from digidex.inventory.forms import DigitForm
 
 class DigitLinkView(LoginRequiredMixin, SingleObjectMixin, View):
     model = Link
-    slug_field = 'serial_number'
-    slug_url_kwarg = 'serial_number'
 
     def get_object(self, queryset=None):
-        # Overriding the method to use 'serial_number' instead of the primary key
+        # Overriding the method to use 'uuid' instead of the primary key
         queryset = queryset or self.get_queryset()
-        serial_number = self.kwargs.get(self.slug_url_kwarg)
-        if serial_number is None:
-            raise Http404("No serial number provided")
+        uuid = self.kwargs.get('uuid')
+        if uuid is None:
+            raise Http404("No uuid provided")
         try:
             # Get the single item from the filtered queryset
-            obj = queryset.get(**{self.slug_field: serial_number})
+            obj = queryset.get(**{self.uuid: uuid})
         except queryset.model.DoesNotExist:
             raise Http404("No Link found matching the query")
         return obj
@@ -46,7 +44,12 @@ class DigitLinkView(LoginRequiredMixin, SingleObjectMixin, View):
             digit = Digit.create_digit(form.cleaned_data, link, request.user)
             return render(request, 'main/digit-details-page.html', {'digit': digit})
         else:
-            return render(request, 'main/digit-creation-page.html', {'form': form})
+            # Pass the form with errors to the context
+            context = {
+                'form': form,
+                'errors': form.errors
+            }
+            return render(request, 'main/digit-creation-page.html', context)
 
     def handle_digit_details(self, request, link):
         if not link.check_access(request.user):

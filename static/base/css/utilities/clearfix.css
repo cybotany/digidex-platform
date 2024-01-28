@@ -1,0 +1,9 @@
+.base-clearfix::before,
+.base-clearfix::after {
+  content: " ";
+  display: table;
+}
+
+.base-clearfix::after {
+  clear: both;
+}

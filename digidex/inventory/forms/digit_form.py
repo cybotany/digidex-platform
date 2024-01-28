@@ -10,6 +10,20 @@ class DigitForm(forms.ModelForm):
     class Meta:
         model = Digit
         fields = ('name', 'description', 'taxonomic_unit',)
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'id': 'nameField',
+                'class': 'text-field base-input'
+            }),
+            'description': forms.Textarea(attrs={
+                'id': 'descriptionField',
+                'class': 'text-field textarea'
+            }),
+            'taxonomic_unit': forms.Select(attrs={
+                'id': 'tsnField',
+                'class': 'text-field base-select',
+            }),
+        }
 
     def __init__(self, *args, **kwargs):
         super(DigitForm, self).__init__(*args, **kwargs)

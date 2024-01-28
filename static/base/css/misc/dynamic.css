@@ -1,0 +1,12 @@
+.base-dyn-empty {
+  padding: 10px;
+  background-color: #dddddd;
+}
+
+.base-dyn-hide {
+  display: none !important;
+}
+
+.base-dyn-bind-empty {
+  display: none !important;
+}
