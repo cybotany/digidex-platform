@@ -1,4 +1,3 @@
-import uuid
 from django.db import models
 from django.urls import reverse
 
@@ -52,6 +51,25 @@ class Link(models.Model):
         verbose_name="Last Modified",
         help_text="The date and time when the link instance was last modified."
     )
+
+    def increment_counter(self):
+        self.counter += 1
+        self.save()
+
+    def activate_link(self, user):
+        self.user = user
+        self.active = True
+        self.save()
+
+    def deactivate_link(self):
+        self.active = False
+        self.save()
+
+    def check_access(self, user):
+       """
+       Checks if user has access to link.
+       """
+       return self.active and self.user == user
 
     def reset_to_default(self):
         """

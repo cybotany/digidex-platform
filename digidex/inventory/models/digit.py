@@ -1,6 +1,7 @@
 import uuid
-from django.db import models
+from django.db import models, transaction
 from django.urls import reverse
+from digidex.journal.models import Collection
 
 
 class Digit(models.Model):
@@ -70,6 +71,35 @@ class Digit(models.Model):
         verbose_name="Last Modified",
         help_text="The date and time when the digit instance was last modified."
     )
+    is_archived = models.BooleanField(
+        default=False,
+        verbose_name="Archived",
+        help_text="Indicates whether the digit is archived."
+    )
+
+    @classmethod
+    def create_digit(cls, form_data, link, user):
+        with transaction.atomic():
+            digit = cls.objects.create(
+                nfc_link=link,
+                journal_collection=Collection.objects.create(),
+                **form_data
+            )
+
+            link.user = user
+            link.active = True
+            link.save()
+
+            return digit
+
+    def archive(self):
+        """
+        Archives the digit instance. This involves marking it as archived and dissociating
+        its NFC link so that the link can be reused for a new digit.
+        """
+        self.nfc_link = None
+        self.is_archived = True
+        self.save()
 
     def save(self, *args, **kwargs):
         """
