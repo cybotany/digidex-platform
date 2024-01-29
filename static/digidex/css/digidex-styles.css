@@ -3,7 +3,6 @@
 @import url('components/typography.css');
 @import url('components/rich-text.css');
 @import url('components/navbar.css');
-@import url('components/banner.css');
 
 .content {
   width: 100%;
@@ -18,9 +17,152 @@
   display: flex;
 }
 
+@import url('components/banner.css');
+
+.button-desktop {
+  grid-column-gap: .5em;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.button-mobile {
+  grid-column-gap: .5em;
+  grid-row-gap: 1em;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
 @import url('landing/hero.css');
 @import url('components/buttons.css');
 @import url('components/info.css');
+
+.lottie {
+  position: relative;
+}
+
+.lines-a1 {
+  z-index: 5;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  padding-left: 6%;
+  padding-right: 10.5%;
+  display: flex;
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}
+
+.line-w {
+  width: 1px;
+  background-image: linear-gradient(to bottom, rgba(15, 100, 146, 0), var(--border) 10%, var(--border) 90%, rgba(15, 100, 146, 0));
+}
+
+.lines-a2 {
+  z-index: 5;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  padding-top: 11%;
+  padding-bottom: 13%;
+  display: flex;
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}
+
+.block-lottie {
+  z-index: 10;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  display: flex;
+  position: relative;
+}
+
+.lottie-animation-2 {
+  z-index: 10;
+  width: 100%;
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}
+
+.lottie-animation-1 {
+  width: 100%;
+}
+
+.lottie-animation-2-blur {
+  z-index: 5;
+  width: 100%;
+  filter: blur(50px);
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}
+
+.features-lottie {
+  z-index: 20;
+  grid-row-gap: 2.7em;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  display: flex;
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}
+
+.feature-lottie-block {
+  grid-column-gap: .6em;
+  background-color: var(--accent-green);
+  -webkit-backdrop-filter: blur(30px);
+  backdrop-filter: blur(30px);
+  border-radius: .64em;
+  justify-content: center;
+  align-items: center;
+  margin-right: 43%;
+  padding: .8em 1.1em;
+  display: flex;
+}
+
+.feature-lottie-block.a2 {
+  margin-right: 5%;
+}
+
+.feature-lottie-block.a3 {
+  margin-right: 58%;
+}
+
+.feature-lottie-block.a4 {
+  margin-right: 15%;
+}
+
+.text-feature-lottie {
+  color: var(--strong-green);
+  letter-spacing: -.02em;
+  font-size: 1em;
+  font-weight: 500;
+  line-height: 120%;
+}
+
+.icon-feature-lottie {
+  width: 1.5em;
+  height: 1.5em;
+}
 
 .section {
   border-radius: 0;
@@ -32,7 +174,6 @@
 
 @import url('landing/solutions.css');
 @import url('landing/clients.css');
-@import url('components/lists.css');
 
 .grid {
   grid-column-gap: 0em;
@@ -95,10 +236,13 @@
 
 @import url('landing/about.css');
 @import url('landing/features.css');
+
 @import url('contact/form.css');
 @import url('landing/faqs.css');
+
 @import url('components/call-to-action.css');
 @import url('components/footer.css');
+
 @import url('landing/reviews.css');
 
 .line-h {
@@ -112,8 +256,8 @@
 }
 
 @import url('components/header.css');
-@import url('solutions/styles.css');
 
+@import url('solutions/styles.css');
 
 .block-left {
   flex-direction: column;

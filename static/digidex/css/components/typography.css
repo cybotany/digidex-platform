@@ -60,6 +60,16 @@ a {
   text-decoration: underline;
 }
 
+ul, ol {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  padding-left: 2.2em;
+}
+
+li {
+  padding: .3em .5em;
+}
+
 strong {
   color: var(--heading);
   font-weight: 700;
