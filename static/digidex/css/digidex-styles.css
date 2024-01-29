@@ -1,8 +1,5 @@
 @import url('.components/variables.css');
 @import url('.components/layout.css');
-
-@import url('.ecommerce/ecommerce-styles.css');
-
 @import url('.components/typography.css');
 @import url('.components/rich-text.css');
 @import url('.components/navbar.css');
@@ -96,13 +93,13 @@
   color: var(--strong-green);
 }
 
-@import url('landing/about.css');
-@import url('landing/features.css');
-@import url('contact/form.css');
-@import url('landing/faqs.css');
-@import url('components/call-to-action.css');
-@import url('components/footer.css');
-@import url('landing/reviews.css');
+@import url('.landing/about.css');
+@import url('.landing/features.css');
+@import url('.contact/form.css');
+@import url('.landing/faqs.css');
+@import url('.components/call-to-action.css');
+@import url('.components/footer.css');
+@import url('.landing/reviews.css');
 
 .line-h {
   height: 1px;
@@ -114,8 +111,8 @@
   background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, .2) 10%, rgba(255, 255, 255, .2) 90%, rgba(255, 255, 255, 0));
 }
 
-@import url('components/header.css');
-@import url('solutions/styles.css');
+@import url('.components/header.css');
+@import url('.solutions/styles.css');
 
 
 .block-left {
@@ -126,17 +123,13 @@
   display: flex;
 }
 
-@import url('company/about-us.css');
-@import url('company/quotes.css');
-@import url('company/team.css');
+@import url('.company/about-us.css');
+@import url('.company/quotes.css');
+@import url('.company/team.css');
 
-@import url('blog/posts.css');
 
-@import url('components/forms.css');
-@import url('ecommerce/cart.css');
-@import url('ecommerce/product.css');
-@import url('ecommerce/checkout.css');
-@import url('components/tabs.css');
+@import url('.components/forms.css');
+@import url('.components/tabs.css');
 
 .page-body {
   width: 100%;
