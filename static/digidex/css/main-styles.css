@@ -1,12 +1,12 @@
-@import url('components/variables.css');
-@import url('components/layout.css');
+@import url('.components/variables.css');
+@import url('.components/layout.css');
 
-@import url('ecommerce/ecommerce-styles.css');
-@import url('components/typography.css');
-@import url('components/lists.css');
-@import url('components/rich-text.css');
-@import url('components/navbar.css');
-@import url('components/banner.css');
+@import url('.ecommerce/ecommerce-styles.css');
+
+@import url('.components/typography.css');
+@import url('.components/rich-text.css');
+@import url('.components/navbar.css');
+@import url('.components/banner.css');
 
 .content {
   width: 100%;
@@ -21,24 +21,9 @@
   display: flex;
 }
 
-.button-desktop {
-  grid-column-gap: .5em;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-}
-
-.button-mobile {
-  grid-column-gap: .5em;
-  grid-row-gap: 1em;
-  justify-content: center;
-  align-items: center;
-  display: none;
-}
-
-@import url('landing/hero.css');
-@import url('components/buttons.css');
-@import url('components/info.css');
+@import url('.landing/hero.css');
+@import url('.components/buttons.css');
+@import url('.components/info.css');
 
 .section {
   border-radius: 0;
@@ -48,9 +33,9 @@
   display: flex;
 }
 
-@import url('landing/solutions.css');
-@import url('landing/clients.css');
-
+@import url('.landing/solutions.css');
+@import url('.landing/clients.css');
+@import url('.components/lists.css');
 
 .grid {
   grid-column-gap: 0em;
@@ -112,64 +97,6 @@
 }
 
 @import url('landing/about.css');
-
-.lottie-wrapper {
-  width: 100%;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  display: flex;
-  position: relative;
-}
-
-.lines-c1 {
-  z-index: 5;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: stretch;
-  padding-left: 22%;
-  padding-right: 22%;
-  display: flex;
-  position: absolute;
-  top: 0%;
-  bottom: 0%;
-  left: 0%;
-  right: 0%;
-}
-
-.lines-c2 {
-  z-index: 5;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: stretch;
-  padding-top: 15%;
-  padding-bottom: 15%;
-  display: flex;
-  position: absolute;
-  top: 0%;
-  bottom: 0%;
-  left: 0%;
-  right: 0%;
-}
-
-.block-heading {
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  margin-bottom: 1em;
-  display: flex;
-}
-
-.block-heading.center {
-  text-align: center;
-  align-items: center;
-}
-
-.centered-text {
-  text-align: center;
-  margin-bottom: 10px;
-}
-
 @import url('landing/features.css');
 @import url('contact/form.css');
 @import url('landing/faqs.css');

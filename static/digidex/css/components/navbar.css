@@ -116,6 +116,21 @@
   color: var(--white);
 }
 
+.button-desktop {
+  grid-column-gap: .5em;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.button-mobile {
+  grid-column-gap: .5em;
+  grid-row-gap: 1em;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
 @media screen and (max-width: 991px) {
   .nav-menu {
     border-top: 1px solid var(--border);
