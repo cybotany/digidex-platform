@@ -42,14 +42,14 @@ class DigitLinkView(LoginRequiredMixin, SingleObjectMixin, View):
         form = DigitForm(request.POST)
         if form.is_valid():
             digit = Digit.create_digit(form.cleaned_data, nfc, request.user)
-            return render(request, 'main/digit-details-page.html', {'digit': digit})
+            return render(request, 'inventory/digit-details-page.html', {'digit': digit})
         else:
             # Pass the form with errors to the context
             context = {
                 'form': form,
                 'errors': form.errors
             }
-            return render(request, 'main/digit-creation-page.html', context)
+            return render(request, 'inventory/digit-creation-page.html', context)
 
     def handle_digit_details(self, request, nfc):
         if not nfc.check_access(request.user):
@@ -57,4 +57,4 @@ class DigitLinkView(LoginRequiredMixin, SingleObjectMixin, View):
 
         digit = get_object_or_404(Digit, nfc_link=nfc)
         # Render the digit details template (you can use a different template if needed)
-        return render(request, 'main/digit-details-page.html', {'digit': digit})
+        return render(request, 'inventory/digit-details-page.html', {'digit': digit})

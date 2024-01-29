@@ -9,7 +9,7 @@ from digidex.inventory.models import Digit
 class DigitModificationView(LoginRequiredMixin, UpdateView):
     model = Digit
     form_class = DigitForm
-    template_name = 'main/digit-modification-page.html'
+    template_name = 'inventory/digit-modification-page.html'
 
     def get_object(self, queryset=None):
         serial_number = self.kwargs.get('serial_number')

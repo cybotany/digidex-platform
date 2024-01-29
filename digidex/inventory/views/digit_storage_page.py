@@ -6,7 +6,7 @@ from digidex.inventory.models import Digit
 class DigitStorageView(LoginRequiredMixin, ListView):
     model = Digit
     context_object_name = 'digits'
-    template_name = 'main/digit-storage-page.html'
+    template_name = 'inventory/digit-storage-page.html'
 
     def get_queryset(self):
         """ Overriding to get Digits for the current user """
