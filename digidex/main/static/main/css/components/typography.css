@@ -1,0 +1,165 @@
+body {
+  background-color: var(--background);
+  color: var(--paragraph);
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  font-family: Space Grotesk, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 155%;
+  display: flex;
+}
+
+h1, h2, h3, h4, h5, h6, strong {
+  color: var(--heading);
+  margin-top: 20;
+  margin-bottom: 0em;
+  letter-spacing: -.05em;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 4.12em;
+  line-height: 110%;
+}
+
+h2 {
+  font-size: 3.12em;
+  line-height: 115%;
+}
+
+h3 {
+  font-size: 2.37em;
+  line-height: 120%;
+}
+
+h4 {
+  font-size: 1.75em;
+  line-height: 125%;
+}
+
+h5 {
+  font-size: 1.37em;
+  line-height: 128%;
+}
+
+h6 {
+  letter-spacing: -.02em;
+  font-size: 1em;
+  font-weight: 600;
+  line-height: 140%;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+a {
+  text-decoration: underline;
+}
+
+strong {
+  color: var(--heading);
+  font-weight: 700;
+}
+
+em {
+  font-style: italic;
+}
+
+blockquote {
+  color: var(--strong-green);
+  border-left: 2px solid rgba(57, 89, 255, .2);
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  margin-left: 1em;
+  padding: .1em 0 .1em 1.3em;
+  font-size: 1.125em;
+  font-weight: 500;
+  line-height: 160%;
+}
+
+figure {
+  border-radius: .87em;
+  margin-top: 2.7em;
+  margin-bottom: 2.7em;
+  overflow: hidden;
+}
+
+figcaption {
+  text-align: center;
+  background-color: #e4ebee;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 1.2em 7%;
+  font-size: .87em;
+  line-height: 145%;
+}
+
+@media screen and (max-width: 991px) {
+  h1 {
+    font-size: 3.5em;
+  }
+
+  h2 {
+    font-size: 2.7em;
+  }
+
+  h3 {
+    font-size: 2em;
+  }
+
+  h4 {
+    font-size: 1.6em;
+  }
+
+  h5 {
+    font-size: 1.25em;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  h1 {
+    font-size: 3em;
+  }
+
+  h2 {
+    font-size: 2.3em;
+  }
+
+  h3 {
+    font-size: 1.8em;
+  }
+
+  h4 {
+    font-size: 1.4em;
+  }
+
+  h5 {
+    font-size: 1.2em;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  h1 {
+    font-size: 2.4em;
+  }
+
+  h2 {
+    font-size: 1.9em;
+  }
+
+  h3 {
+    font-size: 1.6em;
+  }
+
+  h4 {
+    font-size: 1.3em;
+  }
+
+  h5 {
+    font-size: 1.15em;
+  }
+}

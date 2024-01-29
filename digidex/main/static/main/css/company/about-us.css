@@ -1,0 +1,83 @@
+.grid-about {
+  grid-column-gap: 1.5em;
+  grid-row-gap: 1.5em;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: start;
+}
+
+.about {
+  grid-row-gap: 1.2em;
+  background-color: var(--accent-green);
+  border-radius: .87em;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 3.1em;
+  display: flex;
+  position: relative;
+}
+
+.about.red {
+  background-color: var(--accent-red);
+}
+
+.about.blue {
+  background-color: var(--accent-blue);
+}
+
+.block-icon-about {
+  width: 4.5em;
+  height: 4.5em;
+  background-color: var(--strong-green);
+  border-radius: .87em;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.block-icon-about.red {
+  background-color: var(--strong-red);
+}
+
+.block-icon-about.blue {
+  background-color: var(--strong-blue);
+}
+
+.icon-about {
+  width: 2em;
+  height: 2em;
+}
+
+.heading-about {
+  color: var(--strong-green);
+}
+
+.heading-about.red{
+  color: var(--strong-red);
+}
+
+.heading-about.blue{
+  color: var(--strong-blue);
+}
+
+.paragraph-about {
+  color: var(--strong-green);
+}
+
+.paragraph-about.red {
+  color: var(--strong-red);
+}
+
+.paragraph-about.blue {
+  color: var(--strong-blue);
+}
+
+@media screen and (max-width: 767px) {
+  .grid-about {
+    grid-column-gap: .87em;
+    grid-row-gap: .87em;
+    grid-template-columns: 1fr;
+  }
+}

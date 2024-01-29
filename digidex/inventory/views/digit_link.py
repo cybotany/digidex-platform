@@ -13,13 +13,13 @@ class DigitLinkView(LoginRequiredMixin, SingleObjectMixin, View):
     model = NFC
 
     def get_object(self, queryset=None):
-        # Overriding the method to use 'uuid' instead of the primary key
+        # Overriding the method to use 'serial_number' instead of the primary key
         queryset = queryset or self.get_queryset()
-        uuid = self.kwargs.get('uuid')
-        if uuid is None:
-            raise Http404("No uuid provided")
+        serial_number = self.kwargs.get('serial_number')
+        if serial_number is None:
+            raise Http404("No serial number provided")
         try:
-            obj = queryset.get(uuid=uuid)
+            obj = queryset.get(serial_number=serial_number)
         except queryset.model.DoesNotExist:
             raise Http404("No NFC found matching the query")
         return obj

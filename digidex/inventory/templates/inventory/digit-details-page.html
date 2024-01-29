@@ -3,11 +3,11 @@
 <html>
   <head>  
     <meta charset="utf-8">
-    <title>Digit Storage System</title>
+    <title>Digit Details</title>
     <meta content="A platform for gardeners to cultivate their curiosity." name="description">
-    <meta content="Digit Storage System" property="og:title">
+    <meta content="Digit Details" property="og:title">
     <meta content="A platform for gardeners to cultivate their curiosity." property="og:description">
-    <meta content="Digit Storage System" property="twitter:title">
+    <meta content="Digit Details" property="twitter:title">
     <meta content="A platform for gardeners to cultivate their curiosity." property="twitter:description">
     <meta property="og:type" content="website">
     <meta content="summary_large_image" name="twitter:card">
@@ -15,9 +15,8 @@
 
     <link href="{% static 'base/css/normalize.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'base/css/base-styles.css' %}" rel="stylesheet" type="text/css">
-  
-    <link href="{% static 'main/css/partials/digidex-styles.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'main/css/digit-storage-page.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'main/css/main-styles.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'inventory/css/inventory-styles.css' %}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
     
@@ -36,29 +35,28 @@
   </head>
   <body>
     {% include 'main/partials/navigation-bar.html' %}
-    <section class="section-full">
+    <section class="section">
       <div class="content narrow">
-        <div class="digit-body storage">
-          <div class="block-heading center">
-            <h3 class="heading">Box n</h3>
-            <p class="paragraph">Details about Box n</p>
-          </div>
-          <div class="layout-grid grid-digits">
-            {% for digit in digits %}
-              <div class="block-digit">
-                <div class="rich-text-block base-rich-text">
-                  <a class="digit-link" href="{% url 'inventory:digit-link' digit.nfc_link.uuid %}">
-                    <figure class="base-rich-text-align-fullwidth base-rich-text-figure-type-image">
-                      <img src="{% static 'main/images/placeholder.svg' %}" alt="Image Description">
-                      <figcaption>{{ digit.name }}</figcaption>
-                    </figure> 
-                  </a>
-                </div> 
+        <div class="digit-body details">
+          <div class="rich-text-block base-rich-text">
+            <div class="block-heading center">
+              <div class="subtitle">
+                <a href="{% url 'inventory:modification' digit.nfc_link.serial_number %}" class="account-link">Edit or Delete</a>
               </div>
-            {% endfor %}
+              <h3 class="heading">{{ digit.name }}</h3>
+              <div class="date">Created: {{ digit.created_at }}</div>
+              <p class="paragraph">{{ digit.description }}</p>
+            </div>
+            <div class="journal-body">
+              <!--{% include 'main/partials/digit-journal-figure.html' %}-->  
+              <!--{% include 'main/partials/digit-journal-entries.html' %}-->
+            </div>     
           </div>
         </div>
       </div>
-    </section> 
+    </section>
+    {% if digit.taxonomic_unit %}
+      {% include 'main/partials/digit-taxonomy-section.html' %} 
+    {% endif %}
   </body>
 </html>

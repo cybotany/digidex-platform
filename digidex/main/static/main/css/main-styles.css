@@ -1,0 +1,303 @@
+@import url('components/variables.css');
+@import url('components/layout.css');
+
+@import url('ecommerce/ecommerce-styles.css');
+@import url('components/typography.css');
+@import url('components/lists.css');
+@import url('components/rich-text.css');
+@import url('components/navbar.css');
+@import url('components/banner.css');
+
+.content {
+  width: 100%;
+  max-width: 75em;
+}
+
+.content.narrow {
+  max-width: 60em;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  display: flex;
+}
+
+.button-desktop {
+  grid-column-gap: .5em;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.button-mobile {
+  grid-column-gap: .5em;
+  grid-row-gap: 1em;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+@import url('landing/hero.css');
+@import url('components/buttons.css');
+@import url('components/info.css');
+
+.section {
+  border-radius: 0;
+  justify-content: center;
+  align-items: center;
+  padding: 3.75em 2em;
+  display: flex;
+}
+
+@import url('landing/solutions.css');
+@import url('landing/clients.css');
+
+
+.grid {
+  grid-column-gap: 0em;
+  grid-row-gap: 0em;
+  grid-template-rows: auto;
+  align-items: center;
+}
+
+.heading {
+  max-width: 9em;
+  margin-bottom: .5em;
+}
+
+.heading.large {
+  max-width: 13em;
+}
+
+.heading.banner {
+  color: var(--white);
+  margin-bottom: .7em;
+}
+
+.block-right {
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: 15%;
+  display: flex;
+}
+
+.paragraph {
+  max-width: 30em;
+  margin-bottom: 2.2em;
+}
+
+.subtitle {
+  background-color: var(--white);
+  color: var(--heading);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  border-radius: .6em;
+  margin-bottom: .7em;
+  padding: .5em 1em;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
+  box-shadow: 0 10px 20px -10px rgba(20, 23, 24, .05);
+}
+
+.subtitle.white {
+  background-color: rgba(255, 255, 255, .1);
+  color: var(--white);
+}
+
+.subtitle.green {
+  background-color: var(--accent-green);
+  color: var(--strong-green);
+}
+
+@import url('landing/about.css');
+
+.lottie-wrapper {
+  width: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+  position: relative;
+}
+
+.lines-c1 {
+  z-index: 5;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  padding-left: 22%;
+  padding-right: 22%;
+  display: flex;
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}
+
+.lines-c2 {
+  z-index: 5;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  padding-top: 15%;
+  padding-bottom: 15%;
+  display: flex;
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}
+
+.block-heading {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 1em;
+  display: flex;
+}
+
+.block-heading.center {
+  text-align: center;
+  align-items: center;
+}
+
+.centered-text {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+@import url('landing/features.css');
+@import url('contact/form.css');
+@import url('landing/faqs.css');
+@import url('components/call-to-action.css');
+@import url('components/footer.css');
+@import url('landing/reviews.css');
+
+.line-h {
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(15, 100, 146, 0), var(--border) 10%, var(--border) 90%, rgba(15, 100, 146, 0));
+}
+
+.line-banner-h {
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, .2) 10%, rgba(255, 255, 255, .2) 90%, rgba(255, 255, 255, 0));
+}
+
+@import url('components/header.css');
+@import url('solutions/styles.css');
+
+
+.block-left {
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-right: 15%;
+  display: flex;
+}
+
+@import url('company/about-us.css');
+@import url('company/quotes.css');
+@import url('company/team.css');
+
+@import url('blog/posts.css');
+
+@import url('components/forms.css');
+@import url('ecommerce/cart.css');
+@import url('ecommerce/product.css');
+@import url('ecommerce/checkout.css');
+@import url('components/tabs.css');
+
+.page-body {
+  width: 100%;
+  background-color: var(--white);
+  border-radius: .87em;
+  margin-bottom: 1em;
+  padding: 5em 13%;
+  box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
+}
+
+.rotate-icon {
+  -webkit-transform: rotateZ(45deg);
+  -moz-transform: rotateZ(45deg);
+  -ms-transform: rotateZ(45deg);
+  transform: rotateZ(45deg);
+  transition: transform 0.3s ease;
+}
+
+@media screen and (max-width: 991px) {
+  .block-left {
+    padding-right: 10%;
+  }
+
+  .block-right {
+    padding-left: 10%;
+  }
+
+  .section-top {
+    padding-top: 4.5em;
+    padding-bottom: 0;
+  }
+
+  .paragraph-top {
+    font-size: 1em;
+  }
+
+  .page-body {
+    padding: 4em 10%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .block-left {
+    padding-right: 0%;
+  }
+
+  .block-right {
+    padding-left: 0%;
+  }
+
+  .section-top {
+    padding-top: 3.5em;
+  }
+
+  .section {
+    padding-top: 3em;
+    padding-bottom: 3em;
+  }
+
+  .grid {
+    grid-column-gap: 2.5em;
+    grid-row-gap: 2.5em;
+    grid-template-columns: 1fr;
+  }
+
+  .page-body {
+    padding-top: 3em;
+    padding-bottom: 3em;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .section {
+    padding: 2.5em 1.5em;
+  }
+
+  .section-top {
+    padding-top: 3em;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+  }
+
+  .paragraph-top {
+    margin-bottom: 1.2em;
+  }
+
+  .page-body {
+    padding-top: 2em;
+    padding-bottom: 2em;
+  }
+}

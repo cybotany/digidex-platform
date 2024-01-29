@@ -12,12 +12,12 @@ class DigitModificationView(LoginRequiredMixin, UpdateView):
     template_name = 'main/digit-modification-page.html'
 
     def get_object(self, queryset=None):
-        uuid = self.kwargs.get('uuid')
-        obj = get_object_or_404(Digit, nfc_link__uuid=uuid)
+        serial_number = self.kwargs.get('serial_number')
+        obj = get_object_or_404(Digit, nfc_link__serial_number=serial_number)
 
         if obj.nfc_link.user != self.request.user:
             raise PermissionDenied
         return obj
 
     def form_valid(self, form):
-        return redirect('inventory:digit-link', uuid=self.object.nfc_link.uuid)
+        return redirect('inventory:digit-link', serial_number=self.object.nfc_link.serial_number)

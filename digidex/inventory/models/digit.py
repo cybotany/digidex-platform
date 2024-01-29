@@ -1,3 +1,4 @@
+import uuid
 from django.db import models, transaction
 from django.urls import reverse
 from digidex.journal.models import Collection
@@ -11,6 +12,7 @@ class Digit(models.Model):
     It directly associates a plant specimen with its corresponding taxonomic classification.
 
     Attributes:
+        uuid (UUIDField): The unique identifier associated with the NFC tag.
         name (CharField): A human-readable name for the digitized plant.
         description (TextField): A short description of the digitized plant.
         taxonomic_unit (ForeignKey): A relationship to the Unit model, representing the plant's taxonomic classification.
@@ -20,6 +22,14 @@ class Digit(models.Model):
         last_modified (DateTimeField): The date and time when the Digit instance was last modified.
     """
 
+    uuid = models.UUIDField(
+        default=uuid.uuid4,
+        unique=True,
+        editable=False,
+        db_index=True,
+        verbose_name="Digit UUID",
+        help_text="The unique identifier associated with the NFC tag or identification mechanism."
+    )
     name = models.CharField(
         max_length=50,
         null=True,

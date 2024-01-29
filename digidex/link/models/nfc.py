@@ -1,4 +1,3 @@
-import uuid
 from django.db import models
 from django.urls import reverse
 
@@ -10,7 +9,6 @@ class NFC(models.Model):
 
     Attributes:
         serial_number (CharField): The unique serial number associated with the NFC tag.
-        uuid (UUIDField): The unique identifier associated with the NFC tag.
         counter (IntegerField): The number of times the tag has been scanned.
         user (ForeignKey): The user who created the journal entry, linked to the user model.
         active (BooleanField): A flag indicating whether the Link is active and mapped to a digital object.
@@ -23,14 +21,6 @@ class NFC(models.Model):
         db_index=True,
         verbose_name="Tag Serial Number",
         help_text="The unique serial number associated with the NFC tag."
-    )
-    uuid = models.UUIDField(
-        default=uuid.uuid4,
-        unique=True,
-        editable=False,
-        db_index=True,
-        verbose_name="Digit UUID",
-        help_text="The unique identifier associated with the NFC tag or identification mechanism."
     )
     counter = models.IntegerField(
         default=0,
@@ -97,7 +87,7 @@ class NFC(models.Model):
         Returns:
             str: The absolute URL for the NFC instance.
         """
-        return reverse('inventory:digit-link', kwargs={'uuid': self.uuid})
+        return reverse('inventory:digit-link', kwargs={'serial_number': self.serial_number})
 
     def __str__(self):
         """

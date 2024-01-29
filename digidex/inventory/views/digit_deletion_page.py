@@ -11,8 +11,8 @@ class DigitDeletionView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('inventory:storage')
 
     def get_object(self, queryset=None):
-        uuid = self.kwargs.get('uuid')
-        return get_object_or_404(Digit, nfc_link__uuid=uuid)
+        serial_number = self.kwargs.get('serial_number')
+        return get_object_or_404(Digit, nfc_link__serial_number=serial_number)
 
     def delete(self, request, *args, **kwargs):
         # Start a transaction

@@ -3,11 +3,11 @@
 <html>
   <head>  
     <meta charset="utf-8">
-    <title>Create Digit</title>
+    <title>Modify Digit</title>
     <meta content="A platform for gardeners to cultivate their curiosity." name="description">
-    <meta content="Create Digit" property="og:title">
+    <meta content="Modify Digit" property="og:title">
     <meta content="A platform for gardeners to cultivate their curiosity." property="og:description">
-    <meta content="Create Digit" property="twitter:title">
+    <meta content="Modify Digit" property="twitter:title">
     <meta content="A platform for gardeners to cultivate their curiosity." property="twitter:description">
     <meta property="og:type" content="website">
     <meta content="summary_large_image" name="twitter:card">
@@ -15,10 +15,8 @@
 
     <link href="{% static 'base/css/normalize.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'base/css/base-styles.css' %}" rel="stylesheet" type="text/css">
-
-    <link href="{% static 'main/css/partials/digidex-styles.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'main/css/digit-creation-page.css' %}" rel="stylesheet" type="text/css">
-  
+    <link href="{% static 'main/css/main-styles.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'inventory/css/inventory-styles.css' %}" rel="stylesheet" type="text/css">  
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
     
@@ -31,39 +29,29 @@
         }
       });
     </script>
-
+    
     {% load i18n %}
     <script src="{% static 'main/js/jquery/jquery.js' %}"></script>
         
     <!-- Load Select2 and CSS -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> 
-
-
+    
     <link href="{% static 'main/images/favicon.png' %}" rel="shortcut icon" type="image/x-icon">
     <link href="{% static 'main/images/webclip.png' %}" rel="apple-touch-icon">
   </head>
   <body>
-    {% include 'main/partials/navigation-bar.html' %}
+    {% include 'main/partials/navigation-bar.html' %}  
     <section class="section-full">
       <div class="content">
         <div class="digit-form">
-          <div class="subtitle">Create<br></div>
-          <h2 class="digit-form-heading">Create a new digit</h2>
+          <div class="subtitle">Modify<br></div>
+          <h2 class="digit-form-heading">Edit or delete your digit</h2>
           <div class="form-block base-form">
             <form method="post" class="form">
               {% csrf_token %}
-
-              {% if form.non_field_errors %}
-                <div class="error-message">
-                  {% for error in form.non_field_errors %}
-                    <small>{{ error }}</small><br>
-                  {% endfor %}
-                </div>
-              {% endif %}
-
               <div class="form-group">
-                {{ form.name }}
+                <input type="text" class="text-field base-input" maxlength="256" name="{{ form.name.name }}" placeholder="Name" id="{{ form.name.id_for_label }}" required="" value="{{ form.name.value }}">
                 {% if form.name.errors %}
                   <div class="error-message">
                     <small>{{ form.name.errors|striptags }}</small>
@@ -71,7 +59,7 @@
                 {% endif %}
               </div>
               <div class="form-group">
-                {{ form.description }}
+                <textarea class="text-field textarea" name="{{ form.description.name }}" placeholder="Description" id="{{ form.description.id_for_label }}" required="">{{ form.description.value }}</textarea>
                 {% if form.description.errors %}
                   <div class="error-message">
                     <small>{{ form.description.errors|striptags }}</small>
@@ -79,16 +67,28 @@
                 {% endif %}
               </div>
               <div class="form-group">
-                {{ form.taxonomic_unit }}
+                <div class="select-container">
+                  <select class="text-field base-input" name="taxonomic_unit" id="tsnField" required>
+                    {% if digit.taxonomic_unit %}
+                      <option value="{{ digit.taxonomic_unit.id }}" selected="selected">{{ digit.taxonomic_unit }}</option>
+                    {% endif %}
+                  </select>
+                </div>
                 {% if form.taxonomic_unit.errors %}
                   <div class="error-message">
                     <small>{{ form.taxonomic_unit.errors|striptags }}</small>
                   </div>
-                {% endif %}
+              {% endif %}
               </div>
               <input type="submit" value="Submit Digit Updates" class="submit-button base-button">
             </form>
           </div>
+        </div>
+        <div class="delete-digit">
+          <form action="{% url 'inventory:deletion' digit.nfc_link.serial_number %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Delete Digit" class="delete-button base-button" onclick="return confirm('Are you sure you want to delete this Digit? This action cannot be undone.');">
+          </form>
         </div>
       </div>
     </section>
