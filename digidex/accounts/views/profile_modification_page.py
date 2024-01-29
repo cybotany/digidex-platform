@@ -8,7 +8,7 @@ from digidex.accounts.forms import ProfileForm
 class ModifyProfileView(LoginRequiredMixin, UpdateView):
     model = Profile
     form_class = ProfileForm
-    template_name = 'main/profile-modification-page.html'
+    template_name = 'accounts/profile-modification-page.html'
 
     def get_object(self, queryset=None):
         """

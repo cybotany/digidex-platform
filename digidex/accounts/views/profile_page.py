@@ -5,7 +5,7 @@ from digidex.accounts.models import Activity, Profile
 
 
 class UserProfileView(LoginRequiredMixin, View):
-    template_name = 'main/profile-page.html'
+    template_name = 'accounts/profile-page.html'
 
     def get(self, request, *args, **kwargs):
         recent_activities = Activity.objects.filter(user=request.user).order_by('-timestamp')

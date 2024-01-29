@@ -10,7 +10,7 @@ from digidex.accounts.forms import SignupForm
 
 
 class SignupUserView(FormView):
-    template_name = 'main/signup-page.html'
+    template_name = 'accounts/signup-page.html'
     form_class = SignupForm
     success_url = reverse_lazy('main:landing')
 

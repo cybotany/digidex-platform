@@ -3,4 +3,4 @@ from digidex.accounts.forms import LoginForm
 
 class LoginUserView(LoginView):
     form_class = LoginForm
-    template_name = 'main/login-page.html'
+    template_name = 'accounts/login-page.html'
