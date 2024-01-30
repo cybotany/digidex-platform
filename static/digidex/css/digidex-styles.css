@@ -1341,6 +1341,11 @@ figcaption {
   margin-right: 16%;
 }
 
+.icon-contact-lottie {
+  width: 2em;
+  height: 2em;
+}
+
 .block-icon-contact-lottie {
   background-color: var(--white);
   border-radius: .87em;
