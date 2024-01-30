@@ -384,6 +384,14 @@ figcaption {
 }
 
 @media screen and (max-width: 767px) {
+  .nav-menu {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background-color: var(--white);
+    padding: .75;
+    box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
+  }
+
   .button-desktop {
     display: none;
   }
@@ -409,8 +417,12 @@ figcaption {
   }
 
   .nav-menu {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background-color: var(--white);
     padding-left: .5em;
     padding-right: .5em;
+    box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
   }
 }
 
