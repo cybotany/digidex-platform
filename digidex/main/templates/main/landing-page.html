@@ -18,7 +18,9 @@
     <link href="{% static 'digidex/css/digidex-styles.css' %}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
-    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.4/lottie.min.js" type="text/javascript"></script>
+
     <!-- Load Fonts -->
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
     <script type="text/javascript">
@@ -45,8 +47,8 @@
               <a href="{% url 'accounts:signup' %}" class="button base-button">Signup</a>
             </div>
           </div>
-          <!-- Landing Page - Hero Lottie Section -->
-          <div class="lottie">
+          <!-- Hero Lottie Section (LP- Landing Page)-->
+          <div id="heroLottie-LP" data-w-id="heroLottie" class="lottie">
             <div class="lines-a1">
               <div style="width:1px;height:0%" class="line-w"></div>
               <div style="width:1px;height:0%" class="line-w"></div>
@@ -64,9 +66,9 @@
               <div style="width:0%;height:1px" class="line-h"></div>
             </div>
             <div class="block-lottie">
-              <div class="lottie-animation-1" data-animation-type="lottie" data-src="{% static 'main/documents/Lottie-A1-White.json' %}" data-loop="0" data-direction="1" data-autoplay="0" data-renderer="svg" data-default-duration="2.5" data-duration="0"></div>
-              <div class="lottie-animation-2" data-animation-type="lottie" data-src="{% static 'main/documents/Lottie-A2-Blue.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="19.5" data-duration="0"></div>
-              <div class="lottie-animation-2-blur" data-animation-type="lottie" data-src="{% static 'main/documents/Lottie-A2-Blue.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="19.5" data-duration="0"></div>
+              <div data-w-id="heroLottie-LP-animation1" class="lottie-animation-1" data-animation-type="lottie" data-src="{% static 'main/documents/Lottie-A1-White.json' %}" data-loop="0" data-direction="1" data-autoplay="0" data-renderer="svg" data-default-duration="2.5" data-duration="0"></div>
+              <div data-w-id="heroLottie-LP-animation2" class="lottie-animation-2" data-animation-type="lottie" data-src="{% static 'main/documents/Lottie-A2-Blue.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="19.5" data-duration="0"></div>
+              <div data-w-id="heroLottie-LP-animation2-blur" class="lottie-animation-2-blur" data-animation-type="lottie" data-src="{% static 'main/documents/Lottie-A2-Blue.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="19.5" data-duration="0"></div>
             </div>
             <div class="features-lottie">
               <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="feature-lottie-block"><img src="{% static 'main/images/bx-check.svg' %}" loading="eager" alt="" class="icon-feature-lottie">
@@ -88,7 +90,7 @@
     </section> 
     <section class="section">
       <div class="content">
-    <!-- Landing Page - Solutions Section -->
+        <!-- Landing Page - Solutions Section -->
         <div class="layout-grid grid-solutions">
           <div class="solutions"><img src="{% static 'main/images/edge-node-alt.svg' %}" loading="eager" alt="" class="icon-solution">
             <h5 class="heading-solution">Shared Hosting</h5>
@@ -347,5 +349,6 @@
     {% include 'main/partials/call-to-action.html' %}    
     {% include 'main/partials/page-footer.html' %}
     <script src="{% static 'main/js/toggle-faqs.js' %}" type="text/javascript"></script>
+    <script src="{% static 'main/js/toggle-lottie.js' %}" type="text/javascript"></script>
   </body>
 </html>

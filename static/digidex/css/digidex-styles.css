@@ -291,7 +291,7 @@ figcaption {
 }
 
 .logo {
-  height: 5.5em;
+  height: 1.56em;
 }
 
 .nav-menu {
@@ -428,7 +428,7 @@ figcaption {
 }
 
 .section-top-bar {
-  background-color: var(--accent-a1);
+  background-color: var(--strong-green);
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -447,7 +447,6 @@ figcaption {
 
 .top-bar {
   grid-column-gap: 1.87em;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   display: flex;
@@ -2665,5 +2664,27 @@ color: rgba(20, 23, 24, .6);
   .page-body {
     padding-top: 2em;
     padding-bottom: 2em;
+  }
+}
+
+
+#w-node-_37b3a8d2-c553-a736-f678-9b56fa1506c8-0e941739 { /* lp hero w/out lottie */
+  grid-area: span 1 / span 1 / span 1 / span 1;
+}
+
+@media screen and (max-width: 991px) {
+  #w-node-_84b383cf-f2f3-bea7-8c05-b0fd748b650d-0e94173f { /* company page-about red */
+    grid-area: span 1 / span 2 / span 1 / span 2;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  #w-node-a033bb4d-fb8b-e335-6cb2-c443ca8c4bc8-0e941739,  /* lp company section block right */
+  #w-node-dd03f682-5e31-981d-1bc3-e09cb94f042f-0e941739 { /* lp reviews section block right */
+    order: -9999;
+  }
+
+  #w-node-_84b383cf-f2f3-bea7-8c05-b0fd748b650d-0e94173f { /* company page-about red */
+    grid-area: span 1 / span 1 / span 1 / span 1;
   }
 }
