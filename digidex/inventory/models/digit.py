@@ -92,6 +92,16 @@ class Digit(models.Model):
 
             return digit
 
+    def delete(self, *args, **kwargs):
+        """
+        Overrides the delete method of the model to include custom deletion logic.
+        """
+        if self.nfc_link:
+            self.nfc_link.reset_to_default()
+            self.nfc_link.save()
+
+        super(Digit, self).delete(*args, **kwargs)
+
     def archive(self):
         """
         Archives the digit instance. This involves marking it as archived and dissociating
