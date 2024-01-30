@@ -30,8 +30,8 @@
       });
     </script>
     
-    <link href="{% static 'main/images/favicon.png' %}" rel="shortcut icon" type="image/x-icon">
-    <link href="{% static 'main/images/webclip.png' %}" rel="apple-touch-icon">
+    <link href="{% static 'digidex/images/favicon.png' %}" rel="shortcut icon" type="image/x-icon">
+    <link href="{% static 'digidex/images/webclip.png' %}" rel="apple-touch-icon">
   </head>
   <body>
     {% include 'main/partials/navigation-bar.html' %}
@@ -48,7 +48,7 @@
                 <div class="rich-text-block base-rich-text">
                   <a class="digit-link" href="{% url 'inventory:digit-link' digit.nfc_link.serial_number %}">
                     <figure class="base-rich-text-align-fullwidth base-rich-text-figure-type-image">
-                      <img src="{% static 'main/images/placeholder.svg' %}" alt="Image Description">
+                      <img src="{% static 'digidex/images/placeholder.svg' %}" alt="Image Description">
                       <figcaption>{{ digit.name }}</figcaption>
                     </figure> 
                   </a>
