@@ -1,0 +1,37 @@
+<div class="journal-entry-form">
+  <h5 class="heading-journal-entry">New Journal Entry</h5>
+  <div class="form-block base-form">
+    <form id="journalEntry" method="post" action="{% url 'inventory:journal' digit.serial_number %}" class="form" enctype="multipart/form-data">
+      {% csrf_token %}
+      
+      {% if form.non_field_errors %}
+        <div class="error-message">
+          {% for error in form.non_field_errors %}
+            <small>{{ error }}</small><br>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <div class="form-group">
+        {{ form.content }}
+        {% if form.content.errors %}
+          <div class="error-message">
+            <small>{{ form.content.errors|striptags }}</small>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="form-group base-file-upload">
+        <label for="imageField" class="base-file-upload-label">Upload Image</label>
+        {{ form.image }}
+        {% if form.image.errors %}
+          <div class="error-message">
+            <small>{{ form.image.errors|striptags }}</small>
+          </div>
+        {% endif %}
+      </div>
+
+      <input type="submit" value="Submit Entry" data-wait="Please wait..." class="submit-button">
+    </form>                    
+  </div>
+</div>

@@ -33,7 +33,7 @@ class Entry(models.Model):
         __str__: Returns a string representation of the journal entry.
     """
     collection = models.ForeignKey(
-        'Collection',
+        'journal.Collection',
         on_delete=models.CASCADE,
         related_name='journal_entries',
         help_text="The collection to which this journal entry belongs."

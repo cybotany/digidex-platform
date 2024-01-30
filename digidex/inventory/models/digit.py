@@ -96,6 +96,10 @@ class Digit(models.Model):
         """
         Overrides the delete method of the model to include custom deletion logic.
         """
+        # Check if there is an associated Journal Collection and delete it
+        if self.journal_collection_id:
+            self.journal_collection.delete()
+        # Reset the NFC link to default and save it
         if self.nfc_link:
             self.nfc_link.reset_to_default()
             self.nfc_link.save()
