@@ -360,11 +360,7 @@ figcaption {
 
 @media screen and (max-width: 991px) {
   .nav-menu {
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    background-color: var(--white);
     padding: 1.2em 1em;
-    box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
   }
 
   .menu-button {
@@ -385,11 +381,7 @@ figcaption {
 
 @media screen and (max-width: 767px) {
   .nav-menu {
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    background-color: var(--white);
     padding: .75;
-    box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
   }
 
   .button-desktop {
@@ -417,12 +409,8 @@ figcaption {
   }
 
   .nav-menu {
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    background-color: var(--white);
     padding-left: .5em;
     padding-right: .5em;
-    box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
   }
 }
 
