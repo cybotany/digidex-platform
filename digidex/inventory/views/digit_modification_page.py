@@ -1,12 +1,11 @@
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404, redirect
-from django.views.generic.edit import UpdateView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from digidex.link.views import BaseNFCLinkedView
 from digidex.inventory.forms import DigitForm
 from digidex.inventory.models import Digit
 
 
-class DigitModificationView(LoginRequiredMixin, UpdateView):
+class DigitModificationView(BaseNFCLinkedView):
     model = Digit
     form_class = DigitForm
     template_name = 'inventory/digit-modification-page.html'

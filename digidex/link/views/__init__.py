@@ -1,0 +1,1 @@
+from .nfc_linked_view import BaseNFCLinkedView
