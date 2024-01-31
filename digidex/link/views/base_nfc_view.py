@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404
 from digidex.link.models import NFC
 
 
-class BaseNFCLinkedView(LoginRequiredMixin, SingleObjectMixin, View):
+class BaseNFCView(LoginRequiredMixin, SingleObjectMixin, View):
     model = NFC
 
     def get_object(self, queryset=None):

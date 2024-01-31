@@ -35,8 +35,8 @@ class Entry(models.Model):
     collection = models.ForeignKey(
         'journal.Collection',
         on_delete=models.CASCADE,
-        related_name='journal_entries',
-        help_text="The collection to which this journal entry belongs."
+        related_name='entries',
+        help_text="The collection this journal entry belongs."
     )
     content = models.TextField(
         verbose_name="Content",

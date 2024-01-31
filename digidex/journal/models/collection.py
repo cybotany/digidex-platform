@@ -13,7 +13,6 @@ class Collection(models.Model):
 
     Attributes:
         thumbnail (ImageField): A reference to the 'Digit' model.
-        entries (ManyToManyField): Entries in this collection.
         created_at (DateTimeField): The date/time the journal collection was created.
         last_modified (DateTimeField): The date/time the journal collection was modified.
     """
@@ -23,11 +22,6 @@ class Collection(models.Model):
         null=True,
         blank=True,
         help_text="Thumbnail image for the digitized plant."
-    )
-    entries = models.ManyToManyField(
-        'journal.Entry',
-        related_name='collections',
-        help_text="Entries in this collection."
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
