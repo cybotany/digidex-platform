@@ -16,9 +16,7 @@ class DigitCreationView(BaseNFCView, CreateView):
         if not nfc.active:
             form.instance.nfc_link = nfc
             return super().form_valid(form)
-        else:
-            # Handle cases where NFC is already active
-            return redirect('path-to-redirect-if-nfc-active')
+        # Handle cases where NFC is already active
 
     def form_invalid(self, form):
         # Render the template with the invalid form.

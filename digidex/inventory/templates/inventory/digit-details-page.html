@@ -41,7 +41,7 @@
           <div class="rich-text-block base-rich-text">
             <div class="block-heading center">
               <div class="subtitle">
-                <a href="{% url 'inventory:modification' digit.nfc_link.serial_number %}" class="account-link">Edit or Delete</a>
+                <a href="{% url 'inventory:digit-modification' digit.nfc_link.serial_number %}" class="account-link">Edit or Delete</a>
               </div>
               <h3 class="heading">{{ digit.name }}</h3>
               <div class="date">Created: {{ digit.created_at }}</div>

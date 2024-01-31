@@ -6,7 +6,7 @@ from digidex.inventory.models import Digit
 
 class DigitDeletionView(BaseDigitView, DeleteView):
     model = Digit    
-    success_url = reverse_lazy('inventory:storage')
+    success_url = reverse_lazy('inventory:digit-storage')
 
     def get_object(self, queryset=None):
         # Use the BaseDigitView's get_object method to get the associated Digit
