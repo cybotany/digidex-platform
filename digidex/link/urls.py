@@ -3,5 +3,5 @@ from digidex.link.views import NFCLinkView
 
 app_name = 'link'
 urlpatterns = [
-    path('digit/<slug:slug>/', NFCLinkView.as_view(), name='digit-link'),
+    path('digit/<str:serial_number>/', NFCLinkView.as_view(), name='digit-link'),
 ]
