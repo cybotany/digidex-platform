@@ -17,12 +17,13 @@ class ContactUsView(View):
         if form.is_valid():
             new_contact = form.save()
 
-            send_mail(
-                subject=f"New Contact Us Message from {new_contact.name}",
-                message=new_contact.message,
-                from_email=new_contact.email,
-                recipient_list=[settings.EMAIL_HOST_USER],
-                fail_silently=False,
-            )
+        send_mail(
+            subject=f"New Contact Us Message from {new_contact.name}",
+            message=new_contact.message,
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[settings.EMAIL_HOST_USER],
+            fail_silently=False,
+        )
+
 
         return redirect('main:thanks')
