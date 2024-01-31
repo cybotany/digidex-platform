@@ -2,12 +2,3 @@ from .landing_page import LandingView
 from .contact_us_page import ContactUsView
 from .about_us_page import AboutUsView
 from .thank_you_page import ThankYouView
-from .checkout_page import CheckoutView
-from .detail_category import DetailCategoryView
-from .detail_post import DetailPostView
-from .detail_product import DetailProductView
-from .order_confirmation_page  import OrderConfirmationView
-from .paypal_checkout_page import PayPalCheckoutView
-from .pricing_page import PricingView
-from .solutions_page import SolutionsView
-from .blog_page import BlogView
