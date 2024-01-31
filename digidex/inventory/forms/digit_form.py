@@ -7,7 +7,6 @@ class DigitForm(forms.ModelForm):
     """
     Form for creating a digit.
     """
-    tsn = forms.CharField(widget=forms.HiddenInput())
 
     class Meta:
         model = Digit
@@ -33,13 +32,12 @@ class DigitForm(forms.ModelForm):
         # Initialize taxonomic_unit field as empty
         self.fields['taxonomic_unit'].queryset = Digit.objects.none()
 
-    def clean(self):
-        cleaned_data = super().clean()
-        tsn = cleaned_data.get('tsn')
+    def clean_taxonomic_unit(self):
+        tsn = self.cleaned_data.get('taxonomic_unit')
         if tsn:
             try:
                 taxonomic_unit = Unit.objects.get(tsn=tsn)
-                cleaned_data['taxonomic_unit'] = taxonomic_unit
+                return taxonomic_unit
             except Unit.DoesNotExist:
-                self.add_error('tsn', 'Invalid Taxonomic Serial Number')
-        return cleaned_data
+                raise forms.ValidationError('Invalid Taxonomic Serial Number')
+        return None
