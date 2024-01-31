@@ -77,7 +77,14 @@
                   </div>
                 {% endif %}
               </div>
-
+              <div class="form-group">
+                {{ form.taxonomic_unit }}
+                {% if form.taxonomic_unit.errors %}
+                  <div class="error-message">
+                    <small>{{ form.taxonomic_unit.errors|striptags }}</small>
+                  </div>
+                {% endif %}
+              </div>
               <input type="submit" value="Submit Digit Updates" class="submit-button base-button">
             </form>
           </div>
