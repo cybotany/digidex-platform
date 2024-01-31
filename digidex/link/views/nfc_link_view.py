@@ -1,5 +1,5 @@
 from django.shortcuts import redirect
-from digidex.link.views.base_nfc_view import BaseNFCView
+from digidex.utils.helpers import BaseNFCView
 from digidex.link.models import NFC
 
 

@@ -1,6 +1,6 @@
 from django.urls import reverse_lazy
 from django.views.generic.edit import DeleteView
-from digidex.inventory.views.base_digit_view import BaseDigitView
+from digidex.utils.helpers import BaseDigitView
 from digidex.inventory.models import Digit
 
 

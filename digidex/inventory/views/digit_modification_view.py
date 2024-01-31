@@ -1,6 +1,6 @@
 from django.shortcuts import redirect
 from django.views.generic.edit import UpdateView
-from digidex.inventory.views.base_digit_view import BaseDigitView
+from digidex.utils.helpers import BaseDigitView
 from digidex.inventory.models import Digit
 from digidex.inventory.forms import DigitForm
 

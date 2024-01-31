@@ -1,6 +1,6 @@
 from django.views.generic.edit import CreateView
 from django.shortcuts import redirect, render
-from digidex.link.views.base_nfc_view import BaseNFCView
+from digidex.utils.helpers import BaseNFCView
 from digidex.inventory.models import Digit
 from digidex.inventory.forms import DigitForm
 

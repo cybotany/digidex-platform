@@ -1,5 +1,5 @@
 from django.views.generic import DetailView
-from digidex.inventory.views.base_digit_view import BaseDigitView
+from digidex.utils.helpers import BaseDigitView
 from digidex.inventory.models import Digit
 
 
