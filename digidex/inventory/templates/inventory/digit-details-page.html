@@ -37,7 +37,7 @@
     {% include 'main/partials/navigation-bar.html' %}
     <section class="section">
       <div class="content narrow">
-        <div class="digit-body details">
+        <div class="digit-body">
           <div class="rich-text-block base-rich-text">
             <div class="block-heading center">
               <div class="subtitle">
@@ -47,12 +47,41 @@
               <div class="date">Created: {{ digit.created_at }}</div>
               <p class="paragraph">{{ digit.description }}</p>
             </div>
-            <div class="journal-body">
-            </div>     
+            <figure style="max-width:882px" class="base-rich-text-align-fullwidth base-rich-text-figure-type-image main-digit-image">
+              {% if last_image %}
+                <div>
+                  <img src="{{ last_image.url }}" loading="lazy" alt="Recent image of {{ digit.name }}">
+                </div>
+              {% else %}
+                <div>
+                  <img src="{% static 'digidex/images/placeholder.svg' %}"  loading="lazy" alt="">
+                </div>
+              {% endif %}
+              <figcaption>
+                <p class="base-rich-text-figcaption">Recent image of {{ digit.name }}</p>
+              </figcaption>
+            </figure>
+            <div class="journal-container">
+              <ol start="" role="list">
+                {% for entry in journal_entries %}
+                  <li>
+                    <div class="journal-entry">
+                      <div class="journal-entry-header"></div>
+                      <span class="journal-entry-date">Date: {{ entry.created_at|date:"Y-m-d H:i" }}</span>
+                      <span class="journal-entry-author">Author: {{ entry.user }}</span>
+                      <p class="journal-entry-content">{{ entry.content }}</p>
+                    </div>
+                  </li>
+                {% empty %}
+                  <li>No journal entries available.</li>
+                {% endfor %}
+              </ol>
+            </div>
           </div>
         </div>
       </div>
     </section>
+    {% include 'inventory/partials/digit-journal-section.html' %} 
     {% if digit.taxonomic_unit %}
       {% include 'inventory/partials/digit-taxonomy-section.html' %} 
     {% endif %}
