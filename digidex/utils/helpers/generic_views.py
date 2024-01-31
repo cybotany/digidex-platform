@@ -19,15 +19,16 @@ class BaseNFCView(LoginRequiredMixin, SingleObjectMixin, View):
 
 
 
-class BaseDigitView(BaseNFCView):
-    model = Digit
+    class BaseDigitView(BaseNFCView):
+        model = Digit
 
-    def get_object(self, queryset=None):
-        # First, get the NFC object using the superclass's get_object method
-        nfc = super().get_object(queryset=queryset)
+        def get_object(self, queryset=None):
+            serial_number = self.kwargs.get('serial_number')
+            if not serial_number:
+                raise Http404("No serial number provided")
+            nfc = get_object_or_404(NFC, serial_number=serial_number)
 
-        # Then, retrieve the associated Digit using the NFC object
-        try:
-            return Digit.objects.get(nfc_link=nfc)
-        except Digit.DoesNotExist:
-            raise Http404("No Digit found for the given NFC link")
+            try:
+                return Digit.objects.get(nfc_link=nfc)
+            except Digit.DoesNotExist:
+                raise Http404("No Digit found for the given NFC link")
