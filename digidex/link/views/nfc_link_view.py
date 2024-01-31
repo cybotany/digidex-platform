@@ -9,6 +9,5 @@ class NFCLinkView(BaseNFCView):
     def get(self, request, *args, **kwargs):
         nfc = self.get_object()
         if not nfc.active:
-            return redirect('main:landing')
-            #return redirect('inventory:digit-creation', serial_number=nfc.serial_number)
+            return redirect('inventory:digit-creation', serial_number=nfc.serial_number)
         return redirect('inventory:digit-details', serial_number=nfc.serial_number)
