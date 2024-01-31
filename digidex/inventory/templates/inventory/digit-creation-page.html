@@ -50,7 +50,7 @@
           <div class="subtitle">Create<br></div>
           <h2 class="digit-form-heading">Create a new digit</h2>
           <div class="form-block base-form">
-            <form id="digitForm" method="post" action="{% url 'inventory:digit-journal' digit.serial_number %}" class="form">
+            <form id="digitForm" method="post" class="form">
               {% csrf_token %}
 
               {% if form.non_field_errors %}
