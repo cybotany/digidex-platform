@@ -19,8 +19,14 @@ class DigitForm(forms.ModelForm):
                 'id': 'descriptionField',
                 'class': 'text-field textarea'
             }),
+            'taxonomic_unit': forms.Select(attrs={
+                'id': 'tsnField',
+                'class': 'text-field base-select',
+            }),
 
         }
 
     def __init__(self, *args, **kwargs):
         super(DigitForm, self).__init__(*args, **kwargs)
+        # Initialize taxonomic_unit field as empty
+        self.fields['taxonomic_unit'].queryset = Digit.objects.none()

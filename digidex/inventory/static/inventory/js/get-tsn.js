@@ -27,7 +27,8 @@ const select2Config = {
             withCredentials: true
         },
     },
-    minimumInputLength: 1
+    minimumInputLength: 3,
+    placeholder: 'Start typing to search for taxonomic units',
 };
 
 // Initialize select2

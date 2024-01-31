@@ -17,6 +17,6 @@ class EmailVerificationView(View):
             user.email_confirmed = True
             user.save()
 
-            return redirect('inventory:storage')
+            return redirect('inventory:digit-storage')
         else:
             return render(request, 'accounts/failed-verification-page.html')
