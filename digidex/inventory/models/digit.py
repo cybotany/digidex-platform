@@ -52,6 +52,9 @@ class Digit(models.Model):
     )
     nfc_link = models.OneToOneField(
         'link.NFC',
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE,
         related_name='digit',
         help_text="NFC link for the digitized plant."
     )
