@@ -33,5 +33,8 @@ const select2Config = {
 
 // Initialize select2
 $(document).ready(function() {
-    $(tsnField).select2(select2Config);
+    $(tsnField).select2(select2Config).on('select2:select', function(e) {
+        var data = e.params.data;
+        $('#id_tsn').val(data.id);  // Update the hidden 'tsn' field
+    });
 });

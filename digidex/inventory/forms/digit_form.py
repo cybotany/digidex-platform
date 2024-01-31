@@ -1,11 +1,13 @@
 from django import forms
 from digidex.inventory.models import Digit
+from digidex.taxonomy.models import Unit
 
 
 class DigitForm(forms.ModelForm):
     """
     Form for creating a digit.
     """
+    tsn = forms.CharField(widget=forms.HiddenInput())
 
     class Meta:
         model = Digit
@@ -19,9 +21,9 @@ class DigitForm(forms.ModelForm):
                 'id': 'descriptionField',
                 'class': 'text-field textarea'
             }),
-            'taxonomic_unit': forms.TextInput(attrs={
+            'taxonomic_unit': forms.Select(attrs={
                 'id': 'tsnField',
-                'class': 'text-field base-input',
+                'class': 'text-field base-select',
             }),
 
         }
@@ -30,3 +32,14 @@ class DigitForm(forms.ModelForm):
         super(DigitForm, self).__init__(*args, **kwargs)
         # Initialize taxonomic_unit field as empty
         self.fields['taxonomic_unit'].queryset = Digit.objects.none()
+
+    def clean(self):
+        cleaned_data = super().clean()
+        tsn = cleaned_data.get('tsn')
+        if tsn:
+            try:
+                taxonomic_unit = Unit.objects.get(tsn=tsn)
+                cleaned_data['taxonomic_unit'] = taxonomic_unit
+            except Unit.DoesNotExist:
+                self.add_error('tsn', 'Invalid Taxonomic Serial Number')
+        return cleaned_data
