@@ -81,7 +81,7 @@
                 <!-- Select2 field for taxonomic_unit -->
                 <div class="select-container">
                   <select class="base-input" name="{{ field.name }}" id="{{ field.id_for_label }}" {% if field.is_required %}required=""{% endif %}></select>
-                </div>                            {% else %}
+                </div>
                 <!-- Standard fields for name and description -->
                 <input type="{{ field.field.widget.input_type }}" class="text-field base-input" name="{{ field.name }}" placeholder="{{ field.label }}" id="{{ field.id_for_label }}" {% if field.is_required %}required=""{% endif %}>
               </div>
