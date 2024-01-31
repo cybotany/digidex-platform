@@ -1,5 +1,5 @@
 from django.http import Http404
-from digidex.link.views import BaseNFCView
+from digidex.link.views.base_nfc_view import BaseNFCView
 from digidex.inventory.models import Digit
 
 
