@@ -1,7 +1,7 @@
 from django.urls import reverse_lazy
 from django.shortcuts import render
 from django.views.generic.edit import CreateView
-from digidex.inventory.views.base_digit_view import BaseDigitView
+from digidex.utils.helpers import BaseDigitView
 from digidex.journal.forms import JournalEntry
 from digidex.journal.models import Entry
 
