@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import NFCLinkView
+from digidex.link.views import NFCLinkView
 
 app_name = 'link'
 urlpatterns = [
-    path('digit/<str:serial_number>/', NFCLinkView.as_view(), name='digit'),
+    path('digit/<slug:slug>/', NFCLinkView.as_view(), name='digit-link'),
 ]

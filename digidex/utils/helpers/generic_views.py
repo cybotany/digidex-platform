@@ -12,10 +12,10 @@ class BaseNFCView(LoginRequiredMixin, SingleObjectMixin, View):
 
     def get_object(self, queryset=None):
         queryset = queryset or self.get_queryset()
-        serial_number = self.kwargs.get('serial_number')
-        if not serial_number:
+        slug = self.kwargs.get('slug')
+        if not slug:
             raise Http404("No serial number provided")
-        return get_object_or_404(queryset, serial_number=serial_number)
+        return get_object_or_404(queryset, serial_number=slug)
 
 
 

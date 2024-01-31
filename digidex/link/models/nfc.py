@@ -87,7 +87,7 @@ class NFC(models.Model):
         Returns:
             str: The absolute URL for the NFC instance.
         """
-        return reverse('link:digit', kwargs={'serial_number': self.serial_number})
+        return reverse('link:digit', kwargs={'slug': self.serial_number})
 
     def __str__(self):
         """
@@ -99,6 +99,11 @@ class NFC(models.Model):
             str: The serial number of the NTAG213, representing its unique identification.
         """
         return self.serial_number
+
+    def save(self, *args, **kwargs):
+        # Here, you can add logic if you need to generate or modify the slug
+        # In your case, it's just directly using the serial number
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = "Link"
