@@ -40,12 +40,13 @@
         <div class="digit-body">
           <div class="rich-text-block base-rich-text">
             <div class="block-heading center">
-              <div class="subtitle green">Journal<br></div>
               <h3 class="heading">{{ digit.name }}</h3>
+              <a href="{% url 'inventory:digit-modification' digit.nfc_link.serial_number %}" class="account-link">Edit or Delete</a>
               <div class="date">Created: {{ digit.created_at }}</div>
               <p class="paragraph">{{ digit.description }}</p>
-              <a href="{% url 'inventory:digit-modification' digit.nfc_link.serial_number %}" class="account-link">Edit or Delete</a>
+              <div class="subtitle green">Journal<br></div>
             </div>
+            <div class="subtitle green">Journal<br></div>
             <figure style="max-width:882px" class="base-rich-text-align-fullwidth base-rich-text-figure-type-image main-digit-image">
               {% if last_image %}
                 <div>
