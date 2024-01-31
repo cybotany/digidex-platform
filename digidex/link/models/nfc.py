@@ -87,7 +87,7 @@ class NFC(models.Model):
         Returns:
             str: The absolute URL for the NFC instance.
         """
-        return reverse('inventory:digit-link', kwargs={'serial_number': self.serial_number})
+        return reverse('link:digit', kwargs={'serial_number': self.serial_number})
 
     def __str__(self):
         """
