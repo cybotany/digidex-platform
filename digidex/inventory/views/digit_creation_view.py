@@ -1,5 +1,4 @@
-from django.urls import reverse_lazy
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView
 from digidex.utils.helpers import BaseNFCView
 from digidex.inventory.models import Digit
@@ -12,8 +11,9 @@ class DigitCreationView(BaseNFCView, CreateView):
     template_name = 'inventory/digit-creation-page.html'
 
     def form_valid(self, form):
-        self.object = form.save()
-        return reverse_lazy('inventory:digit-details', kwargs={'serial_number': self.object.nfc_link.serial_number})
+        nfc = self.get_object()
+        self.object = Digit.create_digit(form.cleaned_data, nfc, self.request.user)
+        return redirect('inventory:digit-details', kwargs={'serial_number': nfc.serial_number})
 
     def form_invalid(self, form):
         # Render the template with the invalid form.
