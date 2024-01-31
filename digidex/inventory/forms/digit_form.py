@@ -19,9 +19,9 @@ class DigitForm(forms.ModelForm):
                 'id': 'descriptionField',
                 'class': 'text-field textarea'
             }),
-            'taxonomic_unit': forms.Select(attrs={
+            'taxonomic_unit': forms.TextInput(attrs={
                 'id': 'tsnField',
-                'class': 'text-field base-select',
+                'class': 'text-field base-input',
             }),
 
         }
