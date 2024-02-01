@@ -43,10 +43,10 @@
               <div role="listitem" class="base-dyn-item">
                 <div class="block-post">
                   <a href="{% url 'inventory:digit-details' digit.nfc_link.serial_number %}" class="link-post-thumbnail base-inline-block">
-                    {% if entry.image %}
-                      <img alt="Journal Entry Image" loading="eager" src="{{ entry.image.url }}" class="image-post-thumbnail">
+                    {% if digit.journal_collection.thumbnail %}
+                      <img src="{{ digit.journal_collection.thumbnail.image.url }}" alt="Journal Entry Image" loading="eager" class="image-post-thumbnail">
                     {% else %}
-                    <img src="{% static 'digidex/images/placeholder.svg' %}" alt="Image Description">
+                      <img src="{% static 'digidex/images/placeholder.svg' %}" alt="Journal Entry Image Placeholder" loading="eager" class="image-post-thumbnail">
                     {% endif %}
                   </a>
                   <div class="post">
