@@ -50,7 +50,9 @@
           <img alt="Journal Entry Image" loading="eager" src="{{ entry.image.url }}" class="image-main-post">
         {% endif %}
         <div class="post-body">
-          <div class="rich-text-block base-dyn-bind-empty base-richtext">{{ entry.content }}</div>
+          <div class="rich-text-block base-dyn-bind-empty base-richtext">
+            <p class="paragraph-post large">{{ entry.content|safe }}</p>
+          </div>
         </div>
       </div>
     </section>
