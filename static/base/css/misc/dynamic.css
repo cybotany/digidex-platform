@@ -10,3 +10,11 @@
 .base-dyn-bind-empty {
   display: none !important;
 }
+
+.base-condition-invisible {
+  display: none !important;
+}
+
+.layout-layout {
+  display: grid;
+}
