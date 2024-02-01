@@ -1,10 +1,5 @@
 import os
 from django.db import models
-#from digidex.utils.validators import validate_digit_thumbnail
-
-def thumbnail_directory_path(instance, filename):
-    ext = os.path.splitext(filename)[1]
-    return f'journal-{instance.id}/thumbnail{ext}'
 
 
 class Collection(models.Model):
