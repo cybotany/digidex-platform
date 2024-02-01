@@ -1,4 +1,5 @@
 from .journal_storage_view import JournalStorageView
 from .entry_creation_view import EntryCreationView
+from .entry_deletion_view import EntryDeletionView
 from .entry_collection_view import EntryCollectionView
 from .entry_detail_view import EntryDetailView

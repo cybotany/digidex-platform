@@ -12,16 +12,14 @@ class Collection(models.Model):
     Aggregates journal entries for a single Digit.
 
     Attributes:
-        thumbnail (ImageField): A reference to the 'Digit' model.
+        thumbnail (URLField): A URL to an image representing the thumbnail of the collection.
         created_at (DateTimeField): The date/time the journal collection was created.
         last_modified (DateTimeField): The date/time the journal collection was modified.
     """
-    thumbnail = models.ImageField(
-        upload_to=thumbnail_directory_path,
-#        validators=[validate_digit_thumbnail],
-        null=True,
-        blank=True,
-        help_text="Thumbnail image for the digitized plant."
+    thumbnail = models.URLField(
+        null=True, 
+        blank=True, 
+        help_text="URL of the thumbnail image for the digitized plant."
     )
     created_at = models.DateTimeField(
         auto_now_add=True,

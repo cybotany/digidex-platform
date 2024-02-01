@@ -48,9 +48,19 @@
       <div class="content">
         {% if entry.image %}
           <img alt="Journal Entry Image" loading="eager" src="{{ entry.image.url }}" class="image-main-post">
+        {% else %}
+          <img alt="Journal Entry Image" loading="eager" src="{% static 'digidex/images/placeholder.svg' %}" class="image-main-post">
         {% endif %}
         <div class="post-body">
-          <div class="rich-text-block base-dyn-bind-empty base-richtext">{{ entry.content|safe }}</div>
+          <div class="rich-text-block base-richtext">
+            <p>{{ entry.content|safe }}</p>
+          </div>
+        </div>
+        <div class="delete-entry">
+          <form action="{% url 'journal:delete-entry' entry.id %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Delete Entry" class="delete-button base-button" onclick="return confirm('Are you sure you want to delete this Entry? This action cannot be undone.');">
+          </form>
         </div>
       </div>
     </section>
