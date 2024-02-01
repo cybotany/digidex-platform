@@ -2,6 +2,7 @@ from django.core.exceptions import ValidationError
 from digidex.utils.constants import MAX_JOURNAL_ENTRY_SIZE, MAX_JOURNAL_ENTRY_DIMMENSIONS
 
 def validate_journal_entry(image):
+    print("Uploaded file MIME type:", image.file.content_type)
     # Check file size
     if image.size > MAX_JOURNAL_ENTRY_SIZE:
         raise ValidationError('The maximum file size that can be uploaded is 5MB')
