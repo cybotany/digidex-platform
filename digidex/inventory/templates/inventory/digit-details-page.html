@@ -37,48 +37,40 @@
     {% include 'main/partials/navigation-bar.html' %}
     <section class="section">
       <div class="content">
-        <div class="digit-body">
-          <div class="rich-text-block base-rich-text">
-            <div class="block-heading center">
-              <h3 class="heading">{{ digit.name }}</h3>
-              <div class="date">Created: {{ digit.created_at }}</div>
-              <p class="paragraph">{{ digit.description }}</p>
-              <a href="{% url 'inventory:digit-modification' digit.nfc_link.serial_number %}" class="account-link">Edit Digit</a>
-            </div>
-          </div>
+        <div class="block-top">
+          <div class="subtitle green">Journal<br></div>
+          <h3 class="heading-top">{{ digit.name }}</h3>
+          <div class="date-top">Created: {{ digit.created_at }}</div>
+          <p class="paragraph-top">{{ digit.description }}</p>
+          
+          <a href="{% url 'inventory:digit-modification' digit.nfc_link.serial_number %}" class="account-link">Edit Digit</a>
+          <a href="{% url 'journal:collection-details' collection_id=digit.journal_collection.id %}" class="account-link">View Entire Journal</a>
+          <a href="{% url 'journal:add-entry' collection_id=digit.journal_collection.id %}" class="account-link">Add Journal Entry</a>    
         </div>
-      </div>
+      </div> 
     </section>
     <section class="section">
       <div class="content">
-        <div class="block-heading center">
-          <div class="subtitle green">Journal<br></div>
-          <h3 class="heading">{{ digit.name }}'s Journal Entries</h3>
-          <a href="{% url 'journal:collection-details' collection_id=digit.journal_collection.id %}" class="account-link">View Entire Journal</a>
-          <a href="{% url 'journal:add-entry' collection_id=digit.journal_collection.id %}" class="account-link">Add Journal Entry</a>
-        </div>
         <div class="collection-list-wrapper-posts large base-dyn-list">
           <div role="list" class="collection-list-posts large base-dyn-items">
             <div role="listitem" class="base-dyn-item">
-              <div class="block-post large">
-                {% if last_image %}
-                  <img src="{{ last_image.url }}" loading="lazy" alt="Recent image of {{ digit.name }}">
-                {% else %}
-                  <div>
-                    <img src="{% static 'digidex/images/placeholder.svg' %}"  loading="lazy" alt="">
-                  </div>
-                {% endif %}
-                {% for entry in journal_entries %}
-                  <div class="post large">
-                    <div class="date">{{ entry.created_at|date:"M d, Y" }}</div>
-                    <p class="paragraph-post large">{{ entry.content|truncatewords:50 }}</p>
-                  </div>
-                {% empty %}
-                  <div class="empty-state base-dyn-empty">
-                    <div class="text-empty">No journal entries found.</div>
-                  </div>
-                {% endfor %}
-              </div>
+              {% for entry in journal_entries %}
+                <div class="block-post large">
+                  {% if last_image %}
+                    <img src="{{ last_image.url }}" class="link-post-thumbnail large base-inline-block">
+                  {% else %}
+                    <img src="{% static 'digidex/images/placeholder.svg' %}" class="link-post-thumbnail large base-inline-block">
+                  {% endif %}
+                    <div class="post large">
+                      <div class="date">{{ entry.created_at|date:"M d, Y" }}</div>
+                      <p class="paragraph-post large">{{ entry.content|truncatewords:50 }}</p>
+                    </div>
+                </div>
+              {% empty %}
+                <div class="empty-state base-dyn-empty">
+                  <div class="text-empty">No journal entries found.</div>
+                </div>
+              {% endfor %}
             </div>
           </div>
         </div>
