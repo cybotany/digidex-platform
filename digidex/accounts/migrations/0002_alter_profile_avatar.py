@@ -2,7 +2,6 @@
 
 import digidex.accounts.models.profile
 import digidex.utils.custom_storage
-import digidex.utils.validators.profile_avatar_validator
 from django.db import migrations, models
 
 
@@ -16,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='profile',
             name='avatar',
-            field=models.ImageField(blank=True, help_text='The avatar image of the profile.', null=True, storage=digidex.utils.custom_storage.PublicMediaStorage(), upload_to=digidex.accounts.models.profile.profile_avatar_directory_path, validators=[digidex.utils.validators.profile_avatar_validator.validate_profile_avatar]),
+            field=models.ImageField(blank=True, help_text='The avatar image of the profile.', null=True, storage=digidex.utils.custom_storage.PublicMediaStorage(), upload_to=digidex.accounts.models.profile.profile_avatar_directory_path),
         ),
     ]

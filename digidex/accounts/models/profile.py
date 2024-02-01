@@ -1,6 +1,5 @@
 from django.db import models
 from digidex.utils.custom_storage import PublicMediaStorage
-#from digidex.utils.validators import validate_profile_avatar
 
 def profile_avatar_directory_path(instance, filename):
     return f'profile_{instance.id}/avatar.jpeg'
@@ -38,7 +37,6 @@ class Profile(models.Model):
     avatar = models.ImageField(
         upload_to=profile_avatar_directory_path,
         storage=PublicMediaStorage(), 
-#        validators=[validate_profile_avatar],
         null=True,
         blank=True,
         help_text='The avatar image of the profile.'
