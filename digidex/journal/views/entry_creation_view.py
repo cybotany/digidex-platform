@@ -15,6 +15,3 @@ class EntryCreationView(CreateView):
         collection = get_object_or_404(Collection, pk=collection_id)
         form.instance.collection = collection
         return super().form_valid(form)
-
-    def get_success_url(self):
-            return reverse('journal:digit-details', args=[self.object.collection.id])
