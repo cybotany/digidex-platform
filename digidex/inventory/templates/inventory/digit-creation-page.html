@@ -45,44 +45,11 @@
     {% include 'main/partials/navigation-bar.html' %}
     <section class="section-full">
       <div class="content">
-        <div class="digit-form">
-          <div class="subtitle">Create<br></div>
-          <h2 class="digit-form-heading">Create a new digit</h2>
+        <div class="account-form">
+          <div class="subtitle green">Create<br></div>
+          <h2 class="account-heading">Create a new digit</h2>
           <div class="form-block base-form">
-            <form id="digitForm" method="post" class="form">
-              {% csrf_token %}
-
-              {% if form.non_field_errors %}
-                <div class="error-message">
-                  {% for error in form.non_field_errors %}
-                    <small>{{ error }}</small><br>
-                  {% endfor %}
-                </div>
-              {% endif %}
-
-              <div>
-                {{ form.name }}
-                {% if form.name.errors %}
-                  <div class="error-message">
-                    <small>{{ form.name.errors|striptags }}</small>
-                  </div>
-                {% endif %}
-              </div>
-              <div>
-                {{ form.description }}
-                {% if form.description.errors %}
-                  <div class="error-message">
-                    <small>{{ form.description.errors|striptags }}</small>
-                  </div>
-                {% endif %}
-              </div>
-              <div>
-                <div class="select-container">
-                  <select class="base-input" name="taxonomic_unit" id="id_taxonomic_unit" required=""></select>
-              </div> 
-              </div>
-              <input type="submit" value="Create Digit" class="submit-button base-button">
-            </form>
+            {% include 'inventory/partials/digit-form.html' %}
           </div>
         </div>
       </div>
