@@ -51,12 +51,12 @@
           <div class="form-block base-form">
             {% include 'inventory/partials/digit-form.html' %}
           </div>
-        </div>
-        <div class="delete-digit">
-          <form action="{% url 'inventory:digit-deletion' digit.uuid %}" method="post">
-            {% csrf_token %}
-            <input type="submit" value="Delete Digit" class="delete-button base-button" onclick="return confirm('Are you sure you want to delete this Digit? This action cannot be undone.');">
-          </form>
+          <div class="delete-digit">
+            <form action="{% url 'inventory:digit-deletion' digit.uuid %}" method="post">
+              {% csrf_token %}
+              <input type="submit" value="Delete Digit" class="delete-button base-button" onclick="return confirm('Are you sure you want to delete this Digit? This action cannot be undone.');">
+            </form>
+          </div>
         </div>
       </div>
     </section>
