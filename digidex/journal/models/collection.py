@@ -1,6 +1,6 @@
 import os
 from django.db import models
-from digidex.utils.validators import validate_digit_thumbnail
+#from digidex.utils.validators import validate_digit_thumbnail
 
 def thumbnail_directory_path(instance, filename):
     ext = os.path.splitext(filename)[1]
@@ -18,7 +18,7 @@ class Collection(models.Model):
     """
     thumbnail = models.ImageField(
         upload_to=thumbnail_directory_path,
-        validators=[validate_digit_thumbnail],
+#        validators=[validate_digit_thumbnail],
         null=True,
         blank=True,
         help_text="Thumbnail image for the digitized plant."

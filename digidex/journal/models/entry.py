@@ -3,7 +3,7 @@ from datetime import datetime
 from django.db import models
 from django.urls import reverse
 from digidex.utils.custom_storage import PrivateMediaStorage
-from digidex.utils.validators import validate_journal_entry
+#from digidex.utils.validators import validate_journal_entry
 
 def journal_image_directory_path(instance, filename):
     """
@@ -46,7 +46,7 @@ class Entry(models.Model):
     image = models.ImageField(
         upload_to=journal_image_directory_path,
         storage=PrivateMediaStorage(), 
-        validators=[validate_journal_entry],
+#        validators=[validate_journal_entry],
         null=True,
         blank=True,
         help_text="(Optional) The image to save with the journal entry. Only .jpg, .png, and .jpeg extensions are allowed."
