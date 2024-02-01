@@ -12,14 +12,12 @@ class JournalEntry(forms.ModelForm):
         fields = ('content', 'image')
         widgets = {
             'content': forms.Textarea(attrs={
-                'id': 'contentField',
                 'class': 'text-field textarea base-input'
             }),
-            'image': forms.FileInput(attrs={
-                'accept': 'image/*',
-                'id': 'imageField',
-                'class': 'base-file-upload-input',
-            }),
+            #'image': forms.FileInput(attrs={
+            #    'accept': 'image/jpeg, image/png',
+            #    'class': 'base-file-upload-input',
+            #}),
         }
 
     def __init__(self, *args, **kwargs):
