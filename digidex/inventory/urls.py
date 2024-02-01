@@ -3,7 +3,7 @@ from digidex.inventory.views import (DigitStorageView, DigitCreationView, DigitD
 
 app_name = 'inventory'
 urlpatterns = [
-    path('storage-system/', DigitStorageView.as_view(), name='digit-storage'),
+    path('storage/', DigitStorageView.as_view(), name='digit-storage'),
 
     path('<str:serial_number>/creation/', DigitCreationView.as_view(), name='digit-creation'),
     

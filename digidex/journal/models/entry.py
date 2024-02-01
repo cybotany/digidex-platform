@@ -62,14 +62,22 @@ class Entry(models.Model):
         help_text="The date and time when this journal entry was last modified."
     )
 
+    def __str__(self):
+        return f"Journal Entry for Collection: {self.collection.id}"
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)  # Save the Entry instance first
+
+        if self.image:  # Check if an image is attached to the journal entry
+            collection = self.collection
+            collection.thumbnail = self.image
+            collection.save()
+
     def get_absolute_url(self):
         """
         Returns the URL to the detail view of this journal entry.
         """
         return reverse('journal:entry-details', kwargs={'pk': self.id})
-
-    def __str__(self):
-        return f"Journal Entry for Collection: {self.collection.id}"
 
     class Meta:
         verbose_name = "Journal Entry"
