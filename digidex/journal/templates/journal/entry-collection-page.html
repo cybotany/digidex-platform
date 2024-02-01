@@ -65,13 +65,13 @@
                   </div>
                 </div>
               </div>
-            </div>
+            {% empty %}
+              <div class="empty-state base-dyn-empty">
+                <div class="text-empty">No journal entries found.</div>
+              </div>
+            {% endfor %}
           </div>
-        {% else %}
-          <div class="empty-state base-dyn-empty">
-            <div class="text-empty">No journal entries found.</div>
-          </div>
-        {% endif %}
+        </div>
       </div>
     </section>
   </body>
