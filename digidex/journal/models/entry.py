@@ -12,7 +12,7 @@ def journal_image_directory_path(instance, filename):
     ext = os.path.splitext(filename)[1]
     # Use the current timestamp as a unique identifier
     timestamp = datetime.now().strftime('%Y%m%d%H%M%S%f')
-    return f'journal-{instance.id}/entry-{timestamp}{ext}'
+    return f'journal-{instance.collection.id}/entry-{timestamp}{ext}'
 
 
 class Entry(models.Model):
