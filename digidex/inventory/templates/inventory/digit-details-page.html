@@ -51,19 +51,19 @@
     </section>
     <section class="section">
       <div class="content">
-        <div class="collection-list-wrapper-posts large base-dyn-list">
-          <div role="list" class="collection-list-posts large base-dyn-items">
+        <div class="collection-list-wrapper-posts base-dyn-list">
+          <div role="list" class="collection-list-posts base-dyn-items">
             <div role="listitem" class="base-dyn-item">
               {% for entry in journal_entries %}
-                <div class="block-post large">
+                <div class="block-post">
                   {% if last_image %}
-                    <img src="{{ last_image.url }}" class="link-post-thumbnail large base-inline-block">
+                    <img src="{{ last_image.url }}" class="link-post-thumbnail base-inline-block">
                   {% else %}
-                    <img src="{% static 'digidex/images/placeholder.svg' %}" class="link-post-thumbnail large base-inline-block">
+                    <img src="{% static 'digidex/images/placeholder.svg' %}" class="link-post-thumbnail  base-inline-block">
                   {% endif %}
-                    <div class="post large">
+                    <div class="post ">
                       <div class="date">{{ entry.created_at|date:"M d, Y" }}</div>
-                      <p class="paragraph-post large">{{ entry.content|truncatewords:50 }}</p>
+                      <p class="paragraph-post ">{{ entry.content|truncatewords:50 }}</p>
                     </div>
                 </div>
               {% empty %}
