@@ -14,7 +14,7 @@ class EntryDeletionView(LoginRequiredMixin, DeleteView):
         entry_pk = self.kwargs.get('pk')
         if not entry_pk:
             raise Http404("No Entry provided")
-        return get_object_or_404(queryset, uuid=entry_pk)
+        return get_object_or_404(queryset, id=entry_pk)
 
     def get_success_url(self):
             # Assuming the ForeignKey relation to Collection is named 'collection'
