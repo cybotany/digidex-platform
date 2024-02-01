@@ -11,6 +11,7 @@ class Collection(models.Model):
         last_modified (DateTimeField): The date/time the journal collection was modified.
     """
     thumbnail = models.URLField(
+        max_length=500,
         null=True, 
         blank=True, 
         help_text="URL of the thumbnail image for the digitized plant."
