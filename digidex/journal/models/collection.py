@@ -4,7 +4,7 @@ from django.db import models
 
 def thumbnail_directory_path(instance, filename):
     ext = os.path.splitext(filename)[1]
-    return f'digit-{instance.uuid}/thumbnail{ext}'
+    return f'journal-{instance.id}/thumbnail{ext}'
 
 
 class Collection(models.Model):
