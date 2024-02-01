@@ -17,6 +17,7 @@
     <link href="{% static 'base/css/base-styles.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'digidex/css/digidex-styles.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'inventory/css/inventory-styles.css' %}" rel="stylesheet" type="text/css">  
+    
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
     
@@ -44,41 +45,41 @@
     {% include 'main/partials/navigation-bar.html' %}  
     <section class="section-full">
       <div class="content">
-        <div class="digit-form">
-          <div class="subtitle">Modify<br></div>
-          <h2 class="digit-form-heading">Edit or delete your digit</h2>
+        <div class="account-form">
+          <div class="subtitle green">Modify<br></div>
+          <h2 class="account-heading">Update or delete digit</h2>
           <div class="form-block base-form">
             <form method="post" class="form">
               {% csrf_token %}
-              <div class="form-group">
-                <input type="text" class="text-field base-input" maxlength="256" name="{{ form.name.name }}" placeholder="Name" id="{{ form.name.id_for_label }}" required="" value="{{ form.name.value }}">
+
+              {% if form.non_field_errors %}
+                <div class="error-message">
+                  {% for error in form.non_field_errors %}
+                    <small>{{ error }}</small><br>
+                  {% endfor %}
+                </div>
+              {% endif %}
+
+              <div>
+                {{ form.name }}
                 {% if form.name.errors %}
                   <div class="error-message">
                     <small>{{ form.name.errors|striptags }}</small>
                   </div>
                 {% endif %}
               </div>
-              <div class="form-group">
-                <textarea class="text-field textarea" name="{{ form.description.name }}" placeholder="Description" id="{{ form.description.id_for_label }}" required="">{{ form.description.value }}</textarea>
+              <div>
+                {{ form.description }}
                 {% if form.description.errors %}
                   <div class="error-message">
                     <small>{{ form.description.errors|striptags }}</small>
                   </div>
                 {% endif %}
               </div>
-              <div class="form-group">
+              <div>
                 <div class="select-container">
-                  <select class="text-field base-input" name="taxonomic_unit" id="tsnField" required>
-                    {% if digit.taxonomic_unit %}
-                      <option value="{{ digit.taxonomic_unit.id }}" selected="selected">{{ digit.taxonomic_unit }}</option>
-                    {% endif %}
-                  </select>
-                </div>
-                {% if form.taxonomic_unit.errors %}
-                  <div class="error-message">
-                    <small>{{ form.taxonomic_unit.errors|striptags }}</small>
-                  </div>
-              {% endif %}
+                  <select class="base-input" name="taxonomic_unit" id="id_taxonomic_unit" required=""></select>
+                </div> 
               </div>
               <input type="submit" value="Submit Digit Updates" class="submit-button base-button">
             </form>

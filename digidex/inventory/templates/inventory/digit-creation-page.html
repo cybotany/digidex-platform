@@ -38,7 +38,6 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> 
 
-
     <link href="{% static 'digidex/images/favicon.png' %}" rel="shortcut icon" type="image/x-icon">
     <link href="{% static 'digidex/images/webclip.png' %}" rel="apple-touch-icon">
   </head>
@@ -61,7 +60,7 @@
                 </div>
               {% endif %}
 
-              <div class="form-group">
+              <div>
                 {{ form.name }}
                 {% if form.name.errors %}
                   <div class="error-message">
@@ -69,7 +68,7 @@
                   </div>
                 {% endif %}
               </div>
-              <div class="form-group">
+              <div>
                 {{ form.description }}
                 {% if form.description.errors %}
                   <div class="error-message">
@@ -77,55 +76,17 @@
                   </div>
                 {% endif %}
               </div>
-              <div class="form-group">
+              <div>
                 <div class="select-container">
                   <select class="base-input" name="taxonomic_unit" id="id_taxonomic_unit" required=""></select>
               </div> 
               </div>
-              <input type="submit" value="Submit Digit Updates" class="submit-button base-button">
+              <input type="submit" value="Create Digit" class="submit-button base-button">
             </form>
           </div>
         </div>
       </div>
     </section>
-    <script>
-      // DOM Elements
-      const taxonomicUnitField = document.getElementById('id_taxonomic_unit');
-
-      // Configurations for select2
-      const select2Config = {
-          ajax: {
-              url: '/api/get-tsn/',
-              dataType: 'json',
-              delay: 250,
-              data: function (params) {
-                  return {
-                      q: params.term,
-                      page: params.page
-                  };
-              },
-              processResults: function (data) {
-                  return {
-                      results: data.items,
-                  };
-              },
-              cache: true,
-              beforeSend: function(xhr) {
-                  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-                  xhr.setRequestHeader("X-CSRFToken", csrftoken);
-              },
-              xhrFields: {
-                  withCredentials: true
-              },
-          },
-          minimumInputLength: 3,
-          placeholder: 'Start typing to search for taxonomic units',
-      };
-
-      // Initialize select2
-      $(document).ready(function() {
-          $(taxonomicUnitField).select2(select2Config);
-      });
-    </script>
+    <script src="{% static 'inventory/js/get-tsn.js' %}" type="text/javascript"></script>
   </body>
 </html>

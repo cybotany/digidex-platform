@@ -1,6 +1,5 @@
 from django import forms
 from digidex.inventory.models import Digit
-from digidex.taxonomy.models import Unit
 
 
 class DigitForm(forms.ModelForm):
