@@ -5,6 +5,7 @@ from digidex.journal.models import Entry, Collection
 
 class EntryCollectionView(LoginRequiredMixin, ListView):
     model = Entry
+    context_object_name = 'entries'
     template_name = 'journal/entry-collection-page.html'
 
     def get_queryset(self):
@@ -17,15 +18,10 @@ class EntryCollectionView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         
         collection_id = self.kwargs.get('collection_id')
-        entries = self.get_queryset()
 
-        if entries:
-            context['latest_entry'] = entries.first()
-            context['other_entries'] = entries[1:]
-        else:
-            context['latest_entry'] = None
-            context['other_entries'] = []
-
+        # Get the collection and add it to the context
         collection = Collection.objects.get(id=collection_id)
         context['collection'] = collection
+
         return context
+

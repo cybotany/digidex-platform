@@ -36,7 +36,7 @@
   <body>
     {% include 'main/partials/navigation-bar.html' %}
     <section class="section">
-      <div class="content narrow">
+      <div class="content">
         <div class="digit-body">
           <div class="rich-text-block base-rich-text">
             <div class="block-heading center">
@@ -50,52 +50,43 @@
       </div>
     </section>
     <section class="section">
-      <div class="content narrow">
-        <div class="digit-body">
-          <div class="rich-text-block base-rich-text">
-            <div class="block-heading center">
-              <div class="subtitle green">Journal<br></div>
-              <h3 class="heading">{{ digit.name }}'s Journal Entries</h3>
-              <p class="paragraph">{{ digit.description }}</p>
-              <a href="{% url 'journal:add-entry' collection_id=digit.journal_collection.id %}" class="account-link">Add Journal Entry</a>
-            </div>
-            <figure style="max-width:882px" class="base-rich-text-align-fullwidth base-rich-text-figure-type-image main-digit-image">
-              {% if last_image %}
-                <div>
+      <div class="content">
+        <div class="block-heading center">
+          <div class="subtitle green">Journal<br></div>
+          <h3 class="heading">{{ digit.name }}'s Journal Entries</h3>
+          <a href="{% url 'journal:collection-details' collection_id=digit.journal_collection.id %}" class="account-link">View Entire Journal</a>
+          <a href="{% url 'journal:add-entry' collection_id=digit.journal_collection.id %}" class="account-link">Add Journal Entry</a>
+        </div>
+        <div class="collection-list-wrapper-posts large base-dyn-list">
+          <div role="list" class="collection-list-posts large base-dyn-items">
+            <div role="listitem" class="base-dyn-item">
+              <div class="block-post large">
+                {% if last_image %}
                   <img src="{{ last_image.url }}" loading="lazy" alt="Recent image of {{ digit.name }}">
-                </div>
-              {% else %}
-                <div>
-                  <img src="{% static 'digidex/images/placeholder.svg' %}"  loading="lazy" alt="">
-                </div>
-              {% endif %}
-              <figcaption>
-                <p class="base-rich-text-figcaption">Recent image of {{ digit.name }}</p>
-              </figcaption>
-            </figure>
-            <div class="journal-container">
-              <ol start="" role="list">
+                {% else %}
+                  <div>
+                    <img src="{% static 'digidex/images/placeholder.svg' %}"  loading="lazy" alt="">
+                  </div>
+                {% endif %}
                 {% for entry in journal_entries %}
-                  <li>
-                    <div class="journal-entry">
-                      <div class="journal-entry-header"></div>
-                      <span class="journal-entry-date">Date: {{ entry.created_at|date:"Y-m-d H:i" }}</span>
-                      <span class="journal-entry-author">Author: {{ entry.user }}</span>
-                      <p class="journal-entry-content">{{ entry.content }}</p>
-                    </div>
-                  </li>
+                  <div class="post large">
+                    <div class="date">{{ entry.created_at|date:"M d, Y" }}</div>
+                    <p class="paragraph-post large">{{ entry.content|truncatewords:50 }}</p>
+                  </div>
                 {% empty %}
-                  No journal entries.
+                  <div class="empty-state base-dyn-empty">
+                    <div class="text-empty">No journal entries found.</div>
+                  </div>
                 {% endfor %}
-              </ol>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </section>    
     {% if digit.taxonomic_unit %}
       <section class="section">
-        <div class="content narrow">
+        <div class="content">
           <div class="digit-body">
             <div class="rich-text-block base-rich-text">
               <div class="block-heading center">
