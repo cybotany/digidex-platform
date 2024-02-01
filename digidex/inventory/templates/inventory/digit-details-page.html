@@ -40,12 +40,25 @@
         <div class="digit-body">
           <div class="rich-text-block base-rich-text">
             <div class="block-heading center">
-              <div class="subtitle green">Journal<br></div>
               <h3 class="heading">{{ digit.name }}</h3>
               <div class="date">Created: {{ digit.created_at }}</div>
               <p class="paragraph">{{ digit.description }}</p>
+              <a href="{% url 'inventory:digit-modification' digit.nfc_link.serial_number %}" class="account-link">Edit Digit</a>
             </div>
-            <a href="{% url 'inventory:digit-modification' digit.nfc_link.serial_number %}" class="account-link">Edit or Delete</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="content narrow">
+        <div class="digit-body">
+          <div class="rich-text-block base-rich-text">
+            <div class="block-heading center">
+              <div class="subtitle green">Journal<br></div>
+              <h3 class="heading">{{ digit.name }}'s Journal Entries</h3>
+              <p class="paragraph">{{ digit.description }}</p>
+              <a href="{% url 'journal:add-entry' collection_id=digit.journal_collection.id %}" class="account-link">Add Journal Entry</a>
+            </div>
             <figure style="max-width:882px" class="base-rich-text-align-fullwidth base-rich-text-figure-type-image main-digit-image">
               {% if last_image %}
                 <div>

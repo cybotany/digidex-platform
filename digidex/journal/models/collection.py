@@ -34,6 +34,12 @@ class Collection(models.Model):
         help_text="The date and time when the journal collection instance was last modified."
     )
 
+    def get_digit_name(self):
+        return self.digit.name if self.digit else "No Digit"
+
+    def get_digit_description(self):
+        return self.digit.description if self.digit else "No Description"
+
     class Meta:
         verbose_name = "Journal Collection"
         verbose_name_plural = "Journal Collections"

@@ -1,6 +1,7 @@
 import os
 from datetime import datetime
 from django.db import models
+from django.urls import reverse
 from digidex.utils.custom_storage import PrivateMediaStorage
 from digidex.utils.validators import validate_journal_entry
 
@@ -60,6 +61,12 @@ class Entry(models.Model):
         verbose_name="Last Modified",
         help_text="The date and time when this journal entry was last modified."
     )
+
+    def get_absolute_url(self):
+        """
+        Returns the URL to the detail view of this journal entry.
+        """
+        return reverse('journal:entry-details', kwargs={'pk': self.id})
 
     def __str__(self):
         return f"Journal Entry for Collection: {self.collection.id}"

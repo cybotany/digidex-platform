@@ -1,6 +1,7 @@
 from django.views.generic import DetailView
 from digidex.utils.helpers import BaseDigitView
 from digidex.inventory.models import Digit
+from digidex.journal.forms import JournalEntry
 
 
 class DigitDetailView(BaseDigitView, DetailView):
@@ -13,12 +14,17 @@ class DigitDetailView(BaseDigitView, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
         digit = self.object
 
         # Access the related Journal Collection and its entries
         journal_entries = digit.journal_collection.entries.all()
         context['journal_entries'] = journal_entries[:10]
+
+        # Include journal entry form in the context
+        context['journal_entry_form'] = JournalEntry()
+
+
+        context['collection_id'] = digit.journal_collection.id
 
         # Optionally, if you have images associated with journal entries and want the latest image
         last_image_entry = journal_entries.filter(image__isnull=False).order_by('-created_at').first()

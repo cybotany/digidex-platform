@@ -1,1 +1,3 @@
-from .digit_journal import DigitJournalView
+from .entry_creation_view import EntryCreationView
+from .entry_collection_view import EntryCollectionView
+from .entry_detail_view import EntryDetailView
