@@ -14,7 +14,7 @@ class DigitCreationView(CreateView):
         serial_number = self.kwargs.get('serial_number')
         nfc = get_object_or_404(NFC, serial_number=serial_number)
         digit = Digit.create_digit(form.cleaned_data, nfc, self.request.user)
-        return redirect('inventory:digit-details', serial_number=nfc.serial_number)
+        return redirect('inventory:digit-details', uuid=digit.uuid)
 
     def form_invalid(self, form):
         # Render the template with the invalid form.

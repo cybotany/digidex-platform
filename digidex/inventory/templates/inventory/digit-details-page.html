@@ -42,7 +42,7 @@
           <h3 class="heading-top">{{ digit.name }}</h3>
           <div class="date-top">Created: {{ digit.created_at }}</div>
           <p class="paragraph-top">{{ digit.description }}</p>
-          <a href="{% url 'inventory:digit-modification' digit.nfc_link.serial_number %}" class="account-link">Edit Digit</a>
+          <a href="{% url 'inventory:digit-modification' digit.uuid %}" class="account-link">Edit Digit</a>
         </div>
         <div class="collection-list-wrapper-posts large base-dyn-list">
           <div role="list" class="collection-list-posts large base-dyn-items">

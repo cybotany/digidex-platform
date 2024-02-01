@@ -18,7 +18,6 @@ class BaseNFCView(LoginRequiredMixin, SingleObjectMixin, View):
         return get_object_or_404(queryset, serial_number=serial_number)
 
 
-
 class BaseDigitView(BaseNFCView):
     model = Digit
 

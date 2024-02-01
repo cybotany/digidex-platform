@@ -143,7 +143,7 @@ class Digit(models.Model):
         Returns:
             str: The URL to view the details of this digit.
         """
-        return reverse('inventory:digit-details', kwargs={'serial_number': self.nfc_link.serial_number})
+        return reverse('inventory:digit-details', kwargs={'uuid': self.uuid})
 
     class Meta:
         verbose_name = "Digit"

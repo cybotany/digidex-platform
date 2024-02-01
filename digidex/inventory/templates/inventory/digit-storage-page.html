@@ -51,7 +51,7 @@
             {% for digit in digits %}
               <div role="listitem" class="base-dyn-item">
                 <div class="block-post">
-                  <a href="{% url 'inventory:digit-details' digit.nfc_link.serial_number %}" class="link-post-thumbnail base-inline-block">
+                  <a href="{% url 'inventory:digit-details' digit.uuid %}" class="link-post-thumbnail base-inline-block">
                     {% if digit.journal_collection.thumbnail %}
                       <img src="{{ digit.journal_collection.thumbnail.image.url }}" alt="Journal Entry Image" loading="eager" class="image-post-thumbnail">
                     {% else %}
@@ -61,7 +61,7 @@
                   <div class="post">
                     <div class="date">{{ digit.created_at|date:"M d, Y" }}</div>
                     <h4 class="heading-post">{{ digit.name }}</h4>
-                    <a href="{% url 'inventory:digit-details' digit.nfc_link.serial_number %}" class="link-block base-inline-block"></a>
+                    <a href="{% url 'inventory:digit-details' digit.uuid %}" class="link-block base-inline-block"></a>
                   </div>
                 </div>
               </div>

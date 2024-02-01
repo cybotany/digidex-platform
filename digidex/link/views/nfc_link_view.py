@@ -1,13 +1,24 @@
 from django.shortcuts import redirect
-from digidex.utils.helpers import BaseNFCView
+from django.http import Http404
+from django.shortcuts import get_object_or_404
+from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.detail import SingleObjectMixin
 from digidex.link.models import NFC
 
 
-class NFCLinkView(BaseNFCView):
+class NFCLinkView(LoginRequiredMixin, SingleObjectMixin, View):
     model = NFC
-    
+
+    def get_object(self, queryset=None):
+        queryset = queryset or self.get_queryset()
+        serial_number = self.kwargs.get('serial_number')
+        if not serial_number:
+            raise Http404("No serial number provided")
+        return get_object_or_404(queryset, serial_number=serial_number)
+
     def get(self, request, *args, **kwargs):
         nfc = self.get_object()
-        if nfc.active:
-            return redirect('inventory:digit-details', serial_number=nfc.serial_number)
+        if nfc.active and hasattr(nfc, 'digit'):
+            return redirect('inventory:digit-details', uuid=nfc.digit.uuid)
         return redirect('inventory:digit-creation', serial_number=nfc.serial_number)

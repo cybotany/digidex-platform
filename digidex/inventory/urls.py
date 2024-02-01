@@ -6,7 +6,7 @@ urlpatterns = [
     path('storage-system/', DigitStorageView.as_view(), name='digit-storage'),
 
     path('<str:serial_number>/creation/', DigitCreationView.as_view(), name='digit-creation'),
-    path('<str:serial_number>/details/', DigitDetailsView.as_view(), name='digit-details'),
-    path('<str:serial_number>/modification/', DigitModificationView.as_view(), name='digit-modification'),
-    path('<str:serial_number>/deletion/', DigitDeletionView.as_view(), name='digit-deletion'),
+    path('<uuid:uuid>/details/', DigitDetailsView.as_view(), name='digit-details'),
+    path('<uuid:uuid>/modification/', DigitModificationView.as_view(), name='digit-modification'),
+    path('<uuid:uuid>/deletion/', DigitDeletionView.as_view(), name='digit-deletion'),
 ]
