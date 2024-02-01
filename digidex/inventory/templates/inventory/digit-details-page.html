@@ -38,19 +38,12 @@
     <section class="section">
       <div class="content">
         <div class="block-top">
-          <div class="subtitle green">Journal<br></div>
+          <div class="subtitle green">Overview<br></div>
           <h3 class="heading-top">{{ digit.name }}</h3>
           <div class="date-top">Created: {{ digit.created_at }}</div>
           <p class="paragraph-top">{{ digit.description }}</p>
-          
           <a href="{% url 'inventory:digit-modification' digit.nfc_link.serial_number %}" class="account-link">Edit Digit</a>
-          <a href="{% url 'journal:collection-details' collection_id=digit.journal_collection.id %}" class="account-link">View Entire Journal</a>
-          <a href="{% url 'journal:add-entry' collection_id=digit.journal_collection.id %}" class="account-link">Add Journal Entry</a>    
         </div>
-      </div> 
-    </section>
-    <section class="section">
-      <div class="content">
         <div class="collection-list-wrapper-posts large base-dyn-list">
           <div role="list" class="collection-list-posts large base-dyn-items">
             {% for entry in journal_entries %}
@@ -73,9 +66,13 @@
               </div>
             {% endfor %}
           </div>
+          <div class="empty-state base-dyn-empty">
+            <a href="{% url 'journal:collection-details' collection_id=digit.journal_collection.id %}" class="account-link">View Entire Journal</a>
+            <a href="{% url 'journal:add-entry' collection_id=digit.journal_collection.id %}" class="account-link">Add Journal Entry</a>    
+          </div>
         </div>
       </div>
-    </section>    
+    </section>        
     {% if digit.taxonomic_unit %}
       <section class="section">
         <div class="content">
