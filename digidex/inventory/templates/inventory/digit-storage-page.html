@@ -35,24 +35,30 @@
   </head>
   <body>
     {% include 'main/partials/navigation-bar.html' %}
-    <section class="section-full">
-      <div class="content narrow">
-        <div class="digit-body storage">
-          <div class="block-heading center">
-            <h3 class="heading">Box n</h3>
-            <p class="paragraph">Details about Box n</p>
-          </div>
-          <div class="layout-grid grid-digits">
+    <section class="section">
+      <div class="content">
+        <div class="collection-list-wrapper-posts base-dyn-list">
+          <div role="list" class="collection-list-posts base-dyn-items">
             {% for digit in digits %}
-              <div class="block-digit">
-                <div class="rich-text-block base-rich-text">
-                  <a class="digit-link" href="{% url 'inventory:digit-details' digit.nfc_link.serial_number %}">
-                    <figure class="base-rich-text-align-fullwidth base-rich-text-figure-type-image">
-                      <img src="{% static 'digidex/images/placeholder.svg' %}" alt="Image Description">
-                      <figcaption>{{ digit.name }}</figcaption>
-                    </figure> 
+              <div role="listitem" class="base-dyn-item">
+                <div class="block-post">
+                  <a href="{% url 'inventory:digit-details' digit.nfc_link.serial_number %}" class="link-post-thumbnail base-inline-block">
+                    {% if entry.image %}
+                      <img alt="Journal Entry Image" loading="eager" src="{{ entry.image.url }}" class="image-post-thumbnail">
+                    {% else %}
+                    <img src="{% static 'digidex/images/placeholder.svg' %}" alt="Image Description">
+                    {% endif %}
                   </a>
-                </div> 
+                  <div class="post">
+                    <div class="date">{{ digit.created_at|date:"M d, Y" }}</div>
+                    <h4 class="heading-post">{{ digit.name }}</h4>
+                    <a href="{% url 'inventory:digit-details' digit.nfc_link.serial_number %}" class="link-block base-inline-block"></a>
+                  </div>
+                </div>
+              </div>
+            {% empty %}
+              <div class="empty-state base-dyn-empty">
+                <div class="text-empty">No digits found.</div>
               </div>
             {% endfor %}
           </div>
