@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Collection(models.Model):
@@ -29,11 +30,35 @@ class Collection(models.Model):
         help_text="The date and time when the journal collection instance was last modified."
     )
 
+    def get_absolute_url(self):
+        return reverse('journal:entry-details', kwargs={'pk': self.id})
+
     def get_digit_name(self):
         return self.digit.name if self.digit else "No Digit"
 
     def get_digit_description(self):
         return self.digit.description if self.digit else "No Description"
+
+    def get_entry_count(self):
+        """
+        Returns the number of entries in this collection.
+        """
+        return self.entries.count()
+
+    def get_summarized_content(self):
+        """
+        Concatenates and returns a summarized version of the content of all entries in the collection, 
+        prefixed with their creation date.
+        """
+        return ' '.join(
+            f"{entry.created_at.strftime('%Y-%m-%d %H:%M:%S')}: {entry.content}"
+            for entry in self.entries.all()
+        )
+
+    def get_image_carousel_data(self):
+        """Returns a list of image URLs for the entries in the collection."""
+        return [entry.image.url for entry in self.entries.all() if entry.image]
+
 
     class Meta:
         verbose_name = "Journal Collection"

@@ -60,6 +60,12 @@ class Entry(models.Model):
         verbose_name="Last Modified",
         help_text="The date and time when this journal entry was last modified."
     )
+    entry_number = models.PositiveIntegerField(
+        verbose_name="Entry Number",
+        help_text="Numeric value indicating the entry number within the collection.",
+        default=0,  # Default to 0, will be updated on save
+        editable=False
+    )
 
     def __str__(self):
         return f"Journal Entry for Collection: {self.collection.id}"

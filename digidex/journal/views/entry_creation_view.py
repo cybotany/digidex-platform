@@ -11,7 +11,7 @@ class EntryCreationView(CreateView):
     template_name = 'journal/entry-creation-page.html'
 
     def form_valid(self, form):
-        collection_id = self.kwargs.get('collection_id')
+        collection_id = self.kwargs.get('pk')
         collection = get_object_or_404(Collection, pk=collection_id)
         form.instance.collection = collection
         return super().form_valid(form)

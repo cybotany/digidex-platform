@@ -40,35 +40,28 @@
         <div class="block-top">
           <div class="subtitle green">Overview<br></div>
           <h3 class="heading-top">{{ digit.name }}</h3>
-          <div class="date-top">Created: {{ digit.created_at }}</div>
+          <div class="date-top">Created: {{ digit.created_at|date:"M d, Y" }}</div>
           <p class="paragraph-top">{{ digit.description }}</p>
           <a href="{% url 'inventory:digit-modification' digit.uuid %}" class="account-link">Edit Digit</a>
         </div>
         <div class="collection-list-wrapper-posts large base-dyn-list">
           <div role="list" class="collection-list-posts large base-dyn-items">
-            {% for entry in journal_entries %}
-              <div role="listitem" class="base-dyn-item">
-                <div class="block-post large">
-                  {% if last_image %}
-                    <img src="{{ last_image.url }}" class="link-post-thumbnail large base-inline-block">
-                  {% else %}
-                    <img src="{% static 'digidex/images/placeholder.svg' %}" class="link-post-thumbnail large base-inline-block">
-                  {% endif %}
-                  <div class="post large">
-                    <div class="date">{{ entry.created_at|date:"M d, Y" }}</div>
-                    <p class="paragraph-post large">{{ entry.content|truncatewords:50 }}</p>
+            <div role="listitem" class="base-dyn-item">
+              <div class="block-post large">
+                {% for image_url in image_carousel_data %}
+                  <div class="carousel-slide">
+                    <img src="{{ image_url }}" alt="Journal Image" class="link-post-thumbnail large base-inline-block">
                   </div>
+                {% endfor %}
+                <div class="post large">
+                  <p class="paragraph-post large">{{ summarized_content }}</p>
                 </div>
               </div>
-            {% empty %}
-              <div class="empty-state base-dyn-empty">
-                <div class="text-empty">No journal entries found.</div>
-              </div>
-            {% endfor %}
-          </div>
-          <div class="empty-state base-dyn-empty">
-            <a href="{% url 'journal:collection-details' collection_id=digit.journal_collection.id %}" class="account-link">View Entire Journal</a>
-            <a href="{% url 'journal:add-entry' collection_id=digit.journal_collection.id %}" class="account-link">Add Journal Entry</a>    
+            </div>
+            <div class="empty-state base-dyn-empty">
+              <a href="{% url 'journal:collection-details' pk=digit.journal_collection.id %}" class="account-link">View Entire Journal</a>
+              <a href="{% url 'journal:add-entry' pk=digit.journal_collection.id %}" class="account-link">Add Journal Entry</a>    
+            </div>
           </div>
         </div>
       </div>

@@ -19,4 +19,4 @@ class EntryDeletionView(LoginRequiredMixin, DeleteView):
     def get_success_url(self):
             # Assuming the ForeignKey relation to Collection is named 'collection'
             collection = self.object.collection
-            return reverse('journal:collection-details', kwargs={'collection_id': collection.id})
+            return reverse('journal:collection-details', kwargs={'pk': collection.id})
