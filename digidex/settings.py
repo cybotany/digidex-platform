@@ -38,6 +38,10 @@ if DJANGO_ENV == 'production':
     STATICFILES_STORAGE = 'digidex.utils.custom_storage.PublicStaticStorage'
     AWS_LOCATION = 'static'
     
+    STATICFILES_DIRS = [
+        BASE_DIR / "static",
+        "/var/www/static/",
+    ]
     STATIC_URL = '{}/{}/'.format(AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
     STATIC_ROOT = 'static/'
 
