@@ -22,9 +22,9 @@ class DigitDetailsView(LoginRequiredMixin, DetailView):
         journal_collection = digit.journal_collection
 
         # Get summarized content
-        context['summarized_content'] = journal_collection.summarized_content()
+        context['summarized_content'] = journal_collection.get_summarized_content()
 
         # Get image carousel data
-        context['image_carousel_data'] = journal_collection.image_carousel_data()
+        context['image_carousel_data'] = journal_collection.get_image_carousel_data()
 
         return context
