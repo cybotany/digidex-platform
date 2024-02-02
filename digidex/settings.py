@@ -18,7 +18,7 @@ AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', '')
 AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', '')
 AWS_S3_ENDPOINT_URL = os.environ.get('AWS_S3_ENDPOINT_URL', '')
 AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
-AWS_S3_CUSTOM_URL = os.environ.get('AWS_S3_CUSTOM_URL', '')
+AWS_S3_CUSTOM_DOMAIN = os.environ.get('AWS_S3_CUSTOM_DOMAIN', '')
 
 # Environment specific settings
 if DJANGO_ENV == 'production':
@@ -37,7 +37,7 @@ if DJANGO_ENV == 'production':
 
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     AWS_LOCATION = 'static'
-    STATIC_URL = f'https://{AWS_S3_CUSTOM_URL}/{AWS_LOCATION}/'
+    STATIC_URL = f'{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
     STATIC_ROOT = '/var/www/digidex.app/static'
 
     CORS_ALLOWED_ORIGINS = [
@@ -62,8 +62,8 @@ else:
     STATIC_URL = '/static/'
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-    #CORS_ALLOWED_ORIGINS = ["http://10.0.0.218:8080"]
-    CORS_ALLOW_ALL_ORIGINS = True
+    CORS_ALLOWED_ORIGINS = ["http://10.0.0.218:8080"]
+    #CORS_ALLOW_ALL_ORIGINS = True
 
 # Public media settings
 MEDIA_URL = f'https://{AWS_S3_ENDPOINT_URL}/'
