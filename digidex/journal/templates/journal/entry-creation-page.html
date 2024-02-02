@@ -3,11 +3,11 @@
 <html>
   <head>  
     <meta charset="utf-8">
-    <title>New Journal Entry - Digidex - Smart Garden Management</title>
+    <title>New Journal Entry - Digidex</title>
     <meta content="A platform for gardeners to cultivate their curiosity." name="description">
-    <meta content="New Journal Entry - Digidex - Smart Garden Management" property="og:title">
+    <meta content="New Journal Entry - Digidex" property="og:title">
     <meta content="A platform for gardeners to cultivate their curiosity." property="og:description">
-    <meta content="New Journal Entry - Digidex - Smart Garden Management" property="twitter:title">
+    <meta content="New Journal Entry - Digidex" property="twitter:title">
     <meta content="A platform for gardeners to cultivate their curiosity." property="twitter:description">
     <meta property="og:type" content="website">
     <meta content="summary_large_image" name="twitter:card">
@@ -41,49 +41,7 @@
           <div class="subtitle green">Journal Entry<br></div>
           <h2 class="account-heading">Create new entry</h2>
           <div class="form-block base-form">
-            <form method="post" class="form" enctype="multipart/form-data">
-              {% csrf_token %}
-              
-              {% if form.non_field_errors %}
-                <div class="error-message">
-                  {% for error in form.non_field_errors %}
-                    <small>{{ error }}</small><br>
-                  {% endfor %}
-                </div>
-              {% endif %}
-          
-              <div>
-                {{ form.content }}
-                {% if form.content.errors %}
-                  <div class="error-message">
-                    <small>{{ form.content.errors|striptags }}</small>
-                  </div>
-                {% endif %}
-              </div>
-          
-              <div class="base-file-upload">
-                <label for="imageField" class="base-file-upload-label">Upload Image</label>
-                {{ form.image }}
-                {% if form.image.errors %}
-                  <div class="error-message">
-                    <small>{{ form.image.errors|striptags }}</small>
-                  </div>
-                {% endif %}
-              </div>
-          
-              <input type="submit" value="Submit Entry" class="submit-button">
-              {% if form.non_field_errors %}
-                <div class="error-message base-form-fail">
-                  {% for error in form.non_field_errors %}
-                    <div class="text-error">{{ error }}</div>
-                  {% endfor %}
-                </div>
-              {% else %}
-                <div class="success-message base-form-done">
-                  <div class="text-success">Your operation was successful!</div>
-                </div>
-              {% endif %} 
-            </form>                    
+            {% include 'journal/partials/entry-form.html' %}        
           </div>
         </div>
     </div>

@@ -1,35 +1,34 @@
-<form method="post" class="form">
+<form method="post" class="form" enctype="multipart/form-data">
   {% csrf_token %}
-  <!-- Render Username Field -->
+  <!-- Render Content Field -->
   <div>
-    {{ form.username }}
-    {% if form.username.errors %}
+    {{ form.content }}
+    {% if form.content.errors %}
       <div class="error-message">
-        <small>{{ form.username.errors|striptags }}</small>
+        <small>{{ form.content.errors|striptags }}</small>
       </div>
     {% endif %}
   </div>
-  <!-- Render Password Field -->
-  <div>
-    {{ form.password }}
-    {% if form.password.errors %}
+  <!-- Render Image Field -->
+  <div class="base-file-upload">
+    {{ form.image }}
+    {% if form.image.errors %}
       <div class="error-message">
-        <small>{{ form.password.errors|striptags }}</small>
+        <small>{{ form.image.errors|striptags }}</small>
       </div>
     {% endif %}
   </div>
   <!-- Render Submit Button -->
-  <input type="submit" value="Login" class="submit-button base-button">
+  <input type="submit" value="Submit Entry" class="submit-button">
   <!-- Non-Field Errors -->
   {% if form.non_field_errors %}
     <div class="error-message base-form-fail">
       {% for error in form.non_field_errors %}
         <div class="text-error">{{ error }}</div>
-      {% endfor %}
     </div>
   {% else %}
     <div class="success-message base-form-done">
       <div class="text-success">Your operation was successful!</div>
     </div>
-  {% endif %}          
+  {% endif %} 
 </form>

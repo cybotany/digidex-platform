@@ -14,10 +14,10 @@ class JournalEntry(forms.ModelForm):
             'content': forms.Textarea(attrs={
                 'class': 'text-field textarea base-input'
             }),
-            #'image': forms.FileInput(attrs={
-            #    'accept': 'image/jpeg, image/png',
-            #    'class': 'base-file-upload-input',
-            #}),
+            'image': forms.FileInput(attrs={
+                'accept': 'image/*',
+                'class': 'base-file-upload-input',
+            }),
         }
 
     def __init__(self, *args, **kwargs):
