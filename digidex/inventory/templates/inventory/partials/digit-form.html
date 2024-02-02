@@ -32,5 +32,9 @@
         <small>{{ error }}</small><br>
       {% endfor %}
     </div>
-  {% endif %}
+  {% else %}
+    <div class="success-message base-form-done">
+      <div class="text-success">Your operation was successful!</div>
+    </div>
+  {% endif %} 
 </form>
