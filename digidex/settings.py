@@ -10,15 +10,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Fetch the environment variable indicating the environment.
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '')
-DJANGO_ENV = os.environ.get('DJANGO_ENV', 'development')
+DJANGO_ENV = os.environ.get('DJANGO_ENV', 'production')
 
 # AWS settings for static and media files
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', '')
+
 AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', '')
 AWS_S3_ENDPOINT_URL = os.environ.get('SPACES_ENDPOINT_URL', '')
 AWS_S3_CUSTOM_DOMAIN = os.environ.get('SPACES_EDGE_ENDPOINT_URL', '')
 AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+
+AWS_LOCATION = 'static'
 
 # Environment specific settings
 if DJANGO_ENV == 'production':
@@ -35,15 +38,13 @@ if DJANGO_ENV == 'production':
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
 
-    STATICFILES_STORAGE = 'digidex.utils.custom_storage.PublicStaticStorage'
-    AWS_LOCATION = 'static'
-    
+    STATICFILES_STORAGE = 'digidex.utils.custom_storage.PublicStaticStorage'   
     STATICFILES_DIRS = [
         BASE_DIR / "static",
-        "/var/www/static/",
     ]
+
     STATIC_URL = '{}/{}/'.format(AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-    STATIC_ROOT = 'static/'
+    STATIC_ROOT = '/var/www/digidex.app/static'
 
     CORS_ALLOWED_ORIGINS = [
         "https://digidex.app",
