@@ -6,16 +6,18 @@ class LoginForm(AuthenticationForm):
     class Meta:
         model = User
         fields = ['username', 'password']
-        widgets = {
-            'username': forms.TextInput(attrs={
-                'class': 'text-field base-input', 
-                'placeholder': 'Username'
-            }),
-            'password': forms.PasswordInput(attrs={
-                'class': 'text-field base-input', 
-                'placeholder': 'Password'
-            }),
-        }
+
+
+    def __init__(self, *args, **kwargs):
+        super(LoginForm, self).__init__(*args, **kwargs)
+        self.fields['username'].widget = forms.TextInput(attrs={
+            'class': 'text-field base-input',
+            'placeholder': 'Username'
+        })
+        self.fields['password'].widget = forms.PasswordInput(attrs={
+            'class': 'text-field base-input',
+            'placeholder': 'Password'
+        })
 
     def clean_username(self):
         ''' 
