@@ -1,26 +1,40 @@
 document.addEventListener("DOMContentLoaded", function() {
-  // Function to initialize Lottie animations
-  function initLottieAnimations(selector) {
-    var lottieElements = document.querySelectorAll(selector);
+  // Function to initialize Lottie animation for a single element
+  function initLottieAnimation(element) {
+    // Move 'data-src' value to 'src' and remove 'data-src'
+    var animationPath = element.getAttribute('data-src');
+    element.setAttribute('src', animationPath);
+    element.removeAttribute('data-src');
 
-    lottieElements.forEach(function(element) {
-      var animationPath = element.getAttribute('data-src');
-      var loop = element.getAttribute('data-loop') === '1';
-      var autoplay = element.getAttribute('data-autoplay') === '1';
+    var loop = element.getAttribute('data-loop') === '1';
+    var autoplay = element.getAttribute('data-autoplay') === '1';
 
-      lottie.loadAnimation({
-        container: element,
-        renderer: 'svg',
-        loop: loop,
-        autoplay: autoplay,
-        path: animationPath
-      });
+    lottie.loadAnimation({
+      container: element,
+      renderer: 'svg',
+      loop: loop,
+      autoplay: autoplay,
+      path: animationPath
     });
   }
 
-  // Initialize animations for the first set of elements
-  initLottieAnimations('.lottie-animation-1, .lottie-animation-2, .lottie-animation-2-blur');
+  // Intersection Observer Callback
+  function onIntersection(entries, observer) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        initLottieAnimation(entry.target);
+        observer.unobserve(entry.target); // Stop observing the current target
+      }
+    });
+  }
 
-  // Initialize animations for the new banner elements
-  initLottieAnimations('.lottie-animation-1-banner, .lottie-animation-2-banner, .lottie-animation-2-blur-banner');
+  // Set up the Intersection Observer
+  var observer = new IntersectionObserver(onIntersection, {
+    rootMargin: '0px',
+    threshold: 0.1
+  });
+
+  // Observe all Lottie elements
+  var lottieElements = document.querySelectorAll('.lottie-animation-1, .lottie-animation-2, .lottie-animation-2-blur, .lottie-animation-1-banner, .lottie-animation-2-banner, .lottie-animation-2-blur-banner');
+  lottieElements.forEach(element => observer.observe(element));
 });
