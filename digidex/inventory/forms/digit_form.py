@@ -12,11 +12,9 @@ class DigitForm(forms.ModelForm):
         fields = ('name', 'description', 'taxonomic_unit',)
         widgets = {
             'name': forms.TextInput(attrs={
-                'id': 'nameField',
                 'class': 'text-field base-input'
             }),
             'description': forms.Textarea(attrs={
-                'id': 'descriptionField',
                 'class': 'text-field textarea'
             }),
         }

@@ -1,3 +1,3 @@
-from .user_login import LoginForm
-from .user_signup import SignupForm
-from .modify_profile import ProfileForm
+from .login_form import LoginForm
+from .signup_form import SignupForm
+from .profile_form import ProfileForm

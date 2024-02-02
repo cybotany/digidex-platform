@@ -9,13 +9,11 @@ class LoginForm(AuthenticationForm):
         widgets = {
             'username': forms.TextInput(attrs={
                 'class': 'text-field base-input', 
-                'placeholder': 'Username', 
-                'maxlength': '256'
+                'placeholder': 'Username'
             }),
             'password': forms.PasswordInput(attrs={
                 'class': 'text-field base-input', 
-                'placeholder': 'Password', 
-                'maxlength': '256'
+                'placeholder': 'Password'
             }),
         }
 

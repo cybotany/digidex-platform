@@ -16,6 +16,7 @@
     <link href="{% static 'base/css/normalize.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'base/css/base-styles.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'digidex/css/digidex-styles.css' %}" rel="stylesheet" type="text/css">
+    
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
     
@@ -43,40 +44,7 @@
           <div class="subtitle green">Sign in<br></div>
           <h2 class="account-heading">Login to your account</h2>
           <div class="form-block base-form">
-            <form method="post" class="form">
-              {% csrf_token %}
-              <!-- Render Username Field -->
-              <div>
-                {{ form.username }}
-                {% if form.username.errors %}
-                  <div class="error-message">
-                    <small>{{ form.username.errors|striptags }}</small>
-                  </div>
-                {% endif %}
-              </div>
-              <!-- Render Password Field -->
-              <div>
-                {{ form.password }}
-                {% if form.password.errors %}
-                  <div class="error-message">
-                    <small>{{ form.password.errors|striptags }}</small>
-                  </div>
-                {% endif %}
-              </div>
-              <input type="submit" value="Login" class="submit-button base-button">
-              <!-- Non-Field Errors -->
-              {% if form.non_field_errors %}
-                <div class="error-message base-form-fail">
-                  {% for error in form.non_field_errors %}
-                    <div class="text-error">{{ error }}</div>
-                  {% endfor %}
-                </div>
-              {% else %}
-                <div class="success-message base-form-done">
-                  <div class="text-success">Your operation was successful!</div>
-                </div>
-              {% endif %}          
-            </form>
+            {% include 'accounts/partials/login-form.html' %}
             <div class="account-text">Forgot your password? <a href="{% url 'reset_password' %}" class="account-link">Reset password</a></div>
             <div class="account-text">Not registered? <a href="{% url 'accounts:signup' %}" class="account-link">Create account</a></div>
           </div>
