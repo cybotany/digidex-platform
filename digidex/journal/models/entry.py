@@ -50,11 +50,6 @@ class Entry(models.Model):
         blank=True,
         help_text="(Optional) The image to save with the journal entry. Only .jpg, .png, and .jpeg extensions are allowed."
     )
-    is_thumbnail = models.BooleanField(
-        default=False,
-        verbose_name="Is Thumbnail",
-        help_text="Indicates if the entry's image is currently used as the thumbnail for the Collection."
-    )
     created_at = models.DateTimeField(
         auto_now_add=True,
         verbose_name="Created At",
@@ -73,20 +68,16 @@ class Entry(models.Model):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
 
-        if self.image and not self.is_thumbnail:
-            self.collection.entries.filter(is_thumbnail=True).update(is_thumbnail=False)
-            self.is_thumbnail = True
-            
+        if self.image:
             collection = self.collection
-            collection.thumbnail = self.image.url
+            collection.thumbnail = self
             collection.save()
 
     @transaction.atomic
     def delete(self, *args, **kwargs):
-        if self.is_thumbnail:
-            collection = self.collection
-            collection.thumbnail = None
-            collection.save()
+        if self.collection.thumbnail == self:
+            self.collection.thumbnail = None
+            self.collection.save()
         super().delete(*args, **kwargs)
 
     def get_absolute_url(self):

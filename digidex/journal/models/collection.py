@@ -10,7 +10,7 @@ class Collection(models.Model):
         created_at (DateTimeField): The date/time the journal collection was created.
         last_modified (DateTimeField): The date/time the journal collection was modified.
     """
-    thumbnail_entry = models.ForeignKey(
+    thumbnail = models.ForeignKey(
         'journal.Entry',
         on_delete=models.SET_NULL,
         null=True,
