@@ -1,14 +1,6 @@
 <form method="post" class="form">
   {% csrf_token %}
-
-  {% if form.non_field_errors %}
-    <div class="error-message">
-      {% for error in form.non_field_errors %}
-        <small>{{ error }}</small><br>
-      {% endfor %}
-    </div>
-  {% endif %}
-
+  <!-- Render Name Field -->
   <div>
     {{ form.name }}
     {% if form.name.errors %}
@@ -17,6 +9,7 @@
       </div>
     {% endif %}
   </div>
+  <!-- Render Description Field -->
   <div>
     {{ form.description }}
     {% if form.description.errors %}
@@ -25,10 +18,19 @@
       </div>
     {% endif %}
   </div>
+  <!-- Render Taxonomic Unit Field -->
   <div>
     <div class="select-container">
       <select class="base-input" name="taxonomic_unit" id="id_taxonomic_unit" required=""></select>
-  </div> 
+    </div> 
   </div>
   <input type="submit" value="Create Digit" class="submit-button base-button">
+  <!-- Non-Field Errors -->
+  {% if form.non_field_errors %}
+    <div class="error-message">
+      {% for error in form.non_field_errors %}
+        <small>{{ error }}</small><br>
+      {% endfor %}
+    </div>
+  {% endif %}
 </form>
