@@ -2,8 +2,22 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from digidex.accounts.models import User
 
-
 class LoginForm(AuthenticationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'password']
+        widgets = {
+            'username': forms.TextInput(attrs={
+                'class': 'text-field base-input', 
+                'placeholder': 'Username', 
+                'maxlength': '256'
+            }),
+            'password': forms.PasswordInput(attrs={
+                'class': 'text-field base-input', 
+                'placeholder': 'Password', 
+                'maxlength': '256'
+            }),
+        }
 
     def clean_username(self):
         ''' 

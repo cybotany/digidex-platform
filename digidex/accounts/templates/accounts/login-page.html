@@ -45,23 +45,26 @@
           <div class="form-block base-form">
             <form method="post" class="form">
               {% csrf_token %}
+              <!-- Render Username Field -->
               <div>
-                <input type="text" class="text-field base-input" maxlength="256" name="username" placeholder="Username" id="username" required="">
-                  {% if form.username.errors %}
-                    <div class="error-message">
-                      <small>{{ form.username.errors|striptags }}</small>
-                    </div>
-                  {% endif %}
+                {{ form.username }}
+                {% if form.username.errors %}
+                  <div class="error-message">
+                    <small>{{ form.username.errors|striptags }}</small>
+                  </div>
+                {% endif %}
               </div>
+              <!-- Render Password Field -->
               <div>
-                <input type="password" class="text-field base-input" maxlength="256" name="password" placeholder="Password" id="password" required="">
-                  {% if form.password.errors %}
-                    <div class="error-message">
-                      <small>{{ form.password.errors|striptags }}</small>
-                    </div>
-                  {% endif %}
+                {{ form.password }}
+                {% if form.password.errors %}
+                  <div class="error-message">
+                    <small>{{ form.password.errors|striptags }}</small>
+                  </div>
+                {% endif %}
               </div>
               <input type="submit" value="Login" class="submit-button base-button">
+              <!-- Non-Field Errors -->
               {% if form.non_field_errors %}
                 <div class="error-message base-form-fail">
                   {% for error in form.non_field_errors %}
@@ -72,7 +75,7 @@
                 <div class="success-message base-form-done">
                   <div class="text-success">Your operation was successful!</div>
                 </div>
-              {% endif %}            
+              {% endif %}          
             </form>
             <div class="account-text">Forgot your password? <a href="{% url 'reset_password' %}" class="account-link">Reset password</a></div>
             <div class="account-text">Not registered? <a href="{% url 'accounts:signup' %}" class="account-link">Create account</a></div>
