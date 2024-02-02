@@ -79,7 +79,6 @@ PRIVATE_FILE_STORAGE = 'digidex.utils.custom_storage.PrivateMediaStorage'
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = [
-    "access-control-allow-origin",
     "content-type",
     "authorization",
     'x-requested-with'
