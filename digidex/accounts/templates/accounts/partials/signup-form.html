@@ -1,35 +1,35 @@
 <form method="post" class="form">
   {% csrf_token %}
-
+  <!-- Render Username Field -->
   <div>
-    <input type="text" class="text-field base-input" maxlength="256" name="username" placeholder="Username" id="username" required="">
+    {{ form.username }}
     {% if form.username.errors %}
       <div class="error-message">
         <small>{{ form.username.errors|striptags }}</small>
       </div>
     {% endif %}
   </div>
-  
+  <!-- Render Email Field -->
   <div>
-    <input type="email" class="text-field base-input" maxlength="256" name="email" placeholder="Email" id="email" required="">
+    {{ form.email }}
     {% if form.email.errors %}
       <div class="error-message">
         <small>{{ form.email.errors|striptags }}</small>
       </div>
     {% endif %}
   </div>
-  
+  <!-- Render Password Field -->
   <div>
-    <input type="password" class="text-field base-input" maxlength="256" name="password1" placeholder="Password" id="password1" required="">
+    {{ form.password1 }}
     {% if form.password1.errors %}
       <div class="error-message">
         <small>{{ form.password1.errors|striptags }}</small>
       </div>
     {% endif %}
   </div>
-  
+  <!-- Render Password Confirmation Field -->
   <div>
-    <input type="password" class="text-field base-input" maxlength="256" name="password2" placeholder="Confirm Password" id="password2" required="">
+    {{ form.password2 }}
     {% if form.password2.errors %}
       <div class="error-message">
         <small>{{ form.password2.errors|striptags }}</small>
@@ -37,6 +37,8 @@
     {% endif %}
   </div>
   <input type="submit" value="Sign Up" class="submit-button base-button">
+
+  <!-- Render Non-Field Errors -->
   {% if form.non_field_errors %}
     <div class="error-message base-form-fail">
       {% for error in form.non_field_errors %}
@@ -48,4 +50,4 @@
       <div class="text-success">Your operation was successful!</div>
     </div>
   {% endif %}
-</form>    
+</form>

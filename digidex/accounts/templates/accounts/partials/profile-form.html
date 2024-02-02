@@ -1,10 +1,59 @@
-{% block content %}
-  <div class="center">
-    <h2>Edit Profile</h2>
-    <form method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit">Update</button>
-    </form>
+{% load static %}
+<section class="section-full">
+  <div class="content">
+    <div class="account-form">
+      <div class="subtitle blue">Update Profile<br></div>
+      <h2 class="heading-account">Edit your profile</h2>
+
+      <div class="form-block w-form">
+        <form id="profileForm" method="post" class="form" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div>
+            <!-- Bio Field -->
+            <textarea class="text-field w-input" name="bio" placeholder="Your Bio" id="bio">{{ form.bio.value|default_if_none:'' }}</textarea>
+              {% if form.bio.errors %}
+                <div class="error-message">
+                  <small>{{ form.bio.errors|striptags }}</small>
+                </div>
+              {% endif %}
+          </div>
+          <div>
+            <!-- Location Field -->
+            <input type="text" class="text-field w-input" maxlength="256" name="location" placeholder="Location" id="location" value="{{ form.location.value|default_if_none:'' }}">
+              {% if form.location.errors %}
+                <div class="error-message">
+                  <small>{{ form.location.errors|striptags }}</small>
+                </div>
+              {% endif %}
+          </div>
+          <div>
+            <!-- Avatar Field -->
+            <label for="avatar">Profile Picture</label>
+            <input type="file" class="w-input" name="avatar" id="avatar">
+              {% if form.avatar.errors %}
+                <div class="error-message">
+                  <small>{{ form.avatar.errors|striptags }}</small>
+                </div>
+              {% endif %}
+          </div>
+          <input type="submit" value="Save Changes" data-wait="Please wait..." class="submit-button w-button">
+      
+          {% if form.non_field_errors %}
+            <div class="error-message w-form-fail">
+              {% for error in form.non_field_errors %}
+                <div class="text-error">{{ error }}</div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </form>
+      </div>
+      <div>
+        <form method="post" action="{% url 'accounts:delete' %}">
+          {% csrf_token %}
+          <p>Are you sure you want to delete your account? This action cannot be undone.</p>
+          <button type="submit">Delete my account</button>
+        </form>
+      </div>      
+    </div>
   </div>
-{% endblock %}
+</section>
