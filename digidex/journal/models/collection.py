@@ -10,11 +10,13 @@ class Collection(models.Model):
         created_at (DateTimeField): The date/time the journal collection was created.
         last_modified (DateTimeField): The date/time the journal collection was modified.
     """
-    thumbnail = models.URLField(
-        max_length=500,
-        null=True, 
-        blank=True, 
-        help_text="URL of the thumbnail image for the digitized plant."
+    thumbnail_entry = models.ForeignKey(
+        'journal.Entry',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='journal_thumbnail',
+        help_text="Reference to the entry that contains the thumbnail image."
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
