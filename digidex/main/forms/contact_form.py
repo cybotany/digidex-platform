@@ -1,15 +1,24 @@
 from django import forms
 from digidex.main.models import Contact
 
-
 class ContactForm(forms.ModelForm):
     class Meta:
         model = Contact
         fields = ['name', 'email', 'message']
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Name'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}),
-            'message': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Message'}),
+            'name': forms.TextInput(attrs={
+                'class': 'text-field base-input',
+                'placeholder': 'Name'
+            }),
+            'email': forms.EmailInput(attrs={
+                'class': 'text-field base-input',
+                'placeholder': 'Email'
+            }),
+            'message': forms.Textarea(attrs={
+                'class': 'text-field textarea',
+                'placeholder': 'Message',
+                'rows': 4,
+            }),
         }
         labels = {
             'name': '',
@@ -34,3 +43,6 @@ class ContactForm(forms.ModelForm):
                 'required': "Please enter a message."
             },
         }
+
+    def __init__(self, *args, **kwargs):
+        super(ContactForm, self).__init__(*args, **kwargs)

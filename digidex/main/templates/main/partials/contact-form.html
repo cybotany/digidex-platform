@@ -1,25 +1,39 @@
 <form method="post" class="form">
   {% csrf_token %}
-  <!-- Render Username Field -->
+
+  <!-- Render Name Field -->
   <div>
-    {{ form.username }}
-    {% if form.username.errors %}
+    {{ form.name }}
+    {% if form.name.errors %}
       <div class="error-message">
-        <small>{{ form.username.errors|striptags }}</small>
+        <small>{{ form.name.errors|striptags }}</small>
       </div>
     {% endif %}
   </div>
-  <!-- Render Password Field -->
+
+  <!-- Render Email Field -->
   <div>
-    {{ form.password }}
-    {% if form.password.errors %}
+    {{ form.email }}
+    {% if form.email.errors %}
       <div class="error-message">
-        <small>{{ form.password.errors|striptags }}</small>
+        <small>{{ form.email.errors|striptags }}</small>
       </div>
     {% endif %}
   </div>
+
+  <!-- Render Message Field -->
+  <div>
+    {{ form.message }}
+    {% if form.message.errors %}
+      <div class="error-message">
+        <small>{{ form.message.errors|striptags }}</small>
+      </div>
+    {% endif %}
+  </div>
+
   <!-- Render Submit Button -->
-  <input type="submit" value="Login" class="submit-button base-button">
+  <input type="submit" value="Submit" class="submit-button base-button">
+
   <!-- Non-Field Errors -->
   {% if form.non_field_errors %}
     <div class="error-message base-form-fail">
