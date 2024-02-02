@@ -35,6 +35,6 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   // Observe all Lottie elements
-  var lottieElements = document.querySelectorAll('.lottie-animation-1, .lottie-animation-2, .lottie-animation-2-blur, .lottie-animation-1-banner, .lottie-animation-2-banner, .lottie-animation-2-blur-banner');
+  var lottieElements = document.querySelectorAll('.lottie-animation-1, .lottie-animation-2, .lottie-animation-2-blur');
   lottieElements.forEach(element => observer.observe(element));
 });

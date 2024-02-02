@@ -3,11 +3,11 @@
 <html>
   <head>  
     <meta charset="utf-8">
-    <title>Protected page- Digidex - Smart Garden Management</title>
+    <title>Protected page- Digidex</title>
     <meta content="A platform for gardeners to cultivate their curiosity." name="description">
-    <meta content="Protected page - Digidex - Smart Garden Management" property="og:title">
+    <meta content="Protected page - Digidex" property="og:title">
     <meta content="A platform for gardeners to cultivate their curiosity." property="og:description">
-    <meta content="Protected page - Digidex - Smart Garden Management" property="twitter:title">
+    <meta content="Protected page - Digidex" property="twitter:title">
     <meta content="A platform for gardeners to cultivate their curiosity." property="twitter:description">
     <meta property="og:type" content="website">
     <meta content="summary_large_image" name="twitter:card">
@@ -16,6 +16,7 @@
     <link href="{% static 'base/css/normalize.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'base/css/base-styles.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'digidex/css/digidex-styles.css' %}" rel="stylesheet" type="text/css">
+  
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
     
@@ -36,11 +37,12 @@
     <a href="{% url 'main:landing' %}" class="brand-center base-nav-brand">
       <img src="{% static 'digidex/images/logo.png' %}" loading="eager" alt="Host Logo" class="logo">
     </a>
-    <div class="utility-page-wrap page-401">
-      <div class="utility-page-content page-401">
-        <div class="subtitle">Password<br></div>
-        <h2 class="utility-heading page-401">Protected Page</h2>
-        <form class="utility-page-form page-401" method="post" name="email-form" action="{% url 'your_login_view_name' %}">
+    <div class="utility-page-wrap">
+      <div class="utility-page-content">
+        <div class="subtitle green">Password<br></div>
+        <h2 class="account-heading">Protected Page</h2>
+        <p class="account-paragraph">Please enter your password to access this page.</p>
+        <form class="form" method="post">
           {% csrf_token %}
           <label for="pass" class="field-label">Password</label>
           <input type="password" class="text-field w-input" autofocus="true" maxlength="256" name="pass" placeholder="Enter your password" id="pass">
