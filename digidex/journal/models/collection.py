@@ -47,11 +47,12 @@ class Collection(models.Model):
 
     def get_summarized_content(self):
         """
-        Concatenates and returns a summarized version of the content of all entries in the collection, 
-        prefixed with their creation date.
+        Concatenates and returns a summarized version of the content of all entries in the collection. 
+        Each entry is prefixed with its creation date and time, formatted as 'Month Day, Year HH:MM AM/PM',
+        and placed on a new line to act as a header for the content.
         """
-        return ' '.join(
-            f"{entry.created_at.strftime('%Y-%m-%d %H:%M:%S')}: {entry.content}"
+        return '\n\n'.join(
+            f"{entry.created_at.strftime('%B %d, %Y %I:%M %p')}:\n{entry.content}"
             for entry in self.entries.all()
         )
 
