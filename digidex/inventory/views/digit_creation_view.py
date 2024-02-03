@@ -1,11 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic.edit import CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from digidex.inventory.models import Digit
 from digidex.inventory.forms import DigitForm
 from digidex.link.models import NFC
 
 
-class DigitCreationView(CreateView):
+class DigitCreationView(LoginRequiredMixin, CreateView):
     model = Digit
     form_class = DigitForm
     template_name = 'inventory/digit-creation-page.html'
