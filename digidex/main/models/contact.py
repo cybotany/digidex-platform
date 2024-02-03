@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.mail import send_mail
 from django.utils.timezone import now
 from datetime import timedelta
 
@@ -45,6 +46,18 @@ class Contact(models.Model):
             str: A string in the format "Contact submission from <name>".
         """
         return f"Contact submission from {self.name}"
+
+    def send_email(self):
+        """
+        Sends an email to the user after a contact form submission.
+        """
+        send_mail(
+            subject="Thank you for contacting us",
+            message="We have received your message and will get back to you soon.",
+            from_email='no-reply@digidex.app',
+            recipient_list=[self.email],
+            fail_silently=False,
+        )
 
     @classmethod
     def get_pending_responses_summary(cls):

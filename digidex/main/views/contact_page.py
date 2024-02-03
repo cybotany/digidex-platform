@@ -10,12 +10,13 @@ class ContactView(FormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update({
-            'subtitle': 'Contact Us',
-            'heading': "Have questions? Contact us for assistance",
+            'subtitle': 'Contact',
+            'heading': "Contact us for assistance",
             'paragraph': "We're here to help!"
         })
         return context
 
     def form_valid(self, form):
-        # Here you can add the logic to handle a valid form (e.g., sending an email)
+        new_contact = form.save()
+        new_contact.send_email()
         return super().form_valid(form)

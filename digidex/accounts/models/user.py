@@ -49,19 +49,25 @@ class User(AbstractUser):
         token = PasswordResetTokenGenerator().make_token(self)
         base_url = reverse('accounts:verify-email')
         query_string = urlencode({'token': token, 'email': self.email})
-        full_url = f'http://{settings.SITE_HOST}{base_url}?{query_string}'
+        full_url = f'https://{settings.SITE_HOST}{base_url}?{query_string}'
 
         send_mail(
-            'Verify your email',
-            f'Please click the following link to verify your email: {full_url}',
-            settings.DEFAULT_FROM_EMAIL,
-            [self.email],
+            subject='Verify your email',
+            message=f'Please click the following link to verify your email: {full_url}',
+            from_email='no-reply@digidex.app',
+            recipient_list=[self.email],
             fail_silently=False,
         )
 
     def save(self, *args, **kwargs):
-        if not self.pk:
+        # Check if it's a new record
+        new_user = self.pk is None
+        if new_user:
             self.is_active = False
+
+        # Save the user instance
         super().save(*args, **kwargs)
-        if not self.pk:
+
+        # Send verification email for new users
+        if new_user:
             self.send_verification_email()
