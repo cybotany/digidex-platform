@@ -51,18 +51,11 @@
       <div class="content">
         <div class="lottie-wrapper">
           <div class="contact-lottie">
-            <a href="mailto:support@yoursite.com" class="contact-lottie-link a2 base-inline-block">
+            <a href="support@digidex.app" class="contact-lottie-link a2 base-inline-block">
               <div class="block-icon-contact-lottie"><img src="{% static 'main/images/email.svg' %}" loading="eager" alt="" class="icon-contact-lottie"></div>
               <div class="block-heading-contact-lottie">
                 <h4 class="heading-contact-lottie">Email us</h4>
                 <div class="text-contact-lottie">support@digidex.app</div>
-              </div>
-            </a>
-            <a href="tel:+1(888)123-4567" class="contact-lottie-link a3 base-inline-block">
-              <div class="block-icon-contact-lottie"><img src="{% static 'main/images/phone-voice.svg' %}" loading="eager" alt="" class="icon-contact-lottie"></div>
-              <div class="block-heading-contact-lottie">
-                <h4 class="heading-contact-lottie">Call us</h4>
-                <div class="text-contact-lottie">+1 (347)-376-1166</div>
               </div>
             </a>
           </div>
@@ -94,49 +87,7 @@
           <div class="subtitle green">Contact Us<br></div>
           <h2 class="heading-contact">Wanna Talk More?</h2>
           <div class="form-block base-form">
-            <form method="post" class="contact-form form" action="{% url 'main:contact' %}">
-              {% csrf_token %}
-              <div>
-                <input type="text" class="text-field base-input" maxlength="256" name="{{ form.name.name }}" placeholder="Your Name" id="name" required="">
-                  {% if form.name.errors %}
-                    <div class="error-message">
-                      <small>{{ form.name.errors|striptags }}</small>
-                    </div>
-                  {% endif %}
-              </div>
-              <div>
-                <input type="email" class="text-field base-input" maxlength="256" name="{{ form.email.name }}" placeholder="Email" id="email" required="">
-                  {% if form.email.errors %}
-                    <div class="error-message">
-                      <small>{{ form.email.errors|striptags }}</small>
-                    </div>
-                  {% endif %}
-              </div>
-              <div>
-                <textarea class="text-field base-input" maxlength="500" name="{{ form.message.html_name }}" placeholder="Message" id="{{ form.message.id_for_label }}" required=""></textarea>
-                  {% if form.message.errors %}
-                    <div class="error-message">
-                      <small>{{ form.message.errors|striptags }}</small>
-                    </div>
-                  {% endif %}
-              </div>
-              <input type="submit" value="Submit" class="submit-button base-button">
-        
-              {% if form.non_field_errors %}
-                <div class="error-message base-form-fail">
-                  {% for error in form.non_field_errors %}
-                    <div class="text-error">{{ error }}</div>
-                  {% endfor %}
-                </div>
-              {% endif %}
-              {% if messages %}
-                {% for message in messages %}
-                  <div class="base-form-done">
-                    <div class="text-success">{{ message }}</div>
-                  </div>
-                {% endfor %}
-              {% endif %}
-            </form>
+            {% include 'main/partials/contact-form.html' %}
           </div>
         </div>
       </div>
