@@ -1,5 +1,6 @@
 <form method="post" class="form">
   {% csrf_token %}
+
   <!-- Render Username Field -->
   <div>
     {{ form.username }}
@@ -9,6 +10,7 @@
       </div>
     {% endif %}
   </div>
+
   <!-- Render Password Field -->
   <div>
     {{ form.password }}
@@ -18,8 +20,10 @@
       </div>
     {% endif %}
   </div>
+
   <!-- Render Submit Button -->
   <input type="submit" value="Login" class="submit-button base-button">
+
   <!-- Non-Field Errors -->
   {% if form.non_field_errors %}
     <div class="error-message base-form-fail">

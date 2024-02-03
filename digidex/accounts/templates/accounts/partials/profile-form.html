@@ -1,5 +1,6 @@
 <form method="post" class="form" enctype="multipart/form-data">
 {% csrf_token %}
+
   <!-- Render Bio Field -->
   <div>
     {{ form.bio }}
@@ -9,6 +10,7 @@
       </div>
     {% endif %}
   </div>
+
   <!-- Render Location Field -->
   <div>
     {{ form.location }}
@@ -18,6 +20,7 @@
       </div>
     {% endif %}
   </div>
+
   <!-- Render Avatar Field -->
   <div class='base-file-upload'>
     {{ form.avatar }} 
@@ -27,8 +30,10 @@
       </div>
     {% endif %}
   </div>
+
   <!-- Render Submit Button -->
   <input type="submit" value="Update Profile"  class="submit-button base-button">
+
   <!-- Non-Field Errors -->
   {% if form.non_field_errors %}
     <div class="error-message base-form-fail">

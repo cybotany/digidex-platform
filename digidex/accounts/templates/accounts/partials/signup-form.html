@@ -1,5 +1,6 @@
 <form method="post" class="form">
   {% csrf_token %}
+
   <!-- Render Username Field -->
   <div>
     {{ form.username }}
@@ -9,6 +10,7 @@
       </div>
     {% endif %}
   </div>
+
   <!-- Render Email Field -->
   <div>
     {{ form.email }}
@@ -18,6 +20,7 @@
       </div>
     {% endif %}
   </div>
+
   <!-- Render Password Field -->
   <div>
     {{ form.password1 }}
@@ -26,7 +29,9 @@
         <small>{{ form.password1.errors|striptags }}</small>
       </div>
     {% endif %}
+  
   </div>
+
   <!-- Render Password Confirmation Field -->
   <div>
     {{ form.password2 }}
@@ -36,6 +41,8 @@
       </div>
     {% endif %}
   </div>
+
+  <!-- Render Submit Button -->
   <input type="submit" value="Sign Up" class="submit-button base-button">
 
   <!-- Render Non-Field Errors -->
