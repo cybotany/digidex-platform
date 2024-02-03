@@ -53,7 +53,7 @@ class User(AbstractUser):
 
         send_mail(
             subject='Verify your email',
-            message=f'Please click the following link to verify your email: {full_url}',
+            message=f'Please click the following link to verify your email:\n{full_url}',
             from_email='no-reply@digidex.app',
             recipient_list=[self.email],
             fail_silently=False,
