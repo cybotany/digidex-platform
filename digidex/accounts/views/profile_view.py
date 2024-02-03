@@ -15,7 +15,8 @@ class UserProfileView(LoginRequiredMixin, DetailView):
     
         context.update({
             'subtitle': 'Profile',
-            'heading': user.date_joined.strftime("%b %d, %Y"),
+            'date': user.date_joined.strftime("%b %d, %Y"),
+            'heading': user.username,
             'paragraph': 'Details about Profile'
         })
         return context
