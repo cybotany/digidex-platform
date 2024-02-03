@@ -1,29 +1,43 @@
 document.addEventListener("DOMContentLoaded", function() {
-  // Function to initialize Lottie animation for a single element
-  function initLottieAnimation(element) {
-    // Move 'data-src' value to 'src' and remove 'data-src'
-    var animationPath = element.getAttribute('data-src');
-    element.setAttribute('src', animationPath);
-    element.removeAttribute('data-src');
+  // Function to animate lines
+  function animateLines(startDelay = 0) {
+    setTimeout(() => {
+      document.querySelectorAll('.line-w').forEach(line => line.style.height = '100%');
+      document.querySelectorAll('.line-h').forEach(line => line.style.width = '100%');
+    }, startDelay);
+  }
 
+  // Initialize Lottie animation with custom settings
+  function initLottieAnimation(element, startDelay = 0) {
+    var animationPath = element.getAttribute('data-src');
     var loop = element.getAttribute('data-loop') === '1';
     var autoplay = element.getAttribute('data-autoplay') === '1';
 
-    lottie.loadAnimation({
-      container: element,
-      renderer: 'svg',
-      loop: loop,
-      autoplay: autoplay,
-      path: animationPath
-    });
+    // Load the animation with a delay if specified
+    setTimeout(() => {
+      lottie.loadAnimation({
+        container: element,
+        renderer: 'svg',
+        loop: loop,
+        autoplay: autoplay,
+        path: animationPath
+      });
+    }, startDelay);
   }
 
   // Intersection Observer Callback
   function onIntersection(entries, observer) {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        initLottieAnimation(entry.target);
-        observer.unobserve(entry.target); // Stop observing the current target
+        if (entry.target.classList.contains('lottie-animation-1')) {
+          // Start line animations slightly earlier than the Lottie animation
+          animateLines(300);
+          initLottieAnimation(entry.target);
+        } else {
+          // Start other Lottie animations with a delay
+          initLottieAnimation(entry.target, 500);
+        }
+        observer.unobserve(entry.target);
       }
     });
   }
