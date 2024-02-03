@@ -1,19 +1,8 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views import View
-from django.shortcuts import render
-from digidex.accounts.models import Activity, Profile
+from django.views.generic.detail import DetailView
+from digidex.accounts.models import Profile
 
-
-class UserProfileView(LoginRequiredMixin, View):
+class UserProfileView(LoginRequiredMixin, DetailView):
+    model = Profile
     template_name = 'accounts/profile-page.html'
-
-    def get(self, request, *args, **kwargs):
-        recent_activities = Activity.objects.filter(user=request.user).order_by('-timestamp')
-        user_profile = Profile.objects.get(user=request.user)
-
-        context = {
-            'user': request.user,
-            'recent_activities': recent_activities,
-            'user_profile': user_profile
-        }
-        return render(request, self.template_name, context)
+    context_object_name = 'user_profile'

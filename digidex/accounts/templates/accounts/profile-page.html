@@ -49,20 +49,20 @@
           <h3 class="heading-template">Profile</h3>
           <div class="rich-text-block base-rich-text">
             <figure style="max-width:882pxpx" class="base-rich-text-align-fullwidth base-rich-text-figure-type-image">
-              {% if user.profile.avatar %}
-                <div><img src="{{ user.profile.avatar.url }}" alt="User avatar"></div>
+              {% if user_profile.avatar %}
+                <div><img src="{{ user_profile.avatar.url }}" alt="User avatar"></div>
               {% else %}
                 <div><img src="{% static 'digidex/images/placeholder.svg' %}" alt="No Image Available"></div>
               {% endif %}
             
-              <figcaption>User: {{ user.username }}   Joined: {{ user.created_at|date:"M d, Y" }}</figcaption>
+              <figcaption>User: {{ user_profile.username }}   Joined: {{ user_profile.created_at|date:"M d, Y" }}</figcaption>
             </figure>
-            <p class="paragraph">Bio: {{ user.profile.bio }}</p>
-            {% if user.profile.location %}
-              <p class="paragraph">Location: {{ user.profile.location }}</p>
+            <p class="paragraph">Bio: {{ user_profile.bio }}</p>
+            {% if user_profile.location %}
+              <p class="paragraph">Location: {{ user_profile.location }}</p>
             {% endif %}
             <p>
-              <a href="{% url 'accounts:profile-modification' user.profile.id %}">Edit Profile</a>
+              <a href="{% url 'accounts:profile-modification' user_profile.id %}">Edit Profile</a>
             </p>
           </div>
         </div>

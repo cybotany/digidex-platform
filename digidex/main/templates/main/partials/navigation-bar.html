@@ -12,7 +12,7 @@
         <a href="{% url 'main:detail-category' %}" class="nav-link base-nav-link">Shop</a>
         <div class="button-mobile">
           {% if request.user.is_authenticated %}
-            <a href="{% url 'accounts:profile' %}" class="nav-button-outline base-button">{{ request.user.username }}</a>
+            <a href="{% url 'accounts:profile' request.user.id %}" class="nav-button-outline base-button">{{ request.user.username }}</a>
             <a href="{% url 'inventory:digit-storage' %}" class="nav-button-outline base-button">Inventory</a>
             <a href="{% url 'accounts:logout' %}" class="nav-button base-button">Logout</a>
           {% else %}
@@ -25,7 +25,7 @@
     <div class="nav">
       <div class="button-desktop">
         {% if request.user.is_authenticated %}
-          <a href="{% url 'accounts:profile' %}" class="nav-button-outline base-button">{{ request.user.username }}</a>
+          <a href="{% url 'accounts:profile' request.user.id %}" class="nav-button-outline base-button">{{ request.user.username }}</a>
           <a href="{% url 'inventory:digit-storage' %}" class="nav-button-outline base-button">Inventory</a>
           <a href="{% url 'accounts:logout' %}" class="nav-button base-button">Logout</a>
         {% else %}
