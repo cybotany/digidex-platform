@@ -12,7 +12,11 @@ class EntryDetailView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
 
         entry = context.get('entry')
-
+        context.update({
+            'subtitle': '',
+            'heading': '',
+            'paragraph': ''
+        })
         context['subtitle'] = 'Journal Entry'
         context['heading'] = f'Entry {entry.entry_number}'
         context['date'] = entry.created_at.strftime('%B %d, %Y')

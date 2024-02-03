@@ -14,9 +14,9 @@ class DigitStorageView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
-        context['subtitle'] = 'Storage'
-        context['heading'] = 'Storage Box n'
-        context['paragraph'] = 'Details about Storage Box n'
-
+        context.update({
+            'subtitle': 'Storage',
+            'heading': 'Storage Box n',
+            'paragraph': 'Details about Storage Box n'
+        })
         return context

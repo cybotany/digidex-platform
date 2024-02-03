@@ -21,13 +21,13 @@ class DigitDetailsView(LoginRequiredMixin, DetailView):
 
         digit = self.object
         journal_collection = digit.journal_collection
-
-        context['summarized_content'] = journal_collection.get_summarized_content()
-        context['image_carousel_data'] = journal_collection.get_image_carousel_data()
-
-        context['subtitle'] = 'Overview'
-        context['heading'] = digit.name
-        context['paragraph'] = digit.description
-        context['date'] = digit.created_at.strftime("%b %d, %Y")
+        context.update({
+            'subtitle': 'Overview',
+            'heading': digit.name,
+            'paragraph': digit.description,
+            'date': digit.created_at.strftime("%b %d, %Y"),
+            'summarized_content': journal_collection.get_summarized_content(),
+            'image_carousel_data': journal_collection.get_image_carousel_data()
+        })
 
         return context

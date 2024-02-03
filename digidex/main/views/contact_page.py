@@ -1,25 +1,21 @@
-from django.views import View
-from django.shortcuts import render, redirect
+from django.views.generic.edit import FormView
+from django.urls import reverse_lazy
 from digidex.main.forms import ContactForm
 
-class ContactView(View):
+class ContactView(FormView):
     template_name = 'main/contact-page.html'
+    form_class = ContactForm
+    success_url = reverse_lazy('main:thanks')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['subtitle'] = 'Contact Us'
-        context['heading'] = "Have questions? Contact us for assistance"
-        context['paragraph'] = "We're here to help!"
+        context.update({
+            'subtitle': 'Contact Us',
+            'heading': "Have questions? Contact us for assistance",
+            'paragraph': "We're here to help!"
+        })
         return context
 
-    def get(self, request, *args, **kwargs):
-        form = ContactForm()
-        return render(request, self.template_name, {'form': form})
-
-    def post(self, request, *args, **kwargs):
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('main:thanks')
-        else:
-            return render(request, self.template_name, {'form': form})
+    def form_valid(self, form):
+        # Here you can add the logic to handle a valid form (e.g., sending an email)
+        return super().form_valid(form)

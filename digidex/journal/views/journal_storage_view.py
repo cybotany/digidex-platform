@@ -11,3 +11,8 @@ class JournalStorageView(LoginRequiredMixin, ListView):
     #def get_queryset(self):
     #    """ Overriding to get Digits for the current user """
     #    return Collection.objects.filter(nfc_link__user=self.request.user)
+    #        context.update({
+    #        'subtitle': '',
+    #        'heading': '',
+    #        'paragraph': ''
+    #    })
