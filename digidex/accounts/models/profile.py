@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from digidex.utils.custom_storage import PublicMediaStorage
 
 def profile_avatar_directory_path(instance, filename):
@@ -60,6 +61,15 @@ class Profile(models.Model):
             str: A string in the format "<username>'s Profile".
         """
         return f"{self.user.username}'s Profile"
+
+    def get_absolute_url(self):
+        """
+        Get the URL to view the details of this profile.
+
+        Returns:
+            str: The URL to view the details of this profile.
+        """
+        return reverse('accounts:profile', kwargs={'pk': self.id})
 
     class Meta:
         verbose_name = "Profile"

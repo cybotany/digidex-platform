@@ -1,40 +1,16 @@
-from django.urls import reverse_lazy, reverse
-from django.utils.http import urlencode
-from django.http import HttpResponseRedirect
-from django.views.generic.edit import FormView
-from django.conf import settings
-from django.core.mail import send_mail
-from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from django.db import transaction
+from django.views.generic.edit import CreateView
+from django.shortcuts import render, redirect
 from digidex.accounts.forms import SignupForm
+from digidex.accounts.models import User
 
-
-class SignupUserView(FormView):
-    template_name = 'accounts/signup-page.html'
+class SignupUserView(CreateView):
+    model = User
     form_class = SignupForm
-    success_url = reverse_lazy('main:landing')
+    template_name = 'accounts/signup-page.html'
 
     def form_valid(self, form):
-        with transaction.atomic():
-            user = form.save(commit=False)
-            user.is_active = False
-            user.save()
+        user = form.save()
+        return redirect('accounts:confirm-email')
 
-            # Send verification email
-            self.send_verification_email(user)
-
-        return HttpResponseRedirect(reverse('accounts:confirm-email'))
-
-    def send_verification_email(self, user):
-        token = PasswordResetTokenGenerator().make_token(user)
-        base_url = reverse('accounts:verify-email')
-        query_string = urlencode({'token': token, 'email': user.email})
-        full_url = f'http://{self.request.get_host()}{base_url}?{query_string}'
-
-        send_mail(
-            'Verify your email',
-            f'Please click the following link to verify your email: {full_url}',
-            settings.DEFAULT_FROM_EMAIL,
-            [user.email],
-            fail_silently=False,
-        )
+    def form_invalid(self, form):
+        return render(self.request, self.template_name, {'form': form})

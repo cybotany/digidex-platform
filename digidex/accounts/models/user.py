@@ -1,6 +1,11 @@
-import uuid
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.urls import reverse
+from django.utils.http import urlencode
+from django.conf import settings
+from django.core.mail import send_mail
+import uuid
 
 
 class User(AbstractUser):
@@ -39,3 +44,24 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+
+    def send_verification_email(self):
+        token = PasswordResetTokenGenerator().make_token(self)
+        base_url = reverse('accounts:verify-email')
+        query_string = urlencode({'token': token, 'email': self.email})
+        full_url = f'http://{settings.SITE_HOST}{base_url}?{query_string}'
+
+        send_mail(
+            'Verify your email',
+            f'Please click the following link to verify your email: {full_url}',
+            settings.DEFAULT_FROM_EMAIL,
+            [self.email],
+            fail_silently=False,
+        )
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.is_active = False
+        super().save(*args, **kwargs)
+        if not self.pk:
+            self.send_verification_email()
