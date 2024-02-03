@@ -9,7 +9,6 @@
         <a href="{% url 'main:company' %}" class="nav-link base-nav-link">Company</a>
         <a href="{% url 'main:contact' %}" class="nav-link base-nav-link">Contact</a>
         <a href="{% url 'main:blog' %}" class="nav-link base-nav-link">Blog</a>
-        <a href="{% url 'main:detail-category' %}" class="nav-link base-nav-link">Shop</a>
         <div class="button-mobile">
           {% if request.user.is_authenticated %}
             <a href="{% url 'accounts:profile' request.user.id %}" class="nav-button-outline base-button">{{ request.user.username }}</a>
