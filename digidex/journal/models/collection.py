@@ -31,7 +31,7 @@ class Collection(models.Model):
     )
 
     def get_absolute_url(self):
-        return reverse('journal:entry-details', kwargs={'pk': self.id})
+        return reverse('journal:collection', kwargs={'pk': self.id})
 
     def get_digit_name(self):
         return self.digit.name if self.digit else "No Digit"

@@ -3,9 +3,9 @@ from digidex.journal.views import EntryCollectionView, EntryCreationView, EntryD
 
 app_name = 'journal'
 urlpatterns = [
-    path('collection/<int:pk>/', EntryCollectionView.as_view(), name='collection-details'),
-    path('collection/<int:pk>/add/', EntryCreationView.as_view(), name='add-entry'),
+    path('collection/<int:pk>/', EntryCollectionView.as_view(), name='collection'),
+    path('collection/<int:pk>/creation/', EntryCreationView.as_view(), name='entry-creation'),
 
-    path('entry/<int:pk>/', EntryDetailView.as_view(), name='entry-details'),
-    path('entry/<int:pk>/delete', EntryDeletionView.as_view(), name='delete-entry'),
+    path('entry/<int:pk>/', EntryDetailView.as_view(), name='entry'),
+    path('entry/<int:pk>/deletion', EntryDeletionView.as_view(), name='entry-deletion'),
 ]

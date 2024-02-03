@@ -24,9 +24,9 @@ class Entry(models.Model):
 
     Attributes:
         collection (ForeignKey): The Journal Collection this entry is a part of.
+        entry_number (PositiveIntegerField): Numeric value indicating the entry number within the collection.
         content (TextField): The textual content of the journal entry.
         image (ImageField): An optional image associated with the journal entry, supporting specific file extensions.
-        is_thumbnail (BooleanField): Indicates if the entry's image is currently used as the thumbnail for the Collection.
         created_at (DateTimeField): The date and time when the journal entry was created, automatically set when the journal entry is created.
         last_modified (DateTimeField): The date and time when the journal entry was last modified, automatically set whenever the journal entry is edited.
 
@@ -38,6 +38,12 @@ class Entry(models.Model):
         on_delete=models.CASCADE,
         related_name='entries',
         help_text="The collection this journal entry belongs."
+    )
+    entry_number = models.PositiveIntegerField(
+        verbose_name="Entry Number",
+        help_text="Numeric value indicating the entry number within the collection.",
+        default=0,
+        editable=False
     )
     content = models.TextField(
         verbose_name="Content",
@@ -60,15 +66,9 @@ class Entry(models.Model):
         verbose_name="Last Modified",
         help_text="The date and time when this journal entry was last modified."
     )
-    entry_number = models.PositiveIntegerField(
-        verbose_name="Entry Number",
-        help_text="Numeric value indicating the entry number within the collection.",
-        default=0,  # Default to 0, will be updated on save
-        editable=False
-    )
 
     def __str__(self):
-        return f"Journal Entry for Collection: {self.collection.id}"
+        return f"Journal Entry {self.entry_number} for Collection: {self.collection.id}"
 
     @transaction.atomic
     def save(self, *args, **kwargs):
@@ -90,7 +90,7 @@ class Entry(models.Model):
         """
         Returns the URL to the detail view of this journal entry.
         """
-        return reverse('journal:entry-details', kwargs={'pk': self.id})
+        return reverse('journal:entry', kwargs={'pk': self.id})
 
     class Meta:
         verbose_name = "Journal Entry"
