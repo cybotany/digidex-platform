@@ -35,54 +35,37 @@
   </head>
   <body>
     {% include 'main/partials/navigation-bar.html' %}
-    <!-- Profile Page - Profile Content Section --> 
-    <section class="section">
+    <section class="section-top">
       <div class="content">
-        <div class="layout-grid grid">
-
-          <div class="block-right">
-            <div class="subtitle green">Profile<br></div>
-            <h2 class="heading">{{ user.username }}</h2>
-              {% if user.avatar %}
-                <img src="{{ user.avatar.url }}" alt="User avatar" class="avatar-image">
-              {% else %}
-                <img src="{% static 'digidex/images/placeholder.svg' %}" alt="No Image Available" class="avatar-image">
-              {% endif %}
-    
-              {% if user.profile.location %}
-                <p class="paragraph">Location: {{ user.profile.location }}</p>
-              {% endif %}
-              {% if user_profile.interests %}
-                <p class="paragraph">Interests: {{ user_profile.interests }}</p>
-              {% endif %}
-              {% if user_profile.experience %}
-                <p class="paragraph">Experience: {{ user_profile.experience }}</p>
-              {% endif %}
-          </div>
-            
-          <div class="lottie">
-            <h3>Recent Activities</h3>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Activity</th>
-                  <th scope="col">Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for activity in recent_activities %}
-                  <tr>
-                    <th scope="row">{{ forloop.counter }}</th>
-                    <td>{{ activity.content }}</td>
-                    <td>{{ activity.timestamp }}</td>
-                  </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
+        <div class="block-top">
+          <h1 class="heading-top">Profile</h1>
         </div>
       </div>
+    </section>
+    <!-- Profile Page - Profile Content Section --> 
+    <section class="section">
+      <div class="content narrow">
+        <div class="page-body">
+          <h3 class="heading-template">Profile</h3>
+          <div class="rich-text-block base-rich-text">
+            <figure style="max-width:882pxpx" class="base-rich-text-align-fullwidth base-rich-text-figure-type-image">
+              {% if user.profile.avatar %}
+                <div><img src="{{ user.profile.avatar.url }}" alt="User avatar"></div>
+              {% else %}
+                <div><img src="{% static 'digidex/images/placeholder.svg' %}" alt="No Image Available"></div>
+              {% endif %}
+            
+              <figcaption>User: {{ user.username }}   Joined: {{ user.created_at|date:"M d, Y" }}</figcaption>
+            </figure>
+            <p class="paragraph">Bio: {{ user.profile.bio }}</p>
+            {% if user.profile.location %}
+              <p class="paragraph">Location: {{ user.profile.location }}</p>
+            {% endif %}
+            <p>
+              <a href="{% url 'accounts:profile-modification' user.profile.id %}">Edit Profile</a>
+            </p>
+          </div>
+        </div>
     </section>
     {% include 'main/partials/page-footer.html' %}
   </body>
