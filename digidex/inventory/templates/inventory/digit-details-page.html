@@ -60,8 +60,8 @@
               </div>
             </div>
             <div class="empty-state base-dyn-empty">
-              <a href="{% url 'journal:collection-details' pk=digit.journal_collection.id %}" class="account-link">View Entire Journal</a>
-              <a href="{% url 'journal:add-entry' pk=digit.journal_collection.id %}" class="account-link">Add Journal Entry</a>    
+              <a href="{% url 'journal:collection' pk=digit.journal_collection.id %}" class="account-link">View Entire Journal</a>
+              <a href="{% url 'journal:entry-creation' pk=digit.journal_collection.id %}" class="account-link">Add Journal Entry</a>    
             </div>
           </div>
         </div>
