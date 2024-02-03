@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models, transaction
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.urls import reverse
@@ -59,6 +59,7 @@ class User(AbstractUser):
             fail_silently=False,
         )
 
+    @transaction.atomic
     def save(self, *args, **kwargs):
         # Check if it's a new record
         new_user = self.pk is None
@@ -70,4 +71,7 @@ class User(AbstractUser):
 
         # Send verification email for new users
         if new_user:
-            self.send_verification_email()
+            try:
+                self.send_verification_email()
+            except Exception as e:
+                raise
