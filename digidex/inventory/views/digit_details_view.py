@@ -18,13 +18,16 @@ class DigitDetailsView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
         digit = self.object
         journal_collection = digit.journal_collection
 
-        # Get summarized content
         context['summarized_content'] = journal_collection.get_summarized_content()
-
-        # Get image carousel data
         context['image_carousel_data'] = journal_collection.get_image_carousel_data()
+
+        context['subtitle'] = 'Overview'
+        context['heading'] = digit.name
+        context['paragraph'] = digit.description
+        context['date'] = digit.created_at.strftime("%b %d, %Y")
 
         return context

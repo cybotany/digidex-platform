@@ -18,10 +18,12 @@ class EntryCollectionView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         
         collection_id = self.kwargs.get('pk')
-
-        # Get the collection and add it to the context
         collection = Collection.objects.get(id=collection_id)
-        context['collection'] = collection
+
+        context['subtitle'] = 'Journal Collection'
+        context['heading'] = collection.get_digit_name
+        context['paragraph'] = collection.get_digit_description
+
 
         return context
 

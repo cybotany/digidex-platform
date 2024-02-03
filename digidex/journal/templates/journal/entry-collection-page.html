@@ -35,14 +35,7 @@
   </head>
   <body>
     {% include 'main/partials/navigation-bar.html' %}
-    <section class="section-top">
-      <div class="content">
-        <div class="block-top">
-          <h1 class="heading-top">{{ collection.get_digit_name }}</h1>
-          <p class="paragraph-top">{{ collection.get_digit_description }}</p>
-        </div>
-      </div>
-    </section>
+    {% include 'main/partials/page-header.html' %}
     <!-- Entry Collections -->
     <section class="section">
       <div class="content">

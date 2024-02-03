@@ -36,14 +36,7 @@
   </head>
   <body>
     {% include 'main/partials/navigation-bar.html' %}
-    <section class="section-top padding-0">
-      <div class="content">
-        <div class="block-top">
-          <div class="date-top">{{ entry.created_at|date:"M d, Y" }}</div>
-          <h1 class="heading-top">Journal Entry Title</h1> 
-        </div>
-      </div>
-    </section>
+    {% include 'main/partials/page-header.html' %}
     <section class="section">
       <div class="content">
         {% if entry.image %}

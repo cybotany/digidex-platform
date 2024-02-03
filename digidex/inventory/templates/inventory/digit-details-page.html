@@ -36,15 +36,9 @@
   </head>
   <body>
     {% include 'main/partials/navigation-bar.html' %}
+    {% include 'main/partials/page-header.html' %}
     <section class="section">
       <div class="content">
-        <div class="block-top">
-          <div class="subtitle green">Overview<br></div>
-          <h3 class="heading-top">{{ digit.name }}</h3>
-          <div class="date-top">Created: {{ digit.created_at|date:"M d, Y" }}</div>
-          <p class="paragraph-top">{{ digit.description }}</p>
-          <a href="{% url 'inventory:digit-modification' digit.uuid %}" class="account-link">Edit Digit</a>
-        </div>
         <div class="collection-list-wrapper-posts large base-dyn-list">
           <div role="list" class="collection-list-posts large base-dyn-items">
             <div role="listitem" class="base-dyn-item">

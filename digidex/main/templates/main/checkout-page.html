@@ -16,10 +16,9 @@
     <link href="{% static 'base/css/normalize.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'base/css/base-styles.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'digidex/css/digidex-styles.css' %}" rel="stylesheet" type="text/css">
+
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.4/lottie.min.js" type="text/javascript"></script>
 
     <!-- Load Fonts -->
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
@@ -38,8 +37,8 @@
     <link href="{% static 'digidex/images/webclip.png' %}" rel="apple-touch-icon">
   </head>
 <body>
-  {% include "main/partials/page-banner.html" %}
   {% include 'main/partials/navigation-bar.html' %}
+  {% include 'main/partials/page-header.html' %}
   <section class="section-top">
     <div class="content">
       <div class="block-top">

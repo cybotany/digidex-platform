@@ -35,13 +35,7 @@
   </head>
   <body>
     {% include 'main/partials/navigation-bar.html' %}
-    <section class="section-top">
-      <div class="content">
-        <div class="block-top">
-          <h1 class="heading-top">Profile</h1>
-        </div>
-      </div>
-    </section>
+    {% include 'main/partials/page-header.html' %}
     <!-- Profile Page - Profile Content Section --> 
     <section class="section">
       <div class="content narrow">
@@ -54,7 +48,7 @@
                 <div><img src="{% static 'digidex/images/placeholder.svg' %}" alt="No Image Available"></div>
               {% endif %}
             
-              <figcaption>User: {{ user_profile.username }}   Joined: {{ user_profile.created_at|date:"M d, Y" }}</figcaption>
+              <figcaption>Some profile text here</figcaption>
             </figure>
             <p class="paragraph">Bio: {{ user_profile.bio }}</p>
             {% if user_profile.location %}
