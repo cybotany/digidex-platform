@@ -192,6 +192,7 @@ SIMPLE_JWT = {
 
 AUTH_USER_MODEL = "accounts.User"
 
+SITE_HOST = 'www.digidex.app'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.office365.com'
 EMAIL_HOST_USER = 'support@digidex.app'
