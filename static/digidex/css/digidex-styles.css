@@ -770,7 +770,13 @@ figcaption {
 }
 
 .lottie-animation-1 {
+  z-index: 10;
   width: 100%;
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
 }
 
 .lottie-animation-2-blur {
