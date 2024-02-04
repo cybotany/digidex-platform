@@ -360,7 +360,11 @@ figcaption {
 
 @media screen and (max-width: 991px) {
   .nav-menu {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background-color: var(--white);
     padding: 1.2em 1em;
+    box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
   }
 
   .menu-button {
@@ -380,10 +384,6 @@ figcaption {
 }
 
 @media screen and (max-width: 767px) {
-  .nav-menu {
-    padding: .75;
-  }
-
   .button-desktop {
     display: none;
   }
