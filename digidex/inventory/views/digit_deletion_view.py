@@ -1,8 +1,9 @@
+from django.views.generic.edit import DeleteView
 from django.urls import reverse_lazy
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic.edit import DeleteView
+from django.core.exceptions import PermissionDenied
 from digidex.inventory.models import Digit
 
 
@@ -15,4 +16,11 @@ class DigitDeletionView(LoginRequiredMixin, DeleteView):
         uuid = self.kwargs.get('uuid')
         if not uuid:
             raise Http404("No uuid provided")
-        return get_object_or_404(queryset, uuid=uuid)
+        digit = get_object_or_404(queryset, uuid=uuid)
+
+       # Permission check
+        user = self.request.user
+        if digit.nfc_tag.user != user:
+            raise PermissionDenied("You do not have permission to view this digit.")
+
+        return digit

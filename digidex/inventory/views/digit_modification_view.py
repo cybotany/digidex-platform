@@ -2,6 +2,7 @@ from django.views.generic.edit import UpdateView
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from digidex.inventory.models import Digit
 from digidex.inventory.forms import DigitForm
 
@@ -16,7 +17,14 @@ class DigitModificationView(LoginRequiredMixin, UpdateView):
         uuid = self.kwargs.get('uuid')
         if not uuid:
             raise Http404("No uuid provided")
-        return get_object_or_404(queryset, uuid=uuid)
+        digit = get_object_or_404(queryset, uuid=uuid)
+
+        # Permission check
+        user = self.request.user
+        if digit.nfc_tag.user != user:
+            raise PermissionDenied("You do not have permission to view this digit.")
+
+        return digit
 
     def form_invalid(self, form):
         return render(self.request, self.template_name, {'form': form})

@@ -1,6 +1,7 @@
 from django.views.generic.edit import UpdateView
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from digidex.accounts.models import Profile
 from digidex.accounts.forms import ProfileForm
 
@@ -12,10 +13,12 @@ class ModifyProfileView(LoginRequiredMixin, UpdateView):
 
     def get_object(self, queryset=None):
         """
-        This view will edit the profile associated with the user ID passed in the URL.
+        Only allow editing the profile associated with the currently logged-in user.
         """
-        pk = self.kwargs.get('pk')
-        return get_object_or_404(Profile, pk=pk)
+        profile = super().get_object(queryset)
+        if profile.user != self.request.user:
+            raise PermissionDenied("You do not have permission to modify this profile.")
+        return profile
 
     def get_success_url(self):
         """

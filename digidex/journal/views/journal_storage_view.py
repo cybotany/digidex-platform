@@ -1,5 +1,6 @@
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from digidex.journal.models import Collection
 
 
