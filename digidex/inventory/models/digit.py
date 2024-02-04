@@ -74,6 +74,11 @@ class Digit(models.Model):
         verbose_name="Last Modified",
         help_text="The date and time when the digit instance was last modified."
     )
+    is_public = models.BooleanField(
+        default=True,
+        verbose_name="Publicly Available",
+        help_text="Indicates whether a public page is available for this digit."
+    )
     is_archived = models.BooleanField(
         default=False,
         verbose_name="Archived",
