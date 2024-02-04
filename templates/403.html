@@ -42,17 +42,7 @@
         <div class="subtitle green">403<br></div>
         <h2 class="account-heading">Protected Page</h2>
         <p class="account-paragraph">You do not have permission to access this page.</p>
-        <form class="form" method="post">
-          {% csrf_token %}
-          <label for="pass" class="field-label">Password</label>
-          <input type="password" class="text-field w-input" autofocus="true" maxlength="256" name="pass" placeholder="Enter your password" id="pass">
-          <input type="submit" value="Submit" class="submit-button base-button">
-          {% if error_message %}
-            <div class="error-message">
-              <div class="text-error">{{ error_message }}</div>
-            </div>
-          {% endif %}
-        </form>
+        <a href="{% url 'main:landing' %}" class="button base-button">Back to Home</a>
       </div>
     </div>
   </body>
