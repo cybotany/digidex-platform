@@ -6,7 +6,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.detail import SingleObjectMixin
 from digidex.link.models import NFC
 
-
 class NFCLinkView(LoginRequiredMixin, SingleObjectMixin, View):
     model = NFC
 
@@ -19,6 +18,14 @@ class NFCLinkView(LoginRequiredMixin, SingleObjectMixin, View):
 
     def get(self, request, *args, **kwargs):
         nfc = self.get_object()
+        # Check if NFC is active and has an associated digit
         if nfc.active and hasattr(nfc, 'digit'):
-            return redirect('inventory:digit-details', uuid=nfc.digit.uuid)
+            # Check if the current user is the user associated with the NFC tag
+            if nfc.user == request.user:
+                # Redirect to the private digit details page
+                return redirect('inventory:digit-details', uuid=nfc.digit.uuid)
+            else:
+                # Redirect to the public digit page
+                return redirect('inventory:public-digit', uuid=nfc.digit.uuid)
+        # If NFC is not active or doesn't have an associated digit, proceed with digit creation
         return redirect('inventory:digit-creation', serial_number=nfc.serial_number)
