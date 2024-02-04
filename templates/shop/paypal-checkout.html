@@ -59,13 +59,16 @@
                 </div>
                 <fieldset class="block-content">
                   <script type="text/x-wf-template" id="wf-template-651634ddf99c2aac117ddfaf000000000012">%3Clabel%20class%3D%22w-commerce-commercecheckoutshippingmethoditem%20shipping-method%22%3E%3Cinput%20required%3D%22%22%20type%3D%22radio%22%20name%3D%22shipping-method-choice%22%2F%3E%3Cdiv%20class%3D%22w-commerce-commercecheckoutshippingmethoddescriptionblock%22%3E%3Cdiv%20class%3D%22w-commerce-commerceboldtextblock%20cart-item-name%22%3E%3C%2Fdiv%3E%3Cdiv%3E%3C%2Fdiv%3E%3C%2Fdiv%3E%3Cdiv%20class%3D%22cart-item-price%22%3E%3C%2Fdiv%3E%3C%2Flabel%3E</script>
-                  <div data-node-type="commerce-checkout-shipping-methods-list" class="w-commerce-commercecheckoutshippingmethodslist shipping-method-list" data-wf-collection="database.commerceOrder.availableShippingMethods" data-wf-template-id="wf-template-651634ddf99c2aac117ddfaf000000000012"><label class="w-commerce-commercecheckoutshippingmethoditem shipping-method"><input required="" type="radio" name="shipping-method-choice">
+                  <div data-node-type="commerce-checkout-shipping-methods-list" class="w-commerce-commercecheckoutshippingmethodslist shipping-method-list" data-wf-collection="database.commerceOrder.availableShippingMethods" data-wf-template-id="wf-template-651634ddf99c2aac117ddfaf000000000012">
+                    <label class="w-commerce-commercecheckoutshippingmethoditem shipping-method">
+                    <input required="" type="radio" name="shipping-method-choice">
                       <div class="w-commerce-commercecheckoutshippingmethoddescriptionblock">
                         <div class="w-commerce-commerceboldtextblock cart-item-name"></div>
                         <div></div>
                       </div>
                       <div class="cart-item-price"></div>
-                    </label></div>
+                    </label>
+                  </div>
                   <div data-node-type="commerce-checkout-shipping-methods-empty-state" style="display:none" class="w-commerce-commercecheckoutshippingmethodsemptystate empty-state">
                     <div class="text-empty">No shipping methods are available for the address given.</div>
                   </div>
@@ -78,12 +81,14 @@
                 <fieldset class="w-commerce-commercecheckoutblockcontent block-content">
                   <div class="w-commerce-commercecheckoutrow">
                     <div class="w-commerce-commercecheckoutcolumn">
-                      <div class="w-commerce-commercecheckoutsummaryitem"><label class="w-commerce-commercecheckoutsummarylabel field-label">Email</label>
+                      <div class="w-commerce-commercecheckoutsummaryitem">
+                        <label class="w-commerce-commercecheckoutsummarylabel field-label">Email</label>
                         <div></div>
                       </div>
                     </div>
                     <div class="w-commerce-commercecheckoutcolumn">
-                      <div class="w-commerce-commercecheckoutsummaryitem"><label class="w-commerce-commercecheckoutsummarylabel field-label">Shipping Address</label>
+                      <div class="w-commerce-commercecheckoutsummaryitem">
+                        <label class="w-commerce-commercecheckoutsummarylabel field-label">Shipping Address</label>
                         <div></div>
                         <div></div>
                         <div></div>
@@ -105,7 +110,8 @@
                 <fieldset class="w-commerce-commercecheckoutblockcontent block-content">
                   <div class="w-commerce-commercecheckoutrow">
                     <div class="w-commerce-commercecheckoutcolumn">
-                      <div class="w-commerce-commercecheckoutsummaryitem"><label class="w-commerce-commercecheckoutsummarylabel field-label">Payment Info</label>
+                      <div class="w-commerce-commercecheckoutsummaryitem">
+                        <label class="w-commerce-commercecheckoutsummarylabel field-label">Payment Info</label>
                         <div class="w-commerce-commercecheckoutsummaryflexboxdiv">
                           <div class="w-commerce-commercecheckoutsummarytextspacingondiv"></div>
                           <div class="w-commerce-commercecheckoutsummarytextspacingondiv"></div>
@@ -118,7 +124,8 @@
                       </div>
                     </div>
                     <div class="w-commerce-commercecheckoutcolumn">
-                      <div class="w-commerce-commercecheckoutsummaryitem"><label class="w-commerce-commercecheckoutsummarylabel field-label">Billing Address</label>
+                      <div class="w-commerce-commercecheckoutsummaryitem">
+                        <label class="w-commerce-commercecheckoutsummarylabel field-label">Billing Address</label>
                         <div></div>
                         <div></div>
                         <div></div>
@@ -166,7 +173,11 @@
                   </div>
                 </fieldset>
               </div>
-              <form data-node-type="commerce-checkout-discount-form" class="w-commerce-commercecheckoutdiscounts discounts"><label for="wf-ecom-discounts" class="w-commerce-commercecheckoutdiscountslabel field-label">Discount Code</label><input data-node-type="commerce-checkout-discount-input" class="w-commerce-commercecheckoutdiscountsinput text-field-ecommerce base-input" maxlength="256" name="" data-name="field" placeholder="" type="text" id="wf-ecom-discounts"><button aria-label="Apply Discount" class="w-commerce-commercecheckoutdiscountsbutton apply-button">Apply</button></form>
+              <form data-node-type="commerce-checkout-discount-form" class="w-commerce-commercecheckoutdiscounts discounts">
+                <label for="wf-ecom-discounts" class="w-commerce-commercecheckoutdiscountslabel field-label">Discount Code</label>
+                <input data-node-type="commerce-checkout-discount-input" class="w-commerce-commercecheckoutdiscountsinput text-field-ecommerce base-input" maxlength="256" name="" data-name="field" placeholder="" type="text" id="wf-ecom-discounts">
+                <button aria-label="Apply Discount" class="w-commerce-commercecheckoutdiscountsbutton apply-button">Apply</button>
+              </form>
               <a href="#" value="Place Order" data-node-type="commerce-checkout-place-order-button" class="w-commerce-commercecheckoutplaceorderbutton checkout-button" data-loading-text="Placing Order...">Place Order</a>
               <div data-node-type="commerce-checkout-error-state" style="display:none" class="w-commerce-commercepaypalcheckouterrorstate error-message">
                 <div aria-live="polite" class="text-error base-checkout-error-msg" data-w-info-error="There was an error processing your customer info. Please try again, or contact us if you continue to have problems." data-w-shipping-error="Sorry. We can’t ship your order to the address provided." data-w-billing-error="Your payment could not be completed with the payment information provided. Please make sure that your card and billing address information is correct, or try a different payment card, to complete this order. Contact us if you continue to have problems." data-w-minimum-error="The order minimum was not met. Add more items to your cart to continue." data-w-payment-error="There was an error processing your payment. Please try again, or contact us if you continue to have problems." data-w-pricing-error="The prices of one or more items in your cart have changed. Please refresh this page and try again." data-w-extras-error="A merchant setting has changed that impacts your cart. Please refresh and try again." data-w-product-error="One or more of the products in your cart have been removed. Please refresh the page and try again." data-w-invalid-discount-error="This discount is invalid." data-w-expired-discount-error="This discount is no longer available." data-w-usage-reached-discount-error="This discount is no longer available." data-w-requirements-not-met-error="Discount requirements not met">There was an error processing your customer info. Please try again, or contact us if you continue to have problems.</div>
