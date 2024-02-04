@@ -3,12 +3,12 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>- Digidex - Smart Garden Management</title>
+    <title>- Digidex</title>
     <meta content="A platform for gardeners to cultivate their curiosity." name="description">
-    <meta content="- Digidex - Smart Garden Management" property="og:title">
+    <meta content="- Digidex" property="og:title">
     <meta content="A platform for gardeners to cultivate their curiosity." property="og:description">
     <meta content="" property="og:image">
-    <meta content="- Digidex - Smart Garden Management" property="twitter:title">
+    <meta content="- Digidex" property="twitter:title">
     <meta content="A platform for gardeners to cultivate their curiosity." property="twitter:description">
     <meta content="" property="twitter:image">
     <meta property="og:type" content="website">
@@ -40,7 +40,7 @@
     <link href="{% static 'digidex/images/webclip.png' %}" rel="apple-touch-icon">
   </head>
 <body>
-  {% include 'main/partials/navigation-bar.html' %}
+  {% include 'navigation-bar.html' %}
   <section class="section-top">
     <div class="content">
       <div class="block-top">
@@ -118,10 +118,10 @@
       </div>
     </div>
   </section>
-  {% include 'main/partials/faq-section.html' %}
+  {% include 'faq-section.html' %}
   
-  {% include 'main/partials/call-to-action.html' %}  
-  {% include 'main/partials/page-footer.html' %}
+  {% include 'call-to-action.html' %}  
+  {% include 'page-footer.html' %}
   <script src="{% static 'digidex/js/toggle-faqs.js' %}" type="text/javascript"></script>
   <script src="{% static 'digidex/js/toggle-lottie.js' %}" type="text/javascript"></script>
 </body>
