@@ -1,4 +1,4 @@
-<form method="post" class="form">
+<form id="contactForm" method="post" class="form">
   {% csrf_token %}
 
   <!-- Render Name Field -->
@@ -32,7 +32,7 @@
   </div>
 
   <!-- Render Submit Button -->
-  <input type="submit" value="Submit" class="submit-button base-button">
+  <input type="button" value="Submit" class="submit-button base-button" onclick="grecaptcha.enterprise.execute('6LfF4WcpAAAAAL6bd0oEaCTZv1_FyhTGpo7r0s14', {action: 'submit'}).then(onSubmit)">
 
   <!-- Non-Field Errors -->
   {% if form.non_field_errors %}
