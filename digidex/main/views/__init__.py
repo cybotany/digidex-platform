@@ -1,3 +1,4 @@
+from .error_page import ErrorView
 from .blog_page import BlogView
 from .checkout_page import CheckoutView
 from .company_page import CompanyView

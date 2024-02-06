@@ -1,5 +1,6 @@
 from django.urls import path
-from digidex.main.views import (BlogView,
+from digidex.main.views import (ErrorView,
+                                BlogView,
                                 CheckoutView,
                                 CompanyView,
                                 ContactView,
@@ -17,6 +18,7 @@ from digidex.main.views import (BlogView,
 app_name = 'main'
 urlpatterns = [
     path('', LandingView.as_view(), name='landing'),
+    path('error/', ErrorView.as_view(), name='error'),
     path('blog/', BlogView.as_view(), name='blog'),
     path('checkout/', CheckoutView.as_view(), name='checkout'),
     path('company/', CompanyView.as_view(), name='company'),

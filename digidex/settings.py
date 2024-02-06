@@ -12,6 +12,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '')
 DJANGO_ENV = os.environ.get('DJANGO_ENV', 'production')
 
+GOOGLE_CLOUD_PROJECT_ID = os.environ.get('GOOGLE_CLOUD_PROJECT_ID', '')
+RECAPTCHA_SITE_KEY = os.environ.get('RECAPTCHA_SITE_KEY', '')
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = os.environ.get('SERVICE_ACCOUNT_KEY', '')
+RECAPTCHA_REQUIRED_SCORE = os.environ.get('RECAPTCHA_REQUIRED_SCORE', '')
+
 # Environment specific settings
 if DJANGO_ENV == 'production':
     DEBUG = False
