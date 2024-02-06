@@ -106,5 +106,5 @@ class NFC(models.Model):
         super().save(*args, **kwargs)
 
     class Meta:
-        verbose_name = "Link"
-        verbose_name_plural = "Links"
+        verbose_name = "NFC Tag"
+        verbose_name_plural = "NFC Tags"

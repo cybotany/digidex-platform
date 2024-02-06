@@ -19,10 +19,6 @@ class UserAdmin(BaseUserAdmin):
     search_fields = ('username', 'first_name', 'last_name', 'email', 'uuid')
     readonly_fields = ('uuid', 'digit_count', 'collection_count')
 
-    def digit_count(self, user):
-        return user.digits.count()
-    digit_count.short_description = 'Number of Digits'
-
     def collection_count(self, user):
         return user.collections.count()
     collection_count.short_description = 'Number of Collections'
