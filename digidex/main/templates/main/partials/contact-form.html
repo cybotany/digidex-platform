@@ -31,9 +31,7 @@
     {% endif %}
   </div>
   <!-- Render Submit Button -->
-  <button type="button" class="g-recaptcha submit-button base-button" data-sitekey="6LfF4WcpAAAAAL6bd0oEaCTZv1_FyhTGpo7r0s14" data-callback="onSubmit" data-action="submit-contactForm">
-      Submit
-  </button>
+  <input type="submit" value="Submit" class="submit-button base-button" id="submitBtn">
 
   <!-- Non-Field Errors -->
   {% if form.non_field_errors %}

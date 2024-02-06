@@ -50,23 +50,21 @@
       </div>
     </section>
     <script>
-      function onSubmit(token) {
-        // Get the action from the button's data-action attribute
-        var action = document.querySelector('.g-recaptcha').getAttribute('data-action');
-      
-        // Create a hidden input for the action
-        var inputAction = document.createElement('input');
-        inputAction.setAttribute('type', 'hidden');
-        inputAction.setAttribute('name', 'recaptcha_action');
-        inputAction.setAttribute('value', action);
-      
-        // Append the action input to the form
-        var form = document.getElementById('contactForm');
-        form.appendChild(inputAction);
-      
-        // Submit the form
-        form.submit();
-      }
-      </script>
+      document.getElementById('submitBtn').addEventListener('click', function(event) {
+          event.preventDefault();  // Prevent the default form submit
+  
+          grecaptcha.enterprise.execute('6LfF4WcpAAAAAL6bd0oEaCTZv1_FyhTGpo7r0s14', {action: 'submit-contactForm'}).then(function(token) {
+              // Add the token to a hidden field
+              var inputToken = document.createElement('input');
+              inputToken.setAttribute('type', 'hidden');
+              inputToken.setAttribute('name', 'g-recaptcha-response');
+              inputToken.setAttribute('value', token);
+              document.getElementById('contactForm').appendChild(inputToken);
+  
+              // Submit the form
+              document.getElementById('contactForm').submit();
+          });
+      });
+  </script>   
   </body>
 </html>
