@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.views.generic.edit import CreateView
 from django.shortcuts import render, redirect
 from digidex.accounts.forms import SignupForm
@@ -8,9 +9,13 @@ class SignupUserView(CreateView):
     form_class = SignupForm
     template_name = 'accounts/signup-page.html'
 
-    def form_valid(self, form):
-        user = form.save()
-        return redirect('accounts:confirm-email')
+    def get(self, request, *args, **kwargs):
+        # Disable the form and show a message
+        return HttpResponse("Signup is temporarily disabled. Please check back later.")
+
+    #def form_valid(self, form):
+    #    user = form.save()
+    #    return redirect('accounts:confirm-email')
 
     def form_invalid(self, form):
         return render(self.request, self.template_name, {'form': form})
