@@ -36,8 +36,3 @@ class NFCAdmin(admin.ModelAdmin):
         if not obj.user:
             obj.user = request.user
         super().save_model(request, obj, form, change)
-
-    class Media:
-        css = {
-            'all': ('your-custom-css-path.css',)
-        }

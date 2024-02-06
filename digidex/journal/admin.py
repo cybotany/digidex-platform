@@ -50,17 +50,6 @@ class CollectionAdmin(admin.ModelAdmin):
         return obj.get_entry_count()
     get_entry_count.short_description = 'Number of Entries'
 
-    # Override permission methods if necessary
-
-    def save_model(self, request, obj, form, change):
-        # Custom save logic can be added here
-        super().save_model(request, obj, form, change)
-
-    class Media:
-        css = {
-            'all': ('your-custom-css-path.css',)
-        }
-
 
 @admin.register(Entry)
 class EntryAdmin(admin.ModelAdmin):
@@ -91,23 +80,3 @@ class EntryAdmin(admin.ModelAdmin):
         return "No Image"
     image_thumbnail.short_description = 'Image'
 
-    def save_model(self, request, obj, form, change):
-        # Custom save logic can be added here
-        super().save_model(request, obj, form, change)
-
-    def has_add_permission(self, request, obj=None):
-        # Override if you want to control add permissions
-        return super().has_add_permission(request, obj)
-
-    def has_change_permission(self, request, obj=None):
-        # Override if you want to control change permissions
-        return super().has_change_permission(request, obj)
-
-    def has_delete_permission(self, request, obj=None):
-        # Override if you want to control delete permissions
-        return super().has_delete_permission(request, obj)
-
-    class Media:
-        css = {
-            'all': ('your-custom-css-path.css',)
-        }

@@ -33,18 +33,5 @@ class UserAdmin(BaseUserAdmin):
         return format_html('<a href="{}">User Detail Page</a>', url)
     user_specific_info.short_description = 'More Info'
 
-    # Implement custom actions if necessary
-
-    def save_model(self, request, obj, form, change):
-        # Custom save logic can be added here
-        super().save_model(request, obj, form, change)
-
-    # Optionally, override the get_queryset method to optimize query performance
-
-    class Media:
-        css = {
-            'all': ('your-custom-css-path.css',)
-        }
-
-# Register your custom user admin
+# Register custom user admin
 admin.site.register(User, UserAdmin)

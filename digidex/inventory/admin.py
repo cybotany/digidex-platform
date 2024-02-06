@@ -48,12 +48,3 @@ class DigitAdmin(admin.ModelAdmin):
     @admin.action(description='Unarchive selected digits')
     def unarchive_digits(self, request, queryset):
         queryset.update(is_archived=False)
-
-    def save_model(self, request, obj, form, change):
-        # Custom save logic can be added here
-        super().save_model(request, obj, form, change)
-
-    class Media:
-        css = {
-            'all': ('your-custom-css-path.css',)
-        }
