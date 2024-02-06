@@ -24,4 +24,4 @@ class ContactView(FormView):
             new_contact.send_email()
             return super().form_valid(form)
         else:
-            return HttpResponseRedirect(reverse_lazy('main:contact_error'))
+            return HttpResponseRedirect(reverse_lazy('main:error'))
