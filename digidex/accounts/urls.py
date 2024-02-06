@@ -8,7 +8,7 @@ urlpatterns = [
     path('logout/', LogoutUserView.as_view(), name='logout'), 
     path('delete/', DeleteUserView.as_view(), name='delete'),
     path('email-confirmation/', EmailConfirmationView.as_view(), name='confirm-email'),
-    path('email-verification/', EmailVerificationView.as_view(), name='verify-email'),
+    path('email-verification/<uidb64>/<token>/', EmailVerificationView.as_view(), name='verify-email'),
 
     path('profile/<int:pk>/', UserProfileView.as_view(), name='profile'),
     path('profile/<int:pk>/modification/', ModifyProfileView.as_view(), name='profile-modification'),   

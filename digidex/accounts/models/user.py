@@ -2,7 +2,7 @@ from django.db import models, transaction
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.urls import reverse
-from django.utils.http import urlencode
+from django.utils.http import urlencode, urlsafe_base64_encode, force_bytes
 from django.conf import settings
 from django.core.mail import send_mail
 import uuid
@@ -47,9 +47,9 @@ class User(AbstractUser):
 
     def send_verification_email(self):
         token = PasswordResetTokenGenerator().make_token(self)
-        base_url = reverse('accounts:verify-email')
-        query_string = urlencode({'token': token, 'email': self.email})
-        full_url = f'https://{settings.SITE_HOST}{base_url}?{query_string}'
+        uid = urlsafe_base64_encode(force_bytes(self.pk))
+        base_url = reverse('accounts:verify-email', kwargs={'uidb64': uid, 'token': token})
+        full_url = f'https://{settings.SITE_HOST}{base_url}'
 
         send_mail(
             subject='Verify your email',
