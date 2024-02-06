@@ -9,25 +9,15 @@ class UserAdmin(BaseUserAdmin):
 
     # Define custom fieldsets
     fieldsets = BaseUserAdmin.fieldsets + (
-        ('Additional Info', {'fields': ('uuid', 'email_confirmed', 'user_specific_info')}),
+        ('Additional Info', {'fields': ('uuid', 'email_confirmed')}),
     )
     add_fieldsets = BaseUserAdmin.add_fieldsets + (
-        ('Additional Info', {'fields': ('email_confirmed', 'user_specific_info')}),
+        ('Additional Info', {'fields': ('email_confirmed')}),
     )
-    list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff', 'uuid', 'email_confirmed', 'digit_count', 'collection_count')
+    list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff', 'uuid', 'date_joined')
     list_filter = ('is_staff', 'is_superuser', 'is_active', 'email_confirmed')
     search_fields = ('username', 'first_name', 'last_name', 'email', 'uuid')
-    readonly_fields = ('uuid', 'digit_count', 'collection_count')
-
-    def collection_count(self, user):
-        return user.collections.count()
-    collection_count.short_description = 'Number of Collections'
-
-    def user_specific_info(self, user):
-        # Add a link to a custom user detail page or any other related information
-        url = reverse('custom_user_detail', args=[user.uuid])
-        return format_html('<a href="{}">User Detail Page</a>', url)
-    user_specific_info.short_description = 'More Info'
+    ordering = ('date_joined','username')
 
 # Register custom user admin
 admin.site.register(User, UserAdmin)
