@@ -1,7 +1,8 @@
 from django.views import View
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from django.utils.http import urlsafe_base64_decode, force_text
+from django.utils.encoding import force_text
+from django.utils.http import urlsafe_base64_decode
 from digidex.accounts.models import User
 
 
