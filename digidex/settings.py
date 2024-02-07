@@ -4,6 +4,7 @@ Django settings for digidex project.
 import os
 from pathlib import Path
 from datetime import timedelta
+from django.utils.http import urlsplit
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -17,19 +18,20 @@ RECAPTCHA_SITE_KEY = os.environ.get('RECAPTCHA_SITE_KEY', '')
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = os.environ.get('SERVICE_ACCOUNT_KEY', '')
 RECAPTCHA_REQUIRED_SCORE = float(os.environ.get('RECAPTCHA_REQUIRED_SCORE', '0.5'))
 
-# Environment specific settings
-if DJANGO_ENV == 'production':
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(',')
+CORS_ALLOWED_ORIGINS = os.environ.get('CORS_ALLOWED_ORIGINS', 'http://localhost').split(',')
+SITE_HOST = os.environ.get('SITE_HOST', 'localhost')
+
+AWS_LOCATION = 'static'
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', '')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', '')
+AWS_S3_ENDPOINT_URL = os.environ.get('SPACES_ENDPOINT_URL', '')
+AWS_S3_CUSTOM_DOMAIN = os.environ.get('SPACES_EDGE_ENDPOINT_URL', '')
+AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+
+if DJANGO_ENV in ['production', 'staging']:
     DEBUG = False
-    ALLOWED_HOSTS = ["digidex.app", "www.digidex.app"]
-
-    AWS_LOCATION = 'static'
-    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '')
-    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', '')
-    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', '')
-    AWS_S3_ENDPOINT_URL = os.environ.get('SPACES_ENDPOINT_URL', '')
-    AWS_S3_CUSTOM_DOMAIN = os.environ.get('SPACES_EDGE_ENDPOINT_URL', '')
-    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
-
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
@@ -48,11 +50,6 @@ if DJANGO_ENV == 'production':
         BASE_DIR / "static",
     ]
 
-    CORS_ALLOWED_ORIGINS = [
-        "https://digidex.app",
-        "https://www.digidex.app",
-        "https://cdn.digidex.app",
-    ]
     CORS_ALLOW_CREDENTIALS = True
     CORS_ALLOW_HEADERS = [
         'access-control-allow-origin',
@@ -65,26 +62,9 @@ if DJANGO_ENV == 'production':
         "POST",
     ]
 
-elif DJANGO_ENV == 'staging':
-    DEBUG = True
-    ALLOWED_HOSTS = ["staging.digidex.app", "www.staging.digidex.app"]
-
-    AWS_LOCATION = 'static'
-    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '')
-    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', '')
-    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', '')
-    AWS_S3_ENDPOINT_URL = os.environ.get('SPACES_ENDPOINT_URL', '')
-    AWS_S3_CUSTOM_DOMAIN = os.environ.get('SPACES_EDGE_ENDPOINT_URL', '')
-    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
-    
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
-    SECURE_SSL_REDIRECT = True
-
-    SECURE_HSTS_SECONDS = 31536000
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    SECURE_HSTS_PRELOAD = True
+# Environment specific settings
+if DJANGO_ENV == 'production':
+    DEBUG = False
 
     STATIC_URL = '{}/{}/'.format(AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
     MEDIA_URL = f'https://{AWS_S3_ENDPOINT_URL}/'
@@ -95,11 +75,6 @@ elif DJANGO_ENV == 'staging':
         BASE_DIR / "static",
     ]
 
-    CORS_ALLOWED_ORIGINS = [
-        "https://staging.digidex.app",
-        "https://www.staging.digidex.app",
-        "https://cdn.staging.digidex.app",
-    ]
     CORS_ALLOW_CREDENTIALS = True
     CORS_ALLOW_HEADERS = [
         'access-control-allow-origin',
@@ -114,7 +89,6 @@ elif DJANGO_ENV == 'staging':
 
 else:
     DEBUG = True
-    ALLOWED_HOSTS = ["localhost", "10.0.0.218"]
 
     SECURE_PROXY_SSL_HEADER = None
     SESSION_COOKIE_SECURE = False
@@ -240,7 +214,6 @@ SIMPLE_JWT = {
 
 AUTH_USER_MODEL = "accounts.User"
 
-SITE_HOST = 'www.digidex.app'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.office365.com'
 EMAIL_HOST_USER = 'support@digidex.app'
