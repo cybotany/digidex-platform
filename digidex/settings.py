@@ -4,7 +4,7 @@ Django settings for digidex project.
 import os
 from pathlib import Path
 from datetime import timedelta
-from django.utils.http import urlsplit
+from urllib.parse import urlsplit
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
