@@ -2,7 +2,7 @@ from django.conf import settings
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import authenticate
 from django.shortcuts import resolve_url
-from django.utils.http import is_safe_url
+from django.utils.http import url_has_allowed_host_and_scheme
 from digidex.accounts.forms import LoginForm
 
 class LoginUserView(LoginView):
@@ -18,7 +18,8 @@ class LoginUserView(LoginView):
         user = authenticate(self.request, username=username, password=password)
         if user is not None:
             if not user.email_confirmed:
-                return self.form_invalid(form, "Please confirm your email address to log in.")
+                # Updated to pass error_message correctly
+                return self.form_invalid(form, error_message="Please confirm your email address to log in.")
             else:
                 return super().form_valid(form)
         else:
@@ -37,9 +38,9 @@ class LoginUserView(LoginView):
     def get_redirect_url(self):
         """Ensure the user-originating redirection URL is safe."""
         redirect_to = self.request.GET.get('next', '')
-        url_is_safe = is_safe_url(
+        url_is_safe = url_has_allowed_host_and_scheme(
             url=redirect_to,
-            allowed_hosts=self.get_success_url_allowed_hosts(),
+            allowed_hosts={self.request.get_host()},
             require_https=self.request.is_secure(),
         )
         return redirect_to if url_is_safe else ''
