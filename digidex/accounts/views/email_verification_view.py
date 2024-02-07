@@ -14,7 +14,6 @@ class EmailVerificationView(View):
         token_generator = PasswordResetTokenGenerator()
 
         if token_generator.check_token(user, token):
-            user.is_active = True
             user.email_confirmed = True
             user.save()
 

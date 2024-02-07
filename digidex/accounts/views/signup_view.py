@@ -18,7 +18,8 @@ class SignupUserView(CreateView):
         validation_result = validate_recaptcha(recaptcha_response, 'signup')
         
         if validation_result.get("success"):
-            form.save()
+            user = form.save()
+            user.send_verification_email
             return redirect('accounts:confirm-email')
         else:
             messages.error(self.request, "Invalid reCAPTCHA. Please try again.")

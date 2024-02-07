@@ -59,20 +59,3 @@ class User(AbstractUser):
             recipient_list=[self.email],
             fail_silently=False,
         )
-
-    @transaction.atomic
-    def save(self, *args, **kwargs):
-        # Check if it's a new record
-        new_user = self.pk is None
-        if new_user:
-            self.is_active = True
-
-        # Save the user instance
-        super().save(*args, **kwargs)
-
-        # Send verification email for new users
-        if new_user:
-            try:
-                self.send_verification_email()
-            except Exception as e:
-                raise
