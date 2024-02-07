@@ -65,7 +65,7 @@ class User(AbstractUser):
         # Check if it's a new record
         new_user = self.pk is None
         if new_user:
-            self.is_active = False
+            self.is_active = True
 
         # Save the user instance
         super().save(*args, **kwargs)
