@@ -52,5 +52,22 @@
         </div>
       </div>
     </section>
+    <script>
+      document.getElementById('submitBtn').addEventListener('click', function(event) {
+          event.preventDefault();
+  
+          grecaptcha.enterprise.execute('{{ RECAPTCHA_SITE_KEY }}', {action: 'signup'}).then(function(token) {
+              // Add the token to a hidden field
+              var inputToken = document.createElement('input');
+              inputToken.setAttribute('type', 'hidden');
+              inputToken.setAttribute('name', 'g-recaptcha-response');
+              inputToken.setAttribute('value', token);
+              document.getElementById('signupForm').appendChild(inputToken);
+  
+              // Submit the form
+              document.getElementById('signupForm').submit();
+          });
+      });
+  </script>  
   </body>
 </html>

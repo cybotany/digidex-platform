@@ -1,4 +1,4 @@
-<form method="post" class="form">
+<form id="signupForm" method="post" class="form">
   {% csrf_token %}
 
   <!-- Render Username Field -->
@@ -29,7 +29,6 @@
         <small>{{ form.password1.errors|striptags }}</small>
       </div>
     {% endif %}
-  
   </div>
 
   <!-- Render Password Confirmation Field -->
@@ -43,7 +42,7 @@
   </div>
 
   <!-- Render Submit Button -->
-  <input type="submit" value="Sign Up" class="submit-button base-button">
+  <input type="submit" value="Sign Up" class="submit-button base-button" id="submitBtn">
 
   <!-- Render Non-Field Errors -->
   {% if form.non_field_errors %}
