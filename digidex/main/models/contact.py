@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models, transaction
 from django.core.mail import send_mail
 from django.utils.timezone import now
 from datetime import timedelta
@@ -47,7 +47,7 @@ class Contact(models.Model):
         """
         return f"Contact submission from {self.name}"
 
-    def send_email(self):
+    def send_contact_form_email(self):
         """
         Sends an email to the user after a contact form submission.
         """
@@ -58,6 +58,11 @@ class Contact(models.Model):
             recipient_list=[self.email],
             fail_silently=False,
         )
+
+    def save(self, *args, **kwargs):
+        with transaction.atomic():
+            super().save(*args, **kwargs)
+            self.send_contact_form_email()
 
     @classmethod
     def get_pending_responses_summary(cls):
