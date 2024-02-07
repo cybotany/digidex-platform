@@ -59,10 +59,13 @@ class Contact(models.Model):
             fail_silently=False,
         )
 
+    @transaction.atomic
     def save(self, *args, **kwargs):
-        with transaction.atomic():
-            super().save(*args, **kwargs)
+        super().save(*args, **kwargs)
+        try:
             self.send_contact_form_email()
+        except Exception as e:
+            raise e
 
     @classmethod
     def get_pending_responses_summary(cls):
