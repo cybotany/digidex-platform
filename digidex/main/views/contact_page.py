@@ -14,7 +14,7 @@ class ContactView(FormView):
     def form_valid(self, form):
         # Retrieve the reCAPTCHA token and response from the request
         recaptcha_token = self.request.POST.get('g-recaptcha-response')
-        recaptcha_action = self.request.POST.get('submit_contactForm')
+        recaptcha_action = 'submit_contactForm'
 
         # Validate the token
         response = validate_recaptcha(recaptcha_token, recaptcha_action)
