@@ -21,7 +21,5 @@ class ContactView(FormView):
             logger.warning(f"reCAPTCHA validation failed: {validation_result.get('message')}")
             return HttpResponseRedirect(reverse_lazy('main:error'))
 
-        new_contact = form.save(commit=False)
-        new_contact.send_email()
-        new_contact.save()
+        form.save()
         return super().form_valid(form)
