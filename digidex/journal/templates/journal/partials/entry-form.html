@@ -5,7 +5,7 @@
     {{ form.content }}
     {% if form.content.errors %}
       <div class="error-message">
-        <small>{{ form.content.errors|striptags }}</small>
+        <span class="text-error">{{ form.content.errors|striptags }}</span>
       </div>
     {% endif %}
   </div>
@@ -14,7 +14,7 @@
     {{ form.image }}
     {% if form.image.errors %}
       <div class="error-message">
-        <small>{{ form.image.errors|striptags }}</small>
+        <span class="text-error">{{ form.image.errors|striptags }}</span>
       </div>
     {% endif %}
   </div>

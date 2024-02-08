@@ -6,7 +6,7 @@
     {{ form.bio }}
     {% if form.bio.errors %}
       <div class="error-message">
-        <small>{{ form.bio.errors|striptags }}</small>
+        <span class="text-error">{{ form.bio.errors|striptags }}</span>
       </div>
     {% endif %}
   </div>
@@ -16,7 +16,7 @@
     {{ form.location }}
     {% if form.location.errors %}
       <div class="error-message">
-        <small>{{ form.location.errors|striptags }}</small>
+        <span class="text-error">{{ form.location.errors|striptags }}</span>
       </div>
     {% endif %}
   </div>
@@ -26,7 +26,7 @@
     {{ form.avatar }} 
     {% if form.avatar.errors %}
       <div class="error-message">
-        <small>{{ form.avatar.errors|striptags }}</small>
+        <span class="text-error">{{ form.avatar.errors|striptags }}</span>
       </div>
     {% endif %}
   </div>

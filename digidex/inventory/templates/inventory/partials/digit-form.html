@@ -5,7 +5,7 @@
     {{ form.name }}
     {% if form.name.errors %}
       <div class="error-message">
-        <small>{{ form.name.errors|striptags }}</small>
+        <span class="text-error">{{ form.name.errors|striptags }}</span>
       </div>
     {% endif %}
   </div>
@@ -14,7 +14,7 @@
     {{ form.description }}
     {% if form.description.errors %}
       <div class="error-message">
-        <small>{{ form.description.errors|striptags }}</small>
+        <span class="text-error">{{ form.description.errors|striptags }}</span>
       </div>
     {% endif %}
   </div>
@@ -24,6 +24,7 @@
       <select class="base-input" name="taxonomic_unit" id="id_taxonomic_unit" required=""></select>
     </div> 
   </div>
+  <!-- Render Submit Button -->
   <input type="submit" value="Create Digit" class="submit-button base-button">
   <!-- Non-Field Errors -->
   {% if form.non_field_errors %}
