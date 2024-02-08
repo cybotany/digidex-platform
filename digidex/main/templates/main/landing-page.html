@@ -36,6 +36,13 @@
   </head>
   <body>
     {% include 'navigation-bar.html' %}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}    
     <!-- Landing Page - Hero Call To Action Section -->
     <section class="section-hero">
       <div class="content">
