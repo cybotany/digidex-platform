@@ -38,6 +38,13 @@
   </head>
   <body>
     {% include 'navigation-bar.html' %}
+    {% if messages %}
+      {% for message in messages %}
+          <div class="alert {{ message.tags }}">
+              {{ message }}
+          </div>
+      {% endfor %}
+    {% endif %}
     <section class="section full">
       <div class="content">
         <div class="account-form">

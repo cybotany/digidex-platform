@@ -1,5 +1,6 @@
 from django.views import View
 from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib import messages
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.encoding import force_str
 from django.utils.http import urlsafe_base64_decode
@@ -16,6 +17,7 @@ class EmailVerificationView(View):
         if token_generator.check_token(user, token):
             user.email_confirmed = True
             user.save()
+            messages.success(request, 'Your email has been verified. You may now log in.')
 
             return redirect('inventory:digit-storage')
         else:

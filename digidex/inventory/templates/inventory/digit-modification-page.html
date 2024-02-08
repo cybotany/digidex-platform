@@ -42,7 +42,14 @@
     <link href="{% static 'digidex/images/webclip.png' %}" rel="apple-touch-icon">
   </head>
   <body>
-    {% include 'navigation-bar.html' %}  
+    {% include 'navigation-bar.html' %}
+    {% if messages %}
+      {% for message in messages %}
+          <div class="alert {{ message.tags }}">
+              {{ message }}
+          </div>
+      {% endfor %}
+    {% endif %}
     <section class="section-full">
       <div class="content">
         <div class="account-form">

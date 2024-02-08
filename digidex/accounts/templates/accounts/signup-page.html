@@ -39,6 +39,13 @@
     <a href="{% url 'main:landing' %}" class="brand-center base-nav-brand">
       <img src="{% static 'digidex/images/logo.png' %}" loading="eager" alt="" class="logo">
     </a>
+    {% if messages %}
+      {% for message in messages %}
+          <div class="alert {{ message.tags }}">
+              {{ message }}
+          </div>
+      {% endfor %}
+    {% endif %}
     <!-- Signup Form Section -->
     <section class="section-full">
       <div class="content">
