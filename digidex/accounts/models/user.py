@@ -53,7 +53,7 @@ class User(AbstractUser):
         token = PasswordResetTokenGenerator().make_token(self)
         uid = urlsafe_base64_encode(force_bytes(self.pk))
         base_url = reverse('accounts:verify-email', kwargs={'uidb64': uid, 'token': token})
-        full_url = f'https://{settings.SITE_HOST}{base_url}'
+        full_url = f'{settings.SITE_HOST}{base_url}'
 
         # Use EmailLog to create and send the email
         EmailLog.create_and_send_email(
