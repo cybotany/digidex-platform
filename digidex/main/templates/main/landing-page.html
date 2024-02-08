@@ -36,9 +36,9 @@
   </head>
   <body>
     {% include 'navigation-bar.html' %}
-    <div class="collection-list-wrapper-posts base-dyn-list">
+    <div class="collection-list-wrapper-messages base-dyn-list">
       {% if messages %}
-      <div role="list" class="collection-list-posts base-dyn-items">
+      <div role="list" class="base-dyn-items">
         {% for message in messages %}
           <div role="listitem" class="base-dyn-item">
             <div class="{% if message.tags %}{{ message.tags }}-message{% endif %}">
