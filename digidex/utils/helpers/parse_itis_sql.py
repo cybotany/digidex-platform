@@ -1,4 +1,5 @@
 import re
+import sys
 
 def parse_and_export_sql_file(filename):
     with open(filename, 'r', encoding='ISO-8859-1') as file:
@@ -19,3 +20,11 @@ def parse_and_export_sql_file(filename):
             output_file.write(sql_content)
 
     print(f"Exported {len(segments) // 2} SQL files.")
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: python script.py <path_to_sql_file>")
+        sys.exit(1)
+
+    filename = sys.argv[1]
+    parse_and_export_sql_file(filename)
