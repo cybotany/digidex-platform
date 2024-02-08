@@ -1,5 +1,5 @@
 from django.views.generic import TemplateView
 
 
-class EmailConfirmationView(TemplateView):
+class EmailSentView(TemplateView):
     template_name = 'accounts/email-confirmation-page.html'

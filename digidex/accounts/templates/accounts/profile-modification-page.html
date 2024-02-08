@@ -42,6 +42,12 @@
           <div class="form-block base-form">
             {% include 'accounts/partials/profile-form.html' %}
           </div>
+          <div class="delete-user">
+            <form action="{% url 'accounts:digit-deletion' digit.uuid %}" method="post">
+              {% csrf_token %}
+              <input type="submit" value="Delete Digit" class="delete-button base-button" onclick="return confirm('Are you sure you want to delete this Digit? This action cannot be undone.');">
+            </form>
+          </div>
         </div>
       </div>
     </section>

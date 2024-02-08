@@ -5,7 +5,7 @@ from django.shortcuts import resolve_url
 from django.utils.http import url_has_allowed_host_and_scheme
 from digidex.accounts.forms import LoginForm
 
-class LoginUserView(LoginView):
+class UserLoginView(LoginView):
     form_class = LoginForm
     template_name = 'accounts/login-page.html'
 

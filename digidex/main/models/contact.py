@@ -1,7 +1,7 @@
 from django.db import models, transaction
-from django.core.mail import send_mail
 from django.utils.timezone import now
 from datetime import timedelta
+from digidex.accounts.models import EmailLog
 
 class Contact(models.Model):
     """
@@ -51,12 +51,14 @@ class Contact(models.Model):
         """
         Sends an email to the user after a contact form submission.
         """
-        send_mail(
-            subject="Thank you for contacting us",
-            message="We have received your message and will get back to you soon.",
+        # Use EmailLog to create and send the email
+        EmailLog.create_and_send_email(
+            to_email=self.email,
             from_email='no-reply@digidex.app',
-            recipient_list=[self.email],
-            fail_silently=False,
+            subject='Thank you for contacting us',
+            body='We have received your message and will get back to you soon.',
+            reason='contact_us',
+            user=None
         )
 
     @transaction.atomic

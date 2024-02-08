@@ -1,3 +1,4 @@
+import uuid
 from django.db import models, transaction
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
@@ -5,8 +6,10 @@ from django.urls import reverse
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.conf import settings
-from django.core.mail import send_mail
-import uuid
+from digidex.accounts.models import EmailLog
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class User(AbstractUser):
@@ -52,22 +55,22 @@ class User(AbstractUser):
         base_url = reverse('accounts:verify-email', kwargs={'uidb64': uid, 'token': token})
         full_url = f'https://{settings.SITE_HOST}{base_url}'
 
-        send_mail(
-            subject='Verify your email',
-            message=f'Please click the following link to verify your email:\n{full_url}',
+        # Use EmailLog to create and send the email
+        EmailLog.create_and_send_email(
+            to_email=self.email,
             from_email='no-reply@digidex.app',
-            recipient_list=[self.email],
-            fail_silently=False,
+            subject='Verify your email',
+            body=f'Please click the following link to verify your email and complete the signup process:\n{full_url}',
+            reason='email_verification',
+            user=self
         )
 
     @transaction.atomic
     def save(self, *args, **kwargs):
         # Check if it's a new record
         new_user = self.pk is None
-
         # Save the user instance
         super().save(*args, **kwargs)
-
         # Send verification email for new users
         if new_user:
             try:

@@ -16,20 +16,21 @@ class ContactView(FormView):
         recaptcha_token = self.request.POST.get('g-recaptcha-response')
         validation_result = validate_recaptcha(recaptcha_token, 'contact_us')
 
-        if not validation_result.get("success"):
+        if validation_result.get("success"):
+            try:
+                form.save()
+                return super().form_valid(form)
+            except Exception as e:
+                logger.error(f"Error during contact us email submission: {e}")
+                messages.error(self.request, "There was an error processing the contact us form. Please try again later.")
+                return self.form_invalid(form)
+        
+        else:
             # Log the failure and add an error message
-            logger.warning(f"reCAPTCHA validation failed: {validation_result.get('message')}")
+            logger.error(f"reCAPTCHA validation failed: {validation_result.get('message')}")
             messages.error(self.request, "Invalid reCAPTCHA. Please try again.")
-
-            # Instead of redirecting, treat the form as if it were invalid to stay on the page
-            # and display the error message.
             return self.form_invalid(form)
 
-        # If reCAPTCHA validation passes, proceed as normal.
-        form.save()
-        return super().form_valid(form)
-
     def form_invalid(self, form):
-        # Optionally, log that the form was invalid or add additional error handling
         logger.info("Contact form submission was invalid.")
         return super().form_invalid(form)

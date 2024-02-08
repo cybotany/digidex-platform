@@ -8,7 +8,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-class SignupUserView(CreateView):
+class UserSignupView(CreateView):
     model = User
     form_class = SignupForm
     template_name = 'accounts/signup-page.html'
@@ -18,14 +18,18 @@ class SignupUserView(CreateView):
         validation_result = validate_recaptcha(recaptcha_response, 'signup')
         
         if validation_result.get("success"):
-            form.save()
-            return redirect('accounts:confirm-email')
+            try:
+                form.save()
+                return redirect('accounts:confirm-email')
+            except Exception as e:
+                logger.error(f"Error during user signup and sending verification email: {e}")
+                messages.error(self.request, "There was an error processing the signup form. Please try again later.")
+                return self.form_invalid(form)
         else:
             messages.error(self.request, "Invalid reCAPTCHA. Please try again.")
-            logger.warning(f"reCAPTCHA validation failed: {validation_result.get('message')}")
+            logger.error(f"reCAPTCHA validation failed: {validation_result.get('message')}")
             return self.form_invalid(form)
 
     def form_invalid(self, form):
-        # You might want to add additional handling here in case of form invalidation
-        # For example, logging or custom error messages
+        logger.info("Signup form submission was invalid.")
         return render(self.request, self.template_name, {'form': form})

@@ -6,7 +6,7 @@ from digidex.accounts.models import Profile
 from digidex.accounts.forms import ProfileForm
 
 
-class ModifyProfileView(LoginRequiredMixin, UpdateView):
+class ProfileModificationView(LoginRequiredMixin, UpdateView):
     model = Profile
     form_class = ProfileForm
     template_name = 'accounts/profile-modification-page.html'

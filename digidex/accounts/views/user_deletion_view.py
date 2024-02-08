@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import logout
 
 
-class DeleteUserView(LoginRequiredMixin, View):
+class UserDeletionView(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         user = request.user
         user.delete()
