@@ -1,7 +1,7 @@
 from django.db import models, transaction
 from django.utils.timezone import now
 from datetime import timedelta
-from digidex.accounts.models.email_log import EmailLog
+from digidex.utils.models import EmailLog
 
 class Contact(models.Model):
     """
