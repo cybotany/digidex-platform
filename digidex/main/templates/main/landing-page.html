@@ -36,15 +36,19 @@
   </head>
   <body>
     {% include 'navigation-bar.html' %}
-    {% if messages %}
-    <div class="messages-wrapper">
+    <div class="collection-list-wrapper-posts base-dyn-list">
+      {% if messages %}
+      <div role="list" class="collection-list-posts base-dyn-items">
         {% for message in messages %}
-          <div class="{% if message.tags %}{{ message.tags }}-message{% endif %}">
-            <span class="text-{% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</span>
+          <div role="listitem" class="base-dyn-item">
+            <div class="{% if message.tags %}{{ message.tags }}-message{% endif %}">
+              <span class="text-{% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</span>
+            </div>
           </div>
         {% endfor %}
+      </div>  
+       {% endif %}  
     </div>
-    {% endif %}    
     <!-- Landing Page - Hero Call To Action Section -->
     <section class="section-hero">
       <div class="content">
