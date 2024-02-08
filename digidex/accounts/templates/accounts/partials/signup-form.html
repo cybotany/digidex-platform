@@ -43,17 +43,4 @@
 
   <!-- Render Submit Button -->
   <input type="submit" value="Sign Up" class="submit-button base-button" id="submitBtn">
-
-  <!-- Render Non-Field Errors -->
-  {% if form.non_field_errors %}
-    <div class="error-message base-form-fail">
-      {% for error in form.non_field_errors %}
-        <div class="text-error">{{ error }}</div>
-      {% endfor %}
-    </div>
-  {% else %}
-    <div class="success-message base-form-done">
-      <div class="text-success">Your operation was successful!</div>
-    </div>
-  {% endif %}
 </form>

@@ -33,13 +33,4 @@
 
   <!-- Render Submit Button -->
   <input type="submit" value="Update Profile"  class="submit-button base-button">
-
-  <!-- Non-Field Errors -->
-  {% if form.non_field_errors %}
-    <div class="error-message base-form-fail">
-      {% for error in form.non_field_errors %}
-        <div class="text-error">{{ error }}</div>
-      {% endfor %}
-    </div>
-  {% endif %}
 </form>

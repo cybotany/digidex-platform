@@ -1,9 +1,12 @@
+
 from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import authenticate
 from django.shortcuts import resolve_url
 from django.utils.http import url_has_allowed_host_and_scheme
 from digidex.accounts.forms import LoginForm
+
 
 class UserLoginView(LoginView):
     form_class = LoginForm
@@ -14,21 +17,21 @@ class UserLoginView(LoginView):
         username = form.cleaned_data.get('username')
         password = form.cleaned_data.get('password')
 
-        # Check if the user exists and has confirmed their email
         user = authenticate(self.request, username=username, password=password)
         if user is not None:
             if not user.email_confirmed:
-                # Updated to pass error_message correctly
-                return self.form_invalid(form, error_message="Please confirm your email address to log in.")
+                messages.error(self.request, "Please confirm your email address to log in.")
+                return self.form_invalid(form)
             else:
+                messages.success(self.request, "You have successfully logged in.")
                 return super().form_valid(form)
         else:
+            messages.error(self.request, "Invalid login credentials.")
             return self.form_invalid(form)
 
-    def form_invalid(self, form, error_message=None):
-        """If the form is invalid, render the invalid form."""
-        if error_message:
-            form.add_error(None, error_message)
+    def form_invalid(self, form):
+        """If the form is invalid, simply render the invalid form without modifying it."""
+        messages.error(self.request, "There was a problem with the form. Please check the details you entered.")
         return super().form_invalid(form)
 
     def get_success_url(self):
