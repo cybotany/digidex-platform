@@ -6,8 +6,8 @@ from django.urls import reverse
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.conf import settings
-from digidex.utils.models import EmailLog
 import logging
+from .email_log import EmailLog
 
 logger = logging.getLogger(__name__)
 
