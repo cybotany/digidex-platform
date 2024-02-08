@@ -23,7 +23,7 @@ class UserLoginView(LoginView):
                 messages.error(self.request, "Please confirm your email address to log in.")
                 return self.form_invalid(form)
             else:
-                messages.success(self.request, "You have successfully logged in.")
+                messages.success(self.request, "Login successful. Welcome back!")
                 return super().form_valid(form)
         else:
             messages.error(self.request, "Invalid login credentials.")
