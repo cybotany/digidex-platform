@@ -43,7 +43,7 @@ class EmailLog(models.Model):
     )
     date_sent = models.DateTimeField(
         auto_now_add=True,
-        html_content='Date and time the email was sent.'
+        help_text='Date and time the email was sent.'
     )
     user = models.ForeignKey(
         'accounts.User',
