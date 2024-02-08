@@ -26,10 +26,10 @@
   --warning-color: #ffc107;
   --info-color: #3b6f95;
 
-  --accent-success: rgba(138, 215, 160, .07);
-  --accent-error: rgba(229, 57, 53, .07);
-  --accent-warning: rgba(255, 193, 7, .07);
-  --accent-info: rgba(59, 111, 149, .07);
+  --accent-success: rgba(138, 215, 160, .09);
+  --accent-error: rgba(229, 57, 53, .09);
+  --accent-warning: rgba(255, 193, 7, .09);
+  --accent-info: rgba(59, 111, 149, .09);
 }
 
 
