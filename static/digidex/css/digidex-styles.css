@@ -21,11 +21,6 @@
   --accent-blue: rgba(57, 89, 255, .07);
   --accent-yellow: rgba(255, 193, 7, .07);
 
-  --success-color: #8ad7a0;
-  --error-color: #e53935;
-  --warning-color: #ffc107;
-  --info-color: #3b6f95;
-
   --accent-success: rgba(138, 215, 160, .09);
   --accent-error: rgba(229, 57, 53, .09);
   --accent-warning: rgba(255, 193, 7, .09);
@@ -695,13 +690,13 @@ figcaption {
 }
 
 .link-info:hover {
-  background-color: var(--info-color);
+  background-color: var(--strong-blue);
 }
 
 .block-icon-info {
   width: 1.375em;
   height: 1.375em;
-  background-color: var(--info-color);
+  background-color: var(--strong-blue);
   border-radius: 100%;
   justify-content: center;
   align-items: center;
@@ -2608,14 +2603,14 @@ color: rgba(20, 23, 24, .6);
 }
 
 .error-message {
-  background-color: var(--accent-error);
+  background-color: var(--accent-red);
   border-radius: .87em;
   margin-top: 1em;
   padding: 1em 10%;
 }
 
 .text-error {
-  color: var(--error-color);
+  color: var(--strong-red);
   letter-spacing: .05em;
   text-transform: uppercase;
   font-family: IBM Plex Mono, sans-serif;
@@ -2625,14 +2620,14 @@ color: rgba(20, 23, 24, .6);
 }
 
 .warning-message {
-  background-color: var(--accent-warning);
+  background-color: var(--accent-yellow);
   border-radius: .87em;
   margin-top: 1em;
   padding: 1em 10%;
 }
 
 .text-warning {
-  color: var(--warning-color);
+  color: var(--strong-yellow);
   letter-spacing: .05em;
   text-transform: uppercase;
   font-family: IBM Plex Mono, sans-serif;
@@ -2642,14 +2637,14 @@ color: rgba(20, 23, 24, .6);
 }
 
 .info-message {
-  background-color: var(--accent-info);
+  background-color: var(--accent-blue);
   border-radius: .87em;
   margin-top: 1em;
   padding: 1em 10%;
 }
 
 .text-info {
-  color: var(--info-color);
+  color: var(--strong-blue);
   letter-spacing: .05em;
   text-transform: uppercase;
   font-family: IBM Plex Mono, sans-serif;
@@ -2659,13 +2654,13 @@ color: rgba(20, 23, 24, .6);
 }
 
 .success-message {
-  background-color: var(--accent-success);
+  background-color: var(--accent-green);
   border-radius: .87em;
   padding: 1.5em 10%;
 }
 
 .text-success {
-  color: var(--success-color);
+  color: var(--strong-green);
   letter-spacing: .05em;
   text-transform: uppercase;
   font-family: IBM Plex Mono, sans-serif;

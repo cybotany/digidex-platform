@@ -40,13 +40,19 @@
   </head>
   <body>
     {% include 'navigation-bar.html' %}
-    {% if messages %}
-      {% for message in messages %}
-          <div class="alert {{ message.tags }}">
-              {{ message }}
+    <div class="collection-list-wrapper-messages base-dyn-list">
+      {% if messages %}
+      <div role="list" class="base-dyn-items">
+        {% for message in messages %}
+          <div role="listitem" class="base-dyn-item">
+            <div class="{% if message.tags %}{{ message.tags }}-message{% endif %}">
+              <span class="text-{% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</span>
+            </div>
           </div>
-      {% endfor %}
-    {% endif %}
+        {% endfor %}
+      </div>  
+       {% endif %}  
+    </div>
     <section class="section-top">
       <div class="content">
         <div class="block-top">
