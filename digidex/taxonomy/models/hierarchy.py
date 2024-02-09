@@ -25,6 +25,7 @@ class Hierarchy(models.Model):
     )
     parent = models.ForeignKey(
         'taxonomy.Unit',
+        on_delete=models.SET_NULL,
         null=True,
         blank=True,
         verbose_name="Parent Taxonomic Serial Number",

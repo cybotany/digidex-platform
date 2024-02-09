@@ -16,6 +16,7 @@ class UnitSynonyms(models.Model):
     )
     tsn_accepted = models.ForeignKey(
         'taxonomy.Unit',
+        on_delete=models.CASCADE,
         help_text="Taxonomic Serial Number for the accepted Taxonomic Unit."
     )
     last_modified = models.DateTimeField(
