@@ -14,6 +14,7 @@ class Geography(models.Model):
         'taxonomy.Unit',
         on_delete=models.CASCADE,
         verbose_name="Taxonomic Serial Number",
+        db_column="tsn",
         help_text="Taxonomic Serial Number (TSN) for the Taxonomic Unit."
     )
     geography = models.CharField(

@@ -16,6 +16,7 @@ class VernacularReferences(models.Model):
     tsn = models.ForeignKey(
         'taxonomy.Unit',
         on_delete=models.CASCADE,
+        db_column="tsn",
         help_text="Taxonomic Serial Number (TSN) for the Taxonomic Unit."
     )
     vernacular = models.ForeignKey(

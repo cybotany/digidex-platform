@@ -35,6 +35,7 @@ class Unit(models.Model):
 
     tsn = models.IntegerField(
         primary_key=True,
+        db_column="tsn",
         verbose_name="Taxonomic Serial Number",
         help_text="The unique identifier for an occurrence of Taxonomic Units."
     )
