@@ -39,9 +39,9 @@ class Jurisdiction(models.Model):
         """
         Returns a string representation of the division, using its jurisdiction value.
         """
-        return self.jurisdiction_value
+        return self.jurisdiction
     
     class Meta:
-        unique_together = ('tsn', 'jurisdiction_value')
+        unique_together = ('tsn', 'jurisdiction')
         verbose_name = "Jurisdiction"
         verbose_name_plural = "Jurisdictions"
