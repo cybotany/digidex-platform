@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 from digidex.taxonomy.utils.constants import REFERENCE_CHOICES
 
 class VernacularReferences(models.Model):
@@ -24,6 +26,20 @@ class VernacularReferences(models.Model):
         on_delete=models.CASCADE,
         help_text="Unique identifier for the vernacular name entry."
     )
+    content_type = models.ForeignKey(
+        ContentType,
+        on_delete=models.CASCADE,
+        null=True,
+        help_text="Expert, Publication, or Other Source model used as a reference."
+    )
+    object_id = models.PositiveIntegerField(
+        null=True,
+        help_text="Primary key of the referenced model."
+    )
+    content_object = GenericForeignKey(
+        'content_type',
+        'object_id'
+    )
     reference_prefix = models.CharField(
         max_length=3, 
         choices=REFERENCE_CHOICES,
@@ -38,6 +54,14 @@ class VernacularReferences(models.Model):
 
     def __str__(self):
         return f"Vernacular ID: {self.vernacular} - TSN: {self.tsn}, Doc: {self.reference_prefix}{self.reference_id}"
+
+    def save(self, *args, **kwargs):
+        if not self.content_type:
+            model_map = {'EXP': 'Expert', 'PUB': 'Publication', 'SRC': 'Source'}
+            model_class = model_map.get(self.reference_prefix)
+            if model_class:
+                self.content_type = ContentType.objects.get(model=model_class.lower())
+        super(VernacularReferences, self).save(*args, **kwargs)
 
     class Meta:
         unique_together = ('tsn', 'vernacular', 'reference_prefix', 'reference_id')
