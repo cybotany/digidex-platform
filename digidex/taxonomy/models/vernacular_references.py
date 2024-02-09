@@ -39,6 +39,6 @@ class VernacularReferences(models.Model):
         return f"Vernacular ID: {self.vernacular} - TSN: {self.tsn}, Doc: {self.reference_prefix}{self.reference_id}"
 
     class Meta:
-        unique_together = ('tsn', 'reference_prefix', 'reference_id', 'vernacular')
+        unique_together = ('tsn', 'vernacular', 'reference_prefix', 'reference_id')
         verbose_name = "Vernacular Reference"
         verbose_name_plural = "Vernacular References"

@@ -1,6 +1,6 @@
 from django.db import models
 
-class OtherSource(models.Model):
+class Source(models.Model):
     """
     Represents references, other than persons or publications, that are taxonomically significant for
     additions or changes to occurrences of the Taxonomic_units table and/or associated data,

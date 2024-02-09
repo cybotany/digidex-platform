@@ -5,7 +5,7 @@ from .geography import Geography
 from .hierarchy import Hierarchy
 from .jurisdiction import Jurisdiction
 from .kingdom import Kingdom
-from .other_source import OtherSource
+from .source import Source
 from .publication import Publication
 from .rank import Rank
 from .unit_comments import UnitComments
