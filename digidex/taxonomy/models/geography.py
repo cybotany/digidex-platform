@@ -1,13 +1,13 @@
 from django.db import models
 
 
-class GeographicDivision(models.Model):
+class Geography(models.Model):
     """
     Represents the geographic division of a taxonomic unit.
 
     Attributes:
         tsn (ForeignKey): The taxonomic serial number.
-        geographic_value (CharField): The geographic value.
+        geography (CharField): The geographic value.
         last_modified (DateTimeField): The date and time the record was last updated.
     """
     tsn = models.ForeignKey(
@@ -16,7 +16,7 @@ class GeographicDivision(models.Model):
         verbose_name="Taxonomic Serial Number",
         help_text="Taxonomic Serial Number (TSN) for the Taxonomic Unit."
     )
-    geographic_value = models.CharField(
+    geography = models.CharField(
         max_length=200,
         verbose_name="Geographic Value",
         help_text="The geographic value."
@@ -35,6 +35,6 @@ class GeographicDivision(models.Model):
         return self.geographic_value
 
     class Meta:
-        unique_together = ('tsn', 'geographic_value')
+        unique_together = ('tsn', 'geography')
         verbose_name = "Geographic Division"
         verbose_name_plural = "Geographic Divisions"

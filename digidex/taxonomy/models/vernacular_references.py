@@ -7,16 +7,21 @@ class VernacularReferences(models.Model):
     Other_Sources), connecting vernacular names to their evidentiary sources.
 
     Attributes:
-        - tsn (ForeignKey): The Taxonomic Serial Number (TSN) of the taxonomic unit. Links to a 'Unit' model.
-        - reference_prefix (CharField): Prefix indicating the type of reference associated with the vernacular.
-        - reference_id (IntegerField): Identifier for the specific reference providing evidence for the vernacular.
-        - vernacular_id (IntegerField): Unique identifier for the vernacular name entry.
-        - last_modified (DateTimeField): Date and time when the record was last modified.
+        tsn (ForeignKey): The Taxonomic Serial Number (TSN) of the taxonomic unit. Links to a 'Unit' model.
+        vernacular (ForeignKey): Unique identifier for the vernacular name entry.
+        reference_prefix (CharField): Prefix indicating the type of reference associated with the vernacular.
+        reference_id (IntegerField): Identifier for the specific reference providing evidence for the vernacular.
+        last_modified (DateTimeField): Date and time when the record was last modified.
     """
     tsn = models.ForeignKey(
         'taxonomy.Unit',
         on_delete=models.CASCADE,
         help_text="Taxonomic Serial Number (TSN) for the Taxonomic Unit."
+    )
+    vernacular = models.ForeignKey(
+        'taxonomy.Vernacular',
+        on_delete=models.CASCADE,
+        help_text="Unique identifier for the vernacular name entry."
     )
     reference_prefix = models.CharField(
         max_length=3, 
@@ -26,17 +31,14 @@ class VernacularReferences(models.Model):
     reference_id = models.IntegerField(
         help_text="Identifier for the specific reference providing evidence for the vernacular."
     )
-    vernacular_id = models.IntegerField(
-        help_text="Unique identifier for the vernacular name entry."
-    )
     last_modified = models.DateTimeField(
         help_text="Date and time when the record was last modified."
     )
 
     def __str__(self):
-        return f"Vernacular ID: {self.vernacular_id} - TSN: {self.tsn}, Doc: {self.reference_prefix}{self.reference_id}"
+        return f"Vernacular ID: {self.vernacular} - TSN: {self.tsn}, Doc: {self.reference_prefix}{self.reference_id}"
 
     class Meta:
-        unique_together = ('tsn', 'reference_prefix', 'reference_id', 'vernacular_id')
+        unique_together = ('tsn', 'reference_prefix', 'reference_id', 'vernacular')
         verbose_name = "Vernacular Reference"
         verbose_name_plural = "Vernacular References"

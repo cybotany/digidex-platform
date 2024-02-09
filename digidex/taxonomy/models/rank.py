@@ -29,11 +29,11 @@ class Rank(models.Model):
         verbose_name="Rank Name",
         help_text="The label associated with the specific rank of a taxonomic kingdom hierarchy."
     )
-    direct_parent_rank = models.IntegerField(
+    direct_parent_rank = models.SmallIntegerField(
         verbose_name="Direct Parent Rank",
         help_text="The rank of the direct parent of the current rank."
     )
-    required_parent_rank = models.IntegerField(
+    required_parent_rank = models.SmallIntegerField(
         verbose_name="Required Parent Rank",
         help_text="The rank of the required parent of the current rank."
     )

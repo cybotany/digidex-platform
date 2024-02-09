@@ -20,6 +20,7 @@ class Vernacular(models.Model):
         help_text="Taxonomic Serial Number (TSN) for the Taxonomic Unit."
     )
     vernacular_id = models.IntegerField(
+        primary_key=True,
         help_text="Unique identifier for a vernacular name entry."
     )
     vernacular_name = models.CharField(
