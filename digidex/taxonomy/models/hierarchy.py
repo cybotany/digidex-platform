@@ -8,7 +8,6 @@ class Hierarchy(models.Model):
     Attributes:
         hierarchy_string (TextField): A string representation of the complete hierarchy path.
         tsn (ForeignKey): The Taxonomic Serial Number (TSN) of the taxonomic unit. Links to a 'Unit' model.
-        parent_tsn (ForeignKey): The TSN of the parent taxonomic unit.
         level (IntegerField): The hierarchical level of the taxonomic unit.
         children_count (IntegerField): The count of direct children under this taxonomic unit.
     """
@@ -23,15 +22,6 @@ class Hierarchy(models.Model):
         verbose_name="Taxonomic Serial Number",
         db_column="tsn",
         help_text="Taxonomic Serial Number (TSN) for the Taxonomic Unit."
-    )
-    parent_tsn = models.ForeignKey(
-        'taxonomy.Unit',
-        on_delete=models.SET_NULL,
-        related_name='children',
-        null=True,
-        blank=True,
-        verbose_name="Parent TSN",
-        help_text="The TSN of the parent taxonomic unit."
     )
     level = models.IntegerField(
         verbose_name="Level",
