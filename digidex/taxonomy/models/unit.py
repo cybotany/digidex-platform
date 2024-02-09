@@ -147,7 +147,7 @@ class Unit(models.Model):
         verbose_name="Initial Time Stamp",
         help_text="Date and time at which an occurrence of Taxonomic Units is initially loaded into the ITIS database."
     )
-    parent = models.SmallIntegerField(
+    parent = models.IntegerField(
         #'self',
         #on_delete=models.SET_NULL,
         #related_name='children',
