@@ -158,6 +158,7 @@ class Unit(models.Model):
     author = models.ForeignKey(
         'taxonomy.Author',
         on_delete=models.SET_NULL,
+        related_name='authored_units',
         null=True,
         blank=True,
         verbose_name="Author ID",
@@ -166,6 +167,7 @@ class Unit(models.Model):
     hybrid_author = models.ForeignKey(
         'taxonomy.Author',
         on_delete=models.SET_NULL,
+        related_name='authored_hybrid_units',
         null=True,
         blank=True,
         verbose_name="Hybrid Author ID",
