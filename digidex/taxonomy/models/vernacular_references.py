@@ -8,7 +8,7 @@ class VernacularReferences(models.Model):
 
     Attributes:
         tsn (ForeignKey): The Taxonomic Serial Number (TSN) of the taxonomic unit. Links to a 'Unit' model.
-        vernacular (ForeignKey): Unique identifier for the vernacular name entry.
+        vernacular_id (IntegerField): Unique identifier for the vernacular name entry.
         reference_prefix (CharField): Prefix indicating the type of reference associated with the vernacular.
         reference_id (IntegerField): Identifier for the specific reference providing evidence for the vernacular.
         last_modified (DateTimeField): Date and time when the record was last modified.
@@ -19,7 +19,7 @@ class VernacularReferences(models.Model):
         db_column="tsn",
         help_text="Taxonomic Serial Number (TSN) for the Taxonomic Unit."
     )
-    vernacular = models.ForeignKey(
+    vernacular_id = models.IntegerField(
         'taxonomy.Vernacular',
         on_delete=models.CASCADE,
         help_text="Unique identifier for the vernacular name entry."
