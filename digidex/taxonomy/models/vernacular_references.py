@@ -21,7 +21,7 @@ class VernacularReferences(models.Model):
     )
     vernacular_id = models.IntegerField(
         'taxonomy.Vernacular',
-        on_delete=models.CASCADE,
+        #on_delete=models.CASCADE,
         help_text="Unique identifier for the vernacular name entry."
     )
     reference_prefix = models.CharField(
