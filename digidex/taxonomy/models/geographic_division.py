@@ -6,21 +6,26 @@ class GeographicDivision(models.Model):
     Represents the geographic division of a taxonomic unit.
 
     Attributes:
-        tsn (IntegerField): The taxonomic serial number.
-        geographic_value (str): The geographic value.
-        update_date (datetime): The date and time when the geographic value was added.
+        tsn (ForeignKey): The taxonomic serial number.
+        geographic_value (CharField): The geographic value.
+        last_modified (DateTimeField): The date and time the record was last updated.
     """
-    tsn = models.IntegerField(
-        null=True,
-        blank=True
+    tsn = models.ForeignKey(
+        'taxonomy.Unit',
+        on_delete=models.CASCADE,
+        verbose_name="Taxonomic Serial Number",
+        help_text="Taxonomic Serial Number (TSN) for the Taxonomic Unit."
     )
     geographic_value = models.CharField(
         max_length=200,
-        null=True,
-        blank=True
+        verbose_name="Geographic Value",
+        help_text="The geographic value."
     )
-    update_date = models.DateTimeField(
-        auto_now_add=True
+    last_modified = models.DateTimeField(
+        null=True,
+        blank=True,
+        verbose_name="Last Modified",
+        help_text="The date and time the record was last updated."
     )
 
     def __str__(self):
@@ -28,3 +33,8 @@ class GeographicDivision(models.Model):
         Returns a string representation of the division, using its geographic value.
         """
         return self.geographic_value
+
+    class Meta:
+        unique_together = ('tsn', 'geographic_value')
+        verbose_name = "Geographic Division"
+        verbose_name_plural = "Geographic Divisions"

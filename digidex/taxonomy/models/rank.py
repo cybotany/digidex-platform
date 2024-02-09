@@ -1,5 +1,4 @@
 from django.db import models
-from django.urls import reverse
 
 
 class Rank(models.Model):
@@ -9,49 +8,44 @@ class Rank(models.Model):
 
     Attributes:
         kingdom (ForeignKey): A reference to the Kingdom model.
-        rank_id (int): A unique identifier for a specific rank within the taxonomic hierarchy.
-        rank_name (str): The label associated with the specific rank of a taxonomic hierarchy.
+        rank (int): A unique identifier for a specific rank within the taxonomic kingdom hierarchy.
+        rank_name (str): The label associated with the specific rank of a taxonomic kingdom hierarchy.
         direct_parent_rank (ForeignKey): A reference to another Rank which is the direct parent rank.
         required_parent_rank (ForeignKey): A reference to another Rank which is the required parent rank.
-        update_date (datetime): The date on which a record is modified.
+        last_modified (datetime): The date on which a record was last modified.
     """
-
     kingdom = models.ForeignKey(
-        'Kingdom',
-        null=False,
-        blank=False,
+        'taxonomy.Kingdom',
         on_delete=models.CASCADE,
-        verbose_name="Kingdom",
-        db_column='kingdom_id'
+        verbose_name="Kingdom ID",
+        help_text="The kingdom to which the rank belongs."
     )
-    rank_id = models.SmallIntegerField(
-        null=False,
-        blank=False,
-        verbose_name="Rank ID"
+    rank = models.SmallIntegerField(
+        verbose_name="Rank ID",
+        help_text="A unique identifier for a specific rank within the taxonomic kingdom hierarchy."
     )
     rank_name = models.CharField(
         max_length=15,
-        null=False,
-        blank=False,
-        verbose_name="Rank Name"
+        verbose_name="Rank Name",
+        help_text="The label associated with the specific rank of a taxonomic kingdom hierarchy."
     )
-    direct_parent_rank_id = models.IntegerField(
-        null=True,
-        blank=True,
+    direct_parent_rank = models.IntegerField(
         verbose_name="Direct Parent Rank",
+        help_text="The rank of the direct parent of the current rank."
     )
-    required_parent_rank_id = models.IntegerField(
-        null=True,
-        blank=True,
+    required_parent_rank = models.IntegerField(
         verbose_name="Required Parent Rank",
+        help_text="The rank of the required parent of the current rank."
     )
-    update_date = models.DateTimeField(
-        auto_now=True,
-        verbose_name="Update Date"
+    last_modified = models.DateTimeField(
+        verbose_name="Update Date",
+        help_text="The date on which a record was last modified."
     )
 
     class Meta:
-        unique_together = (('kingdom', 'rank_id'))
+        unique_together = (('kingdom', 'rank'))
+        verbose_name = "Rank"
+        verbose_name_plural = "Ranks"
 
     def __str__(self):
         """
@@ -61,12 +55,3 @@ class Rank(models.Model):
             str: A string representation of the taxon unit type.
         """
         return self.rank_name
-
-    def get_absolute_url(self):
-        """
-        Get the URL to view the details of this taxon unit type.
-
-        Returns:
-            str: The URL to view the details of this taxon unit type.
-        """
-        return reverse('taxonomy:describe_taxon_unit_type', args=[str(self.rank_id)])

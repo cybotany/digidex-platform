@@ -5,43 +5,43 @@ class Hierarchy(models.Model):
     """
     Represents the hierarchy of a taxonomic unit as per ITIS data model documentation.
 
-    Fields:
+    Attributes:
         hierarchy_string (TextField): A string representation of the complete hierarchy path.
-        tsn (IntegerField): The Taxonomic Serial Number (TSN) of the taxonomic unit. 
-                          Links to a 'Unit' model.
-        parent_tsn (IntegerField): The TSN of the parent taxonomic unit.
+        tsn (ForeignKey): The Taxonomic Serial Number (TSN) of the taxonomic unit. Links to a 'Unit' model.
+        parent_tsn (ForeignKey): The TSN of the parent taxonomic unit.
         level (IntegerField): The hierarchical level of the taxonomic unit.
         children_count (IntegerField): The count of direct children under this taxonomic unit.
     """
     hierarchy_string = models.TextField(
         unique=True,
-        null=False,
-        blank=False,
-        verbose_name="Hierarchy String"
+        verbose_name="Hierarchy String",
+        help_text="A string representation of the complete hierarchy path."
     )
-    tsn = models.IntegerField(
-        null=False,
-        blank=False
+    tsn = models.ForeignKey(
+        'taxonomy.Unit',
+        on_delete=models.CASCADE,
+        verbose_name="Taxonomic Serial Number",
+        help_text="Taxonomic Serial Number (TSN) for the Taxonomic Unit."
     )
-    parent_tsn = models.IntegerField(
+    parent = models.ForeignKey(
+        'taxonomy.Unit',
         null=True,
         blank=True,
         verbose_name="Parent Taxonomic Serial Number",
-        db_column='parent_tsn'
+        help_text="The TSN of the parent taxonomic unit."
     )
     level = models.IntegerField(
-        null=False,
-        blank=False,
-        verbose_name="Taxonomic Rank"
+        verbose_name="Level",
+        help_text="The hierarchical level of the taxonomic unit."
     )
     children_count = models.IntegerField(
-        null=False,
-        blank=False,
-        verbose_name="Taxonomic Rank"
+        verbose_name="Children Count",
+        help_text="The count of direct children under this taxonomic unit."
     )
-
-    class Meta:
-        verbose_name_plural = "Hierarchies"
 
     def __str__(self):
         return self.hierarchy_string
+
+    class Meta:
+        verbose_name = "Hierarchy"
+        verbose_name_plural = "Hierarchies"
