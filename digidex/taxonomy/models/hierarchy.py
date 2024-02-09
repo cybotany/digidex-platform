@@ -25,7 +25,7 @@ class Hierarchy(models.Model):
         help_text="Taxonomic Serial Number (TSN) for the Taxonomic Unit."
     )
     parent_tsn = models.ForeignKey(
-        'self',
+        'taxonomy.Unit',
         on_delete=models.SET_NULL,
         related_name='children',
         null=True,
