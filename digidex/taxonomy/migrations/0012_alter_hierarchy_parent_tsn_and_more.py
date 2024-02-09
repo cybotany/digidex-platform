@@ -12,11 +12,6 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterField(
-            model_name='hierarchy',
-            name='parent_tsn',
-            field=models.ForeignKey(blank=True, help_text='The TSN of the parent taxonomic unit.', null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='children', to='taxonomy.hierarchy', verbose_name='Parent TSN'),
-        ),
-        migrations.AlterField(
             model_name='rank',
             name='direct_parent_rank',
             field=models.ForeignKey(blank=True, help_text='The rank of the direct parent of the current rank.', null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='direct_children', to='taxonomy.rank', verbose_name='Direct Parent Rank'),
