@@ -148,6 +148,7 @@ class Unit(models.Model):
     )
     parent = models.ForeignKey(
         'self',
+        on_delete=models.SET_NULL,
         null=True,
         blank=True,
         verbose_name="Parent TSN",
