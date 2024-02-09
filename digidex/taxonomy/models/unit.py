@@ -26,7 +26,7 @@ class Unit(models.Model):
         author (ForeignKey): A unique identifier for the author(s) of a taxonomic name.
         hybrid_author (ForeignKey): The unique identifier for the author(s) of a taxonomic name which has been identified as the second part of a hybrid formula. For example Agrostis L. X Polypogon Desf.
         kingdom (ForeignKey): A unique identifier for the highest level of the taxonomic hierarchy structure.
-        rank (SmallIntegerField): A unique identifier for a specific level within the taxonomic hierarchy
+        rank (ForeignKey): A unique identifier for a specific level within the taxonomic hierarchy
         last_modified (DateTimeField): The date on which a record is modified. The purpose of this element is to provide assistance to those downloading data on a periodic basis.
         uncertain_prnt_ind (CharField): Indicator for occurrences of Taxonomic Units where placement is uncertain.
         n_usage (CharField):  Current standing of an occurrence of a Taxonomic Unit. A duplicate of usage element. Note usage values moved to name_usage because “usage” is a SQL reserved word which sometimes causes issues with database code.
@@ -182,9 +182,9 @@ class Unit(models.Model):
         verbose_name="Kingdom",
         help_text="A unique identifier for the highest level of the taxonomic hierarchy structure."
     )
-    rank = models.SmallIntegerField(
-#        'taxonomy.Rank',
-#        on_delete=models.SET_NULL,
+    rank = models.ForeignKey(
+        'taxonomy.Rank',
+        on_delete=models.SET_NULL,
         null=True,
         blank=True,
         verbose_name="Rank",
