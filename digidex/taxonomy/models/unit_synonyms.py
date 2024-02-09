@@ -19,6 +19,7 @@ class UnitSynonyms(models.Model):
     tsn_accepted = models.ForeignKey(
         'taxonomy.Unit',
         on_delete=models.CASCADE,
+        db_column='tsn_accepted',
         related_name='accepted_for',
         help_text="Taxonomic Serial Number for the accepted Taxonomic Unit."
     )
