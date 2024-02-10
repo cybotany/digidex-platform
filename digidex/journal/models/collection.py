@@ -39,6 +39,9 @@ class Collection(models.Model):
     def get_digit_description(self):
         return self.digit.description if self.digit else "No Description"
 
+    def get_digit_url(self):
+        return self.digit.get_absolute_url() if self.digit else self.get_absolute_url()
+
     def get_entry_count(self):
         """
         Returns the number of entries in this collection.

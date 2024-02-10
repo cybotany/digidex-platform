@@ -28,6 +28,7 @@ class EntryCollectionView(LoginRequiredMixin, ListView):
         context.update({
             'subtitle': 'Journal Collection',
             'heading': collection.get_digit_name(),
-            'paragraph': collection.get_digit_description()
+            'paragraph': collection.get_digit_description(),
+            'digit_url': collection.get_digit_url(),
         })
         return context
