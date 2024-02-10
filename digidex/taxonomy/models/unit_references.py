@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 from digidex.taxonomy.utils.constants import REFERENCE_CHOICES, BINARY_CHOICE
 
 class UnitReferences(models.Model):
@@ -22,6 +24,18 @@ class UnitReferences(models.Model):
         on_delete=models.CASCADE,
         db_column="tsn",
         help_text="Taxonomic Serial Number (TSN) for the Taxonomic Unit."
+    )
+    content_type = models.ForeignKey(
+        ContentType,
+        on_delete=models.CASCADE
+    )
+    object_id = models.PositiveIntegerField(
+        null=True,
+        help_text="Primary key of the referenced model."
+    )
+    content_object = GenericForeignKey(
+        'content_type',
+        'object_id'
     )
     reference_prefix = models.CharField(
         max_length=3, 
