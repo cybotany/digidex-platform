@@ -73,40 +73,53 @@
         </div>
       </div>
     </section>
-    <!-- Placeholder for dynamic kingdom details -->
-    <section class="section">
-      <div id="kingdom-detail-container" class="content">
-        <!-- Kingdom details will be loaded here -->
+    {% load static %}
+    <div class="layout-grid grid-about">
+      <div class="about"> 
+        <div class="block-icon-about"><img src="{% static 'main/images/cloud-mod-stack.svg' %}" loading="eager" alt="" class="icon-about"></div>
+        <h4 class="heading-about">Fact about Rank</h4>
+        <p class="paragraph-about">{{ kingdom.valid_units_by_rank }}</p>
       </div>
-    </section>
-    {% include 'page-footer.html' %}
+      <div class="about red">
+        <div class="block-icon-about red"><img src="{% static 'main/images/events.svg' %}" loading="eager" alt="" class="icon-about"></div>
+        <h4 class="heading-about red">Fact about Geography</h4>
+        <p class="paragraph-about red">{{ kingdom.valid_units_by_geography }}</p>
+      </div>
+      <div class="about blue">
+        <div class="block-icon-about blue"><img src="{% static 'main/images/earth.svg' %}" loading="eager" alt="" class="icon-about"></div>
+        <h4 class="heading-about blue">Fact about Jurisdiction</h4>
+        <p class="paragraph-about blue">{{ kingdom.valid_units_by_jurisdiction }}</p>
+      </div>
+    </div>    
     <script>
       $(document).ready(function() {
-        $('.kingdom-link').click(function(e) {
-          e.preventDefault();
-          const kingdomId = $(this).data('kingdom-id');
-    
-          // Construct the base URL dynamically
-          const baseUrl = `${window.location.protocol}//${window.location.host}/`;
-          
-          // Construct the full URL for the AJAX request
-          const requestUrl = baseUrl + `api/get-kingdom/${kingdomId}/`;
-    
-          // AJAX request to fetch kingdom details
-          $.ajax({
-            url: requestUrl,
-            type: 'GET',
-            success: function(response) {
-              // Assuming 'response.html' contains the HTML snippet
-              // Update your page with the HTML snippet fetched
-              $('#kingdom-detail-container').html(response.html);
-            },
-            error: function(xhr, status, error) {
-              // Handle errors here
-              console.error("Error fetching kingdom details:", error);
-            }
+          $('.kingdom-link').click(function(e) {
+              e.preventDefault();
+              const kingdomId = $(this).data('kingdom-id');
+
+              // Construct the base URL dynamically
+              const baseUrl = `${window.location.protocol}//${window.location.host}/`;
+
+              // Construct the full URL for the AJAX request
+              const requestUrl = baseUrl + `api/get-kingdom/${kingdomId}/`;
+
+              // AJAX request to fetch kingdom details
+              $.ajax({
+                  url: requestUrl,
+                  type: 'GET',
+                  success: function(response) {
+                      // Now 'response' is expected to be a JSON object, so you directly access its properties
+                      // Fill in the paragraphs for each kingdom fact
+                      $('.paragraph-about').eq(0).text(response.valid_units_by_rank); // For 'Fact about Rank'
+                      $('.paragraph-about.red').text(response.valid_units_by_geography); // For 'Fact about Geography'
+                      $('.paragraph-about.blue').text(response.valid_units_by_jurisdiction); // For 'Fact about Jurisdiction'
+                  },
+                  error: function(xhr, status, error) {
+                      // Handle errors here
+                      console.error("Error fetching kingdom details:", error);
+                  }
+              });
           });
-        });
       });
     </script>           
   </body>

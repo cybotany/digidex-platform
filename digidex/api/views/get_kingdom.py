@@ -14,7 +14,5 @@ class GetKingdom(APIView):
             'valid_units_by_geography': kingdom.valid_units_by_geography(),
             'valid_units_by_jurisdiction': kingdom.valid_units_by_jurisdiction(),
         }
-        # Render the partial template with the kingdom data
-        html = render_to_string('taxonomy/partials/kingdom-details.html', {'kingdom': kingdom_data})
         
-        return Response({'html': html}, status=status.HTTP_200_OK)
+        return Response(kingdom_data, status=status.HTTP_200_OK)
