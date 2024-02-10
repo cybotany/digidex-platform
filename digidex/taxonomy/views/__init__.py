@@ -1,1 +1,1 @@
-from .kingdom_details import KingdomDetailsView
+from .kingdom_detail import KingdomDetailView
