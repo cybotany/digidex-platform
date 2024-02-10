@@ -7,7 +7,6 @@ class Source(models.Model):
     or that provide credibility for vernacular names.
 
     Attributes:
-        source_prefix (CharField): A prefix attached to a serial id to identify the record as an Other Source.
         source_id (IntegerField): The unique identifier for a supplier of information, other than a person or publication.
         source_type (CharField): The type of supplier providing information to ITIS, e.g., database.
         source (CharField): The name of the supplier of information to the ITIS database.
@@ -16,11 +15,6 @@ class Source(models.Model):
         source_comment (TextField): Remarks associated with the provider of information to ITIS.
         last_modified (DateTimeField): The date and time the record was last updated.
     """
-    source_prefix = models.CharField(
-        max_length=3, 
-        default='SRC', 
-        help_text="A prefix attached to a serial id to identify the record as an Other Source."
-    )
     source_id = models.IntegerField(
         primary_key=True, 
         help_text="The unique identifier for a supplier of information, other than a person or publication."
@@ -61,9 +55,8 @@ class Source(models.Model):
     )
 
     def __str__(self):
-        return f"{self.source_prefix}{self.source_id} - {self.source}"
+        return f"Misc. Source: {self.source_id} - {self.source}"
 
     class Meta:
-        unique_together = ('source_prefix', 'source_id')
         verbose_name = "Source"
         verbose_name_plural = "Sources"

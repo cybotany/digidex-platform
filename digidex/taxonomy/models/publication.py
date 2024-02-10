@@ -7,7 +7,6 @@ class Publication(models.Model):
     provide credibility for approved vernacular names.
 
     Attributes:
-        publication_prefix (CharField): A prefix attached to a serial number to associate the record with the Publications table.
         publication_id (IntegerField): The unique identifier of a printed reference.
         reference_author (CharField): Author(s) of the printed reference.
         title (CharField): The identifying name given an article contained in a printed reference.
@@ -22,11 +21,6 @@ class Publication(models.Model):
         publication_comment (TextField): Remarks associated with the printed reference cited.
         last_modified (DateTimeField): The date and time the record was last updated. Automatically set on record update.
     """
-    publication_prefix = models.CharField(
-        max_length=3, 
-        default='PUB', 
-        help_text="A prefix attached to a serial number to associate the record with the Publications table."
-    )
     publication_id = models.IntegerField(
         primary_key=True, 
         help_text="The unique identifier of a printed reference."
@@ -102,9 +96,8 @@ class Publication(models.Model):
     )
 
     def __str__(self):
-        return f"{self.publication_prefix}{self.publication_id} - {self.title}"
+        return f"Publication: {self.publication_id} - {self.title}"
 
     class Meta:
-        unique_together = ('publication_prefix', 'publication_id')
         verbose_name = "Publication"
         verbose_name_plural = "Publications"
