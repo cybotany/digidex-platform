@@ -203,7 +203,7 @@ class Unit(models.Model):
 
     class Meta:
         indexes = [
-            models.Index(fields=['complete_name']),
+            models.Index(fields=['complete_name', 'name_usage']),
         ]
 
     def __str__(self):
