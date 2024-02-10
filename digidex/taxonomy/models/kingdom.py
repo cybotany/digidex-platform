@@ -42,7 +42,9 @@ class Kingdom(models.Model):
         grouped by kingdom and rank.
         """
         
-        return self.unit_set.filter(name_usage__in=VALID_NAME_USAGES).values(
+        return self.unit_set.filter(
+            name_usage__in=VALID_NAME_USAGES
+        ).values(
             'rank__rank_name',
         ).annotate(
             valid_units_count=models.Count('tsn')
@@ -72,7 +74,7 @@ class Kingdom(models.Model):
         ).values(
             'jurisdiction_value'
         ).annotate(
-            units_count=models.Count('tsn')
+            valid_units_count=models.Count('tsn')
         ).order_by('jurisdiction_value')
 
     class Meta:
