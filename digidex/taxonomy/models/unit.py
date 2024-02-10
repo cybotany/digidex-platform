@@ -215,15 +215,6 @@ class Unit(models.Model):
         verbose_name="Complete Name",
         help_text="The unit indicators and unit name fields concatenated and trimmed to present entire scientific name, without taxon author. Designed to be helpful when searching for taxa by scientific name."
     )
-    temp_g = models.CharField(
-        max_length=200,
-        verbose_name="Geographic Value",
-        help_text="The geographic value."
-    )
-    temp_j = models.CharField(
-        max_length=30,
-        help_text="Label signifying a US jurisdictional unit as defined by the TWG, and Canada."
-    )
 
     class Meta:
         indexes = [
