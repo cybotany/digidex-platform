@@ -5,5 +5,5 @@ from digidex.taxonomy.models import Kingdom
 
 class KingdomDetailsView(LoginRequiredMixin, DetailView):
     model = Kingdom
-    template_name = 'inventory/kingdom-details-page.html'
+    template_name = 'taxonomy/kingdom-details-page.html'
     context_object_name = 'kingdom'
