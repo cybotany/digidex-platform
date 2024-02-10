@@ -9,7 +9,7 @@ class Jurisdiction(models.Model):
 
     Attributes:
         tsn (ForeignKey): The taxonomic serial number.
-        jurisdiction (str): The geographic value.
+        jurisdiction_value (str): The geographic value.
         origin (str): Indication of whether a Taxonomic Unit is native and/or introduced to a US jurisdictional unit.
         last_modified (datetime): The date and time when the geographic value was added.
     """
@@ -19,7 +19,7 @@ class Jurisdiction(models.Model):
         db_column="tsn",
         help_text="Taxonomic Serial Number (TSN) for the Taxonomic Unit."
     )
-    jurisdiction = models.CharField(
+    jurisdiction_value = models.CharField(
         max_length=30,
         help_text="Label signifying a US jurisdictional unit as defined by the TWG, and Canada."
     )
@@ -39,9 +39,9 @@ class Jurisdiction(models.Model):
         """
         Returns a string representation of the division, using its jurisdiction value.
         """
-        return self.jurisdiction
+        return self.jurisdiction_value
     
     class Meta:
-        unique_together = ('tsn', 'jurisdiction')
+        unique_together = ('tsn', 'jurisdiction_value')
         verbose_name = "Jurisdiction"
         verbose_name_plural = "Jurisdictions"

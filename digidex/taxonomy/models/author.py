@@ -7,7 +7,6 @@ class Author(models.Model):
     Attributes:
         id (IntegerField): The unique identifier for the author(s) of a taxonomic name.
         author (str): The author(s) associated with the name of a taxon.
-        kingdom (ForeignKey): A unique identifier for the highest level of the taxonomic hierarchy structure.
         short_author (CharField): The author(s) associated with the name of a taxon with parenthesis, commas and periods removed.
         last_modified (datetime): The date on the record was last modified.
     """
@@ -21,14 +20,6 @@ class Author(models.Model):
         max_length=100,
         verbose_name="Author",
         help_text="The author(s) associated with the name of a taxon."
-    )
-    kingdom = models.ForeignKey(
-        'taxonomy.Kingdom',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name="Kingdom",
-        help_text="A unique identifier for the highest level of the taxonomic hierarchy structure."
     )
     short_author = models.CharField(
         max_length=100,

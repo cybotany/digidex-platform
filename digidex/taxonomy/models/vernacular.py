@@ -10,7 +10,7 @@ class Vernacular(models.Model):
         - tsn (ForeignKey): The Taxonomic Serial Number (TSN) of the taxonomic unit. Links to a 'Unit' model.
         - id (IntegerField): Unique identifier for the vernacular name entry.
         - vernacular_name (CharField): Common name associated with the taxonomic unit.
-        - language (CharField): Language of the vernacular name.
+        - vernacular_language (CharField): Language of the vernacular name.
         - approved_ind (CharField): Indicator of whether the vernacular name is approved.
         - last_modified (DateTimeField): Date and time when the record was last updated.
     """
@@ -28,7 +28,7 @@ class Vernacular(models.Model):
         max_length=80, 
         help_text="Common name associated with the taxonomic unit."
     )
-    language = models.CharField(
+    vernacular_language = models.CharField(
         max_length=15, 
         help_text="Language of the vernacular name."
     )
@@ -44,7 +44,7 @@ class Vernacular(models.Model):
     )
 
     def __str__(self):
-        return f"{self.vernacular_name} ({self.language}) - TSN: {self.tsn}"
+        return f"{self.vernacular_name} ({self.vernacular_language}) - TSN: {self.tsn}"
 
     class Meta:
         unique_together = ('tsn', 'id')

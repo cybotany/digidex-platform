@@ -7,7 +7,7 @@ class Geography(models.Model):
 
     Attributes:
         tsn (ForeignKey): The taxonomic serial number.
-        geography (CharField): The geographic value.
+        geography_value (CharField): The geographic value.
         last_modified (DateTimeField): The date and time the record was last updated.
     """
     tsn = models.ForeignKey(
@@ -17,7 +17,7 @@ class Geography(models.Model):
         db_column="tsn",
         help_text="Taxonomic Serial Number (TSN) for the Taxonomic Unit."
     )
-    geography = models.CharField(
+    geography_value = models.CharField(
         max_length=200,
         verbose_name="Geographic Value",
         help_text="The geographic value."
@@ -33,9 +33,9 @@ class Geography(models.Model):
         """
         Returns a string representation of the division, using its geographic value.
         """
-        return self.geographic_value
+        return self.geography_value
 
     class Meta:
-        unique_together = ('tsn', 'geography')
+        unique_together = ('tsn', 'geography_value')
         verbose_name = "Geographic Division"
         verbose_name_plural = "Geographic Divisions"
