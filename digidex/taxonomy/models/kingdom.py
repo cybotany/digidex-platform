@@ -6,11 +6,11 @@ class Kingdom(models.Model):
     The highest rank in the taxonomic hierarchical structure.
 
     Attributes:
-        kingdom_id (IntegerField): A unique identifier for the highest level of the taxonomic hierarchy structure.
+        id (IntegerField): A unique identifier for the highest level of the taxonomic hierarchy structure.
         kingdom_name (CharField): The label associated with the highest level of the taxonomic hierarchy structure.
         last_modified (dateDateTimeFieldtime): The date a record was modified.
     """
-    kingdom_id = models.IntegerField(
+    id = models.IntegerField(
         primary_key=True,
         verbose_name="Kingdom ID",
         help_text="A unique identifier for the highest level of the taxonomic hierarchy structure."

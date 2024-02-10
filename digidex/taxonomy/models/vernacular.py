@@ -8,7 +8,7 @@ class Vernacular(models.Model):
 
     Attributes:
         - tsn (ForeignKey): The Taxonomic Serial Number (TSN) of the taxonomic unit. Links to a 'Unit' model.
-        - vernacular_id (IntegerField): Unique identifier for the vernacular name entry.
+        - id (IntegerField): Unique identifier for the vernacular name entry.
         - vernacular_name (CharField): Common name associated with the taxonomic unit.
         - language (CharField): Language of the vernacular name.
         - approved_ind (CharField): Indicator of whether the vernacular name is approved.
@@ -20,7 +20,7 @@ class Vernacular(models.Model):
         db_column="tsn",
         help_text="Taxonomic Serial Number (TSN) for the Taxonomic Unit."
     )
-    vernacular_id = models.IntegerField(
+    id = models.IntegerField(
         primary_key=True,
         help_text="Unique identifier for a vernacular name entry."
     )

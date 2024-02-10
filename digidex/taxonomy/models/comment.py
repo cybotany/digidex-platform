@@ -7,13 +7,13 @@ class Comment(models.Model):
     Taxonomic Unit.
 
     Attributes:
-        comment_id (IntegerField): The unique identifier for the comment.
+        id (IntegerField): The unique identifier for the comment.
         commentator (CharField): The name of the person who made the comment.
         comment (TextField): The comment itself.
         created_at (DateTimeField): The date and time when the comment was made.
         last_modified (DateTimeField): The date and time when the record was last modified.
     """
-    comment_id = models.IntegerField(
+    id = models.IntegerField(
         primary_key=True,
         verbose_name="Comment ID",
         help_text="The unique identifier for the comment."
