@@ -45,7 +45,7 @@ class Kingdom(models.Model):
         return self.unit_set.filter(name_usage__in=VALID_NAME_USAGES).values(
             'rank__rank_name',
         ).annotate(
-            valid_units_count=models.Count('id')
+            valid_units_count=models.Count('tsn')
         ).order_by('rank')
 
     def valid_units_by_geography(self):
