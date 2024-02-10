@@ -11,6 +11,7 @@ urlpatterns = [
     path('user/', include('digidex.accounts.urls')),
     path('api/', include('digidex.api.urls')),
     path('link/', include('digidex.link.urls')),
+    path('taxonomy/', include('digidex.taxonomy.urls')),
     path('digit/', include('digidex.inventory.urls')),
     path('journal/', include('digidex.journal.urls')),
     path('reset_password/', auth_views.PasswordResetView.as_view(), name ='reset_password'),
