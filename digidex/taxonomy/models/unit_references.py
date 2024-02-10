@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
-from digidex.taxonomy.utils.constants import REFERENCE_CHOICES, BINARY_CHOICE
+from digidex.taxonomy.utils.constants import BINARY_CHOICE
 
 class UnitReferences(models.Model):
     """
@@ -11,8 +11,8 @@ class UnitReferences(models.Model):
 
     Attributes:
         tsn (ForeignKey): The Taxonomic Serial Number (TSN) of the taxonomic unit. Links to a 'Unit' model.
-        reference_id (IntegerField): The identifier for a publication, expert, or other source, used in conjunction with reference_prefix.
-        reference_prefix (CharField): A prefix identifying the reference type (Expert, Publication, Other Source).
+        content_type (ForeignKey): A prefix identifying the reference type (Expert, Publication, Other Source).
+        object_id (PositiveIntegerField): The identifier for a publication, expert, or other source, used in conjunction with reference_prefix.
         original_desc_ind (CharField): Indicator for the reference of the original description of the taxonomic unit.
         init_itis_desc_ind (CharField): Indicator for references serving as the basis for recognizing a taxonomic unit where the original reference is unavailable.
         change_track_id (IntegerField): The unique identifier assigned to a change made to a taxonomic unit.
@@ -36,14 +36,6 @@ class UnitReferences(models.Model):
     content_object = GenericForeignKey(
         'content_type',
         'object_id'
-    )
-    reference_prefix = models.CharField(
-        max_length=3, 
-        choices=REFERENCE_CHOICES,
-        help_text="A prefix identifying the reference type (Expert, Publication, Other Source)."
-    )
-    reference_id = models.IntegerField(
-        help_text="The identifier for a publication, expert, or other source, used in conjunction with reference_prefix."
     )
     original_desc_ind = models.CharField(
         max_length=1, 
@@ -75,9 +67,9 @@ class UnitReferences(models.Model):
     )
 
     def __str__(self):
-        return f"{self.reference_id}{self.reference_prefix} - TSN: {self.tsn}"
+        return f"{self.content_type}{self.object_id} - TSN: {self.tsn}"
 
     class Meta:
-        unique_together = ('tsn', 'reference_prefix', 'reference_id')
+        unique_together = ('tsn', 'content_type', 'object_id')
         verbose_name = "Unit Reference"
         verbose_name_plural = "Unit References"

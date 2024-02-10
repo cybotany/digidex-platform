@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
-from digidex.taxonomy.utils.constants import REFERENCE_CHOICES
 
 class VernacularReferences(models.Model):
     """
@@ -11,8 +10,8 @@ class VernacularReferences(models.Model):
     Attributes:
         tsn (ForeignKey): The Taxonomic Serial Number (TSN) of the taxonomic unit. Links to a 'Unit' model.
         vernacular (ForeignKey): Unique identifier for the vernacular name entry.
-        reference_prefix (CharField): Prefix indicating the type of reference associated with the vernacular.
-        reference_id (IntegerField): Identifier for the specific reference providing evidence for the vernacular.
+        content_type (ForeignKey): Prefix indicating the type of reference associated with the vernacular.
+        object_id (PositiveIntegerField): Identifier for the specific reference providing evidence for the vernacular.
         last_modified (DateTimeField): Date and time when the record was last modified.
     """
     tsn = models.ForeignKey(
@@ -40,30 +39,14 @@ class VernacularReferences(models.Model):
         'content_type',
         'object_id'
     )
-    reference_prefix = models.CharField(
-        max_length=3, 
-        choices=REFERENCE_CHOICES,
-        help_text="Prefix indicating the type of reference associated with the vernacular."
-    )
-    reference_id = models.IntegerField(
-        help_text="Identifier for the specific reference providing evidence for the vernacular."
-    )
     last_modified = models.DateTimeField(
         help_text="Date and time when the record was last modified."
     )
 
     def __str__(self):
-        return f"Vernacular ID: {self.vernacular} - TSN: {self.tsn}, Doc: {self.reference_prefix}{self.reference_id}"
-
-    def save(self, *args, **kwargs):
-        if not self.content_type:
-            model_map = {'EXP': 'Expert', 'PUB': 'Publication', 'SRC': 'Source'}
-            model_class = model_map.get(self.reference_prefix)
-            if model_class:
-                self.content_type = ContentType.objects.get(model=model_class.lower())
-        super(VernacularReferences, self).save(*args, **kwargs)
+        return f"Vernacular ID: {self.vernacular} - TSN: {self.tsn}, Doc: {self.content_type}{self.object_id}"
 
     class Meta:
-        unique_together = ('tsn', 'vernacular', 'reference_prefix', 'reference_id')
+        unique_together = ('tsn', 'vernacular', 'content_type', 'object_id')
         verbose_name = "Vernacular Reference"
         verbose_name_plural = "Vernacular References"
