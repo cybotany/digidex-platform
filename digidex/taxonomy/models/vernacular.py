@@ -47,6 +47,6 @@ class Vernacular(models.Model):
         return f"{self.vernacular_name} ({self.language}) - TSN: {self.tsn}"
 
     class Meta:
-        unique_together = ('tsn', 'vernacular_id')
+        unique_together = ('tsn', 'id')
         verbose_name = "Vernacular Name"
         verbose_name_plural = "Vernacular Names"
