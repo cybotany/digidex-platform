@@ -46,6 +46,8 @@ class Entry(models.Model):
         editable=False
     )
     content = models.TextField(
+        null=True,
+        blank=True,
         verbose_name="Content",
         help_text="The textual content of the journal entry."
     )
