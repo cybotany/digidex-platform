@@ -64,18 +64,16 @@ class Kingdom(models.Model):
 
     def valid_units_by_jurisdiction(self):
         """
-        Returns a queryset with counts of units, grouped by jurisdiction value,
-        and optionally by origin (native/introduced).
+        Returns a queryset with counts of units, grouped by jurisdiction value.
         """
         return Jurisdiction.objects.filter(
             tsn__kingdom=self,
             tsn__name_usage__in=VALID_NAME_USAGES
         ).values(
-            'jurisdiction_value',
-            'origin'
+            'jurisdiction_value'
         ).annotate(
             units_count=models.Count('tsn')
-        ).order_by('jurisdiction_value', 'origin')
+        ).order_by('jurisdiction_value')
 
     class Meta:
         verbose_name = "Kingdom"
