@@ -8,14 +8,14 @@ class Expert(models.Model):
     for vernacular names.
 
     Attributes:
-        expert_id (IntegerField): The unique identifier for the author(s) of a taxonomic name.
+        id (IntegerField): The unique identifier for the author(s) of a taxonomic name.
         expert (CharField): The name of the taxonomic expert providing credence to the taxonomy,
                             nomenclature or attributes of a Taxonomic Unit occurrence for the ITIS.
         expert_comment (str): Remarks noted by or associated with a taxonomic expert who is providing
                            credence to the taxonomy, nomenclature or attributes of a Taxonomic Unit occurrence.
         last_modified (datetime): The date and time the record was last modified.
     """
-    expert_id = models.IntegerField(
+    id = models.IntegerField(
         primary_key=True,
         editable=False,
         help_text="The unique identifier for the author(s) of a taxonomic name."

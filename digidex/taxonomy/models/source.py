@@ -7,7 +7,7 @@ class Source(models.Model):
     or that provide credibility for vernacular names.
 
     Attributes:
-        source_id (IntegerField): The unique identifier for a supplier of information, other than a person or publication.
+        id (IntegerField): The unique identifier for a supplier of information, other than a person or publication.
         source_type (CharField): The type of supplier providing information to ITIS, e.g., database.
         source (CharField): The name of the supplier of information to the ITIS database.
         version (CharField): Number, date, or other identifier of the source indicating its version.
@@ -15,7 +15,7 @@ class Source(models.Model):
         source_comment (TextField): Remarks associated with the provider of information to ITIS.
         last_modified (DateTimeField): The date and time the record was last updated.
     """
-    source_id = models.IntegerField(
+    id = models.IntegerField(
         primary_key=True, 
         help_text="The unique identifier for a supplier of information, other than a person or publication."
     )
@@ -55,7 +55,7 @@ class Source(models.Model):
     )
 
     def __str__(self):
-        return f"Misc. Source: {self.source_id} - {self.source}"
+        return f"Misc. Source: {self.id} - {self.source}"
 
     class Meta:
         verbose_name = "Source"

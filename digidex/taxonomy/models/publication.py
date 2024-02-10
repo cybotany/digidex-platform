@@ -7,7 +7,7 @@ class Publication(models.Model):
     provide credibility for approved vernacular names.
 
     Attributes:
-        publication_id (IntegerField): The unique identifier of a printed reference.
+        id (IntegerField): The unique identifier of a printed reference.
         reference_author (CharField): Author(s) of the printed reference.
         title (CharField): The identifying name given an article contained in a printed reference.
         publication_name (CharField): The title of the printed reference, including volume and number, if applicable.
@@ -21,7 +21,7 @@ class Publication(models.Model):
         publication_comment (TextField): Remarks associated with the printed reference cited.
         last_modified (DateTimeField): The date and time the record was last updated. Automatically set on record update.
     """
-    publication_id = models.IntegerField(
+    id = models.IntegerField(
         primary_key=True, 
         help_text="The unique identifier of a printed reference."
     )
@@ -96,7 +96,7 @@ class Publication(models.Model):
     )
 
     def __str__(self):
-        return f"Publication: {self.publication_id} - {self.title}"
+        return f"Publication: {self.id} - {self.title}"
 
     class Meta:
         verbose_name = "Publication"
