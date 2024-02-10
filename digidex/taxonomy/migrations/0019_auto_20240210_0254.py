@@ -10,4 +10,24 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.RenameField(
+            model_name='author',
+            old_name='author_id',
+            new_name='id',
+        ),
+        migrations.RenameField(
+            model_name='comment',
+            old_name='comment_id',
+            new_name='id',
+        ),
+        migrations.RenameField(
+            model_name='kingdom',
+            old_name='kingdom_id',
+            new_name='id',
+        ),
+        migrations.RenameField(
+            model_name='vernacular',
+            old_name='vernacular_id',
+            new_name='id',
+        ),
     ]
