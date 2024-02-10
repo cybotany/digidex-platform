@@ -19,7 +19,7 @@ class DigitDetailsView(LoginRequiredMixin, DetailView):
 
         # Permission check
         user = self.request.user
-        if digit.nfc_tag.user != user:
+        if digit.nfc_link.user != user:
             raise PermissionDenied("You do not have permission to view this digit.")
 
         return digit
