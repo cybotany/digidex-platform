@@ -78,17 +78,23 @@
       <div class="about"> 
         <div class="block-icon-about"><img src="{% static 'main/images/cloud-mod-stack.svg' %}" loading="eager" alt="" class="icon-about"></div>
         <h4 class="heading-about">Fact about Rank</h4>
-        <p class="paragraph-about">{{ kingdom.valid_units_by_rank }}</p>
+        <p id="rank-details" class="paragraph-about">
+          <!-- This is where the AJAX response will be inserted -->
+        </p>
       </div>
       <div class="about red">
         <div class="block-icon-about red"><img src="{% static 'main/images/events.svg' %}" loading="eager" alt="" class="icon-about"></div>
         <h4 class="heading-about red">Fact about Geography</h4>
-        <p class="paragraph-about red">{{ kingdom.valid_units_by_geography }}</p>
+        <p id="geography-details" class="paragraph-about red">
+          <!-- This is where the AJAX response will be inserted -->
+        </p>
       </div>
       <div class="about blue">
         <div class="block-icon-about blue"><img src="{% static 'main/images/earth.svg' %}" loading="eager" alt="" class="icon-about"></div>
         <h4 class="heading-about blue">Fact about Jurisdiction</h4>
-        <p class="paragraph-about blue">{{ kingdom.valid_units_by_jurisdiction }}</p>
+        <p id="jurisdiction-details" class="paragraph-about blue">
+          <!-- This is where the AJAX response will be inserted -->
+        </p>
       </div>
     </div>    
     <script>
@@ -108,11 +114,29 @@
                   url: requestUrl,
                   type: 'GET',
                   success: function(response) {
-                      // Now 'response' is expected to be a JSON object, so you directly access its properties
-                      // Fill in the paragraphs for each kingdom fact
-                      $('.paragraph-about').eq(0).text(response.valid_units_by_rank); // For 'Fact about Rank'
-                      $('.paragraph-about.red').text(response.valid_units_by_geography); // For 'Fact about Geography'
-                      $('.paragraph-about.blue').text(response.valid_units_by_jurisdiction); // For 'Fact about Jurisdiction'
+                      // Handle 'valid_units_by_rank'
+                      let rankHtml = '<ul>'; // Start an unordered list
+                      response.valid_units_by_rank.forEach(function(rank) {
+                          // For each rank, append a list item with the rank name and valid units count
+                          rankHtml += `<li>${rank.rank__rank_name}: ${rank.valid_units_count}</li>`;
+                      });
+                      rankHtml += '</ul>'; // Close the unordered list
+
+                      let geographyHtml = '<ul>';
+                      response.valid_units_by_geography.forEach(function(geography) {
+                          geographyHtml += `<li>${geography.geography_value}: ${geography.valid_units_count}</li>`;
+                      });
+                      geographyHtml += '</ul>';
+
+                      let jurisdictionHtml = '<ul>';
+                      response.valid_units_by_jurisdiction.forEach(function(jurisdiction) {
+                          jurisdictionHtml += `<li>${jurisdiction.jurisdiction_value}: ${jurisdiction.valid_units_count}</li>`;
+                      });
+                      jurisdictionHtml += '</ul>';
+                            
+                      $('#rank-details').html(rankHtml);
+                      $('#geography-details').html(geographyHtml);
+                      $('#jurisdiction-details').html(jurisdictionHtml);
                   },
                   error: function(xhr, status, error) {
                       // Handle errors here
