@@ -85,14 +85,21 @@
         $('.kingdom-link').click(function(e) {
           e.preventDefault();
           const kingdomId = $(this).data('kingdom-id');
-      
+    
+          // Construct the base URL dynamically
+          const baseUrl = `${window.location.protocol}//${window.location.host}/`;
+          
+          // Construct the full URL for the AJAX request
+          const requestUrl = baseUrl + `api/get-kingdom/${kingdomId}/`;
+    
           // AJAX request to fetch kingdom details
           $.ajax({
-            url: `api/get-kingdom/${kingdomId}/`,
+            url: requestUrl,
             type: 'GET',
             success: function(response) {
+              // Assuming 'response.html' contains the HTML snippet
               // Update your page with the HTML snippet fetched
-              $('#kingdom-detail-container').html(response.html); // Assuming 'response.html' contains the HTML snippet
+              $('#kingdom-detail-container').html(response.html);
             },
             error: function(xhr, status, error) {
               // Handle errors here
@@ -101,6 +108,6 @@
           });
         });
       });
-    </script>        
+    </script>           
   </body>
 </html>
