@@ -62,7 +62,7 @@ class Kingdom(models.Model):
             valid_units_count=models.Count('tsn')
         ).order_by('geography_value')
 
-    def count_units_by_jurisdiction(self):
+    def valid_units_by_jurisdiction(self):
         """
         Returns a queryset with counts of units, grouped by jurisdiction value,
         and optionally by origin (native/introduced).

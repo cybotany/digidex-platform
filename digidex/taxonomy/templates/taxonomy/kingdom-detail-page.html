@@ -73,25 +73,10 @@
         </div>
       </div>
     </section>
+    <!-- Placeholder for dynamic kingdom details -->
     <section class="section">
-      <div class="content">
-        <div class="layout-grid grid-about">
-          <div class="about"> 
-            <div class="block-icon-about"><img src="{% static 'main/images/cloud-mod-stack.svg' %}" loading="eager" alt="" class="icon-about"></div>
-            <h4 class="heading-about">Fact 1</h4>
-            <p class="paragraph-about">Details about fact 1.</p>
-          </div>
-          <div class="about red">
-            <div class="block-icon-about red"><img src="{% static 'main/images/events.svg' %}" loading="eager" alt="" class="icon-about"></div>
-            <h4 class="heading-about red">Fact 2</h4>
-            <p class="paragraph-about red">Details about fact 2.</p>
-          </div>
-          <div class="about blue">
-            <div class="block-icon-about blue"><img src="{% static 'main/images/earth.svg' %}" loading="eager" alt="" class="icon-about"></div>
-            <h4 class="heading-about blue">Fact 3</h4>
-            <p class="paragraph-about blue">Details about fact 3.</p>
-          </div>
-        </div>
+      <div id="kingdom-detail-container" class="content">
+        <!-- Kingdom details will be loaded here -->
       </div>
     </section>
     {% include 'page-footer.html' %}
@@ -106,11 +91,8 @@
             url: `api/get-kingdom/${kingdomId}/`,
             type: 'GET',
             success: function(response) {
-              // Update your page with the data fetched
-              $('#kingdom-detail-container').html(`
-                <h1>${data.kingdom_name}</h1>
-                // Populate more details as needed
-              `);
+              // Update your page with the HTML snippet fetched
+              $('#kingdom-detail-container').html(response.html); // Assuming 'response.html' contains the HTML snippet
             },
             error: function(xhr, status, error) {
               // Handle errors here
@@ -119,6 +101,6 @@
           });
         });
       });
-      </script>      
+    </script>        
   </body>
 </html>

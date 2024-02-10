@@ -1,0 +1,17 @@
+<div class="layout-grid grid-about">
+  <div class="about"> 
+    <div class="block-icon-about"><img src="{% static 'main/images/cloud-mod-stack.svg' %}" loading="eager" alt="" class="icon-about"></div>
+    <h4 class="heading-about">Fact about Rank</h4>
+    <p class="paragraph-about">{{ kingdom.valid_units_by_rank }}</p>
+  </div>
+  <div class="about red">
+    <div class="block-icon-about red"><img src="{% static 'main/images/events.svg' %}" loading="eager" alt="" class="icon-about"></div>
+    <h4 class="heading-about red">Fact about Geography</h4>
+    <p class="paragraph-about red">{{ kingdom.valid_units_by_geography }}</p>
+  </div>
+  <div class="about blue">
+    <div class="block-icon-about blue"><img src="{% static 'main/images/earth.svg' %}" loading="eager" alt="" class="icon-about"></div>
+    <h4 class="heading-about blue">Fact about Jurisdiction</h4>
+    <p class="paragraph-about blue">{{ kingdom.valid_units_by_jurisdiction }}</p>
+  </div>
+</div>
