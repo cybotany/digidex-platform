@@ -51,10 +51,6 @@ class NFC(models.Model):
         help_text="The date and time when the link instance was last modified."
     )
 
-    def increment_counter(self):
-        self.counter += 1
-        self.save()
-
     def activate_link(self, user):
         self.user = user
         self.active = True
@@ -99,11 +95,6 @@ class NFC(models.Model):
             str: The serial number of the NTAG213, representing its unique identification.
         """
         return self.serial_number
-
-    def save(self, *args, **kwargs):
-        # Here, you can add logic if you need to generate or modify the slug
-        # In your case, it's just directly using the serial number
-        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = "NFC Tag"

@@ -20,6 +20,8 @@ class Digit(models.Model):
         journal_collection (OneToOneField): A relationship to the Collection model, representing the entire journal collection link for the digitized plant.
         created_at (DateTimeField): The date and time when the Digit instance was created.
         last_modified (DateTimeField): The date and time when the Digit instance was last modified.
+        is_public (BooleanField): Indicates whether a public page is available for this digit.
+        is_archived (BooleanField): Indicates whether the digit is archived.
     """
 
     uuid = models.UUIDField(
@@ -129,17 +131,6 @@ class Digit(models.Model):
             self.name = f'Digit {user_digit_count + 1}'
 
         super().save(*args, **kwargs)
-
-    def __str__(self):
-        """
-        Returns a string representation of the Digit instance.
-
-        The string representation includes the name of the digitized plant.
-
-        Returns:
-            str: String representation of the Digit instance.
-        """
-        return self.name
 
     def get_absolute_url(self):
         """
