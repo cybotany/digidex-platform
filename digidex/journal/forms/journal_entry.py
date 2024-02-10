@@ -12,7 +12,7 @@ class JournalEntry(forms.ModelForm):
             }),
             'image': forms.FileInput(attrs={
                 'accept': 'image/*',
-                'class': 'base-file-upload-input',
+                #'class': 'base-file-upload-input',
             }),
         }
 
