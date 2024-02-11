@@ -59,26 +59,26 @@
               {% for entry in journal_entries %}
                 <div role="listitem" class="base-dyn-item">
                   <div class="block-post large">
-                    <div class="date">{{ entry.created_at }}</div>
-                    <h3 class="heading-post">{{ entry.entry_number }}</h3>
                     {% if entry.image %}
                       <img src="{{ entry.image.url }}" alt="Journal Image" class="link-post-thumbnail large base-inline-block">
                     {% else %}
                       <img src="{% static 'digidex/images/placeholder.svg' %}" alt="Journal Image Placeholder" class="link-post-thumbnail large base-inline-block">
                     {% endif %}
-                    {% if entry.content %}
-                      <div class="rich-text-block base-rich-text">
-                        <div class="post large">
-                          <p class="paragraph-post large">{{ summarized_content }}</p>
+                    <div class="post large">
+                      <div class="date">{% entry.created_at %}</div>
+                      <h3 class="heading-post">Entry {% entry.entry_number %}</h3>
+                      {% if entry.content %}
+                        <p class="paragraph-post large">{{ summarized_content }}</p>
+                      {% else %}
+                        <p class="paragraph-post large">Text left blank.</p>
+                      {% endif %}
+                      <a href="{{ entry.get_absolute_url }}" class="link-block base-inline-block">
+                        <div class="text-link">View entry</div>
+                        <div class="block-icon-link">
+                          <img src="{% static 'digidex/images/bx-arrow-to-right_green.svg' %}" loading="eager" alt="" class="icon-link">
                         </div>
-                      </div>
-                    {% else %}
-                      <div class="rich-text-block base-rich-text">
-                        <div class="post large">
-                          <p class="paragraph-post large">Text content left blank.</p>
-                        </div>
-                      </div>
-                    {% endif %}
+                      </a>
+                    </div>
                   </div>
                 </div>
               {% endfor %}
