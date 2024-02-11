@@ -59,11 +59,13 @@
               {% for entry in journal_entries %}
                 <div role="listitem" class="base-dyn-item">
                   <div class="block-post large">
-                    {% if entry.image %}
-                      <img src="{{ entry.image.url }}" alt="Journal Image" class="link-post-thumbnail large base-inline-block">
-                    {% else %}
-                      <img src="{% static 'digidex/images/placeholder.svg' %}" alt="Journal Image Placeholder" class="link-post-thumbnail large base-inline-block">
-                    {% endif %}
+                    <a href="#" class="link-post-thumbnail large base-inline-block">
+                      {% if entry.image %}
+                        <img src="{{ entry.image.url }}" alt="Journal Image" class="image-post-thumbnail large">
+                      {% else %}
+                        <img src="{% static 'digidex/images/placeholder.svg' %}" alt="Journal Image Placeholder" class="image-post-thumbnail large">
+                      {% endif %}
+                    </a>
                     <div class="post large">
                       <div class="date">{{ entry.created_at }}</div>
                       <h3 class="heading-post">Entry {{ entry.entry_number }}</h3>
