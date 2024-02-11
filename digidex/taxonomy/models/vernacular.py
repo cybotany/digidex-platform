@@ -1,5 +1,8 @@
+from collections import defaultdict
 from django.db import models
+from django.contrib.contenttypes.models import ContentType
 from digidex.taxonomy.utils.constants import BINARY_CHOICE
+from . import VernacularReferences
 
 class Vernacular(models.Model):
     """
@@ -45,6 +48,47 @@ class Vernacular(models.Model):
 
     def __str__(self):
         return f"{self.vernacular_name} ({self.vernacular_language}) - TSN: {self.tsn}"
+
+    def get_references(self):
+        """
+        Retrieves all references associated with this vernacular name, including the type of reference
+        (publication, expert, etc.) and its details.
+
+        Returns:
+            list of dicts: A list of dictionaries, each containing details of the reference associated
+                           with the vernacular name.
+        """
+        # Fetch all VernacularReferences instances related to this Vernacular
+        vernacular_references = VernacularReferences.objects.filter(vernacular=self)
+        
+        # Prepare a mapping of ContentType ID to a list of object_ids
+        references_map = defaultdict(list)
+        for ref in vernacular_references:
+            references_map[ref.content_type_id].append(ref.object_id)
+
+        # Batch fetch references for each ContentType
+        fetched_objects = {}
+        for ct_id, object_ids in references_map.items():
+            content_type = ContentType.objects.get_for_id(ct_id)
+            model_class = content_type.model_class()
+            objects = model_class.objects.in_bulk(object_ids)
+            fetched_objects[ct_id] = objects
+
+        # Construct result using fetched objects
+        result = []
+        for ref in vernacular_references:
+            ct_id = ref.content_type_id
+            obj_id = ref.object_id
+            fetched_obj = fetched_objects[ct_id].get(obj_id)
+            if fetched_obj:
+                detail = {
+                    'type': ref.content_type.model,
+                    'object_id': obj_id,
+                    'details': str(fetched_obj),  # Assumes __str__ method of the referenced model provides meaningful info
+                }
+                result.append(detail)
+
+        return result
 
     class Meta:
         unique_together = ('tsn', 'id')

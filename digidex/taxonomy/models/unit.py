@@ -1,5 +1,7 @@
+from collections import defaultdict
 from django.db import models
-
+from django.contrib.contenttypes.models import ContentType
+from . import UnitComments, UnitReferences
 
 class Unit(models.Model):
     """
@@ -223,3 +225,83 @@ class Unit(models.Model):
             str: The ITIS URL if TSN is available, otherwise an empty string.
         """
         return f"https://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&search_value={self.tsn}#null"
+
+    def get_author_name(self):
+        """
+        Retrieves the name of the author associated with this taxonomic unit.
+        
+        Returns:
+            str: The name of the author if available, otherwise a default string indicating no author.
+        """
+        if self.author:
+            return self.author.name
+        else:
+            return "No author available"
+
+    def get_vernacular_names(self):
+        """
+        Retrieves all vernacular names associated with this taxonomic unit, including the vernacular name,
+        its language, vernacular id, and approval status.
+
+        Returns:
+            list of dicts: A list of dictionaries, each containing vernacular name, its id, language,
+                           and approval status for the taxonomic unit.
+        """
+        vernaculars = self.vernacular_set.all().values('id', 'vernacular_name', 'vernacular_language', 'approved_ind')
+        return list(vernaculars)
+
+    def get_comments(self):
+        """
+        Retrieves all comments associated with this taxonomic unit, including the commentator name and the comment text.
+
+        Returns:
+            list of dicts: A list of dictionaries, each containing the comment ID, commentator name, and comment text
+                           for each comment associated with the taxonomic unit.
+        """
+        comments = UnitComments.objects.filter(tsn=self) \
+                                        .select_related('comment') \
+                                        .values('comment__id', 'comment__commentator', 'comment__comment')
+        return list(comments)
+
+    def get_references(self):
+        """
+        Retrieves all references associated with this taxonomic unit, including the type of reference
+        (publication, expert, etc.) and its details.
+
+        Returns:
+            list of dicts: A list of dictionaries, each containing details of the reference associated
+                           with the taxonomic unit.
+        """
+        # Step 1: Group UnitReferences by ContentType
+        unit_references = UnitReferences.objects.filter(tsn=self)
+        content_type_ids = unit_references.values_list('content_type_id', flat=True).distinct()
+
+        # Prepare a mapping of ContentType ID to a list of object_ids
+        references_map = defaultdict(list)
+        for ref in unit_references:
+            references_map[ref.content_type_id].append(ref.object_id)
+
+        # Step 2: Batch fetch references for each ContentType
+        fetched_objects = {}
+        for ct_id, object_ids in references_map.items():
+            content_type = ContentType.objects.get_for_id(ct_id)
+            model_class = content_type.model_class()
+            objects = model_class.objects.in_bulk(object_ids)
+            fetched_objects[ct_id] = objects
+
+        # Step 3: Construct result using fetched objects
+        result = []
+        for ref in unit_references:
+            ct_id = ref.content_type_id
+            obj_id = ref.object_id
+            fetched_obj = fetched_objects[ct_id].get(obj_id)
+            if fetched_obj:
+                detail = {
+                    'type': ref.content_type.model,
+                    'object_id': obj_id,
+                    'original_description': ref.original_description_ind,
+                    'details': str(fetched_obj),
+                }
+                result.append(detail)
+
+        return result
