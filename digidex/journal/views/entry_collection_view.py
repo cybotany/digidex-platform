@@ -25,10 +25,15 @@ class EntryCollectionView(LoginRequiredMixin, ListView):
         
         collection_id = self.kwargs.get('pk')
         collection = Collection.objects.get(id=collection_id)
+
+        collection_heading = f"{collection.get_digit_name()}'s Journal"
+        collection_paragraph = collection.get_digit_description()
+        digit_url = collection.get_digit_url()
+
         context.update({
-            'subtitle': 'Journal Collection',
-            'heading': collection.get_digit_name(),
-            'paragraph': collection.get_digit_description(),
-            'digit_url': collection.get_digit_url(),
+            'subtitle': 'Collection',
+            'heading': collection_heading,
+            'paragraph': collection_paragraph,
+            'digit_url': digit_url,
         })
         return context

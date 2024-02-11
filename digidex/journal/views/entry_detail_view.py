@@ -26,12 +26,16 @@ class EntryDetailView(LoginRequiredMixin, DetailView):
 
         collection_url = entry.collection.get_absolute_url() if entry.collection else "#"
         digit_url = entry.collection.digit.get_absolute_url() if entry.collection and entry.collection.digit else "#"
+        
+        entry_heading = f"{entry.collection.get_digit_name()}'s Journal"
+        entry_date = entry.created_at.strftime('%B %d, %Y')
+        entry_number = f"Entry {entry.get_entry_number()}"
 
         context.update({
-            'subtitle': 'Journal Entry',
-            'heading': f'Entry {entry.entry_number}',
-            'date': entry.created_at.strftime('%B %d, %Y'),
-            'paragraph': '',
+            'subtitle': 'Entry',
+            'heading': entry_heading,
+            'date': entry_date,
+            'paragraph': entry_number,
             'digit_url': digit_url,
             'collection_url': collection_url,
         })
