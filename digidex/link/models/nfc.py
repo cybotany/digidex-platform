@@ -31,7 +31,7 @@ class NFC(models.Model):
         'accounts.User',
         null=True,
         blank=True,
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         verbose_name="User",
         help_text="The user associated with this link."
     )

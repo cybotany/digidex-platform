@@ -1,9 +1,11 @@
+from django.db.models import Prefetch
 from django.views.generic import DetailView
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from digidex.inventory.models import Digit
+from digidex.journal.models import Entry
 
 
 class DigitDetailsView(LoginRequiredMixin, DetailView):
@@ -11,7 +13,9 @@ class DigitDetailsView(LoginRequiredMixin, DetailView):
     template_name = 'inventory/digit-details-page.html'
 
     def get_object(self, queryset=None):
-        queryset = queryset or self.get_queryset()
+        queryset = queryset or self.get_queryset().prefetch_related(
+            Prefetch('journal_collection__entries', queryset=Entry.objects.order_by('-created_at'))
+        )
         uuid = self.kwargs.get('uuid')
         if not uuid:
             raise Http404("No uuid provided")
