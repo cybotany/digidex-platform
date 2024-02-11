@@ -68,11 +68,11 @@
                     </a>
                     <div class="post large">
                       <div class="date">{{ entry.created_at }}</div>
-                      <h3 class="heading-post">Entry {{ entry.entry_number }}</h3>
+                      <a href="#" class="link-post-thumbnail large base-inline-block">
+                        <h3 class="heading-post">Entry {{ entry.entry_number }}</h3>
+                      </a>
                       {% if entry.content %}
                         <p class="paragraph-post large">{{ summarized_content }}</p>
-                      {% else %}
-                        <p class="paragraph-post large">Text left blank.</p>
                       {% endif %}
                       <a href="{{ entry.get_absolute_url }}" class="link-block base-inline-block">
                         <div class="text-link">View entry</div>
