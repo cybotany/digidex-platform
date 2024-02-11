@@ -30,6 +30,16 @@ AWS_S3_ENDPOINT_URL = os.environ.get('SPACES_ENDPOINT_URL', '')
 AWS_S3_CUSTOM_DOMAIN = os.environ.get('SPACES_EDGE_ENDPOINT_URL', '')
 AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
 
+DEFAULT_FILE_STORAGE = 'digidex.utils.custom_storage.PublicMediaStorage'
+STATICFILES_STORAGE = 'digidex.utils.custom_storage.PublicStaticStorage'  
+PRIVATE_FILE_STORAGE = 'digidex.utils.custom_storage.PrivateMediaStorage'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+MEDIA_URL = f'https://{AWS_S3_ENDPOINT_URL}/media/'
+
 if DJANGO_ENV in ['production', 'staging']:
     DEBUG = False
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -42,13 +52,6 @@ if DJANGO_ENV in ['production', 'staging']:
     SECURE_HSTS_PRELOAD = True
 
     STATIC_URL = '{}/{}/'.format(AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-    MEDIA_URL = f'https://{AWS_S3_ENDPOINT_URL}/'
-
-    DEFAULT_FILE_STORAGE = 'digidex.utils.custom_storage.PublicMediaStorage'
-    STATICFILES_STORAGE = 'digidex.utils.custom_storage.PublicStaticStorage'   
-    STATICFILES_DIRS = [
-        BASE_DIR / "static",
-    ]
 
     CORS_ALLOW_CREDENTIALS = True
     CORS_ALLOW_HEADERS = [
@@ -61,31 +64,7 @@ if DJANGO_ENV in ['production', 'staging']:
         "GET",
         "POST",
     ]
-
-# Environment specific settings
-if DJANGO_ENV == 'production':
-    DEBUG = False
-
-    STATIC_URL = '{}/{}/'.format(AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-    MEDIA_URL = f'https://{AWS_S3_ENDPOINT_URL}/'
-
-    DEFAULT_FILE_STORAGE = 'digidex.utils.custom_storage.PublicMediaStorage'
-    STATICFILES_STORAGE = 'digidex.utils.custom_storage.PublicStaticStorage'   
-    STATICFILES_DIRS = [
-        BASE_DIR / "static",
-    ]
-
-    CORS_ALLOW_CREDENTIALS = True
-    CORS_ALLOW_HEADERS = [
-        'access-control-allow-origin',
-        "content-type",
-        "authorization",
-        'x-requested-with'
-    ]
-    CORS_ALLOW_METHODS = [
-        "GET",
-        "POST",
-    ]
+    CORS_ORIGIN_ALLOW_ALL = False
 
 else:
     DEBUG = True
@@ -95,18 +74,7 @@ else:
     CSRF_COOKIE_SECURE = False
     SECURE_SSL_REDIRECT = False
 
-    STATIC_URL = '/static/'
-    MEDIA_URL = '/media/'
-
-    DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
-    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
-    STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, 'static'),
-    ]
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    
-
-PRIVATE_FILE_STORAGE = 'digidex.utils.custom_storage.PrivateMediaStorage'
+    STATIC_URL = f'https://{AWS_S3_ENDPOINT_URL}/{AWS_LOCATION}/'
 
 # Application definition
 INSTALLED_APPS = [
