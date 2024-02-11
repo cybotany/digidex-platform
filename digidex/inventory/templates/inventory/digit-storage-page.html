@@ -58,7 +58,7 @@
                 <div class="block-post">
                   <a href="{% url 'inventory:digit-details' digit.uuid %}" class="link-post-thumbnail base-inline-block">
                     {% if digit.journal_collection.thumbnail %}
-                      <img src="{% digit.journal_collection.thumbnail.image.url %}" alt="Journal Entry Image" loading="eager" class="image-post-thumbnail">
+                      <img src="{{ digit.journal_collection.thumbnail.image.url }}" alt="Journal Entry Image" loading="eager" class="image-post-thumbnail">
                     {% else %}
                       <img src="{% static 'digidex/images/placeholder.svg' %}" alt="Journal Entry Image Placeholder" loading="eager" class="image-post-thumbnail">
                     {% endif %}
