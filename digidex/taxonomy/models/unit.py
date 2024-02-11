@@ -259,7 +259,7 @@ class Unit(models.Model):
         else:
             return "No author available"
 
-    def get_vernacular_names(self):
+    def get_vernacular_info(self):
         """
         Retrieves all vernacular names associated with this taxonomic unit, including the vernacular name,
         its language, vernacular id, and approval status.
@@ -327,7 +327,7 @@ class Unit(models.Model):
 
         return result
 
-    def get_geographic_values(self):
+    def get_geographic_info(self):
         """
         Retrieves all geographic values associated with this taxonomic unit.
 
