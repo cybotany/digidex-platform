@@ -55,27 +55,44 @@
       <div class="content">
         <div class="collection-list-wrapper-posts large base-dyn-list">
           <div role="list" class="collection-list-posts large base-dyn-items">
-            
-              <div role="listitem" class="base-dyn-item">
-                <div class="block-post large">
-                  {% for image_url in image_carousel_data %}
-                    <img src="{{ image_url }}" alt="Journal Image" class="link-post-thumbnail large base-inline-block">
-                  {% endfor %}
-                  <div class="rich-text-block base-rich-text">
-                    <div class="post large">
-                      <p class="paragraph-post large">{{ summarized_content }}</p>
-                    </div>
+            {% if journal_entries %}
+              {% for entry in journal_entries %}
+                <div role="listitem" class="base-dyn-item">
+                  <div class="block-post large">
+                    <div class="date">{{ entry.created_at }}</div>
+                    <h3 class="heading-post">{{ entry.entry_number }}</h3>
+                    {% if entry.image %}
+                      <img src="{{ entry.image.url }}" alt="Journal Image" class="link-post-thumbnail large base-inline-block">
+                    {% else %}
+                      <img src="{% static 'digidex/images/placeholder.svg' %}" alt="Journal Image Placeholder" class="link-post-thumbnail large base-inline-block">
+                    {% endif %}
+                    {% if entry.content %}
+                      <div class="rich-text-block base-rich-text">
+                        <div class="post large">
+                          <p class="paragraph-post large">{{ summarized_content }}</p>
+                        </div>
+                      </div>
+                    {% else %}
+                      <div class="rich-text-block base-rich-text">
+                        <div class="post large">
+                          <p class="paragraph-post large">Text content left blank.</p>
+                        </div>
+                      </div>
+                    {% endif %}
                   </div>
                 </div>
+              {% endfor %}
+            {% else %}
+              <div class="empty-state base-dyn-empty">
+                <div class="text-empty">No journal entries</div>
               </div>
-            <div class="empty-state base-dyn-empty">
-              <a href="{% url 'journal:collection' pk=digit.journal_collection.id %}" class="account-link">View Entire Journal</a>
-              <a href="{% url 'journal:entry-creation' pk=digit.journal_collection.id %}" class="account-link">Add Journal Entry</a>    
-            </div>
+            {% endif %}
           </div>
         </div>
       </div>
     </section>        
+    <a href="{% url 'journal:collection' pk=digit.journal_collection.id %}" class="account-link">View Entire Journal</a>
+    <a href="{% url 'journal:entry-creation' pk=digit.journal_collection.id %}" class="account-link">Add Journal Entry</a>    
     {% if digit.taxonomic_unit %}
       <section class="section">
         <div class="content">
