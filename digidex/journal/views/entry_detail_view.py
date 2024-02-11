@@ -29,7 +29,7 @@ class EntryDetailView(LoginRequiredMixin, DetailView):
         
         entry_heading = f"{entry.collection.get_digit_name()}'s Journal"
         entry_date = entry.created_at.strftime('%B %d, %Y')
-        entry_number = f"Entry {entry.entry_number()}"
+        entry_number = f"Entry {entry.entry_number}"
 
         context.update({
             'subtitle': 'Entry',
