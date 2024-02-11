@@ -348,9 +348,7 @@ class Unit(models.Model):
         Returns:
             QuerySet of Unit instances that are synonyms of this unit.
         """
-        # This uses the 'accepted_for' related_name from the UnitSynonyms model
-        # to find all synonym TSNs for the current accepted unit.
-        synonyms = Unit.objects.filter(accepted_for__tsn_accepted=self.pk)
+        synonyms = Unit.objects.filter(synonyms__tsn=self.tsn)
         return synonyms
 
     class Meta:
