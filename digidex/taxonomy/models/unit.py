@@ -343,13 +343,17 @@ class Unit(models.Model):
 
     def get_synonyms(self):
         """
-        Retrieves all synonyms for this taxonomic unit if it is the accepted name.
-        
+        Retrieves the complete names of all synonyms for this taxonomic unit if it is the accepted name.
+
         Returns:
-            QuerySet of Unit instances that are synonyms of this unit.
+            list of str: A list of complete names of all synonyms of this unit.
         """
-        synonyms = Unit.objects.filter(synonyms__tsn=self.tsn)
-        return synonyms
+        # This uses the 'accepted_for' related_name from the UnitSynonyms model
+        # to find all synonym TSNs for the current accepted unit.
+        synonyms = Unit.objects.filter(accepted_for__tsn_accepted=self.tsn)
+        # Retrieve a list of complete names from the synonyms queryset
+        complete_names = synonyms.values_list('complete_name', flat=True)
+        return list(complete_names)
 
     class Meta:
         indexes = [
