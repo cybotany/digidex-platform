@@ -92,7 +92,7 @@ INSTALLED_APPS = [
     'digidex.api',
     'digidex.inventory',
     'digidex.journal',
-    'digidex.link',
+    'digidex.link.apps.LinkConfig',
     'digidex.main',
     'digidex.taxonomy',
     'digidex.utils',

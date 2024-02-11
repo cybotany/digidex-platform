@@ -19,6 +19,12 @@ class Collection(models.Model):
         related_name='journal_thumbnail',
         help_text="Reference to the entry that contains the thumbnail image."
     )
+    digit = models.OneToOneField(
+        'inventory.Digit',
+        on_delete=models.CASCADE,
+        related_name='journal_collection',
+        help_text="The digit associated with this journal collection."
+    )
     created_at = models.DateTimeField(
         auto_now_add=True,
         verbose_name="Created At",

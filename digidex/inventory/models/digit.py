@@ -1,7 +1,6 @@
 import uuid
 from django.db import models, transaction
 from django.urls import reverse
-from digidex.journal.models import Collection
 
 
 class Digit(models.Model):
@@ -17,7 +16,6 @@ class Digit(models.Model):
         description (TextField): A short description of the digitized plant.
         taxonomic_unit (ForeignKey): A relationship to the Unit model, representing the plant's taxonomic classification.
         nfc_link (OneToOneField): A relationship to the Link model, representing the NFC link for the digitized plant.
-        journal_collection (OneToOneField): A relationship to the Collection model, representing the entire journal collection link for the digitized plant.
         created_at (DateTimeField): The date and time when the Digit instance was created.
         last_modified (DateTimeField): The date and time when the Digit instance was last modified.
         is_public (BooleanField): Indicates whether a public page is available for this digit.
@@ -48,7 +46,7 @@ class Digit(models.Model):
         'taxonomy.Unit',
         null=True,
         blank=True,
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         related_name='digits',
         help_text="The taxonomic classification of the digitized plant."
     )
@@ -59,12 +57,6 @@ class Digit(models.Model):
         on_delete=models.CASCADE,
         related_name='digit',
         help_text="NFC link for the digitized plant."
-    )
-    journal_collection = models.OneToOneField(
-        'journal.Collection',
-        on_delete=models.CASCADE,
-        related_name='digit',
-        help_text="The journal for the digitized plant."
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
@@ -92,7 +84,6 @@ class Digit(models.Model):
         with transaction.atomic():
             digit = cls.objects.create(
                 nfc_link=link,
-                journal_collection=Collection.objects.create(),
                 **form_data
             )
             link.user = user
