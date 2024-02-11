@@ -221,6 +221,32 @@ class Unit(models.Model):
         """
         return f"https://www.itis.gov/servlet/SingleRpt/SingleRpt?search_topic=TSN&search_value={self.tsn}#null"
 
+    def get_rank_details(self):
+        """
+        Retrieves rank details including rank name, direct parent rank, and required parent rank.
+
+        Returns:
+            dict: A dictionary containing the rank name, direct parent rank name, and required parent rank name.
+        """
+        if not self.rank:
+            return {
+                'rank_name': None,
+                'direct_parent_rank': None,
+                'required_parent_rank': None
+            }
+
+        # Fetching direct parent rank name
+        direct_parent_rank_name = self.rank.direct_parent_rank.rank_name if self.rank.direct_parent_rank else None
+
+        # Fetching required parent rank name
+        required_parent_rank_name = self.rank.required_parent_rank.rank_name if self.rank.required_parent_rank else None
+
+        return {
+            'rank_name': self.rank.rank_name,
+            'direct_parent_rank': direct_parent_rank_name,
+            'required_parent_rank': required_parent_rank_name
+        }
+
     def get_author_name(self):
         """
         Retrieves the name of the author associated with this taxonomic unit.
