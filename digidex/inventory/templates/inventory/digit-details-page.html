@@ -68,14 +68,20 @@
                     </a>
                     <div class="post large">
                       <div class="date">{{ entry.created_at }}</div>
-                      <a href="#" class="link-post-thumbnail large base-inline-block">
+                      <a href="#" class="link-heading-post large base-inline-block">
                         <h3 class="heading-post">Entry {{ entry.entry_number }}</h3>
                       </a>
                       {% if entry.content %}
                         <p class="paragraph-post large">{{ summarized_content }}</p>
                       {% endif %}
-                      <a href="{{ entry.get_absolute_url }}" class="link-block base-inline-block">
-                        <div class="text-link">View entry</div>
+                      <a href="{% url 'journal:collection' pk=digit.journal_collection.id %}" class="link-block base-inline-block">
+                        <div class="text-link">View Entire Journal</div>
+                        <div class="block-icon-link">
+                          <img src="{% static 'digidex/images/bx-arrow-to-right_green.svg' %}" loading="eager" alt="" class="icon-link">
+                        </div>
+                      </a>
+                      <a href="{% url 'journal:entry-creation' pk=digit.journal_collection.id %}" class="link-block base-inline-block">
+                        <div class="text-link">View Entire Journal</div>
                         <div class="block-icon-link">
                           <img src="{% static 'digidex/images/bx-arrow-to-right_green.svg' %}" loading="eager" alt="" class="icon-link">
                         </div>
@@ -93,8 +99,6 @@
         </div>
       </div>
     </section>        
-    <a href="{% url 'journal:collection' pk=digit.journal_collection.id %}" class="account-link">View Entire Journal</a>
-    <a href="{% url 'journal:entry-creation' pk=digit.journal_collection.id %}" class="account-link">Add Journal Entry</a>    
     {% if digit.taxonomic_unit %}
       <section class="section">
         <div class="content">
