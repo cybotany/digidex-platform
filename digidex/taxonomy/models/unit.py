@@ -1,7 +1,7 @@
 from collections import defaultdict
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
-from . import UnitComments, UnitReferences
+from . import UnitComments, UnitReferences, Hierarchy
 
 class Unit(models.Model):
     """
@@ -203,11 +203,6 @@ class Unit(models.Model):
         help_text="The unit indicators and unit name fields concatenated and trimmed to present entire scientific name, without taxon author. Designed to be helpful when searching for taxa by scientific name."
     )
 
-    class Meta:
-        indexes = [
-            models.Index(fields=['complete_name', 'name_usage']),
-        ]
-
     def __str__(self):
         """
         Returns a string representation of the taxonomic unit, using its complete name.
@@ -305,3 +300,60 @@ class Unit(models.Model):
                 result.append(detail)
 
         return result
+
+    def get_geographic_values(self):
+        """
+        Retrieves all geographic values associated with this taxonomic unit.
+
+        Returns:
+            list of str: A list of geographic values for the taxonomic unit.
+        """
+        return list(self.geography_set.all().values_list('geography_value', flat=True))
+
+    def get_jurisdiction_info(self):
+        """
+        Retrieves all jurisdiction information associated with this taxonomic unit, including
+        jurisdiction values and origin information.
+
+        Returns:
+            list of dicts: A list of dictionaries, each containing jurisdiction value and origin
+                        information for the taxonomic unit.
+        """
+        jurisdictions = self.jurisdiction_set.all().values('jurisdiction_value', 'origin')
+        return list(jurisdictions)
+
+    def get_hierarchy_info(self):
+        """
+        Retrieves hierarchy information associated with this taxonomic unit, including
+        the hierarchy string, level, and children count.
+
+        Returns:
+            dict: A dictionary containing the hierarchy string, level, and children count
+                  for the taxonomic unit, or None if no hierarchy information is found.
+        """
+        try:
+            hierarchy = self.hierarchy_set.get()  # Assuming there's only one hierarchy per unit
+            return {
+                'hierarchy_string': hierarchy.hierarchy_string,
+                'level': hierarchy.level,
+                'children_count': hierarchy.children_count,
+            }
+        except Hierarchy.DoesNotExist:
+            return None
+
+    def get_synonyms(self):
+        """
+        Retrieves all synonyms for this taxonomic unit if it is the accepted name.
+        
+        Returns:
+            QuerySet of Unit instances that are synonyms of this unit.
+        """
+        # This uses the 'accepted_for' related_name from the UnitSynonyms model
+        # to find all synonym TSNs for the current accepted unit.
+        synonyms = Unit.objects.filter(accepted_for__tsn_accepted=self.pk)
+        return synonyms
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['complete_name', 'name_usage']),
+        ]
