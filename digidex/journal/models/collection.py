@@ -53,3 +53,25 @@ class Collection(models.Model):
         Returns the number of entries in this collection.
         """
         return self.entries.count()
+
+    def get_all_entries(self):
+        return self.entries.all().order_by('-created_at')
+
+    def get_summarized_content(self):
+        """
+        Concatenates and returns a summarized version of the content of all entries in the collection. 
+        Each entry is prefixed with its creation date and time, formatted as 'Month Day, Year HH:MM AM/PM',
+        and placed on a new line to act as a header for the content.
+        """
+        return '\n\n'.join(
+            f"{entry.created_at.strftime('%B %d, %Y %I:%M %p')}:\n{entry.content}"
+            for entry in self.entries.all()
+        )
+
+    def get_image_carousel_data(self):
+        """Returns a list of image URLs for the entries in the collection."""
+        return [entry.image.url for entry in self.entries.all() if entry.image]
+
+    class Meta:
+        verbose_name = "Journal Collection"
+        verbose_name_plural = "Journal Collections"
