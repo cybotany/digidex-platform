@@ -23,10 +23,16 @@ class EntryDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         entry = context.get('entry')
+
+        collection_url = entry.collection.get_absolute_url() if entry.collection else "#"
+        digit_url = entry.collection.digit.get_absolute_url() if entry.collection and entry.collection.digit else "#"
+
         context.update({
             'subtitle': 'Journal Entry',
             'heading': f'Entry {entry.entry_number}',
             'date': entry.created_at.strftime('%B %d, %Y'),
-            'paragraph': ''
+            'paragraph': '',
+            'digit_url': digit_url,
+            'collection_url': collection_url,
         })
         return context
