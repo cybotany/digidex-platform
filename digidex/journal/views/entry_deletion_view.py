@@ -38,4 +38,4 @@ class EntryDeletionView(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self):
         collection = self.object.collection
-        return reverse('journal:collection-details', kwargs={'pk': collection.id})
+        return reverse('journal:collection', kwargs={'pk': collection.id})
