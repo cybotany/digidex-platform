@@ -65,8 +65,8 @@
                       <img src="{% static 'digidex/images/placeholder.svg' %}" alt="Journal Image Placeholder" class="link-post-thumbnail large base-inline-block">
                     {% endif %}
                     <div class="post large">
-                      <div class="date">{% entry.created_at %}</div>
-                      <h3 class="heading-post">Entry {% entry.entry_number %}</h3>
+                      <div class="date">{{ entry.created_at }}</div>
+                      <h3 class="heading-post">Entry {{ entry.entry_number }}</h3>
                       {% if entry.content %}
                         <p class="paragraph-post large">{{ summarized_content }}</p>
                       {% else %}
