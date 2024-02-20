@@ -18,9 +18,9 @@ RECAPTCHA_SITE_KEY = os.environ.get('RECAPTCHA_SITE_KEY', '')
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = os.environ.get('SERVICE_ACCOUNT_KEY', '')
 RECAPTCHA_REQUIRED_SCORE = float(os.environ.get('RECAPTCHA_REQUIRED_SCORE', '0.5'))
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(',')
-CORS_ALLOWED_ORIGINS = os.environ.get('CORS_ALLOWED_ORIGINS', 'http://localhost').split(',')
-SITE_HOST = os.environ.get('SITE_HOST', 'localhost')
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
+CORS_ALLOWED_ORIGINS = os.environ.get('CORS_ALLOWED_ORIGINS', '').split(',')
+SITE_HOST = os.environ.get('SITE_HOST', '')
 
 AWS_LOCATION = 'static'
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '')
@@ -193,6 +193,10 @@ EMAIL_USE_TLS = True
 
 LOGIN_REDIRECT_URL = 'inventory:digit-storage'
 LOGIN_URL = 'accounts:login'
+
+LOG_DIR = os.path.join(BASE_DIR, 'logs')
+if not os.path.exists(LOG_DIR):
+    os.makedirs(LOG_DIR)
 
 LOGGING = {
     'version': 1,
