@@ -113,6 +113,7 @@ env.bak/
 venv.bak/
 glenv/
 digit_venv/
+digidex_env/
 
 # Spyder project settings
 .spyderproject
@@ -131,9 +132,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-
-# venv dir
-greenhouse/
 
 # Private settings file
 .env
