@@ -6,6 +6,7 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.urls import reverse
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
+from django.utils.text import slugify
 from django.conf import settings
 from digidex.utils.models import EmailLog
 
@@ -45,6 +46,12 @@ class User(AbstractUser):
         default=False,
         help_text='Indicates whether the user has confirmed their email address.'
     )
+    username_slug = models.SlugField(
+        unique=True,
+        max_length=255,
+        editable=False,
+        help_text="Slugified version of the username for URL usage."
+    )
 
     def __str__(self):
         return self.username
@@ -67,13 +74,20 @@ class User(AbstractUser):
 
     @transaction.atomic
     def save(self, *args, **kwargs):
-        # Check if it's a new record
-        new_user = self.pk is None
+        if not self.username_slug or self.username != self.__original_username:
+            self.username_slug = slugify(self.username)
         # Save the user instance
         super().save(*args, **kwargs)
         # Send verification email for new users
-        if new_user:
+        if self.__original_new_user:
             try:
                 self.send_verification_email()
             except Exception as e:
                 raise
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Track the original username to detect changes
+        self.__original_username = self.username
+        # Track if the instance is new
+        self.__original_new_user = self.pk is None

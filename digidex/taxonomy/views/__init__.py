@@ -1,1 +1,1 @@
-from .kingdom_detail import KingdomDetailView
+from .landing_page import LandingView

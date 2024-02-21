@@ -1,5 +1,4 @@
 from .digit_details_view import DigitDetailsView
-from .digit_storage_view import DigitStorageView
 from .digit_deletion_view import DigitDeletionView
 from .digit_modification_view import DigitModificationView
 from .public_digit_view import PublicDigitView

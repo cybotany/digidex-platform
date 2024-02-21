@@ -3,7 +3,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Taxon Kingdoms - Digidex</title>
+    <title>Taxonomy - Digidex</title>
     <meta content="A platform for gardeners to cultivate their curiosity." name="description">
     <meta content="Taxon Kingdoms - Digidex" property="og:title">
     <meta content="A platform for gardeners to cultivate their curiosity." property="og:description">
@@ -56,14 +56,14 @@
     <section class="section-top">
       <div class="content">
         <div class="block-top">
-          <h1 class="heading-top">Taxonomy Kingdoms</h1>
+          <h1 class="heading-top">Taxonomy Geography</h1>
           <div class="block-categories">
             <div class="collection-list-wrapper-categories base-dyn-list">
               <div role="list" class="collection-list-categories base-dyn-items">
-                {% for kingdom in kingdoms %}
+                {% for geography in geography_list %}
                   <div role="listitem" class="collection-item-categories base-dyn-item">
-                    <a href="#" data-kingdom-id="{{ kingdom.id }}" class="link-category base-inline-block kingdom-link">
-                      <div class="text-category">{{ kingdom.kingdom_name }}</div>
+                    <a href="#" data-geography-id="{{ geography.id }}" class="link-category base-inline-block kingdom-link">
+                      <div class="text-category">{{ geography.geography_value }}</div>
                     </a>
                   </div>
                 {% endfor %}              
@@ -98,54 +98,6 @@
       </div>
     </div> 
     {% include 'page-footer.html' %}
-    <script>
-      $(document).ready(function() {
-          $('.kingdom-link').click(function(e) {
-              e.preventDefault();
-              const kingdomId = $(this).data('kingdom-id');
-
-              // Construct the base URL dynamically
-              const baseUrl = `${window.location.protocol}//${window.location.host}/`;
-
-              // Construct the full URL for the AJAX request
-              const requestUrl = baseUrl + `api/get-kingdom/${kingdomId}/`;
-
-              // AJAX request to fetch kingdom details
-              $.ajax({
-                  url: requestUrl,
-                  type: 'GET',
-                  success: function(response) {
-                      // Handle 'valid_units_by_rank'
-                      let rankHtml = '<ul>'; // Start an unordered list
-                      response.valid_units_by_rank.forEach(function(rank) {
-                          // For each rank, append a list item with the rank name and valid units count
-                          rankHtml += `<li>${rank.rank__rank_name}: ${rank.valid_units_count}</li>`;
-                      });
-                      rankHtml += '</ul>'; // Close the unordered list
-
-                      let geographyHtml = '<ul>';
-                      response.valid_units_by_geography.forEach(function(geography) {
-                          geographyHtml += `<li>${geography.geography_value}: ${geography.valid_units_count}</li>`;
-                      });
-                      geographyHtml += '</ul>';
-
-                      let jurisdictionHtml = '<ul>';
-                      response.valid_units_by_jurisdiction.forEach(function(jurisdiction) {
-                          jurisdictionHtml += `<li>${jurisdiction.jurisdiction_value}: ${jurisdiction.valid_units_count}</li>`;
-                      });
-                      jurisdictionHtml += '</ul>';
-                            
-                      $('#rank-details').html(rankHtml);
-                      $('#geography-details').html(geographyHtml);
-                      $('#jurisdiction-details').html(jurisdictionHtml);
-                  },
-                  error: function(xhr, status, error) {
-                      // Handle errors here
-                      console.error("Error fetching kingdom details:", error);
-                  }
-              });
-          });
-      });
-    </script>         
+    <script src="{% static 'taxonomy/js/geography-link' %}"></script>         
   </body>
 </html>
