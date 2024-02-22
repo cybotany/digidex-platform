@@ -1,5 +1,5 @@
 // DOM Elements
-const taxonomicUnitField = document.getElementById('id_taxonomic_unit');
+const taxonomicUnitField = document.getElementById('id_taxon');
 
 // Configurations for select2
 const select2Config = {
