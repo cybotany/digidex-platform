@@ -5,13 +5,13 @@ from digidex.inventory.models import Digit
 
 @admin.register(Digit)
 class DigitAdmin(admin.ModelAdmin):
-    list_display = ('name', 'uuid', 'taxonomic_unit', 'nfc_link_detail', 'journal_collection_link', 'entry_count', 'created_at', 'last_modified', 'is_public', 'is_archived')
+    list_display = ('name', 'uuid', 'taxon', 'ntag_detail', 'journal_collection_link', 'entry_count', 'created_at', 'last_modified', 'is_public', 'is_archived')
     list_filter = ('is_public', 'is_archived', 'created_at', 'last_modified')
-    search_fields = ('name', 'uuid', 'nfc_link__serial_number')
-    readonly_fields = ('uuid', 'nfc_link_detail', 'journal_collection_link', 'entry_count', 'created_at', 'last_modified')
+    search_fields = ('name', 'uuid', 'ntag__serial_number')
+    readonly_fields = ('uuid', 'ntag_detail', 'journal_collection_link', 'entry_count', 'created_at', 'last_modified')
     fieldsets = (
         (None, {
-            'fields': ('uuid', 'name', 'description', 'taxonomic_unit', 'nfc_link', 'nfc_link_detail', 'journal_collection', 'journal_collection_link', 'entry_count')
+            'fields': ('uuid', 'name', 'description', 'taxon', 'ntag', 'ntag_detail', 'journal_collection', 'journal_collection_link', 'entry_count')
         }),
         ('Status', {
             'fields': ('is_public', 'is_archived')
@@ -22,11 +22,11 @@ class DigitAdmin(admin.ModelAdmin):
     )
     actions = ['archive_digits', 'unarchive_digits']
 
-    def nfc_link_detail(self, obj):
-        if obj.nfc_link:
-            return format_html('<a href="{}">{} (Serial: {})</a>', reverse('admin:link_nfc_change', args=[obj.nfc_link.id]), "NFC Link", obj.nfc_link.serial_number)
-        return "No NFC Link"
-    nfc_link_detail.short_description = 'NFC Link Detail'
+    def ntag_detail(self, obj):
+        if obj.ntag:
+            return format_html('<a href="{}">{} (Serial: {})</a>', reverse('admin:link_ntag_change', args=[obj.ntag.id]), "NTAG Link", obj.ntag.serial_number)
+        return "No NTAG Link"
+    ntag_detail.short_description = 'NTAG Link Detail'
 
     def journal_collection_link(self, obj):
         if obj.journal_collection:
