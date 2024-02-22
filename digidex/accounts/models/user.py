@@ -34,6 +34,7 @@ class User(AbstractUser):
     Extended Fields:
         - uuid (UUIDField): A universally unique identifier for the user.
         - email_confirmed (BooleanField): Indicates if the user has confirmed their email address.
+        - username_slug (SlugField): A slugified version of the username for URL usage.
     """
     uuid = models.UUIDField(
         default=uuid.uuid4,

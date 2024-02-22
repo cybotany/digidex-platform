@@ -17,7 +17,7 @@ class Profile(models.Model):
         bio (TextField): A text field for user biography, maximum length 500 characters.
         location (CharField): A char field for user location, maximum length 30 characters.
         avatar (ImageField): An image field for user's profile picture.
-        is_public (BooleanField): A boolean field to determine if the profile is public or private.
+        is_public (BooleanField): A boolean field to determine if the profile is public or private. Profile is private by default.
         created_at (DateTimeField): The date and time when the profile was created.
         last_modified (DateTimeField): The date and time when the profile was last modified.
     """
@@ -45,7 +45,7 @@ class Profile(models.Model):
     )
     is_public = models.BooleanField(
         default=False,
-        help_text='Indicates if the profile should be publicly visible or private.'
+        help_text='Indicates if the profile should be publicly visible to the public or private. Profile is private by default.'
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
@@ -83,7 +83,7 @@ class Profile(models.Model):
         Returns:
             QuerySet: A QuerySet of all Digit objects associated with the user.
         """
-        return Digit.objects.filter(nfc_link__user=self.user)
+        return Digit.objects.filter(ntag__user=self.user)
 
     class Meta:
         verbose_name = "Profile"

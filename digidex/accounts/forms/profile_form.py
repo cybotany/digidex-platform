@@ -4,7 +4,7 @@ from digidex.accounts.models import Profile
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('bio', 'location', 'avatar',)
+        fields = ('bio', 'location', 'avatar', 'is_public',)
         widgets = {
             'bio': forms.Textarea(attrs={
                 'class': 'text-field base-input',
@@ -17,6 +17,9 @@ class ProfileForm(forms.ModelForm):
             }),
             'avatar': forms.FileInput(attrs={
                 'accept': 'image/*',
+                'class': 'base-file-upload-input',
+            }),
+            'is_public': forms.CheckboxInput(attrs={
                 'class': 'base-file-upload-input',
             }),
         }
