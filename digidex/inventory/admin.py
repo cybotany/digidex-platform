@@ -5,8 +5,8 @@ from digidex.inventory.models import Digit
 
 @admin.register(Digit)
 class DigitAdmin(admin.ModelAdmin):
-    list_display = ('name', 'uuid', 'taxon', 'ntag_detail', 'journal_collection_link', 'entry_count', 'created_at', 'last_modified', 'is_public', 'is_archived')
-    list_filter = ('is_public', 'is_archived', 'created_at', 'last_modified')
+    list_display = ('name', 'uuid', 'taxon', 'ntag_detail', 'journal_collection_link', 'entry_count', 'created_at', 'last_modified', 'is_archived')
+    list_filter = ('is_archived', 'created_at', 'last_modified')
     search_fields = ('name', 'uuid', 'ntag__serial_number')
     readonly_fields = ('uuid', 'ntag_detail', 'journal_collection_link', 'entry_count', 'created_at', 'last_modified')
     fieldsets = (
@@ -14,7 +14,7 @@ class DigitAdmin(admin.ModelAdmin):
             'fields': ('uuid', 'name', 'description', 'taxon', 'ntag', 'ntag_detail', 'journal_collection', 'journal_collection_link', 'entry_count')
         }),
         ('Status', {
-            'fields': ('is_public', 'is_archived')
+            'fields': ('is_archived')
         }),
         ('Timestamps', {
             'fields': ('created_at', 'last_modified')
