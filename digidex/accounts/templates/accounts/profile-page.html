@@ -3,11 +3,11 @@
 <html>
   <head>  
     <meta charset="utf-8">
-    <title>Profile - Digidex</title>
+    <title>Digit Storage System - Digidex</title>
     <meta content="A platform for gardeners to cultivate their curiosity." name="description">
-    <meta content="Profile - Digidex" property="og:title">
+    <meta content="Digit Storage System - Digidex" property="og:title">
     <meta content="A platform for gardeners to cultivate their curiosity." property="og:description">
-    <meta content="Profile - Digidex" property="twitter:title">
+    <meta content="Digit Storage System - Digidex" property="twitter:title">
     <meta content="A platform for gardeners to cultivate their curiosity." property="twitter:description">
     <meta property="og:type" content="website">
     <meta content="summary_large_image" name="twitter:card">
@@ -16,6 +16,7 @@
     <link href="{% static 'base/css/normalize.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'base/css/base-styles.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'digidex/css/digidex-styles.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'inventory/css/inventory-styles.css' %}" rel="stylesheet" type="text/css">
     
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
@@ -49,7 +50,6 @@
        {% endif %}  
     </div>
     {% include 'page-header.html' %}
-    <!-- Profile Page - Profile Content Section --> 
     <section class="section">
       <div class="content narrow">
         <div class="page-body">
@@ -73,6 +73,35 @@
           </div>
         </div>
     </section>
-    {% include 'page-footer.html' %}
+
+    <section class="section">
+      <div class="content">
+        <div class="collection-list-wrapper-posts base-dyn-list">
+          <div role="list" class="collection-list-posts base-dyn-items">
+            {% for digit in digits %}
+              <div role="listitem" class="base-dyn-item">
+                <div class="block-post">
+                  <a href="{% url 'inventory:digit-details' digit.uuid %}" class="link-post-thumbnail base-inline-block">
+                    {% if digit.journal_collection.thumbnail %}
+                      <img src="{{ digit.journal_collection.thumbnail.image.url }}" alt="Journal Entry Image" loading="eager" class="image-post-thumbnail">
+                    {% else %}
+                      <img src="{% static 'digidex/images/placeholder.svg' %}" alt="Journal Entry Image Placeholder" loading="eager" class="image-post-thumbnail">
+                    {% endif %}
+                  </a>
+                  <div class="post">
+                    <h4 class="heading-post">{{ digit.name }}</h4>
+                    <a href="{% url 'inventory:digit-details' digit.uuid %}" class="link-block base-inline-block"></a>
+                  </div>
+                </div>
+              </div>
+            {% empty %}
+              <div class="empty-state base-dyn-empty">
+                <div class="text-empty">No digits found.</div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section> 
   </body>
 </html>

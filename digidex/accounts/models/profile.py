@@ -1,5 +1,7 @@
 from django.db import models
 from django.urls import reverse
+
+from digidex.inventory.models import Digit
 from digidex.utils.custom_storage import PublicMediaStorage
 
 def profile_avatar_directory_path(instance, filename):
@@ -15,8 +17,7 @@ class Profile(models.Model):
         bio (TextField): A text field for user biography, maximum length 500 characters.
         location (CharField): A char field for user location, maximum length 30 characters.
         avatar (ImageField): An image field for user's profile picture.
-        interests (CharField): A char field for user's interests.
-        experience (CharField): A char field for user's experience.
+        is_public (BooleanField): A boolean field to determine if the profile is public or private.
         created_at (DateTimeField): The date and time when the profile was created.
         last_modified (DateTimeField): The date and time when the profile was last modified.
     """
@@ -41,6 +42,10 @@ class Profile(models.Model):
         null=True,
         blank=True,
         help_text='The avatar image of the profile.'
+    )
+    is_public = models.BooleanField(
+        default=False,
+        help_text='Indicates if the profile should be publicly visible or private.'
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
@@ -69,7 +74,16 @@ class Profile(models.Model):
         Returns:
             str: The URL to view the details of this profile.
         """
-        return reverse('accounts:profile', kwargs={'pk': self.id})
+        return reverse('accounts:profile', kwargs={'username_slug': self.user.username_slug})
+
+    def get_user_digits(self):
+        """
+        Retrieves all Digit objects associated with the user of this profile.
+
+        Returns:
+            QuerySet: A QuerySet of all Digit objects associated with the user.
+        """
+        return Digit.objects.filter(nfc_link__user=self.user)
 
     class Meta:
         verbose_name = "Profile"

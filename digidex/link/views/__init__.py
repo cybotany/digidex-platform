@@ -1,1 +1,1 @@
-from .nfc_link_view import NFCLinkView
+from .ntag_link_view import NTAGLinkView

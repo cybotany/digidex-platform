@@ -24,7 +24,7 @@ class DigitModificationView(LoginRequiredMixin, UpdateView):
 
         # Permission check
         user = self.request.user
-        if digit.nfc_link.user != user:
+        if digit.ntag.user != user:
             raise PermissionDenied("You do not have permission to view this digit.")
 
         return digit

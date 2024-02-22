@@ -11,14 +11,13 @@ class Digit(models.Model):
     It directly associates a plant specimen with its corresponding taxonomic classification.
 
     Attributes:
-        uuid (UUIDField): The unique identifier associated with the NFC tag.
+        uuid (UUIDField): The unique identifier associated with each Digit.
         name (CharField): A human-readable name for the digitized plant.
         description (TextField): A short description of the digitized plant.
-        taxonomic_unit (ForeignKey): A relationship to the Unit model, representing the plant's taxonomic classification.
-        nfc_link (OneToOneField): A relationship to the Link model, representing the NFC link for the digitized plant.
+        taxon (ForeignKey): A relationship to the Unit model, representing the plant's taxonomic classification.
+        ntag (OneToOneField): A relationship to the Link model, representing the NTAG link for the digitized plant.
         created_at (DateTimeField): The date and time when the Digit instance was created.
         last_modified (DateTimeField): The date and time when the Digit instance was last modified.
-        is_public (BooleanField): Indicates whether a public page is available for this digit.
         is_archived (BooleanField): Indicates whether the digit is archived.
     """
 
@@ -28,7 +27,7 @@ class Digit(models.Model):
         editable=False,
         db_index=True,
         verbose_name="Digit UUID",
-        help_text="The unique identifier associated with the NFC tag or identification mechanism."
+        help_text="The unique identifier associated with the Digit."
     )
     name = models.CharField(
         max_length=50,
@@ -42,7 +41,7 @@ class Digit(models.Model):
         blank=True,
         help_text="A short description of the digitized plant."
     )
-    taxonomic_unit = models.ForeignKey(
+    taxon = models.ForeignKey(
         'taxonomy.Unit',
         null=True,
         blank=True,
@@ -50,13 +49,18 @@ class Digit(models.Model):
         related_name='digits',
         help_text="The taxonomic classification of the digitized plant."
     )
-    nfc_link = models.OneToOneField(
-        'link.NFC',
+    ntag = models.OneToOneField(
+        'link.NTAG',
         null=True,
         blank=True,
         on_delete=models.CASCADE,
         related_name='digit',
-        help_text="NFC link for the digitized plant."
+        help_text="NTAG link for the digitized plant."
+    )
+    is_archived = models.BooleanField(
+        default=False,
+        verbose_name="Archived",
+        help_text="Indicates whether the digit is archived."
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
@@ -68,22 +72,12 @@ class Digit(models.Model):
         verbose_name="Last Modified",
         help_text="The date and time when the digit instance was last modified."
     )
-    is_public = models.BooleanField(
-        default=True,
-        verbose_name="Publicly Available",
-        help_text="Indicates whether a public page is available for this digit."
-    )
-    is_archived = models.BooleanField(
-        default=False,
-        verbose_name="Archived",
-        help_text="Indicates whether the digit is archived."
-    )
 
     @classmethod
     def create_digit(cls, form_data, link, user):
         with transaction.atomic():
             digit = cls.objects.create(
-                nfc_link=link,
+                ntag=link,
                 **form_data
             )
             link.user = user
@@ -96,19 +90,19 @@ class Digit(models.Model):
         """
         Overrides the delete method of the model to include custom deletion logic.
         """
-        # Reset the NFC link to default and save it
-        if self.nfc_link:
-            self.nfc_link.reset_to_default()
-            self.nfc_link.save()
+        # Reset the NTAG link to default and save it
+        if self.ntag:
+            self.ntag.reset_to_default()
+            self.ntag.save()
 
         super(Digit, self).delete(*args, **kwargs)
 
     def archive(self):
         """
         Archives the digit instance. This involves marking it as archived and dissociating
-        its NFC link so that the link can be reused for a new digit.
+        its NTAG link so that the link can be reused for a new digit.
         """
-        self.nfc_link = None
+        self.ntag = None
         self.is_archived = True
         self.save()
 
@@ -118,7 +112,7 @@ class Digit(models.Model):
         based on the count of Digits the user has.
         """
         if not self.name:
-            user_digit_count = Digit.objects.filter(nfc_link__user=self.nfc_link.user).count()
+            user_digit_count = Digit.objects.filter(ntag__user=self.ntag.user).count()
             self.name = f'Digit {user_digit_count + 1}'
 
         super().save(*args, **kwargs)

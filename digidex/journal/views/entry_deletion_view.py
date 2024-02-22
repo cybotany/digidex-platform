@@ -20,7 +20,7 @@ class EntryDeletionView(LoginRequiredMixin, DeleteView):
 
         entry = get_object_or_404(Entry, id=entry_pk)
 
-        if entry.collection.digit.nfc_link.user != self.request.user:
+        if entry.collection.digit.ntag.user != self.request.user:
             raise PermissionDenied("You do not have permission to delete this entry.")
 
         return entry

@@ -1,7 +1,6 @@
 from django import forms
 from digidex.inventory.models import Digit
 
-
 class DigitForm(forms.ModelForm):
     """
     Form for creating a digit.
@@ -9,7 +8,7 @@ class DigitForm(forms.ModelForm):
 
     class Meta:
         model = Digit
-        fields = ('name', 'description', 'taxonomic_unit',)
+        fields = ('name', 'description', 'taxon',)
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': 'text-field base-input'

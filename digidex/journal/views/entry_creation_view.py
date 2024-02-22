@@ -17,7 +17,7 @@ class EntryCreationView(LoginRequiredMixin, CreateView):
     def dispatch(self, request, *args, **kwargs):
         collection_id = self.kwargs.get('pk')
         collection = get_object_or_404(Collection, pk=collection_id)
-        if collection.digit.nfc_link.user != request.user:
+        if collection.digit.ntag.user != request.user:
             raise PermissionDenied("You do not have permission to add an entry to this collection.")
         return super().dispatch(request, *args, **kwargs)
 

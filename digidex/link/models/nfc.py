@@ -1,15 +1,13 @@
 from django.db import models
-from django.urls import reverse
-
 
 class NFC(models.Model):
     """
-    The NFC (Near Field Communication) model is primarily used to connect physical objects (like plants) that have been digitized
-    through an NTAG213 to their digital representations and metadata in the system.
+    Abstract base class for NFC (Near Field Communication) technology, providing common attributes.
 
     Attributes:
         serial_number (CharField): The unique serial number associated with the NFC tag.
-        counter (IntegerField): The number of times the tag has been scanned.
+        manufacturer (CharField): The manufacturer of the NFC tag.
+        version (CharField): The version of the NFC tag.
         user (ForeignKey): The user who created the journal entry, linked to the user model.
         active (BooleanField): A flag indicating whether the Link is active and mapped to a digital object.
         created_at (DateTimeField): The date and time when the Link instance was created.
@@ -22,10 +20,18 @@ class NFC(models.Model):
         verbose_name="Tag Serial Number",
         help_text="The unique serial number associated with the NFC tag."
     )
-    counter = models.IntegerField(
-        default=0,
-        verbose_name="Counter",
-        help_text="The number of times the tag has been scanned."
+    manufacturer = models.CharField(
+        max_length=2,
+        blank=True,
+        verbose_name="Manufacturer",
+        db_column="manufacturer_id",
+        help_text="The manufacturer of the NFC tag."
+    )
+    version = models.CharField(
+        max_length=4,
+        blank=True,
+        verbose_name="Version",
+        help_text="The version of the NFC tag."
     )
     user = models.ForeignKey(
         'accounts.User',
@@ -51,51 +57,5 @@ class NFC(models.Model):
         help_text="The date and time when the link instance was last modified."
     )
 
-    def activate_link(self, user):
-        self.user = user
-        self.active = True
-        self.save()
-
-    def deactivate_link(self):
-        self.active = False
-        self.save()
-
-    def check_access(self, user):
-       """
-       Checks if user has access to link.
-       """
-       return self.active and self.user == user
-
-    def reset_to_default(self):
-        """
-        Resets the link to its default settings.
-        """
-        self.active = False
-        self.user = None
-        self.save()
-
-    def get_absolute_url(self):
-        """
-        Returns the absolute URL for the NFC instance.
-        
-        This URL is unique for each NFC link and can be used to access specific resources or views related to it.
-
-        Returns:
-            str: The absolute URL for the NFC instance.
-        """
-        return reverse('link:digit', kwargs={'serial_number': self.serial_number})
-
-    def __str__(self):
-        """
-        Returns a string representation of the NFC instance.
-
-        This representation is primarily based on the unique serial number of the NTAG213.
-
-        Returns:
-            str: The serial number of the NTAG213, representing its unique identification.
-        """
-        return self.serial_number
-
     class Meta:
-        verbose_name = "NFC Tag"
-        verbose_name_plural = "NFC Tags"
+        abstract = True

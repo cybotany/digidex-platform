@@ -13,8 +13,8 @@ class EntryCollectionView(LoginRequiredMixin, ListView):
         collection_id = self.kwargs.get('pk')
 
         # Ensure the collection exists and is associated with the current user
-        collection = Collection.objects.filter(id=collection_id).select_related('digit__nfc_link').first()
-        if not collection or collection.digit.nfc_link.user != self.request.user:
+        collection = Collection.objects.filter(id=collection_id).select_related('digit__ntag').first()
+        if not collection or collection.digit.ntag.user != self.request.user:
             raise PermissionDenied("You do not have permission to view these entries.")
 
         # Use select_related to optimize the query
