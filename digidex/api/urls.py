@@ -1,6 +1,6 @@
 from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from digidex.api.views import GetTSN, CreateLink, GetKingdom
+from digidex.api.views import GetTSN, CreateLink, GetGeography
 
 app_name = 'api'
 urlpatterns = [
@@ -8,5 +8,5 @@ urlpatterns = [
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('get-tsn/', GetTSN.as_view(), name='get-tsn'),
     path('create-link/<str:serial_number>/', CreateLink.as_view(), name='create-link'),
-    path('get-kingdom/<int:id>/', GetKingdom.as_view(), name='get-kingdom'),
+    path('get-geography/<int:id>/', GetGeography.as_view(), name='get-geography'),
 ]
