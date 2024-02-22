@@ -14,7 +14,7 @@ class DigitAdmin(admin.ModelAdmin):
             'fields': ('uuid', 'name', 'description', 'taxon', 'ntag', 'ntag_detail', 'journal_collection', 'journal_collection_link', 'entry_count')
         }),
         ('Status', {
-            'fields': ('is_archived')
+            'fields': ('is_archived',)
         }),
         ('Timestamps', {
             'fields': ('created_at', 'last_modified')
