@@ -36,6 +36,11 @@ class User(AbstractUser):
         - email_confirmed (BooleanField): Indicates if the user has confirmed their email address.
         - username_slug (SlugField): A slugified version of the username for URL usage.
     """
+    username = models.CharField(
+        max_length=32,
+        unique=True,
+        help_text="Required. 32 characters or fewer. Letters, digits and .(periods) only.",
+    )
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
@@ -76,9 +81,16 @@ class User(AbstractUser):
     @transaction.atomic
     def save(self, *args, **kwargs):
         if not self.username_slug or self.username != self.__original_username:
-            self.username_slug = slugify(self.username)
-        # Save the user instance
+            base_slug = slugify(self.username)
+            unique_slug = base_slug
+            num = 1
+            while User.objects.filter(username_slug=unique_slug).exists():
+                unique_slug = f'{base_slug}-{num}'
+                num += 1
+            self.username_slug = unique_slug
+
         super().save(*args, **kwargs)
+
         # Send verification email for new users
         if self.__original_new_user:
             try:
