@@ -52,9 +52,12 @@
  
     <section class="section">
       <div class="content">
-        <div class="layout-grid grid">
-          <div class="lottie">
-            <h2 class="heading">{{ profile.user.username }}</h2>
+        <div class="block-heading center">
+          <div class="subtitle">Profile<br></div>
+          <h2 class="heading">{{ profile.user.username }}</h2>
+        </div>
+        <div class="layout-grid grid-features">
+          <div class="features"> 
             {% if profile.avatar %}
               <img src="{{ profile.avatar.url }}" alt="User avatar" class="avatar-image">
             {% else %}
@@ -62,10 +65,11 @@
             {% endif %}
             <a href="{% url 'accounts:profile-modification' profile.user.username_slug %}">Edit Profile</a>
           </div>
-          <div class="block-right">
-            <div class="subtitle green">Bio<br></div>
-            <div class="date-top">Joined: {{ profile.created_at }}<br></div>
-            <p class="paragraph">{{ profile.bio }}</p>
+          <div class="features"> 
+            <div class="block-heading-features">
+              <h5 class="heading-features">Joined: {{ profile.created_at }}</h5>
+            </div>
+            <p class="paragraph-features">{{ profile.bio }}</p>
           </div>
         </div>
       </div>
