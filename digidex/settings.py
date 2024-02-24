@@ -191,7 +191,6 @@ EMAIL_PORT = 587
 EMAIL_USE_SSL = False
 EMAIL_USE_TLS = True
 
-LOGIN_REDIRECT_URL = 'inventory:digit-storage'
 LOGIN_URL = 'accounts:login'
 
 LOG_DIR = os.path.join(BASE_DIR, 'logs')
