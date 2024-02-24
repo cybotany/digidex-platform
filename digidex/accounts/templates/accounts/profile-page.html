@@ -58,18 +58,17 @@
         </div>
         <div class="layout-grid grid-profile">
           <div class="profile-avatar"> 
-            <div class="avatar-wrapper">
-              {% if profile.avatar %}
-                <img src="{{ profile.avatar.url }}" alt="User avatar" class="avatar-image">
-              {% else %}
-                <img src="{% static 'digidex/images/placeholder.svg' %}" alt="No Image Available" class="avatar-image">
-              {% endif %}
-            </div>
+            {% if profile.avatar %}
+              <img src="{{ profile.avatar.url }}" alt="User avatar" class="avatar-image">
+            {% else %}
+              <img src="{% static 'digidex/images/placeholder.svg' %}" alt="No Image Available" class="avatar-image">
+            {% endif %}
             <div class="profile-text">Edit Profile<a href="{% url 'accounts:profile-modification' profile.user.username_slug %}" class="profile-link"></a></div>
           </div>
           <div class="profile-bio"> 
             <div class="block-bio-heading">
               <div class="bio-date">Joined: {{ profile.created_at }}</div>
+              <div class="bio-inventory">Digits Captured: {{ digits_count }}</div>
             </div>
             <p class="bio-paragraph">{{ profile.bio }}</p>
           </div>

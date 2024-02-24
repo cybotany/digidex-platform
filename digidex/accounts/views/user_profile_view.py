@@ -16,9 +16,12 @@ class UserProfileView(DetailView):
         # Checks if the profile is public or if the user is authenticated 
         # and the owner of the profile.
         if profile.is_public or (self.request.user.is_authenticated and self.request.user == profile.user):
-            context['digits'] = profile.get_user_digits()
+            user_digits = profile.get_user_digits()
+            context['digits'] = user_digits
+            context['digits_count'] = user_digits.count()
         else:
             context['digits'] = []
+            context['digits_count'] = 0
             if not self.profile.is_public:
                 context['private_profile'] = True
         
