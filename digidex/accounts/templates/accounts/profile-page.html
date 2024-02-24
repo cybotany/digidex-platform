@@ -67,7 +67,7 @@
           </div>
           <div class="profile-bio"> 
             <div class="block-bio-heading">
-              <div class="bio-date">Joined: {{ profile.created_at }}</div>
+              <div class="bio-inventory">Joined: {{ profile.created_at|date:"M. d, Y" }}</div>
               <div class="bio-inventory">Digits Captured: {{ digits_count }}</div>
             </div>
             <p class="bio-paragraph">{{ profile.bio }}</p>
