@@ -51,27 +51,18 @@
     </div>
     {% include 'page-header.html' %}
     <section class="section">
-      <div class="content narrow">
+      <div class="content">
         <div class="page-body">
-          <div class="rich-text-block base-rich-text">
-            <figure style="max-width:882pxpx" class="base-rich-text-align-fullwidth base-rich-text-figure-type-image">
-              {% if profile.avatar %}
-                <div><img src="{{ profile.avatar.url }}" alt="User avatar"></div>
-              {% else %}
-                <div><img src="{% static 'digidex/images/placeholder.svg' %}" alt="No Image Available"></div>
-              {% endif %}
-            
-              <figcaption>Some profile text here</figcaption>
-            </figure>
-            <p class="paragraph">Bio: {{ profile.bio }}</p>
-            {% if profile.location %}
-              <p class="paragraph">Location: {{ profile.location }}</p>
-            {% endif %}
-            <p>
-              <a href="{% url 'accounts:profile-modification' profile.user.username_slug %}">Edit Profile</a>
-            </p>
-          </div>
+          {% if profile.avatar %}
+            <img src="{{ profile.avatar.url }}" alt="User avatar" class="avatar-image">
+          {% else %}
+            <img src="{% static 'digidex/images/placeholder.svg' %}" alt="No Image Available" class="avatar-image">
+          {% endif %}
+          <p>
+            <a href="{% url 'accounts:profile-modification' profile.user.username_slug %}">Edit Profile</a>
+          </p>
         </div>
+      </div>
     </section>
 
     <section class="section">
