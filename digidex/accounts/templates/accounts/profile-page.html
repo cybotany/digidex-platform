@@ -49,18 +49,23 @@
       </div>  
        {% endif %}  
     </div>
-    {% include 'page-header.html' %}
     <section class="section">
       <div class="content">
-        <div class="page-body">
-          {% if profile.avatar %}
-            <img src="{{ profile.avatar.url }}" alt="User avatar" class="avatar-image">
-          {% else %}
-            <img src="{% static 'digidex/images/placeholder.svg' %}" alt="No Image Available" class="avatar-image">
-          {% endif %}
-          <p>
+        <div class="layout-grid grid">
+          <div class="lottie">
+            <h2 class="heading">{% profile.user.username %}</h2>
+            {% if profile.avatar %}
+              <img src="{{ profile.avatar.url }}" alt="User avatar" class="avatar-image">
+            {% else %}
+              <img src="{% static 'digidex/images/placeholder.svg' %}" alt="No Image Available" class="avatar-image">
+            {% endif %}
             <a href="{% url 'accounts:profile-modification' profile.user.username_slug %}">Edit Profile</a>
-          </p>
+          </div>
+          <div class="block-right">
+            <div class="subtitle green">Bio<br></div>
+            <div class="date-top">Joined: {% profile.created_at %}<br></div>
+            <p class="paragraph">{% profile.bio %}</p>
+          </div>
         </div>
       </div>
     </section>
