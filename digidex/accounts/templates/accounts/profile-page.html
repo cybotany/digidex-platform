@@ -58,6 +58,7 @@
         </div>
         <div class="layout-grid grid-profile">
           <div class="profile-avatar"> 
+            <div class="date">Joined: {{ profile.created_at|date:"M. d, Y" }}</div>
             {% if profile.avatar %}
               <img src="{{ profile.avatar.url }}" alt="User avatar" class="avatar-image">
             {% else %}
@@ -66,15 +67,13 @@
             <div class="profile-text">Edit Profile<a href="{% url 'accounts:profile-modification' profile.user.username_slug %}" class="profile-link"></a></div>
           </div>
           <div class="profile-bio"> 
-            <div class="block-bio-heading">
-              <div class="bio-inventory">Joined: {{ profile.created_at|date:"M. d, Y" }}</div>
-              <div class="bio-inventory">Digits Captured: {{ digits_count }}</div>
+            <div class="block-bio-heading"><img src="{% static 'inventory/images/plant.svg' %}" loading="eager" alt="" class="icon-bio">
+              <div class="plant-inventory-count">Plant Digits Captured: {{ digits_count }}</div>
             </div>
             <p class="bio-paragraph">{{ profile.bio }}</p>
           </div>
       </div>
     </section>
-
     <section class="section">
       <div class="content">
         <div class="collection-list-wrapper-posts base-dyn-list">
