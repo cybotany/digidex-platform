@@ -49,11 +49,12 @@
       </div>  
        {% endif %}  
     </div>
+ 
     <section class="section">
       <div class="content">
         <div class="layout-grid grid">
           <div class="lottie">
-            <h2 class="heading">{% profile.user.username %}</h2>
+            <h2 class="heading">{{ profile.user.username }}</h2>
             {% if profile.avatar %}
               <img src="{{ profile.avatar.url }}" alt="User avatar" class="avatar-image">
             {% else %}
@@ -63,8 +64,8 @@
           </div>
           <div class="block-right">
             <div class="subtitle green">Bio<br></div>
-            <div class="date-top">Joined: {% profile.created_at %}<br></div>
-            <p class="paragraph">{% profile.bio %}</p>
+            <div class="date-top">Joined: {{ profile.created_at }}<br></div>
+            <p class="paragraph">{{ profile.bio }}</p>
           </div>
         </div>
       </div>
