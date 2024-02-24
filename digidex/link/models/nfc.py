@@ -6,8 +6,7 @@ class NFC(models.Model):
 
     Attributes:
         serial_number (CharField): The unique serial number associated with the NFC tag.
-        manufacturer (CharField): The manufacturer of the NFC tag.
-        version (CharField): The version of the NFC tag.
+        eeprom (BinaryField): The EEPROM data associated with the NFC tag.
         counter (PositiveIntegerField): The counter value associated with the NFC tag.
         user (ForeignKey): The user who created the journal entry, linked to the user model.
         active (BooleanField): A flag indicating whether the Link is active and mapped to a digital object.
@@ -21,18 +20,11 @@ class NFC(models.Model):
         verbose_name="Tag Serial Number",
         help_text="The unique serial number associated with the NFC tag."
     )
-    manufacturer = models.CharField(
-        max_length=2,
+    eeprom = models.BinaryField(
+        null=True,
         blank=True,
-        verbose_name="Manufacturer",
-        db_column="manufacturer_id",
-        help_text="The manufacturer of the NFC tag."
-    )
-    version = models.CharField(
-        max_length=4,
-        blank=True,
-        verbose_name="Version",
-        help_text="The version of the NFC tag."
+        verbose_name="EEPROM",
+        help_text="The EEPROM data associated with the NFC tag."
     )
     counter = models.PositiveIntegerField(
         default=0,
