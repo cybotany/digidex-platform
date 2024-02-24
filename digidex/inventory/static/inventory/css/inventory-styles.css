@@ -1,9 +1,9 @@
-.avatar-image {
-  border-radius: 50%;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  max-width: 150px;
-  margin-bottom: 15px;
-}
+@import url('box/profile-section.css');
+@import url('box/grid-section.css');
+
+@import url('digit/journal-section.css');
+@import url('digit/taxonomy-section.css');
+@import url('digit/care-section.css');
 
 .digit-body {
   width: 100%;
@@ -22,12 +22,6 @@
 .digit-modification-link.large {
   margin-bottom: 1.4em;
 }
-
-@import url('digit/journal-section.css');
-@import url('digit/taxonomy-section.css');
-@import url('digit/care-section.css');
-
-@import url('box/grid-section.css');
 
 @media screen and (max-width: 991px) {  
   .digit-body {

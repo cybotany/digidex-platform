@@ -52,24 +52,25 @@
  
     <section class="section">
       <div class="content">
-        <div class="block-heading center">
-          <div class="subtitle">Profile<br></div>
-          <h2 class="heading">{{ profile.user.username }}</h2>
+        <div class="block-profile">
+          <div class="profile-subtitle">Profile<br></div>
+          <h2 class="profile-heading">{{ profile.user.username }}</h2>
         </div>
-        <div class="layout-grid grid-features">
-          <div class="features"> 
-            {% if profile.avatar %}
-              <img src="{{ profile.avatar.url }}" alt="User avatar" class="avatar-image">
-            {% else %}
-              <img src="{% static 'digidex/images/placeholder.svg' %}" alt="No Image Available" class="avatar-image">
-            {% endif %}
-            <a href="{% url 'accounts:profile-modification' profile.user.username_slug %}">Edit Profile</a>
-          </div>
-          <div class="features"> 
-            <div class="block-heading-features">
-              <h5 class="heading-features">Joined: {{ profile.created_at }}</h5>
+        <div class="layout-grid grid-profile">
+          <div class="profile-avatar"> 
+            <div class="avatar-wrapper">
+              {% if profile.avatar %}
+                <img src="{{ profile.avatar.url }}" alt="User avatar">
+              {% else %}
+                <img src="{% static 'digidex/images/placeholder.svg' %}" alt="No Image Available">
+              {% endif %}
             </div>
-            <p class="paragraph-features">{{ profile.bio }}</p>
+            <div class="profile-text">Edit Profile<a href="{% url 'accounts:profile-modification' profile.user.username_slug %}" class="profile-link"></a></div>
+          <div class="profile-bio"> 
+            <div class="block-bio-heading">
+              <div class="bio-date">Joined: {{ profile.created_at }}</div>
+            </div>
+            <p class="bio-paragraph">{{ profile.bio }}</p>
           </div>
         </div>
       </div>
