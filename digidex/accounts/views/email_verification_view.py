@@ -19,6 +19,6 @@ class EmailVerificationView(View):
             user.save()
             messages.success(request, 'Your email has been verified. You may now log in.')
 
-            return redirect('inventory:digit-storage')
+            return redirect('accounts:profile', username_slug=user.username_slug)
         else:
             return render(request, 'accounts/failed-verification-page.html')
