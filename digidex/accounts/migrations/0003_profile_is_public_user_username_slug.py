@@ -27,4 +27,5 @@ class Migration(migrations.Migration):
             field=models.SlugField(editable=False, help_text='Slugified version of the username for URL usage.', max_length=255, unique=True),
             preserve_default=False,
         ),
+        migrations.RunPython(generate_username_slugs),
     ]

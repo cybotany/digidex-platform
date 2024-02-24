@@ -8,6 +8,8 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.utils.text import slugify
 from django.conf import settings
+
+from digidex.accounts.validators import username_validator
 from digidex.utils.models import EmailLog
 
 logger = logging.getLogger(__name__)
@@ -39,7 +41,8 @@ class User(AbstractUser):
     username = models.CharField(
         max_length=32,
         unique=True,
-        help_text="Required. 32 characters or fewer. Letters, digits and .(periods) only.",
+        validators=[username_validator],
+        help_text="Required. 32 characters or fewer. Letters, digits and dashes only.",
     )
     uuid = models.UUIDField(
         default=uuid.uuid4,
@@ -80,6 +83,7 @@ class User(AbstractUser):
 
     @transaction.atomic
     def save(self, *args, **kwargs):
+        self.username = self.username.lower()
         if not self.username_slug or self.username != self.__original_username:
             base_slug = slugify(self.username)
             unique_slug = base_slug
