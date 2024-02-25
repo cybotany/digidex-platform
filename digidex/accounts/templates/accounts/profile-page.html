@@ -67,6 +67,7 @@
             <div class="profile-text"><a href="{% url 'accounts:profile-modification' profile.user.username_slug %}" class="profile-link">Edit Profile</a></div>
           </div>
           <div class="profile-bio">
+            <!-- Tab Headings -->
             <div class="tab-headings">
               <div class="tab-heading active" data-tab-target="#bio">
                 <img src="{% static 'inventory/images/bio.svg' %}" alt="Bio Icon" class="icon-bio"><span class="bio-text">Bio</span>
@@ -82,21 +83,21 @@
             <!-- Tab Content -->
             <div id="bio" class="tab-content active">
               <ul>
-                <li>Last Login: {{ profile.created_at|date:"M. d, Y" }}</li>
-                <li>Location: {{ profile.location }}</li>
-                <li>Bio: {{ profile.bio }}</li>
+                <li class="bio-text">Last Login: {{ profile.created_at|date:"M. d, Y" }}</li>
+                <li class="bio-text">Location: {{ profile.location }}</li>
+                <li class="bio-text">Bio: {{ profile.bio }}</li>
               </ul>
             </div>
             <div id="plants" class="tab-content">
               <ul>
-                <li>Last Plant Update: {{ profile.created_at|date:"M. d, Y" }}</li>
-                <li>Count of Plant Digits: {{ digits_count }}</li>
+                <li class="plant-text">Last Plant Update: {{ profile.created_at|date:"M. d, Y" }}</li>
+                <li class="plant-text">Count of Plant Digits: {{ digits_count }}</li>
               </ul>
             </div>
             <div id="pets" class="tab-content">
               <ul>
-                <li>Last Pet Update: {{ profile.created_at|date:"M. d, Y" }}</li>
-                <li>Count of Pet Digits: {{ digits_count }}</li>
+                <li class="pet-text">Last Pet Update: {{ profile.created_at|date:"M. d, Y" }}</li>
+                <li class="pet-text">Count of Pet Digits: {{ digits_count }}</li>
               </ul>
             </div>
           </div>
