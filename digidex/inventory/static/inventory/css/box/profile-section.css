@@ -1,5 +1,5 @@
 .content-profile {
-  background-color: var(--white);
+  background-color: var(--background);
   border-radius: 15px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
 }
@@ -24,17 +24,8 @@
   grid-template-rows: auto;
   grid-template-columns: 1fr 2fr;
   background-color: var(--white);
-  border-radius: 20px;
+  border-radius: 15px;
 }
-
-.profile-avatar, .profile-bio {
-  border-right: 2px solid rgba(0, 0, 0, 0.1); /* Adds a subtle right border to profile-avatar */
-}
-
-.profile-bio {
-  border-left: none; /* Ensures that profile-bio does not have a left border if it's not needed */
-}
-
 
 .profile-avatar {
   grid-column-gap: 1.3em;
@@ -46,6 +37,7 @@
   padding-bottom: 1.2em;
   display: flex;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
 }
 
 .avatar-image {
@@ -86,6 +78,7 @@
   padding-bottom: 1.2em;
   display: flex;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
 }
 
 .block-bio-heading {
