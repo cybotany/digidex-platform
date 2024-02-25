@@ -17,8 +17,8 @@ class EmailVerificationView(View):
         if token_generator.check_token(user, token):
             user.email_confirmed = True
             user.save()
-            messages.success(request, 'Your email has been verified. You may now log in.')
+            messages.success(request, 'Your email has been verified.')
 
-            return redirect('accounts:profile', username_slug=user.username_slug)
+            return redirect('accounts:profile-modification', username_slug=user.username_slug)
         else:
             return render(request, 'accounts/failed-verification-page.html')

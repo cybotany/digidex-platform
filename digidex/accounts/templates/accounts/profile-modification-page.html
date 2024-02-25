@@ -37,19 +37,7 @@
     <a href="{% url 'main:landing' %}" class="brand-center base-nav-brand">
       <img src="{% static 'digidex/images/logo.png' %}" loading="eager" alt="" class="logo">
     </a>
-    <div class="collection-list-wrapper-messages base-dyn-list">
-      {% if messages %}
-      <div role="list" class="base-dyn-items">
-        {% for message in messages %}
-          <div role="listitem" class="base-dyn-item">
-            <div class="{% if message.tags %}{{ message.tags }}-message{% endif %}">
-              <span class="text-{% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</span>
-            </div>
-          </div>
-        {% endfor %}
-      </div>  
-       {% endif %}  
-    </div>
+    {% include 'message-bar.html' %} 
     <section class="section-full">
       <div class="content">
         <div class="account-form">
