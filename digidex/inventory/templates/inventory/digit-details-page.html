@@ -38,7 +38,7 @@
     {% include 'navigation-bar.html' %}
     {% include 'message-bar.html' %}
   
-    <section class="section-digit-top">
+    <section class="section">
       <div class="content content-digit-top">
         <div class="block-digit-top">
           <div class="subtitle green">Overview<br></div>
@@ -46,7 +46,7 @@
           <h2 class="digit-heading-top">{{ digit.name }}</h2>
           <div class="digit-paragraph-top">{{ digit.description }}</div>
           {% if is_owner %}
-            <div class="digit-text-top"><a href="{% url 'inventory:digit-modification' uuid=digit.uuid %}" class="digit-link">Edit Digit</a></div>
+            <div class="digit-text-top"><a href="{% url 'inventory:digit-modification' uuid=digit.uuid %}" class="digit-link-top">Edit Digit</a></div>
           {% endif %}
         </div>
       </div>
