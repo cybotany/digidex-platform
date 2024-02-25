@@ -36,7 +36,6 @@
   padding-bottom: 1.2em;
   display: flex;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 15px;
 }
 
 .avatar-image {
@@ -77,7 +76,6 @@
   padding-bottom: 1.2em;
   display: flex;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 15px;
 }
 
 .block-bio-heading {
