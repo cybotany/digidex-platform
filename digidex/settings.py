@@ -12,6 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Fetch the environment variable indicating the environment.
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '')
 DJANGO_ENV = os.environ.get('DJANGO_ENV', 'production')
+ENVIRONMENT_ASSETS = os.getenv('ENVIRONMENT_ASSETS', 'default')
 
 GOOGLE_CLOUD_PROJECT_ID = os.environ.get('GOOGLE_CLOUD_PROJECT_ID', '')
 RECAPTCHA_SITE_KEY = os.environ.get('RECAPTCHA_SITE_KEY', '')
@@ -68,13 +69,16 @@ if DJANGO_ENV in ['production', 'staging']:
 
 else:
     DEBUG = True
-
     SECURE_PROXY_SSL_HEADER = None
     SESSION_COOKIE_SECURE = False
     CSRF_COOKIE_SECURE = False
     SECURE_SSL_REDIRECT = False
 
-    STATIC_URL = f'https://{AWS_S3_ENDPOINT_URL}/{AWS_LOCATION}/'
+    if ENVIRONMENT_ASSETS == 'default':
+        STATIC_URL = '/static/'
+        STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    else:
+        STATIC_URL = f'https://{AWS_S3_ENDPOINT_URL}/{AWS_LOCATION}/'
 
 # Application definition
 INSTALLED_APPS = [
