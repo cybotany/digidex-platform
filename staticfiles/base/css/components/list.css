@@ -1,0 +1,10 @@
+ul, ol {
+  margin-top: 0px;
+  margin-bottom: 10px;
+  padding-left: 40px;
+}
+
+.base-list-unstyled {
+  padding-left: 0;
+  list-style: none;
+}
