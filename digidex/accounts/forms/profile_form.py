@@ -17,10 +17,9 @@ class ProfileForm(forms.ModelForm):
             }),
             'avatar': forms.FileInput(attrs={
                 'accept': 'image/*',
-                'class': 'base-file-upload-input',
             }),
             'is_public': forms.CheckboxInput(attrs={
-                'class': 'base-file-upload-input',
+                'class': 'checkbox-input',
             }),
         }
 
