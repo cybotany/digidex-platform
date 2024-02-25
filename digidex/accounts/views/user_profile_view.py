@@ -1,7 +1,6 @@
 from django.views.generic.detail import DetailView
 from digidex.accounts.models import Profile
 
-
 class UserProfileView(DetailView):
     model = Profile
     template_name = 'accounts/profile-page.html'
@@ -14,13 +13,13 @@ class UserProfileView(DetailView):
         profile = context['profile']
 
         is_profile_owner = self.request.user.is_authenticated and self.request.user == profile.user
-        
-        if profile.is_public or is_profile_owner:
+        if is_profile_owner:
             user_digits = profile.get_user_digits()
-            digits_count = user_digits.count()
+        elif profile.is_public:
+            user_digits = profile.get_user_digits().filter(is_public=True)
         else:
             user_digits = []
-            digits_count = 0
+        digits_count = len(user_digits)
 
         context.update({
             'is_profile_owner': is_profile_owner,
