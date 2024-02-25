@@ -28,7 +28,7 @@
 }
 
 .grid-profile {
-  background-color: var(--pale-lime-green-background);
+  background-color: var(--honeydew-background);
   grid-column-gap: 3em;
   grid-row-gap: 1.8em;
   grid-template-rows: auto;
@@ -88,7 +88,6 @@
 }
 
 .block-bio-heading {
-  color: var(--tea-green-background);
   grid-column-gap: 1em;
   grid-row-gap: 1em;
   justify-content: flex-start;
@@ -111,10 +110,6 @@
   color: var(--strong-blue);
   font-weight: 500;
   line-height: 130%;
-}
-
-.bio-paragraph {
-  color: var(--honeydew-background);
 }
 
 @media screen and (max-width: 767px) {
