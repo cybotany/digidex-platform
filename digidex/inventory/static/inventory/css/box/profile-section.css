@@ -102,7 +102,7 @@
   background-color: var(--accent-red);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  margin: 0 1px;
+  margin: 0;
   border-radius: 15px 15px 0 0;
   transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
@@ -126,6 +126,7 @@
 
 .tab-content {
   display: none;
+  margin-top: -2px;
   flex-grow: 2;
 }
 
