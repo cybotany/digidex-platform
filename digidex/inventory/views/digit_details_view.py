@@ -2,13 +2,12 @@ from django.db.models import Prefetch
 from django.views.generic import DetailView
 from django.http import Http404
 from django.shortcuts import get_object_or_404
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from digidex.inventory.models import Digit
 from digidex.journal.models import Entry
 
 
-class DigitDetailsView(LoginRequiredMixin, DetailView):
+class DigitDetailsView(DetailView):
     model = Digit
     template_name = 'inventory/digit-details-page.html'
 
@@ -22,26 +21,26 @@ class DigitDetailsView(LoginRequiredMixin, DetailView):
         digit = get_object_or_404(queryset, uuid=uuid)
 
         # Permission check
-        user = self.request.user
-        if digit.ntag.user != user:
-            raise PermissionDenied("You do not have permission to view this digit.")
+        if not digit.is_public:
+            user = self.request.user
+            if not user.is_authenticated or digit.ntag.user != user:
+                raise PermissionDenied("You do not have permission to view this digit.")
 
         return digit
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
         digit = self.object
+        user = self.request.user
+
+        is_owner = user.is_authenticated and digit.ntag.user == user
 
         journal_collection = digit.journal_collection
-        journal_entries = journal_collection.get_all_entries()
-        
+        journal_entries = journal_collection.get_all_entries() if digit.is_public or is_owner else []
+
         context.update({
-            'subtitle': 'Overview',
-            'heading': digit.name,
-            'paragraph': digit.description,
-            'date': digit.created_at.strftime("%b %d, %Y"),
-            'journal_entries': journal_entries
+            'journal_entries': journal_entries,
+            'is_owner': is_owner
         })
 
         return context

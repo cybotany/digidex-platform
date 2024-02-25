@@ -46,7 +46,7 @@
         </div>
         <div class="layout-grid grid-profile">
           <div class="profile-avatar"> 
-            <div class="date">{{ profile.created_at|date:"M. d, Y" }}</div>
+            <div class="date-top">{{ profile.created_at|date:"M. d, Y" }}</div>
             {% if profile.avatar %}
               <img src="{{ profile.avatar.url }}" alt="User avatar" class="avatar-image">
             {% else %}
