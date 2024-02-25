@@ -6,7 +6,8 @@ class ProfileForm(forms.ModelForm):
         label='Upload Avatar',
         widget=forms.FileInput(attrs={
             'accept': 'image/*',
-        })
+        }),
+        required=False
     )
     bio = forms.CharField(
         widget=forms.Textarea(attrs={
