@@ -12,22 +12,20 @@ class UserProfileView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         profile = context['profile']
+
+        is_profile_owner = self.request.user.is_authenticated and self.request.user == profile.user
         
-        # Checks if the profile is public or if the user is authenticated and the owner of the profile.
-        if profile.is_public or (self.request.user.is_authenticated and self.request.user == profile.user):
+        if profile.is_public or is_profile_owner:
             user_digits = profile.get_user_digits()
-            context['digits'] = user_digits
-            context['digits_count'] = user_digits.count()
+            digits_count = user_digits.count()
         else:
-            context['digits'] = []
-            context['digits_count'] = 0
-            if not profile.is_public:
-                context['private_profile'] = True
-        
+            user_digits = []
+            digits_count = 0
+
         context.update({
-            'subtitle': 'Profile',
-            'heading': f"{profile.user.username}",
-            'paragraph': profile.bio,
-            'date': profile.created_at,
+            'is_profile_owner': is_profile_owner,
+            'digits': user_digits,
+            'digits_count': digits_count,
         })
+        
         return context
