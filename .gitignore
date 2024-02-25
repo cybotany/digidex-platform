@@ -141,3 +141,6 @@ dmypy.json
 
 # Data inserts
 data/insert_*.sql
+
+# staticfiles
+staticfiles/
