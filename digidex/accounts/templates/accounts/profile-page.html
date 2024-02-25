@@ -97,7 +97,7 @@
           <div role="list" class="collection-list-posts base-dyn-items">
             {% for digit in digits %}
               <div role="listitem" class="base-dyn-item">
-                <a href="{% url 'inventory:digit-details' digit.uuid %}" class="block-post-link base-inline-block">
+                <a href="{% url 'inventory:digit-details' digit.uuid %}" class="block-post-link">
                   <div class="block-post">
                     {% if digit.journal_collection.thumbnail %}
                       <img src="{{ digit.journal_collection.thumbnail.image.url }}" alt="Journal Entry Image" loading="eager" class="image-post-thumbnail">
