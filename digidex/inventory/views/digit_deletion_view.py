@@ -1,5 +1,5 @@
 from django.views.generic.edit import DeleteView
-from django.urls import reverse_lazy
+from django.urls import reverse
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
@@ -12,7 +12,6 @@ logger = logging.getLogger(__name__)
 
 class DigitDeletionView(LoginRequiredMixin, DeleteView):
     model = Digit
-    success_url = reverse_lazy('inventory:digit-storage')
 
     def get_object(self, queryset=None):
         queryset = queryset or self.get_queryset()
@@ -27,6 +26,14 @@ class DigitDeletionView(LoginRequiredMixin, DeleteView):
             raise PermissionDenied("You do not have permission to delete this digit.")
 
         return digit
+
+    def get_success_url(self):
+        """
+        Override to redirect to the user's profile page after successful deletion.
+        """
+        username_slug = self.request.user.username_slug
+        return reverse('accounts:profile', kwargs={'username_slug': username_slug})
+
 
     def delete(self, request, *args, **kwargs):
         """
