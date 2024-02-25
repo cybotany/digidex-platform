@@ -1,6 +1,6 @@
 .content-profile {
   background-color: var(--background);
-  padding: 2em 0;
+  padding: 2em;
   border-radius: 15px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
 }
@@ -24,8 +24,6 @@
   grid-row-gap: 1.8em;
   grid-template-rows: auto;
   grid-template-columns: 1fr 2fr;
-  background-color: var(--white);
-  border-radius: 15px;
 }
 
 .profile-avatar {
