@@ -34,9 +34,7 @@
     <link href="{% static 'digidex/images/webclip.png' %}" rel="apple-touch-icon">
   </head>
   <body>
-    <a href="{% url 'main:landing' %}" class="brand-center base-nav-brand">
-      <img src="{% static 'digidex/images/logo.png' %}" loading="eager" alt="" class="logo">
-    </a>
+    {% include 'navigation-bar.html' %}
     {% include 'message-bar.html' %} 
     <section class="section-full">
       <div class="content">

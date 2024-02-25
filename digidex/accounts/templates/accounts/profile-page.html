@@ -83,7 +83,7 @@
             </div>
             <div id="pets" class="tab-content">
               <ul>
-                <li class="pet-text">Count of Pet Digits: {{ digits_count }}</li>
+                <li class="pet-text">Count of Pet Digits: 0</li>
               </ul>
             </div>
           </div>
@@ -97,19 +97,18 @@
           <div role="list" class="collection-list-posts base-dyn-items">
             {% for digit in digits %}
               <div role="listitem" class="base-dyn-item">
-                <div class="block-post">
-                  <a href="{% url 'inventory:digit-details' digit.uuid %}" class="link-post-thumbnail base-inline-block">
+                <a href="{% url 'inventory:digit-details' digit.uuid %}" class="block-post-link base-inline-block">
+                  <div class="block-post">
                     {% if digit.journal_collection.thumbnail %}
                       <img src="{{ digit.journal_collection.thumbnail.image.url }}" alt="Journal Entry Image" loading="eager" class="image-post-thumbnail">
                     {% else %}
                       <img src="{% static 'digidex/images/placeholder.svg' %}" alt="Journal Entry Image Placeholder" loading="eager" class="image-post-thumbnail">
                     {% endif %}
-                  </a>
-                  <div class="post">
-                    <h4 class="heading-post">{{ digit.name }}</h4>
-                    <a href="{% url 'inventory:digit-details' digit.uuid %}" class="link-block base-inline-block"></a>
+                    <div class="post">
+                      <h4 class="heading-post">{{ digit.name }}</h4>
+                    </div>
                   </div>
-                </div>
+                </a>
               </div>
             {% empty %}
               <div class="empty-state base-dyn-empty">

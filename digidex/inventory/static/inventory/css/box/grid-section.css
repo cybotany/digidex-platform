@@ -1,3 +1,14 @@
+.block-post-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.block-post-link:hover .block-post {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
 .digit-body.storage {
   margin-bottom: 0;
 }
