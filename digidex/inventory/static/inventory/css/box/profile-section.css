@@ -126,7 +126,6 @@
 
 .tab-content {
   display: none;
-  margin-top: -2px;
   flex-grow: 2;
 }
 
