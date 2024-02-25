@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Fetch the environment variable indicating the environment.
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '')
 DJANGO_ENV = os.environ.get('DJANGO_ENV', 'production')
-STATIC_MANAGEMENT = os.getenv('STATIC_MANAGEMENT', 'default')
+STATIC_MANAGEMENT = os.getenv('STATIC_MANAGEMENT', 'local')
 
 GOOGLE_CLOUD_PROJECT_ID = os.environ.get('GOOGLE_CLOUD_PROJECT_ID', '')
 RECAPTCHA_SITE_KEY = os.environ.get('RECAPTCHA_SITE_KEY', '')
@@ -74,9 +74,10 @@ else:
     CSRF_COOKIE_SECURE = False
     SECURE_SSL_REDIRECT = False
 
-    if STATIC_MANAGEMENT == 'default':
+    if STATIC_MANAGEMENT == 'local':
         STATIC_URL = '/static/'
         STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+        STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
     else:
         STATIC_URL = f'https://{AWS_S3_ENDPOINT_URL}/{AWS_LOCATION}/'
 
