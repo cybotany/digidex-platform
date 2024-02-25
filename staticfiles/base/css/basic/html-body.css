@@ -1,0 +1,46 @@
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  background-color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: #333;
+}
+
+html[data-dynpage] [data-cloak] {
+  color: transparent !important;
+}
+
+html.base-mod-touch * {
+  background-attachment: scroll !important;
+}
+
+.base-hidden {
+  display: none;
+}
+
+.base-block {
+  display: block;
+}
+
+.base-code-block {
+  margin: unset;
+}
+
+.base-inline-block {
+  max-width: 100%;
+  display: inline-block;
+}
+
+.base-condition-invisible {
+  display: none !important;
+}
+
+.base-layout-layout {
+  display: grid;
+}
