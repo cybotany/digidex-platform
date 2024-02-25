@@ -77,11 +77,19 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.tab-headings {
+  display: flex;
+  justify-content: space-around;
+  margin: 0 -10px;
+}
+
 .tab-heading {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  flex-grow: 1;
+  text-align: center;
   padding: 1.2em;
   margin: 0 10px;
   background-color: var(--accent-red);
