@@ -28,13 +28,10 @@
 }
 
 .grid-profile {
-  background-color: var(--honeydew-background);
   grid-column-gap: 3em;
   grid-row-gap: 1.8em;
   grid-template-rows: auto;
   grid-template-columns: 1fr 2fr;
-  border-radius: 20px;
-  transition: box-shadow 0.3s ease-in-out; 
 }
 
 .profile-avatar {
@@ -46,6 +43,9 @@
   padding-top: 1.2em;
   padding-bottom: 1.2em;
   display: flex;
+  background-color: var(--honeydew-background);
+  border-radius: 20px;
+  transition: box-shadow 0.3s ease-in-out; 
 }
 
 .avatar-image {
@@ -85,6 +85,9 @@
   padding-top: 1.2em;
   padding-bottom: 1.2em;
   display: flex;
+  background-color: var(--honeydew-background);
+  border-radius: 20px;
+  transition: box-shadow 0.3s ease-in-out; 
 }
 
 .block-bio-heading {
