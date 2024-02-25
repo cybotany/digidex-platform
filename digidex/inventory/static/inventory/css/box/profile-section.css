@@ -158,22 +158,22 @@
   background-color: var(--light-blue);
 }
 
-#bio .bio-text,
-#plants .plant-text,
-#pets .pet-text {
+.bio-text,
+.plant-text,
+.pet-text {
   font-weight: 500;
   line-height: 130%;
 }
 
-#bio .bio-text {
+.bio-text {
   color: var(--strong-red);
 }
 
-#plants .plant-text {
+.plant-text {
   color: var(--strong-green);
 }
 
-#pets .pet-text {
+.pet-text {
   color: var(--strong-blue);
 }
 
