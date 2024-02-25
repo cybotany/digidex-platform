@@ -85,18 +85,16 @@
               <ul>
                 <li class="bio-text">Last Login: {{ profile.created_at|date:"M. d, Y" }}</li>
                 <li class="bio-text">Location: {{ profile.location }}</li>
-                <li class="bio-text">Bio: {{ profile.bio }}</li>
+                <li class="bio-text">{{ profile.bio }}</li>
               </ul>
             </div>
             <div id="plants" class="tab-content">
               <ul>
-                <li class="plant-text">Last Plant Update: {{ profile.created_at|date:"M. d, Y" }}</li>
                 <li class="plant-text">Count of Plant Digits: {{ digits_count }}</li>
               </ul>
             </div>
             <div id="pets" class="tab-content">
               <ul>
-                <li class="pet-text">Last Pet Update: {{ profile.created_at|date:"M. d, Y" }}</li>
                 <li class="pet-text">Count of Pet Digits: {{ digits_count }}</li>
               </ul>
             </div>
