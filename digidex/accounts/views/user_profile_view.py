@@ -13,8 +13,7 @@ class UserProfileView(DetailView):
         context = super().get_context_data(**kwargs)
         profile = context['profile']
         
-        # Checks if the profile is public or if the user is authenticated 
-        # and the owner of the profile.
+        # Checks if the profile is public or if the user is authenticated and the owner of the profile.
         if profile.is_public or (self.request.user.is_authenticated and self.request.user == profile.user):
             user_digits = profile.get_user_digits()
             context['digits'] = user_digits
@@ -22,7 +21,7 @@ class UserProfileView(DetailView):
         else:
             context['digits'] = []
             context['digits_count'] = 0
-            if not self.profile.is_public:
+            if not profile.is_public:
                 context['private_profile'] = True
         
         context.update({
