@@ -10,7 +10,7 @@
         <a href="{% url 'main:contact' %}" class="nav-link base-nav-link">Contact</a>
         <div class="button-mobile">
           {% if request.user.is_authenticated %}
-            <a href="{% url 'taxonomy:landing' %}" class="nav-button-outline base-button">Taxonomy</a>
+            <!-- <a href="{% url 'taxonomy:landing' %}" class="nav-button-outline base-button">Taxonomy</a> -->
             <a href="{% url 'accounts:profile' username_slug=request.user.username_slug %}" class="nav-button-outline base-button">{{ request.user.username }}</a>
             <a href="{% url 'accounts:logout' %}" class="nav-button base-button">Logout</a>
           {% else %}
@@ -23,7 +23,7 @@
     <div class="nav">
       <div class="button-desktop">
         {% if request.user.is_authenticated %}
-          <a href="{% url 'taxonomy:landing' %}" class="nav-button-outline base-button">Taxonomy</a>
+          <!-- <a href="{% url 'taxonomy:landing' %}" class="nav-button-outline base-button">Taxonomy</a> -->
           <a href="{% url 'accounts:profile' username_slug=request.user.username_slug %}" class="nav-button-outline base-button">{{ request.user.username }}</a>
           <a href="{% url 'accounts:logout' %}" class="nav-button base-button">Logout</a>
         {% else %}
