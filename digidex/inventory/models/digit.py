@@ -16,9 +16,10 @@ class Digit(models.Model):
         description (TextField): A short description of the digitized plant.
         taxon (ForeignKey): A relationship to the Unit model, representing the plant's taxonomic classification.
         ntag (OneToOneField): A relationship to the Link model, representing the NTAG link for the digitized plant.
+        is_public (BooleanField): Indicates if the digit should be publicly visible to the public or private. Digit is private by default.
+        is_archived (BooleanField): Indicates whether the digit is archived.
         created_at (DateTimeField): The date and time when the Digit instance was created.
         last_modified (DateTimeField): The date and time when the Digit instance was last modified.
-        is_archived (BooleanField): Indicates whether the digit is archived.
     """
 
     uuid = models.UUIDField(
@@ -56,6 +57,10 @@ class Digit(models.Model):
         on_delete=models.CASCADE,
         related_name='digit',
         help_text="NTAG link for the digitized plant."
+    )
+    is_public = models.BooleanField(
+        default=False,
+        help_text='Indicates if the digit should be publicly visible to the public or private. Digit is private by default.'
     )
     is_archived = models.BooleanField(
         default=False,
