@@ -64,7 +64,7 @@
             {% else %}
               <img src="{% static 'digidex/images/placeholder.svg' %}" alt="No Image Available" class="avatar-image">
             {% endif %}
-            <div class="profile-text">Edit Profile<a href="{% url 'accounts:profile-modification' profile.user.username_slug %}" class="profile-link"></a></div>
+            <div class="profile-text"><a href="{% url 'accounts:profile-modification' profile.user.username_slug %}" class="profile-link">Edit Profile</a></div>
           </div>
           <div class="profile-bio">
             <div class="tab-headings">
