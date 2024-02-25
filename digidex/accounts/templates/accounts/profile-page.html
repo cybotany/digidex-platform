@@ -67,6 +67,9 @@
             <div class="profile-text">Edit Profile<a href="{% url 'accounts:profile-modification' profile.user.username_slug %}" class="profile-link"></a></div>
           </div>
           <div class="profile-bio"> 
+            <div class="block-bio-heading"><img src="{% static 'inventoryimages/bio.svg' %}" alt="Bio Icon" class="icon-bio">
+              <div class="bio-info">Last Login: {{ profile.created_at|date:"M. d, Y" }}</div>
+            </div>
             <div class="block-plant-heading"><img src="{% static 'inventory/images/plant.svg' %}" loading="eager" alt="" class="icon-bio">
               <div class="plant-count">Plant Digits: {{ digits_count }}</div>
             </div>

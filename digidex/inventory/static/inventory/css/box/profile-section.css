@@ -77,6 +77,21 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.block-bio-heading {
+  flex: 1;
+  margin: 0 10px;
+  grid-column-gap: 1em;
+  grid-row-gap: 1em;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--accent-red);
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1.2em;
+}
+
 .block-plant-heading {
   display: flex;
   justify-content: center;
