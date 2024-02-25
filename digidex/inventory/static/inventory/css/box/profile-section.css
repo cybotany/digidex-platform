@@ -83,6 +83,11 @@
   justify-content: space-around;
 }
 
+.tab-heading,
+.tab-content {
+  border-radius: 15px;
+}
+
 .tab-heading {
   display: flex;
   align-items: center;
@@ -93,14 +98,23 @@
   padding: 1.2em;
   margin: 0;
   background-color: var(--accent-red);
-  border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
 
-.tab-heading:hover,
 .tab-heading.active {
-  background-color: var(--honeydew-background);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 
 .icon-bio {
@@ -149,15 +163,6 @@
 #pets .pet-text {
   color: var(--strong-blue);
 }
-
-.tab-content {
-  display: none;
-}
-
-.tab-content.active {
-  display: block;
-}
-
 
 @media screen and (max-width: 767px) {
   .grid-profile {
