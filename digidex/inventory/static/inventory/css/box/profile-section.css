@@ -1,16 +1,7 @@
-.profile-subtitle {
+.content-profile {
   background-color: var(--white);
-  color: var(--heading);
-  letter-spacing: .05em;
-  text-transform: uppercase;
-  border-radius: .6em;
-  margin-bottom: .7em;
-  padding: .5em 1em;
-  font-family: IBM Plex Mono, sans-serif;
-  font-size: .7em;
-  font-weight: 500;
-  line-height: 130%;
-  box-shadow: 0 10px 20px -10px rgba(20, 23, 24, .05);
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
 }
 
 .block-profile {
@@ -32,7 +23,18 @@
   grid-row-gap: 1.8em;
   grid-template-rows: auto;
   grid-template-columns: 1fr 2fr;
+  background-color: var(--white);
+  border-radius: 20px;
 }
+
+.profile-avatar, .profile-bio {
+  border-right: 2px solid rgba(0, 0, 0, 0.1); /* Adds a subtle right border to profile-avatar */
+}
+
+.profile-bio {
+  border-left: none; /* Ensures that profile-bio does not have a left border if it's not needed */
+}
+
 
 .profile-avatar {
   grid-column-gap: 1.3em;
@@ -43,9 +45,7 @@
   padding-top: 1.2em;
   padding-bottom: 1.2em;
   display: flex;
-  background-color: var(--honeydew-background);
-  border-radius: 20px;
-  transition: box-shadow 0.3s ease-in-out; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .avatar-image {
@@ -85,9 +85,7 @@
   padding-top: 1.2em;
   padding-bottom: 1.2em;
   display: flex;
-  background-color: var(--honeydew-background);
-  border-radius: 20px;
-  transition: box-shadow 0.3s ease-in-out; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .block-bio-heading {
@@ -96,6 +94,9 @@
   justify-content: flex-start;
   align-items: center;
   display: flex;
+  background-color: var(--honeydew-background);
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .icon-bio {

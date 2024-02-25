@@ -51,14 +51,14 @@
     </div>
  
     <section class="section">
-      <div class="content">
+      <div class="content content-profile">
         <div class="block-profile">
-          <div class="profile-subtitle">Profile<br></div>
+          <div class="subtitle green">Profile<br></div>
           <h2 class="profile-heading">{{ profile.user.username }}</h2>
         </div>
         <div class="layout-grid grid-profile">
           <div class="profile-avatar"> 
-            <div class="date">Joined: {{ profile.created_at|date:"M. d, Y" }}</div>
+            <div class="date">{{ profile.created_at|date:"M. d, Y" }}</div>
             {% if profile.avatar %}
               <img src="{{ profile.avatar.url }}" alt="User avatar" class="avatar-image">
             {% else %}
@@ -72,6 +72,7 @@
             </div>
             <p class="bio-paragraph">{{ profile.bio }}</p>
           </div>
+        </div>
       </div>
     </section>
     
