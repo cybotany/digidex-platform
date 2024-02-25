@@ -1,5 +1,6 @@
 .content-profile {
   background-color: var(--background);
+  padding: 2em 0;
   border-radius: 15px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
 }
