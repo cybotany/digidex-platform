@@ -4,8 +4,12 @@ from digidex.accounts.models import Profile
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('bio', 'location', 'avatar', 'is_public',)
+        fields = ('avatar', 'bio', 'location', 'is_public',)
         widgets = {
+            'avatar': forms.FileInput(attrs={
+                'accept': 'image/*',
+                'label': 'Upload Avatar',
+            }),
             'bio': forms.Textarea(attrs={
                 'class': 'text-field base-input',
                 'placeholder': 'Short biography',
@@ -15,11 +19,9 @@ class ProfileForm(forms.ModelForm):
                 'class': 'text-field base-input',
                 'placeholder': 'Location',
             }),
-            'avatar': forms.FileInput(attrs={
-                'accept': 'image/*',
-            }),
             'is_public': forms.CheckboxInput(attrs={
                 'class': 'checkbox-input',
+                'label': 'Make Profile Public?',
             }),
         }
 
