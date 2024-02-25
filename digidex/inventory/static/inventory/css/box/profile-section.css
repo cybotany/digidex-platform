@@ -78,13 +78,12 @@
 }
 
 .block-plant-heading {
-  flex: 1;
-  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   grid-column-gap: 1em;
   grid-row-gap: 1em;
-  justify-content: flex-start;
-  align-items: center;
-  display: flex;
   background-color: var(--accent-green);
   border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -92,13 +91,12 @@
 }
 
 .block-pet-heading {
-  flex: 1;
-  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   grid-column-gap: 1em;
   grid-row-gap: 1em;
-  justify-content: flex-start;
-  align-items: center;
-  display: flex;
   background-color: var(--accent-blue);
   border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
