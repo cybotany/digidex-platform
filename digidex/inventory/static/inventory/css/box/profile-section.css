@@ -69,9 +69,9 @@
 
 .profile-bio {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
   padding: 0 0 1.2em 0;
   border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -119,20 +119,34 @@
   background-color: var(--accent-blue);
 }
 
-.bio-text, .plant-text, .pet-text {
+#bio.tab-content {
+  background-color: var(--light-red);
+}
+
+#plants.tab-content {
+  background-color: var(--light-green);
+}
+
+#pets.tab-content {
+  background-color: var(--light-blue);
+}
+
+#bio .bio-text,
+#plants .plant-text,
+#pets .pet-text {
   font-weight: 500;
   line-height: 130%;
 }
 
-.bio-text {
+#bio .bio-text {
   color: var(--strong-red);
 }
 
-.plant-text {
+#plants .plant-text {
   color: var(--strong-green);
 }
 
-.pet-text {
+#pets .pet-text {
   color: var(--strong-blue);
 }
 
