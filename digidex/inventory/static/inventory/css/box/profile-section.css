@@ -78,18 +78,16 @@
 }
 
 .block-bio-heading {
-  flex: 1;
-  margin: 0 10px;
-  grid-column-gap: 1em;
-  grid-row-gap: 1em;
+  display: flex;
   justify-content: center;
   align-items: center;
-  display: flex;
   flex-direction: column;
+  grid-column-gap: 1em;
+  grid-row-gap: 1em;
   background-color: var(--accent-red);
   border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 1.2em;
+  padding: 1em;
 }
 
 .block-plant-heading {
@@ -121,6 +119,12 @@
 .icon-bio {
   width: 2em;
   height: 2em;
+}
+
+.plant-count {
+  color: var(--strong-red);
+  font-weight: 500;
+  line-height: 130%;
 }
 
 .plant-count {
