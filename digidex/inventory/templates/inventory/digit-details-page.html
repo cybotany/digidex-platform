@@ -60,18 +60,14 @@
               {% for entry in journal_entries %}
                 <div role="listitem" class="base-dyn-item">
                   <div class="block-post large">
-                    <a href="#" class="link-post-thumbnail large base-inline-block">
-                      {% if entry.image %}
-                        <img src="{{ entry.image.url }}" alt="Journal Image" class="image-post-thumbnail large">
-                      {% else %}
-                        <img src="{% static 'digidex/images/placeholder.svg' %}" alt="Journal Image Placeholder" class="image-post-thumbnail large">
-                      {% endif %}
-                    </a>
+                    {% if entry.image %}
+                      <img src="{{ entry.image.url }}" alt="Journal Image" class="image-post-thumbnail large">
+                    {% else %}
+                      <img src="{% static 'digidex/images/placeholder.svg' %}" alt="Journal Image Placeholder" class="image-post-thumbnail large">
+                    {% endif %}
                     <div class="post large">
                       <div class="date">{{ entry.created_at }}</div>
-                      <a href="#" class="link-heading-post large base-inline-block">
-                        <h3 class="heading-post">Entry {{ entry.entry_number }}</h3>
-                      </a>
+                      <h3 class="heading-post">Entry {{ entry.entry_number }}</h3>
                       {% if entry.content %}
                         <p class="paragraph-post large">{{ summarized_content }}</p>
                       {% endif %}
@@ -95,17 +91,6 @@
                   </div>
                 </div>
               {% endfor %}
-            {% else %}
-              {% if is_owner %}
-                <div class="empty-state base-dyn-empty">
-                  <a href="{% url 'journal:entry-creation' pk=digit.journal_collection.id %}" class="link-block base-inline-block">
-                    <div class="text-empty">Create Journal Entry</div>
-                    <div class="block-icon-link">
-                      <img src="{% static 'digidex/images/bx-arrow-to-right_green.svg' %}" loading="eager" alt="" class="icon-link">
-                    </div>
-                  </a>
-                </div>
-              {% endif %}
             {% endif %}
           </div>
         </div>
