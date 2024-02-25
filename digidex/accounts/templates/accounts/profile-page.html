@@ -66,17 +66,31 @@
             {% endif %}
             <div class="profile-text">Edit Profile<a href="{% url 'accounts:profile-modification' profile.user.username_slug %}" class="profile-link"></a></div>
           </div>
-          <div class="profile-bio"> 
-            <div class="block-bio-heading"><img src="{% static 'inventory/images/bio.svg' %}" alt="Bio Icon" class="icon-bio">
-              <div class="bio-info">Last Login: {{ profile.created_at|date:"M. d, Y" }}</div>
+          <div class="profile-bio">
+            <div class="tab-headings">
+              <div class="tab-heading active" data-tab-target="#bio">
+                <img src="{% static 'inventory/images/bio.svg' %}" alt="Bio Icon" class="icon-bio">Bio
+              </div>
+              <div class="tab-heading" data-tab-target="#plants">
+                <img src="{% static 'inventory/images/plant.svg' %}" alt="Plant Icon" class="icon-bio">Plants
+              </div>
+              <div class="tab-heading" data-tab-target="#pets">
+                <img src="{% static 'inventory/images/animal.svg' %}" alt="Pet Icon" class="icon-bio">Pets
+              </div>
+            </div>            
+
+            <!-- Tab Content -->
+            <div id="bio" class="tab-content active">
+              <p>Last Login: {{ profile.created_at|date:"M. d, Y" }}</p>
             </div>
-            <div class="block-plant-heading"><img src="{% static 'inventory/images/plant.svg' %}" loading="eager" alt="" class="icon-bio">
-              <div class="plant-count">Plant Digits: {{ digits_count }}</div>
+  
+            <div id="plants" class="tab-content">
+              <p>Count of Plant Digits: {{ digits_count }}</p>
             </div>
-            <div class="block-pet-heading"><img src="{% static 'inventory/images/animal.svg' %}" loading="eager" alt="" class="icon-bio">
-              <div class="pet-count">Pet Digits: {{ digits_count }}</div>
+
+            <div id="pets" class="tab-content">
+              <p>Count of Pet Digits: {{ digits_count }}</p>
             </div>
-            <p class="bio-paragraph">{{ profile.bio }}</p>
           </div>
         </div>
       </div>
@@ -111,5 +125,25 @@
         </div>
       </div>
     </section> 
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const tabs = document.querySelectorAll('.tab-heading');
+        const tabContents = document.querySelectorAll('.tab-content');
+      
+        tabs.forEach(tab => {
+          tab.addEventListener('click', () => {
+            const target = document.querySelector(tab.dataset.tabTarget);
+            
+            // Remove active class from all tabs and contents
+            tabs.forEach(t => t.classList.remove('active'));
+            tabContents.forEach(c => c.classList.remove('active'));
+      
+            // Add active class to clicked tab and its content
+            tab.classList.add('active');
+            target.classList.add('active');
+          });
+        });
+      });
+      </script>      
   </body>
 </html>

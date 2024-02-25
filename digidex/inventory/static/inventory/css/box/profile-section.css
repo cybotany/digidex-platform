@@ -77,6 +77,17 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.tab-heading:hover {
+  background-color: #f0f0f0;
+}
+
+.tab-heading.active {
+  background-color: #e0e0e0;
+  color: var(--strong-color);
+  box-shadow: inset 0 -2px 0 0 var(--highlight-color);
+}
+
+
 .block-bio-heading {
   display: flex;
   justify-content: center;
