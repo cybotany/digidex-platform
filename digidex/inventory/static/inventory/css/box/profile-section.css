@@ -35,6 +35,7 @@
   padding-top: 1.2em;
   padding-bottom: 1.2em;
   display: flex;
+  border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -67,18 +68,31 @@
 }
 
 .profile-bio {
-  grid-column-gap: 1.3em;
-  grid-row-gap: 1.3em;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding-top: 1.2em;
-  padding-bottom: 1.2em;
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1.2em 2em;
+  border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.block-bio-heading {
+.block-plant-heading {
+  flex: 1;
+  margin: 0 10px;
+  grid-column-gap: 1em;
+  grid-row-gap: 1em;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+  background-color: var(--honeydew-background);
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.block-pet-heading {
+  flex: 1;
+  margin: 0 10px;
   grid-column-gap: 1em;
   grid-row-gap: 1em;
   justify-content: flex-start;
@@ -94,13 +108,13 @@
   height: 2em;
 }
 
-.plant-inventory-count {
+.plant-count {
   color: var(--strong-green);
   font-weight: 500;
   line-height: 130%;
 }
 
-.pet-inventory-count {
+.pet-count {
   color: var(--strong-blue);
   font-weight: 500;
   line-height: 130%;

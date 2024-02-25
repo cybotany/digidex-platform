@@ -67,8 +67,11 @@
             <div class="profile-text">Edit Profile<a href="{% url 'accounts:profile-modification' profile.user.username_slug %}" class="profile-link"></a></div>
           </div>
           <div class="profile-bio"> 
-            <div class="block-bio-heading"><img src="{% static 'inventory/images/plant.svg' %}" loading="eager" alt="" class="icon-bio">
-              <div class="plant-inventory-count">Plant Digits Captured: {{ digits_count }}</div>
+            <div class="block-plant-heading"><img src="{% static 'inventory/images/plant.svg' %}" loading="eager" alt="" class="icon-bio">
+              <div class="plant-count">Plant Digits Captured: {{ digits_count }}</div>
+            </div>
+            <div class="block-pet-heading"><img src="{% static 'inventory/images/animal.svg' %}" loading="eager" alt="" class="icon-bio">
+              <div class="pet-count">Pet Digits Captured: {{ digits_count }}</div>
             </div>
             <p class="bio-paragraph">{{ profile.bio }}</p>
           </div>
