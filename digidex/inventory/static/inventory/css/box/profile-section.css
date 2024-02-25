@@ -77,16 +77,37 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.tab-heading:hover {
-  background-color: #f0f0f0;
+.tab-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 1.2em;
+  margin: 0 10px;
+  background-color: var(--accent-red);
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 }
 
+.tab-heading:hover,
 .tab-heading.active {
-  background-color: #e0e0e0;
-  color: var(--strong-color);
-  box-shadow: inset 0 -2px 0 0 var(--highlight-color);
+  background-color: var(--honeydew-background);
 }
 
+.icon-bio {
+  margin-bottom: 5px;
+}
+
+.tab-heading[data-tab-target="#bio"] {
+  background-color: var(--accent-red);
+}
+.tab-heading[data-tab-target="#plants"] {
+  background-color: var(--accent-green);
+}
+.tab-heading[data-tab-target="#pets"] {
+  background-color: var(--accent-blue);
+}
 
 .block-bio-heading {
   display: flex;
