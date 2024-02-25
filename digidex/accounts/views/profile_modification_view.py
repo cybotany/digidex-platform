@@ -15,7 +15,9 @@ class ProfileModificationView(LoginRequiredMixin, UpdateView):
         """
         Only allow editing the profile associated with the currently logged-in user.
         """
-        profile = super().get_object(queryset)
+        username_slug = self.kwargs.get('username_slug')
+        profile = get_object_or_404(Profile, user__username_slug=username_slug)
+
         if profile.user != self.request.user:
             raise PermissionDenied("You do not have permission to modify this profile.")
         return profile
