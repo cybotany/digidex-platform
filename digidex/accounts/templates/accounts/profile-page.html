@@ -82,6 +82,8 @@
             <!-- Tab Content -->
             <div id="bio" class="tab-content active">
               <p>Last Login: {{ profile.created_at|date:"M. d, Y" }}</p>
+              <p>Location: {{ profile.location }}</p>
+              <p>Bio: {{ profile.bio }}</p>
             </div>
             <div id="plants" class="tab-content">
               <p>Count of Plant Digits: {{ digits_count }}</p>
