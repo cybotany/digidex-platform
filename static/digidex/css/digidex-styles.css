@@ -26,9 +26,9 @@
   --accent-warning: rgba(255, 193, 7, .09);
   --accent-info: rgba(59, 111, 149, .09);
 
-  --pale-lime-green: #C7F9CC;
-  --tea-green: #D0F0C0;
-  --honeydew: #F0FFF0;
+  --pale-lime-green-background: rgba(199, 249, 204, 0.8);
+  --tea-green-background: rgba(208, 240, 192, 0.8);
+  --honeydew-background: rgba(240, 255, 240, 0.8);
 }
 
 

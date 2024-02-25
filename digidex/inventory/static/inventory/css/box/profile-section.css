@@ -28,11 +28,13 @@
 }
 
 .grid-profile {
-  background-color: var(--pale-lime-green);
+  background-color: var(--pale-lime-green-background);
   grid-column-gap: 3em;
   grid-row-gap: 1.8em;
   grid-template-rows: auto;
   grid-template-columns: 1fr 2fr;
+  border-radius: 20px;
+  transition: box-shadow 0.3s ease-in-out; 
 }
 
 .profile-avatar {
@@ -86,7 +88,7 @@
 }
 
 .block-bio-heading {
-  color: var(--tea-green);
+  color: var(--tea-green-background);
   grid-column-gap: 1em;
   grid-row-gap: 1em;
   justify-content: flex-start;
@@ -112,7 +114,7 @@
 }
 
 .bio-paragraph {
-  color: var(--honeydew);
+  color: var(--honeydew-background);
 }
 
 @media screen and (max-width: 767px) {
