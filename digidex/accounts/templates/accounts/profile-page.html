@@ -69,15 +69,15 @@
           <div class="profile-bio">
             <div class="tab-headings">
               <div class="tab-heading active" data-tab-target="#bio">
-                <img src="{% static 'inventory/images/bio.svg' %}" alt="Bio Icon" class="icon-bio">Bio
+                <img src="{% static 'inventory/images/bio.svg' %}" alt="Bio Icon" class="icon-bio"><span class="bio-text">Bio</span>
               </div>
               <div class="tab-heading" data-tab-target="#plants">
-                <img src="{% static 'inventory/images/plant.svg' %}" alt="Plant Icon" class="icon-bio">Plants
+                <img src="{% static 'inventory/images/plant.svg' %}" alt="Plant Icon" class="icon-bio"><span class="plant-text">Plants</span>
               </div>
               <div class="tab-heading" data-tab-target="#pets">
-                <img src="{% static 'inventory/images/animal.svg' %}" alt="Pet Icon" class="icon-bio">Pets
+                <img src="{% static 'inventory/images/animal.svg' %}" alt="Pet Icon" class="icon-bio"><span class="pet-text">Pets</span>
               </div>
-            </div>            
+            </div>                       
 
             <!-- Tab Content -->
             <div id="bio" class="tab-content active">
@@ -129,19 +129,26 @@
         const tabContents = document.querySelectorAll('.tab-content');
       
         tabs.forEach(tab => {
-          tab.addEventListener('click', () => {
+          tab.addEventListener('click', function() {
             const target = document.querySelector(tab.dataset.tabTarget);
-            
+            const activeColor = window.getComputedStyle(tab).backgroundColor;
+      
             // Remove active class from all tabs and contents
-            tabs.forEach(t => t.classList.remove('active'));
-            tabContents.forEach(c => c.classList.remove('active'));
+            tabs.forEach(t => {
+              t.classList.remove('active');
+            });
+            tabContents.forEach(c => {
+              c.classList.remove('active');
+              c.style.backgroundColor = ""; // Reset background color
+            });
       
             // Add active class to clicked tab and its content
             tab.classList.add('active');
             target.classList.add('active');
+            target.style.backgroundColor = activeColor; // Apply active tab's background color to content
           });
         });
       });
-      </script>      
+    </script>          
   </body>
 </html>
