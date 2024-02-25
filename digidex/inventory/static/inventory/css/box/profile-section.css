@@ -83,7 +83,8 @@
   display: flex;
   justify-content: space-between;
   width:100%;
-  margin-bottom: -1px; 
+  position: relative;
+  z-index: 2;
 }
 
 .tab-heading,
@@ -103,6 +104,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   margin: 0;
+  position: relative; 
   border-radius: 15px 15px 0 0;
   transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
@@ -128,6 +130,8 @@
   display: none;
   margin-top: -2px;
   flex-grow: 2;
+  position: relative;
+  z-index: 1;
 }
 
 .tab-content.active {
@@ -140,6 +144,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
   transform: translateY(-2px);
+  z-index: 3;
 }
 
 .icon-bio {
