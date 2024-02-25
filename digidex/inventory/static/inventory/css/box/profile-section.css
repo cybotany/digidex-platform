@@ -100,10 +100,11 @@
   flex: 1;
   padding: 1em;
   background-color: var(--accent-red);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   margin: 0 1px;
   border-radius: 15px 15px 0 0;
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
 .tab-heading:first-child, .tab-heading:last-child {
@@ -114,6 +115,13 @@
 .tab-heading.active {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.tab-heading:not(.active):hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
 }
 
 .tab-content {
