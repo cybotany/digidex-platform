@@ -30,7 +30,10 @@ class Collection(models.Model):
     object_id = models.PositiveIntegerField(
         help_text="The ID of the digit associated with this journal collection."
     )
-    content_object = GenericForeignKey('content_type', 'object_id')
+    content_object = GenericForeignKey(
+        'content_type',
+        'object_id'
+    )
     created_at = models.DateTimeField(
         auto_now_add=True,
         verbose_name="Created At",
