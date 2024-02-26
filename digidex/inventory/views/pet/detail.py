@@ -6,9 +6,9 @@ from django.core.exceptions import PermissionDenied
 from digidex.inventory.models import Pet
 from digidex.journal.models import Entry
 
-class PetDetails(DetailView):
+class DetailPet(DetailView):
     model = Pet
-    template_name = 'inventory/pets/pet-details-page.html'
+    template_name = 'inventory/pet/detail-page.html'
 
     def get_object(self, queryset=None):
         # Prefetch related objects to optimize database queries for journal entries

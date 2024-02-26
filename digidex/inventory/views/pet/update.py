@@ -10,10 +10,10 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-class PetModification(LoginRequiredMixin, UpdateView):
+class UpdatePet(LoginRequiredMixin, UpdateView):
     model = Pet
     form_class = PetForm
-    template_name = 'inventory/pet/modification-page.html'
+    template_name = 'inventory/pet/update-page.html'
 
     def get_object(self, queryset=None):
         queryset = queryset or self.get_queryset()
@@ -41,7 +41,7 @@ class PetModification(LoginRequiredMixin, UpdateView):
         """
         If the form is invalid, optionally add an error message before re-rendering the form.
         """
-        messages.error(self.request, "There was a problem with the form. Please check the details you entered.")  # Optionally add error message
+        messages.error(self.request, "There was a problem with the form. Please check the details you entered.")
         return super().form_invalid(form)
 
     def get_success_url(self):

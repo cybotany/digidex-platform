@@ -7,9 +7,9 @@ from digidex.inventory.models import Plant
 from digidex.journal.models import Entry
 
 
-class PlantDetails(DetailView):
+class DetailPlant(DetailView):
     model = Plant
-    template_name = 'inventory/plants/plant-details-page.html'
+    template_name = 'inventory/plant/detail-page.html'
 
     def get_object(self, queryset=None):
         queryset = queryset or self.get_queryset().prefetch_related(

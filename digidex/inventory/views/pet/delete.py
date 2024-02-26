@@ -10,7 +10,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-class PetDeletion(LoginRequiredMixin, DeleteView):
+class DeletePet(LoginRequiredMixin, DeleteView):
     model = Pet
 
     def get_object(self, queryset=None):

@@ -3,11 +3,11 @@
 <html>
   <head>  
     <meta charset="utf-8">
-    <title>Modify Plant - Digidex</title>
+    <title>Create Plant Digit - Digidex</title>
     <meta content="A platform for gardeners to cultivate their curiosity." name="description">
-    <meta content="Modify Plant - Digidex" property="og:title">
+    <meta content="Create Plant Digit - Digidex" property="og:title">
     <meta content="A platform for gardeners to cultivate their curiosity." property="og:description">
-    <meta content="Modify Plant - Digidex" property="twitter:title">
+    <meta content="Create Plant Digit - Digidex" property="twitter:title">
     <meta content="A platform for gardeners to cultivate their curiosity." property="twitter:description">
     <meta property="og:type" content="website">
     <meta content="summary_large_image" name="twitter:card">
@@ -16,8 +16,8 @@
     <link href="{% static 'base/css/normalize.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'base/css/base-styles.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'digidex/css/digidex-styles.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'inventory/css/inventory-styles.css' %}" rel="stylesheet" type="text/css">  
-    
+    <link href="{% static 'inventory/css/inventory-styles.css' %}" rel="stylesheet" type="text/css">
+  
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
     
@@ -30,14 +30,14 @@
         }
       });
     </script>
-    
+
     {% load i18n %}
     <script src="{% static 'digidex/js/jquery/jquery.js' %}"></script>
         
     <!-- Load Select2 and CSS -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> 
-    
+
     <link href="{% static 'digidex/images/favicon.png' %}" rel="shortcut icon" type="image/x-icon">
     <link href="{% static 'digidex/images/webclip.png' %}" rel="apple-touch-icon">
   </head>
@@ -47,16 +47,10 @@
     <section class="section-full">
       <div class="content">
         <div class="account-form">
-          <div class="subtitle green">Modify<br></div>
-          <h2 class="account-heading">Update or delete plant</h2>
+          <div class="subtitle green">Create<br></div>
+          <h2 class="account-heading">Create digitized plant</h2>
           <div class="form-block base-form">
             {% include 'inventory/plant/partials/form.html' %}
-          </div>
-          <div class="delete-digit">
-            <form action="{% url 'inventory:plant-deletion' plant.uuid %}" method="post">
-              {% csrf_token %}
-              <input type="submit" value="Delete Digit" class="delete-button base-button" onclick="return confirm('Are you sure you want to delete this Plant? This action cannot be undone.');">
-            </form>
           </div>
         </div>
       </div>

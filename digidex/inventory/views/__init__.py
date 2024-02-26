@@ -1,2 +1,2 @@
-from .pet import PetDeletion, PetDetails, PetModification
-from .plant import PlantDeletion, PlantDetails, PlantModification
+from .pet import DetailPet, UpdatePet, DeletePet
+from .plant import DetailPlant, UpdatePlant, DeletePlant

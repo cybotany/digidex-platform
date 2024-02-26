@@ -1,5 +1,5 @@
 from digidex.inventory.models import Pet
-from .digit_form import DigitForm
+from ..base import DigitForm
 
 class PetForm(DigitForm):
     """

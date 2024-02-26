@@ -4,9 +4,9 @@ from django.shortcuts import get_object_or_404
 from django.core.exceptions import PermissionDenied
 from digidex.journal.models import Entry
 
-class EntryDetailView(LoginRequiredMixin, DetailView):
+class DetailEntry(LoginRequiredMixin, DetailView):
     model = Entry
-    template_name = 'journal/entry-details-page.html'
+    template_name = 'journal/entry/detail-page.html'
     context_object_name = 'entry'
 
     def get_object(self, queryset=None):

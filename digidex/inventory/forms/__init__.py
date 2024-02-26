@@ -1,2 +1,2 @@
-from .pet_form import PetForm
-from .plant_form import PlantForm
+from .pet import PetForm
+from .plant import PlantForm

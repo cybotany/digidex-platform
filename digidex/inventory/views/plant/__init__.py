@@ -1,3 +1,3 @@
-from .deletion import PlantDeletion
-from .details import PlantDetails
-from .modification import PlantModification
+from .detail import DetailPlant
+from .update import UpdatePlant
+from .delete import DeletePlant

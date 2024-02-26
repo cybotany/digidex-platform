@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from digidex.journal.models import Entry, Collection
 
-class EntryCollectionView(LoginRequiredMixin, ListView):
+class DetailCollection(LoginRequiredMixin, ListView):
     model = Entry
     context_object_name = 'entries'
     template_name = 'journal/entry-collection-page.html'

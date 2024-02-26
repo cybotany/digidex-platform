@@ -1,3 +1,3 @@
-from .deletion import PetDeletion
-from .details import PetDetails
-from .modification import PetModification
+from .detail import DetailPet
+from .update import UpdatePet
+from .delete import DeletePet

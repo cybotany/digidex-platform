@@ -1,5 +1,5 @@
 from digidex.inventory.models import Plant
-from .digit_form import DigitForm
+from ..base import DigitForm
 
 class PlantForm(DigitForm):
     """

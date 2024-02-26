@@ -9,10 +9,10 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-class EntryCreationView(LoginRequiredMixin, CreateView):
+class AddEntry(LoginRequiredMixin, CreateView):
     model = Entry
     form_class = JournalEntry
-    template_name = 'journal/entry-creation-page.html'
+    template_name = 'journal/entry/form-page.html'
 
     def dispatch(self, request, *args, **kwargs):
         collection_id = self.kwargs.get('pk')

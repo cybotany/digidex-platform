@@ -11,7 +11,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-class NTAGLinkView(LoginRequiredMixin, View):
+class NTAGLink(LoginRequiredMixin, View):
     def get_object(self):
         serial_number = self.kwargs.get('serial_number')
         if not serial_number:

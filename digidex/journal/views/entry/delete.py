@@ -10,7 +10,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-class EntryDeletionView(LoginRequiredMixin, DeleteView):
+class DeleteEntry(LoginRequiredMixin, DeleteView):
     model = Entry
 
     def get_object(self, queryset=None):

@@ -1,14 +1,14 @@
 from django.urls import path
-from digidex.inventory.views import (PlantDetails, PlantModification, PlantDeletion,
-                                     PetDetails, PetModification, PetDeletion)
+from digidex.inventory.views import (DetailPet, UpdatePet, DeletePet,
+                                     DetailPlant, UpdatePlant, DeletePlant)
 
 app_name = 'inventory'
 urlpatterns = [
-    path('plant/<uuid:uuid>/', PlantDetails.as_view(), name='plant-details'),
-    path('plant/<uuid:uuid>/modification/', PlantModification.as_view(), name='plant-modification'),
-    path('plant/<uuid:uuid>/deletion/', PlantDeletion.as_view(), name='plant-deletion'),
+    path('pet/<uuid:uuid>/', DetailPet.as_view(), name='detail-pet'),
+    path('pet/<uuid:uuid>/update/', UpdatePet.as_view(), name='update-pet'),
+    path('pet/<uuid:uuid>/delete/', DeletePet.as_view(), name='delete-pet'),
 
-    path('pet/<uuid:uuid>/', PetDetails.as_view(), name='pet-details'),
-    path('pet/<uuid:uuid>/modification/', PetModification.as_view(), name='pet-modification'),
-    path('pet/<uuid:uuid>/deletion/', PetDeletion.as_view(), name='pet-deletion'),
+    path('plant/<uuid:uuid>/', DetailPlant.as_view(), name='detail-plant'),
+    path('plant/<uuid:uuid>/update/', UpdatePlant.as_view(), name='update-plant'),
+    path('plant/<uuid:uuid>/delete/', DeletePlant.as_view(), name='delete-plant'),
 ]

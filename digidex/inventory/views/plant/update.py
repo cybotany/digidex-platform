@@ -10,10 +10,10 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-class PlantModification(LoginRequiredMixin, UpdateView):
+class UpdatePlant(LoginRequiredMixin, UpdateView):
     model = Plant
     form_class = PlantForm
-    template_name = 'inventory/plant/modification-page.html'
+    template_name = 'inventory/plant/update-page.html'
 
     def get_object(self, queryset=None):
         queryset = queryset or self.get_queryset()
