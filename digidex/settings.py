@@ -196,7 +196,7 @@ EMAIL_PORT = 587
 EMAIL_USE_SSL = False
 EMAIL_USE_TLS = True
 
-LOGIN_URL = 'accounts:login'
+LOGIN_URL = 'accounts:login-user'
 
 LOG_DIR = os.path.join(BASE_DIR, 'logs')
 if not os.path.exists(LOG_DIR):
