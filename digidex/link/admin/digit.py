@@ -9,7 +9,7 @@ class DigitLink(admin.ModelAdmin):
     list_filter = ('ntag_type', 'active', 'created_at', 'last_modified', 'user__username')
     search_fields = ('serial_number', 'user__username')
     actions = ['activate_links', 'deactivate_links']
-    readonly_fields = ('user_link')
+    readonly_fields = ('user_link',)
 
     def user_link(self, obj):
         if obj.user:
