@@ -1,1 +1,1 @@
-from .ntag_link_view import NTAGLinkView
+from .ntag_link import NTAGLink

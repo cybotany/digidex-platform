@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 class NFC(models.Model):
     """
@@ -54,6 +55,46 @@ class NFC(models.Model):
         verbose_name="Last Modified",
         help_text="The date and time when the link instance was last modified."
     )
+
+    def activate_link(self, user):
+        """
+        Activates the link, associating it with a user and setting it as active.
+        """
+        self.user = user
+        self.active = True
+        self.save()
+
+    def deactivate_link(self):
+        """
+        Deactivates the link, making it inactive.
+        """
+        self.active = False
+        self.save()
+
+    def check_access(self, user):
+        """
+        Checks if a user has access to the link.
+        """
+        return self.active and self.user == user
+
+    def reset_to_default(self):
+        """
+        Resets the link to its default settings.
+        """
+        self.active = False
+        self.user = None
+        self.save()
+
+    def get_absolute_url(self):
+        """
+        Returns the absolute URL for the NFC instance.
+        
+        This URL is unique for each NFC link and can be used to access specific resources or views related to it.
+
+        Returns:
+            str: The absolute URL for the NFC instance.
+        """
+        return reverse('link:digit', kwargs={'serial_number': self.serial_number})
 
     class Meta:
         abstract = True

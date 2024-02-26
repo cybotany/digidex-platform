@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, get_object_or_404
 from django.http import Http404, HttpResponseRedirect
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -20,9 +20,9 @@ class NTAGLinkView(LoginRequiredMixin, View):
 
     def get_form_and_model(self, tag_use):
         if tag_use == 'plant':
-            return PlantForm, Plant, 'inventory/plant_creation_page.html'
+            return PlantForm, Plant, 'inventory/plant/creation-page.html'
         elif tag_use == 'pet':
-            return PetForm, Pet, 'inventory/pet_creation_page.html'
+            return PetForm, Pet, 'inventory/pet/creation-page.html'
         else:
             raise ValueError("Unsupported tag use type")
 
@@ -44,7 +44,7 @@ class NTAGLinkView(LoginRequiredMixin, View):
         associated_digit = self.get_associated_digit(ntag)
         if ntag.active and associated_digit:
             if ntag.user == request.user:
-                return redirect('inventory:digit-details', uuid=associated_digit.uuid)
+                return HttpResponseRedirect(associated_digit.get_absolute_url())
             else:
                 raise PermissionDenied("You do not have permission to view this digit.")
         else:

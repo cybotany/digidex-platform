@@ -1,7 +1,5 @@
 import uuid
 from django.db import models, transaction
-from django.urls import reverse
-
 
 class Digit(models.Model):
     """
@@ -113,21 +111,18 @@ class Digit(models.Model):
         Overrides the save method of the model. If name is not provided, it sets a default name 
         based on the count of Digits the user has.
         """
-        if not self.name:
-            user_digit_count = Digit.objects.filter(ntag__user=self.ntag.user).count()
-            self.name = f'Digit {user_digit_count + 1}'
+        if not self.name and self.ntag:
+            user_digit_count = Digit.objects.filter(
+                ntag__user=self.ntag.user,
+                ntag__ntag_use=self.ntag.ntag_use
+            ).count()
+
+            default_name_prefix = self.ntag.get_ntag_use_display()  # Assumes readable name for ntag_use
+            self.name = f"{default_name_prefix} {user_digit_count + 1}"
 
         super().save(*args, **kwargs)
 
-    def get_absolute_url(self):
-        """
-        Get the URL to view the details of this digit.
-
-        Returns:
-            str: The URL to view the details of this digit.
-        """
-        return reverse('inventory:digit-details', kwargs={'uuid': self.uuid})
-
     class Meta:
-        verbose_name = "Digit"
-        verbose_name_plural = "Digits"
+        abstract = True
+        ordering = ['-created_at']
+        

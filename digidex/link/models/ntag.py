@@ -1,14 +1,33 @@
 from django.db import models
-from django.urls import reverse
-
 from .nfc import NFC
-from .constants import NTAG_TYPES, NTAG_USES
 
 class NTAG(NFC):
     """
     Model representing NTAGs, a specific implementation of NFC tags.
     Inherits common attributes from NFC and can include NTAG-specific fields and methods.
     """
+    NTAG_TYPES = [
+        ('NTAG_424_DNA_TagTamper', 'NTAG 424 DNA TagTamper'),
+        ('NTAG_424_DNA', 'NTAG 424 DNA'),
+        ('NTAG_426Q_DNA', 'NTAG 426Q DNA'),
+        ('NTAG_223_DNA', 'NTAG 223 DNA'),
+        ('NTAG_224_DNA', 'NTAG 224 DNA'),
+        ('NTAG_223_DNA_StatusDetect', 'NTAG 223 DNA StatusDetect'),
+        ('NTAG_224_DNA_StatusDetect', 'NTAG 224 DNA StatusDetect'),
+        ('NTAG_213_TagTamper', 'NTAG 213 TagTamper'),
+        ('NTAG_213', 'NTAG 213'),
+        ('NTAG_215', 'NTAG 215'),
+        ('NTAG_216', 'NTAG 216'),
+        ('NTAG_210', 'NTAG 210'),
+        ('NTAG_212', 'NTAG 212'),
+        ('NTAG_210µ', 'NTAG 210µ'),
+    ]
+
+    NTAG_USES = [
+        ('plant_label', 'Plant Label'),
+        ('pet_tag', 'Pet Tag'),
+    ]
+
     ntag_type = models.CharField(
         max_length=25,
         blank=True,
@@ -22,46 +41,6 @@ class NTAG(NFC):
         verbose_name="NTAG Use",
         help_text="The intended use of the NTAG."
     )
-
-    def activate_link(self, user):
-        """
-        Activates the link, associating it with a user and setting it as active.
-        """
-        self.user = user
-        self.active = True
-        self.save()
-
-    def deactivate_link(self):
-        """
-        Deactivates the link, making it inactive.
-        """
-        self.active = False
-        self.save()
-
-    def check_access(self, user):
-        """
-        Checks if a user has access to the link.
-        """
-        return self.active and self.user == user
-
-    def reset_to_default(self):
-        """
-        Resets the link to its default settings.
-        """
-        self.active = False
-        self.user = None
-        self.save()
-
-    def get_absolute_url(self):
-        """
-        Returns the absolute URL for the NTAG instance.
-        
-        This URL is unique for each NTAG link and can be used to access specific resources or views related to it.
-
-        Returns:
-            str: The absolute URL for the NTAG instance.
-        """
-        return reverse('link:digit', kwargs={'serial_number': self.serial_number})
 
     def __str__(self):
         """
