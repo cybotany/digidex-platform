@@ -5,27 +5,27 @@ from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
-from digidex.inventory.models import Digit
+from digidex.inventory.models import Pet
 import logging
 
 logger = logging.getLogger(__name__)
 
-class DigitDeletionView(LoginRequiredMixin, DeleteView):
-    model = Digit
+class PetDeletion(LoginRequiredMixin, DeleteView):
+    model = Pet
 
     def get_object(self, queryset=None):
         queryset = queryset or self.get_queryset()
         uuid = self.kwargs.get('uuid')
         if not uuid:
             raise Http404("No uuid provided")
-        digit = get_object_or_404(queryset, uuid=uuid)
+        pet = get_object_or_404(queryset, uuid=uuid)
 
         # Permission check
         user = self.request.user
-        if digit.ntag.user != user:
-            raise PermissionDenied("You do not have permission to delete this digit.")
+        if pet.ntag.user != user:
+            raise PermissionDenied("You do not have permission to delete this pet.")
 
-        return digit
+        return pet
 
     def get_success_url(self):
         """
@@ -41,7 +41,7 @@ class DigitDeletionView(LoginRequiredMixin, DeleteView):
         add a success message.
         """
         obj = self.get_object()
-        success_message = f"The digit '{obj}' was deleted successfully."
+        success_message = f"The pet '{obj}' was deleted successfully."
         response = super().delete(request, *args, **kwargs)
         messages.success(self.request, success_message)
         return response

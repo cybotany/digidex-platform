@@ -1,3 +1,2 @@
-from .digit_details_view import DigitDetailsView
-from .digit_deletion_view import DigitDeletionView
-from .digit_modification_view import DigitModificationView
+from .pet import PetDeletion, PetDetails, PetModification
+from .plant import PlantDeletion, PlantDetails, PlantModification

@@ -1,6 +1,9 @@
 // DOM Elements
 const taxonomicUnitField = document.getElementById('id_taxon');
 
+// Get kingdom_id from data attribute
+const kingdomId = taxonomicUnitField.getAttribute('data-kingdom-id');
+
 // Configurations for select2
 const select2Config = {
   ajax: {
@@ -10,7 +13,8 @@ const select2Config = {
     data: function (params) {
       return {
         q: params.term,
-        page: params.page
+        page: params.page,
+        kingdom_id: kingdomId
       };
     },
     processResults: function (data) {

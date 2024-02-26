@@ -3,13 +3,13 @@ from django.views.generic import DetailView
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.core.exceptions import PermissionDenied
-from digidex.inventory.models import Digit
+from digidex.inventory.models import Plant
 from digidex.journal.models import Entry
 
 
-class DigitDetailsView(DetailView):
-    model = Digit
-    template_name = 'inventory/digit-details-page.html'
+class PlantDetails(DetailView):
+    model = Plant
+    template_name = 'inventory/plants/plant-details-page.html'
 
     def get_object(self, queryset=None):
         queryset = queryset or self.get_queryset().prefetch_related(
@@ -18,25 +18,25 @@ class DigitDetailsView(DetailView):
         uuid = self.kwargs.get('uuid')
         if not uuid:
             raise Http404("No uuid provided")
-        digit = get_object_or_404(queryset, uuid=uuid)
+        plant = get_object_or_404(queryset, uuid=uuid)
 
         # Permission check
-        if not digit.is_public:
+        if not plant.is_public:
             user = self.request.user
-            if not user.is_authenticated or digit.ntag.user != user:
-                raise PermissionDenied("You do not have permission to view this digit.")
+            if not user.is_authenticated or plant.ntag.user != user:
+                raise PermissionDenied("You do not have permission to view this Plant.")
 
-        return digit
+        return plant
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        digit = self.object
+        plant = self.object
         user = self.request.user
 
-        is_owner = user.is_authenticated and digit.ntag.user == user
+        is_owner = user.is_authenticated and plant.ntag.user == user
 
-        journal_collection = digit.journal_collection
-        journal_entries = journal_collection.get_all_entries() if digit.is_public or is_owner else []
+        journal_collection = plant.journal_collection
+        journal_entries = journal_collection.get_all_entries() if plant.is_public or is_owner else []
 
         context.update({
             'journal_entries': journal_entries,
