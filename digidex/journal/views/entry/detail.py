@@ -10,12 +10,10 @@ class DetailEntry(LoginRequiredMixin, DetailView):
     context_object_name = 'entry'
 
     def get_object(self, queryset=None):
-        # Retrieve the entry based on the passed UUID or primary key
         pk = self.kwargs.get('pk')
-        entry = get_object_or_404(Entry, pk=pk)
-
-        # Check if the logged-in user owns the digit linked to the entry's collection
-        if entry.collection.digit.ntag.user != self.request.user:
+        entry = get_object_or_404(Entry, pk=pk)        
+        entity = entry.collection.content_object
+        if hasattr(entity, 'ntag') and entity.ntag.user != self.request.user:
             raise PermissionDenied("You do not have permission to view this entry.")
         
         return entry
@@ -24,10 +22,10 @@ class DetailEntry(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         entry = context.get('entry')
 
-        collection_url = entry.collection.get_absolute_url() if entry.collection else "#"
-        digit_url = entry.collection.digit.get_absolute_url() if entry.collection and entry.collection.digit else "#"
+        collection_url = entry.collection.get_absolute_url()
+        entity_url = entry.collection.get_entity_url()
         
-        entry_heading = f"{entry.collection.get_digit_name()}'s Journal"
+        entry_heading = f"{entry.collection.get_entity_name()}'s Journal"
         entry_date = entry.created_at.strftime('%B %d, %Y')
         entry_number = f"Entry {entry.entry_number}"
 
@@ -36,7 +34,7 @@ class DetailEntry(LoginRequiredMixin, DetailView):
             'heading': entry_heading,
             'date': entry_date,
             'paragraph': entry_number,
-            'digit_url': digit_url,
             'collection_url': collection_url,
+            'entity_url': entity_url,
         })
         return context

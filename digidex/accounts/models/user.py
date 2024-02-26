@@ -8,7 +8,6 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.utils.text import slugify
 from django.conf import settings
-
 from digidex.accounts.validators import username_validator
 from digidex.utils.models import EmailLog
 
@@ -68,7 +67,7 @@ class User(AbstractUser):
     def send_verification_email(self):
         token = PasswordResetTokenGenerator().make_token(self)
         uid = urlsafe_base64_encode(force_bytes(self.pk))
-        base_url = reverse('accounts:verify-email', kwargs={'uidb64': uid, 'token': token})
+        base_url = reverse('accounts:verify-user', kwargs={'uidb64': uid, 'token': token})
         full_url = f'{settings.SITE_HOST}{base_url}'
 
         # Use EmailLog to create and send the email

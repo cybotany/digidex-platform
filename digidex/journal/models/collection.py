@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
-
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 
 class Collection(models.Model):
     """
@@ -19,12 +20,17 @@ class Collection(models.Model):
         related_name='journal_thumbnail',
         help_text="Reference to the entry that contains the thumbnail image."
     )
-    digit = models.OneToOneField(
-        'inventory.Digit',
+    content_type = models.ForeignKey(
+        ContentType,
         on_delete=models.CASCADE,
-        related_name='journal_collection',
-        help_text="The digit associated with this journal collection."
+        limit_choices_to=models.Q(app_label='inventory', model='plant') | 
+                          models.Q(app_label='inventory', model='pet'),
+        help_text="The type of the digit associated with this journal collection."
     )
+    object_id = models.PositiveIntegerField(
+        help_text="The ID of the digit associated with this journal collection."
+    )
+    content_object = GenericForeignKey('content_type', 'object_id')
     created_at = models.DateTimeField(
         auto_now_add=True,
         verbose_name="Created At",
@@ -39,15 +45,24 @@ class Collection(models.Model):
     def get_absolute_url(self):
         return reverse('journal:collection', kwargs={'pk': self.id})
 
-    def get_digit_name(self):
-        return self.digit.name if self.digit else "No Digit"
+    def get_entity_name(self):
+        """
+        Returns the name of the associated Plant or Pet entity.
+        """
+        return self.content_object.name if self.content_object else "No Entity"
 
-    def get_digit_description(self):
-        return self.digit.description if self.digit else "No Description"
+    def get_entity_description(self):
+        """
+        Returns the description of the associated Plant or Pet entity.
+        """
+        return self.content_object.description if self.content_object else "No Description"
 
-    def get_digit_url(self):
-        return self.digit.get_absolute_url() if self.digit else self.get_absolute_url()
-
+    def get_entity_url(self):
+        """
+        Returns the URL to view the details of the associated Plant or Pet entity.
+        """
+        return self.content_object.get_absolute_url() if self.content_object else self.get_absolute_url()
+    
     def get_entry_count(self):
         """
         Returns the number of entries in this collection.

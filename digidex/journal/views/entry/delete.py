@@ -19,8 +19,9 @@ class DeleteEntry(LoginRequiredMixin, DeleteView):
             raise Http404("No Entry provided")
 
         entry = get_object_or_404(Entry, id=entry_pk)
+        content_object = entry.collection.content_object
 
-        if entry.collection.digit.ntag.user != self.request.user:
+        if hasattr(content_object, 'ntag') and content_object.ntag.user != self.request.user:
             raise PermissionDenied("You do not have permission to delete this entry.")
 
         return entry

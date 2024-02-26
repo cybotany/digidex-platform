@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
@@ -9,16 +10,13 @@ class DetailCollection(LoginRequiredMixin, ListView):
     template_name = 'journal/entry-collection-page.html'
 
     def get_queryset(self):
-        # Retrieve the collection_id from the URL
         collection_id = self.kwargs.get('pk')
+        collection = get_object_or_404(Collection, id=collection_id)
 
-        # Ensure the collection exists and is associated with the current user
-        collection = Collection.objects.filter(id=collection_id).select_related('digit__ntag').first()
-        if not collection or collection.digit.ntag.user != self.request.user:
+        if collection.content_object and getattr(collection.content_object, 'ntag', None) and collection.content_object.ntag.user != self.request.user:
             raise PermissionDenied("You do not have permission to view these entries.")
 
-        # Use select_related to optimize the query
-        return Entry.objects.filter(collection=collection).select_related('collection__digit')
+        return Entry.objects.filter(collection=collection)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -26,14 +24,14 @@ class DetailCollection(LoginRequiredMixin, ListView):
         collection_id = self.kwargs.get('pk')
         collection = Collection.objects.get(id=collection_id)
 
-        collection_heading = f"{collection.get_digit_name()}'s Journal"
-        collection_paragraph = collection.get_digit_description()
-        digit_url = collection.get_digit_url()
+        collection_heading = f"{collection.get_entity_name()}'s Journal"
+        collection_paragraph = collection.get_entity_description()
+        entity_url = collection.get_entity_url()
 
         context.update({
             'subtitle': 'Collection',
             'heading': collection_heading,
             'paragraph': collection_paragraph,
-            'digit_url': digit_url,
+            'entity_url': entity_url,
         })
         return context

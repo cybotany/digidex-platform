@@ -4,21 +4,24 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.contrib import messages
 from digidex.journal.models import Entry, Collection
-from digidex.journal.forms import JournalEntry
+from digidex.journal.forms import EntryForm
 import logging
 
 logger = logging.getLogger(__name__)
 
 class AddEntry(LoginRequiredMixin, CreateView):
     model = Entry
-    form_class = JournalEntry
+    form_class = EntryForm
     template_name = 'journal/entry/form-page.html'
 
     def dispatch(self, request, *args, **kwargs):
         collection_id = self.kwargs.get('pk')
         collection = get_object_or_404(Collection, pk=collection_id)
-        if collection.digit.ntag.user != request.user:
+        content_object = collection.content_object
+
+        if hasattr(content_object, 'ntag') and content_object.ntag.user != request.user:
             raise PermissionDenied("You do not have permission to add an entry to this collection.")
+
         return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):

@@ -1,7 +1,6 @@
 from django.db import models
 from django.urls import reverse
-
-from digidex.inventory.models import Digit
+from digidex.inventory.models import Plant, Pet
 from digidex.utils.custom_storage import PublicMediaStorage
 
 def profile_avatar_directory_path(instance, filename):
@@ -74,16 +73,38 @@ class Profile(models.Model):
         Returns:
             str: The URL to view the details of this profile.
         """
-        return reverse('accounts:profile', kwargs={'username_slug': self.user.username_slug})
+        return reverse('accounts:detail-profile', kwargs={'username_slug': self.user.username_slug})
+
+    def get_user_plants(self):
+        """
+        Retrieves all Plant objects associated with the user of this profile.
+
+        Returns:
+            QuerySet: A QuerySet of all Plant objects associated with the user.
+        """
+        return Plant.objects.filter(ntag__user=self.user)
+
+    def get_user_pets(self):
+        """
+        Retrieves all Pet objects associated with the user of this profile.
+
+        Returns:
+            QuerySet: A QuerySet of all Pet objects associated with the user.
+        """
+        return Pet.objects.filter(ntag__user=self.user)
 
     def get_user_digits(self):
         """
-        Retrieves all Digit objects associated with the user of this profile.
+        Retrieves all Plant and Pet objects associated with the user of this profile,
+        combining them into a single QuerySet.
 
         Returns:
-            QuerySet: A QuerySet of all Digit objects associated with the user.
+            QuerySet: A combined QuerySet of all Plant and Pet objects associated with the user.
         """
-        return Digit.objects.filter(ntag__user=self.user)
+        user_plants = self.get_user_plants()
+        user_pets = self.get_user_pets()
+
+        return user_plants.union(user_pets)
 
     class Meta:
         verbose_name = "Profile"
