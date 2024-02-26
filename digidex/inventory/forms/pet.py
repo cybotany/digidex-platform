@@ -1,10 +1,12 @@
 from django import forms
+from digidex.inventory.models import Pet
 
-class DigitForm(forms.ModelForm):
+class PetForm(forms.ModelForm):
     """
-    Abstract form for creating a digitizied representation of an object.
+    Form for creating a digitizied representation of a Pet.
     """
     class Meta:
+        model = Pet
         fields = ('name', 'description', 'taxon',)
         widgets = {
             'name': forms.TextInput(attrs={
@@ -16,4 +18,4 @@ class DigitForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        super(DigitForm, self).__init__(*args, **kwargs)
+        super(PetForm, self).__init__(*args, **kwargs)
