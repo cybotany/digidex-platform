@@ -9,6 +9,7 @@ class Digit(models.Model):
         uuid (UUIDField): The unique identifier associated with each Digit.
         name (CharField): A human-readable name for the digitized entity.
         description (TextField): A short description of the digitized entity.
+        grouping (ForeignKey): The grouping this digit belongs to.
         taxon (ForeignKey): A relationship to the Unit model, representing the entity's taxonomic classification.
         ntag (OneToOneField): A relationship to the Link model, representing the NTAG link for the digitized entity.
         is_public (BooleanField): Indicates if the digit should be publicly visible to the public or private. Digit is private by default.
@@ -37,12 +38,20 @@ class Digit(models.Model):
         blank=True,
         help_text="A short description of the digitized entity."
     )
+    grouping = models.ForeignKey(
+        'inventory.Grouping',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="%(class)ss", # The second "s" at the end is intentional
+        help_text="The grouping this digit belongs to."
+    )
     taxon = models.ForeignKey(
         'taxonomy.Unit',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='%(class)s_digits',
+        related_name="%(class)ss", # The second "s" at the end is intentional
         help_text="The taxonomic classification of the digitized entity."
     )
     ntag = models.OneToOneField(
@@ -117,7 +126,7 @@ class Digit(models.Model):
                 ntag__ntag_use=self.ntag.ntag_use
             ).count()
 
-            default_name_prefix = self.ntag.get_ntag_use_display()  # Assumes readable name for ntag_use
+            default_name_prefix = self.ntag.get_ntag_use_display()
             self.name = f"{default_name_prefix} {user_digit_count + 1}"
 
         super().save(*args, **kwargs)
