@@ -42,7 +42,7 @@ class Digit(models.Model):
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='digits',
+        related_name='%(class)s_digits',
         help_text="The taxonomic classification of the digitized entity."
     )
     ntag = models.OneToOneField(
