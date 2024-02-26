@@ -1,9 +1,9 @@
 from django.views.generic.detail import DetailView
 from digidex.accounts.models import Profile
 
-class UserProfileView(DetailView):
+class DetailProfile(DetailView):
     model = Profile
-    template_name = 'accounts/profile-page.html'
+    template_name = 'accounts/profile/detail-page.html'
     context_object_name = 'profile'
     slug_field = 'user__username_slug'
     slug_url_kwarg = 'username_slug'

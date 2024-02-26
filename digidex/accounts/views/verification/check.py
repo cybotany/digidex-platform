@@ -6,8 +6,7 @@ from django.utils.encoding import force_str
 from django.utils.http import urlsafe_base64_decode
 from digidex.accounts.models import User
 
-
-class EmailVerificationView(View):
+class VerificationCheck(View):
 
     def get(self, request, uidb64, token):
         uid = force_str(urlsafe_base64_decode(uidb64))
@@ -21,4 +20,4 @@ class EmailVerificationView(View):
 
             return redirect('accounts:profile-modification', username_slug=user.username_slug)
         else:
-            return render(request, 'accounts/failed-verification-page.html')
+            return render(request, 'accounts/verification/failure-page.html')

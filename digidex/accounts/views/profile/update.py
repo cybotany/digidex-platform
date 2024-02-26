@@ -1,15 +1,15 @@
 from django.views.generic.edit import UpdateView
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.contrib import messages
 from digidex.accounts.models import Profile
 from digidex.accounts.forms import ProfileForm
 
-class ProfileModificationView(LoginRequiredMixin, UpdateView):
+class UpdateProfile(LoginRequiredMixin, UpdateView):
     model = Profile
     form_class = ProfileForm
-    template_name = 'accounts/profile-modification-page.html'
+    template_name = 'accounts/profile/update-page.html'
 
     def get_object(self, queryset=None):
         """

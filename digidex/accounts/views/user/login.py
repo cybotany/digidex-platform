@@ -6,9 +6,9 @@ from django.utils.http import url_has_allowed_host_and_scheme
 from digidex.accounts.forms import LoginForm
 
 
-class UserLoginView(LoginView):
+class LoginUser(LoginView):
     form_class = LoginForm
-    template_name = 'accounts/login-page.html'
+    template_name = 'accounts/user/login-page.html'
 
     def form_valid(self, form):
         """Security check complete. Log the user in."""

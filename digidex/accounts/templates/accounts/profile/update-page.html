@@ -42,7 +42,46 @@
           <div class="subtitle green">Modify<br></div>
           <h2 class="account-heading">Update your profile</h2>
           <div class="form-block base-form">
-            {% include 'accounts/profile/form.html' %}
+            <form method="post" class="form" enctype="multipart/form-data">
+              {% csrf_token %}
+              <!-- Render Avatar Field -->
+              <div>
+                {{ form.avatar }} 
+                {% if form.avatar.errors %}
+                  <div class="error-message">
+                    <span class="text-error">{{ form.avatar.errors|striptags }}</span>
+                  </div>
+                {% endif %}
+              </div>
+              
+              <!-- Render Bio Field -->
+              <div>
+                {{ form.bio }}
+                {% if form.bio.errors %}
+                  <div class="error-message">
+                    <span class="text-error">{{ form.bio.errors|striptags }}</span>
+                  </div>
+                {% endif %}
+              </div>
+              
+              <!-- Render Location Field -->
+              <div>
+                {{ form.location }}
+                {% if form.location.errors %}
+                  <div class="error-message">
+                    <span class="text-error">{{ form.location.errors|striptags }}</span>
+                  </div>
+                {% endif %}
+              </div>
+              
+              <!-- Render is_public Checkbox -->
+              <div>
+                {{ form.is_public }}
+              </div>
+              
+              <!-- Render Submit Button -->
+              <input type="submit" value="Update Profile"  class="submit-button base-button">
+            </form>
           </div>
           <div class="delete-user">
             <form action="{% url 'accounts:delete-user' %}" method="post">

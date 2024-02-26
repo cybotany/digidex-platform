@@ -8,10 +8,10 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-class UserSignupView(CreateView):
+class SignupUser(CreateView):
     model = User
     form_class = SignupForm
-    template_name = 'accounts/signup-page.html'
+    template_name = 'accounts/user/signup-page.html'
 
     def form_valid(self, form):
         recaptcha_response = self.request.POST.get('g-recaptcha-response')
