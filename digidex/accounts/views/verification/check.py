@@ -18,6 +18,6 @@ class VerificationCheck(View):
             user.save()
             messages.success(request, 'Your email has been verified.')
 
-            return redirect('accounts:update-profile', username_slug=user.username_slug)
+            return redirect('inventory:update-profile', user_slug=user.slug)
         else:
             return render(request, 'accounts/verification/failure-page.html')

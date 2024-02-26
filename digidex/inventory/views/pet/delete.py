@@ -31,8 +31,7 @@ class DeletePet(LoginRequiredMixin, DeleteView):
         """
         Override to redirect to the user's profile page after successful deletion.
         """
-        username_slug = self.request.user.username_slug
-        return reverse('accounts:profile', kwargs={'username_slug': username_slug})
+        return reverse('inventory:profile', kwargs={'user_slug': self.request.user.slug})
 
 
     def delete(self, request, *args, **kwargs):

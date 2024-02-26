@@ -8,17 +8,23 @@ class Grouping(models.Model):
     Model for organizing digitized entities into groups.
 
     Attributes:
-        name (CharField): A human-readable name for the digitized entity.
-        description (TextField): A short description of the digitized entity.
+        name (CharField): A human-readable name for the digitized grouping entity.
+        slug (SlugField): A short label for the digitized grouping entity.
+        description (TextField): A short description of the digitized grouping entity.
         user (ForeignKey): A relationship to the User model.
-        created_at (DateTimeField): The date and time when the Digit instance was created.
-        last_modified (DateTimeField): The date and time when the Digit instance was last modified.
+        created_at (DateTimeField): The date and time when the Grouping instance was created.
+        last_modified (DateTimeField): The date and time when the Grouping instance was last modified.
     """
     name = models.CharField(
         max_length=255,
         blank=False,
         null=False,
         help_text="The name of the group."
+    )
+    slug = models.SlugField(
+        max_length=255,
+        blank=True,
+        help_text="The slug for the group."
     )
     description = models.TextField(
         blank=True,
@@ -51,14 +57,13 @@ class Grouping(models.Model):
         """
         Returns the absolute URL to the Grouping's detail page.
         """
-        return reverse('inventory:detail-grouping', kwargs={'pk': self.pk})
+        return reverse('inventory:detail-grouping', kwargs={'user_slug': self.user.slug, 'group_slug': self.slug})
 
     def get_user_profile_url(self):
         """
         Returns the URL to the associated user's profile detail page.
         """
-        username_slug = self.user.username_slug
-        return reverse('accounts:detail-profile', kwargs={'username_slug': username_slug})
+        return reverse('inventory:detail-profile', kwargs={'user_slug': self.user.slug})
 
     def get_user_plants(self):
         """

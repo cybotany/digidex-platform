@@ -74,7 +74,7 @@ class Profile(models.Model):
         Returns:
             str: The URL to view the details of this profile.
         """
-        return reverse('accounts:detail-profile', kwargs={'username_slug': self.user.username_slug})
+        return reverse('inventory:detail-profile', kwargs={'user_slug': self.user.slug})
 
     def get_user_groupings(self):
         """

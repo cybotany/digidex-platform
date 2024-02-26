@@ -1,5 +1,4 @@
 import logging
-from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView
 from django.contrib import messages
@@ -22,7 +21,3 @@ class CreateGrouping(LoginRequiredMixin, CreateView):
     def form_invalid(self, form):
         messages.error(self.request, "There was a problem with the form. Please check the details you entered.")
         return super().form_invalid(form)
-
-    def get_success_url(self):
-        username_slug = self.request.user.username_slug
-        return reverse('accounts:detail-profile', kwargs={'username_slug': username_slug})

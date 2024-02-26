@@ -13,7 +13,6 @@ from digidex.utils.models import EmailLog
 
 logger = logging.getLogger(__name__)
 
-
 class User(AbstractUser):
     """
     User model extending Django's AbstractUser. This model includes all fields
@@ -35,7 +34,7 @@ class User(AbstractUser):
     Extended Fields:
         - uuid (UUIDField): A universally unique identifier for the user.
         - email_confirmed (BooleanField): Indicates if the user has confirmed their email address.
-        - username_slug (SlugField): A slugified version of the username for URL usage.
+        - slug (SlugField): A slugified version of the username for URL usage.
     """
     username = models.CharField(
         max_length=32,
@@ -54,7 +53,7 @@ class User(AbstractUser):
         default=False,
         help_text='Indicates whether the user has confirmed their email address.'
     )
-    username_slug = models.SlugField(
+    slug = models.SlugField(
         unique=True,
         max_length=255,
         editable=False,
@@ -83,14 +82,14 @@ class User(AbstractUser):
     @transaction.atomic
     def save(self, *args, **kwargs):
         self.username = self.username.lower()
-        if not self.username_slug or self.username != self.__original_username:
+        if not self.slug or self.username != self.__original_username:
             base_slug = slugify(self.username)
             unique_slug = base_slug
             num = 1
-            while User.objects.filter(username_slug=unique_slug).exists():
+            while User.objects.filter(slug=unique_slug).exists():
                 unique_slug = f'{base_slug}-{num}'
                 num += 1
-            self.username_slug = unique_slug
+            self.slug = unique_slug
 
         super().save(*args, **kwargs)
 
