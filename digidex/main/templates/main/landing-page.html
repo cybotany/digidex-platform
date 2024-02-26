@@ -46,7 +46,7 @@
             <p class="paragraph-hero">Digitize, manage, and nurture your garden with an AI assistant tailored for you.</p>
             {% if not request.user.is_authenticated %}
               <div class="button-hero">
-                <a href="{% url 'accounts:signup' %}" class="button base-button">Signup</a>
+                <a href="{% url 'accounts:signup-user' %}" class="button base-button">Signup</a>
               </div>
             {% endif %}
           </div>
