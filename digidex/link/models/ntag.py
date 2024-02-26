@@ -20,7 +20,6 @@ class NTAG(NFC):
         ('NTAG_216', 'NTAG 216'),
         ('NTAG_210', 'NTAG 210'),
         ('NTAG_212', 'NTAG 212'),
-        ('NTAG_210µ', 'NTAG 210µ'),
     ]
 
     NTAG_USES = [
@@ -32,12 +31,14 @@ class NTAG(NFC):
         max_length=25,
         blank=True,
         choices=NTAG_TYPES, 
+        default='NTAG_213'
         verbose_name="NTAG Type",
         help_text="The type of the NTAG."
     )
     ntag_use = models.CharField(
         max_length=20,
         choices=NTAG_USES,
+        default='plant_label'
         verbose_name="NTAG Use",
         help_text="The intended use of the NTAG."
     )
