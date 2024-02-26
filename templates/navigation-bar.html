@@ -24,7 +24,7 @@
       <div class="button-desktop">
         {% if request.user.is_authenticated %}
           <!-- <a href="{% url 'taxonomy:landing' %}" class="nav-button-outline base-button">Taxonomy</a> -->
-          <a href="{% url 'accounts:profile-user' username_slug=request.user.username_slug %}" class="nav-button-outline base-button">{{ request.user.username }}</a>
+          <a href="{% url 'accounts:detail-profile' username_slug=request.user.username_slug %}" class="nav-button-outline base-button">{{ request.user.username }}</a>
           <a href="{% url 'accounts:logout-user' %}" class="nav-button base-button">Logout</a>
         {% else %}
           <a href="{% url 'accounts:login-user' %}" class="nav-button-outline base-button">Login</a>
