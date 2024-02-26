@@ -1,26 +1,26 @@
 from django.db import models
 from django.urls import reverse
+
 from .nfc import NFC
+from .constants import NTAG_TYPES, NTAG_USES
 
 class NTAG(NFC):
     """
     Model representing NTAGs, a specific implementation of NFC tags.
     Inherits common attributes from NFC and can include NTAG-specific fields and methods.
     """
-    NTAG213 = 213
-    NTAG215 = 215
-    NTAG216 = 216
-    NTAG_TYPES = [
-        (NTAG213, 'NTAG213'),
-        (NTAG215, 'NTAG215'),
-        (NTAG216, 'NTAG216'),
-    ]
     ntag_type = models.CharField(
-        max_length=8,
+        max_length=25,
         blank=True,
         choices=NTAG_TYPES, 
         verbose_name="NTAG Type",
         help_text="The type of the NTAG."
+    )
+    ntag_use = models.CharField(
+        max_length=20,
+        choices=NTAG_USES,
+        verbose_name="NTAG Use",
+        help_text="The intended use of the NTAG."
     )
 
     def activate_link(self, user):

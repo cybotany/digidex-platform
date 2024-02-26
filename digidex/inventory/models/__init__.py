@@ -1,1 +1,2 @@
-from .digit import Digit
+from .pet import Pet
+from .plant import Plant

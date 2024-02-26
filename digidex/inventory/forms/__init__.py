@@ -1,1 +1,2 @@
-from .digit_form import DigitForm
+from .pet_form import PetForm
+from .plant_form import PlantForm

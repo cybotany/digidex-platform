@@ -5,17 +5,14 @@ from django.urls import reverse
 
 class Digit(models.Model):
     """
-    Represents a digitized version of a plant, linking it to both the inventory system and taxonomic data.
-
-    The Digit model serves as a bridge between physical plant specimens and their digital representations. 
-    It directly associates a plant specimen with its corresponding taxonomic classification.
+    Abstract base model for digitized entities, serving as a bridge between physical specimens and their digital representations.
 
     Attributes:
         uuid (UUIDField): The unique identifier associated with each Digit.
-        name (CharField): A human-readable name for the digitized plant.
-        description (TextField): A short description of the digitized plant.
-        taxon (ForeignKey): A relationship to the Unit model, representing the plant's taxonomic classification.
-        ntag (OneToOneField): A relationship to the Link model, representing the NTAG link for the digitized plant.
+        name (CharField): A human-readable name for the digitized entity.
+        description (TextField): A short description of the digitized entity.
+        taxon (ForeignKey): A relationship to the Unit model, representing the entity's taxonomic classification.
+        ntag (OneToOneField): A relationship to the Link model, representing the NTAG link for the digitized entity.
         is_public (BooleanField): Indicates if the digit should be publicly visible to the public or private. Digit is private by default.
         is_archived (BooleanField): Indicates whether the digit is archived.
         created_at (DateTimeField): The date and time when the Digit instance was created.
@@ -34,13 +31,13 @@ class Digit(models.Model):
         max_length=50,
         null=True,
         blank=True,
-        help_text="A human-readable name for the digitized plant."
+        help_text="A human-readable name for the digitized entity."
     )
     description = models.TextField(
         max_length=500,
         null=True,
         blank=True,
-        help_text="A short description of the digitized plant."
+        help_text="A short description of the digitized entity."
     )
     taxon = models.ForeignKey(
         'taxonomy.Unit',
@@ -48,15 +45,15 @@ class Digit(models.Model):
         blank=True,
         on_delete=models.SET_NULL,
         related_name='digits',
-        help_text="The taxonomic classification of the digitized plant."
+        help_text="The taxonomic classification of the digitized entity."
     )
     ntag = models.OneToOneField(
         'link.NTAG',
         null=True,
         blank=True,
         on_delete=models.CASCADE,
-        related_name='digit',
-        help_text="NTAG link for the digitized plant."
+        related_name='%(class)s',
+        help_text="NTAG link for the digitized entity."
     )
     is_public = models.BooleanField(
         default=False,

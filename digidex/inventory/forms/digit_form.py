@@ -1,13 +1,10 @@
 from django import forms
-from digidex.inventory.models import Digit
 
 class DigitForm(forms.ModelForm):
     """
-    Form for creating a digit.
+    Abstract form for creating a digitizied representation of an object.
     """
-
     class Meta:
-        model = Digit
         fields = ('name', 'description', 'taxon',)
         widgets = {
             'name': forms.TextInput(attrs={

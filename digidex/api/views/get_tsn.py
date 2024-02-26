@@ -13,11 +13,17 @@ class GetTSN(APIView):
 
     def get(self, request, *args, **kwargs):
         search_term = request.GET.get('q', '').strip()
+        kingdom = request.GET.get('kingdom', '').strip().capitalize()
+    
         if not search_term:
             raise APIException("Search term is required.")
+        
+        if kingdom not in ['Plantae', 'Animalia']:
+            raise APIException("Invalid kingdom. Please specify either 'Plantae' or 'Animalia'.")
 
         tsn_objects = Unit.objects.filter(
-            Q(complete_name__icontains=search_term)
+            Q(complete_name__icontains=search_term) & 
+            Q(kingdom__iexact=kingdom)
         )[:10]
 
         serialized_data = TaxonomyUnitSerializer(tsn_objects, many=True).data

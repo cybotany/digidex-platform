@@ -4,8 +4,8 @@ from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from digidex.link.models import NTAG
-from digidex.inventory.models import Digit
-from digidex.inventory.forms import DigitForm
+from digidex.inventory.models import Plant, Pet
+from digidex.inventory.forms import PlantForm, PetForm
 from django.contrib import messages
 import logging
 
@@ -18,27 +18,49 @@ class NTAGLinkView(LoginRequiredMixin, View):
             raise Http404("No serial number provided")
         return get_object_or_404(NTAG, serial_number=serial_number)
 
+    def get_form_and_model(self, tag_use):
+        if tag_use == 'plant':
+            return PlantForm, Plant, 'inventory/plant_creation_page.html'
+        elif tag_use == 'pet':
+            return PetForm, Pet, 'inventory/pet_creation_page.html'
+        else:
+            raise ValueError("Unsupported tag use type")
+
+    def get_associated_digit(self, ntag):
+        if ntag.tag_use == 'plant':
+            try:
+                return ntag.plant
+            except Plant.DoesNotExist:
+                return None
+        elif ntag.tag_use == 'pet':
+            try:
+                return ntag.pet
+            except Pet.DoesNotExist:
+                return None
+        return None
+
     def get(self, request, *args, **kwargs):
         ntag = self.get_object()
-        # Check if NTAG is active and has an associated digit
-        if ntag.active and hasattr(ntag, 'digit'):
-            # Check if the current user is the user associated with the NTAG
+        associated_digit = self.get_associated_digit(ntag)
+        if ntag.active and associated_digit:
             if ntag.user == request.user:
-                # Redirect to the private digit details page
-                return redirect('inventory:digit-details', uuid=ntag.digit.uuid)
+                return redirect('inventory:digit-details', uuid=associated_digit.uuid)
             else:
                 raise PermissionDenied("You do not have permission to view this digit.")
-        # If NTAG is not active or doesn't have an associated digit, proceed with digit creation
-        form = DigitForm()
-        return render(request, 'inventory/digit-creation-page.html', {'form': form, 'ntag': ntag})
+        else:
+            FormClass, _, template_name= self.get_form_and_model(ntag.tag_use)
+            form = FormClass()
+            return render(request, template_name, {'form': form, 'ntag': ntag})
 
     def post(self, request, *args, **kwargs):
         ntag = self.get_object()
-        form = DigitForm(request.POST)
+        FormClass, ModelClass, template_name = self.get_form_and_model(ntag.tag_use)
+        form = FormClass(request.POST)
         if form.is_valid():
-            digit = Digit.create_digit(form.cleaned_data, ntag, request.user)
-            messages.success(request, "Digit created successfully.")
+            digit = ModelClass.create_digit(form.cleaned_data, ntag, request.user)
+            messages.success(request, f"{ModelClass.__name__} created successfully.")
             return HttpResponseRedirect(digit.get_absolute_url())
         else:
             messages.error(request, "There was a problem with the form. Please check the details you entered.")
-            return render(request, 'inventory/digit-creation-page.html', {'form': form, 'ntag': ntag})
+            return render(request, template_name, {'form': form, 'ntag': ntag})
+    
