@@ -1,6 +1,7 @@
+from django.conf import settings
 from django.db import models
 from django.urls import reverse
-from digidex.inventory.models import Plant, Pet
+from digidex.inventory.models import Grouping
 from digidex.utils.custom_storage import PublicMediaStorage
 
 def profile_avatar_directory_path(instance, filename):
@@ -21,7 +22,7 @@ class Profile(models.Model):
         last_modified (DateTimeField): The date and time when the profile was last modified.
     """
     user = models.OneToOneField(
-        'accounts.User',
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         help_text='The user associated with this profile.'
     )
@@ -75,36 +76,15 @@ class Profile(models.Model):
         """
         return reverse('accounts:detail-profile', kwargs={'username_slug': self.user.username_slug})
 
-    def get_user_plants(self):
+    def get_user_groupings(self):
         """
-        Retrieves all Plant objects associated with the user of this profile.
+        Retrieves all Grouping objects associated with the user of this profile.
 
         Returns:
-            QuerySet: A QuerySet of all Plant objects associated with the user.
+            QuerySet: A QuerySet of all Grouping objects associated with the user.
         """
-        return Plant.objects.filter(ntag__user=self.user)
-
-    def get_user_pets(self):
-        """
-        Retrieves all Pet objects associated with the user of this profile.
-
-        Returns:
-            QuerySet: A QuerySet of all Pet objects associated with the user.
-        """
-        return Pet.objects.filter(ntag__user=self.user)
-
-    def get_user_digits(self):
-        """
-        Retrieves all Plant and Pet objects associated with the user of this profile,
-        combining them into a single QuerySet.
-
-        Returns:
-            QuerySet: A combined QuerySet of all Plant and Pet objects associated with the user.
-        """
-        user_plants = self.get_user_plants()
-        user_pets = self.get_user_pets()
-
-        return user_plants.union(user_pets)
+        #Grouping = apps.get_model('inventory', 'Grouping')
+        return Grouping.objects.filter(user=self.user)
 
     class Meta:
         verbose_name = "Profile"

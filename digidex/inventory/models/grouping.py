@@ -1,5 +1,8 @@
 from django.conf import settings
 from django.db import models
+from .plant import Plant
+from .pet import Pet
+#from django.apps import apps
 
 class Grouping(models.Model):
     """
@@ -44,3 +47,26 @@ class Grouping(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_user_plants(self):
+        """
+        Retrieves all Plant objects associated with the user of this profile.
+        """
+        #Plant = apps.get_model('inventory', 'Plant')
+        return Plant.objects.filter(grouping=self)
+
+    def get_user_pets(self):
+        """
+        Retrieves all Pet objects associated with the user of this profile.
+        """
+        #Pet = apps.get_model('inventory', 'Pet')
+        return Pet.objects.filter(grouping=self)
+
+    def get_user_digits(self):
+        """
+        Retrieves all Plant and Pet objects associated with this grouping,
+        combining them into a single QuerySet.
+        """
+        user_plants = self.get_user_plants()
+        user_pets = self.get_user_pets()
+        return user_plants.union(user_pets)
