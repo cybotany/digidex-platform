@@ -20,7 +20,7 @@ class SignupUser(CreateView):
         if validation_result.get("success"):
             try:
                 form.save()
-                return redirect('accounts:confirm-email')
+                return redirect('accounts:email-user')
             except Exception as e:
                 logger.error(f"Error during user signup and sending verification email: {e}")
                 messages.error(self.request, "There was an error processing the signup form. Please try again later.")
