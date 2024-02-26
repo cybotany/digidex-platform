@@ -14,17 +14,23 @@ class DetailProfile(DetailView):
 
         is_profile_owner = self.request.user.is_authenticated and self.request.user == profile.user
         if is_profile_owner:
-            user_digits = profile.get_user_digits()
+            user_pets = profile.get_user_pets()
+            user_plants = profile.get_user_plants()
         elif profile.is_public:
-            user_digits = profile.get_user_digits().filter(is_public=True)
+            user_pets = profile.get_user_pets().filter(is_public=True)
+            user_plants = profile.get_user_plants().filter(is_public=True)
         else:
-            user_digits = []
-        digits_count = len(user_digits)
+            user_pets = []
+            user_plants = []
+        pet_count = len(user_pets)
+        plant_count = len(user_plants)
 
         context.update({
             'is_profile_owner': is_profile_owner,
-            'digits': user_digits,
-            'digits_count': digits_count,
+            'pets': user_pets,
+            'pet_count': pet_count,
+            'plants': user_plants,
+            'plant_count': plant_count,
         })
         
         return context
