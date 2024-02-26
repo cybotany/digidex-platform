@@ -1,10 +1,10 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from django.urls import reverse
-from digidex.inventory.models import Digit
+from digidex.inventory.models import Pet
 
-@admin.register(Digit)
-class DigitAdmin(admin.ModelAdmin):
+@admin.register(Pet)
+class PetAdmin(admin.ModelAdmin):
     list_display = ('name', 'uuid', 'taxon', 'ntag_detail', 'journal_collection_link', 'entry_count', 'created_at', 'last_modified', 'is_archived')
     list_filter = ('is_archived', 'created_at', 'last_modified')
     search_fields = ('name', 'uuid', 'ntag__serial_number')
@@ -20,7 +20,7 @@ class DigitAdmin(admin.ModelAdmin):
             'fields': ('created_at', 'last_modified')
         }),
     )
-    actions = ['archive_digits', 'unarchive_digits']
+    actions = ['archive_items', 'unarchive_items']
 
     def ntag_detail(self, obj):
         if obj.ntag:
@@ -41,10 +41,10 @@ class DigitAdmin(admin.ModelAdmin):
         return 0
     entry_count.short_description = 'Number of Journal Entries'
 
-    @admin.action(description='Archive selected digits')
-    def archive_digits(self, request, queryset):
+    @admin.action(description='Archive selected items')
+    def archive_items(self, request, queryset):
         queryset.update(is_archived=True)
 
-    @admin.action(description='Unarchive selected digits')
-    def unarchive_digits(self, request, queryset):
+    @admin.action(description='Unarchive selected items')
+    def unarchive_items(self, request, queryset):
         queryset.update(is_archived=False)

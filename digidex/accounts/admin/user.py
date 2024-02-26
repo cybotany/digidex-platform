@@ -1,17 +1,15 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from django.utils.html import format_html
-from django.urls import reverse
+from django.contrib.auth.admin import UserAdmin
 from digidex.accounts.models import User
 
-class UserAdmin(BaseUserAdmin):
+class UserAccount(UserAdmin):
     model = User
 
     # Define custom fieldsets
-    fieldsets = BaseUserAdmin.fieldsets + (
+    fieldsets = UserAdmin.fieldsets + (
         ('Additional Info', {'fields': ('uuid', 'email_confirmed')}),
     )
-    add_fieldsets = BaseUserAdmin.add_fieldsets + (
+    add_fieldsets = UserAdmin.add_fieldsets + (
         ('Additional Info', {'fields': ('email_confirmed')}),
     )
     list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff', 'uuid', 'date_joined')
