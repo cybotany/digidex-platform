@@ -31,14 +31,14 @@ class NTAG(NFC):
         max_length=25,
         blank=True,
         choices=NTAG_TYPES, 
-        default='NTAG_213'
+        default='NTAG_213',
         verbose_name="NTAG Type",
         help_text="The type of the NTAG."
     )
     ntag_use = models.CharField(
         max_length=20,
         choices=NTAG_USES,
-        default='plant_label'
+        default='plant_label',
         verbose_name="NTAG Use",
         help_text="The intended use of the NTAG."
     )
