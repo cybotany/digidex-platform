@@ -40,9 +40,9 @@ class Digit(models.Model):
     )
     grouping = models.ForeignKey(
         'inventory.Grouping',
-        on_delete=models.SET_NULL,
         null=True,
         blank=True,
+        on_delete=models.SET_NULL,
         related_name="%(class)ss", # The second "s" at the end is intentional
         help_text="The grouping this digit belongs to."
     )
