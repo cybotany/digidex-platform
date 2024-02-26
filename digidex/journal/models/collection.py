@@ -2,9 +2,10 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+from digidex.inventory.models import Plant
 
 def get_default_content_type():
-    return ContentType.objects.get_for_model(app_label='inventory', model='plant').pk
+    return ContentType.objects.get_for_model(Plant).pk
 
 class Collection(models.Model):
     """
