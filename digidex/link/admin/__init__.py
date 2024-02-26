@@ -1,2 +1,1 @@
-from .pet import PetLink
-from .plant import PlantLink
+from .digit import DigitLink

@@ -1,2 +1,2 @@
-from .pet import PetCollection, PetEntry
-from .plant import PlantCollection, PlantEntry
+from .collection import JournalCollection
+from .entry import JournalEntry

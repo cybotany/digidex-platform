@@ -4,7 +4,7 @@ from django.utils.html import format_html
 from digidex.journal.models import Entry
 
 @admin.register(Entry)
-class PlantEntry(admin.ModelAdmin):
+class JournalEntry(admin.ModelAdmin):
     list_display = ('entry_number', 'collection_link', 'content_summary', 'image_thumbnail', 'created_at', 'last_modified')
     list_filter = ('created_at', 'last_modified', 'collection__id')
     search_fields = ('content', 'collection__id')

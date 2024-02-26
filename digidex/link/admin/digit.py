@@ -4,12 +4,12 @@ from django.urls import reverse
 from digidex.link.models import NTAG
 
 @admin.register(NTAG)
-class PlantLink(admin.ModelAdmin):
-    list_display = ('serial_number', 'ntag_type', 'counter', 'user_link', 'plant_link', 'active', 'created_at', 'last_modified')
+class DigitLink(admin.ModelAdmin):
+    list_display = ('serial_number', 'ntag_type', 'counter', 'user_link', 'pet_link', 'active', 'created_at', 'last_modified')
     list_filter = ('ntag_type', 'active', 'created_at', 'last_modified', 'user__username')
     search_fields = ('serial_number', 'user__username')
     actions = ['activate_links', 'deactivate_links']
-    readonly_fields = ('user_link', 'plant_link')
+    readonly_fields = ('user_link', 'pet_link')
 
     def user_link(self, obj):
         if obj.user:
@@ -17,8 +17,8 @@ class PlantLink(admin.ModelAdmin):
         return "No User"
     user_link.short_description = 'User'
 
-    def plant_link(self, obj):
-        return "Adjust or remove this method based on NTAG-Plant relationship"
+    def digit_link(self, obj):
+        return "Adjust or remove this method based on NTAG-Pet relationship"
 
     @admin.action(description='Activate selected NTAG links')
     def activate_links(self, request, queryset):
