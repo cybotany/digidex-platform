@@ -12,7 +12,7 @@ urlpatterns = [
     path('api/', include('digidex.api.urls')),
     path('link/', include('digidex.link.urls')),
     path('taxonomy/', include('digidex.taxonomy.urls')),
-    path('digit/', include('digidex.inventory.urls')),
+    path('inventory/', include('digidex.inventory.urls')),
     path('journal/', include('digidex.journal.urls')),
     path('reset_password/', auth_views.PasswordResetView.as_view(), name ='reset_password'),
     path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(), name ='password_reset_done'),

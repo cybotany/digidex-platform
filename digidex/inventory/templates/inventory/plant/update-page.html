@@ -50,7 +50,7 @@
           <div class="subtitle green">Modify<br></div>
           <h2 class="account-heading">Update or delete plant</h2>
           <div class="form-block base-form">
-            {% include 'inventory/plant/partials/form.html' %}
+            {% include 'inventory/plant/form.html' %}
           </div>
           <div class="delete-digit">
             <form action="{% url 'inventory:delete-plant' plant.uuid %}" method="post">

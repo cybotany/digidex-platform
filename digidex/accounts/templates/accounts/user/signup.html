@@ -47,7 +47,52 @@
           <div class="subtitle green">Sign up<br></div>
           <h2 class="account-heading">Create an account</h2>
           <div class="form-block base-form">     
-            {% include 'accounts/partials/signup-form.html' %}     
+            <form id="signupForm" method="post" class="form">
+              {% csrf_token %}
+            
+              <!-- Render Username Field -->
+              <div>
+                {{ form.username }}
+                {% if form.username.errors %}
+                  <div class="error-message">
+                    <span class="text-error">{{ form.username.errors|striptags }}</span>
+                  </div>
+                {% endif %}
+              </div>
+            
+              <!-- Render Email Field -->
+              <div>
+                {{ form.email }}
+                {% if form.email.errors %}
+                  <div class="error-message">
+                    <span class="text-error">{{ form.email.errors|striptags }}</span>
+                  </div>
+                {% endif %}
+              </div>
+            
+              <!-- Render Password Field -->
+              <div>
+                {{ form.password1 }}
+                {% if form.password1.errors %}
+                  <div class="error-message">
+                    <span class="text-error">{{ form.password1.errors|striptags }}</span>
+                  </div>
+                {% endif %}
+              </div>
+            
+              <!-- Render Password Confirmation Field -->
+              <div>
+                {{ form.password2 }}
+                {% if form.password2.errors %}
+                  <div class="error-message">
+                    <span class="text-error">{{ form.password2.errors|striptags }}</span>
+                  </div>
+                {% endif %}
+              </div>
+            
+              <!-- Render Submit Button -->
+              <input type="submit" value="Sign Up" class="submit-button base-button" id="submitBtn">
+            </form>                
             <div class="account-text">Already registered? <a href="{% url 'accounts:login' %}" class="account-link">Login to your account</a></div>
           </div>
         </div>

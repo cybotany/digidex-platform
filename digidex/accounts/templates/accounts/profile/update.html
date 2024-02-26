@@ -3,11 +3,11 @@
 <html>
   <head>  
     <meta charset="utf-8">
-    <title>Login - Digidex </title>
+    <title>Modify Profile - Digidex</title>
     <meta content="A platform for gardeners to cultivate their curiosity." name="description">
-    <meta content="Login - Digidex " property="og:title">
+    <meta content="Modify Profile - Digidex" property="og:title">
     <meta content="A platform for gardeners to cultivate their curiosity." property="og:description">
-    <meta content="Login - Digidex " property="twitter:title">
+    <meta content="Modify Profile - Digidex" property="twitter:title">
     <meta content="A platform for gardeners to cultivate their curiosity." property="twitter:description">
     <meta property="og:type" content="website">
     <meta content="summary_large_image" name="twitter:card">
@@ -29,25 +29,26 @@
         }
       });
     </script>
-    
+        
     <link href="{% static 'digidex/images/favicon.png' %}" rel="shortcut icon" type="image/x-icon">
     <link href="{% static 'digidex/images/webclip.png' %}" rel="apple-touch-icon">
   </head>
   <body>
-    <a href="{% url 'main:landing' %}" class="brand-center base-nav-brand">
-      <img src="{% static 'digidex/images/logo.png' %}" loading="eager" alt="" class="logo">
-    </a>
-    {% include 'message-bar.html' %}
-    <!-- Login Form Section -->
+    {% include 'navigation-bar.html' %}
+    {% include 'message-bar.html' %} 
     <section class="section-full">
       <div class="content">
         <div class="account-form">
-          <div class="subtitle green">Sign in<br></div>
-          <h2 class="account-heading">Login to your account</h2>
+          <div class="subtitle green">Modify<br></div>
+          <h2 class="account-heading">Update your profile</h2>
           <div class="form-block base-form">
-            {% include 'accounts/partials/login-form.html' %}
-            <div class="account-text">Forgot your password? <a href="{% url 'reset_password' %}" class="account-link">Reset password</a></div>
-            <div class="account-text">Not registered? <a href="{% url 'accounts:signup' %}" class="account-link">Create account</a></div>
+            {% include 'accounts/profile/form.html' %}
+          </div>
+          <div class="delete-user">
+            <form action="{% url 'accounts:delete-user' %}" method="post">
+              {% csrf_token %}
+              <input type="submit" value="Delete Account" class="delete-button base-button" onclick="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
+            </form>
           </div>
         </div>
       </div>
