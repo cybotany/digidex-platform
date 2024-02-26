@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 class Grouping(models.Model):
@@ -23,7 +24,7 @@ class Grouping(models.Model):
         help_text="The description of the group."
     )
     user = models.ForeignKey(
-        'auth.User',
+        settings.AUTH_USER_MODEL,
         related_name='digit_groups',
         on_delete=models.CASCADE,
         help_text="A relationship to the User model."

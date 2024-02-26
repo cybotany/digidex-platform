@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.urls import reverse
 
@@ -33,7 +34,7 @@ class NFC(models.Model):
         help_text="The counter value associated with the NFC tag."
     )
     user = models.ForeignKey(
-        'accounts.User',
+        settings.AUTH_USER_MODEL,
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
