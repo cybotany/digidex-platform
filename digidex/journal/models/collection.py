@@ -32,6 +32,7 @@ class Collection(models.Model):
         help_text="The type of the digit associated with this journal collection."
     )
     object_id = models.PositiveIntegerField(
+        null=True,
         help_text="The ID of the digit associated with this journal collection."
     )
     content_object = GenericForeignKey(
