@@ -1,7 +1,7 @@
 import uuid
 from django.db import models, transaction
 
-class Digit(models.Model):
+class BaseDigit(models.Model):
     """
     Abstract base model for digitized entities, serving as a bridge between physical specimens and their digital representations.
 

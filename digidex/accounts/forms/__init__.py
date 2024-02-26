@@ -1,2 +1,2 @@
-from .user import LoginForm, SignupForm
-from .profile import ProfileForm
+from .login import LoginForm
+from .signup import SignupForm

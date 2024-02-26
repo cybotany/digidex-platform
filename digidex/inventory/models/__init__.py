@@ -1,3 +1,2 @@
+from .digit import Plant, Pet
 from .grouping import Grouping
-from .pet import Pet
-from .plant import Plant

@@ -1,8 +1,8 @@
 from django.db import models
 from django.urls import reverse
-from .digit import Digit
+from .base import BaseDigit
 
-class Pet(Digit):
+class Pet(BaseDigit):
     breed = models.CharField(max_length=100, null=True, blank=True)
 
     def get_description(self):

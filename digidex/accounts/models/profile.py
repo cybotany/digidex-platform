@@ -83,7 +83,6 @@ class Profile(models.Model):
         Returns:
             QuerySet: A QuerySet of all Grouping objects associated with the user.
         """
-        #Grouping = apps.get_model('inventory', 'Grouping')
         return Grouping.objects.filter(user=self.user)
 
     class Meta:

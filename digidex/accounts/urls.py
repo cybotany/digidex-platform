@@ -1,6 +1,5 @@
 from django.urls import path
 from digidex.accounts.views import (SignupUser, LoginUser, LogoutUser, DeleteUser,
-                                    DetailProfile, UpdateProfile,
                                     VerificationEmail, VerificationCheck)
 
 app_name = 'accounts'
@@ -12,7 +11,4 @@ urlpatterns = [
 
     path('email-confirmation/', VerificationEmail.as_view(), name='email-user'),
     path('email-verification/<uidb64>/<token>/', VerificationCheck.as_view(), name='verify-user'),
-
-    path('<slug:username_slug>/', DetailProfile.as_view(), name='detail-profile'),
-    path('<slug:username_slug>/update/', UpdateProfile.as_view(), name='update-profile'),
 ]

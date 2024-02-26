@@ -1,8 +1,7 @@
 from django.conf import settings
 from django.db import models
-from .plant import Plant
-from .pet import Pet
-#from django.apps import apps
+from django.urls import reverse
+from .digit import Plant, Pet
 
 class Grouping(models.Model):
     """
@@ -48,18 +47,29 @@ class Grouping(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        """
+        Returns the absolute URL to the Grouping's detail page.
+        """
+        return reverse('inventory:detail-grouping', kwargs={'pk': self.pk})
+
+    def get_user_profile_url(self):
+        """
+        Returns the URL to the associated user's profile detail page.
+        """
+        username_slug = self.user.username_slug
+        return reverse('accounts:detail-profile', kwargs={'username_slug': username_slug})
+
     def get_user_plants(self):
         """
         Retrieves all Plant objects associated with the user of this profile.
         """
-        #Plant = apps.get_model('inventory', 'Plant')
         return Plant.objects.filter(grouping=self)
 
     def get_user_pets(self):
         """
         Retrieves all Pet objects associated with the user of this profile.
         """
-        #Pet = apps.get_model('inventory', 'Pet')
         return Pet.objects.filter(grouping=self)
 
     def get_user_digits(self):

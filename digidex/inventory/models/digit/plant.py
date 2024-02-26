@@ -1,8 +1,8 @@
 from django.db import models
 from django.urls import reverse
-from .digit import Digit
+from .base import BaseDigit
 
-class Plant(Digit):
+class Plant(BaseDigit):
     sunlight_requirement = models.CharField(max_length=100, null=True, blank=True)
 
     def get_description(self):

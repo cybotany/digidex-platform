@@ -1,5 +1,6 @@
 from django.urls import path
-from digidex.inventory.views import (DetailPet, UpdatePet, DeletePet,
+from digidex.inventory.views import (DetailProfile, UpdateProfile,
+                                     DetailPet, UpdatePet, DeletePet,
                                      DetailPlant, UpdatePlant, DeletePlant)
 
 app_name = 'inventory'
@@ -11,4 +12,7 @@ urlpatterns = [
     path('plant/<uuid:uuid>/', DetailPlant.as_view(), name='detail-plant'),
     path('plant/<uuid:uuid>/update/', UpdatePlant.as_view(), name='update-plant'),
     path('plant/<uuid:uuid>/delete/', DeletePlant.as_view(), name='delete-plant'),
+
+    path('<slug:username_slug>/', DetailProfile.as_view(), name='detail-profile'),
+    path('<slug:username_slug>/update/', UpdateProfile.as_view(), name='update-profile'),
 ]
