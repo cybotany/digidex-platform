@@ -3,6 +3,9 @@ from django.urls import reverse
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 
+def get_default_content_type():
+    return ContentType.objects.get_for_model(app_label='inventory', model='plant').pk
+
 class Collection(models.Model):
     """
     Aggregates journal entries for a single Digit.
@@ -23,6 +26,7 @@ class Collection(models.Model):
     content_type = models.ForeignKey(
         ContentType,
         on_delete=models.CASCADE,
+        default=get_default_content_type,
         limit_choices_to=models.Q(app_label='inventory', model='plant') | 
                           models.Q(app_label='inventory', model='pet'),
         help_text="The type of the digit associated with this journal collection."
