@@ -35,12 +35,12 @@ class NTAGLink(LoginRequiredMixin, View):
             raise ValueError("Unsupported tag use type")
 
     def get_associated_digit(self, ntag):
-        if ntag.use == 'plant':
+        if ntag.use_category() == 'plant':
             try:
                 return ntag.plant
             except Plant.DoesNotExist:
                 return None
-        elif ntag.use == 'pet':
+        elif ntag.use_category() == 'pet':
             try:
                 return ntag.pet
             except Pet.DoesNotExist:
@@ -56,13 +56,13 @@ class NTAGLink(LoginRequiredMixin, View):
             else:
                 raise PermissionDenied("You do not have permission to view this digit.")
         else:
-            FormClass, _, template_name= self.get_form_and_model(ntag.use)
+            FormClass, _, template_name= self.get_form_and_model(ntag.use_category())
             form = FormClass()
             return render(request, template_name, {'form': form, 'ntag': ntag})
 
     def post(self, request, *args, **kwargs):
         ntag = self.get_object()
-        FormClass, ModelClass, template_name = self.get_form_and_model(ntag.use)
+        FormClass, ModelClass, template_name = self.get_form_and_model(ntag.use_category())
         form = FormClass(request.POST)
         if form.is_valid():
             digit = ModelClass.create_digit(form.cleaned_data, ntag, request.user)

@@ -15,21 +15,11 @@ class BaseDigit(models.Model):
         grouping (ForeignKey): The grouping this digit belongs to.
         taxon (ForeignKey): A relationship to the Unit model, representing the entity's taxonomic classification.
         ntag (OneToOneField): A relationship to the Link model, representing the NTAG link for the digitized entity.
-        digit_type (CharField): The type of digitized entity, derived from NTAG use.
         is_public (BooleanField): Indicates if the digit should be publicly visible to the public or private. Digit is private by default.
         is_archived (BooleanField): Indicates whether the digit is archived.
         created_at (DateTimeField): The date and time when the Digit instance was created.
         last_modified (DateTimeField): The date and time when the Digit instance was last modified.
     """
-    DIGIT_TYPES = [
-        ('plant', 'Plant'),
-        ('pet', 'Pet'),
-    ]
-    NTAG_USE_TO_DIGIT_TYPE = {
-        'plant_label': 'plant',
-        'pet_tag': 'pet',
-    }
-
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
@@ -72,12 +62,6 @@ class BaseDigit(models.Model):
         related_name='%(class)s',
         help_text="NTAG link for the digitized entity."
     )
-    digit_type = models.CharField(
-        max_length=10,
-        choices=DIGIT_TYPES,
-        default='plant',
-        help_text="The type of digitized entity, derived from NTAG use."
-    )
     is_public = models.BooleanField(
         default=False,
         help_text='Indicates if the digit should be publicly visible to the public or private. Digit is private by default.'
@@ -101,10 +85,8 @@ class BaseDigit(models.Model):
     @classmethod
     def create_digit(cls, form_data, link, user):
         with transaction.atomic():    
-            digit_type = cls.NTAG_USE_TO_DIGIT_TYPE.get(link.use, 'plant')
             digit = cls.objects.create(
                 ntag=link,
-                digit_type=digit_type,
                 **form_data
             )
             link.user = user
@@ -148,16 +130,14 @@ class BaseDigit(models.Model):
                 }
             )
             self.grouping = default_grouping
-        if not self.digit_type and self.ntag:
-            self.digit_type = self.NTAG_USE_TO_DIGIT_TYPE.get(self.ntag.use, 'plant')
         
         if not self.name and self.ntag:
             user_digit_count = BaseDigit.objects.filter(
                 ntag__user=self.ntag.user,
-                ntag__use=self.ntag.use
+                ntag__use=self.ntag.use_category()
             ).count()
 
-            default_name_prefix = self.ntag.get_use_display()
+            default_name_prefix = self.ntag.use_category()
             self.name = f"{default_name_prefix} {user_digit_count + 1}"
 
         super().save(*args, **kwargs)
@@ -167,7 +147,7 @@ class BaseDigit(models.Model):
         Get the URL to view the details of this digitized entity, using query parameters.
         """
         base_url = reverse('inventory:detail-digit')
-        query_params = urlencode({'type': self.digit_type, 'uuid': self.uuid})
+        query_params = urlencode({'type': self.ntag.use_category(), 'uuid': self.uuid})
         return f"{base_url}?{query_params}"
 
     class Meta:
