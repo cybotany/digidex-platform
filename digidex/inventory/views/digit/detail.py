@@ -6,7 +6,7 @@ from digidex.journal.models import Entry
 
 class DetailDigit(DetailView):
     def get_object(self, queryset=None):
-        digit_type = self.request.GET.get('type')
+        digit_type = self.kwargs.get('type')
         uuid = self.kwargs.get('uuid')
 
         if not uuid or not digit_type:
