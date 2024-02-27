@@ -1,4 +1,4 @@
-from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.views.generic import DetailView
 from django.http import Http404
 from django.shortcuts import get_object_or_404
@@ -16,7 +16,7 @@ class DetailGrouping(DetailView):
         if not user_slug or not group_slug:
             raise Http404("No sufficient identifiers provided")
 
-        user = get_object_or_404(settings.AUTH_USER_MODEL, slug=user_slug)
+        user = get_object_or_404(get_user_model(), slug=user_slug)
         grouping = get_object_or_404(Grouping, slug=group_slug, user=user)
 
         if not grouping.is_public:
