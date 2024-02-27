@@ -58,15 +58,16 @@ class Grouping(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        if not self.slug or self.tracker.has_changed('name'):
-            self.slug = slugify(self.name)
-            original_slug = self.slug
-            num = 1
-            while Grouping.objects.filter(user=self.user, slug=self.slug).exclude(pk=self.pk).exists():
-                self.slug = f"{original_slug}-{num}"
-                num += 1
+        self.slug = slugify(self.name)
+        # Ensure the slug is unique for the user
+        original_slug = self.slug
+        num = 1
+        # Check for existing slugs that are the same and append a number to make the new slug unique
+        while Grouping.objects.filter(user=self.user, slug=self.slug).exclude(pk=self.pk).exists():
+            self.slug = f"{original_slug}-{num}"
+            num += 1
 
-        super().save(*args, **kwargs)
+        super(Grouping, self).save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
         if not self.is_default:
