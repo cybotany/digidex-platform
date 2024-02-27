@@ -23,7 +23,7 @@ class UpdateDigit(LoginRequiredMixin, UpdateView):
         """
         Dynamically get the form class based on 'type' query parameter.
         """
-        digit_type = self.request.GET.get('type')
+        digit_type = self.kwargs.get('type')
         form_class = FORM_MAP.get(digit_type)
         if not form_class:
             raise Http404("Invalid digit type")
@@ -33,15 +33,15 @@ class UpdateDigit(LoginRequiredMixin, UpdateView):
         """
         Dynamically get the template name based on 'type' query parameter.
         """
-        digit_type = self.request.GET.get('type')
+        digit_type = self.kwargs.get('type')
         template_name = f'inventory/{digit_type}/update-page.html'
         if not template_name:
             raise Http404("Invalid digit type")
         return [template_name]
     
     def get_object(self, queryset=None):
-        digit_type = self.request.GET.get('type')
-        uuid = self.request.GET.get('uuid')
+        digit_type = self.kwargs.get('type')
+        uuid = self.kwargs.get('uuid')
 
         if not uuid or not digit_type:
             raise Http404("No uuid or digit type provided")

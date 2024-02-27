@@ -146,9 +146,8 @@ class BaseDigit(models.Model):
         """
         Get the URL to view the details of this digitized entity, using query parameters.
         """
-        base_url = reverse('inventory:detail-digit')
-        query_params = urlencode({'type': self.ntag.use_category(), 'uuid': self.uuid})
-        return f"{base_url}?{query_params}"
+        digit_type = self.ntag.use_category()
+        return reverse('inventory:detail-digit', kwargs={'type': digit_type, 'uuid': self.uuid})
 
     class Meta:
         abstract = True

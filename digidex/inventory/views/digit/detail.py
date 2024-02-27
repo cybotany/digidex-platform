@@ -7,7 +7,7 @@ from digidex.journal.models import Entry
 class DetailDigit(DetailView):
     def get_object(self, queryset=None):
         digit_type = self.request.GET.get('type')
-        uuid = self.request.GET.get('uuid')
+        uuid = self.kwargs.get('uuid')
 
         if not uuid or not digit_type:
             raise Http404("No UUID or digit type provided")

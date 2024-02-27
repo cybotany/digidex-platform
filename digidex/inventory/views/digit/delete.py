@@ -12,8 +12,8 @@ logger = logging.getLogger(__name__)
 
 class DeleteDigit(LoginRequiredMixin, DeleteView):
     def get_object(self, queryset=None):
-        digit_type = self.request.GET.get('type')
-        uuid = self.request.GET.get('uuid')
+        digit_type = self.kwargs.get('type')
+        uuid = self.kwargs.get('uuid')
 
         if not uuid:
             raise Http404("No UUID provided")
