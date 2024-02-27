@@ -90,29 +90,31 @@
             </div>
           </div>
         </div>
-        <div class="collection-list-wrapper-posts base-dyn-list">
-          <div role="list" class="collection-list-posts base-dyn-items">
-            {% for grouping in user_groupings %}
-              <div role="listitem" class="base-dyn-item">
-                <a href="{{ grouping.get_absolute_url }}" class="block-post-link">
-                  <div class="block-post">
-                    <div class="post">
-                      <div class="date">{{ grouping.last_modified }}</div>
-                      <h3 class="heading-post">{{ grouping.name }}</h3>
-                      <p class="paragraph-post large">{{ grouping.description }}</p>
+        <div class="layout-grid grid-profile">
+          <div class="collection-list-wrapper-posts base-dyn-list">
+            <div role="list" class="collection-list-posts base-dyn-items">
+              {% for grouping in user_groupings %}
+                <div role="listitem" class="base-dyn-item">
+                  <a href="{{ grouping.get_absolute_url }}" class="block-post-link">
+                    <div class="block-post">
+                      <div class="post">
+                        <div class="date">{{ grouping.last_modified }}</div>
+                        <h3 class="heading-post">{{ grouping.name }}</h3>
+                        <p class="paragraph-post large">{{ grouping.description }}</p>
+                      </div>
                     </div>
-                  </div>
-                </a>
-              </div>
-            {% empty %}
-              <div class="empty-state base-dyn-empty">
-                <div class="text-empty">No groupings found.</div>
-              </div>
-            {% endfor %}
+                  </a>
+                </div>
+              {% empty %}
+                <div class="empty-state base-dyn-empty">
+                  <div class="text-empty">No groupings found.</div>
+                </div>
+              {% endfor %}
+            </div>
           </div>
         </div>
       </div>
-    </section>
+    </section>     
     <script src="{% static 'inventory/js/toggle-tabs.js' %} "></script>          
   </body>
 </html>
