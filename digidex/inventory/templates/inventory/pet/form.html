@@ -24,6 +24,15 @@
       <select class="base-input" name="taxon" id="id_taxon" data-kingdom-id="5"></select>
     </div> 
   </div>
+  <!-- Render Grouping Field -->
+  <div>
+    {{ form.grouping }}
+    {% if form.grouping.errors %}
+      <div class="error-message">
+        <span class="text-error">{{ form.grouping.errors|striptags }}</span>
+      </div>
+    {% endif %}
+  </div>
   <!-- Render Submit Button -->
   <input type="submit" value="Create Digit" class="submit-button base-button"> 
 </form>
