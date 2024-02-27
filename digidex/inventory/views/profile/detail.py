@@ -13,6 +13,7 @@ class DetailProfile(DetailView):
         profile = context['profile']
 
         is_profile_owner = self.request.user.is_authenticated and self.request.user == profile.user
+        """
         if is_profile_owner:
             user_pets = profile.get_user_pets()
             user_plants = profile.get_user_plants()
@@ -22,6 +23,9 @@ class DetailProfile(DetailView):
         else:
             user_pets = []
             user_plants = []
+        """
+        user_pets = []
+        user_plants = []
         pet_count = len(user_pets)
         plant_count = len(user_plants)
 
