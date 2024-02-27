@@ -39,8 +39,7 @@ class LoginUser(LoginView):
         if redirect_to:
             return redirect_to
         else:
-            user_slug = self.request.user.slug
-            return reverse('inventory:detail-profile', kwargs={'user_slug': user_slug})
+            return reverse('inventory:detail-profile', kwargs={'user_slug': self.request.user.slug})
 
     def get_redirect_url(self):
         """Ensure the user-originating redirection URL is safe."""

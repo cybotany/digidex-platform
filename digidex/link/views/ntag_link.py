@@ -20,9 +20,9 @@ class NTAGLink(LoginRequiredMixin, View):
 
     def get_form_and_model(self, tag_use):
         if tag_use == 'plant':
-            return PlantForm, Plant, 'inventory/plant/creation-page.html'
+            return PlantForm, Plant, f'inventory/{tag_use}/creation-page.html'
         elif tag_use == 'pet':
-            return PetForm, Pet, 'inventory/pet/creation-page.html'
+            return PetForm, Pet, f'inventory/{tag_use}/creation-page.html'
         else:
             raise ValueError("Unsupported tag use type")
 
