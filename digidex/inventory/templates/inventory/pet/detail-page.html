@@ -45,7 +45,7 @@
           <div class="date-top">Created: {{ digit.created_at|date:"M. d, Y" }}</div>
           {% if is_owner %}
             <div class="digit-text-top">
-              <a href="{% url 'inventory:update-digit' type=digit.get_digit_type digit.uuid %}" class="digit-link-top">Update {{ digit.get_digit_type|capfirst }}</a>
+              <a href="{% url 'inventory:update-digit' type=digit.get_digit_type uuid=digit.uuid %}" class="digit-link-top">Update {{ digit.get_digit_type|capfirst }}</a>
             </div>
           {% endif %}
           <h2 class="digit-heading-top">{{ digit.name }}</h2>
