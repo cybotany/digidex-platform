@@ -2,7 +2,7 @@ import uuid
 from urllib.parse import urlencode
 from django.urls import reverse
 from django.db import models, transaction
-from ..grouping import Grouping
+from .grouping import Grouping
 
 class BaseDigit(models.Model):
     """
