@@ -62,6 +62,7 @@ class UpdateDigit(LoginRequiredMixin, UpdateView):
             user = self.request.user
             if obj.ntag.user != user:
                 raise PermissionDenied("You do not have permission to edit this item.")
+            self.model = model
             return obj
         else:
             raise Http404("No matching object found")
