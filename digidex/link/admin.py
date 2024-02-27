@@ -5,8 +5,8 @@ from digidex.link.models import NTAG
 
 @admin.register(NTAG)
 class DigitLink(admin.ModelAdmin):
-    list_display = ('serial_number', 'ntag_type', 'counter', 'user_link', 'active', 'created_at', 'last_modified')
-    list_filter = ('ntag_type', 'active', 'created_at', 'last_modified', 'user__username')
+    list_display = ('serial_number', 'type', 'use', 'counter', 'user_link', 'active', 'created_at', 'last_modified')
+    list_filter = ('type', 'use', 'active', 'created_at', 'last_modified', 'user__username')
     search_fields = ('serial_number', 'user__username')
     actions = ['activate_links', 'deactivate_links']
     readonly_fields = ('user_link',)
