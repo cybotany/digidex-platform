@@ -1,5 +1,5 @@
 from django.views.generic.detail import DetailView
-from digidex.accounts.models import Profile
+from digidex.inventory.models import Profile
 
 class DetailProfile(DetailView):
     model = Profile

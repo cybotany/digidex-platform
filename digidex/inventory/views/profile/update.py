@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.contrib import messages
-from digidex.accounts.models import Profile
+from digidex.inventory.models import Profile
 from digidex.inventory.forms import ProfileForm
 
 class UpdateProfile(LoginRequiredMixin, UpdateView):
