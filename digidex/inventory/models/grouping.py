@@ -68,29 +68,63 @@ class Grouping(models.Model):
         """
         return reverse('inventory:detail-grouping', kwargs={'user_slug': self.user.slug, 'group_slug': self.slug})
 
-    def get_user_profile_url(self):
+    def _get_items(self, item_type, is_owner):
         """
-        Returns the URL to the associated user's profile detail page.
+        Private method to retrieve or count items (plants or pets) based on ownership.
+        
+        Parameters:
+        - item_type (str): Type of items to retrieve ('plants' or 'pets').
+        - is_owner (bool): Ownership status to filter items.
         """
-        return reverse('inventory:detail-profile', kwargs={'user_slug': self.user.slug})
+        items = getattr(self, item_type)
+        if not is_owner:
+            items = items.filter(is_public=False)
+        return items
 
-    def get_user_plants(self):
-        """
-        Retrieves all Plant objects associated with the user of this profile.
-        """
-        return self.plants.all()
+    def _get_user_plants(self, is_owner=False):
+        return self._get_items('plants', is_owner)
 
-    def get_user_pets(self):
-        """
-        Retrieves all Pet objects associated with the user of this profile.
-        """
-        return self.pets.all()
+    def _count_user_plants(self, is_owner=False):
+        return self._get_items('plants', is_owner).count()
 
-    def get_user_digits(self):
+    def _get_user_pets(self, is_owner=False):
+        return self._get_items('pets', is_owner)
+
+    def _count_user_pets(self, is_owner=False):
+        return self._get_items('pets', is_owner).count()
+
+    def get_counts(self, is_owner=False, digit_type='all'):
         """
-        Retrieves all Plant and Pet objects associated with this grouping,
-        combining them into a single QuerySet.
+        Returns counts of plants, pets, or both for this grouping, based on ownership status and digit type.
+
+        Parameters:
+        - is_owner (bool): Determines whether to count all items or only those that are not public.
+        - digit_type (str): Specifies the digit type to return ('plants', 'pets', or 'all').
+        
+        Returns:
+        A dictionary with counts for plants and pets.
         """
-        user_plants = self.get_user_plants()
-        user_pets = self.get_user_pets()
-        return user_plants.union(user_pets)
+        counts = {}
+        if digit_type in ['plants', 'all']:
+            counts['plant_count'] = self._count_user_plants(is_owner)
+        if digit_type in ['pets', 'all']:
+            counts['pet_count'] = self._count_user_pets(is_owner)
+        return counts
+
+    def get_digits(self, is_owner=False, digit_type='all'):
+        """
+        Returns QuerySets of plants, pets, or both for this grouping, based on ownership status and digit type.
+        
+        Parameters:
+        - is_owner (bool): Determines whether to count all items or only those that are not public.
+        - digit_type (str): Specifies the digit type to return ('plants', 'pets', or 'all').
+
+        Returns:
+        A dictionary with counts for plants and pets.
+        """
+        digits = {}
+        if digit_type in ['plants', 'all']:
+            digits['plants'] = self._get_user_plants(is_owner)
+        if digit_type in ['pets', 'all']:
+            digits['pets'] = self._get_user_pets(is_owner)
+        return digits

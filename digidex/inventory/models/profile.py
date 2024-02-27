@@ -76,14 +76,30 @@ class Profile(models.Model):
         """
         return reverse('inventory:detail-profile', kwargs={'user_slug': self.user.slug})
 
-    def get_user_groupings(self):
+    def get_groupings(self, include=None, is_owner=False):
         """
-        Retrieves all Grouping objects associated with the user of this profile.
+        Optionally retrieves all Grouping objects associated with the user of this profile,
+        including counts of plants and pets and/or the actual digit objects if specified.
+
+        Parameters:
+        - include (list or None): Specifies what additional data to include in each grouping.
+                                       Options could include 'counts', 'digits', or both.
+        - is_owner (bool): The ownership status, to determine visibility of counts and digits.
 
         Returns:
-            QuerySet: A QuerySet of all Grouping objects associated with the user.
+            QuerySet: A QuerySet of all Grouping objects associated with the user,
+                      optionally including specified additional data.
         """
-        return Grouping.objects.filter(user=self.user)
+        groupings = Grouping.objects.filter(user=self.user)
+
+        if include is not None:
+            for grouping in groupings:
+                if 'counts' in include:
+                    grouping.counts = grouping.get_counts(is_owner=is_owner, digit_type='all')
+                if 'digits' in include:
+                    grouping.digits = grouping.get_digits(is_owner=is_owner, digit_type='all')
+
+        return groupings
 
     class Meta:
         verbose_name = "Profile"

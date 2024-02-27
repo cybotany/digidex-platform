@@ -80,12 +80,12 @@
             </div>
             <div id="plants" class="tab-content">
               <ul>
-                <li class="plant-text">Count of Plant Digits: {{ plant_count }}</li>
+                <li class="plant-text">Count of Plant Digits: 0</li>
               </ul>
             </div>
             <div id="pets" class="tab-content">
               <ul>
-                <li class="pet-text">Count of Pet Digits: {{ pet_count }}</li>
+                <li class="pet-text">Count of Pet Digits: 0</li>
               </ul>
             </div>
           </div>
@@ -93,35 +93,35 @@
       </div>
     </section>
 
-    <!-- Plant and Pet Digit List -->
-    <section class="section">
-      <div class="content">
-        <div class="collection-list-wrapper-posts base-dyn-list">
-          <div role="list" class="collection-list-posts base-dyn-items">
-            {% for plant in plants %}
-              <div role="listitem" class="base-dyn-item">
-                <a href="{% url 'inventory:detail-plant' plant.uuid %}" class="block-post-link">
-                  <div class="block-post">
-                    {% if plant.journal_collection.thumbnail %}
-                      <img src="{{ plant.journal_collection.thumbnail.image.url }}" alt="Journal Entry Image" loading="eager" class="image-post-thumbnail">
-                    {% else %}
-                      <img src="{% static 'digidex/images/placeholder.svg' %}" alt="Journal Entry Image Placeholder" loading="eager" class="image-post-thumbnail">
-                    {% endif %}
-                    <div class="post">
-                      <h4 class="heading-post">{{ plant.name }}</h4>
-                    </div>
+  <!-- Grouping List -->
+  <section class="section">
+    <div class="content">
+      <div class="collection-list-wrapper-posts base-dyn-list">
+        <div role="list" class="collection-list-posts base-dyn-items">
+          {% for grouping in user_groupings %}
+            <div role="listitem" class="base-dyn-item">
+              <a href="{% url 'inventory:detail-grouping' grouping.slug %}" class="block-post-link">
+                <div class="block-post">
+                  <!--<img src="{% static 'digidex/images/grouping-placeholder.svg' %}" alt="Grouping Thumbnail" loading="eager" class="image-post-thumbnail">-->
+                  <div class="post">
+                    <p>{{ grouping.description }}</p>
+
+                    <!-- Display counts for plants and pets within the grouping -->
+                    <p>{{ grouping.counts.plant_count }} Plant(s)</p>
+                    <p>{{ grouping.counts.pet_count }} Pet(s)</p>                    
                   </div>
-                </a>
-              </div>
-            {% empty %}
-              <div class="empty-state base-dyn-empty">
-                <div class="text-empty">No plants found.</div>
-              </div>
-            {% endfor %}
-          </div>
+                </div>
+              </a>
+            </div>
+          {% empty %}
+            <div class="empty-state base-dyn-empty">
+              <div class="text-empty">No groupings found.</div>
+            </div>
+          {% endfor %}
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
     <script src="{% static 'inventory/js/toggle-tabs.js' %} "></script>          
   </body>

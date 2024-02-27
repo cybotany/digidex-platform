@@ -11,30 +11,16 @@ class DetailProfile(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         profile = context['profile']
-
         is_profile_owner = self.request.user.is_authenticated and self.request.user == profile.user
-        """
-        if is_profile_owner:
-            user_pets = profile.get_user_pets()
-            user_plants = profile.get_user_plants()
-        elif profile.is_public:
-            user_pets = profile.get_user_pets().filter(is_public=True)
-            user_plants = profile.get_user_plants().filter(is_public=True)
+
+        if is_profile_owner or profile.is_public:
+            user_groupings = profile.get_groupings(include=['counts', 'digits'], is_owner=is_profile_owner)
         else:
-            user_pets = []
-            user_plants = []
-        """
-        user_pets = []
-        user_plants = []
-        pet_count = len(user_pets)
-        plant_count = len(user_plants)
+            user_groupings = []
 
         context.update({
             'is_profile_owner': is_profile_owner,
-            'pets': user_pets,
-            'pet_count': pet_count,
-            'plants': user_plants,
-            'plant_count': plant_count,
+            'user_groupings': user_groupings,
         })
         
         return context
