@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
-from . import Plant, Pet
 
 class Grouping(models.Model):
     """
@@ -79,13 +78,13 @@ class Grouping(models.Model):
         """
         Retrieves all Plant objects associated with the user of this profile.
         """
-        return Plant.objects.filter(grouping=self)
+        return self.plants.all()
 
     def get_user_pets(self):
         """
         Retrieves all Pet objects associated with the user of this profile.
         """
-        return Pet.objects.filter(grouping=self)
+        return self.pets.all()
 
     def get_user_digits(self):
         """

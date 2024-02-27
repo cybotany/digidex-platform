@@ -1,4 +1,5 @@
-from .digit import Pet, Plant, Grouping
+from .digit import Pet, Plant
+from .grouping import Grouping
 from .profile import Profile, profile_avatar_directory_path
 
 MODEL_MAP = {
