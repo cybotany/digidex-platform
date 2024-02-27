@@ -1,5 +1,5 @@
 from django import forms
-from digidex.accounts.models import Profile
+from digidex.inventory.models import Profile
 
 class ProfileForm(forms.ModelForm):
     avatar = forms.ImageField(
