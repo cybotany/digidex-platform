@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth import get_user_model
-from inventory.models import Grouping
+from digidex.inventory.models import Grouping
 
 User = get_user_model()
 
