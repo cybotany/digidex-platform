@@ -12,6 +12,7 @@ class Grouping(models.Model):
         slug (SlugField): A short label for the digitized grouping entity.
         description (TextField): A short description of the digitized grouping entity.
         user (ForeignKey): A relationship to the User model.
+        is_default (BooleanField): Indicates if this is the default grouping for the user. Default groupings cannot be deleted.
         created_at (DateTimeField): The date and time when the Grouping instance was created.
         last_modified (DateTimeField): The date and time when the Grouping instance was last modified.
     """

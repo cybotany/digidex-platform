@@ -102,13 +102,15 @@
             <div role="listitem" class="base-dyn-item">
               <a href="{{ grouping.get_absolute_url }}" class="block-post-link">
                 <div class="block-post">
-                  <!--<img src="{% static 'digidex/images/grouping-placeholder.svg' %}" alt="Grouping Thumbnail" loading="eager" class="image-post-thumbnail">-->
+                  <!--{% if grouping.image %}-->
+                    <!--<img src="{{ grouping.image.url }}" alt="Grouping Thumbnail" loading="eager" class="image-post-thumbnail">-->
+                  <!--{% else %}-->
+                    <img src="{% static 'digidex/images/placeholder.svg' %}" alt="Grouping Thumbnail" loading="eager" class="image-post-thumbnail">
+                  <!--{% endif %}-->
                   <div class="post">
-                    <p>{{ grouping.description }}</p>
-
-                    <!-- Display counts for plants and pets within the grouping -->
-                    <p>{{ grouping.counts.plant_count }} Plant(s)</p>
-                    <p>{{ grouping.counts.pet_count }} Pet(s)</p>                    
+                    <div class="date">{{ grouping.last_modified }}</div>
+                    <h3 class="heading-post">{{ grouping.name }}</h3>
+                    <p class="paragraph-post large">{{ grouping.description }}</p>
                   </div>
                 </div>
               </a>
