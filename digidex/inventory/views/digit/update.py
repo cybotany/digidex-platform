@@ -11,6 +11,13 @@ logger = logging.getLogger(__name__)
 
 class UpdateDigit(LoginRequiredMixin, UpdateView):
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        digit = context.get('object')
+        context['type'] = digit.get_digit_type
+        context['uuid'] = str(digit.uuid)
+        return context
+    
     def get_form_kwargs(self):
         """
         Return the keyword arguments for instantiating the form.
