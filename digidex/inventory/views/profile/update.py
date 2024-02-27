@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.contrib import messages
 from digidex.accounts.models import Profile
-from digidex.accounts.forms import ProfileForm
+from digidex.inventory.forms import ProfileForm
 
 class UpdateProfile(LoginRequiredMixin, UpdateView):
     model = Profile
@@ -15,8 +15,8 @@ class UpdateProfile(LoginRequiredMixin, UpdateView):
         """
         Only allow editing the profile associated with the currently logged-in user.
         """
-        username_slug = self.kwargs.get('username_slug')
-        profile = get_object_or_404(Profile, user__username_slug=username_slug)
+        slug = self.kwargs.get('user_slug')
+        profile = get_object_or_404(Profile, user__slug=slug)
 
         if profile.user != self.request.user:
             raise PermissionDenied("You do not have permission to modify this profile.")

@@ -17,11 +17,8 @@ class DetailGrouping(DetailView):
             raise Http404("No sufficient identifiers provided")
 
         user = get_object_or_404(settings.AUTH_USER_MODEL, slug=user_slug)
+        grouping = get_object_or_404(Grouping, slug=group_slug, user=user)
 
-        # Adjust the query to match your model's structure. Assuming Grouping model has a 'name' or 'slug' field
-        grouping = get_object_or_404(Grouping, slug=group_slug, user=user)  # Adjust 'name' to your field
-
-        # Permission check (adjust according to your Grouping model's fields and privacy logic)
         if not grouping.is_public:
             if not self.request.user.is_authenticated or grouping.user != self.request.user:
                 raise PermissionDenied("You do not have permission to view this grouping.")
@@ -32,15 +29,9 @@ class DetailGrouping(DetailView):
         context = super().get_context_data(**kwargs)
         grouping = self.object
         user = self.request.user
-
         is_owner = user.is_authenticated and grouping.user == user
 
-        # Assuming Grouping model relates to some entries you want to display
-        # Adjust the context as needed based on your actual data models
-        entries = grouping.entries.all() if grouping.is_public or is_owner else []
-
         context.update({
-            'entries': entries,
             'is_owner': is_owner
         })
 

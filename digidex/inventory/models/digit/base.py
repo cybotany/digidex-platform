@@ -1,4 +1,6 @@
 import uuid
+from urllib.parse import urlencode
+from django.urls import reverse
 from django.db import models, transaction
 
 class BaseDigit(models.Model):
@@ -12,11 +14,20 @@ class BaseDigit(models.Model):
         grouping (ForeignKey): The grouping this digit belongs to.
         taxon (ForeignKey): A relationship to the Unit model, representing the entity's taxonomic classification.
         ntag (OneToOneField): A relationship to the Link model, representing the NTAG link for the digitized entity.
+        digit_type (CharField): The type of digitized entity, derived from NTAG use.
         is_public (BooleanField): Indicates if the digit should be publicly visible to the public or private. Digit is private by default.
         is_archived (BooleanField): Indicates whether the digit is archived.
         created_at (DateTimeField): The date and time when the Digit instance was created.
         last_modified (DateTimeField): The date and time when the Digit instance was last modified.
     """
+    DIGIT_TYPES = [
+        ('plant', 'Plant'),
+        ('pet', 'Pet'),
+    ]
+    NTAG_USE_TO_DIGIT_TYPE = {
+        'plant_label': 'plant',
+        'pet_tag': 'pet',
+    }
 
     uuid = models.UUIDField(
         default=uuid.uuid4,
@@ -62,6 +73,12 @@ class BaseDigit(models.Model):
         related_name='%(class)s',
         help_text="NTAG link for the digitized entity."
     )
+    digit_type = models.CharField(
+        max_length=10,
+        choices=DIGIT_TYPES,
+        default='plant',
+        help_text="The type of digitized entity, derived from NTAG use."
+    )
     is_public = models.BooleanField(
         default=False,
         help_text='Indicates if the digit should be publicly visible to the public or private. Digit is private by default.'
@@ -84,9 +101,11 @@ class BaseDigit(models.Model):
 
     @classmethod
     def create_digit(cls, form_data, link, user):
-        with transaction.atomic():
+        with transaction.atomic():    
+            digit_type = cls.NTAG_USE_TO_DIGIT_TYPE.get(link.ntag_use, 'plant')
             digit = cls.objects.create(
                 ntag=link,
+                digit_type=digit_type,
                 **form_data
             )
             link.user = user
@@ -104,7 +123,7 @@ class BaseDigit(models.Model):
             self.ntag.reset_to_default()
             self.ntag.save()
 
-        super(Digit, self).delete(*args, **kwargs)
+        super(BaseDigit, self).delete(*args, **kwargs)
 
     def archive(self):
         """
@@ -120,8 +139,11 @@ class BaseDigit(models.Model):
         Overrides the save method of the model. If name is not provided, it sets a default name 
         based on the count of Digits the user has.
         """
+        if not self.digit_type and self.ntag:
+            self.digit_type = self.NTAG_USE_TO_DIGIT_TYPE.get(self.ntag.ntag_use, 'plant')
+        
         if not self.name and self.ntag:
-            user_digit_count = Digit.objects.filter(
+            user_digit_count = BaseDigit.objects.filter(
                 ntag__user=self.ntag.user,
                 ntag__ntag_use=self.ntag.ntag_use
             ).count()
@@ -130,6 +152,14 @@ class BaseDigit(models.Model):
             self.name = f"{default_name_prefix} {user_digit_count + 1}"
 
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        """
+        Get the URL to view the details of this digitized entity, using query parameters.
+        """
+        base_url = reverse('inventory:detail-digit')
+        query_params = urlencode({'type': self.digit_type, 'uuid': self.uuid})
+        return f"{base_url}?{query_params}"
 
     class Meta:
         abstract = True
