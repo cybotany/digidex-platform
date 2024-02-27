@@ -1,11 +1,19 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth import get_user_model
-from digidex.inventory.models import Profile
+from digidex.inventory.models import Profile, Grouping
 
 @receiver(post_save, sender=get_user_model())
 def manage_user_creation(sender, instance, created, **kwargs):
     """
     Signal handler to create or update a user profile whenever a user instance is created or saved.
     """
-    Profile.objects.get_or_create(user=instance)
+    profile, _ = Profile.objects.get_or_create(user=instance)
+
+    if created:
+        Grouping.objects.create(
+            user=instance,
+            name="Default Group",
+            description="Automatically created default group.",
+            is_default=True
+        )

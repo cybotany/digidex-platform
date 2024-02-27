@@ -37,6 +37,10 @@ class Grouping(models.Model):
         on_delete=models.CASCADE,
         help_text="A relationship to the User model."
     )
+    is_default = models.BooleanField(
+        default=False,
+        help_text="Indicates if this is the default grouping for the user. Default groupings cannot be deleted."
+    )
     created_at = models.DateTimeField(
         auto_now_add=True,
         verbose_name="Created At",
@@ -52,6 +56,12 @@ class Grouping(models.Model):
 
     def __str__(self):
         return self.name
+
+    def delete(self, *args, **kwargs):
+        if not self.is_default:
+            super(Grouping, self).delete(*args, **kwargs)
+        else:
+            pass
 
     def get_absolute_url(self):
         """
