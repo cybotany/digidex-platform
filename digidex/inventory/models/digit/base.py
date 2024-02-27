@@ -164,6 +164,9 @@ class BaseDigit(models.Model):
             return entries
         return Entry.objects.none()
 
+    def get_digit_type(self):
+        return self.__class__.__name__.lower()
+
     class Meta:
         abstract = True
         ordering = ['-created_at']

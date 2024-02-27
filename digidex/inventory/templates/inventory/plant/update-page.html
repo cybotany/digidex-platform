@@ -3,11 +3,11 @@
 <html>
   <head>  
     <meta charset="utf-8">
-    <title>Modify Plant - Digidex</title>
+    <title>Modify {{ digit.get_digit_type|capfirst }} - Digidex</title>
     <meta content="A platform for gardeners to cultivate their curiosity." name="description">
-    <meta content="Modify Plant - Digidex" property="og:title">
+    <meta content="Modify {{ digit.get_digit_type|capfirst }} - Digidex" property="og:title">
     <meta content="A platform for gardeners to cultivate their curiosity." property="og:description">
-    <meta content="Modify Plant - Digidex" property="twitter:title">
+    <meta content="Modify {{ digit.get_digit_type|capfirst }} - Digidex" property="twitter:title">
     <meta content="A platform for gardeners to cultivate their curiosity." property="twitter:description">
     <meta property="og:type" content="website">
     <meta content="summary_large_image" name="twitter:card">
@@ -48,14 +48,14 @@
       <div class="content">
         <div class="account-form">
           <div class="subtitle green">Modify<br></div>
-          <h2 class="account-heading">Update or delete plant</h2>
+          <h2 class="account-heading">Update {{ digit.get_digit_type|capfirst }}</h2>
           <div class="form-block base-form">
-            {% include 'inventory/plant/form.html' %}
+            {% include 'inventory/{{ digit.get_digit_type }}/form.html' %}
           </div>
           <div class="delete-digit">
-            <form action="{% url 'inventory:delete-plant' plant.uuid %}" method="post">
+            <form action="{% url 'inventory:delete-digit' type=digit.get_digit_type digit.uuid %}" method="post">
               {% csrf_token %}
-              <input type="submit" value="Delete Digit" class="delete-button base-button" onclick="return confirm('Are you sure you want to delete this Plant? This action cannot be undone.');">
+              <input type="submit" value="Delete {{ digit.get_digit_type|capfirst }}" class="delete-button base-button" onclick="return confirm('Are you sure you want to delete this {{ digit.get_digit_type|capfirst }}? This action cannot be undone.');">
             </form>
           </div>
         </div>

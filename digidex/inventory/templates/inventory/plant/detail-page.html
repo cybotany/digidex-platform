@@ -3,11 +3,11 @@
 <html>
   <head>  
     <meta charset="utf-8">
-    <title>Plant Details - Digidex</title>
+    <title>{{ digit.get_digit_type|capfirst }} Details - Digidex</title>
     <meta content="A platform for gardeners to cultivate their curiosity." name="description">
-    <meta content="Plant Details - Digidex" property="og:title">
+    <meta content="{{ digit.get_digit_type|capfirst }} Details - Digidex" property="og:title">
     <meta content="A platform for gardeners to cultivate their curiosity." property="og:description">
-    <meta content="Plant Details - Digidex" property="twitter:title">
+    <meta content="{{ digit.get_digit_type|capfirst }} Details - Digidex" property="twitter:title">
     <meta content="A platform for gardeners to cultivate their curiosity." property="twitter:description">
     <meta property="og:type" content="website">
     <meta content="summary_large_image" name="twitter:card">
@@ -42,12 +42,14 @@
       <div class="content content-digit-top">
         <div class="block-digit-top">
           <div class="subtitle green">Overview<br></div>
-          <div class="date-top">Created: {{ plant.created_at|date:"M. d, Y" }}</div>
+          <div class="date-top">Created: {{ digit.created_at|date:"M. d, Y" }}</div>
           {% if is_owner %}
-            <div class="digit-text-top"><a href="{% url 'inventory:update-plant' uuid=plant.uuid %}" class="digit-link-top">Update Plant</a></div>
+            <div class="digit-text-top">
+              <a href="{% url 'inventory:update-digit' type=digit.get_digit_type digit.uuid %}" class="digit-link-top">Update {{ digit.get_digit_type|capfirst }}</a>
+            </div>
           {% endif %}
-          <h2 class="digit-heading-top">{{ plant.name }}</h2>
-          <div class="digit-paragraph-top">{{ plant.description }}</div>
+          <h2 class="digit-heading-top">{{ digit.name }}</h2>
+          <div class="digit-paragraph-top">{{ digit.description }}</div>
         </div>
       </div>
     </section>
@@ -75,13 +77,13 @@
                   </div>
                   <div class="journal-wrapper base-dyn-empty">
                     {% if is_owner %}
-                      <a href="{% url 'journal:collection' pk=plant.journal_collection.id %}" class="journal-link-block base-inline-block">
+                      <a href="{% url 'journal:collection' pk=digit.journal_collection.id %}" class="journal-link-block base-inline-block">
                         <div class="text-link">View Entire Journal</div>
                         <div class="block-journal-icon-link">
                           <img src="{% static 'digidex/images/bx-arrow-to-right_green.svg' %}" loading="eager" alt="" class="icon-link">
                         </div>
                       </a>
-                      <a href="{% url 'journal:entry-creation' pk=plant.journal_collection.id %}" class="journal-link-block base-inline-block">
+                      <a href="{% url 'journal:entry-creation' pk=digit.journal_collection.id %}" class="journal-link-block base-inline-block">
                         <div class="text-link">Create Journal Entry</div>
                         <div class="block-journal-icon-link">
                           <img src="{% static 'digidex/images/bx-arrow-to-right_green.svg' %}" loading="eager" alt="" class="icon-link">
