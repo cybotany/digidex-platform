@@ -10,6 +10,15 @@ from digidex.inventory.forms import FORM_MAP
 logger = logging.getLogger(__name__)
 
 class UpdateDigit(LoginRequiredMixin, UpdateView):
+    
+    def get_form_kwargs(self):
+        """
+        Return the keyword arguments for instantiating the form.
+        """
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
     def get_form_class(self):
         """
         Dynamically get the form class based on 'type' query parameter.
