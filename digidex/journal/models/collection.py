@@ -13,6 +13,9 @@ class Collection(models.Model):
 
     Attributes:
         thumbnail (URLField): A URL to an image representing the thumbnail of the collection.
+        content_type (ForeignKey): The type of the digit associated with this journal collection.
+        object_id (PositiveIntegerField): The ID of the digit associated with this journal collection.
+        context_object (GenericForeignKey): A reference to the digit associated with this journal collection.
         created_at (DateTimeField): The date/time the journal collection was created.
         last_modified (DateTimeField): The date/time the journal collection was modified.
     """

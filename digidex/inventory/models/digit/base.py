@@ -1,7 +1,8 @@
 import uuid
-from urllib.parse import urlencode
 from django.urls import reverse
 from django.db import models, transaction
+from django.contrib.contenttypes.models import ContentType
+from digidex.journal.models import Collection, Entry
 from ..grouping import Grouping
 
 class BaseDigit(models.Model):
@@ -148,6 +149,20 @@ class BaseDigit(models.Model):
         """
         digit_type = self.ntag.use_category()
         return reverse('inventory:detail-digit', kwargs={'type': digit_type, 'uuid': self.uuid})
+
+    def get_journal_entries(self):
+        """
+        Fetches all Entry objects related to this Digit instance through its Collection.
+        Returns a QuerySet of Entry instances.
+        """
+        content_type = ContentType.objects.get_for_model(self.__class__)
+        collections = Collection.objects.filter(content_type=content_type, object_id=self.pk)
+
+        if collections.exists():
+            collection = collections.first()
+            entries = collection.get_all_entries()
+            return entries
+        return Entry.objects.none()
 
     class Meta:
         abstract = True

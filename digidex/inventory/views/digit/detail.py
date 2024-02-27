@@ -1,8 +1,6 @@
-from django.db.models import Prefetch
 from django.views.generic import DetailView
 from django.http import Http404
 from digidex.inventory.models import MODEL_MAP
-from digidex.journal.models import Entry
 
 class DetailDigit(DetailView):
     def get_object(self, queryset=None):
@@ -16,13 +14,10 @@ class DetailDigit(DetailView):
         if not model:
             raise Http404(f"Invalid digit type '{digit_type}'")
 
-        obj_queryset = model.objects.prefetch_related(
-            Prefetch('journal_entries', queryset=Entry.objects.order_by('-created_at'))
-        )
-        obj = obj_queryset.filter(uuid=uuid).first()
+        obj = model.objects.filter(uuid=uuid).first()
         if obj:
             self.model = model
-            self.template_name = f'inventory/{model.__name__.lower()}/detail-page.html'
+            self.template_name = f'inventory/{digit_type}/detail-page.html'
             return obj
         else:
             raise Http404("No matching object found")
@@ -33,8 +28,8 @@ class DetailDigit(DetailView):
         user = self.request.user
 
         is_owner = user.is_authenticated and digit.ntag.user == user
-        journal_entries = digit.journal_entries.all() if digit.is_public or is_owner else []
-
+        journal_entries = digit.get_journal_entries() if digit.is_public or is_owner else []
+        
         context.update({
             'journal_entries': journal_entries,
             'is_owner': is_owner
