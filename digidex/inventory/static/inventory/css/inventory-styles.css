@@ -1,8 +1,9 @@
 @import url('profile/header.css');
+@import url('profile/groups.css');
 
-@import url('digit/header-section.css');
-@import url('digit/journal-section.css');
-@import url('digit/taxonomy-section.css');
-@import url('digit/care-section.css');
+@import url('digit/header.css');
+@import url('digit/journal.css');
+@import url('digit/taxonomy.css');
+@import url('digit/care.css');
 
-@import url('grouping/grid-section.css');
+@import url('grouping/grid.css');
