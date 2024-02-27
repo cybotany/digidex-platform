@@ -1,6 +1,5 @@
 from django.core.management.base import BaseCommand
 from django.contrib.contenttypes.models import ContentType
-from django.db.models import Count
 from digidex.inventory.models import Plant, Pet
 from digidex.journal.models import Collection
 
@@ -8,19 +7,19 @@ class Command(BaseCommand):
     help = 'Create a journal collection for every pet or plant that currently doesn\'t have one.'
 
     def handle(self, *args, **options):
-        self.create_missing_collections_for_model(Plant)
-        self.create_missing_collections_for_model(Pet)
+        for model in [Plant, Pet]:
+            self.create_missing_collections_for_model(model)
 
     def create_missing_collections_for_model(self, model):
-        # Get the ContentType for the current model
         content_type = ContentType.objects.get_for_model(model)
+        model_ids_with_collections = Collection.objects.filter(
+            content_type=content_type
+        ).values_list('object_id', flat=True)
 
-        # Find all instances of the model that do not have a Collection
-        missing_collections = model.objects.annotate(
-            collection_count=Count('collection')
-        ).filter(collection_count=0)
+        missing_collections = model.objects.exclude(
+            id__in=model_ids_with_collections
+        )
 
-        # Create a Collection for each missing instance
         for instance in missing_collections:
             Collection.objects.create(
                 content_type=content_type,
