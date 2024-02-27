@@ -3,6 +3,8 @@ from django.http import Http404
 from digidex.inventory.models import MODEL_MAP
 
 class DetailDigit(DetailView):
+    context_object_name = 'digit'
+
     def get_object(self, queryset=None):
         digit_type = self.kwargs.get('type')
         uuid = self.kwargs.get('uuid')
