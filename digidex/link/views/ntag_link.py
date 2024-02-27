@@ -16,7 +16,7 @@ class NTAGLink(LoginRequiredMixin, View):
         """
         Return the keyword arguments for instantiating the form.
         """
-        kwargs = super().get_form_kwargs()
+        kwargs = super(NTAGLink, self).get_form_kwargs() if hasattr(super(), 'get_form_kwargs') else {}
         kwargs['user'] = self.request.user
         return kwargs
 
@@ -57,13 +57,13 @@ class NTAGLink(LoginRequiredMixin, View):
                 raise PermissionDenied("You do not have permission to view this digit.")
         else:
             FormClass, _, template_name= self.get_form_and_model(ntag.use_category())
-            form = FormClass()
+            form = FormClass(**self.get_form_kwargs())
             return render(request, template_name, {'form': form, 'ntag': ntag})
 
     def post(self, request, *args, **kwargs):
         ntag = self.get_object()
         FormClass, ModelClass, template_name = self.get_form_and_model(ntag.use_category())
-        form = FormClass(request.POST)
+        form = FormClass(request.POST, **self.get_form_kwargs())
         if form.is_valid():
             digit = ModelClass.create_digit(form.cleaned_data, ntag, request.user)
             messages.success(request, f"{ModelClass.__name__} created successfully.")
