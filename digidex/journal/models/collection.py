@@ -2,10 +2,6 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
-from digidex.inventory.models import Plant
-
-def get_default_content_type():
-    return ContentType.objects.get_for_model(Plant).pk
 
 class Collection(models.Model):
     """
@@ -30,7 +26,7 @@ class Collection(models.Model):
     content_type = models.ForeignKey(
         ContentType,
         on_delete=models.CASCADE,
-        default=get_default_content_type,
+        null=True,
         limit_choices_to=models.Q(app_label='inventory', model='plant') | 
                           models.Q(app_label='inventory', model='pet'),
         help_text="The type of the digit associated with this journal collection."
@@ -53,6 +49,11 @@ class Collection(models.Model):
         verbose_name="Last Modified",
         help_text="The date and time when the journal collection instance was last modified."
     )
+
+    def save(self, *args, **kwargs):
+        if self._state.adding and not self.content_type_id:
+            self.content_type = ContentType.objects.get(app_label='inventory', model='plant')
+        super().save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse('journal:collection', kwargs={'pk': self.id})
