@@ -100,7 +100,7 @@
         <div role="list" class="collection-list-posts base-dyn-items">
           {% for grouping in user_groupings %}
             <div role="listitem" class="base-dyn-item">
-              <a href="{% url 'inventory:detail-grouping' grouping.slug %}" class="block-post-link">
+              <a href="{{ grouping.get_absolute_url() }}" class="block-post-link">
                 <div class="block-post">
                   <!--<img src="{% static 'digidex/images/grouping-placeholder.svg' %}" alt="Grouping Thumbnail" loading="eager" class="image-post-thumbnail">-->
                   <div class="post">
