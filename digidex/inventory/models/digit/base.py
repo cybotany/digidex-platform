@@ -2,6 +2,7 @@ import uuid
 from urllib.parse import urlencode
 from django.urls import reverse
 from django.db import models, transaction
+from ..grouping import Grouping
 
 class BaseDigit(models.Model):
     """
@@ -51,9 +52,7 @@ class BaseDigit(models.Model):
     )
     grouping = models.ForeignKey(
         'inventory.Grouping',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         related_name="%(class)ss", # The second "s" at the end is intentional
         help_text="The grouping this digit belongs to."
     )
@@ -139,6 +138,16 @@ class BaseDigit(models.Model):
         Overrides the save method of the model. If name is not provided, it sets a default name 
         based on the count of Digits the user has.
         """
+        if not self.grouping_id:
+            default_grouping, _ = Grouping.objects.get_or_create(
+                user=self.ntag.user,
+                is_default=True,
+                defaults={
+                    'name': 'Default Grouping',
+                    'description': 'This is an automatically created default grouping.'
+                }
+            )
+            self.grouping = default_grouping
         if not self.digit_type and self.ntag:
             self.digit_type = self.NTAG_USE_TO_DIGIT_TYPE.get(self.ntag.ntag_use, 'plant')
         
