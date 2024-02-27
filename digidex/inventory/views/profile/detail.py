@@ -5,8 +5,8 @@ class DetailProfile(DetailView):
     model = Profile
     template_name = 'inventory/profile/detail-page.html'
     context_object_name = 'profile'
-    slug_field = 'user__username_slug'
-    slug_url_kwarg = 'username_slug'
+    slug_field = 'user__slug'
+    slug_url_kwarg = 'user_slug'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
