@@ -101,7 +101,7 @@ class BaseDigit(models.Model):
     @classmethod
     def create_digit(cls, form_data, link, user):
         with transaction.atomic():    
-            digit_type = cls.NTAG_USE_TO_DIGIT_TYPE.get(link.ntag_use, 'plant')
+            digit_type = cls.NTAG_USE_TO_DIGIT_TYPE.get(link.use, 'plant')
             digit = cls.objects.create(
                 ntag=link,
                 digit_type=digit_type,
@@ -149,15 +149,15 @@ class BaseDigit(models.Model):
             )
             self.grouping = default_grouping
         if not self.digit_type and self.ntag:
-            self.digit_type = self.NTAG_USE_TO_DIGIT_TYPE.get(self.ntag.ntag_use, 'plant')
+            self.digit_type = self.NTAG_USE_TO_DIGIT_TYPE.get(self.ntag.use, 'plant')
         
         if not self.name and self.ntag:
             user_digit_count = BaseDigit.objects.filter(
                 ntag__user=self.ntag.user,
-                ntag__ntag_use=self.ntag.ntag_use
+                ntag__use=self.ntag.use
             ).count()
 
-            default_name_prefix = self.ntag.get_ntag_use_display()
+            default_name_prefix = self.ntag.get_use_display()
             self.name = f"{default_name_prefix} {user_digit_count + 1}"
 
         super().save(*args, **kwargs)

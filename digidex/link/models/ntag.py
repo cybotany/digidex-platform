@@ -27,7 +27,7 @@ class NTAG(NFC):
         ('pet_tag', 'Pet Tag'),
     ]
 
-    ntag_type = models.CharField(
+    type = models.CharField(
         max_length=25,
         blank=True,
         choices=NTAG_TYPES, 
@@ -35,7 +35,7 @@ class NTAG(NFC):
         verbose_name="NTAG Type",
         help_text="The type of the NTAG."
     )
-    ntag_use = models.CharField(
+    use = models.CharField(
         max_length=20,
         choices=NTAG_USES,
         default='plant_label',
@@ -47,7 +47,7 @@ class NTAG(NFC):
         """
         Returns a string representation of the NTAG instance, primarily based on its unique serial number.
         """
-        return f"{self.ntag_type} - {self.serial_number}"
+        return f"{self.type} - {self.serial_number}"
 
     class Meta:
         verbose_name = "NTAG"
