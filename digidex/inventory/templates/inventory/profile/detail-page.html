@@ -90,27 +90,26 @@
             </div>
           </div>
         </div>
-        <div class="layout-grid grid-profile">
-          <div class="collection-list-wrapper-posts base-dyn-list">
-            <div role="list" class="collection-list-posts base-dyn-items">
-              {% for grouping in user_groupings %}
-                <div role="listitem" class="base-dyn-item">
-                  <a href="{{ grouping.get_absolute_url }}" class="block-post-link">
-                    <div class="block-post">
-                      <div class="post">
-                        <div class="date">{{ grouping.last_modified }}</div>
-                        <h3 class="heading-post">{{ grouping.name }}</h3>
-                        <p class="paragraph-post large">{{ grouping.description }}</p>
-                      </div>
+        <!-- Spacing here between elements-->
+        <div class="collection-list-wrapper-groups base-dyn-list">
+          <div role="list" class="collection-list-groups base-dyn-items">
+            {% for grouping in user_groupings %}
+              <div role="listitem" class="base-dyn-item">
+                <a href="{{ grouping.get_absolute_url }}" class="block-group-link">
+                  <div class="block-group">
+                    <div class="group">
+                      <div class="date">{{ grouping.last_modified }}</div>
+                      <h3 class="heading-group">{{ grouping.name }}</h3>
+                      <p class="paragraph-group large">{{ grouping.description }}</p>
                     </div>
-                  </a>
-                </div>
-              {% empty %}
-                <div class="empty-state base-dyn-empty">
-                  <div class="text-empty">No groupings found.</div>
-                </div>
-              {% endfor %}
-            </div>
+                  </div>
+                </a>
+              </div>
+            {% empty %}
+              <div class="empty-group-state base-dyn-empty">
+                <div class="group-text-empty">No groupings found.</div>
+              </div>
+            {% endfor %}
           </div>
         </div>
       </div>
