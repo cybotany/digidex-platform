@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
+from django.utils.text import slugify
 
 class Grouping(models.Model):
     """
@@ -55,6 +56,17 @@ class Grouping(models.Model):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        if not self.slug or self.tracker.has_changed('name'):
+            self.slug = slugify(self.name)
+            original_slug = self.slug
+            num = 1
+            while Grouping.objects.filter(user=self.user, slug=self.slug).exclude(pk=self.pk).exists():
+                self.slug = f"{original_slug}-{num}"
+                num += 1
+
+        super().save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
         if not self.is_default:
