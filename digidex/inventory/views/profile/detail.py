@@ -3,7 +3,7 @@ from digidex.inventory.models import Profile
 
 class DetailProfile(DetailView):
     model = Profile
-    template_name = 'accounts/profile/detail-page.html'
+    template_name = 'inventory/profile/detail-page.html'
     context_object_name = 'profile'
     slug_field = 'user__username_slug'
     slug_url_kwarg = 'username_slug'

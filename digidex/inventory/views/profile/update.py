@@ -9,7 +9,7 @@ from digidex.inventory.forms import ProfileForm
 class UpdateProfile(LoginRequiredMixin, UpdateView):
     model = Profile
     form_class = ProfileForm
-    template_name = 'accounts/profile/update-page.html'
+    template_name = 'inventory/profile/update-page.html'
 
     def get_object(self, queryset=None):
         """
