@@ -44,50 +44,47 @@
           <div class="subtitle green">Grouping<br></div>
           <h2 class="profile-heading">{{ grouping.name }}</h2>
         </div>
-        <!-- Pet Digits -->
-        <div class="collection-list-wrapper-digits large base-dyn-list">
-          <div role="list" class="collection-list-digits large base-dyn-items">
-            {% for pet in pet_digits %}
-              <div role="listitem" class="base-dyn-item">
-                <a href="{{ pet.get_absolute_url }}" class="block-digit-link large">
-                  <div class="block-digit large">
-                    <div class="digit large">
-                      <div class="date">{{ pet.last_modified }}</div>
-                      <h3 class="heading-digit">{{ pet.name }}</h3>
-                      <p class="paragraph-digit large">{{ pet.description }}</p>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            {% empty %}
-              <div class="empty-digit-state base-dyn-empty">
-                <div class="digit-text-empty">No digits found.</div>
-              </div>
-            {% endfor %}
+        {% if pet_digits|length == 0 and plant_digits|length == 0 %}
+          <div class="empty-digit-state base-dyn-empty">
+            <div class="digit-text-empty">No plants or pets found.</div>
           </div>
-        </div>
-        <!-- Plant Digits -->
-        <div class="collection-list-wrapper-digits base-dyn-list">
-          <div role="list" class="collection-list-digits base-dyn-items">
-            {% for plant in plant_digits %}
-              <div role="listitem" class="base-dyn-item">
-                <a href="{{ plant.get_absolute_url }}" class="block-digit-link">
-                  <div class="block-digit">
-                    <div class="digit">
-                      <div class="date">{{ plant.last_modified }}</div>
-                      <h3 class="heading-digit">{{ plant.name }}</h3>
-                      <p class="paragraph-digit">{{ plant.description }}</p>
+        {% else %}
+          <!-- Pet Digits -->
+          <div class="collection-list-wrapper-digits large base-dyn-list">
+            <div role="list" class="collection-list-digits large base-dyn-items">
+              {% for pet in pet_digits %}
+                <div role="listitem" class="base-dyn-item">
+                  <a href="{{ pet.get_absolute_url }}" class="block-digit-link large">
+                    <div class="block-digit large">
+                      <div class="digit large">
+                        <div class="date">{{ pet.last_modified }}</div>
+                        <h3 class="heading-digit">{{ pet.name }}</h3>
+                        <p class="paragraph-digit large">{{ pet.description }}</p>
+                      </div>
                     </div>
-                  </div>
-                </a>
-              </div>
-            {% empty %}
-              <div class="empty-digit-state base-dyn-empty">
-                <div class="digit-text-empty">No digits found.</div>
-              </div>
-            {% endfor %}
+                  </a>
+                </div>
+              {% endfor %}
+            </div>
           </div>
-        </div>
+          <!-- Plant Digits -->
+          <div class="collection-list-wrapper-digits base-dyn-list">
+            <div role="list" class="collection-list-digits base-dyn-items">
+              {% for plant in plant_digits %}
+                <div role="listitem" class="base-dyn-item">
+                  <a href="{{ plant.get_absolute_url }}" class="block-digit-link">
+                    <div class="block-digit">
+                      <div class="digit">
+                        <div class="date">{{ plant.last_modified }}</div>
+                        <h3 class="heading-digit">{{ plant.name }}</h3>
+                        <p class="paragraph-digit">{{ plant.description }}</p>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
       </div>
     </section>     
     <script src="{% static 'inventory/js/toggle-tabs.js' %} "></script>          

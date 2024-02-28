@@ -14,13 +14,11 @@ class DetailGrouping(DetailView):
 
         if user_slug and not group_slug:
             return redirect('inventory:detail-profile', user_slug=user_slug)
-
         if not user_slug or not group_slug:
             raise Http404("No sufficient identifiers provided")
 
         user = get_object_or_404(get_user_model(), slug=user_slug)
         grouping = get_object_or_404(Grouping, slug=group_slug, user=user)
-
         return grouping
 
     def get_context_data(self, **kwargs):
