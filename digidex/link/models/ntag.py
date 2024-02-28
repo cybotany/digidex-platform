@@ -24,7 +24,8 @@ class NTAG(NFC):
 
     NTAG_USES = [
         ('plant_label', 'Plant Label'),
-        ('pet_tag', 'Pet Tag'),
+        ('dog_tag', 'Dog Tag'),
+        ('cat_tag', 'Cat Tag'),
     ]
 
     type = models.CharField(
@@ -49,20 +50,31 @@ class NTAG(NFC):
         """
         return f"{self.type} - {self.serial_number}"
 
-    def get_link_use(self):
+    def _get_link_use(self):
         """
         Returns the first word of the `use` attribute, splitting by '_'.
         """
         return self.use.split('_')[0] if self.use else None
 
-    def get_digit_type(self):
+    def get_digit(self):
         """
         Returns the first word of the `use` attribute, splitting by '_'.
         """
-        if self.get_link_use() == 'plant':
+        if self._get_link_use() == 'plant':
             return getattr(self, 'plant', None)
-        elif self.get_link_use() == 'pet':
+        elif self._get_link_use() in ('dog', 'cat'):
             return getattr(self, 'pet', None)
+        return None
+
+    def get_kingdom_id(self):
+        """
+        Returns the kingdom_id based on the NTAG's use.
+        If the use is set to 'plant_label', it returns 3, otherwise, it returns 5.
+        """
+        if self._get_link_use() == 'plant':
+            return getattr(self, 3, None)
+        elif self._get_link_use() in ('dog', 'cat'):
+            return getattr(self, 5, None)
         return None
 
     class Meta:

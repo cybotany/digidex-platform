@@ -10,7 +10,8 @@ from digidex.inventory.forms import FORM_MAP
 logger = logging.getLogger(__name__)
 
 class UpdateDigit(LoginRequiredMixin, UpdateView):
-    
+    template_name = 'inventory/digit/update-page.html'
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         digit = context.get('object')
@@ -35,16 +36,6 @@ class UpdateDigit(LoginRequiredMixin, UpdateView):
         if not form_class:
             raise Http404("Invalid digit type")
         return form_class
-
-    def get_template_names(self):
-        """
-        Dynamically get the template name based on 'type' query parameter.
-        """
-        digit_type = self.kwargs.get('type')
-        template_name = f'inventory/digit/{digit_type}/update-page.html'
-        if not template_name:
-            raise Http404("Invalid digit type")
-        return [template_name]
     
     def get_object(self, queryset=None):
         digit_type = self.kwargs.get('type')

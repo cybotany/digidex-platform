@@ -4,6 +4,7 @@ from digidex.inventory.models import MODEL_MAP
 
 class DetailDigit(DetailView):
     context_object_name = 'digit'
+    template_name = 'inventory/digit/detail.html'
 
     def get_object(self, queryset=None):
         digit_type = self.kwargs.get('type')
@@ -19,7 +20,6 @@ class DetailDigit(DetailView):
         obj = model.objects.filter(uuid=uuid).first()
         if obj:
             self.model = model
-            self.template_name = f'inventory/digit/{digit_type}/detail-page.html'
             return obj
         else:
             raise Http404("No matching object found")
