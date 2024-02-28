@@ -41,7 +41,7 @@ class UpdateDigit(LoginRequiredMixin, UpdateView):
         Dynamically get the template name based on 'type' query parameter.
         """
         digit_type = self.kwargs.get('type')
-        template_name = f'inventory/{digit_type}/update-page.html'
+        template_name = f'inventory/digit/{digit_type}/update-page.html'
         if not template_name:
             raise Http404("Invalid digit type")
         return [template_name]

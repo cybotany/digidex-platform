@@ -50,7 +50,45 @@
           <div class="subtitle green">Modify<br></div>
           <h2 class="account-heading">Update {{ digit.get_digit_type|capfirst }}</h2>
           <div class="form-block base-form">
-            {% include 'inventory/plant/form.html' %}
+            <!-- Render Form -->
+            <form method="post" class="form">
+              {% csrf_token %}
+              <!-- Render Name Field -->
+              <div>
+                {{ form.name }}
+                {% if form.name.errors %}
+                  <div class="error-message">
+                    <span class="text-error">{{ form.name.errors|striptags }}</span>
+                  </div>
+                {% endif %}
+              </div>
+              <!-- Render Description Field -->
+              <div>
+                {{ form.description }}
+                {% if form.description.errors %}
+                  <div class="error-message">
+                    <span class="text-error">{{ form.description.errors|striptags }}</span>
+                  </div>
+                {% endif %}
+              </div>
+              <!-- Render Taxonomic Unit Field -->
+              <div>
+                <div class="select-container">
+                  <select class="base-input" name="taxon" id="id_taxon" data-kingdom-id="5"></select>
+                </div> 
+              </div>
+              <!-- Render Grouping Field -->
+              <div>
+                {{ form.grouping }}
+                {% if form.grouping.errors %}
+                  <div class="error-message">
+                    <span class="text-error">{{ form.grouping.errors|striptags }}</span>
+                  </div>
+                {% endif %}
+              </div>
+              <!-- Render Submit Button -->
+              <input type="submit" value="Create Digit" class="submit-button base-button"> 
+            </form>
           </div>
           <div class="delete-digit">
             <form action="{% url 'inventory:delete-digit' type=type uuid=uuid %}" method="post">
