@@ -141,7 +141,7 @@ class BaseDigit(models.Model):
         """
         Get the URL to view the details of this digitized entity, using query parameters.
         """
-        digit_type = self.ntag.get_link_use()
+        digit_type = self.ntag._get_link_use()
         return reverse('inventory:detail-digit', kwargs={'type': digit_type, 'uuid': self.uuid})
 
     def get_journal_entries(self):
