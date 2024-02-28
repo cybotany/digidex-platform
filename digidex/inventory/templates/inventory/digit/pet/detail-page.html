@@ -3,11 +3,11 @@
 <html>
   <head>  
     <meta charset="utf-8">
-    <title>{{ digit.get_digit_type|capfirst }} Details - Digidex</title>
+    <title>Digit Details - Digidex</title>
     <meta content="A platform for gardeners to cultivate their curiosity." name="description">
-    <meta content="{{ digit.get_digit_type|capfirst }} Details - Digidex" property="og:title">
+    <meta content="Digit Details - Digidex" property="og:title">
     <meta content="A platform for gardeners to cultivate their curiosity." property="og:description">
-    <meta content="{{ digit.get_digit_type|capfirst }} Details - Digidex" property="twitter:title">
+    <meta content="Digit Details - Digidex" property="twitter:title">
     <meta content="A platform for gardeners to cultivate their curiosity." property="twitter:description">
     <meta property="og:type" content="website">
     <meta content="summary_large_image" name="twitter:card">
@@ -45,7 +45,7 @@
           <div class="date-top">Created: {{ digit.created_at|date:"M. d, Y" }}</div>
           {% if is_owner %}
             <div class="digit-text-top">
-              <a href="{% url 'inventory:update-digit' type=digit.get_digit_type uuid=digit.uuid %}" class="digit-link-top">Update {{ digit.get_digit_type|capfirst }}</a>
+              <a href="{% url 'inventory:update-digit' type=ntag.get_digit_type uuid=digit.uuid %}" class="digit-link-top">Update Digit</a>
             </div>
           {% endif %}
           <h2 class="digit-heading-top">{{ digit.name }}</h2>
