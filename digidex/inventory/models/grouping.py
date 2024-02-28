@@ -114,13 +114,13 @@ class Grouping(models.Model):
         digits = {}
         if digit_type in ['plants', 'pets', 'all']:
             if digit_type in ['plants', 'all']:
-                plants = self._get_user_plants(is_owner)
+                plants = self._get_user_plants(is_owner).all()
                 digits['plants'] = {
                     'items': plants,
                     'count': plants.count()
                 }
             if digit_type in ['pets', 'all']:
-                pets = self._get_user_pets(is_owner)
+                pets = self._get_user_pets(is_owner).all()
                 digits['pets'] = {
                     'items': pets,
                     'count': pets.count()
