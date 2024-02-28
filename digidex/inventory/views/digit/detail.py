@@ -19,7 +19,7 @@ class DetailDigit(DetailView):
         obj = model.objects.filter(uuid=uuid).first()
         if obj:
             self.model = model
-            self.template_name = f'inventory/{digit_type}/detail-page.html'
+            self.template_name = f'inventory/digit/{digit_type}/detail-page.html'
             return obj
         else:
             raise Http404("No matching object found")
