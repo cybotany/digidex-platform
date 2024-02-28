@@ -41,10 +41,12 @@
     <section class="section">
       <div class="content content-profile">
         <div class="block-profile">
-          <div class="subtitle green">Grouping<br></div>
-          <h2 class="profile-heading">{{ grouping.name }}</h2>
+          <a href="{{ owner.url }}" class="block-digit-link base-inline-block">
+            <div class="subtitle green"><br></div>
+          </a>
+          <h2 class="profile-heading">{{ owner.username }}</h2>
         </div>
-        {% if pet_digits|length == 0 and plant_digits|length == 0 %}
+        {% if pet_count == 0 and plant_count == 0 %}
           <div class="empty-digit-state base-dyn-empty">
             <div class="digit-text-empty">No plants or pets found.</div>
           </div>

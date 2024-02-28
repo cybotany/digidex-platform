@@ -28,11 +28,15 @@ class DetailGrouping(DetailView):
         is_owner = user.is_authenticated and grouping.user == user
 
         digits = grouping.get_digits(is_owner=is_owner, digit_type='all')
+        owner = grouping.get_user()
 
         context.update({
+            'owner': owner,
             'is_owner': is_owner,
-            'pet_digits': digits.get('pets', []),
-            'plant_digits': digits.get('plants', [])
+            'pet_digits': digits.get('pets', {}).get('items', []),
+            'pet_count': digits.get('pets', {}).get('count', 0),
+            'plant_digits': digits.get('plants', {}).get('items', []),
+            'plant_count': digits.get('plants', {}).get('count', 0)
         })
 
         return context
