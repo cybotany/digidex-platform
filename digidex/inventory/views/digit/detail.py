@@ -4,7 +4,7 @@ from digidex.inventory.models import MODEL_MAP
 
 class DetailDigit(DetailView):
     context_object_name = 'digit'
-    template_name = 'inventory/digit/detail.html'
+    template_name = 'inventory/digit/detail-page.html'
 
     def get_object(self, queryset=None):
         digit_type = self.kwargs.get('type')
