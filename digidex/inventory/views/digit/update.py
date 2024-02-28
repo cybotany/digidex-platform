@@ -15,8 +15,9 @@ class UpdateDigit(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         digit = context.get('object')
-        context['type'] = digit.get_digit_type
+        context['type'] = digit.get_digit_type()
         context['uuid'] = str(digit.uuid)
+        context['kingdom_id'] = digit.get_kingdom_id()
         return context
     
     def get_form_kwargs(self):

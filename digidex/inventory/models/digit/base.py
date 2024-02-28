@@ -172,6 +172,15 @@ class BaseDigit(models.Model):
     def get_digit_type(self):
         return self.__class__.__name__.lower()
 
+    def get_kingdom_id(self):
+        """
+        Placeholder method to get the kingdom ID associated with the digit.
+        
+        This method should be overridden by subclasses to return the actual kingdom ID
+        based on the digit's taxonomy.
+        """
+        raise NotImplementedError("Subclasses must implement this method to return the kingdom ID.")
+
     class Meta:
         abstract = True
         ordering = ['-created_at']

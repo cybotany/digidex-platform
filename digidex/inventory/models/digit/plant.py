@@ -7,3 +7,9 @@ class Plant(BaseDigit):
         null=True,
         blank=True
     )
+
+    def get_kingdom_id(self):
+        """
+        Return the kingdom ID for animals.
+        """
+        return 3
