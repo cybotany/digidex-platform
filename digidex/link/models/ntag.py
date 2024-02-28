@@ -49,11 +49,21 @@ class NTAG(NFC):
         """
         return f"{self.type} - {self.serial_number}"
 
-    def use_category(self):
+    def _use(self):
         """
         Returns the first word of the `use` attribute, splitting by '_'.
         """
         return self.use.split('_')[0] if self.use else None
+
+    def get_digit_type(self):
+        """
+        Returns the first word of the `use` attribute, splitting by '_'.
+        """
+        if self._use() == 'plant':
+            return getattr(self, 'plant', None)
+        elif self._use() == 'pet':
+            return getattr(self, 'pet', None)
+        return None
 
     class Meta:
         verbose_name = "NTAG"

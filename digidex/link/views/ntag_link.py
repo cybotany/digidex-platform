@@ -3,7 +3,6 @@ from django.shortcuts import render, get_object_or_404
 from django.http import Http404, HttpResponseRedirect
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.exceptions import PermissionDenied
 from digidex.link.models import NTAG
 from digidex.inventory.models import Plant, Pet
 from digidex.inventory.forms import PlantForm, PetForm
@@ -34,35 +33,19 @@ class NTAGLink(LoginRequiredMixin, View):
         else:
             raise ValueError("Unsupported tag use type")
 
-    def get_associated_digit(self, ntag):
-        if ntag.use_category() == 'plant':
-            try:
-                return ntag.plant
-            except Plant.DoesNotExist:
-                return None
-        elif ntag.use_category() == 'pet':
-            try:
-                return ntag.pet
-            except Pet.DoesNotExist:
-                return None
-        return None
-
     def get(self, request, *args, **kwargs):
         ntag = self.get_object()
-        associated_digit = self.get_associated_digit(ntag)
-        if ntag.active and associated_digit:
-            if ntag.user == request.user:
-                return HttpResponseRedirect(associated_digit.get_absolute_url())
-            else:
-                raise PermissionDenied("You do not have permission to view this digit.")
+        linked_digit = ntag.get_digit_type()
+        if ntag.active and linked_digit:
+            return HttpResponseRedirect(linked_digit.get_absolute_url())
         else:
-            FormClass, _, template_name= self.get_form_and_model(ntag.use_category())
+            FormClass, _, template_name= self.get_form_and_model(ntag._use)
             form = FormClass(**self.get_form_kwargs())
             return render(request, template_name, {'form': form, 'ntag': ntag})
 
     def post(self, request, *args, **kwargs):
         ntag = self.get_object()
-        FormClass, ModelClass, template_name = self.get_form_and_model(ntag.use_category())
+        FormClass, ModelClass, template_name = self.get_form_and_model(ntag._use)
         form = FormClass(request.POST, **self.get_form_kwargs())
         if form.is_valid():
             digit = ModelClass.create_digit(form.cleaned_data, ntag, request.user)

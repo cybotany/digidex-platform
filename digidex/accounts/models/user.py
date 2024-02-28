@@ -57,6 +57,7 @@ class User(AbstractUser):
         unique=True,
         max_length=255,
         editable=False,
+        db_index=True,
         help_text="Slugified version of the username for URL usage."
     )
 

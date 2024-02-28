@@ -10,7 +10,6 @@ class DeleteUser(LoginRequiredMixin, View):
         user = request.user
         user.delete()
 
-        # Add a success message to be displayed on the next page
         messages.success(request, 'Your account has been successfully deleted.')
         logout(request)
         return redirect('main:landing')
