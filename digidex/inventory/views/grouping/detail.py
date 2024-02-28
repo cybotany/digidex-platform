@@ -1,8 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.views.generic import DetailView
 from django.http import Http404
-from django.shortcuts import get_object_or_404
-from django.core.exceptions import PermissionDenied
+from django.shortcuts import get_object_or_404, redirect
 from digidex.inventory.models import Grouping
 
 class DetailGrouping(DetailView):
@@ -13,15 +12,14 @@ class DetailGrouping(DetailView):
         user_slug = self.kwargs.get('user_slug')
         group_slug = self.kwargs.get('group_slug')
 
+        if user_slug and not group_slug:
+            return redirect('inventory:detail-profile', user_slug=user_slug)
+
         if not user_slug or not group_slug:
             raise Http404("No sufficient identifiers provided")
 
         user = get_object_or_404(get_user_model(), slug=user_slug)
         grouping = get_object_or_404(Grouping, slug=group_slug, user=user)
-
-        if not grouping.is_public:
-            if not self.request.user.is_authenticated or grouping.user != self.request.user:
-                raise PermissionDenied("You do not have permission to view this grouping.")
 
         return grouping
 
@@ -31,8 +29,12 @@ class DetailGrouping(DetailView):
         user = self.request.user
         is_owner = user.is_authenticated and grouping.user == user
 
+        digits = grouping.get_digits(is_owner=is_owner, digit_type='all')
+
         context.update({
-            'is_owner': is_owner
+            'is_owner': is_owner,
+            'pet_digits': digits.get('pets', []),
+            'plant_digits': digits.get('plants', [])
         })
 
         return context
