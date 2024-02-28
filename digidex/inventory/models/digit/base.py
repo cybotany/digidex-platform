@@ -158,6 +158,17 @@ class BaseDigit(models.Model):
             return entries
         return Entry.objects.none()
 
+    def get_grouping_name(self):
+        """
+        Returns the name of the grouping this digit belongs to, if any.
+
+        Returns:
+            str or None: The name of the grouping or None if the digit does not belong to any grouping.
+        """
+        if self.grouping_id is not None:
+            return self.grouping.name
+        return None
+
     def get_digit_type(self):
         return self.__class__.__name__.lower()
 
