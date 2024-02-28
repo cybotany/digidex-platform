@@ -132,14 +132,8 @@ class BaseDigit(models.Model):
             )
             self.grouping = default_grouping
         
-        if not self.name and self.ntag:
-            user_digit_count = BaseDigit.objects.filter(
-                ntag__user=self.ntag.user,
-                ntag__use=self.ntag.get_link_use()
-            ).count()
-
-            default_name_prefix = self.ntag.get_link_use()
-            self.name = f"{default_name_prefix} {user_digit_count + 1}"
+        if not self.name:
+            self.name = "Digit"
 
         super().save(*args, **kwargs)
 
