@@ -14,7 +14,7 @@ class DetailProfile(DetailView):
         is_profile_owner = self.request.user.is_authenticated and self.request.user == profile.user
 
         if is_profile_owner or profile.is_public:
-            user_groupings = profile.get_groupings(include=['counts', 'digits'], is_owner=is_profile_owner)
+            user_groupings = profile.get_groupings(is_owner=is_profile_owner)
         else:
             user_groupings = []
 

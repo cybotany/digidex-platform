@@ -76,30 +76,30 @@ class Profile(models.Model):
         """
         return reverse('inventory:detail-profile', kwargs={'user_slug': self.user.slug})
 
-    def get_groupings(self, include=None, is_owner=False):
+    def get_groupings(self, is_owner=False):
         """
-        Optionally retrieves all Grouping objects associated with the user of this profile,
-        including counts of plants and pets and/or the actual digit objects if specified.
+        Retrieves all Grouping objects associated with the user of this profile,
+        optionally including counts of plants and pets and/or the actual digit objects if specified.
 
         Parameters:
         - include (list or None): Specifies what additional data to include in each grouping.
-                                       Options could include 'counts', 'digits', or both.
+                                  Options could include 'digits'. Since 'counts' are included
+                                  in 'digits', specifying 'counts' separately is not needed.
         - is_owner (bool): The ownership status, to determine visibility of counts and digits.
 
         Returns:
-            QuerySet: A QuerySet of all Grouping objects associated with the user,
-                      optionally including specified additional data.
+            list: A list of all Grouping objects associated with the user,
+                  optionally including specified additional data.
         """
-        groupings = Grouping.objects.filter(user=self.user)
+        groupings = Grouping.objects.filter(user=self.user).prefetch_related('plants', 'pets')
 
-        if include is not None:
-            for grouping in groupings:
-                if 'counts' in include:
-                    grouping.counts = grouping.get_counts(is_owner=is_owner, digit_type='all')
-                if 'digits' in include:
-                    grouping.digits = grouping.get_digits(is_owner=is_owner, digit_type='all')
+        # Convert the QuerySet to a list to allow adding attributes to each Grouping instance
+        groupings_list = list(groupings)
 
-        return groupings
+        for grouping in groupings_list:
+            grouping.digits = grouping.get_digits(is_owner=is_owner, digit_type='all')
+
+        return groupings_list
 
     class Meta:
         verbose_name = "Profile"
