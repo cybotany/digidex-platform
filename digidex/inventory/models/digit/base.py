@@ -135,10 +135,10 @@ class BaseDigit(models.Model):
         if not self.name and self.ntag:
             user_digit_count = BaseDigit.objects.filter(
                 ntag__user=self.ntag.user,
-                ntag__use=self.ntag._use
+                ntag__use=self.ntag.get_link_use()
             ).count()
 
-            default_name_prefix = self.ntag._use
+            default_name_prefix = self.ntag.get_link_use()
             self.name = f"{default_name_prefix} {user_digit_count + 1}"
 
         super().save(*args, **kwargs)
@@ -147,7 +147,7 @@ class BaseDigit(models.Model):
         """
         Get the URL to view the details of this digitized entity, using query parameters.
         """
-        digit_type = self.ntag._use()
+        digit_type = self.ntag.get_link_use()
         return reverse('inventory:detail-digit', kwargs={'type': digit_type, 'uuid': self.uuid})
 
     def get_journal_entries(self):

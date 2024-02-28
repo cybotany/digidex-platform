@@ -49,7 +49,7 @@ class NTAG(NFC):
         """
         return f"{self.type} - {self.serial_number}"
 
-    def _use(self):
+    def get_link_use(self):
         """
         Returns the first word of the `use` attribute, splitting by '_'.
         """
@@ -59,9 +59,9 @@ class NTAG(NFC):
         """
         Returns the first word of the `use` attribute, splitting by '_'.
         """
-        if self._use() == 'plant':
+        if self.get_link_use() == 'plant':
             return getattr(self, 'plant', None)
-        elif self._use() == 'pet':
+        elif self.get_link_use() == 'pet':
             return getattr(self, 'pet', None)
         return None
 

@@ -39,13 +39,13 @@ class NTAGLink(LoginRequiredMixin, View):
         if ntag.active and linked_digit:
             return HttpResponseRedirect(linked_digit.get_absolute_url())
         else:
-            FormClass, _, template_name= self.get_form_and_model(ntag._use)
+            FormClass, _, template_name= self.get_form_and_model(ntag.get_link_use())
             form = FormClass(**self.get_form_kwargs())
             return render(request, template_name, {'form': form, 'ntag': ntag})
 
     def post(self, request, *args, **kwargs):
         ntag = self.get_object()
-        FormClass, ModelClass, template_name = self.get_form_and_model(ntag._use)
+        FormClass, ModelClass, template_name = self.get_form_and_model(ntag.get_link_use())
         form = FormClass(request.POST, **self.get_form_kwargs())
         if form.is_valid():
             digit = ModelClass.create_digit(form.cleaned_data, ntag, request.user)
