@@ -138,7 +138,7 @@ class Grouping(models.Model):
         """
         digits = {}
         if digit_type in ['plants', 'all']:
-            digits['plants'] = self._get_user_plants(is_owner)
+            digits['plants'] = self._get_user_plants(is_owner).all()
         if digit_type in ['pets', 'all']:
-            digits['pets'] = self._get_user_pets(is_owner)
+            digits['pets'] = self._get_user_pets(is_owner).all()
         return digits
