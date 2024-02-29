@@ -18,6 +18,7 @@ class DetailProfile(DetailView):
         plant_digits = []
         plant_count = 0
         groupings = []
+        grouping_count = 0
 
         if is_profile_owner or profile.is_public:
             user_groupings = profile.get_groupings()
