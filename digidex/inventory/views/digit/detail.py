@@ -33,8 +33,8 @@ class DetailDigit(DetailView):
         journal_entries = digit.get_journal_entries() if digit.is_public or is_owner else []
         
         context.update({
+            'is_owner': is_owner,
             'journal_entries': journal_entries,
-            'is_owner': is_owner
         })
 
         return context
