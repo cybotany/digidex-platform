@@ -79,38 +79,83 @@
             </div>
             <div id="plants" class="tab-content">
               <ul>
-                <li class="plant-text">Count of Plant Digits: 0</li>
+                <li class="plant-text">Count of Plant Digits: {{ plant_count }}</li>
               </ul>
             </div>
             <div id="pets" class="tab-content">
               <ul>
-                <li class="pet-text">Count of Pet Digits: 0</li>
+                <li class="pet-text">Count of Pet Digits: {{ pet_count }}</li>
               </ul>
             </div>
           </div>
         </div>
         <!-- Spacing here between elements-->
-        <div class="collection-list-wrapper-groups base-dyn-list">
-          <div role="list" class="collection-list-groups base-dyn-items">
-            {% for grouping in user_groupings %}
-              <div role="listitem" class="base-dyn-item">
-                <a href="{{ grouping.get_absolute_url }}" class="block-group-link">
-                  <div class="block-group">
-                    <div class="group">
-                      <div class="date">{{ grouping.last_modified }}</div>
-                      <h3 class="heading-group">{{ grouping.name }}</h3>
-                      <p class="paragraph-group">{{ grouping.description }}</p>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            {% empty %}
-              <div class="empty-group-state base-dyn-empty">
-                <div class="group-text-empty">No groupings found.</div>
-              </div>
-            {% endfor %}
+        {% if pet_count == 0 and plant_count == 0 %}
+          <div class="empty-digit-state base-dyn-empty">
+            <div class="digit-text-empty">No plants or pets found.</div>
           </div>
-        </div>
+        {% else %}
+          {% if pet_count > 0 %}
+            <!-- Pet Digits -->
+            <div class="collection-list-wrapper-digits large base-dyn-list">
+              <div role="list" class="collection-list-digits large base-dyn-items">
+                {% for pet in pet_digits %}
+                  <div role="listitem" class="base-dyn-item">
+                    <a href="{{ pet.get_absolute_url }}" class="block-digit-link large">
+                      <div class="block-digit large">
+                        <div class="digit large">
+                          <div class="date">{{ pet.last_modified }}</div>
+                          <h3 class="heading-digit">{{ pet.name }}</h3>
+                          <p class="paragraph-digit large">{{ pet.description }}</p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          {% endif %}
+          {% if plant_count > 0 %}
+            <!-- Plant Digits -->
+            <div class="collection-list-wrapper-digits base-dyn-list">
+              <div role="list" class="collection-list-digits base-dyn-items">
+                {% for plant in plant_digits %}
+                  <div role="listitem" class="base-dyn-item">
+                    <a href="{{ plant.get_absolute_url }}" class="block-digit-link">
+                      <div class="block-digit">
+                        <div class="digit">
+                          <div class="date">{{ plant.last_modified }}</div>
+                          <h3 class="heading-digit">{{ plant.name }}</h3>
+                          <p class="paragraph-digit">{{ plant.description }}</p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          {% endif %}
+        {% endif %}
+        {% if grouping_count > 0 %}
+          <!-- Spacing here between elements-->
+          <div class="collection-list-wrapper-groups base-dyn-list">
+            <div role="list" class="collection-list-groups base-dyn-items">
+              {% for group in groupings %}
+                <div role="listitem" class="base-dyn-item">
+                  <a href="{{ group.get_absolute_url }}" class="block-group-link">
+                    <div class="block-group">
+                      <div class="group">
+                        <div class="date">{{ group.last_modified }}</div>
+                        <h3 class="heading-group">{{ group.name }}</h3>
+                        <p class="paragraph-group">{{ group.description }}</p>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
       </div>
     </section>     
     <script src="{% static 'inventory/js/toggle-tabs.js' %} "></script>          

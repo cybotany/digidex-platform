@@ -27,7 +27,7 @@ class DetailGrouping(DetailView):
         user = self.request.user
         is_owner = user.is_authenticated and grouping.user == user
 
-        digits = grouping.get_digits(is_owner=is_owner, digit_type='all')
+        digits = grouping.get_digits()
         owner = grouping.get_user()
 
         context.update({

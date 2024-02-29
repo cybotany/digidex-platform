@@ -76,30 +76,42 @@ class Profile(models.Model):
         """
         return reverse('inventory:detail-profile', kwargs={'user_slug': self.user.slug})
 
-    def get_groupings(self, is_owner=False):
+    def get_default_digits(self):
         """
-        Retrieves all Grouping objects associated with the user of this profile,
-        optionally including counts of plants and pets and/or the actual digit objects if specified.
-
-        Parameters:
-        - include (list or None): Specifies what additional data to include in each grouping.
-                                  Options could include 'digits'. Since 'counts' are included
-                                  in 'digits', specifying 'counts' separately is not needed.
-        - is_owner (bool): The ownership status, to determine visibility of counts and digits.
+        Retrieves the default Grouping object for the user (marked with is_default=True),
+        including prefetched related plants and pets, and all other Grouping objects 
+        associated with the user without prefetching related objects for them.
 
         Returns:
-            list: A list of all Grouping objects associated with the user,
-                  optionally including specified additional data.
+            dict: A dictionary with 'default_grouping' for the default grouping object (or None if not set),
+                and 'other_groupings' for a list of all other grouping objects associated with the user.
         """
-        groupings = Grouping.objects.filter(user=self.user).prefetch_related('plants', 'pets')
+        grouping = Grouping.objects.filter(user=self.user, is_default=True)\
+                                            .prefetch_related('plants', 'pets')\
+                                            .first()
 
-        # Convert the QuerySet to a list to allow adding attributes to each Grouping instance
-        groupings_list = list(groupings)
+        if not grouping:
+            return {
+                'plants': {'items': [], 'count': 0},
+                'pets': {'items': [], 'count': 0},
+            }
+        return grouping.get_digits(digit_type='all')
 
-        for grouping in groupings_list:
-            grouping.digits = grouping.get_digits(is_owner=is_owner, digit_type='all')
+    def get_groupings(self):
+        """
+        Retrieves the default Grouping object for the user (marked with is_default=True),
+        including prefetched related plants and pets, and all other Grouping objects 
+        associated with the user without prefetching related objects for them.
 
-        return groupings_list
+        Returns:
+            dict: A dictionary with 'default_grouping' for the default grouping object (or None if not set),
+                and 'other_groupings' for a list of all other grouping objects associated with the user.
+        """
+        groupings = Grouping.objects.filter(user=self.user, is_default=False).all()
+        return {
+            'groupings': groupings,
+            'grouping_count': groupings.count(),
+        }
 
     class Meta:
         verbose_name = "Profile"

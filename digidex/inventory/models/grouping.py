@@ -59,24 +59,20 @@ class Grouping(models.Model):
     def __str__(self):
         return self.name
 
-    def _get_items(self, item_type, is_owner):
+    def _get_items(self, item_type):
         """
-        Private method to retrieve or count items (plants or pets) based on ownership.
+        Private method to retrieve or count items (plants or pets).
         
         Parameters:
         - item_type (str): Type of items to retrieve ('plants' or 'pets').
-        - is_owner (bool): Ownership status to filter items.
         """
-        items = getattr(self, item_type)
-        if not is_owner:
-            items = items.filter(is_public=False)
-        return items
+        return getattr(self, item_type)
 
-    def _get_user_plants(self, is_owner=False):
-        return self._get_items('plants', is_owner)
+    def _get_user_plants(self):
+        return self._get_items('plants')
 
-    def _get_user_pets(self, is_owner=False):
-        return self._get_items('pets', is_owner)
+    def _get_user_pets(self):
+        return self._get_items('pets')
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -99,13 +95,12 @@ class Grouping(models.Model):
         """
         return reverse('inventory:detail-grouping', kwargs={'user_slug': self.user.slug, 'group_slug': self.slug})
 
-    def get_digits(self, is_owner=False, digit_type='all'):
+    def get_digits(self, digit_type='all'):
         """
         Returns QuerySets of plants, pets, or both for this grouping, along with their counts, 
         based on ownership status and digit type.
         
         Parameters:
-        - is_owner (bool): Determines whether to include all items or only those that are not public.
         - digit_type (str): Specifies the digit type to return ('plants', 'pets', or 'all').
 
         Returns:
@@ -114,13 +109,13 @@ class Grouping(models.Model):
         digits = {}
         if digit_type in ['plants', 'pets', 'all']:
             if digit_type in ['plants', 'all']:
-                plants = self._get_user_plants(is_owner).all()
+                plants = self._get_user_plants().all()
                 digits['plants'] = {
                     'items': plants,
                     'count': plants.count()
                 }
             if digit_type in ['pets', 'all']:
-                pets = self._get_user_pets(is_owner).all()
+                pets = self._get_user_pets().all()
                 digits['pets'] = {
                     'items': pets,
                     'count': pets.count()

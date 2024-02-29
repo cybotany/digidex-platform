@@ -13,14 +13,33 @@ class DetailProfile(DetailView):
         profile = context['profile']
         is_profile_owner = self.request.user.is_authenticated and self.request.user == profile.user
 
+        pet_digits = []
+        pet_count = 0
+        plant_digits = []
+        plant_count = 0
+        groupings = []
+
         if is_profile_owner or profile.is_public:
-            user_groupings = profile.get_groupings(is_owner=is_profile_owner)
-        else:
-            user_groupings = []
+            user_groupings = profile.get_groupings()
+            digits = profile.get_default_digits()
+
+            groupings = user_groupings.get('groupings', [])
+            grouping_count = user_groupings.get('grouping_count', 0)
+            
+            pet_digits = digits.get('digits', {}).get('pets', {}).get('items', [])
+            pet_count = digits.get('digits', {}).get('pets', {}).get('count', 0)
+            
+            plant_digits = digits.get('digits', {}).get('plants', {}).get('items', [])
+            plant_count = digits.get('digits', {}).get('plants', {}).get('count', 0)
 
         context.update({
             'is_profile_owner': is_profile_owner,
-            'user_groupings': user_groupings,
+            'groupings': groupings,
+            'grouping_count': grouping_count,
+            'pet_digits': pet_digits,
+            'pet_count': pet_count,
+            'plant_digits': plant_digits,
+            'plant_count': plant_count,
         })
         
         return context
