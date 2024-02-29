@@ -72,9 +72,9 @@ class NTAG(NFC):
         If the use is set to 'plant_label', it returns 3, otherwise, it returns 5.
         """
         if self._get_link_use() == 'plant':
-            return getattr(self, 3, None)
+            return 3
         elif self._get_link_use() in ('dog', 'cat'):
-            return getattr(self, 5, None)
+            return 5
         return None
 
     class Meta:
