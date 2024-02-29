@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
-from django.utils.text import slugify
 
 class NFC(models.Model):
     """
@@ -9,7 +8,6 @@ class NFC(models.Model):
 
     Attributes:
         serial_number (CharField): The unique serial number associated with the NFC tag.
-        slug (SlugField): The slug for the NFC object.
         eeprom (BinaryField): The EEPROM data associated with the NFC tag.
         counter (PositiveIntegerField): The counter value associated with the NFC tag.
         user (ForeignKey): The user who created the journal entry, linked to the user model.
@@ -23,12 +21,6 @@ class NFC(models.Model):
         db_index=True,
         verbose_name="Tag Serial Number",
         help_text="The unique serial number associated with the NFC tag."
-    )
-    slug = models.SlugField(
-        max_length=255,
-        blank=True,
-        db_index=True,
-        help_text="The slug for the NFC object."
     )
     eeprom = models.BinaryField(
         null=True,
@@ -64,11 +56,6 @@ class NFC(models.Model):
         verbose_name="Last Modified",
         help_text="The date and time when the link instance was last modified."
     )
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.serial_number.replace(':', '-'))
-        super(NFC, self).save(*args, **kwargs)
 
     def activate_link(self, user):
         """
@@ -108,7 +95,7 @@ class NFC(models.Model):
         Returns:
             str: The absolute URL for the NFC instance.
         """
-        return reverse('link:digit', kwargs={'slug': self.slug})
+        return reverse('link:digit', kwargs={'serial_number': self.serial_number})
 
     class Meta:
         abstract = True
