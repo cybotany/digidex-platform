@@ -17,7 +17,7 @@ class NTAGLink(LoginRequiredMixin, View):
         """
         Return the keyword arguments for instantiating the form.
         """
-        kwargs = super(NTAGLink, self).get_form_kwargs() if hasattr(super(), 'get_form_kwargs') else {}
+        kwargs = {}
         kwargs['user'] = self.request.user
         return kwargs
 
@@ -41,9 +41,14 @@ class NTAGLink(LoginRequiredMixin, View):
         if ntag.active and linked_digit:
             return HttpResponseRedirect(linked_digit.get_absolute_url())
         else:
-            FormClass, _= self.get_form_and_model(ntag.use)
+            FormClass, _ = self.get_form_and_model(ntag.use)
             form = FormClass(**self.get_form_kwargs())
-            return render(request, {'form': form, 'ntag': ntag, 'kingdom_id': ntag.get_kingdom_id()})
+            context = {
+                'form': form,
+                'ntag': ntag,
+                'kingdom_id': ntag.get_kingdom_id()
+            }
+            return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
         ntag = self.get_object()
@@ -55,5 +60,9 @@ class NTAGLink(LoginRequiredMixin, View):
             return HttpResponseRedirect(digit.get_absolute_url())
         else:
             messages.error(request, "There was a problem with the form. Please check the details you entered.")
-            return render(request, {'form': form, 'ntag': ntag, 'kingdom_id': ntag.get_kingdom_id()})
-    
+            context = {
+                'form': form,
+                'ntag': ntag,
+                'kingdom_id': ntag.get_kingdom_id()
+            }
+            return render(request, self.template_name, context)    
