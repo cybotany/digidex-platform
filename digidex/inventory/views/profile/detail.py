@@ -26,11 +26,11 @@ class DetailProfile(DetailView):
             groupings = user_groupings.get('groupings', [])
             grouping_count = user_groupings.get('grouping_count', 0)
             
-            pet_digits = digits.get('digits', {}).get('pets', {}).get('items', [])
-            pet_count = digits.get('digits', {}).get('pets', {}).get('count', 0)
+            pet_digits = digits.get('pets', {}).get('items', [])
+            pet_count = digits.get('pets', {}).get('count', 0)
             
-            plant_digits = digits.get('digits', {}).get('plants', {}).get('items', [])
-            plant_count = digits.get('digits', {}).get('plants', {}).get('count', 0)
+            plant_digits = digits.get('plants', {}).get('items', [])
+            plant_count = digits.get('plants', {}).get('count', 0)
 
         context.update({
             'is_profile_owner': is_profile_owner,

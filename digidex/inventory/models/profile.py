@@ -86,16 +86,14 @@ class Profile(models.Model):
             dict: A dictionary with 'default_grouping' for the default grouping object (or None if not set),
                 and 'other_groupings' for a list of all other grouping objects associated with the user.
         """
-        grouping = Grouping.objects.filter(user=self.user, is_default=True)\
-                                            .prefetch_related('plants', 'pets')\
-                                            .first()
+        grouping = Grouping.objects.filter(user=self.user, is_default=True).prefetch_related('plants', 'pets').first()
 
         if not grouping:
             return {
                 'plants': {'items': [], 'count': 0},
                 'pets': {'items': [], 'count': 0},
             }
-        return grouping.get_digits(digit_type='all')
+        return grouping.get_digits()
 
     def get_groupings(self):
         """
