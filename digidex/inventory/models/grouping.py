@@ -95,6 +95,18 @@ class Grouping(models.Model):
         """
         return reverse('inventory:detail-grouping', kwargs={'user_slug': self.user.slug, 'group_slug': self.slug})
 
+    def get_parent_url(self):
+        """
+        Returns the parent URL.
+        """
+        return reverse('inventory:detail-profile', kwargs={'user_slug': self.user.slug})
+
+    def get_owner_username(self):
+        """
+        Returns the parent URL.
+        """
+        return self.user.username
+
     def get_digits(self, digit_type='all'):
         """
         Returns QuerySets of plants, pets, or both for this grouping, along with their counts, 
@@ -131,6 +143,6 @@ class Grouping(models.Model):
         A dictionary containing the 'url' and 'username' of the grouping's owner.
         """
         return {
-            'url': reverse('inventory:detail-profile', kwargs={'user_slug': self.user.slug}),
-            'username': self.user.username
+            'url': self.get_parent_url(),
+            'username': self.get_owner_username()
         }

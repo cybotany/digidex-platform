@@ -144,6 +144,14 @@ class BaseDigit(models.Model):
         digit_type = self.ntag._get_link_use()
         return reverse('inventory:detail-digit', kwargs={'type': digit_type, 'uuid': self.uuid})
 
+    def get_parent_url(self):
+        """
+        Get the URL of the parent URL.
+        """
+        if self.grouping.is_default:
+            return self.grouping.get_parent_url()
+        return self.grouping.get_absolute_url()
+
     def get_journal_entries(self):
         """
         Fetches all Entry objects related to this Digit instance through its Collection.

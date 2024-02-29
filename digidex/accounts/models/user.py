@@ -61,6 +61,13 @@ class User(AbstractUser):
         help_text="Slugified version of the username for URL usage."
     )
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Track the original username to detect changes
+        self.__original_username = self.username
+        # Track if the instance is new
+        self.__original_new_user = self.pk is None
+
     def __str__(self):
         return self.username
 
@@ -100,10 +107,3 @@ class User(AbstractUser):
                 self.send_verification_email()
             except Exception as e:
                 raise
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        # Track the original username to detect changes
-        self.__original_username = self.username
-        # Track if the instance is new
-        self.__original_new_user = self.pk is None
