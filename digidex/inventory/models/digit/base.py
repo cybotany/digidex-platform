@@ -159,9 +159,9 @@ class BaseDigit(models.Model):
         Returns:
             str or None: The name of the grouping or None if the digit does not belong to any grouping.
         """
-        if self.grouping_id is not None:
+        if not self.grouping.is_default:
             return self.grouping.name
-        return None
+        return self.grouping.get_owner_username()
 
     def get_journal_entries(self):
         """
