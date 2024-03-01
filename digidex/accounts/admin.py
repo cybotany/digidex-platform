@@ -1,9 +1,10 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from digidex.accounts.models import User
+
+from digidex.accounts.models import user as base_user
 
 class UserAccount(UserAdmin):
-    model = User
+    model = base_user.User
 
     # Define custom fieldsets
     fieldsets = UserAdmin.fieldsets + (
@@ -18,4 +19,4 @@ class UserAccount(UserAdmin):
     ordering = ('date_joined','username')
 
 # Register custom user admin
-admin.site.register(User, UserAdmin)
+admin.site.register(base_user.User, UserAdmin)

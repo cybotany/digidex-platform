@@ -1,2 +1,2 @@
-from .entry import Entry
-from .collection import Collection
+from .entry import JournalEntry
+from .collection import JournalCollection

@@ -5,7 +5,7 @@ from digidex.journal.models import entry as base_entry
 
 class JournalEntryForm(forms.ModelForm):
     class Meta:
-        model = base_entry.Entry
+        model = base_entry.JournalEntry
         fields = ('content', 'image')
         widgets = {
             'content': forms.Textarea(attrs={

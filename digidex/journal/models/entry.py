@@ -16,7 +16,7 @@ def journal_image_directory_path(instance, filename):
     return f'journal-{instance.collection.id}/entry-{timestamp}{ext}'
 
 
-class Entry(models.Model):
+class JournalEntry(models.Model):
     """
     Represents journal entries associated with a Digit.
 

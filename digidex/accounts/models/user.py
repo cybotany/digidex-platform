@@ -9,6 +9,7 @@ from django.utils.http import urlsafe_base64_encode
 from django.utils.text import slugify
 from django.conf import settings
 from digidex.accounts.validators import username_validator
+
 from digidex.utils.models import EmailLog
 
 logger = logging.getLogger(__name__)

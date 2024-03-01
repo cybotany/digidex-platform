@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 
-class Collection(models.Model):
+class JournalCollection(models.Model):
     """
     Aggregates journal entries for a single Digit.
 
