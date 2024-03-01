@@ -3,6 +3,9 @@ from django.db import models
 from digidex.inventory.models.digit.animal import base as base_animal
 
 class Pet(base_animal.Animal):
+    """
+    A class representing a pet digit.
+    """
     age = models.PositiveIntegerField(
         null=True,
         blank=True
@@ -20,9 +23,3 @@ class Pet(base_animal.Animal):
 
     class Meta:
         abstract = True
-
-    def get_kingdom_id(self):
-        """
-        Return the kingdom ID for animals.
-        """
-        return 5

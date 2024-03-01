@@ -1,16 +1,25 @@
-from django.db import models
+from django.core.exceptions import ObjectDoesNotExist
 
 from digidex.inventory.models.digit import base as base_digit
+from digidex.taxonomy.models import kingdom as taxon_kingdom
 
 class Plant(base_digit.Digit):
-    sunlight_requirement = models.CharField(
-        max_length=100,
-        null=True,
-        blank=True
-    )
+    """
+    A class representing a plant digit.
+    """
+    _kingdom_id = 3
 
-    def get_kingdom_id(self):
-        """
-        Return the kingdom ID for animals.
-        """
-        return 3
+    @classmethod
+    def get_kingdom(cls):
+        try:
+            return taxon_kingdom.Kingdom.objects.get(id=cls._kingdom_id)
+        except ObjectDoesNotExist:
+            raise ValueError(f"Kingdom with the specified ID {cls._kingdom_id} does not exist.")
+
+    def save(self, *args, **kwargs):
+        if not self.kingdom:
+            self.kingdom = self.get_kingdom()
+        super().save(*args, **kwargs)
+
+    class Meta:
+        abstract = True

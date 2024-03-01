@@ -16,6 +16,8 @@ class Digit(models.Model):
         name (CharField): A human-readable name for the digitized entity.
         description (TextField): A short description of the digitized entity.
         grouping (ForeignKey): The grouping this digit belongs to.
+
+        
         taxon (ForeignKey): A relationship to the Unit model, representing the entity's taxonomic classification.
         ntag (OneToOneField): A relationship to the Link model, representing the NTAG link for the digitized entity.
         is_public (BooleanField): Indicates if the digit should be publicly visible to the public or private. Digit is private by default.
@@ -49,14 +51,6 @@ class Digit(models.Model):
         related_name="%(class)ss", # The second "s" at the end is intentional
         help_text="The grouping this digit belongs to."
     )
-    taxon = models.ForeignKey(
-        'taxonomy.Unit',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name="%(class)ss", # The second "s" at the end is intentional
-        help_text="The taxonomic classification of the digitized entity."
-    )
     ntag = models.OneToOneField(
         'link.NTAG',
         null=True,
@@ -73,6 +67,22 @@ class Digit(models.Model):
         default=False,
         verbose_name="Archived",
         help_text="Indicates whether the digit is archived."
+    )
+    # Taxonomy fields
+    kingdom = models.ForeignKey(
+        'taxonomy.Kingdom',
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE,
+        help_text="The taxonomic classification of the digitized entity."
+    )
+    taxon = models.ForeignKey(
+        'taxonomy.Taxon',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="%(class)ss", # The second "s" at the end is intentional
+        help_text="The taxonomic classification of the digitized entity."
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
@@ -167,14 +177,17 @@ class Digit(models.Model):
     def get_digit_type(self):
         return self.__class__.__name__.lower()
 
-    def get_kingdom_id(self):
+    def get_kingdom(self):
         """
-        Placeholder method to get the kingdom ID associated with the digit.
+        Returns the kingdom associated with the digit.
         
-        This method should be overridden by subclasses to return the actual kingdom ID
-        based on the digit's taxonomy.
+        This method should be overridden by subclasses to return the actual kingdom object,
+        if the kingdom handling varies by subclass.
         """
-        raise NotImplementedError("Subclasses must implement this method to return the kingdom ID.")
+        if self.kingdom:
+            return self.kingdom
+        else:
+            raise ValueError("Kingdom is not set for this Digit.")
 
     def get_parent_details(self):
         """
