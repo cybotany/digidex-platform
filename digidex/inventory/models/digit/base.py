@@ -4,12 +4,12 @@ from django.db import models, transaction
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ObjectDoesNotExist
 
+from digidex.inventory.models import grouping as digit_grouping
 from digidex.journal.models import collection as journal_collection
 from digidex.journal.models import entry as journal_entry
-from digidex.inventory.models import grouping as digit_grouping
-from digidex.taxonomy.models.itis.taxon import base as base_taxon
-from digidex.taxonomy.models.itis.taxon import kingdom as base_kingdom
-from digidex.taxonomy.models.itis.taxon import rank as base_rank
+from digidex.taxonomy.models.itis.taxon import base as itis_taxon
+from digidex.taxonomy.models.itis.taxon import kingdom as itis_kingdom
+from digidex.taxonomy.models.itis.taxon import rank as itis_rank
 
 class Digit(models.Model):
     """
@@ -20,8 +20,6 @@ class Digit(models.Model):
         name (CharField): A human-readable name for the digitized entity.
         description (TextField): A short description of the digitized entity.
         grouping (ForeignKey): The grouping this digit belongs to.
-
-        
         taxon (ForeignKey): A relationship to the Unit model, representing the entity's taxonomic classification.
         ntag (OneToOneField): A relationship to the Link model, representing the NTAG link for the digitized entity.
         is_public (BooleanField): Indicates if the digit should be publicly visible to the public or private. Digit is private by default.
@@ -199,7 +197,7 @@ class Digit(models.Model):
         itis_kingdom_pk = cls()._get_itis_kingdom_pk()
         if itis_kingdom_pk:
             try:
-                return base_kingdom.ItisTaxonKingdom.objects.get(pk=itis_kingdom_pk)
+                return itis_kingdom.ItisTaxonKingdom.objects.get(pk=itis_kingdom_pk)
             except ObjectDoesNotExist:
                 raise ValueError(f"Taxon Kingdom with the primary key {itis_kingdom_pk} does not exist in the ITIS database.")
         else:
@@ -210,7 +208,7 @@ class Digit(models.Model):
         itis_rank_pk = cls()._get_itis_taxon_pk()
         if itis_rank_pk:
             try:
-                return base_rank.ItisTaxonRank.objects.get(pk=itis_rank_pk)
+                return itis_rank.ItisTaxonRank.objects.get(pk=itis_rank_pk)
             except ObjectDoesNotExist:
                 raise ValueError(f"Taxon Rank with the primary key {itis_rank_pk} does not exist does not exist in the ITIS database.")
         else:
@@ -224,7 +222,7 @@ class Digit(models.Model):
         itis_taxon_pk = cls()._get_itis_taxon_pk()
         if itis_taxon_pk:
             try:
-                return base_taxon.ItisTaxonUnit.objects.get(pk=itis_taxon_pk)
+                return itis_taxon.ItisTaxonUnit.objects.get(pk=itis_taxon_pk)
             except ObjectDoesNotExist:
                 raise ValueError(f"Taxon with the serial number {itis_taxon_pk} does not exist does not exist in the ITIS database.")
         else:

@@ -1,2 +1,2 @@
-from .login import LoginForm
-from .signup import SignupForm
+from .login import DigidexLoginForm
+from .signup import DigidexSignupForm

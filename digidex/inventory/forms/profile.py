@@ -1,5 +1,5 @@
 from django import forms
-from digidex.inventory.models import Profile
+from digidex.inventory.models import profile as digidex_profile
 
 class ProfileForm(forms.ModelForm):
     avatar = forms.ImageField(
@@ -33,5 +33,5 @@ class ProfileForm(forms.ModelForm):
     )
 
     class Meta:
-        model = Profile
+        model = digidex_profile.DigidexProfile
         fields = ('avatar', 'bio', 'location', 'is_public',)

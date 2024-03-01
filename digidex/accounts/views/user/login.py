@@ -3,11 +3,12 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth import authenticate, login
 from django.urls import reverse
 from django.utils.http import url_has_allowed_host_and_scheme
-from digidex.accounts.forms import LoginForm
+
+from digidex.accounts.forms import login as digidex_login
 
 
-class LoginUser(LoginView):
-    form_class = LoginForm
+class LoginDigidexUser(LoginView):
+    form_class = digidex_login.DigidexLoginForm
     template_name = 'accounts/user/login-page.html'
 
     def form_valid(self, form):

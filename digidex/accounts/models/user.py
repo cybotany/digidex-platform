@@ -8,13 +8,13 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.utils.text import slugify
 from django.conf import settings
-from digidex.accounts.validators import username_validator
 
+from digidex.accounts.validators import username_validator
 from digidex.utils.models import EmailLog
 
 logger = logging.getLogger(__name__)
 
-class User(AbstractUser):
+class DigidexUser(AbstractUser):
     """
     User model extending Django's AbstractUser. This model includes all fields
     from AbstractUser and additional fields for extended functionality.
@@ -40,7 +40,7 @@ class User(AbstractUser):
     username = models.CharField(
         max_length=32,
         unique=True,
-        validators=[username_validator],
+        validators=[username_validator.digidex_username_validator],
         help_text="Required. 32 characters or fewer. Letters, digits and dashes only.",
     )
     uuid = models.UUIDField(
@@ -95,7 +95,7 @@ class User(AbstractUser):
             base_slug = slugify(self.username)
             unique_slug = base_slug
             num = 1
-            while User.objects.filter(slug=unique_slug).exists():
+            while DigidexUser.objects.filter(slug=unique_slug).exists():
                 unique_slug = f'{base_slug}-{num}'
                 num += 1
             self.slug = unique_slug

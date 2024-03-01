@@ -1,16 +1,18 @@
+import logging
+
 from django.contrib import messages
 from django.views.generic.edit import CreateView
 from django.shortcuts import render, redirect
+
 from digidex.utils.helpers import validate_recaptcha
-from digidex.accounts.forms import SignupForm
-from digidex.accounts.models import User
-import logging
+from digidex.accounts.forms import signup as digidex_signup
+from digidex.accounts.models import user as digidex_user
 
 logger = logging.getLogger(__name__)
 
-class SignupUser(CreateView):
-    model = User
-    form_class = SignupForm
+class SignupDigidexUser(CreateView):
+    model = digidex_user.DigidexUser
+    form_class = digidex_signup.DigidexSignupForm
     template_name = 'accounts/user/signup-page.html'
 
     def form_valid(self, form):

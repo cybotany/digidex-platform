@@ -1,15 +1,16 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
-from digidex.accounts.models import User
 
-class LoginForm(AuthenticationForm):
+from digidex.accounts.models import user as digidex_user
+
+class DigidexLoginForm(AuthenticationForm):
     class Meta:
-        model = User
+        model = digidex_user.DigidexUser
         fields = ['username', 'password']
 
 
     def __init__(self, *args, **kwargs):
-        super(LoginForm, self).__init__(*args, **kwargs)
+        super(DigidexLoginForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget = forms.TextInput(attrs={
             'class': 'text-field base-input',
             'placeholder': 'Username'
@@ -26,7 +27,7 @@ class LoginForm(AuthenticationForm):
         '''
         username = self.cleaned_data['username']
         username_lower = username.lower()
-        if not User.objects.filter(username__iexact=username_lower).exists():
+        if not digidex_user.DigidexUser.objects.filter(username__iexact=username_lower).exists():
             raise forms.ValidationError("Invalid username: %s" % username)
 
         return username_lower

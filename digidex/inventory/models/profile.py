@@ -8,7 +8,7 @@ from digidex.utils import custom_storage
 def profile_avatar_directory_path(instance, filename):
     return f'profile_{instance.id}/avatar.jpeg'
 
-class Profile(models.Model):
+class DigidexProfile(models.Model):
     """
     User profile model for storing additional user information.
 

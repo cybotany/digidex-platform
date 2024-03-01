@@ -1,1 +1,1 @@
-from .username_validator import username_validator
+from .username_validator import digidex_username_validator
