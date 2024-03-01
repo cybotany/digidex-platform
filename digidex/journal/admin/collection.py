@@ -3,11 +3,12 @@ from django.urls import reverse
 from django.utils.html import format_html
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
+
 from digidex.inventory.models import Pet, Plant
-from digidex.journal.models import Collection
+from digidex.journal.models import collection as base_collection
 
 
-@admin.register(Collection)
+@admin.register(base_collection.Collection)
 class JournalCollection(admin.ModelAdmin):
     list_display = ('id', 'thumbnail_image', 'get_entity_name', 'get_entry_count', 'view_entries_link', 'created_at', 'last_modified')
     list_filter = ('created_at', 'last_modified')

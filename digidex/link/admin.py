@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from django.urls import reverse
-from digidex.link.models import NTAG
+from digidex.link.models.nfc import NTAG
 
 @admin.register(NTAG)
 class DigitLink(admin.ModelAdmin):

@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from digidex.link.models import NTAG
+from digidex.link.models.nfc import NTAG
 
 class CreateLink(APIView):
     permission_classes = [IsAuthenticated]

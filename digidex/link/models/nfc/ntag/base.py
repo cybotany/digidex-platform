@@ -1,7 +1,7 @@
 from django.db import models
-from .nfc import NFC
+from digidex.link.models.nfc import base as base_nfc
 
-class NTAG(NFC):
+class NTAG(base_nfc.NFC):
     """
     Model representing NTAGs, a specific implementation of NFC tags.
     Inherits common attributes from NFC and can include NTAG-specific fields and methods.

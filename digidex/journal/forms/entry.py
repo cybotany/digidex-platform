@@ -1,10 +1,11 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from digidex.journal.models import Entry
 
-class EntryForm(forms.ModelForm):
+from digidex.journal.models import entry as base_entry
+
+class JournalEntryForm(forms.ModelForm):
     class Meta:
-        model = Entry
+        model = base_entry.Entry
         fields = ('content', 'image')
         widgets = {
             'content': forms.Textarea(attrs={
@@ -17,7 +18,7 @@ class EntryForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        super(EntryForm, self).__init__(*args, **kwargs)
+        super(JournalEntryForm, self).__init__(*args, **kwargs)
 
     def clean(self):
         cleaned_data = super().clean()

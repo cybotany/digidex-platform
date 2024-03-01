@@ -1,2 +1,1 @@
-from .detail import DetailCollection
-#from .list import ListCollections
+from .detail import DetailJournalCollection

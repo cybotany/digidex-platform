@@ -1,2 +1,2 @@
-from .collection import DetailCollection
-from .entry import AddEntry, DetailEntry, DeleteEntry
+from .collection import DetailJournalCollection
+from .entry import AddJournalEntry, DetailJournalEntry, DeleteJournalEntry

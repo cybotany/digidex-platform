@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import Http404, HttpResponseRedirect
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from digidex.link.models import NTAG
+from digidex.link.models.nfc import NTAG
 from digidex.inventory.models import Plant, Pet
 from digidex.inventory.forms import PlantForm, PetForm
 from django.contrib import messages

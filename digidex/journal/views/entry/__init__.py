@@ -1,3 +1,3 @@
-from .add import AddEntry
-from .detail import DetailEntry
-from .delete import DeleteEntry
+from .add import AddJournalEntry
+from .detail import DetailJournalEntry
+from .delete import DeleteJournalEntry
