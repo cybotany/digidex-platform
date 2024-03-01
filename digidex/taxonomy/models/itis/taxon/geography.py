@@ -10,7 +10,7 @@ class ItisTaxonGeography(models.Model):
         last_modified (DateTimeField): The date and time the record was last updated.
     """
     tsn = models.ForeignKey(
-        'taxonomy.Unit',
+        'taxonomy.ItisTaxonUnit',
         on_delete=models.CASCADE,
         verbose_name="Taxonomic Serial Number",
         db_column="tsn",

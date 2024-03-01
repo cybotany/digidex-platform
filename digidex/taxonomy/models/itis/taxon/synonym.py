@@ -10,14 +10,14 @@ class ItisTaxonSynonym(models.Model):
         - last_modified (DateTimeField): The date and time the record was last updated.
     """
     tsn = models.ForeignKey(
-        'taxonomy.Unit',
+        'taxonomy.ItisTaxonUnit',
         on_delete=models.CASCADE,
         db_column="tsn",
         related_name='accepted_for',
         help_text="Taxonomic Serial Number (TSN) for the Taxonomic Unit."
     )
     tsn_accepted = models.ForeignKey(
-        'taxonomy.Unit',
+        'taxonomy.ItisTaxonUnit',
         on_delete=models.CASCADE,
         db_column='tsn_accepted',
         related_name='synonyms',

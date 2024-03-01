@@ -16,7 +16,7 @@ class ItisTaxonHierarchy(models.Model):
         help_text="A string representation of the complete hierarchy path."
     )
     tsn = models.ForeignKey(
-        'taxonomy.Unit',
+        'taxonomy.ItisTaxonUnit',
         on_delete=models.CASCADE,
         verbose_name="Taxonomic Serial Number",
         db_column="tsn",

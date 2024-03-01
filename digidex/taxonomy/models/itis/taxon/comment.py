@@ -13,13 +13,13 @@ class ItisTaxonComment(models.Model):
         last_modified (DateTimeField): The date and time the record was last updated.
     """
     tsn = models.ForeignKey(
-        'taxonomy.Taxon',
+        'taxonomy.ItisTaxonUnit',
         on_delete=models.CASCADE,
         db_column="tsn",
         help_text="Taxonomic Serial Number (TSN) for the Taxonomic Unit."
     )
     comment = models.ForeignKey(
-        'taxonomy.Comment',
+        'taxonomy.ItisComment',
         on_delete=models.CASCADE,
         help_text="Unique identifier for the associated Comment."
     )

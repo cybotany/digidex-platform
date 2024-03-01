@@ -14,7 +14,7 @@ class ItisTaxonRank(models.Model):
         last_modified (datetime): The date on which a record was last modified.
     """
     kingdom = models.ForeignKey(
-        'taxonomy.Kingdom',
+        'taxonomy.ItisTaxonKingdom',
         on_delete=models.CASCADE,
         verbose_name="Kingdom ID",
         help_text="The kingdom to which the rank belongs."

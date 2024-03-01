@@ -141,7 +141,7 @@ class ItisTaxonUnit(models.Model):
         help_text="The taxonomic serial number for the direct parent of the subject occurrence of Taxonomic Units."
     )
     author = models.ForeignKey(
-        'taxonomy.Author',
+        'taxonomy.ItisAuthor',
         on_delete=models.SET_NULL,
         related_name='authored_units',
         null=True,
@@ -150,7 +150,7 @@ class ItisTaxonUnit(models.Model):
         help_text="A unique identifier for the author(s) of a taxonomic name."
     )
     hybrid_author = models.ForeignKey(
-        'taxonomy.Author',
+        'taxonomy.ItisAuthor',
         on_delete=models.SET_NULL,
         related_name='authored_hybrid_units',
         null=True,
@@ -159,7 +159,7 @@ class ItisTaxonUnit(models.Model):
         help_text="The unique identifier for the author(s) of a taxonomic name which has been identified as the second part of a hybrid formula."
     )
     kingdom = models.ForeignKey(
-        'taxonomy.Kingdom',
+        'taxonomy.ItisTaxonKingdom',
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -167,7 +167,7 @@ class ItisTaxonUnit(models.Model):
         help_text="A unique identifier for the highest level of the taxonomic hierarchy structure."
     )
     rank = models.ForeignKey(
-        'taxonomy.Rank',
+        'taxonomy.ItisTaxonRank',
         on_delete=models.SET_NULL,
         null=True,
         blank=True,

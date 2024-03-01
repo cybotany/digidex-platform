@@ -13,7 +13,7 @@ class ItisTaxonJurisdiction(models.Model):
         last_modified (datetime): The date and time when the geographic value was added.
     """
     tsn = models.ForeignKey(
-        'taxonomy.Unit',
+        'taxonomy.ItisTaxonUnit',
         on_delete=models.CASCADE,
         db_column="tsn",
         help_text="Taxonomic Serial Number (TSN) for the Taxonomic Unit."

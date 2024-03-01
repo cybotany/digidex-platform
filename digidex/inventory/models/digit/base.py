@@ -7,9 +7,9 @@ from django.core.exceptions import ObjectDoesNotExist
 from digidex.journal.models import collection as journal_collection
 from digidex.journal.models import entry as journal_entry
 from digidex.inventory.models import grouping as digit_grouping
-from digidex.taxonomy.models.taxon import base as base_taxon
-from digidex.taxonomy.models import kingdom as base_kingdom
-from digidex.taxonomy.models import rank as base_rank
+from digidex.taxonomy.models.itis.taxon import base as base_taxon
+from digidex.taxonomy.models.itis.taxon import kingdom as base_kingdom
+from digidex.taxonomy.models.itis.taxon import rank as base_rank
 
 class Digit(models.Model):
     """
@@ -29,8 +29,8 @@ class Digit(models.Model):
         created_at (DateTimeField): The date and time when the Digit instance was created.
         last_modified (DateTimeField): The date and time when the Digit instance was last modified.
     """
-    _itis_kingdom_pk = 0
-    _itis_rank_pk = 0
+    _itis_kingdom_pk = None
+    _itis_rank_pk = None
     _itis_taxon_pk = None
 
     uuid = models.UUIDField(
@@ -71,21 +71,16 @@ class Digit(models.Model):
         default=False,
         help_text='Indicates if the digit should be publicly visible to the public or private. Digit is private by default.'
     )
-    is_archived = models.BooleanField(
-        default=False,
-        verbose_name="Archived",
-        help_text="Indicates whether the digit is archived."
-    )
     # Taxonomy fields
     kingdom = models.ForeignKey(
-        'taxonomy.Kingdom',
+        'taxonomy.ItisTaxonKingdom',
         null=True,
         blank=True,
         on_delete=models.CASCADE,
         help_text="The taxonomic kingdom of the digitized entity."
     )
     rank = models.ForeignKey(
-        'taxonomy.Rank',
+        'taxonomy.ItisTaxonRank',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
@@ -93,7 +88,7 @@ class Digit(models.Model):
         help_text="The taxonomic rank of the digitized entity."
     )
     taxon = models.ForeignKey(
-        'taxonomy.Taxon',
+        'taxonomy.ItisTaxonUnit',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
@@ -111,78 +106,29 @@ class Digit(models.Model):
         help_text="The date and time when the digit instance was last modified."
     )
 
-    @classmethod
-    def create_digit(cls, form_data, link, user):
-        with transaction.atomic():    
-            digit = cls.objects.create(
-                ntag=link,
-                **form_data
-            )
-            link.user = user
-            link.active = True
-            link.save()
+    def _get_itis_kingdom_pk(self):
+        """
+        Retrieves the Primary Key used for the ITIS taxonomic kingdom database tabel.
+        This method is intended to be overridden by subclasses.
+        """
+        return self._itis_kingdom_pk
 
-            return digit
+    def _get_itis_rank_pk(self):
+        """
+        Retrieves the Primary Key used for the ITIS taxonomic rank database tabel.
+        This method is intended to be overridden by subclasses.
+        """
+        return self._itis_rank_pk
 
     def _get_itis_taxon_pk(self):
         """
-        Retrieves the Primary Key used for the ITIS taxonomic unit database tabel. This method is intended to be overridden by subclasses.
+        Retrieves the Primary Key used for the ITIS taxonomic unit database tabel.
+        This method is intended to be overridden by subclasses.
         """
         return self._itis_taxon_pk
 
-    @classmethod
-    def get_taxon(cls):
-        """
-        Retrieves the taxon using the ITIS taxonomic serial number.
-        """
-        
-        itis_taxon_pk = cls()._get_itis_taxon_pk() # Create an instance to access the non-class method
-        if itis_taxon_pk:
-            try:
-                return base_taxon.Taxon.objects.get(pk=itis_taxon_pk)
-            except ObjectDoesNotExist:
-                raise ValueError(f"Taxon with the serial number {itis_taxon_pk} does not exist does not exist in the ITIS database.")
-        else:
-            raise ValueError("ITIS Taxon PK not defined.")
-
-    @classmethod
-    def get_kingdom(cls):
-        if hasattr(cls, '_itis_kingdom_pk'):
-            try:
-                return base_kingdom.Kingdom.objects.get(pk=cls._itis_kingdom_pk)
-            except ObjectDoesNotExist:
-                raise ValueError(f"Kingdom with the primary key {cls._itis_kingdom_pk} does not exist in the ITIS database.")
-        else:
-            raise NotImplementedError("This method must be implemented by subclasses.")
-
-    @classmethod
-    def get_rank(cls):
-        if hasattr(cls, '_itis_rank_pk'):
-            try:
-                return base_rank.Rank.objects.get(pk=cls._itis_rank_pk)
-            except ObjectDoesNotExist:
-                raise ValueError(f"Taxon Rank with the primary key {cls._itis_rank_pk} does not exist does not exist in the ITIS database.")
-        else:
-            raise NotImplementedError("This method must be implemented by subclasses.")
-
-    def delete(self, *args, **kwargs):
-        """
-        Overrides the delete method of the model to include custom deletion logic.
-        """
-        # Reset the NTAG link to default and save it
-        if self.ntag:
-            self.ntag.reset_to_default()
-            self.ntag.save()
-        super(Digit, self).delete(*args, **kwargs)
-
-    def archive(self):
-        """
-        Archives the digit instance. This involves marking it as archived and dissociating
-        its NTAG link so that the link can be reused for a new digit.
-        """
-        self.ntag = None
-        self.is_archived = True
-        self.save()
+    def get_digit_type(self):
+        return self.__class__.__name__.lower()
 
     def save(self, *args, **kwargs):
         """
@@ -214,6 +160,29 @@ class Digit(models.Model):
 
         super().save(*args, **kwargs)
 
+    @classmethod
+    def create_digit(cls, form_data, link, user):
+        with transaction.atomic():    
+            digit = cls.objects.create(
+                ntag=link,
+                **form_data
+            )
+            link.user = user
+            link.active = True
+            link.save()
+
+            return digit
+
+    def delete(self, *args, **kwargs):
+        """
+        Overrides the delete method of the model to include custom deletion logic.
+        """
+        # Reset the NTAG link to default and save it
+        if self.ntag:
+            self.ntag.reset_to_default()
+            self.ntag.save()
+        super(Digit, self).delete(*args, **kwargs)
+
     def get_absolute_url(self):
         """
         Get the URL to view the details of this digitized entity, using query parameters.
@@ -224,6 +193,42 @@ class Digit(models.Model):
         else:
             _type = 'pet'
         return reverse('inventory:detail-digit', kwargs={'type': _type, 'uuid': self.uuid})
+
+    @classmethod
+    def get_kingdom(cls):
+        itis_kingdom_pk = cls()._get_itis_kingdom_pk()
+        if itis_kingdom_pk:
+            try:
+                return base_kingdom.ItisTaxonKingdom.objects.get(pk=itis_kingdom_pk)
+            except ObjectDoesNotExist:
+                raise ValueError(f"Taxon Kingdom with the primary key {itis_kingdom_pk} does not exist in the ITIS database.")
+        else:
+            raise NotImplementedError("This method must be implemented by subclasses.")
+
+    @classmethod
+    def get_rank(cls):
+        itis_rank_pk = cls()._get_itis_taxon_pk()
+        if itis_rank_pk:
+            try:
+                return base_rank.ItisTaxonRank.objects.get(pk=itis_rank_pk)
+            except ObjectDoesNotExist:
+                raise ValueError(f"Taxon Rank with the primary key {itis_rank_pk} does not exist does not exist in the ITIS database.")
+        else:
+            raise NotImplementedError("This method must be implemented by subclasses.")
+
+    @classmethod
+    def get_taxon(cls):
+        """
+        Retrieves the taxon using the ITIS taxonomic serial number.
+        """
+        itis_taxon_pk = cls()._get_itis_taxon_pk()
+        if itis_taxon_pk:
+            try:
+                return base_taxon.ItisTaxonUnit.objects.get(pk=itis_taxon_pk)
+            except ObjectDoesNotExist:
+                raise ValueError(f"Taxon with the serial number {itis_taxon_pk} does not exist does not exist in the ITIS database.")
+        else:
+            raise ValueError("ITIS Taxon PK not defined.")
 
     def get_journal_entries(self):
         """
@@ -238,21 +243,6 @@ class Digit(models.Model):
             entries = collection.get_all_entries()
             return entries
         return journal_entry.Entry.objects.none()
-
-    def get_digit_type(self):
-        return self.__class__.__name__.lower()
-
-    def get_kingdom(self):
-        """
-        Returns the kingdom associated with the digit.
-        
-        This method should be overridden by subclasses to return the actual kingdom object,
-        if the kingdom handling varies by subclass.
-        """
-        if self.kingdom:
-            return self.kingdom
-        else:
-            raise ValueError("Kingdom is not set for this Digit.")
 
     def get_parent_details(self):
         """
