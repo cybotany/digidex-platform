@@ -86,6 +86,13 @@ class Grouping(models.Model):
         """
         return self.user.username
 
+    @property
+    def is_public(self):
+        """
+        Property to check if the grouping is public based on the user's profile setting.
+        """
+        return self.user.profile.is_public
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         original_slug = self.slug

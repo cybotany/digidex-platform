@@ -26,8 +26,12 @@ class DetailDigit(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        digit = self.object
+        digit = self.object 
         is_owner = self.request.user.is_authenticated and self.request.user == digit.ntag.user
+
+        parent = digit.get_parent_details()
+        parent_url = parent.get('url', '#')
+        parent_name = parent.get('name', '')
 
         journal_entries = []
 
@@ -36,6 +40,8 @@ class DetailDigit(DetailView):
         
         context.update({
             'is_owner': is_owner,
+            'parent_url': parent_url,
+            'parent_name': parent_name,
             'journal_entries': journal_entries,
         })
 
