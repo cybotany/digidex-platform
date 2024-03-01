@@ -7,20 +7,15 @@ class PetCat(base_pet.Pet):
     A digitized representation of a pet cat.
     
     Attributes:
-    - indoor (BooleanField): The size of the dog.
+    - indoor (BooleanField): Indicates whether the cat is an indoor cat or not.
     
     Methods:
-    - get_taxon: Return the Taxonimic Serial Number ID for domesticated dogs.
+    - get_taxon: Return the Taxonimic Serial Number ID for domesticated cats.
     """
     _taxon_pk = 183798
+    _rank_pk = 122
 
     indoor = models.BooleanField(
         default=True,
         help_text="Indicates whether the cat is an indoor cat or not."
     )
-
-    def get_kingdom_id(self):
-        """
-        Return the kingdom ID for animals.
-        """
-        return 5

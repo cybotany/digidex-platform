@@ -1,6 +1,6 @@
 from django.db import models
 
-class Publication(models.Model):
+class ItisPublication(models.Model):
     """
     Represents printed references that are taxonomically significant for additions or
     changes to occurrences of the Taxonomic_units table and/or associated data, or that

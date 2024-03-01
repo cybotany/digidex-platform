@@ -1,6 +1,6 @@
 from django.db import models
 
-class TaxonComments(models.Model):
+class ItisTaxonComment(models.Model):
     """
     An intersection table for establishing a many-to-many relationship between
     Taxonomic Units and associated Comments. This model links Taxonomic Units

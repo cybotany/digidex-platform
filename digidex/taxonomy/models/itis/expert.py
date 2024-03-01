@@ -1,6 +1,6 @@
 from django.db import models
 
-class Expert(models.Model):
+class ItisExpert(models.Model):
     """
     Represents a taxonomist who is the responsible source for an occurrence of a Taxonomic Unit being
     recognized by and added to the ITIS database, or for changes being made to an

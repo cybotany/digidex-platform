@@ -1,6 +1,6 @@
 from django.db import models
 
-class Geography(models.Model):
+class ItisTaxonGeography(models.Model):
     """
     Represents the geographic division of a taxonomic unit.
 

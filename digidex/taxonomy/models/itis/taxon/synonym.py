@@ -1,6 +1,6 @@
 from django.db import models
 
-class TaxonSynonyms(models.Model):
+class ItisTaxonSynonym(models.Model):
     """
     Represents the linkage between an accepted taxonomic name and its alternates or predecessors.
     

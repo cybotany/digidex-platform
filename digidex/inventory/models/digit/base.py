@@ -2,10 +2,14 @@ import uuid
 from django.urls import reverse
 from django.db import models, transaction
 from django.contrib.contenttypes.models import ContentType
+from django.core.exceptions import ObjectDoesNotExist
 
 from digidex.journal.models import collection as journal_collection
 from digidex.journal.models import entry as journal_entry
 from digidex.inventory.models import grouping as digit_grouping
+from digidex.taxonomy.models.taxon import base as base_taxon
+from digidex.taxonomy.models import kingdom as base_kingdom
+from digidex.taxonomy.models import rank as base_rank
 
 class Digit(models.Model):
     """
@@ -25,6 +29,10 @@ class Digit(models.Model):
         created_at (DateTimeField): The date and time when the Digit instance was created.
         last_modified (DateTimeField): The date and time when the Digit instance was last modified.
     """
+    _itis_kingdom_pk = 0
+    _itis_rank_pk = 0
+    _itis_taxon_pk = None
+
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
@@ -74,7 +82,15 @@ class Digit(models.Model):
         null=True,
         blank=True,
         on_delete=models.CASCADE,
-        help_text="The taxonomic classification of the digitized entity."
+        help_text="The taxonomic kingdom of the digitized entity."
+    )
+    rank = models.ForeignKey(
+        'taxonomy.Rank',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="%(class)ss", # The second "s" at the end is intentional
+        help_text="The taxonomic rank of the digitized entity."
     )
     taxon = models.ForeignKey(
         'taxonomy.Taxon',
@@ -108,6 +124,47 @@ class Digit(models.Model):
 
             return digit
 
+    def _get_itis_taxon_pk(self):
+        """
+        Retrieves the Primary Key used for the ITIS taxonomic unit database tabel. This method is intended to be overridden by subclasses.
+        """
+        return self._itis_taxon_pk
+
+    @classmethod
+    def get_taxon(cls):
+        """
+        Retrieves the taxon using the ITIS taxonomic serial number.
+        """
+        
+        itis_taxon_pk = cls()._get_itis_taxon_pk() # Create an instance to access the non-class method
+        if itis_taxon_pk:
+            try:
+                return base_taxon.Taxon.objects.get(pk=itis_taxon_pk)
+            except ObjectDoesNotExist:
+                raise ValueError(f"Taxon with the serial number {itis_taxon_pk} does not exist does not exist in the ITIS database.")
+        else:
+            raise ValueError("ITIS Taxon PK not defined.")
+
+    @classmethod
+    def get_kingdom(cls):
+        if hasattr(cls, '_itis_kingdom_pk'):
+            try:
+                return base_kingdom.Kingdom.objects.get(pk=cls._itis_kingdom_pk)
+            except ObjectDoesNotExist:
+                raise ValueError(f"Kingdom with the primary key {cls._itis_kingdom_pk} does not exist in the ITIS database.")
+        else:
+            raise NotImplementedError("This method must be implemented by subclasses.")
+
+    @classmethod
+    def get_rank(cls):
+        if hasattr(cls, '_itis_rank_pk'):
+            try:
+                return base_rank.Rank.objects.get(pk=cls._itis_rank_pk)
+            except ObjectDoesNotExist:
+                raise ValueError(f"Taxon Rank with the primary key {cls._itis_rank_pk} does not exist does not exist in the ITIS database.")
+        else:
+            raise NotImplementedError("This method must be implemented by subclasses.")
+
     def delete(self, *args, **kwargs):
         """
         Overrides the delete method of the model to include custom deletion logic.
@@ -116,7 +173,6 @@ class Digit(models.Model):
         if self.ntag:
             self.ntag.reset_to_default()
             self.ntag.save()
-
         super(Digit, self).delete(*args, **kwargs)
 
     def archive(self):
@@ -143,7 +199,16 @@ class Digit(models.Model):
                 }
             )
             self.grouping = default_grouping
-        
+
+        if not self.kingdom:
+            self.kingdom = self.get_kingdom()  
+
+        if not self.rank:
+            self.rank = self.get_rank()  
+
+        if not self.taxon:
+            self.taxon = self.get_taxon()        
+
         if not self.name:
             self.name = "Digit"
 

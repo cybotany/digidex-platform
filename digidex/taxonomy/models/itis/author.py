@@ -1,6 +1,6 @@
 from django.db import models
 
-class Author(models.Model):
+class ItisAuthor(models.Model):
     """
     Represents the author of a taxonomic unit.
 

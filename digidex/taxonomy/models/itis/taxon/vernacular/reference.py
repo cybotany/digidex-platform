@@ -1,8 +1,7 @@
 from django.db import models
-from django.contrib.contenttypes.fields import GenericForeignKey
-from django.contrib.contenttypes.models import ContentType
+from digidex.taxonomy.models.itis.taxon import reference as itis_reference
 
-class VernacularReferences(models.Model):
+class ItisTaxonVernacularReference(itis_reference.ItisTaxonReference):
     """
     Provides a link between occurrences of Vernaculars and references (Publications, Experts,
     Other_Sources), connecting vernacular names to their evidentiary sources.
@@ -14,26 +13,9 @@ class VernacularReferences(models.Model):
         last_modified (DateTimeField): Date and time when the record was last modified.
     """
     vernacular = models.ForeignKey(
-        'taxonomy.Vernacular',
+        'taxonomy.ItisTaxonVernacular',
         on_delete=models.CASCADE,
         help_text="Unique identifier for the vernacular name entry."
-    )
-    content_type = models.ForeignKey(
-        ContentType,
-        on_delete=models.CASCADE,
-        null=True,
-        help_text="Expert, Publication, or Other Source model used as a reference."
-    )
-    object_id = models.PositiveIntegerField(
-        null=True,
-        help_text="Primary key of the referenced model."
-    )
-    content_object = GenericForeignKey(
-        'content_type',
-        'object_id'
-    )
-    last_modified = models.DateTimeField(
-        help_text="Date and time when the record was last modified."
     )
 
     def __str__(self):

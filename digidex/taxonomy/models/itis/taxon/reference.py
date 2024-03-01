@@ -2,9 +2,9 @@ from django.db import models
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 
-from digidex.taxonomy.utils import constants as taxonomy_constants
+from digidex.taxonomy.utils import itis_constants
 
-class TaxonReferences(models.Model):
+class ItisTaxonReference(models.Model):
     """
     Represents a link between occurrences of a Taxonomic Unit and occurrences of publications,
     experts, or other sources. This table facilitates the association of taxonomic units with their
@@ -39,7 +39,7 @@ class TaxonReferences(models.Model):
         max_length=1, 
         blank=True, 
         null=True, 
-        choices=taxonomy_constants.BINARY_CHOICE,
+        choices=itis_constants.BINARY_CHOICE,
         help_text="Indicator for the reference of the original description of the taxonomic unit."
     )
     last_modified = models.DateTimeField(

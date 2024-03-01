@@ -1,6 +1,6 @@
 from django.db import models
 
-class Comment(models.Model):
+class ItisComment(models.Model):
     """
     A mechanism for recording history or detail deemed important for an occurrence(s) of
     Taxonomic Unit.

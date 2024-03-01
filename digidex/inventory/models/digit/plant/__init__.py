@@ -1,2 +1,1 @@
-from .indoor import IndoorPlant
-from .outdoor import OutdoorPlant
+from base import Plant

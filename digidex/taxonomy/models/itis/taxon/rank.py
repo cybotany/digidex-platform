@@ -1,6 +1,6 @@
 from django.db import models
 
-class Rank(models.Model):
+class ItisTaxonRank(models.Model):
     """
     Defines the levels associated with the taxonomic hierarchical structure and establishes the
     rank order for an occurrence of the Taxonomic Units.

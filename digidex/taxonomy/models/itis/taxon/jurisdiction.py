@@ -1,6 +1,6 @@
 from django.db import models
 
-class Jurisdiction(models.Model):
+class ItisTaxonJurisdiction(models.Model):
     """
     Represents the association of a of Taxonomic Unit with one or more US
     jurisdictional unit. Also provides an identification of whether the taxon was native
