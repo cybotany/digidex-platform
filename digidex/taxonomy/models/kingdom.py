@@ -1,7 +1,8 @@
 from django.db import models
-from .geography import Geography
-from .jurisdiction import Jurisdiction
-from digidex.taxonomy.utils.constants import VALID_NAME_USAGES
+
+from digidex.taxonomy.utils import constants as taxon_constants
+from digidex.taxonomy.models import jurisdiction as taxon_jurisdiction
+from digidex.taxonomy.models import geography as taxon_geography
 
 class Kingdom(models.Model):
     """
@@ -43,7 +44,7 @@ class Kingdom(models.Model):
         """
         
         return self.unit_set.filter(
-            name_usage__in=VALID_NAME_USAGES
+            name_usage__in=taxon_constants.VALID_NAME_USAGES
         ).values(
             'rank__rank_name',
         ).annotate(
@@ -55,9 +56,9 @@ class Kingdom(models.Model):
         Returns a queryset with counts of valid units, grouped by geography value.
         """
 
-        return Geography.objects.filter(
+        return taxon_geography.Geography.objects.filter(
             tsn__kingdom=self,
-            tsn__name_usage__in=VALID_NAME_USAGES
+            tsn__name_usage__in=taxon_constants.VALID_NAME_USAGES
         ).values(
             'geography_value'
         ).annotate(
@@ -68,9 +69,9 @@ class Kingdom(models.Model):
         """
         Returns a queryset with counts of units, grouped by jurisdiction value.
         """
-        return Jurisdiction.objects.filter(
+        return taxon_jurisdiction.Jurisdiction.objects.filter(
             tsn__kingdom=self,
-            tsn__name_usage__in=VALID_NAME_USAGES
+            tsn__name_usage__in=taxon_constants.VALID_NAME_USAGES
         ).values(
             'jurisdiction_value'
         ).annotate(

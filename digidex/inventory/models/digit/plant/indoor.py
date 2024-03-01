@@ -1,7 +1,7 @@
 from django.db import models
-from .base import BaseDigit
+from ..base import Digit
 
-class Plant(BaseDigit):
+class IndoorPlant(Digit):
     sunlight_requirement = models.CharField(
         max_length=100,
         null=True,

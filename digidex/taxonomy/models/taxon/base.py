@@ -1,9 +1,14 @@
+# digidex/taxonomy/models/taxon/base.py
 from collections import defaultdict
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
-from . import UnitComments, UnitReferences, Hierarchy
 
-class Unit(models.Model):
+from digidex.taxonomy.models.taxon import base as base_taxon
+from digidex.taxonomy.models.taxon import references as taxon_references
+from digidex.taxonomy.models.taxon import comments as taxon_comments
+from digidex.taxonomy.models import hierarchy as taxon_hierarchy
+
+class Taxon(models.Model):
     """
     Represents a taxonomic unit in the ITIS data model.
 
@@ -268,8 +273,8 @@ class Unit(models.Model):
             list of dicts: A list of dictionaries, each containing vernacular name, its id, language,
                            and approval status for the taxonomic unit.
         """
-        vernaculars = self.vernacular_set.all().values('id', 'vernacular_name', 'vernacular_language', 'approved_ind')
-        return list(vernaculars)
+        _vernaculars = self.vernacular_set.all().values('id', 'vernacular_name', 'vernacular_language', 'approved_ind')
+        return list(_vernaculars)
 
     def get_comments(self):
         """
@@ -279,10 +284,10 @@ class Unit(models.Model):
             list of dicts: A list of dictionaries, each containing the comment ID, commentator name, and comment text
                            for each comment associated with the taxonomic unit.
         """
-        comments = UnitComments.objects.filter(tsn=self) \
-                                        .select_related('comment') \
-                                        .values('comment__id', 'comment__commentator', 'comment__comment')
-        return list(comments)
+        _comments = taxon_comments.TaxonComments.objects.filter(tsn=self) \
+            .select_related('comment') \
+            .values('comment__id', 'comment__commentator', 'comment__comment')
+        return list(_comments)
 
     def get_references(self):
         """
@@ -293,13 +298,13 @@ class Unit(models.Model):
             list of dicts: A list of dictionaries, each containing details of the reference associated
                            with the taxonomic unit.
         """
-        # Step 1: Group UnitReferences by ContentType
-        unit_references = UnitReferences.objects.filter(tsn=self)
-        content_type_ids = unit_references.values_list('content_type_id', flat=True).distinct()
+        # Step 1: Group TaxonReferences by ContentType
+        _references = taxon_references.TaxonReferences.objects.filter(tsn=self)
+        _content_type_ids = _references.values_list('content_type_id', flat=True).distinct()
 
         # Prepare a mapping of ContentType ID to a list of object_ids
         references_map = defaultdict(list)
-        for ref in unit_references:
+        for ref in _references:
             references_map[ref.content_type_id].append(ref.object_id)
 
         # Step 2: Batch fetch references for each ContentType
@@ -312,7 +317,7 @@ class Unit(models.Model):
 
         # Step 3: Construct result using fetched objects
         result = []
-        for ref in unit_references:
+        for ref in _references:
             ct_id = ref.content_type_id
             obj_id = ref.object_id
             fetched_obj = fetched_objects[ct_id].get(obj_id)
@@ -345,8 +350,8 @@ class Unit(models.Model):
             list of dicts: A list of dictionaries, each containing jurisdiction value and origin
                         information for the taxonomic unit.
         """
-        jurisdictions = self.jurisdiction_set.all().values('jurisdiction_value', 'origin')
-        return list(jurisdictions)
+        _jurisdictions = self.jurisdiction_set.all().values('jurisdiction_value', 'origin')
+        return list(_jurisdictions)
 
     def get_hierarchy_info(self):
         """
@@ -358,13 +363,13 @@ class Unit(models.Model):
                   for the taxonomic unit, or None if no hierarchy information is found.
         """
         try:
-            hierarchy = self.hierarchy_set.get()  # Assuming there's only one hierarchy per unit
+            _hierarchy = self.hierarchy_set.get()
             return {
-                'hierarchy_string': hierarchy.hierarchy_string,
-                'level': hierarchy.level,
-                'children_count': hierarchy.children_count,
+                'hierarchy_string': _hierarchy.hierarchy_string,
+                'level': _hierarchy.level,
+                'children_count': _hierarchy.children_count,
             }
-        except Hierarchy.DoesNotExist:
+        except taxon_hierarchy.Hierarchy.DoesNotExist:
             return None
 
     def get_synonyms(self):
@@ -374,11 +379,8 @@ class Unit(models.Model):
         Returns:
             list of str: A list of complete names of all synonyms of this unit.
         """
-        # This uses the 'accepted_for' related_name from the UnitSynonyms model
-        # to find all synonym TSNs for the current accepted unit.
-        synonyms = Unit.objects.filter(accepted_for__tsn_accepted=self.tsn)
-        # Retrieve a list of complete names from the synonyms queryset
-        complete_names = synonyms.values_list('complete_name', flat=True)
+        _synonyms = base_taxon.Taxon.objects.filter(accepted_for__tsn_accepted=self.tsn)
+        complete_names = _synonyms.values_list('complete_name', flat=True)
         return list(complete_names)
 
     class Meta:

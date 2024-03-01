@@ -1,8 +1,8 @@
 from django.db import models
-from .base import BaseDigit
+from ..base import Digit
 
-class Pet(BaseDigit):
-    breed = models.CharField(
+class OutdoorPlant(Digit):
+    sunlight_requirement = models.CharField(
         max_length=100,
         null=True,
         blank=True
@@ -12,4 +12,4 @@ class Pet(BaseDigit):
         """
         Return the kingdom ID for animals.
         """
-        return 5
+        return 3

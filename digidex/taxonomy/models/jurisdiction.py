@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class Jurisdiction(models.Model):
     """
     Represents the association of a of Taxonomic Unit with one or more US

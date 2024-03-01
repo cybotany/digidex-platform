@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class Comment(models.Model):
     """
     A mechanism for recording history or detail deemed important for an occurrence(s) of

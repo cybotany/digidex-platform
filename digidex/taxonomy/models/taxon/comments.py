@@ -1,6 +1,6 @@
 from django.db import models
 
-class UnitComments(models.Model):
+class TaxonComments(models.Model):
     """
     An intersection table for establishing a many-to-many relationship between
     Taxonomic Units and associated Comments. This model links Taxonomic Units
@@ -13,7 +13,7 @@ class UnitComments(models.Model):
         last_modified (DateTimeField): The date and time the record was last updated.
     """
     tsn = models.ForeignKey(
-        'taxonomy.Unit',
+        'taxonomy.Taxon',
         on_delete=models.CASCADE,
         db_column="tsn",
         help_text="Taxonomic Serial Number (TSN) for the Taxonomic Unit."

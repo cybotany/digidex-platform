@@ -1,8 +1,9 @@
 from collections import defaultdict
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
-from digidex.taxonomy.utils.constants import BINARY_CHOICE
-from . import VernacularReferences
+
+from digidex.taxonomy.utils import constants as taxonomy_constants
+from digidex.taxonomy.models.vernacular import references as vernacular_references
 
 class Vernacular(models.Model):
     """
@@ -39,7 +40,7 @@ class Vernacular(models.Model):
         max_length=1, 
         blank=True, 
         null=True, 
-        choices=BINARY_CHOICE,
+        choices=taxonomy_constants.BINARY_CHOICE,
         help_text="Indicator of whether the vernacular name is approved."
     )
     last_modified = models.DateTimeField(
@@ -59,11 +60,11 @@ class Vernacular(models.Model):
                            with the vernacular name.
         """
         # Fetch all VernacularReferences instances related to this Vernacular
-        vernacular_references = VernacularReferences.objects.filter(vernacular=self)
+        _v_refs = vernacular_references.VernacularReferences.objects.filter(vernacular=self)
         
         # Prepare a mapping of ContentType ID to a list of object_ids
         references_map = defaultdict(list)
-        for ref in vernacular_references:
+        for ref in _v_refs:
             references_map[ref.content_type_id].append(ref.object_id)
 
         # Batch fetch references for each ContentType
@@ -76,7 +77,7 @@ class Vernacular(models.Model):
 
         # Construct result using fetched objects
         result = []
-        for ref in vernacular_references:
+        for ref in _v_refs:
             ct_id = ref.content_type_id
             obj_id = ref.object_id
             fetched_obj = fetched_objects[ct_id].get(obj_id)

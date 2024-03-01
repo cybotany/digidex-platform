@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class Hierarchy(models.Model):
     """
     Represents the hierarchy of a taxonomic unit as per ITIS data model documentation.

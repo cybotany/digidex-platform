@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class Geography(models.Model):
     """
     Represents the geographic division of a taxonomic unit.

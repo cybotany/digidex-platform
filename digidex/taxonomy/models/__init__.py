@@ -8,9 +8,5 @@ from .kingdom import Kingdom
 from .source import Source
 from .publication import Publication
 from .rank import Rank
-from .unit_comments import UnitComments
-from .unit_references import UnitReferences
-from .unit_synonyms import UnitSynonyms
-from .unit import Unit
-from .vernacular_references import VernacularReferences
-from .vernacular import Vernacular
+from .taxon import Taxon, TaxonSynonyms, TaxonComments, TaxonReferences
+from .vernacular import Vernacular, VernacularReferences

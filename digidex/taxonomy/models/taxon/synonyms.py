@@ -1,6 +1,6 @@
 from django.db import models
 
-class UnitSynonyms(models.Model):
+class TaxonSynonyms(models.Model):
     """
     Represents the linkage between an accepted taxonomic name and its alternates or predecessors.
     

@@ -5,7 +5,7 @@ from django.contrib.contenttypes.models import ContentType
 from digidex.journal.models import Collection, Entry
 from ..grouping import Grouping
 
-class BaseDigit(models.Model):
+class Digit(models.Model):
     """
     Abstract base model for digitized entities, serving as a bridge between physical specimens and their digital representations.
 
@@ -105,7 +105,7 @@ class BaseDigit(models.Model):
             self.ntag.reset_to_default()
             self.ntag.save()
 
-        super(BaseDigit, self).delete(*args, **kwargs)
+        super(Digit, self).delete(*args, **kwargs)
 
     def archive(self):
         """

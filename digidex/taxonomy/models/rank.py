@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class Rank(models.Model):
     """
     Defines the levels associated with the taxonomic hierarchical structure and establishes the

@@ -1,9 +1,10 @@
 from django.db import models
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
-from digidex.taxonomy.utils.constants import BINARY_CHOICE
 
-class UnitReferences(models.Model):
+from digidex.taxonomy.utils import constants as taxonomy_constants
+
+class TaxonReferences(models.Model):
     """
     Represents a link between occurrences of a Taxonomic Unit and occurrences of publications,
     experts, or other sources. This table facilitates the association of taxonomic units with their
@@ -38,7 +39,7 @@ class UnitReferences(models.Model):
         max_length=1, 
         blank=True, 
         null=True, 
-        choices=BINARY_CHOICE,
+        choices=taxonomy_constants.BINARY_CHOICE,
         help_text="Indicator for the reference of the original description of the taxonomic unit."
     )
     last_modified = models.DateTimeField(
