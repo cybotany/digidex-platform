@@ -1,8 +1,9 @@
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
-from digidex.inventory.models import Grouping
-from digidex.utils.custom_storage import PublicMediaStorage
+
+from digidex.inventory.models import grouping as digit_grouping
+from digidex.utils import custom_storage
 
 def profile_avatar_directory_path(instance, filename):
     return f'profile_{instance.id}/avatar.jpeg'
@@ -38,7 +39,7 @@ class Profile(models.Model):
     )
     avatar = models.ImageField(
         upload_to=profile_avatar_directory_path,
-        storage=PublicMediaStorage(), 
+        storage=custom_storage.PublicMediaStorage(), 
         null=True,
         blank=True,
         help_text='The avatar image of the profile.'
@@ -86,7 +87,8 @@ class Profile(models.Model):
             dict: A dictionary with 'default_grouping' for the default grouping object (or None if not set),
                 and 'other_groupings' for a list of all other grouping objects associated with the user.
         """
-        grouping = Grouping.objects.filter(user=self.user, is_default=True).prefetch_related('plants', 'pets').first()
+        grouping = digit_grouping.Grouping.objects.filter(user=self.user, is_default=True)\
+            .prefetch_related('plants', 'pets').first()
 
         if not grouping:
             return {
@@ -105,7 +107,7 @@ class Profile(models.Model):
             dict: A dictionary with 'default_grouping' for the default grouping object (or None if not set),
                 and 'other_groupings' for a list of all other grouping objects associated with the user.
         """
-        groupings = Grouping.objects.filter(user=self.user, is_default=False).all()
+        groupings = digit_grouping.Grouping.objects.filter(user=self.user, is_default=False).all()
         return {
             'groupings': groupings,
             'grouping_count': groupings.count(),

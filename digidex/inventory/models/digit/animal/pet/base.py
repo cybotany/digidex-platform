@@ -1,7 +1,8 @@
 from django.db import models
-from digidex.inventory.models.digit.animal import base
 
-class Pet(base.Animal):
+from digidex.inventory.models.digit.animal import base as base_animal
+
+class Pet(base_animal.Animal):
     age = models.PositiveIntegerField(
         null=True,
         blank=True

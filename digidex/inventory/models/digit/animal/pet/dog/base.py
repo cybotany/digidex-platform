@@ -1,7 +1,8 @@
 from django.db import models
-from digidex.inventory.models.digit.animal.pet import base
 
-class PetDog(base.Pet):
+from digidex.inventory.models.digit.animal.pet import base as base_pet
+
+class PetDog(base_pet.Pet):
     """
     A dog that is a pet.
     

@@ -1,5 +1,4 @@
-from digidex.inventory.models.digit import base
-from digidex.inventory.models.digit import base
+from digidex.inventory.models.digit import base as base_digit
 
-class Animal(base.Digit):
+class Animal(base_digit.Digit):
     pass

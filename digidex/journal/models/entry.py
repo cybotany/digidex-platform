@@ -2,7 +2,8 @@ import os
 from datetime import datetime
 from django.db import models, transaction
 from django.urls import reverse
-from digidex.utils.custom_storage import PrivateMediaStorage
+
+from digidex.utils import custom_storage 
 
 def journal_image_directory_path(instance, filename):
     """
@@ -53,7 +54,7 @@ class Entry(models.Model):
     )
     image = models.ImageField(
         upload_to=journal_image_directory_path,
-        storage=PrivateMediaStorage(), 
+        storage=custom_storage.PrivateMediaStorage(), 
         null=True,
         blank=True,
         help_text="(Optional) The image to save with the journal entry. Only .jpg, .png, and .jpeg extensions are allowed."

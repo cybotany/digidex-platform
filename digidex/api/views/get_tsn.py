@@ -4,8 +4,9 @@ from rest_framework.exceptions import APIException
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication
 from django.db.models import Q
-from digidex.taxonomy.models import Unit
-from digidex.api.serializers import TaxonomyUnitSerializer
+
+from digidex.api.serializers import TaxonFilterSerializer
+from digidex.taxonomy.models.taxon import base as base_taxon
 
 class GetTSN(APIView):
     permission_classes = [IsAuthenticated]
@@ -21,11 +22,11 @@ class GetTSN(APIView):
         if not kingdom_id.isdigit():
             raise APIException("Invalid kingdom_id. Please specify a valid kingdom_id.")
 
-        tsn_objects = Unit.objects.filter(
+        tsn_objects = base_taxon.Taxon.objects.filter(
             Q(complete_name__icontains=search_term) & 
             Q(kingdom__id=kingdom_id)
         )[:10]
 
-        serialized_data = TaxonomyUnitSerializer(tsn_objects, many=True).data
+        serialized_data = TaxonFilterSerializer(tsn_objects, many=True).data
         results = [{"id": tsn['tsn'], "text": tsn['complete_name']} for tsn in serialized_data]
         return Response({"items": results})

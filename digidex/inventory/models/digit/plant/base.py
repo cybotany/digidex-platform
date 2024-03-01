@@ -1,8 +1,8 @@
 from django.db import models
 
-from digidex.inventory.models.digit.plant import base as base_plant
+from digidex.inventory.models.digit import base as base_digit
 
-class OutdoorPlant(base_plant.Plant):
+class Plant(base_digit.Digit):
     sunlight_requirement = models.CharField(
         max_length=100,
         null=True,

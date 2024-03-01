@@ -2,8 +2,10 @@ import uuid
 from django.urls import reverse
 from django.db import models, transaction
 from django.contrib.contenttypes.models import ContentType
-from digidex.journal.models import Collection, Entry
-from ..grouping import Grouping
+
+from digidex.journal.models import collection as journal_collection
+from digidex.journal.models import entry as journal_entry
+from digidex.inventory.models import grouping as digit_grouping
 
 class Digit(models.Model):
     """
@@ -122,7 +124,7 @@ class Digit(models.Model):
         based on the count of Digits the user has.
         """
         if not self.grouping_id:
-            default_grouping, _ = Grouping.objects.get_or_create(
+            default_grouping, _ = digit_grouping.Grouping.objects.get_or_create(
                 user=self.ntag.user,
                 is_default=True,
                 defaults={
@@ -154,13 +156,13 @@ class Digit(models.Model):
         Returns a QuerySet of Entry instances.
         """
         content_type = ContentType.objects.get_for_model(self.__class__)
-        collections = Collection.objects.filter(content_type=content_type, object_id=self.pk)
+        collections = journal_collection.Collection.objects.filter(content_type=content_type, object_id=self.pk)
 
         if collections.exists():
             collection = collections.first()
             entries = collection.get_all_entries()
             return entries
-        return Entry.objects.none()
+        return journal_entry.Entry.objects.none()
 
     def get_digit_type(self):
         return self.__class__.__name__.lower()

@@ -1,7 +1,8 @@
 from django.db import models
-from digidex.inventory.models.digit.animal.pet import base
 
-class PetCat(base.Pet):
+from digidex.inventory.models.digit.animal.pet import base as base_pet
+
+class PetCat(base_pet.Pet):
     indoor = models.BooleanField(
         default=True
     )
