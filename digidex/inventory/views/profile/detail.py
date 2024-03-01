@@ -11,7 +11,7 @@ class DetailProfile(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         profile = context['profile']
-        is_profile_owner = self.request.user.is_authenticated and self.request.user == profile.user
+        is_owner = self.request.user.is_authenticated and self.request.user == profile.user
 
         pet_digits = []
         pet_count = 0
@@ -20,7 +20,7 @@ class DetailProfile(DetailView):
         groupings = []
         grouping_count = 0
 
-        if is_profile_owner or profile.is_public:
+        if is_owner or profile.is_public:
             user_groupings = profile.get_groupings()
             digits = profile.get_default_digits()
 
@@ -34,7 +34,7 @@ class DetailProfile(DetailView):
             plant_count = digits.get('plants', {}).get('count', 0)
 
         context.update({
-            'is_profile_owner': is_profile_owner,
+            'is_owner': is_owner,
             'groupings': groupings,
             'grouping_count': grouping_count,
             'pet_digits': pet_digits,

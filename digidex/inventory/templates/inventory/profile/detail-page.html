@@ -45,13 +45,13 @@
         </div>
         <div class="layout-grid grid-profile">
           <div class="profile-avatar"> 
-            <div class="date-top">{{ profile.created_at|date:"M. d, Y" }}</div>
+            <div class="date-top">Joined {{ profile.created_at|date:"M. d, Y" }}</div>
             {% if profile.avatar %}
               <img src="{{ profile.avatar.url }}" alt="User avatar" class="avatar-image">
             {% else %}
               <img src="{% static 'digidex/images/placeholder.svg' %}" alt="No Image Available" class="avatar-image">
             {% endif %}
-            {% if is_profile_owner %}
+            {% if is_owner %}
               <div class="profile-text"><a href="{% url 'inventory:update-profile' user_slug=profile.user.slug %}" class="profile-link">Edit Profile</a></div>
             {% endif %}
           </div>

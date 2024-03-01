@@ -7,6 +7,7 @@ from digidex.inventory.models import Grouping
 class DetailGrouping(DetailView):
     model = Grouping
     template_name = 'inventory/grouping/detail-page.html'
+    context_object_name = 'grouping'
 
     def get_object(self, queryset=None):
         user_slug = self.kwargs.get('user_slug')
@@ -24,19 +25,34 @@ class DetailGrouping(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         grouping = self.object
-        user = self.request.user
-        is_owner = user.is_authenticated and grouping.user == user
+        is_owner = self.request.user.is_authenticated and grouping.user == self.request.user
 
-        digits = grouping.get_digits()
-        owner = grouping.get_user()
+        parent = grouping.get_parent_details()
+        parent_url = parent.get('url', '#')
+        parent_name = parent.get('name', '')
+
+        pet_digits = []
+        pet_count = 0
+        plant_digits = []
+        plant_count = 0 
+
+        if is_owner or grouping.is_public:
+            digits = grouping.get_digits()
+
+            pet_digits = digits.get('pets', {}).get('items', [])
+            pet_count = digits.get('pets', {}).get('count', 0)
+
+            plant_digits = digits.get('plants', {}).get('items', [])
+            plant_count = digits.get('plants', {}).get('count', 0)
 
         context.update({
-            'owner': owner,
             'is_owner': is_owner,
-            'pet_digits': digits.get('pets', {}).get('items', []),
-            'pet_count': digits.get('pets', {}).get('count', 0),
-            'plant_digits': digits.get('plants', {}).get('items', []),
-            'plant_count': digits.get('plants', {}).get('count', 0)
+            'parent_url': parent_url,
+            'parent_name': parent_name,
+            'pet_digits': pet_digits,
+            'pet_count': pet_count,
+            'plant_digits': plant_digits,
+            'plant_count': plant_count
         })
 
         return context

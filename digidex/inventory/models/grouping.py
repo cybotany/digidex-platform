@@ -74,6 +74,18 @@ class Grouping(models.Model):
     def _get_user_pets(self):
         return self._get_items('pets')
 
+    def _get_parent_url(self):
+        """
+        Returns the URL of the parent object.
+        """
+        return reverse('inventory:detail-profile', kwargs={'user_slug': self.user.slug})
+
+    def _get_parent_name(self):
+        """
+        Returns the name of the parent object.
+        """
+        return self.user.username
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         original_slug = self.slug
@@ -93,19 +105,9 @@ class Grouping(models.Model):
         """
         Returns the absolute URL to the Grouping's detail page.
         """
+        if self.is_default:
+            return reverse('inventory:detail-profile', kwargs={'user_slug': self.user.slug})
         return reverse('inventory:detail-grouping', kwargs={'user_slug': self.user.slug, 'group_slug': self.slug})
-
-    def get_parent_url(self):
-        """
-        Returns the parent URL.
-        """
-        return reverse('inventory:detail-profile', kwargs={'user_slug': self.user.slug})
-
-    def get_owner_username(self):
-        """
-        Returns the parent URL.
-        """
-        return self.user.username
 
     def get_digits(self, digit_type='all'):
         """
@@ -134,15 +136,27 @@ class Grouping(models.Model):
                 }
         return digits
 
-    def get_user(self):
+    def get_details(self):
+        """
+        Returns information about the grouping, including the URL and its name 
+        
+        Returns:
+        A dictionary containing the 'url' and 'name' of the grouping.
+        """
+        return {
+            'url': self.get_absolute_url(),
+            'name': self.name
+        }
+
+    def get_parent_details(self):
         """
         Returns information about the grouping's owner, including the URL to their profile 
         and their username.
         
         Returns:
-        A dictionary containing the 'url' and 'username' of the grouping's owner.
+        A dictionary containing the 'url' and 'name' of the grouping's owner.
         """
         return {
-            'url': self.get_parent_url(),
-            'username': self.get_owner_username()
+            'url': self._get_parent_url(),
+            'name': self._get_parent_name()
         }

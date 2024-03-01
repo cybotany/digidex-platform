@@ -141,27 +141,12 @@ class BaseDigit(models.Model):
         """
         Get the URL to view the details of this digitized entity, using query parameters.
         """
-        digit_type = self.ntag._get_link_use()
-        return reverse('inventory:detail-digit', kwargs={'type': digit_type, 'uuid': self.uuid})
-
-    def get_parent_url(self):
-        """
-        Get the URL of the parent URL.
-        """
-        if self.grouping.is_default:
-            return self.grouping.get_parent_url()
-        return self.grouping.get_absolute_url()
-
-    def get_parent_name(self):
-        """
-        Returns the name of the grouping this digit belongs to, if any.
-
-        Returns:
-            str or None: The name of the grouping or None if the digit does not belong to any grouping.
-        """
-        if not self.grouping.is_default:
-            return self.grouping.name
-        return self.grouping.get_owner_username()
+        ntag_use = self.ntag.get_use()
+        if ntag_use == 'plant':
+            _type = 'plant'
+        else:
+            _type = 'pet'
+        return reverse('inventory:detail-digit', kwargs={'type': _type, 'uuid': self.uuid})
 
     def get_journal_entries(self):
         """
@@ -188,6 +173,18 @@ class BaseDigit(models.Model):
         based on the digit's taxonomy.
         """
         raise NotImplementedError("Subclasses must implement this method to return the kingdom ID.")
+
+    def get_parent_details(self):
+        """
+        Returns information about the grouping's owner, including the URL to their profile 
+        and their username.
+        
+        Returns:
+        A dictionary containing the 'url' and 'name' of the grouping's owner.
+        """
+        if self.grouping.is_default:
+            return self.grouping.get_parent_details()
+        return self.grouping.get_details()
 
     class Meta:
         abstract = True

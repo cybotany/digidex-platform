@@ -56,6 +56,12 @@ class NTAG(NFC):
         """
         return self.use.split('_')[0] if self.use else None
 
+    def get_use(self):
+        """
+        Returns the first word of the `use` attribute, splitting by '_'.
+        """
+        return self._get_link_use()
+
     def get_digit(self):
         """
         Returns the first word of the `use` attribute, splitting by '_'.

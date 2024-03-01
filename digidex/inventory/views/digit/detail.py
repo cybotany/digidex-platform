@@ -27,10 +27,12 @@ class DetailDigit(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         digit = self.object
-        user = self.request.user
+        is_owner = self.request.user.is_authenticated and self.request.user == digit.ntag.user
 
-        is_owner = user.is_authenticated and digit.ntag.user == user
-        journal_entries = digit.get_journal_entries() if digit.is_public or is_owner else []
+        journal_entries = []
+
+        if is_owner or digit.is_public:
+            journal_entries = digit.get_journal_entries()
         
         context.update({
             'is_owner': is_owner,

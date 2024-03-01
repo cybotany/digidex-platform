@@ -41,7 +41,9 @@
     <section class="section">
       <div class="content content-digit-top">
         <div class="block-digit-top">
-          <div class="subtitle green">Overview<br></div>
+          <a href="{{ owner.url }}" class="block-digit-link base-inline-block">
+            <div class="subtitle green">{{ owner.username }}<br></div>
+          </a>
           <div class="date-top">Created: {{ digit.created_at|date:"M. d, Y" }}</div>
           {% if is_owner %}
             <div class="digit-text-top">
