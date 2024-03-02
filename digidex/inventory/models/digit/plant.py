@@ -1,6 +1,6 @@
-from digidex.inventory.models.digitized import _digit
+from digidex.inventory.models.digit import _base
 
-class _DigitizedPlant(_digit._Digit):
+class _DigitizedPlant(_base._Digit):
     """
     A digitized representation of a plant
     """

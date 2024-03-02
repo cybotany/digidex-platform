@@ -1,7 +1,7 @@
 from django.db import models
-from digidex.inventory.models.digitized import _digit
+from digidex.inventory.models.digit import _base
 
-class _DigitizedAnimal(_digit._Digit):
+class _DigitizedAnimal(_base._Digit):
     """
     A digitized representation of an animal.
     """

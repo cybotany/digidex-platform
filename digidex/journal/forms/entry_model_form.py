@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 
 from digidex.journal.models import entry as base_entry
 
-class JournalEntryForm(forms.ModelForm):
+class JournalEntryModelForm(forms.ModelForm):
     class Meta:
         model = base_entry.JournalEntry
         fields = ('content', 'image')
@@ -18,7 +18,7 @@ class JournalEntryForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
-        super(JournalEntryForm, self).__init__(*args, **kwargs)
+        super(JournalEntryModelForm, self).__init__(*args, **kwargs)
 
     def clean(self):
         cleaned_data = super().clean()

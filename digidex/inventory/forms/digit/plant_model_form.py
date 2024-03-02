@@ -1,5 +1,5 @@
 from django import forms
-from digidex.inventory.models.digitized import plant
+from digidex.inventory.models.digit import plant
 
 class _DigitizedPlantForm(forms.ModelForm):
     """

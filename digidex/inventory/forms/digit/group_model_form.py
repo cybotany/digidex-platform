@@ -1,7 +1,7 @@
-from digidex.inventory.forms.digitized import _base_forms
-from digidex.inventory.models.digitized import group
+from digidex.inventory.forms import _base
+from digidex.inventory.models.digit import group
 
-class ItemizedDigitGroupModelForm(_base_forms._AbstractInventoryModelForm):
+class ItemizedDigitGroupModelForm(_base._AbstractInventoryModelForm):
     """
     Form for creating a digitizied representation of a grouping of digitized entites.
     """

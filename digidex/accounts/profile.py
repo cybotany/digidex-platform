@@ -2,7 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.urls import reverse
 
-from digidex.inventory.models.digitized import group
+from digidex.inventory.models.digit import group
 from digidex.utils import custom_storage
 
 def profile_avatar_directory_path(instance, filename):

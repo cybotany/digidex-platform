@@ -4,7 +4,7 @@ from django.db import models, transaction
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ObjectDoesNotExist
 
-from digidex.inventory.models.digitized import group
+from digidex.inventory.models.digit import group
 from digidex.journal.models import collection
 from digidex.journal.models import entry
 from digidex.taxonomy.models.itis.taxon import base
@@ -23,7 +23,6 @@ class _Digit(models.Model):
         taxon (ForeignKey): A relationship to the Unit model, representing the entity's taxonomic classification.
         ntag (OneToOneField): A relationship to the Link model, representing the NTAG link for the digitized entity.
         is_public (BooleanField): Indicates if the digit should be publicly visible to the public or private. Digit is private by default.
-        is_archived (BooleanField): Indicates whether the digit is archived.
         created_at (DateTimeField): The date and time when the Digit instance was created.
         last_modified (DateTimeField): The date and time when the Digit instance was last modified.
     """
