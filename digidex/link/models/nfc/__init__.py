@@ -1,1 +1,1 @@
-from .base import NFC
+from .tag import NfcTag

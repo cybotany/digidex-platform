@@ -72,22 +72,6 @@ class DigidexUser(AbstractUser):
     def __str__(self):
         return self.username
 
-    def send_verification_email(self):
-        token = PasswordResetTokenGenerator().make_token(self)
-        uid = urlsafe_base64_encode(force_bytes(self.pk))
-        base_url = reverse('accounts:verify-user', kwargs={'uidb64': uid, 'token': token})
-        full_url = f'{settings.SITE_HOST}{base_url}'
-
-        # Use EmailLog to create and send the email
-        EmailLog.create_and_send_email(
-            to_email=self.email,
-            from_email='no-reply@digidex.app',
-            subject='Verify your email',
-            body=f'Please click the following link to verify your email and complete the signup process:\n{full_url}',
-            reason='email_verification',
-            user=self
-        )
-
     @transaction.atomic
     def save(self, *args, **kwargs):
         self.username = self.username.lower()
@@ -107,4 +91,20 @@ class DigidexUser(AbstractUser):
             try:
                 self.send_verification_email()
             except Exception as e:
-                raise
+                raise Exception(f'Error sending verification email: {e}')
+
+    def send_verification_email(self):
+        token = PasswordResetTokenGenerator().make_token(self)
+        uid = urlsafe_base64_encode(force_bytes(self.pk))
+        base_url = reverse('accounts:verify-user', kwargs={'uidb64': uid, 'token': token})
+        full_url = f'{settings.SITE_HOST}{base_url}'
+
+        # Use EmailLog to create and send the email
+        EmailLog.create_and_send_email(
+            to_email=self.email,
+            from_email='no-reply@digidex.app',
+            subject='Verify your email',
+            body=f'Please click the following link to verify your email and complete the signup process:\n{full_url}',
+            reason='email_verification',
+            user=self
+        )

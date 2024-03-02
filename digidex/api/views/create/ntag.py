@@ -3,9 +3,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from digidex.link.models.nfc import NTAG
+from digidex.link.models.nfc import tag
 
-class CreateLink(APIView):
+class CreateNtagLink(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [JWTAuthentication]
 
@@ -17,7 +17,7 @@ class CreateLink(APIView):
         if not serial_number:
             return Response({"error": "Serial Number not provided."}, status=status.HTTP_400_BAD_REQUEST)
         
-        ntag, created = NTAG.objects.update_or_create(
+        ntag, created = ntag.NTAG.objects.update_or_create(
             serial_number=serial_number, 
             defaults={'type': ntag_type, 'use': ntag_use}
         )

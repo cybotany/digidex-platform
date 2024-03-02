@@ -1,16 +1,15 @@
 import logging
-from django.shortcuts import render, get_object_or_404
-from django.http import Http404, HttpResponseRedirect
-from django.views import View
-from django.contrib.auth.mixins import LoginRequiredMixin
-from digidex.link.models.nfc import NTAG
-from digidex.inventory.models import Plant, Pet
-from digidex.inventory.forms import PlantForm, PetForm
-from django.contrib import messages
-
 logger = logging.getLogger(__name__)
 
-class NTAGLink(LoginRequiredMixin, View):
+from django.shortcuts import render, get_object_or_404
+from django.http import Http404, HttpResponseRedirect
+from django.contrib import messages
+
+from digidex.link.models.nfc import base as nfc_link
+from digidex.inventory.models import Plant, Pet
+from digidex.inventory.forms import PlantForm, PetForm
+
+class LinkNtagAndDigit(nfc_link.AbstractNfcLink):
     template_name = "inventory/digit/creation-page.html"
 
     def get_form_kwargs(self):
@@ -25,7 +24,7 @@ class NTAGLink(LoginRequiredMixin, View):
         serial_number = self.kwargs.get('serial_number')
         if not serial_number:
             raise Http404("No serial number provided")
-        return get_object_or_404(NTAG, serial_number=serial_number)
+        return get_object_or_404(nfc_link.NfcTag, serial_number=serial_number)
 
     def get_form_and_model(self, use):
         if use == 'plant_label':

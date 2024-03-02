@@ -2,7 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.urls import reverse
 
-class NFC(models.Model):
+class NearFieldCommunication(models.Model):
     """
     Abstract base class for NFC (Near Field Communication) technology, providing common attributes.
 

@@ -1,1 +1,1 @@
-from .ntag_link import NTAGLink
+from .nfc.base import AbstractNfcLink

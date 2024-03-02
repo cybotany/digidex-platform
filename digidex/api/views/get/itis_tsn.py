@@ -6,9 +6,9 @@ from rest_framework.authentication import SessionAuthentication
 from django.db.models import Q
 
 from digidex.api.serializers import TaxonFilterSerializer
-from digidex.taxonomy.models.taxon import base as base_taxon
+from digidex.taxonomy.models.itis.taxon import base as itis_taxon
 
-class GetTSN(APIView):
+class GetItisTSN(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [SessionAuthentication]
 
@@ -22,7 +22,7 @@ class GetTSN(APIView):
         if not kingdom_id.isdigit():
             raise APIException("Invalid kingdom_id. Please specify a valid kingdom_id.")
 
-        tsn_objects = base_taxon.Taxon.objects.filter(
+        tsn_objects = itis_taxon.ItisTaxonUnit.objects.filter(
             Q(complete_name__icontains=search_term) & 
             Q(kingdom__id=kingdom_id)
         )[:10]
