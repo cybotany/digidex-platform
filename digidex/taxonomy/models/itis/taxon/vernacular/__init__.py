@@ -1,2 +1,0 @@
-from .base import ItisTaxonVernacular
-from .reference import ItisTaxonVernacularReference
