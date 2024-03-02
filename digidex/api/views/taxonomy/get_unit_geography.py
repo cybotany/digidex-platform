@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404
 
 from digidex.taxonomy.models.itis.taxon import geography as itis_geography
 
-class GetItisGeography(APIView):
+class GetItisUnitGeography(APIView):
     def get(self, request, id):
         geography = get_object_or_404(itis_geography.ItisTaxonGeography, pk=id)
 

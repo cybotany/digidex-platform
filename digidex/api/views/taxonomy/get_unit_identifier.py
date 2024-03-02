@@ -8,7 +8,7 @@ from django.db.models import Q
 from digidex.api.serializers import TaxonFilterSerializer
 from digidex.taxonomy.models.itis.taxon import base as itis_taxon
 
-class GetItisTSN(APIView):
+class GetItisUnitIdentifier(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [SessionAuthentication]
 
