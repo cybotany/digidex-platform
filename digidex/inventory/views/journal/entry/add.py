@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.contrib import messages
 
-from digidex.journal.forms import entry_model_form as entry_form
+from digidex.inventory.forms import entry_model_form as entry_form
 from digidex.journal.models import entry as base_entry
 from digidex.journal.models import collection as base_collection
 
