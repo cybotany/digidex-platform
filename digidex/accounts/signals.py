@@ -3,7 +3,7 @@ from django.dispatch import receiver
 from django.contrib.auth import get_user_model
 
 from digidex.inventory.models import profile as app_profile
-from digidex.inventory.models import grouping as digit_group
+from digidex.inventory.models.digit import group as digit_group
 
 @receiver(post_save, sender=get_user_model())
 def manage_user_creation(sender, instance, created, **kwargs):

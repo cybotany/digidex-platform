@@ -1,6 +1,6 @@
 from django import forms
 
-from digidex.inventory.models import grouping as inventory_group
+from digidex.inventory.models.digit import group as inventory_group
 
 class InventoryGroupingForm(forms.ModelForm):
     """
