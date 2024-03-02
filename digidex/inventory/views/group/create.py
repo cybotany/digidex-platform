@@ -1,11 +1,9 @@
-import logging
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView
 from django.contrib import messages
 from digidex.inventory.models import Grouping
 from digidex.inventory.forms import GroupingForm
 
-logger = logging.getLogger(__name__)
 
 class CreateGrouping(LoginRequiredMixin, CreateView):
     model = Grouping

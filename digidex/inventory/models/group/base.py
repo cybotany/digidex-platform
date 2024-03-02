@@ -3,7 +3,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 
-class DigitGroup(models.Model):
+class ItemizedDigitGroup(models.Model):
     """
     Model for organizing digitized entities into groups.
 

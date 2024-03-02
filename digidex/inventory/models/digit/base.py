@@ -4,7 +4,7 @@ from django.db import models, transaction
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ObjectDoesNotExist
 
-from digidex.inventory.models.digit import group
+from digidex.inventory.models.group import base
 from digidex.journal.models import collection
 from digidex.journal.models import entry
 from digidex.taxonomy.models.itis.taxon import base
@@ -134,7 +134,7 @@ class Digit(models.Model):
         based on the count of Digits the user has.
         """
         if not self.grouping_id:
-            default_grouping, _ = group.DigitGroup.objects.get_or_create(
+            default_grouping, _ = base.DigitGroup.objects.get_or_create(
                 user=self.ntag.user,
                 is_default=True,
                 defaults={

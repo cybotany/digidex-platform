@@ -1,6 +1,5 @@
 from .digit import Pet, Plant
-from .digit.group import DigitGroup
-from .profile import Profile, profile_avatar_directory_path
+from .group import ItemizedDigitGroup
 
 MODEL_MAP = {
     'pet': Pet,
