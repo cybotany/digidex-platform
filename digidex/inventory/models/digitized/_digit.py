@@ -4,14 +4,14 @@ from django.db import models, transaction
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ObjectDoesNotExist
 
-from digidex.inventory.models.group import base
+from digidex.inventory.models.digitized import group
 from digidex.journal.models import collection
 from digidex.journal.models import entry
 from digidex.taxonomy.models.itis.taxon import base
 from digidex.taxonomy.models.itis.taxon import kingdom
 from digidex.taxonomy.models.itis.taxon import rank
 
-class Digit(models.Model):
+class _Digit(models.Model):
     """
     Abstract base model for digitized entities, serving as a bridge between physical specimens and their digital representations.
 
@@ -134,7 +134,7 @@ class Digit(models.Model):
         based on the count of Digits the user has.
         """
         if not self.grouping_id:
-            default_grouping, _ = base.DigitGroup.objects.get_or_create(
+            default_grouping, _ = group.DigitGroup.objects.get_or_create(
                 user=self.ntag.user,
                 is_default=True,
                 defaults={
@@ -220,7 +220,7 @@ class Digit(models.Model):
         _taxon_pk = cls()._get_taxon_pk()
         if _taxon_pk:
             try:
-                return base.ItisTaxonUnit.objects.get(pk=_taxon_pk)
+                return group.ItisTaxonUnit.objects.get(pk=_taxon_pk)
             except ObjectDoesNotExist:
                 raise ValueError(f"Taxon with the serial number {_taxon_pk} does not exist does not exist in the ITIS database.")
         else:

@@ -1,6 +1,6 @@
 from django import forms
 
-class AbstractInventoryForm(forms.Form):
+class _AbstractInventoryForm(forms.Form):
     class Meta:
         abstract = True 
         fields = '__all__'
@@ -12,7 +12,7 @@ class AbstractInventoryForm(forms.Form):
         pass
 
 
-class AbstractInventoryModelForm(forms.ModelForm):
+class _AbstractInventoryModelForm(forms.ModelForm):
     class Meta:
         abstract = True 
         model = None

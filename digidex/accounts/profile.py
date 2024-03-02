@@ -2,7 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.urls import reverse
 
-from digidex.inventory.models.group import base
+from digidex.inventory.models.digitized import group
 from digidex.utils import custom_storage
 
 def profile_avatar_directory_path(instance, filename):
@@ -86,7 +86,7 @@ class DigidexProfile(models.Model):
             dict: A dictionary with 'default_grouping' for the default grouping object (or None if not set),
                 and 'other_groupings' for a list of all other grouping objects associated with the user.
         """
-        grouping = base.DigitGroup.objects.filter(user=self.user, is_default=True)\
+        grouping = grouping.DigitGroup.objects.filter(user=self.user, is_default=True)\
             .prefetch_related('plants', 'pets').first()
 
         if not grouping:
@@ -106,7 +106,7 @@ class DigidexProfile(models.Model):
             dict: A dictionary with 'default_grouping' for the default grouping object (or None if not set),
                 and 'other_groupings' for a list of all other grouping objects associated with the user.
         """
-        groupings = base.DigitGroup.objects.filter(user=self.user, is_default=False).all()
+        groupings = group.DigitGroup.objects.filter(user=self.user, is_default=False).all()
         return {
             'groupings': groupings,
             'grouping_count': groupings.count(),

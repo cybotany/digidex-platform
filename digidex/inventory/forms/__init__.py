@@ -1,1 +1,1 @@
-from .base import AbstractInventoryForm, AbstractInventoryModelForm
+from .digitized import _AbstractInventoryForm, _AbstractInventoryModelForm
