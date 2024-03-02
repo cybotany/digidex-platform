@@ -9,7 +9,7 @@ from digidex.link.models.nfc import base as nfc_link
 from digidex.inventory.models import Plant, Pet
 from digidex.inventory.forms import PlantForm, PetForm
 
-class LinkNtagAndDigit(nfc_link.AbstractNfcLink):
+class LinkDigit(nfc_link.AbstractNfcLink):
     template_name = "inventory/digit/creation-page.html"
 
     def get_form_kwargs(self):

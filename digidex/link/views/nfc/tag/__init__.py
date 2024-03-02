@@ -1,1 +1,1 @@
-from .base import AbstractNfcLink
+from .base import LinkDigit

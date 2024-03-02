@@ -1,1 +1,1 @@
-from .nfc.base import AbstractNfcLink
+from .base import AbstractLink

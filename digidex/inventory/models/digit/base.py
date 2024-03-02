@@ -4,12 +4,12 @@ from django.db import models, transaction
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ObjectDoesNotExist
 
-from digidex.inventory.models import grouping as digit_grouping
-from digidex.journal.models import collection as journal_collection
-from digidex.journal.models import entry as journal_entry
-from digidex.taxonomy.models.itis.taxon import base as itis_taxon
-from digidex.taxonomy.models.itis.taxon import kingdom as itis_kingdom
-from digidex.taxonomy.models.itis.taxon import rank as itis_rank
+from digidex.inventory.models import grouping
+from digidex.journal.models import collection
+from digidex.journal.models import entry
+from digidex.taxonomy.models.itis.taxon import base
+from digidex.taxonomy.models.itis.taxon import kingdom
+from digidex.taxonomy.models.itis.taxon import rank
 
 class Digit(models.Model):
     """
@@ -27,9 +27,9 @@ class Digit(models.Model):
         created_at (DateTimeField): The date and time when the Digit instance was created.
         last_modified (DateTimeField): The date and time when the Digit instance was last modified.
     """
-    _itis_kingdom_pk = None
-    _itis_rank_pk = None
-    _itis_taxon_pk = None
+    _kingdom_pk = None
+    _rank_pk = None
+    _taxon_pk = None
 
     uuid = models.UUIDField(
         default=uuid.uuid4,
@@ -104,26 +104,26 @@ class Digit(models.Model):
         help_text="The date and time when the digit instance was last modified."
     )
 
-    def _get_itis_kingdom_pk(self):
+    def _get_kingdom_pk(self):
         """
         Retrieves the Primary Key used for the ITIS taxonomic kingdom database tabel.
         This method is intended to be overridden by subclasses.
         """
-        return self._itis_kingdom_pk
+        return self._kingdom_pk
 
-    def _get_itis_rank_pk(self):
+    def _get_rank_pk(self):
         """
         Retrieves the Primary Key used for the ITIS taxonomic rank database tabel.
         This method is intended to be overridden by subclasses.
         """
-        return self._itis_rank_pk
+        return self._rank_pk
 
-    def _get_itis_taxon_pk(self):
+    def _get_taxon_pk(self):
         """
         Retrieves the Primary Key used for the ITIS taxonomic unit database tabel.
         This method is intended to be overridden by subclasses.
         """
-        return self._itis_taxon_pk
+        return self._taxon_pk
 
     def get_digit_type(self):
         return self.__class__.__name__.lower()
@@ -134,7 +134,7 @@ class Digit(models.Model):
         based on the count of Digits the user has.
         """
         if not self.grouping_id:
-            default_grouping, _ = digit_grouping.Grouping.objects.get_or_create(
+            default_grouping, _ = grouping.DigitGroup.objects.get_or_create(
                 user=self.ntag.user,
                 is_default=True,
                 defaults={
@@ -146,10 +146,8 @@ class Digit(models.Model):
 
         if not self.kingdom:
             self.kingdom = self.get_kingdom()  
-
         if not self.rank:
             self.rank = self.get_rank()  
-
         if not self.taxon:
             self.taxon = self.get_taxon()        
 
@@ -185,8 +183,8 @@ class Digit(models.Model):
         """
         Get the URL to view the details of this digitized entity, using query parameters.
         """
-        ntag_use = self.ntag.get_use()
-        if ntag_use == 'plant':
+        _ntag_use = self.ntag.get_use()
+        if _ntag_use == 'plant':
             _type = 'plant'
         else:
             _type = 'pet'
@@ -194,23 +192,23 @@ class Digit(models.Model):
 
     @classmethod
     def get_kingdom(cls):
-        itis_kingdom_pk = cls()._get_itis_kingdom_pk()
-        if itis_kingdom_pk:
+        _kingdom_pk = cls()._get_kingdom_pk()
+        if _kingdom_pk:
             try:
-                return itis_kingdom.ItisTaxonKingdom.objects.get(pk=itis_kingdom_pk)
+                return kingdom.ItisTaxonKingdom.objects.get(pk=_kingdom_pk)
             except ObjectDoesNotExist:
-                raise ValueError(f"Taxon Kingdom with the primary key {itis_kingdom_pk} does not exist in the ITIS database.")
+                raise ValueError(f"Taxon Kingdom with the primary key {_kingdom_pk} does not exist in the ITIS database.")
         else:
             raise NotImplementedError("This method must be implemented by subclasses.")
 
     @classmethod
     def get_rank(cls):
-        itis_rank_pk = cls()._get_itis_taxon_pk()
-        if itis_rank_pk:
+        _rank_pk = cls()._get_rank_pk()
+        if _rank_pk:
             try:
-                return itis_rank.ItisTaxonRank.objects.get(pk=itis_rank_pk)
+                return rank.ItisTaxonRank.objects.get(pk=_rank_pk)
             except ObjectDoesNotExist:
-                raise ValueError(f"Taxon Rank with the primary key {itis_rank_pk} does not exist does not exist in the ITIS database.")
+                raise ValueError(f"Taxon Rank with the primary key {_rank_pk} does not exist does not exist in the ITIS database.")
         else:
             raise NotImplementedError("This method must be implemented by subclasses.")
 
@@ -219,12 +217,12 @@ class Digit(models.Model):
         """
         Retrieves the taxon using the ITIS taxonomic serial number.
         """
-        itis_taxon_pk = cls()._get_itis_taxon_pk()
-        if itis_taxon_pk:
+        _taxon_pk = cls()._get_taxon_pk()
+        if _taxon_pk:
             try:
-                return itis_taxon.ItisTaxonUnit.objects.get(pk=itis_taxon_pk)
+                return base.ItisTaxonUnit.objects.get(pk=_taxon_pk)
             except ObjectDoesNotExist:
-                raise ValueError(f"Taxon with the serial number {itis_taxon_pk} does not exist does not exist in the ITIS database.")
+                raise ValueError(f"Taxon with the serial number {_taxon_pk} does not exist does not exist in the ITIS database.")
         else:
             raise ValueError("ITIS Taxon PK not defined.")
 
@@ -233,14 +231,14 @@ class Digit(models.Model):
         Fetches all Entry objects related to this Digit instance through its Collection.
         Returns a QuerySet of Entry instances.
         """
-        content_type = ContentType.objects.get_for_model(self.__class__)
-        collections = journal_collection.Collection.objects.filter(content_type=content_type, object_id=self.pk)
+        _content_type = ContentType.objects.get_for_model(self.__class__)
+        _collections = collection.JournalCollection.objects.filter(content_type=_content_type, object_id=self.pk)
 
-        if collections.exists():
-            collection = collections.first()
-            entries = collection.get_all_entries()
-            return entries
-        return journal_entry.Entry.objects.none()
+        if _collections.exists():
+            _collection = _collections.first()
+            _entries = _collection.get_all_entries()
+            return _entries
+        return entry.JournalEntry.objects.none()
 
     def get_parent_details(self):
         """

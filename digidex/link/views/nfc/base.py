@@ -1,8 +1,4 @@
-import logging
-logger = logging.getLogger(__name__)
+from digidex.link.views import base as base_link
 
-from django.views import View
-from django.contrib.auth.mixins import LoginRequiredMixin
-
-class AbstractNfcLink(LoginRequiredMixin, View):
+class AbstractNfcLink(base_link.AbstractLink):
     pass

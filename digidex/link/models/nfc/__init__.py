@@ -1,1 +1,1 @@
-from .tag import NfcTag
+from .base import NearFieldCommunication
