@@ -1,1 +1,0 @@
-from .entry_model_form import JournalEntryModelForm
