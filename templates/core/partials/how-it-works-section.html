@@ -1,0 +1,40 @@
+<section class="section">
+  <div class="content">
+    <div class="collection-list-wrapper-shop base-dyn-list">
+      <div role="list" class="collection-list-shop base-dyn-items">
+        {% for product in category_products %}
+          <div role="listitem" class="base-dyn-item">
+            <div class="product">
+              <div class="block-icon-product">
+                <img alt="" loading="eager" src="" class="icon-product">
+              </div>
+              <a href="#" class="link-product base-inline-block">
+                <h3 class="heading-product"></h3>
+              </a>
+              <div class="block-price">
+                <div class="text-price"></div>
+                <div class="compare-at-price"></div>
+              </div>
+              <p class="paragraph-description"></p>
+              <div class="subtitle-product">Features<br></div>
+              <div class="block-features-product">
+                <div class="features-product">
+                  <img src="{% static 'main/images/bx-check.svg' %}" loading="eager" alt="Check Mark" class="icon-features-product">
+                  <h6 class="heading-features-product"></h6>
+                </div>
+                <div class="features-product">
+                  <img src="{% static 'main/images/bx-check.svg' %}" loading="eager" alt="Check Mark" class="icon-features-product">
+                  <h6 class="heading-features-product"></h6>
+                </div>
+                <div class="features-product">
+                  <img src="{% static 'main/images/bx-check.svg' %}" loading="eager" alt="Check Mark" class="icon-features-product">
+                  <h6 class="heading-features-product"></h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
