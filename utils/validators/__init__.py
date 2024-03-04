@@ -1,1 +1,0 @@
-from .username_validator import digidex_username_validator
