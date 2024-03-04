@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>  
+    <meta charset="utf-8">
+    <title>Signup - Digidex</title>
+    <meta content="A platform for gardeners to cultivate their curiosity." name="description">
+    <meta content="Signup - Digidex" property="og:title">
+    <meta content="A platform for gardeners to cultivate their curiosity." property="og:description">
+    <meta content="Signup - Digidex" property="twitter:title">
+    <meta content="A platform for gardeners to cultivate their curiosity." property="twitter:description">
+    <meta property="og:type" content="website">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+
+    <link href="{% static 'base/css/normalize.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'base/css/base-styles.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'digidex/css/digidex-styles.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
+
+    <!-- Load reCAPTCHA js code -->
+    <script src="https://www.google.com/recaptcha/enterprise.js?render={{ RECAPTCHA_SITE_KEY }}"></script>
+
+    <!-- Load Fonts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      WebFont.load({
+        google: {
+          families: ["Space Grotesk:regular,500,600,700", "IBM Plex Mono:regular,italic,500,500italic,600,600italic,700,700italic"]
+        }
+      });
+    </script>
+    
+    <link href="{% static 'digidex/images/favicon.png' %}" rel="shortcut icon" type="image/x-icon">
+    <link href="{% static 'digidex/images/webclip.png' %}" rel="apple-touch-icon">
+  </head>
+  <body>
+    <a href="{% url 'main:landing' %}" class="brand-center base-nav-brand">
+      <img src="{% static 'digidex/images/logo.png' %}" loading="eager" alt="" class="logo">
+    </a>
+    {% include 'message-bar.html' %}
+    <!-- Signup Form Section -->
+    <section class="section-full">
+      <div class="content">
+        <div class="account-form">
+          <div class="subtitle green">Sign up<br></div>
+          <h2 class="account-heading">Create an account</h2>
+          <div class="form-block base-form">     
+            <form id="signupForm" method="post" class="form">
+              {% csrf_token %}
+            
+              <!-- Render Username Field -->
+              <div>
+                {{ form.username }}
+                {% if form.username.errors %}
+                  <div class="error-message">
+                    <span class="text-error">{{ form.username.errors|striptags }}</span>
+                  </div>
+                {% endif %}
+              </div>
+            
+              <!-- Render Email Field -->
+              <div>
+                {{ form.email }}
+                {% if form.email.errors %}
+                  <div class="error-message">
+                    <span class="text-error">{{ form.email.errors|striptags }}</span>
+                  </div>
+                {% endif %}
+              </div>
+            
+              <!-- Render Password Field -->
+              <div>
+                {{ form.password1 }}
+                {% if form.password1.errors %}
+                  <div class="error-message">
+                    <span class="text-error">{{ form.password1.errors|striptags }}</span>
+                  </div>
+                {% endif %}
+              </div>
+            
+              <!-- Render Password Confirmation Field -->
+              <div>
+                {{ form.password2 }}
+                {% if form.password2.errors %}
+                  <div class="error-message">
+                    <span class="text-error">{{ form.password2.errors|striptags }}</span>
+                  </div>
+                {% endif %}
+              </div>
+            
+              <!-- Render Submit Button -->
+              <input type="submit" value="Sign Up" class="submit-button base-button" id="submitBtn">
+            </form>                
+            <div class="account-text">Already registered? <a href="{% url 'accounts:login-user' %}" class="account-link">Login to your account</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script>
+      document.getElementById('submitBtn').addEventListener('click', function(event) {
+          event.preventDefault();
+  
+          grecaptcha.enterprise.execute('{{ RECAPTCHA_SITE_KEY }}', {action: 'signup'}).then(function(token) {
+              // Add the token to a hidden field
+              var inputToken = document.createElement('input');
+              inputToken.setAttribute('type', 'hidden');
+              inputToken.setAttribute('name', 'g-recaptcha-response');
+              inputToken.setAttribute('value', token);
+              document.getElementById('signupForm').appendChild(inputToken);
+  
+              // Submit the form
+              document.getElementById('signupForm').submit();
+          });
+      });
+  </script>  
+  </body>
+</html>
