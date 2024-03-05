@@ -31,7 +31,6 @@
   --honeydew-background: rgba(240, 255, 240, 0.8);
 }
 
-
 .layout-grid {
   grid-row-gap: 16px;
   grid-column-gap: 16px;
@@ -364,6 +363,21 @@ figcaption {
   color: var(--white);
 }
 
+.button-desktop {
+  grid-column-gap: .5em;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.button-mobile {
+  grid-column-gap: .5em;
+  grid-row-gap: 1em;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
 @media screen and (max-width: 991px) {
   .nav-menu {
     display: none;
@@ -427,21 +441,6 @@ figcaption {
   justify-content: flex-start;
   align-items: stretch;
   display: flex;
-}
-
-.button-desktop {
-  grid-column-gap: .5em;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-}
-
-.button-mobile {
-  grid-column-gap: .5em;
-  grid-row-gap: 1em;
-  justify-content: center;
-  align-items: center;
-  display: none;
 }
 
 .section-hero {
