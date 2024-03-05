@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>  
+    <meta charset="utf-8">
+    <title>Company - Digidex</title>
+    <meta content="A platform for gardeners to cultivate their curiosity." name="description">
+    <meta content="Company - Digidex" property="og:title">
+    <meta content="A platform for gardeners to cultivate their curiosity." property="og:description">
+    <meta content="Company - Digidex" property="twitter:title">
+    <meta content="A platform for gardeners to cultivate their curiosity." property="twitter:description">
+    <meta property="og:type" content="website">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+
+    <link href="{% static 'base/css/normalize.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'base/css/base-styles.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'digidex/css/digidex-styles.css' %}" rel="stylesheet" type="text/css">
+    
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.4/lottie.min.js" type="text/javascript"></script>
+
+    <!-- Load Fonts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      WebFont.load({
+        google: {
+          families: ["Space Grotesk:regular,500,600,700", "IBM Plex Mono:regular,italic,500,500italic,600,600italic,700,700italic"]
+        }
+      });
+    </script>
+    
+    <link href="{% static 'digidex/images/favicon.png' %}" rel="shortcut icon" type="image/x-icon">
+    <link href="{% static 'digidex/images/webclip.png' %}" rel="apple-touch-icon">
+  </head>
+  <body>
+    {% include 'navigation-bar.html' %}
+    {% include 'message-bar.html' %}
+    {% include 'page-header.html' %}
+    <!-- About Us Section-->
+    <section class="section">
+      <div class="content">
+        <div class="layout-grid grid-about">
+          <div class="about"> 
+            <div class="block-icon-about"><img src="{% static 'main/images/cloud-mod-stack.svg' %}" loading="eager" alt="" class="icon-about"></div>
+            <h4 class="heading-about">Our Role</h4>
+            <p class="paragraph-about">We empower plant enthusiasts through innovative technology.<br><br>Our NFC stickers simplify plant data digitization, while our  platform enables efficient tracking and analysis of plant growth and input usage.<br><br>Complemented by comprehensive data integrations and a personalized AI assistant, we transform your gardening experience into a journey of discovery.</p>
+          </div>
+          <div class="about red">
+            <div class="block-icon-about red"><img src="{% static 'main/images/events.svg' %}" loading="eager" alt="" class="icon-about"></div>
+            <h4 class="heading-about red">Our Values</h4>
+            <p class="paragraph-about red">We champion sustainability and stewardship, committing to protect and understand our planet&#x27;s ecosystems.<br><br>Innovation drives us to make biodiversity management accessible to all, empowering every plant enthusiast with intuitive technology.<br><br>Our core belief is that through education, engagement, and empowerment, we can inspire a greener future.</p>
+          </div>
+          <div class="about blue">
+            <div class="block-icon-about blue"><img src="{% static 'main/images/earth.svg' %}" loading="eager" alt="" class="icon-about"></div>
+            <h4 class="heading-about blue">Our Mission</h4>
+            <p class="paragraph-about blue">We are passionately dedicated to understanding and safeguarding our planet&#x27;s diverse ecosystems. <br><br>Our mission is to pioneer revolutionary approaches in biodiversity management and conservation, harnessing cutting-edge technology to create a sustainable future.<br><br>Join us in our journey to protect and cherish the natural world.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Company Page Lottie -->
+    <section class="section">
+      <div class="content">
+        <div class="layout-grid grid">
+          <div class="lottie">
+            <div class="lines-b1">
+              <div class="line-w"></div>
+              <div class="line-w"></div>
+              <div class="line-w"></div>
+              <div class="line-w"></div>
+              <div class="line-w"></div>
+              <div class="line-w"></div>
+            </div>
+            <div class="lines-b2">
+              <div class="line-h"></div>
+              <div class="line-h"></div>
+              <div class="line-h"></div>
+              <div class="line-h"></div>
+              <div class="line-h"></div>
+              <div class="line-h"></div>
+            </div>
+            <div class="block-lottie">
+              <div class="lottie-animation-1" data-animation-type="lottie" data-src="{% static 'digidex/documents/Lottie-B1-White.json' %}" data-loop="0" data-direction="1" data-autoplay="0" data-is-ix2-target="1" data-renderer="svg" data-default-duration="2.5" data-duration="0"></div>
+              <div class="lottie-animation-2" data-animation-type="lottie" data-src="{% static 'digidex/documents/Lottie-B2-Green.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="16" data-duration="0"></div>
+              <div class="lottie-animation-2-blur" data-animation-type="lottie" data-src="{% static 'digidex/documents/Lottie-B2-Green.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="16" data-duration="0"></div>
+            </div>
+          </div>
+          <!-- Company Page Founder Quote -->
+          <div class="block-right">
+            <h5 class="heading-quote">“Quis duis laoreet euismod facilisis posuere fringilla viverra tortor. Sit est duis enim lectus ac tincidunt. Eleifend interdum nulla ut vitae. Nunc sem faucibus neque faucibus. <br><br>Urna non et dictum sit cras. Urna etiam elit proin amet sed magna faucibus varius. Pulvinar gravida imperdiet cras dui pellentesque amet augue. Tincidunt et velit.”</h5>
+            <div class="block-quote">
+              <div class="block-name">
+                <h6 class="heading-name">Rafael Puello</h6>
+                <div class="text-role">founder<br></div>
+              </div><img src="{% static 'main/images/signature.svg' %}" loading="eager" alt="" class="signature">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% include 'call-to-action.html' %} 
+    {% include 'page-footer.html' %}
+    <script src="{% static 'digidex/js/toggle-lottie.js' %}" type="text/javascript"></script>
+  </body>
+</html>
