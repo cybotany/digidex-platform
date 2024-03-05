@@ -1,0 +1,37 @@
+{% load static %}
+{% if not request.user.is_authenticated %}
+  <section class="section">
+    <div class="content">
+      <div class="layout-grid grid-banner">
+        <div class="block-banner">
+          <div class="subtitle white">Are you ready?<br></div>
+          <h2 class="heading banner">Start your journey today</h2>
+          <a href="{% url 'accounts:signup-user' %}" class="button yellow base-button">Signup</a>
+        </div>
+        <div class="lottie-banner">
+          <div class="lines-d1">
+            <div class="line-banner-w"></div>
+            <div class="line-banner-w"></div>
+            <div class="line-banner-w"></div>
+            <div class="line-banner-w"></div>
+            <div class="line-banner-w"></div>
+            <div class="line-banner-w"></div>
+          </div>
+          <div class="lines-d2">
+            <div class="line-banner-h"></div>
+            <div class="line-banner-h"></div>
+            <div class="line-banner-h"></div>
+            <div class="line-banner-h"></div>
+            <div class="line-banner-h"></div>
+            <div class="line-banner-h"></div>
+          </div>
+          <div class="block-lottie-banner">
+            <div class="lottie-animation-1-banner" data-animation-type="lottie" data-src="{% static 'digidex/documents/Lottie-D1-Green.json' %}" data-loop="0" data-direction="1" data-autoplay="0" data-renderer="svg" data-default-duration="2.5" data-duration="0"></div>
+            <div class="lottie-animation-2-banner" data-animation-type="lottie" data-src="{% static 'digidex/documents/Lottie-D2-Yellow.json' %}" data-loop="0" data-direction="1" data-autoplay="0" data-renderer="svg" data-default-duration="2" data-duration="0"></div>
+            <div class="lottie-animation-2-blur-banner" data-animation-type="lottie" data-src="{% static 'digidex/documents/Lottie-D2-Yellow.json' %}" data-loop="0" data-direction="1" data-autoplay="0" data-renderer="svg" data-default-duration="2" data-duration="0"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}
