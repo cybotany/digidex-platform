@@ -29,15 +29,30 @@
         {% block extra_css %}
         {# Override this in templates to add extra stylesheets #}
         {% endblock %}
+
+        {% block header_js_script %}
+        {# Override this in templates to add extra js scripts in the header #}
+        {% endblock %}
+        <link href="{% static 'digidex/images/favicon.png' %}" rel="shortcut icon" type="image/x-icon">
+        <link href="{% static 'digidex/images/webclip.png' %}" rel="apple-touch-icon">
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
         {% wagtailuserbar %}
 
-        {% include 'page-footer.html' %}
-        {% include 'navigation-bar.html' %}
+        {% block page_header %}
+        {# Override this in templates to add html for the page header #}
+        {% endblock %}
+
+        {% block navigation_bar %}
+        {# Override this in templates to add a naviagation bar #}
+        {% endblock %}
+
         {% block content %}{% endblock %}
-        {% include 'page-footer.html' %}
+
+        {% block page_footer %}
+        {# Override this in templates to add html for the page footer #}
+        {% endblock %}
         
         {# Global javascript #}
         <script type="text/javascript" src="{% static 'js/cms.js' %}"></script>
