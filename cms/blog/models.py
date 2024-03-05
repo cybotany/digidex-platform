@@ -13,9 +13,7 @@ class BlogIndexPage(Page):
     ]
 
     def blogs(self):
-        # Get list of live event pages that are descendants of this page
-        blogs = BlogPage.objects.live().descendant_of(self)
-        # Order by date
+        blogs = BlogPage.objects.descendant_of(self)
         blogs = blogs.order_by('date_from')
 
         return blogs
@@ -30,7 +28,6 @@ class BlogPage(Page):
         index.SearchField('intro'),
         index.SearchField('body'),
     ]
-
     content_panels = Page.content_panels + [
         FieldPanel('date'),
         FieldPanel('intro'),
@@ -38,5 +35,4 @@ class BlogPage(Page):
     ]
 
     def blog_index(self):
-        # Find closest ancestor which is a blog index
         return self.get_ancestors().type(BlogIndexPage).last()
