@@ -1,11 +1,12 @@
 @import url('basic/font-icon.css');
 @import url('basic/box-sizing.css');
 @import url('basic/html-body.css');
+
 @import url('components/images.css');
-@import url('utilities/clearfix.css');
+@import url('components/clearfix.css');
 @import url('components/buttons.css');
 @import url('components/webflow-badge.css');
-@import url('basic/typography.css');
+@import url('components/typography.css');
 @import url('components/list.css');
 @import url('components/video.css');
 @import url('components/forms.css');
@@ -16,6 +17,7 @@
 @import url('components/lightbox.css');
 @import url('components/rich-text.css');
 @import url('components/navigation-bar.css');
-@import url('components/tabs.css');
+
+@import url('misc/tabs.css');
 @import url('misc/animations.css');
 @import url('misc/dynamic.css');
