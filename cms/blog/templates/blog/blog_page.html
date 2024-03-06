@@ -9,7 +9,22 @@
       <div class="block-top">
         <div class="date-top">{{ page.date }}</div>
         <h1 class="heading-top">{{ page.title }}</h1>
-        <p class="paragraph-top blog-post">{{ page.intro }}</p>
+        <p class="paragraph-top blog-post">
+        {{ page.intro }}
+          {% with authors=page.authors.all %}
+            {% if authors %}
+              <h3>Posted by:</h3>
+              <ul>
+                {% for author in authors %}
+                  <li style="display: inline">
+                    {% image author.author_image fill-40x60 style="vertical-align: middle" %}
+                    {{ author.name }}
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          {% endwith %}
+        </p>
       </div>
     </div>
   </section>
