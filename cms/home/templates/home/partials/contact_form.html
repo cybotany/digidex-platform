@@ -1,6 +1,5 @@
 <form id="contactForm" method="post" class="form">
   {% csrf_token %}
-
   <!-- Render Name Field -->
   <div>
     {{ form.name }}
@@ -10,7 +9,6 @@
       </div>
     {% endif %}
   </div>
-
   <!-- Render Email Field -->
   <div>
     {{ form.email }}
@@ -20,7 +18,6 @@
       </div>
     {% endif %}
   </div>
-
   <!-- Render Message Field -->
   <div>
     {{ form.message }}
