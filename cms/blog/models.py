@@ -12,11 +12,21 @@ class BlogIndexPage(Page):
         FieldPanel('intro')
     ]
 
-    def blogs(self):
-        blogs = BlogPage.objects.descendant_of(self)
-        blogs = blogs.order_by('date_from')
+    def get_context(self, request):
+        context = super().get_context(request)
+        # Get all live blog pages children of this page, ordered by publish date
+        blogpages = self.get_children().live().order_by('-first_published_at')
+        # Initialize the blogpages dict in context
+        context['blogpages'] = {
+            'latest': None,
+            'older': [],
+        }
+        # If there are any blog pages, assign latest and older accordingly
+        if blogpages.exists():
+            context['blogpages']['latest'] = blogpages.first()
+            context['blogpages']['older'] = blogpages[1:]
+        return context
 
-        return blogs
 
 
 class BlogPage(Page):
