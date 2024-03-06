@@ -1101,6 +1101,10 @@ figcaption {
 }
 
 @media screen and (max-width: 479px) {
+  .contact {
+    padding: 2em;
+  }
+
   .contact-lottie-link {
     min-width: 15em;
     grid-column-gap: 1em;
@@ -1600,11 +1604,6 @@ figcaption {
   margin-bottom: 2em;
   font-size: 1.125em;
   line-height: 160%;
-}
-
-.paragraph-top.blog-post {
-  max-width: 36em;
-  margin-bottom: .5em;
 }
 
 .heading-top {
