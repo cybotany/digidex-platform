@@ -1,35 +1,35 @@
-<div data-open-product="" data-wf-cart-type="rightDropdown" data-wf-cart-query="" data-wf-page-link-href-prefix="" class="w-commerce-commercecartwrapper cart" data-node-type="commerce-cart-wrapper">
-    <a class="w-commerce-commercecartopenlink cart-button w-inline-block" role="button" aria-haspopup="dialog" aria-label="Open cart" data-node-type="commerce-cart-open-link" href="#">
-      <img src="images/cart.svg" loading="eager" alt="" class="icon-cart">
-      <div class="w-commerce-commercecartopenlinkcount icon-cart-quantity">0</div>
+<div data-open-product="" data-wf-cart-type="rightDropdown" data-wf-cart-query="" data-wf-page-link-href-prefix="" class="base-commerce-commercecartwrapper cart" data-node-type="commerce-cart-wrapper">
+    <a class="base-commerce-commercecartopenlink cart-button base-inline-block" role="button" aria-haspopup="dialog" aria-label="Open cart" data-node-type="commerce-cart-open-link" href="#">
+      <img src="{% static 'images/bx/cart.svg' %}" loading="eager" alt="" class="icon-cart">
+      <div class="base-commerce-commercecartopenlinkcount icon-cart-quantity">0</div>
     </a>
-    <div style="display:none" class="w-commerce-commercecartcontainerwrapper w-commerce-commercecartcontainerwrapper--cartType-rightDropdown cart-wrapper" data-node-type="commerce-cart-container-wrapper">
-      <div data-node-type="commerce-cart-container" role="dialog" class="w-commerce-commercecartcontainer cart-container">
-        <div class="w-commerce-commercecartheader cart-header">
-          <h4 class="w-commerce-commercecartheading">Your Cart</h4>
-          <a class="w-commerce-commercecartcloselink close-button w-inline-block" role="button" aria-label="Close cart" data-node-type="commerce-cart-close-link">
-            <img src="images/close.svg" loading="eager" alt="" class="icon-close">
+    <div style="display:none" class="base-commerce-commercecartcontainerwrapper base-commerce-commercecartcontainerwrapper--cartType-rightDropdown cart-wrapper" data-node-type="commerce-cart-container-wrapper">
+      <div data-node-type="commerce-cart-container" role="dialog" class="base-commerce-commercecartcontainer cart-container">
+        <div class="base-commerce-commercecartheader cart-header">
+          <h4 class="base-commerce-commercecartheading">Your Cart</h4>
+          <a class="base-commerce-commercecartcloselink close-button base-inline-block" role="button" aria-label="Close cart" data-node-type="commerce-cart-close-link">
+            <img src="{% static 'images/bx/cart.svg' %}images/close.svg" loading="eager" alt="" class="icon-close">
           </a>
         </div>
-        <div class="w-commerce-commercecartformwrapper cart-form-wrapper">
-          <form style="display:none" class="w-commerce-commercecartform" data-node-type="commerce-cart-form">
-            <script type="text/x-wf-template" id="wf-template-4d93fcbc-3625-ff9a-91a6-fa731268e376"></script>
-            <div class="w-commerce-commercecartlist cart-list" data-wf-collection="database.commerceOrder.userItems" data-wf-template-id="wf-template-4d93fcbc-3625-ff9a-91a6-fa731268e376"></div>
-            <div class="w-commerce-commercecartfooter">
-              <div aria-atomic="true" aria-live="polite" class="w-commerce-commercecartlineitem cart-line-item">
+        <div class="base-commerce-commercecartformwrapper cart-form-wrapper">
+          <form style="display:none" class="base-commerce-commercecartform" data-node-type="commerce-cart-form">
+            <script type="text/x-wf-template"></script>
+            <div class="base-commerce-commercecartlist cart-list" data-wf-collection="database.commerceOrder.userItems" data-wf-template-id="wf-template-4d93fcbc-3625-ff9a-91a6-fa731268e376"></div>
+            <div class="base-commerce-commercecartfooter">
+              <div aria-atomic="true" aria-live="polite" class="base-commerce-commercecartlineitem cart-line-item">
                 <div>Subtotal</div>
-                <div class="w-commerce-commercecartordervalue text-subtotal"></div>
+                <div class="base-commerce-commercecartordervalue text-subtotal"></div>
               </div>
               <div>
                 <div style="position:relative" data-wf-paypal-button="{&quot;layout&quot;:&quot;horizontal&quot;,&quot;color&quot;:&quot;gold&quot;,&quot;shape&quot;:&quot;pill&quot;,&quot;label&quot;:&quot;paypal&quot;,&quot;tagline&quot;:false,&quot;note&quot;:false}" class="paypal">
                   <div style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;z-index:999;cursor:auto"></div>
                 </div>
                 <div data-node-type="commerce-cart-quick-checkout-actions">
-                  <a data-node-type="commerce-cart-apple-pay-button" role="button" aria-label="Apple Pay" aria-haspopup="dialog" style="background-image:-webkit-named-image(apple-pay-logo-white);background-size:100% 50%;background-position:50% 50%;background-repeat:no-repeat" class="w-commerce-commercecartapplepaybutton apple-pay" tabindex="0">
+                  <a data-node-type="commerce-cart-apple-pay-button" role="button" aria-label="Apple Pay" aria-haspopup="dialog" style="background-image:-webkit-named-image(apple-pay-logo-white);background-size:100% 50%;background-position:50% 50%;background-repeat:no-repeat" class="base-commerce-commercecartapplepaybutton apple-pay" tabindex="0">
                     <div></div>
                   </a>
-                  <a data-node-type="commerce-cart-quick-checkout-button" role="button" tabindex="0" aria-haspopup="dialog" style="display:none" class="w-commerce-commercecartquickcheckoutbutton pay-with-browser">
-                    <svg class="w-commerce-commercequickcheckoutgoogleicon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewbox="0 0 16 16">
+                  <a data-node-type="commerce-cart-quick-checkout-button" role="button" tabindex="0" aria-haspopup="dialog" style="display:none" class="base-commerce-commercecartquickcheckoutbutton pay-with-browser">
+                    <svg class="base-commerce-commercequickcheckoutgoogleicon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewbox="0 0 16 16">
                       <defs>
                         <polygon id="google-mark-a" points="0 .329 3.494 .329 3.494 7.649 0 7.649"></polygon>
                         <polygon id="google-mark-c" points=".894 0 13.169 0 13.169 6.443 .894 6.443"></polygon>
@@ -49,7 +49,7 @@
                         <path fill="#EA4335" d="M0.894,4.3291 L3.478,6.4431 C4.113,4.5611 5.843,3.1671 7.889,3.1671 C9.018,3.1451 10.102,3.5781 10.912,4.3671 L13.169,2.0781 C11.733,0.7231 9.85,-0.0219 7.889,0.0001 C4.941,0.0001 2.245,1.6791 0.894,4.3291" mask="url(#google-mark-d)"></path>
                       </g>
                     </svg>
-                    <svg class="w-commerce-commercequickcheckoutmicrosofticon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewbox="0 0 16 16">
+                    <svg class="base-commerce-commercequickcheckoutmicrosofticon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewbox="0 0 16 16">
                       <g fill="none" fill-rule="evenodd">
                         <polygon fill="#F05022" points="7 7 1 7 1 1 7 1"></polygon>
                         <polygon fill="#7DB902" points="15 7 9 7 9 1 15 1"></polygon>
@@ -60,16 +60,16 @@
                     <div>Pay with browser.</div>
                   </a>
                 </div>
-                <a href="checkout.html" value="Continue to Checkout" class="w-commerce-commercecartcheckoutbutton checkout-button" data-loading-text="Hang Tight..." data-node-type="cart-checkout-button">Continue to Checkout</a>
+                <a href="{}" value="Continue to Checkout" class="base-commerce-commercecartcheckoutbutton checkout-button" data-loading-text="Hang Tight..." data-node-type="cart-checkout-button">Continue to Checkout</a>
               </div>
             </div>
           </form>
-          <div class="w-commerce-commercecartemptystate cart-empty-state">
+          <div class="base-commerce-commercecartemptystate cart-empty-state">
             <div aria-label="This cart is empty" aria-live="polite" class="text-cart-empty">No items found.</div>
-            <a href="pricing.html" class="button w-button">Back to Shop</a>
+            <a href="" class="button base-button">Back to Shop</a>
           </div>
-          <div aria-live="assertive" style="display:none" data-node-type="commerce-cart-error" class="w-commerce-commercecarterrorstate cart-error-state">
-            <div class="text-error w-cart-error-msg" data-w-cart-quantity-error="Product is not available in this quantity." data-w-cart-general-error="Something went wrong when adding this item to the cart." data-w-cart-checkout-error="Checkout is disabled on this site." data-w-cart-cart_order_min-error="The order minimum was not met. Add more items to your cart to continue." data-w-cart-subscription_error-error="Before you purchase, please use your email invite to verify your address so we can send order updates.">Product is not available in this quantity.</div>
+          <div aria-live="assertive" style="display:none" data-node-type="commerce-cart-error" class="base-commerce-commercecarterrorstate cart-error-state">
+            <div class="text-error base-cart-error-msg" data-base-cart-quantity-error="Product is not available in this quantity." data-base-cart-general-error="Something went wrong when adding this item to the cart." data-base-cart-checkout-error="Checkout is disabled on this site." data-base-cart-cart_order_min-error="The order minimum was not met. Add more items to your cart to continue." data-base-cart-subscription_error-error="Before you purchase, please use your email invite to verify your address so we can send order updates.">Product is not available in this quantity.</div>
           </div>
         </div>
       </div>
