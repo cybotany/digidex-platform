@@ -33,13 +33,22 @@
       {% with post.main_image as main_image %}
         {% if main_image %}{% image main_image %}{% endif %}
       {% endwith %}
-      
       <div class="post-body">
         <div class="rich-text-block w-dyn-bind-empty w-richtext">
           {{ page.body|richtext }}
         </div>
       </div>
     </div>
+    <p><a href="{{ page.get_parent.url }}">Return to blog</a></p>
+    {% with tags=page.tags.all %}
+      {% if tags %}
+        <div class="tags">
+          <h3>Tags</h3>
+          {% for tag in tags %}
+            <a href="{% slugurl 'tags' %}?tag={{ tag }}"><button type="button">{{ tag }}</button></a>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
   </section>
-  <p><a href="{{ page.get_parent.url }}">Return to blog</a></p>
 {% endblock %}

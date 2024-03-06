@@ -1,11 +1,12 @@
 from django import forms
 from django.db import models
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
+from modelcluster.contrib.taggit import ClusterTaggableManager
 from wagtail.models import Page, Orderable
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.search import index
-from wagtail.snippets.models import register_snippet
+from taggit.models import TaggedItemBase
 
 class BlogIndexPage(Page):
     intro = RichTextField(
@@ -32,6 +33,23 @@ class BlogIndexPage(Page):
         return context
 
 
+class BlogPageTag(TaggedItemBase):
+    content_object = ParentalKey(
+        'blog.BlogPage',
+        related_name='tagged_items',
+        on_delete=models.CASCADE
+    )
+
+
+class BlogTagIndexPage(Page):
+    def get_context(self, request):
+        tag = request.GET.get('tag')
+        blogpages = BlogPage.objects.filter(tags__name=tag)
+
+        context = super().get_context(request)
+        context['blogpages'] = blogpages
+        return context
+
 
 class BlogPage(Page):
     date = models.DateField(
@@ -45,6 +63,10 @@ class BlogPage(Page):
     )
     authors = ParentalManyToManyField(
         'blog.Author',
+        blank=True
+    )
+    tags = ClusterTaggableManager(
+        through=BlogPageTag,
         blank=True
     )
 
@@ -67,6 +89,7 @@ class BlogPage(Page):
         MultiFieldPanel([
             FieldPanel('date'),
             FieldPanel('authors', widget=forms.CheckboxSelectMultiple),
+            FieldPanel('tags'),
         ], heading="Blog information"),
         FieldPanel('date'),
         FieldPanel('intro'),
