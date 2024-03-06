@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <base target="_parent">
+    <title>Checkout - Digidex</title>
+    <meta content="A platform for gardeners to cultivate their curiosity." name="description">
+    <meta content="Checkout - Digidex" property="og:title">
+    <meta content="A platform for gardeners to cultivate their curiosity." property="og:description">
+    <meta content="Checkout - Digidex" property="twitter:title">
+    <meta content="A platform for gardeners to cultivate their curiosity." property="twitter:description">
+    <meta property="og:type" content="website">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+
+    <link href="{% static 'base/css/normalize.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'base/css/base-styles.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'digidex/css/digidex-styles.css' %}" rel="stylesheet" type="text/css">
+
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.4/lottie.min.js" type="text/javascript"></script>
+
+    <!-- Load Fonts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      WebFont.load({
+        google: {
+          families: ["Space Grotesk:regular,500,600,700", "IBM Plex Mono:regular,italic,500,500italic,600,600italic,700,700italic"]
+        }
+      });
+    </script>
+
+    {% load i18n %}
+    <script src="{% static 'digidex/js/jquery/jquery.js' %}"></script>
+    
+    <link href="{% static 'digidex/images/favicon.png' %}" rel="shortcut icon" type="image/x-icon">
+    <link href="{% static 'digidex/images/webclip.png' %}" rel="apple-touch-icon">
+  </head>
+  <body>
+    {% include 'navigation-bar.html' %}
+    {% include 'page-header.html' %}
+    <section class="section-top">
+      <div class="content">
+        <div class="block-top">
+          <h1 class="heading-top">Checkout</h1>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="content">
+        <div data-node-type="commerce-paypal-checkout-form-container" data-wf-checkout-query="" data-wf-page-link-href-prefix="" class="w-commerce-commercepaypalcheckoutformcontainer ecommerce-form">
+          <div class="w-layout-grid ecommerce-grid">
+            <div class="w-commerce-commercelayoutmain ecommerce-contents">
+              <form data-node-type="commerce-checkout-shipping-methods-wrapper" class="w-commerce-commercecheckoutshippingmethodswrapper ecommerce-block">
+                <div class="w-commerce-commercecheckoutblockheader block-header">
+                  <h4>Shipping Method</h4>
+                </div>
+                <fieldset class="block-content">
+                  <script type="text/x-wf-template" id="wf-template-651634ddf99c2aac117ddfaf000000000012">%3Clabel%20class%3D%22w-commerce-commercecheckoutshippingmethoditem%20shipping-method%22%3E%3Cinput%20required%3D%22%22%20type%3D%22radio%22%20name%3D%22shipping-method-choice%22%2F%3E%3Cdiv%20class%3D%22w-commerce-commercecheckoutshippingmethoddescriptionblock%22%3E%3Cdiv%20class%3D%22w-commerce-commerceboldtextblock%20cart-item-name%22%3E%3C%2Fdiv%3E%3Cdiv%3E%3C%2Fdiv%3E%3C%2Fdiv%3E%3Cdiv%20class%3D%22cart-item-price%22%3E%3C%2Fdiv%3E%3C%2Flabel%3E</script>
+                  <div data-node-type="commerce-checkout-shipping-methods-list" class="w-commerce-commercecheckoutshippingmethodslist shipping-method-list" data-wf-collection="database.commerceOrder.availableShippingMethods" data-wf-template-id="wf-template-651634ddf99c2aac117ddfaf000000000012">
+                    <label class="w-commerce-commercecheckoutshippingmethoditem shipping-method">
+                    <input required="" type="radio" name="shipping-method-choice">
+                      <div class="w-commerce-commercecheckoutshippingmethoddescriptionblock">
+                        <div class="w-commerce-commerceboldtextblock cart-item-name"></div>
+                        <div></div>
+                      </div>
+                      <div class="cart-item-price"></div>
+                    </label>
+                  </div>
+                  <div data-node-type="commerce-checkout-shipping-methods-empty-state" style="display:none" class="w-commerce-commercecheckoutshippingmethodsemptystate empty-state">
+                    <div class="text-empty">No shipping methods are available for the address given.</div>
+                  </div>
+                </fieldset>
+              </form>
+              <div class="w-commerce-commercecheckoutcustomerinfosummarywrapper ecommerce-block">
+                <div class="w-commerce-commercecheckoutsummaryblockheader block-header">
+                  <h4>Customer Information</h4>
+                </div>
+                <fieldset class="w-commerce-commercecheckoutblockcontent block-content">
+                  <div class="w-commerce-commercecheckoutrow">
+                    <div class="w-commerce-commercecheckoutcolumn">
+                      <div class="w-commerce-commercecheckoutsummaryitem">
+                        <label class="w-commerce-commercecheckoutsummarylabel field-label">Email</label>
+                        <div></div>
+                      </div>
+                    </div>
+                    <div class="w-commerce-commercecheckoutcolumn">
+                      <div class="w-commerce-commercecheckoutsummaryitem">
+                        <label class="w-commerce-commercecheckoutsummarylabel field-label">Shipping Address</label>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div class="w-commerce-commercecheckoutsummaryflexboxdiv">
+                          <div class="w-commerce-commercecheckoutsummarytextspacingondiv"></div>
+                          <div class="w-commerce-commercecheckoutsummarytextspacingondiv"></div>
+                          <div class="w-commerce-commercecheckoutsummarytextspacingondiv"></div>
+                        </div>
+                        <div></div>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+              <div class="w-commerce-commercecheckoutpaymentsummarywrapper ecommerce-block">
+                <div class="w-commerce-commercecheckoutsummaryblockheader block-header">
+                  <h4>Payment Info</h4>
+                </div>
+                <fieldset class="w-commerce-commercecheckoutblockcontent block-content">
+                  <div class="w-commerce-commercecheckoutrow">
+                    <div class="w-commerce-commercecheckoutcolumn">
+                      <div class="w-commerce-commercecheckoutsummaryitem">
+                        <label class="w-commerce-commercecheckoutsummarylabel field-label">Payment Info</label>
+                        <div class="w-commerce-commercecheckoutsummaryflexboxdiv">
+                          <div class="w-commerce-commercecheckoutsummarytextspacingondiv"></div>
+                          <div class="w-commerce-commercecheckoutsummarytextspacingondiv"></div>
+                        </div>
+                        <div class="w-commerce-commercecheckoutsummaryflexboxdiv">
+                          <div></div>
+                          <div> / </div>
+                          <div></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="w-commerce-commercecheckoutcolumn">
+                      <div class="w-commerce-commercecheckoutsummaryitem">
+                        <label class="w-commerce-commercecheckoutsummarylabel field-label">Billing Address</label>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div class="w-commerce-commercecheckoutsummaryflexboxdiv">
+                          <div class="w-commerce-commercecheckoutsummarytextspacingondiv"></div>
+                          <div class="w-commerce-commercecheckoutsummarytextspacingondiv"></div>
+                          <div class="w-commerce-commercecheckoutsummarytextspacingondiv"></div>
+                        </div>
+                        <div></div>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+              <div class="w-commerce-commercecheckoutorderitemswrapper ecommerce-block">
+                <div class="w-commerce-commercecheckoutsummaryblockheader block-header">
+                  <h4>Items in Order</h4>
+                </div>
+                <fieldset class="w-commerce-commercecheckoutblockcontent block-content">
+                  <script type="text/x-wf-template" id="wf-template-651634ddf99c2aac117ddfaf000000000056"></script>
+                  <div role="list" class="w-commerce-commercecheckoutorderitemslist" data-wf-collection="database.commerceOrder.userItems" data-wf-template-id="wf-template-651634ddf99c2aac117ddfaf000000000056"></div>
+                </fieldset>
+              </div>
+            </div>
+            <div class="w-commerce-commercelayoutsidebar ecommerce-sidebar">
+              <div class="w-commerce-commercecheckoutordersummarywrapper order-summary">
+                <div class="w-commerce-commercecheckoutsummaryblockheader block-header">
+                  <h4>Order Summary</h4>
+                </div>
+                <fieldset class="w-commerce-commercecheckoutblockcontent block-content">
+                  <div class="w-commerce-commercecheckoutsummarylineitem">
+                    <div>Subtotal</div>
+                    <div class="cart-item-price"></div>
+                  </div>
+                  <script type="text/x-wf-template" id="wf-template-651634ddf99c2aac117ddfaf000000000070">%3Cdiv%20class%3D%22w-commerce-commercecheckoutordersummaryextraitemslistitem%22%3E%3Cdiv%3E%3C%2Fdiv%3E%3Cdiv%20class%3D%22cart-item-price%22%3E%3C%2Fdiv%3E%3C%2Fdiv%3E</script>
+                  <div class="w-commerce-commercecheckoutordersummaryextraitemslist" data-wf-collection="database.commerceOrder.extraItems" data-wf-template-id="wf-template-651634ddf99c2aac117ddfaf000000000070">
+                    <div class="w-commerce-commercecheckoutordersummaryextraitemslistitem">
+                      <div></div>
+                      <div class="cart-item-price"></div>
+                    </div>
+                  </div>
+                  <div class="w-commerce-commercecheckoutsummarylineitem">
+                    <div>Total</div>
+                    <div class="w-commerce-commercecheckoutsummarytotal text-subtotal"></div>
+                  </div>
+                </fieldset>
+              </div>
+              <form data-node-type="commerce-checkout-discount-form" class="w-commerce-commercecheckoutdiscounts discounts">
+                <label for="wf-ecom-discounts" class="w-commerce-commercecheckoutdiscountslabel field-label">Discount Code</label>
+                <input data-node-type="commerce-checkout-discount-input" class="w-commerce-commercecheckoutdiscountsinput text-field-ecommerce base-input" maxlength="256" name="" data-name="field" placeholder="" type="text" id="wf-ecom-discounts">
+                <button aria-label="Apply Discount" class="w-commerce-commercecheckoutdiscountsbutton apply-button">Apply</button>
+              </form>
+              <a href="#" value="Place Order" data-node-type="commerce-checkout-place-order-button" class="w-commerce-commercecheckoutplaceorderbutton checkout-button" data-loading-text="Placing Order...">Place Order</a>
+              <div data-node-type="commerce-checkout-error-state" style="display:none" class="w-commerce-commercepaypalcheckouterrorstate error-message">
+                <div aria-live="polite" class="text-error base-checkout-error-msg" data-w-info-error="There was an error processing your customer info. Please try again, or contact us if you continue to have problems." data-w-shipping-error="Sorry. We can’t ship your order to the address provided." data-w-billing-error="Your payment could not be completed with the payment information provided. Please make sure that your card and billing address information is correct, or try a different payment card, to complete this order. Contact us if you continue to have problems." data-w-minimum-error="The order minimum was not met. Add more items to your cart to continue." data-w-payment-error="There was an error processing your payment. Please try again, or contact us if you continue to have problems." data-w-pricing-error="The prices of one or more items in your cart have changed. Please refresh this page and try again." data-w-extras-error="A merchant setting has changed that impacts your cart. Please refresh and try again." data-w-product-error="One or more of the products in your cart have been removed. Please refresh the page and try again." data-w-invalid-discount-error="This discount is invalid." data-w-expired-discount-error="This discount is no longer available." data-w-usage-reached-discount-error="This discount is no longer available." data-w-requirements-not-met-error="Discount requirements not met">There was an error processing your customer info. Please try again, or contact us if you continue to have problems.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% include 'page-footer.html' %}
+  </body>
+</html>

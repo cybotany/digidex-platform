@@ -1,0 +1,196 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Solutions - Digidex</title>
+    <meta content="A platform for gardeners to cultivate their curiosity." name="description">
+    <meta content="Solutions - Digidex" property="og:title">
+    <meta content="A platform for gardeners to cultivate their curiosity." property="og:description">
+    <meta content="Solutions - Digidex" property="twitter:title">
+    <meta content="A platform for gardeners to cultivate their curiosity." property="twitter:description">
+    <meta property="og:type" content="website">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+
+    <link href="{% static 'base/css/normalize.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'base/css/base-styles.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'digidex/css/digidex-styles.css' %}" rel="stylesheet" type="text/css">
+
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.4/lottie.min.js" type="text/javascript"></script>
+
+    <!-- Load Fonts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      WebFont.load({
+        google: {
+          families: ["Space Grotesk:regular,500,600,700", "IBM Plex Mono:regular,italic,500,500italic,600,600italic,700,700italic"]
+        }
+      });
+    </script>
+    
+    <link href="{% static 'digidex/images/favicon.png' %}" rel="shortcut icon" type="image/x-icon">
+    <link href="{% static 'digidex/images/webclip.png' %}" rel="apple-touch-icon">
+  </head>
+  <body>
+    {% include 'navigation-bar.html' %}
+    <div class="collection-list-wrapper-messages base-dyn-list">
+      {% if messages %}
+      <div role="list" class="base-dyn-items">
+        {% for message in messages %}
+          <div role="listitem" class="base-dyn-item">
+            <div class="{% if message.tags %}{{ message.tags }}-message{% endif %}">
+              <span class="text-{% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</span>
+            </div>
+          </div>
+        {% endfor %}
+      </div>  
+       {% endif %}  
+    </div>
+    {% include 'page-header.html' %}
+    <section class="section-top">
+      <div class="content">
+        <div class="block-top">
+          <h1 class="heading-top">Performance, security, and more</h1>
+          <p class="paragraph-top">Imperdiet in varius suspendisse ac fermentum pellentesque placerat scelerisque rutrum.</p>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="content">
+        <div class="layout-grid grid-solutions-large">
+          <div class="solutions-large">
+            <div class="block-icon-solution"><img src="{% static 'main/images/meter.svg' %}" loading="eager" alt="" class="icon-solution"></div>
+            <h4 class="heading-solution-large">Performance</h4>
+            <p class="paragraph-solution-large">Nunc suspendisse sed purus tincidunt faucibus malesuada aliquet. Amet aliquam adipiscing neque sit eu velit quis mi. Aliquet est in tellus tristique nisi.</p>
+            <div class="block-list">
+              <div class="list">
+                <div class="block-icon-list"><img src="{% static 'main/images/bx-check.svg' %}" loading="eager" alt="" class="icon-list"></div>
+                <h6 class="heading-list blue">Tristique odio dapibus id at pretium nibh</h6>
+              </div>
+              <div class="list">
+                <div class="block-icon-list"><img src="{% static 'main/images/bx-check.svg' %}" loading="eager" alt="" class="icon-list"></div>
+                <h6 class="heading-list blue">Viverra nulla porttitor suspendisse</h6>
+              </div>
+              <div class="list">
+                <div class="block-icon-list"><img src="{% static 'main/images/bx-check.svg' %}" loading="eager" alt="" class="icon-list"></div>
+                <h6 class="heading-list blue">Nec sit ullamcorper urna</h6>
+              </div>
+            </div>
+          </div>
+          <div class="solutions-large green">
+            <div class="block-icon-solution green"><img src="{% static 'main/images/ibm-cloud-key-protect.svg' %}" loading="eager" alt="" class="icon-solution"></div>
+            <h4 class="heading-solution-large green">Security</h4>
+            <p class="paragraph-solution-large green">Fermentum turpis eu leo amet libero vel. Est curabitur dui bibendum consectetur lectus pellentesque quis viverra. Elit quam massa aliquam vitae arcu bibendum purus.</p>
+            <div class="block-list">
+              <div class="list">
+                <div class="block-icon-list green"><img src="{% static 'main/images/bx-check.svg' %}" loading="eager" alt="" class="icon-list"></div>
+                <h6 class="heading-list green">Urna sit proin lobortis pretium posuere</h6>
+              </div>
+              <div class="list">
+                <div class="block-icon-list green"><img src="{% static 'main/images/bx-check.svg' %}" loading="eager" alt="" class="icon-list"></div>
+                <h6 class="heading-list green">Vel ornare mauris ut arcu</h6>
+              </div>
+              <div class="list">
+                <div class="block-icon-list green"><img src="{% static 'main/images/bx-check.svg' %}" loading="eager" alt="" class="icon-list"></div>
+                <h6 class="heading-list green">Dolor arcu in amet</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+    <section class="section">
+      <div class="content">
+        <div class="layout-grid grid">
+          <div class="block-left">
+            <div class="subtitle">Business<br></div>
+            <h2 class="heading">Tailored hosting solutions for every business need</h2>
+            <p class="paragraph">Fermentum risus donec dictum id. In orci maecenas turpis ac leo laoreet in suspendisse feugiat. Posuere convallis congue mauris purus lectus bibendum amet ultrices.</p>
+            <div class="block-list">
+              <div class="list">
+                <div class="block-icon-list"><img src="{% static 'main/images/bx-check.svg' %}" loading="eager" alt="" class="icon-list"></div>
+                <h6 class="heading-list">Tristique odio dapibus id at pretium nibh</h6>
+              </div>
+              <div class="list">
+                <div class="block-icon-list"><img src="{% static 'main/images/bx-check.svg' %}" loading="eager" alt="" class="icon-list"></div>
+                <h6 class="heading-list">Viverra nulla porttitor suspendisse</h6>
+              </div>
+            </div>
+          </div>
+          <div class="lottie">
+            <div class="lines-b1">
+              <div class="line-w"></div>
+              <div class="line-w"></div>
+              <div class="line-w"></div>
+              <div class="line-w"></div>
+              <div class="line-w"></div>
+              <div class="line-w"></div>
+            </div>
+            <div class="lines-b2">
+              <div class="line-h"></div>
+              <div class="line-h"></div>
+              <div class="line-h"></div>
+              <div class="line-h"></div>
+              <div class="line-h"></div>
+              <div class="line-h"></div>
+            </div>
+            <div class="block-lottie">
+              <div class="lottie-animation-1" data-animation-type="lottie" data-src="{% static 'digidex/documents/Lottie-B1-White.json' %}" data-loop="0" data-direction="1" data-autoplay="0" data-is-ix2-target="1"  data-renderer="svg" data-default-duration="2.5" data-duration="0"></div>
+              <div class="lottie-animation-2" data-animation-type="lottie" data-src="{% static 'digidex/documents/Lottie-B2-Green.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="16" data-duration="0"></div>
+              <div class="lottie-animation-2-blur" data-animation-type="lottie" data-src="{% static 'digidex/documents/Lottie-B2-Green.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="16" data-duration="0"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% include 'main/partials/feature-section.html' %}
+    <section class="section">
+      <div class="content">
+        <div class="layout-grid grid">
+          <div class="lottie">
+            <div class="lines-b1">
+              <div class="line-w"></div>
+              <div class="line-w"></div>
+              <div class="line-w"></div>
+              <div class="line-w"></div>
+              <div class="line-w"></div>
+              <div class="line-w"></div>
+            </div>
+            <div class="lines-b2">
+              <div class="line-h"></div>
+              <div class="line-h"></div>
+              <div class="line-h"></div>
+              <div class="line-h"></div>
+              <div class="line-h"></div>
+              <div class="line-h"></div>
+            </div>
+            <div class="block-lottie">
+              <div class="lottie-animation-1" data-animation-type="lottie" data-src="{% static 'digidex/documents/Lottie-B1-White.json' %}" data-loop="0" data-direction="1" data-autoplay="0" data-is-ix2-target="1"  data-renderer="svg" data-default-duration="2.5" data-duration="0"></div>
+              <div class="lottie-animation-2" data-animation-type="lottie" data-src="{% static 'digidex/documents/Lottie-B2-Green.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="16" data-duration="0"></div>
+              <div class="lottie-animation-2-blur" data-animation-type="lottie" data-src="{% static 'digidex/documents/Lottie-B2-Green.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="16" data-duration="0"></div>
+            </div>
+          </div>
+          <div class="block-right">
+            <div class="subtitle">Cloud hosting<br></div>
+            <h2 class="heading">Unleash the power of scalability</h2>
+            <p class="paragraph">Aliquam sit ac turpis fringilla commodo consectetur. Feugiat turpis diam fringilla faucibus pellentesque.</p>
+            <div class="layout-grid grid-numbers">
+              <div class="numbers"><img src="{% static 'main/images/block-storage.svg' %}" loading="eager" alt="" class="icon-numbers">
+                <h4 class="heading-numbers">Scalability</h4>
+                <div class="text-numbers">Easily scale your resources</div>
+              </div>
+              <div class="numbers green"><img src="{% static 'main/images/chart-evaluation.svg' %}" loading="eager" alt="" class="icon-numbers">
+                <h4 class="heading-numbers green">Cost Efficiency</h4>
+                <div class="text-numbers green">Pay only for the resources you use</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% include 'call-to-action.html' %} 
+    {% include 'page-footer.html' %}
+  </body>
+</html>
