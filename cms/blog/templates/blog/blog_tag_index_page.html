@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load wagtailcore_tags %}
 
+
+{% block extra_css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/blog.css' %}">
+{% endblock %}
 {% block content %}
   <section class="section-top">
     <div style="opacity:0" class="content">
