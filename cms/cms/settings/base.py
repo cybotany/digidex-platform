@@ -14,6 +14,7 @@ INSTALLED_APPS = [
     "ecommerce",
     "home",
     "search",
+    "rest_framework",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.embeds",
