@@ -1,9 +1,9 @@
-from rest_framework import serializers
+from rest_framework import serializers as rf_serializers
 from wagtail.images.api.fields import ImageRenditionField
 
 from blog import models
 
-class BlogPageGalleryImageSerializer(serializers.ModelSerializer):
+class BlogPageGalleryImageSerializer(rf_serializers.ModelSerializer):
     image = ImageRenditionField('fill-100x100')
 
     class Meta:
@@ -11,7 +11,7 @@ class BlogPageGalleryImageSerializer(serializers.ModelSerializer):
         fields = ['id', 'image', 'caption']
 
 
-class AuthorSerializer(serializers.ModelSerializer):
+class AuthorSerializer(rf_serializers.ModelSerializer):
     author_image = ImageRenditionField('fill-100x100', allow_null=True)
 
     class Meta:
@@ -19,15 +19,15 @@ class AuthorSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'author_image']
 
 
-class BlogPageSerializer(serializers.ModelSerializer):
+class BlogPageSerializer(rf_serializers.ModelSerializer):
     gallery_images = BlogPageGalleryImageSerializer(many=True, read_only=True)
     main_image = ImageRenditionField('fill-100x100', source='main_image')
-    authors = serializers.SlugRelatedField(
+    authors = rf_serializers.SlugRelatedField(
         many=True, 
         read_only=True, 
         slug_field='name'
     )
-    tags = serializers.SlugRelatedField(
+    tags = rf_serializers.SlugRelatedField(
         many=True, 
         read_only=True, 
         slug_field='name'

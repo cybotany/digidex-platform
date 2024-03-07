@@ -120,7 +120,7 @@ class BlogPageGalleryImage(Orderable):
 
 
 @register_snippet
-class BlogAuthor(models.Model):
+class Author(models.Model):
     name = models.CharField(
         max_length=255
     )
