@@ -117,7 +117,6 @@ class DigidexUser(AbstractUser):
             raise
 
 
-
 class DigidexProfile(models.Model):
     """
     User profile model for storing additional user information.
