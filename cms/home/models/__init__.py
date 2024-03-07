@@ -1,1 +1,1 @@
-from .home_page import HomePage, LandingPage
+from .home_page import HomePage
