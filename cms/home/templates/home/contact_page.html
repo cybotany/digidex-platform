@@ -1,16 +1,26 @@
-<!-- Load reCAPTCHA js code -->
-<script src="https://www.google.com/recaptcha/enterprise.js?render={{ RECAPTCHA_SITE_KEY }}"></script>
+{% extends "base.html" %}
+{% load static %}
 
-<section class="section full">
+{% block extra_js %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.4/lottie.min.js" type="text/javascript"></script>
+  <script src="{% static 'digidex/js/toggle-faqs.js' %}" type="text/javascript"></script>
+  <script src="{% static 'digidex/js/toggle-lottie.js' %}" type="text/javascript"></script>
+  <script src="{% static 'js/reCAPTCHA.js' %}"></script> 
+  <script src="https://www.google.com/recaptcha/enterprise.js?render={{ RECAPTCHA_SITE_KEY }}"></script>
+{% endblock extra_js %}
+
+{% block content %}
+
+<section class="section">
   <div class="content">
     <div class="account-form">
       <div class="subtitle">Contact<br></div>
       <h2 class="heading-contact">Wanna Talk More?</h2>
       <div class="form-block base-form">
-        {% include 'home/forms/contact_form.html' %}
+        {% include 'home/partials/contact_page_sections/contact_form.html' %}
       </div>
     </div>
   </div>
 </section>
-
-<script src="{% static 'js/reCAPTCHA.js' %}"></script> 
+{% include 'home/partials/page_footer.html' %}
+{% endblock content %}

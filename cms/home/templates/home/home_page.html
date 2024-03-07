@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block extra_css %}
-  <link rel="stylesheet" href="{% static 'css/welcome_page.css' %}">
-{% endblock extra_css %}
-
-{% block content %}{% endblock content %}
+{% block content %}
+  {% include 'home/partials/thank_you_message.html' %}
+  {% include 'home/partials/page_footer.html' %}
+{% endblock content %}
