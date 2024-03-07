@@ -1,1 +1,2 @@
-from .blog import BlogIndexPage, BlogPage, BlogPageGalleryImage, Author
+from .base import BlogIndexPage, BlogPage, BlogPageGalleryImage
+from .author import Author

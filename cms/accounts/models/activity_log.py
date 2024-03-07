@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class ActivityLog(models.Model):
     """
     Represents an activity performed by a user, such as creating, updating, or deleting an item (e.g., a plant).
