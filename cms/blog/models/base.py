@@ -118,6 +118,7 @@ class BlogPageGalleryImage(Orderable):
         FieldPanel('caption'),
     ]
 
+
 @register_snippet
 class BlogAuthor(models.Model):
     name = models.CharField(
