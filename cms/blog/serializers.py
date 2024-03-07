@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from wagtail.images.api.fields import ImageRenditionField
-from . import models
+
+from blog import models
 
 class BlogPageGalleryImageSerializer(serializers.ModelSerializer):
     image = ImageRenditionField('fill-100x100')
@@ -8,7 +9,6 @@ class BlogPageGalleryImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.BlogPageGalleryImage
         fields = ['id', 'image', 'caption']
-
 
 
 class AuthorSerializer(serializers.ModelSerializer):

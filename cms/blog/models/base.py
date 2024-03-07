@@ -6,6 +6,7 @@ from wagtail.models import Page, Orderable
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.search import index
+from wagtail.snippets.models import register_snippet
 from taggit.models import TaggedItemBase
 
 class BlogIndexPage(Page):
@@ -118,3 +119,27 @@ class BlogPageGalleryImage(Orderable):
         FieldPanel('image'),
         FieldPanel('caption'),
     ]
+
+@register_snippet
+class Author(models.Model):
+    name = models.CharField(
+        max_length=255
+    )
+    author_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    panels = [
+        FieldPanel('name'),
+        FieldPanel('author_image'),
+    ]
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = 'Authors'
