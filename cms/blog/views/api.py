@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from . import models, serializers
+from blog import models, serializers
 
 class BlogPageViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.BlogPage.objects.all()
