@@ -52,7 +52,7 @@
               <img src="{% static 'digidex/images/placeholder.svg' %}" alt="No Image Available" class="avatar-image">
             {% endif %}
             {% if is_owner %}
-              <div class="profile-text"><a href="{% url 'inventory:update-profile' user_slug=profile.user.slug %}" class="profile-link">Edit Profile</a></div>
+              <div class="profile-text"><a href="{% pageurl 'inventory:update-profile' user_slug=profile.user.slug %}" class="profile-link">Edit Profile</a></div>
             {% endif %}
           </div>
           <div class="profile-bio">
