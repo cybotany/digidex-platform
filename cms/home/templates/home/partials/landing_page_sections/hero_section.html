@@ -6,7 +6,7 @@
         <p class="paragraph-hero">Create a digitized representation of your pet, record longitudinal data with a private digital journal, and save a public page with contact information for lost pets accessible to anyone.</p>
         {% if not request.user.is_authenticated %}
           <div class="button-hero">
-            <a href="{% url 'authentication:signup-user' %}" class="button base-button">Signup</a>
+            <a href="{% url 'signup-user' %}" class="button base-button">Signup</a>
           </div>
         {% endif %}
       </div>
