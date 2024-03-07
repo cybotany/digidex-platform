@@ -1,5 +1,9 @@
+from logging import getLogger
+logger = getLogger(__name__)
+
 import uuid
 from django.db import models, transaction
+from django.core.mail import send_mail, BadHeaderError
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.urls import reverse
@@ -8,9 +12,8 @@ from django.utils.http import urlsafe_base64_encode
 from django.utils.text import slugify
 from django.conf import settings
 
-from cms.cms.utils.storage import digital_ocean
-from cms.cms.utils.validators import username_validator
-from cms.accounts.models import activity
+from cms.utils.storage import digital_ocean
+from cms.utils.validators import username_validator
 
 def profile_avatar_directory_path(instance, filename):
     return f'profile_{instance.id}/avatar.jpeg'
@@ -100,15 +103,19 @@ class DigidexUser(AbstractUser):
         base_url = reverse('accounts:verify-user', kwargs={'uidb64': uid, 'token': token})
         full_url = f'{settings.SITE_HOST}{base_url}'
 
-        # Use EmailLog to create and send the email
-        activity.EmailActivity.create_and_send_email(
-            to_email=self.email,
-            from_email='no-reply@digidex.app',
-            subject='Verify your email',
-            body=f'Please click the following link to verify your email and complete the signup process:\n{full_url}',
-            reason='email_verification',
-            user=self
-        )
+        try:
+            send_mail(
+                subject='Verify your email',
+                message=f'Please click the following link to verify your email and complete the signup process:\n{full_url}',
+                from_email='no-reply@digidex.app',
+                recipient_list=[self.email],
+                fail_silently=False,
+            )
+        except (BadHeaderError, Exception) as e:
+            logger.warning(f"Email failed: {e}")
+            # Reraise the exception if you want calling code to handle it
+            raise
+
 
 
 class DigidexProfile(models.Model):
@@ -125,7 +132,7 @@ class DigidexProfile(models.Model):
         last_modified (DateTimeField): The date and time when the profile was last modified.
     """
     user = models.OneToOneField(
-        'accounts.User',
+        DigidexUser,
         on_delete=models.CASCADE,
         help_text='The user associated with this profile.'
     )
@@ -177,7 +184,7 @@ class DigidexProfile(models.Model):
         Returns:
             str: The URL to view the details of this profile.
         """
-        return reverse('accounts:profile', kwargs={'username_slug': self.user.username_slug})
+        return reverse('profile', kwargs={'username_slug': self.user.username_slug})
 
     class Meta:
         verbose_name = "Profile"
