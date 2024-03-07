@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from . import models, serializers
+from accounts import models, serializers
 
 class DigidexUserViewSet(viewsets.ModelViewSet):
     queryset = models.DigidexUser.objects.all()

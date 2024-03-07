@@ -61,7 +61,7 @@ class BlogPage(Page):
         blank=True
     )
     authors = ParentalManyToManyField(
-        'blog.Author',
+        'Author',
         blank=True
     )
     tags = ClusterTaggableManager(

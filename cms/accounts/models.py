@@ -12,8 +12,8 @@ from django.utils.http import urlsafe_base64_encode
 from django.utils.text import slugify
 from django.conf import settings
 
-from cms.cms.utils.cms_storage import storage
-from cms.cms.utils.validators import validators
+from cms.utils import cms_storage
+from cms.utils import validators
 
 def profile_avatar_directory_path(instance, filename):
     return f'profile_{instance.id}/avatar.jpeg'
@@ -100,7 +100,7 @@ class DigidexUser(AbstractUser):
     def send_verification_email(self):
         token = PasswordResetTokenGenerator().make_token(self)
         uid = urlsafe_base64_encode(force_bytes(self.pk))
-        base_url = reverse('accounts:verify-user', kwargs={'uidb64': uid, 'token': token})
+        base_url = reverse('verify-user', kwargs={'uidb64': uid, 'token': token})
         full_url = f'{settings.SITE_HOST}{base_url}'
 
         try:
@@ -147,7 +147,7 @@ class DigidexProfile(models.Model):
     )
     avatar = models.ImageField(
         upload_to=profile_avatar_directory_path,
-        storage=storage.PublicMediaStorage(), # PublicMediaStorage()?
+        storage=cms_storage.PublicMediaStorage, # PublicMediaStorage()?
         null=True,
         blank=True,
         help_text='The avatar image of the profile.'
