@@ -10,17 +10,16 @@
 {% endblock extra_js %}
 
 {% block content %}
-
-<section class="section">
-  <div class="content">
-    <div class="account-form">
-      <div class="subtitle">Contact<br></div>
-      <h2 class="heading-contact">Wanna Talk More?</h2>
-      <div class="form-block base-form">
-        {% include 'home/partials/contact_page_sections/contact_form.html' %}
+  <section class="section">
+    <div class="content">
+      <div class="account-form">
+        <div class="subtitle">Contact<br></div>
+        <h2 class="heading-contact">Wanna Talk More?</h2>
+        <div class="form-block base-form">
+          {% include 'home/partials/contact_page_sections/contact_form.html' %}
+        </div>
       </div>
     </div>
-  </div>
-</section>
-{% include 'home/partials/page_footer.html' %}
+  </section>
+  {% include 'home/partials/page_footer.html' %}
 {% endblock content %}
