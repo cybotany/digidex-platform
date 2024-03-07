@@ -1,2 +1,2 @@
-from .activity import ActivityLog, EmailActivity
-from .user import DigidexUser, DigidexProfile
+#from .activity import ActivityLog, EmailActivity
+#from .user import DigidexUser, DigidexProfile
