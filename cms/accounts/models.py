@@ -12,8 +12,8 @@ from django.utils.http import urlsafe_base64_encode
 from django.utils.text import slugify
 from django.conf import settings
 
-from cms.utils.storage import digital_ocean
-from cms.utils.validators import username_validator
+from cms.cms.utils.cms_storage import storage
+from cms.cms.utils.validators import validators
 
 def profile_avatar_directory_path(instance, filename):
     return f'profile_{instance.id}/avatar.jpeg'
@@ -44,7 +44,7 @@ class DigidexUser(AbstractUser):
     username = models.CharField(
         max_length=32,
         unique=True,
-        validators=[username_validator.validate_username],
+        validators=[validators.validate_username],
         help_text="Required. 32 characters or fewer. Letters, digits and dashes only.",
     )
     uuid = models.UUIDField(
@@ -147,7 +147,7 @@ class DigidexProfile(models.Model):
     )
     avatar = models.ImageField(
         upload_to=profile_avatar_directory_path,
-        storage=digital_ocean.PublicMediaStorage(), # PublicMediaStorage()?
+        storage=storage.PublicMediaStorage(), # PublicMediaStorage()?
         null=True,
         blank=True,
         help_text='The avatar image of the profile.'
