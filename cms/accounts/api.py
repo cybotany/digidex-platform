@@ -1,7 +1,7 @@
-from rest_framework import serializers
-from cms.accounts.models import user
+from rest_framework import viewsets
+from cms.accounts.models import DigidexUser
+from cms.accounts.serializers import DigidexUserSerializer
 
-class DigidexUserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = user.DigidexUser
-        fields = ['id', 'username', 'email']
+class DigidexUserViewSet(viewsets.ModelViewSet):
+    queryset = DigidexUser.objects.all()
+    serializer_class = DigidexUserSerializer
