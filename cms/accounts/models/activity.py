@@ -1,3 +1,6 @@
+from logging import getLogger
+logger = getLogger(__name__)
+
 from django.db import models
 from django.core.mail import send_mail, BadHeaderError
 
@@ -107,7 +110,6 @@ class EmailActivity(models.Model):
                 fail_silently=False,
             )
         except (BadHeaderError, Exception) as e:
-            # Update the log to indicate the failure
             email_log.status = 'failed'
             email_log.save()
 
