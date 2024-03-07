@@ -5,6 +5,7 @@ from cms.accounts import views
 
 router = DefaultRouter()
 router.register(r'users', views.DigidexUserViewSet)
+router.register(r'profile', views.DigidexProfileViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),
