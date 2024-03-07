@@ -1,10 +1,10 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
-from cms.accounts.views import user_viewset
+from cms.accounts import views
 
 router = DefaultRouter()
-router.register(r'users', user_viewset.DigidexUserViewSet)
+router.register(r'users', views.DigidexUserViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),

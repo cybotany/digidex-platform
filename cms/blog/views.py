@@ -1,10 +1,9 @@
 from rest_framework import viewsets
-from .models import BlogPage
-from .serializers import BlogPageSerializer
+from . import models, serializers
 
 class BlogPageViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = BlogPage.objects.all()
-    serializer_class = BlogPageSerializer
+    queryset = models.BlogPage.objects.all()
+    serializer_class = serializers.BlogPageSerializer
 
     def get_queryset(self):
         return super().get_queryset().live().order_by('-date')
