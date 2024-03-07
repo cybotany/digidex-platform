@@ -1,5 +1,6 @@
 from django import forms
 from django.db import models
+
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from wagtail.models import Page, Orderable
@@ -20,14 +21,11 @@ class BlogIndexPage(Page):
 
     def get_context(self, request):
         context = super().get_context(request)
-        # Get all live blog pages children of this page, ordered by publish date
         blogpages = self.get_children().live().order_by('-first_published_at')
-        # Initialize the blogpages dict in context
         context['blogpages'] = {
             'latest': None,
             'older': [],
         }
-        # If there are any blog pages, assign latest and older accordingly
         if blogpages.exists():
             context['blogpages']['latest'] = blogpages.first()
             context['blogpages']['older'] = blogpages[1:]
@@ -121,7 +119,7 @@ class BlogPageGalleryImage(Orderable):
     ]
 
 @register_snippet
-class Author(models.Model):
+class BlogAuthor(models.Model):
     name = models.CharField(
         max_length=255
     )
