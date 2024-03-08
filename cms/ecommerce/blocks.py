@@ -30,7 +30,5 @@ class FeaturedPostsBlock(StructBlock):
 
 
 class PortfolioStreamBlock(BaseStreamBlock):
-    # delete the pass statement
-
     card = CardBlock(group="Sections")
     featured_posts = FeaturedPostsBlock(group="Sections")
