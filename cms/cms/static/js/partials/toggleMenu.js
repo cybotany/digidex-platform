@@ -14,11 +14,3 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
-
-// Additional CSS for the 'show-menu' class
-// You should add this to your CSS file
-/*
-.show-menu {
-    display: block !important; // or any other display property that fits your design
-}
-*/

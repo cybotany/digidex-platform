@@ -1,3 +1,6 @@
+<script src="https://www.google.com/recaptcha/enterprise.js?render={{ RECAPTCHA_SITE_KEY }}"></script>
+
+
 document.getElementById('submitBtn').addEventListener('click', function(event) {
     event.preventDefault();  // Prevent the default form submit
 
