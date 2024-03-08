@@ -31,3 +31,17 @@ class HomePageSection(Orderable):
         FieldPanel("content"),
         FieldPanel("lottie_animation"),
     ]
+
+
+class HomePage(Page):
+    body = StreamField(
+        blocks.BaseStreamBlock(),
+        null=True,
+        blank=True,
+        verbose_name="Page body",
+        use_json_field=True
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel('body'),
+    ]
