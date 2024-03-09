@@ -6,8 +6,6 @@ from wagtail.blocks import (
     StructBlock,
 )
 from wagtail.images.blocks import ImageChooserBlock
-# Project specific imports
-from cms.base.blocks.base import BaseStreamBlock
 
 class CardBlock(StructBlock):
     heading = CharBlock()
@@ -27,8 +25,3 @@ class FeaturedPostsBlock(StructBlock):
     class Meta:
         icon = "folder-open-inverse"
         template = "portfolio/blocks/featured_posts_block.html"
-
-
-class PortfolioStreamBlock(BaseStreamBlock):
-    card = CardBlock(group="Sections")
-    featured_posts = FeaturedPostsBlock(group="Sections")
