@@ -34,7 +34,7 @@ class LottieAnimationBlock(blocks.StructBlock):
     # Add other fields as necessary...
 
     class Meta:
-        template = "blocks/lottie_animation_block.html"
+        template = "base/blocks/lottie_animation_block.html"
 
 
 class SectionHeadingBlock(blocks.StructBlock):
@@ -97,7 +97,7 @@ class StepBlock(blocks.StructBlock):
 
     class Meta:
         icon = 'list-ul'
-        template = 'blocks/step_block.html'
+        template = 'base/blocks/step_block.html'
 
 
 class BaseStreamBlock(blocks.StreamBlock):
@@ -108,3 +108,12 @@ class BaseStreamBlock(blocks.StreamBlock):
         help_text="Insert a URL to embed. For example, https://www.youtube.com/watch?v=SGJFWirQ3ks",
         icon="media",
     )
+
+
+class CallToActionBlock(BaseStreamBlock):
+    lottie_animation_1 = LottieAnimationBlock()
+    lottie_animation_2 = LottieAnimationBlock()
+    # Define other fields or animations as necessary...
+
+    class Meta:
+        template = "blocks/call_to_action_block.html"
