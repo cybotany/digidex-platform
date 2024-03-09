@@ -5,7 +5,7 @@ from django.contrib import admin
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
-
+# Project specific imports
 from search import views as search_views
 
 urlpatterns = [

@@ -1,4 +1,5 @@
 from rest_framework import viewsets
+# Project specific imports
 from blog import models, serializers
 
 class BlogPageViewSet(viewsets.ReadOnlyModelViewSet):

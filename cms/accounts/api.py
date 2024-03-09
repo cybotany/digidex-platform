@@ -1,4 +1,5 @@
 from rest_framework import viewsets
+# Project specific imports
 from accounts import models, serializers
 
 class DigidexUserViewSet(viewsets.ModelViewSet):

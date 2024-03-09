@@ -1,6 +1,4 @@
 from logging import getLogger
-logger = getLogger(__name__)
-
 import uuid
 from django.db import models, transaction
 from django.core.mail import send_mail, BadHeaderError
@@ -11,9 +9,11 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.utils.text import slugify
 from django.conf import settings
-
+# Project specific imports
 from cms.utils import cms_storage
 from cms.utils import validators
+
+logger = getLogger(__name__)
 
 def profile_avatar_directory_path(instance, filename):
     return f'profile_{instance.id}/avatar.jpeg'

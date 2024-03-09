@@ -1,4 +1,5 @@
 from rest_framework import serializers
+# Project specific imports
 from accounts import models
 
 class DigidexUserSerializer(serializers.ModelSerializer):

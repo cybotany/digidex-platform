@@ -1,6 +1,6 @@
 from rest_framework import serializers as rf_serializers
 from wagtail.images.api.fields import ImageRenditionField
-
+# Project specific imports
 from blog import models
 
 class BlogPageGalleryImageSerializer(rf_serializers.ModelSerializer):

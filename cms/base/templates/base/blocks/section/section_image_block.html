@@ -1,0 +1,6 @@
+<div class="image-block">
+  <img src="{{ self.image.url }}" alt="{{ self.caption }}">
+  {% if self.caption %}
+    <figcaption>{{ self.caption }}</figcaption>
+  {% endif %}
+</div>

@@ -3,7 +3,7 @@ from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.fields import RichTextField, StreamField
 from wagtail.models import Page, Orderable
 from modelcluster.fields import ParentalKey
-
+# Project specific imports
 from base import blocks
 
 class HomePageSection(Orderable):

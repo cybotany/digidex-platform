@@ -1,6 +1,6 @@
 from django import template
 from wagtail.models import Site
-
+# Project specific imports
 from base import models
 
 register = template.Library()

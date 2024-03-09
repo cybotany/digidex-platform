@@ -6,7 +6,7 @@ from wagtail.blocks import (
     StructBlock,
 )
 from wagtail.images.blocks import ImageChooserBlock
-
+# Project specific imports
 from base.blocks import BaseStreamBlock
 
 class CardBlock(StructBlock):

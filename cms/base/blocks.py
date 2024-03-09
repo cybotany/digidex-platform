@@ -1,47 +1,72 @@
-from wagtail.blocks import (
-    CharBlock,
-    ChoiceBlock,
-    RichTextBlock,
-    StreamBlock,
-    StructBlock,
-)
-from wagtail.embeds.blocks import EmbedBlock
-from wagtail.images.blocks import ImageChooserBlock
+from wagtail.core import blocks
+from wagtail.images import blocks as i_blocks
+from wagtail.embeds import blocks as e_blocks
 
-
-class ImageBlock(StructBlock):
-    image = ImageChooserBlock(required=True)
-    caption = CharBlock(required=False)
-    attribution = CharBlock(required=False)
+class ImageBlock(blocks.StructBlock):
+    image = i_blocks.ImageChooserBlock(
+        required=True
+    )
+    caption = blocks.CharBlock(
+        required=False
+    )
+    attribution = blocks.CharBlock(
+        required=False
+    )
 
     class Meta:
         icon = "image"
         template = "base/blocks/image_block.html"
 
 
-class HeadingBlock(StructBlock):
-    heading_text = CharBlock(classname="title", required=True)
-    size = ChoiceBlock(
-        choices=[
-            ("", "Select a heading size"),
-            ("h2", "H2"),
-            ("h3", "H3"),
-            ("h4", "H4"),
-        ],
-        blank=True,
-        required=False,
+class PageHeadingBlock(blocks.StructBlock):
+    subtitle_text = blocks.RichTextBlock(
+        classname="subtitle",
+        required=True
+    )
+    subtitle_link_text = blocks.RichTextBlock(
+        classname="subtitle green",
+        required=True
+    )
+    heading_text = blocks.RichTextBlock(
+        classname="heading-top",
+        required=True
+    )
+    date = blocks.DateBlock(
+        classname="date-top",
+        required=False
+    )
+    paragraph = blocks.RichTextBlock(
+        classname="paragraph-top",
+        required=False
     )
 
     class Meta:
         icon = "title"
-        template = "base/blocks/heading_block.html"
+        template = "base/blocks/page_heading_block.html"
 
 
-class BaseStreamBlock(StreamBlock):
-    heading_block = HeadingBlock()
-    paragraph_block = RichTextBlock(icon="pilcrow")
+class StepBlock(blocks.StructBlock):
+    title = blocks.CharBlock(
+        required=True,
+        max_length=100
+    )
+    description = blocks.TextBlock(
+        required=True
+    )
+    icon = e_blocks.ImageChooserBlock(
+        required=False
+    )
+
+    class Meta:
+        icon = 'list-ul'
+        template = 'blocks/step_block.html'
+
+
+class BaseStreamBlock(blocks.StreamBlock):
+    heading_block = blocks.HeadingBlock()
+    paragraph_block = blocks.RichTextBlock(icon="pilcrow")
     image_block = ImageBlock()
-    embed_block = EmbedBlock(
+    embed_block = e_blocks.EmbedBlock(
         help_text="Insert a URL to embed. For example, https://www.youtube.com/watch?v=SGJFWirQ3ks",
         icon="media",
     )
