@@ -23,15 +23,15 @@ class HowItWorksBlock(core_blocks.StructBlock):
         icon = 'snippet'
 
 
-class CallToActionBlock(blocks.StructBlock):
-    subtitle = blocks.CharBlock(
+class CallToActionBlock(core_blocks.StructBlock):
+    subtitle = core_blocks.CharBlock(
         required=True
     )
-    heading = blocks.CharBlock(
+    heading = core_blocks.CharBlock(
         required=True
     )
-    lottie_animation_1 = LottieAnimationBlock()
-    lottie_animation_2 = LottieAnimationBlock()
+    lottie_animation_1 = blocks.LottieAnimationBlock()
+    lottie_animation_2 = blocks.LottieAnimationBlock()
     # Define other fields or animations as necessary...
 
     class Meta:
