@@ -18,6 +18,25 @@ class ImageBlock(blocks.StructBlock):
         template = "base/blocks/image_block.html"
 
 
+class LottieAnimationBlock(blocks.StructBlock):
+    animation_src = blocks.URLBlock(
+        required=True,
+        help_text="URL to the Lottie animation JSON file."
+    )
+    loop = blocks.BooleanBlock(
+        required=False,
+        default=False
+    )
+    autoplay = blocks.BooleanBlock(
+        required=False,
+        default=False
+    )
+    # Add other fields as necessary...
+
+    class Meta:
+        template = "blocks/lottie_animation_block.html"
+
+
 class PageHeadingBlock(blocks.StructBlock):
     subtitle_text = blocks.RichTextBlock(
         classname="subtitle",

@@ -36,7 +36,9 @@ class HomePageSection(Orderable):
 
 class HomePage(Page):
     body = StreamField([
+        ('hero', home_blocks.HeroBlock()),
         ('how_it_works', home_blocks.HowItWorksBlock()),
+        ('call_to_action', home_blocks.CallToActionBlock()),
     ],
     null=True,
     blank=True,

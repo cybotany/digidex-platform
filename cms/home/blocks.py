@@ -2,25 +2,6 @@ from wagtail.core import blocks as core_blocks
 # Project specific imports
 from base import blocks
 
-class LottieAnimationBlock(blocks.StructBlock):
-    animation_src = blocks.URLBlock(
-        required=True,
-        help_text="URL to the Lottie animation JSON file."
-    )
-    loop = blocks.BooleanBlock(
-        required=False,
-        default=False
-    )
-    autoplay = blocks.BooleanBlock(
-        required=False,
-        default=False
-    )
-    # Add other fields as necessary...
-
-    class Meta:
-        template = "blocks/lottie_animation_block.html"
-
-
 class HowItWorksBlock(core_blocks.StructBlock):
     subtitle = core_blocks.CharBlock(
         required=True,
