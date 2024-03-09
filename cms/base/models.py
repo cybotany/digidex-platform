@@ -24,9 +24,18 @@ from wagtail.contrib.settings.models import (
 
 @register_setting
 class NavigationSettings(BaseGenericSetting):
-    twitter_url = models.URLField(verbose_name="Twitter URL", blank=True)
-    github_url = models.URLField(verbose_name="GitHub URL", blank=True)
-    linkedin_url = models.URLField(verbose_name="LinkedIn URL", blank=True)
+    twitter_url = models.URLField(
+        verbose_name="Twitter URL",
+        blank=True
+    )
+    github_url = models.URLField(
+        verbose_name="GitHub URL",
+        blank=True
+    )
+    linkedin_url = models.URLField(
+        verbose_name="LinkedIn URL",
+        blank=True
+    )
 
     panels = [
         MultiFieldPanel(
@@ -48,7 +57,6 @@ class FooterText(
     TranslatableMixin,
     models.Model,
 ):
-
     body = RichTextField()
 
     panels = [
@@ -70,7 +78,11 @@ class FooterText(
 
 
 class FormField(AbstractFormField):
-    page = ParentalKey('FormPage', on_delete=models.CASCADE, related_name='form_fields')
+    page = ParentalKey(
+        'FormPage',
+        on_delete=models.CASCADE,
+        related_name='form_fields'
+    )
 
 
 class FormPage(AbstractEmailForm):
