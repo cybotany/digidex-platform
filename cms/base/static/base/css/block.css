@@ -1,0 +1,186 @@
+.block-content {
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px #000;
+  padding: 1.5em;
+}
+
+.block-hero {
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  display: flex;
+}
+
+.block-header {
+  border-style: none none solid;
+  border-color: var(--border);
+  background-color: rgba(0, 0, 0, 0);
+  padding: 1em 1.5em;
+}
+
+.block-heading {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 1em;
+  display: flex;
+}
+
+.block-heading.center {
+  text-align: center;
+  align-items: center;
+}
+
+.block-heading-features {
+  grid-column-gap: 1em;
+  grid-row-gap: 1em;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+
+.block-quantity {
+  font-size: .9em;
+}
+
+.block-icon-info {
+  width: 1.375em;
+  height: 1.375em;
+  background-color: var(--strong-green);
+  border-radius: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.block-lottie {
+  z-index: 10;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  display: flex;
+  position: relative;
+}
+
+.block-clients {
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+.block-left {
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-right: 15%;
+  display: flex;
+}
+
+.block-right {
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: 15%;
+  display: flex;
+}
+
+.block-faq {
+  grid-column-gap: 1.13em;
+  grid-row-gap: 1.13em;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  display: flex;
+}
+
+.block-icon-accordion {
+  width: 2.12em;
+  height: 2.12em;
+  background-color: var(--accent-green);
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-radius: 100%;
+  flex: none;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.block-banner {
+  z-index: 50;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 5em;
+  padding-bottom: 5em;
+  padding-left: 12%;
+  display: flex;
+  position: relative;
+}
+
+.block-lottie-banner {
+  z-index: 10;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  display: flex;
+  position: relative;
+}
+
+@media screen and (max-width: 991px) {
+  .block-categories {
+    flex-direction: column;
+  }
+
+  .block-left {
+    padding-right: 10%;
+  }
+
+  .block-right {
+    padding-left: 10%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .block-hero {
+    text-align: center;
+    align-items: center;
+  }
+  
+  .block-left {
+    padding-right: 0%;
+  }
+
+  .block-right {
+    padding-left: 0%;
+  }
+
+  .block-faq {
+    grid-column-gap: .87em;
+    grid-row-gap: .87em;
+  }
+
+  .block-banner {
+    padding: 4em 10%;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .block-price {
+    flex-direction: column;
+  }
+
+  .block-categories {
+    font-size: .9em;
+  }
+
+  .block-banner {
+    padding-top: 2.5em;
+    padding-bottom: 2.5em;
+  }
+}

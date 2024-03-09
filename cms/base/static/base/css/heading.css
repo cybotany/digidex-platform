@@ -1,0 +1,26 @@
+.heading {
+  max-width: 9em;
+  margin-bottom: .5em;
+}
+
+.heading-accordion {
+  margin-top: .3em;
+  margin-bottom: .3em;
+}
+
+.heading-top {
+  max-width: 11.5em;
+  margin-bottom: .38em;
+}
+
+@media screen and (max-width: 991px) {
+
+}
+
+@media screen and (max-width: 767px) {
+
+}
+
+@media screen and (max-width: 479px) {
+
+}

@@ -10,21 +10,6 @@
   display: flex;
 }
 
-.grid-hero {
-  grid-column-gap: 0em;
-  grid-row-gap: 0em;
-  grid-template-rows: auto;
-  grid-template-columns: 1.2fr 1fr;
-  align-items: center;
-}
-
-.block-hero {
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  display: flex;
-}
-
 .link-info {
   background-color: var(--white);
   border-radius: 50em;
@@ -53,31 +38,9 @@
   line-height: 110%;
 }
 
-.block-icon-info {
-  width: 1.375em;
-  height: 1.375em;
-  background-color: var(--strong-blue);
-  border-radius: 100%;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-}
-
 .icon-info {
   width: 1em;
   height: 1em;
-}
-
-.heading-hero {
-  max-width: 11.5em;
-  margin-bottom: .38em;
-}
-
-.paragraph-hero {
-  max-width: 26em;
-  margin-bottom: 2em;
-  font-size: 1.125em;
-  line-height: 160%;
 }
 
 .button-hero {
@@ -191,16 +154,6 @@
   right: 0%;
 }
 
-.block-lottie {
-  z-index: 10;
-  width: 100%;
-  flex-direction: row;
-  justify-content: center;
-  align-items: stretch;
-  display: flex;
-  position: relative;
-}
-
 .lottie-animation-2 {
   z-index: 10;
   width: 100%;
@@ -278,26 +231,9 @@
   height: 1.5em;
 }
 
-@media screen and (max-width: 991px) {
-  .paragraph-hero {
-    font-size: 1em;
-  }
-}
-
 @media screen and (max-width: 767px) {
   .section-hero {
     padding-bottom: 3em;
-  }
-
-  .grid-hero {
-    grid-column-gap: 2.5em;
-    grid-row-gap: 2.5em;
-    grid-template-columns: 1fr;
-  }
-
-  .block-hero {
-    text-align: center;
-    align-items: center;
   }
 }
 
