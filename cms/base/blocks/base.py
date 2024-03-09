@@ -31,7 +31,6 @@ class LottieAnimationBlock(blocks.StructBlock):
         required=False,
         default=False
     )
-    # Add other fields as necessary...
 
     class Meta:
         template = "base/blocks/lottie_animation_block.html"
@@ -53,22 +52,20 @@ class SectionHeadingBlock(blocks.StructBlock):
 
     class Meta:
         icon = "title"
-        template = "base/blocks/page_heading_block.html"
+        template = "base/blocks/section_heading_block.html"
+
+
+class BaseSectionBlock(blocks.StreamBlock):
+    heading_block = SectionHeadingBlock()
+    paragraph_block = blocks.RichTextBlock(icon="pilcrow")
+    image_block = ImageBlock()
+    embed_block = e_blocks.EmbedBlock(
+        help_text="Insert a URL to embed. For example, https://www.youtube.com/watch?v=SGJFWirQ3ks",
+        icon="media",
+    )
 
 
 class PageHeadingBlock(SectionHeadingBlock):
-    subtitle_text = blocks.RichTextBlock(
-        classname="subtitle",
-        required=False
-    )
-    subtitle_link_text = blocks.RichTextBlock(
-        classname="subtitle green",
-        required=False
-    )
-    heading_text = blocks.RichTextBlock(
-        classname="heading-top",
-        required=True
-    )
     date = blocks.DateBlock(
         classname="date-top",
         required=False
@@ -81,6 +78,16 @@ class PageHeadingBlock(SectionHeadingBlock):
     class Meta:
         icon = "title"
         template = "base/blocks/page_heading_block.html"
+
+
+class BasePageBlock(blocks.StreamBlock):
+    heading_block = PageHeadingBlock()
+    paragraph_block = blocks.RichTextBlock(icon="pilcrow")
+    image_block = ImageBlock()
+    embed_block = e_blocks.EmbedBlock(
+        help_text="Insert a URL to embed. For example, https://www.youtube.com/watch?v=SGJFWirQ3ks",
+        icon="media",
+    )
 
 
 class StepBlock(blocks.StructBlock):
@@ -100,20 +107,30 @@ class StepBlock(blocks.StructBlock):
         template = 'base/blocks/step_block.html'
 
 
-class BaseStreamBlock(blocks.StreamBlock):
-    heading_block = SectionHeadingBlock()
-    paragraph_block = blocks.RichTextBlock(icon="pilcrow")
-    image_block = ImageBlock()
-    embed_block = e_blocks.EmbedBlock(
-        help_text="Insert a URL to embed. For example, https://www.youtube.com/watch?v=SGJFWirQ3ks",
-        icon="media",
-    )
-
-
-class CallToActionBlock(BaseStreamBlock):
+class HeroSection(BaseSectionBlock):
     lottie_animation_1 = LottieAnimationBlock()
     lottie_animation_2 = LottieAnimationBlock()
-    # Define other fields or animations as necessary...
 
     class Meta:
-        template = "blocks/call_to_action_block.html"
+        template = "base/blocks/hero_section.html"
+
+
+class HowItWorksSection(BaseSectionBlock):
+    paragraph = blocks.TextBlock(
+        required=True
+    )
+    steps = blocks.ListBlock(
+        StepBlock()
+    )
+
+    class Meta:
+        template = 'base/blocks/how_it_works_block.html'
+        icon = 'snippet'
+
+
+class CallToActionSection(BaseSectionBlock):
+    lottie_animation_1 = LottieAnimationBlock()
+    lottie_animation_2 = LottieAnimationBlock()
+
+    class Meta:
+        template = "base/blocks/call_to_action_section.html"
