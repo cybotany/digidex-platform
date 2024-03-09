@@ -37,14 +37,33 @@ class LottieAnimationBlock(blocks.StructBlock):
         template = "blocks/lottie_animation_block.html"
 
 
-class PageHeadingBlock(blocks.StructBlock):
+class SectionHeadingBlock(blocks.StructBlock):
     subtitle_text = blocks.RichTextBlock(
         classname="subtitle",
-        required=True
+        required=False
     )
     subtitle_link_text = blocks.RichTextBlock(
         classname="subtitle green",
+        required=False
+    )
+    heading_text = blocks.RichTextBlock(
+        classname="heading-top",
         required=True
+    )
+
+    class Meta:
+        icon = "title"
+        template = "base/blocks/page_heading_block.html"
+
+
+class PageHeadingBlock(SectionHeadingBlock):
+    subtitle_text = blocks.RichTextBlock(
+        classname="subtitle",
+        required=False
+    )
+    subtitle_link_text = blocks.RichTextBlock(
+        classname="subtitle green",
+        required=False
     )
     heading_text = blocks.RichTextBlock(
         classname="heading-top",
@@ -82,7 +101,7 @@ class StepBlock(blocks.StructBlock):
 
 
 class BaseStreamBlock(blocks.StreamBlock):
-    heading_block = blocks.HeadingBlock()
+    heading_block = SectionHeadingBlock()
     paragraph_block = blocks.RichTextBlock(icon="pilcrow")
     image_block = ImageBlock()
     embed_block = e_blocks.EmbedBlock(

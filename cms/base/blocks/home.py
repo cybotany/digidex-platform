@@ -1,6 +1,6 @@
 from wagtail.core import blocks as core_blocks
 # Project specific imports
-from cms.base.blocks import base
+from base.blocks import base
 
 class CallToActionBlock(core_blocks.StructBlock):
     subtitle = core_blocks.CharBlock(
@@ -16,7 +16,7 @@ class CallToActionBlock(core_blocks.StructBlock):
     class Meta:
         template = "blocks/call_to_action_block.html"
 
-class HowItWorksBlock(core_blocks.StructBlock):
+class HowItWorksBlock(base.BaseStreamBlock):
     subtitle = core_blocks.CharBlock(
         required=True,
         max_length=100
