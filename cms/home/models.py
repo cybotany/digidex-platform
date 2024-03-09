@@ -4,8 +4,8 @@ from wagtail.fields import RichTextField, StreamField
 from wagtail.models import Page, Orderable
 from modelcluster.fields import ParentalKey
 # Project specific imports
-from base import blocks
-from home import blocks as home_blocks
+from cms.base.blocks import base
+from cms.base.blocks import home as home_blocks
 
 class HomePageSection(Orderable):
     page = ParentalKey(
@@ -17,7 +17,7 @@ class HomePageSection(Orderable):
         blank=True
     )
     content = StreamField(
-        blocks.BaseStreamBlock(),
+        base.BaseStreamBlock(),
         use_json_field=True,
         blank=True
     )

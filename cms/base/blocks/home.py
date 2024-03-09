@@ -1,6 +1,20 @@
 from wagtail.core import blocks as core_blocks
 # Project specific imports
-from base import blocks
+from cms.base.blocks import base
+
+class CallToActionBlock(core_blocks.StructBlock):
+    subtitle = core_blocks.CharBlock(
+        required=True
+    )
+    heading = core_blocks.CharBlock(
+        required=True
+    )
+    lottie_animation_1 = base.LottieAnimationBlock()
+    lottie_animation_2 = base.LottieAnimationBlock()
+    # Define other fields or animations as necessary...
+
+    class Meta:
+        template = "blocks/call_to_action_block.html"
 
 class HowItWorksBlock(core_blocks.StructBlock):
     subtitle = core_blocks.CharBlock(
@@ -15,7 +29,7 @@ class HowItWorksBlock(core_blocks.StructBlock):
         required=True
     )
     steps = core_blocks.ListBlock(
-        blocks.StepBlock()
+        base.StepBlock()
     )
 
     class Meta:
@@ -30,8 +44,8 @@ class CallToActionBlock(core_blocks.StructBlock):
     heading = core_blocks.CharBlock(
         required=True
     )
-    lottie_animation_1 = blocks.LottieAnimationBlock()
-    lottie_animation_2 = blocks.LottieAnimationBlock()
+    lottie_animation_1 = base.LottieAnimationBlock()
+    lottie_animation_2 = base.LottieAnimationBlock()
     # Define other fields or animations as necessary...
 
     class Meta:

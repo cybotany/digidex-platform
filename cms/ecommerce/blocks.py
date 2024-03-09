@@ -7,7 +7,7 @@ from wagtail.blocks import (
 )
 from wagtail.images.blocks import ImageChooserBlock
 # Project specific imports
-from base.blocks import BaseStreamBlock
+from cms.base.blocks.base import BaseStreamBlock
 
 class CardBlock(StructBlock):
     heading = CharBlock()
