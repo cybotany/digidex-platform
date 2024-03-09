@@ -5,6 +5,7 @@ from wagtail.models import Page, Orderable
 from modelcluster.fields import ParentalKey
 # Project specific imports
 from base import blocks
+from home import blocks as home_blocks
 
 class HomePageSection(Orderable):
     page = ParentalKey(
@@ -34,12 +35,12 @@ class HomePageSection(Orderable):
 
 
 class HomePage(Page):
-    body = StreamField(
-        blocks.BaseStreamBlock(),
-        null=True,
-        blank=True,
-        verbose_name="Page body",
-        use_json_field=True
+    body = StreamField([
+        ('how_it_works', home_blocks.HowItWorksBlock()),
+    ],
+    null=True,
+    blank=True,
+    use_json_field=True
     )
 
     content_panels = Page.content_panels + [
