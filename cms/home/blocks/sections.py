@@ -1,20 +1,22 @@
+from wagtail import blocks
+
+from base.blocks import base, pages, sections
 
 
-
-class HeroSection(BaseSectionBlock):
-    lottie_animation_1 = LottieAnimationBlock()
-    lottie_animation_2 = LottieAnimationBlock()
+class HeroSection(sections.BaseSectionBlock):
+    lottie_animation_1 = base.LottieAnimationBlock()
+    lottie_animation_2 = base.LottieAnimationBlock()
 
     class Meta:
         template = "base/blocks/hero_section.html"
 
 
-class HowItWorksSection(BaseSectionBlock):
+class HowItWorksSection(sections.BaseSectionBlock):
     paragraph = blocks.TextBlock(
         required=True
     )
     steps = blocks.ListBlock(
-        StepBlock()
+        base.StepBlock()
     )
 
     class Meta:
@@ -22,9 +24,9 @@ class HowItWorksSection(BaseSectionBlock):
         icon = 'snippet'
 
 
-class CallToActionSection(BaseSectionBlock):
-    lottie_animation_1 = LottieAnimationBlock()
-    lottie_animation_2 = LottieAnimationBlock()
+class CallToActionSection(sections.BaseSectionBlock):
+    lottie_animation_1 = base.LottieAnimationBlock()
+    lottie_animation_2 = base.LottieAnimationBlock()
 
     class Meta:
         template = "base/blocks/call_to_action_section.html"

@@ -1,19 +1,36 @@
-from wagtail.models import Page
-from wagtail.fields import StreamField
-from wagtail.admin.panels import FieldPanel
+from django.db import models
+from wagtail.core.models import Page
+from wagtail.core.fields import StreamField
+from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
+# Import your block classes here
+from .blocks import CategoryPageBlock
 
-from cms.ecommerce.blocks import section
-
-class PortfolioPage(Page):
-    parent_page_types = ["home.HomePage"]
-
-    body = StreamField(
-        section.PortfolioStreamBlock(),
-        blank=True,
-        use_json_field=True,
-        help_text="Use this section to list your projects and skills.",
-    )
+class CategoryPage(Page):
+    content = StreamField(CategoryPageBlock(), verbose_name="Page content", blank=True)
 
     content_panels = Page.content_panels + [
-        FieldPanel("body"),
+        StreamFieldPanel('content'),
     ]
+
+    class Meta:
+        verbose_name = "Category Page"
+        verbose_name_plural = "Category Pages"
+
+
+class ProductPage(Page):
+    # If you want to include some fixed fields (like a main image, title, etc.) you can define them here
+    # For simplicity, we're assuming all product details will be handled by the `ProductBlock`
+    
+    # StreamField to include detailed product information, features, and FAQs
+    body = StreamField([
+        ('product', ProductBlock()),
+        ('faq_section', FAQSectionBlock(optional=True)),
+    ], null=True, blank=True)
+
+    content_panels = Page.content_panels + [
+        StreamFieldPanel('body'),
+    ]
+
+    class Meta:
+        verbose_name = "Product Page"
+        verbose_name_plural = "Product Pages"

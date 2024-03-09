@@ -4,8 +4,8 @@ from wagtail.fields import RichTextField, StreamField
 from wagtail.models import Page, Orderable
 from modelcluster.fields import ParentalKey
 # Project specific imports
-from cms.base.blocks import base
-from cms.base.blocks import home as home_blocks
+from base.blocks import base
+from home.blocks import home as home_blocks
 
 class HomePageSection(Orderable):
     page = ParentalKey(
