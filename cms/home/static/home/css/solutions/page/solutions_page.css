@@ -1,0 +1,115 @@
+.grid-solutions-large {
+  grid-column-gap: 1.5em;
+  grid-row-gap: 1.5em;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  margin-bottom: 1.5em;
+}
+
+.solutions-large {
+  grid-row-gap: 1.2em;
+  background-color: var(--accent-green);
+  border-radius: .87em;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 3.1em;
+  display: flex;
+  position: relative;
+}
+
+.solutions-large.green {
+  background-color: var(--accent-green);
+}
+
+.heading-solution-large {
+  color: var(--strong-green);
+}
+
+.heading-solution-large.green {
+  color: var(--strong-green);
+}
+
+.paragraph-solution-large {
+  color: var(--strong-green);
+}
+
+.paragraph-solution-large.green {
+  color: var(--strong-green);
+}
+
+.block-icon-solution {
+  width: 4.5em;
+  height: 4.5em;
+  background-color: var(--strong-green);
+  border-radius: .87em;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.block-icon-solution.green {
+  background-color: var(--accent-green);
+}
+
+.list {
+  grid-column-gap: .7em;
+  grid-row-gap: .7em;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+
+.icon-list {
+  width: 1.125em;
+  height: 1.125em;
+}
+
+.block-icon-list {
+  width: 1.625em;
+  height: 1.625em;
+  background-color: var(--accent-green);
+  border-radius: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.block-icon-list.blue {
+  background-color: var(--accent-blue);
+}
+
+.heading-list {
+  color: var(--strong-green);
+}
+
+.heading-list.blue {
+  color: var(--strong-blue);
+}
+
+.block-list {
+  grid-column-gap: .56em;
+  grid-row-gap: .56em;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  display: flex;
+}
+
+@media screen and (max-width: 767px) {
+  .grid-solutions-large {
+    grid-column-gap: .87em;
+    grid-row-gap: .87em;
+    grid-template-columns: 1fr;
+    margin-bottom: .87em;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .solutions-large {
+    padding: 2em;
+  }
+}
