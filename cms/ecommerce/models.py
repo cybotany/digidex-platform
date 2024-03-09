@@ -6,7 +6,11 @@ from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
 from .blocks import CategoryPageBlock
 
 class CategoryPage(Page):
-    content = StreamField(CategoryPageBlock(), verbose_name="Page content", blank=True)
+    content = StreamField(
+        CategoryPageBlock(),
+        verbose_name="Page content",
+        blank=True
+    )
 
     content_panels = Page.content_panels + [
         StreamFieldPanel('content'),
