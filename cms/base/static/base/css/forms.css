@@ -1,0 +1,180 @@
+.form-block {
+  width: 100%;
+  margin-top: .4em;
+  margin-bottom: 0;
+}
+
+.submit-button {
+  background-color: var(--strong-green);
+  color: var(--white);
+  letter-spacing: -.02em;
+  border-radius: .87em;
+  padding: 1.2em 1.8em;
+  font-size: 1.12em;
+  font-weight: 500;
+  line-height: 120%;
+  transition: box-shadow .3s cubic-bezier(.25, .46, .45, .94), background-color .3s cubic-bezier(.25, .46, .45, .94);
+}
+
+.submit-button:hover {
+  box-shadow: 0 15px 40px -10px var(--strong-green);
+}
+
+.submit-button.yellow {
+  background-color: var(--strong-yellow);
+  color: var(--heading);
+}
+
+.submit-button.yellow:hover {
+  box-shadow: 0 15px 40px -10px var(--strong-yellow);
+}
+
+.form {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  display: flex;
+}
+
+.text-field {
+    height: 3.75em;
+    border: 1px solid var(--border);
+    background-color: var(--white);
+    color: var(--heading);
+    border-radius: .87em;
+    margin-bottom: 1.12em;
+    padding: 1em 1.2em;
+    font-size: 1em;
+    line-height: 130%;
+    transition: border-color .3s cubic-bezier(.25, .46, .45, .94);
+}
+
+.text-field:focus {
+border-color: var(--strong-green);
+}
+
+.text-field::-ms-input-placeholder {
+color: rgba(20, 23, 24, .6);
+}
+
+.text-field::placeholder {
+color: rgba(20, 23, 24, .6);
+}
+
+.text-field.transparent {
+color: var(--white);
+background-color: rgba(255, 255, 255, .1);
+border-color: rgba(255, 255, 255, .2);
+}
+
+.text-field.transparent:focus {
+border-color: var(--white);
+}
+
+.text-field.transparent::-ms-input-placeholder {
+color: rgba(255, 255, 255, .65);
+}
+
+.text-field.transparent::placeholder {
+color: rgba(255, 255, 255, .65);
+}
+
+.textarea {
+max-height: 30em;
+max-width: 100%;
+min-height: 14em;
+min-width: 100%;
+border: 1px solid var(--border);
+background-color: var(--white);
+color: var(--heading);
+border-radius: .87em;
+margin-bottom: 1.12em;
+padding: 1em 1.2em;
+font-size: 1em;
+line-height: 130%;
+transition: border-color .3s cubic-bezier(.25, .46, .45, .94);
+}
+
+.textarea:focus {
+border-color: var(--strong-green);
+}
+
+.textarea::-ms-input-placeholder {
+color: rgba(20, 23, 24, .6);
+}
+
+.textarea::placeholder {
+color: rgba(20, 23, 24, .6);
+}
+
+.error-message {
+  background-color: var(--accent-red);
+  border-radius: .87em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 1em 10%;
+}
+
+.text-error {
+  color: var(--strong-red);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
+}
+
+.warning-message {
+  background-color: var(--accent-yellow);
+  border-radius: .87em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 1em 10%;
+}
+
+.text-warning {
+  color: var(--strong-yellow);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
+}
+
+.info-message {
+  background-color: var(--accent-blue);
+  border-radius: .87em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 1em 10%;
+}
+
+.text-info {
+  color: var(--strong-blue);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
+}
+
+.success-message {
+  background-color: var(--accent-green);
+  border-radius: .87em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 1.5em 10%;
+}
+
+.text-success {
+  color: var(--strong-green);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
+}
