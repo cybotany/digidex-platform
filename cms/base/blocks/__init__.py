@@ -1,1 +1,3 @@
-from .base import ImageBlock, LottieAnimationBlock, SectionHeadingBlock, BaseSectionBlock, PageHeadingBlock, BasePageBlock, StepBlock, HeroSection, HowItWorksSection, CallToActionSection
+from .base import ImageBlock, LottieAnimationBlock, StepBlock
+from .section import SectionHeadingBlock, BaseSectionBlock
+from .page import PageHeadingBlock, BasePageBlock
