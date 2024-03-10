@@ -100,32 +100,10 @@
   position: relative;
 }
 
-.block.footer {
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-}
-
-.block.footer.down {
-  justify-content: flex-start;
-  align-items: center;
-  margin-bottom: 3em;
-  display: flex;
-}
-
 .block.social {
   grid-column-gap: .5em;
   grid-row-gap: .5em;
   justify-content: flex-start;
-  align-items: center;
-  display: flex;
-}
-
-.block.top {
-  text-align: center;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
   display: flex;
 }

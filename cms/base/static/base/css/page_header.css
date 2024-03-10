@@ -1,0 +1,31 @@
+.section.top {
+  justify-content: center;
+  align-items: center;
+  padding: 6em 2em 1.5em;
+  display: flex;
+}
+
+.section.top.padding-0 {
+  padding-bottom: 0;
+}
+
+.block.top {
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.heading.top {
+  max-width: 11.5em;
+  margin-bottom: .38em;
+}
+
+@media screen and (max-width: 479px) {
+  .section.top {
+    padding-top: 3em;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+  }
+}

@@ -1,0 +1,8 @@
+.heading.account {
+  max-width: 9em;
+  margin-bottom: .3em;
+}
+
+.heading.account.white {
+    color: var(--white);
+  }
