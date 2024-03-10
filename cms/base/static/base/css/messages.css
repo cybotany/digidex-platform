@@ -5,6 +5,38 @@
   margin-top: 20px;
 }
 
+.message-error {
+  background-color: var(--accent-red);
+  border-radius: .87em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 1em 10%;
+}
+
+.message-warning {
+  background-color: var(--accent-yellow);
+  border-radius: .87em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 1em 10%;
+}
+
+.message-info {
+  background-color: var(--accent-blue);
+  border-radius: .87em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 1em 10%;
+}
+
+.message-success {
+  background-color: var(--accent-green);
+  border-radius: .87em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 1.5em 10%;
+}
+
 .error-message {
   background-color: var(--accent-red);
   border-radius: .87em;

@@ -1,0 +1,22 @@
+.subtitle-clients {
+  opacity: .7;
+  color: var(--heading);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  margin-bottom: 2.3em;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
+}
+
+.subtitle-footer {
+  color: rgba(20, 23, 24, .5);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  margin-bottom: 1.7em;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
+}

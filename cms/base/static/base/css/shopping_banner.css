@@ -22,13 +22,7 @@
   line-height: 120%;
 }
 
-.icon-top-bar {
-  width: 1.125em;
-  height: 1.125em;
-}
-
 @media screen and (max-width: 991px) {
-
   .top-bar-block {
     grid-row-gap: .6em;
     flex-direction: column;
@@ -37,7 +31,6 @@
 }
 
 @media screen and (max-width: 479px) {
-
   .top-bar {
     grid-row-gap: .6em;
     flex-direction: column;

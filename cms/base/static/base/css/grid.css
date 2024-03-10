@@ -38,6 +38,14 @@
   overflow: hidden;
 }
 
+.grid-footer {
+  grid-column-gap: 1.4em;
+  grid-row-gap: 0em;
+  grid-template-rows: auto;
+  grid-template-columns: 2.4fr 1fr 1fr 1fr;
+  margin-bottom: 7.5em;
+}
+
 @media screen and (max-width: 991px) {
   .grid-product {
     grid-template-columns: 1fr;
@@ -69,6 +77,13 @@
   .grid-banner {
     grid-template-columns: 1fr;
   }
+
+  .grid-footer {
+    grid-column-gap: 2.5em;
+    grid-row-gap: 2.5em;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 6em;
+  }
 }
 
 @media screen and (max-width: 479px) {
@@ -79,5 +94,10 @@
 
   .grid-faq {
     grid-template-columns: 1fr;
+  }
+
+  .grid-footer {
+    grid-template-columns: 1fr;
+    margin-bottom: 5em;
   }
 }

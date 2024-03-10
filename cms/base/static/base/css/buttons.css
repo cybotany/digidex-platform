@@ -1,3 +1,18 @@
+.button-desktop {
+  grid-column-gap: .5em;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.button-mobile {
+  grid-column-gap: .5em;
+  grid-row-gap: 1em;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
 .button-hero {
   grid-column-gap: .5em;
   flex-direction: row;
@@ -44,7 +59,19 @@
 }
 
 @media screen and (max-width: 767px) {
+  .button-desktop {
+    display: none;
+  }
 
+  .button-mobile {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: .5em;
+    margin-bottom: .8em;
+    padding-left: .5em;
+    padding-right: .5em;
+    display: flex;
+  }
 }
 
 @media screen and (max-width: 479px) {
