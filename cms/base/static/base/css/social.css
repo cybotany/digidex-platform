@@ -14,10 +14,3 @@
 .social-link:hover {
   box-shadow: inset 0 0 0 2px var(--strong-green), 0 15px 25px -10px rgba(20, 23, 24, .05);
 }
-
-@media screen and (max-width: 767px) {
-}
-
-@media screen and (max-width: 479px) {
-
-}

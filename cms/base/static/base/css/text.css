@@ -78,6 +78,17 @@
   line-height: 165%;
 }
 
+.text-empty {
+  opacity: .7;
+  color: var(--heading);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
+}
+
 @media screen and (max-width: 479px) {
   .text-field-ecommerce {
     margin-bottom: .9em;

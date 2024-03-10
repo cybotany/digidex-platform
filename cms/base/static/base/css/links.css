@@ -84,6 +84,26 @@
   color: var(--strong-green);
 }
 
+.link-post-thumbnail {
+  width: 100%;
+}
+
+.link-post-thumbnail.large {
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  display: flex;
+}
+
+.link-heading-post {
+  margin-bottom: 1.3em;
+  text-decoration: none;
+}
+
+.link-heading-post.large {
+  margin-bottom: 1.4em;
+}
+
 @media screen and (max-width: 991px) {
   .link-category {
     padding: 1em 1.2em;

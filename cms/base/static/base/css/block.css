@@ -172,6 +172,25 @@
   display: flex;
 }
 
+.block-post {
+  background-color: var(--white);
+  border-radius: .87em;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  display: flex;
+  box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
+}
+
+.block-post.large {
+  grid-column-gap: 0em;
+  grid-row-gap: 0em;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-columns: 1fr;
+  display: grid;
+}
+
 @media screen and (max-width: 991px) {
   .block-categories {
     flex-direction: column;
@@ -211,6 +230,10 @@
 
   .block-footer-down {
     margin-bottom: 2em;
+  }
+
+  .block-post.large {
+    grid-template-columns: 1fr;
   }
 }
 

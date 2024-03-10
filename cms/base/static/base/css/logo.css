@@ -13,16 +13,10 @@
   margin-bottom: 1.8em;
 }
 
-@media screen and (max-width: 991px) {
-}
-
 @media screen and (max-width: 767px) {
   .logo-client {
     max-height: 1.5em;
     margin-left: 1.8em;
     margin-right: 1.8em;
   }
-}
-
-@media screen and (max-width: 479px) {
 }

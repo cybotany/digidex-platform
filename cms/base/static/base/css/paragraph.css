@@ -43,6 +43,15 @@
   line-height: 165%;
 }
 
+.paragraph-post {
+  margin-bottom: 1.4em;
+}
+
+.paragraph-post.large {
+  max-width: 25em;
+  margin-bottom: 1.6em;
+}
+
 @media screen and (max-width: 991px) {
   .paragraph-hero {
     font-size: 1em;
