@@ -1,7 +1,7 @@
 from django import template
 from wagtail.models import Site
 # Project specific imports
-from cms.base.blocks.base import models
+from cms.base.blocks.blocks import models
 
 register = template.Library()
 
