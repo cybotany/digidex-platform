@@ -98,18 +98,3 @@
   align-items: flex-start;
   display: flex;
 }
-
-@media screen and (max-width: 767px) {
-  .grid-solutions-large {
-    grid-column-gap: .87em;
-    grid-row-gap: .87em;
-    grid-template-columns: 1fr;
-    margin-bottom: .87em;
-  }
-}
-
-@media screen and (max-width: 479px) {
-  .solutions-large {
-    padding: 2em;
-  }
-}
