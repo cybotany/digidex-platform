@@ -37,6 +37,32 @@
   overflow: hidden;
 }
 
+.item.accordion {
+  width: 100%;
+  background-color: var(--white);
+  border-radius: .87em;
+  padding-left: 1.8em;
+  padding-right: 1.2em;
+  box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
+}
+
+.header.accordion {
+  grid-column-gap: 1em;
+  cursor: pointer;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  transition: padding .3s cubic-bezier(.25, .46, .45, .94);
+  display: flex;
+}
+
+.header.accordion:hover {
+  padding-left: .3em;
+  padding-right: .3em;
+}
+
 @media screen and (max-width: 767px) {
   .grid.faq {
     grid-column-gap: .87em;

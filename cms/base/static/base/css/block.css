@@ -4,6 +4,13 @@
   padding: 1.5em;
 }
 
+.block.header {
+  border-style: none none solid;
+  border-color: var(--border);
+  background-color: rgba(0, 0, 0, 0);
+  padding: 1em 1.5em;
+}
+
 .block.heading {
   flex-direction: column;
   justify-content: flex-start;

@@ -38,3 +38,17 @@
   font-weight: 500;
   line-height: 130%;
 }
+
+.logo.client {
+  max-height: 2.7em;
+  margin-left: 2.7em;
+  margin-right: 2.7em;
+}
+
+@media screen and (max-width: 767px) {
+  .logo.client {
+    max-height: 1.5em;
+    margin-left: 1.8em;
+    margin-right: 1.8em;
+  }
+}

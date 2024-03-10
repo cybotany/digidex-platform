@@ -1,3 +1,7 @@
+.logo {
+  height: 1.56em;
+}
+
 .grid {
   grid-column-gap: 0em;
   grid-row-gap: 0em;

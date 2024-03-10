@@ -21,6 +21,11 @@
   display: flex;
 }
 
+.logo.footer {
+  height: 1.56em;
+  margin-bottom: 1.8em;
+}
+
 .subtitle.footer {
   color: rgba(20, 23, 24, .5);
   letter-spacing: .05em;
