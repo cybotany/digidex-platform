@@ -35,4 +35,8 @@
   .grid.banner {
     grid-template-columns: 1fr;
   }
+
+  .block.banner {
+    padding: 4em 10%;
+  }
 }

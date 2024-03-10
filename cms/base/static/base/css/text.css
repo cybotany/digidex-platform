@@ -1,10 +1,3 @@
-.text.top-bar {
-  color: var(--white);
-  letter-spacing: -.02em;
-  font-size: .87em;
-  line-height: 120%;
-}
-
 .text.required {
   color: var(--accent-a3);
   font-size: .9em;
@@ -68,16 +61,6 @@
   line-height: 120%;
 }
 
-.text.footer-down {
-  color: rgba(20, 23, 24, .5);
-  letter-spacing: .05em;
-  text-transform: uppercase;
-  font-family: IBM Plex Mono, sans-serif;
-  font-size: .7em;
-  font-weight: 500;
-  line-height: 165%;
-}
-
 .text.empty {
   opacity: .7;
   color: var(--heading);
@@ -87,22 +70,6 @@
   font-size: .7em;
   font-weight: 500;
   line-height: 130%;
-}
-
-.text.account {
-  width: 100%;
-  max-width: 32em;
-  color: rgba(20, 23, 24, .6);
-  text-align: center;
-  margin-top: 1.4em;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: .87em;
-  line-height: 140%;
-}
-
-.text.account.white {
-  color: rgba(255, 255, 255, .5);
 }
 
 @media screen and (max-width: 479px) {
