@@ -1,3 +1,10 @@
+.grid.faq {
+  grid-column-gap: 1.13em;
+  grid-row-gap: 1.13em;
+  grid-template-rows: auto;
+  align-items: start;
+}
+
 .block.faq {
   grid-column-gap: 1.13em;
   grid-row-gap: 1.13em;
@@ -31,8 +38,19 @@
 }
 
 @media screen and (max-width: 767px) {
+  .grid.faq {
+    grid-column-gap: .87em;
+    grid-row-gap: .87em;
+  }
+
   .block.faq {
     grid-column-gap: .87em;
     grid-row-gap: .87em;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .grid.faq {
+    grid-template-columns: 1fr;
   }
 }

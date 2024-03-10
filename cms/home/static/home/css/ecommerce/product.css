@@ -124,6 +124,10 @@
 
 
 @media screen and (max-width: 991px) {
+  .grid.product {
+    grid-template-columns: 1fr;
+  }
+
   .product-sticky {
     padding: 3.1em;
     position: relative;

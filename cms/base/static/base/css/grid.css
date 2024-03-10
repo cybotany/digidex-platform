@@ -5,43 +5,10 @@
   align-items: center;
 }
 
-.grid.faq {
-  grid-column-gap: 1.13em;
-  grid-row-gap: 1.13em;
-  grid-template-rows: auto;
-  align-items: start;
-}
-
-.grid.ecommerce {
-  width: 100%;
-  grid-column-gap: 1.5em;
-  grid-row-gap: 1.5em;
-  grid-template-rows: auto;
-  grid-template-columns: 2fr 1fr;
-  align-items: start;
-}
-
-@media screen and (max-width: 991px) {
-  .grid.product {
-    grid-template-columns: 1fr;
-  }
-}
-
 @media screen and (max-width: 767px) {
   .grid {
     grid-column-gap: 2.5em;
     grid-row-gap: 2.5em;
-    grid-template-columns: 1fr;
-  }
-
-  .grid.faq {
-    grid-column-gap: .87em;
-    grid-row-gap: .87em;
-  }
-}
-
-@media screen and (max-width: 479px) {
-  .grid.faq {
     grid-template-columns: 1fr;
   }
 }
