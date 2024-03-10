@@ -1,3 +1,10 @@
+.collection-list-wrapper.messages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
 .message.error {
   background-color: var(--accent-red);
   border-radius: .87em;
