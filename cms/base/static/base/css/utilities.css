@@ -6,7 +6,7 @@
   padding: .5em .3em;
 }
 
-.body-green {
+.body.green {
   background-color: var(--accent-green);
 }
 

@@ -46,6 +46,11 @@
   box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
 }
 
+.heading.accordion {
+  margin-top: .3em;
+  margin-bottom: .3em;
+}
+
 .header.accordion {
   grid-column-gap: 1em;
   cursor: pointer;

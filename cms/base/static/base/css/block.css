@@ -24,6 +24,31 @@
   align-items: center;
 }
 
+.subtitle {
+  background-color: var(--white);
+  color: var(--heading);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  border-radius: .6em;
+  margin-bottom: .7em;
+  padding: .5em 1em;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
+  box-shadow: 0 10px 20px -10px rgba(20, 23, 24, .05);
+}
+
+.subtitle.white {
+  background-color: rgba(255, 255, 255, .1);
+  color: var(--white);
+}
+
+.subtitle.green {
+  background-color: var(--accent-green);
+  color: var(--strong-green);
+}
+
 .block.left {
   flex-direction: column;
   justify-content: center;

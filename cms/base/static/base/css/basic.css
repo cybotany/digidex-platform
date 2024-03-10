@@ -1,3 +1,7 @@
+.logo {
+  height: 1.56em;
+}
+
 .section.full {
   flex: 1;
   justify-content: center;
@@ -6,10 +10,33 @@
   display: flex;
 }
 
+.grid {
+  grid-column-gap: 0em;
+  grid-row-gap: 0em;
+  grid-template-rows: auto;
+  align-items: center;
+}
+
+.heading {
+  max-width: 9em;
+  margin-bottom: .5em;
+}
+
+.paragraph {
+  max-width: 30em;
+  margin-bottom: 2.2em;
+}
+
 @media screen and (max-width: 767px) {
   .section {
     padding-top: 3em;
     padding-bottom: 3em;
+  }
+
+  .grid {
+    grid-column-gap: 2.5em;
+    grid-row-gap: 2.5em;
+    grid-template-columns: 1fr;
   }
 }
 

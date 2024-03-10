@@ -69,6 +69,11 @@
   line-height: 130%;
 }
 
+.paragraph.review {
+  font-size: .87em;
+  line-height: 155%;
+}
+
 .icon.star {
   width: 1.13em;
   height: 1.13em;

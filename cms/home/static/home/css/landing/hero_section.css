@@ -461,6 +461,10 @@
   height: 2em;
 }
 
+.paragraph.features {
+  max-width: 20em;
+}
+
 .text.feature.lottie {
   color: var(--strong-green);
   letter-spacing: -.02em;
