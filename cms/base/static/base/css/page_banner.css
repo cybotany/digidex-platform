@@ -23,6 +23,11 @@
   line-height: 120%;
 }
 
+.icon.top.bar {
+  width: 1.125em;
+  height: 1.125em;
+}
+
 .info.top.bar {
   opacity: .7;
   color: var(--white);

@@ -47,6 +47,11 @@
   line-height: 130%;
 }
 
+.icon.star {
+  width: 1.13em;
+  height: 1.13em;
+}
+
 .stars {
   grid-column-gap: .25em;
   grid-row-gap: .25em;

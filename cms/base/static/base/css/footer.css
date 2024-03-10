@@ -40,6 +40,11 @@
   display: flex;
 }
 
+.icon.social {
+  width: 1.5em;
+  height: 1.5em;
+}
+
 .block.footer.down {
   justify-content: flex-start;
   align-items: center;

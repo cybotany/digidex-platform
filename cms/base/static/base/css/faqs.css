@@ -7,6 +7,29 @@
   display: flex;
 }
 
+.block.icon.accordion {
+  width: 2.12em;
+  height: 2.12em;
+  background-color: var(--accent-green);
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-radius: 100%;
+  flex: none;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.icon.accordion {
+  width: 1.5em;
+  height: 1.5em;
+  flex: none;
+}
+
+.content.accordion {
+  display: block;
+  overflow: hidden;
+}
+
 @media screen and (max-width: 767px) {
   .block.faq {
     grid-column-gap: .87em;
