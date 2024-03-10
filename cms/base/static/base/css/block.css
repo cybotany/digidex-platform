@@ -73,6 +73,16 @@
   overflow: hidden;
 }
 
+.block-reviews {
+  height: 40em;
+  grid-column-gap: .88em;
+  grid-row-gap: .88em;
+  flex-direction: row;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
 .block-left {
   flex-direction: column;
   justify-content: center;
@@ -203,6 +213,10 @@
 
   .block-categories {
     font-size: .9em;
+  }
+
+  .block-reviews {
+    flex-direction: column;
   }
 
   .block-banner {

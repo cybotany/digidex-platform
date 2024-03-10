@@ -1,0 +1,19 @@
+.gradient-reviews {
+  z-index: 50;
+  background-image: linear-gradient(to bottom, var(--background), rgba(244, 246, 247, 0) 10%, rgba(244, 246, 247, 0) 90%, var(--background));
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}
+
+.gradient-clients {
+  z-index: 50;
+  background-image: linear-gradient(to right, var(--background) 5%, rgba(244, 246, 247, 0) 20%, rgba(244, 246, 247, 0) 80%, var(--background) 95%);
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}
