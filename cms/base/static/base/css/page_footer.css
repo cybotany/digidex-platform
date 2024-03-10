@@ -32,22 +32,6 @@
   line-height: 130%;
 }
 
-.link-footer {
-  color: var(--heading);
-  letter-spacing: -.02em;
-  padding-top: .44em;
-  padding-bottom: .44em;
-  font-size: 1em;
-  font-weight: 500;
-  line-height: 120%;
-  text-decoration: none;
-  transition: color .3s cubic-bezier(.25, .46, .45, .94);
-}
-
-.link-footer:hover {
-  color: var(--strong-green);
-}
-
 .logo-footer {
   height: 1.56em;
   margin-bottom: 1.8em;
@@ -110,16 +94,6 @@
   font-size: .7em;
   font-weight: 500;
   line-height: 165%;
-}
-
-.link-footer-down {
-  color: var(--heading);
-  text-decoration: none;
-  transition: color .3s cubic-bezier(.25, .46, .45, .94);
-}
-
-.link-footer-down:hover {
-  color: var(--strong-green);
 }
 
 @media screen and (max-width: 767px) {

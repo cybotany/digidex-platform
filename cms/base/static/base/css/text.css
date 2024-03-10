@@ -1,0 +1,75 @@
+.text-top-bar {
+  color: var(--white);
+  letter-spacing: -.02em;
+  font-size: .87em;
+  line-height: 120%;
+}
+
+.text-required {
+  color: var(--accent-a3);
+  font-size: .9em;
+  font-weight: 500;
+  line-height: 155%;
+}
+
+.text-error {
+  color: var(--strong-red);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
+}
+
+.text-warning {
+  color: var(--strong-yellow);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
+}
+
+.text-info {
+  color: var(--strong-blue);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
+}
+
+.text-success {
+  color: var(--strong-green);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
+}
+
+.text-button {
+  color: var(--strong-green);
+  letter-spacing: -.02em;
+  font-size: 1.12em;
+  font-weight: 500;
+  line-height: 120%;
+}
+
+.text-feature-lottie {
+  color: var(--strong-green);
+  letter-spacing: -.02em;
+  font-size: 1em;
+  font-weight: 500;
+  line-height: 120%;
+}
+
+@media screen and (max-width: 479px) {
+  .text-field-ecommerce {
+    margin-bottom: .9em;
+  }
+}

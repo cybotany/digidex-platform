@@ -4,3 +4,35 @@
   align-items: center;
   margin-top: 20px;
 }
+
+.error-message {
+  background-color: var(--accent-red);
+  border-radius: .87em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 1em 10%;
+}
+
+.warning-message {
+  background-color: var(--accent-yellow);
+  border-radius: .87em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 1em 10%;
+}
+
+.info-message {
+  background-color: var(--accent-blue);
+  border-radius: .87em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 1em 10%;
+}
+
+.success-message {
+  background-color: var(--accent-green);
+  border-radius: .87em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 1.5em 10%;
+}

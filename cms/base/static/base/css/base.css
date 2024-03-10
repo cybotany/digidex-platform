@@ -245,3 +245,7 @@ figcaption {
   color: var(--heading);
 }
 
+.content {
+  width: 100%;
+  max-width: 75em;
+}
