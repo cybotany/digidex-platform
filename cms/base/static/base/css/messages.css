@@ -5,7 +5,7 @@
   margin-top: 20px;
 }
 
-.message-error {
+.message.error {
   background-color: var(--accent-red);
   border-radius: .87em;
   margin-top: 1em;
@@ -13,7 +13,7 @@
   padding: 1em 10%;
 }
 
-.message-warning {
+.message.warning {
   background-color: var(--accent-yellow);
   border-radius: .87em;
   margin-top: 1em;
@@ -21,7 +21,7 @@
   padding: 1em 10%;
 }
 
-.message-info {
+.message.info {
   background-color: var(--accent-blue);
   border-radius: .87em;
   margin-top: 1em;
@@ -29,7 +29,7 @@
   padding: 1em 10%;
 }
 
-.message-success {
+.message.success {
   background-color: var(--accent-green);
   border-radius: .87em;
   margin-top: 1em;

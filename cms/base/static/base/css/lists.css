@@ -1,4 +1,4 @@
-.collection-list-posts {
+.collection-list.posts {
   grid-column-gap: 1.5em;
   grid-row-gap: 3.4em;
   grid-template-rows: auto;
@@ -7,43 +7,49 @@
   display: grid;
 }
 
-.collection-list-posts.large {
+.collection-list.posts.large {
   grid-template-columns: 1fr;
 }
 
-.collection-list-wrapper-posts.large {
+.collection-list-wrapper.posts.large {
   margin-bottom: 3.4em;
 }
 
 @media screen and (max-width: 991px) {
-  .collection-list-posts {
+  .collection-list.shop {
+    grid-column-gap: 1.13em;
+    grid-row-gap: 1.13em;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .collection-list.posts {
     grid-column-gap: 1.13em;
     grid-row-gap: 3em;
     grid-template-columns: 1fr 1fr;
   }
 
-  .collection-list-wrapper-posts.large {
+  .collection-list-wrapper.posts.large {
     margin-bottom: 3em;
   }
 }
 
 @media screen and (max-width: 767px) {
- .collection-list-posts {
+ .collection-list.posts {
     grid-row-gap: 2em;
     grid-template-columns: 1fr;
   }
 
-  .collection-list-wrapper-posts.large {
+  .collection-list-wrapper.posts.large {
     margin-bottom: 2em;
   }
 }
 
 @media screen and (max-width: 479px) {
-  .collection-list-posts {
+  .collection-list.posts {
     grid-row-gap: 1.5em;
   }
 
-  .collection-list-wrapper-posts.large {
+  .collection-list-wrapper.posts.large {
     margin-bottom: 1.5em;
   }
 }

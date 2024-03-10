@@ -10,7 +10,7 @@
   color: var(--heading);
 }
 
-.link-top-bar {
+.link.top-bar {
   grid-column-gap: .35em;
   opacity: .7;
   justify-content: center;
@@ -20,11 +20,11 @@
   display: flex;
 }
 
-.link-top-bar:hover {
+.link.top-bar:hover {
   opacity: 1;
 }
 
-.link-info {
+.link.info {
   background-color: var(--white);
   border-radius: 50em;
   justify-content: flex-start;
@@ -36,11 +36,11 @@
   display: flex;
 }
 
-.link-info:hover {
+.link.info:hover {
   background-color: var(--strong-blue);
 }
 
-.link-button {
+.link.button {
   grid-column-gap: .4em;
   border-radius: 50em;
   flex-direction: row;
@@ -52,13 +52,13 @@
   display: flex;
 }
 
-.link-button:hover {
+.link.button:hover {
   box-shadow: inset 0 0 0 2px var(--strong-green);
   padding-left: 1.6em;
   padding-right: 1.6em;
 }
 
-.link-footer {
+.link.footer {
   color: var(--heading);
   letter-spacing: -.02em;
   padding-top: .44em;
@@ -70,42 +70,59 @@
   transition: color .3s cubic-bezier(.25, .46, .45, .94);
 }
 
-.link-footer:hover {
+.link.footer:hover {
   color: var(--strong-green);
 }
 
-.link-footer-down {
+.link.footer-down {
   color: var(--heading);
   text-decoration: none;
   transition: color .3s cubic-bezier(.25, .46, .45, .94);
 }
 
-.link-footer-down:hover {
+.link.footer-down:hover {
   color: var(--strong-green);
 }
 
-.link-post-thumbnail {
+.link.account {
+  color: rgba(20, 23, 24, .6);
+  transition: color .3s cubic-bezier(.25, .46, .45, .94);
+}
+
+.link.account:hover {
+  color: var(--strong-green);
+}
+
+.link.account.white {
+  color: rgba(255, 255, 255, .5);
+}
+
+.link.account.white:hover {
+  color: var(--white);
+}
+
+.link.post-thumbnail {
   width: 100%;
 }
 
-.link-post-thumbnail.large {
+.link.post-thumbnail.large {
   flex-direction: row;
   justify-content: flex-start;
   align-items: stretch;
   display: flex;
 }
 
-.link-heading-post {
+.link.heading-post {
   margin-bottom: 1.3em;
   text-decoration: none;
 }
 
-.link-heading-post.large {
+.link.heading-post.large {
   margin-bottom: 1.4em;
 }
 
 @media screen and (max-width: 991px) {
-  .link-category {
+  .link.category {
     padding: 1em 1.2em;
   }
 }

@@ -1,4 +1,4 @@
-.grid-hero {
+.grid.hero {
   grid-column-gap: 0em;
   grid-row-gap: 0em;
   grid-template-rows: auto;
@@ -6,7 +6,7 @@
   align-items: center;
 }
 
-.grid-features {
+.grid.features {
   grid-column-gap: 2em;
   grid-row-gap: 1.8em;
   grid-template-rows: auto;
@@ -20,14 +20,14 @@
   align-items: center;
 }
 
-.grid-faq {
+.grid.faq {
   grid-column-gap: 1.13em;
   grid-row-gap: 1.13em;
   grid-template-rows: auto;
   align-items: start;
 }
 
-.grid-banner {
+.grid.banner {
   grid-column-gap: 0em;
   grid-row-gap: 0em;
   background-color: var(--strong-green);
@@ -38,7 +38,7 @@
   overflow: hidden;
 }
 
-.grid-footer {
+.grid.footer {
   grid-column-gap: 1.4em;
   grid-row-gap: 0em;
   grid-template-rows: auto;
@@ -46,20 +46,29 @@
   margin-bottom: 7.5em;
 }
 
+.grid.ecommerce {
+  width: 100%;
+  grid-column-gap: 1.5em;
+  grid-row-gap: 1.5em;
+  grid-template-rows: auto;
+  grid-template-columns: 2fr 1fr;
+  align-items: start;
+}
+
 @media screen and (max-width: 991px) {
-  .grid-product {
+  .grid.product {
     grid-template-columns: 1fr;
   }
 }
 
 @media screen and (max-width: 767px) {
-  .grid-hero {
+  .grid.hero {
     grid-column-gap: 2.5em;
     grid-row-gap: 2.5em;
     grid-template-columns: 1fr;
   }
 
-  .grid-features {
+  .grid.features {
     grid-template-columns: 1fr 1fr;
   }
 
@@ -69,16 +78,16 @@
     grid-template-columns: 1fr;
   }
 
-  .grid-faq {
+  .grid.faq {
     grid-column-gap: .87em;
     grid-row-gap: .87em;
   }
 
-  .grid-banner {
+  .grid.banner {
     grid-template-columns: 1fr;
   }
 
-  .grid-footer {
+  .grid.footer {
     grid-column-gap: 2.5em;
     grid-row-gap: 2.5em;
     grid-template-columns: 1fr 1fr;
@@ -87,16 +96,16 @@
 }
 
 @media screen and (max-width: 479px) {
-  .grid-features {
+  .grid.features {
     grid-row-gap: 1.2em;
     grid-template-columns: 1fr;
   }
 
-  .grid-faq {
+  .grid.faq {
     grid-template-columns: 1fr;
   }
 
-  .grid-footer {
+  .grid.footer {
     grid-template-columns: 1fr;
     margin-bottom: 5em;
   }

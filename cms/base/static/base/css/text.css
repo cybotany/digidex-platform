@@ -1,18 +1,18 @@
-.text-top-bar {
+.text.top-bar {
   color: var(--white);
   letter-spacing: -.02em;
   font-size: .87em;
   line-height: 120%;
 }
 
-.text-required {
+.text.required {
   color: var(--accent-a3);
   font-size: .9em;
   font-weight: 500;
   line-height: 155%;
 }
 
-.text-error {
+.text.error {
   color: var(--strong-red);
   letter-spacing: .05em;
   text-transform: uppercase;
@@ -22,7 +22,7 @@
   line-height: 130%;
 }
 
-.text-warning {
+.text.warning {
   color: var(--strong-yellow);
   letter-spacing: .05em;
   text-transform: uppercase;
@@ -32,7 +32,7 @@
   line-height: 130%;
 }
 
-.text-info {
+.text.info {
   color: var(--strong-blue);
   letter-spacing: .05em;
   text-transform: uppercase;
@@ -42,7 +42,7 @@
   line-height: 130%;
 }
 
-.text-success {
+.text.success {
   color: var(--strong-green);
   letter-spacing: .05em;
   text-transform: uppercase;
@@ -52,7 +52,7 @@
   line-height: 130%;
 }
 
-.text-button {
+.text.button {
   color: var(--strong-green);
   letter-spacing: -.02em;
   font-size: 1.12em;
@@ -60,7 +60,7 @@
   line-height: 120%;
 }
 
-.text-feature-lottie {
+.text.feature-lottie {
   color: var(--strong-green);
   letter-spacing: -.02em;
   font-size: 1em;
@@ -68,7 +68,7 @@
   line-height: 120%;
 }
 
-.text-footer-down {
+.text.footer-down {
   color: rgba(20, 23, 24, .5);
   letter-spacing: .05em;
   text-transform: uppercase;
@@ -78,7 +78,7 @@
   line-height: 165%;
 }
 
-.text-empty {
+.text.empty {
   opacity: .7;
   color: var(--heading);
   letter-spacing: .05em;
@@ -89,8 +89,24 @@
   line-height: 130%;
 }
 
+.text.account {
+  width: 100%;
+  max-width: 32em;
+  color: rgba(20, 23, 24, .6);
+  text-align: center;
+  margin-top: 1.4em;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: .87em;
+  line-height: 140%;
+}
+
+.text.account.white {
+  color: rgba(255, 255, 255, .5);
+}
+
 @media screen and (max-width: 479px) {
-  .text-field-ecommerce {
+  .text-field.ecommerce {
     margin-bottom: .9em;
   }
 }

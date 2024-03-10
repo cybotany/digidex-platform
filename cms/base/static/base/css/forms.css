@@ -1,34 +1,3 @@
-.form-block {
-  width: 100%;
-  margin-top: .4em;
-  margin-bottom: 0;
-}
-
-.submit-button {
-  background-color: var(--strong-green);
-  color: var(--white);
-  letter-spacing: -.02em;
-  border-radius: .87em;
-  padding: 1.2em 1.8em;
-  font-size: 1.12em;
-  font-weight: 500;
-  line-height: 120%;
-  transition: box-shadow .3s cubic-bezier(.25, .46, .45, .94), background-color .3s cubic-bezier(.25, .46, .45, .94);
-}
-
-.submit-button:hover {
-  box-shadow: 0 15px 40px -10px var(--strong-green);
-}
-
-.submit-button.yellow {
-  background-color: var(--strong-yellow);
-  color: var(--heading);
-}
-
-.submit-button.yellow:hover {
-  box-shadow: 0 15px 40px -10px var(--strong-yellow);
-}
-
 .form {
   flex-direction: column;
   justify-content: flex-start;
@@ -107,7 +76,7 @@ color: rgba(20, 23, 24, .6);
 color: rgba(20, 23, 24, .6);
 }
 
-.text-field-ecommerce {
+.text-field.ecommerce {
   height: 3.75em;
   border: 1px solid var(--border);
   background-color: var(--background);
@@ -120,15 +89,62 @@ color: rgba(20, 23, 24, .6);
   transition: border-color .3s cubic-bezier(.25, .46, .45, .94);
 }
 
-.text-field-ecommerce:focus,
-.text-field-ecommerce.-wfp-focus {
+.text-field.ecommerce:focus,
+.text-field.ecommerce.-wfp-focus {
   border-color: var(--accent-a1);
 }
 
-.text-field-ecommerce::-ms-input-placeholder {
+.text-field.ecommerce::-ms-input-placeholder {
   color: rgba(20, 23, 24, .6);
 }
 
-.text-field-ecommerce::placeholder {
+.text-field.ecommerce::placeholder {
   color: rgba(20, 23, 24, .6);
+}
+
+.form.ecommerce {
+  min-height: auto;
+  background-color: rgba(0, 0, 0, 0);
+  padding: 0;
+}
+
+.form.account {
+  z-index: 50;
+  width: 100%;
+  max-width: 32em;
+  background-color: var(--white);
+  text-align: center;
+  border-radius: .87em;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 3.1em;
+  display: flex;
+  position: relative;
+  box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
+}
+
+.form.account.green {
+  background-color: var(--strong-green);
+  box-shadow: none;
+}
+
+.form.utility-page {
+  width: 100%;
+  flex-direction: column;
+  align-items: stretch;
+  margin-top: .8em;
+  display: flex;
+}
+
+@media screen and (max-width: 479px) {
+  .text-field {
+    margin-bottom: .9em;
+  }
+  
+  .form.account {
+    padding: 2em;
+  }
 }

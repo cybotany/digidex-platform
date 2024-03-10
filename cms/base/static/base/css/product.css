@@ -1,0 +1,14 @@
+
+@media screen and (max-width: 991px) {
+  .product-sticky {
+    padding: 3.1em;
+    position: relative;
+    top: auto;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .product {
+    padding: 1.5em;
+  }
+}

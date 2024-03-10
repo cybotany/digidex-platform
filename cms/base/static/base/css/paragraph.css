@@ -3,35 +3,35 @@
   margin-bottom: 2.2em;
 }
 
-.paragraph-hero {
+.paragraph.hero {
   max-width: 26em;
   margin-bottom: 2em;
   font-size: 1.125em;
   line-height: 160%;
 }
 
-.paragraph-features {
+.paragraph.features {
   max-width: 20em;
 }
 
-.paragraph-review {
+.paragraph.review {
   font-size: .87em;
   line-height: 155%;
 }
 
-.paragraph-accordion {
+.paragraph.accordion {
   max-width: 90%;
   margin-bottom: 1.6em;
 }
 
-.paragraph-top {
+.paragraph.top {
   max-width: 32em;
   margin-bottom: 2em;
   font-size: 1.125em;
   line-height: 160%;
 }
 
-.paragraph-footer {
+.paragraph.footer {
   max-width: 26em;
   color: rgba(20, 23, 24, .5);
   letter-spacing: .05em;
@@ -43,21 +43,30 @@
   line-height: 165%;
 }
 
-.paragraph-post {
+.paragraph.account {
+  max-width: 23em;
+  margin-bottom: 1.8em;
+}
+
+.paragraph.account.white {
+  color: rgba(255, 255, 255, .8);
+}
+
+.paragraph.post {
   margin-bottom: 1.4em;
 }
 
-.paragraph-post.large {
+.paragraph.post.large {
   max-width: 25em;
   margin-bottom: 1.6em;
 }
 
 @media screen and (max-width: 991px) {
-  .paragraph-hero {
+  .paragraph.hero {
     font-size: 1em;
   }
 
-  .paragraph-top {
+  .paragraph.top {
     font-size: 1em;
   }
 }
@@ -67,7 +76,11 @@
 }
 
 @media screen and (max-width: 479px) {
-  .paragraph-top {
+  .paragraph.top {
     margin-bottom: 1.2em;
+  }
+
+  .paragraph.account {
+    margin-bottom: 1em;
   }
 }

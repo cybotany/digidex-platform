@@ -1,4 +1,4 @@
-.utility-page-wrap {
+.wrap.utility-page {
   width: 100%;
   flex: 1;
   justify-content: center;
@@ -7,7 +7,7 @@
   display: flex;
 }
 
-.utility-page-content {
+.content.utility-page {
   width: 100%;
   max-width: 24em;
   background-color: var(--white);
@@ -21,22 +21,6 @@
   box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
 }
 
-.utility-page-form {
-  width: 100%;
-  flex-direction: column;
-  align-items: stretch;
-  margin-top: .8em;
-  display: flex;
-}
-
-.section-full {
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  padding: 3.75em 2em;
-  display: flex;
-}
-
 .brand-center {
   flex: none;
   margin-top: 1.2em;
@@ -45,106 +29,18 @@
   padding: .5em .3em;
 }
 
-.account-form {
-  z-index: 50;
-  width: 100%;
-  max-width: 32em;
-  background-color: var(--white);
-  text-align: center;
-  border-radius: .87em;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 3.1em;
-  display: flex;
-  position: relative;
-  box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
-}
-
-.account-form.green {
-  background-color: var(--strong-green);
-  box-shadow: none;
-}
-
-.account-heading {
-  max-width: 9em;
-  margin-bottom: .3em;
-}
-
-.account-heading.white {
-  color: var(--white);
-}
-
-.account-paragraph {
-  max-width: 23em;
-  margin-bottom: 1.8em;
-}
-
-.account-paragraph.white {
-  color: rgba(255, 255, 255, .8);
-}
-
-.account-text {
-  width: 100%;
-  max-width: 32em;
-  color: rgba(20, 23, 24, .6);
-  text-align: center;
-  margin-top: 1.4em;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: .87em;
-  line-height: 140%;
-}
-
-.account-text.white {
-  color: rgba(255, 255, 255, .5);
-}
-
-.account-link {
-  color: rgba(20, 23, 24, .6);
-  transition: color .3s cubic-bezier(.25, .46, .45, .94);
-}
-
-.account-link:hover {
-  color: var(--strong-green);
-}
-
-.account-link.white {
-  color: rgba(255, 255, 255, .5);
-}
-
-.account-link.white:hover {
-  color: var(--white);
-}
-
 .body-green {
   background-color: var(--accent-green);
 }
 
 @media screen and (max-width: 479px) {
-  .section-full {
-    padding-top: 3em;
-  }
-
-  .text-field {
-    margin-bottom: .9em;
-  }
-  
-  .account-form {
-    padding: 2em;
-  }
-
-  .paragraph-account {
-    margin-bottom: 1em;
-  }
-
-  .utility-page-wrap {
+  .wrap.utility-page {
     padding-top: 2em;
   }
 
-  .utility-page-content, .product-content, .product-sticky {
+  .content.utility-page,
+  .content.product,
+  .product-sticky {
     padding: 2em;
   }
 }
