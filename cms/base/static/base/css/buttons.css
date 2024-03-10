@@ -31,16 +31,6 @@
   background-color: var(--strong-green);
 }
 
-.icon.info {
-  width: 1em;
-  height: 1em;
-}
-
-.icon.button {
-  width: 1.5em;
-  height: 1.5em;
-}
-
 .button.apply {
   height: 3.75em;
   background-color: var(--accent-a1);
