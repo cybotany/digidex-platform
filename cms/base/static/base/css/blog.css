@@ -77,14 +77,15 @@
     padding: 3.4em 3.2em;
   }
 
-  .post-body {
+  .post.body {
     padding-left: 10%;
     padding-right: 10%;
   }
 }
 
 @media screen and (max-width: 767px) {
-  .image.post.thumbnail, .image.post.thumbnail.large {
+  .image.post.thumbnail,
+  .image.post.thumbnail.large {
     height: 50vw;
   }
 
@@ -95,11 +96,12 @@
 }
 
 @media screen and (max-width: 479px) {
-  .post, .post.large {
+  .post,
+  .post.large {
     padding: 1.8em 2.2em;
   }
 
-  .post-body {
+  .post.body {
     padding-top: 2.5em;
     padding-bottom: 2.5em;
   }

@@ -1,0 +1,6 @@
+.wrapper.clients {
+  flex: none;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}

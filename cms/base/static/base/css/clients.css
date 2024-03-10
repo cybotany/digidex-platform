@@ -6,10 +6,3 @@
   margin-top: 3.6em;
   display: flex;
 }
-
-.clients-wrapper {
-  flex: none;
-  justify-content: flex-start;
-  align-items: center;
-  display: flex;
-}

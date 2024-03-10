@@ -1,3 +1,10 @@
+.header.block {
+  border-style: none none solid;
+  border-color: var(--border);
+  background-color: rgba(0, 0, 0, 0);
+  padding: 1em 1.5em;
+}
+
 .header.accordion {
   grid-column-gap: 1em;
   cursor: pointer;

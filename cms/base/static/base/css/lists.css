@@ -15,6 +15,13 @@
   margin-bottom: 3.4em;
 }
 
+.collection-list-wrapper.messages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
 @media screen and (max-width: 991px) {
   .collection-list.shop {
     grid-column-gap: 1.13em;
