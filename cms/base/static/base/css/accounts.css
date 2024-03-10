@@ -30,6 +30,15 @@
     color: var(--white);
 }
 
+.paragraph.account {
+  max-width: 23em;
+  margin-bottom: 1.8em;
+}
+
+.paragraph.account.white {
+  color: rgba(255, 255, 255, .8);
+}
+
 .text.account {
   width: 100%;
   max-width: 32em;
@@ -49,5 +58,9 @@
 @media screen and (max-width: 479px) {
   .form.account {
     padding: 2em;
+  }
+
+  .paragraph.account {
+    margin-bottom: 1em;
   }
 }

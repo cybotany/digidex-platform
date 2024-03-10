@@ -63,6 +63,11 @@
   padding-right: .3em;
 }
 
+.paragraph.accordion {
+  max-width: 90%;
+  margin-bottom: 1.6em;
+}
+
 @media screen and (max-width: 767px) {
   .grid.faq {
     grid-column-gap: .87em;

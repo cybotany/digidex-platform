@@ -73,12 +73,21 @@
   line-height: 130%;
 }
 
-.post.body {
+.body.post {
   width: 100%;
   background-color: var(--white);
   border-radius: .87em;
   padding: 4em 13%;
   box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
+}
+
+.paragraph.post {
+  margin-bottom: 1.4em;
+}
+
+.paragraph.post.large {
+  max-width: 25em;
+  margin-bottom: 1.6em;
 }
 
 .image.main.post {

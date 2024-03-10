@@ -37,6 +37,18 @@
   line-height: 130%;
 }
 
+.paragraph.footer {
+  max-width: 26em;
+  color: rgba(20, 23, 24, .5);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  margin-bottom: 2.2em;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 165%;
+}
+
 .block.social {
   grid-column-gap: .5em;
   grid-row-gap: .5em;

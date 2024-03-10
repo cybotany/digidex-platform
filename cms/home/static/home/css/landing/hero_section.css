@@ -469,6 +469,12 @@
   line-height: 120%;
 }
 
+@media screen and (max-width: 991px) {
+  .paragraph.hero {
+    font-size: 1em;
+  }
+}
+
 
 @media screen and (max-width: 767px) {
   .section.hero {
