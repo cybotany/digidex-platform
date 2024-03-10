@@ -1,4 +1,4 @@
-.grid-product {
+.grid.product {
   grid-column-gap: 1.5em;
   grid-row-gap: 1.5em;
   grid-template-rows: auto;
@@ -120,4 +120,27 @@
   position: sticky;
   top: 100px;
   box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
+}
+
+
+@media screen and (max-width: 991px) {
+  .product-sticky {
+    padding: 3.1em;
+    position: relative;
+    top: auto;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .product {
+    padding: 1.5em;
+  }
+
+  .product.content {
+    padding: 2em;
+  }
+
+  .product-sticky {
+    padding: 2em;
+  }
 }
