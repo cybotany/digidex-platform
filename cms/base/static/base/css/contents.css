@@ -1,0 +1,10 @@
+.content.block {
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px #000;
+  padding: 1.5em;
+}
+
+.content.accordion {
+  display: block;
+  overflow: hidden;
+}

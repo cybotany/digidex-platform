@@ -1,0 +1,16 @@
+.header.accordion {
+  grid-column-gap: 1em;
+  cursor: pointer;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  transition: padding .3s cubic-bezier(.25, .46, .45, .94);
+  display: flex;
+}
+
+.header.accordion:hover {
+  padding-left: .3em;
+  padding-right: .3em;
+}

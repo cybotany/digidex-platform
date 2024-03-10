@@ -1,40 +1,40 @@
-.icon-top-bar {
+.icon.top-bar {
   width: 1.125em;
   height: 1.125em;
 }
 
-.icon-info {
+.icon.info {
   width: 1em;
   height: 1em;
 }
 
-.icon-button {
+.icon.button {
   width: 1.5em;
   height: 1.5em;
 }
 
-.icon-star {
+.icon.star {
   width: 1.13em;
   height: 1.13em;
 }
 
-.icon-accordion {
+.icon.accordion {
   width: 1.5em;
   height: 1.5em;
   flex: none;
 }
 
-.icon-features {
+.icon.features {
   width: 2em;
   height: 2em;
 }
 
-.icon-feature-lottie {
+.icon.feature-lottie {
   width: 1.5em;
   height: 1.5em;
 }
 
-.icon-social {
+.icon.social {
   width: 1.5em;
   height: 1.5em;
 }

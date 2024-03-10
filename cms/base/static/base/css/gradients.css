@@ -1,4 +1,4 @@
-.gradient-reviews {
+.gradient.reviews {
   z-index: 50;
   background-image: linear-gradient(to bottom, var(--background), rgba(244, 246, 247, 0) 10%, rgba(244, 246, 247, 0) 90%, var(--background));
   position: absolute;
@@ -8,7 +8,7 @@
   right: 0%;
 }
 
-.gradient-clients {
+.gradient.clients {
   z-index: 50;
   background-image: linear-gradient(to right, var(--background) 5%, rgba(244, 246, 247, 0) 20%, rgba(244, 246, 247, 0) 80%, var(--background) 95%);
   position: absolute;

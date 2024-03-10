@@ -1,19 +1,19 @@
-.heading-hero {
-  max-width: 11.5em;
-  margin-bottom: .38em;
-}
-
 .heading {
   max-width: 9em;
   margin-bottom: .5em;
 }
 
-.heading-accordion {
+.heading.hero {
+  max-width: 11.5em;
+  margin-bottom: .38em;
+}
+
+.heading.accordion {
   margin-top: .3em;
   margin-bottom: .3em;
 }
 
-.heading-top {
+.heading.top {
   max-width: 11.5em;
   margin-bottom: .38em;
 }
