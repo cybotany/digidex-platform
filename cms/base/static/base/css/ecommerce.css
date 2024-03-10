@@ -6,6 +6,10 @@
   display: flex;
 }
 
+.block.quantity {
+  font-size: .9em;
+}
+
 .block.ecommerce {
   background-color: var(--white);
   border-radius: .87em;
