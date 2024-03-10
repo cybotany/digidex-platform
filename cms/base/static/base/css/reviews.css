@@ -13,6 +13,16 @@
   box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
 }
 
+.block.reviews {
+  height: 40em;
+  grid-column-gap: .88em;
+  grid-row-gap: .88em;
+  flex-direction: row;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
 .review.left {
   width: 100%;
   flex-direction: column;
@@ -47,6 +57,10 @@
 }
 
 @media screen and (max-width: 479px) {
+  .block.reviews {
+    flex-direction: column;
+  }
+
   .review {
     padding: 1.6em;
   }

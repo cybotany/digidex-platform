@@ -11,4 +11,12 @@
   .product {
     padding: 1.5em;
   }
+
+  .product.content {
+    padding: 2em;
+  }
+
+  .product-sticky {
+    padding: 2em;
+  }
 }

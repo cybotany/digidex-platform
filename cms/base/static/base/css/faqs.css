@@ -1,0 +1,15 @@
+.block.faq {
+  grid-column-gap: 1.13em;
+  grid-row-gap: 1.13em;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  display: flex;
+}
+
+@media screen and (max-width: 767px) {
+  .block.faq {
+    grid-column-gap: .87em;
+    grid-row-gap: .87em;
+  }
+}

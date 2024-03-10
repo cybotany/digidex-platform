@@ -6,35 +6,14 @@
   display: flex;
 }
 
-@media screen and (max-width: 991px) {
-  .section.top.bar {
-    padding-top: .8em;
-    padding-bottom: .8em;
-  }
-
-  .section.top {
-    padding-top: 4.5em;
-    padding-bottom: 0;
-  }
-}
-
 @media screen and (max-width: 767px) {
   .section {
     padding-top: 3em;
     padding-bottom: 3em;
   }
-
-  .section.top {
-    padding-top: 3.5em;
-  }
 }
 
 @media screen and (max-width: 479px) {
-  .section.top.bar {
-    padding-left: 1.5em;
-    padding-right: 1.5em;
-  }
-
   .section {
     padding: 2.5em 1.5em;
   }

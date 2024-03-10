@@ -16,6 +16,14 @@
   display: flex;
 }
 
+.block.heading.features {
+  grid-column-gap: 1em;
+  grid-row-gap: 1em;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+
 @media screen and (max-width: 767px) {
   .grid.features {
     grid-template-columns: 1fr 1fr;
