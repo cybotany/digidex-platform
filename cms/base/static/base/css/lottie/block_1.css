@@ -110,3 +110,24 @@
   width: 1.5em;
   height: 1.5em;
 }
+
+@media screen and (max-width: 479px) {
+  .features-lottie {
+    grid-row-gap: 1.5em;
+  }
+
+  .feature-lottie-block {
+    margin-right: 31%;
+  }
+
+  .feature-lottie-block.a3 {
+    margin-right: 38%;
+  }
+
+  .features {
+    grid-column-gap: 1em;
+    grid-row-gap: 1em;
+    padding-top: .8em;
+    padding-bottom: .8em;
+  }
+}

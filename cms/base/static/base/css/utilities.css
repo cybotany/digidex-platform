@@ -139,4 +139,12 @@
   .paragraph-account {
     margin-bottom: 1em;
   }
+
+  .utility-page-wrap {
+    padding-top: 2em;
+  }
+
+  .utility-page-content, .product-content, .product-sticky {
+    padding: 2em;
+  }
 }

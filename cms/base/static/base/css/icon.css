@@ -24,6 +24,11 @@
   flex: none;
 }
 
+.icon-features {
+  width: 2em;
+  height: 2em;
+}
+
 .icon-feature-lottie {
   width: 1.5em;
   height: 1.5em;
