@@ -1,8 +1,8 @@
-.heading-quote {
+.heading.quote {
   margin-bottom: 1.4em;
 }
 
-.block-quote {
+.block.quote {
   grid-column-gap: 1.25em;
   grid-row-gap: 1.25em;
   flex-direction: row;
@@ -11,19 +11,19 @@
   display: flex;
 }
 
-.block-name {
+.block.name {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   display: flex;
 }
 
-.heading-name {
+.heading.name {
   margin-bottom: .3em;
   line-height: 120%;
 }
 
-.text-role {
+.text.role {
   color: rgba(20, 23, 24, .7);
   letter-spacing: .05em;
   text-transform: uppercase;

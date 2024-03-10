@@ -31,6 +31,79 @@
   position: relative;
 }
 
+.lottie.banner {
+  position: absolute;
+  top: -6%;
+  bottom: auto;
+  left: auto;
+  right: 0%;
+}
+
+.line.banner.h {
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, .2) 10%, rgba(255, 255, 255, .2) 90%, rgba(255, 255, 255, 0));
+}
+
+.line.banner.w {
+  width: 1px;
+  background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, .2) 10%, rgba(255, 255, 255, .2) 90%, rgba(255, 255, 255, 0));
+}
+
+.lines.d1 {
+  z-index: 5;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  padding-left: 8%;
+  padding-right: 8.5%;
+  display: flex;
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}
+
+.lines.d2 {
+  z-index: 5;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  padding-top: 14%;
+  padding-bottom: 14%;
+  display: flex;
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}
+
+.lottie.animation2.banner {
+  z-index: 10;
+  width: 100%;
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}
+
+.lottie.animation1.banner {
+  width: 100%;
+}
+
+.lottie.animation2.blur.banner {
+  z-index: 5;
+  width: 100%;
+  filter: blur(50px);
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}
+
 @media screen and (max-width: 767px) {
   .grid.banner {
     grid-template-columns: 1fr;
@@ -38,5 +111,10 @@
 
   .block.banner {
     padding: 4em 10%;
+  }
+
+  .lottie.banner {
+    position: relative;
+    top: 0%;
   }
 }

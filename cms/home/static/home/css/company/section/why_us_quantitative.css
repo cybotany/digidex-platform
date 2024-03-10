@@ -1,4 +1,4 @@
-.grid-numbers {
+.grid.numbers {
   grid-column-gap: .87em;
   grid-row-gap: .87em;
   grid-template-rows: auto;
@@ -21,21 +21,21 @@
   background-color: var(--accent-green);
 }
 
-.icon-numbers {
+.icon.numbers {
   width: 2em;
   height: 2em;
 }
 
-.heading-numbers {
+.heading.numbers {
   color: var(--strong-blue);
   font-weight: 500;
 }
 
-.heading-numbers.green {
+.heading.numbers.green {
   color: var(--strong-green); 
 }
 
-.text-numbers {
+.text.numbers {
   max-width: 11em;
   color: var(--strong-blue);
   letter-spacing: -.02em;
@@ -44,25 +44,25 @@
   line-height: 130%;
 }
 
-.text-numbers.green {
+.text.numbers.green {
   color: var(--strong-green);
 }
 
 @media screen and (max-width: 991px) {
-  .grid-numbers {
+  .grid.numbers {
     font-size: .9em;
   }
 }
 
 @media screen and (max-width: 767px) {
-  .grid-numbers {
+  .grid.numbers {
     width: 100%;
     font-size: 1em;
   }
 }
 
 @media screen and (max-width: 479px) {
-  .grid-numbers {
+  .grid.numbers {
     grid-template-columns: 1fr;
   }
 }
