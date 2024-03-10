@@ -4,3 +4,30 @@
   align-items: center;
   display: flex;
 }
+
+.wrapper.reviews {
+  width: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  display: flex;
+}
+
+.wrapper.reviews.right {
+  justify-content: flex-end;
+}
+
+.wrapper.utility-page {
+  width: 100%;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  padding: 3em 1em;
+  display: flex;
+}
+
+@media screen and (max-width: 479px) {
+  .wrapper.utility-page {
+    padding-top: 2em;
+  }
+}
