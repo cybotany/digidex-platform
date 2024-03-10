@@ -1,0 +1,21 @@
+.block.banner {
+  z-index: 50;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 5em;
+  padding-bottom: 5em;
+  padding-left: 12%;
+  display: flex;
+  position: relative;
+}
+
+.block.banner.lottie {
+  z-index: 10;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  display: flex;
+  position: relative;
+}

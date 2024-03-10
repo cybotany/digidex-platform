@@ -21,6 +21,15 @@
   display: flex;
 }
 
+.nav.block {
+  width: 100%;
+  max-width: 75em;
+  grid-column-gap: 1em;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+
 .brand {
   flex: none;
   margin-right: .5em;
