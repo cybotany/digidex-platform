@@ -207,35 +207,6 @@ figcaption {
   }
 }
 
-.rich-text-block p {
-  margin-bottom: 1.4em;
-}
-  
-.rich-text-block h1 {
-  margin-bottom: .4em;
-}
-  
-.rich-text-block h2,
-.rich-text-block h3,
-.rich-text-block h4,
-.rich-text-block h5,
-.rich-text-block h6 {
-  margin-top: 1em;
-  margin-bottom: .4em;
-}
-  
-.rich-text-block a {
-  border-bottom: 1px solid var(--strong-green);
-  color: var(--strong-green);
-  text-decoration: none;
-  transition: border-color .3s cubic-bezier(.25, .46, .45, .94), color .3s cubic-bezier(.25, .46, .45, .94);
-}
-  
-.rich-text-block a:hover {
-  border-bottom-color: var(--heading);
-  color: var(--heading);
-}
-
 .section {
   justify-content: center;
   align-items: center;

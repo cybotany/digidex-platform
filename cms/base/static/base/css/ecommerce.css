@@ -7,6 +7,12 @@
   align-items: start;
 }
 
+.form.ecommerce {
+  min-height: auto;
+  background-color: rgba(0, 0, 0, 0);
+  padding: 0;
+}
+
 .contents.ecommerce {
   grid-column-gap: 1.5em;
   grid-row-gap: 1.5em;
