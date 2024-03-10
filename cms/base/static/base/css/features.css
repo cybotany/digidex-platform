@@ -1,0 +1,19 @@
+.features {
+  grid-column-gap: 1.3em;
+  grid-row-gap: 1.3em;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-top: 1.2em;
+  padding-bottom: 1.2em;
+  display: flex;
+}
+
+@media screen and (max-width: 479px) {
+  .features {
+    grid-column-gap: 1em;
+    grid-row-gap: 1em;
+    padding-top: .8em;
+    padding-bottom: .8em;
+  }
+}
