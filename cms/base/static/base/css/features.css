@@ -1,3 +1,10 @@
+.grid.features {
+  grid-column-gap: 2em;
+  grid-row-gap: 1.8em;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
 .features {
   grid-column-gap: 1.3em;
   grid-row-gap: 1.3em;
@@ -9,7 +16,18 @@
   display: flex;
 }
 
+@media screen and (max-width: 767px) {
+  .grid.features {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 @media screen and (max-width: 479px) {
+  .grid.features {
+    grid-row-gap: 1.2em;
+    grid-template-columns: 1fr;
+  }
+  
   .features {
     grid-column-gap: 1em;
     grid-row-gap: 1em;
