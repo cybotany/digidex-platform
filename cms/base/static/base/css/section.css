@@ -22,16 +22,36 @@
   display: flex;
 }
 
+.section-top {
+  justify-content: center;
+  align-items: center;
+  padding: 6em 2em 1.5em;
+  display: flex;
+}
+
+.section-top.padding-0 {
+  padding-bottom: 0;
+}
+
 @media screen and (max-width: 991px) {
   .section-top-bar {
     padding-top: .8em;
     padding-bottom: .8em;
+  }
+
+  .section-top {
+    padding-top: 4.5em;
+    padding-bottom: 0;
   }
 }
 
 @media screen and (max-width: 767px) {
   .section-hero {
     padding-bottom: 3em;
+  }
+
+  .section-top {
+    padding-top: 3.5em;
   }
 }
 
@@ -47,6 +67,12 @@
 
   .section-footer {
     padding-top: 2.5em;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+  }
+
+  .section-top {
+    padding-top: 3em;
     padding-left: 1.5em;
     padding-right: 1.5em;
   }

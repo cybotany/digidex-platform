@@ -164,6 +164,14 @@
   display: flex;
 }
 
+.block-top {
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
 @media screen and (max-width: 991px) {
   .block-categories {
     flex-direction: column;
