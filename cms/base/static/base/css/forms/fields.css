@@ -41,32 +41,6 @@ color: rgba(255, 255, 255, .65);
 color: rgba(255, 255, 255, .65);
 }
 
-.text-field.ecommerce {
-  height: 3.75em;
-  border: 1px solid var(--border);
-  background-color: var(--background);
-  color: var(--heading);
-  border-radius: .87em;
-  margin-bottom: 1.12em;
-  padding: 1em 1.2em;
-  font-size: 1em;
-  line-height: 130%;
-  transition: border-color .3s cubic-bezier(.25, .46, .45, .94);
-}
-
-.text-field.ecommerce:focus,
-.text-field.ecommerce.-wfp-focus {
-  border-color: var(--accent-a1);
-}
-
-.text-field.ecommerce::-ms-input-placeholder {
-  color: rgba(20, 23, 24, .6);
-}
-
-.text-field.ecommerce::placeholder {
-  color: rgba(20, 23, 24, .6);
-}
-
 .textarea {
   max-height: 30em;
   max-width: 100%;
@@ -93,10 +67,4 @@ color: rgba(255, 255, 255, .65);
 
 .textarea::placeholder {
   color: rgba(20, 23, 24, .6);
-}
-
-@media screen and (max-width: 479px) {
-  .form.account {
-    padding: 2em;
-  }
 }

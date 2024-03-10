@@ -1,3 +1,15 @@
+.wrapper.reviews {
+  width: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  display: flex;
+}
+
+.wrapper.reviews.right {
+  justify-content: flex-end;
+}
+
 .gradient.reviews {
   z-index: 50;
   background-image: linear-gradient(to bottom, var(--background), rgba(244, 246, 247, 0) 10%, rgba(244, 246, 247, 0) 90%, var(--background));

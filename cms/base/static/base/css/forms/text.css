@@ -63,9 +63,3 @@
   font-weight: 500;
   line-height: 130%;
 }
-
-@media screen and (max-width: 479px) {
-  .text-field.ecommerce {
-    margin-bottom: .9em;
-  }
-}

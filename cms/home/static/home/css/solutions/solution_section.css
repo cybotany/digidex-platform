@@ -101,6 +101,13 @@
   right: 2em;
 }
 
+.wrapper.clients {
+  flex: none;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+
 .clients {
   text-align: center;
   flex-direction: column;

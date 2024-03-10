@@ -10,7 +10,16 @@
   background-color: var(--accent-green);
 }
 
-.utility-page.form {
+.wrapper.utility-page {
+  width: 100%;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  padding: 3em 1em;
+  display: flex;
+}
+
+.form.utility-page {
   width: 100%;
   flex-direction: column;
   align-items: stretch;
@@ -18,7 +27,7 @@
   display: flex;
 }
 
-.utility-page.content {
+.content.utility-page {
   width: 100%;
   max-width: 24em;
   background-color: var(--white);
@@ -33,7 +42,11 @@
 }
 
 @media screen and (max-width: 479px) {
-  .utility-page.content {
+  .content.utility-page {
     padding: 2em;
+  }
+
+  .wrapper.utility-page {
+    padding-top: 2em;
   }
 }
