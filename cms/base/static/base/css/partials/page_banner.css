@@ -1,3 +1,10 @@
+.top.bar {
+  grid-column-gap: 1.87em;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
 .section.top.bar {
   background-color: var(--strong-green);
   flex-direction: column;
@@ -36,11 +43,18 @@
   line-height: 120%;
 }
 
-.top.bar {
-  grid-column-gap: 1.87em;
+.link.bar.top {
+  grid-column-gap: .35em;
+  opacity: .7;
   justify-content: center;
   align-items: center;
+  text-decoration: none;
+  transition: opacity .3s cubic-bezier(.25, .46, .45, .94);
   display: flex;
+}
+
+.link.bar.top:hover {
+  opacity: 1;
 }
 
 @media screen and (max-width: 991px) {

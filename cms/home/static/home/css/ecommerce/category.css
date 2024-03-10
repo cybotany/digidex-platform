@@ -58,6 +58,10 @@
   .block.categories {
     flex-direction: column;
   }
+
+  .link.category {
+    padding: 1em 1.2em;
+  }
 }
 
 @media screen and (max-width: 479px) {

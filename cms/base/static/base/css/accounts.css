@@ -55,6 +55,23 @@
   color: rgba(255, 255, 255, .5);
 }
 
+.link.account {
+  color: rgba(20, 23, 24, .6);
+  transition: color .3s cubic-bezier(.25, .46, .45, .94);
+}
+
+.link.account:hover {
+  color: var(--strong-green);
+}
+
+.link.account.white {
+  color: rgba(255, 255, 255, .5);
+}
+
+.link.account.white:hover {
+  color: var(--white);
+}
+
 @media screen and (max-width: 479px) {
   .form.account {
     padding: 2em;
