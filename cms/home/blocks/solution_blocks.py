@@ -10,13 +10,16 @@ class SolutionBlock(blocks.StructBlock):
         required=True,
         help_text="Enter the solution description"
     )
-    link_url = blocks.URLBlock(
+    link = blocks.PageChooserBlock(
         required=True,
-        help_text="Enter the URL for 'Learn more' link"
+        help_text="Select a page for 'Learn more' link"
     )
     tag = blocks.CharBlock(
         required=False,
-        max_length=255,
+        choices=[
+            ('most_popular', 'Most popular'),
+            ('best_value', 'Best Value')
+        ], 
         help_text="Tag for the solution (optional)"
     )
 

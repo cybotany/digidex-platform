@@ -13,11 +13,14 @@ class HeroSectionBlock(blocks.StructBlock):
     secondary_action_button = basic_blocks.BaseLinkBlock(
         help_text="Secondary action button, typically for support or contact, including an icon."
     )
-    lottie_animations = blocks.StructBlock([
-        ('animation_1', basic_blocks.LottieAnimationBlock(required=False)),
-        ('animation_2', basic_blocks.LottieAnimationBlock(required=False)),
-        ('animation_2_blur', basic_blocks.LottieAnimationBlock(required=False)),
-    ], help_text="Lottie animations for the hero section")
+    lottie_animations = blocks.StructBlock(
+        [
+            ('animation_1', basic_blocks.LottieAnimationBlock(required=False)),
+            ('animation_2', basic_blocks.LottieAnimationBlock(required=False)),
+            ('animation_2_blur', basic_blocks.LottieAnimationBlock(required=False)),
+        ],
+        help_text="Lottie animations for the hero section"
+    )
 
     class Meta:
         template = 'blocks/hero_section_block.html'
