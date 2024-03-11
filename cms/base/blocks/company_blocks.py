@@ -1,5 +1,7 @@
 from wagtail import blocks
 from wagtail.images import blocks as i_blocks
+# Project specific blocks
+from base.blocks import basic_blocks
 
 class TextContentBlock(blocks.StructBlock):
     subtitle = blocks.CharBlock(
@@ -54,7 +56,7 @@ class StatisticsGridBlock(blocks.StructBlock):
 
 
 class FeaturedSectionBlock(blocks.StructBlock):
-    lottie_animation = LottieAnimationBlock()
+    lottie_animation = basic_blocks.LottieAnimationBlock()
     text_content = TextContentBlock()
     statistics_grid = StatisticsGridBlock()
 

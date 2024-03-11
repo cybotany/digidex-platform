@@ -1,34 +1,19 @@
 from wagtail import blocks
-from wagtail.images import blocks as i_blocks
 
 class NavLinkBlock(blocks.StructBlock):
-    title = blocks.CharBlock(required=True, max_length=255, help_text="Enter the link title")
-    url = blocks.URLBlock(required=True, help_text="Enter the link URL")
+    title = blocks.CharBlock(
+        required=True,
+        max_length=255,
+        help_text="Enter the link title"
+    )
+    url = blocks.URLBlock(
+        required=True,
+        help_text="Enter the link URL"
+    )
 
     class Meta:
         icon = 'link'
         template = 'blocks/nav_link_block.html'
-
-
-class ActionButtonBlock(blocks.StructBlock):
-    button_text = blocks.CharBlock(
-        required=True,
-        max_length=255,
-        help_text="Enter the button text"
-    )
-    button_url = blocks.URLBlock(
-        required=True,
-        help_text="Enter the button URL"
-    )
-    button_style = blocks.ChoiceBlock(
-        choices=[
-            ('outline', 'Outline'),
-            ('fill', 'Fill'),
-        ], icon='choice', help_text="Select the button style")
-
-    class Meta:
-        icon = 'plus'
-        template = 'blocks/action_button_block.html'
 
 
 class ShoppingCartBlock(blocks.StructBlock):

@@ -1,24 +1,6 @@
 from wagtail import blocks
-from wagtail.images import blocks as i_blocks
-
-class LinkBlock(blocks.StructBlock):
-    icon = i_blocks.ImageChooserBlock(
-        required=True,
-        help_text="Select an icon for the link"
-    )
-    text = blocks.CharBlock(
-        required=True,
-        max_length=255,
-        help_text="Enter the display text for the link"
-    )
-    url = blocks.URLBlock(
-        required=False,
-        help_text="Enter a URL for the link (optional)"
-    )
-
-    class Meta:
-        icon = 'link'
-        template = 'blocks/top_bar_link_block.html'
+# Project specific blocks
+from base.blocks import basic_blocks
 
 
 class PromoBlock(blocks.StructBlock):
@@ -38,7 +20,7 @@ class TopBarBlock(blocks.StructBlock):
         help_text="Set the promotional message for the top bar"
     )
     links = blocks.ListBlock(
-        LinkBlock(help_text="Add links to the top bar")
+        basic_blocks.LinkBlock(help_text="Add links to the top bar")
     )
     class Meta:
         icon = 'edit'

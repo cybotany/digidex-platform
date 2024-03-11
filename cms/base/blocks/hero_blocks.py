@@ -1,7 +1,8 @@
 from wagtail import blocks
 from wagtail.images import blocks as i_blocks
+# Project specific blocks
+from base.blocks import basic_blocks
 
-from .lottie_blocks import LottieAnimationBlock
 
 class HeroSectionBlock(blocks.StructBlock):
     title = blocks.CharBlock(
@@ -13,15 +14,15 @@ class HeroSectionBlock(blocks.StructBlock):
         required=False,
         help_text="Subtitle or a short paragraph"
     )
-    promotional_link = LinkBlock(help_text="Optional promotional link")
+    promotional_link = basic_blocks.LinkBlock(help_text="Optional promotional link")
     buttons = blocks.ListBlock(
-        ActionButtonBlock(),
+        basic_blocks.ActionButtonBlock(),
         help_text="Add one or more action buttons"
     )
     lottie_animations = blocks.StructBlock([
-        ('animation_1', LottieAnimationBlock(required=False)),
-        ('animation_2', LottieAnimationBlock(required=False)),
-        ('animation_2_blur', LottieAnimationBlock(required=False)),
+        ('animation_1', basic_blocks.LottieAnimationBlock(required=False)),
+        ('animation_2', basic_blocks.LottieAnimationBlock(required=False)),
+        ('animation_2_blur', basic_blocks.LottieAnimationBlock(required=False)),
     ], help_text="Lottie animations for the hero section")
 
     class Meta:
