@@ -32,12 +32,28 @@ class BaseTitleBlock(blocks.StructBlock):
         template = 'blocks/title_block.html'
 
 
+class BaseImageBlock(blocks.StructBlock):
+    image = ImageChooserBlock(
+        required=True
+    )
+    caption = blocks.CharBlock(
+        required=False
+    )
+    attribution = blocks.CharBlock(
+        required=False
+    )
+
+    class Meta:
+        icon = "image"
+        label = "Image"
+        template = "blocks/image_block.html"
+
+
 class BaseIconBlock(blocks.StructBlock):
     """
     A base block for representing icons across different blocks.
     """
-    image = ImageChooserBlock(
-        required=True,
+    image = BaseImageBlock(
         help_text="Select an icon image"
     )
     alt_text = blocks.CharBlock(
@@ -55,22 +71,6 @@ class BaseIconBlock(blocks.StructBlock):
         icon = 'image'
         label = 'Icon'
         template = 'blocks/icon_block.html'
-
-class BaseImageBlock(blocks.StructBlock):
-    image = ImageChooserBlock(
-        required=True
-    )
-    caption = blocks.CharBlock(
-        required=False
-    )
-    attribution = blocks.CharBlock(
-        required=False
-    )
-
-    class Meta:
-        icon = "image"
-        label = "Image"
-        template = "blocks/image_block.html"
 
 
 class BaseURLBlock(blocks.StructBlock):
@@ -97,15 +97,7 @@ class BaseURLBlock(blocks.StructBlock):
 
 class BaseLinkBlock(blocks.StructBlock):
     icon = BaseIconBlock()
-    text = blocks.CharBlock(
-        required=True,
-        max_length=255,
-        help_text="Enter the display text for the link"
-    )
-    url = blocks.URLBlock(
-        required=False,
-        help_text="Enter a URL for the link (optional)"
-    )
+    url = BaseURLBlock()
 
     class Meta:
         icon = 'link'
@@ -113,8 +105,7 @@ class BaseLinkBlock(blocks.StructBlock):
 
 
 class LottieAnimationBlock(blocks.StructBlock):
-    animation_src = blocks.URLBlock(
-        required=True,
+    animation_src = BaseURLBlock(
         help_text="URL to the Lottie animation JSON file."
     )
     loop = blocks.BooleanBlock(
@@ -168,15 +159,7 @@ class LottieBlock(blocks.StructBlock):
 
 
 class ActionButtonBlock(blocks.StructBlock):
-    button_text = blocks.CharBlock(
-        required=True,
-        max_length=255,
-        help_text="Enter the button text"
-    )
-    button_url = blocks.URLBlock(
-        required=True,
-        help_text="Enter the button URL"
-    )
+    button_url = BaseURLBlock()
     button_style = blocks.ChoiceBlock(
         choices=[
             ('outline', 'Outline'),

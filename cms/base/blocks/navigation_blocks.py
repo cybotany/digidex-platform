@@ -10,11 +10,8 @@ class NavLinkBlock(basic_blocks.BaseURLBlock):
         template = 'blocks/nav_link_block.html'
 
 
-class ShoppingCartBlock(blocks.StructBlock):
-    checkout_url = blocks.URLBlock(
-        required=True,
-        help_text="Enter the checkout page URL"
-    )
+class ShoppingCartBlock(basic_blocks.BaseURLBlock):
+    pass
 
     class Meta:
         icon = 'cart'
