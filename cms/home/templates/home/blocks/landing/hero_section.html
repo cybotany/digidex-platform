@@ -5,13 +5,26 @@
         <h1 class="heading-hero">{{ block.value.heading }}</h1>
         <p class="paragraph-hero">{{ block.value.paragraph }}</p>
       </div>
-      <!-- Hero Lottie animations are now rendered dynamically -->
       <div id="heroLottie-LP" data-w-id="heroLottie" class="lottie">
       {% for animation in block.value.lottie_animations %}
         <div class="{{ animation.css_class }}" data-animation-type="lottie" data-src="{% static animation.json_file %}" data-loop="{{ animation.loop }}" data-direction="{{ animation.direction }}" data-autoplay="{{ animation.autoplay }}" data-renderer="svg" data-default-duration="{{ animation.default_duration }}" data-duration="{{ animation.duration }}"></div>
       {% endfor %}
       </div>
       <div class="features-lottie">
+        <div class="features-lottie">
+          <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="feature-lottie-block"><img src="images/bx-check-shield.svg" loading="eager" alt="" class="icon-feature-lottie">
+            <div class="text-feature-lottie">Advanced Security</div>
+          </div>
+          <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="feature-lottie-block a2"><img src="images/bx-tachometer.svg" loading="eager" alt="" class="icon-feature-lottie">
+            <div class="text-feature-lottie">Performance</div>
+          </div>
+          <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="feature-lottie-block a3"><img src="images/bx-rocket.svg" loading="eager" alt="" class="icon-feature-lottie">
+            <div class="text-feature-lottie">99.99% Uptime</div>
+          </div>
+          <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="feature-lottie-block a4"><img src="images/bx-cloud-snow.svg" loading="eager" alt="" class="icon-feature-lottie">
+            <div class="text-feature-lottie">Unlimited Scaling</div>
+          </div>
+        </div>
         {% for feature in block.value.features %}
           <div style="transform: none;" class="feature-lottie-block">
             <img src="{% static feature.icon %}" loading="eager" alt="" class="icon-feature-lottie">

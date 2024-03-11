@@ -10,7 +10,7 @@ class SectionHeadingBlock(blocks.StructBlock):
         required=False
     )
     heading_text = blocks.RichTextBlock(
-        classname="heading-top",
+        classname="heading",
         required=True
     )
 
