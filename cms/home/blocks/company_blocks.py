@@ -2,18 +2,6 @@ from wagtail import blocks
 # Project specific blocks
 from base.blocks import basic_blocks
 
-class TextContentBlock(blocks.StructBlock):
-    title = basic_blocks.BaseTitleBlock()
-    body = blocks.TextBlock(
-        required=True,
-        help_text="Enter the section body text"
-    )
-
-    class Meta:
-        icon = 'doc-full'
-        template = 'blocks/text_content_block.html'
-
-
 class StatisticItemBlock(blocks.StructBlock):
     icon = basic_blocks.BaseIconBlock()
     number = blocks.CharBlock(
@@ -52,7 +40,7 @@ class StatisticsGridBlock(blocks.StructBlock):
 
 class FeaturedSectionBlock(blocks.StructBlock):
     lottie = basic_blocks.LottieBlock()
-    text_content = TextContentBlock()
+    text_content = basic_blocks.TextContentBlock()
     statistics_grid = StatisticsGridBlock()
 
     class Meta:

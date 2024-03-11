@@ -4,11 +4,7 @@ from base.blocks import basic_blocks
 
 class FeatureItemBlock(blocks.StructBlock):
     icon = basic_blocks.BaseIconBlock()
-    title = basic_blocks.BaseTitleBlock()
-    description = blocks.TextBlock(
-        required=True,
-        help_text="Enter the feature description"
-    )
+    content = basic_blocks.TextContentBlock()
 
     class Meta:
         icon = 'pick'

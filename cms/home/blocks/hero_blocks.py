@@ -4,13 +4,13 @@ from base.blocks import basic_blocks
 
 class HeroSectionBlock(blocks.StructBlock):
     title = basic_blocks.BaseTitleBlock()
-    promotional_link = basic_blocks.BaseLinkBlock(
+    promotional_link = basic_blocks.BaseURLBlock(
         help_text="Optional promotional link, for example, a discount or special offer."
     )
     primary_action_button = basic_blocks.ActionButtonBlock(
         help_text="Primary action button, e.g., 'Get Started'."
     )
-    secondary_action_button = basic_blocks.BaseLinkBlock(
+    secondary_action_button = basic_blocks.BaseURLBlock(
         help_text="Secondary action button, typically for support or contact, including an icon."
     )
     lottie_animations = basic_blocks.LottieBlock(
@@ -22,12 +22,8 @@ class HeroSectionBlock(blocks.StructBlock):
 
 
 class FeatureIconBlock(blocks.StructBlock):
-    icon = basic_blocks.BaseIconBlock()
-    title = basic_blocks.BaseTitleBlock()
-    description = blocks.TextBlock(
-        required=True,
-        help_text="Short description of the feature"
-    )
+    icon = basic_blocks.BaseURLBlock()
+    content = basic_blocks.TextContentBlock()
 
     class Meta:
         icon = 'pick'

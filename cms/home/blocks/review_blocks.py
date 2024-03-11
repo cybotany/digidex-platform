@@ -2,12 +2,8 @@ from wagtail import blocks
 # Project specific blocks
 from base.blocks import basic_blocks
 
-class SectionTitleBlock(blocks.StructBlock):
-    title = basic_blocks.BaseTitleBlock()
-    paragraph = blocks.TextBlock(
-        required=False,
-        help_text="Enter an introductory paragraph if needed"
-    )
+class SectionTitleBlock(basic_blocks.TextContentBlock):
+    pass
 
     class Meta:
         icon = 'title'

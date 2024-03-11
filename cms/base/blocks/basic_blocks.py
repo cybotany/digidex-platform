@@ -42,6 +42,21 @@ class BaseImageBlock(blocks.StructBlock):
     attribution = blocks.CharBlock(
         required=False
     )
+    alt_text = blocks.CharBlock(
+        required=False,
+        max_length=255,
+        help_text="Alt text for the icon (optional)"
+    )
+    css_class = blocks.CharBlock(
+        required=False,
+        choices=[
+            ('default', 'Default'),
+            ('highlight', 'Highlight'),
+            ('large', 'Large')
+        ],
+        default='default',
+        help_text="CSS class for styling (optional)"
+    )
 
     class Meta:
         icon = "image"
@@ -49,36 +64,20 @@ class BaseImageBlock(blocks.StructBlock):
         template = "blocks/image_block.html"
 
 
-class BaseIconBlock(blocks.StructBlock):
-    """
-    A base block for representing icons across different blocks.
-    """
-    image = BaseImageBlock(
-        help_text="Select an icon image"
-    )
-    alt_text = blocks.CharBlock(
-        required=False,
-        max_length=255,
-        help_text="Alt text for the icon (optional)"
-    )
-    #icon = blocks.ChoiceBlock(
-    #    choices=get_dynamic_icon_choices(),
-    #    required=True,
-    #    help_text="Select an icon"
-    #)
-
-    class Meta:
-        icon = 'image'
-        label = 'Icon'
-        template = 'blocks/icon_block.html'
-
-
 class BaseURLBlock(blocks.StructBlock):
+    icon = ImageChooserBlock(
+        required=False,
+        help_text="Optional: Select an icon image"
+    )
+    text = blocks.CharBlock(
+        required=True,
+        max_length=255,
+        help_text="Enter the link title or text"
+    )
     url = blocks.URLBlock(
         required=True,
         help_text="Enter the URL"
     )
-    title = BaseTitleBlock()
     target = blocks.ChoiceBlock(
         required=False,
         choices=[
@@ -88,20 +87,66 @@ class BaseURLBlock(blocks.StructBlock):
         help_text="Where the link should open",
         default='_self'
     )
-    
+    css_class = blocks.CharBlock(
+        required=False,
+        choices=[
+            ('default', 'Default'),
+            ('highlight', 'Highlight'),
+            ('large', 'Large')
+        ],
+        default='default',
+        help_text="CSS class for styling (optional)"
+    )
+
     class Meta:
         icon = 'link'
-        label = 'URL'
+        label = 'Enhanced URL'
         template = 'blocks/base_url_block.html'
 
 
-class BaseLinkBlock(blocks.StructBlock):
-    icon = BaseIconBlock()
-    url = BaseURLBlock()
+class BaseButtonBlock(BaseURLBlock):
+    css_class = blocks.CharBlock(
+        required=False,
+        choices=[
+            ('default', 'Default'),
+            ('highlight', 'Highlight'),
+            ('large', 'Large')
+        ],
+        default='default',
+        help_text="CSS class for styling (optional)"
+    )
+
 
     class Meta:
         icon = 'link'
-        template = 'blocks/top_bar_link_block.html'
+        template = 'blocks/button_block.html'
+
+
+class ActionButtonBlock(BaseButtonBlock):
+    button_style = blocks.ChoiceBlock(
+        choices=[
+            ('outline', 'Outline'),
+            ('fill', 'Fill'),
+        ],
+        icon='choice',
+        help_text="Select the button style"
+    )
+
+    class Meta:
+        icon = 'plus'
+        template = 'blocks/action_button_block.html'
+
+
+class TextContentBlock(blocks.StructBlock):
+    title = BaseTitleBlock()
+    body = blocks.TextBlock(
+        required=True,
+        help_text="Enter the section body text"
+    )
+
+    class Meta:
+        icon = 'doc-full'
+        template = 'blocks/text_content_block.html'
 
 
 class LottieAnimationBlock(blocks.StructBlock):
@@ -156,19 +201,3 @@ class LottieBlock(blocks.StructBlock):
 
     class Meta:
         template = 'blocks/lottie_block.html'
-
-
-class ActionButtonBlock(blocks.StructBlock):
-    button_url = BaseURLBlock()
-    button_style = blocks.ChoiceBlock(
-        choices=[
-            ('outline', 'Outline'),
-            ('fill', 'Fill'),
-        ],
-        icon='choice',
-        help_text="Select the button style"
-    )
-
-    class Meta:
-        icon = 'plus'
-        template = 'blocks/action_button_block.html'

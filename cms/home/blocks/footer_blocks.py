@@ -1,24 +1,16 @@
 from wagtail import blocks
-from wagtail.images import blocks as i_blocks
 # Project specific blocks
 from base.blocks import basic_blocks
 
-class SocialLinkBlock(blocks.StructBlock):
-    social = basic_blocks.BaseLinkBlock()
+class QuickLinkBlock(basic_blocks.BaseURLBlock):
+    pass
 
-    class Meta:
-        icon = 'link'
-        template = 'blocks/social_link_block.html'
-
-
-class QuickLinkBlock(blocks.StructBlock):
-    url = basic_blocks.BaseURLBlock()
     class Meta:
         icon = 'link'
         template = 'blocks/quick_link_block.html'
 
 class FooterBlock(blocks.StructBlock):
-    logo_image = i_blocks.ImageChooserBlock(
+    logo_image = basic_blocks.BaseImageBlock(
         required=False,
         help_text="Footer logo image"
     )
@@ -33,7 +25,7 @@ class FooterBlock(blocks.StructBlock):
         QuickLinkBlock(label="Template Link")
     )
     social_links = blocks.ListBlock(
-        SocialLinkBlock(label="Social Link")
+        QuickLinkBlock(label="Social Link")
     )
     copyright_text = blocks.CharBlock(
         required=True,

@@ -5,11 +5,7 @@ from base.blocks import basic_blocks
 
 class SolutionBlock(blocks.StructBlock):
     icon = basic_blocks.BaseIconBlock()
-    title = basic_blocks.BaseTitleBlock()
-    description = blocks.TextBlock(
-        required=True,
-        help_text="Enter the solution description"
-    )
+    content = basic_blocks.TextContentBlock()
     link = blocks.PageChooserBlock(
         required=True,
         help_text="Select a page for 'Learn more' link"
@@ -39,8 +35,7 @@ class SolutionsGridBlock(blocks.StructBlock):
 
 
 class ClientLogoBlock(blocks.StructBlock):
-    logo = i_blocks.ImageChooserBlock(
-        required=True,
+    logo = basic_blocks.BaseImageBlock(
         help_text="Select a client logo"
     )
 
