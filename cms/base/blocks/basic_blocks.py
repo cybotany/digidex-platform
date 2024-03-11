@@ -17,7 +17,12 @@ class BaseTitleBlock(blocks.StructBlock):
     )
     css_class = blocks.CharBlock(
         required=False,
-        max_length=255,
+        choices=[
+            ('default', 'Default'),
+            ('highlight', 'Highlight'),
+            ('large', 'Large')
+        ],
+        default='default',
         help_text="CSS class for styling (optional)"
     )
 
@@ -40,6 +45,11 @@ class BaseIconBlock(blocks.StructBlock):
         max_length=255,
         help_text="Alt text for the icon (optional)"
     )
+    #icon = blocks.ChoiceBlock(
+    #    choices=get_dynamic_icon_choices(),
+    #    required=True,
+    #    help_text="Select an icon"
+    #)
 
     class Meta:
         icon = 'image'
@@ -72,6 +82,15 @@ class BaseURLBlock(blocks.StructBlock):
         required=True,
         max_length=255,
         help_text="Enter the title"
+    )
+    target = blocks.ChoiceBlock(
+        required=False,
+        choices=[
+            ('_self', 'Same window'),
+            ('_blank', 'New window')
+        ],
+        help_text="Where the link should open",
+        default='_self'
     )
     
     class Meta:
@@ -123,6 +142,12 @@ class LottieAnimationBlock(blocks.StructBlock):
         default='svg',
         help_text="Rendering mode for the animation."
     )
+    aspect_ratio = blocks.CharBlock(
+        required=False,
+        max_length=10,
+        help_text="Aspect ratio (e.g., '16:9')",
+        default='16:9'
+    )
     default_duration = blocks.FloatBlock(
         required=False,
         help_text="Default duration in seconds."
@@ -135,42 +160,6 @@ class LottieAnimationBlock(blocks.StructBlock):
 
     class Meta:
         template = "blocks/lottie_animation_block.html"
-
-
-class LottieAnimationBlock(blocks.StructBlock):
-    animation_src = blocks.URLBlock(
-        required=True,
-        help_text="URL to the Lottie animation JSON file."
-    )
-    loop = blocks.BooleanBlock(
-        required=False,
-        default=False
-    )
-    direction = blocks.IntegerBlock(
-        default=1,
-        help_text="Direction of the animation playback."
-    )
-    autoplay = blocks.BooleanBlock(
-        required=False,
-        default=False
-    )
-    renderer = blocks.ChoiceBlock(
-        choices=[('svg', 'SVG'), ('canvas', 'Canvas'), ('html', 'HTML')],
-        default='svg',
-        help_text="Rendering mode for the animation."
-    )
-    default_duration = blocks.FloatBlock(
-        required=False,
-        help_text="Default duration in seconds."
-    )
-    duration = blocks.FloatBlock(
-        required=False,
-        default=0,
-        help_text="Animation duration in seconds, overrides default duration."
-    )
-
-    class Meta:
-        template = "base/blocks/lottie_animation_block.html"
 
 
 class LottieBlock(blocks.StructBlock):
@@ -196,7 +185,10 @@ class ActionButtonBlock(blocks.StructBlock):
         choices=[
             ('outline', 'Outline'),
             ('fill', 'Fill'),
-        ], icon='choice', help_text="Select the button style")
+        ],
+        icon='choice',
+        help_text="Select the button style"
+    )
 
     class Meta:
         icon = 'plus'

@@ -4,10 +4,14 @@ from base.blocks import basic_blocks
 
 class HeroSectionBlock(blocks.StructBlock):
     title = basic_blocks.BaseTitleBlock()
-    promotional_link = blocks.LinkBlock(help_text="Optional promotional link")
-    buttons = blocks.ListBlock(
-        basic_blocks.ActionButtonBlock(),
-        help_text="Add one or more action buttons"
+    promotional_link = basic_blocks.BaseLinkBlock(
+        help_text="Optional promotional link, for example, a discount or special offer."
+    )
+    primary_action_button = basic_blocks.ActionButtonBlock(
+        help_text="Primary action button, e.g., 'Get Started'."
+    )
+    secondary_action_button = basic_blocks.BaseLinkBlock(
+        help_text="Secondary action button, typically for support or contact, including an icon."
     )
     lottie_animations = blocks.StructBlock([
         ('animation_1', basic_blocks.LottieAnimationBlock(required=False)),
