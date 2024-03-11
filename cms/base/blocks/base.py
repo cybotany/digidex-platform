@@ -1,6 +1,5 @@
 from wagtail import blocks
 from wagtail.images import blocks as i_blocks
-from wagtail.embeds import blocks as e_blocks
 
 class ImageBlock(blocks.StructBlock):
     image = i_blocks.ImageChooserBlock(
@@ -53,8 +52,18 @@ class LottieAnimationBlock(blocks.StructBlock):
     class Meta:
         template = "base/blocks/lottie_animation_block.html"
 
+
+class LottieBlock(blocks.StructBlock):
+    lottie_animation_1 = LottieAnimationBlock()
+    lottie_animation_2 = LottieAnimationBlock()
+    lottie_animation_2_blur = LottieAnimationBlock()
+
+    class Meta:
+        template = 'blocks/lottie_block.html'
+
+
 class LinkBlock(blocks.StructBlock):
-    icon = ImageChooserBlock(required=True, help_text="Select an icon for the link")
+    icon = i_blocks.ImageChooserBlock(required=True, help_text="Select an icon for the link")
     text = blocks.CharBlock(required=True, max_length=255, help_text="Enter the display text for the link")
     url = blocks.URLBlock(required=False, help_text="Enter a URL for the link (optional)")
 
@@ -70,27 +79,15 @@ class PromoBlock(blocks.StructBlock):
         icon = 'doc-full'
         template = 'blocks/top_bar_promo_block.html'
 
-class LottieBlock(blocks.StructBlock):
-    lottie_animation_1 = LottieAnimationBlock()
-    lottie_animation_2 = LottieAnimationBlock()
-    lottie_animation_2_blur = LottieAnimationBlock()
 
-    class Meta:
-        template = 'blocks/lottie_block.html'
-
-
-class StepBlock(blocks.StructBlock):
-    title = blocks.CharBlock(
-        required=True,
-        max_length=100
+class TopBarBlock(blocks.StructBlock):
+    promo = PromoBlock(
+        help_text="Set the promotional message for the top bar"
     )
-    description = blocks.TextBlock(
-        required=True
-    )
-    icon = e_blocks.ImageChooserBlock(
-        required=False
+    links = blocks.ListBlock(
+        LinkBlock(help_text="Add links to the top bar")
     )
 
     class Meta:
-        icon = 'list-ul'
-        template = 'base/blocks/step_block.html'
+        icon = 'edit'
+        template = 'blocks/top_bar_block.html'
