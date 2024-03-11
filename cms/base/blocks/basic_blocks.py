@@ -105,17 +105,7 @@ class BaseURLBlock(blocks.StructBlock):
 
 
 class BaseButtonBlock(BaseURLBlock):
-    css_class = blocks.CharBlock(
-        required=False,
-        choices=[
-            ('default', 'Default'),
-            ('highlight', 'Highlight'),
-            ('large', 'Large')
-        ],
-        default='default',
-        help_text="CSS class for styling (optional)"
-    )
-
+    pass
 
     class Meta:
         icon = 'link'
