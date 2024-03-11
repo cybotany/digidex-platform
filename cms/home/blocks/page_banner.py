@@ -22,13 +22,8 @@ class BannerBlock(blocks.StructBlock):
         required=True,
         help_text="Enter the URL for the button."
     )
-    lottie_animation_1_src = blocks.URLBlock(
-        required=False,
-        help_text="URL to the first Lottie animation JSON file."
-    )
-    lottie_animation_2_src = blocks.URLBlock(
-        required=False,
-        help_text="URL to the second Lottie animation JSON file."
+    lottie_animation = basic_blocks.LottieAnimationBlock(
+        help_text="Add a Lottie animation for the section."
     )
 
     class Meta:

@@ -51,15 +51,7 @@ class StatisticsGridBlock(blocks.StructBlock):
 
 
 class FeaturedSectionBlock(blocks.StructBlock):
-    lottie_animations = blocks.StructBlock(
-        [
-            ('animation_1', basic_blocks.LottieAnimationBlock(required=False)),
-            ('animation_2', basic_blocks.LottieAnimationBlock(required=False)),
-            ('animation_2_blur', basic_blocks.LottieAnimationBlock(required=False)),
-        ],
-        help_text="Lottie animations for the hero section"
-    )
-    lottie_animation = basic_blocks.LottieAnimationBlock()
+    lottie = basic_blocks.LottieBlock()
     text_content = TextContentBlock()
     statistics_grid = StatisticsGridBlock()
 

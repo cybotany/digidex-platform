@@ -78,11 +78,7 @@ class BaseURLBlock(blocks.StructBlock):
         required=True,
         help_text="Enter the URL"
     )
-    title = blocks.CharBlock(
-        required=True,
-        max_length=255,
-        help_text="Enter the title"
-    )
+    title = BaseTitleBlock()
     target = blocks.ChoiceBlock(
         required=False,
         choices=[

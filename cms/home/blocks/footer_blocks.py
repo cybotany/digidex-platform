@@ -4,11 +4,7 @@ from wagtail.images import blocks as i_blocks
 from base.blocks import basic_blocks
 
 class SocialLinkBlock(blocks.StructBlock):
-    icon = basic_blocks.BaseIconBlock()
-    url = blocks.URLBlock(
-        required=True,
-        help_text="Social media URL"
-    )
+    social = basic_blocks.BaseLinkBlock()
 
     class Meta:
         icon = 'link'
@@ -16,12 +12,7 @@ class SocialLinkBlock(blocks.StructBlock):
 
 
 class QuickLinkBlock(blocks.StructBlock):
-    title = basic_blocks.BaseTitleBlock()
-    url = blocks.URLBlock(
-        required=True,
-        help_text="URL of the link"
-    )
-
+    url = basic_blocks.BaseURLBlock()
     class Meta:
         icon = 'link'
         template = 'blocks/quick_link_block.html'

@@ -3,19 +3,7 @@ from wagtail import blocks
 from base.blocks import basic_blocks
 
 class ContactMethodBlock(blocks.StructBlock):
-    icon = basic_blocks.BaseIconBlock()
-    method_name = blocks.CharBlock(
-        required=True,
-        max_length=255
-    )
-    contact_detail = blocks.CharBlock(
-        required=True,
-        max_length=255
-    )
-    link = blocks.URLBlock(
-        required=False,
-        help_text="Optional: Add a link for the contact method."
-    )
+    contact_link = basic_blocks.BaseLinkBlock()
 
     class Meta:
         icon = 'user'
@@ -27,7 +15,9 @@ class ContactSectionBlock(blocks.StructBlock):
     contact_methods = blocks.ListBlock(
         ContactMethodBlock(help_text="Add contact methods.")
     )
-    # Add Lottie animation block if needed, assuming you have a LottieBlock defined as before
+    lottie_animation = basic_blocks.LottieBlock(
+        help_text="Add a Lottie animation for the section."
+    )
 
     class Meta:
         icon = 'contact'
