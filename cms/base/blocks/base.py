@@ -53,6 +53,22 @@ class LottieAnimationBlock(blocks.StructBlock):
     class Meta:
         template = "base/blocks/lottie_animation_block.html"
 
+class LinkBlock(blocks.StructBlock):
+    icon = ImageChooserBlock(required=True, help_text="Select an icon for the link")
+    text = blocks.CharBlock(required=True, max_length=255, help_text="Enter the display text for the link")
+    url = blocks.URLBlock(required=False, help_text="Enter a URL for the link (optional)")
+
+    class Meta:
+        icon = 'link'
+        template = 'blocks/top_bar_link_block.html'
+
+
+class PromoBlock(blocks.StructBlock):
+    message = blocks.CharBlock(required=True, max_length=255, help_text="Enter the promotional message")
+
+    class Meta:
+        icon = 'doc-full'
+        template = 'blocks/top_bar_promo_block.html'
 
 class LottieBlock(blocks.StructBlock):
     lottie_animation_1 = LottieAnimationBlock()
