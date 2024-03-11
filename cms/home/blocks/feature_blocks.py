@@ -4,11 +4,7 @@ from base.blocks import basic_blocks
 
 class FeatureItemBlock(blocks.StructBlock):
     icon = basic_blocks.BaseIconBlock()
-    title = blocks.CharBlock(
-        required=True,
-        max_length=255,
-        help_text="Enter the feature title"
-    )
+    title = basic_blocks.BaseTitleBlock()
     description = blocks.TextBlock(
         required=True,
         help_text="Enter the feature description"
@@ -30,16 +26,7 @@ class FeaturesGridBlock(blocks.StructBlock):
 
 
 class SectionHeadingBlock(blocks.StructBlock):
-    subtitle = blocks.CharBlock(
-        required=False,
-        max_length=255,
-        help_text="Enter the section subtitle"
-    )
-    title = blocks.CharBlock(
-        required=True,
-        max_length=255,
-        help_text="Enter the section title"
-    )
+    title = basic_blocks.BaseTitleBlock()
 
     class Meta:
         icon = 'title'

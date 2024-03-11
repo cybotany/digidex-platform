@@ -4,11 +4,7 @@ from wagtail.images import blocks as i_blocks
 from base.blocks import basic_blocks
 
 class SocialLinkBlock(blocks.StructBlock):
-    icon = blocks.CharBlock(
-        required=True,
-        max_length=255,
-        help_text="Icon class or image name"
-    )
+    icon = basic_blocks.BaseIconBlock()
     url = blocks.URLBlock(
         required=True,
         help_text="Social media URL"

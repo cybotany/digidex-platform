@@ -3,11 +3,6 @@ from wagtail import blocks
 from base.blocks import basic_blocks
 
 class TextContentBlock(blocks.StructBlock):
-    subtitle = blocks.CharBlock(
-        required=False,
-        max_length=255,
-        help_text="Enter the section subtitle"
-    )
     title = basic_blocks.BaseTitleBlock()
     body = blocks.TextBlock(
         required=True,

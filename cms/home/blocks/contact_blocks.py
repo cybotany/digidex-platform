@@ -23,14 +23,7 @@ class ContactMethodBlock(blocks.StructBlock):
 
 
 class ContactSectionBlock(blocks.StructBlock):
-    title = blocks.CharBlock(
-        required=True,
-        max_length=255
-    )
-    subtitle = blocks.CharBlock(
-        required=False,
-        max_length=255
-    )
+    title = basic_blocks.BaseTitleBlock()
     contact_methods = blocks.ListBlock(
         ContactMethodBlock(help_text="Add contact methods.")
     )

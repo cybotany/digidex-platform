@@ -4,10 +4,6 @@ from base.blocks import basic_blocks
 
 class HeroSectionBlock(blocks.StructBlock):
     title = basic_blocks.BaseTitleBlock()
-    subtitle = blocks.TextBlock(
-        required=False,
-        help_text="Subtitle or a short paragraph"
-    )
     promotional_link = blocks.LinkBlock(help_text="Optional promotional link")
     buttons = blocks.ListBlock(
         basic_blocks.ActionButtonBlock(),
