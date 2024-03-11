@@ -1,5 +1,4 @@
 from wagtail import blocks
-from wagtail.images import blocks as i_blocks
 # Project specific blocks
 from base.blocks import basic_blocks
 
@@ -25,10 +24,7 @@ class TextContentBlock(blocks.StructBlock):
 
 
 class StatisticItemBlock(blocks.StructBlock):
-    icon = i_blocks.ImageChooserBlock(
-        required=False,
-        help_text="Icon representing the statistic"
-    )
+    icon = basic_blocks.IconBlock()
     number = blocks.CharBlock(
         required=True,
         max_length=255,

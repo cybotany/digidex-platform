@@ -1,4 +1,6 @@
 from wagtail import blocks
+# Project specific blocks
+from base.blocks import basic_blocks
 
 class StarRatingBlock(blocks.StructBlock):
     # Assuming a maximum of 5 stars, this could be extended to be more dynamic

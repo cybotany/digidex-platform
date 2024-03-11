@@ -1,5 +1,7 @@
 from wagtail import blocks
 from wagtail.images import blocks as i_blocks
+# Project specific blocks
+from base.blocks import basic_blocks
 
 class SocialLinkBlock(blocks.StructBlock):
     icon = blocks.CharBlock(

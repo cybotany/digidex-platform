@@ -1,6 +1,37 @@
 from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
 
+class BaseTitleBlock(blocks.StructBlock):
+    """
+    A base block for titles and subtitles, with an optional CSS class for styling.
+    """
+    title = blocks.CharBlock(required=True, max_length=255, help_text="Enter the title")
+    subtitle = blocks.CharBlock(required=False, max_length=255, help_text="Enter the subtitle (optional)")
+    css_class = blocks.CharBlock(required=False, max_length=255, help_text="CSS class for styling (optional)")
+
+    class Meta:
+        icon = 'title'
+        label = 'Title'
+
+
+class IconBlock(blocks.StructBlock):
+    """
+    A base block for representing icons across different blocks.
+    """
+    image = ImageChooserBlock(
+        required=True,
+        help_text="Select an icon image"
+    )
+    alt_text = blocks.CharBlock(
+        required=False,
+        max_length=255,
+        help_text="Alt text for the icon (optional)"
+    )
+
+    class Meta:
+        icon = 'image'
+        label = 'Icon'
+
 class ImageBlock(blocks.StructBlock):
     image = ImageChooserBlock(
         required=True
@@ -124,10 +155,7 @@ class ActionButtonBlock(blocks.StructBlock):
 
 
 class LinkBlock(blocks.StructBlock):
-    icon = ImageChooserBlock(
-        required=True,
-        help_text="Select an icon for the link"
-    )
+    icon = IconBlock()
     text = blocks.CharBlock(
         required=True,
         max_length=255,

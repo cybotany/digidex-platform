@@ -1,11 +1,9 @@
 from wagtail import blocks
-from wagtail.images import blocks as i_blocks
+# Project specific blocks
+from base.blocks import basic_blocks
 
 class ContactMethodBlock(blocks.StructBlock):
-    icon = blocks.StructBlock([
-        ('image', i_blocks.ImageChooserBlock(required=True)),
-        ('alt_text', blocks.CharBlock(required=False, max_length=255)),
-    ])
+    icon = basic_blocks.IconBlock()
     method_name = blocks.CharBlock(
         required=True,
         max_length=255

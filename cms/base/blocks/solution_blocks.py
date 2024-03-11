@@ -1,11 +1,10 @@
 from wagtail import blocks
 from wagtail.images import blocks as i_blocks
+# Project specific blocks
+from base.blocks import basic_blocks
 
 class SolutionBlock(blocks.StructBlock):
-    icon = i_blocks.ImageChooserBlock(
-        required=True,
-        help_text="Select an icon for the solution"
-    )
+    icon = basic_blocks.IconBlock()
     title = blocks.CharBlock(
         required=True,
         max_length=255,
