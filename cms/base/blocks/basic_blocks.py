@@ -80,6 +80,23 @@ class BaseURLBlock(blocks.StructBlock):
         template = 'blocks/base_url_block.html'
 
 
+class BaseLinkBlock(blocks.StructBlock):
+    icon = BaseIconBlock()
+    text = blocks.CharBlock(
+        required=True,
+        max_length=255,
+        help_text="Enter the display text for the link"
+    )
+    url = blocks.URLBlock(
+        required=False,
+        help_text="Enter a URL for the link (optional)"
+    )
+
+    class Meta:
+        icon = 'link'
+        template = 'blocks/top_bar_link_block.html'
+
+
 class LottieAnimationBlock(blocks.StructBlock):
     animation_src = blocks.URLBlock(
         required=True,
@@ -184,20 +201,3 @@ class ActionButtonBlock(blocks.StructBlock):
     class Meta:
         icon = 'plus'
         template = 'blocks/action_button_block.html'
-
-
-class LinkBlock(blocks.StructBlock):
-    icon = IconBlock()
-    text = blocks.CharBlock(
-        required=True,
-        max_length=255,
-        help_text="Enter the display text for the link"
-    )
-    url = blocks.URLBlock(
-        required=False,
-        help_text="Enter a URL for the link (optional)"
-    )
-
-    class Meta:
-        icon = 'link'
-        template = 'blocks/top_bar_link_block.html'

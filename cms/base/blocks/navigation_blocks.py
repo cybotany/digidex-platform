@@ -2,16 +2,8 @@ from wagtail import blocks
 # Project specific blocks
 from base.blocks import basic_blocks
 
-class NavLinkBlock(blocks.StructBlock):
-    title = blocks.CharBlock(
-        required=True,
-        max_length=255,
-        help_text="Enter the link title"
-    )
-    url = blocks.URLBlock(
-        required=True,
-        help_text="Enter the link URL"
-    )
+class NavLinkBlock(basic_blocks.BaseURLBlock):
+    pass
 
     class Meta:
         icon = 'link'
