@@ -1,6 +1,8 @@
 from wagtail import blocks
 from wagtail.images import blocks as i_blocks
 
+from .lottie_blocks import LottieAnimationBlock
+
 class HeroSectionBlock(blocks.StructBlock):
     title = blocks.CharBlock(required=True, max_length=255, help_text="Main heading of the hero section")
     subtitle = blocks.TextBlock(required=False, help_text="Subtitle or a short paragraph")
