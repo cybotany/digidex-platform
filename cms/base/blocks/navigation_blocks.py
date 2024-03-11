@@ -35,7 +35,7 @@ class NavbarBlock(blocks.StructBlock):
         NavLinkBlock(help_text="Add navigation links")
     )
     action_buttons = blocks.ListBlock(
-        ActionButtonBlock(help_text="Add action buttons")
+        basic_blocks.ActionButtonBlock(help_text="Add action buttons")
     )
     shopping_cart = ShoppingCartBlock()
 

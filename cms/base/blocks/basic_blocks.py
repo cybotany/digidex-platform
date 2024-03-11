@@ -5,16 +5,29 @@ class BaseTitleBlock(blocks.StructBlock):
     """
     A base block for titles and subtitles, with an optional CSS class for styling.
     """
-    title = blocks.CharBlock(required=True, max_length=255, help_text="Enter the title")
-    subtitle = blocks.CharBlock(required=False, max_length=255, help_text="Enter the subtitle (optional)")
-    css_class = blocks.CharBlock(required=False, max_length=255, help_text="CSS class for styling (optional)")
+    title = blocks.CharBlock(
+        required=True,
+        max_length=255,
+        help_text="Enter the title"
+    )
+    subtitle = blocks.CharBlock(
+        required=False,
+        max_length=255,
+        help_text="Enter the subtitle (optional)"
+    )
+    css_class = blocks.CharBlock(
+        required=False,
+        max_length=255,
+        help_text="CSS class for styling (optional)"
+    )
 
     class Meta:
         icon = 'title'
         label = 'Title'
+        template = 'blocks/title_block.html'
 
 
-class IconBlock(blocks.StructBlock):
+class BaseIconBlock(blocks.StructBlock):
     """
     A base block for representing icons across different blocks.
     """
@@ -31,8 +44,9 @@ class IconBlock(blocks.StructBlock):
     class Meta:
         icon = 'image'
         label = 'Icon'
+        template = 'blocks/icon_block.html'
 
-class ImageBlock(blocks.StructBlock):
+class BaseImageBlock(blocks.StructBlock):
     image = ImageChooserBlock(
         required=True
     )
@@ -45,7 +59,25 @@ class ImageBlock(blocks.StructBlock):
 
     class Meta:
         icon = "image"
+        label = "Image"
         template = "blocks/image_block.html"
+
+
+class BaseURLBlock(blocks.StructBlock):
+    url = blocks.URLBlock(
+        required=True,
+        help_text="Enter the URL"
+    )
+    title = blocks.CharBlock(
+        required=True,
+        max_length=255,
+        help_text="Enter the title"
+    )
+    
+    class Meta:
+        icon = 'link'
+        label = 'URL'
+        template = 'blocks/base_url_block.html'
 
 
 class LottieAnimationBlock(blocks.StructBlock):
