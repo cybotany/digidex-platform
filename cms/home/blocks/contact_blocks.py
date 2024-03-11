@@ -3,7 +3,7 @@ from wagtail import blocks
 from base.blocks import basic_blocks
 
 class ContactMethodBlock(blocks.StructBlock):
-    icon = basic_blocks.IconBlock()
+    icon = basic_blocks.BaseIconBlock()
     method_name = blocks.CharBlock(
         required=True,
         max_length=255

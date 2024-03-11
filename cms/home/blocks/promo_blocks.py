@@ -2,7 +2,6 @@ from wagtail import blocks
 # Project specific blocks
 from base.blocks import basic_blocks
 
-
 class PromoBlock(blocks.StructBlock):
     message = blocks.CharBlock(
         required=True,

@@ -3,16 +3,12 @@ from wagtail import blocks
 from base.blocks import basic_blocks
 
 class HeroSectionBlock(blocks.StructBlock):
-    title = blocks.CharBlock(
-        required=True,
-        max_length=255,
-        help_text="Main heading of the hero section"
-    )
+    title = basic_blocks.BaseTitleBlock()
     subtitle = blocks.TextBlock(
         required=False,
         help_text="Subtitle or a short paragraph"
     )
-    promotional_link = basic_blocks.LinkBlock(help_text="Optional promotional link")
+    promotional_link = blocks.LinkBlock(help_text="Optional promotional link")
     buttons = blocks.ListBlock(
         basic_blocks.ActionButtonBlock(),
         help_text="Add one or more action buttons"
@@ -28,12 +24,8 @@ class HeroSectionBlock(blocks.StructBlock):
 
 
 class FeatureIconBlock(blocks.StructBlock):
-    icon = basic_blocks.IconBlock()
-    title = blocks.CharBlock(
-        required=True,
-        max_length=255,
-        help_text="Feature title"
-    )
+    icon = basic_blocks.BaseIconBlock()
+    title = basic_blocks.BaseTitleBlock()
     description = blocks.TextBlock(
         required=True,
         help_text="Short description of the feature"

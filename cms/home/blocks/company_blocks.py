@@ -8,11 +8,7 @@ class TextContentBlock(blocks.StructBlock):
         max_length=255,
         help_text="Enter the section subtitle"
     )
-    title = blocks.CharBlock(
-        required=True,
-        max_length=255,
-        help_text="Enter the section title"
-    )
+    title = basic_blocks.BaseTitleBlock()
     body = blocks.TextBlock(
         required=True,
         help_text="Enter the section body text"
@@ -24,7 +20,7 @@ class TextContentBlock(blocks.StructBlock):
 
 
 class StatisticItemBlock(blocks.StructBlock):
-    icon = basic_blocks.IconBlock()
+    icon = basic_blocks.BaseIconBlock()
     number = blocks.CharBlock(
         required=True,
         max_length=255,

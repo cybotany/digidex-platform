@@ -20,11 +20,7 @@ class SocialLinkBlock(blocks.StructBlock):
 
 
 class QuickLinkBlock(blocks.StructBlock):
-    title = blocks.CharBlock(
-        required=True,
-        max_length=255,
-        help_text="Title of the link"
-    )
+    title = basic_blocks.BaseTitleBlock()
     url = blocks.URLBlock(
         required=True,
         help_text="URL of the link"

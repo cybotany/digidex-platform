@@ -4,12 +4,8 @@ from wagtail.images import blocks as i_blocks
 from base.blocks import basic_blocks
 
 class SolutionBlock(blocks.StructBlock):
-    icon = basic_blocks.IconBlock()
-    title = blocks.CharBlock(
-        required=True,
-        max_length=255,
-        help_text="Enter the solution title"
-    )
+    icon = basic_blocks.BaseIconBlock()
+    title = basic_blocks.BaseTitleBlock()
     description = blocks.TextBlock(
         required=True,
         help_text="Enter the solution description"
@@ -51,11 +47,7 @@ class ClientLogoBlock(blocks.StructBlock):
 
 
 class ClientsGridBlock(blocks.StructBlock):
-    title = blocks.CharBlock(
-        required=False,
-        max_length=255,
-        help_text="Title for the clients section"
-    )
+    title = basic_blocks.BaseTitleBlock()
     logos = blocks.ListBlock(
         ClientLogoBlock(help_text="Add client logos")
     )

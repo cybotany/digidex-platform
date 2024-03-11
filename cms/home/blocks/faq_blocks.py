@@ -19,11 +19,7 @@ class AccordionItemBlock(blocks.StructBlock):
 
 
 class FAQBlock(blocks.StructBlock):
-    title = blocks.CharBlock(
-        required=False,
-        max_length=255,
-        help_text="Optional: Enter a title for the FAQ section."
-    )
+    title = basic_blocks.BaseTitleBlock()
     items = blocks.ListBlock(
         AccordionItemBlock(help_text="Add FAQ items.")
     )
