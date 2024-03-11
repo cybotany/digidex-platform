@@ -1,3 +1,2 @@
-from .base import ImageBlock, LottieAnimationBlock, LottieBlock, StepBlock
-from .section import SectionHeadingBlock, BaseSectionBlock
-from .page import PageHeadingBlock, BasePageBlock
+from .basic_blocks import *
+from .navigation_blocks import *
