@@ -11,12 +11,20 @@ class NavLinkBlock(blocks.StructBlock):
 
 
 class ActionButtonBlock(blocks.StructBlock):
-    button_text = blocks.CharBlock(required=True, max_length=255, help_text="Enter the button text")
-    button_url = blocks.URLBlock(required=True, help_text="Enter the button URL")
-    button_style = blocks.ChoiceBlock(choices=[
-        ('outline', 'Outline'),
-        ('fill', 'Fill'),
-    ], icon='choice', help_text="Select the button style")
+    button_text = blocks.CharBlock(
+        required=True,
+        max_length=255,
+        help_text="Enter the button text"
+    )
+    button_url = blocks.URLBlock(
+        required=True,
+        help_text="Enter the button URL"
+    )
+    button_style = blocks.ChoiceBlock(
+        choices=[
+            ('outline', 'Outline'),
+            ('fill', 'Fill'),
+        ], icon='choice', help_text="Select the button style")
 
     class Meta:
         icon = 'plus'
@@ -24,7 +32,10 @@ class ActionButtonBlock(blocks.StructBlock):
 
 
 class ShoppingCartBlock(blocks.StructBlock):
-    checkout_url = blocks.URLBlock(required=True, help_text="Enter the checkout page URL")
+    checkout_url = blocks.URLBlock(
+        required=True,
+        help_text="Enter the checkout page URL"
+    )
 
     class Meta:
         icon = 'cart'
@@ -33,8 +44,12 @@ class ShoppingCartBlock(blocks.StructBlock):
 
 
 class NavbarBlock(blocks.StructBlock):
-    nav_links = blocks.ListBlock(NavLinkBlock(help_text="Add navigation links"))
-    action_buttons = blocks.ListBlock(ActionButtonBlock(help_text="Add action buttons"))
+    nav_links = blocks.ListBlock(
+        NavLinkBlock(help_text="Add navigation links")
+    )
+    action_buttons = blocks.ListBlock(
+        ActionButtonBlock(help_text="Add action buttons")
+    )
     shopping_cart = ShoppingCartBlock()
 
     class Meta:

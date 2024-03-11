@@ -2,9 +2,19 @@ from wagtail import blocks
 from wagtail.images import blocks as i_blocks
 
 class LinkBlock(blocks.StructBlock):
-    icon = i_blocks.ImageChooserBlock(required=True, help_text="Select an icon for the link")
-    text = blocks.CharBlock(required=True, max_length=255, help_text="Enter the display text for the link")
-    url = blocks.URLBlock(required=False, help_text="Enter a URL for the link (optional)")
+    icon = i_blocks.ImageChooserBlock(
+        required=True,
+        help_text="Select an icon for the link"
+    )
+    text = blocks.CharBlock(
+        required=True,
+        max_length=255,
+        help_text="Enter the display text for the link"
+    )
+    url = blocks.URLBlock(
+        required=False,
+        help_text="Enter a URL for the link (optional)"
+    )
 
     class Meta:
         icon = 'link'
@@ -12,7 +22,11 @@ class LinkBlock(blocks.StructBlock):
 
 
 class PromoBlock(blocks.StructBlock):
-    message = blocks.CharBlock(required=True, max_length=255, help_text="Enter the promotional message")
+    message = blocks.CharBlock(
+        required=True,
+        max_length=255,
+        help_text="Enter the promotional message"
+    )
 
     class Meta:
         icon = 'doc-full'

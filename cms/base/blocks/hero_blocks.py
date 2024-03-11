@@ -4,10 +4,20 @@ from wagtail.images import blocks as i_blocks
 from .lottie_blocks import LottieAnimationBlock
 
 class HeroSectionBlock(blocks.StructBlock):
-    title = blocks.CharBlock(required=True, max_length=255, help_text="Main heading of the hero section")
-    subtitle = blocks.TextBlock(required=False, help_text="Subtitle or a short paragraph")
+    title = blocks.CharBlock(
+        required=True,
+        max_length=255,
+        help_text="Main heading of the hero section"
+    )
+    subtitle = blocks.TextBlock(
+        required=False,
+        help_text="Subtitle or a short paragraph"
+    )
     promotional_link = LinkBlock(help_text="Optional promotional link")
-    buttons = blocks.ListBlock(ActionButtonBlock(), help_text="Add one or more action buttons")
+    buttons = blocks.ListBlock(
+        ActionButtonBlock(),
+        help_text="Add one or more action buttons"
+    )
     lottie_animations = blocks.StructBlock([
         ('animation_1', LottieAnimationBlock(required=False)),
         ('animation_2', LottieAnimationBlock(required=False)),
@@ -19,9 +29,19 @@ class HeroSectionBlock(blocks.StructBlock):
 
 
 class FeatureIconBlock(blocks.StructBlock):
-    icon = i_blocks.ImageChooserBlock(required=True, help_text="Select a feature icon")
-    title = blocks.CharBlock(required=True, max_length=255, help_text="Feature title")
-    description = blocks.TextBlock(required=True, help_text="Short description of the feature")
+    icon = i_blocks.ImageChooserBlock(
+        required=True,
+        help_text="Select a feature icon"
+    )
+    title = blocks.CharBlock(
+        required=True,
+        max_length=255,
+        help_text="Feature title"
+    )
+    description = blocks.TextBlock(
+        required=True,
+        help_text="Short description of the feature"
+    )
 
     class Meta:
         icon = 'pick'
