@@ -8,10 +8,6 @@ class ImageBlock(bblocks.BaseStructBlock):
     attribution = bblocks.BaseCharBlock(
         required=False
     )
-    alt_text = bblocks.BaseCharBlock(
-        required=False,
-        help_text="Alt text for the icon (optional)"
-    )
 
     class Meta:
         icon = "image"
@@ -25,7 +21,7 @@ class URLBlock(bblocks.BaseStructBlock):
         help_text="Optional: Select an icon image"
     )
     text = bblocks.BaseCharBlock(
-        help_text="Enter the link title or text"
+        help_text="Enter the link title"
     )
     url = bblocks.BaseURLBlock(
         required=True,
@@ -48,25 +44,15 @@ class URLBlock(bblocks.BaseStructBlock):
 
 
 class ButtonBlock(bblocks.BaseStructBlock):
-    button_style = bblocks.BaseChoiceBlock(
-        choices=[
-            ('outline', 'Outline'),
-            ('fill', 'Fill'),
-        ],
-        icon='choice',
-        help_text="Select the button style"
-    )
+    button = URLBlock()
 
     class Meta:
         icon = 'plus'
         template = 'blocks/button_block.html'
 
 
-class TitleBlock(bblocks.BaseStructBlock):
-    """
-    A base block for titles and subtitles, with an optional CSS class for styling.
-    """
-    title = bblocks.BaseCharBlock(
+class SectionHeadingBlock(bblocks.BaseStructBlock):
+    heading = bblocks.BaseCharBlock(
         help_text="Enter the title"
     )
     subtitle = bblocks.BaseCharBlock(
@@ -76,12 +62,12 @@ class TitleBlock(bblocks.BaseStructBlock):
 
     class Meta:
         icon = 'title'
-        label = 'Title'
-        template = 'blocks/title_block.html'
+        label = 'Heading'
+        template = 'blocks/section_heading.html'
 
 
 class TextContentBlock(bblocks.BaseStructBlock):
-    title = TitleBlock()
+    heading = SectionHeadingBlock()
     body = bblocks.BaseTextBlock(
         help_text="Enter the section body text"
     )
@@ -91,55 +77,55 @@ class TextContentBlock(bblocks.BaseStructBlock):
         template = 'blocks/text_content_block.html'
 
 
-class LottieAnimationBlock(bblocks.BaseStructBlock):
-    animation_src = bblocks.BaseURLBlock(
-        help_text="URL to the Lottie animation JSON file."
+class PromoBar(bblocks.BaseStructBlock):
+    message = bblocks.BaseCharBlock(
+        help_text="Enter the promotional message"
     )
-    loop = bblocks.BaseBooleanBlock(
-        required=False,
-        default=False
-    )
-    direction = bblocks.BaseIntegerBlock(
-        default=1,
-        help_text="Direction of the animation playback."
-    )
-    autoplay = bblocks.BaseBooleanBlock(
-        required=False,
-        default=False
-    )
-    renderer = bblocks.BaseChoiceBlock(
-        choices=[
-            ('svg', 'SVG'),
-            ('canvas', 'Canvas'),
-            ('html', 'HTML')
-        ],
-        default='svg',
-        help_text="Rendering mode for the animation."
-    )
-    aspect_ratio = bblocks.BaseCharBlock(
-        required=False,
-        max_length=10,
-        help_text="Aspect ratio (e.g., '16:9')",
-        default='16:9'
-    )
-    default_duration = bblocks.BaseFloatBlock(
-        required=False,
-        help_text="Default duration in seconds."
-    )
-    duration = bblocks.BaseFloatBlock(
-        required=False,
-        default=0,
-        help_text="Animation duration in seconds, overrides default duration."
+    icons = bblocks.BaseListBlock(
+        URLBlock(help_text="Add links to the top bar")
     )
 
     class Meta:
-        template = "blocks/lottie_animation_block.html"
+        icon = 'doc-full'
+        template = 'blocks/top_bar_block.html'
 
 
-class LottieBlock(bblocks.BaseStructBlock):
-    lottie_animation_1 = LottieAnimationBlock()
-    lottie_animation_2 = LottieAnimationBlock()
-    lottie_animation_2_blur = LottieAnimationBlock()
+class NavigationBarBlock(bblocks.BaseStructBlock):
+    nav_links = bblocks.BaseListBlock(
+        URLBlock(help_text="Add navigation links")
+    )
+    action_buttons = bblocks.BaseListBlock(
+        ButtonBlock(help_text="Add action buttons")
+    )
+    shopping_cart = URLBlock()
 
     class Meta:
-        template = 'blocks/lottie_block.html'
+        icon = 'site'
+        template = 'blocks/navbar_block.html'
+
+
+class FooterBlock(bblocks.BaseStructBlock):
+    logo = bblocks.BaseImageBlock(
+        required=False,
+        help_text="Footer logo image"
+    )
+    description = bblocks.BaseTextBlock(
+        required=False,
+        help_text="Footer description"
+    )
+    quick_links = bblocks.BaseListBlock(
+        bblocks.BaseURLBlock(label="Quick Link")
+    )
+    template_links = bblocks.BaseListBlock(
+        bblocks.BaseURLBlock(label="Template Link")
+    )
+    social_links = bblocks.BaseListBlock(
+        bblocks.BaseURLBlock(label="Social Link")
+    )
+    copyright_text = bblocks.BaseCharBlock(
+        help_text="Copyright text"
+    )
+
+    class Meta:
+        icon = 'site'
+        template = 'blocks/footer_block.html'

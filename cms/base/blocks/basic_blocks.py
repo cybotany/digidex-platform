@@ -51,6 +51,6 @@ class BaseStructBlock(blocks.StructBlock):
         template = "blocks/base/struct_block.html"
 
 
-class BaseStreamBlock(blocks.BaseStreamBlock):
+class BaseStreamBlock(blocks.StreamBlock):
     class Meta:
         template = "blocks/base/stream_block.html"
