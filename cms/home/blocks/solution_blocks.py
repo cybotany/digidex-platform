@@ -1,10 +1,9 @@
 from wagtail import blocks
-from wagtail.images import blocks as i_blocks
 # Project specific blocks
 from base.blocks import basic_blocks
 
 class SolutionBlock(blocks.StructBlock):
-    icon = basic_blocks.BaseIconBlock()
+    icon = basic_blocks.BaseImageBlock()
     content = basic_blocks.TextContentBlock()
     link = blocks.PageChooserBlock(
         required=True,

@@ -3,9 +3,7 @@ from wagtail import blocks
 from base.blocks import basic_blocks
 
 class PromoBlock(blocks.StructBlock):
-    message = blocks.CharBlock(
-        required=True,
-        max_length=255,
+    message = basic_blocks.BaseCharBlock(
         help_text="Enter the promotional message"
     )
 
@@ -19,7 +17,7 @@ class TopBarBlock(blocks.StructBlock):
         help_text="Set the promotional message for the top bar"
     )
     links = blocks.ListBlock(
-        basic_blocks.LinkBlock(help_text="Add links to the top bar")
+        basic_blocks.BaseURLBlock(help_text="Add links to the top bar")
     )
     class Meta:
         icon = 'edit'

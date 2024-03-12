@@ -2,14 +2,6 @@ from wagtail import blocks
 # Project specific blocks
 from base.blocks import basic_blocks
 
-class SectionTitleBlock(basic_blocks.TextContentBlock):
-    pass
-
-    class Meta:
-        icon = 'title'
-        template = 'blocks/section_title_block.html'
-
-
 class StarRatingBlock(blocks.StructBlock):
     stars = blocks.IntegerBlock(
         min_value=1,
@@ -24,9 +16,7 @@ class ReviewBlock(blocks.StructBlock):
         required=True,
         help_text="The text of the review"
     )
-    reviewer_name = blocks.CharBlock(
-        required=True,
-        max_length=255,
+    reviewer_name = basic_blocks.BaseCharBlock(
         help_text="Name of the reviewer"
     )
 
@@ -44,26 +34,11 @@ class ReviewsWrapperBlock(blocks.StructBlock):
         icon = 'group'
         template = 'blocks/reviews_wrapper_block.html'
 
-class ButtonBlock(blocks.StructBlock):
-    button_text = blocks.CharBlock(
-        required=True,
-        max_length=255,
-        help_text="Enter the button text"
-    )
-    button_link = blocks.URLBlock(
-        required=True,
-        help_text="Enter the URL the button will link to"
-    )
-
-    class Meta:
-        icon = 'link'
-        template = 'blocks/button_block.html'
-
 
 class ReviewSectionBlock(blocks.StructBlock):
-    title = SectionTitleBlock()
+    title = basic_blocks.TextContentBlock()
     reviews = ReviewsWrapperBlock()
-    button = ButtonBlock()
+    button = basic_blocks.ButtonBlock()
 
     class Meta:
         icon = 'placeholder'

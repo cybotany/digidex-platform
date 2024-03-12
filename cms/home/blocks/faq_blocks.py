@@ -3,9 +3,7 @@ from wagtail import blocks
 from base.blocks import basic_blocks
 
 class AccordionItemBlock(blocks.StructBlock):
-    question = blocks.CharBlock(
-        required=True,
-        max_length=255, 
+    question = basic_blocks.BaseCharBlock(
         help_text="Enter the FAQ question."
     )
     answer = blocks.TextBlock(

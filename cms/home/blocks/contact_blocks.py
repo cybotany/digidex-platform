@@ -3,7 +3,7 @@ from wagtail import blocks
 from base.blocks import basic_blocks
 
 class ContactMethodBlock(blocks.StructBlock):
-    contact_link = basic_blocks.BaseLinkBlock()
+    contact_link = basic_blocks.BaseURLBlock()
 
     class Meta:
         icon = 'user'

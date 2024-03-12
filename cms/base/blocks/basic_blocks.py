@@ -1,18 +1,26 @@
 from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
 
+class BaseCharBlock(blocks.CharBlock):
+    def __init__(self, required=True, max_length=255, default="Default", help_text=None, **kwargs):
+        if help_text:
+            kwargs['help_text'] = help_text
+        super().__init__(required=required, max_length=max_length, **kwargs)
+
+    def clean(self, value):
+        value = super().clean(value)
+        return value
+
+
 class BaseTitleBlock(blocks.StructBlock):
     """
     A base block for titles and subtitles, with an optional CSS class for styling.
     """
-    title = blocks.CharBlock(
-        required=True,
-        max_length=255,
+    title = blocks.BaseCharBlock(
         help_text="Enter the title"
     )
-    subtitle = blocks.CharBlock(
+    subtitle = blocks.BaseCharBlock(
         required=False,
-        max_length=255,
         help_text="Enter the subtitle (optional)"
     )
     css_class = blocks.CharBlock(
@@ -36,15 +44,14 @@ class BaseImageBlock(blocks.StructBlock):
     image = ImageChooserBlock(
         required=True
     )
-    caption = blocks.CharBlock(
+    caption = BaseCharBlock(
         required=False
     )
-    attribution = blocks.CharBlock(
+    attribution = BaseCharBlock(
         required=False
     )
-    alt_text = blocks.CharBlock(
+    alt_text = BaseCharBlock(
         required=False,
-        max_length=255,
         help_text="Alt text for the icon (optional)"
     )
     css_class = blocks.CharBlock(
@@ -69,9 +76,7 @@ class BaseURLBlock(blocks.StructBlock):
         required=False,
         help_text="Optional: Select an icon image"
     )
-    text = blocks.CharBlock(
-        required=True,
-        max_length=255,
+    text = BaseCharBlock(
         help_text="Enter the link title or text"
     )
     url = blocks.URLBlock(
@@ -104,15 +109,7 @@ class BaseURLBlock(blocks.StructBlock):
         template = 'blocks/base_url_block.html'
 
 
-class BaseButtonBlock(BaseURLBlock):
-    pass
-
-    class Meta:
-        icon = 'link'
-        template = 'blocks/button_block.html'
-
-
-class ActionButtonBlock(BaseButtonBlock):
+class ButtonBlock(BaseURLBlock):
     button_style = blocks.ChoiceBlock(
         choices=[
             ('outline', 'Outline'),
@@ -124,7 +121,7 @@ class ActionButtonBlock(BaseButtonBlock):
 
     class Meta:
         icon = 'plus'
-        template = 'blocks/action_button_block.html'
+        template = 'blocks/button_block.html'
 
 
 class TextContentBlock(blocks.StructBlock):
@@ -164,7 +161,7 @@ class LottieAnimationBlock(blocks.StructBlock):
         default='svg',
         help_text="Rendering mode for the animation."
     )
-    aspect_ratio = blocks.CharBlock(
+    aspect_ratio = BaseCharBlock(
         required=False,
         max_length=10,
         help_text="Aspect ratio (e.g., '16:9')",

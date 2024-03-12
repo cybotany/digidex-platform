@@ -3,15 +3,11 @@ from wagtail import blocks
 from base.blocks import basic_blocks
 
 class StatisticItemBlock(blocks.StructBlock):
-    icon = basic_blocks.BaseIconBlock()
-    number = blocks.CharBlock(
-        required=True,
-        max_length=255,
+    icon = basic_blocks.BaseImageBlock()
+    number = basic_blocks.BaseCharBlock(
         help_text="Statistic number"
     )
-    description = blocks.CharBlock(
-        required=True,
-        max_length=255,
+    description = basic_blocks.BaseCharBlock(
         help_text="Statistic description"
     )
     style = blocks.ChoiceBlock(

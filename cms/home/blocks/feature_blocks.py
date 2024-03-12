@@ -3,7 +3,7 @@ from wagtail import blocks
 from base.blocks import basic_blocks
 
 class FeatureItemBlock(blocks.StructBlock):
-    icon = basic_blocks.BaseIconBlock()
+    icon = basic_blocks.BaseURLBlock()
     content = basic_blocks.TextContentBlock()
 
     class Meta:
@@ -21,16 +21,14 @@ class FeaturesGridBlock(blocks.StructBlock):
         template = 'blocks/features_grid_block.html'
 
 
-class SectionHeadingBlock(blocks.StructBlock):
-    title = basic_blocks.BaseTitleBlock()
-
+class SectionHeadingBlock(basic_blocks.BaseTitleBlock):
+    pass
     class Meta:
         icon = 'title'
         template = 'blocks/section_heading_block.html'
 
 
-class HostingFeaturesSectionBlock(blocks.StructBlock):
-    heading = SectionHeadingBlock()
+class HostingFeaturesSectionBlock(SectionHeadingBlock):
     features_grid = FeaturesGridBlock()
 
     class Meta:
