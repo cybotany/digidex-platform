@@ -3,6 +3,7 @@ from base.blocks import composite_blocks as cblocks
 
 class BaseBlock(bblocks.BaseStructBlock):
     pass
+
     class Meta:
         template = "blocks/layout/block.html"
 
@@ -14,6 +15,7 @@ class BaseGrid(bblocks.BaseStreamBlock):
         ],
         min_num=1
     )
+
     class Meta:
         template = "blocks/layout/grid.html"
 
@@ -26,12 +28,14 @@ class BaseContent(bblocks.BaseStructBlock):
         ],
         max_num=1
     )
+
     class Meta:
         template = "blocks/layout/content.html"
 
 
 class BaseSection(bblocks.BaseStructBlock):
     content = BaseContent()
+
     class Meta:
         template = "blocks/layout/section.html"
 
@@ -43,25 +47,23 @@ class BasePageBody(bblocks.BaseStreamBlock):
         ],
         min_num=1
     ) 
+
     class Meta:
         template = "blocks/layout/page_body.html"
 
 
-class BasePageHeader(bblocks.BaseStructBlock):
-    navigation = cblocks.NavbarBlock()
+class PageHeaderBlock(bblocks.BaseStructBlock):
+    promo = cblocks.PromoBarBlock()
+    navigation = cblocks.NavigationBarBlock()
+
     class Meta:
         template = "blocks/layout/page_header.html"
 
 
-class BasePageFooter(bblocks.BaseStructBlock):
-    pass
-    class Meta:
-        template = "blocks/layout/page_footer.html"
-
-
 class BasePage(bblocks.BaseStructBlock):
-    page_header = BasePageHeader()
+    page_header = PageHeaderBlock()
     page_body = BasePageBody()
-    page_footer = BasePageFooter()
+    page_footer = cblocks.FooterBlock()
+
     class Meta:
         template = "blocks/layout/page.html"

@@ -20,7 +20,7 @@ class URLBlock(bblocks.BaseStructBlock):
         required=False,
         help_text="Optional: Select an icon image"
     )
-    text = bblocks.BaseCharBlock(
+    text = bblocks.BaseTextBlock(
         help_text="Enter the link title"
     )
     url = bblocks.BaseURLBlock(
@@ -51,7 +51,7 @@ class ButtonBlock(bblocks.BaseStructBlock):
         template = 'blocks/button_block.html'
 
 
-class SectionHeadingBlock(bblocks.BaseStructBlock):
+class HeadingBlock(bblocks.BaseStructBlock):
     heading = bblocks.BaseCharBlock(
         help_text="Enter the title"
     )
@@ -67,7 +67,7 @@ class SectionHeadingBlock(bblocks.BaseStructBlock):
 
 
 class TextContentBlock(bblocks.BaseStructBlock):
-    heading = SectionHeadingBlock()
+    heading = HeadingBlock()
     body = bblocks.BaseTextBlock(
         help_text="Enter the section body text"
     )
@@ -77,7 +77,7 @@ class TextContentBlock(bblocks.BaseStructBlock):
         template = 'blocks/text_content_block.html'
 
 
-class PromoBar(bblocks.BaseStructBlock):
+class PromoBarBlock(bblocks.BaseStructBlock):
     message = bblocks.BaseCharBlock(
         help_text="Enter the promotional message"
     )
@@ -113,14 +113,10 @@ class FooterBlock(bblocks.BaseStructBlock):
         required=False,
         help_text="Footer description"
     )
-    quick_links = bblocks.BaseListBlock(
-        bblocks.BaseURLBlock(label="Quick Link")
-    )
-    template_links = bblocks.BaseListBlock(
-        bblocks.BaseURLBlock(label="Template Link")
-    )
-    social_links = bblocks.BaseListBlock(
-        bblocks.BaseURLBlock(label="Social Link")
+    links = bblocks.BaseListBlock(
+        bblocks.BaseURLBlock(label="Quick Links"),
+        bblocks.BaseURLBlock(label="Template Links"),
+        bblocks.BaseURLBlock(label="Social Links")
     )
     copyright_text = bblocks.BaseCharBlock(
         help_text="Copyright text"
