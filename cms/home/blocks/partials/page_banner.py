@@ -1,11 +1,13 @@
-from wagtail import blocks
 # Project specific blocks
-from cms.base.blocks import basic_blocks
+from base.blocks.basic import layout_blocks as _lblocks, \
+                              composite_blocks as _cblocks
+# App specific blocks
+from home.blocks.partials import lottie_block
 
-class BannerBlock(blocks.StructBlock):
-    title = basic_blocks.BaseTitleBlock()
-    button = basic_blocks.ButtonBlock()
-    lottie_animation = basic_blocks.LottieAnimationBlock()
+class BannerBlock(_lblocks.SectionBlock):
+    title = _cblocks.HeadingBlock()
+    button = _cblocks.ButtonBlock()
+    lottie_animation = lottie_block.LottieBlock()
 
     class Meta:
         icon = 'placeholder'

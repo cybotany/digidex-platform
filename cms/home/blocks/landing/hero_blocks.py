@@ -1,16 +1,19 @@
-from wagtail import blocks
 # Project specific blocks
-from cms.base.blocks import basic_blocks
+from base.blocks.basic import basic_blocks as _bblocks,\
+                              layout_blocks as _lblocks,\
+                              composite_blocks as _cblocks
+# App specific blocks
+from home.blocks.partials import lottie_block
 
-class HeroSectionBlock(blocks.StructBlock):
-    title = basic_blocks.BaseTitleBlock()
-    promotional_link = basic_blocks.BaseURLBlock(
+class HeroSectionBlock(_lblocks.SectionBlock):
+    title = _cblocks.HeadingBlock()
+    promotional_link = _cblocks.URLBlock(
         help_text="Optional promotional link, for example, a discount or special offer."
     )
-    button = blocks.ListBlock(
-        basic_blocks.ButtonBlock()
+    button = _bblocks.BaseListBlock(
+        _cblocks.ButtonBlock()
     )
-    lottie_animations = basic_blocks.LottieBlock(
+    lottie_animations = lottie_block.LottieBlock(
         required=False
     )
 
@@ -18,10 +21,8 @@ class HeroSectionBlock(blocks.StructBlock):
         template = 'blocks/hero_section_block.html'
 
 
-class FeatureIconBlock(blocks.StructBlock):
-    icon = basic_blocks.BaseURLBlock()
-    content = basic_blocks.TextContentBlock()
-
+class FeatureIconBlock(_cblocks.URLBlock):
+    pass
     class Meta:
         icon = 'pick'
         template = 'blocks/feature_icon_block.html'

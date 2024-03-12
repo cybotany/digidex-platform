@@ -1,8 +1,8 @@
 from base.blocks.basic import basic_blocks
-from base.blocks.page.header import navigation_bar, promo_banner
+from base.blocks.page.header import navigation_bar, promo_bar
 
 class PageHeaderBlock(basic_blocks.BaseStructBlock):
-    promo = promo_banner.PromoBarBlock()
+    promo = promo_bar.PromoBarBlock()
     navigation = navigation_bar.NavigationBarBlock()
 
     class Meta:

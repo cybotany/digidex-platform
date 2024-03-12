@@ -1,22 +1,22 @@
-from cms.base.blocks import basic_blocks as bblocks
+from base.blocks.basic import basic_blocks as _bblocks
 
-class LottieAnimationBlock(bblocks.BaseStructBlock):
-    animation_src = bblocks.BaseURLBlock(
+class LottieAnimationBlock(_bblocks.BaseStructBlock):
+    animation_src = _bblocks.BaseURLBlock(
         help_text="URL to the Lottie animation JSON file."
     )
-    loop = bblocks.BaseBooleanBlock(
+    loop = _bblocks.BaseBooleanBlock(
         required=False,
         default=False
     )
-    direction = bblocks.BaseIntegerBlock(
+    direction = _bblocks.BaseIntegerBlock(
         default=1,
         help_text="Direction of the animation playback."
     )
-    autoplay = bblocks.BaseBooleanBlock(
+    autoplay = _bblocks.BaseBooleanBlock(
         required=False,
         default=False
     )
-    renderer = bblocks.BaseChoiceBlock(
+    renderer = _bblocks.BaseChoiceBlock(
         choices=[
             ('svg', 'SVG'),
             ('canvas', 'Canvas'),
@@ -25,17 +25,17 @@ class LottieAnimationBlock(bblocks.BaseStructBlock):
         default='svg',
         help_text="Rendering mode for the animation."
     )
-    aspect_ratio = bblocks.BaseCharBlock(
+    aspect_ratio = _bblocks.BaseCharBlock(
         required=False,
         max_length=10,
         help_text="Aspect ratio (e.g., '16:9')",
         default='16:9'
     )
-    default_duration = bblocks.BaseFloatBlock(
+    default_duration = _bblocks.BaseFloatBlock(
         required=False,
         help_text="Default duration in seconds."
     )
-    duration = bblocks.BaseFloatBlock(
+    duration = _bblocks.BaseFloatBlock(
         required=False,
         default=0,
         help_text="Animation duration in seconds, overrides default duration."
@@ -45,7 +45,7 @@ class LottieAnimationBlock(bblocks.BaseStructBlock):
         template = "blocks/lottie_animation_block.html"
 
 
-class LottieBlock(bblocks.BaseStructBlock):
+class LottieBlock(_bblocks.BaseStructBlock):
     lottie_animation_1 = LottieAnimationBlock()
     lottie_animation_2 = LottieAnimationBlock()
     lottie_animation_2_blur = LottieAnimationBlock()

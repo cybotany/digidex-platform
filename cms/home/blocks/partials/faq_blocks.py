@@ -1,12 +1,13 @@
-from wagtail import blocks
 # Project specific blocks
-from cms.base.blocks import basic_blocks
+from base.blocks.basic import basic_blocks as _bblocks, \
+                              layout_blocks as _lblocks, \
+                              composite_blocks as _cblocks
 
-class AccordionItemBlock(blocks.StructBlock):
-    question = basic_blocks.BaseCharBlock(
+class AccordionItemBlock(_lblocks.BaseBlock):
+    question = _bblocks.BaseCharBlock(
         help_text="Enter the FAQ question."
     )
-    answer = blocks.TextBlock(
+    answer = _bblocks.BaseTextBlock(
         required=True,
         help_text="Enter the answer to the question."
     )
@@ -16,9 +17,9 @@ class AccordionItemBlock(blocks.StructBlock):
         template = 'blocks/accordion_item_block.html'
 
 
-class FAQBlock(blocks.StructBlock):
-    title = basic_blocks.BaseTitleBlock()
-    items = blocks.ListBlock(
+class FAQBlock(_lblocks.GridBlock):
+    title = _cblocks.HeadingBlock()
+    items = _bblocks.BaseListBlock(
         AccordionItemBlock(help_text="Add FAQ items.")
     )
 

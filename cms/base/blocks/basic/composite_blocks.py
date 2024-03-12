@@ -1,11 +1,11 @@
-from base.blocks.basic import basic_blocks as bblocks
+from base.blocks.basic import basic_blocks as _bblocks
 
-class ImageBlock(bblocks.BaseStructBlock):
-    image = bblocks.BaseImageBlock()
-    caption = bblocks.BaseCharBlock(
+class ImageBlock(_bblocks.BaseStructBlock):
+    image = _bblocks.BaseImageBlock()
+    caption = _bblocks.BaseCharBlock(
         required=False
     )
-    attribution = bblocks.BaseCharBlock(
+    attribution = _bblocks.BaseCharBlock(
         required=False
     )
 
@@ -15,19 +15,19 @@ class ImageBlock(bblocks.BaseStructBlock):
         template = "blocks/image_block.html"
 
 
-class URLBlock(bblocks.BaseStructBlock):
-    icon = bblocks.BaseImageBlock(
+class URLBlock(_bblocks.BaseStructBlock):
+    icon = _bblocks.BaseImageBlock(
         required=False,
         help_text="Optional: Select an icon image"
     )
-    text = bblocks.BaseTextBlock(
+    text = _bblocks.BaseTextBlock(
         help_text="Enter the link title"
     )
-    url = bblocks.BaseURLBlock(
+    url = _bblocks.BaseURLBlock(
         required=True,
         help_text="Enter the URL"
     )
-    target = bblocks.BaseChoiceBlock(
+    target = _bblocks.BaseChoiceBlock(
         required=False,
         choices=[
             ('_self', 'Same window'),
@@ -43,7 +43,7 @@ class URLBlock(bblocks.BaseStructBlock):
         template = 'blocks/base_url_block.html'
 
 
-class ButtonBlock(bblocks.BaseStructBlock):
+class ButtonBlock(_bblocks.BaseStructBlock):
     button = URLBlock()
 
     class Meta:
@@ -51,11 +51,11 @@ class ButtonBlock(bblocks.BaseStructBlock):
         template = 'blocks/button_block.html'
 
 
-class HeadingBlock(bblocks.BaseStructBlock):
-    heading = bblocks.BaseCharBlock(
+class HeadingBlock(_bblocks.BaseStructBlock):
+    heading = _bblocks.BaseCharBlock(
         help_text="Enter the title"
     )
-    subtitle = bblocks.BaseCharBlock(
+    subtitle = _bblocks.BaseCharBlock(
         required=False,
         help_text="Enter the subtitle (optional)"
     )
@@ -66,9 +66,9 @@ class HeadingBlock(bblocks.BaseStructBlock):
         template = 'blocks/section_heading.html'
 
 
-class TextContentBlock(bblocks.BaseStructBlock):
+class TextContentBlock(_bblocks.BaseStructBlock):
     heading = HeadingBlock()
-    body = bblocks.BaseTextBlock(
+    body = _bblocks.BaseTextBlock(
         help_text="Enter the section body text"
     )
 

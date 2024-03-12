@@ -1,15 +1,16 @@
-from wagtail import blocks
 # Project specific blocks
-from cms.base.blocks import basic_blocks
+from base.blocks.basic import basic_blocks as _bblocks,\
+                              layout_blocks as _lblocks,\
+                              composite_blocks as _cblocks
 
-class SolutionBlock(blocks.StructBlock):
-    icon = basic_blocks.BaseImageBlock()
-    content = basic_blocks.TextContentBlock()
+class SolutionBlock(_lblocks.SectionBlock):
+    icon = _bblocks.BaseImageBlock()
+    content = _cblocks.TextContentBlock()
     link = blocks.PageChooserBlock(
         required=True,
         help_text="Select a page for 'Learn more' link"
     )
-    tag = blocks.CharBlock(
+    tag = _bblocks.BaseCharBlock(
         required=False,
         choices=[
             ('most_popular', 'Most popular'),
@@ -23,8 +24,8 @@ class SolutionBlock(blocks.StructBlock):
         template = 'blocks/solution_block.html'
 
 
-class SolutionsGridBlock(blocks.StructBlock):
-    solutions = blocks.ListBlock(
+class SolutionsGridBlock(_lblocks.GridBlock):
+    solutions = _bblocks.BaseListBlock(
         SolutionBlock(help_text="Add solutions to the grid")
     )
 
@@ -34,7 +35,7 @@ class SolutionsGridBlock(blocks.StructBlock):
 
 
 class ClientLogoBlock(blocks.StructBlock):
-    logo = basic_blocks.BaseImageBlock(
+    logo = _bblocks.BaseImageBlock(
         help_text="Select a client logo"
     )
 
@@ -44,8 +45,8 @@ class ClientLogoBlock(blocks.StructBlock):
 
 
 class ClientsGridBlock(blocks.StructBlock):
-    title = basic_blocks.BaseTitleBlock()
-    logos = blocks.ListBlock(
+    title = _cblocks.HeadingBlock()
+    logos = _bblocks.BaseListBlock(
         ClientLogoBlock(help_text="Add client logos")
     )
 
