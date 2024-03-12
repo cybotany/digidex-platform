@@ -1,9 +1,9 @@
-from cms.base.blocks import basic_blocks as bblocks
-from base.blocks import composite_blocks as cblocks
+from base.blocks.basic import basic_blocks
+from base.blocks.page.header import navigation_bar, promo_banner
 
-class PageHeaderBlock(bblocks.BaseStructBlock):
-    promo = cblocks.PromoBarBlock()
-    navigation = cblocks.NavigationBarBlock()
+class PageHeaderBlock(basic_blocks.BaseStructBlock):
+    promo = promo_banner.PromoBarBlock()
+    navigation = navigation_bar.NavigationBarBlock()
 
     class Meta:
         template = "blocks/layout/page_header.html"

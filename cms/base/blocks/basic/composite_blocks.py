@@ -1,4 +1,4 @@
-from cms.base.blocks import basic_blocks as bblocks
+from base.blocks.basic import basic_blocks as bblocks
 
 class ImageBlock(bblocks.BaseStructBlock):
     image = bblocks.BaseImageBlock()

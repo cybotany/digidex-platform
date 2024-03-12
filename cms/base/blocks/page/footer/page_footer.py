@@ -1,21 +1,20 @@
-from base.blocks import basic_blocks as bblocks
-from base.blocks import composite_blocks as cblocks
+from base.blocks.basic import basic_blocks, composite_blocks
 
-class FooterBlock(bblocks.BaseStructBlock):
-    logo = bblocks.BaseImageBlock(
+class PageFooterBlock(basic_blocks.BaseStructBlock):
+    logo = basic_blocks.BaseImageBlock(
         required=False,
         help_text="Footer logo image"
     )
-    description = bblocks.BaseTextBlock(
+    description = basic_blocks.BaseTextBlock(
         required=False,
         help_text="Footer description"
     )
-    links = bblocks.BaseListBlock(
-        cblocks.URLBlock(label="Quick Links"),
-        cblocks.URLBlock(label="Template Links"),
-        cblocks.URLBlock(label="Social Links")
+    links = basic_blocks.BaseListBlock(
+        composite_blocks.URLBlock(label="Quick Links"),
+        composite_blocks.URLBlock(label="Template Links"),
+        composite_blocks.URLBlock(label="Social Links")
     )
-    copyright_text = bblocks.BaseCharBlock(
+    copyright_text = basic_blocks.BaseCharBlock(
         help_text="Copyright text"
     )
 

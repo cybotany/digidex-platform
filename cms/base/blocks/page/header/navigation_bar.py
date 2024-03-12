@@ -1,14 +1,13 @@
-from base.blocks import basic_blocks as bblocks
-from base.blocks import composite_blocks as cblocks
+from base.blocks.basic import basic_blocks, composite_blocks
 
-class NavigationBarBlock(bblocks.BaseStructBlock):
-    nav_links = bblocks.BaseListBlock(
-        cblocks.URLBlock(help_text="Add navigation links")
+class NavigationBarBlock(basic_blocks.BaseStructBlock):
+    nav_links = basic_blocks.BaseListBlock(
+        composite_blocks.URLBlock(help_text="Add navigation links")
     )
-    action_buttons = bblocks.BaseListBlock(
-        cblocks.ButtonBlock(help_text="Add action buttons")
+    action_buttons = basic_blocks.BaseListBlock(
+        composite_blocks.ButtonBlock(help_text="Add action buttons")
     )
-    shopping_cart = cblocks.URLBlock()
+    shopping_cart = composite_blocks.URLBlock()
 
     class Meta:
         icon = 'site'

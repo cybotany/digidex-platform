@@ -1,4 +1,4 @@
-from base.blocks.basic import base as _bblocks
+from base.blocks.basic import basic_blocks as _bblocks
 
 class BaseBlock(_bblocks.BaseStructBlock):
     pass
