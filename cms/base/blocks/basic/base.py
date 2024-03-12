@@ -54,9 +54,3 @@ class BaseStreamBlock(blocks.StreamBlock):
     class Meta:
         template = "blocks/base/stream_block.html"
 
-
-class BaseBlock(BaseStructBlock):
-    pass
-
-    class Meta:
-        template = "blocks/layout/block.html"
