@@ -1,6 +1,6 @@
 from wagtail import blocks
 # Project specific blocks
-from base.blocks import basic_blocks
+from cms.base.blocks import basic_blocks
 
 class StatisticItemBlock(blocks.StructBlock):
     icon = basic_blocks.BaseImageBlock()

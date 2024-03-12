@@ -1,6 +1,6 @@
 from wagtail import blocks
 # Project specific blocks
-from base.blocks import basic_blocks
+from cms.base.blocks import basic_blocks
 
 class StarRatingBlock(blocks.StructBlock):
     stars = blocks.IntegerBlock(

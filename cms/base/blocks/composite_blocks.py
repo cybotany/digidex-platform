@@ -1,4 +1,4 @@
-from base.blocks import basic_blocks as bblocks
+from cms.base.blocks import basic_blocks as bblocks
 
 class ImageBlock(bblocks.BaseStructBlock):
     image = bblocks.BaseImageBlock()
@@ -75,53 +75,3 @@ class TextContentBlock(bblocks.BaseStructBlock):
     class Meta:
         icon = 'doc-full'
         template = 'blocks/text_content_block.html'
-
-
-class PromoBarBlock(bblocks.BaseStructBlock):
-    message = bblocks.BaseCharBlock(
-        help_text="Enter the promotional message"
-    )
-    icons = bblocks.BaseListBlock(
-        URLBlock(help_text="Add links to the top bar")
-    )
-
-    class Meta:
-        icon = 'doc-full'
-        template = 'blocks/top_bar_block.html'
-
-
-class NavigationBarBlock(bblocks.BaseStructBlock):
-    nav_links = bblocks.BaseListBlock(
-        URLBlock(help_text="Add navigation links")
-    )
-    action_buttons = bblocks.BaseListBlock(
-        ButtonBlock(help_text="Add action buttons")
-    )
-    shopping_cart = URLBlock()
-
-    class Meta:
-        icon = 'site'
-        template = 'blocks/navbar_block.html'
-
-
-class FooterBlock(bblocks.BaseStructBlock):
-    logo = bblocks.BaseImageBlock(
-        required=False,
-        help_text="Footer logo image"
-    )
-    description = bblocks.BaseTextBlock(
-        required=False,
-        help_text="Footer description"
-    )
-    links = bblocks.BaseListBlock(
-        bblocks.BaseURLBlock(label="Quick Links"),
-        bblocks.BaseURLBlock(label="Template Links"),
-        bblocks.BaseURLBlock(label="Social Links")
-    )
-    copyright_text = bblocks.BaseCharBlock(
-        help_text="Copyright text"
-    )
-
-    class Meta:
-        icon = 'site'
-        template = 'blocks/footer_block.html'

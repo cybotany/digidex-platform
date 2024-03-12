@@ -1,17 +1,10 @@
-from base.blocks import basic_blocks as bblocks
+from cms.base.blocks import basic_blocks as bblocks
 from base.blocks import composite_blocks as cblocks
 
-class BaseBlock(bblocks.BaseStructBlock):
-    pass
-
-    class Meta:
-        template = "blocks/layout/block.html"
-
-
-class BaseGrid(bblocks.BaseStreamBlock):
+class GridBlock(bblocks.BaseStreamBlock):
     items = bblocks.BaseStreamBlock(
         [
-            ('base_block', BaseBlock()),
+            ('base_block', bblocks.BaseBlock()),
         ],
         min_num=1
     )
@@ -20,11 +13,11 @@ class BaseGrid(bblocks.BaseStreamBlock):
         template = "blocks/layout/grid.html"
 
 
-class BaseContent(bblocks.BaseStructBlock):
+class ContentBlock(bblocks.BaseStructBlock):
     content_block = bblocks.BaseStreamBlock(
         [
-            ('grid', BaseGrid()),
-            ('block', BaseBlock()),
+            ('grid', GridBlock()),
+            ('block', bblocks.BaseBlock()),
         ],
         max_num=1
     )
@@ -33,8 +26,8 @@ class BaseContent(bblocks.BaseStructBlock):
         template = "blocks/layout/content.html"
 
 
-class BaseSection(bblocks.BaseStructBlock):
-    content = BaseContent()
+class SectionBlock(bblocks.BaseStructBlock):
+    content = ContentBlock()
 
     class Meta:
         template = "blocks/layout/section.html"
@@ -43,7 +36,7 @@ class BaseSection(bblocks.BaseStructBlock):
 class BasePageBody(bblocks.BaseStreamBlock):
     sections = bblocks.BaseStreamBlock(
         [
-            ('section', BaseSection()),
+            ('section', SectionBlock()),
         ],
         min_num=1
     ) 

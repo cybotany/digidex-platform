@@ -45,7 +45,6 @@ class BaseImageBlock(img_blocks.ImageChooserBlock):
     class Meta:
         template = "blocks/base/image_block.html"
 
-
 class BaseStructBlock(blocks.StructBlock):
     class Meta:
         template = "blocks/base/struct_block.html"
@@ -54,3 +53,10 @@ class BaseStructBlock(blocks.StructBlock):
 class BaseStreamBlock(blocks.StreamBlock):
     class Meta:
         template = "blocks/base/stream_block.html"
+
+
+class BaseBlock(BaseStructBlock):
+    pass
+
+    class Meta:
+        template = "blocks/layout/block.html"
