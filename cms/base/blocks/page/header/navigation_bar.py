@@ -72,4 +72,4 @@ class NavigationBarBlock(_bblocks.BaseStructBlock):
 
     class Meta:
         icon = 'site'
-        template = 'blocks/base/page/header/navigation/bar.html'
+        template = 'blocks/base/page/header/navigation_bar.html'

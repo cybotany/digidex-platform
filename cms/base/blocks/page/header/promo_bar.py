@@ -9,7 +9,7 @@ class TopBarPromoBlock(_bblocks.BaseStructBlock):
 
     class Meta:
         icon = 'doc-full'
-        template = 'blocks/top_bar_block.html'
+        template = 'blocks/base/page/header/navigation/promo/message.html'
 
 
 class TopBarIconBlock(_bblocks.BaseStructBlock):
@@ -20,7 +20,7 @@ class TopBarIconBlock(_bblocks.BaseStructBlock):
 
     class Meta:
         icon = 'doc-full'
-        template = 'blocks/top_bar_block.html'
+        template = 'blocks/base/page/header/navigation/promo/icon.html'
 
 
 class PromoBarBlock(_lblocks.SectionBlock):
@@ -31,4 +31,4 @@ class PromoBarBlock(_lblocks.SectionBlock):
 
     class Meta:
         icon = 'doc-full'
-        template = 'blocks/top_bar_block.html'
+        template = 'blocks/base/page/header/navigation/promo_bar.html'
