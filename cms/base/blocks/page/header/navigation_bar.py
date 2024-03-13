@@ -6,7 +6,7 @@ class NavigationLinkBlock(_cblocks.URLBlock):
 
     class Meta:
         icon = 'site'
-        template = 'blocks/base/page/header/navigation_bar.html'
+        template = 'blocks/base/page/header/navigation/link.html'
 
 
 class NavigationButtonBlock(_cblocks.ButtonBlock):
@@ -14,7 +14,7 @@ class NavigationButtonBlock(_cblocks.ButtonBlock):
 
     class Meta:
         icon = 'site'
-        template = 'blocks/base/navigation_link_block.html'
+        template = 'blocks/base/page/header/navigation/button.html'
 
 
 class NavigationLinkListBlock(_cblocks.URLBlock):
@@ -22,10 +22,6 @@ class NavigationLinkListBlock(_cblocks.URLBlock):
             NavigationButtonBlock(),
             help_text="Add navigation buttons"
         )
-
-    class Meta:
-        icon = 'site'
-        template = 'blocks/base/navigation_menu_block.html'
 
 
 class NavigationMenuBlock(_bblocks.BaseStreamBlock):
@@ -36,7 +32,7 @@ class NavigationMenuBlock(_bblocks.BaseStreamBlock):
 
     class Meta:
         icon = 'site'
-        template = 'blocks/base/navigation_menu_block.html'
+        template = 'blocks/base/page/header/navigation/menu.html'
 
 
 class NavigationDesktopBlock(_bblocks.BaseStreamBlock):
@@ -44,7 +40,7 @@ class NavigationDesktopBlock(_bblocks.BaseStreamBlock):
 
     class Meta:
         icon = 'site'
-        template = 'blocks/base/navigation_menu_block.html'
+        template = 'blocks/base/page/header/navigation/desktop_buttons.html'
 
 
 class ShoppingCartBlock(_cblocks.ButtonBlock):
@@ -52,7 +48,7 @@ class ShoppingCartBlock(_cblocks.ButtonBlock):
 
     class Meta:
         icon = 'site'
-        template = 'blocks/base/navigation_bar.html'
+        template = 'blocks/base/page/header/navigation/shopping_cart.html'
 
 
 class NavigationBarBlock(_bblocks.BaseStructBlock):
@@ -62,4 +58,4 @@ class NavigationBarBlock(_bblocks.BaseStructBlock):
 
     class Meta:
         icon = 'site'
-        template = 'blocks/base/navbar_block.html'
+        template = 'blocks/base/page/header/navigation/bar.html'
