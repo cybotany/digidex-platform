@@ -1,3 +1,27 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="top-bar">
+    {% if self.promo %}
+        <div class="info-top-bar">
+            {{ self.promo.message }}
+        </div>
+    {% endif %}
+    {% if self.icons %}
+        <div class="link-top-bar">
+            {% for icon in self.icons %}
+                <a href="{{ icon.value.icon.url }}" class="w-inline-block icon-top-bar">
+                    {% if icon.value.icon.icon %}
+                        {% image icon.value.icon.icon fill-32x32 as img %}
+                        <img src="{{ img.url }}" alt="{{ icon.value.icon.text }}">
+                    {% endif %}
+                    <span class="text-top-bar">{{ icon.value.icon.text }}</span>
+                </a>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+
 {% load static %}
 <section class="section-top-bar">
   <div class="top-bar-block">
