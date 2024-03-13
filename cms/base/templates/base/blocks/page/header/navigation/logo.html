@@ -1,3 +1,4 @@
-<a href="index.html" aria-current="page" class="brand w-nav-brand w--current">
-    <img src="images/logo.svg" loading="eager" alt="" class="logo">
+<a href="{{ value.url }}" aria-current="page" class="brand base-nav-brand base--current">
+    {% image value.logo_image fill-100x100 as img %}
+    <img src="{{ img.url }}" loading="eager" alt="{{ value.logo_image.title }}" class="logo">
 </a>
