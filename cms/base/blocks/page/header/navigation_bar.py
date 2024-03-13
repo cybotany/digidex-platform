@@ -6,7 +6,7 @@ class NavigationLinkBlock(_cblocks.URLBlock):
 
     class Meta:
         icon = 'site'
-        template = 'blocks/base/navigation_link_block.html'
+        template = 'blocks/base/page/header/navigation_bar.html'
 
 
 class NavigationButtonBlock(_cblocks.ButtonBlock):
