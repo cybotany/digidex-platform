@@ -1,4 +1,4 @@
-from base.blocks.basic import basic_blocks as _bblocks
+from cms.base.blocks import basic_blocks as _bblocks
 
 class LottieAnimationBlock(_bblocks.BaseStructBlock):
     animation_src = _bblocks.BaseURLBlock(

@@ -1,7 +1,7 @@
 # Project specific blocks
-from base.blocks.basic import layout_blocks as _lblocks, \
-                              composite_blocks as _cblocks
+from cms.base.blocks import layout_blocks as _lblocks
 # App specific blocks
+from cms.base.blocks import composite_blocks as _cblocks
 from home.blocks.partials import lottie_block
 
 class BannerBlock(_lblocks.SectionBlock):

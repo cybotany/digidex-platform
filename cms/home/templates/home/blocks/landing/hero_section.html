@@ -1,10 +1,19 @@
 <section class="section-hero">
   <div class="content">
     <div class="layout-grid grid-hero">
-      <div class="block-hero">
-        <h1 class="heading-hero">{{ block.value.heading }}</h1>
-        <p class="paragraph-hero">{{ block.value.paragraph }}</p>
+      <div class="button-hero">
+        {% for button in block.value.buttons %}
+          {% with button_value=button.value %}
+            <a href="{{ button_value.url }}" class="button w-button {{ button_value.button_style }}" target="{{ button_value.target }}">
+              {% if button_value.icon %}
+                <img src="{{ button_value.icon.url }}" loading="eager" alt="" class="icon-button">
+              {% endif %}
+              <div class="text-button">{{ button_value.text }}</div>
+            </a>
+          {% endwith %}
+        {% endfor %}
       </div>
+      
       <div id="heroLottie-LP" data-w-id="heroLottie" class="lottie">
       {% for animation in block.value.lottie_animations %}
         <div class="{{ animation.css_class }}" data-animation-type="lottie" data-src="{% static animation.json_file %}" data-loop="{{ animation.loop }}" data-direction="{{ animation.direction }}" data-autoplay="{{ animation.autoplay }}" data-renderer="svg" data-default-duration="{{ animation.default_duration }}" data-duration="{{ animation.duration }}"></div>

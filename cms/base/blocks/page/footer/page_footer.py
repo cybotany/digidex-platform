@@ -1,4 +1,5 @@
-from base.blocks.basic import basic_blocks, composite_blocks
+from cms.base.blocks import composite_blocks
+from cms.base.blocks import basic_blocks
 
 class PageFooterBlock(basic_blocks.BaseStructBlock):
     logo = basic_blocks.BaseImageBlock(

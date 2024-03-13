@@ -1,4 +1,5 @@
-from base.blocks.basic import basic_blocks, composite_blocks
+from cms.base.blocks import composite_blocks
+from cms.base.blocks import basic_blocks
 
 class NavigationBarBlock(basic_blocks.BaseStructBlock):
     nav_links = basic_blocks.BaseListBlock(

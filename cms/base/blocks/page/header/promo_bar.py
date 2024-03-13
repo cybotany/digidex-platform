@@ -1,4 +1,5 @@
-from base.blocks.basic import basic_blocks, composite_blocks
+from cms.base.blocks import composite_blocks
+from cms.base.blocks import basic_blocks
 
 class PromoBarBlock(basic_blocks.BaseStructBlock):
     message = basic_blocks.BaseCharBlock(

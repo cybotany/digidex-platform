@@ -1,9 +1,10 @@
-from base.blocks.basic import basic_blocks, layout_blocks
+from cms.base.blocks import basic_blocks as _bblocks,\
+                            layout_blocks as _lblocks
 
-class PageBodyBlock(basic_blocks.BaseStreamBlock):
-    sections = basic_blocks.BaseStreamBlock(
+class PageBodyBlock(_bblocks.BaseStreamBlock):
+    sections = _bblocks.BaseStreamBlock(
         [
-            ('section', layout_blocks.SectionBlock()),
+            ('section', _lblocks.SectionBlock()),
         ],
         min_num=1
     ) 

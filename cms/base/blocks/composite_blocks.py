@@ -1,4 +1,4 @@
-from base.blocks.basic import basic_blocks as _bblocks
+from cms.base.blocks import basic_blocks as _bblocks
 
 class ImageBlock(_bblocks.BaseStructBlock):
     image = _bblocks.BaseImageBlock()
@@ -12,7 +12,7 @@ class ImageBlock(_bblocks.BaseStructBlock):
     class Meta:
         icon = "image"
         label = "Image"
-        template = "blocks/image_block.html"
+        template = "blocks/basic/compositeimage_block.html"
 
 
 class URLBlock(_bblocks.BaseStructBlock):
@@ -43,9 +43,15 @@ class URLBlock(_bblocks.BaseStructBlock):
         template = 'blocks/base_url_block.html'
 
 
-class ButtonBlock(_bblocks.BaseStructBlock):
-    button = URLBlock()
-
+class ButtonBlock(URLBlock):
+    button_style = _bblocks.BaseChoiceBlock(
+        choices=[
+            ('outline', 'Outline'),
+            ('fill', 'Fill'),
+        ],
+        icon='choice',
+        help_text="Select the button style"
+    )
     class Meta:
         icon = 'plus'
         template = 'blocks/button_block.html'
@@ -53,7 +59,7 @@ class ButtonBlock(_bblocks.BaseStructBlock):
 
 class HeadingBlock(_bblocks.BaseStructBlock):
     heading = _bblocks.BaseCharBlock(
-        help_text="Enter the title"
+        help_text="Enter the heading or title."
     )
     subtitle = _bblocks.BaseCharBlock(
         required=False,
@@ -66,12 +72,12 @@ class HeadingBlock(_bblocks.BaseStructBlock):
         template = 'blocks/section_heading.html'
 
 
-class TextContentBlock(_bblocks.BaseStructBlock):
-    heading = HeadingBlock()
-    body = _bblocks.BaseTextBlock(
-        help_text="Enter the section body text"
+class ParagraphBlock(_bblocks.BaseStructBlock):
+    paragraph = _bblocks.BaseTextBlock(
+        help_text="Enter the paragraph text"
     )
 
     class Meta:
-        icon = 'doc-full'
-        template = 'blocks/text_content_block.html'
+        icon = 'title'
+        label = 'Paragraph'
+        template = 'blocks/section_heading.html'

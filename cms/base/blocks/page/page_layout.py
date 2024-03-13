@@ -1,4 +1,4 @@
-from base.blocks.basic import basic_blocks
+from cms.base.blocks import basic_blocks
 from base.blocks.page.header import page_header
 from base.blocks.page.body import page_body
 from base.blocks.page.footer import page_footer
