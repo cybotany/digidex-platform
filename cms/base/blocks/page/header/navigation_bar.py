@@ -16,7 +16,7 @@ class LogoLinkBlock(_bblocks.BaseStructBlock):
         template = 'blocks/base/page/header/navigation/logo_link.html'
 
 
-class NavigationMenuMobileBlock(_bblocks.BaseStreamBlock):
+class NavigationMenuMobileBlock(_bblocks.BaseStructBlock):
     nav_links = _bblocks.BaseListBlock(
         _cblocks.URLBlock(help_text="Add navigation links")
     )
@@ -38,7 +38,7 @@ class ShoppingCartBlock(_cblocks.ButtonBlock):
         template = 'blocks/base/page/header/navigation/shopping_cart.html'
 
 
-class NavigationMenuDesktopBlock(_bblocks.BaseStreamBlock):
+class NavigationMenuDesktopBlock(_bblocks.BaseStructBlock):
     desktop_nav_buttons = _bblocks.BaseListBlock(
         _cblocks.ButtonBlock(),
         help_text="Add navigation buttons"
