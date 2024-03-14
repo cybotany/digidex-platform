@@ -13,45 +13,21 @@ class LogoLinkBlock(_bblocks.BaseStructBlock):
 
     class Meta:
         icon = 'site'
-
-class NavigationLinkBlock(_cblocks.URLBlock):
-    pass
-
-    class Meta:
-        icon = 'site'
+        template = 'blocks/base/page/header/navigation/logo_link.html'
 
 
-class NavigationButtonBlock(_cblocks.ButtonBlock):
-    pass
-
-    class Meta:
-        icon = 'site'
-
-
-class NavigationLinkListBlock(_cblocks.URLBlock):
-    nav_buttons = _bblocks.BaseListBlock(
-            NavigationButtonBlock(),
-            help_text="Add navigation buttons"
-        )
-
-
-class NavigationMenuBlock(_bblocks.BaseStreamBlock):
+class NavigationMenuMobileBlock(_bblocks.BaseStreamBlock):
     nav_links = _bblocks.BaseListBlock(
         _cblocks.URLBlock(help_text="Add navigation links")
     )
-    mobile_nav_buttons = NavigationLinkListBlock()
+    mobile_nav_buttons = _bblocks.BaseListBlock(
+        _cblocks.ButtonBlock(),
+        help_text="Add navigation buttons"
+    )
 
     class Meta:
         icon = 'site'
-        template = 'blocks/base/page/header/navigation/menu.html'
-
-
-class NavigationDesktopBlock(_bblocks.BaseStreamBlock):
-    desktop_nav_buttons = NavigationLinkListBlock()
-
-    class Meta:
-        icon = 'site'
-        template = 'blocks/base/page/header/navigation/desktop_buttons.html'
+        template = 'blocks/base/page/header/navigation/menu_mobile.html'
 
 
 class ShoppingCartBlock(_cblocks.ButtonBlock):
@@ -62,10 +38,21 @@ class ShoppingCartBlock(_cblocks.ButtonBlock):
         template = 'blocks/base/page/header/navigation/shopping_cart.html'
 
 
-class NavigationBarBlock(_bblocks.BaseStructBlock):
-    nav_menu = NavigationMenuBlock()
-    desktop_buttons = NavigationDesktopBlock()
+class NavigationMenuDesktopBlock(_bblocks.BaseStreamBlock):
+    desktop_nav_buttons = _bblocks.BaseListBlock(
+        _cblocks.ButtonBlock(),
+        help_text="Add navigation buttons"
+    )
     shopping_cart = ShoppingCartBlock()
+
+    class Meta:
+        icon = 'site'
+        template = 'blocks/base/page/header/navigation/menu_desktop.html'
+
+
+class NavigationBarBlock(_bblocks.BaseStructBlock):
+    nav_menu = NavigationMenuMobileBlock()
+    desktop_buttons = NavigationMenuDesktopBlock()
 
     class Meta:
         icon = 'site'
