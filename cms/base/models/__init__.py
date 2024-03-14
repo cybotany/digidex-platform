@@ -1,1 +1,1 @@
-from .contact import Contact
+from .form import Contact
