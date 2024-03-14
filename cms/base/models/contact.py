@@ -13,13 +13,13 @@ from wagtail.contrib.forms.panels import FormSubmissionsPanel
 
 class FormField(AbstractFormField):
     page = ParentalKey(
-        'FormPage',
+        'ContactPage',
         on_delete=models.CASCADE,
         related_name='form_fields'
     )
 
 
-class FormPage(AbstractEmailForm):
+class ContactPage(AbstractEmailForm):
     intro = RichTextField(blank=True)
     thank_you_text = RichTextField(blank=True)
 
