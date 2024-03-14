@@ -1,38 +1,24 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
-<div class="top-bar">
-  {% include "base/blocks/page/header/promo/message.html" %}
- 
-  <div class="link-top-bar">
-    {% for icon in self.icons %}
-      <a href="{{ icon.value.icon.url }}" class="w-inline-block icon-top-bar">
-        {% if icon.value.icon.icon %}
-          {% image icon.value.icon.icon fill-32x32 as img %}
-          <img src="{{ img.url }}" alt="{{ icon.value.icon.text }}">
-        {% endif %}
-        <span class="text-top-bar">{{ icon.value.icon.text }}</span>
-      </a>
-    {% endfor %}
-  </div>
-</div>
-
-
-{% load static %}
 <section class="section-top-bar">
   <div class="top-bar-block">
     <div class="top-bar">
-      <div class="info-top-bar">New customer offer: Get 25% off your first order with promo code NEW25</div>
+      <div class="info-top-bar">
+        {{ self.promo.message.value }}
+      </div>
     </div>
-  </div>
-  <div class="top-bar">
-    <a href="#" class="link-top-bar base-inline-block"><img src="{% static 'images/bx/world.svg' %}" loading="eager" alt="" class="icon-top-bar">
-      <div class="text-top-bar">English</div>
-    </a>
-    <a href="#" class="link-top-bar base-inline-block"><img src="{% static 'images/bx/chat.svg' %}" loading="eager" alt="" class="icon-top-bar">
-      <div class="text-top-bar">Live Chat</div>
-    </a>
-    <a href="#" class="link-top-bar base-inline-block"><img src="{% static 'images/bx/phone-call.svg' %}" loading="eager" alt="" class="icon-top-bar">
-      <div class="text-top-bar">(888) 123-4567</div>
-    </a>
+    <div class="top-bar">
+      <div class="link-top-bar">
+        {% for _icon in self.icons %}
+          <a href="{{ _icon.value.url }}" class="base-inline-block icon-top-bar" target="{{ _icon.value.target }}">
+            {% if _icon.value.icon %}
+              {% image _icon.value.icon fill-32x32 as img %}
+                <img src="{{ img.url }}" alt="{{ _icon.value.text }}">
+            {% endif %}
+            <span class="text-top-bar">{{ _icon.value.text }}</span>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
   </div>
 </section>

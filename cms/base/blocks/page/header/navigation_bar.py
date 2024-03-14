@@ -13,14 +13,12 @@ class LogoLinkBlock(_bblocks.BaseStructBlock):
 
     class Meta:
         icon = 'site'
-        template = 'blocks/base/page/header/navigation/logo.html'
 
 class NavigationLinkBlock(_cblocks.URLBlock):
     pass
 
     class Meta:
         icon = 'site'
-        template = 'blocks/base/page/header/navigation/link.html'
 
 
 class NavigationButtonBlock(_cblocks.ButtonBlock):
@@ -28,7 +26,6 @@ class NavigationButtonBlock(_cblocks.ButtonBlock):
 
     class Meta:
         icon = 'site'
-        template = 'blocks/base/page/header/navigation/button.html'
 
 
 class NavigationLinkListBlock(_cblocks.URLBlock):
