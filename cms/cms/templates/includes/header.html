@@ -2,13 +2,33 @@
 
 <header>
   {% get_site_root as site_root %}
-  <nav>
-    <p>
-      <a href="{% pageurl site_root %}">{{ site_root.title }}</a> |
-        {% for menuitem in site_root.get_children.live.in_menu %}
-          <a href="{% pageurl menuitem %}">{{ menuitem.title }}</a>{% if not forloop.last %} | {% endif %}
-        {% endfor %}
-    </p>
-  </nav>
-  {% wagtailuserbar "top-right" %}
+  <div role="banner" class="navbar base-nav">
+    <div class="nav-block">
+      <div class="nav">
+        {% include "base/blocks/page/header/navigation/logo_link.html" %}
+        <nav role="navigation" class="nav-menu base-nav-menu">
+          <a href="{% pageurl site_root %}">{{ site_root.title }}</a> |
+          {% for menuitem in site_root.get_children.live.in_menu %}
+            <a href="{% pageurl menuitem %}" class="nav-link base-nav-link" >{{ menuitem.title }}</a>
+          {% endfor %}
+          <div class="button-mobile"></div>
+          {% wagtailuserbar "top-right" %}
+        </nav>
+      </div>
+      <div class="nav">
+        <div class="button-desktop">
+          {% if request.user.is_authenticated %}
+            <a href="{{ value.url }}" class="nav-button-outline base-button" target="{{ value.target }}">{{ value.text }}</a>
+            <a href="{{ value.url }}" class="nav-button base-button" target="{{ value.target }}">{{ value.text }}</a>
+          {% else %}
+            <a href="{{ value.url }}" class="nav-button-outline base-button" target="{{ value.target }}">{{ value.text }}</a>
+            <a href="{{ value.url }}" class="nav-button base-button" target="{{ value.target }}">{{ value.text }}</a>
+          {% endif %}
+        </div>
+        <div class="menu-button base-nav-button">
+          <div class="icon-menu base-icon-nav-menu"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </header>

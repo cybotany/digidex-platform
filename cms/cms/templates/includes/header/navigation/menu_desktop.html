@@ -1,9 +1,0 @@
-<div class="button-desktop">
-  {% if request.user.is_authenticated %}
-    <a href="{{ value.url }}" class="nav-button-outline base-button" target="{{ value.target }}">{{ value.text }}</a>
-    <a href="{{ value.url }}" class="nav-button base-button" target="{{ value.target }}">{{ value.text }}</a>
-  {% else %}
-    <a href="{{ value.url }}" class="nav-button-outline base-button" target="{{ value.target }}">{{ value.text }}</a>
-    <a href="{{ value.url }}" class="nav-button base-button" target="{{ value.target }}">{{ value.text }}</a>
-  {% endif %}
-</div>
