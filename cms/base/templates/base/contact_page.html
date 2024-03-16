@@ -7,17 +7,54 @@
   <section class="section-top">
     <div style="opacity:0" class="content">
       <div class="block-top">
-        <h1 class="heading-top">Performance, security, and more</h1>
-        <p class="paragraph-top">Imperdiet in varius suspendisse ac fermentum pellentesque placerat scelerisque rutrum.</p>
+        <h1 class="heading-top">{{ page.title }}Have questions? Contact us for expert advice</h1>
+        <p class="paragraph-top">{{ page.intro|richtext }}Nullam nisl nunc sit semper. Neque tristique enim fringilla ut volutpat. Vitae leo vitae duis rhoncus.</p>
       </div>
     </div>
   </section>
-    <h1>{{ page.title }}</h1>
-    <div>{{ page.intro|richtext }}</div>
-
-    <form class="page-form" action="{% pageurl page %}" method="POST">
-        {% csrf_token %}
-        {{ form.as_div }}
-        <button type="Submit">Submit</button>
-    </form>
+  <section class="section">
+    <div class="content">
+      <div class="account-form">
+        <div class="form-block base-form">
+          <form class="page-form" action="{% pageurl page %}" method="POST">
+            {% csrf_token %}
+            {{ form.as_div }}
+            <button type="Submit">Submit</button>
+          </form>
+          <form id="contactForm" method="post" class="form">
+            {% csrf_token %}
+            <!-- Render Name Field -->
+            <div>
+              {{ form.name }}
+              {% if form.name.errors %}
+                <div class="error-message">
+                  <span class="text-error">{{ form.name.errors|striptags }}</span>
+                </div>
+              {% endif %}
+            </div>
+            <!-- Render Email Field -->
+            <div>
+              {{ form.email }}
+              {% if form.email.errors %}
+                <div class="error-message">
+                  <span class="text-error">{{ form.email.errors|striptags }}</span>
+                </div>
+              {% endif %}
+            </div>
+            <!-- Render Message Field -->
+            <div>
+              {{ form.message }}
+              {% if form.message.errors %}
+                <div class="error-message">
+                  <span class="text-error">{{ form.message.errors|striptags }}</span>
+                </div>
+              {% endif %}
+            </div>
+            <!-- Render Submit Button -->
+            <input type="submit" value="Submit" class="submit-button base-button" id="submitBtn">         
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
 {% endblock content %}
