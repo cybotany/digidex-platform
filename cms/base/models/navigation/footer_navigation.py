@@ -18,7 +18,7 @@ from wagtail.contrib.settings.models import (
 )
 
 @register_setting
-class NavigationSettings(BaseGenericSetting):
+class FooterNavigationSettings(BaseGenericSetting):
     twitter_url = models.URLField(
         verbose_name="Twitter URL",
         blank=True

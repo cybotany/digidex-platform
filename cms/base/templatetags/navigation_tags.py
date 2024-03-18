@@ -1,7 +1,7 @@
 from django import template
 from wagtail.models import Site
 # Project specific imports
-from cms.base.models import navigation
+from cms.base.models.navigation import footer_navigation
 
 register = template.Library()
 
@@ -10,7 +10,7 @@ def get_footer_text(context):
     footer_text = context.get("footer_text", "")
 
     if not footer_text:
-        instance = navigation.FooterText.objects.filter(live=True).first()
+        instance = footer_navigation.FooterText.objects.filter(live=True).first()
         footer_text = instance.body if instance else ""
 
     return {
