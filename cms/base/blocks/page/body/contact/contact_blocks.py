@@ -1,9 +1,10 @@
-from wagtail import blocks
 # Project specific blocks
-from base.blocks import basic_blocks
+from base.blocks import basic_blocks as _bblocks,\
+                        composite_blocks as _cblocks,\
+                        layout_blocks as _lblocks
 
 class ContactMethodBlock(blocks.StructBlock):
-    contact_link = basic_blocks.BaseURLBlock()
+    contact_link = _bblocks.BaseURLBlock()
 
     class Meta:
         icon = 'user'
@@ -11,11 +12,11 @@ class ContactMethodBlock(blocks.StructBlock):
 
 
 class ContactSectionBlock(blocks.StructBlock):
-    title = basic_blocks.BaseTitleBlock()
+    title = _bblocks.BaseTitleBlock()
     contact_methods = blocks.ListBlock(
         ContactMethodBlock(help_text="Add contact methods.")
     )
-    lottie_animation = basic_blocks.LottieBlock(
+    lottie_animation = _bblocks.LottieBlock(
         help_text="Add a Lottie animation for the section."
     )
 

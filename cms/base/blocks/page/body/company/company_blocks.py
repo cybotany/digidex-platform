@@ -1,13 +1,14 @@
-from wagtail import blocks
 # Project specific blocks
-from base.blocks import basic_blocks
+from base.blocks import basic_blocks as _bblocks,\
+                        composite_blocks as _cblocks,\
+                        layout_blocks as _lblocks
 
 class StatisticItemBlock(blocks.StructBlock):
-    icon = basic_blocks.BaseImageBlock()
-    number = basic_blocks.BaseCharBlock(
+    icon = _bblocks.BaseImageBlock()
+    number = _bblocks.BaseCharBlock(
         help_text="Statistic number"
     )
-    description = basic_blocks.BaseCharBlock(
+    description = _bblocks.BaseCharBlock(
         help_text="Statistic description"
     )
     style = blocks.ChoiceBlock(
