@@ -5,8 +5,8 @@ from base.blocks import layout_blocks as _lblocks,\
 
 class SolutionBlock(_lblocks.SectionBlock):
     icon = _bblocks.BaseImageBlock()
-    content = _cblocks.TextContentBlock()
-    link = blocks.PageChooserBlock(
+    content = _bblocks.BaseTextBlock()
+    link = _cblocks.URLBlock(
         required=True,
         help_text="Select a page for 'Learn more' link"
     )
@@ -34,7 +34,7 @@ class SolutionsGridBlock(_lblocks.GridBlock):
         template = 'blocks/solutions_grid_block.html'
 
 
-class ClientLogoBlock(blocks.StructBlock):
+class ClientLogoBlock(_bblocks.BaseStructBlock):
     logo = _bblocks.BaseImageBlock(
         help_text="Select a client logo"
     )
@@ -44,7 +44,7 @@ class ClientLogoBlock(blocks.StructBlock):
         template = 'blocks/client_logo_block.html'
 
 
-class ClientsGridBlock(blocks.StructBlock):
+class ClientsGridBlock(_bblocks.StructBlock):
     title = _cblocks.HeadingBlock()
     logos = _bblocks.BaseListBlock(
         ClientLogoBlock(help_text="Add client logos")

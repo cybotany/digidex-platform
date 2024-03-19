@@ -3,7 +3,7 @@ from base.blocks import basic_blocks as _bblocks,\
                         composite_blocks as _cblocks,\
                         layout_blocks as _lblocks
 
-class StatisticItemBlock(blocks.StructBlock):
+class StatisticItemBlock(_bblocks.BaseStructBlock):
     icon = _bblocks.BaseImageBlock()
     number = _bblocks.BaseCharBlock(
         help_text="Statistic number"
@@ -11,7 +11,7 @@ class StatisticItemBlock(blocks.StructBlock):
     description = _bblocks.BaseCharBlock(
         help_text="Statistic description"
     )
-    style = blocks.ChoiceBlock(
+    style = _bblocks.BaseChoiceBlock(
         required=False,
         choices=[
             ('default', 'Default'),
@@ -25,8 +25,8 @@ class StatisticItemBlock(blocks.StructBlock):
         template = 'blocks/statistic_item_block.html'
 
 
-class StatisticsGridBlock(blocks.StructBlock):
-    statistics = blocks.ListBlock(
+class StatisticsGridBlock(_bblocks.BaseStructBlock):
+    statistics = _bblocks.BaseListBlock(
         StatisticItemBlock(help_text="Add statistics")
     )
 
@@ -35,9 +35,9 @@ class StatisticsGridBlock(blocks.StructBlock):
         template = 'blocks/statistics_grid_block.html'
 
 
-class FeaturedSectionBlock(blocks.StructBlock):
-    lottie = basic_blocks.LottieBlock()
-    text_content = basic_blocks.TextContentBlock()
+class FeaturedSectionBlock(_bblocks.BaseStructBlock):
+    lottie = _cblocks.LottieBlock()
+    text_content = _bblocks.BaseTextBlock()
     statistics_grid = StatisticsGridBlock()
 
     class Meta:

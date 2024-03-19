@@ -1,7 +1,7 @@
 from django import template
 from wagtail.models import Site
 # Project specific imports
-from cms.base.models.navigation import footer_navigation
+from base.models.navigation import footer_navigation
 
 register = template.Library()
 
