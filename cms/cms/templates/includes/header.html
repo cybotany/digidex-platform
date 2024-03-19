@@ -1,12 +1,12 @@
-{% load wagtailcore_tags navigation_tags wagtailuserbar %}
+{% load static wagtailcore_tags navigation_tags wagtailuserbar %}
 
 <header>
   {% get_site_root as site_root %}
   <div role="banner" class="navbar base-nav">
     <div class="nav-block">
       <div class="nav">
-        <a href="{% url 'main:landing' %}" aria-current="page" class="brand base-nav-brand base--brand">
-          <img src="{% static 'cms/images/logo.png' %}" loading="lazy" srcset="{% static 'digidex/images/logo-p-500.png' %} 500w, {% static 'digidex/images/logo-p-800.png' %} 800w, {% static 'digidex/images/logo.png' %} 1024w" alt="" class="logo">
+        <a href=# aria-current="page" class="brand base-nav-brand base--brand">
+          <img src="{% static 'cms/images/logo/logo.png' %}" loading="lazy" srcset="{% static 'cms/images/logo/p-500.png' %} 500w, {% static 'cms/images/logo/p-800.png' %} 800w, {% static 'digidex/images/logo.png' %} 1024w" alt="" class="logo">
         </a>
         <nav role="navigation" class="nav-menu base-nav-menu">
           <div class="button-mobile"></div>
