@@ -1,9 +1,9 @@
 # Project specific blocks
-from cms.base.blocks import basic_blocks as _bblocks,\
-                            composite_blocks as _cblocks,\
-                            layout_blocks as _lblocks
+from base.blocks import basic_blocks as _bblocks,\
+                        composite_blocks as _cblocks,\
+                        layout_blocks as _lblocks
 # App specific blocks
-from cms.home.blocks.partials import lottie_block
+from home.blocks.partials import lottie_block
 
 class HeroBlock(_lblocks.SectionBlock):
     heading = _cblocks.HeadingBlock()

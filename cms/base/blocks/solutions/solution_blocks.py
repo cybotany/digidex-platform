@@ -1,6 +1,7 @@
 # Project specific blocks
-from cms.base.blocks import layout_blocks as _lblocks
-from cms.base.blocks import basic_blocks as _bblocks, composite_blocks as _cblocks
+from base.blocks import layout_blocks as _lblocks,\
+                        basic_blocks as _bblocks,\
+                        composite_blocks as _cblocks
 
 class SolutionBlock(_lblocks.SectionBlock):
     icon = _bblocks.BaseImageBlock()

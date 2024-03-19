@@ -1,6 +1,7 @@
 # Project specific blocks
-from cms.base.blocks import layout_blocks as _lblocks
-from cms.base.blocks import basic_blocks as _bblocks, composite_blocks as _cblocks
+from base.blocks import basic_blocks as _bblocks,\
+                        composite_blocks as _cblocks,\
+                        layout_blocks as _lblocks
 
 class AccordionItemBlock(_lblocks.BaseBlock):
     question = _bblocks.BaseCharBlock(
