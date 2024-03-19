@@ -1,50 +1,50 @@
 from django.db import models
-from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
-from wagtail.fields import RichTextField, StreamField
-from wagtail.models import Page, Orderable
-from modelcluster.fields import ParentalKey
-# Project specific imports
-from cms.base.blocks.base import blocks
-from home.blocks import home as home_blocks
 
-class HomePageSection(Orderable):
-    page = ParentalKey(
-        "HomePage",
-        related_name="sections"
-    )
-    title = models.CharField(
-        max_length=255,
-        blank=True
-    )
-    content = StreamField(
-        blocks.BaseStreamBlock(),
-        use_json_field=True,
-        blank=True
-    )
-    lottie_animation = models.CharField(
-        max_length=255,
-        blank=True,
-        help_text="URL to the Lottie animation JSON file"
-    )
-
-    panels = [
-        FieldPanel("title"),
-        FieldPanel("content"),
-        FieldPanel("lottie_animation"),
-    ]
+from wagtail.models import Page
+from wagtail.fields import RichTextField
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 
 
 class HomePage(Page):
-    body = StreamField([
-        ('hero', home_blocks.HeroBlock()),
-        ('how_it_works', home_blocks.HowItWorksBlock()),
-        ('call_to_action', home_blocks.CallToActionBlock()),
-    ],
-    null=True,
-    blank=True,
-    use_json_field=True
+    image = models.ForeignKey(
+        "wagtailimages.Image",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+        help_text="Homepage image",
+    )
+    hero_text = models.CharField(
+        blank=True,
+        max_length=255, help_text="Write an introduction for the site"
+    )
+    hero_cta = models.CharField(
+        blank=True,
+        verbose_name="Hero CTA",
+        max_length=255,
+        help_text="Text to display on Call to Action",
+    )
+    hero_cta_link = models.ForeignKey(
+        "wagtailcore.Page",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+        verbose_name="Hero CTA link",
+        help_text="Choose a page to link to for the Call to Action",
     )
 
+    body = RichTextField(blank=True)
+
     content_panels = Page.content_panels + [
+        MultiFieldPanel(
+            [
+                FieldPanel("image"),
+                FieldPanel("hero_text"),
+                FieldPanel("hero_cta"),
+                FieldPanel("hero_cta_link"),
+            ],
+            heading="Hero section",
+        ),
         FieldPanel('body'),
     ]
