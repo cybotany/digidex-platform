@@ -273,17 +273,17 @@ figcaption {
 .navbar {
   -webkit-backdrop-filter: blur(40px);
   backdrop-filter: blur(40px);
-  background-color: rgba(0, 0, 0, 0);
-  border-bottom: 1px solid rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: .7em;
   padding: 1.1em 2em;
   display: flex;
-  position: -webkit-sticky;
-  position: sticky;
+  position: fixed;
   top: 0;
+  width: 100%;
+  z-index: 1030;
 }
 
 .nav-block {
