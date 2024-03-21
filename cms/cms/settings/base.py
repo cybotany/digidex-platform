@@ -176,10 +176,8 @@ STORAGES = {
 
 
 # Wagtail settings
+WAGTAIL_SITE_NAME = "DigiDex"
 
-WAGTAIL_SITE_NAME = "cms"
-
-# Search
 # https://docs.wagtail.org/en/stable/topics/search/backends.html
 WAGTAILSEARCH_BACKENDS = {
     "default": {
@@ -187,8 +185,9 @@ WAGTAILSEARCH_BACKENDS = {
     }
 }
 
-# Base URL to use when referring to full URLs within the Wagtail admin backend -
-# e.g. in notification emails. Don't include '/admin' or a trailing slash
 WAGTAILADMIN_BASE_URL = "http://example.com"
+
 LOGIN_URL = '/accounts/login/'
 WAGTAIL_FRONTEND_LOGIN_URL = LOGIN_URL
+
+AUTH_USER_MODEL = 'accounts.DigiDexUser'

@@ -10,8 +10,7 @@ from django.utils.http import urlsafe_base64_encode
 from django.utils.text import slugify
 from django.conf import settings
 # Project specific imports
-from cms.utils import cms_storage
-from cms.utils import validators
+from cms.utils import cms_storage, validators
 
 logger = getLogger(__name__)
 
@@ -114,7 +113,7 @@ class DigiDexProfile(models.Model):
         last_modified (DateTimeField): The date and time when the profile was last modified.
     """
     user = models.OneToOneField(
-        DigiDexUser,
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         help_text='The user associated with this profile.'
     )
