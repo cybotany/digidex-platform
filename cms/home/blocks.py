@@ -16,7 +16,7 @@ class HeroBlock(_lblocks.BaseBlock):
     )
 
     class Meta:
-        template = 'home/blocks/hero/block.html'
+        template = 'home/blocks/hero_block.html'
 
 
 class LottieFeature(_bblocks.BaseStructBlock):
@@ -37,7 +37,7 @@ class LottieFeature(_bblocks.BaseStructBlock):
     )
 
     class Meta:
-        template = 'home/blocks/hero/feature.html'
+        template = 'home/blocks/hero_feature.html'
 
 
 class HeroLottie(_lblocks.BaseBlock):
@@ -47,7 +47,7 @@ class HeroLottie(_lblocks.BaseBlock):
     )
 
     class Meta:
-        template = 'home/blocks/hero/lottie.html'
+        template = 'home/blocks/hero_lottie.html'
 
 
 class HeroGrid(_lblocks.GridBlock):
@@ -60,11 +60,11 @@ class HeroGrid(_lblocks.GridBlock):
     )
 
     class Meta:
-        template = 'home/blocks/hero/grid.html'
+        template = 'home/blocks/hero_grid.html'
 
 
 class HeroSection(_lblocks.SectionBlock):
     content = HeroGrid()
 
     class Meta:
-        template = 'home/blocks/hero/section.html'
+        template = 'home/blocks/hero_section.html'
