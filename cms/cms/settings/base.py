@@ -10,6 +10,7 @@ PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 INSTALLED_APPS = [
+    "accounts",
     "base",
     "blog",
     "ecommerce",
@@ -169,3 +170,5 @@ WAGTAILSEARCH_BACKENDS = {
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 WAGTAILADMIN_BASE_URL = "http://example.com"
+LOGIN_URL = '/accounts/login/'
+WAGTAIL_FRONTEND_LOGIN_URL = LOGIN_URL
