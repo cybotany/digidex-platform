@@ -1,5 +1,5 @@
-from wagtail.core.models import Page
-from wagtail.core.fields import RichTextField, StreamField
+from wagtail.models import Page
+from wagtail.fields import RichTextField, StreamField
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 
 from home import blocks as _hblocks
