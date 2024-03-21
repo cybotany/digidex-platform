@@ -1,5 +1,4 @@
 from base.blocks import basic_blocks as _bblocks,\
-                        composite_blocks as _cblocks,\
                         layout_blocks as _lblocks
 
 
@@ -11,20 +10,17 @@ class CallToAction(_bblocks.BaseStructBlock):
     )
     url = _bblocks.BaseURLBlock(
         required=True,
-        default="#",
         help_text="Enter the url for the call to action."
     )
 
-    class Meta:
-        template = 'blocks/call_to_action.html'
 
 class HeroBlock(_lblocks.BaseBlock):
-    value_proposition_headline = _bblocks.BaseCharBlock(
+    headline = _bblocks.BaseCharBlock(
         required=True,
         max_length=75,
         help_text="Enter the headline for the value proposition. Capped at 75 characters to enforce conciseness."
     )
-    value_proposition_subheadline = _bblocks.BaseCharBlock(
+    subheadline = _bblocks.BaseCharBlock(
         required=False,
         max_length=150,
         help_text="Enter the subheadline for the value proposition. Capped at 150 characters to enforce brevity."
@@ -36,6 +32,16 @@ class HeroBlock(_lblocks.BaseBlock):
 
 
 class _LottieFeature(_bblocks.BaseStructBlock):
+    order = _bblocks.BaseChoiceBlock(
+        choices=[
+            (1, ""),
+            (2, "a2"),
+            (3, "a3"),
+            (4, "a4"),
+        ],
+        required=True,
+        help_text="Select the display order and corresponding style."
+    )
     icon = _bblocks.BaseImageBlock(
         required=False,
         help_text="Select an icon image for the feature."
@@ -51,7 +57,7 @@ class _LottieFeature(_bblocks.BaseStructBlock):
         template = 'blocks/lottie/feature.html'
 
 
-class HeroLottie(_cblocks.LottieBlock):
+class HeroLottie(_lblocks.BaseBlock):
     lottie_features = _bblocks.BaseListBlock(
         _LottieFeature(),
         label="Features",
@@ -65,7 +71,7 @@ class HeroLottie(_cblocks.LottieBlock):
 
 class HeroSection(_lblocks.SectionBlock):
     hero_block = HeroBlock()
-    hero_lottie = _cblocks.LottieAnimationBlock()
+    hero_lottie = HeroLottie()
 
     class Meta:
         template = 'blocks/hero_section.html'

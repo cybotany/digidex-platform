@@ -1,4 +1,4 @@
-<div style="transform: none;" class="feature-lottie-block">
+<div style="transform: none;" class="feature-lottie-block {% if feature.value.order > 1 %}a{{ feature.value.order }}{% endif %}">
   {% if self.icon %}
     <img src="{% self.icon %}" alt="{{ self.icon.title }}" class="icon-feature-lottie">
   {% endif %}

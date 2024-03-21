@@ -81,38 +81,3 @@ class ParagraphBlock(_bblocks.BaseStructBlock):
         icon = 'title'
         label = 'Paragraph'
         template = 'blocks/section_heading.html'
-
-
-class LottieAnimationBlock(_bblocks.BaseStructBlock):
-    animation_src = _bblocks.BaseURLBlock(
-        help_text="URL to the Lottie animation JSON file."
-    )
-    loop = _bblocks.BaseBooleanBlock(
-        required=False,
-        default=False
-    )
-    direction = _bblocks.BaseIntegerBlock(
-        default=1,
-        help_text="Direction of the animation playback."
-    )
-    duration = _bblocks.BaseFloatBlock(
-        required=False,
-        default=0,
-        help_text="Animation duration in seconds, overrides default duration."
-    )
-    autoplay = _bblocks.BaseBooleanBlock(
-        required=False,
-        default=False
-    )
-
-    class Meta:
-        template = 'blocks/lottie/animation.html'
-
-
-class LottieBlock(_bblocks.BaseStructBlock):
-    lottie_animation_1 = LottieAnimationBlock()
-    lottie_animation_2 = LottieAnimationBlock()
-    lottie_animation_2_blur = LottieAnimationBlock()
-
-    class Meta:
-        template = 'blocks/lottie/section_heading.html'
