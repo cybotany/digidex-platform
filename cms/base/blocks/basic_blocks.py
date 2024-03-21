@@ -31,8 +31,10 @@ class BaseTextBlock(blocks.TextBlock):
 class BaseURLBlock(blocks.URLBlock):
     pass
 
+
 class BaseImageBlock(img_blocks.ImageChooserBlock):
     pass
+
 
 class BaseStructBlock(blocks.StructBlock):
     pass

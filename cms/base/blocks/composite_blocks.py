@@ -63,7 +63,6 @@ class ButtonBlock(_bblocks.BaseStructBlock):
         icon = 'plus'
 
 
-
 class HeadingBlock(_bblocks.BaseStructBlock):
     heading = _bblocks.BaseCharBlock(
         help_text="Enter the heading or title."
