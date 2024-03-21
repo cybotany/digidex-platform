@@ -12,7 +12,6 @@ class ImageBlock(_bblocks.BaseStructBlock):
     class Meta:
         icon = "image"
         label = "Image"
-        template = "blocks/basic/compositeimage_block.html"
 
 
 class URLBlock(_bblocks.BaseStructBlock):
@@ -40,7 +39,6 @@ class URLBlock(_bblocks.BaseStructBlock):
     class Meta:
         icon = 'link'
         label = 'Enhanced URL'
-        template = 'blocks/base_url_block.html'
 
 
 class ButtonBlock(URLBlock):
@@ -54,7 +52,6 @@ class ButtonBlock(URLBlock):
     )
     class Meta:
         icon = 'plus'
-        template = 'blocks/button_block.html'
 
 
 class HeadingBlock(_bblocks.BaseStructBlock):
@@ -69,7 +66,7 @@ class HeadingBlock(_bblocks.BaseStructBlock):
     class Meta:
         icon = 'title'
         label = 'Heading'
-        template = 'blocks/section_heading.html'
+        template = 'base/blocks/section_heading.html'
 
 
 class ParagraphBlock(_bblocks.BaseStructBlock):
@@ -80,4 +77,4 @@ class ParagraphBlock(_bblocks.BaseStructBlock):
     class Meta:
         icon = 'title'
         label = 'Paragraph'
-        template = 'blocks/section_heading.html'
+        template = 'base/blocks/section_heading.html'

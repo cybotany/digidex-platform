@@ -3,8 +3,6 @@ from base.blocks import basic_blocks as _bblocks
 class BaseBlock(_bblocks.BaseStructBlock):
     pass
 
-    class Meta:
-        template = "blocks/layout/block.html"
 
 class GridBlock(_bblocks.BaseStreamBlock):
     items = _bblocks.BaseStreamBlock(
@@ -13,9 +11,6 @@ class GridBlock(_bblocks.BaseStreamBlock):
         ],
         min_num=1
     )
-
-    class Meta:
-        template = "blocks/layout/grid.html"
 
 
 class ContentBlock(_bblocks.BaseStructBlock):
@@ -27,12 +22,6 @@ class ContentBlock(_bblocks.BaseStructBlock):
         max_num=1
     )
 
-    class Meta:
-        template = "blocks/layout/content.html"
-
 
 class SectionBlock(_bblocks.BaseStructBlock):
     content = ContentBlock()
-
-    class Meta:
-        template = "blocks/layout/section.html"
