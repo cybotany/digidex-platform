@@ -20,7 +20,7 @@ class URLBlock(_bblocks.BaseStructBlock):
         required=False,
         help_text="Optional: Select an icon image"
     )
-    text = _bblocks.BaseTextBlock(
+    text = _bblocks.BaseCharBlock(
         help_text="Enter the link title"
     )
     url = _bblocks.BaseURLBlock(
@@ -95,37 +95,18 @@ class LottieAnimationBlock(_bblocks.BaseStructBlock):
         default=1,
         help_text="Direction of the animation playback."
     )
-    autoplay = _bblocks.BaseBooleanBlock(
-        required=False,
-        default=False
-    )
-    renderer = _bblocks.BaseChoiceBlock(
-        choices=[
-            ('svg', 'SVG'),
-            ('canvas', 'Canvas'),
-            ('html', 'HTML')
-        ],
-        default='svg',
-        help_text="Rendering mode for the animation."
-    )
-    aspect_ratio = _bblocks.BaseCharBlock(
-        required=False,
-        max_length=10,
-        help_text="Aspect ratio (e.g., '16:9')",
-        default='16:9'
-    )
-    default_duration = _bblocks.BaseFloatBlock(
-        required=False,
-        help_text="Default duration in seconds."
-    )
     duration = _bblocks.BaseFloatBlock(
         required=False,
         default=0,
         help_text="Animation duration in seconds, overrides default duration."
     )
+    autoplay = _bblocks.BaseBooleanBlock(
+        required=False,
+        default=False
+    )
 
     class Meta:
-        template = "blocks/lottie_animation_block.html"
+        template = 'blocks/lottie/animation.html'
 
 
 class LottieBlock(_bblocks.BaseStructBlock):
@@ -134,4 +115,4 @@ class LottieBlock(_bblocks.BaseStructBlock):
     lottie_animation_2_blur = LottieAnimationBlock()
 
     class Meta:
-        template = 'blocks/lottie_block.html'
+        template = 'blocks/lottie/section_heading.html'
