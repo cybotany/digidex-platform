@@ -6,11 +6,17 @@
     <div class="content">
       <div class="layout-grid grid-hero">
         <div class="block-hero">
-          <h1 class="heading-hero">The Ultimate Gardening Companion</h1>
-          <p class="paragraph-hero">Digitize, manage, and nurture your garden with an AI assistant tailored for you.</p>
-            <div class="button-hero">
-              <a href=# class="button base-button">Signup</a>
-            </div>
+          <!-- Use model fields for dynamic content -->
+          <h1 class="heading-hero">{{ page.hero_heading }}</h1>
+          <p class="paragraph-hero">{{ page.hero_text }}</p>
+          <div class="button-hero">
+            <!-- Dynamically generate the CTA link if hero_cta_link is set -->
+            {% if page.hero_cta_link %}
+              <a href="{{ page.hero_cta_link.url }}" class="button base-button">{{ page.hero_cta }}</a>
+            {% else %}
+              <a href="#" class="button base-button">{{ page.hero_cta }}</a>
+            {% endif %}
+          </div>
         </div>
         <!-- Hero Lottie Section (LP- Landing Page)-->
         <div id="heroLottie-LP" data-w-id="heroLottie" class="lottie">
