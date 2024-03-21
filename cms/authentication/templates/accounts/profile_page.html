@@ -1,0 +1,163 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>  
+    <meta charset="utf-8">
+    <title>Digit Storage System - Digidex</title>
+    <meta content="A platform for gardeners to cultivate their curiosity." name="description">
+    <meta content="Digit Storage System - Digidex" property="og:title">
+    <meta content="A platform for gardeners to cultivate their curiosity." property="og:description">
+    <meta content="Digit Storage System - Digidex" property="twitter:title">
+    <meta content="A platform for gardeners to cultivate their curiosity." property="twitter:description">
+    <meta property="og:type" content="website">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+
+    <link href="{% static 'base/css/normalize.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'base/css/base-styles.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'digidex/css/digidex-styles.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'inventory/css/inventory-styles.css' %}" rel="stylesheet" type="text/css">
+    
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
+    
+    <!-- Load Fonts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      WebFont.load({
+        google: {
+          families: ["Space Grotesk:regular,500,600,700", "IBM Plex Mono:regular,italic,500,500italic,600,600italic,700,700italic"]
+        }
+      });
+    </script>
+    
+    <link href="{% static 'digidex/images/favicon.png' %}" rel="shortcut icon" type="image/x-icon">
+    <link href="{% static 'digidex/images/webclip.png' %}" rel="apple-touch-icon">
+  </head>
+  <body>
+    {% include 'navigation-bar.html' %}
+    {% include 'message-bar.html' %}
+ 
+    <section class="section">
+      <div class="content content-profile">
+        <div class="block-profile">
+          <h2 class="profile-heading">{{ profile.user.username }}</h2>
+        </div>
+        <div class="layout-grid grid-profile">
+          <div class="profile-avatar"> 
+            <div class="date-top">Joined {{ profile.created_at|date:"M. d, Y" }}</div>
+            {% if profile.avatar %}
+              <img src="{{ profile.avatar.url }}" alt="User avatar" class="avatar-image">
+            {% else %}
+              <img src="{% static 'digidex/images/placeholder.svg' %}" alt="No Image Available" class="avatar-image">
+            {% endif %}
+            {% if is_owner %}
+              <div class="profile-text"><a href="{% pageurl 'inventory:update-profile' user_slug=profile.user.slug %}" class="profile-link">Edit Profile</a></div>
+            {% endif %}
+          </div>
+          <div class="profile-bio">
+            <!-- Tab Headings -->
+            <div class="tab-headings">
+              <div class="tab-heading active" data-tab-target="#bio">
+                <img src="{% static 'inventory/images/bio.svg' %}" alt="Bio Icon" class="icon-bio"><span class="bio-text">Bio</span>
+              </div>
+              <div class="tab-heading" data-tab-target="#plants">
+                <img src="{% static 'inventory/images/plant.svg' %}" alt="Plant Icon" class="icon-bio"><span class="plant-text">Plants</span>
+              </div>
+              <div class="tab-heading" data-tab-target="#pets">
+                <img src="{% static 'inventory/images/animal.svg' %}" alt="Pet Icon" class="icon-bio"><span class="pet-text">Pets</span>
+              </div>
+            </div>                       
+
+            <!-- Tab Content -->
+            <div id="bio" class="tab-content active">
+              <ul>
+                <li class="bio-text">Last Login: {{ profile.created_at|date:"M. d, Y" }}</li>
+                <li class="bio-text">Location: {{ profile.location }}</li>
+                <li class="bio-text">{{ profile.bio }}</li>
+              </ul>
+            </div>
+            <div id="plants" class="tab-content">
+              <ul>
+                <li class="plant-text">Count of Plant Digits: {{ plant_count }}</li>
+              </ul>
+            </div>
+            <div id="pets" class="tab-content">
+              <ul>
+                <li class="pet-text">Count of Pet Digits: {{ pet_count }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- Spacing here between elements-->
+        {% if pet_count == 0 and plant_count == 0 %}
+          <div class="empty-digit-state base-dyn-empty">
+            <div class="digit-text-empty">No plants or pets found.</div>
+          </div>
+        {% else %}
+          {% if pet_count > 0 %}
+            <!-- Pet Digits -->
+            <div class="collection-list-wrapper-digits large base-dyn-list">
+              <div role="list" class="collection-list-digits large base-dyn-items">
+                {% for pet in pet_digits %}
+                  <div role="listitem" class="base-dyn-item">
+                    <a href="{{ pet.get_absolute_url }}" class="block-digit-link large">
+                      <div class="block-digit large">
+                        <div class="digit large">
+                          <div class="date">{{ pet.last_modified }}</div>
+                          <h3 class="heading-digit">{{ pet.name }}</h3>
+                          <p class="paragraph-digit large">{{ pet.description }}</p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          {% endif %}
+          {% if plant_count > 0 %}
+            <!-- Plant Digits -->
+            <div class="collection-list-wrapper-digits base-dyn-list">
+              <div role="list" class="collection-list-digits base-dyn-items">
+                {% for plant in plant_digits %}
+                  <div role="listitem" class="base-dyn-item">
+                    <a href="{{ plant.get_absolute_url }}" class="block-digit-link">
+                      <div class="block-digit">
+                        <div class="digit">
+                          <div class="date">{{ plant.last_modified }}</div>
+                          <h3 class="heading-digit">{{ plant.name }}</h3>
+                          <p class="paragraph-digit">{{ plant.description }}</p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          {% endif %}
+        {% endif %}
+        {% if grouping_count > 0 %}
+          <!-- Spacing here between elements-->
+          <div class="collection-list-wrapper-groups base-dyn-list">
+            <div role="list" class="collection-list-groups base-dyn-items">
+              {% for group in groupings %}
+                <div role="listitem" class="base-dyn-item">
+                  <a href="{{ group.get_absolute_url }}" class="block-group-link">
+                    <div class="block-group">
+                      <div class="group">
+                        <div class="date">{{ group.last_modified }}</div>
+                        <h3 class="heading-group">{{ group.name }}</h3>
+                        <p class="paragraph-group">{{ group.description }}</p>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </section>     
+    <script src="{% static 'inventory/js/toggle-tabs.js' %} "></script>          
+  </body>
+</html>
