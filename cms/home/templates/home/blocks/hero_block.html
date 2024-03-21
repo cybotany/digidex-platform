@@ -1,10 +1,10 @@
+{% load wagtailcore_tags %}
+
 <div class="block-hero">
-  <!-- Value Proposition -->
   {% if value.headline and value.subheadline %}
     <h1 class="heading-hero">{{ value.headline }}</h1>
     <p class="paragraph-hero">{{ value.subheadline }}</p>
   {% endif %}
-  <!-- CTA button -->
   <div class="button-hero">
     <a href="{{ value.cta.url }}" class="button base-button">{{ value.cta.text }}</a>
   </div>

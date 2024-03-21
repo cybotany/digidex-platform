@@ -1,10 +1,7 @@
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags %}
 
 <section class="section-hero">
   <div class="content">
-    <div class="layout-grid grid-hero">
-      {% include_block value.hero_block %}
-      {% include_block value.hero_lottie %}
-    </div>
+    {% include_block value.content %}
   </div>
 </section>

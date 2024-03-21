@@ -4,10 +4,10 @@ class BaseBlock(_bblocks.BaseStructBlock):
     pass
 
 
-class GridBlock(_bblocks.BaseStreamBlock):
+class GridBlock(_bblocks.BaseStructBlock):
     items = _bblocks.BaseStreamBlock(
         [
-            ('base_block', BaseBlock()),
+            ('block', BaseBlock()),
         ],
         min_num=1
     )
