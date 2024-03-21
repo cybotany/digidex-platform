@@ -1,11 +1,12 @@
-from wagtail.models import Page
-from wagtail.fields import RichTextField, StreamField
+from wagtail.core.models import Page
+from wagtail.core.fields import RichTextField, StreamField
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
-from wagtail.fields import StreamField
+
+from home import blocks as _hblocks
 
 class HomePage(Page):
     hero_content = StreamField(
-        [('hero', HeroSectionBlock())],
+        [('hero_section', _hblocks.HeroSection())],
         null=True,
         blank=True,
         help_text="Content for the hero section of the homepage."
