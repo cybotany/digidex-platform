@@ -6,26 +6,22 @@ class CallToAction(_bblocks.BaseStructBlock):
     text = _bblocks.BaseCharBlock(
         required=True,
         max_length=75,
-        help_text="Enter the text for the call to action."
     )
     url = _bblocks.BaseURLBlock(
         required=True,
-        help_text="Enter the url for the call to action."
     )
 
 
 class HeroBlock(_lblocks.BaseBlock):
-    headline = _bblocks.BaseCharBlock(
+    heading = _bblocks.BaseCharBlock(
         required=True,
         max_length=75,
-        help_text="Enter the headline for the value proposition. Capped at 75 characters to enforce conciseness."
     )
-    subheadline = _bblocks.BaseCharBlock(
+    text = _bblocks.BaseCharBlock(
         required=False,
         max_length=150,
-        help_text="Enter the subheadline for the value proposition. Capped at 150 characters to enforce brevity."
     )
-    cta = CallToAction()
+    call_to_action = CallToAction()
 
     class Meta:
         template = 'blocks/hero_block.html'
@@ -34,34 +30,28 @@ class HeroBlock(_lblocks.BaseBlock):
 class _LottieFeature(_bblocks.BaseStructBlock):
     order = _bblocks.BaseChoiceBlock(
         choices=[
-            (1, ""),
-            (2, "a2"),
-            (3, "a3"),
-            (4, "a4"),
+            (1, "First"),
+            (2, "Second"),
+            (3, "Third"),
+            (4, "Fourth"),
         ],
-        required=True,
-        help_text="Select the display order and corresponding style."
+        required=True
     )
     icon = _bblocks.BaseImageBlock(
-        required=False,
-        help_text="Select an icon image for the feature."
+        required=False
     )
     text = _bblocks.BaseCharBlock(
-        required=True,
-        help_text="Enter the text for this feature."
+        required=True
     )
 
     class Meta:
         icon = 'tick'
-        label = 'Feature'
         template = 'blocks/lottie/feature.html'
 
 
 class HeroLottie(_lblocks.BaseBlock):
     lottie_features = _bblocks.BaseListBlock(
         _LottieFeature(),
-        label="Features",
-        help_text="Add up to 4 features to be displayed in the hero section.",
         max_length=4
     )
 
