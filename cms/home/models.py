@@ -7,19 +7,16 @@ from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 class HomePage(Page):
     hero_heading = models.CharField(
         blank=True,
-        max_length=75,
-        help_text="Write an introduction for the site"
+        max_length=75
     )
     hero_text = models.CharField(
         blank=True,
-        max_length=150,
-        help_text="Write an introduction for the site"
+        max_length=150
     )
     hero_cta = models.CharField(
         blank=True,
         verbose_name="Hero CTA",
-        max_length=75,
-        help_text="Text to display on Call to Action",
+        max_length=75
     )
     hero_cta_link = models.ForeignKey(
         "wagtailcore.Page",
@@ -27,8 +24,7 @@ class HomePage(Page):
         blank=True,
         on_delete=models.SET_NULL,
         related_name="+",
-        verbose_name="Hero CTA link",
-        help_text="Choose a page to link to for the Call to Action",
+        verbose_name="Hero CTA link"
     )
     lottie = RichTextField(blank=True)
 
