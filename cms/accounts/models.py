@@ -18,7 +18,7 @@ logger = getLogger(__name__)
 def profile_avatar_directory_path(instance, filename):
     return f'profile_{instance.id}/avatar.jpeg'
 
-class DigidexUser(AbstractUser):
+class DigiDexUser(AbstractUser):
     """
     User model extending Django's AbstractUser. This model includes all fields
     from AbstractUser and additional fields for extended functionality.
@@ -39,7 +39,6 @@ class DigidexUser(AbstractUser):
     Extended Fields:
         - uuid (UUIDField): A universally unique identifier for the user.
         - email_confirmed (BooleanField): Indicates if the user has confirmed their email address.
-        - slug (SlugField): A slugified version of the username for URL usage.
     """
     username = models.CharField(
         max_length=32,
@@ -58,13 +57,6 @@ class DigidexUser(AbstractUser):
         default=False,
         help_text='Indicates whether the user has confirmed their email address.'
     )
-    slug = models.SlugField(
-        unique=True,
-        max_length=255,
-        editable=False,
-        db_index=True,
-        help_text="Slugified version of the username for URL usage."
-    )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -79,23 +71,14 @@ class DigidexUser(AbstractUser):
     @transaction.atomic
     def save(self, *args, **kwargs):
         self.username = self.username.lower()
-        if not self.slug or self.username != self.__original_username:
-            base_slug = slugify(self.username)
-            unique_slug = base_slug
-            num = 1
-            while DigidexUser.objects.filter(slug=unique_slug).exists():
-                unique_slug = f'{base_slug}-{num}'
-                num += 1
-            self.slug = unique_slug
-
         super().save(*args, **kwargs)
 
-        # Send verification email for new users
         if self.__original_new_user:
             try:
                 self.send_verification_email()
             except Exception as e:
-                raise Exception(f'Error sending verification email: {e}')
+                logger.error(f'Error sending verification email: {e}')
+                raise
 
     def send_verification_email(self):
         token = PasswordResetTokenGenerator().make_token(self)
@@ -113,16 +96,16 @@ class DigidexUser(AbstractUser):
             )
         except (BadHeaderError, Exception) as e:
             logger.warning(f"Email failed: {e}")
-            # Reraise the exception if you want calling code to handle it
             raise
 
 
-class DigidexProfile(models.Model):
+class DigiDexProfile(models.Model):
     """
     User profile model for storing additional user information.
 
     Fields:
         user (OneToOneField): A one-to-one reference to the User model.
+        slug (SlugField): A slugified version of the username for URL usage.
         bio (TextField): A text field for user biography, maximum length 500 characters.
         location (CharField): A char field for user location, maximum length 30 characters.
         avatar (ImageField): An image field for user's profile picture.
@@ -131,9 +114,16 @@ class DigidexProfile(models.Model):
         last_modified (DateTimeField): The date and time when the profile was last modified.
     """
     user = models.OneToOneField(
-        DigidexUser,
+        DigiDexUser,
         on_delete=models.CASCADE,
         help_text='The user associated with this profile.'
+    )
+    slug = models.SlugField(
+        unique=True,
+        max_length=255,
+        editable=False,
+        db_index=True,
+        help_text="Slugified version of the username for URL usage."
     )
     bio = models.TextField(
         max_length=500,
@@ -175,6 +165,18 @@ class DigidexProfile(models.Model):
             str: A string in the format "<username>'s Profile".
         """
         return f"{self.user.username}'s Profile"
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base_slug = slugify(self.user.username)
+            unique_slug = base_slug
+            num = 1
+            while DigiDexProfile.objects.filter(slug=unique_slug).exists():
+                unique_slug = f'{base_slug}-{num}'
+                num += 1
+            self.slug = unique_slug
+        
+        super().save(*args, **kwargs)
 
     def get_absolute_url(self):
         """
