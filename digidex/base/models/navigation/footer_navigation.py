@@ -16,19 +16,20 @@ from wagtail.contrib.settings.models import (
     register_setting,
 )
 
-from digidex.base.models import wagtail_fields as _bfields
+from base.models import django_fields as _dfields,\
+                        wagtail_fields as _wfields
 
 @register_setting
 class FooterNavigationSettings(BaseGenericSetting):
-    twitter_url = models.URLField(
+    twitter_url = _dfields.BaseURLField(
         verbose_name="Twitter URL",
-        blank=True
+        blank=True 
     )
-    github_url = models.URLField(
+    github_url = _dfields.BaseURLField(
         verbose_name="GitHub URL",
         blank=True
     )
-    linkedin_url = models.URLField(
+    linkedin_url = _dfields.BaseURLField(
         verbose_name="LinkedIn URL",
         blank=True
     )
@@ -53,7 +54,7 @@ class FooterText(
     TranslatableMixin,
     models.Model,
 ):
-    body = _bfields.BaseRichTextField()
+    body = _wfields.BaseRichTextField()
 
     panels = [
         FieldPanel("body"),
