@@ -4,8 +4,8 @@ from django.urls import reverse
 from django.utils.text import slugify
 from django.conf import settings
 # Project specific imports
+from base.utils import storage
 from base.fields import django_fields as _dfields
-from digidex.utils import storage
 
 logger = getLogger(__name__)
 
