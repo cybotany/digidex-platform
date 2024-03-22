@@ -4,7 +4,6 @@ from wagtail.admin.panels import (
     MultiFieldPanel,
     PublishingPanel,
 )
-from wagtail.fields import RichTextField
 from wagtail.models import (
     DraftStateMixin,
     PreviewableMixin,
@@ -16,6 +15,8 @@ from wagtail.contrib.settings.models import (
     BaseGenericSetting,
     register_setting,
 )
+
+from digidex.base.models import wagtail_fields as _bfields
 
 @register_setting
 class FooterNavigationSettings(BaseGenericSetting):
@@ -52,7 +53,7 @@ class FooterText(
     TranslatableMixin,
     models.Model,
 ):
-    body = RichTextField()
+    body = _bfields.BaseRichTextField()
 
     panels = [
         FieldPanel("body"),

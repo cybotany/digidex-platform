@@ -1,9 +1,8 @@
 from django.db import models
-
 from wagtail.models import Page
-from wagtail.fields import RichTextField, StreamField
 from wagtail.admin.panels import FieldPanel, StreamFieldPanel
 
+from digidex.base.models import wagtail_fields as _bfields
 from base.blocks import basic_blocks as _bblocks
 
 class CompanyPage(Page):
@@ -13,12 +12,12 @@ class CompanyPage(Page):
         null=True,
         blank=True
     )
-    description = RichTextField(
+    description = _bfields.BaseRichTextField(
         blank=True
     )
     
     # Dynamic content blocks
-    body = StreamField(
+    body = _bfields.BaseStreamField(
         [
             ('paragraph', _bblocks.BaseRichTextBlock()),
             ('image', _bblocks.BaseImageBlock()),
