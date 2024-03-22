@@ -3,30 +3,34 @@
 <div class="layout-grid grid-solutions">
   {% for card in self.cards %}
     <div class="solutions">
-      {% if self.tag %}
-        {% with tag=self.tag %}
+      {% if card.value.tag %}
+        {% with tag=card.value.tag %}
           {% if tag.color %}
             <div class="{{ tag.color }}-tag">{{ tag.text }}<br></div>
           {% endif %}
         {% endwith %}
       {% endif %}
     
-      {% with content=self.content %}
-        {% if content.image %}
-          {% image content.image fill-300x300 as img %}
-          <img src="{{ img.url }}" alt="{{ content.image.title }}" loading="eager" class="icon-solution">
-        {% endif %}
-        
-        {% if content.heading %}
-          <h5 class="heading-solution">{{ content.heading|richtext }}</h5>
-        {% endif %}
-        
-        {% if content.paragraph %}
-          <p class="paragraph-solution">{{ content.paragraph|richtext }}</p>
-        {% endif %}
-      {% endwith %}
+      {% if card.value.content %}
+        {% with content=card.value.content %}
+          {% if content.image %}
+            {% image content.image fill-300x300 as img %}
+            <img src="{{ img.url }}" alt="{{ content.image.title }}" loading="eager" class="icon-solution">
+          {% endif %}
+          
+          {% if content.heading %}
+            <h5 class="heading-solution">{{ content.heading|richtext }}</h5>
+          {% endif %}
+          
+          {% if content.paragraph %}
+            <p class="paragraph-solution">{{ content.paragraph|richtext }}</p>
+          {% endif %}
+        {% endwith %}
+      {% endif %}
 
-      {% include_block self.icon %}
+      {% if card.value.icon %}
+        {% include_block card.value.icon %}
+      {% endif %}
     </div>
   {% endfor %}
 </div>

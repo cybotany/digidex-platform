@@ -6,7 +6,10 @@
         <div class="gradient-clients"></div>
         <div class="clients-wrapper">
             {% for logo in self.logos %}
-                {% include_block logo %}
+                {% if logo.value.image %}
+                {% image logo.value.image original as img %}
+                <img src="{{ img.url }}" alt="{{ logo.value.alt_text }}" class="logo-client">
+                {% endif %}
             {% endfor %}
         </div>
     </div>
