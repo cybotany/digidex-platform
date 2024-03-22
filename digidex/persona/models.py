@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.utils.text import slugify
 from django.conf import settings
 # Project specific imports
-from digidex.utils import cms_storage
+from digidex.digidex.utils import digidex_storage
 
 logger = getLogger(__name__)
 
@@ -49,7 +49,7 @@ class DigiDexProfile(models.Model):
     )
     avatar = models.ImageField(
         upload_to=profile_avatar_directory_path,
-        storage=cms_storage.PublicMediaStorage, # PublicMediaStorage()?
+        storage=digidex_storage.PublicMediaStorage, # PublicMediaStorage()?
         null=True,
         blank=True,
         help_text='The avatar image of the profile.'
