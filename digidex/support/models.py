@@ -1,16 +1,16 @@
 from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel
 
-from base.blocks import basic_blocks as _bblocks
-from base.fields import wagtail_fields as _wfields
+from base.fields import wagtail_fields as _wfields,\
+                        django_fields as _dfields
 from base import models as _models
 from support import blocks as _sblocks
 
 class SupportIndexPage(_models.IndexPage):
-    intro_heading = _bblocks.BaseCharBlock(
+    intro_heading = _dfields.BaseCharField(
         required=True
     )
-    intro_text = _bblocks.BaseTextBlock(
+    intro_text = _dfields.BaseTextField(
         required=True
     )
     contact_options = _wfields.BaseStreamField(
