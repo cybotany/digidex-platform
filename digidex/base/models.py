@@ -1,5 +1,5 @@
 from wagtail.models import Page
-from wagtail.admin.panels import StreamFieldPanel
+from wagtail.admin.panels import FieldPanel
 
 from base.fields import wagtail_fields as _wfields
 from base.blocks import basic_blocks as _bblocks
@@ -11,7 +11,7 @@ class IndexPage(Page):
     ], null=True, blank=True)
 
     content_panels = Page.content_panels + [
-        StreamFieldPanel('introduction'),
+        FieldPanel('introduction'),
     ]
 
     class Meta:

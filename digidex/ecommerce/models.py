@@ -1,5 +1,5 @@
 from wagtail.models import Page
-from wagtail.admin.panels import StreamFieldPanel
+from wagtail.admin.panels import FieldPanel
 
 from base.blocks import basic_blocks as _bblocks
 from base.fields import wagtail_fields as _wfields
@@ -32,7 +32,7 @@ class EcommerceIndexPage(Page):
     )
 
     content_panels = Page.content_panels + [
-        StreamFieldPanel('categories'),
-        StreamFieldPanel('products'),
-        StreamFieldPanel('faqs'),
+        FieldPanel('categories'),
+        FieldPanel('products'),
+        FieldPanel('faqs'),
     ]
