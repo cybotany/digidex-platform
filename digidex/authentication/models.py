@@ -2,8 +2,8 @@ import uuid
 from django.db import transaction
 from django.contrib.auth.models import AbstractUser
 # Project specific imports
+from base.utils import validators
 from base.fields import django_fields as _dfields
-from digidex.utils import validators
 
 class DigiDexUser(AbstractUser):
     """
