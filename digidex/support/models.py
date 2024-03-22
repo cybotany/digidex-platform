@@ -3,7 +3,7 @@ from wagtail.admin.panels import FieldPanel
 
 from base.fields import wagtail_fields as _wfields,\
                         django_fields as _dfields
-from digidex.base import models as base_models
+from base import models as base_models
 from support import blocks as _sblocks
 
 class SupportIndexPage(base_models.IndexPage):
