@@ -15,9 +15,8 @@ from wagtail.contrib.settings.models import (
     BaseGenericSetting,
     register_setting,
 )
-
-from base.fields import django as _dfields,\
-                        wagtail as _wfields
+from base.fields import django_fields as _dfields,\
+                        wagtail_fields as _wfields
 
 @register_setting
 class FooterNavigationSettings(BaseGenericSetting):
