@@ -180,6 +180,7 @@ STORAGES = {
 
 # Wagtail settings
 WAGTAIL_SITE_NAME = "DigiDex"
+WAGTAILADMIN_BASE_URL = "https://digidex.tech/admin"
 
 # https://docs.wagtail.org/en/stable/topics/search/backends.html
 WAGTAILSEARCH_BACKENDS = {
