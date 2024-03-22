@@ -3,9 +3,10 @@ from wagtail.admin.panels import FieldPanel
 
 from base.blocks import basic_blocks as _bblocks
 from base.fields import wagtail_fields as _wfields
+from base import models as _models
 from ecommerce import blocks as _blocks
 
-class EcommerceIndexPage(Page):
+class EcommerceIndexPage(_models.IndexPage):
     top_heading = _bblocks.BaseCharBlock(
         required=True
     )

@@ -1,9 +1,14 @@
 from wagtail.models import Page
-from wagtail.admin.panels import FieldPanel, StreamFieldPanel
+from wagtail.admin.panels import FieldPanel
 
 from base.blocks import basic_blocks as _bblocks
 from base.fields import django_fields as _dfields,\
                         wagtail_fields as _wfields
+from base import models as _models
+
+
+class CompanyIndexPage(_models.IndexPage):
+    pass
 
 class CompanyPage(Page):
     # Metadata fields
@@ -30,5 +35,5 @@ class CompanyPage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('subtitle'),
         FieldPanel('description'),
-        StreamFieldPanel('body'),
+        FieldPanel('body'),
     ]

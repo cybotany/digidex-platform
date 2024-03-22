@@ -3,7 +3,11 @@ from wagtail.core.models import Page
 from wagtail.admin.edit_handlers import StreamFieldPanel
 
 from base.blocks import basic_blocks as _bblocks
+from base import models as _models
 from solution import blocks as _sblocks
+
+class SolutionIndexPage(_models.IndexPage):
+    pass
 
 class SolutionsPage(Page):
     top_section = StreamField([

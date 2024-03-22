@@ -16,27 +16,3 @@ class IndexPage(Page):
 
     class Meta:
         abstract = True
-
-class AuthenticationIndexPage(IndexPage):
-    pass
-
-class AuthorizationIndexPage(IndexPage):
-    pass
-
-class CompanyIndexPage(IndexPage):
-    pass
-
-class EcommerceIndexPage(IndexPage):
-    pass
-
-class PersonaIndexPage(IndexPage):
-    pass
-
-class PrivacyIndexPage(IndexPage):
-    pass
-
-class SolutionIndexPage(IndexPage):
-    pass
-
-class SupportIndexPage(IndexPage):
-    pass

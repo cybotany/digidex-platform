@@ -1,12 +1,12 @@
 from wagtail.models import Page
-from wagtail.admin.edit_handlers import StreamFieldPanel
-
+from wagtail.admin.panels import FieldPanel
 
 from base.blocks import basic_blocks as _bblocks
 from base.fields import wagtail_fields as _wfields
+from base import models as _models
 from support import blocks as _sblocks
 
-class SupportIndexPage(Page):
+class SupportIndexPage(_models.IndexPage):
     intro_heading = _bblocks.BaseCharBlock(
         required=True
     )
@@ -29,8 +29,8 @@ class SupportIndexPage(Page):
     )
 
     content_panels = Page.content_panels + [
-        StreamFieldPanel('intro_heading'),
-        StreamFieldPanel('intro_text'),
-        StreamFieldPanel('contact_options'),
-        StreamFieldPanel('faqs'),
+        FieldPanel('intro_heading'),
+        FieldPanel('intro_text'),
+        FieldPanel('contact_options'),
+        FieldPanel('faqs'),
     ]
