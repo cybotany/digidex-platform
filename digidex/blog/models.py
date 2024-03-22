@@ -4,14 +4,16 @@ from django.db import models
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from wagtail.models import Page, Orderable
-from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 from taggit.models import TaggedItemBase
 
+from base.models import django_fields as _dfields,\
+                        wagtail_fields as _wfields
+
 class BlogIndexPage(Page):
-    intro = RichTextField(
+    intro = _wfields.BaseRichTextField(
         blank=True
     )
 
@@ -51,13 +53,13 @@ class BlogTagIndexPage(Page):
 
 
 class BlogPage(Page):
-    date = models.DateField(
+    date = _dfields.BaseDateField(
         "Post date"
     )
-    intro = models.CharField(
+    intro = _dfields.BaseCharField(
         max_length=250
     )
-    body = RichTextField(
+    body = _wfields.BaseRichTextField(
         blank=True
     )
     authors = ParentalManyToManyField(
@@ -103,12 +105,12 @@ class BlogPageGalleryImage(Orderable):
         on_delete=models.CASCADE,
         related_name='gallery_images'
     )
-    image = models.ForeignKey(
+    image = _dfields.BaseForeignKey(
         'wagtailimages.Image',
         on_delete=models.CASCADE,
         related_name='+'
     )
-    caption = models.CharField(
+    caption = _dfields.BaseCharField(
         blank=True,
         max_length=250
     )
@@ -121,10 +123,10 @@ class BlogPageGalleryImage(Orderable):
 
 @register_snippet
 class Author(models.Model):
-    name = models.CharField(
+    name = _dfields.BaseCharField(
         max_length=255
     )
-    author_image = models.ForeignKey(
+    author_image = _dfields.BaseForeignKey(
         'wagtailimages.Image',
         null=True,
         blank=True,

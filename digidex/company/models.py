@@ -1,23 +1,23 @@
-from django.db import models
 from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel, StreamFieldPanel
 
-from digidex.base.models import wagtail_fields as _bfields
 from base.blocks import basic_blocks as _bblocks
+from base.models import wagtail_fields as _wfields,\
+                        django_fields as _dfields
 
 class CompanyPage(Page):
     # Metadata fields
-    subtitle = models.CharField(
+    subtitle = _dfields.BaseCharField(
         max_length=255,
         null=True,
         blank=True
     )
-    description = _bfields.BaseRichTextField(
+    description = _wfields.BaseRichTextField(
         blank=True
     )
     
     # Dynamic content blocks
-    body = _bfields.BaseStreamField(
+    body = _wfields.BaseStreamField(
         [
             ('paragraph', _bblocks.BaseRichTextBlock()),
             ('image', _bblocks.BaseImageBlock()),
