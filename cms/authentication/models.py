@@ -13,9 +13,6 @@ from cms.utils import  validators
 
 logger = getLogger(__name__)
 
-def profile_avatar_directory_path(instance, filename):
-    return f'profile_{instance.id}/avatar.jpeg'
-
 class DigiDexUser(AbstractUser):
     """
     User model extending Django's AbstractUser. This model includes all fields
