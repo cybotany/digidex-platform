@@ -10,19 +10,20 @@ PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 INSTALLED_APPS = [
-    "allauth",
-    "allauth.account",
-    "allauth.socialaccount",
     "authentication",
     "authorization",
-    "persona",
-    "privacy",
     "base",
     "blog",
+    "company",
     "ecommerce",
     "home",
+    "navigation",
+    "persona",
+    "privacy",
     "search",
-    "rest_framework",
+    "solution",
+    "support",
+
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.contrib.settings",
@@ -37,12 +38,19 @@ INSTALLED_APPS = [
     "wagtail",
     "modelcluster",
     "taggit",
+
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    "rest_framework",
+
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
 ]
 
 MIDDLEWARE = [
