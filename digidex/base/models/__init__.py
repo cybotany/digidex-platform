@@ -1,1 +1,0 @@
-from .navigation import FooterNavigationSettings, FooterText
