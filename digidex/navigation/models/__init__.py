@@ -1,1 +1,2 @@
-from .footer import FooterNavigationSettings
+from .footer import FooterNavigationSettings, FooterText
+from .header import HeaderText
