@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
@@ -63,6 +64,7 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
     "allauth.account.middleware.AccountMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 SOCIALACCOUNT_PROVIDERS = {
@@ -200,3 +202,10 @@ LOGIN_URL = '/authentication/login/'
 WAGTAIL_FRONTEND_LOGIN_URL = LOGIN_URL
 
 AUTH_USER_MODEL = 'authentication.DigiDexUser'
+
+# Allauth settings
+
+# Django Debug Toolbar settings
+INTERNAL_IPS = [
+    "10.0.0.218",
+]
