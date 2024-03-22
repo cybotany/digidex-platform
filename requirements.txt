@@ -10,6 +10,7 @@ cryptography==42.0.5
 defusedxml==0.7.1
 Django==5.0.2
 django-allauth==0.61.1
+django-debug-toolbar==4.3.0
 django-filter==23.5
 django-modelcluster==6.3
 django-permissionedforms==0.1
