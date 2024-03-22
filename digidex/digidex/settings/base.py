@@ -15,7 +15,6 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "authentication",
     "authorization",
-    "interest",
     "persona",
     "privacy",
     "base",
