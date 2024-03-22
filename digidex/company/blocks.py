@@ -8,12 +8,12 @@ class TeamMemberBlock(_bblocks.BaseStructBlock):
         max_length=255
     )
     image = _bblocks.BaseImageBlock()
-    description = _bblocks.BaseTextBlock(
+    description = _bblocks.BaseRichTextBlock(
         max_length=255
     )
 
 class TestimonialBlock(_bblocks.BaseStructBlock):
-    quote = _bblocks.BaseTextBlock(
+    quote = _bblocks.BaseRichTextBlock(
         max_length=255
     )
     author = _bblocks.BaseCharBlock(
