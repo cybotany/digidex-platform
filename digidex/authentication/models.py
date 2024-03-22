@@ -1,17 +1,7 @@
-from logging import getLogger
 import uuid
 from django.db import models, transaction
-from django.core.mail import send_mail, BadHeaderError
-from django.contrib.auth.models import AbstractUser
-from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from django.urls import reverse
-from django.utils.encoding import force_bytes
-from django.utils.http import urlsafe_base64_encode
-from django.conf import settings
 # Project specific imports
 from digidex.utils import  validators
-
-logger = getLogger(__name__)
 
 class DigiDexUser(AbstractUser):
     """
@@ -53,13 +43,6 @@ class DigiDexUser(AbstractUser):
         help_text='Indicates whether the user has confirmed their email address.'
     )
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        # Track the original username to detect changes
-        self.__original_username = self.username
-        # Track if the instance is new
-        self.__original_new_user = self.pk is None
-
     def __str__(self):
         return self.username
 
@@ -67,28 +50,3 @@ class DigiDexUser(AbstractUser):
     def save(self, *args, **kwargs):
         self.username = self.username.lower()
         super().save(*args, **kwargs)
-
-        if self.__original_new_user:
-            try:
-                self.send_verification_email()
-            except Exception as e:
-                logger.error(f'Error sending verification email: {e}')
-                raise
-
-    def send_verification_email(self):
-        token = PasswordResetTokenGenerator().make_token(self)
-        uid = urlsafe_base64_encode(force_bytes(self.pk))
-        base_url = reverse('verify-user', kwargs={'uidb64': uid, 'token': token})
-        full_url = f'{settings.SITE_HOST}{base_url}'
-
-        try:
-            send_mail(
-                subject='Verify your email',
-                message=f'Please click the following link to verify your email and complete the signup process:\n{full_url}',
-                from_email='no-reply@digidex.app',
-                recipient_list=[self.email],
-                fail_silently=False,
-            )
-        except (BadHeaderError, Exception) as e:
-            logger.warning(f"Email failed: {e}")
-            raise

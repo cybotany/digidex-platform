@@ -97,7 +97,7 @@ class DigiDexProfile(models.Model):
         Returns:
             str: The URL to view the details of this profile.
         """
-        return reverse('profile', kwargs={'username_slug': self.user.username_slug})
+        return reverse('profile', kwargs={'username_slug': self.slug})
 
     class Meta:
         verbose_name = "Profile"
