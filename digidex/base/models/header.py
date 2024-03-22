@@ -3,11 +3,12 @@ from wagtail.admin.panels import FieldPanel, PublishingPanel
 from wagtail.models import DraftStateMixin, PreviewableMixin, RevisionMixin, TranslatableMixin
 from wagtail.snippets.models import register_snippet
 
-from base.fields import wagtail_fields as _wfields
+from base.fields import django_fields as _dfields,\
+                        wagtail_fields as _wfields
 
 @register_snippet
 class HeaderText(DraftStateMixin, RevisionMixin, PreviewableMixin, TranslatableMixin, models.Model):
-    heading = models.CharField(
+    heading = _dfields.BaseCharField(
         max_length=75,
     )
     body = _wfields.BaseRichTextField(
@@ -16,7 +17,7 @@ class HeaderText(DraftStateMixin, RevisionMixin, PreviewableMixin, TranslatableM
 
     panels = [
         FieldPanel('heading'),
-        FieldPanel('paragraph'),
+        FieldPanel('body'),
         PublishingPanel(),
     ]
 
