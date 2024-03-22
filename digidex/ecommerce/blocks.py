@@ -1,35 +1,61 @@
+from base.blocks import basic_blocks as _bblocks,\
+                        composite_blocks as _cblocks,\
+                        layout_blocks as _lblocks
 
-
-class FeatureBlock(blocks.StructBlock):
-    icon = ImageChooserBlock(required=True)
-    text = blocks.CharBlock(required=True)
+class FeatureBlock(_bblocks.BaseStructBlock):
+    icon = _bblocks.BaseImageBlock(
+        required=True
+        )
+    text = _bblocks.BaseCharBlock(
+        required=True
+        )
 
     class Meta:
         template = 'blocks/feature_block.html'
 
-class ProductBlock(blocks.StructBlock):
-    icon = ImageChooserBlock(required=True)
-    title = blocks.CharBlock(required=True)
-    description = blocks.TextBlock(required=True)
-    price = blocks.CharBlock(required=True)
-    compare_at_price = blocks.CharBlock(required=False)
-    features = blocks.ListBlock(FeatureBlock())
-    view_plan_url = blocks.URLBlock()
+class ProductBlock(_bblocks.BaseStructBlock):
+    icon = _bblocks.BaseImageBlock(
+        required=True
+        )
+    title = _bblocks.BaseCharBlock(
+        required=True
+        )
+    description = _bblocks.BaseTextBlock(
+        required=True
+        )
+    price = _bblocks.BaseCharBlock(
+        required=True
+        )
+    compare_at_price = _bblocks.BaseCharBlock(
+        required=False
+        )
+    features = _bblocks.BaseListBlock(
+        FeatureBlock()
+        )
+    view_plan_url = _bblocks.BaseURLBlock()
 
     class Meta:
         template = 'blocks/product_block.html'
 
-class FAQBlock(blocks.StructBlock):
-    question = blocks.CharBlock(required=True)
-    answer = blocks.TextBlock(required=True)
+class FAQBlock(_bblocks.BaseStructBlock):
+    question = _bblocks.BaseCharBlock(
+        required=True
+        )
+    answer = _bblocks.BaseTextBlock(
+        required=True
+        )
 
     class Meta:
         template = 'blocks/faq_block.html'
 
-class CategoryLinkBlock(blocks.StructBlock):
-    name = blocks.CharBlock(required=True)
-    url = blocks.URLBlock()
-    icon = ImageChooserBlock(required=True)
+class CategoryLinkBlock(_bblocks.BaseStructBlock):
+    name = _bblocks.BaseCharBlock(
+        required=True
+        )
+    url = _bblocks.BaseURLBlock()
+    icon = _bblocks.BaseImageBlock(
+        required=True
+        )
 
     class Meta:
         template = 'blocks/category_link_block.html'

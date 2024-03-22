@@ -1,18 +1,19 @@
-from wagtail.core import blocks
-from wagtail.images.blocks import ImageChooserBlock
+from base.blocks import basic_blocks as _bblocks,\
+                        composite_blocks as _cblocks,\
+                        layout_blocks as _lblocks
 
-class ContactOptionBlock(blocks.StructBlock):
-    icon = ImageChooserBlock(required=True)
-    method = blocks.CharBlock(required=True)
-    detail = blocks.CharBlock(required=True)
-    link = blocks.URLBlock(required=False)
+class ContactOptionBlock(_bblocks.StructBlock):
+    icon = _bblocks.ImageChooserBlock(required=True)
+    method = _bblocks.CharBlock(required=True)
+    detail = _bblocks.CharBlock(required=True)
+    link = _bblocks.URLBlock(required=False)
 
     class Meta:
         template = 'blocks/contact_option_block.html'
 
-class FAQBlock(blocks.StructBlock):
-    question = blocks.CharBlock(required=True)
-    answer = blocks.TextBlock(required=True)
+class FAQBlock(_bblocks.StructBlock):
+    question = _bblocks.CharBlock(required=True)
+    answer = _bblocks.TextBlock(required=True)
 
     class Meta:
         template = 'blocks/faq_block.html'

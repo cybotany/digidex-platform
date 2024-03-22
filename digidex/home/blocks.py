@@ -1,28 +1,44 @@
-from wagtail.core import blocks
-from wagtail.images.blocks import ImageChooserBlock
+from base.blocks import basic_blocks as _bblocks,\
+                        composite_blocks as _cblocks,\
+                        layout_blocks as _lblocks
 
-class SolutionBlock(blocks.StructBlock):
-    icon = ImageChooserBlock(required=True)
-    title = blocks.CharBlock(required=True, max_length=255)
-    description = blocks.TextBlock(required=True)
-    link_url = blocks.URLBlock(required=True)
-    link_text = blocks.CharBlock(default='Learn more', required=False)
-    tag = blocks.CharBlock(required=False, help_text='Optional tag like "Most popular" or "Best Value"')
+class SolutionBlock(_bblocks.BaseStructBlock):
+    icon = _bblocks.BaseImageBlock(
+        required=True
+    )
+    title = _bblocks.BaseCharBlock(
+        required=True,
+        max_length=255
+    )
+    description = _bblocks.BaseTextBlock(
+        required=True
+    )
+    link_url = _bblocks.BaseURLBlock(
+        required=True
+    )
+    link_text = _bblocks.BaseCharBlock(
+        default='Learn more',
+        required=False
+    )
+    tag = _bblocks.BaseCharBlock(
+        required=False,
+        help_text='Optional tag like "Most popular" or "Best Value"'
+    )
 
     class Meta:
         template = 'blocks/solution_block.html'
 
 
-class ClientLogoBlock(blocks.StructBlock):
-    logo = ImageChooserBlock(required=True)
+class ClientLogoBlock(_bblocks.BaseStructBlock):
+    logo = _bblocks.BaseImageBlock(required=True)
 
     class Meta:
         template = 'blocks/client_logo_block.html'
 
 
-class ReviewBlock(blocks.StructBlock):
-    review_text = blocks.TextBlock(required=True)
-    reviewer_name = blocks.CharBlock(required=True, max_length=255)
+class ReviewBlock(_bblocks.BaseStructBlock):
+    review_text = _bblocks.BaseTextBlock(required=True)
+    reviewer_name = _bblocks.BaseCharBlock(required=True, max_length=255)
 
     class Meta:
         template = 'blocks/review_block.html'
