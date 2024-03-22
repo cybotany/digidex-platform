@@ -2,8 +2,8 @@ from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel, StreamFieldPanel
 
 from base.blocks import basic_blocks as _bblocks
-from base.models import wagtail_fields as _wfields,\
-                        django_fields as _dfields
+from base.fields import wagtail as _wfields,\
+                        django as _dfields
 
 class CompanyPage(Page):
     # Metadata fields
