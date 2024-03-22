@@ -38,7 +38,6 @@ class StatisticsGridBlock(_bblocks.BaseStructBlock):
 
 
 class FeaturedSectionBlock(_bblocks.BaseStructBlock):
-    lottie = _cblocks.LottieBlock()
     text_content = _bblocks.BaseTextBlock()
     statistics_grid = StatisticsGridBlock()
 
