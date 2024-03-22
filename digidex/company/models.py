@@ -4,7 +4,7 @@ from wagtail.admin.panels import FieldPanel
 from base.blocks import basic_blocks as _bblocks
 from base.fields import django_fields as _dfields,\
                         wagtail_fields as _wfields
-from base import models as _models
+from digidex.base.models import header as _models
 
 
 class CompanyIndexPage(_models.IndexPage):

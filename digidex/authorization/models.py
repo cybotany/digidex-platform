@@ -1,4 +1,4 @@
-from base import models
+from digidex.base.models import header
 
-class AuthorizationIndexPage(models.IndexPage):
+class AuthorizationIndexPage(header.IndexPage):
     pass

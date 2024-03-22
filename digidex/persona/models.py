@@ -6,7 +6,7 @@ from django.conf import settings
 # Project specific imports
 from base.utils import storage
 from base.fields import django_fields as _dfields
-from base import models as _models
+from digidex.base.models import header as _models
 
 logger = getLogger(__name__)
 
