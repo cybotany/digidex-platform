@@ -19,41 +19,41 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='digidexprofile',
             name='avatar',
-            field=base.models.django_fields.BaseImageField(blank=True, help_text='The avatar image of the profile.', null=True, storage=digidex.utils.storage.PublicMediaStorage, upload_to=persona.models.profile_avatar_directory_path),
+            field=base.fields.django_fields.BaseImageField(blank=True, help_text='The avatar image of the profile.', null=True, storage=digidex.utils.storage.PublicMediaStorage, upload_to=persona.models.profile_avatar_directory_path),
         ),
         migrations.AlterField(
             model_name='digidexprofile',
             name='bio',
-            field=base.models.django_fields.BaseTextField(blank=True, help_text='A short biography of the user.', max_length=500),
+            field=base.fields.django_fields.BaseTextField(blank=True, help_text='A short biography of the user.', max_length=500),
         ),
         migrations.AlterField(
             model_name='digidexprofile',
             name='created_at',
-            field=base.models.django_fields.BaseDateTimeField(auto_now_add=True, help_text='The date and time when the profile was created.', verbose_name='Created At'),
+            field=base.fields.django_fields.BaseDateTimeField(auto_now_add=True, help_text='The date and time when the profile was created.', verbose_name='Created At'),
         ),
         migrations.AlterField(
             model_name='digidexprofile',
             name='is_public',
-            field=base.models.django_fields.BaseBooleanField(default=False, help_text='Indicates if the profile should be publicly visible to the public or private. Profile is private by default.'),
+            field=base.fields.django_fields.BaseBooleanField(default=False, help_text='Indicates if the profile should be publicly visible to the public or private. Profile is private by default.'),
         ),
         migrations.AlterField(
             model_name='digidexprofile',
             name='last_modified',
-            field=base.models.django_fields.BaseDateTimeField(auto_now=True, help_text='The date and time when the profile was last modified.', verbose_name='Last Modified'),
+            field=base.fields.django_fields.BaseDateTimeField(auto_now=True, help_text='The date and time when the profile was last modified.', verbose_name='Last Modified'),
         ),
         migrations.AlterField(
             model_name='digidexprofile',
             name='location',
-            field=base.models.django_fields.BaseCharField(blank=True, help_text='The location of the user.', max_length=30),
+            field=base.fields.django_fields.BaseCharField(blank=True, help_text='The location of the user.', max_length=30),
         ),
         migrations.AlterField(
             model_name='digidexprofile',
             name='slug',
-            field=base.models.django_fields.BaseSlugField(editable=False, help_text='Slugified version of the username for URL usage.', max_length=255, unique=True),
+            field=base.fields.django_fields.BaseSlugField(editable=False, help_text='Slugified version of the username for URL usage.', max_length=255, unique=True),
         ),
         migrations.AlterField(
             model_name='digidexprofile',
             name='user',
-            field=base.models.django_fields.BaseOneToOneField(help_text='The user associated with this profile.', on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            field=base.fields.django_fields.BaseOneToOneField(help_text='The user associated with this profile.', on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
         ),
     ]

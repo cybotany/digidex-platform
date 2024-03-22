@@ -95,22 +95,22 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='footernavigationsettings',
             name='github_url',
-            field=base.models.django_fields.BaseURLField(blank=True, verbose_name='GitHub URL'),
+            field=base.fields.django_fields.BaseURLField(blank=True, verbose_name='GitHub URL'),
         ),
         migrations.AlterField(
             model_name='footernavigationsettings',
             name='linkedin_url',
-            field=base.models.django_fields.BaseURLField(blank=True, verbose_name='LinkedIn URL'),
+            field=base.fields.django_fields.BaseURLField(blank=True, verbose_name='LinkedIn URL'),
         ),
         migrations.AlterField(
             model_name='footernavigationsettings',
             name='twitter_url',
-            field=base.models.django_fields.BaseURLField(blank=True, verbose_name='Twitter URL'),
+            field=base.fields.django_fields.BaseURLField(blank=True, verbose_name='Twitter URL'),
         ),
         migrations.AlterField(
             model_name='footertext',
             name='body',
-            field=base.models.wagtail_fields.BaseRichTextField(),
+            field=base.fields.wagtail_fields.BaseRichTextField(),
         ),
         migrations.DeleteModel(
             name='CompanyPage',

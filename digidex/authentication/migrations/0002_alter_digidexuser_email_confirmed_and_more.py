@@ -17,16 +17,16 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='digidexuser',
             name='email_confirmed',
-            field=base.models.django_fields.BaseBooleanField(default=False, help_text='Indicates whether the user has confirmed their email address.'),
+            field=base.fields.django_fields.BaseBooleanField(default=False, help_text='Indicates whether the user has confirmed their email address.'),
         ),
         migrations.AlterField(
             model_name='digidexuser',
             name='username',
-            field=base.models.django_fields.BaseCharField(help_text='Required. 32 characters or fewer. Letters, digits and dashes only.', max_length=32, unique=True, validators=[django.core.validators.RegexValidator(flags=re.RegexFlag['ASCII'], message='Username must contain only letters, digits, and dashes.', regex='^[\\w-]+$')]),
+            field=base.fields.django_fields.BaseCharField(help_text='Required. 32 characters or fewer. Letters, digits and dashes only.', max_length=32, unique=True, validators=[django.core.validators.RegexValidator(flags=re.RegexFlag['ASCII'], message='Username must contain only letters, digits, and dashes.', regex='^[\\w-]+$')]),
         ),
         migrations.AlterField(
             model_name='digidexuser',
             name='uuid',
-            field=base.models.django_fields.BaseUUIDField(db_index=True, default=uuid.uuid4, help_text='The universal unique identifier associated with each User.', unique=True, verbose_name='User UUID'),
+            field=base.fields.django_fields.BaseUUIDField(db_index=True, default=uuid.uuid4, help_text='The universal unique identifier associated with each User.', unique=True, verbose_name='User UUID'),
         ),
     ]

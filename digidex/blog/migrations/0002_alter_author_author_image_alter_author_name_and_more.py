@@ -17,41 +17,41 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='author',
             name='author_image',
-            field=base.models.django_fields.BaseForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='wagtailimages.image'),
+            field=base.fields.django_fields.BaseForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='wagtailimages.image'),
         ),
         migrations.AlterField(
             model_name='author',
             name='name',
-            field=base.models.django_fields.BaseCharField(max_length=255),
+            field=base.fields.django_fields.BaseCharField(max_length=255),
         ),
         migrations.AlterField(
             model_name='blogindexpage',
             name='intro',
-            field=base.models.wagtail_fields.BaseRichTextField(blank=True),
+            field=base.fields.wagtail_fields.BaseRichTextField(blank=True),
         ),
         migrations.AlterField(
             model_name='blogpage',
             name='body',
-            field=base.models.wagtail_fields.BaseRichTextField(blank=True),
+            field=base.fields.wagtail_fields.BaseRichTextField(blank=True),
         ),
         migrations.AlterField(
             model_name='blogpage',
             name='date',
-            field=base.models.django_fields.BaseDateField(verbose_name='Post date'),
+            field=base.fields.django_fields.BaseDateField(verbose_name='Post date'),
         ),
         migrations.AlterField(
             model_name='blogpage',
             name='intro',
-            field=base.models.django_fields.BaseCharField(max_length=250),
+            field=base.fields.django_fields.BaseCharField(max_length=250),
         ),
         migrations.AlterField(
             model_name='blogpagegalleryimage',
             name='caption',
-            field=base.models.django_fields.BaseCharField(blank=True, max_length=250),
+            field=base.fields.django_fields.BaseCharField(blank=True, max_length=250),
         ),
         migrations.AlterField(
             model_name='blogpagegalleryimage',
             name='image',
-            field=base.models.django_fields.BaseForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='+', to='wagtailimages.image'),
+            field=base.fields.django_fields.BaseForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='+', to='wagtailimages.image'),
         ),
     ]
