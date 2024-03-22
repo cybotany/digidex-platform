@@ -35,7 +35,6 @@ class BaseURLBlock(blocks.URLBlock):
 class BaseImageBlock(img_blocks.ImageChooserBlock):
     pass
 
-
 class BaseStructBlock(blocks.StructBlock):
     pass
 
