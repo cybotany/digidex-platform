@@ -1,7 +1,6 @@
 from django import forms
 from django.db import models
 
-from digidex.base.fields import django_fields as _dfields
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from wagtail.models import Page, Orderable
@@ -10,7 +9,8 @@ from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 from taggit.models import TaggedItemBase
 
-from base.fields import wagtail_fields as _wfields
+from base.fields import django_fields as _dfields,\
+                        wagtail_fields as _wfields
 
 class BlogIndexPage(Page):
     intro = _wfields.BaseRichTextField(
