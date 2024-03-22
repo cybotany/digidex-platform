@@ -8,10 +8,10 @@ from support import blocks as _sblocks
 
 class SupportIndexPage(_models.IndexPage):
     intro_heading = _dfields.BaseCharField(
-        required=True
+        max_length=75
     )
     intro_text = _dfields.BaseTextField(
-        required=True
+        max_length=150
     )
     contact_options = _wfields.BaseStreamField(
         [
