@@ -63,17 +63,20 @@ class BaseAutoField(models.AutoField):
 class BaseBigAutoField(models.BigAutoField):
     pass
 
-class BaseSmallAutoField(models.SmallAutoField):
-    pass
-
 class BaseBinaryField(models.BinaryField):
     pass
 
 class BaseDurationField(models.DurationField):
     pass
 
-class BaseGenericIPAddressField(models.GenericIPAddressField):
+class BaseIPAddressField(models.GenericIPAddressField):
     pass
 
-class BaseIPAddressField(models.IPAddressField):
+class BaseJSONField(models.JSONField):
+    pass
+
+class BaseFileField(models.FileField):
+    pass
+
+class BaseDateField(models.DateField):
     pass
