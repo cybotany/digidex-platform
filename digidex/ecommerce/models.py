@@ -3,10 +3,10 @@ from wagtail.admin.panels import FieldPanel
 
 from base.blocks import basic_blocks as _bblocks
 from base.fields import wagtail_fields as _wfields
-from digidex.base.models import header as _models
+from base.models import base as base_models
 from ecommerce import blocks as _blocks
 
-class EcommerceIndexPage(_models.IndexPage):
+class EcommerceIndexPage(base_models.IndexPage):
     top_heading = _bblocks.BaseCharBlock(
         required=True
     )

@@ -3,10 +3,10 @@ from wagtail.admin.panels import FieldPanel
 
 from base.fields import wagtail_fields as _wfields,\
                         django_fields as _dfields
-from digidex.base.models import header as _models
+from base.models import base as base_models
 from support import blocks as _sblocks
 
-class SupportIndexPage(_models.IndexPage):
+class SupportIndexPage(base_models.IndexPage):
     intro_heading = _dfields.BaseCharField(
         max_length=75
     )

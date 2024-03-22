@@ -6,7 +6,7 @@ from django.conf import settings
 # Project specific imports
 from base.utils import storage
 from base.fields import django_fields as _dfields
-from digidex.base.models import header as _models
+from base.models import base as base_models
 
 logger = getLogger(__name__)
 
@@ -106,5 +106,5 @@ class DigiDexProfile(models.Model):
         verbose_name_plural = "Profiles"
 
 
-class PersonaIndexPage(_models.IndexPage):
+class PersonaIndexPage(base_models.IndexPage):
     pass
