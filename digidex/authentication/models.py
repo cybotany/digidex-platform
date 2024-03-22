@@ -9,7 +9,7 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.conf import settings
 # Project specific imports
-from cms.utils import  validators
+from digidex.utils import  validators
 
 logger = getLogger(__name__)
 

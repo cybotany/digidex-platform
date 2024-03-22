@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.utils.text import slugify
 from django.conf import settings
 # Project specific imports
-from cms.utils import cms_storage
+from digidex.utils import cms_storage
 
 logger = getLogger(__name__)
 

@@ -178,7 +178,6 @@ STORAGES = {
     },
 }
 
-
 # Wagtail settings
 WAGTAIL_SITE_NAME = "DigiDex"
 
@@ -189,9 +188,7 @@ WAGTAILSEARCH_BACKENDS = {
     }
 }
 
-WAGTAILADMIN_BASE_URL = "http://example.com"
-
-LOGIN_URL = '/accounts/login/'
+LOGIN_URL = '/authentication/login/'
 WAGTAIL_FRONTEND_LOGIN_URL = LOGIN_URL
 
-AUTH_USER_MODEL = 'accounts.DigiDexUser'
+AUTH_USER_MODEL = 'authentication.DigiDexUser'
