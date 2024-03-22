@@ -1,55 +1,67 @@
-# Project specific blocks
-from base.blocks import layout_blocks as _lblocks,\
-                        basic_blocks as _bblocks,\
-                        composite_blocks as _cblocks
+from base.blocks import basic_blocks as _bblocks,\
+                        composite_blocks as _cblocks,\
+                        layout_blocks as _lblocks
 
-class SolutionBlock(_lblocks.SectionBlock):
-    icon = _bblocks.BaseImageBlock()
-    content = _bblocks.BaseTextBlock()
-    link = _cblocks.URLBlock(
+class AboutSectionBlock(_bblocks.BaseStructBlock):
+    icon = _bblocks.BaseImageBlock(
+        required=True
+    )
+    title = _bblocks.BaseCharBlock(
+        required=True
+    )
+    text = _bblocks.BaseTextBlock(
+        required=True
+    )
+
+    class Meta:
+        template = 'blocks/about_section_block.html'
+
+
+class QuoteBlock(_bblocks.BaseStructBlock):
+    quote_text = _bblocks.BaseTextBlock(
+        required=True
+    )
+    author_name = _bblocks.BaseCharBlock(
+        required=True
+    )
+    author_role = _bblocks.BaseCharBlock(
+        required=True
+    )
+    author_signature = _bblocks.BaseImageBlock(
+        required=False
+    )
+
+    class Meta:
+        template = 'blocks/quote_block.html'
+
+
+class TeamMemberBlock(_bblocks.BaseStructBlock):
+    image = _bblocks.BaseImageBlock(
+        required=True
+    )
+    name = _bblocks.BaseCharBlock(
+        required=True
+    )
+    role = _bblocks.BaseCharBlock(
+        required=True
+    )
+
+    class Meta:
+        template = 'blocks/team_member_block.html'
+
+
+class ReviewBlock(_bblocks.BaseStructBlock):
+    reviewer_name = _bblocks.BaseCharBlock(
+        required=True
+    )
+    review_text = _bblocks.BaseTextBlock(
+        required=True
+    )
+    star_rating = _bblocks.BaseIntegerBlock(
         required=True,
-        help_text="Select a page for 'Learn more' link"
-    )
-    tag = _bblocks.BaseCharBlock(
-        required=False,
-        choices=[
-            ('most_popular', 'Most popular'),
-            ('best_value', 'Best Value')
-        ], 
-        help_text="Tag for the solution (optional)"
+        min_value=1,
+        max_value=5
     )
 
     class Meta:
-        icon = 'solution'
-        template = 'blocks/solution_block.html'
-
-
-class SolutionsGridBlock(_lblocks.GridBlock):
-    solutions = _bblocks.BaseListBlock(
-        SolutionBlock(help_text="Add solutions to the grid")
-    )
-
-    class Meta:
-        icon = 'grid'
-        template = 'blocks/solutions_grid_block.html'
-
-
-class ClientLogoBlock(_bblocks.BaseStructBlock):
-    logo = _bblocks.BaseImageBlock(
-        help_text="Select a client logo"
-    )
-
-    class Meta:
-        icon = 'image'
-        template = 'blocks/client_logo_block.html'
-
-
-class ClientsGridBlock(_bblocks.StructBlock):
-    title = _cblocks.HeadingBlock()
-    logos = _bblocks.BaseListBlock(
-        ClientLogoBlock(help_text="Add client logos")
-    )
-
-    class Meta:
-        icon = 'group'
-        template = 'blocks/clients_grid_block.html'
+        template = 'blocks/review_block.html'
