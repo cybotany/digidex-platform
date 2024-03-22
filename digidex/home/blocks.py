@@ -30,15 +30,22 @@ class SolutionBlock(_bblocks.BaseStructBlock):
 
 
 class ClientLogoBlock(_bblocks.BaseStructBlock):
-    logo = _bblocks.BaseImageBlock(required=True)
+    logo = _bblocks.BaseImageBlock(
+        required=True
+    )
 
     class Meta:
         template = 'blocks/client_logo_block.html'
 
 
 class ReviewBlock(_bblocks.BaseStructBlock):
-    review_text = _bblocks.BaseTextBlock(required=True)
-    reviewer_name = _bblocks.BaseCharBlock(required=True, max_length=255)
+    review_text = _bblocks.BaseTextBlock(
+        required=True
+    )
+    reviewer_name = _bblocks.BaseCharBlock(
+        required=True,
+        max_length=255
+    )
 
     class Meta:
         template = 'blocks/review_block.html'
