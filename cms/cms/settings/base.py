@@ -10,10 +10,14 @@ PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 INSTALLED_APPS = [
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    "accounts",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "authentication",
+    "authorization",
+    "interest",
+    "persona",
+    "privacy",
     "base",
     "blog",
     "ecommerce",
