@@ -1,2 +1,2 @@
-from .footer import FooterText
-from .header import HeaderText
+from .footer_text import FooterText
+from .header_text import HeaderText
