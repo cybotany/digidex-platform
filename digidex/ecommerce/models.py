@@ -1,5 +1,5 @@
 from wagtail.models import Page
-from wagtail.admin.edit_handlers import StreamFieldPanel
+from wagtail.admin.panels import StreamFieldPanel
 
 from base.blocks import basic_blocks as _bblocks
 from base.fields import wagtail_fields as _wfields
