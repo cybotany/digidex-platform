@@ -1,9 +1,12 @@
-from base.blocks import basics, components, layouts
+from base.blocks import basics as _blocks
                         
 
-class CallToActionBlock(layouts.SectionBlock):
-    text = basics.BaseCharBlock()
-    button = components.ButtonBlock()
+class CallToActionContentBlock(_blocks.ContentBlock):
+    pass
+
+
+class CallToActionSectionBlock(_blocks.SectionBlock):
+    content = CallToActionContentBlock()
 
     class Meta:
         icon = 'placeholder'

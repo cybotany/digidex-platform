@@ -1,15 +1,15 @@
-from base.blocks import basics, components, layouts
+from base.blocks import basics as _blocks
 
 
-class StatisticItemBlock(basics.BaseStructBlock):
-    icon = basics.BaseImageBlock()
-    number = basics.BaseCharBlock(
+class StatisticItemBlock(_blocks.BaseStructBlock):
+    icon = _blocks.BaseImageBlock()
+    number = _blocks.BaseCharBlock(
         help_text="Statistic number"
     )
-    description = basics.BaseCharBlock(
+    description = _blocks.BaseCharBlock(
         help_text="Statistic description"
     )
-    style = basics.BaseChoiceBlock(
+    style = _blocks.BaseChoiceBlock(
         required=False,
         choices=[
             ('default', 'Default'),
@@ -23,8 +23,8 @@ class StatisticItemBlock(basics.BaseStructBlock):
         template = 'base/blocks/apps/company/statistic_item_block.html'
 
 
-class StatisticsGridBlock(basics.BaseStructBlock):
-    statistics = basics.BaseListBlock(
+class StatisticsGridBlock(_blocks.BaseStructBlock):
+    statistics = _blocks.BaseListBlock(
         StatisticItemBlock(help_text="Add statistics")
     )
 
@@ -33,8 +33,8 @@ class StatisticsGridBlock(basics.BaseStructBlock):
         template = 'base/blocks/apps/company/statistics_grid_block.html'
 
 
-class FeaturedSectionBlock(basics.BaseStructBlock):
-    text_content = basics.BaseTextBlock()
+class FeaturedSectionBlock(_blocks.BaseStructBlock):
+    text_content = _blocks.BaseTextBlock()
     statistics_grid = StatisticsGridBlock()
 
     class Meta:
@@ -42,26 +42,37 @@ class FeaturedSectionBlock(basics.BaseStructBlock):
         template = 'base/blocks/apps/company/featured_section_block.html'
 
 
-class TeamMemberBlock(basics.BaseStructBlock):
-    name = basics.BaseCharBlock(
+class TeamMemberBlock(_blocks.BaseStructBlock):
+    name = _blocks.BaseCharBlock(
         max_length=255
     )
-    role = basics.BaseCharBlock(
+    role = _blocks.BaseCharBlock(
         max_length=255
     )
-    image = basics.BaseImageBlock()
-    description = basics.BaseRichTextBlock(
+    image = _blocks.BaseImageBlock()
+    description = _blocks.BaseRichTextBlock(
         max_length=255
     )
 
-class TestimonialBlock(basics.BaseStructBlock):
-    quote = basics.BaseRichTextBlock(
+class TestimonialBlock(_blocks.BaseStructBlock):
+    quote = _blocks.BaseRichTextBlock(
         max_length=255
     )
-    author = basics.BaseCharBlock(
+    author = _blocks.BaseCharBlock(
         max_length=255
     )
-    role = basics.BaseCharBlock(
+    role = _blocks.BaseCharBlock(
         max_length=255,
         required=False
     )
+
+
+class CompanyContentBlock(_blocks.BaseContentBlock):
+    pass
+
+class CompanySectionBlock(_blocks.BaseSectionBlock):
+    content = CompanyContentBlock()
+
+    class Meta:
+        icon = 'image'
+        template = 'base/blocks/apps/company/section.html'

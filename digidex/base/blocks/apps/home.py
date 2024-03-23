@@ -1,36 +1,28 @@
-from base.blocks import basics, components, layouts
+from base.blocks import basics as _blocks
 
 
-class HeroBlock(layouts.BaseBlock):
-    heading = basics.BaseCharBlock(
+class HeroBlock(_blocks.BaseBlock):
+    heading = _blocks.BaseCharBlock(
         required=True,
         max_length=255
     )
-    text = basics.BaseTextBlock(
+    text = _blocks.BaseTextBlock(
         required=True
     )
-    primary_button = components.ButtonBlock(
+    primary_button = _blocks.BaseButtonBlock(
         required=True
     )
-    secondary_button = components.ButtonBlock(
+    secondary_button = _blocks.BaseButtonBlock(
         required=False
     )
 
 
-class HeroContent(layouts.ContentBlock):
+class HeroContentBlock(_blocks.BaseContentBlock):
     pass
 
 
-class HeroSection(layouts.SectionBlock):
-    image = basics.BaseImageBlock(
-        required=False
-    )
-    cta = basics.BaseStructBlock(
-        [
-            ("text", basics.BaseCharBlock(required=True, max_length=255)),
-            ("url", basics.BaseURLBlock(required=True)),
-        ]
-    )
+class HeroSectionBlock(_blocks.BaseSectionBlock):
+    content = HeroContentBlock()
 
     class Meta:
         template = "blocks/hero_section.html"

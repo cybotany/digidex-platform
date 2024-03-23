@@ -1,11 +1,12 @@
-from base.blocks import basics, components, layouts
+from base.blocks import basics as _blocks
 
-class SolutionTagBlock(components.TagBlock):
-    text = basics.BaseCharBlock(
+
+class SolutionTagBlock(_blocks.BaseStructBlock):
+    text = _blocks.BaseCharBlock(
         required=True,
         help_text="Enter the text for the tag (e.g., 'Most popular')."
     )
-    color = basics.BaseChoiceBlock(
+    color = _blocks.BaseChoiceBlock(
         choices=[
             ('yellow', 'Yellow'),
             ('blue', 'Blue'),
@@ -15,35 +16,35 @@ class SolutionTagBlock(components.TagBlock):
     )
 
 
-class SolutionCardContentBlock(components.IconBlock):
-    image = basics.BaseImageBlock(
+class SolutionCardContentBlock(_blocks.BaseStructBlock):
+    image = _blocks.BaseImageBlock(
         required=True,
         help_text="Select an image for the solution card."
     )
-    heading = basics.BaseRichTextBlock(
+    heading = _blocks.BaseRichTextBlock(
         required=True,
         help_text="Enter the heading for the solution card."
     )
-    paragraph = basics.BaseRichTextBlock(
+    paragraph = _blocks.BaseRichTextBlock(
         required=True,
         help_text="Enter a descriptive paragraph for the solution."
     )
 
 
-class SolutionCardIconBlock(components.IconBlock):
-    icon = basics.BaseImageBlock(
+class SolutionCardIconBlock(_blocks.BaseStructBlock):
+    icon = _blocks.BaseImageBlock(
         required=True,
         help_text="Select an icon image to represent the link."
     )
-    text = basics.BaseCharBlock(
+    text = _blocks.BaseCharBlock(
         required=True,
         help_text="Enter the text for the link."
     )
-    page = basics.BasePageBlock(
+    page = _blocks.BasePageBlock(
         required=False,
         help_text="Select the destination page for the link."
     )
-    target = basics.BaseChoiceBlock(
+    target = _blocks.BaseChoiceBlock(
         choices=[
             ('_self', 'Open in the same window'),
             ('_blank', 'Open in a new window')
@@ -53,7 +54,7 @@ class SolutionCardIconBlock(components.IconBlock):
     )
 
 
-class SolutionCardBlock(layouts.BaseBlock):
+class SolutionCardBlock(_blocks.BaseBlock):
     tag = SolutionTagBlock(
         required=False,
         help_text="Optionally add a tag to the card, such as 'Most popular' or 'New'."
@@ -67,8 +68,8 @@ class SolutionCardBlock(layouts.BaseBlock):
     )
 
 
-class SolutionGridBlock(layouts.GridBlock):
-    items = basics.BaseListBlock(
+class SolutionGridBlock(_blocks.BaseGridBlock):
+    items = _blocks.BaseListBlock(
         SolutionCardBlock(),
         min_num=1,
         max_num=4,
@@ -80,12 +81,12 @@ class SolutionGridBlock(layouts.GridBlock):
         template = 'base/blocks/solution/grid.html'
 
 
-class ClientLogoBlock(basics.BaseStructBlock):
-    image = basics.BaseImageBlock(
+class ClientLogoBlock(_blocks.BaseStructBlock):
+    image = _blocks.BaseImageBlock(
         required=True,
         help_text="Select a client logo image."
     )
-    alt_text = basics.BaseCharBlock(
+    alt_text = _blocks.BaseCharBlock(
         required=False,
         max_length=255,
         help_text="Enter an alternative text for the image."
@@ -95,13 +96,13 @@ class ClientLogoBlock(basics.BaseStructBlock):
         icon = 'image'
 
 
-class SolutionClientsBlock(layouts.BaseBlock):
-    subtitle = basics.BaseCharBlock(
+class SolutionClientsBlock(_blocks.BaseBlock):
+    subtitle = _blocks.BaseCharBlock(
         required=False,
         max_length=255,
         help_text="Enter a subtitle for the clients section."
     )
-    logos = basics.BaseListBlock(
+    logos = _blocks.BaseListBlock(
         ClientLogoBlock(),
         help_text="Add client logos."
     )
@@ -111,16 +112,11 @@ class SolutionClientsBlock(layouts.BaseBlock):
         template = 'base/blocks/apps/solution/clients.html'
 
 
-class SolutionContentBlock(layouts.ContentBlock):
-    subcontent = basics.BaseStreamBlock(
-        [
-            ('solutions', SolutionGridBlock()),
-            ('clients', SolutionClientsBlock()),
-        ],
-        max_num=1
-    )
+class SolutionContentBlock(_blocks.BaseContentBlock):
+    pass
 
-class SolutionSectionBlock(layouts.SectionBlock):
+
+class SolutionSectionBlock(_blocks.BaseSectionBlock):
     content = SolutionContentBlock()
 
     class Meta:

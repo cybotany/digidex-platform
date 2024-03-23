@@ -38,7 +38,7 @@ class BasePageBlock(blocks.PageChooserBlock):
     pass
 
 
-class BaseImageBlock(img_blocks.ImageChooserBlock):
+class BaseImageBlock(imgImageChooserBlock):
     pass
 
 
@@ -51,4 +51,44 @@ class BaseStructBlock(blocks.StructBlock):
 
 
 class BaseStreamBlock(blocks.StreamBlock):
+    pass
+
+
+class BaseBlock(BaseStructBlock):
+    """
+    Parent:
+      - BaseGrid
+    Child:
+      - BaseComponents
+    """
+    pass
+
+
+class BaseGridBlock(BaseStreamBlock):
+    """
+    Parent:
+      - BaseContent
+    Child:
+      - BaseBlock
+    """
+    pass
+
+
+class BaseContentBlock(BaseStreamBlock):
+    """
+    Parent:
+      - BaseSection
+    Child:
+      - BaseGrid
+    """
+    pass
+
+
+class BaseSectionBlock(BaseStructBlock):
+    """
+    Parent:
+      - BasePage
+    Child:
+      - BaseContent
+    """
     pass

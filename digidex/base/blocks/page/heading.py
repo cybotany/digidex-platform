@@ -1,23 +1,23 @@
-from base.blocks import basics, components, layouts
+from base.blocks import basics as _blocks
 
 
-class HeadingBlock(layouts.BaseBlock):
-    title = basics.BaseCharBlock(
+class HeadingBlock(_blocks.BaseBlock):
+    title = _blocks.BaseCharBlock(
         required=True,
         help_text="Enter the heading title"
     )
-    text = basics.BaseTextBlock(
+    text = _blocks.BaseTextBlock(
         required=True,
         help_text="Enter the heading text"
     )
 
 
-class HeadingContent(layouts.ContentBlock):
-    block = HeadingBlock()
+class HeadingContentBlock(_blocks.ContentBlock):
+    pass
 
 
-class HeadingSection(layouts.SectionBlock):
-    content = HeadingContent()
+class HeadingSectionBlock(_blocks.SectionBlock):
+    content = HeadingContentBlock()
 
     class Meta:
         icon = "placeholder"
