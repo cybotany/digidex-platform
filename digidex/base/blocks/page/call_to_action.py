@@ -1,9 +1,8 @@
-from digidex.base.blocks import layouts
-from digidex.base.blocks import basics, components
+from base.blocks import basics, components, layouts
                         
 
-class CallToActionBannerBlock(layouts.SectionBlock):
-    title = basics.BaseCharBlock()
+class CallToActionBlock(layouts.SectionBlock):
+    text = basics.BaseCharBlock()
     button = components.ButtonBlock()
 
     class Meta:

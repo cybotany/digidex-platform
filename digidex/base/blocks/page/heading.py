@@ -1,5 +1,4 @@
-from digidex.base.blocks import layouts
-from digidex.base.blocks import basics
+from base.blocks import basics, components, layouts
 
 
 class HeadingBlock(layouts.BaseBlock):

@@ -2,20 +2,39 @@ from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel
 
 from base.fields import wagtail_fields
-from base.blocks import basics
+from base.blocks.page import call_to_action, heading
 
-class IndexPage(Page):
-    introduction = wagtail_fields.BaseStreamField(
+
+class BasePage(Page):
+    heading = wagtail_fields.BaseStreamField(
         [
-            ('paragraph', basics.BaseRichTextBlock()),
+            ('heading', heading.HeadingBlock()),
         ],
         null=True,
-        blank=True
+        blank=False,
+        use_json_field=True
+    )
+    
+    call_to_action = wagtail_fields.BaseStreamField(
+        [
+            ('cta', call_to_action.CallToActionBlock()),
+        ],
+        null=True,
+        blank=False,
+        use_json_field=True
     )
 
+    class Meta:
+        abstract = True
+
     content_panels = Page.content_panels + [
-        FieldPanel('introduction'),
+        FieldPanel('heading'),
+        FieldPanel('call_to_action'),
     ]
+
+
+class BaseIndexPage(BasePage):
+    pass
 
     class Meta:
         abstract = True
