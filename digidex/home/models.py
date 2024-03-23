@@ -1,45 +1,28 @@
-from django.db import models
 from wagtail.models import Page
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel
+from wagtail.admin.panels import FieldPanel
 
-from base.fields import django_fields, wagtail_fields
+from base.fields import wagtail_fields
+from base.blocks.apps import home as hero_section
+from base.blocks.apps.solutions import section as solution_section
 
 
 class HomePage(Page):
-    hero_heading = django_fields.BaseCharField(
-        blank=True,
-        max_length=75
-    )
-    hero_text = django_fields.BaseCharField(
-        blank=True,
-        max_length=150
-    )
-    hero_cta = django_fields.BaseCharField(
-        blank=True,
-        verbose_name="Hero CTA",
-        max_length=75
-    )
-    hero_cta_link = django_fields.BaseForeignKey(
-        "wagtailcore.Page",
+    hero = wagtail_fields.BaseStreamField(
+        [
+            ('hero', hero_section.HeroSectionBlock())
+        ],
         null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name="+",
-        verbose_name="Hero CTA link"
+        blank=True
     )
-    lottie = wagtail_fields.BaseRichTextField(
+    solutions = wagtail_fields.BaseStreamField(
+        [
+            ('solutions', solution_section.SolutionSectionBlock())
+        ],
+        null=True,
         blank=True
     )
 
     content_panels = Page.content_panels + [
-        MultiFieldPanel(
-            [
-                FieldPanel("hero_heading"),
-                FieldPanel("hero_text"),
-                FieldPanel("hero_cta"),
-                FieldPanel("hero_cta_link"),
-            ],
-            heading="Hero section",
-        ),
-        FieldPanel('lottie'),
+        FieldPanel('hero_section'),
+        FieldPanel('features'),
     ]
