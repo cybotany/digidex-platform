@@ -1,9 +1,8 @@
-from digidex.base.blocks import component
-from digidex.base.blocks import basic
+from base.blocks import basics, components, layouts
 
 
-class TopBarPromoBlock(basic.BaseStructBlock):
-    message = basic.BaseCharBlock(
+class TopBarPromoBlock(basics.BaseStructBlock):
+    message = basics.BaseCharBlock(
         help_text="Enter the promotional message"
     )
 
@@ -11,10 +10,10 @@ class TopBarPromoBlock(basic.BaseStructBlock):
         icon = 'doc-full'
 
 
-class PromoBarBlock(basic.SectionBlock):
+class PromoBarBlock(basics.SectionBlock):
     promo = TopBarPromoBlock()
-    icons = basic.BaseListBlock(
-        component.URLBlock()
+    icons = basics.BaseListBlock(
+        components.URLBlock()
     )
 
     class Meta:

@@ -1,7 +1,7 @@
 from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel
 
-from base.blocks import basic
+from base.blocks import basics
 from base.fields import django_fields, wagtail_fields
 from base import models as base_models
 
@@ -23,9 +23,9 @@ class CompanyPage(Page):
     # Dynamic content blocks
     body = wagtail_fields.BaseStreamField(
         [
-            ('paragraph', basic.BaseRichTextBlock()),
-            ('image', basic.BaseImageBlock()),
-            ('url', basic.BaseURLBlock()),
+            ('paragraph', basics.BaseRichTextBlock()),
+            ('image', basics.BaseImageBlock()),
+            ('url', basics.BaseURLBlock()),
         ],
         null=True,
         blank=True

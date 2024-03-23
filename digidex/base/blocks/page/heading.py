@@ -1,22 +1,23 @@
-from base.blocks import basic
+from digidex.base.blocks import layouts
+from digidex.base.blocks import basics
 
 
-class HeadingBlock(basic.BaseBlock):
-    title = basic.BaseCharBlock(
+class HeadingBlock(layouts.BaseBlock):
+    title = basics.BaseCharBlock(
         required=True,
         help_text="Enter the heading title"
     )
-    text = basic.BaseTextBlock(
+    text = basics.BaseTextBlock(
         required=True,
         help_text="Enter the heading text"
     )
 
 
-class HeadingContent(basic.ContentBlock):
+class HeadingContent(layouts.ContentBlock):
     block = HeadingBlock()
 
 
-class HeadingSection(basic.SectionBlock):
+class HeadingSection(layouts.SectionBlock):
     content = HeadingContent()
 
     class Meta:

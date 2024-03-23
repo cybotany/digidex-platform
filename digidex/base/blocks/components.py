@@ -1,8 +1,8 @@
-from base.blocks import basic
+from digidex.base.blocks import basics
 
 
-class TagBlock(basic.BaseStructBlock):
-    text = basic.BaseCharBlock(
+class TagBlock(basics.BaseStructBlock):
+    text = basics.BaseCharBlock(
         required=False
     )
 
@@ -10,16 +10,16 @@ class TagBlock(basic.BaseStructBlock):
         icon = 'tag'
 
 
-class URLBlock(basic.BaseStructBlock):
-    text = basic.BaseCharBlock(
+class URLBlock(basics.BaseStructBlock):
+    text = basics.BaseCharBlock(
         required=False,
         help_text="Enter the link title"
     )
-    url = basic.BaseURLBlock(
+    url = basics.BaseURLBlock(
         required=False,
         help_text="Enter the URL"
     )
-    target = basic.BaseChoiceBlock(
+    target = basics.BaseChoiceBlock(
         choices=[
             ('_self', 'Same window'),
             ('_blank', 'New window')
@@ -34,7 +34,7 @@ class URLBlock(basic.BaseStructBlock):
 
 
 class IconBlock(URLBlock):
-    icon = basic.BaseImageBlock(
+    icon = basics.BaseImageBlock(
         required=False,
         help_text="Optional: Select an icon image"
     )

@@ -1,15 +1,15 @@
-from base.blocks import basic
+from base.blocks import basics, components, layouts
 
 
-class StatisticItemBlock(basic.BaseStructBlock):
-    icon = basic.BaseImageBlock()
-    number = basic.BaseCharBlock(
+class StatisticItemBlock(basics.BaseStructBlock):
+    icon = basics.BaseImageBlock()
+    number = basics.BaseCharBlock(
         help_text="Statistic number"
     )
-    description = basic.BaseCharBlock(
+    description = basics.BaseCharBlock(
         help_text="Statistic description"
     )
-    style = basic.BaseChoiceBlock(
+    style = basics.BaseChoiceBlock(
         required=False,
         choices=[
             ('default', 'Default'),
@@ -23,8 +23,8 @@ class StatisticItemBlock(basic.BaseStructBlock):
         template = 'base/blocks/apps/company/statistic_item_block.html'
 
 
-class StatisticsGridBlock(basic.BaseStructBlock):
-    statistics = basic.BaseListBlock(
+class StatisticsGridBlock(basics.BaseStructBlock):
+    statistics = basics.BaseListBlock(
         StatisticItemBlock(help_text="Add statistics")
     )
 
@@ -33,8 +33,8 @@ class StatisticsGridBlock(basic.BaseStructBlock):
         template = 'base/blocks/apps/company/statistics_grid_block.html'
 
 
-class FeaturedSectionBlock(basic.BaseStructBlock):
-    text_content = basic.BaseTextBlock()
+class FeaturedSectionBlock(basics.BaseStructBlock):
+    text_content = basics.BaseTextBlock()
     statistics_grid = StatisticsGridBlock()
 
     class Meta:
@@ -42,26 +42,26 @@ class FeaturedSectionBlock(basic.BaseStructBlock):
         template = 'base/blocks/apps/company/featured_section_block.html'
 
 
-class TeamMemberBlock(basic.BaseStructBlock):
-    name = basic.BaseCharBlock(
+class TeamMemberBlock(basics.BaseStructBlock):
+    name = basics.BaseCharBlock(
         max_length=255
     )
-    role = basic.BaseCharBlock(
+    role = basics.BaseCharBlock(
         max_length=255
     )
-    image = basic.BaseImageBlock()
-    description = basic.BaseRichTextBlock(
+    image = basics.BaseImageBlock()
+    description = basics.BaseRichTextBlock(
         max_length=255
     )
 
-class TestimonialBlock(basic.BaseStructBlock):
-    quote = basic.BaseRichTextBlock(
+class TestimonialBlock(basics.BaseStructBlock):
+    quote = basics.BaseRichTextBlock(
         max_length=255
     )
-    author = basic.BaseCharBlock(
+    author = basics.BaseCharBlock(
         max_length=255
     )
-    role = basic.BaseCharBlock(
+    role = basics.BaseCharBlock(
         max_length=255,
         required=False
     )

@@ -1,12 +1,12 @@
-from base.blocks import basic, component
+from base.blocks import basics, components, layouts
 
 
-class LogoLinkBlock(basic.BaseStructBlock):
-    logo_image = basic.BaseImageBlock(
+class LogoLinkBlock(basics.BaseStructBlock):
+    logo_image = basics.BaseImageBlock(
         required=True,
         help_text="Select the logo image"
     )
-    url = basic.BaseURLBlock(
+    url = basics.BaseURLBlock(
         required=True,
         help_text="Enter the URL the logo should link to"
     )
@@ -16,12 +16,12 @@ class LogoLinkBlock(basic.BaseStructBlock):
         template = 'base/blocks/apps/navigation/logo_link.html'
 
 
-class NavigationMenuMobileBlock(basic.BaseStructBlock):
-    nav_links = basic.BaseListBlock(
-        component.URLBlock(help_text="Add navigation links")
+class NavigationMenuMobileBlock(basics.BaseStructBlock):
+    nav_links = basics.BaseListBlock(
+        components.URLBlock(help_text="Add navigation links")
     )
-    mobile_nav_buttons = basic.BaseListBlock(
-        component.ButtonBlock(),
+    mobile_nav_buttons = basics.BaseListBlock(
+        components.ButtonBlock(),
         help_text="Add navigation buttons"
     )
 
@@ -30,7 +30,7 @@ class NavigationMenuMobileBlock(basic.BaseStructBlock):
         template = 'base/blocks/apps/navigation/menu_mobile.html'
 
 
-class ShoppingCartBlock(component.ButtonBlock):
+class ShoppingCartBlock(components.ButtonBlock):
     pass
 
     class Meta:
@@ -38,9 +38,9 @@ class ShoppingCartBlock(component.ButtonBlock):
         template = 'base/blocks/apps/navigation/shopping_cart.html'
 
 
-class NavigationMenuDesktopBlock(basic.BaseStructBlock):
-    desktop_nav_buttons = basic.BaseListBlock(
-        component.ButtonBlock(),
+class NavigationMenuDesktopBlock(basics.BaseStructBlock):
+    desktop_nav_buttons = basics.BaseListBlock(
+        components.ButtonBlock(),
         help_text="Add navigation buttons"
     )
     shopping_cart = ShoppingCartBlock()
@@ -50,7 +50,7 @@ class NavigationMenuDesktopBlock(basic.BaseStructBlock):
         template = 'base/blocks/apps/navigation/menu_desktop.html'
 
 
-class NavigationBarBlock(basic.BaseStructBlock):
+class NavigationBarBlock(basics.BaseStructBlock):
     nav_menu = NavigationMenuMobileBlock()
     desktop_buttons = NavigationMenuDesktopBlock()
 

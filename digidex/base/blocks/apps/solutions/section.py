@@ -1,11 +1,11 @@
-from base.blocks import basic, component
+from base.blocks import basics, components, layouts
 
-class SolutionTagBlock(component.TagBlock):
-    text = basic.BaseCharBlock(
+class SolutionTagBlock(components.TagBlock):
+    text = basics.BaseCharBlock(
         required=True,
         help_text="Enter the text for the tag (e.g., 'Most popular')."
     )
-    color = basic.BaseChoiceBlock(
+    color = basics.BaseChoiceBlock(
         choices=[
             ('yellow', 'Yellow'),
             ('blue', 'Blue'),
@@ -15,35 +15,35 @@ class SolutionTagBlock(component.TagBlock):
     )
 
 
-class SolutionCardContentBlock(component.IconBlock):
-    image = basic.BaseImageBlock(
+class SolutionCardContentBlock(components.IconBlock):
+    image = basics.BaseImageBlock(
         required=True,
         help_text="Select an image for the solution card."
     )
-    heading = basic.BaseRichTextBlock(
+    heading = basics.BaseRichTextBlock(
         required=True,
         help_text="Enter the heading for the solution card."
     )
-    paragraph = basic.BaseRichTextBlock(
+    paragraph = basics.BaseRichTextBlock(
         required=True,
         help_text="Enter a descriptive paragraph for the solution."
     )
 
 
-class SolutionCardIconBlock(component.IconBlock):
-    icon = basic.BaseImageBlock(
+class SolutionCardIconBlock(components.IconBlock):
+    icon = basics.BaseImageBlock(
         required=True,
         help_text="Select an icon image to represent the link."
     )
-    text = basic.BaseCharBlock(
+    text = basics.BaseCharBlock(
         required=True,
         help_text="Enter the text for the link."
     )
-    page = basic.BasePageBlock(
+    page = basics.BasePageBlock(
         required=False,
         help_text="Select the destination page for the link."
     )
-    target = basic.BaseChoiceBlock(
+    target = basics.BaseChoiceBlock(
         choices=[
             ('_self', 'Open in the same window'),
             ('_blank', 'Open in a new window')
@@ -53,7 +53,7 @@ class SolutionCardIconBlock(component.IconBlock):
     )
 
 
-class SolutionCardBlock(basic.BaseBlock):
+class SolutionCardBlock(basics.BaseBlock):
     tag = SolutionTagBlock(
         required=False,
         help_text="Optionally add a tag to the card, such as 'Most popular' or 'New'."
@@ -67,8 +67,8 @@ class SolutionCardBlock(basic.BaseBlock):
     )
 
 
-class SolutionGridBlock(basic.GridBlock):
-    items = basic.BaseListBlock(
+class SolutionGridBlock(basics.GridBlock):
+    items = basics.BaseListBlock(
         SolutionCardBlock(),
         min_num=1,
         max_num=4,
@@ -80,12 +80,12 @@ class SolutionGridBlock(basic.GridBlock):
         template = 'base/blocks/solution/grid.html'
 
 
-class ClientLogoBlock(basic.BaseStructBlock):
-    image = basic.BaseImageBlock(
+class ClientLogoBlock(basics.BaseStructBlock):
+    image = basics.BaseImageBlock(
         required=True,
         help_text="Select a client logo image."
     )
-    alt_text = basic.BaseCharBlock(
+    alt_text = basics.BaseCharBlock(
         required=False,
         max_length=255,
         help_text="Enter an alternative text for the image."
@@ -95,13 +95,13 @@ class ClientLogoBlock(basic.BaseStructBlock):
         icon = 'image'
 
 
-class SolutionClientsBlock(basic.BaseBlock):
-    subtitle = basic.BaseCharBlock(
+class SolutionClientsBlock(basics.BaseBlock):
+    subtitle = basics.BaseCharBlock(
         required=False,
         max_length=255,
         help_text="Enter a subtitle for the clients section."
     )
-    logos = basic.BaseListBlock(
+    logos = basics.BaseListBlock(
         ClientLogoBlock(),
         help_text="Add client logos."
     )
@@ -111,8 +111,8 @@ class SolutionClientsBlock(basic.BaseBlock):
         template = 'base/blocks/apps/solution/clients.html'
 
 
-class SolutionContentBlock(basic.ContentBlock):
-    subcontent = basic.BaseStreamBlock(
+class SolutionContentBlock(basics.ContentBlock):
+    subcontent = basics.BaseStreamBlock(
         [
             ('solutions', SolutionGridBlock()),
             ('clients', SolutionClientsBlock()),
@@ -120,7 +120,7 @@ class SolutionContentBlock(basic.ContentBlock):
         max_num=1
     )
 
-class SolutionSectionBlock(basic.SectionBlock):
+class SolutionSectionBlock(basics.SectionBlock):
     content = SolutionContentBlock()
 
     class Meta:
