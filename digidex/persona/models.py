@@ -6,7 +6,7 @@ from django.conf import settings
 
 from base.utils import storage
 from base.fields import django
-from base.models import basics as _models
+from base import models as _models
 
 logger = getLogger(__name__)
 

@@ -1,4 +1,4 @@
-from base.models import basics as _models
+from base import models as _models
 
 
 class SupportIndexPage(_models.BaseIndexPage):
