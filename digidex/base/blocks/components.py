@@ -1,4 +1,4 @@
-from digidex.base.blocks import basics
+from base.blocks import basics
 
 
 class TagBlock(basics.BaseStructBlock):
