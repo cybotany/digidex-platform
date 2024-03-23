@@ -27,9 +27,9 @@ class SolutionCardIconBlock(_cblocks.IconBlock):
         required=True,
         help_text="Enter the text for the link."
     )
-    url = _bblocks.BaseURLBlock(
-        required=True,
-        help_text="Enter the destination URL for the link."
+    page = _bblocks.BasePageBlock(
+        required=False,
+        help_text="Select the destination page for the link."
     )
     target = _bblocks.BaseChoiceBlock(
         choices=[
@@ -64,7 +64,7 @@ class SolutionCardBlock(_lblocks.BaseBlock):
     content = SolutionCardContentBlock(
         help_text="Add the main content for the card."
     )
-    icon = SolutionCardIconBlock(
+    button = SolutionCardIconBlock(
         required=True,
         help_text="Define an icon with a link for additional details or actions."
     )

@@ -28,8 +28,16 @@
         {% endwith %}
       {% endif %}
 
-      {% if card.value.icon %}
-        {% include_block card.value.icon %}
+      {% if card.value.button %}
+        {% with button=card.value.button %}
+          <a href="{% if button.page %}{{ button.page.url }}{% else %}# {% endif %}" class="link-block w-inline-block" target="{{ button.target }}">
+            {% if button.icon %}
+              {% image button.icon fill-32x32 as icon_img %}
+              <div class="block-icon-link"><img src="{{ icon_img.url }}" alt="{{ button.icon.title }}" loading="eager" class="icon-link"></div>
+            {% endif %}
+            <div class="text-link">{{ button.text }}</div>
+          </a>
+        {% endwith %}
       {% endif %}
     </div>
   {% endfor %}
