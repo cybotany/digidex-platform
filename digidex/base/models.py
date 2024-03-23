@@ -35,7 +35,12 @@ class CallToActionBanner(BaseGenericSetting):
         help_text="Main heading text"
     )
     call_to_action_page = _fields.BaseForeignKey(
-        Page, null=True, blank=True, on_delete=models.SET_NULL, related_name="+", help_text="Page to link the call to action to"
+        Page,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+        help_text="Page to link the call to action to"
     )
 
     panels = [
