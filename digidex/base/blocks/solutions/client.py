@@ -1,17 +1,16 @@
 from base.blocks import basic_blocks as _bblocks,\
-                        composite_blocks as _cblocks,\
                         layout_blocks as _lblocks
 
 
-class ClientLogoBlock(blocks.StructBlock):
+class ClientLogoBlock(_bblocks.BaseStructBlock):
     """
     A block representing a single client logo.
     """
-    image = ImageChooserBlock(
+    image = _bblocks.BaseImageBlock(
         required=True,
         help_text="Select a client logo image."
     )
-    alt_text = blocks.CharBlock(
+    alt_text = _bblocks.BaseCharBlock(
         required=False,
         max_length=255,
         help_text="Enter an alternative text for the image."
@@ -21,16 +20,16 @@ class ClientLogoBlock(blocks.StructBlock):
         icon = 'image'
 
 
-class SolutionClientsBlock(blocks.StructBlock):
+class SolutionClientsBlock(_lblocks.BaseBlock):
     """
     A block representing a section of client logos with a subtitle.
     """
-    subtitle = blocks.CharBlock(
+    subtitle = _bblocks.BaseCharBlock(
         required=False,
         max_length=255,
         help_text="Enter a subtitle for the clients section."
     )
-    logos = blocks.ListBlock(
+    logos = _bblocks.BaseListBlock(
         ClientLogoBlock(),
         help_text="Add client logos."
     )
