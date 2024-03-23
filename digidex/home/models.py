@@ -23,6 +23,6 @@ class HomePage(Page):
     )
 
     content_panels = Page.content_panels + [
-        FieldPanel('hero_section'),
-        FieldPanel('features'),
+        FieldPanel('hero'),
+        FieldPanel('solutions'),
     ]
