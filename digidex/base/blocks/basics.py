@@ -92,3 +92,13 @@ class BaseSectionBlock(BaseStructBlock):
       - BaseContent
     """
     pass
+
+class SectionHeading(_blocks.BaseBlock):
+    title = _blocks.BaseCharBlock(
+        required=True,
+        help_text="Enter the heading title"
+    )
+    text = _blocks.BaseTextBlock(
+        required=True,
+        help_text="Enter the heading text"
+    )

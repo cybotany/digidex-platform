@@ -1,7 +1,29 @@
 from base.blocks import basics as _blocks
 
 
-class HeadingBlock(_blocks.BaseBlock):
+class SectionHeading(_blocks.BaseBlock):
+    title = _blocks.BaseCharBlock(
+        required=True,
+        help_text="Enter the heading title"
+    )
+    subtitle = _blocks.BaseTextBlock(
+        required=False,
+        help_text="Enter the heading subtitle"
+    )
+    centered = _blocks.BaseBooleanBlock(
+        required=False,
+        default=False,
+        help_text="Should the heading be centered?"
+    )
+
+    class Meta:
+        icon = "placeholder"
+        template = "base/blocks/section/heading.html"
+        label = "Section Heading"
+
+
+
+class PageHeadingContent(_blocks.BaseContentBlock):
     title = _blocks.BaseCharBlock(
         required=True,
         help_text="Enter the heading title"
@@ -12,14 +34,10 @@ class HeadingBlock(_blocks.BaseBlock):
     )
 
 
-class HeadingContentBlock(_blocks.BaseContentBlock):
-    pass
-
-
-class HeadingSectionBlock(_blocks.BaseSectionBlock):
-    content = HeadingContentBlock()
+class PageHeading(_blocks.BaseSectionBlock):
+    content = PageHeadingContent()
 
     class Meta:
         icon = "placeholder"
-        template = "base/blocks/apps/navigation/heading.html"
-        label = "Page Header"
+        template = "base/blocks/page/heading.html"
+        label = "Page Heading"
