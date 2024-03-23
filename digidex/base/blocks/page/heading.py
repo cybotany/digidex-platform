@@ -12,11 +12,11 @@ class HeadingBlock(_blocks.BaseBlock):
     )
 
 
-class HeadingContentBlock(_blocks.ContentBlock):
+class HeadingContentBlock(_blocks.BaseContentBlock):
     pass
 
 
-class HeadingSectionBlock(_blocks.SectionBlock):
+class HeadingSectionBlock(_blocks.BaseSectionBlock):
     content = HeadingContentBlock()
 
     class Meta:

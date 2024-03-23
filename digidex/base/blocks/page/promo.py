@@ -10,7 +10,7 @@ class TopBarPromoBlock(_blocks.BaseStructBlock):
         icon = 'doc-full'
 
 
-class PromoBarBlock(_blocks.SectionBlock):
+class PromoBarBlock(_blocks.BaseSectionBlock):
     promo = TopBarPromoBlock()
     icons = _blocks.BaseListBlock(
         _blocks.BaseURLBlock()

@@ -1,11 +1,11 @@
 from base.blocks import basics as _blocks
                         
 
-class CallToActionContentBlock(_blocks.ContentBlock):
+class CallToActionContentBlock(_blocks.BaseContentBlock):
     pass
 
 
-class CallToActionSectionBlock(_blocks.SectionBlock):
+class CallToActionSectionBlock(_blocks.BaseSectionBlock):
     content = CallToActionContentBlock()
 
     class Meta:
