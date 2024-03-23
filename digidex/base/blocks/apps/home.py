@@ -1,18 +1,27 @@
 from base.blocks import basics, components, layouts
 
 
-class HeroContentBlock(layouts.ContentBlock):
-    pass
-
-
-class HeroSectionBlock(layouts.SectionBlock):
+class HeroBlock(layouts.BaseBlock):
     heading = basics.BaseCharBlock(
         required=True,
         max_length=255
     )
-    sub_heading = basics.BaseTextBlock(
+    text = basics.BaseTextBlock(
+        required=True
+    )
+    primary_button = components.ButtonBlock(
+        required=True
+    )
+    secondary_button = components.ButtonBlock(
         required=False
     )
+
+
+class HeroContent(layouts.ContentBlock):
+    pass
+
+
+class HeroSection(layouts.SectionBlock):
     image = basics.BaseImageBlock(
         required=False
     )
