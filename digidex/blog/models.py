@@ -9,11 +9,10 @@ from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 from taggit.models import TaggedItemBase
 
-from base.fields import django_fields as _dfields,\
-                        wagtail_fields as _wfields
+from base.fields import django_fields, wagtail_fields
 
 class BlogIndexPage(Page):
-    intro = _wfields.BaseRichTextField(
+    intro = wagtail_fields.BaseRichTextField(
         blank=True
     )
 
@@ -53,13 +52,13 @@ class BlogTagIndexPage(Page):
 
 
 class BlogPage(Page):
-    date = _dfields.BaseDateField(
+    date = django_fields.BaseDateField(
         "Post date"
     )
-    intro = _dfields.BaseCharField(
+    intro = django_fields.BaseCharField(
         max_length=250
     )
-    body = _wfields.BaseRichTextField(
+    body = wagtail_fields.BaseRichTextField(
         blank=True
     )
     authors = ParentalManyToManyField(
@@ -105,12 +104,12 @@ class BlogPageGalleryImage(Orderable):
         on_delete=models.CASCADE,
         related_name='gallery_images'
     )
-    image = _dfields.BaseForeignKey(
+    image = django_fields.BaseForeignKey(
         'wagtailimages.Image',
         on_delete=models.CASCADE,
         related_name='+'
     )
-    caption = _dfields.BaseCharField(
+    caption = django_fields.BaseCharField(
         blank=True,
         max_length=250
     )
@@ -123,10 +122,10 @@ class BlogPageGalleryImage(Orderable):
 
 @register_snippet
 class Author(models.Model):
-    name = _dfields.BaseCharField(
+    name = django_fields.BaseCharField(
         max_length=255
     )
-    author_image = _dfields.BaseForeignKey(
+    author_image = django_fields.BaseForeignKey(
         'wagtailimages.Image',
         null=True,
         blank=True,

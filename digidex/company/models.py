@@ -2,8 +2,7 @@ from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel
 
 from base.blocks import basic_blocks as _bblocks
-from base.fields import django_fields as _dfields,\
-                        wagtail_fields as _wfields
+from base.fields import django_fields, wagtail_fields
 from base import models as base_models
 
 
@@ -12,17 +11,17 @@ class CompanyIndexPage(base_models.IndexPage):
 
 class CompanyPage(Page):
     # Metadata fields
-    subtitle = _dfields.BaseCharField(
+    subtitle = django_fields.BaseCharField(
         max_length=255,
         null=True,
         blank=True
     )
-    description = _wfields.BaseRichTextField(
+    description = wagtail_fields.BaseRichTextField(
         blank=True
     )
     
     # Dynamic content blocks
-    body = _wfields.BaseStreamField(
+    body = wagtail_fields.BaseStreamField(
         [
             ('paragraph', _bblocks.BaseRichTextBlock()),
             ('image', _bblocks.BaseImageBlock()),
