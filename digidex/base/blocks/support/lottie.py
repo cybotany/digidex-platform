@@ -11,7 +11,7 @@ class ContactMethodBlock(_bblocks.BaseStructBlock):
     description = _bblocks.BaseCharBlock(
         required=True
     )
-    link = _bblocks.BaseURLBlock(
+    url = _bblocks.BaseURLBlock(
         required=False
     )
 

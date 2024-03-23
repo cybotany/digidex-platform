@@ -1,0 +1,9 @@
+<div class="block-heading center">
+  {% if self.heading %}
+    <h2 class="heading large">{{ self.heading|richtext }}</h2>
+  {% endif %}
+  
+  {% if self.subtitle %}
+    <div class="subtitle">{{ self.subtitle|richtext }}<br></div>
+  {% endif %}
+</div>
