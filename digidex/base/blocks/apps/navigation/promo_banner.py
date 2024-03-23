@@ -1,6 +1,5 @@
-from cms.base.blocks import basic_blocks as _bblocks,\
-                            composite_blocks as _cblocks,\
-                            layout_blocks as _lblocks
+from base.blocks import basic_blocks as _bblocks,\
+                            composite_blocks as _cblocks
 
 class TopBarPromoBlock(_bblocks.BaseStructBlock):
     message = _bblocks.BaseCharBlock(
@@ -11,7 +10,7 @@ class TopBarPromoBlock(_bblocks.BaseStructBlock):
         icon = 'doc-full'
 
 
-class PromoBarBlock(_lblocks.SectionBlock):
+class PromoBarBlock(_bblocks.SectionBlock):
     promo = TopBarPromoBlock()
     icons = _bblocks.BaseListBlock(
         _cblocks.URLBlock()
@@ -19,4 +18,4 @@ class PromoBarBlock(_lblocks.SectionBlock):
 
     class Meta:
         icon = 'doc-full'
-        template = 'blocks/base/page/header/navigation/promo_bar.html'
+        template = 'base/blocks/apps/navigation/promo_bar.html'

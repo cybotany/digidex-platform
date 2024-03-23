@@ -1,5 +1,5 @@
-from cms.base.blocks import basic_blocks as _bblocks,\
-                            composite_blocks as _cblocks
+from base.blocks import basic_blocks as _bblocks,\
+                        composite_blocks as _cblocks
 
 class LogoLinkBlock(_bblocks.BaseStructBlock):
     logo_image = _bblocks.BaseImageBlock(
@@ -13,7 +13,7 @@ class LogoLinkBlock(_bblocks.BaseStructBlock):
 
     class Meta:
         icon = 'site'
-        template = 'blocks/base/page/header/navigation/logo_link.html'
+        template = 'base/blocks/apps/navigation/logo_link.html'
 
 
 class NavigationMenuMobileBlock(_bblocks.BaseStructBlock):
@@ -27,7 +27,7 @@ class NavigationMenuMobileBlock(_bblocks.BaseStructBlock):
 
     class Meta:
         icon = 'site'
-        template = 'blocks/base/page/header/navigation/menu_mobile.html'
+        template = 'base/blocks/apps/navigation/menu_mobile.html'
 
 
 class ShoppingCartBlock(_cblocks.ButtonBlock):
@@ -35,7 +35,7 @@ class ShoppingCartBlock(_cblocks.ButtonBlock):
 
     class Meta:
         icon = 'site'
-        template = 'blocks/base/page/header/navigation/shopping_cart.html'
+        template = 'base/blocks/apps/navigation/shopping_cart.html'
 
 
 class NavigationMenuDesktopBlock(_bblocks.BaseStructBlock):
@@ -47,7 +47,7 @@ class NavigationMenuDesktopBlock(_bblocks.BaseStructBlock):
 
     class Meta:
         icon = 'site'
-        template = 'blocks/base/page/header/navigation/menu_desktop.html'
+        template = 'base/blocks/apps/navigation/menu_desktop.html'
 
 
 class NavigationBarBlock(_bblocks.BaseStructBlock):
@@ -56,4 +56,4 @@ class NavigationBarBlock(_bblocks.BaseStructBlock):
 
     class Meta:
         icon = 'site'
-        template = 'blocks/base/page/header/navigation_bar.html'
+        template = 'base/blocks/apps/navigation/navigation_bar.html'

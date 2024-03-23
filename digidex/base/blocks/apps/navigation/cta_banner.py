@@ -1,12 +1,10 @@
-from base.blocks import composite_blocks as _cblocks,\
-                        layout_blocks as _lblocks
-                      
-
-class CallToActionBannerBlock(_lblocks.SectionBlock):
-    title = _cblocks.HeadingBlock()
+from base.blocks import basic_blocks as _bblocks,\
+                        composite_blocks as _cblocks
+                        
+class CallToActionBannerBlock(_bblocks.SectionBlock):
+    title = _bblocks.BaseCharBlock()
     button = _cblocks.ButtonBlock()
-    lottie_animation = _cblocks.LottieBlock()
 
     class Meta:
         icon = 'placeholder'
-        template = 'blocks/banner_block.html'
+        template = 'base/blocks/apps/navigation/cta_banner.html'

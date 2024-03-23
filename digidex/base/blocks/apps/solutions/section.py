@@ -110,7 +110,7 @@ class SolutionClientsBlock(_lblocks.BaseBlock):
 
     class Meta:
         icon = 'group'
-        template = 'base/blocks/solution/clients.html'
+        template = 'base/blocks/apps/solution/clients.html'
 
 
 class SolutionContentBlock(_lblocks.ContentBlock):
@@ -127,4 +127,4 @@ class SolutionSectionBlock(_lblocks.SectionBlock):
 
     class Meta:
         icon = 'image'
-        template = 'base/blocks/solution/section.html'
+        template = 'base/blocks/apps/solution/section.html'

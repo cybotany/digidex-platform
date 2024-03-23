@@ -19,7 +19,7 @@ class StatisticItemBlock(_bblocks.BaseStructBlock):
 
     class Meta:
         icon = 'pick'
-        template = 'blocks/statistic_item_block.html'
+        template = 'base/blocks/apps/company/statistic_item_block.html'
 
 
 class StatisticsGridBlock(_bblocks.BaseStructBlock):
@@ -29,7 +29,7 @@ class StatisticsGridBlock(_bblocks.BaseStructBlock):
 
     class Meta:
         icon = 'grid'
-        template = 'blocks/statistics_grid_block.html'
+        template = 'base/blocks/apps/company/statistics_grid_block.html'
 
 
 class FeaturedSectionBlock(_bblocks.BaseStructBlock):
@@ -38,7 +38,7 @@ class FeaturedSectionBlock(_bblocks.BaseStructBlock):
 
     class Meta:
         icon = 'placeholder'
-        template = 'blocks/featured_section_block.html'
+        template = 'base/blocks/apps/company/featured_section_block.html'
 
 
 class TeamMemberBlock(_bblocks.BaseStructBlock):

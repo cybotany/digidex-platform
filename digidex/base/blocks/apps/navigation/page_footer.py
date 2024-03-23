@@ -1,5 +1,5 @@
-from cms.base.blocks import basic_blocks as _bblocks,\
-                            composite_blocks as _cblocks
+from base.blocks import basic_blocks as _bblocks,\
+                        composite_blocks as _cblocks
 
 class PageFooterBlock(_bblocks.BaseStructBlock):
     logo = _bblocks.BaseImageBlock(
@@ -21,4 +21,4 @@ class PageFooterBlock(_bblocks.BaseStructBlock):
 
     class Meta:
         icon = 'site'
-        template = 'blocks/footer_block.html'
+        template = 'base/blocks/apps/navigation/footer_block.html'
