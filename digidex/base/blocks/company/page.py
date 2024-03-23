@@ -1,6 +1,4 @@
-from base.blocks import basic_blocks as _bblocks,\
-                        composite_blocks as _cblocks,\
-                        layout_blocks as _lblocks
+from base.blocks import basic_blocks as _bblocks
 
 class StatisticItemBlock(_bblocks.BaseStructBlock):
     icon = _bblocks.BaseImageBlock()
@@ -41,3 +39,28 @@ class FeaturedSectionBlock(_bblocks.BaseStructBlock):
     class Meta:
         icon = 'placeholder'
         template = 'blocks/featured_section_block.html'
+
+
+class TeamMemberBlock(_bblocks.BaseStructBlock):
+    name = _bblocks.BaseCharBlock(
+        max_length=255
+    )
+    role = _bblocks.BaseCharBlock(
+        max_length=255
+    )
+    image = _bblocks.BaseImageBlock()
+    description = _bblocks.BaseRichTextBlock(
+        max_length=255
+    )
+
+class TestimonialBlock(_bblocks.BaseStructBlock):
+    quote = _bblocks.BaseRichTextBlock(
+        max_length=255
+    )
+    author = _bblocks.BaseCharBlock(
+        max_length=255
+    )
+    role = _bblocks.BaseCharBlock(
+        max_length=255,
+        required=False
+    )
