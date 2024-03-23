@@ -3,10 +3,10 @@ from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 from django.conf import settings
-# Project specific imports
+
 from base.utils import storage
 from base.fields import django
-from base.models import basics as basic_models
+from base.models import basics as _models
 
 logger = getLogger(__name__)
 
@@ -106,5 +106,5 @@ class DigiDexProfile(models.Model):
         verbose_name_plural = "Profiles"
 
 
-class PersonaIndexPage(basic_models.BaseIndexPage):
+class PersonaIndexPage(_models.BaseIndexPage):
     pass

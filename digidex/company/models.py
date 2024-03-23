@@ -2,15 +2,15 @@ from base.fields import django
 from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel
 
-from base.blocks import basics as basic_blocks
 from base.fields import wagtail
-from base.models import basics as basic_models
+from base.blocks import basics as _blocks
+from base.models import basics as _models
 
 
-class CompanyIndexPage(basic_models.IndexPage):
+class CompanyIndexPage(_models.BaseIndexPage):
     pass
 
-class CompanyPage(Page):
+class CompanyPage(_models.BasePage):
     # Metadata fields
     subtitle = django.BaseCharField(
         max_length=255,
@@ -24,9 +24,9 @@ class CompanyPage(Page):
     # Dynamic content blocks
     body = wagtail.BaseStreamField(
         [
-            ('paragraph', basic_blocks.BaseRichTextBlock()),
-            ('image', basic_blocks.BaseImageBlock()),
-            ('url', basic_blocks.BaseURLBlock()),
+            ('paragraph', _blocks.BaseRichTextBlock()),
+            ('image', _blocks.BaseImageBlock()),
+            ('url', _blocks.BaseURLBlock()),
         ],
         null=True,
         blank=True

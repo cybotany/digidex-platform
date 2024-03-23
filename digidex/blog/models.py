@@ -10,8 +10,9 @@ from wagtail.snippets.models import register_snippet
 from taggit.models import TaggedItemBase
 
 from base.fields import django, wagtail
+from base.models import basics as _models
 
-class BlogIndexPage(Page):
+class BlogIndexPage(_models.BaseIndexPage):
     intro = wagtail.BaseRichTextField(
         blank=True
     )
@@ -41,7 +42,7 @@ class BlogPageTag(TaggedItemBase):
     )
 
 
-class BlogTagIndexPage(Page):
+class BlogTagIndexPage(_models.BaseIndexPage):
     def get_context(self, request):
         tag = request.GET.get('tag')
         blogpages = BlogPage.objects.filter(tags__name=tag)
@@ -51,7 +52,7 @@ class BlogTagIndexPage(Page):
         return context
 
 
-class BlogPage(Page):
+class BlogPage(_models.BasePage):
     date = django.BaseDateField(
         "Post date"
     )

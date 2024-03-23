@@ -1,10 +1,9 @@
-from wagtail.models import Page
-from wagtail.admin.panels import FieldPanel
+from base.models import basics as _models
 
-from base.models import basics as base_models
 
-class SolutionIndexPage(base_models.IndexPage):
+class SolutionIndexPage(_models.BaseIndexPage):
     pass
 
-class SolutionsPage(Page):
+
+class SolutionPage(_models.BasePage):
     pass

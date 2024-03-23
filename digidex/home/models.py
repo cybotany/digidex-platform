@@ -4,9 +4,10 @@ from wagtail.admin.panels import FieldPanel
 from base.fields import wagtail
 from base.blocks.apps import home as hero
 from base.blocks.apps.solutions import section as solutions
+from base.models import basics as _models
 
 
-class HomePage(Page):
+class HomePage(_models.BasePage):
     hero = wagtail.BaseStreamField(
         [
             ('hero', hero.HeroSectionBlock())
