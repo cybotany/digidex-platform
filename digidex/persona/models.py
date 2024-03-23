@@ -1,14 +1,12 @@
-from logging import getLogger
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 from django.conf import settings
 
 from base.utils import storage
-from base.fields import django
+from base.fields import basics as _fields
 from base import models as _models
 
-logger = getLogger(__name__)
 
 def profile_avatar_directory_path(instance, filename):
     return f'profile_{instance.id}/avatar.jpeg'
@@ -27,45 +25,45 @@ class DigiDexProfile(models.Model):
         created_at (DateTimeField): The date and time when the profile was created.
         last_modified (DateTimeField): The date and time when the profile was last modified.
     """
-    user = django.BaseOneToOneField(
+    user = _fields.BaseOneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         help_text='The user associated with this profile.'
     )
-    slug = django.BaseSlugField(
+    slug = _fields.BaseSlugField(
         unique=True,
         max_length=255,
         editable=False,
         db_index=True,
         help_text="Slugified version of the username for URL usage."
     )
-    bio = django.BaseTextField(
+    bio = _fields.BaseTextField(
         max_length=500,
         blank=True,
         help_text='A short biography of the user.'
     )
-    location = django.BaseCharField(
+    location = _fields.BaseCharField(
         max_length=30,
         blank=True,
         help_text='The location of the user.'
     )
-    avatar = django.BaseImageField(
+    avatar = _fields.BaseImageField(
         upload_to=profile_avatar_directory_path,
         storage=storage.PublicMediaStorage,
         null=True,
         blank=True,
         help_text='The avatar image of the profile.'
     )
-    is_public = django.BaseBooleanField(
+    is_public = _fields.BaseBooleanField(
         default=False,
         help_text='Indicates if the profile should be publicly visible to the public or private. Profile is private by default.'
     )
-    created_at = django.BaseDateTimeField(
+    created_at = _fields.BaseDateTimeField(
         auto_now_add=True,
         verbose_name="Created At",
         help_text="The date and time when the profile was created."
     )
-    last_modified = django.BaseDateTimeField(
+    last_modified = _fields.BaseDateTimeField(
         auto_now=True,
         verbose_name="Last Modified",
         help_text="The date and time when the profile was last modified."

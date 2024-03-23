@@ -3,7 +3,7 @@ from django.db import transaction
 from django.contrib.auth.models import AbstractUser
 # Project specific imports
 from base.utils import validators
-from base.fields import django
+from base.fields import basics as _fields
 
 class DigiDexUser(AbstractUser):
     """
@@ -27,20 +27,20 @@ class DigiDexUser(AbstractUser):
         - uuid (UUIDField): A universally unique identifier for the user.
         - email_confirmed (BooleanField): Indicates if the user has confirmed their email address.
     """
-    username = django.BaseCharField(
+    username = _fields.BaseCharField(
         max_length=32,
         unique=True,
         validators=[validators.validate_username],
         help_text="Required. 32 characters or fewer. Letters, digits and dashes only.",
     )
-    uuid = django.BaseUUIDField(
+    uuid = _fields.BaseUUIDField(
         default=uuid.uuid4,
         unique=True,
         db_index=True,
         verbose_name="User UUID",
         help_text="The universal unique identifier associated with each User."
     )
-    email_confirmed = django.BaseBooleanField(
+    email_confirmed = _fields.BaseBooleanField(
         default=False,
         help_text='Indicates whether the user has confirmed their email address.'
     )

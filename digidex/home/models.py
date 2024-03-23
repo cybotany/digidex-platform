@@ -1,13 +1,13 @@
 from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel
 
-from base.fields import wagtail
+from base.fields import basics as _fields
 from base.blocks import basics as _blocks
 from base import models as _models
 
 
 class HomePage(_models.BasePage):
-    body = wagtail.BaseStreamField(
+    body = _fields.BaseStreamField(
         [
             ('person', _blocks.BaseStructBlock([
                 ('first_name', _blocks.BaseCharBlock()),

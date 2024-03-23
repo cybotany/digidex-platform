@@ -4,19 +4,21 @@ from wagtail.contrib.settings.models import BaseGenericSetting, register_setting
 from wagtail.models import DraftStateMixin, PreviewableMixin, RevisionMixin, TranslatableMixin
 from wagtail.snippets.models import register_snippet
 
-from base.fields import django, wagtail
+from base.fields import basics as _fields
+from base.blocks import basics as _blocks
+from base import models as _models
 
 @register_setting
 class FooterNavigationSettings(BaseGenericSetting):
-    twitter_url = django.BaseURLField(
+    twitter_url = _fields.BaseURLField(
         verbose_name="Twitter URL",
         blank=True 
     )
-    github_url = django.BaseURLField(
+    github_url = _fields.BaseURLField(
         verbose_name="GitHub URL",
         blank=True
     )
-    linkedin_url = django.BaseURLField(
+    linkedin_url = _fields.BaseURLField(
         verbose_name="LinkedIn URL",
         blank=True
     )
@@ -34,7 +36,7 @@ class FooterNavigationSettings(BaseGenericSetting):
 
 @register_snippet
 class FooterText( DraftStateMixin, RevisionMixin, PreviewableMixin, TranslatableMixin, models.Model):
-    body = wagtail.BaseRichTextField(
+    body = _fields.BaseRichTextField(
         max_length=150,
     )
 
