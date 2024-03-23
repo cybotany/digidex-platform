@@ -1,25 +1,18 @@
-{% load static wagtailcore_tags navigation_tags wagtailuserbar %}
-
-<header>
-  {% get_site_root as site_root %}
-  <div role="banner" class="navbar base-nav">
-    <div class="nav-block">
-      <div class="nav">
-        <a href=# aria-current="page" class="brand base-nav-brand base--brand">
-          <img src="{% static 'images/logo/logo.png' %}" loading="lazy" srcset="{% static 'images/logo/p-500.png' %} 500w, {% static 'images/logo/p-800.png' %} 800w, {% static 'images/logo/logo.png' %} 1024w" alt="" class="logo">
+  <section class="section-top-bar">
+    <div class="top-bar-block">
+      <div class="top-bar">
+        <div class="info-top-bar">New customer offer: Get 25% off your first order with promo code NEW25</div>
+      </div>
+      <div class="top-bar">
+        <a href="#" class="link-top-bar w-inline-block"><img src="images/bx-world.svg" loading="eager" alt="" class="icon-top-bar">
+          <div class="text-top-bar">English</div>
         </a>
-        <nav role="navigation" class="nav-menu base-nav-menu">
-          <div class="button-mobile"></div>
-        </nav>
+        <a href="#" class="link-top-bar w-inline-block"><img src="images/bx-chat.svg" loading="eager" alt="" class="icon-top-bar">
+          <div class="text-top-bar">Live Chat</div>
+        </a>
+        <a href="#" class="link-top-bar w-inline-block"><img src="images/bx-phone-call.svg" loading="eager" alt="" class="icon-top-bar">
+          <div class="text-top-bar">(888) 123-4567</div>
+        </a>
       </div>
-      <div class="nav">
-        <div class="button-desktop"></div>
-        <div class="menu-button base-nav-button">
-          <div class="icon-menu base-icon-nav-menu"></div>
-        </div>
-      </div>
-      {% wagtailuserbar "top-right" %}
     </div>
-  </div>
-</header>
-
+  </section>

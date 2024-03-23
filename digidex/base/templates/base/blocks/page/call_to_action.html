@@ -1,10 +1,17 @@
-{% load static %}
+{% load wagtailsettings_tags static wagtailcore_tags %}
+
+{% get_settings use_default_site=True as settings %}
+
 <section class="section">
   <div class="content">
     <div class="layout-grid grid-banner">
       <div class="block-banner">
-        <div class="subtitle white">Are you ready?<br></div>
-        <h2 class="heading banner">Start your journey today</h2>
+        {% if settings.CallToActionBanner.subtitle %}
+          <div class="subtitle white">{{ settings.CallToActionBanner.subtitle|safe }}<br></div>
+        {% endif %}
+        {% if settings.CallToActionBanner.heading %}
+          <h2 class="heading banner">{{ settings.CallToActionBanner.heading|safe }}</h2>
+        {% endif %}
       </div>
       <div class="lottie-banner">
         <div class="lines-d1">
