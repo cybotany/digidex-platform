@@ -69,9 +69,6 @@ class SolutionCardBlock(_lblocks.BaseBlock):
         help_text="Define an icon with a link for additional details or actions."
     )
 
-    class Meta:
-        template = 'base/blocks/solutions/card.html'
-
 
 class SolutionCardGridBlock(_lblocks.GridBlock):
     cards = _bblocks.BaseListBlock(
@@ -83,4 +80,4 @@ class SolutionCardGridBlock(_lblocks.GridBlock):
 
     class Meta:
         icon = 'image'
-        template = 'base/blocks/solutions/card/grid.html'
+        template = 'base/blocks/solution/cards.html'
