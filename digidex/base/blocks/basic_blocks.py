@@ -43,11 +43,20 @@ class BaseStreamBlock(blocks.StreamBlock):
 class BaseBlock(BaseStructBlock):
     pass
 
-class GridBlock(BaseStructBlock):
-    pass
+class GridBlock(BaseListBlock):
+    def __init__(self, **kwargs):
+        super().__init__(BaseBlock(), **kwargs)
 
-class ContentBlock(BaseStructBlock):
-    pass
+
+class ContentBlock(BaseStreamBlock):
+    blocks = BaseStreamBlock(
+        [
+            ('base', BaseBlock())
+        ],
+        icon='placeholder'
+    )
+    grid = GridBlock()
+
 
 class SectionBlock(BaseStructBlock):
-    pass
+    content = ContentBlock(required=True)
