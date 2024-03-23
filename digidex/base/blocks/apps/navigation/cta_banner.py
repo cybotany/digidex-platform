@@ -1,9 +1,8 @@
-from base.blocks import basic_blocks as _bblocks,\
-                        composite_blocks as _cblocks
+from base.blocks import basic_blocks, composite_blocks
                         
-class CallToActionBannerBlock(_bblocks.SectionBlock):
-    title = _bblocks.BaseCharBlock()
-    button = _cblocks.ButtonBlock()
+class CallToActionBannerBlock(basic_blocks.SectionBlock):
+    title = basic_blocks.BaseCharBlock()
+    button = composite_blocks.ButtonBlock()
 
     class Meta:
         icon = 'placeholder'

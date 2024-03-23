@@ -1,12 +1,11 @@
-from base.blocks import basic_blocks as _bblocks,\
-                        composite_blocks as _cblocks
+from base.blocks import basic_blocks, composite_blocks
 
-class LogoLinkBlock(_bblocks.BaseStructBlock):
-    logo_image = _bblocks.BaseImageBlock(
+class LogoLinkBlock(basic_blocks.BaseStructBlock):
+    logo_image = basic_blocks.BaseImageBlock(
         required=True,
         help_text="Select the logo image"
     )
-    url = _bblocks.BaseURLBlock(
+    url = basic_blocks.BaseURLBlock(
         required=True,
         help_text="Enter the URL the logo should link to"
     )
@@ -16,12 +15,12 @@ class LogoLinkBlock(_bblocks.BaseStructBlock):
         template = 'base/blocks/apps/navigation/logo_link.html'
 
 
-class NavigationMenuMobileBlock(_bblocks.BaseStructBlock):
-    nav_links = _bblocks.BaseListBlock(
-        _cblocks.URLBlock(help_text="Add navigation links")
+class NavigationMenuMobileBlock(basic_blocks.BaseStructBlock):
+    nav_links = basic_blocks.BaseListBlock(
+        composite_blocks.URLBlock(help_text="Add navigation links")
     )
-    mobile_nav_buttons = _bblocks.BaseListBlock(
-        _cblocks.ButtonBlock(),
+    mobile_nav_buttons = basic_blocks.BaseListBlock(
+        composite_blocks.ButtonBlock(),
         help_text="Add navigation buttons"
     )
 
@@ -30,7 +29,7 @@ class NavigationMenuMobileBlock(_bblocks.BaseStructBlock):
         template = 'base/blocks/apps/navigation/menu_mobile.html'
 
 
-class ShoppingCartBlock(_cblocks.ButtonBlock):
+class ShoppingCartBlock(composite_blocks.ButtonBlock):
     pass
 
     class Meta:
@@ -38,9 +37,9 @@ class ShoppingCartBlock(_cblocks.ButtonBlock):
         template = 'base/blocks/apps/navigation/shopping_cart.html'
 
 
-class NavigationMenuDesktopBlock(_bblocks.BaseStructBlock):
-    desktop_nav_buttons = _bblocks.BaseListBlock(
-        _cblocks.ButtonBlock(),
+class NavigationMenuDesktopBlock(basic_blocks.BaseStructBlock):
+    desktop_nav_buttons = basic_blocks.BaseListBlock(
+        composite_blocks.ButtonBlock(),
         help_text="Add navigation buttons"
     )
     shopping_cart = ShoppingCartBlock()
@@ -50,7 +49,7 @@ class NavigationMenuDesktopBlock(_bblocks.BaseStructBlock):
         template = 'base/blocks/apps/navigation/menu_desktop.html'
 
 
-class NavigationBarBlock(_bblocks.BaseStructBlock):
+class NavigationBarBlock(basic_blocks.BaseStructBlock):
     nav_menu = NavigationMenuMobileBlock()
     desktop_buttons = NavigationMenuDesktopBlock()
 

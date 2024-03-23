@@ -1,21 +1,21 @@
-from base.blocks import basic_blocks as _bblocks
+from base.blocks import basic_blocks
 
 
-class HeroSectionBlock(_bblocks.BaseStructBlock):
-    heading = _bblocks.BaseCharBlock(
+class HeroSectionBlock(basic_blocks.BaseStructBlock):
+    heading = basic_blocks.BaseCharBlock(
         required=True,
         max_length=255
     )
-    sub_heading = _bblocks.BaseTextBlock(
+    sub_heading = basic_blocks.BaseTextBlock(
         required=False
     )
-    image = _bblocks.BaseImageBlock(
+    image = basic_blocks.BaseImageBlock(
         required=False
     )
-    cta = _bblocks.BaseStructBlock(
+    cta = basic_blocks.BaseStructBlock(
         [
-            ("text", _bblocks.BaseCharBlock(required=True, max_length=255)),
-            ("url", _bblocks.BaseURLBlock(required=True)),
+            ("text", basic_blocks.BaseCharBlock(required=True, max_length=255)),
+            ("url", basic_blocks.BaseURLBlock(required=True)),
         ]
     )
 

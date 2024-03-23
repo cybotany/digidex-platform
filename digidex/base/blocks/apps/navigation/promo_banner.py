@@ -1,8 +1,8 @@
-from base.blocks import basic_blocks as _bblocks,\
-                            composite_blocks as _cblocks
+from base.blocks import basic_blocks, composite_blocks
 
-class TopBarPromoBlock(_bblocks.BaseStructBlock):
-    message = _bblocks.BaseCharBlock(
+
+class TopBarPromoBlock(basic_blocks.BaseStructBlock):
+    message = basic_blocks.BaseCharBlock(
         help_text="Enter the promotional message"
     )
 
@@ -10,10 +10,10 @@ class TopBarPromoBlock(_bblocks.BaseStructBlock):
         icon = 'doc-full'
 
 
-class PromoBarBlock(_bblocks.SectionBlock):
+class PromoBarBlock(basic_blocks.SectionBlock):
     promo = TopBarPromoBlock()
-    icons = _bblocks.BaseListBlock(
-        _cblocks.URLBlock()
+    icons = basic_blocks.BaseListBlock(
+        composite_blocks.URLBlock()
     )
 
     class Meta:

@@ -1,38 +1,38 @@
-from base.blocks import basic_blocks as _bblocks
+from base.blocks import basic_blocks
 
-class ContactHeadingBlock(_bblocks.BaseBlock):
-    heading = _bblocks.BaseRichTextBlock(
+class ContactHeadingBlock(basic_blocks.BaseBlock):
+    heading = basic_blocks.BaseRichTextBlock(
         required=True,
         help_text="Enter a heading for this section."
     )
-    subtitle = _bblocks.BaseRichTextBlock(
+    subtitle = basic_blocks.BaseRichTextBlock(
         required=True,
         help_text="Enter a subtitle for this section."
     )
 
 
-class ContactMethodBlock(_bblocks.BaseStructBlock):
-    icon = _bblocks.BaseImageBlock(
+class ContactMethodBlock(basic_blocks.BaseStructBlock):
+    icon = basic_blocks.BaseImageBlock(
         required=True
     )
-    method = _bblocks.BaseCharBlock(
+    method = basic_blocks.BaseCharBlock(
         required=True
     )
-    description = _bblocks.BaseCharBlock(
+    description = basic_blocks.BaseCharBlock(
         required=True
     )
-    url = _bblocks.BaseURLBlock(
+    url = basic_blocks.BaseURLBlock(
         required=False
     )
 
 
-class ContactLottieBlock(_bblocks.BaseStructBlock):
-    methods = _bblocks.BaseListBlock(
+class ContactLottieBlock(basic_blocks.BaseStructBlock):
+    methods = basic_blocks.BaseListBlock(
         ContactMethodBlock(help_text="Add contact methods.")
     )
 
 
-class ContactContactBlock(_bblocks.SectionBlock):
+class ContactContactBlock(basic_blocks.SectionBlock):
     title = ContactHeadingBlock()
     lottie = ContactLottieBlock()
 
@@ -41,7 +41,7 @@ class ContactContactBlock(_bblocks.SectionBlock):
         template = 'base/blocks/support/section.html'
 
 
-class ContactSectionBlock(_bblocks.SectionBlock):
+class ContactSectionBlock(basic_blocks.SectionBlock):
     title = ContactHeadingBlock()
     lottie = ContactLottieBlock()
 
