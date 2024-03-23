@@ -95,7 +95,7 @@ class ClientLogoBlock(basics.BaseStructBlock):
         icon = 'image'
 
 
-class SolutionClientsBlock(basics.BaseBlock):
+class SolutionClientsBlock(layouts.BaseBlock):
     subtitle = basics.BaseCharBlock(
         required=False,
         max_length=255,
