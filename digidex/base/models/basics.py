@@ -1,12 +1,12 @@
 from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel
 
-from base.fields import wagtail_fields
+from base.fields import wagtail
 from base.blocks.page import call_to_action, heading
 
 
 class BasePage(Page):
-    heading = wagtail_fields.BaseStreamField(
+    heading = wagtail.BaseStreamField(
         [
             ('heading', heading.HeadingBlock()),
         ],
@@ -15,7 +15,7 @@ class BasePage(Page):
         use_json_field=True
     )
     
-    call_to_action = wagtail_fields.BaseStreamField(
+    call_to_action = wagtail.BaseStreamField(
         [
             ('cta', call_to_action.CallToActionBlock()),
         ],

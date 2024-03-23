@@ -1,2 +1,2 @@
-from .django_fields import *
-from .wagtail_fields import *
+from .django import *
+from .wagtail import *
