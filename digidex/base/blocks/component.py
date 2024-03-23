@@ -1,7 +1,8 @@
-from base.blocks import basic_blocks
+from base.blocks import basic
 
-class TagBlock(basic_blocks.BaseStructBlock):
-    text = basic_blocks.BaseCharBlock(
+
+class TagBlock(basic.BaseStructBlock):
+    text = basic.BaseCharBlock(
         required=False
     )
 
@@ -9,16 +10,16 @@ class TagBlock(basic_blocks.BaseStructBlock):
         icon = 'tag'
 
 
-class URLBlock(basic_blocks.BaseStructBlock):
-    text = basic_blocks.BaseCharBlock(
+class URLBlock(basic.BaseStructBlock):
+    text = basic.BaseCharBlock(
         required=False,
         help_text="Enter the link title"
     )
-    url = basic_blocks.BaseURLBlock(
+    url = basic.BaseURLBlock(
         required=False,
         help_text="Enter the URL"
     )
-    target = basic_blocks.BaseChoiceBlock(
+    target = basic.BaseChoiceBlock(
         choices=[
             ('_self', 'Same window'),
             ('_blank', 'New window')
@@ -33,7 +34,7 @@ class URLBlock(basic_blocks.BaseStructBlock):
 
 
 class IconBlock(URLBlock):
-    icon = basic_blocks.BaseImageBlock(
+    icon = basic.BaseImageBlock(
         required=False,
         help_text="Optional: Select an icon image"
     )

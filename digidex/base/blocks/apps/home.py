@@ -1,21 +1,31 @@
-from base.blocks import basic_blocks
+from base.blocks import basic
 
 
-class HeroSectionBlock(basic_blocks.BaseStructBlock):
-    heading = basic_blocks.BaseCharBlock(
+class HeroContentBlock(basic.ContentBlock):
+    subcontent = basic.BaseStreamBlock(
+        #[
+        #    ('solutions', SolutionGridBlock()),
+        #    ('clients', SolutionClientsBlock()),
+        #],
+        min_num=1
+    )
+
+
+class HeroSectionBlock(basic.BaseStructBlock):
+    heading = basic.BaseCharBlock(
         required=True,
         max_length=255
     )
-    sub_heading = basic_blocks.BaseTextBlock(
+    sub_heading = basic.BaseTextBlock(
         required=False
     )
-    image = basic_blocks.BaseImageBlock(
+    image = basic.BaseImageBlock(
         required=False
     )
-    cta = basic_blocks.BaseStructBlock(
+    cta = basic.BaseStructBlock(
         [
-            ("text", basic_blocks.BaseCharBlock(required=True, max_length=255)),
-            ("url", basic_blocks.BaseURLBlock(required=True)),
+            ("text", basic.BaseCharBlock(required=True, max_length=255)),
+            ("url", basic.BaseURLBlock(required=True)),
         ]
     )
 
