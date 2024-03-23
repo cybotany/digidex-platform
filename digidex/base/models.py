@@ -8,7 +8,7 @@ from base.blocks.page import heading as _blocks
 class BasePage(Page):
     body = _wagtail.BaseStreamField(
         [
-            ('heading', _blocks.HeadingBlock()),
+            ('heading', _blocks.PageHeading()),
         ],
         null=True,
         blank=False,
