@@ -4,7 +4,7 @@ from wagtail.admin.panels import FieldPanel
 from base.fields import wagtail_fields as _wfields,\
                         django_fields as _dfields
 from base import models as base_models
-from support import blocks as _sblocks
+from digidex.base.blocks.support.section import heading as _sblocks
 
 class SupportIndexPage(base_models.IndexPage):
     intro_heading = _dfields.BaseCharField(
