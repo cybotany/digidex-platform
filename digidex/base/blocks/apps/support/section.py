@@ -1,6 +1,6 @@
 from base.blocks import basics, components, layouts
 
-class ContactHeadingBlock(basics.BaseBlock):
+class ContactHeadingBlock(layouts.BaseBlock):
     heading = basics.BaseRichTextBlock(
         required=True,
         help_text="Enter a heading for this section."
@@ -32,7 +32,7 @@ class ContactLottieBlock(basics.BaseStructBlock):
     )
 
 
-class ContactContactBlock(basics.SectionBlock):
+class ContactContactBlock(layouts.ContactBlock):
     title = ContactHeadingBlock()
     lottie = ContactLottieBlock()
 
@@ -41,7 +41,7 @@ class ContactContactBlock(basics.SectionBlock):
         template = 'base/blocks/support/section.html'
 
 
-class ContactSectionBlock(basics.SectionBlock):
+class ContactSectionBlock(layouts.SectionBlock):
     title = ContactHeadingBlock()
     lottie = ContactLottieBlock()
 

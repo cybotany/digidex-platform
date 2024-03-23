@@ -53,7 +53,7 @@ class SolutionCardIconBlock(components.IconBlock):
     )
 
 
-class SolutionCardBlock(basics.BaseBlock):
+class SolutionCardBlock(layouts.BaseBlock):
     tag = SolutionTagBlock(
         required=False,
         help_text="Optionally add a tag to the card, such as 'Most popular' or 'New'."
@@ -67,7 +67,7 @@ class SolutionCardBlock(basics.BaseBlock):
     )
 
 
-class SolutionGridBlock(basics.GridBlock):
+class SolutionGridBlock(layouts.GridBlock):
     items = basics.BaseListBlock(
         SolutionCardBlock(),
         min_num=1,
@@ -111,7 +111,7 @@ class SolutionClientsBlock(basics.BaseBlock):
         template = 'base/blocks/apps/solution/clients.html'
 
 
-class SolutionContentBlock(basics.ContentBlock):
+class SolutionContentBlock(layouts.ContentBlock):
     subcontent = basics.BaseStreamBlock(
         [
             ('solutions', SolutionGridBlock()),
@@ -120,7 +120,7 @@ class SolutionContentBlock(basics.ContentBlock):
         max_num=1
     )
 
-class SolutionSectionBlock(basics.SectionBlock):
+class SolutionSectionBlock(layouts.SectionBlock):
     content = SolutionContentBlock()
 
     class Meta:

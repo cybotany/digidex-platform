@@ -10,7 +10,7 @@ class TopBarPromoBlock(basics.BaseStructBlock):
         icon = 'doc-full'
 
 
-class PromoBarBlock(basics.SectionBlock):
+class PromoBarBlock(layouts.SectionBlock):
     promo = TopBarPromoBlock()
     icons = basics.BaseListBlock(
         components.URLBlock()
