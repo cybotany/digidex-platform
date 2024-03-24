@@ -1,7 +1,7 @@
 from base.blocks import basics as _blocks
 
 
-class SolutionTagBlock(_blocks.BaseStructBlock):
+class SolutionTag(_blocks.BaseStructBlock):
     text = _blocks.BaseCharBlock(
         required=True,
         help_text="Enter the text for the tag (e.g., 'Most popular')."
@@ -16,7 +16,7 @@ class SolutionTagBlock(_blocks.BaseStructBlock):
     )
 
 
-class SolutionCardContentBlock(_blocks.BaseStructBlock):
+class SolutionCardContent(_blocks.BaseStructBlock):
     image = _blocks.BaseImageBlock(
         required=True,
         help_text="Select an image for the solution card."
@@ -31,7 +31,7 @@ class SolutionCardContentBlock(_blocks.BaseStructBlock):
     )
 
 
-class SolutionCardIconBlock(_blocks.BaseStructBlock):
+class SolutionCardIcon(_blocks.BaseStructBlock):
     icon = _blocks.BaseImageBlock(
         required=True,
         help_text="Select an icon image to represent the link."
@@ -55,20 +55,20 @@ class SolutionCardIconBlock(_blocks.BaseStructBlock):
 
 
 class SolutionCardBlock(_blocks.BaseBlock):
-    tag = SolutionTagBlock(
+    tag = SolutionTag(
         required=False,
         help_text="Optionally add a tag to the card, such as 'Most popular' or 'New'."
     )
-    content = SolutionCardContentBlock(
+    content = SolutionCardContent(
         help_text="Add the main content for the card."
     )
-    button = SolutionCardIconBlock(
+    button = SolutionCardIcon(
         required=True,
         help_text="Define an icon with a link for additional details or actions."
     )
 
 
-class SolutionGridBlock(_blocks.BaseGridBlock):
+class SolutionGrid(_blocks.BaseGridBlock):
     items = _blocks.BaseListBlock(
         SolutionCardBlock(),
         min_num=1,
@@ -81,7 +81,7 @@ class SolutionGridBlock(_blocks.BaseGridBlock):
         template = 'base/blocks/solution/grid.html'
 
 
-class ClientLogoBlock(_blocks.BaseStructBlock):
+class ClientLogo(_blocks.BaseStructBlock):
     image = _blocks.BaseImageBlock(
         required=True,
         help_text="Select a client logo image."
@@ -96,14 +96,14 @@ class ClientLogoBlock(_blocks.BaseStructBlock):
         icon = 'image'
 
 
-class SolutionClientsBlock(_blocks.BaseBlock):
+class ClientWrapperBlock(_blocks.BaseBlock):
     subtitle = _blocks.BaseCharBlock(
         required=False,
         max_length=255,
         help_text="Enter a subtitle for the clients section."
     )
     logos = _blocks.BaseListBlock(
-        ClientLogoBlock(),
+        ClientLogo(),
         help_text="Add client logos."
     )
 
@@ -112,12 +112,13 @@ class SolutionClientsBlock(_blocks.BaseBlock):
         template = 'base/blocks/apps/solution/clients.html'
 
 
-class SolutionContentBlock(_blocks.BaseContentBlock):
-    pass
+class SolutionContent(_blocks.BaseContentBlock):
+    solutions = SolutionGrid()
+    clients = ClientWrapperBlock()
 
 
 class SolutionSection(_blocks.BaseSectionBlock):
-    content = SolutionContentBlock()
+    content = SolutionContent()
 
     class Meta:
         icon = 'image'

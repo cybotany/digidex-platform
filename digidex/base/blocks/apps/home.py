@@ -29,12 +29,12 @@ class HeroBlock(_blocks.BaseBlock):
     
 
 
-class HeroContentBlock(_blocks.BaseContentBlock):
+class HeroContent(_blocks.BaseContentBlock):
     hero = HeroBlock()
 
 
 class HeroSection(_blocks.BaseSectionBlock):
-    content = HeroContentBlock()
+    content = HeroContent()
 
     class Meta:
         template = "blocks/hero_section.html"
