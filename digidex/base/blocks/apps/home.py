@@ -30,7 +30,9 @@ class HeroButtons(_blocks.BaseStructBlock):
 
 
 class HeroCallToActionBlock(_blocks.BaseBlock):
-    promo = PromoTag(required=False)
+    promo = PromoTag(
+        required=False
+    )
     heading = _blocks.HeadingBlock()
     buttons = HeroButtons()
 
