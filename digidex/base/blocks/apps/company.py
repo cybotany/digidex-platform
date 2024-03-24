@@ -1,6 +1,5 @@
 from base.blocks import basics as _blocks
 from base.blocks.apps import company as _company
-from base.blocks.components import heading as _heading
 
 
 class StatisticItem(_blocks.BaseStructBlock):
@@ -29,7 +28,7 @@ class StatisticGrid(_blocks.BaseGridBlock):
 
 class CompanyContent(_blocks.BaseContentBlock):
     #lottie = _blocks.BaseLottieBlock()
-    block = _heading.HeadingBlock()
+    block = _blocks.HeadingBlock()
     grid = StatisticGrid()
 
 

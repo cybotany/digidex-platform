@@ -1,5 +1,4 @@
 from base.blocks import basics as _blocks
-from base.blocks.components import heading as _heading
 
 
 class SupportContactBlock(_blocks.BaseStructBlock):
@@ -26,7 +25,7 @@ class SupportLottie(_blocks.BaseStructBlock):
 class SupportContent(_blocks.BaseContentBlock):
     blocks = _blocks.BaseStreamBlock(
         [
-            ('heading', _heading.HeadingBlock()),
+            ('heading', _blocks.HeadingBlock()),
             ('lottie', SupportLottie()),
         ],
         required=False
