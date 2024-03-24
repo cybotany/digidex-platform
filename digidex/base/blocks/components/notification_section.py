@@ -18,4 +18,4 @@ class PromoBarBlock(_blocks.BaseSectionBlock):
 
     class Meta:
         icon = 'doc-full'
-        template = 'base/blocks/apps/navigation/promo_bar.html'
+        template = 'base/blocks/components/notification_section.html'

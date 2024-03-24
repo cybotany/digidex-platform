@@ -1,5 +1,4 @@
 from base.blocks import basics as _blocks
-from base.blocks.apps import company as _company
 
 
 class StatisticItem(_blocks.BaseStructBlock):
@@ -11,19 +10,11 @@ class StatisticItem(_blocks.BaseStructBlock):
         help_text="Statistic description"
     )
 
-    class Meta:
-        icon = 'pick'
-        template = 'base/blocks/apps/company/statistic_item_block.html'
-
 
 class StatisticGrid(_blocks.BaseGridBlock):
     statistics = _blocks.BaseListBlock(
         StatisticItem(help_text="Add statistics")
     )
-
-    class Meta:
-        icon = 'grid'
-        template = 'base/blocks/apps/company/statistics_grid_block.html'
 
 
 class CompanyContent(_blocks.BaseContentBlock):
@@ -43,10 +34,6 @@ class CompanySection(_blocks.BaseSectionBlock):
 class FeaturedSectionBlock(_blocks.BaseStructBlock):
     text_content = _blocks.BaseTextBlock()
     statistics_grid = StatisticGrid()
-
-    class Meta:
-        icon = 'placeholder'
-        template = 'base/blocks/apps/company/featured_section_block.html'
 
 
 class TeamMemberBlock(_blocks.BaseStructBlock):

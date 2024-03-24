@@ -39,4 +39,4 @@ class ReviewSection(_blocks.BaseSectionBlock):
 
     class Meta:
         icon = 'placeholder'
-        template = 'base/blocks/components/reviews.html'
+        template = 'base/blocks/components/review_section.html'

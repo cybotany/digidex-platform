@@ -16,7 +16,6 @@ class FeatureBlock(_blocks.BaseStructBlock):
     )
 
     class Meta:
-        template = "base/blocks/feature_block.html"
         icon = "placeholder"
         label = "Feature"
 
