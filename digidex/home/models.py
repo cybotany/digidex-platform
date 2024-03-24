@@ -17,7 +17,8 @@ class HomePage(_models.BasePage):
             ('support', _blocks.BaseStructBlock()),
             ('faq', _blocks.BaseStructBlock()),
             ('cta', _blocks.BaseStructBlock()),
-        ]
+        ],
+        default=[],
     )
 
     content_panels = Page.content_panels + [
