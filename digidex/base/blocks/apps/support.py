@@ -1,15 +1,5 @@
 from base.blocks import basics as _blocks
-
-
-class SupportHeadingBlock(_blocks.BaseBlock):
-    heading = _blocks.BaseRichTextBlock(
-        required=True,
-        help_text="Enter a heading for this section."
-    )
-    subtitle = _blocks.BaseRichTextBlock(
-        required=True,
-        help_text="Enter a subtitle for this section."
-    )
+from base.blocks.components import heading as _heading
 
 
 class SupportMethodBlock(_blocks.BaseStructBlock):
@@ -33,12 +23,12 @@ class SupportLottieBlock(_blocks.BaseStructBlock):
     )
 
 
-class SupportContentBlock(_blocks.BaseContentBlock):
-    pass
+class SupportContent(_blocks.BaseContentBlock):
+    block = _heading.SectionHeading()
 
 
 class SupportSection(_blocks.BaseSectionBlock):
-    content = SupportContentBlock()
+    content = SupportContent()
 
     class Meta:
         template = 'base/blocks/support/section.html'

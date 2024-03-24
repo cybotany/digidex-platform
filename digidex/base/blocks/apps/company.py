@@ -1,7 +1,9 @@
 from base.blocks import basics as _blocks
+from base.blocks.apps import company as _company
+from base.blocks.components import heading as _heading
 
 
-class StatisticItemBlock(_blocks.BaseStructBlock):
+class StatisticItem(_blocks.BaseStructBlock):
     icon = _blocks.BaseImageBlock()
     number = _blocks.BaseCharBlock(
         help_text="Statistic number"
@@ -9,23 +11,15 @@ class StatisticItemBlock(_blocks.BaseStructBlock):
     description = _blocks.BaseCharBlock(
         help_text="Statistic description"
     )
-    style = _blocks.BaseChoiceBlock(
-        required=False,
-        choices=[
-            ('default', 'Default'),
-            ('green', 'Green'),
-        ],
-        help_text="Statistic style",
-        default='default')
 
     class Meta:
         icon = 'pick'
         template = 'base/blocks/apps/company/statistic_item_block.html'
 
 
-class StatisticsGridBlock(_blocks.BaseStructBlock):
+class StatisticGrid(_blocks.BaseGridBlock):
     statistics = _blocks.BaseListBlock(
-        StatisticItemBlock(help_text="Add statistics")
+        StatisticItem(help_text="Add statistics")
     )
 
     class Meta:
@@ -33,9 +27,23 @@ class StatisticsGridBlock(_blocks.BaseStructBlock):
         template = 'base/blocks/apps/company/statistics_grid_block.html'
 
 
+class CompanyContent(_blocks.BaseContentBlock):
+    #lottie = _blocks.BaseLottieBlock()
+    block = _heading.SectionHeading()
+    grid = StatisticGrid()
+
+
+class CompanySection(_blocks.BaseSectionBlock):
+    content = CompanyContent()
+
+    class Meta:
+        icon = 'image'
+        template = 'base/blocks/apps/company/section.html'
+
+
 class FeaturedSectionBlock(_blocks.BaseStructBlock):
     text_content = _blocks.BaseTextBlock()
-    statistics_grid = StatisticsGridBlock()
+    statistics_grid = StatisticGrid()
 
     class Meta:
         icon = 'placeholder'
@@ -65,14 +73,3 @@ class TestimonialBlock(_blocks.BaseStructBlock):
         max_length=255,
         required=False
     )
-
-
-class CompanyContentBlock(_blocks.BaseContentBlock):
-    pass
-
-class CompanySection(_blocks.BaseSectionBlock):
-    content = CompanyContentBlock()
-
-    class Meta:
-        icon = 'image'
-        template = 'base/blocks/apps/company/section.html'

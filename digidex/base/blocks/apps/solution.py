@@ -16,7 +16,7 @@ class SolutionTag(_blocks.BaseStructBlock):
     )
 
 
-class SolutionCardContent(_blocks.BaseStructBlock):
+class SolutionCardItems(_blocks.BaseStructBlock):
     image = _blocks.BaseImageBlock(
         required=True,
         help_text="Select an image for the solution card."
@@ -59,7 +59,7 @@ class SolutionCardBlock(_blocks.BaseBlock):
         required=False,
         help_text="Optionally add a tag to the card, such as 'Most popular' or 'New'."
     )
-    content = SolutionCardContent(
+    items = SolutionCardItems(
         help_text="Add the main content for the card."
     )
     button = SolutionCardIcon(
@@ -69,7 +69,7 @@ class SolutionCardBlock(_blocks.BaseBlock):
 
 
 class SolutionGrid(_blocks.BaseGridBlock):
-    items = _blocks.BaseListBlock(
+    solutions = _blocks.BaseListBlock(
         SolutionCardBlock(),
         min_num=1,
         max_num=4,
@@ -113,8 +113,8 @@ class ClientWrapperBlock(_blocks.BaseBlock):
 
 
 class SolutionContent(_blocks.BaseContentBlock):
-    solutions = SolutionGrid()
-    clients = ClientWrapperBlock()
+    grid = SolutionGrid()
+    block = ClientWrapperBlock()
 
 
 class SolutionSection(_blocks.BaseSectionBlock):

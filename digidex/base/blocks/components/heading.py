@@ -6,21 +6,19 @@ class SectionHeading(_blocks.BaseBlock):
         required=True,
         help_text="Enter the heading title"
     )
-    subtitle = _blocks.BaseTextBlock(
+    subtitle = _blocks.BaseCharBlock(
         required=False,
         help_text="Enter the heading subtitle"
     )
-    centered = _blocks.BaseBooleanBlock(
+    text = _blocks.BaseTextBlock(
         required=False,
-        default=False,
-        help_text="Should the heading be centered?"
+        help_text="Enter the heading text"
     )
 
     class Meta:
         icon = "placeholder"
         template = "base/blocks/section/heading.html"
         label = "Section Heading"
-
 
 
 class PageHeadingContent(_blocks.BaseContentBlock):

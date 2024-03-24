@@ -1,4 +1,8 @@
-<div class="block-heading {% if block.centered %}center{% endif %}">
-  <div class="subtitle">{{ block.subtitle|linebreaksbr }}</div>
-  <h2 class="heading">{{ block.title }}</h2>
-</div>
+<!-- base/blocks/section/heading.html -->
+{% if block.subtitle %}
+    <div class="subtitle">{{ block.subtitle|linebreaksbr }}</div>
+{% endif %}
+<h2 class="heading">{{ block.title }}</h2>
+{% if block.text %}
+    <p class="paragraph">{{ block.text }}</p>
+{% endif %}

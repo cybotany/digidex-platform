@@ -30,7 +30,7 @@ class HeroBlock(_blocks.BaseBlock):
 
 
 class HeroContent(_blocks.BaseContentBlock):
-    hero = HeroBlock()
+    block = HeroBlock()
 
 
 class HeroSection(_blocks.BaseSectionBlock):
