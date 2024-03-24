@@ -10,6 +10,7 @@ from base.blocks.apps import (
 )
 from base.blocks.components import (
     feature_section as _feature,
+    review_section as _review,
     cta_section as _cta,
     faq_section as _faq,
 )
@@ -23,7 +24,7 @@ class HomePage(_models.BasePage):
             ('solutions', _solution.SolutionSection()),
             ('company', _company.CompanySection()),
             ('features', _feature.FeatureSection()),
-            ('reviews', _company.CompanySection()),
+            ('reviews', _review.ReviewSection()),
             ('support', _support.SupportSection()),
             ('faq', _faq.FAQSection()),
             ('cta', _cta.CallToActionSection()),
