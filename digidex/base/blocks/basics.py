@@ -92,3 +92,18 @@ class BaseSectionBlock(BaseStructBlock):
       - BaseContent
     """
     pass
+
+
+class ButtonBlock(BaseStructBlock):
+    text = BaseCharBlock(
+        required=True,
+        help_text="Text for the button"
+    )
+    url = BaseURLBlock(
+        required=True,
+        help_text="URL the button will link to"
+    )
+
+
+class SecondaryButtonBlock(ButtonBlock):
+    icon = BaseImageBlock()

@@ -28,8 +28,7 @@ class CompanyPage(_models.BasePage):
             ('image', _blocks.BaseImageBlock()),
             ('url', _blocks.BaseURLBlock()),
         ],
-        null=True,
-        blank=True
+        default=[],
     )
 
     content_panels = Page.content_panels + [

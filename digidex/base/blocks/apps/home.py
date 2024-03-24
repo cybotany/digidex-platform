@@ -1,6 +1,22 @@
 from base.blocks import basics as _blocks
 
 
+class HeroButtons(_blocks.BaseStructBlock):
+    primary = _blocks.ButtonBlock(
+        required=True,
+        help_text="Primary button"
+    )
+    secondary = _blocks.SecondaryButtonBlock(
+        required=False,
+        help_text="Secondary button"
+    )
+
+    class Meta:
+        template = "blocks/button_hero.html"
+        icon = "placeholder"
+        label = "Hero Buttons"
+
+
 class HeroBlock(_blocks.BaseBlock):
     heading = _blocks.BaseCharBlock(
         required=True,
@@ -9,12 +25,8 @@ class HeroBlock(_blocks.BaseBlock):
     text = _blocks.BaseTextBlock(
         required=True
     )
-    primary_button = _blocks.BaseButtonBlock(
-        required=True
-    )
-    secondary_button = _blocks.BaseButtonBlock(
-        required=False
-    )
+    buttons = HeroButtons()
+    
 
 
 class HeroContentBlock(_blocks.BaseContentBlock):

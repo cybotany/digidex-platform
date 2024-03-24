@@ -70,7 +70,7 @@ class TestimonialBlock(_blocks.BaseStructBlock):
 class CompanyContentBlock(_blocks.BaseContentBlock):
     pass
 
-class CompanySectionBlock(_blocks.BaseSectionBlock):
+class CompanySection(_blocks.BaseSectionBlock):
     content = CompanyContentBlock()
 
     class Meta:
