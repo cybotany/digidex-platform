@@ -3,31 +3,47 @@ from wagtail.admin.panels import FieldPanel
 
 from base.fields import basics as _fields
 from base.blocks.apps import (
-    home as _hero,
+    home as _home,
     solution as _solution,
     company as _company,
+    #privacy as _privacy,
     support as _support,
-)
-from base.blocks.components import (
-    feature_section as _feature,
-    review_section as _review,
-    cta_section as _cta,
-    faq_section as _faq,
 )
 from base import models as _models
 
 
 class HomePage(_models.BasePage):
+    """
+    Landing page for project. Designed to efficiently communicate
+    the value proposition of the product and/or service to the target audience.
+    
+    Understanding Full Scope of Value Proposition:
+        Who - highlight who the target audience value proposition is designed for (target audience - segment of market that can later expand in concentric circles).
+        What - highlight what the pain the product and/or service solves.
+        When - highlight when the pain was experienced by the target audience in the past.
+        Where - highlight where the pain can or will be experienced by the target audience.
+        Why - highlight why the pain is important to solve.
+
+    Customer Pain Discovery Results:
+        1. Pain does not exist
+        2. Pain exists but prospect does not know
+        3. Pain exists and prospect knows but have not quantified it and will do nothing about it
+        4. Pain exists and prospect knows and have quantified it but will do nothing about it
+        5. Pain exists and prospect knows and have quantified it and will do something about it (Most valuable customer)
+
+    Mom Test Summary:
+        1. Talk about their life instead of your idea
+        2. Ask about specifics in the past instead of generics or opinions about the future
+        3. Talk less and listen more
+
+    """
     body = _fields.BaseStreamField(
         [
-            ('hero', _hero.HeroSection()),
+            ('hero', _home.HeroSection()),
             ('solutions', _solution.SolutionSection()),
             ('company', _company.CompanySection()),
-            ('features', _feature.FeatureSection()),
-            ('reviews', _review.ReviewSection()),
             ('support', _support.SupportSection()),
-            ('faq', _faq.FAQSection()),
-            ('cta', _cta.CallToActionSection()),
+            #('privacy', _privacy.PrivacySection()),
         ],
         default=[],
     )
