@@ -27,7 +27,7 @@ class CompanySection(_blocks.BaseSectionBlock):
     content = CompanyContent()
 
     class Meta:
-        icon = 'image'
+        icon = 'placeholder'
         template = 'base/apps/company/section.html'
 
 

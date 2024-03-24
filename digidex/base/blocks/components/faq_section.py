@@ -33,5 +33,5 @@ class FAQSection(_blocks.BaseSectionBlock):
 
     class Meta:
         icon = 'help'
-        label = "FAQ Section"
+        label = "FAQs"
         template = 'base/blocks/components/sections/faq_section.html'
