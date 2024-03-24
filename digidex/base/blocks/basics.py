@@ -214,7 +214,7 @@ class LineBlock(BaseStructBlock):
     )
 
 
-class AnimationWrapperBlock(BaseStructBlock):
+class LottieBlock(BaseStructBlock):
     lines_a = BaseListBlock(
         LineBlock(),
         help_text="Vertical lines configuration"
