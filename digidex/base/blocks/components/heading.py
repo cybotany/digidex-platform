@@ -1,7 +1,7 @@
 from base.blocks import basics as _blocks
 
 
-class SectionHeading(_blocks.BaseBlock):
+class HeadingBlock(_blocks.BaseBlock):
     title = _blocks.BaseCharBlock(
         required=True,
         help_text="Enter the heading title"
@@ -17,11 +17,11 @@ class SectionHeading(_blocks.BaseBlock):
 
     class Meta:
         icon = "placeholder"
-        template = "base/blocks/section/heading.html"
+        template = "base/blocks/components/heading.html"
         label = "Section Heading"
 
 
-class PageHeadingContent(_blocks.BaseContentBlock):
+class HeadingSectionContent(_blocks.BaseContentBlock):
     title = _blocks.BaseCharBlock(
         required=True,
         help_text="Enter the heading title"
@@ -32,10 +32,10 @@ class PageHeadingContent(_blocks.BaseContentBlock):
     )
 
 
-class PageHeading(_blocks.BaseSectionBlock):
-    content = PageHeadingContent()
+class HeadingSection(_blocks.BaseSectionBlock):
+    content = HeadingSectionContent()
 
     class Meta:
         icon = "placeholder"
-        template = "base/blocks/page/heading.html"
+        template = "base/blocks/app/heading.html"
         label = "Page Heading"

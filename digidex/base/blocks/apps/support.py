@@ -24,7 +24,7 @@ class SupportLottieBlock(_blocks.BaseStructBlock):
 
 
 class SupportContent(_blocks.BaseContentBlock):
-    block = _heading.SectionHeading()
+    block = _heading.HeadingBlock()
 
 
 class SupportSection(_blocks.BaseSectionBlock):

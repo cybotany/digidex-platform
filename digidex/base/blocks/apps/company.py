@@ -29,7 +29,7 @@ class StatisticGrid(_blocks.BaseGridBlock):
 
 class CompanyContent(_blocks.BaseContentBlock):
     #lottie = _blocks.BaseLottieBlock()
-    block = _heading.SectionHeading()
+    block = _heading.HeadingBlock()
     grid = StatisticGrid()
 
 
