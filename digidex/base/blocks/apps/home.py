@@ -30,10 +30,10 @@ class HeroBlock(_blocks.BaseBlock):
 
 
 class HeroContentBlock(_blocks.BaseContentBlock):
-    pass
+    hero = HeroBlock()
 
 
-class HeroSectionBlock(_blocks.BaseSectionBlock):
+class HeroSection(_blocks.BaseSectionBlock):
     content = HeroContentBlock()
 
     class Meta:

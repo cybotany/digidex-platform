@@ -116,7 +116,7 @@ class SolutionContentBlock(_blocks.BaseContentBlock):
     pass
 
 
-class SolutionSectionBlock(_blocks.BaseSectionBlock):
+class SolutionSection(_blocks.BaseSectionBlock):
     content = SolutionContentBlock()
 
     class Meta:

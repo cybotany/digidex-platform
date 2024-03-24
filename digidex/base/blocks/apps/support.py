@@ -37,7 +37,7 @@ class SupportContentBlock(_blocks.BaseContentBlock):
     pass
 
 
-class SupportSectionBlock(_blocks.BaseSectionBlock):
+class SupportSection(_blocks.BaseSectionBlock):
     content = SupportContentBlock()
 
     class Meta:
