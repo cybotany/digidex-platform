@@ -61,7 +61,9 @@ class BaseBlock(BaseStructBlock):
     Child:
       - BaseComponents
     """
-    pass
+
+    class Meta:
+        template = "base/basics/block.html"
 
 
 class BaseGridBlock(BaseStreamBlock):
@@ -71,7 +73,9 @@ class BaseGridBlock(BaseStreamBlock):
     Child:
       - BaseBlock
     """
-    pass
+
+    class Meta:
+        template = "base/basics/grid.html"
 
 
 class BaseContentBlock(BaseStreamBlock):
@@ -81,7 +85,9 @@ class BaseContentBlock(BaseStreamBlock):
     Child:
       - BaseGrid
     """
-    pass
+
+    class Meta:
+        template = "base/basics/content.html"
 
 
 class BaseSectionBlock(BaseStructBlock):
@@ -91,7 +97,9 @@ class BaseSectionBlock(BaseStructBlock):
     Child:
       - BaseContent
     """
-    pass
+
+    class Meta:
+        template = "base/basics/section.html"
 
 
 class ButtonBlock(BaseStructBlock):
