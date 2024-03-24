@@ -28,7 +28,7 @@ class CompanySection(_blocks.BaseSectionBlock):
 
     class Meta:
         icon = 'image'
-        template = 'base/blocks/apps/company/section.html'
+        template = 'base/apps/company/section.html'
 
 
 class FeaturedSectionBlock(_blocks.BaseStructBlock):

@@ -11,11 +11,6 @@ class HeroButtons(_blocks.BaseStructBlock):
         help_text="Secondary button"
     )
 
-    class Meta:
-        template = "blocks/button_hero.html"
-        icon = "placeholder"
-        label = "Hero Buttons"
-
 
 class HeroBlock(_blocks.BaseBlock):
     heading = _blocks.BaseCharBlock(
@@ -28,7 +23,6 @@ class HeroBlock(_blocks.BaseBlock):
     buttons = HeroButtons()
     
 
-
 class HeroContent(_blocks.BaseContentBlock):
     block = HeroBlock()
 
@@ -37,4 +31,4 @@ class HeroSection(_blocks.BaseSectionBlock):
     content = HeroContent()
 
     class Meta:
-        template = "blocks/hero_section.html"
+        template = "base/apps/home/hero_section.html"

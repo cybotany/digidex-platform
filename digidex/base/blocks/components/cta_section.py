@@ -16,4 +16,4 @@ class CallToActionSection(_blocks.BaseSectionBlock):
     class Meta:
         label = "Call To Action"
         icon = 'placeholder'
-        template = 'base/blocks/components/cta_section.html'
+        template = 'base/components/sections/cta_section.html'

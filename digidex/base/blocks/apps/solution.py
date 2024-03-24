@@ -76,10 +76,6 @@ class SolutionGrid(_blocks.BaseGridBlock):
         help_text="Add up to 4 solution cards. Each card will be displayed in a single row."
     )
 
-    class Meta:
-        icon = 'image'
-        template = 'base/blocks/solution/grid.html'
-
 
 class ClientLogo(_blocks.BaseStructBlock):
     image = _blocks.BaseImageBlock(
@@ -91,9 +87,6 @@ class ClientLogo(_blocks.BaseStructBlock):
         max_length=255,
         help_text="Enter an alternative text for the image."
     )
-
-    class Meta:
-        icon = 'image'
 
 
 class ClientWrapperBlock(_blocks.BaseBlock):
@@ -107,10 +100,6 @@ class ClientWrapperBlock(_blocks.BaseBlock):
         help_text="Add client logos."
     )
 
-    class Meta:
-        icon = 'group'
-        template = 'base/blocks/apps/solution/clients.html'
-
 
 class SolutionContent(_blocks.BaseContentBlock):
     grid = SolutionGrid()
@@ -121,5 +110,5 @@ class SolutionSection(_blocks.BaseSectionBlock):
     content = SolutionContent()
 
     class Meta:
-        icon = 'image'
-        template = 'base/blocks/apps/solution/section.html'
+        icon = 'placeholder'
+        template = 'base/apps/solution/section.html'

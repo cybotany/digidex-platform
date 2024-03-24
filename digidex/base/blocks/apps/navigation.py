@@ -11,10 +11,6 @@ class LogoLinkBlock(_blocks.BaseStructBlock):
         help_text="Enter the URL the logo should link to"
     )
 
-    class Meta:
-        icon = 'site'
-        template = 'base/blocks/apps/navigation/logo_link.html'
-
 
 class NavigationMenuMobileBlock(_blocks.BaseStructBlock):
     nav_links = _blocks.BaseListBlock(
@@ -25,17 +21,13 @@ class NavigationMenuMobileBlock(_blocks.BaseStructBlock):
         help_text="Add navigation buttons"
     )
 
-    class Meta:
-        icon = 'site'
-        template = 'base/blocks/apps/navigation/menu_mobile.html'
-
 
 class ShoppingCartBlock(_blocks.ButtonBlock):
     pass
 
     class Meta:
         icon = 'site'
-        template = 'base/blocks/apps/navigation/shopping_cart.html'
+        template = 'base/apps/navigation/shopping_cart.html'
 
 
 class NavigationMenuDesktopBlock(_blocks.BaseStructBlock):
@@ -45,15 +37,11 @@ class NavigationMenuDesktopBlock(_blocks.BaseStructBlock):
     )
     shopping_cart = ShoppingCartBlock()
 
-    class Meta:
-        icon = 'site'
-        template = 'base/blocks/apps/navigation/menu_desktop.html'
-
 
 class NavigationBarBlock(_blocks.BaseStructBlock):
     nav_menu = NavigationMenuMobileBlock()
     desktop_buttons = NavigationMenuDesktopBlock()
 
     class Meta:
-        icon = 'site'
-        template = 'base/blocks/apps/navigation/navigation_bar.html'
+        icon = 'placeholder'
+        template = 'base/apps/navigation/navigation_bar.html'

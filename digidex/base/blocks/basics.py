@@ -125,7 +125,7 @@ class HeadingBlock(BaseBlock):
 
     class Meta:
         icon = "placeholder"
-        template = "base/blocks/components/heading.html"
+        template = "base/components/blocks/heading_block.html"
         label = "Section Heading"
 
 
@@ -145,5 +145,5 @@ class HeadingSection(BaseSectionBlock):
 
     class Meta:
         icon = "placeholder"
-        template = "base/blocks/components/heading.html"
+        template = "base/components/sections/heading_section.html"
         label = "Page Heading"

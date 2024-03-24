@@ -36,4 +36,5 @@ class SupportSection(_blocks.BaseSectionBlock):
     content = SupportContent()
 
     class Meta:
+        icon = 'placeholder'
         template = 'base/blocks/support/section.html'

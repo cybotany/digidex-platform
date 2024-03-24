@@ -40,4 +40,4 @@ class FeatureSection(_blocks.BaseSectionBlock):
 
     class Meta:
         icon = 'placeholder'
-        template = 'base/blocks/components/feature_section.html'
+        template = 'base/blocks/components/sections/feature_section.html'
