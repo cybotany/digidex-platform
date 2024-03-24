@@ -38,7 +38,7 @@ class BasePageBlock(blocks.PageChooserBlock):
     pass
 
 
-class BaseImageBlock(img_blocks.ImageChooserBlock):
+class BaseImageBlock(imgImageChooserBlock):
     pass
 
 
@@ -107,3 +107,43 @@ class ButtonBlock(BaseStructBlock):
 
 class SecondaryButtonBlock(ButtonBlock):
     icon = BaseImageBlock()
+
+
+class HeadingBlock(BaseBlock):
+    title = BaseCharBlock(
+        required=True,
+        help_text="Enter the heading title"
+    )
+    subtitle = BaseCharBlock(
+        required=False,
+        help_text="Enter the heading subtitle"
+    )
+    text = BaseTextBlock(
+        required=False,
+        help_text="Enter the heading text"
+    )
+
+    class Meta:
+        icon = "placeholder"
+        template = "base/blocks/components/heading.html"
+        label = "Section Heading"
+
+
+class HeadingSectionContent(BaseContentBlock):
+    title = BaseCharBlock(
+        required=True,
+        help_text="Enter the heading title"
+    )
+    text = BaseTextBlock(
+        required=True,
+        help_text="Enter the heading text"
+    )
+
+
+class HeadingSection(BaseSectionBlock):
+    content = HeadingSectionContent()
+
+    class Meta:
+        icon = "placeholder"
+        template = "base/blocks/components/heading.html"
+        label = "Page Heading"

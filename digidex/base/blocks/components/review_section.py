@@ -1,5 +1,4 @@
 from base.blocks import basics as _blocks
-from base.blocks.components import heading as _heading
                         
 
 class ReviewCard(_blocks.BaseStructBlock):
@@ -26,7 +25,7 @@ class ReviewGrid(_blocks.BaseGridBlock):
     )
 
 
-class ReviewHeading(_heading.HeadingBlock):
+class ReviewHeading(_blocks.HeadingBlock):
     button = _blocks.ButtonBlock()
 
 

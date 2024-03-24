@@ -1,5 +1,4 @@
 from base.blocks import basics as _blocks
-from base.blocks.components import heading as _heading
                         
 
 class FeatureBlock(_blocks.BaseStructBlock):
@@ -33,7 +32,7 @@ class FeatureGrid(_blocks.BaseGridBlock):
 
 
 class FeatureContent(_blocks.BaseContentBlock):
-    block = _heading.HeadingBlock()
+    block = _blocks.HeadingBlock()
     grid = FeatureGrid()
 
 

@@ -1,0 +1,21 @@
+<section class="section">
+  <div class="content">
+    <div class="block-heading center">
+      <div class="subtitle">{{ self.intro.subtitle }}</div>
+      <h2 class="heading">{{ self.intro.title }}</h2>
+    </div>
+    <div class="base-layout-grid grid-faq">
+      {% for faq in self.faqs %}
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <h6 class="heading-accordion">{{ faq.question }}</h6>
+            <div class="block-icon-accordion"><img src="images/close.svg" alt="" class="icon-accordion"></div>
+          </div>
+          <div class="accordion-content" style="display:none">
+            <p class="paragraph-accordion">{{ faq.answer }}</p>
+          </div>
+        </div>    
+      {% endfor %}
+    </div>
+  </div>
+</section>

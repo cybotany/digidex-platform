@@ -2,7 +2,7 @@ from base.blocks import basics as _blocks
 from base.blocks.components import heading as _heading
 
 
-class SupportMethodBlock(_blocks.BaseStructBlock):
+class SupportContactBlock(_blocks.BaseStructBlock):
     icon = _blocks.BaseImageBlock(
         required=True
     )
@@ -17,14 +17,20 @@ class SupportMethodBlock(_blocks.BaseStructBlock):
     )
 
 
-class SupportLottieBlock(_blocks.BaseStructBlock):
+class SupportLottie(_blocks.BaseStructBlock):
     methods = _blocks.BaseListBlock(
-        SupportMethodBlock(help_text="Add contact methods.")
+        SupportContactBlock(help_text="Add contact methods.")
     )
 
 
 class SupportContent(_blocks.BaseContentBlock):
-    block = _heading.HeadingBlock()
+    blocks = _blocks.BaseStreamBlock(
+        [
+            ('heading', _heading.HeadingBlock()),
+            ('lottie', SupportLottie()),
+        ],
+        required=False
+    )
 
 
 class SupportSection(_blocks.BaseSectionBlock):
