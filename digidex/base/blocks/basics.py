@@ -38,7 +38,7 @@ class BasePageBlock(blocks.PageChooserBlock):
     pass
 
 
-class BaseImageBlock(imgImageChooserBlock):
+class BaseImageBlock(img_blocks.ImageChooserBlock):
     pass
 
 
