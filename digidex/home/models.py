@@ -2,13 +2,7 @@ from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel
 
 from base.fields import basics as _fields
-from base.blocks.apps import (
-    home as _home,
-    solution as _solution,
-    company as _company,
-    #privacy as _privacy,
-    support as _support,
-)
+from base.blocks.apps import home as _home
 from base import models as _models
 
 
@@ -40,9 +34,9 @@ class HomePage(_models.BasePage):
     body = _fields.BaseStreamField(
         [
             ('hero', _home.HeroSection()),
-            ('solutions', _solution.SolutionSection()),
-            ('company', _company.CompanySection()),
-            ('support', _support.SupportSection()),
+            #('solutions', _solution.SolutionSection()),
+            #('company', _company.CompanySection()),
+            #('support', _support.SupportSection()),
             #('privacy', _privacy.PrivacySection()),
         ],
         default=[],
