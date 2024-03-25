@@ -10,7 +10,7 @@
           <div class="paragraph-footer">Built with Wagtail<br></div>
         </div>
         <div class="block-footer">
-          {% with twitter_url=settings.base.PageFooterNavigationSettings.twitter_url github_url=settings.navigation.FooterNavigationSettings.github_url mastodon_url=settings.navigation.FooterNavigationSettings.mastodon_url %}
+          {% with twitter_url=settings.base.PageFooterNavigationSettings.twitter_url github_url=settings.navigation.PageFooterNavigationSettings.github_url mastodon_url=settings.navigation.PageFooterNavigationSettings.mastodon_url %}
             {% if twitter_url or github_url or mastodon_url %}
               <div class="subtitle-footer">Social Media Links<br></div>
               {% if github_url %}
