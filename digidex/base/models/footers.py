@@ -23,19 +23,10 @@ class CallToActionFooter(BaseGenericSetting):
         null=True,
         help_text="Main heading text"
     )
-    call_to_action_page = _fields.BaseForeignKey(
-        _models.BasePage,
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name="+",
-        help_text="Page to link the call to action to"
-    )
 
     panels = [
         FieldPanel('subtitle'),
         FieldPanel('heading'),
-        PageChooserPanel('call_to_action_page'),
     ]
 
 
