@@ -5,7 +5,7 @@ from base.models import footers
 
 register = template.Library()
 
-@register.inclusion_tag("navigation/includes/footer_text.html", takes_context=True)
+@register.inclusion_tag("base/includes/footer_text.html", takes_context=True)
 def get_footer_text(context):
     footer_text = context.get("footer_text", "")
 
