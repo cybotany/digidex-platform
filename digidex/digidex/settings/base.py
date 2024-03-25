@@ -51,7 +51,6 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
