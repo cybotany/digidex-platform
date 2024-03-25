@@ -1,4 +1,4 @@
-from base import models as _models
+from digidex.base.models import basics as _models
 
 
 class SupportIndexPage(_models.BaseIndexPage):

@@ -10,7 +10,7 @@ from wagtail.snippets.models import register_snippet
 from taggit.models import TaggedItemBase
 
 from base.fields import basics as _fields
-from base import models as _models
+from digidex.base.models import basics as _models
 
 class BlogIndexPage(_models.BaseIndexPage):
     intro = _fields.BaseRichTextField(
