@@ -28,7 +28,7 @@ class HeroButtons(_blocks.BaseStructBlock):
         help_text="Secondary button"
     )
 
-
+ 
 class HeroCallToActionBlock(_blocks.BaseBlock):
     promo = PromoTag(
         required=False
