@@ -3,7 +3,7 @@ from wagtail.admin.panels import FieldPanel
 
 from base.fields import basics as _fields
 from base.blocks.apps import home as _home
-from digidex.base.models import basics as _models
+from base.models import basics as _models
 
 
 class HomePage(_models.BasePage):
