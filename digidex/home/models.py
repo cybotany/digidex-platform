@@ -1,12 +1,9 @@
+from wagtail.fields import StreamField
 from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel
 
-from digidex.base.fields.django import basics as _fields
-from base.blocks.apps import home as _home
-from base.models import basics as _models
 
-
-class HomePage(_models.BasePage):
+class HomePage(Page):
     """
     Landing page for project. Designed to efficiently communicate
     the value proposition of the product and/or service to the target audience.
@@ -31,14 +28,8 @@ class HomePage(_models.BasePage):
         3. Talk less and listen more
 
     """
-    body = _fields.BaseStreamField(
-        [
-            ('hero', _home.HeroSection()),
-            #('solutions', _solution.SolutionSection()),
-            #('company', _company.CompanySection()),
-            #('support', _support.SupportSection()),
-            #('privacy', _privacy.PrivacySection()),
-        ],
+    body = StreamField(
+        [],
         default=[],
     )
 

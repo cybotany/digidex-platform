@@ -3,17 +3,16 @@ from django.db import models
 
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.contrib.taggit import ClusterTaggableManager
+from wagtail.fields import RichTextField
 from wagtail.models import Page, Orderable
 from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 from taggit.models import TaggedItemBase
 
-from digidex.base.fields.django import basics as _fields
-from base.models import basics as _models
 
-class BlogIndexPage(_models.BaseIndexPage):
-    intro = _fields.BaseRichTextField(
+class BlogIndexPage(Page):
+    intro = RichTextField(
         blank=True
     )
 
@@ -42,7 +41,7 @@ class BlogPageTag(TaggedItemBase):
     )
 
 
-class BlogTagIndexPage(_models.BaseIndexPage):
+class BlogTagIndexPage(Page):
     def get_context(self, request):
         tag = request.GET.get('tag')
         blogpages = BlogPage.objects.filter(tags__name=tag)
@@ -52,14 +51,14 @@ class BlogTagIndexPage(_models.BaseIndexPage):
         return context
 
 
-class BlogPage(_models.BasePage):
-    date = _fields.BaseDateField(
+class BlogPage(Page):
+    date = models.DateField(
         "Post date"
     )
-    intro = _fields.BaseCharField(
+    intro = models.CharField(
         max_length=250
     )
-    body = _fields.BaseRichTextField(
+    body = RichTextField(
         blank=True
     )
     authors = ParentalManyToManyField(
@@ -105,12 +104,12 @@ class BlogPageGalleryImage(Orderable):
         on_delete=models.CASCADE,
         related_name='gallery_images'
     )
-    image = _fields.BaseForeignKey(
+    image = models.ForeignKey(
         'wagtailimages.Image',
         on_delete=models.CASCADE,
         related_name='+'
     )
-    caption = _fields.BaseCharField(
+    caption = models.CharField(
         blank=True,
         max_length=250
     )
@@ -123,10 +122,10 @@ class BlogPageGalleryImage(Orderable):
 
 @register_snippet
 class Author(models.Model):
-    name = _fields.BaseCharField(
+    name = models.CharField(
         max_length=255
     )
-    author_image = _fields.BaseForeignKey(
+    author_image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
         blank=True,
