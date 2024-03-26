@@ -191,7 +191,5 @@ WAGTAILSEARCH_BACKENDS = {
     }
 }
 
-LOGIN_URL = '/authentication/login/'
-WAGTAIL_FRONTEND_LOGIN_URL = LOGIN_URL
-
-AUTH_USER_MODEL = 'authentication.DigiDexUser'
+#LOGIN_URL = '/authentication/login/'
+#WAGTAIL_FRONTEND_LOGIN_URL = LOGIN_URL
