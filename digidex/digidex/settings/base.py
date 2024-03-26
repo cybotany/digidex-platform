@@ -10,10 +10,8 @@ PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 INSTALLED_APPS = [
-    "authentication",
-    "authorization",
     "base",
-    "blog",
+    #"blog",
     "home",
     "search",
 
@@ -44,6 +42,8 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
 ]
 
 MIDDLEWARE = [
