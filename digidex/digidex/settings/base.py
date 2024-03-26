@@ -14,11 +14,8 @@ INSTALLED_APPS = [
     "authorization",
     "base",
     "blog",
-    "ecommerce",
     "home",
-    "privacy",
     "search",
-    "support",
 
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
