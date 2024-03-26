@@ -192,4 +192,45 @@ WAGTAILSEARCH_BACKENDS = {
 }
 
 #LOGIN_URL = '/authentication/login/'
+#LOGIN_REDIRECT_URL = '/authentication/login/'
 #WAGTAIL_FRONTEND_LOGIN_URL = LOGIN_URL
+# ALLAUTH settings
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
+#ACCOUNT_ADAPTER = 'project.users.adapter.MyAccountAdapter'
+
+ACCOUNT_USERNAME_VALIDATORS = 'some.module.validators.custom_username_validators'
+
+ACCOUNT_USERNAME_BLACKLIST = [
+    'admin', 'administrator', 'root', 'sysadmin', 'webmaster',
+    'support', 'helpdesk', 'moderator', 'superuser', 'guest', 
+    'anonymous', 'nobody', 'user', 'null', 'undefined', 'localhost',
+    'default', 'public', 'system', 'official', 'security', 'info',
+    'contact', 'feedback', 'no-reply', 'noreply', 'api', 'static',
+    'assets', 'img', 'admin', 'login', 'logout', 'signup', 'register',
+]
+
+ACCOUNT_USERNAME_MIN_LENGTH = 3
+
+ACCOUNT_PRESERVE_USERNAME_CASING = False
+
+ACCOUNT_FORMS = {
+    'add_email': 'allauth.account.forms.AddEmailForm',
+    'change_password': 'allauth.account.forms.ChangePasswordForm',
+    'login': 'allauth.account.forms.LoginForm',
+    'reset_password': 'allauth.account.forms.ResetPasswordForm',
+    'reset_password_from_key': 'allauth.account.forms.ResetPasswordKeyForm',
+    'set_password': 'allauth.account.forms.SetPasswordForm',
+    'signup': 'allauth.account.forms.SignupForm',
+    'user_token': 'allauth.account.forms.UserTokenForm',
+}
+
+#ACCOUNT_SIGNUP_FORM_CLASS = 'myapp.forms.SignupForm'
+
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
+
+ACCOUNT_EMAIL_NOTIFICATIONS = True
+
+ACCOUNT_EMAIL_REQUIRED = True
+
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
