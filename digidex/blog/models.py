@@ -9,7 +9,7 @@ from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 from taggit.models import TaggedItemBase
 
-from base.fields import basics as _fields
+from digidex.base.fields.django import basics as _fields
 from base.models import basics as _models
 
 class BlogIndexPage(_models.BaseIndexPage):

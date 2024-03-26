@@ -1,46 +1,23 @@
 from django.db import models
+from wagtail.fields import RichTextField
 
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel, PageChooserPanel, PublishingPanel
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel, PublishingPanel
 from wagtail.contrib.settings.models import BaseGenericSetting, register_setting
 from wagtail.models import DraftStateMixin, PreviewableMixin, RevisionMixin, TranslatableMixin
 from wagtail.snippets.models import register_snippet
 
-from base.models import basics as _models
-from base.fields import basics as _fields
-
 
 @register_setting
-class CallToActionFooter(BaseGenericSetting):
-    subtitle = _fields.BaseCharField(
-        max_length=255,
-        blank=True,
-        null=True,
-        help_text="Subtitle text"
-    )
-    heading = _fields.BaseCharField(
-        max_length=255,
-        blank=True,
-        null=True,
-        help_text="Main heading text"
-    )
-
-    panels = [
-        FieldPanel('subtitle'),
-        FieldPanel('heading'),
-    ]
-
-
-@register_setting
-class PageFooterNavigationSettings(BaseGenericSetting):
-    twitter_url = _fields.BaseURLField(
+class FooterNavigationSettings(BaseGenericSetting):
+    twitter_url = models.URLField(
         verbose_name="Twitter URL",
         blank=True 
     )
-    github_url = _fields.BaseURLField(
+    github_url = models.URLField(
         verbose_name="GitHub URL",
         blank=True
     )
-    linkedin_url = _fields.BaseURLField(
+    linkedin_url = models.URLField(
         verbose_name="LinkedIn URL",
         blank=True
     )
@@ -58,8 +35,8 @@ class PageFooterNavigationSettings(BaseGenericSetting):
 
 
 @register_snippet
-class PageFooterText( DraftStateMixin, RevisionMixin, PreviewableMixin, TranslatableMixin, models.Model):
-    body = _fields.BaseRichTextField(
+class FooterText( DraftStateMixin, RevisionMixin, PreviewableMixin, TranslatableMixin, models.Model):
+    body = RichTextField(
         max_length=150,
     )
 

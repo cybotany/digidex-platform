@@ -5,12 +5,12 @@ from base.models import footers
 
 register = template.Library()
 
-@register.inclusion_tag("base/includes/footer_text.html", takes_context=True)
+@register.inclusion_tag("includes/footer_text.html", takes_context=True)
 def get_footer_text(context):
     footer_text = context.get("footer_text", "")
 
     if not footer_text:
-        instance = footers.PageFooterText.objects.filter(live=True).first()
+        instance = footers.FooterText.objects.filter(live=True).first()
         footer_text = instance.body if instance else ""
 
     return {

@@ -1,2 +1,1 @@
-from .basics import BasePage, BaseIndexPage
-from .footers import CallToActionFooter, PageFooterText, PageFooterNavigationSettings
+from .footers import FooterText, FooterNavigationSettings

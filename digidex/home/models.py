@@ -1,7 +1,7 @@
 from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel
 
-from base.fields import basics as _fields
+from digidex.base.fields.django import basics as _fields
 from base.blocks.apps import home as _home
 from base.models import basics as _models
 
