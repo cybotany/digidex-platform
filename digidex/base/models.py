@@ -1,10 +1,25 @@
+# base/models/page.py
 from django.db import models
-from wagtail.fields import RichTextField
-
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel, PublishingPanel
+from wagtail.models import Page
+from wagtail.fields import StreamField, RichTextField
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel, PublishingPanel, StreamFieldPanel
 from wagtail.contrib.settings.models import BaseGenericSetting, register_setting
 from wagtail.models import DraftStateMixin, PreviewableMixin, RevisionMixin, TranslatableMixin
 from wagtail.snippets.models import register_snippet
+from .blocks import SectionBlock
+
+
+class HomePage(Page):
+    body = StreamField([
+        ('section', SectionBlock()),
+    ], null=True, blank=True)
+
+    content_panels = Page.content_panels + [
+        StreamFieldPanel('body'),
+    ]
+
+    class Meta:
+        verbose_name = "Homepage"
 
 
 @register_setting

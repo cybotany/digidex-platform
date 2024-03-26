@@ -1,6 +1,7 @@
-from wagtail.fields import StreamField
-from wagtail.models import Page
-from wagtail.admin.panels import FieldPanel
+from wagtail.core.models import Page
+from wagtail.core.fields import StreamField
+from wagtail.admin.edit_handlers import StreamFieldPanel
+from .blocks import SectionBlock
 
 class HomePage(Page):
     """
@@ -8,11 +9,14 @@ class HomePage(Page):
     the value proposition of the product and/or service to the target audience.
 
     """
-    body = StreamField(
-        [],
-        default=[],
-    )
+    body = StreamField([
+        ('section', SectionBlock()),
+    ], null=True, blank=True)
 
     content_panels = Page.content_panels + [
-        FieldPanel('body'),
+        StreamFieldPanel('body'),
     ]
+
+    class Meta:
+        verbose_name = "Homepage"
+        template = "home/home_page.html"
