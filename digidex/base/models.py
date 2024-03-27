@@ -19,7 +19,7 @@ class BasePage(Page):
     ]
 
     class Meta:
-        verbose_name = "Homepage"
+        verbose_name = "Base Page"
 
 
 @register_setting
