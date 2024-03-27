@@ -1,7 +1,21 @@
 # base/blocks.py
 from wagtail import blocks
 from wagtail.images.blocks import ImageChooserBlock
-from .constants import COLOR_BLOCK_CHOICES
+
+COLOR_CHOICES = (
+    ('white', 'White'),
+    ('background', 'Background'),
+    ('border', 'Border'),
+    ('heading-color', 'Heading'),
+    ('accent-a1', 'Accent A1'),
+    ('accent-a2', 'Accent A2'),
+    ('accent-a3', 'Accent A3'),
+    ('accent-a4', 'Accent A4'),
+    ('accent-b1', 'Accent B1'),
+    ('accent-b2', 'Accent B2'),
+    ('accent-b3', 'Accent B3'),
+    ('paragraph-color', 'Paragraph'),
+)
 
 class _HeadingBlock(blocks.StructBlock):
     text = blocks.CharBlock(required=True, help_text="Add your text here")
@@ -18,7 +32,7 @@ class ButtonBlock(blocks.StructBlock):
 
 
 class ColorBlock(blocks.StructBlock):
-    color = blocks.ChoiceBlock(choices=COLOR_BLOCK_CHOICES, default='white', help_text='Select a color scheme')
+    color = blocks.ChoiceBlock(choices=COLOR_CHOICES, default='white', help_text='Select a color scheme')
     title = blocks.CharBlock(required=True, help_text="Enter the title text")
     subtitle = blocks.CharBlock(required=True, help_text="Enter the subtitle text")
 
