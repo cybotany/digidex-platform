@@ -2,14 +2,6 @@
 from wagtail import blocks
 from wagtail.images.blocks import ImageChooserBlock
 
-# home/blocks.py
-from wagtail.core import blocks
-from wagtail.images.blocks import ImageChooserBlock
-
-# home/blocks.py
-from wagtail.core import blocks
-from wagtail.images.blocks import ImageChooserBlock
-
 class SectionBlock(blocks.StructBlock):
     section_type = blocks.ChoiceBlock(choices=[
         ('company', 'Company'),
