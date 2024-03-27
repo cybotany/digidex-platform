@@ -5,31 +5,51 @@
   <section class="section-footer">
     <div class="content">
       <div class="layout-grid grid-footer">
-        <div class="block-footer">
-          <img src="{% static 'images/logo/logo.png' %}" loading="lazy" alt="" class="logo-footer">
-          <div class="paragraph-footer">{% get_footer_text %}<br></div>
-          <div class="block-social">
-            <a href="tel:+1(888)123-4567" class="social-link w-inline-block"><img src="../images/phone-voice.svg" loading="eager" alt="" class="icon-social"></a>
-            <a href="mailto:support@yoursite.com" class="social-link w-inline-block"><img src="../images/email.svg" loading="eager" alt="" class="icon-social"></a>
-            <a href="#" class="social-link w-inline-block"><img src="../images/chat-launch.svg" loading="eager" alt="" class="icon-social"></a>
-          </div>
-        </div>
-        <div class="block-footer">
-          {% with twitter_url=settings.base.FooterNavigationSettings.twitter_url github_url=settings.base.FooterNavigationSettings.github_url %}
-            {% if twitter_url or github_url %}
-              <div class="subtitle-footer">Social Media Links<br></div>
-              {% if twitter_url %}
-                <a href="{{ twitter_url }}" target="_blank" rel="noopener noreferrer" class="link-footer">Twitter</a>
+        {% for block in footer_settings.content %}
+          {% if block.block_type == 'logo' %}
+            <div class="block-footer">
+              <img src="{{ block.value.url }}" loading="eager" alt="" class="logo-footer">
+            </div>
+  
+          {% elif block.block_type == 'paragraph' %}
+            <div class="paragraph-footer">{{ block.value|richtext }}</div>
+
+          {% elif block.block_type == 'contact' %}
+            <!-- Handling Contact Information -->
+            <div class="block-social">
+              {% if block.value.phone %}
+                <a href="tel:{{ block.value.phone }}" class="social-link base-inline-block">
+                  <!-- Insert phone icon here -->
+                </a>
               {% endif %}
-              {% if github_url %}
-                <a href="{{ github_url }}" target="_blank" rel="noopener noreferrer" class="link-footer">GitHub</a>
+              {% if block.value.email %}
+                <a href="mailto:{{ block.value.email }}" class="social-link base-inline-block">
+                  <!-- Insert email icon here -->
+                </a>
               {% endif %}
-            {% endif %}
-          {% endwith %}
-        </div>
-      </div>
-      <div class="block-footer-down">
-        <div class="text-footer-down">Copyright 2024 CyBotany. All rights reserved.<br></div>
+              {% if block.value.chat %}
+                <a href="{{ block.value.chat }}" class="social-link base-inline-block">
+                  <!-- Insert chat icon here -->
+                </a>
+              {% endif %}
+            </div>
+
+          {% elif block.block_type == 'link' %}
+            <div class="block-footer">
+              <div class="subtitle-footer">{{ block.value.category|title }}<br></div>
+              <a href="{{ block.value.url }}" class="link-footer">{{ block.value.title }}</a>
+            </div>
+  
+          {% elif block.block_type == 'copyright' %}
+            <div class="block-footer-down">
+              <div class="text-footer-down">{{ block.value }}</div>
+            </div>
+          {% elif block.block_type == 'credits' %}
+            <div class="block-footer-down">
+              <div class="text-footer-down">{{ block.value }}</div>
+            </div>
+          {% endif %}
+        {% endfor %}
       </div>
     </div>
   </section>
