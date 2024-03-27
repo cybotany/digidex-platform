@@ -7,7 +7,12 @@
       <div class="layout-grid grid-footer">
         <div class="block-footer">
           <img src="{% static 'images/logo/logo.png' %}" loading="lazy" alt="" class="logo-footer">
-          <div class="paragraph-footer">Built with Wagtail<br></div>
+          <div class="paragraph-footer">{% get_footer_text %}<br></div>
+          <div class="block-social">
+            <a href="tel:+1(888)123-4567" class="social-link w-inline-block"><img src="../images/phone-voice.svg" loading="eager" alt="" class="icon-social"></a>
+            <a href="mailto:support@yoursite.com" class="social-link w-inline-block"><img src="../images/email.svg" loading="eager" alt="" class="icon-social"></a>
+            <a href="#" class="social-link w-inline-block"><img src="../images/chat-launch.svg" loading="eager" alt="" class="icon-social"></a>
+          </div>
         </div>
         <div class="block-footer">
           {% with twitter_url=settings.base.FooterNavigationSettings.twitter_url github_url=settings.base.FooterNavigationSettings.github_url %}
@@ -23,7 +28,9 @@
           {% endwith %}
         </div>
       </div>
-      {% get_footer_text %}
+      <div class="block-footer-down">
+        <div class="text-footer-down">Copyright 2024 CyBotany. All rights reserved.<br></div>
+      </div>
     </div>
   </section>
 </footer>

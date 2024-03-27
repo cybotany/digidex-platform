@@ -1,52 +1,48 @@
-# base/models/page.py
+# base/models.py
 from django.db import models
-from wagtail.fields import RichTextField
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel, PublishingPanel
+from wagtail.admin.panels import FieldPanel
+from wagtail.fields import StreamField
 from wagtail.contrib.settings.models import BaseGenericSetting, register_setting
-from wagtail.models import DraftStateMixin, PreviewableMixin, RevisionMixin, TranslatableMixin
-from wagtail.snippets.models import register_snippet
+from wagtail.blocks import RichTextBlock, StructBlock, TextBlock, ChoiceBlock
+from wagtail.images.blocks import ImageChooserBlock
+
+class FooterLinkBlock(StructBlock):
+    title = models.CharField(max_length=255)
+    url = models.URLField()
+    category = ChoiceBlock(
+        choices=(
+            ('company', 'Company Information'),
+            ('news', 'News & Events'),
+            ('social', 'Connect With Us'),
+        ),
+        required=True
+    )
+
+
+class FooterContactBlock(StructBlock):
+    phone = models.CharField(max_length=20)
+    email = models.EmailField(max_length=254)
+    chat = models.URLField(max_length=255)
+
 
 @register_setting
-class FooterNavigationSettings(BaseGenericSetting):
-    twitter_url = models.URLField(
-        verbose_name="Twitter URL",
-        blank=True 
-    )
-    github_url = models.URLField(
-        verbose_name="GitHub URL",
+class FooterSettings(BaseGenericSetting):
+    content = StreamField(
+        [
+            ('logo', ImageChooserBlock(icon="image")),
+            ('paragraph', RichTextBlock(icon="pilcrow")),
+            ('contact', FooterContactBlock()),
+            ('link', FooterLinkBlock(icon="link")),
+            ('copyright', TextBlock(required=False)),
+            ('credits', TextBlock(required=False)),
+        ],
+        null=True,
         blank=True
     )
 
     panels = [
-        MultiFieldPanel(
-            [
-                FieldPanel("twitter_url"),
-                FieldPanel("github_url"),
-            ],
-            "Social settings",
-        )
+        FieldPanel('content'),
     ]
 
-
-@register_snippet
-class FooterText( DraftStateMixin, RevisionMixin, PreviewableMixin, TranslatableMixin, models.Model):
-    body = RichTextField(
-        max_length=150,
-    )
-
-    panels = [
-        FieldPanel("body"),
-        PublishingPanel(),
-    ]
-
-    def __str__(self):
-        return "Footer text"
-
-    def get_preview_template(self, request, mode_name):
-        return "base.html"
-
-    def get_preview_context(self, request, mode_name):
-        return {"footer_text": self.body}
-
-    class Meta(TranslatableMixin.Meta):
-        verbose_name_plural = "Footer Text"
+    class Meta:
+        verbose_name = "Footer Settings"
