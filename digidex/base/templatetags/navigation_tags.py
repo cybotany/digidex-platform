@@ -1,7 +1,7 @@
 from django import template
 from wagtail.models import Site
 
-from base.models import footers
+from base import models as _models
 
 register = template.Library()
 
@@ -10,7 +10,7 @@ def get_footer_text(context):
     footer_text = context.get("footer_text", "")
 
     if not footer_text:
-        instance = footers.FooterText.objects.filter(live=True).first()
+        instance = _models.FooterText.objects.filter(live=True).first()
         footer_text = instance.body if instance else ""
 
     return {
