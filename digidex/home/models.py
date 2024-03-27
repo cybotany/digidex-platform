@@ -19,4 +19,3 @@ class HomePage(Page):
 
     class Meta:
         verbose_name = "Homepage"
-        template = "home/home_page.html"
