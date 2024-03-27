@@ -10,14 +10,14 @@
           <div class="paragraph-footer">Built with Wagtail<br></div>
         </div>
         <div class="block-footer">
-          {% with twitter_url=settings.base.PageFooterNavigationSettings.twitter_url github_url=settings.base.PageFooterNavigationSettings.github_url mastodon_url=settings.base.PageFooterNavigationSettings.mastodon_url %}
-            {% if twitter_url or github_url or mastodon_url %}
+          {% with twitter_url=settings.base.FooterNavigationSettings.twitter_url github_url=settings.base.FooterNavigationSettings.github_url %}
+            {% if twitter_url or github_url %}
               <div class="subtitle-footer">Social Media Links<br></div>
+              {% if twitter_url %}
+                <a href="{{ twitter_url }}" target="_blank" rel="noopener noreferrer" class="link-footer">Twitter</a>
+              {% endif %}
               {% if github_url %}
                 <a href="{{ github_url }}" target="_blank" rel="noopener noreferrer" class="link-footer">GitHub</a>
-              {% endif %}
-              {% if mastodon_url %}
-                <a href="{{ mastodon_url }}" target="_blank" rel="noopener noreferrer" class="link-footer">Mastodon</a>
               {% endif %}
             {% endif %}
           {% endwith %}

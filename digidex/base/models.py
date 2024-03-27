@@ -32,17 +32,12 @@ class FooterNavigationSettings(BaseGenericSetting):
         verbose_name="GitHub URL",
         blank=True
     )
-    linkedin_url = models.URLField(
-        verbose_name="LinkedIn URL",
-        blank=True
-    )
 
     panels = [
         MultiFieldPanel(
             [
                 FieldPanel("twitter_url"),
                 FieldPanel("github_url"),
-                FieldPanel("linkedin_url"),
             ],
             "Social settings",
         )
