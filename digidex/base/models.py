@@ -1,27 +1,10 @@
 # base/models/page.py
 from django.db import models
-from wagtail.models import Page
-from wagtail.fields import StreamField, RichTextField
+from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel, PublishingPanel
 from wagtail.contrib.settings.models import BaseGenericSetting, register_setting
 from wagtail.models import DraftStateMixin, PreviewableMixin, RevisionMixin, TranslatableMixin
 from wagtail.snippets.models import register_snippet
-from .blocks import SectionBlock
-
-
-class BasePage(Page):
-    body = StreamField([
-        ('section', SectionBlock()),
-    ], null=True, blank=True)
-
-    content_panels = Page.content_panels + [
-        FieldPanel('body'),
-    ]
-
-    class Meta:
-        verbose_name = "Base Page"
-        abstract = True
-
 
 @register_setting
 class FooterNavigationSettings(BaseGenericSetting):
