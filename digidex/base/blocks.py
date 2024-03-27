@@ -1,5 +1,22 @@
 # base/blocks.py
 from wagtail import blocks
+from wagtail.images import blocks as image_blocks
+from wagtail.embeds import blocks as embed_blocks
+
+class HeadingBlock(blocks.StructBlock):
+    title = blocks.CharBlock()
+
+    class Meta:
+        icon = "title"
+
+
+class FigureBlock(blocks.StructBlock):
+    image = image_blocks.ImageChooserBlock(required=True)
+    caption = blocks.CharBlock(required=False, help_text='Add a caption for the image')
+
+    class Meta:
+        template = "blocks/figure_block.html"
+
 
 DIGIT_STYLE_CHOICES = (
     ('white', 'White'),
@@ -21,11 +38,13 @@ class DigitBlock(blocks.StructBlock):
     title = blocks.CharBlock(required=True, help_text="Enter the title")
     subtitle = blocks.CharBlock(required=False, help_text="Enter the subtitle")
 
+
 class DigitDisplayBlock(blocks.StreamBlock):
     digits = blocks.ListBlock(DigitBlock())
 
     class Meta:
         template = "blocks/digit_display_block.html"
+
 
 BUTTON_STYLE_CHOICES = (
     ('', 'Primary'),
@@ -45,9 +64,32 @@ class ButtonBlock(blocks.StructBlock):
     size = blocks.ChoiceBlock(choices=BUTTON_SIZE_CHOICES, default='button', help_text="Select button size")
     style = blocks.ChoiceBlock(choices=BUTTON_STYLE_CHOICES, default='', help_text="Select button style")
 
+
 class ButtonDisplayBlock(blocks.StructBlock):
     primary = ButtonBlock()
     secondary = ButtonBlock()
 
     class Meta:
         template = "blocks/button_display_block.html"
+
+
+class PageHeading(HeadingBlock):
+    text = blocks.CharBlock(required=True, max_length=255)
+
+    class Meta:
+        template = "blocks/page/heading_block.html"
+
+
+class PageContent(blocks.StreamBlock):
+    heading = HeadingBlock()
+    paragraph = blocks.RichTextBlock()
+    image = FigureBlock()
+    buttons = ButtonDisplayBlock()
+    digits = DigitDisplayBlock()
+    embeded_object = embed_blocks.EmbedBlock(
+        help_text="Insert a URL to embed. For example, https://www.youtube.com/watch?v=SGJFWirQ3ks",
+        icon="media"
+    )
+
+    class Meta:
+        template = "blocks/page/content_block.html"

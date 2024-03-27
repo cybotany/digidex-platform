@@ -1,0 +1,8 @@
+<!-- blocks/page/content_block.html -->
+<section class="section">
+  <div class="content narrow">
+    {% for block in self %}
+      {% include_block block %}
+    {% endfor %}
+  </div>
+</section>
