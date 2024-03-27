@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Check if the menu button is present
     if (menuButton) {
         // Select the navigation menu
-        var navMenu = document.querySelector('.nav-menu.w-nav-menu');
+        var navMenu = document.querySelector('.nav-menu.base-nav-menu');
 
         // Add click event listener to the menu button
         menuButton.addEventListener('click', function () {
