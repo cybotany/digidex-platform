@@ -20,6 +20,7 @@ class BasePage(Page):
 
     class Meta:
         verbose_name = "Base Page"
+        abstract = True
 
 
 @register_setting
