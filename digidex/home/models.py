@@ -10,8 +10,8 @@ class HomePage(Page):
     the value proposition of the product and/or service to the target audience.
     """
     body = StreamField([
-        ('page_heading', _blocks.PageHeading(required=False)),
-        ('page_body', _blocks.PageBody()),
+        ('digit_display', _blocks.DisplayDigitBlock()),
+        ('button_display', _blocks.DisplayButtonBlock()),
     ], null=True, blank=True)
 
     content_panels = Page.content_panels + [

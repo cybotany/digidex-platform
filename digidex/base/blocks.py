@@ -1,8 +1,7 @@
 # base/blocks.py
 from wagtail import blocks
-from wagtail.images.blocks import ImageChooserBlock
 
-COLOR_CHOICES = (
+DIGIT_STYLE_CHOICES = (
     ('white', 'White'),
     ('background', 'Background'),
     ('border', 'Border'),
@@ -17,59 +16,38 @@ COLOR_CHOICES = (
     ('paragraph-color', 'Paragraph'),
 )
 
-class _HeadingBlock(blocks.StructBlock):
-    text = blocks.CharBlock(required=True, help_text="Add your text here")
+class DigitBlock(blocks.StructBlock):
+    style = blocks.ChoiceBlock(choices=DIGIT_STYLE_CHOICES, default='white', help_text='Select a color scheme')
+    title = blocks.CharBlock(required=True, help_text="Enter the title")
+    subtitle = blocks.CharBlock(required=False, help_text="Enter the subtitle")
 
+class DigitDisplayBlock(blocks.StreamBlock):
+    digits = blocks.ListBlock(DigitBlock())
 
-class _RichTextBlock(blocks.RichTextBlock):
     class Meta:
-        template = "blocks/rich_text_block.html"
+        template = "blocks/digit_display_block.html"
 
+BUTTON_STYLE_CHOICES = (
+    ('', 'Primary'),
+    ('dark', 'Dark'),
+    ('yellow', 'Yellow'),
+    ('-outline', 'Outline'),
+)
+
+BUTTON_SIZE_CHOICES = (
+    ('button', 'Primary'),
+    ('button-small', 'Small'),
+)
 
 class ButtonBlock(blocks.StructBlock):
-    text = blocks.CharBlock(required=True)
-    link = blocks.URLBlock(required=False)
+    text = blocks.CharBlock(required=True, max_length=255)
+    url = blocks.URLBlock(required=True)
+    size = blocks.ChoiceBlock(choices=BUTTON_SIZE_CHOICES, default='button', help_text="Select button size")
+    style = blocks.ChoiceBlock(choices=BUTTON_STYLE_CHOICES, default='', help_text="Select button style")
 
-
-class ColorBlock(blocks.StructBlock):
-    color = blocks.ChoiceBlock(choices=COLOR_CHOICES, default='white', help_text='Select a color scheme')
-    title = blocks.CharBlock(required=True, help_text="Enter the title text")
-    subtitle = blocks.CharBlock(required=True, help_text="Enter the subtitle text")
-
-    class Meta:
-        template = "blocks/color/color_block.html"
-
-
-class Grid(blocks.StreamBlock):
-    heading = _HeadingBlock()
-    color = ColorBlock()
-
-
-class PageHeading(blocks.StructBlock):
-    heading = _HeadingBlock()
-    text = blocks.CharBlock(required=False)
+class ButtonDisplayBlock(blocks.StructBlock):
+    primary = ButtonBlock()
+    secondary = ButtonBlock()
 
     class Meta:
-        template = "blocks/page/heading_block.html"
-
-
-class PageBody(blocks.StreamBlock):
-    heading = _HeadingBlock()
-    paragraph = _RichTextBlock()
-    image = ImageChooserBlock()
-    button = ButtonBlock()
-    grid = Grid()
-
-    class Meta:
-        template = "blocks/page/body_block.html"
-
-#class CallToAction(blocks.StructBlock):
-#    subtitle = blocks.CharBlock(required=True, help_text="Add your subtitle here")
-#    heading = blocks.CharBlock(required=True, help_text="Add your main heading here")
-#    button_text = blocks.CharBlock(required=True, help_text="Button text")
-#    button_link = blocks.URLBlock(required=True, help_text="Button link")
-
-#    class Meta:
-#        template = "blocks/page/call_to_action_block.html"
-#        icon = "placeholder"
-#        label = "Call to Action"
+        template = "blocks/button_display_block.html"

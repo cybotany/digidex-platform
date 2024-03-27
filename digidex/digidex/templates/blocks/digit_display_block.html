@@ -1,0 +1,14 @@
+<!-- blocks/digit_display_block.html -->
+
+<div class="layout-grid grid-digits">
+  {% for digit in self.digits %}
+    <div class="block-digit {{digit.style}}">
+      {% if digit.title %}
+        <div class="heading-digit">{{digit.title}}</div>
+        {% if digit.title %}
+      {% if digit.subtitle %}
+        <div class="subtitle-color">{{digit.subtitle}}</div>
+      {% endif digit.subtitle %}
+    </div>
+  {% endfor %}
+</div>
