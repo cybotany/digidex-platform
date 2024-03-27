@@ -9,7 +9,7 @@ from wagtail.snippets.models import register_snippet
 from .blocks import SectionBlock
 
 
-class HomePage(Page):
+class BasePage(Page):
     body = StreamField([
         ('section', SectionBlock()),
     ], null=True, blank=True)

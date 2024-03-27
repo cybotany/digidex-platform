@@ -1,7 +1,8 @@
 from wagtail.models import Page
 from wagtail.fields import StreamField
 from wagtail.admin.panels import FieldPanel
-from .blocks import SectionBlock
+
+from base.blocks import SectionBlock
 
 class HomePage(Page):
     """
