@@ -1,6 +1,6 @@
 from wagtail.models import Page
 from wagtail.fields import StreamField
-from wagtail.admin.edit_handlers import FieldPanel
+from wagtail.admin.panels import FieldPanel
 from .blocks import SectionBlock
 
 class HomePage(Page):
