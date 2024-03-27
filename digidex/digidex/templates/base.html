@@ -30,6 +30,15 @@
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍩</text></svg>"/>
         <link rel="apple-touch-icon" href="{% static 'images/logo/webclip.png' %}"/>
 
+        {# Load webfonts asynchronously #}
+        <script>
+          WebFont.load({
+            google: {
+              families: ["Space Grotesk:regular,500,600,700", "IBM Plex Mono:regular,italic,500,500italic,600,600italic,700,700italic"]
+            }
+          });
+        </script>
+
         {# Global stylesheets #}
         <link rel="stylesheet" type="text/css" href="{% static 'css/digidex.css' %}">
 
