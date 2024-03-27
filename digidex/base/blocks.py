@@ -81,7 +81,7 @@ class PageHeading(HeadingBlock):
 
 
 class PageContent(blocks.StreamBlock):
-    heading = HeadingBlock()
+    heading = PageHeading()
     paragraph = blocks.RichTextBlock()
     image = FigureBlock()
     buttons = ButtonDisplayBlock()

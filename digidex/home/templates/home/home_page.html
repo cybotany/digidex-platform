@@ -1,9 +1,9 @@
 <!-- templates/home/home_page.html -->
 {% extends "base.html" %}
-<section class="section">
-  <div class="content narrow">
-    {% for block in self.content %}
-      {% include_block block %}
-    {% endfor %}
-  </div>
-</section>
+
+{% for block in page.body %}
+  {% if block.block_type == 'heading' %}
+    {% include_block block %}
+  {% elif block.block_type == 'content' %}
+    {% include_block block %}
+  {% endif %}
