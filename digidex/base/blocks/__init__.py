@@ -1,1 +1,1 @@
-from .page_blocks import PageContentBlock, PageHeadingBlock
+from .page_content_block import PageContentBlock

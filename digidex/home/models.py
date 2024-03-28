@@ -1,22 +1,26 @@
+from django.db import models
 from wagtail.models import Page
 from wagtail.fields import StreamField
 from wagtail.admin.panels import FieldPanel
 
-from base.blocks import PageHeading, PageContent
+from base.blocks import PageContentBlock
 
 class HomePage(Page):
-    """
-    Landing page for project. Designed to efficiently communicate
-    the value proposition of the product/service to the target audience.
-    """
+    heading_title = models.CharField(max_length=255, blank=True, null=True)
+    heading_text = models.TextField(blank=True, null=True)
     body = StreamField(
         [
-            ('heading', PageHeading()),
-            ('content', PageContent()),
+            ('content', PageContentBlock()),
         ],
         blank=True
     )
 
     content_panels = Page.content_panels + [
+        FieldPanel('heading_title'),
+        FieldPanel('heading_text'),
         FieldPanel('body'),
     ]
+
+    class Meta:
+        verbose_name = "Home Page"
+        verbose_name_plural = "Home Pages"

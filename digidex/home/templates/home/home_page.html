@@ -1,16 +1,24 @@
-<!-- home/home_page.html -->
+<!-- templates/home_page.html -->
+
 {% extends "base.html" %}
 
-{% for block in page.body %}
+{% load wagtailcore_tags %}
+
+{% block content %}
   <section class="section-top">
     <div class="content">
       <div class="block-top">
-        <h1 class="heading-top">{{ block.value }}</h1>
-        <p class="paragraph-top">{{ block.value }}</p>
+        <h1 class="heading-top">{{ page.heading_title }}</h1>
+        {% if page.heading_text %}
+          <p class="paragraph-top">{{ page.heading_text }}</p>
+        {% endif %}
       </div>
     </div>
   </section>
-  {% elif block.block_type == 'content' %}
+
+  <!-- Rendering Content Blocks -->
+  {% for block in page.body %}
     {% include_block block %}
-  {% endif %}
-{% endfor %}
+  {% endfor %}
+
+{% endblock %}
