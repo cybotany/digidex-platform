@@ -7,4 +7,4 @@ class FigureBlock(blocks.StructBlock):
     caption = blocks.CharBlock(required=False, help_text='Add a caption for the image')
 
     class Meta:
-        template = "base/blocks/figure_block.html"
+        template = "base/blocks/content/figure_block.html"

@@ -26,4 +26,4 @@ class DigitBlock(blocks.StreamBlock):
     digits = blocks.ListBlock(_DigitBlock())
 
     class Meta:
-        template = "base/blocks/digit_block.html"
+        template = "base/blocks/content/digit_block.html"

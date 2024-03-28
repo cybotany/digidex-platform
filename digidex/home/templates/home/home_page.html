@@ -1,9 +1,16 @@
-<!-- templates/home/home_page.html -->
+<!-- home/home_page.html -->
 {% extends "base.html" %}
 
 {% for block in page.body %}
-  {% if block.block_type == 'heading' %}
-    {% include_block block %}
+  <section class="section-top">
+    <div class="content">
+      <div class="block-top">
+        <h1 class="heading-top">{{ block.value }}</h1>
+        <p class="paragraph-top">{{ block.value }}</p>
+      </div>
+    </div>
+  </section>
   {% elif block.block_type == 'content' %}
     {% include_block block %}
   {% endif %}
+{% endfor %}

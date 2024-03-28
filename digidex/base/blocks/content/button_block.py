@@ -25,4 +25,4 @@ class ButtonBlock(blocks.StructBlock):
     secondary = _ButtonBlock()
 
     class Meta:
-        template = "base/blocks/button_block.html"
+        template = "base/blocks/content/button_block.html"
