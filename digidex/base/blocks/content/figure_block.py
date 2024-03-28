@@ -1,4 +1,4 @@
-# base/blocks/figure_block.py
+# base/blocks/content/figure_block.py
 from wagtail import blocks
 from wagtail.images import blocks as image_blocks
 

@@ -1,4 +1,4 @@
-# base/blocks/digit_block.py
+# base/blocks/content/digit_block.py
 from wagtail import blocks
 
 DIGIT_STYLE_CHOICES = (

@@ -1,4 +1,4 @@
-# base/blocks/button_block.py
+# base/blocks/content/button_block.py
 from wagtail import blocks
 
 BUTTON_STYLE_CHOICES = (

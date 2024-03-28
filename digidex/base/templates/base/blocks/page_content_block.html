@@ -1,8 +1,10 @@
-<!-- base/blocks/page_contact_block.html -->
+<!-- base/blocks/page_content_block.html -->
 <section class="section">
   <div class="content narrow">
-    {% for block in self.content %}
-      {% include_block block %}
-    {% endfor %}
+    <div class="page-body">
+      {% for block in self.content %}
+        {% include_block block %}
+      {% endfor %}
+    </div>
   </div>
 </section>
