@@ -1,3 +1,36 @@
+:root {
+  --white: white;
+  --background: #f4f6f7;
+  --paragraph: rgba(20, 23, 24, .8);
+  --heading: #141718;
+  --border: rgba(15, 100, 146, .2);
+
+  --neutral-dark: #333;
+  --neutral-light: #f2f2f2;
+
+  --navbar-background: rgba(138, 215, 160, 0.8);
+  --navbar-border: 1px solid rgba(138, 215, 160, 0.3);
+
+  --strong-green: #00693e;
+  --strong-red: #bc0087;
+  --strong-blue: #3959ff;
+  --strong-yellow: #ffc107;
+
+  --accent-green: rgba(0, 135, 38, .07);
+  --accent-red: rgba(188, 0, 135, .07);
+  --accent-blue: rgba(57, 89, 255, .07);
+  --accent-yellow: rgba(255, 193, 7, .07);
+
+  --accent-success: rgba(138, 215, 160, .09);
+  --accent-error: rgba(229, 57, 53, .09);
+  --accent-warning: rgba(255, 193, 7, .09);
+  --accent-info: rgba(59, 111, 149, .09);
+
+  --pale-lime-green-background: rgba(199, 249, 204, 0.8);
+  --tea-green-background: rgba(208, 240, 192, 0.8);
+  --honeydew-background: rgba(240, 255, 240, 0.8);
+}
+
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
     display: block
     }
