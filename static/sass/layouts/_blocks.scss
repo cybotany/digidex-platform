@@ -1,25 +1,9 @@
-:root {
-  --background: #f4f6f7;
-  --paragraph: rgba(20, 23, 24, .8);
-  --heading: #141718;
-  --accent-a1: #3959ff;
-  --border: rgba(15, 100, 146, .2);
-  --white: white;
-  --accent-a4: #eadb5b;
-  --accent-b1: rgba(57, 89, 255, .07);
-  --accent-a3: #008726;
-  --accent-b3: rgba(0, 135, 38, .07);
-  --accent-b2: rgba(188, 0, 135, .07);
-  --accent-a2: #bc0087;
+.base-block {
+  display: block;
 }
-
-.base-layout-grid {
-  grid-row-gap: 16px;
-  grid-column-gap: 16px;
-  grid-template-rows: auto auto;
-  grid-template-columns: 1fr 1fr;
-  grid-auto-columns: 1fr;
-  display: grid;
+.base-inline-block {
+  max-width: 100%;
+  display: inline-block;
 }
 .block-hero {
   flex-direction: column;
@@ -410,6 +394,9 @@
   .block-hero {
     text-align: center;
     align-items: center;
+  }
+  .block-left {
+    padding-right: 0%;
   }
   .block-right {
     padding-left: 0%;

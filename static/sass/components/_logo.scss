@@ -1,0 +1,25 @@
+.brand {
+  flex: none;
+  margin-right: .5em;
+  padding: .5em .3em;
+}
+.logo {
+  height: 1.56em;
+}
+.logo-client {
+  max-height: 2.7em;
+  margin-left: 2.7em;
+  margin-right: 2.7em;
+}
+.logo-footer {
+  height: 1.56em;
+  margin-bottom: 1.8em;
+}
+
+@media screen and (max-width: 767px) {
+  .logo-client {
+    max-height: 1.5em;
+    margin-left: 1.8em;
+    margin-right: 1.8em;
+  }
+}

@@ -1513,7 +1513,8 @@ figcaption {
   color: var(--heading);
   letter-spacing: -.02em;
   padding: .7em 1.2em;
-  font-size: 1em;
+  font-size: 1em
+  ;
   font-weight: 500;
   line-height: 120%;
   transition: color .3s cubic-bezier(.25, .46, .45, .94);
