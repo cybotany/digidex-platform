@@ -2,3 +2,10 @@
   padding-left: 0;
   list-style: none;
 }
+
+.collection-list-wrapper-messages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}

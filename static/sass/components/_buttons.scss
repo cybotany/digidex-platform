@@ -6,6 +6,14 @@ $color-primary: $color-strong-green;
 $color-secondary: $color-heading;
 $color-accent: $color-strong-yellow;
 
+button,
+[type='button'],
+[type='reset'] {
+  border: 0;
+  cursor: pointer;
+  -webkit-appearance: button;
+}
+
 .base-button {
   display: inline-block;
   padding: 9px 15px;

@@ -123,6 +123,11 @@
 .base--nav-dropdown-list-open {
   position: static;
 }
+@media screen and (max-width: 767px) {
+  .base-nav-brand {
+    padding-left: 10px;
+  }
+}
 @media screen and (max-width: 991px) {
   .base-nav[data-collapse="medium"] .base-nav-menu {
     display: none;
