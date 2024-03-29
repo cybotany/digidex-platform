@@ -260,20 +260,17 @@ figcaption {
     display: flex
 }
 
-.subtitle.white {
-    color: var(--white);
-    background-color: rgba(255, 255, 255, 0.1)
+.content {
+  width: 100%;
+  max-width: 75em;
 }
 
-.accordion-content {
-    display: block;
-    overflow: hidden
-}
-
-.block-content {
-    background-color: rgba(0, 0, 0, 0);
-    border: 1px #000;
-    padding: 1.5em
+.content.narrow {
+  max-width: 60em;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  display: flex;
 }
 
 .page-body {
@@ -285,29 +282,68 @@ figcaption {
     box-shadow: 0 15px 25px -10px rgba(20, 23, 24, 0.05)
 }
 
-.heading-template {
-    margin-bottom: 0.8em
+.grid {
+  grid-column-gap: 0em;
+  grid-row-gap: 0em;
+  grid-template-rows: auto;
+  align-items: center;
 }
 
-.paragraph-template {
-    margin-bottom: 2.4em
+.block-right {
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: 15%;
+  display: flex;
 }
 
-.image-template {
-    object-fit: cover;
-    border-radius: 0.6em
+.heading {
+  max-width: 9em;
+  margin-bottom: .5em;
 }
 
-.lottie-template {
-    background-color: var(--background);
-    border-radius: 0.6em
+.heading.large {
+  max-width: 13em;
 }
 
-.font-template {
-    background-color: var(--accent-green);
-    border-radius: 0.87em;
-    margin-top: 0.7em;
-    padding: 1.3em 1.8em
+.heading.banner {
+  color: var(--white);
+  margin-bottom: .7em;
+}
+
+.subtitle {
+  background-color: var(--white);
+  color: var(--heading);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  border-radius: .6em;
+  margin-bottom: .7em;
+  padding: .5em 1em;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
+  box-shadow: 0 10px 20px -10px rgba(20, 23, 24, .05);
+}
+
+.subtitle.white {
+  background-color: rgba(255, 255, 255, .1);
+  color: var(--white);
+}
+
+.subtitle.green {
+  background-color: var(--accent-green);
+  color: var(--strong-green);
+}
+
+.paragraph {
+  max-width: 30em;
+  margin-bottom: 2.2em;
+}
+
+.paragraph-top.blog-post {
+  max-width: 36em;
+  margin-bottom: .5em;
 }
 
 @media screen and (max-width: 991px) {
@@ -382,4 +418,25 @@ figcaption {
     padding-top: 2em;
     padding-bottom: 2em;
   }
+}
+
+.heading-template {
+  margin-bottom: 0.8em
+}
+.paragraph-template {
+  margin-bottom: 2.4em
+}
+.image-template {
+  object-fit: cover;
+  border-radius: 0.6em
+}
+.lottie-template {
+  background-color: var(--background);
+  border-radius: 0.6em
+}
+.font-template {
+  background-color: var(--accent-green);
+  border-radius: 0.87em;
+  margin-top: 0.7em;
+  padding: 1.3em 1.8em
 }

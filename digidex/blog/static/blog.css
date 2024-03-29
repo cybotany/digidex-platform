@@ -1,4 +1,4 @@
-.collection-list.posts {
+.collection-list-posts {
   grid-column-gap: 1.5em;
   grid-row-gap: 3.4em;
   grid-template-rows: auto;
@@ -7,15 +7,11 @@
   display: grid;
 }
 
-.collection-list.posts.large {
+.collection-list-posts.large {
   grid-template-columns: 1fr;
 }
 
-.collection-list-wrapper.posts.large {
-  margin-bottom: 3.4em;
-}
-
-.block.post {
+.block-post {
   background-color: var(--white);
   border-radius: .87em;
   flex-direction: column;
@@ -25,7 +21,7 @@
   box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
 }
 
-.block.post.large {
+.block-post.large {
   grid-column-gap: 0em;
   grid-row-gap: 0em;
   grid-template-rows: auto;
@@ -34,16 +30,31 @@
   display: grid;
 }
 
-.image.post.thumbnail {
+.collection-list-wrapper-posts.large {
+  margin-bottom: 3.4em;
+}
+
+.image-post-thumbnail {
   width: 100%;
   height: 15em;
   object-fit: cover;
   border-radius: .87em;
 }
 
-.image.post.thumbnail.large {
+.image-post-thumbnail.large {
   height: auto;
   max-height: 40em;
+}
+
+.link-post-thumbnail {
+  width: 100%;
+}
+
+.link-post-thumbnail.large {
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  display: flex;
 }
 
 .post {
@@ -60,6 +71,15 @@
   padding: 4.3em 4.5em;
 }
 
+.link-heading-post {
+  margin-bottom: 1.3em;
+  text-decoration: none;
+}
+
+.link-heading-post.large {
+  margin-bottom: 1.4em;
+}
+
 .date {
   color: rgba(20, 23, 24, .5);
   letter-spacing: .05em;
@@ -71,7 +91,16 @@
   line-height: 130%;
 }
 
-.empty.state {
+.paragraph-post {
+  margin-bottom: 1.4em;
+}
+
+.paragraph-post.large {
+  max-width: 25em;
+  margin-bottom: 1.6em;
+}
+
+.empty-state {
   background-color: var(--white);
   text-align: center;
   border-radius: .87em;
@@ -79,7 +108,18 @@
   box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
 }
 
-.date.top {
+.text-empty {
+  opacity: .7;
+  color: var(--heading);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
+}
+
+.date-top {
   color: rgba(20, 23, 24, .5);
   letter-spacing: .05em;
   text-transform: uppercase;
@@ -90,7 +130,7 @@
   line-height: 130%;
 }
 
-.body.post {
+.post-body {
   width: 100%;
   background-color: var(--white);
   border-radius: .87em;
@@ -98,53 +138,24 @@
   box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
 }
 
-.paragraph.post {
-  margin-bottom: 1.4em;
-}
-
-.paragraph.post.large {
-  max-width: 25em;
-  margin-bottom: 1.6em;
-}
-
-.image.main.post {
+.image-main-post {
   width: 100%;
   object-fit: cover;
   border-radius: .87em;
 }
 
-.link.post.thumbnail {
-  width: 100%;
-}
-
-.link.post.thumbnail.large {
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: stretch;
-  display: flex;
-}
-
-.link.heading.post {
-  margin-bottom: 1.3em;
-  text-decoration: none;
-}
-
-.link.heading.post.large {
-  margin-bottom: 1.4em;
-}
-
 @media screen and (max-width: 991px) {
-  .collection-list.posts {
+  .collection-list-posts {
     grid-column-gap: 1.13em;
     grid-row-gap: 3em;
     grid-template-columns: 1fr 1fr;
   }
 
-  .collection-list-wrapper.posts.large {
+  .collection-list-wrapper-posts.large {
     margin-bottom: 3em;
   }
-  
-  .image.post.thumbnail {
+
+  .image-post-thumbnail {
     height: 28vw;
   }
 
@@ -152,28 +163,27 @@
     padding: 3.4em 3.2em;
   }
 
-  .post.body {
+  .post-body {
     padding-left: 10%;
     padding-right: 10%;
   }
 }
 
 @media screen and (max-width: 767px) {
-  .collection-list.posts {
+  .collection-list-posts {
     grid-row-gap: 2em;
     grid-template-columns: 1fr;
   }
 
-  .collection-list-wrapper.posts.large {
-    margin-bottom: 2em;
-  }
-  
-  .block.post.large {
+  .block-post.large {
     grid-template-columns: 1fr;
   }
 
-  .image.post.thumbnail,
-  .image.post.thumbnail.large {
+  .collection-list-wrapper-posts.large {
+    margin-bottom: 2em;
+  }
+
+  .image-post-thumbnail, .image-post-thumbnail.large {
     height: 50vw;
   }
 
@@ -184,20 +194,19 @@
 }
 
 @media screen and (max-width: 479px) {
-  .collection-list.posts {
+  .collection-list-posts {
     grid-row-gap: 1.5em;
   }
 
-  .collection-list-wrapper.posts.large {
+  .collection-list-wrapper-posts.large {
     margin-bottom: 1.5em;
   }
 
-  .post,
-  .post.large {
+  .post, .post.large {
     padding: 1.8em 2.2em;
   }
 
-  .post.body {
+  .post-body {
     padding-top: 2.5em;
     padding-bottom: 2.5em;
   }
