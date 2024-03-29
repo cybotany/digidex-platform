@@ -1,0 +1,101 @@
+.block-button {
+    grid-column-gap: 0.8em;
+    grid-row-gap: 0.8em;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 1em;
+    display: flex
+}
+
+.button:hover {
+    box-shadow: 0 15px 40px -10px var(--strong-green)
+}
+
+.button-small {
+    background-color: var(--strong-green);
+    color: var(--white);
+    letter-spacing: -0.02em;
+    border-radius: 50em;
+    padding: 0.7em 1.4em;
+    font-size: 1em;
+    font-weight: 500;
+    line-height: 120%;
+    transition: box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+}
+
+.button-small:hover {
+    box-shadow: 0 15px 40px -10px var(--strong-green)
+}
+
+.button.yellow {
+    background-color: var(--strong-yellow);
+    color: var(--heading)
+}
+
+.button.yellow:hover {
+    box-shadow: 0 15px 40px -10px var(--strong-yellow)
+}
+
+.button-small.yellow {
+    background-color: var(--strong-yellow);
+    color: var(--heading)
+}
+
+.button-small.yellow:hover {
+    box-shadow: 0 15px 40px -10px var(--strong-yellow)
+}
+
+.button.dark {
+    background-color: var(--heading)
+}
+
+.button.dark:hover {
+    background-color: var(--strong-green)
+}
+
+.button-small.dark {
+    background-color: var(--heading)
+}
+
+.button-small.dark:hover {
+    background-color: var(--strong-green)
+}
+
+.button-outline {
+    box-shadow: 0 0 0 -10px var(--strong-green), inset 0 0 0 2px var(--strong-green);
+    color: var(--strong-green);
+    letter-spacing: -0.02em;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 50em;
+    padding: 0.9em 1.8em;
+    font-size: 1.12em;
+    font-weight: 500;
+    line-height: 120%;
+    transition: box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+}
+
+.button-outline:hover {
+    background-color: var(--strong-green);
+    box-shadow: 0 15px 40px -10px var(--strong-green), inset 0 0 0 2px var(--strong-green);
+    color: var(--white)
+}
+
+.button-outline-small {
+    box-shadow: 0 0 0 -10px var(--strong-green), inset 0 0 0 2px var(--strong-green);
+    color: var(--strong-green);
+    letter-spacing: -0.02em;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 50em;
+    padding: 0.7em 1.4em;
+    font-size: 1em;
+    font-weight: 500;
+    line-height: 120%;
+    transition: box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+}
+
+.button-outline-small:hover {
+    background-color: var(--strong-green);
+    box-shadow: 0 15px 40px -10px var(--strong-green), inset 0 0 0 2px var(--strong-green);
+    color: var(--white)
+}
