@@ -17,6 +17,18 @@
     padding: 0.4em 2em;
 }
 
+.content {
+    width: 100%;
+    max-width: 75em
+}
+.content.narrow {
+    max-width: 60em;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    display: flex
+}
+
 .notification-bar-block, .notification-bar, .link-notification-bar {
     width: 100%;
     max-width: 75em; /* Adjust based on .notification-bar-block needs */

@@ -1,0 +1,90 @@
+.grid-digits {
+    grid-column-gap: 0.6em;
+    grid-row-gap: 0.6em;
+    grid-template-rows: auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr
+}
+
+.block-digit {
+    min-height: 11em;
+    grid-column-gap: 0.25em;
+    grid-row-gap: 0.25em;
+    background-color: var(--white);
+    border-radius: 0.5em;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding: 1.2em;
+    display: flex
+}
+
+.block-digit.background {
+    background-color: var(--background)
+}
+
+.block-digit.border {
+    background-color: var(--border)
+}
+
+.block-digit.heading-digit {
+    background-color: var(--heading)
+}
+
+.block-digit.accent-a1 {
+    background-color: var(--strong-green)
+}
+
+.block-digit.accent-a2 {
+    background-color: var(--strong-blue)
+}
+
+.block-digit.accent-a3 {
+    background-color: var(--strong-red)
+}
+
+.block-digit.accent-a4 {
+    background-color: var(--strong-yellow)
+}
+
+.block-digit.accent-b1 {
+    background-color: var(--accent-green)
+}
+
+.block-digit.accent-b2 {
+    background-color: var(--accent-blue)
+}
+
+.block-digit.accent-b3 {
+    background-color: var(--accent-red)
+}
+
+.block-digit.paragraph-digit {
+    background-color: var(--paragraph)
+}
+
+.text-digit {
+    color: var(--heading);
+    letter-spacing: -0.02em;
+    font-size: 1em;
+    font-weight: 600;
+    line-height: 120%
+}
+
+.text-digit.white {
+    color: var(--white)
+}
+
+.hex-digit {
+    opacity: 0.5;
+    color: var(--heading);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-family: IBM Plex Mono, sans-serif;
+    font-size: 0.7em;
+    font-weight: 500;
+    line-height: 130%
+}
+
+.hex-digit.white {
+    color: var(--white)
+}

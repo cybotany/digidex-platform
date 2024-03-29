@@ -1,3 +1,99 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+body {
+  margin: 0;
+  min-height: 100%;
+  background-color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: #333;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: middle;
+  display: inline-block;
+}
+html.base-mod-touch * {
+  background-attachment: scroll !important;
+}
+input.base-button {
+  -webkit-appearance: button;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+h1 {
+  font-size: 38px;
+  line-height: 44px;
+  margin-top: 20px;
+}
+h2 {
+  font-size: 32px;
+  line-height: 36px;
+  margin-top: 20px;
+}
+h3 {
+  font-size: 24px;
+  line-height: 30px;
+  margin-top: 20px;
+}
+h4 {
+  font-size: 18px;
+  line-height: 24px;
+  margin-top: 10px;
+}
+h5 {
+  font-size: 14px;
+  line-height: 20px;
+  margin-top: 10px;
+}
+h6 {
+  font-size: 12px;
+  line-height: 18px;
+  margin-top: 10px;
+}
+p {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+blockquote {
+  margin: 0 0 10px 0;
+  padding: 10px 20px;
+  border-left: 5px solid #E2E2E2;
+  font-size: 18px;
+  line-height: 22px;
+}
+figure {
+  margin: 0;
+  margin-bottom: 10px;
+}
+figcaption {
+  margin-top: 5px;
+  text-align: center;
+}
+ul,
+ol {
+  margin-top: 0px;
+  margin-bottom: 10px;
+  padding-left: 40px;
+}
+
 article,
 aside
 details,
@@ -492,4 +588,53 @@ button,
     position: relative;
     display: block;
     overflow: hidden
+}
+
+
+@media (min-width: 768px) {
+  .base-nav-brand {
+    padding-left: 10px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .base-nav[data-collapse="medium"] .base-nav-menu {
+    display: none;
+  }
+  .base-nav[data-collapse="medium"] .base-nav-button {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .base-nav[data-collapse="small"] .base-nav-menu {
+    display: none;
+  }
+  .base-nav[data-collapse="small"] .base-nav-button {
+    display: block;
+  }
+  .base-nav-brand {
+    padding-left: 10px;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .base-nav[data-collapse="tiny"] .base-nav-menu {
+    display: none;
+  }
+  .base-nav[data-collapse="tiny"] .base-nav-button {
+    display: block;
+  }
+  .w-tab-link {
+    display: block;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

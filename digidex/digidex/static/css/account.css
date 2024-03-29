@@ -1,0 +1,88 @@
+.submit-button {
+    background-color: var(--strong-green);
+    color: var(--white);
+    letter-spacing: -0.02em;
+    border-radius: 0.87em;
+    padding: 1.2em 1.8em;
+    font-size: 1.12em;
+    font-weight: 500;
+    line-height: 120%;
+    transition: box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+}
+
+.submit-button:hover {
+    box-shadow: 0 15px 40px -10px var(--strong-green)
+}
+
+.submit-button.yellow {
+    background-color: var(--strong-yellow);
+    color: var(--heading)
+}
+
+.submit-button.yellow:hover {
+    box-shadow: 0 15px 40px -10px var(--strong-yellow)
+}
+
+.error-message.yellow {
+    border: 1px dashed var(--strong-yellow);
+    background-color: rgba(0, 0, 0, 0)
+}
+
+.text-error {
+    color: #bc0003;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-family: IBM Plex Mono, sans-serif;
+    font-size: 0.7em;
+    font-weight: 500;
+    line-height: 130%
+}
+
+.text-error.yellow {
+    color: var(--strong-yellow)
+}
+
+.success-message.yellow {
+    border: 1px dashed var(--strong-yellow);
+    background-color: rgba(0, 0, 0, 0)
+}
+
+.text-success.yellow {
+    color: var(--strong-yellow)
+}
+
+.section-full {
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    padding: 3.75em 2em;
+    display: flex
+}
+
+.brand-center {
+    flex: none;
+    margin-top: 1.2em;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0.5em 0.3em
+}
+
+.heading-account.white {
+    color: var(--white)
+}
+
+.paragraph-account.white {
+    color: rgba(255, 255, 255, 0.8)
+}
+
+.text-account.white {
+    color: rgba(255, 255, 255, 0.5)
+}
+
+.link-account.white {
+    color: rgba(255, 255, 255, 0.5)
+}
+
+.link-account.white:hover {
+    color: var(--white)
+}
