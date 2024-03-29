@@ -270,6 +270,19 @@ figcaption {
     overflow: hidden
 }
 
+.block-heading {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 1em;
+  display: flex;
+}
+
+.block-heading.center {
+  text-align: center;
+  align-items: center;
+}
+
 .block-content {
     background-color: rgba(0, 0, 0, 0);
     border: 1px #000;
@@ -308,9 +321,4 @@ figcaption {
     border-radius: 0.87em;
     margin-top: 0.7em;
     padding: 1.3em 1.8em
-}
-
-.ibm-plex-mono {
-    font-family: IBM Plex Mono, sans-serif;
-    font-weight: 500
 }
