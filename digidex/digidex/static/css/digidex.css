@@ -298,10 +298,10 @@ figcaption {
 }
 
 .text-top {
-max-width: 32em;
-margin-bottom: 2em;
-font-size: 1.125em;
-line-height: 160%;
+  max-width: 32em;
+  margin-bottom: 2em;
+  font-size: 1.125em;
+  line-height: 160%;
 }
 
 .page-body {
