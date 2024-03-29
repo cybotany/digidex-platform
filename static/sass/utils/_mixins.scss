@@ -1,5 +1,9 @@
 @import 'static/sass/utils/_variables';
 
+@mixin gradient-line($direction, $color-start, $color-end) {
+  background-image: linear-gradient($direction, $color-start, $color-end);
+}
+
 @mixin button-base {
   color: $color-white;
   letter-spacing: -0.02em;
