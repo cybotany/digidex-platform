@@ -1,0 +1,82 @@
+.heading-hero {
+  max-width: 11.5em;
+  margin-bottom: .38em;
+}
+.heading {
+  max-width: 9em;
+  margin-bottom: .5em;
+}
+
+.heading.large {
+  max-width: 13em;
+}
+
+.heading.banner {
+  color: var(--white);
+  margin-bottom: .7em;
+}
+.heading-numbers {
+  color: var(--accent-a1);
+  font-weight: 500;
+}
+
+.heading-numbers.green {
+  color: var(--accent-a3);
+}
+.heading-contact-lottie {
+  color: var(--accent-a1);
+  font-weight: 500;
+}
+.heading-accordion {
+  margin-top: .3em;
+  margin-bottom: .3em;
+}
+.heading-top {
+  max-width: 11.5em;
+  margin-bottom: .38em;
+}
+.heading-solution-large {
+  color: var(--accent-a1);
+}
+
+.heading-solution-large.green {
+  color: var(--accent-a3);
+}
+.heading-list.blue {
+  color: var(--accent-a1);
+}
+
+.heading-list.green {
+  color: var(--accent-a3);
+}
+.heading-about {
+  color: var(--accent-a1);
+}
+
+.heading-about.green {
+  color: var(--accent-a3);
+}
+
+.heading-about.red {
+  color: var(--accent-a2);
+}.heading-quote {
+  margin-bottom: 1.4em;
+}
+.heading-name {
+  margin-bottom: .3em;
+  line-height: 120%;
+}
+.heading-account {
+  max-width: 9em;
+  margin-bottom: .3em;
+}
+
+.heading-account.white {
+  color: var(--white);
+}
+.heading-template {
+  margin-bottom: .8em;
+}
+.block-color.heading-color {
+  background-color: var(--heading);
+}

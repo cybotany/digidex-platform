@@ -1,129 +1,6 @@
-@import 'static/sass/utils/_variables';
-@import 'static/sass/utils/_mixins';
-
-.lottie-wrapper {
-  width: 100%;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  display: flex;
-  position: relative;
-}
-
 .lottie {
   position: relative;
 }
-
-.lines-a1 {
-  z-index: 5;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: stretch;
-  padding-left: 6%;
-  padding-right: 10.5%;
-  display: flex;
-  position: absolute;
-  top: 0%;
-  bottom: 0%;
-  left: 0%;
-  right: 0%;
-}
-
-.line-w, .line-banner-w {
-  width: 1px;
-  @include gradient-line(to bottom, rgba(15, 100, 146, 0), var(--border) 10%, var(--border) 90%, rgba(15, 100, 146, 0));
-}
-
-.line-h, .line-banner-h {
-  height: 1px;
-  @include gradient-line(to right, rgba(15, 100, 146, 0), var(--border) 10%, var(--border) 90%, rgba(15, 100, 146, 0));
-}
-
-.lines-a2 {
-  z-index: 5;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: stretch;
-  padding-top: 11%;
-  padding-bottom: 13%;
-  display: flex;
-  position: absolute;
-  top: 0%;
-  bottom: 0%;
-  left: 0%;
-  right: 0%;
-}
-
-.lines-b1 {
-  z-index: 5;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: stretch;
-  padding-left: 4%;
-  padding-right: 13%;
-  display: flex;
-  position: absolute;
-  top: 0%;
-  bottom: 0%;
-  left: 0%;
-  right: 0%;
-}
-
-.lines-b2 {
-  z-index: 5;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: stretch;
-  padding-top: 12%;
-  padding-bottom: 12%;
-  display: flex;
-  position: absolute;
-  top: 0%;
-  bottom: 0%;
-  left: 0%;
-  right: 0%;
-}
-
-.lines-c1 {
-  z-index: 5;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: stretch;
-  padding-left: 22%;
-  padding-right: 22%;
-  display: flex;
-  position: absolute;
-  top: 0%;
-  bottom: 0%;
-  left: 0%;
-  right: 0%;
-}
-
-.lines-c2 {
-  z-index: 5;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: stretch;
-  padding-top: 15%;
-  padding-bottom: 15%;
-  display: flex;
-  position: absolute;
-  top: 0%;
-  bottom: 0%;
-  left: 0%;
-  right: 0%;
-}
-
-.block-lottie {
-  z-index: 10;
-  width: 100%;
-  flex-direction: row;
-  justify-content: center;
-  align-items: stretch;
-  display: flex;
-  position: relative;
-}
-
 .lottie-animation-2 {
   z-index: 10;
   width: 100%;
@@ -148,190 +25,14 @@
   left: 0%;
   right: 0%;
 }
-
-.features-lottie {
-  z-index: 20;
-  grid-row-gap: 2.7em;
+.lottie-wrapper {
+  width: 100%;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
-  display: flex;
-  position: absolute;
-  top: 0%;
-  bottom: 0%;
-  left: 0%;
-  right: 0%;
-}
-
-.feature-lottie-block {
-  grid-column-gap: .6em;
-  background-color: var(--accent-green);
-  -webkit-backdrop-filter: blur(30px);
-  backdrop-filter: blur(30px);
-  border-radius: .64em;
-  justify-content: center;
-  align-items: center;
-  margin-right: 43%;
-  padding: .8em 1.1em;
-  display: flex;
-}
-
-.feature-lottie-block.a2 {
-  margin-right: 5%;
-}
-
-.feature-lottie-block.a3 {
-  margin-right: 58%;
-}
-
-.feature-lottie-block.a4 {
-  margin-right: 15%;
-}
-
-.text-feature-lottie {
-  color: var(--strong-green);
-  letter-spacing: -.02em;
-  font-size: 1em;
-  font-weight: 500;
-  line-height: 120%;
-}
-
-.icon-feature-lottie {
-  width: 1.5em;
-  height: 1.5em;
-}
-
-@media screen and (max-width: 767px) {
-  .grid-features {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media screen and (max-width: 479px) {
-  .features-lottie {
-    grid-row-gap: 1.5em;
-  }
-
-  .feature-lottie-block {
-    margin-right: 31%;
-  }
-
-  .feature-lottie-block.a3 {
-    margin-right: 38%;
-  }
-
-  .grid-features {
-    grid-row-gap: 1.2em;
-    grid-template-columns: 1fr;
-  }
-
-  .features {
-    grid-column-gap: 1em;
-    grid-row-gap: 1em;
-    padding-top: .8em;
-    padding-bottom: .8em;
-  }
-}
-
-.contact-lottie {
-  z-index: 20;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  padding-top: 6%;
-  padding-bottom: 6%;
-  display: flex;
-  position: absolute;
-  top: 0%;
-  bottom: 0%;
-  left: 0%;
-  right: 0%;
-}
-
-.contact-lottie-link {
-  min-width: 18em;
-  grid-column-gap: 1.44em;
-  background-color: var(--accent-green);
-  -webkit-backdrop-filter: blur(30px);
-  backdrop-filter: blur(30px);
-  border-radius: .64em;
   justify-content: flex-start;
   align-items: center;
-  margin-right: 28%;
-  padding-top: .87em;
-  padding-bottom: .87em;
-  padding-right: 2em;
-  text-decoration: none;
-  transition: box-shadow .3s cubic-bezier(.25, .46, .45, .94);
   display: flex;
+  position: relative;
 }
-
-.contact-lottie-link:hover {
-  box-shadow: inset 0 0 0 2px var(--strong-green);
-}
-
-.contact-lottie-link.a2 {
-  margin-right: -33%;
-}
-
-.contact-lottie-link.a3 {
-  margin-right: 16%;
-}
-
-.icon-contact-lottie {
-  width: 2em;
-  height: 2em;
-}
-
-.block-icon-contact-lottie {
-  background-color: var(--white);
-  border-radius: .87em;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-left: -.94em;
-  padding: 1.1em;
-  display: flex;
-  box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
-}
-
-.heading-contact-lottie {
-  color: var(--strong-green);
-  font-weight: 500;
-}
-
-.block-heading-contact-lottie {
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  display: flex;
-}
-
-.text-contact-lottie {
-  max-width: 11em;
-  opacity: .5;
-  color: var(--strong-green);
-  letter-spacing: -.02em;
-  font-size: .87em;
-  font-weight: 500;
-  line-height: 130%;
-}
-
-@media screen and (max-width: 479px) {
-  .contact-lottie-link {
-    min-width: 15em;
-    grid-column-gap: 1em;
-    grid-row-gap: 1em;
-    margin-right: 0%;
-    font-size: .9em;
-  }
-
-  .contact-lottie-link.a2,
-  .contact-lottie-link.a3 {
-    margin-right: 0%;
-  }
-}
-
 .lottie-banner {
   position: absolute;
   top: -6%;
@@ -339,57 +40,6 @@
   left: auto;
   right: 0%;
 }
-
-.lines-d1 {
-  z-index: 5;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: stretch;
-  padding-left: 8%;
-  padding-right: 8.5%;
-  display: flex;
-  position: absolute;
-  top: 0%;
-  bottom: 0%;
-  left: 0%;
-  right: 0%;
-}
-
-.lines-d2 {
-  z-index: 5;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: stretch;
-  padding-top: 14%;
-  padding-bottom: 14%;
-  display: flex;
-  position: absolute;
-  top: 0%;
-  bottom: 0%;
-  left: 0%;
-  right: 0%;
-}
-
-.block-lottie-banner {
-  z-index: 10;
-  width: 100%;
-  flex-direction: row;
-  justify-content: center;
-  align-items: stretch;
-  display: flex;
-  position: relative;
-}
-
-.line-banner-w {
-  width: 1px;
-  background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, .2) 10%, rgba(255, 255, 255, .2) 90%, rgba(255, 255, 255, 0));
-}
-
-.line-banner-h {
-  height: 1px;
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, .2) 10%, rgba(255, 255, 255, .2) 90%, rgba(255, 255, 255, 0));
-}
-
 .lottie-animation-1-banner {
   width: 100%;
 }
@@ -413,4 +63,15 @@
   bottom: 0%;
   left: 0%;
   right: 0%;
+}
+.lottie-template {
+  background-color: var(--background);
+  border-radius: .6em;
+}
+
+@media screen and (max-width: 767px) {
+  .lottie-banner {
+    position: relative;
+    top: 0%;
+  }
 }
