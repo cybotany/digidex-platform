@@ -1,3 +1,6 @@
+@import 'static/sass/utils/_variables';
+@import 'static/sass/utils/_mixins';
+
 .page-notification-bar {
   background-color: var(--strong-green);
   flex-direction: column;

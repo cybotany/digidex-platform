@@ -1,3 +1,6 @@
+@import 'static/sass/utils/_variables';
+@import 'static/sass/utils/_mixins';
+
 .collection-list-wrapper-messages {
   display: flex;
   flex-direction: column;

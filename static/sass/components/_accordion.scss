@@ -1,38 +1,23 @@
+@import 'static/sass/utils/_variables';
+@import 'static/sass/utils/_mixins';
+
 .grid-faq {
-  grid-column-gap: 1.13em;
-  grid-row-gap: 1.13em;
+  @include grid-faq;
   grid-template-rows: auto;
-  align-items: start;
 }
 
 .block-faq {
-  grid-column-gap: 1.13em;
-  grid-row-gap: 1.13em;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: stretch;
-  display: flex;
+  @include block-faq;
 }
 
 .accordion-item {
-  width: 100%;
-  background-color: var(--white);
-  border-radius: .87em;
-  padding-left: 1.8em;
-  padding-right: 1.2em;
-  box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
+  @include accordion-item-base;
+  padding-left: 1.8em; // Specific left padding
 }
 
 .accordion-header {
-  grid-column-gap: 1em;
-  cursor: pointer;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 1em;
-  padding-bottom: 1em;
-  transition: padding .3s cubic-bezier(.25, .46, .45, .94);
-  display: flex;
+  @include accordion-header-base;
+  padding: 1em; // Uniform padding, adjust as needed
 }
 
 .accordion-header:hover {
@@ -40,27 +25,24 @@
   padding-right: .3em;
 }
 
-.heading-accordion {
+.heading-accordion, .paragraph-accordion {
   margin-top: .3em;
   margin-bottom: .3em;
 }
 
-.icon-accordion {
+.icon-accordion, .block-icon-accordion {
   width: 1.5em;
   height: 1.5em;
-  flex: none;
-}
-
-.block-icon-accordion {
-  width: 2.12em;
-  height: 2.12em;
-  background-color: var(--accent-green);
-  border: 1px solid rgba(255, 255, 255, .2);
-  border-radius: 100%;
   flex: none;
   justify-content: center;
   align-items: center;
   display: flex;
+}
+
+.block-icon-accordion {
+  background-color: $accent-green;
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-radius: 100%;
 }
 
 .accordion-content {
@@ -73,15 +55,4 @@
   margin-bottom: 1.6em;
 }
 
-@media screen and (max-width: 767px) {
-  .grid-faq, .block-faq {
-    grid-column-gap: .87em;
-    grid-row-gap: .87em;
-  }
-}
-
-@media screen and (max-width: 479px) {
-  .grid-faq {
-    grid-template-columns: 1fr;
-  }
-}
+@include responsive-grid-faq;

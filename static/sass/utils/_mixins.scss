@@ -17,7 +17,7 @@
 
 @mixin accordion-item-base {
   width: 100%;
-  background-color: var(--white); // Consider replacing with SCSS variable
+  background-color: $color-white;
   border-radius: .87em;
   box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
   padding: 0 1.2em;
