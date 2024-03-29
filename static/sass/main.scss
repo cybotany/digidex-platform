@@ -12,19 +12,23 @@
 @import 'components/_modal';
 
 // Layouts
-@import 'components/_header';
-@import 'components/_footer';
+@import 'layouts/_layout';
+@import 'layouts/_header';
+@import 'layouts/_footer';
 @import 'layouts/_grid';
 @import 'layouts/_section';
 
 // Pages
-@import 'pages/_home';
+@import 'pages/_account';
+@import 'pages/_blog';
+@import 'pages/_company';
+@import 'pages/_contact';
+@import 'pages/_solutions';
+@import 'pages/_utility';
 
 // Utils
 @import 'utils/_mixins';
 @import 'utils/_variables';
-@import 'utils/_functions';
-@import 'utils/_helpers';
 
 // Vendor
 @import 'vendor/_bootstrap';
