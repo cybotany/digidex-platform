@@ -1,5 +1,48 @@
 @import 'static/sass/utils/_variables';
 
+@mixin grid-faq($gap: 1.13em) {
+  grid-column-gap: $gap;
+  grid-row-gap: $gap;
+  align-items: start;
+}
+
+@mixin block-faq {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  grid-column-gap: 1.13em;
+  grid-row-gap: 1.13em;
+}
+
+@mixin accordion-item-base {
+  width: 100%;
+  background-color: var(--white); // Consider replacing with SCSS variable
+  border-radius: .87em;
+  box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
+  padding: 0 1.2em;
+}
+
+@mixin accordion-header-base {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: padding .3s cubic-bezier(.25, .46, .45, .94);
+}
+
+@mixin responsive-grid-faq {
+  @media screen and (max-width: 767px) {
+    grid-column-gap: .87em;
+    grid-row-gap: .87em;
+  }
+
+  @media screen and (max-width: 479px) {
+    grid-template-columns: 1fr;
+  }
+}
+
 @mixin button-base {
   color: $color-white;
   letter-spacing: -0.02em;
