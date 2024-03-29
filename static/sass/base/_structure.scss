@@ -1,6 +1,13 @@
 @import 'static/sass/utils/_variables';
 @import 'static/sass/utils/_mixins';
 
+.base-block {
+  display: block;
+}
+.base-inline-block {
+  max-width: 100%;
+  display: inline-block;
+}
 .section {
   justify-content: center;
   align-items: center;

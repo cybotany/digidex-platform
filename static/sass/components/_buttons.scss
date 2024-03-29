@@ -6,6 +6,21 @@ $color-primary: $color-strong-green;
 $color-secondary: $color-heading;
 $color-accent: $color-strong-yellow;
 
+.base-button {
+  display: inline-block;
+  padding: 9px 15px;
+  background-color: #3898EC;
+  color: white;
+  border: 0;
+  line-height: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 0;
+}
+input.base-button {
+  -webkit-appearance: button;
+}
+
 .block-button {
   display: flex;
   flex-direction: row;

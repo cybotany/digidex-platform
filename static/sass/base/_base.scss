@@ -126,112 +126,8 @@ ol {
   font-weight: normal;
   font-style: normal;
 }
-[class^="base-icon-"],
-[class*=" base-icon-"] {
-  /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'webflow-icons' !important;
-  speak: none;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-.base-icon-slider-right:before {
-  content: "\e600";
-}
-.base-icon-slider-left:before {
-  content: "\e601";
-}
-.base-icon-nav-menu:before {
-  content: "\e602";
-}
-.base-icon-arrow-down:before,
-.base-icon-dropdown-toggle:before {
-  content: "\e603";
-}
-.base-icon-file-upload-remove:before {
-  content: "\e900";
-}
-.base-icon-file-upload-icon:before {
-  content: "\e903";
-}
-.base-block {
-  display: block;
-}
-.base-inline-block {
-  max-width: 100%;
-  display: inline-block;
-}
-.base-clearfix:before,
-.base-clearfix:after {
-  content: " ";
-  display: table;
-  grid-column-start: 1;
-  grid-row-start: 1;
-  grid-column-end: 2;
-  grid-row-end: 2;
-}
-.base-clearfix:after {
-  clear: both;
-}
-.base-hidden {
-  display: none;
-}
-.base-button {
-  display: inline-block;
-  padding: 9px 15px;
-  background-color: #3898EC;
-  color: white;
-  border: 0;
-  line-height: inherit;
-  text-decoration: none;
-  cursor: pointer;
-  border-radius: 0;
-}
-input.base-button {
-  -webkit-appearance: button;
-}
 html[data-w-dynpage] [data-w-cloak] {
   color: transparent !important;
-}
-.base-code-block {
-  margin: unset;
-}
-
-.base-list-unstyled {
-  padding-left: 0;
-  list-style: none;
-}
-.base-embed:before,
-.base-embed:after {
-  content: " ";
-  display: table;
-  grid-column-start: 1;
-  grid-row-start: 1;
-  grid-column-end: 2;
-  grid-row-end: 2;
-}
-.base-embed:after {
-  clear: both;
-}
-.base-video {
-  width: 100%;
-  position: relative;
-  padding: 0;
-}
-.base-video iframe,
-.base-video object,
-.base-video embed {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
 }
 fieldset {
   padding: 0;
@@ -259,20 +155,4 @@ button,
   100% {
     transform: rotate(360deg);
   }
-}
-.base-dyn-empty {
-  padding: 10px;
-  background-color: #dddddd;
-}
-.base-dyn-hide {
-  display: none !important;
-}
-.base-dyn-bind-empty {
-  display: none !important;
-}
-.base-condition-invisible {
-  display: none !important;
-}
-.wf-layout-layout {
-  display: grid;
 }
