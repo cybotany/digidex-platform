@@ -289,6 +289,27 @@ figcaption {
   align-items: center;
 }
 
+.block-heading {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 1em;
+  display: flex;
+}
+
+.block-heading.center {
+  text-align: center;
+  align-items: center;
+}
+
+.block-left {
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-right: 15%;
+  display: flex;
+}
+
 .block-right {
   flex-direction: column;
   justify-content: center;
