@@ -851,8 +851,8 @@ button, [type="button"], [type="reset"] {
     margin-bottom: 0.4em
     }
 .rich-text-block a {
-    border-bottom: 1px solid var(--accent-a1);
-    color: var(--accent-a1);
+    border-bottom: 1px solid var(--strong-green);
+    color: var(--strong-green);
     text-decoration: none;
     transition: border-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)
     }
@@ -912,13 +912,13 @@ button, [type="button"], [type="reset"] {
     transition: color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)
     }
 .nav-link:hover {
-    color: var(--accent-a1)
+    color: var(--strong-green)
     }
 .nav-link.w--current {
     color: var(--heading)
     }
 .nav-link.w--current:hover {
-    color: var(--accent-a1)
+    color: var(--strong-green)
     }
 .nav-button {
     background-color: var(--heading);
@@ -932,12 +932,12 @@ button, [type="button"], [type="reset"] {
     transition: box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)
     }
 .nav-button:hover {
-    background-color: var(--accent-a1);
-    box-shadow: 0 15px 40px -10px var(--accent-a1)
+    background-color: var(--strong-green);
+    box-shadow: 0 15px 40px -10px var(--strong-green)
     }
 .nav-button-outline {
-    box-shadow: 0 0 0 -10px var(--accent-a1), inset 0 0 0 2px var(--accent-a1);
-    color: var(--accent-a1);
+    box-shadow: 0 0 0 -10px var(--strong-green), inset 0 0 0 2px var(--strong-green);
+    color: var(--strong-green);
     letter-spacing: -0.02em;
     background-color: rgba(0, 0, 0, 0);
     border-radius: 50em;
@@ -948,12 +948,12 @@ button, [type="button"], [type="reset"] {
     transition: box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)
     }
 .nav-button-outline:hover {
-    background-color: var(--accent-a1);
-    box-shadow: 0 15px 40px -10px var(--accent-a1), inset 0 0 0 2px var(--accent-a1);
+    background-color: var(--strong-green);
+    box-shadow: 0 15px 40px -10px var(--strong-green), inset 0 0 0 2px var(--strong-green);
     color: var(--white)
     }
 .section-top-bar {
-    background-color: var(--accent-a1);
+    background-color: var(--strong-green);
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -1041,7 +1041,7 @@ button, [type="button"], [type="reset"] {
     display: flex
     }
 .button {
-    background-color: var(--accent-a1);
+    background-color: var(--strong-green);
     color: var(--white);
     letter-spacing: -0.02em;
     border-radius: 50em;
@@ -1052,20 +1052,20 @@ button, [type="button"], [type="reset"] {
     transition: box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)
     }
 .button:hover {
-    box-shadow: 0 15px 40px -10px var(--accent-a1)
+    box-shadow: 0 15px 40px -10px var(--strong-green)
     }
 .button.yellow {
-    background-color: var(--accent-a4);
+    background-color: var(--strong-yellow);
     color: var(--heading)
     }
 .button.yellow:hover {
-    box-shadow: 0 15px 40px -10px var(--accent-a4)
+    box-shadow: 0 15px 40px -10px var(--strong-yellow)
     }
 .button.dark {
     background-color: var(--heading)
     }
 .button.dark:hover {
-    background-color: var(--accent-a1)
+    background-color: var(--strong-green)
     }
 .link-button {
     grid-column-gap: 0.4em;
@@ -1079,7 +1079,7 @@ button, [type="button"], [type="reset"] {
     display: flex
     }
 .link-button:hover {
-    box-shadow: inset 0 0 0 2px var(--accent-a1);
+    box-shadow: inset 0 0 0 2px var(--strong-green);
     padding-left: 1.6em;
     padding-right: 1.6em
     }
@@ -1088,7 +1088,7 @@ button, [type="button"], [type="reset"] {
     height: 1.5em
     }
 .text-button {
-    color: var(--accent-a1);
+    color: var(--strong-green);
     letter-spacing: -0.02em;
     font-size: 1.12em;
     font-weight: 500;
@@ -1101,7 +1101,7 @@ button, [type="button"], [type="reset"] {
     display: flex
     }
 .yellow-tag {
-    background-color: var(--accent-a4);
+    background-color: var(--strong-yellow);
     color: var(--heading);
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -1172,7 +1172,7 @@ button, [type="button"], [type="reset"] {
     transition: color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)
     }
 .link-footer:hover {
-    color: var(--accent-a1)
+    color: var(--strong-green)
     }
 .logo-footer {
     height: 1.56em;
@@ -1200,7 +1200,7 @@ button, [type="button"], [type="reset"] {
     width: 3.2em;
     height: 3.2em;
     background-color: var(--white);
-    box-shadow: inset 0 0 0 0 var(--accent-a1), 0 15px 25px -10px rgba(20, 23, 24, 0.05);
+    box-shadow: inset 0 0 0 0 var(--strong-green), 0 15px 25px -10px rgba(20, 23, 24, 0.05);
     border-radius: 100%;
     flex-direction: column;
     justify-content: center;
@@ -1209,7 +1209,7 @@ button, [type="button"], [type="reset"] {
     display: flex
     }
 .social-link:hover {
-    box-shadow: inset 0 0 0 2px var(--accent-a1), 0 15px 25px -10px rgba(20, 23, 24, 0.05)
+    box-shadow: inset 0 0 0 2px var(--strong-green), 0 15px 25px -10px rgba(20, 23, 24, 0.05)
     }
 .icon-social {
     width: 1.5em;
@@ -1236,7 +1236,7 @@ button, [type="button"], [type="reset"] {
     transition: color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)
     }
 .link-footer-down:hover {
-    color: var(--accent-a1)
+    color: var(--strong-green)
     }
 .section-top {
     justify-content: center;
@@ -1259,7 +1259,7 @@ button, [type="button"], [type="reset"] {
     margin-bottom: 0.38em
     }
 .submit-button {
-    background-color: var(--accent-a1);
+    background-color: var(--strong-green);
     color: var(--white);
     letter-spacing: -0.02em;
     border-radius: 0.87em;
@@ -1270,17 +1270,17 @@ button, [type="button"], [type="reset"] {
     transition: box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)
     }
 .submit-button:hover {
-    box-shadow: 0 15px 40px -10px var(--accent-a1)
+    box-shadow: 0 15px 40px -10px var(--strong-green)
     }
 .submit-button.yellow {
-    background-color: var(--accent-a4);
+    background-color: var(--strong-yellow);
     color: var(--heading)
     }
 .submit-button.yellow:hover {
-    box-shadow: 0 15px 40px -10px var(--accent-a4)
+    box-shadow: 0 15px 40px -10px var(--strong-yellow)
     }
 .error-message.yellow {
-    border: 1px dashed var(--accent-a4);
+    border: 1px dashed var(--strong-yellow);
     background-color: rgba(0, 0, 0, 0)
     }
 .text-error {
@@ -1293,14 +1293,14 @@ button, [type="button"], [type="reset"] {
     line-height: 130%
     }
 .text-error.yellow {
-    color: var(--accent-a4)
+    color: var(--strong-yellow)
     }
 .success-message.yellow {
-    border: 1px dashed var(--accent-a4);
+    border: 1px dashed var(--strong-yellow);
     background-color: rgba(0, 0, 0, 0)
     }
 .text-success.yellow {
-    color: var(--accent-a4)
+    color: var(--strong-yellow)
     }
 .section-full {
     flex: 1;
@@ -1335,7 +1335,7 @@ button, [type="button"], [type="reset"] {
     flex: none
     }
 .cart-button {
-    background-color: var(--accent-a1);
+    background-color: var(--strong-green);
     border-radius: 50em;
     flex-direction: row;
     justify-content: center;
@@ -1346,7 +1346,7 @@ button, [type="button"], [type="reset"] {
     position: relative
     }
 .cart-button:hover {
-    box-shadow: 0 15px 30px -8px var(--accent-a1)
+    box-shadow: 0 15px 30px -8px var(--strong-green)
     }
 .icon-cart {
     width: 1.37em;
@@ -1412,7 +1412,7 @@ button, [type="button"], [type="reset"] {
 .image-cart-item {
     width: 3.5em;
     height: 3.5em;
-    background-color: var(--accent-b1);
+    background-color: var(--accent-green);
     object-fit: cover;
     border-radius: 0.62em;
     padding: 0.9em
@@ -1429,7 +1429,7 @@ button, [type="button"], [type="reset"] {
     line-height: 130%
     }
 .cart-item-price {
-    color: var(--accent-a1);
+    color: var(--strong-green);
     margin-bottom: 0.6em;
     font-size: 0.9em;
     font-weight: 600;
@@ -1447,7 +1447,7 @@ button, [type="button"], [type="reset"] {
     transition: color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)
     }
 .remove-button:hover {
-    color: var(--accent-a1)
+    color: var(--strong-green)
     }
 .cart-quantity {
     width: 3.7em;
@@ -1464,7 +1464,7 @@ button, [type="button"], [type="reset"] {
     transition: border-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)
     }
 .cart-quantity:focus {
-    border-color: var(--accent-a1)
+    border-color: var(--strong-green)
     }
 .cart-line-item {
     margin-bottom: 1em;
@@ -1483,7 +1483,7 @@ button, [type="button"], [type="reset"] {
     border-radius: 50em
     }
 .checkout-button {
-    background-color: var(--accent-a1);
+    background-color: var(--strong-green);
     color: var(--white);
     letter-spacing: -0.02em;
     border-radius: 50em;
@@ -1495,7 +1495,7 @@ button, [type="button"], [type="reset"] {
     transition: box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)
     }
 .checkout-button:hover {
-    box-shadow: 0 15px 40px -10px var(--accent-a1)
+    box-shadow: 0 15px 40px -10px var(--strong-green)
     }
 .cart-empty-state {
     flex-direction: column;
@@ -1509,7 +1509,7 @@ button, [type="button"], [type="reset"] {
     line-height: 130%
     }
 .button-small {
-    background-color: var(--accent-a1);
+    background-color: var(--strong-green);
     color: var(--white);
     letter-spacing: -0.02em;
     border-radius: 50em;
@@ -1520,20 +1520,20 @@ button, [type="button"], [type="reset"] {
     transition: box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)
     }
 .button-small:hover {
-    box-shadow: 0 15px 40px -10px var(--accent-a1)
+    box-shadow: 0 15px 40px -10px var(--strong-green)
     }
 .button-small.yellow {
-    background-color: var(--accent-a4);
+    background-color: var(--strong-yellow);
     color: var(--heading)
     }
 .button-small.yellow:hover {
-    box-shadow: 0 15px 40px -10px var(--accent-a4)
+    box-shadow: 0 15px 40px -10px var(--strong-yellow)
     }
 .button-small.dark {
     background-color: var(--heading)
     }
 .button-small.dark:hover {
-    background-color: var(--accent-a1)
+    background-color: var(--strong-green)
     }
 .cart-error-state {
     background-color: rgba(188, 0, 3, 0.07);
@@ -1542,7 +1542,7 @@ button, [type="button"], [type="reset"] {
     padding: 1em 1.4em
     }
 .yellow-tag-product {
-    background-color: var(--accent-a4);
+    background-color: var(--strong-yellow);
     color: var(--heading);
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -1574,7 +1574,7 @@ button, [type="button"], [type="reset"] {
     width: 100%
     }
 .add-to-cart-button {
-    background-color: var(--accent-a1);
+    background-color: var(--strong-green);
     color: var(--white);
     letter-spacing: -0.02em;
     border-radius: 50em;
@@ -1585,10 +1585,10 @@ button, [type="button"], [type="reset"] {
     transition: box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)
     }
 .add-to-cart-button:hover {
-    box-shadow: 0 15px 40px -10px var(--accent-a1)
+    box-shadow: 0 15px 40px -10px var(--strong-green)
     }
 .buy-now-button {
-    background-color: var(--accent-a1);
+    background-color: var(--strong-green);
     color: var(--white);
     letter-spacing: -0.02em;
     border-radius: 50em;
@@ -1600,14 +1600,14 @@ button, [type="button"], [type="reset"] {
     transition: box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)
     }
 .buy-now-button:hover {
-    box-shadow: 0 15px 40px -10px var(--accent-a1)
+    box-shadow: 0 15px 40px -10px var(--strong-green)
     }
 .buy-now-button.yellow {
-    background-color: var(--accent-a4);
+    background-color: var(--strong-yellow);
     color: var(--heading)
     }
 .buy-now-button.yellow:hover {
-    box-shadow: 0 15px 40px -10px var(--accent-a4)
+    box-shadow: 0 15px 40px -10px var(--strong-yellow)
     }
 .product-content {
     background-color: var(--white);
@@ -1634,7 +1634,7 @@ button, [type="button"], [type="reset"] {
     }
 .apply-button {
     height: 3.75em;
-    background-color: var(--accent-a1);
+    background-color: var(--strong-green);
     color: var(--white);
     letter-spacing: -0.02em;
     border-radius: 0.87em;
@@ -1646,7 +1646,7 @@ button, [type="button"], [type="reset"] {
     transition: box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)
     }
 .apply-button:hover {
-    box-shadow: 0 15px 40px -10px var(--accent-a1)
+    box-shadow: 0 15px 40px -10px var(--strong-green)
     }
 .page-body {
     width: 100%;
@@ -1687,25 +1687,25 @@ button, [type="button"], [type="reset"] {
     background-color: var(--heading)
     }
 .block-color.accent-a1 {
-    background-color: var(--accent-a1)
+    background-color: var(--strong-green)
     }
 .block-color.accent-a2 {
-    background-color: var(--accent-a2)
+    background-color: var(--strong-blue)
     }
 .block-color.accent-a3 {
-    background-color: var(--accent-a3)
+    background-color: var(--strong-red)
     }
 .block-color.accent-a4 {
-    background-color: var(--accent-a4)
+    background-color: var(--strong-yellow)
     }
 .block-color.accent-b1 {
-    background-color: var(--accent-b1)
+    background-color: var(--accent-green)
     }
 .block-color.accent-b2 {
-    background-color: var(--accent-b2)
+    background-color: var(--accent-blue)
     }
 .block-color.accent-b3 {
-    background-color: var(--accent-b3)
+    background-color: var(--accent-red)
     }
 .block-color.paragraph-color {
     background-color: var(--paragraph)
@@ -1743,8 +1743,8 @@ button, [type="button"], [type="reset"] {
     display: flex
     }
 .button-outline-small {
-    box-shadow: 0 0 0 -10px var(--accent-a1), inset 0 0 0 2px var(--accent-a1);
-    color: var(--accent-a1);
+    box-shadow: 0 0 0 -10px var(--strong-green), inset 0 0 0 2px var(--strong-green);
+    color: var(--strong-green);
     letter-spacing: -0.02em;
     background-color: rgba(0, 0, 0, 0);
     border-radius: 50em;
@@ -1755,13 +1755,13 @@ button, [type="button"], [type="reset"] {
     transition: box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)
     }
 .button-outline-small:hover {
-    background-color: var(--accent-a1);
-    box-shadow: 0 15px 40px -10px var(--accent-a1), inset 0 0 0 2px var(--accent-a1);
+    background-color: var(--strong-green);
+    box-shadow: 0 15px 40px -10px var(--strong-green), inset 0 0 0 2px var(--strong-green);
     color: var(--white)
     }
 .button-outline {
-    box-shadow: 0 0 0 -10px var(--accent-a1), inset 0 0 0 2px var(--accent-a1);
-    color: var(--accent-a1);
+    box-shadow: 0 0 0 -10px var(--strong-green), inset 0 0 0 2px var(--strong-green);
+    color: var(--strong-green);
     letter-spacing: -0.02em;
     background-color: rgba(0, 0, 0, 0);
     border-radius: 50em;
@@ -1772,8 +1772,8 @@ button, [type="button"], [type="reset"] {
     transition: box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)
     }
 .button-outline:hover {
-    background-color: var(--accent-a1);
-    box-shadow: 0 15px 40px -10px var(--accent-a1), inset 0 0 0 2px var(--accent-a1);
+    background-color: var(--strong-green);
+    box-shadow: 0 15px 40px -10px var(--strong-green), inset 0 0 0 2px var(--strong-green);
     color: var(--white)
     }
 .paragraph-template {
@@ -1806,12 +1806,12 @@ button, [type="button"], [type="reset"] {
     width: 4.2em;
     height: 4.2em;
     max-width: none;
-    background-color: var(--accent-b1);
+    background-color: var(--accent-green);
     border-radius: 0.87em;
     padding: 1.3em
     }
 .font-template {
-    background-color: var(--accent-b1);
+    background-color: var(--accent-green);
     border-radius: 0.87em;
     margin-top: 0.7em;
     padding: 1.3em 1.8em
