@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "sass": "^1.72.0"
+  },
+  "scripts": {
+    "watch:sass": "sass --watch static/sass/:static/css/"
   }
 }

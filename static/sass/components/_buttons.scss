@@ -1,0 +1,20 @@
+.button {
+    background-color: $color-primary;
+    color: white;
+    // More styles...
+  
+    &.dark {
+      background-color: $color-secondary;
+    }
+  
+    &.yellow {
+      background-color: #eadb5b; // Consider moving to variables if reused
+    }
+  
+    &.outline {
+      background-color: transparent;
+      border: 1px solid $color-primary;
+      color: $color-primary;
+    }
+  }
+  
