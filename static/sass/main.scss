@@ -1,20 +1,30 @@
 // Base styles
+@import 'base/_base';
 @import 'base/_reset';
-@import 'base/_variables';
 @import 'base/_typography';
-@import 'base/_mixins';
 
 // Components
 @import 'components/_buttons';
-@import 'components/_navbar';
-@import 'components/_footer';
-@import 'components/_header';
+@import 'components/_nav';
 @import 'components/_notification';
+@import 'components/_accordion';
+@import 'components/_form';
+@import 'components/_modal';
 
 // Layouts
+@import 'components/_header';
+@import 'components/_footer';
 @import 'layouts/_grid';
 @import 'layouts/_section';
 
 // Pages
 @import 'pages/_home';
-@import 'pages/_about';
+
+// Utils
+@import 'utils/_mixins';
+@import 'utils/_variables';
+@import 'utils/_functions';
+@import 'utils/_helpers';
+
+// Vendor
+@import 'vendor/_bootstrap';
