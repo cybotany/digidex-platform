@@ -1,0 +1,148 @@
+.section {
+  justify-content: center;
+  align-items: center;
+  padding: 3.75em 2em;
+  display: flex;
+}
+
+.grid {
+  grid-column-gap: 0em;
+  grid-row-gap: 0em;
+  grid-template-rows: auto;
+  align-items: center;
+}
+
+.heading {
+  max-width: 9em;
+  margin-bottom: .5em;
+}
+
+.heading.large {
+  max-width: 13em;
+}
+
+.heading.banner {
+  color: var(--white);
+  margin-bottom: .7em;
+}
+
+.block-right {
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: 15%;
+  display: flex;
+}
+
+.paragraph {
+  max-width: 30em;
+  margin-bottom: 2.2em;
+}
+
+.subtitle {
+  background-color: var(--white);
+  color: var(--heading);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  border-radius: .6em;
+  margin-bottom: .7em;
+  padding: .5em 1em;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
+  box-shadow: 0 10px 20px -10px rgba(20, 23, 24, .05);
+}
+
+.subtitle.white {
+  background-color: rgba(255, 255, 255, .1);
+  color: var(--white);
+}
+
+.subtitle.green {
+  background-color: var(--accent-green);
+  color: var(--strong-green);
+}
+
+.page-body {
+  width: 100%;
+  background-color: var(--white);
+  border-radius: .87em;
+  margin-bottom: 1em;
+  padding: 5em 13%;
+  box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
+}
+
+@media screen and (max-width: 991px) {
+  .block-left {
+    padding-right: 10%;
+  }
+
+  .block-right {
+    padding-left: 10%;
+  }
+
+  .section-top {
+    padding-top: 4.5em;
+    padding-bottom: 0;
+  }
+
+  .paragraph-top {
+    font-size: 1em;
+  }
+
+  .page-body {
+    padding: 4em 10%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .block-left {
+    padding-right: 0%;
+  }
+
+  .block-right {
+    padding-left: 0%;
+  }
+
+  .section-top {
+    padding-top: 3.5em;
+  }
+
+  .section {
+    padding-top: 3em;
+    padding-bottom: 3em;
+  }
+
+  .grid {
+    grid-column-gap: 2.5em;
+    grid-row-gap: 2.5em;
+    grid-template-columns: 1fr;
+  }
+
+  .page-body {
+    padding-top: 3em;
+    padding-bottom: 3em;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .section {
+    padding: 2.5em 1.5em;
+  }
+
+  .section-top {
+    padding-top: 3em;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+  }
+
+  .paragraph-top {
+    margin-bottom: 1.2em;
+  }
+
+  .page-body {
+    padding-top: 2em;
+    padding-bottom: 2em;
+  }
+}
