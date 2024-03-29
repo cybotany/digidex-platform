@@ -17,18 +17,6 @@
     padding: 0.4em 2em;
 }
 
-.content {
-    width: 100%;
-    max-width: 75em
-}
-.content.narrow {
-    max-width: 60em;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: stretch;
-    display: flex
-}
-
 .notification-bar-block, .notification-bar, .link-notification-bar {
     width: 100%;
     max-width: 75em; /* Adjust based on .notification-bar-block needs */
@@ -58,12 +46,12 @@
 }
 
 @media screen and (max-width: 991px) {
-  .section-top-bar {
+  .page-notification-bar {
     padding-top: .8em;
     padding-bottom: .8em;
   }
 
-  .top-bar-block {
+  .notification-bar-block {
     grid-row-gap: .6em;
     flex-direction: column;
     align-items: flex-start;
@@ -71,12 +59,12 @@
 }
 
 @media screen and (max-width: 479px) {
-  .section-top-bar {
+  .page-notification-bar {
     padding-left: 1.5em;
     padding-right: 1.5em;
   }
 
-  .top-bar {
+  .notification-bar {
     grid-row-gap: .6em;
     flex-direction: column;
     align-items: flex-start;
