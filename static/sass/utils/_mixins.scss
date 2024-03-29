@@ -4,6 +4,62 @@
   background-image: linear-gradient($direction, $color-start, $color-end);
 }
 
+// Mixins (to be moved to _mixins.scss)
+@mixin gradient-line($direction, $start-color, $start-percentage, $end-percentage, $end-color) {
+  background-image: linear-gradient($direction, $start-color, $start-color $start-percentage, $end-color $end-percentage, $end-color);
+}
+
+@mixin responsive-feature-lottie {
+  @media screen and (max-width: 767px) {
+    .grid-features {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media screen and (max-width: 479px) {
+    .features-lottie {
+      grid-row-gap: 1.5em;
+    }
+
+    .feature-lottie-block {
+      margin-right: 31%;
+    }
+
+    .feature-lottie-block.a3 {
+      margin-right: 38%;
+    }
+
+    .grid-features {
+      grid-row-gap: 1.2em;
+      grid-template-columns: 1fr;
+    }
+
+    .features {
+      grid-column-gap: 1em;
+      grid-row-gap: 1em;
+      padding-top: .8em;
+      padding-bottom: .8em;
+    }
+  }
+}
+
+@mixin responsive-contact-lottie {
+  @media screen and (max-width: 479px) {
+    .contact-lottie-link {
+      min-width: 15em;
+      grid-column-gap: 1em;
+      grid-row-gap: 1em;
+      margin-right: 0%;
+      font-size: .9em;
+    }
+
+    .contact-lottie-link.a2,
+    .contact-lottie-link.a3 {
+      margin-right: 0%;
+    }
+  }
+}
+
 @mixin button-base {
   color: $color-white;
   letter-spacing: -0.02em;
@@ -111,4 +167,64 @@
   &:hover {
     box-shadow: inset 0 0 0 2px var(--strong-green), 0 15px 25px -10px rgba(20, 23, 24, .05); // Consider using SCSS variables
   }
+}
+
+@mixin center-flex {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+@mixin account-form-base {
+  width: 100%;
+  max-width: 32em;
+  text-align: center;
+  border-radius: .87em;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  display: flex;
+}
+
+@mixin responsive-padding {
+  @media screen and (max-width: 479px) {
+    padding: 2em;
+  }
+}
+
+
+// Blog Mixins
+// _mixins.scss
+@mixin flex-column-start {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  display: flex;
+}
+
+@mixin grid-standard {
+  grid-column-gap: 1.5em;
+  grid-row-gap: 3.4em;
+  grid-template-columns: 1fr 1fr 1fr;
+  display: grid;
+}
+
+@mixin box-standard {
+  background-color: $white-color;
+  border-radius: $border-radius-standard;
+  box-shadow: $shadow-standard;
+}
+
+@mixin post-text-style {
+  color: $text-color-light;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  margin-bottom: .8em;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
 }

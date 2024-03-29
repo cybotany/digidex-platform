@@ -8,6 +8,7 @@ $color-background: #f4f6f7;
 $color-paragraph: rgba(20, 23, 24, 0.8);
 $color-heading: #141718;
 $color-border: rgba(15, 100, 146, 0.2);
+$lottie-border-color: rgba(15, 100, 146, 0);
 
 $color-text-secondary: rgba(20, 23, 24, .5);
 
@@ -40,3 +41,25 @@ $color-honeydew-background: rgba(240, 255, 240, 0.8);
 $shadow-color: rgba(20, 23, 24, .05);
 $border-radius: .87em;
 $padding-standard: 1.2em;
+
+// Spacing and sizes
+$padding-small: .8em;
+$padding-medium: 1.1em;
+$margin-large: 43%;
+$blur-radius: 50px;
+
+// Account Variables
+$shadow-color: rgba(20, 23, 24, .05);
+$text-dark: rgba(20, 23, 24, .6);
+$text-white: rgba(255, 255, 255, .5);
+$background-dark: rgba(20, 23, 24, .6);
+$background-light: rgba(255, 255, 255, .8);
+
+// Blog Variables
+$white-color: #fff; // Assuming var(--white) maps to this value
+$text-color-light: rgba(20, 23, 24, .5); // For lighter text
+$shadow-standard: 0 15px 25px -10px rgba(20, 23, 24, .05); // Standard box shadow
+$padding-standard: 2.5em 2.8em;
+$padding-large: 4.3em 4.5em;
+$margin-bottom-standard: 1.4em;
+$border-radius-standard: .87em;

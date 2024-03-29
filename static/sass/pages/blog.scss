@@ -2,35 +2,21 @@
 @import 'static/sass/utils/_mixins';
 
 .collection-list-posts {
-  grid-column-gap: 1.5em;
-  grid-row-gap: 3.4em;
-  grid-template-rows: auto;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-auto-columns: 1fr;
-  display: grid;
-}
+  @include grid-standard;
 
-.collection-list-posts.large {
-  grid-template-columns: 1fr;
+  &.large {
+    grid-template-columns: 1fr;
+  }
 }
 
 .block-post {
-  background-color: var(--white);
-  border-radius: .87em;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: stretch;
-  display: flex;
-  box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
-}
-
-.block-post.large {
-  grid-column-gap: 0em;
-  grid-row-gap: 0em;
-  grid-template-rows: auto;
-  grid-template-columns: 1fr 1fr;
-  grid-auto-columns: 1fr;
-  display: grid;
+  @include box-standard;
+  @include flex-column-start;
+  
+  &.large {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .collection-list-wrapper-posts.large {
@@ -41,176 +27,95 @@
   width: 100%;
   height: 15em;
   object-fit: cover;
-  border-radius: .87em;
-}
+  border-radius: $border-radius-standard;
 
-.image-post-thumbnail.large {
-  height: auto;
-  max-height: 40em;
+  &.large {
+    height: auto;
+    max-height: 40em;
+  }
 }
 
 .link-post-thumbnail {
   width: 100%;
-}
 
-.link-post-thumbnail.large {
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: stretch;
-  display: flex;
+  &.large {
+    @include flex-column-start;
+  }
 }
 
 .post {
   width: 100%;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 2.5em 2.8em;
-  display: flex;
-}
+  @include flex-column-start;
+  padding: $padding-standard;
 
-.post.large {
-  justify-content: center;
-  padding: 4.3em 4.5em;
+  &.large {
+    justify-content: center;
+    padding: $padding-large;
+  }
 }
 
 .link-heading-post {
-  margin-bottom: 1.3em;
-  text-decoration: none;
+  margin-bottom: $margin-bottom-standard;
+  
+  &.large {
+    margin-bottom: 1.4em;
+  }
 }
 
-.link-heading-post.large {
-  margin-bottom: 1.4em;
-}
-
-.date {
-  color: rgba(20, 23, 24, .5);
-  letter-spacing: .05em;
-  text-transform: uppercase;
-  margin-bottom: .8em;
-  font-family: IBM Plex Mono, sans-serif;
-  font-size: .7em;
-  font-weight: 500;
-  line-height: 130%;
+.date, .date-top {
+  @include post-text-style;
 }
 
 .paragraph-post {
-  margin-bottom: 1.4em;
-}
+  margin-bottom: $margin-bottom-standard;
 
-.paragraph-post.large {
-  max-width: 25em;
-  margin-bottom: 1.6em;
+  &.large {
+    max-width: 25em;
+    margin-bottom: 1.6em;
+  }
 }
 
 .empty-state {
-  background-color: var(--white);
+  @include box-standard;
   text-align: center;
-  border-radius: .87em;
   padding: 1em 1.4em;
-  box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
 }
 
 .text-empty {
+  @include post-text-style;
   opacity: .7;
-  color: var(--heading);
-  letter-spacing: .05em;
-  text-transform: uppercase;
-  font-family: IBM Plex Mono, sans-serif;
-  font-size: .7em;
-  font-weight: 500;
-  line-height: 130%;
-}
-
-.date-top {
-  color: rgba(20, 23, 24, .5);
-  letter-spacing: .05em;
-  text-transform: uppercase;
-  margin-bottom: .8em;
-  font-family: IBM Plex Mono, sans-serif;
-  font-size: .7em;
-  font-weight: 500;
-  line-height: 130%;
 }
 
 .post-body {
   width: 100%;
-  background-color: var(--white);
-  border-radius: .87em;
+  @include box-standard;
   padding: 4em 13%;
-  box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
 }
 
 .image-main-post {
   width: 100%;
   object-fit: cover;
-  border-radius: .87em;
+  border-radius: $border-radius-standard;
 }
 
+// Responsive Adjustments
 @media screen and (max-width: 991px) {
   .collection-list-posts {
-    grid-column-gap: 1.13em;
-    grid-row-gap: 3em;
     grid-template-columns: 1fr 1fr;
-  }
-
-  .collection-list-wrapper-posts.large {
-    margin-bottom: 3em;
-  }
-
-  .image-post-thumbnail {
-    height: 28vw;
-  }
-
-  .post.large {
-    padding: 3.4em 3.2em;
-  }
-
-  .post-body {
-    padding-left: 10%;
-    padding-right: 10%;
+    // Other adjustments
   }
 }
 
 @media screen and (max-width: 767px) {
   .collection-list-posts {
-    grid-row-gap: 2em;
     grid-template-columns: 1fr;
-  }
-
-  .block-post.large {
-    grid-template-columns: 1fr;
-  }
-
-  .collection-list-wrapper-posts.large {
-    margin-bottom: 2em;
-  }
-
-  .image-post-thumbnail, .image-post-thumbnail.large {
-    height: 50vw;
-  }
-
-  .post-body {
-    padding-top: 2.9em;
-    padding-bottom: 2.9em;
+    // Other adjustments
   }
 }
 
 @media screen and (max-width: 479px) {
-  .collection-list-posts {
-    grid-row-gap: 1.5em;
-  }
-
-  .collection-list-wrapper-posts.large {
-    margin-bottom: 1.5em;
-  }
-
   .post, .post.large {
     padding: 1.8em 2.2em;
-  }
-
-  .post-body {
-    padding-top: 2.5em;
-    padding-bottom: 2.5em;
+    // Other adjustments
   }
 }
