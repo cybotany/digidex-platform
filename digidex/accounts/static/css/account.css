@@ -1,88 +1,99 @@
-.submit-button {
-    background-color: var(--strong-green);
-    color: var(--white);
-    letter-spacing: -0.02em;
-    border-radius: 0.87em;
-    padding: 1.2em 1.8em;
-    font-size: 1.12em;
-    font-weight: 500;
-    line-height: 120%;
-    transition: box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+.account-form {
+  z-index: 50;
+  width: 100%;
+  max-width: 32em;
+  background-color: var(--white);
+  text-align: center;
+  border-radius: .87em;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 3.1em;
+  display: flex;
+  position: relative;
+  box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
 }
 
-.submit-button:hover {
-    box-shadow: 0 15px 40px -10px var(--strong-green)
+.account-form.green {
+  background-color: var(--strong-green);
+  box-shadow: none;
 }
 
-.submit-button.yellow {
-    background-color: var(--strong-yellow);
-    color: var(--heading)
+.account-heading {
+  max-width: 9em;
+  margin-bottom: .3em;
 }
 
-.submit-button.yellow:hover {
-    box-shadow: 0 15px 40px -10px var(--strong-yellow)
+.account-heading.white {
+  color: var(--white);
 }
 
-.error-message.yellow {
-    border: 1px dashed var(--strong-yellow);
-    background-color: rgba(0, 0, 0, 0)
+.account-paragraph {
+  max-width: 23em;
+  margin-bottom: 1.8em;
 }
 
-.text-error {
-    color: #bc0003;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    font-family: IBM Plex Mono, sans-serif;
-    font-size: 0.7em;
-    font-weight: 500;
-    line-height: 130%
+.account-paragraph.white {
+  color: rgba(255, 255, 255, .8);
 }
 
-.text-error.yellow {
-    color: var(--strong-yellow)
+.account-text {
+  width: 100%;
+  max-width: 32em;
+  color: rgba(20, 23, 24, .6);
+  text-align: center;
+  margin-top: 1.4em;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: .87em;
+  line-height: 140%;
 }
 
-.success-message.yellow {
-    border: 1px dashed var(--strong-yellow);
-    background-color: rgba(0, 0, 0, 0)
+.account-text.white {
+  color: rgba(255, 255, 255, .5);
 }
 
-.text-success.yellow {
-    color: var(--strong-yellow)
+.account-link {
+  color: rgba(20, 23, 24, .6);
+  transition: color .3s cubic-bezier(.25, .46, .45, .94);
 }
 
-.section-full {
-    flex: 1;
-    justify-content: center;
-    align-items: center;
-    padding: 3.75em 2em;
-    display: flex
+.account-link:hover {
+  color: var(--strong-green);
 }
 
-.brand-center {
-    flex: none;
-    margin-top: 1.2em;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0.5em 0.3em
+.account-link.white {
+  color: rgba(255, 255, 255, .5);
 }
 
-.heading-account.white {
-    color: var(--white)
+.account-link.white:hover {
+  color: var(--white);
 }
 
-.paragraph-account.white {
-    color: rgba(255, 255, 255, 0.8)
+.body-green {
+  background-color: var(--accent-green);
 }
 
-.text-account.white {
-    color: rgba(255, 255, 255, 0.5)
-}
+@media screen and (max-width: 479px) {
+  .section-full {
+    padding-top: 3em;
+  }
 
-.link-account.white {
-    color: rgba(255, 255, 255, 0.5)
-}
+  .text-field {
+    margin-bottom: .9em;
+  }
+  
+  .account-form {
+    padding: 2em;
+  }
 
-.link-account.white:hover {
-    color: var(--white)
+  .paragraph-account {
+    margin-bottom: 1em;
+  }
+
+  .contact {
+    padding: 2em;
+  }
 }

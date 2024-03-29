@@ -22,8 +22,9 @@
     margin-bottom: 0.38em
 }
 
-/* Need to verify this */
-.text-page-heading {
-    max-width: 18em;
-    margin-bottom: 1.5em
+.paragraph-top {
+  max-width: 32em;
+  margin-bottom: 2em;
+  font-size: 1.125em;
+  line-height: 160%;
 }

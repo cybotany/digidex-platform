@@ -270,19 +270,6 @@ figcaption {
     overflow: hidden
 }
 
-.block-heading {
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  margin-bottom: 1em;
-  display: flex;
-}
-
-.block-heading.center {
-  text-align: center;
-  align-items: center;
-}
-
 .block-content {
     background-color: rgba(0, 0, 0, 0);
     border: 1px #000;
@@ -321,4 +308,78 @@ figcaption {
     border-radius: 0.87em;
     margin-top: 0.7em;
     padding: 1.3em 1.8em
+}
+
+@media screen and (max-width: 991px) {
+  .block-left {
+    padding-right: 10%;
+  }
+
+  .block-right {
+    padding-left: 10%;
+  }
+
+  .section-top {
+    padding-top: 4.5em;
+    padding-bottom: 0;
+  }
+
+  .paragraph-top {
+    font-size: 1em;
+  }
+
+  .page-body {
+    padding: 4em 10%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .block-left {
+    padding-right: 0%;
+  }
+
+  .block-right {
+    padding-left: 0%;
+  }
+
+  .section-top {
+    padding-top: 3.5em;
+  }
+
+  .section {
+    padding-top: 3em;
+    padding-bottom: 3em;
+  }
+
+  .grid {
+    grid-column-gap: 2.5em;
+    grid-row-gap: 2.5em;
+    grid-template-columns: 1fr;
+  }
+
+  .page-body {
+    padding-top: 3em;
+    padding-bottom: 3em;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .section {
+    padding: 2.5em 1.5em;
+  }
+
+  .section-top {
+    padding-top: 3em;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+  }
+
+  .paragraph-top {
+    margin-bottom: 1.2em;
+  }
+
+  .page-body {
+    padding-top: 2em;
+    padding-bottom: 2em;
+  }
 }
