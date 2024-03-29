@@ -3,12 +3,12 @@
 {% load wagtailcore_tags %}
 
 {% block content %}
-  <section class="section-top">
+  <section class="page-heading">
     <div class="content">
-      <div class="block-top">
-        <h1 class="heading-top">{{ page.heading_title }}</h1>
+      <div class="block-page-heading">
+        <h1 class="title-page-heading">{{ page.heading_title }}</h1>
         {% if page.heading_text %}
-          <p class="paragraph-top">{{ page.heading_text }}</p>
+          <p class="text-page-heading">{{ page.heading_text }}</p>
         {% endif %}
       </div>
     </div>

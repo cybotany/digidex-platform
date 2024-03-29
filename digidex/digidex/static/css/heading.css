@@ -1,0 +1,29 @@
+.page-heading {
+    justify-content: center;
+    align-items: center;
+    padding: 6em 2em 1.5em;
+    display: flex
+}
+
+.page-heading.padding-0 {
+    padding-bottom: 0
+}
+
+.block-page-heading {
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: flex
+}
+
+.title-page-heading {
+    max-width: 11.5em;
+    margin-bottom: 0.38em
+}
+
+/* Need to verify this */
+.text-page-heading {
+    max-width: 18em;
+    margin-bottom: 1.5em
+}
