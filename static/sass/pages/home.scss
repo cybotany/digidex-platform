@@ -7,13 +7,9 @@
   padding: 3.5em 2em 3.75em;
   display: flex;
 }
-
 .grid-hero {
-  grid-column-gap: 0em;
-  grid-row-gap: 0em;
+  @include grid-basic($col-gap: 0, $row-gap: 0, $columns: 1.2fr 1fr, $align: center);
   grid-template-rows: auto;
-  grid-template-columns: 1.2fr 1fr;
-  align-items: center;
 }
 
 .block-hero {

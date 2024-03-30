@@ -1,12 +1,13 @@
 @import 'static/sass/utils/_variables';
 
 // Define Mixins
-@mixin grid-basic($col-gap: 16px, $row-gap: 16px, $columns: 1fr 1fr) {
+@mixin grid-basic($col-gap: 16px, $row-gap: 16px, $rows: auto, $columns: 1fr 1fr, $align: start) {
   display: grid;
   grid-column-gap: $col-gap;
   grid-row-gap: $row-gap;
+  grid-template-rows: $rows;
   grid-template-columns: $columns;
-  align-items: start;
+  align-items: $columns;
 }
 
 @mixin grid-responsive($breakpoint) {
@@ -18,23 +19,14 @@
     @media screen and (max-width: 767px) {
       @content;
     }
-  } // Add more breakpoints as needed
-}
-
-// Usage
-.hero-section {
-  @include grid-basic($col-gap: 0, $row-gap: 0, $columns: 1.2fr 1fr);
-}
-
-.solutions-section {
-  @include grid-basic($col-gap: 1.5em, $row-gap: 1.5em, $columns: repeat(4, 1fr));
-  
-  @include grid-responsive('tablet') {
-    @include grid-basic($col-gap: 1.13em, $row-gap: 1.13em, $columns: repeat(2, 1fr));
-  }
-  
-  @include grid-responsive('mobile') {
-    @include grid-basic($col-gap: .87em, $row-gap: .87em, $columns: 1fr);
+  } @else if $breakpoint == 'large' {
+    @media screen and (max-width: 991px) {
+      @content;
+    }
+  } @else if $breakpoint == 'extra-large' {
+    @media screen and (min-width: 992px) {
+      @content;
+    }
   }
 }
 
