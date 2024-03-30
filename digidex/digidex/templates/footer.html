@@ -8,20 +8,26 @@
           <img src="images/logo.svg" loading="eager" alt="" class="logo-footer">
           <div class="paragraph-footer">{% get_footer_text %}<br></div>
           <div class="block-social">
-            <a href="tel:+1(888)123-4567" class="social-link w-inline-block"><img src="images/phone-voice.svg" loading="eager" alt="" class="icon-social"></a>
-            <a href="mailto:support@yoursite.com" class="social-link w-inline-block"><img src="images/email.svg" loading="eager" alt="" class="icon-social"></a>
-            <a href="#" class="social-link w-inline-block"><img src="images/chat-launch.svg" loading="eager" alt="" class="icon-social"></a>
+            <a href="tel:+1(888)123-4567" class="social-link w-inline-block">
+              <img src="images/phone-voice.svg" loading="eager" alt="" class="icon-social">
+            </a>
+            <a href="mailto:support@yoursite.com" class="social-link w-inline-block">
+              <img src="images/email.svg" loading="eager" alt="" class="icon-social">
+            </a>
+            <a href="#" class="social-link w-inline-block">
+              <img src="images/chat-launch.svg" loading="eager" alt="" class="icon-social">
+            </a>
           </div>
         </div>
         <div id="w-node-d0458a27-e73f-e612-462d-65302581b234-2581b225" class="block-footer">
-          <div class="subtitle-footer">Quick Links<br></div>
+          <div class="subtitle-footer">Company Information<br></div>
           <a href="solutions.html" class="link-footer">Solutions</a>
           <a href="company.html" class="link-footer">Company</a>
           <a href="contact.html" class="link-footer">Contact</a>
           <a href="blog.html" class="link-footer">Blog</a>
         </div>
         <div id="w-node-d0458a27-e73f-e612-462d-65302581b24c-2581b225" class="block-footer">
-          <div class="subtitle-footer">Template<br></div>
+          <div class="subtitle-footer">News & Events<br></div>
           <a href="template-info/licensing.html" class="link-footer">Licensing</a>
           <a href="template-info/style-guide.html" class="link-footer">Style Guide</a>
           <a href="template-info/changelog.html" class="link-footer">Changelog</a>
@@ -30,7 +36,7 @@
         {% with twitter_url=settings.base.NavigationSettings.twitter_url github_url=settings.base.NavigationSettings.github_url mastodon_url=settings.base.NavigationSettings.mastodon_url %}
           {% if twitter_url or github_url or mastodon_url %}
             <div id="w-node-d0458a27-e73f-e612-462d-65302581b240-2581b225" class="block-footer">
-              <div class="subtitle-footer">Social<br></div>
+              <div class="subtitle-footer">Connect With Us<br></div>
               {% if github_url %}
                 <a href="{{ github_url }}" target="_blank" class="link-footer">GitHub</a>
               {% endif %}

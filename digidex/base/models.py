@@ -3,7 +3,7 @@ from django.db import models
 from wagtail.admin.panels import FieldPanel
 from wagtail.fields import StreamField
 from wagtail.contrib.settings.models import BaseGenericSetting, register_setting
-from wagtail.blocks import RichTextBlock, StructBlock, TextBlock, ChoiceBlock
+from wagtail.blocks import StructBlock, TextBlock, ChoiceBlock, CharBlock
 from wagtail.images.blocks import ImageChooserBlock
 
 class FooterLinkBlock(StructBlock):
@@ -13,7 +13,7 @@ class FooterLinkBlock(StructBlock):
         choices=(
             ('company', 'Company Information'),
             ('news', 'News & Events'),
-            ('social', 'Connect With Us'),
+            ('social', 'Social Links'),
         ),
         required=True
     )
@@ -30,11 +30,11 @@ class FooterSettings(BaseGenericSetting):
     content = StreamField(
         [
             ('logo', ImageChooserBlock(icon="image")),
-            ('paragraph', RichTextBlock(icon="pilcrow")),
+            ('paragraph', TextBlock(icon="pilcrow")),
             ('contact', FooterContactBlock()),
             ('link', FooterLinkBlock(icon="link")),
-            ('copyright', TextBlock(required=False)),
-            ('credits', TextBlock(required=False)),
+            ('copyright', CharBlock(required=False)),
+            ('credits', CharBlock(required=False)),
         ],
         null=True,
         blank=True
