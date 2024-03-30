@@ -1,62 +1,76 @@
 @import 'static/sass/utils/_variables';
 @import 'static/sass/utils/_mixins';
 
-.page-notification-bar {
-  background-color: var(--strong-green);
+.section-top-bar {
+  background-color: var(--accent-a1);
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0.4em 2em;
+  padding: .4em 2em;
   display: flex;
+}
 
-  .content {
-    width: 100%;
-    max-width: 75em;
-  }
+.content {
+  width: 100%;
+  max-width: 75em;
+}
 
-  .notification-bar-block {
-    width: 100%;
-    max-width: 75em;
-    grid-column-gap: 1em;
-    justify-content: space-between;
-    align-items: center;
-    display: flex;
-  }
+.content.narrow {
+  max-width: 60em;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  display: flex;
+}
 
-  .notification-bar {
-    grid-column-gap: 1.87em;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-  }
+.top-bar-block {
+  width: 100%;
+  max-width: 75em;
+  grid-column-gap: 1em;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
 
-  .info-notification-bar,
-  .text-notification-bar {
-    opacity: 0.7;
-    color: var(--white);
-    letter-spacing: -0.02em;
-    font-size: 0.87em;
-    line-height: 120%;
-  }
+.top-bar {
+  grid-column-gap: 1.87em;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
 
-  .link-notification-bar {
-    grid-column-gap: 0.35em;
-    opacity: 0.7;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    transition: opacity 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    display: flex;
+.info-top-bar {
+  opacity: .7;
+  color: var(--white);
+  letter-spacing: -.02em;
+  font-size: .87em;
+  line-height: 120%;
+}
 
-    &:hover {
-      opacity: 1;
-    }
+.link-top-bar {
+  grid-column-gap: .35em;
+  opacity: .7;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  transition: opacity .3s cubic-bezier(.25, .46, .45, .94);
+  display: flex;
+}
 
-    .icon-notification-bar {
-      width: 1.125em;
-      height: 1.125em;
-    }
-  }
+.link-top-bar:hover {
+  opacity: 1;
+}
+
+.icon-top-bar {
+  width: 1.125em;
+  height: 1.125em;
+}
+
+.text-top-bar {
+  color: var(--white);
+  letter-spacing: -.02em;
+  font-size: .87em;
+  line-height: 120%;
 }
 
 @media screen and (max-width: 991px) {

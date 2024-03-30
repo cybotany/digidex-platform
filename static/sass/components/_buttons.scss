@@ -1,78 +1,147 @@
-@import 'static/sass/utils/_variables';
-@import 'static/sass/utils/_mixins';
-
-// Define color variables at the start for easy theme management
-$color-primary: $color-strong-green;
-$color-secondary: $color-heading;
-$color-accent: $color-strong-yellow;
-
-button,
-[type='button'],
-[type='reset'] {
-  border: 0;
-  cursor: pointer;
-  -webkit-appearance: button;
-}
-
-.base-button {
-  display: inline-block;
-  padding: 9px 15px;
-  background-color: #3898EC;
-  color: white;
-  border: 0;
-  line-height: inherit;
-  text-decoration: none;
-  cursor: pointer;
-  border-radius: 0;
-}
-input.base-button {
-  -webkit-appearance: button;
-}
-
-.block-button {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
+.button-desktop {
+  grid-column-gap: .5em;
+  justify-content: center;
   align-items: center;
-  margin-top: 1em;
-  grid-column-gap: 0.8em;
-  grid-row-gap: 0.8em;
+  display: flex;
+}
+
+.button-mobile {
+  grid-column-gap: .5em;
+  grid-row-gap: 1em;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+.button-hero {
+  grid-column-gap: .5em;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 
 .button {
-  @include button-base;
-  @include button-size;
+  background-color: var(--accent-a1);
+  color: var(--white);
+  letter-spacing: -.02em;
+  border-radius: 50em;
+  padding: .9em 1.8em;
+  font-size: 1.12em;
+  font-weight: 500;
+  line-height: 120%;
+  transition: box-shadow .3s cubic-bezier(.25, .46, .45, .94), background-color .3s cubic-bezier(.25, .46, .45, .94);
+}
 
-  background-color: $color-primary;
-  @include button-hover($color-primary);
+.button:hover {
+  box-shadow: 0 15px 40px -10px var(--accent-a1);
+}
 
-  &.yellow {
-    background-color: $color-accent;
-    color: $color-secondary;
-    @include button-hover($color-accent);
+.button.yellow {
+  background-color: var(--accent-a4);
+  color: var(--heading);
+}
+
+.button.yellow:hover {
+  box-shadow: 0 15px 40px -10px var(--accent-a4);
+}
+
+.button.dark {
+  background-color: var(--heading);
+}
+
+.button.dark:hover {
+  background-color: var(--accent-a1);
+}
+
+.button-small {
+  background-color: var(--accent-a1);
+  color: var(--white);
+  letter-spacing: -.02em;
+  border-radius: 50em;
+  padding: .7em 1.4em;
+  font-size: 1em;
+  font-weight: 500;
+  line-height: 120%;
+  transition: box-shadow .3s cubic-bezier(.25, .46, .45, .94), background-color .3s cubic-bezier(.25, .46, .45, .94);
+}
+
+.button-small:hover {
+  box-shadow: 0 15px 40px -10px var(--accent-a1);
+}
+
+.button-small.yellow {
+  background-color: var(--accent-a4);
+  color: var(--heading);
+}
+
+.button-small.yellow:hover {
+  box-shadow: 0 15px 40px -10px var(--accent-a4);
+}
+
+.button-small.dark {
+  background-color: var(--heading);
+}
+
+.button-small.dark:hover {
+  background-color: var(--accent-a1);
+}
+
+.button-outline-small {
+  box-shadow: 0 0 0 -10px var(--accent-a1), inset 0 0 0 2px var(--accent-a1);
+  color: var(--accent-a1);
+  letter-spacing: -.02em;
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 50em;
+  padding: .7em 1.4em;
+  font-size: 1em;
+  font-weight: 500;
+  line-height: 120%;
+  transition: box-shadow .3s cubic-bezier(.25, .46, .45, .94), color .3s cubic-bezier(.25, .46, .45, .94), background-color .3s cubic-bezier(.25, .46, .45, .94);
+}
+
+.button-outline-small:hover {
+  background-color: var(--accent-a1);
+  box-shadow: 0 15px 40px -10px var(--accent-a1), inset 0 0 0 2px var(--accent-a1);
+  color: var(--white);
+}
+
+.button-outline {
+  box-shadow: 0 0 0 -10px var(--accent-a1), inset 0 0 0 2px var(--accent-a1);
+  color: var(--accent-a1);
+  letter-spacing: -.02em;
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 50em;
+  padding: .9em 1.8em;
+  font-size: 1.12em;
+  font-weight: 500;
+  line-height: 120%;
+  transition: box-shadow .3s cubic-bezier(.25, .46, .45, .94), color .3s cubic-bezier(.25, .46, .45, .94), background-color .3s cubic-bezier(.25, .46, .45, .94);
+}
+
+.button-outline:hover {
+  background-color: var(--accent-a1);
+  box-shadow: 0 15px 40px -10px var(--accent-a1), inset 0 0 0 2px var(--accent-a1);
+  color: var(--white);
+}
+
+@media screen and (max-width: 767px) {
+  .button-desktop {
+    display: none;
   }
-
-  &.dark {
-    background-color: $color-secondary;
-    &:hover {
-      background-color: $color-primary;
-    }
+  .button-mobile {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: .5em;
+    margin-bottom: .8em;
+    padding-left: .5em;
+    padding-right: .5em;
+    display: flex;
   }
+}
 
-  &.outline {
-    background-color: transparent;
-    border: 1px solid $color-primary;
-    color: $color-primary;
-    box-shadow: inset 0 0 0 2px $color-primary;
-    
-    &:hover {
-      background-color: $color-primary;
-      color: $color-white;
-    }
-  }
-  
-  // Add additional size variant for demonstration
-  &.small {
-    @include button-size($padding: 0.7em 1.4em, $font-size: 1em);
+@media screen and (max-width: 479px) {
+  .button-hero {
+    grid-row-gap: .5em;
+    flex-direction: column;
   }
 }
