@@ -16,16 +16,14 @@ import os
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
-
-
 # Application definition
-
 INSTALLED_APPS = [
+    "base",
     "home",
     "search",
+    "accounts",
+    "blog",
+
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.embeds",
@@ -39,12 +37,21 @@ INSTALLED_APPS = [
     "wagtail",
     "modelcluster",
     "taggit",
+
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    "rest_framework",
+
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +63,21 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
 ]
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        # For each OAuth based provider, either add a ``SocialApp``
+        # (``socialaccount`` app) containing the required client
+        # credentials, or list them here:
+        'APP': {
+            'client_id': '123',
+            'secret': '456',
+            'key': ''
+        }
+    }
+}
 
 ROOT_URLCONF = "digidex.urls"
 
@@ -73,9 +94,15 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "wagtail.contrib.settings.context_processors.settings",
             ],
         },
     },
+]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 WSGI_APPLICATION = "digidex.wsgi.application"
@@ -85,9 +112,13 @@ WSGI_APPLICATION = "digidex.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ.get('CMS_DATABASE_NAME'),
+        'USER': os.environ.get('CMS_DATABASE_USER'),
+        'PASSWORD': os.environ.get('CMS_DATABASE_PASSWORD'),
+        'HOST': os.environ.get('CMS_DATABASE_HOST'),
+        'PORT': os.environ.get('CMS_DATABASE_PORT'),
     }
 }
 
@@ -156,10 +187,19 @@ STORAGES = {
     },
 }
 
-
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "digidex"
+
+WAGTAILADMIN_BASE_URL = "https://digidex.tech/admin"
+
+WAGTAILIMAGES_EXTENSIONS = ['gif', 'jpg', 'jpeg', 'png', 'webp', 'svg']
+
+WAGTAILSEARCH_BACKENDS = {
+    "default": {
+        "BACKEND": "wagtail.search.backends.database",
+    }
+}
 
 # Search
 # https://docs.wagtail.org/en/stable/topics/search/backends.html
@@ -172,3 +212,48 @@ WAGTAILSEARCH_BACKENDS = {
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 WAGTAILADMIN_BASE_URL = "http://example.com"
+
+#LOGIN_URL = '/authentication/login/'
+#LOGIN_REDIRECT_URL = '/authentication/login/'
+#WAGTAIL_FRONTEND_LOGIN_URL = LOGIN_URL
+# ALLAUTH settings
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
+#ACCOUNT_ADAPTER = 'project.users.adapter.MyAccountAdapter'
+
+ACCOUNT_USERNAME_VALIDATORS = 'some.module.validators.custom_username_validators'
+
+ACCOUNT_USERNAME_BLACKLIST = [
+    'admin', 'administrator', 'root', 'sysadmin', 'webmaster',
+    'support', 'helpdesk', 'moderator', 'superuser', 'guest', 
+    'anonymous', 'nobody', 'user', 'null', 'undefined', 'localhost',
+    'default', 'public', 'system', 'official', 'security', 'info',
+    'contact', 'feedback', 'no-reply', 'noreply', 'api', 'static',
+    'assets', 'img', 'admin', 'login', 'logout', 'signup', 'register',
+]
+
+ACCOUNT_USERNAME_MIN_LENGTH = 3
+
+ACCOUNT_PRESERVE_USERNAME_CASING = False
+
+ACCOUNT_FORMS = {
+    'add_email': 'allauth.account.forms.AddEmailForm',
+    'change_password': 'allauth.account.forms.ChangePasswordForm',
+    'login': 'allauth.account.forms.LoginForm',
+    'reset_password': 'allauth.account.forms.ResetPasswordForm',
+    'reset_password_from_key': 'allauth.account.forms.ResetPasswordKeyForm',
+    'set_password': 'allauth.account.forms.SetPasswordForm',
+    'signup': 'allauth.account.forms.SignupForm',
+    'user_token': 'allauth.account.forms.UserTokenForm',
+}
+
+#ACCOUNT_SIGNUP_FORM_CLASS = 'myapp.forms.SignupForm'
+
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
+
+ACCOUNT_EMAIL_NOTIFICATIONS = True
+
+ACCOUNT_EMAIL_REQUIRED = True
+
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
