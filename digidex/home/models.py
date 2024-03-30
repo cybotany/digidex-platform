@@ -1,13 +1,20 @@
 from django.db import models
 from wagtail.models import Page
 from wagtail.fields import StreamField
-from wagtail.admin.panels import FieldPanel
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 
-from base.blocks import PageContentBlock
+from base.blocks.page_content_block import PageContentBlock
 
 class HomePage(Page):
-    heading_title = models.CharField(max_length=255, blank=True, null=True)
-    heading_text = models.TextField(blank=True, null=True)
+    title = models.CharField(
+        max_length=255,
+        blank=True,
+        null=True
+    )
+    text = models.TextField(
+        blank=True,
+        null=True
+    )
     body = StreamField(
         [
             ('content', PageContentBlock()),
@@ -16,8 +23,13 @@ class HomePage(Page):
     )
 
     content_panels = Page.content_panels + [
-        FieldPanel('heading_title'),
-        FieldPanel('heading_text'),
+        MultiFieldPanel(
+            [
+                FieldPanel('title'),
+                FieldPanel('text'),
+            ],
+            heading="Page Heading",
+        ),
         FieldPanel('body'),
     ]
 
