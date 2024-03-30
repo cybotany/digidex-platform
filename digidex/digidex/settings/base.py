@@ -217,7 +217,7 @@ WAGTAILADMIN_BASE_URL = "http://example.com"
 #LOGIN_REDIRECT_URL = '/authentication/login/'
 #WAGTAIL_FRONTEND_LOGIN_URL = LOGIN_URL
 # ALLAUTH settings
-
+AUTH_USER_MODEL = 'accounts.User'
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
 #ACCOUNT_ADAPTER = 'project.users.adapter.MyAccountAdapter'
