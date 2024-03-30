@@ -4,7 +4,6 @@
   align-items: center;
   display: flex;
 }
-
 .button-mobile {
   grid-column-gap: .5em;
   grid-row-gap: 1em;
@@ -19,7 +18,6 @@
   align-items: center;
   display: flex;
 }
-
 .button {
   background-color: var(--accent-a1);
   color: var(--white);
@@ -31,28 +29,22 @@
   line-height: 120%;
   transition: box-shadow .3s cubic-bezier(.25, .46, .45, .94), background-color .3s cubic-bezier(.25, .46, .45, .94);
 }
-
 .button:hover {
   box-shadow: 0 15px 40px -10px var(--accent-a1);
 }
-
 .button.yellow {
   background-color: var(--accent-a4);
   color: var(--heading);
 }
-
 .button.yellow:hover {
   box-shadow: 0 15px 40px -10px var(--accent-a4);
 }
-
 .button.dark {
   background-color: var(--heading);
 }
-
 .button.dark:hover {
   background-color: var(--accent-a1);
 }
-
 .button-small {
   background-color: var(--accent-a1);
   color: var(--white);
@@ -64,28 +56,22 @@
   line-height: 120%;
   transition: box-shadow .3s cubic-bezier(.25, .46, .45, .94), background-color .3s cubic-bezier(.25, .46, .45, .94);
 }
-
 .button-small:hover {
   box-shadow: 0 15px 40px -10px var(--accent-a1);
 }
-
 .button-small.yellow {
   background-color: var(--accent-a4);
   color: var(--heading);
 }
-
 .button-small.yellow:hover {
   box-shadow: 0 15px 40px -10px var(--accent-a4);
 }
-
 .button-small.dark {
   background-color: var(--heading);
 }
-
 .button-small.dark:hover {
   background-color: var(--accent-a1);
 }
-
 .button-outline-small {
   box-shadow: 0 0 0 -10px var(--accent-a1), inset 0 0 0 2px var(--accent-a1);
   color: var(--accent-a1);
@@ -98,13 +84,11 @@
   line-height: 120%;
   transition: box-shadow .3s cubic-bezier(.25, .46, .45, .94), color .3s cubic-bezier(.25, .46, .45, .94), background-color .3s cubic-bezier(.25, .46, .45, .94);
 }
-
 .button-outline-small:hover {
   background-color: var(--accent-a1);
   box-shadow: 0 15px 40px -10px var(--accent-a1), inset 0 0 0 2px var(--accent-a1);
   color: var(--white);
 }
-
 .button-outline {
   box-shadow: 0 0 0 -10px var(--accent-a1), inset 0 0 0 2px var(--accent-a1);
   color: var(--accent-a1);
@@ -117,11 +101,86 @@
   line-height: 120%;
   transition: box-shadow .3s cubic-bezier(.25, .46, .45, .94), color .3s cubic-bezier(.25, .46, .45, .94), background-color .3s cubic-bezier(.25, .46, .45, .94);
 }
-
 .button-outline:hover {
   background-color: var(--accent-a1);
   box-shadow: 0 15px 40px -10px var(--accent-a1), inset 0 0 0 2px var(--accent-a1);
   color: var(--white);
+}
+
+.close-button {
+  width: auto;
+  height: auto;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: .25em;
+  display: flex;
+}
+.remove-button {
+  color: rgba(20, 23, 24, .7);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
+  text-decoration: none;
+  transition: color .3s cubic-bezier(.25, .46, .45, .94);
+}
+.remove-button:hover {
+  color: var(--accent-a1);
+}
+.checkout-button {
+  background-color: var(--accent-a1);
+  color: var(--white);
+  letter-spacing: -.02em;
+  border-radius: 50em;
+  margin-top: 1em;
+  padding: .9em 1.8em;
+  font-size: 1.12em;
+  font-weight: 500;
+  line-height: 120%;
+  transition: box-shadow .3s cubic-bezier(.25, .46, .45, .94), background-color .3s cubic-bezier(.25, .46, .45, .94);
+}
+.checkout-button:hover {
+  box-shadow: 0 15px 40px -10px var(--accent-a1);
+}
+.add-to-cart-button {
+  background-color: var(--accent-a1);
+  color: var(--white);
+  letter-spacing: -.02em;
+  border-radius: 50em;
+  padding: .9em 1.8em;
+  font-size: 1.12em;
+  font-weight: 500;
+  line-height: 120%;
+  transition: box-shadow .3s cubic-bezier(.25, .46, .45, .94), background-color .3s cubic-bezier(.25, .46, .45, .94);
+}
+.add-to-cart-button:hover {
+  box-shadow: 0 15px 40px -10px var(--accent-a1);
+}
+.buy-now-button {
+  background-color: var(--accent-a1);
+  color: var(--white);
+  letter-spacing: -.02em;
+  border-radius: 50em;
+  margin-top: .8em;
+  padding: .9em 1.8em;
+  font-size: 1.12em;
+  font-weight: 500;
+  line-height: 120%;
+  transition: box-shadow .3s cubic-bezier(.25, .46, .45, .94), background-color .3s cubic-bezier(.25, .46, .45, .94);
+}
+.buy-now-button:hover {
+  box-shadow: 0 15px 40px -10px var(--accent-a1);
+}
+.buy-now-button.yellow {
+  background-color: var(--accent-a4);
+  color: var(--heading);
+}
+.buy-now-button.yellow:hover {
+  box-shadow: 0 15px 40px -10px var(--accent-a4);
 }
 
 @media screen and (max-width: 767px) {

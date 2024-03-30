@@ -1,5 +1,9 @@
 @import 'static/sass/utils/_variables';
 
+.body-blue {
+  background-color: #0d32f5;
+}
+
 @mixin gradient-line($direction, $color-start, $color-end) {
   background-image: linear-gradient($direction, $color-start, $color-end);
 }

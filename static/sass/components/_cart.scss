@@ -1,0 +1,98 @@
+.cart {
+  flex: none;
+}
+.cart-button {
+  background-color: var(--accent-a1);
+  border-radius: 50em;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: .6em;
+  transition: box-shadow .3s cubic-bezier(.25, .46, .45, .94);
+  display: flex;
+  position: relative;
+}
+.cart-button:hover {
+  box-shadow: 0 15px 30px -8px var(--accent-a1);
+}
+.cart-wrapper {
+  background-color: rgba(0, 0, 0, 0);
+}
+.cart-container {
+  width: 100%;
+  max-width: 30em;
+  min-width: 22em;
+  background-color: var(--white);
+  border-radius: .87em;
+  margin-top: .7em;
+  box-shadow: 0 15px 25px -5px rgba(20, 23, 24, .15);
+}
+.cart-header {
+  border-bottom-color: var(--border);
+  padding: 1em 1.5em;
+}
+.cart-list {
+  padding: 1em 1.5em;
+}
+.cart-item {
+  align-items: flex-start;
+  padding-top: .7em;
+  padding-bottom: .7em;
+}
+.cart-item-name {
+  color: var(--heading);
+  letter-spacing: -.02em;
+  font-size: 1.05em;
+  font-weight: 600;
+  line-height: 130%;
+}
+.cart-item-price {
+  color: var(--accent-a1);
+  margin-bottom: .6em;
+  font-size: .9em;
+  font-weight: 600;
+  line-height: 120%;
+}
+.cart-quantity {
+  width: 3.7em;
+  height: 2.4em;
+  border-color: var(--border);
+  background-color: var(--white);
+  color: var(--heading);
+  border-radius: .62em;
+  margin-bottom: .8em;
+  padding: .5em .5em .5em .8em;
+  font-size: .9em;
+  font-weight: 400;
+  line-height: 1.3em;
+  transition: border-color .3s cubic-bezier(.25, .46, .45, .94);
+}
+.cart-quantity:focus {
+  border-color: var(--accent-a1);
+}
+.cart-line-item {
+  margin-bottom: 1em;
+  padding-top: .3em;
+  padding-bottom: .3em;
+  font-size: .9em;
+  line-height: 140%;
+}
+.cart-empty-state {
+  flex-direction: column;
+  padding-top: 3.5em;
+  padding-bottom: 3.5em;
+}
+.cart-error-state {
+  background-color: rgba(188, 0, 3, .07);
+  border-radius: .62em;
+  margin: 0 1.5em 1.5em;
+  padding: 1em 1.4em;
+}
+
+@media screen and (max-width: 479px) {
+  .cart-container {
+    min-width: auto;
+    border-radius: 0;
+    margin-top: 0;
+  }
+}

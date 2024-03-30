@@ -219,3 +219,65 @@
     padding: 2em;
   }
 }
+
+.solutions {
+  grid-row-gap: 1.2em;
+  background-color: var(--white);
+  border-radius: .87em;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 2.5em;
+  display: flex;
+  position: relative;
+  box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
+}
+.yellow-tag {
+  background-color: var(--accent-a4);
+  color: var(--heading);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  border-radius: .6em;
+  padding: .7em 1.1em;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 110%;
+  position: absolute;
+  top: -.8em;
+  bottom: auto;
+  left: auto;
+  right: 2em;
+}
+.green-tag {
+  background-color: var(--accent-a3);
+  color: var(--white);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  border-radius: .6em;
+  padding: .7em 1.1em;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 110%;
+  position: absolute;
+  top: -.8em;
+  bottom: auto;
+  left: auto;
+  right: 2em;
+}
+
+@media screen and (max-width: 767px) {
+  .solutions {
+    padding: 2.2em;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .solutions {
+    padding: 2em;
+  }
+  .solutions-large {
+    padding: 2em;
+  }
+}

@@ -10,7 +10,6 @@
   position: relative;
   overflow: hidden;
 }
-
 .review-left {
   width: 100%;
   flex-direction: column;
@@ -18,7 +17,6 @@
   align-items: stretch;
   display: flex;
 }
-
 .review {
   grid-column-gap: .94em;
   grid-row-gap: .94em;
@@ -33,12 +31,10 @@
   display: flex;
   box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
 }
-
 .paragraph-review {
   font-size: .87em;
   line-height: 155%;
 }
-
 .review-name {
   color: var(--heading);
   letter-spacing: -.02em;
@@ -46,7 +42,6 @@
   font-weight: 500;
   line-height: 130%;
 }
-
 .stars {
   grid-column-gap: .25em;
   grid-row-gap: .25em;
@@ -55,12 +50,10 @@
   align-items: center;
   display: flex;
 }
-
 .icon-star {
   width: 1.13em;
   height: 1.13em;
 }
-
 .reviews-wrapper {
   width: 100%;
   flex-direction: column;
@@ -68,11 +61,9 @@
   align-items: stretch;
   display: flex;
 }
-
 .reviews-wrapper.right {
   justify-content: flex-end;
 }
-
 .review-right {
   width: 100%;
   flex-direction: column;
@@ -80,7 +71,6 @@
   align-items: stretch;
   display: flex;
 }
-
 .gradient-reviews {
   z-index: 50;
   background-image: linear-gradient(to bottom, var(--background), rgba(244, 246, 247, 0) 10%, rgba(244, 246, 247, 0) 90%, var(--background));
@@ -95,7 +85,6 @@
   .block-reviews {
     flex-direction: column;
   }
-
   .review {
     padding: 1.6em;
   }
