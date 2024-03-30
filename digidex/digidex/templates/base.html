@@ -23,6 +23,12 @@
         <base target="_blank">
         {% endif %}
 
+        {# Add supported color schemes: #}
+        <meta name="color-scheme" content="light dark">
+
+        {# Add a favicon with inline SVG: #}
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍩</text></svg>"/>
+
         {# Global stylesheets #}
         <link rel="stylesheet" type="text/css" href="{% static 'css/digidex.css' %}">
 
@@ -32,9 +38,11 @@
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
-        {% wagtailuserbar %}
-
-        {% block content %}{% endblock %}
+        {% include "includes/header.html" %}
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+        {% include "includes/footer.html" %}
 
         {# Global javascript #}
         <script type="text/javascript" src="{% static 'js/digidex.js' %}"></script>
