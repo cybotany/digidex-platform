@@ -7,12 +7,12 @@ from base.blocks.page_content_block import PageContentBlock
 
 
 class HomePage(Page):
-    heading_title = models.CharField(
+    heading = models.CharField(
         max_length=255,
         blank=True,
         null=True
     )
-    heading_paragraph = models.TextField(
+    paragraph = models.TextField(
         blank=True,
         null=True
     )
@@ -26,8 +26,8 @@ class HomePage(Page):
     content_panels = Page.content_panels + [
         MultiFieldPanel(
             [
-                FieldPanel('title'),
-                FieldPanel('text'),
+                FieldPanel('heading'),
+                FieldPanel('paragraph'),
             ],
             heading="Page Heading",
         ),
