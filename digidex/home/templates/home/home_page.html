@@ -1,22 +1,13 @@
 <!-- home/home_page.html -->
 {% extends "base.html" %}
-{% load wagtailcore_tags %}
+{% load static %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/welcome_page.css' %}">
+{% endblock extra_css %}
 
 {% block content %}
-  <section class="page-heading">
-    <div class="content">
-      <div class="block-page-heading">
-        <h1 class="title-page-heading">{{ page.heading_title }}</h1>
-        {% if page.heading_text %}
-          <p class="text-page-heading">{{ page.heading_text }}</p>
-        {% endif %}
-      </div>
-    </div>
-  </section>
-
-  <!-- Rendering Content Blocks -->
-  {% for block in page.body %}
-    {% include_block block %}
-  {% endfor %}
-
-{% endblock %}
+  {% include 'home/welcome_page.html' %}
+{% endblock content %}
