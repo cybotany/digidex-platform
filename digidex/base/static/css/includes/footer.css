@@ -121,15 +121,43 @@
 .link-footer-down:hover {
   color: var(--accent-a1);
 }
-@media screen and (min-width: 991px) {
 
-}
-@media screen and (max-width: 991px) {
-
-}
 @media screen and (max-width: 767px) {
+  .section-footer {
+    padding-top: 3em;
+  }
 
+  .grid-footer {
+    grid-column-gap: 2.5em;
+    grid-row-gap: 2.5em;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 6em;
+  }
+
+  .block-footer-down {
+    margin-bottom: 2em;
+  }
 }
 @media screen and (max-width: 479px) {
+  .section-footer {
+    padding-top: 2.5em;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+  }
 
+  .grid-footer {
+    grid-template-columns: 1fr;
+    margin-bottom: 5em;
+  }
+
+  .block-footer {
+    text-align: center;
+    align-items: center;
+  }
+
+  .block-footer-down {
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 1.5em;
+  }
 }
