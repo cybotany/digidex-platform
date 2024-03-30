@@ -6,12 +6,12 @@ from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from base.blocks.page_content_block import PageContentBlock
 
 class HomePage(Page):
-    title = models.CharField(
+    heading_title = models.CharField(
         max_length=255,
         blank=True,
         null=True
     )
-    text = models.TextField(
+    heading_paragraph = models.TextField(
         blank=True,
         null=True
     )
