@@ -1,3 +1,142 @@
+.grid {
+  grid-column-gap: 0em;
+  grid-row-gap: 0em;
+  grid-template-rows: auto;
+  align-items: center;
+}
+
+.heading {
+  max-width: 9em;
+  margin-bottom: .5em;
+}
+
+.heading.large {
+  max-width: 13em;
+}
+
+.heading.banner {
+  color: var(--white);
+  margin-bottom: .7em;
+}
+
+.block-right {
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: 15%;
+  display: flex;
+}
+
+.paragraph {
+  max-width: 30em;
+  margin-bottom: 2.2em;
+}
+
+.subtitle {
+  background-color: var(--white);
+  color: var(--heading);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  border-radius: .6em;
+  margin-bottom: .7em;
+  padding: .5em 1em;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
+  box-shadow: 0 10px 20px -10px rgba(20, 23, 24, .05);
+}
+
+.subtitle.white {
+  color: var(--white);
+  background-color: rgba(255, 255, 255, .1);
+}
+
+.subtitle.blue {
+  background-color: var(--accent-b1);
+  color: var(--accent-a1);
+}
+
+.lines-b1 {
+  z-index: 5;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  padding-left: 4%;
+  padding-right: 13%;
+  display: flex;
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}
+
+.lines-b2 {
+  z-index: 5;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  padding-top: 12%;
+  padding-bottom: 12%;
+  display: flex;
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}
+
+.grid-numbers {
+  grid-column-gap: .87em;
+  grid-row-gap: .87em;
+  grid-template-rows: auto;
+  align-items: start;
+}
+
+.numbers {
+  grid-column-gap: .5em;
+  grid-row-gap: .5em;
+  background-color: var(--accent-b1);
+  border-radius: .64em;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 1.2em 1.4em 1.4em;
+  display: flex;
+}
+
+.numbers.green {
+  background-color: var(--accent-b3);
+}
+
+.icon-numbers {
+  width: 2em;
+  height: 2em;
+}
+
+.heading-numbers {
+  color: var(--accent-a1);
+  font-weight: 500;
+}
+
+.heading-numbers.green {
+  color: var(--accent-a3);
+}
+
+.text-numbers {
+  max-width: 11em;
+  color: var(--accent-a1);
+  letter-spacing: -.02em;
+  font-size: .87em;
+  font-weight: 500;
+  line-height: 130%;
+}
+
+.text-numbers.green {
+  color: var(--accent-a3);
+}
+
 .grid-about {
   grid-column-gap: 1.5em;
   grid-row-gap: 1.5em;
