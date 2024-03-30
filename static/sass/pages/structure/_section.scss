@@ -41,6 +41,10 @@
   padding: 3.75em 2em;
   display: flex;
 }
+.content {
+  width: 100%;
+  max-width: 75em;
+}
 
 @media screen and (max-width: 991px) {
 .section-top-bar {

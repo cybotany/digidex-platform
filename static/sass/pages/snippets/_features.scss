@@ -8,19 +8,16 @@
   margin-bottom: 1em;
   display: flex;
 }
-
 .block-heading.center {
   text-align: center;
   align-items: center;
 }
-
 .grid-features {
   grid-column-gap: 2em;
   grid-row-gap: 1.8em;
   grid-template-rows: auto;
   grid-template-columns: 1fr 1fr 1fr;
 }
-
 .features {
   grid-column-gap: 1.3em;
   grid-row-gap: 1.3em;
@@ -31,7 +28,6 @@
   padding-bottom: 1.2em;
   display: flex;
 }
-
 .block-heading-features {
   grid-column-gap: 1em;
   grid-row-gap: 1em;
@@ -39,12 +35,10 @@
   align-items: center;
   display: flex;
 }
-
 .icon-features {
   width: 2em;
   height: 2em;
 }
-
 .paragraph-features {
   max-width: 20em;
 }
@@ -60,7 +54,6 @@
     grid-row-gap: 1.2em;
     grid-template-columns: 1fr;
   }
-
   .features {
     grid-column-gap: 1em;
     grid-row-gap: 1em;
