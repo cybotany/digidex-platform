@@ -143,3 +143,15 @@
   object-fit: cover;
   border-radius: .87em;
 }
+@media screen and (min-width: 991px) {
+
+}
+@media screen and (max-width: 991px) {
+
+}
+@media screen and (max-width: 767px) {
+
+}
+@media screen and (max-width: 479px) {
+
+}

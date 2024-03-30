@@ -1,0 +1,31 @@
+
+@media screen and (min-width: 991px) {
+
+}
+@media screen and (max-width: 991px) {
+    .section-top-bar {
+        padding-top: .8em;
+        padding-bottom: .8em;
+      }
+    
+      .top-bar-block {
+        grid-row-gap: .6em;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+}
+@media screen and (max-width: 767px) {
+
+}
+@media screen and (max-width: 479px) {
+    .section-top-bar {
+        padding-left: 1.5em;
+        padding-right: 1.5em;
+      }
+    
+      .top-bar {
+        grid-row-gap: .6em;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+}

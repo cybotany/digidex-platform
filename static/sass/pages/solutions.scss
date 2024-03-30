@@ -2,17 +2,16 @@
 @import 'static/sass/utils/_mixins';
 
 .grid-solutions {
-  @include grid-basic($col-gap: 1.5em, $row-gap: 1.5em, $rows: auto, $columns: repeat(4, 1fr), $align: center);
-  padding: 2em;
+  @include grid-basic($col-gap: 1.5em, $row-gap: 1.5em, $columns: repeat(4, 1fr));
+  grid-template-rows: auto;
+  align-items: start;
 
-  @include grid-responsive('tablet') {
+  @include grid-responsive('desktop') {
     @include grid-basic($col-gap: 1.13em, $row-gap: 1.13em, $columns: repeat(2, 1fr));
-    padding: 2em;
   }
   
-  @include grid-responsive('mobile') {
+  @include grid-responsive('tablet') {
     @include grid-basic($col-gap: .87em, $row-gap: .87em, $columns: 1fr);
-    padding: 2em;
   }
 }
 .solutions {
@@ -106,10 +105,18 @@
   @include grid-basic($col-gap: 1.5em, $row-gap: 1.5em, $columns: repeat(2, 1fr));
   margin-bottom: 1.5em;
   padding: 2em;
+
+  @include grid-responsive('large') {
+    @include grid-basic($col-gap: 1.13em, $row-gap: 1.13em, $columns: 1fr);
+    margin-bottom: .87em;
+  }
+
+  @include grid-responsive('tablet') {
+    @include grid-basic($col-gap: .87em, $row-gap: .87em, $columns: 1fr);
+    margin-bottom: .87em;
+  }
   
   @include grid-responsive('mobile') {
-    @include grid-basic($col-gap: .87em, $row-gap: .87em, $columns: 1fr);
-    padding: 2em;
   }
 }
 .solutions-large.green {
@@ -177,4 +184,11 @@
   justify-content: flex-start;
   align-items: flex-start;
   display: flex;
+}
+
+
+@media screen and (max-width: 479px) {
+  .solutions {
+    padding: 2em;
+  }
 }

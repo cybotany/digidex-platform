@@ -9,6 +9,9 @@
   padding: .4em 2em;
   display: flex;
 }
+.section-top-bar {
+  @include section-style(accent-a1, .4em 2em);
+}
 
 .content {
   width: 100%;

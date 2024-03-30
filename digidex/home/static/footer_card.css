@@ -121,3 +121,15 @@
 .link-footer-down:hover {
   color: var(--accent-a1);
 }
+@media screen and (min-width: 991px) {
+
+}
+@media screen and (max-width: 991px) {
+
+}
+@media screen and (max-width: 767px) {
+
+}
+@media screen and (max-width: 479px) {
+
+}

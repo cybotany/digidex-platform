@@ -1,6 +1,19 @@
 @import 'static/sass/utils/_variables';
 
 // Define Mixins
+@mixin section-style($background-color: null, $padding: null, $flex-direction: column, $justify-content: center, $align-items: center, $display: flex) {
+  background-color: var(--#{$background-color});
+  padding: $padding;
+  flex-direction: $flex-direction;
+  justify-content: $justify-content;
+  align-items: $align-items;
+  display: $display;
+  
+  &.padding-0 {
+    padding-bottom: 0;
+  }
+}
+
 @mixin grid-basic($col-gap: 16px, $row-gap: 16px, $rows: auto, $columns: 1fr 1fr, $align: start) {
   display: grid;
   grid-column-gap: $col-gap;
@@ -21,10 +34,6 @@
     }
   } @else if $breakpoint == 'large' {
     @media screen and (max-width: 991px) {
-      @content;
-    }
-  } @else if $breakpoint == 'extra-large' {
-    @media screen and (min-width: 992px) {
       @content;
     }
   }

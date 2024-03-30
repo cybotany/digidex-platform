@@ -161,3 +161,38 @@
   margin-left: 2.7em;
   margin-right: 2.7em;
 }
+
+
+@media screen and (min-width: 991px) {
+
+}
+@media screen and (max-width: 991px) {
+  .grid-solutions {
+    grid-column-gap: 1.13em;
+    grid-row-gap: 1.13em;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media screen and (max-width: 767px) {
+  .grid-solutions {
+    grid-column-gap: .87em;
+    grid-row-gap: .87em;
+  }
+  .solutions {
+    padding: 2.2em;
+  }
+  .logo-client {
+    max-height: 1.5em;
+    margin-left: 1.8em;
+    margin-right: 1.8em;
+  }
+}
+@media screen and (max-width: 479px) {
+  .grid-solutions {
+    grid-template-columns: 1fr;
+  }
+
+  .solutions {
+    padding: 2em;
+  }
+}
