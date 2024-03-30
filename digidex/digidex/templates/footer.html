@@ -4,8 +4,9 @@
   <section class="section-footer">
     <div class="content">
       <div class="w-layout-grid grid-footer">
-        <div id="w-node-d0458a27-e73f-e612-462d-65302581b228-2581b225" class="block-footer"><img src="images/logo.svg" loading="eager" alt="" class="logo-footer">
-          <div class="paragraph-footer">Fast, Reliable, Secure - Your Website Deserves the Best Hosting<br></div>
+        <div id="w-node-d0458a27-e73f-e612-462d-65302581b228-2581b225" class="block-footer">
+          <img src="images/logo.svg" loading="eager" alt="" class="logo-footer">
+          <div class="paragraph-footer">{% get_footer_text %}<br></div>
           <div class="block-social">
             <a href="tel:+1(888)123-4567" class="social-link w-inline-block"><img src="images/phone-voice.svg" loading="eager" alt="" class="icon-social"></a>
             <a href="mailto:support@yoursite.com" class="social-link w-inline-block"><img src="images/email.svg" loading="eager" alt="" class="icon-social"></a>
@@ -46,20 +47,4 @@
       </div>
     </div>
   </section>
-    <p>Built with Wagtail</p>
-            <p>
-                Follow me on:
-                {% if github_url %}
-                    <a href="{{ github_url }}">GitHub</a>
-                {% endif %}
-                {% if twitter_url %}
-                    <a href="{{ twitter_url }}">Twitter</a>
-                {% endif %}
-                {% if mastodon_url %}
-                    <a href="{{ mastodon_url }}">Mastodon</a>
-                {% endif %}
-            </p>
-        {% endif %}
-    {% endwith %}
-    {% get_footer_text %}
 </footer>
