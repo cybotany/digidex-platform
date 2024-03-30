@@ -1,21 +1,22 @@
+<!-- home/home_page.html -->
 {% extends "base.html" %}
-{% load static %}
-
-{% block body_class %}template-homepage{% endblock %}
-
-{% block extra_css %}
-
-{% comment %}
-Delete the line below if you're just getting started and want to remove the welcome screen!
-{% endcomment %}
-<link rel="stylesheet" href="{% static 'css/welcome_page.css' %}">
-{% endblock extra_css %}
+{% load wagtailcore_tags %}
 
 {% block content %}
+  <section class="page-heading">
+    <div class="content">
+      <div class="block-page-heading">
+        <h1 class="title-page-heading">{{ page.heading_title }}</h1>
+        {% if page.heading_text %}
+          <p class="text-page-heading">{{ page.heading_text }}</p>
+        {% endif %}
+      </div>
+    </div>
+  </section>
 
-{% comment %}
-Delete the line below if you're just getting started and want to remove the welcome screen!
-{% endcomment %}
-{% include 'home/welcome_page.html' %}
+  <!-- Rendering Content Blocks -->
+  {% for block in page.body %}
+    {% include_block block %}
+  {% endfor %}
 
-{% endblock content %}
+{% endblock %}
