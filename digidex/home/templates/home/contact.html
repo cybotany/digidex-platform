@@ -1,3 +1,4 @@
+{% load static %}
   <section class="section">
     <div class="content">
       <div class="block-heading center">
@@ -8,7 +9,7 @@
         <div class="contact-lottie">
           <a href="#" class="contact-lottie-link base-inline-block">
             <div class="block-icon-contact-lottie">
-              <img src="images/chat-launch.svg" loading="eager" alt="" class="icon-contact-lottie">
+              <img src="{% static 'images/bx/chat-launch.svg' %}" loading="eager" alt="" class="icon-contact-lottie">
             </div>
             <div class="block-heading-contact-lottie">
               <h4 class="heading-contact-lottie">Chat us</h4>
@@ -17,7 +18,7 @@
           </a>
           <a href="mailto:support@yoursite.com" class="contact-lottie-link a2 base-inline-block">
             <div class="block-icon-contact-lottie">
-              <img src="images/email.svg" loading="eager" alt="" class="icon-contact-lottie">
+              <img src="{% static 'images/bx/email' %}" loading="eager" alt="" class="icon-contact-lottie">
             </div>
             <div class="block-heading-contact-lottie">
               <h4 class="heading-contact-lottie">Email us</h4>
@@ -26,7 +27,7 @@
           </a>
           <a href="tel:+1(888)123-4567" class="contact-lottie-link a3 base-inline-block">
             <div class="block-icon-contact-lottie">
-              <img src="images/phone-voice.svg" loading="eager" alt="" class="icon-contact-lottie">
+              <img src="{% static 'images/bx/phone-voice' %}" loading="eager" alt="" class="icon-contact-lottie">
             </div>
             <div class="block-heading-contact-lottie">
               <h4 class="heading-contact-lottie">Call us</h4>
@@ -36,24 +37,24 @@
         </div>
         <div data-w-id="" class="lottie">
           <div class="lines-c1">
-            <div style="width:1px;height:0%" class="line-w"></div>
-            <div style="width:1px;height:0%" class="line-w"></div>
-            <div style="width:1px;height:0%" class="line-w"></div>
+            <div class="line-w"></div>
+            <div class="line-w"></div>
+            <div class="line-w"></div>
           </div>
           <div class="lines-c2">
-            <div style="width:0%;height:1px" class="line-h"></div>
-            <div style="width:0%;height:1px" class="line-h"></div>
-            <div style="width:0%;height:1px" class="line-h"></div>
-            <div style="width:0%;height:1px" class="line-h"></div>
-            <div style="width:0%;height:1px" class="line-h"></div>
-            <div style="width:0%;height:1px" class="line-h"></div>
-            <div style="width:0%;height:1px" class="line-h"></div>
-            <div style="width:0%;height:1px" class="line-h"></div>
+            <div class="line-h"></div>
+            <div class="line-h"></div>
+            <div class="line-h"></div>
+            <div class="line-h"></div>
+            <div class="line-h"></div>
+            <div class="line-h"></div>
+            <div class="line-h"></div>
+            <div class="line-h"></div>
           </div>
           <div class="block-lottie">
-            <div class="lottie-animation-1" data-w-id="" data-animation-type="lottie" data-src="documents/Lottie-C1-White.json" data-loop="0" data-direction="1" data-autoplay="0" data-is-ix2-target="1" data-renderer="svg" data-default-duration="2.5" data-duration="0"></div>
-            <div class="lottie-animation-2" data-w-id="" data-animation-type="lottie" data-src="documents/Lottie-C2-Blue.json" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="12.5" data-duration="0"></div>
-            <div class="lottie-animation-2-blur" data-w-id="" data-animation-type="lottie" data-src="documents/Lottie-C2-Blue.json" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="12.5" data-duration="0"></div>
+            <div class="lottie-animation-1" data-w-id="" data-animation-type="lottie" data-src="{% static 'documents/Lottie-C1-White.json' %}" data-loop="0" data-direction="1" data-autoplay="0" data-is-ix2-target="1" data-renderer="svg" data-default-duration="2.5" data-duration="0"></div>
+            <div class="lottie-animation-2" data-w-id="" data-animation-type="lottie" data-src="{% static 'documents/Lottie-C2-Blue.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="12.5" data-duration="0"></div>
+            <div class="lottie-animation-2-blur" data-w-id="" data-animation-type="lottie" data-src="{% static 'documents/Lottie-C2-Blue.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="12.5" data-duration="0"></div>
           </div>
         </div>
       </div>
