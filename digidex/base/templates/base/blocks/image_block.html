@@ -1,6 +1,6 @@
 {% load wagtailimages_tags %}
 
-<figure style="max-width:882pxpx" class="base-richtext-align-fullwidth base-richtext-figure-type-image">
+<figure style="max-width:882px" class="base-richtext-align-fullwidth base-richtext-figure-type-image">
     {% image self.image fill-600x338 loading="lazy" %}
     <figcaption>{{ self.caption }} - {{ self.attribution }}</figcaption>
 </figure>

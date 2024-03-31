@@ -13,7 +13,7 @@ from taggit.models import TaggedItemBase
 from base.blocks import HeadingBlock
 
 class BlogIndexPage(Page):
-    body = StreamField([
+    intro = StreamField([
         ('heading', HeadingBlock()),
     ],
     null=True,
@@ -21,19 +21,13 @@ class BlogIndexPage(Page):
     )
 
     content_panels = Page.content_panels + [
-        FieldPanel('body'),
+        FieldPanel('intro'),
     ]
 
     def get_context(self, request):
         context = super().get_context(request)
         blogpages = self.get_children().live().order_by('-first_published_at')
-        context['blogpages'] = {
-            'latest': None,
-            'older': [],
-        }
-        if blogpages.exists():
-            context['blogpages']['latest'] = blogpages.first()
-            context['blogpages']['older'] = blogpages[1:]
+        context['blogpages'] = blogpages
         return context
 
 

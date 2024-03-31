@@ -2,62 +2,60 @@
 {% load static wagtailcore_tags %}
 
 {% block content %}
-  {% for block in page.body %}
+  {% for block in page.intro %}
     {% include_block block %}
   {% endfor %}
+  
   <section class="section">
     <div class="content">
-      <div class="collection-list-wrapper-posts large base-dyn-list">
-        <div role="list" class="collection-list-posts large base-dyn-items">
-          <div role="listitem" class="base-dyn-item">
-            <div class="block-post large">
-              <a href="#" class="link-post-thumbnail large base-inline-block">
-                <img alt="" loading="eager" src="{% static '' %}" class="image-post-thumbnail large">
-              </a>
-              <div class="post large">
-                <div class="date"></div>
-                <a href="#" class="link-heading-post large base-inline-block">
-                  <h3 class="heading-post"></h3>
-                </a>
-                <p class="paragraph-post large"></p>
-                <a href="#" class="link-block base-inline-block">
-                  <div class="text-link">Read more</div>
-                  <div class="block-icon-link">
-                    <img src="{% static 'images/bx/arrow.svg' %}" loading="eager" alt="" class="icon-link"></div>
-                </a>
+      {% if blogposts %}
+        <div class="collection-list-wrapper-posts large base-dyn-list">
+          <div role="list" class="collection-list-posts large base-dyn-items">
+            {% with blogposts.first as featured_post %}
+              <div role="listitem" class="base-dyn-item">
+                <div class="block-post large">
+                  <a href="{{ featured_post.url }}" class="link-post-thumbnail large base-inline-block">
+                    {% image featured_post.specific.main_image fill-600x338 as img %}
+                    <img alt="" loading="eager" src="{{ img.url }}" class="image-post-thumbnail large">
+                  </a>
+                  <div class="post large">
+                    <div class="date">{{ featured_post.specific.date }}</div>
+                    <a href="{{ featured_post.url }}" class="link-heading-post large base-inline-block">
+                      <h3 class="heading-post">{{ featured_post.title }}</h3>
+                    </a>
+                    <p class="paragraph-post large">{{ featured_post.specific.intro }}</p>
+                    <a href="{{ featured_post.url }}" class="link-block base-inline-block">
+                      <div class="text-link">Read more</div>
+                      <div class="block-icon-link">
+                        <img src="{% static 'images/bx-arrow-to-right_blue.svg' %}" loading="eager" alt="" class="icon-link">
+                      </div>
+                    </a>
+                  </div>
+                </div>
               </div>
-            </div>
+            {% endwith %}
           </div>
         </div>
-        <div class="empty-state base-dyn-empty">
-          <div class="text-empty">No items found.</div>
-        </div>
-      </div>
+      {% endif %}
+
+      <!-- Container for the rest of the posts -->
       <div class="collection-list-wrapper-posts base-dyn-list">
         <div role="list" class="collection-list-posts base-dyn-items">
-          <div role="listitem" class="base-dyn-item">
-            <div class="block-post">
-              <a href="#" class="link-post-thumbnail base-inline-block">
-                <img alt="" loading="eager" src="" class="image-post-thumbnail"></a>
-              <div class="post">
-                <div class="date"></div>
-                <a href="#" class="link-heading-post base-inline-block">
-                  <h4 class="heading-post"></h4>
-                </a>
-                <p class="paragraph-post"></p>
-                <a href="#" class="link-block base-inline-block">
-                  <div class="text-link">Read more</div>
-                  <div class="block-icon-link">
-                    <img src="{% static 'images/bx/arrow.svg' %}" loading="eager" alt="" class="icon-link">
-                  </div>
-                </a>
+          {% for post in blogposts %}
+            {% if not forloop.first %}
+              <div role="listitem" class="base-dyn-item">
+                <div class="block-post">
+                  <!-- Your post rendering for non-featured posts here -->
+                </div>
               </div>
-            </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+        {% if not blogposts %}
+          <div class="empty-state base-dyn-empty">
+            <div class="text-empty">No items found.</div>
           </div>
-        </div>
-        <div class="empty-state base-dyn-empty">
-          <div class="text-empty">No items found.</div>
-        </div>
+        {% endif %}
       </div>
     </div>
   </section>
