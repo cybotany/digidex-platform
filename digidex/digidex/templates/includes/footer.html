@@ -3,7 +3,7 @@
   <section class="section-footer">
     <div class="content">
       <div class="base-layout-grid grid-footer">
-        <div id="base-node-PLACEHOLDER" class="block-footer">
+        <div class="block-footer">
           <img src="{% static 'images/logo/logo.svg' %}" loading="eager" alt="" class="logo-footer">
           <div class="paragraph-footer">Footer Placeholder<br></div>
           <div class="block-social">
@@ -18,14 +18,14 @@
             </a>
           </div>
         </div>
-        <div id="base-node-PLACEHOLDER" class="block-footer">
+        <div class="block-footer">
           <div class="subtitle-footer">Company Information<br></div>
           <a href="solutions.html" class="link-footer">Solutions</a>
           <a href="company.html" class="link-footer">Company</a>
           <a href="contact.html" class="link-footer">Contact</a>
           <a href="blog.html" class="link-footer">Blog</a>
         </div>
-        <div id="base-node-PLACEHOLDER" class="block-footer">
+        <div class="block-footer">
           <div class="subtitle-footer">News & Events<br></div>
           <a href="template-info/licensing.html" class="link-footer">Licensing</a>
           <a href="template-info/style-guide.html" class="link-footer">Style Guide</a>
@@ -33,20 +33,12 @@
           <a href="template-info/instructions.html" class="link-footer">Instructions</a>
         </div>
         {% with twitter_url=settings.base.FooterSettings.twitter_url github_url=settings.base.FooterSettings.github_url mastodon_url=settings.base.FooterSettings.mastodon_url %}
-          {% if twitter_url or github_url or mastodon_url %}
-            <div id="base-node-PLACEHOLDER" class="block-footer">
-              <div class="subtitle-footer">Connect With Us<br></div>
-              {% if github_url %}
-                <a href="{{ github_url }}" target="_blank" class="link-footer">GitHub</a>
-              {% endif %}
-              {% if twitter_url %}
-                <a href="{{ twitter_url }}" target="_blank" class="link-footer">Twitter</a>
-              {% endif %}
-              {% if linkedin_url %}
-                <a href="{{ linkedin_url }}" target="_blank" class="link-footer">Linkedin</a>
-              {% endif %}
-            </div>
-          {% endif %}
+          <div class="block-footer">
+            <div class="subtitle-footer">Connect With Us<br></div>
+            <a href="{% if github_url %}{{ github_url }}{% else %}#{% endif %}" target="_blank" class="link-footer">GitHub</a>
+            <a href="{% if twitter_url %}{{ twitter_url }}{% else %}#{% endif %}" target="_blank" class="link-footer">Twitter</a>
+            <a href="{% if linkedin_url %}{{ linkedin_url }}{% else %}#{% endif %}" target="_blank" class="link-footer">Linkedin</a>
+          </div>
         {% endwith %}
        </div>
       <div class="block-footer-down">
