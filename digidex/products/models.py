@@ -1,3 +1,7 @@
-from django.db import models
+from base.models.body import BasePage
 
-# Create your models here.
+class ProductIndexPage(BasePage):
+    pass
+
+class ProductPage(BasePage):
+    pass

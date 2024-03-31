@@ -1,3 +1,7 @@
 from django.db import models
 
-# Create your models here.
+class CategoryIndexPage(BasePage):
+    pass
+
+class CategoryPage(BasePage):
+    pass

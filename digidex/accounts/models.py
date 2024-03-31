@@ -21,5 +21,8 @@ class User(AbstractUser):
         help_text="Used for it's universally unique identifying properties for external users."
     )
 
+class AccountIndexPage(BasePage):
+    pass
+
 class AccountPage(BasePage):
     pass
