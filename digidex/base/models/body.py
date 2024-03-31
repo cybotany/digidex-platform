@@ -3,12 +3,12 @@ from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.models import Page
 
 class HeadingMixin(models.Model):
-    title = models.CharField(
+    heading_title = models.CharField(
         max_length=255,
         blank=True,
         null=True
     )
-    intro = models.CharField(
+    heading_intro = models.CharField(
         max_length=255,
         blank=True,
         null=True
@@ -17,8 +17,8 @@ class HeadingMixin(models.Model):
     panels = [
         MultiFieldPanel(
             [
-                FieldPanel('title'),
-                FieldPanel('intro'),
+                FieldPanel('heading_title'),
+                FieldPanel('heading_intro'),
             ],
             heading="Page Heading",
         ),
