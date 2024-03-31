@@ -38,15 +38,15 @@ class HomePage(Page):
     content_panels = Page.content_panels + [
         MultiFieldPanel(
             [
-                FieldPanel('heading'),
-                FieldPanel('paragraph'),
+                FieldPanel('hero_heading'),
+                FieldPanel('hero_paragraph'),
             ],
             heading="Landing Page Hero Text",
         ),
         MultiFieldPanel(
             [
-                FieldPanel('primary_hero_cta'),
-                FieldPanel('alternate_hero_cta'),
+                FieldPanel('hero_cta_link'),
+                FieldPanel('alt_hero_cta_link'),
             ],
             heading="Landing Page Hero Buttons",
         ),
