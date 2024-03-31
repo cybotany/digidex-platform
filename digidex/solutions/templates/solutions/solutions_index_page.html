@@ -1,4 +1,10 @@
-{% load static %}
+{% extends "base.html" %}
+{% load static i18n wagtailcore_tags wagtailimages_tags %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/solution.css' %}">
+{% endblock extra_css %}
+
 {% block content %}
   <section class="section">
     <div class="content">
