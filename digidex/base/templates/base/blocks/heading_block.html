@@ -1,8 +1,13 @@
-<section class="section-top">
-  <div class="content">
-    <div class="block-top">
-      <h1 class="heading-top">{{ self.heading }}</h1>
-      <p class="paragraph-top">{{ self.paragraph }}</p>
-    </div>
-  </div>
-</section>
+{% if self.size == 'h1' %}
+  <h1 class="heading{% if self.modifier %}-{{ self.modifier }}{% endif %}">{{ self.title }}</h1>
+{% elif self.size == 'h2' %}
+  <h2 class="heading{% if self.modifier %}-{{ self.modifier }}{% endif %}">{{ self.title }}</h2>
+{% elif self.size == 'h3' %}
+  <h3 class="heading{% if self.modifier %}-{{ self.modifier }}{% endif %}">{{ self.title }}</h3>
+{% elif self.size == 'h4' %}
+  <h4 class="heading{% if self.modifier %}-{{ self.modifier }}{% endif %}">{{ self.title }}</h4>
+{% elif self.size == 'h5' %}
+  <h5 class="heading{% if self.modifier %}-{{ self.modifier }}{% endif %}">{{ self.title }}</h5>
+{% elif self.size == 'h6' %}
+  <h6 class="heading{% if self.modifier %}-{{ self.modifier }}{% endif %}">{{ self.title }}</h6>
+{% endif %}

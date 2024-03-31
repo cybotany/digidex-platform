@@ -19,6 +19,29 @@ class ImageBlock(blocks.StructBlock):
         template = "base/blocks/image_block.html"
 
 
+class HeadingBlock(blocks.StructBlock):
+    title = blocks.CharBlock(
+        classname="title",
+        required=True
+    )
+    size = blocks.ChoiceBlock(
+        choices=[
+            ("", "Select a heading size"),
+            ("h1", "H1"),
+            ("h2", "H2"),
+            ("h3", "H3"),
+            ("h4", "H4"),
+            ("h5", "H5"),
+        ],
+        blank=True,
+        required=False,
+    )
+
+    class Meta:
+        icon = "title"
+        template = "base/blocks/heading_block.html"
+
+
 class PageHeadingBlock(blocks.StructBlock):
     title = blocks.CharBlock(
         required=True,
@@ -36,7 +59,7 @@ class PageHeadingBlock(blocks.StructBlock):
         label = "Heading"
 
 
-class BaseStreamBlock(blocks.StreamBlock):
+class BasePageBlock(blocks.StreamBlock):
     heading = PageHeadingBlock()
     paragraph = blocks.RichTextBlock(icon="pilcrow")
     image = ImageBlock()

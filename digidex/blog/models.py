@@ -10,15 +10,14 @@ from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 from taggit.models import TaggedItemBase
 
-from base.blocks import HeadingBlock
+from blog.blocks import BlogStreamBlock
 
 class BlogIndexPage(Page):
-    main = StreamField([
-        ('heading', HeadingBlock()),
-        ('body', RichTextField()),
-    ],
-    null=True,
-    blank=True
+    main = StreamField(
+        BlogStreamBlock(),
+        blank=True,
+        use_json_field=True,
+        help_text="Use this section to list your projects and skills.",
     )
 
     content_panels = Page.content_panels + [
