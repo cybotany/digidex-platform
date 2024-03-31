@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block body_class %}{% endblock %}
+
+{% block content %}
+  <section class="section-top padding-0">
+    <div class="content">
+      <div class="block-top">
+        <div class="date-top">{{ page.date }}</div>
+        <h1 class="heading-top">{{ page.title }}</h1>
+        <p class="paragraph-top blog-post">{{ page.title }}</p>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="content narrow">
+      {% image page.main_image fill-600x338 as img %}
+      <img alt="" loading="eager" src="{{ img.url }}" class="image-main-post">
+      <div class="post-body">
+        <div class="rich-text-block w-dyn-bind-empty w-richtext">
+          {{ page.body|richtext }}
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
