@@ -25,9 +25,9 @@ INSTALLED_APPS = [
     "company",
     "ecommerce",
     "home",
+    "products",
     "search",
     "solutions",
-    "search",
 
     "wagtail.contrib.settings",
     "wagtail.contrib.forms",

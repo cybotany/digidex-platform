@@ -1,4 +1,4 @@
-from django.db import models
+from base.models.body import BasePage
 
 class CategoryIndexPage(BasePage):
     pass
