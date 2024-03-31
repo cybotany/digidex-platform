@@ -1,5 +1,3 @@
-@import url('base.css');
-@import url('normalize.css');
 :root {
   --white: white;
   --background: #f4f6f7;
@@ -16,7 +14,7 @@
   --accent-b2: rgba(188, 0, 135, .07);
   --accent-b3: rgba(57, 89, 255, .07);
 }
-/* Start of Typography Styles*/
+
 body {
   background-color: var(--background);
   color: var(--paragraph);
