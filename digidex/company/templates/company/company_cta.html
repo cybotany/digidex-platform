@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static i18n wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/company.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+  <section class="section">
+    <div class="content">
+      <div class="base-layout-grid grid">
+        <div class="lottie">
+          <div class="lines-b1">
+            <div class="line-w"></div>
+            <div class="line-w"></div>
+            <div class="line-w"></div>
+            <div class="line-w"></div>
+            <div class="line-w"></div>
+            <div class="line-w"></div>
+          </div>
+          <div class="lines-b2">
+            <div class="line-h"></div>
+            <div class="line-h"></div>
+            <div class="line-h"></div>
+            <div class="line-h"></div>
+            <div class="line-h"></div>
+            <div class="line-h"></div>
+          </div>
+          <div class="block-lottie">
+            <div class="lottie-animation-1" data-animation-type="lottie" data-src="{% static 'documents/Lottie-B1-White.json' %}" data-loop="0" data-direction="1" data-autoplay="0" data-is-ix2-target="1" data-renderer="svg" data-default-duration="2.5" data-duration="0"></div>
+            <div class="lottie-animation-2" data-animation-type="lottie" data-src="{% static 'documents/Lottie-B2-Blue.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="16" data-duration="0"></div>
+            <div class="lottie-animation-2-blur" data-animation-type="lottie" data-src="{% static 'documents/Lottie-B2-Blue.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="16" data-duration="0"></div>
+          </div>
+        </div>
+        <div class="block-right">
+          <div class="subtitle">Company<br></div>
+          <h2 class="heading">Real solutions for real web pros</h2>
+          <p class="paragraph">Sit venenatis mattis fringilla molestie duis sit diam enim. Sed tempor habitasse mi duis tincidunt aliquet metus at. Cursus iaculis ac enim risus quam vulputate.</p>
+          <div class="base-layout-grid grid-numbers">
+            <div class="numbers">
+              <img src="{% static 'images/tech/app-connectivity-blue.svg' %}" loading="eager" alt="" class="icon-numbers">
+              <h4 class="heading-numbers">3,500,000+</h4>
+              <div class="text-numbers">websites currently hosted.</div>
+            </div>
+            <div class="numbers green">
+              <img src="{% static 'images/tech/content-delivery-network.svg' %}" loading="eager" alt="" class="icon-numbers">
+              <h4 class="heading-numbers green">50,000+</h4>
+              <div class="text-numbers green">servers around the world</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock content %}
