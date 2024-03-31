@@ -39,7 +39,16 @@ class BlogIndexPage(Page):
 
 class BlogPage(Page):
     date = models.DateField("Post date")
-    intro = models.CharField(max_length=250)
+    heading_title = models.CharField(
+        max_length=255,
+        blank=True,
+        null=True
+    )
+    heading_paragraph = models.CharField(
+        max_length=255,
+        blank=True,
+        null=True
+    )
     body = RichTextField(blank=True)
 
     def main_image(self):
@@ -50,13 +59,14 @@ class BlogPage(Page):
             return None
 
     search_fields = Page.search_fields + [
-        index.SearchField('intro'),
+        index.SearchField('heading_title'),
         index.SearchField('body'),
     ]
 
     content_panels = Page.content_panels + [
         FieldPanel('date'),
-        FieldPanel('intro'),
+        FieldPanel('heading_title'),
+        FieldPanel('heading_paragraph'),
         FieldPanel('body'),
         InlinePanel('gallery_images', label="Gallery images"),
     ]

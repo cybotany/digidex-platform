@@ -50,6 +50,9 @@
               <div role="listitem" class="base-dyn-item">
                 <div class="block-post">
                   <a href="{{ post.url }}" class="link-post-thumbnail base-inline-block">
+                    {% with post.main_image as main_image %}
+                      {% if main_image %}{% image main_image fill-160x100 %}{% endif %}
+                    {% endwith %}
                     <img alt="" loading="eager" src="" class="image-post-thumbnail">
                   </a>
                   <div class="post">
