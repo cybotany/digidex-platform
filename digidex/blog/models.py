@@ -18,10 +18,10 @@ class BlogIndexPage(Page):
     ],
     null=True,
     blank=True
-)
+    )
 
     content_panels = Page.content_panels + [
-        FieldPanel('intro'),
+        FieldPanel('body'),
     ]
 
     def get_context(self, request):

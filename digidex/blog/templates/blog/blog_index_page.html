@@ -2,7 +2,9 @@
 {% load static wagtailcore_tags %}
 
 {% block content %}
-
+  {% for block in page.body %}
+    {% include_block block %}
+  {% endfor %}
   <section class="section">
     <div class="content">
       <div class="collection-list-wrapper-posts large base-dyn-list">
