@@ -13,15 +13,16 @@ from taggit.models import TaggedItemBase
 from base.blocks import HeadingBlock
 
 class BlogIndexPage(Page):
-    intro = StreamField([
+    main = StreamField([
         ('heading', HeadingBlock()),
+        ('body', RichTextField()),
     ],
     null=True,
     blank=True
     )
 
     content_panels = Page.content_panels + [
-        FieldPanel('intro'),
+        FieldPanel('main'),
     ]
 
     def get_context(self, request):
@@ -29,14 +30,6 @@ class BlogIndexPage(Page):
         blogpages = self.get_children().live().order_by('-first_published_at')
         context['blogpages'] = blogpages
         return context
-
-
-class BlogPageTag(TaggedItemBase):
-    content_object = ParentalKey(
-        'BlogPage',
-        related_name='tagged_items',
-        on_delete=models.CASCADE
-    )
 
 
 class BlogTagIndexPage(Page):
@@ -47,6 +40,14 @@ class BlogTagIndexPage(Page):
         context = super().get_context(request)
         context['blogpages'] = blogpages
         return context
+
+
+class BlogPageTag(TaggedItemBase):
+    content_object = ParentalKey(
+        'BlogPage',
+        related_name='tagged_items',
+        on_delete=models.CASCADE
+    )
 
 
 class BlogPage(Page):
