@@ -5,7 +5,7 @@
       <div class="base-layout-grid grid-footer">
         <div id="base-node-PLACEHOLDER" class="block-footer">
           <img src="{% static 'images/logo/logo.svg' %}" loading="eager" alt="" class="logo-footer">
-          <div class="paragraph-footer">{% get_footer_text %}<br></div>
+          <div class="paragraph-footer">Footer Placeholder<br></div>
           <div class="block-social">
             <a href="tel:+1(888)123-4567" class="social-link base-inline-block">
               <img src="{% static 'images/bx/phone-voice.svg' %}" loading="eager" alt="" class="icon-social">
@@ -32,7 +32,7 @@
           <a href="template-info/changelog.html" class="link-footer">Changelog</a>
           <a href="template-info/instructions.html" class="link-footer">Instructions</a>
         </div>
-        {% with twitter_url=settings.base.NavigationSettings.twitter_url github_url=settings.base.NavigationSettings.github_url mastodon_url=settings.base.NavigationSettings.mastodon_url %}
+        {% with twitter_url=settings.base.FooterSettings.twitter_url github_url=settings.base.FooterSettings.github_url mastodon_url=settings.base.FooterSettings.mastodon_url %}
           {% if twitter_url or github_url or mastodon_url %}
             <div id="base-node-PLACEHOLDER" class="block-footer">
               <div class="subtitle-footer">Connect With Us<br></div>
@@ -46,6 +46,8 @@
                 <a href="{{ linkedin_url }}" target="_blank" class="link-footer">Linkedin</a>
               {% endif %}
             </div>
+          {% endif %}
+        {% endwith %}
        </div>
       <div class="block-footer-down">
         <div class="text-footer-down">©2024 CyBotany, Institute. All rights reserved. Built with <a href="https://wagtail.org/" target="_blank" class="link-footer-down">Wagtail</a><br></div>

@@ -18,12 +18,10 @@ class FooterLinkBlock(StructBlock):
         required=True
     )
 
-
 class FooterContactBlock(StructBlock):
     phone = models.CharField(max_length=20)
     email = models.EmailField(max_length=254)
     chat = models.URLField(max_length=255)
-
 
 @register_setting
 class FooterSettings(BaseGenericSetting):
