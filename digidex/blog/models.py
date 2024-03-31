@@ -7,10 +7,10 @@ from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel
 from wagtail.search import index
 from modelcluster.fields import ParentalKey
 
-from base.models.mixins import HeadingMixin
+from base.models.body import BasePage
 
-class BlogIndexPage(HeadingMixin, Page):
-    content_panels = Page.content_panels + HeadingMixin.panels
+class BlogIndexPage(BasePage):
+    content_panels = Page.content_panels
 
     def get_context(self, request):
         context = super().get_context(request)
@@ -19,7 +19,7 @@ class BlogIndexPage(HeadingMixin, Page):
         return context
 
 
-class BlogPage(HeadingMixin, Page):
+class BlogPage(BasePage):
     date = models.DateField("Post date")
     body = RichTextField(blank=True)
 
@@ -34,7 +34,7 @@ class BlogPage(HeadingMixin, Page):
         index.SearchField('body'),
     ]
 
-    content_panels = Page.content_panels  + HeadingMixin.panels + [
+    content_panels = Page.content_panels + [
         FieldPanel('date'),
         FieldPanel('body'),
         InlinePanel('gallery_images', label="Gallery images"),
