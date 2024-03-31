@@ -1,4 +1,4 @@
-{% load static %}
+{% load static wagtailcore_tags wagtailimages_tags %}
   <section class="section-hero">
     <div class="content">
       <div class="base-layout-grid grid-hero">
@@ -11,8 +11,8 @@
           <h1 class="heading-hero">{{ page.hero_heading }}</h1>
           <p class="paragraph-hero">{{ page.hero_paragraph }}</p>
           <div class="button-hero">
-            <a href="{% pageurl page.hero_cta_link %}" class="button base-button">Get Started</a>
-            <a href="{% pageurl page.alt_hero_cta_link %}" class="link-button base-inline-block">
+            <a href="#" class="button base-button">Get Started</a>
+            <a href="#" class="link-button base-inline-block">
               <img src="{% static 'images/bx/support.svg' %}" loading="eager" alt="" class="icon-button">
               <div class="text-button">Support Center</div>
             </a>

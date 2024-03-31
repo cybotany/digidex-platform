@@ -1,4 +1,4 @@
-{% load wagtailcore_tags navigation_tags wagtailuserbar %}
+{% load static wagtailcore_tags navigation_tags wagtailuserbar %}
 <header class="header">
   <section class="section-top-bar">
     <div class="top-bar-block">
@@ -6,7 +6,8 @@
         <div class="info-top-bar">Notification Placeholder</div>
       </div>
       <div class="top-bar">
-        <a href="#" class="link-top-bar w-inline-block"><img src="images/bx-chat.svg" loading="eager" alt="" class="icon-top-bar">
+        <a href="#" class="link-top-bar base-inline-block">
+          <img src="{% static 'images/bx-chat.svg' %}" loading="eager" alt="" class="icon-top-bar">
           <div class="text-top-bar">Live Chat</div>
         </a>
       </div>
@@ -14,30 +15,30 @@
   </section>
   <a href="#main" class="skip-link">Skip to content</a>
   {% get_site_root as site_root %}
-  <div data-w-id="9c896d19-12ed-148e-4e5a-1c014986d7c2" data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav">
+  <div data-w-id="PLACEHOLDER" data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar base-nav">
     <div class="nav-block">
       <div class="nav">
-        <a href="{% pageurl site_root %}" aria-current="page" class="brand w-nav-brand w--current">
-            <img src="images/logo.svg" loading="eager" alt="" class="logo">
+        <a href="{% pageurl site_root %}" aria-current="page" class="brand base-nav-brand base--current">
+            <img src="{% static 'images/logo.svg' %}" loading="eager" alt="" class="logo">
         </a>
-        <nav role="navigation" class="nav-menu w-nav-menu">
+        <nav role="navigation" class="nav-menu base-nav-menu">
           {% for menuitem in site_root.get_children.live.in_menu %}
             {# Add the child pages of your HomePage that have their `Show in menu` checked #}
-            <a href="{% pageurl menuitem %}" class="nav-link w-nav-link">{{ menuitem.title }}</a>{% if not forloop.last %} | {% endif %}
+            <a href="{% pageurl menuitem %}" class="nav-link base-nav-link">{{ menuitem.title }}</a>{% if not forloop.last %} | {% endif %}
           {% endfor %}
           <div class="button-mobile">
-            <a href="login.html" class="nav-button-outline w-button">Login</a>
-            <a href="get-started.html" class="nav-button w-button">Get Started</a>
+            <a href="login.html" class="nav-button-outline base-button">Login</a>
+            <a href="get-started.html" class="nav-button base-button">Get Started</a>
           </div>
         </nav>
       </div>
       <div class="nav">
         <div class="button-desktop">
-          <a href="login.html" class="nav-button-outline w-button">Login</a>
-          <a href="get-started.html" class="nav-button w-button">Get Started</a>
+          <a href="login.html" class="nav-button-outline base-button">Login</a>
+          <a href="get-started.html" class="nav-button base-button">Get Started</a>
         </div>
-        <div class="menu-button w-nav-button">
-          <div class="icon-menu w-icon-nav-menu"></div>
+        <div class="menu-button base-nav-button">
+          <div class="icon-menu base-icon-nav-menu"></div>
         </div>
       </div>
     </div>
