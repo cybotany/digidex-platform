@@ -44,10 +44,9 @@ class HeadingBlock(blocks.StructBlock):
 
 class BaseStreamBlock(blocks.StreamBlock):
     heading = HeadingBlock()
-    paragraph = blocks.RichTextBlock(icon="pilcrow")
+    body = blocks.RichTextBlock(icon="pilcrow")
     image = ImageBlock()
     embed = EmbedBlock(
         help_text="Insert a URL to embed. For example, https://www.youtube.com/watch?v=SGJFWirQ3ks",
         icon="media",
     )
-
