@@ -6,11 +6,30 @@
     <div class="content">
       <div class="block-top">
         <div class="date-top">{{ page.date }}</div>
-        <h1 class="heading-top">{{ page.heading }}</h1>
-        <p class="paragraph-top blog-post">{{ page.paragraph }}</p>
+        <h1 class="heading-top">{{ page.title }}</h1>
+        <p class="paragraph-top blog-post">
+        {{ page.intro }}
+          {% with authors=page.authors.all %}
+            {% if authors %}
+              <h3>Posted by:</h3>
+              <ul>
+                {% for author in authors %}
+                  <li style="display: inline">
+                    {% image author.author_image fill-40x60 style="vertical-align: middle" %}
+                    {{ author.name }}
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          {% endwith %}
+        </p>
       </div>
     </div>
   </section>
+  {% for block in page.body %}
+    {% include_block block %}
+  {% endfor %}
+  
   <section class="section">
     <div class="content">
       {% if blogposts %}
@@ -32,7 +51,7 @@
                     <a href="{{ featured_post.url }}" class="link-block base-inline-block">
                       <div class="text-link">Read more</div>
                       <div class="block-icon-link">
-                        <img src="{% static 'images/bx/arrow.svg' %}" loading="eager" alt="" class="icon-link">
+                        <img src="{% static 'images/bx-arrow-to-right_blue.svg' %}" loading="eager" alt="" class="icon-link">
                       </div>
                     </a>
                   </div>
@@ -42,6 +61,8 @@
           </div>
         </div>
       {% endif %}
+
+      <!-- Container for the rest of the posts -->
       <div class="collection-list-wrapper-posts base-dyn-list">
         <div role="list" class="collection-list-posts base-dyn-items">
           {% for post in blogposts %}
