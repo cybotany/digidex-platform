@@ -15,8 +15,7 @@
   </section>
   <section class="section">
     <div class="content narrow">
-      {% image page.main_image fill-600x338 as img %}
-      <img alt="" loading="eager" src="{{ img.url }}" class="image-main-post">
+      <img alt="" loading="eager" src="" class="image-main-post">
       <div class="post-body">
         <div class="rich-text-block w-dyn-bind-empty w-richtext">
           {{ page.body|richtext }}
@@ -24,4 +23,7 @@
       </div>
     </div>
   </section>
+  <p>
+    <a href="{{ page.get_parent.url }}">Return to blog</a>
+  </p>
 {% endblock %}
