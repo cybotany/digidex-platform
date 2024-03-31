@@ -5,30 +5,12 @@ from wagtail.fields import RichTextField
 from wagtail.models import Page, Orderable
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel
 from wagtail.search import index
-
 from modelcluster.fields import ParentalKey
 
-class BlogIndexPage(Page):
-    heading_title = models.CharField(
-        max_length=255,
-        blank=True,
-        null=True
-    )
-    heading_paragraph = models.CharField(
-        max_length=255,
-        blank=True,
-        null=True
-    )
+from base.models.mixins import HeadingMixin
 
-    content_panels = Page.content_panels + [
-        MultiFieldPanel(
-            [
-                FieldPanel('heading_title'),
-                FieldPanel('heading_paragraph'),
-            ],
-            heading="Blog Page Heading",
-        ),
-    ]
+class BlogIndexPage(HeadingMixin, Page):
+    content_panels = Page.content_panels + HeadingMixin.panels
 
     def get_context(self, request):
         context = super().get_context(request)
@@ -37,18 +19,8 @@ class BlogIndexPage(Page):
         return context
 
 
-class BlogPage(Page):
+class BlogPage(HeadingMixin, Page):
     date = models.DateField("Post date")
-    heading_title = models.CharField(
-        max_length=255,
-        blank=True,
-        null=True
-    )
-    heading_paragraph = models.CharField(
-        max_length=255,
-        blank=True,
-        null=True
-    )
     body = RichTextField(blank=True)
 
     def main_image(self):
@@ -59,14 +31,11 @@ class BlogPage(Page):
             return None
 
     search_fields = Page.search_fields + [
-        index.SearchField('heading_title'),
         index.SearchField('body'),
     ]
 
-    content_panels = Page.content_panels + [
+    content_panels = Page.content_panels  + HeadingMixin.panels + [
         FieldPanel('date'),
-        FieldPanel('heading_title'),
-        FieldPanel('heading_paragraph'),
         FieldPanel('body'),
         InlinePanel('gallery_images', label="Gallery images"),
     ]
