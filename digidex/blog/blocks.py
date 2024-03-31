@@ -1,4 +1,4 @@
-from base.blocks import BasePageBlock
+from base.blocks import BaseStreamBlock
 
-class BlogStreamBlock(BasePageBlock):
+class BlogStreamBlock(BaseStreamBlock):
     pass

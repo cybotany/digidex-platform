@@ -13,15 +13,14 @@ from taggit.models import TaggedItemBase
 from blog.blocks import BlogStreamBlock
 
 class BlogIndexPage(Page):
-    main = StreamField(
+    body = StreamField(
         BlogStreamBlock(),
         blank=True,
         use_json_field=True,
-        help_text="Use this section to list your projects and skills.",
     )
 
     content_panels = Page.content_panels + [
-        FieldPanel('main'),
+        FieldPanel('body'),
     ]
 
     def get_context(self, request):
