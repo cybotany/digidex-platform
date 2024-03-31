@@ -3,18 +3,22 @@ from django.db import models
 
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.contrib.taggit import ClusterTaggableManager
-from wagtail.fields import RichTextField
+from wagtail.fields import RichTextField, StreamField
 from wagtail.models import Page, Orderable
 from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 from taggit.models import TaggedItemBase
 
+from base.blocks import HeadingBlock
 
 class BlogIndexPage(Page):
-    intro = RichTextField(
-        blank=True
-    )
+    body = StreamField([
+        ('heading', HeadingBlock()),
+    ],
+    null=True,
+    blank=True
+)
 
     content_panels = Page.content_panels + [
         FieldPanel('intro'),
