@@ -1,4 +1,4 @@
-# base/models/footer.py
+# base/models/header.py
 from django.db import models
 from wagtail.admin.panels import FieldPanel
 from wagtail.fields import StreamField
@@ -6,7 +6,7 @@ from wagtail.contrib.settings.models import BaseGenericSetting, register_setting
 from wagtail.blocks import StructBlock, TextBlock, ChoiceBlock, CharBlock
 from wagtail.images.blocks import ImageChooserBlock
 
-class FooterLinkBlock(StructBlock):
+class HeaderLinkBlock(StructBlock):
     title = models.CharField(max_length=255)
     url = models.URLField()
     category = ChoiceBlock(
@@ -18,19 +18,19 @@ class FooterLinkBlock(StructBlock):
         required=True
     )
 
-class FooterContactBlock(StructBlock):
+class HeaderContactBlock(StructBlock):
     phone = models.CharField(max_length=20)
     email = models.EmailField(max_length=254)
     chat = models.URLField(max_length=255)
 
 @register_setting
-class FooterSettings(BaseGenericSetting):
+class HeaderSettings(BaseGenericSetting):
     content = StreamField(
         [
             ('logo', ImageChooserBlock(icon="image")),
             ('paragraph', TextBlock(icon="pilcrow")),
-            ('contact', FooterContactBlock()),
-            ('link', FooterLinkBlock(icon="link")),
+            ('contact', HeaderContactBlock()),
+            ('link', HeaderLinkBlock(icon="link")),
             ('copyright', CharBlock(required=False)),
             ('credits', CharBlock(required=False)),
         ],
@@ -43,4 +43,4 @@ class FooterSettings(BaseGenericSetting):
     ]
 
     class Meta:
-        verbose_name = "Footer Settings"
+        verbose_name = "Header Settings"
