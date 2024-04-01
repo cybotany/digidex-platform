@@ -2,8 +2,6 @@ import uuid
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-from base.models.body import BasePage
-
 class User(AbstractUser):
     username = models.CharField(
         max_length=32
@@ -20,9 +18,3 @@ class User(AbstractUser):
         verbose_name="User UUID",
         help_text="Used for it's universally unique identifying properties for external users."
     )
-
-class AccountIndexPage(BasePage):
-    pass
-
-class AccountPage(BasePage):
-    pass
