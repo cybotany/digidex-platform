@@ -1,23 +1,20 @@
+from wagtail import fields
 from wagtail.admin.panels import FieldPanel
 
 from base import models as _models
-from solutions import blocks as _blocks
+from solutions import blocks as _sblocks
 
 
 class SolutionsIndexPage(_models.BasePage):
-    solutions = _blocks.SolutionsStreamBlock(
-        [
-            ('solution', _blocks.SolutionBlock(icon="placeholder")),
-        ],
+    solutions = fields.StreamField(
+        _sblocks.SolutionsStreamBlock,
         null=True,
         blank=True,
         help_text="Solution sections"
     )
 
-    features = _blocks.FeaturesStreamBlock(
-        [
-            ('feature', _blocks.FeatureBlock(icon="doc-full")),
-        ],
+    features = fields.StreamField(
+        _sblocks.FeaturesStreamBlock,
         null=True,
         blank=True,
         help_text="Feature sections"

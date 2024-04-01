@@ -2,24 +2,15 @@ from wagtail import blocks
 from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
 
-
-class ImageBlock(blocks.StructBlock):
-    image = ImageChooserBlock(
-        required=True
-    )
-    caption = blocks.CharBlock(
-        required=False
-    )
-    attribution = blocks.CharBlock(
-        required=False
-    )
-
-    class Meta:
-        icon = "image"
-        template = "base/blocks/image_block.html"
+class BaseStructBlock(blocks.StructBlock):
+    pass
 
 
-class HeadingBlock(blocks.StructBlock):
+class BaseStreamBlock(blocks.StreamBlock):
+    pass
+
+
+class HeadingBlock(BaseStructBlock):
     title = blocks.CharBlock(
         classname="title",
         required=True
@@ -42,11 +33,63 @@ class HeadingBlock(blocks.StructBlock):
         template = "base/blocks/heading_block.html"
 
 
-class BaseStreamBlock(blocks.StreamBlock):
+class BaseListItemBlock(BaseStructBlock):
+    text = blocks.CharBlock(
+        required=True,
+        max_length=255,
+        help_text="List item text"
+    )
+
+
+class BaseListBlock(blocks.ListBlock):
+    pass
+
+
+class ParagraphBlock(blocks.RichTextBlock):
+    class Meta:
+        icon = "pilcrow"
+        template = "base/blocks/paragraph_block.html"
+
+
+class ContentBlock(BaseStructBlock):
+    """
+    A generic content block for heading and body.
+    """
+    heading = HeadingBlock(
+        max_length=50,
+        help_text="Enter the heading text here"
+    )
+    paragraph = ParagraphBlock(
+        required=False,
+        help_text="Enter the body here"
+    )
+
+
+class ImageBlock(blocks.StructBlock):
+    image = ImageChooserBlock(
+        required=True
+    )
+    caption = blocks.CharBlock(
+        required=False
+    )
+    attribution = blocks.CharBlock(
+        required=False
+    )
+
+    class Meta:
+        icon = "image"
+        template = "base/blocks/image_block.html"
+
+
+class PageBodyBlock(blocks.StreamBlock):
     heading = HeadingBlock()
-    body = blocks.RichTextBlock(icon="pilcrow")
+    body = ParagraphBlock()
     image = ImageBlock()
     embed = EmbedBlock(
         help_text="Insert a URL to embed. For example, https://www.youtube.com/watch?v=SGJFWirQ3ks",
         icon="media",
     )
+
+    class Meta:
+        icon = "placeholder"
+        template = "base/blocks/page_body_block.html"
