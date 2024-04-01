@@ -208,9 +208,10 @@ WAGTAILSEARCH_BACKENDS = {
     }
 }
 
-#LOGIN_URL = '/authentication/login/'
-#LOGIN_REDIRECT_URL = '/authentication/login/'
-#WAGTAIL_FRONTEND_LOGIN_URL = LOGIN_URL
+SIGNUP_URL = '/accounts/signup/'
+LOGIN_URL = '/accounts/login/'
+WAGTAIL_FRONTEND_LOGIN_URL = LOGIN_URL
+
 # ALLAUTH settings
 AUTH_USER_MODEL = 'accounts.User'
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
