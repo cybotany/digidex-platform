@@ -6,31 +6,14 @@ from wagtail.contrib.settings.models import BaseGenericSetting, register_setting
 from wagtail.blocks import StructBlock, TextBlock, ChoiceBlock, CharBlock
 from wagtail.images.blocks import ImageChooserBlock
 
-class HeaderLinkBlock(StructBlock):
-    title = models.CharField(max_length=255)
-    url = models.URLField()
-    category = ChoiceBlock(
-        choices=(
-            ('company', 'Company Information'),
-            ('news', 'News & Events'),
-            ('social', 'Social Links'),
-        ),
-        required=True
-    )
-
-class HeaderContactBlock(StructBlock):
-    phone = models.CharField(max_length=20)
-    email = models.EmailField(max_length=254)
-    chat = models.URLField(max_length=255)
+from base import blocks as _bblocks
 
 @register_setting
 class HeaderSettings(BaseGenericSetting):
     content = StreamField(
         [
             ('logo', ImageChooserBlock(icon="image")),
-            ('paragraph', TextBlock(icon="pilcrow")),
-            ('contact', HeaderContactBlock()),
-            ('link', HeaderLinkBlock(icon="link")),
+            ('link', _bblocks.LinkBlock(icon="link")),
             ('copyright', CharBlock(required=False)),
             ('credits', CharBlock(required=False)),
         ],
