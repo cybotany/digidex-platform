@@ -1,0 +1,11 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<section class="section{{ value.section_type }}">
+  <div class="content{{ value.content_type }}">
+    <div class="base-layout-grid grid{{ value.grid_type }}">
+      {% for block in value.content %}
+        {% include_block block %}
+      {% endfor %}
+    </div>
+  </div>
+</section>

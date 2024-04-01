@@ -2,7 +2,23 @@ from django.db import models
 from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 
+from base import blocks as _bblocks
+
 class HomePage(Page):
+    hero_info_link = models.URLField(
+        blank=True
+    )
+    hero_info_text = models.CharField(
+        max_length=255,
+        blank=True
+    )
+    hero_info_img = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
     hero_heading = models.CharField(
         max_length=255,
         blank=True,
@@ -12,24 +28,7 @@ class HomePage(Page):
         blank=True,
         null=True
     )
-    hero_cta_link = models.ForeignKey(
-        "wagtailcore.Page",
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name="+",
-        verbose_name="Primary Hero CTA link",
-        help_text="Choose a page to link to for the Primary Call to Action",
-    )
-    alt_hero_cta_link = models.ForeignKey(
-        "wagtailcore.Page",
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name="+",
-        verbose_name="Alternate Hero CTA link",
-        help_text="Choose a page to link to for the Alternate Call to Action",
-    )
+    hero_buttons = _bblocks.ButtonCollectionBlock()
 
     content_panels = Page.content_panels + [
         MultiFieldPanel(

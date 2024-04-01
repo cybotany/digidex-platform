@@ -1,0 +1,13 @@
+{% if value.internal_url %}
+  <a href="{{ value.internal_url.url }}" class="link{{ value.style }} base-inline-block"></a>
+{% elif value.external_url %}
+  <a href="{{ value.external_url }}" class="link{{ value.style }} base-inline-block"></a>
+{% else %}
+  <a href="#" class="link{{ value.style }} base-inline-block"></a>
+
+
+  <a href="{{ page.hero_info_link }}" class="link-info base-inline-block">
+    <div class="text-info">{{ page.hero_info_text }}<br></div>
+    <div class="block-icon-info">
+      <img src="{{ page.hero_info_img }}" loading="eager" alt="" class="icon-info"></div>
+  </a>
