@@ -1,27 +1,21 @@
 # base/models/footer.py
-from wagtail.admin.panels import FieldPanel
-from wagtail.fields import StreamField
-from wagtail.contrib.settings.models import BaseGenericSetting, register_setting
+from wagtail.admin import panels
+from wagtail import fields
+from wagtail.contrib.settings import models
 from wagtail import blocks
 
-from base import blocks as _bblocks
-
-
-@register_setting
-class FooterSettings(BaseGenericSetting):
-    content = StreamField(
+@models.register_setting
+class FooterSettings(models.BaseGenericSetting):
+    content = fields.StreamField(
         [
-            ('logo', _bblocks.LogoBlock()),
-            ('paragraph', blocks.CharBlock()),
-            ('copyright', blocks.CharBlock(required=False)),
-            ('credits', blocks.CharBlock(required=False)),
+            ('paragraph', blocks.RichTextBlock()),
         ],
         null=True,
         blank=True
     )
 
     panels = [
-        FieldPanel('content'),
+        panels.FieldPanel('content'),
     ]
 
     class Meta:

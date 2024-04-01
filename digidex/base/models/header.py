@@ -1,28 +1,21 @@
 # base/models/header.py
-from django.db import models
-from wagtail.admin.panels import FieldPanel
-from wagtail.fields import StreamField
-from wagtail.contrib.settings.models import BaseGenericSetting, register_setting
-from wagtail.blocks import StructBlock, TextBlock, ChoiceBlock, CharBlock
-from wagtail.images.blocks import ImageChooserBlock
+from wagtail.admin import panels
+from wagtail import fields
+from wagtail.contrib.settings import models
+from wagtail.images import blocks as img_blocks
 
-from base import blocks as _bblocks
-
-@register_setting
-class HeaderSettings(BaseGenericSetting):
-    content = StreamField(
+@models.register_setting
+class HeaderSettings(models.BaseGenericSetting):
+    content = fields.StreamField(
         [
-            ('logo', ImageChooserBlock(icon="image")),
-            ('link', _bblocks.LinkBlock(icon="link")),
-            ('copyright', CharBlock(required=False)),
-            ('credits', CharBlock(required=False)),
+            ('logo', img_blocks.ImageChooserBlock(icon="image")),
         ],
         null=True,
         blank=True
     )
 
     panels = [
-        FieldPanel('content'),
+        panels.FieldPanel('content'),
     ]
 
     class Meta:

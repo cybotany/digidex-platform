@@ -2,23 +2,7 @@ from django.db import models
 from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 
-from base import blocks as _bblocks
-
 class HomePage(Page):
-    hero_info_link = models.URLField(
-        blank=True
-    )
-    hero_info_text = models.CharField(
-        max_length=255,
-        blank=True
-    )
-    hero_info_img = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
     hero_heading = models.CharField(
         max_length=255,
         blank=True,
@@ -28,7 +12,22 @@ class HomePage(Page):
         blank=True,
         null=True
     )
-    hero_buttons = _bblocks.ButtonCollectionBlock()
+    hero_cta_link = models.URLField(
+        blank=True,
+        null=True
+    )
+    hero_cta_text = models.URLField(
+        blank=True,
+        null=True
+    )
+    alt_hero_cta_link = models.URLField(
+        blank=True,
+        null=True
+    )
+    alt_hero_cta_text = models.URLField(
+        blank=True,
+        null=True
+    )
 
     content_panels = Page.content_panels + [
         MultiFieldPanel(
@@ -36,14 +35,21 @@ class HomePage(Page):
                 FieldPanel('hero_heading'),
                 FieldPanel('hero_paragraph'),
             ],
-            heading="Landing Page Hero Text",
+            heading="Hero Content",
         ),
         MultiFieldPanel(
             [
                 FieldPanel('hero_cta_link'),
-                FieldPanel('alt_hero_cta_link'),
+                FieldPanel('hero_cta_text'),
             ],
-            heading="Landing Page Hero Buttons",
+            heading="Primary Hero Button",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel('alt_hero_cta_link'),
+                FieldPanel('alt_hero_cta_text'),
+            ],
+            heading="Secondary Hero Button",
         ),
     ]
 
