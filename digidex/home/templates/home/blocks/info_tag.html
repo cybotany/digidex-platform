@@ -1,0 +1,25 @@
+{% load wagtailimages_tags %}
+
+{% if value.link %}
+  <a href="{{ value.link.url }}" class="link-info base-inline-block">
+    {% if value.image %}
+      <div class="block-icon-info">
+        {% image value.image fill-100x100 class="icon-info" %}
+      </div>
+    {% endif %}
+    {% if value.text %}
+      <div class="text-info">{{ value.text }}<br></div>
+    {% endif %}
+  </a>
+{% else %}
+  <div class="base-inline-block">
+    {% if value.image %}
+      <div class="block-icon-info">
+        {% image value.value fill-100x100 class="icon-info" %}
+      </div>
+   {% endif %}
+   {% if value.text %}
+      <div class="text-info">{{ value.text }}<br></div>
+   {% endif %}
+  </div>
+{% endif %}
