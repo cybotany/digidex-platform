@@ -1,7 +1,8 @@
 from base.models.body import BasePage
 
 class CategoryIndexPage(BasePage):
-    pass
+    parent_page_types = ["ecommerce.EcommerceIndexPage"]
+
 
 class CategoryPage(BasePage):
-    pass
+    parent_page_types = ["categories.CategoryIndexPage"]

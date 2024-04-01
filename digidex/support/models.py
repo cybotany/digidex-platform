@@ -4,6 +4,8 @@ from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from base.models.body import BasePage
 
 class SupportIndexPage(BasePage):
+    parent_page_types = ["home.HomePage"]
+
     body_heading_subtitle = models.CharField(
         blank=True,
         null=True

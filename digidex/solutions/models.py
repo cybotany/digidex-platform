@@ -6,6 +6,8 @@ from solutions import blocks as _sblocks
 
 
 class SolutionsIndexPage(_models.BasePage):
+    parent_page_types = ["home.HomePage"]
+
     solutions = fields.StreamField(
         _sblocks.SolutionsStreamBlock,
         null=True,

@@ -4,6 +4,8 @@ from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from base.models.body import BasePage
 
 class CompanyIndexPage(BasePage):
+    parent_page_types = ["home.HomePage"]
+
     # About section fields
     about_vision = models.TextField(blank=True, null=True)
     about_mission = models.TextField(blank=True, null=True)
