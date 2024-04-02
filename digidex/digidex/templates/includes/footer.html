@@ -1,26 +1,37 @@
-{% load static navigation_tags %}
+{% load static navigation_tags wagtailcore_tags %}
 <footer>
   <section class="section-footer">
     <div class="content">
       <div class="base-layout-grid grid-footer">
-        <!-- Support Block -->
+        <div class="block-footer">
+          <img src="{% static 'images/logo/plant.svg' %}" loading="eager" alt="" class="logo-footer">
+          <div class="paragraph-footer">Fast, Reliable, Secure - Your Website Deserves the Best Hosting<br></div>
+        </div>
         <div class="block-footer">
           <div class="subtitle-footer">About Us<br></div>
-          <a href="{{ page.company }}" class="link-footer">Company</a>
-          <a href="{{ page.contact }}" class="link-footer">Contact</a>
+          {% with company=settings.base.AboutUsSettings.company %}
+            <a href="{% pageurl company %}" class="link-footer">Company</a>
+          {% endwith %}
+          {% with contact=settings.base.AboutUsSettings.contact %}
+            <a href="{% pageurl contact %}" class="link-footer">Contact</a>
+          {% endwith %}
         </div>
         <div class="block-footer">
           <div class="subtitle-footer">News & Events<br></div>
-          <a href="{{ page.solutions }}" class="link-footer">Solutions</a>
-          <a href="{{ page.blog }}" class="link-footer">Blog</a>
+          {% with solutions=settings.base.NewsAndEventsSettings.solutions %}
+            <a href="{% pageurl solutions %}" class="link-footer">Solutions</a>
+          {% endwith %}
+          {% with blog=settings.base.NewsAndEventsSettings.blog %} 
+            <a href="{% pageurl blog %}" class="link-footer">Blog</a>
+          {% endwith %}
         </div>
           <div class="block-footer">
             <div class="subtitle-footer">Connect With Us<br></div>
-            {% with github_url=settings.base.SocialMediaSettings.github_url %}
-              <a href="{% if github_url %}{{ github_url }}{% else %}#{% endif %}" target="_blank" class="link-footer">GitHub</a>
+            {% with github=settings.base.SocialMediaSettings.github %}
+              <a href="{% if github %}{{ github }}{% else %}#{% endif %}" target="_blank" class="link-footer">GitHub</a>
             {% endwith %}
-            {% with twitter_url=settings.base.SocialMediaSettings.twitter_url %}
-              <a href="{% if twitter_url %}{{ twitter_url }}{% else %}#{% endif %}" target="_blank" class="link-footer">Twitter</a>
+            {% with twitter=settings.base.SocialMediaSettings.twitter %}
+              <a href="{% if twitter %}{{ twitter }}{% else %}#{% endif %}" target="_blank" class="link-footer">Twitter</a>
             {% endwith %}
           </div>
        </div>
