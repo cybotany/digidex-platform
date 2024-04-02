@@ -1,9 +1,8 @@
 from django.db import models
+from wagtail import models as wt_models
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 
-from base.models.page import BasePage
-
-class SupportIndexPage(BasePage):
+class SupportIndexPage(wt_models.Page):
     parent_page_types = ["home.HomePage"]
 
     body_heading_subtitle = models.CharField(
@@ -42,7 +41,7 @@ class SupportIndexPage(BasePage):
         null=True
     )
 
-    content_panels = BasePage.content_panels + [
+    content_panels = wt_models.Page.content_panels + [
         MultiFieldPanel([
             FieldPanel('body_heading_subtitle'),
             FieldPanel('body_heading_title'),

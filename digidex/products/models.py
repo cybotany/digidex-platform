@@ -1,9 +1,8 @@
-from base.models.page import BasePage
+from wagtail import models as wt_models
 
-class ProductIndexPage(BasePage):
+class ProductIndexPage(wt_models.Page):
     parent_page_types = ["ecommerce.EcommerceIndexPage"]
 
 
-class ProductPage(BasePage):
+class ProductPage(wt_models.Page):
     parent_page_types = ["products.ProductIndexPage"]
-

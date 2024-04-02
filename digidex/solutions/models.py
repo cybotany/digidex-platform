@@ -1,7 +1,7 @@
-from base import models as _models
+from wagtail import models as wt_models
 
 
-class SolutionsIndexPage(_models.BasePage):
+class SolutionsIndexPage(wt_models.Page):
     parent_page_types = ["home.HomePage"]
 
     class Meta:

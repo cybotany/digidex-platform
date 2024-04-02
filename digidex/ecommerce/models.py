@@ -1,7 +1,10 @@
-from base.models.page import BasePage
+from django.db import models
+from wagtail import models as wt_models
 
-class EcommerceIndexPage(BasePage):
-    pass
+class EcommerceIndexPage(wt_models.Page):
+    heading = models.CharField(max_length=255, blank=True, null=True)
+    intro = models.TextField(blank=True, null=True)
 
-class EcommercePage(BasePage):
-    pass
+class EcommercePage(wt_models.Page):
+    heading = models.CharField(max_length=255, blank=True, null=True)
+    intro = models.TextField(blank=True, null=True)

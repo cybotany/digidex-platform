@@ -1,11 +1,12 @@
 from django.db import models
+from wagtail import models as wt_models
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 
-from base.models.page import BasePage
-
-class CompanyIndexPage(BasePage):
+class CompanyIndexPage(wt_models.Page):
     parent_page_types = ["home.HomePage"]
-
+    heading = models.CharField(max_length=255, blank=True, null=True)
+    intro = models.TextField(blank=True, null=True)
+    
     # About section fields
     about_vision = models.TextField(blank=True, null=True)
     about_mission = models.TextField(blank=True, null=True)
@@ -32,7 +33,7 @@ class CompanyIndexPage(BasePage):
         related_name='+'
     )
 
-    content_panels = BasePage.content_panels + [
+    content_panels = wt_models.Page.content_panels + [
         MultiFieldPanel([
             FieldPanel('about_vision'),
             FieldPanel('about_mission'),
