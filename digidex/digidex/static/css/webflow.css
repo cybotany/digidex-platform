@@ -14,9 +14,6 @@
   font-variant: normal;
   text-transform: none;
   line-height: 1;
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 .base-icon-slider-right:before {
   content: "\e600";
@@ -38,8 +35,6 @@
   content: "\e903";
 }
 * {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 html {
@@ -96,7 +91,7 @@ html.base-mod-touch * {
   border-radius: 0;
 }
 input.base-button {
-  -webkit-appearance: button;
+  appearance: button;
 }
 html[data-w-dynpage] [data-w-cloak] {
   color: transparent !important;
@@ -303,7 +298,7 @@ button,
 [type='reset'] {
   border: 0;
   cursor: pointer;
-  -webkit-appearance: button;
+  appearance: button;
 }
 .base-form {
   margin: 0 0 15px;
@@ -348,8 +343,8 @@ label {
   color: #999;
   opacity: 1;
 }
-.base-input::-webkit-input-placeholder,
-.base-select::-webkit-input-placeholder {
+.base-input::input-placeholder,
+.base-select::input-placeholder {
   color: #999;
 }
 .base-input:focus,
@@ -1294,7 +1289,6 @@ textarea.base-select {
   background-repeat: no-repeat;
   background-position: center;
   cursor: pointer;
-  -webkit-transition: all 0.3s;
   transition: all 0.3s;
 }
 .base-lightbox-left {
@@ -1352,7 +1346,6 @@ textarea.base-select {
   box-sizing: content-box;
   /* 1 */
   cursor: pointer;
-  -webkit-transform: translate3d(0, 0, 0);
   /* 2 */
 }
 .base-lightbox-active {
@@ -1372,13 +1365,11 @@ textarea.base-select {
 .base-lightbox-thumbnail .base-lightbox-tall {
   top: 50%;
   width: 100%;
-  -webkit-transform: translate(0, -50%);
   transform: translate(0, -50%);
 }
 .base-lightbox-thumbnail .base-lightbox-wide {
   left: 50%;
   height: 100%;
-  -webkit-transform: translate(-50%, 0);
   transform: translate(-50%, 0);
 }
 /*
@@ -1398,7 +1389,6 @@ textarea.base-select {
   margin-left: -20px;
   border: 5px solid rgba(0, 0, 0, 0.4);
   border-radius: 50%;
-  -webkit-animation: spin 0.8s infinite linear;
   animation: spin 0.8s infinite linear;
 }
 .base-lightbox-spinner:after {
@@ -1680,9 +1670,6 @@ textarea.base-select {
   font-size: 24px;
   display: none;
   cursor: pointer;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  tap-highlight-color: rgba(0, 0, 0, 0);
-  -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
