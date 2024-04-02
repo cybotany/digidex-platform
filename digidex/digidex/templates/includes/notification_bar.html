@@ -1,0 +1,12 @@
+{% if notification_settings %}
+  {% for block in notification_settings.notification %}
+    <div class="top-bar">
+      {% if block.block_type == 'title' %}
+        <div class="info-top-bar">{{ block.value }}</div>
+      {% elif block.block_type == 'icon' %}
+        <!-- Adjust the following line according to how your IconBlock is structured -->
+        <img src="{{ block.value.url }}" loading="eager" alt="" class="icon-top-bar">
+      {% endif %}
+    </div>
+  {% endfor %}
+{% endif %}

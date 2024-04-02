@@ -16,7 +16,7 @@ class HomePage(Page):
         blank=True,
         null=True
     )
-    hero_cta_text = models.URLField(
+    hero_cta_text = models.CharField(
         blank=True,
         null=True
     )
@@ -24,7 +24,7 @@ class HomePage(Page):
         blank=True,
         null=True
     )
-    alt_hero_cta_text = models.URLField(
+    alt_hero_cta_text = models.CharField(
         blank=True,
         null=True
     )
