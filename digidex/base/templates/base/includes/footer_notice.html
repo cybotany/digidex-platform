@@ -1,10 +1,7 @@
 {% load wagtailcore_tags %}
 
 <div class="block-footer-down">
-  {% if footer_copyright %}
-    <div class="text-footer-down">{{ footer_copyright|richtext }}<br></div>
-  {% endif %}
-  {% if footer_credit %}
-    <div class="text-footer-down">{{ footer_credit|richtext }}<br></div>
+  {% if notice %}
+    <div class="text-footer-down">{{ notice }}<br></div>
   {% endif %}
 </div>

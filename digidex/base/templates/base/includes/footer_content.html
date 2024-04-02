@@ -1,14 +1,7 @@
-{% load wagtailimages_tags wagtailcore_tags %}
+{% load static wagtailcore_tags %}
 
 <div class="block-footer">
-  TEST!!!
-  {% if footer_logo %}
-    {% image footer_logo fill-100x100 as img %}
-    <img src="{{ img.url }}" loading="eager" alt="Footer Logo" class="logo-footer">
-  {% endif %}
-  
-  <div class="paragraph-footer"> 
-    TEST!!!
-    {{ footer_body|richtext }}<br>
+  <img src="{% static 'images/logo/plant.svg' %}" loading="eager" alt="Footer Logo" class="logo-footer">
+  <div class="paragraph-footer"> {{ paragraph }}<br>
   </div>
 </div>

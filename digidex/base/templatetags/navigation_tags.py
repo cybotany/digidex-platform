@@ -8,12 +8,12 @@ register = template.Library()
 @register.inclusion_tag("base/includes/footer_content.html", takes_context=True)
 def get_footer_content(context):
     DEFAULT_CONTENT = {
-        "body": "",
+        "paragraph": "",
     }
 
     _content = footer.FooterContent.objects.first()
     footer_content = {
-        "body": _content.body if _content else DEFAULT_CONTENT["body"],
+        "paragraph": _content.paragraph if _content else DEFAULT_CONTENT["paragraph"],
     }
 
     return footer_content
@@ -26,7 +26,7 @@ def get_footer_notice(context):
 
     _notice = footer.FooterNotice.objects.first()
     footer_notice = {
-        "copyright": _notice.notice if _notice else DEFAULT_NOTICE["notice"],
+        "notice": _notice.notice if _notice else DEFAULT_NOTICE["notice"],
     }
 
     return footer_notice
