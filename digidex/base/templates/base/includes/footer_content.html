@@ -1,26 +1,14 @@
 {% load wagtailimages_tags wagtailcore_tags %}
 
 <div class="block-footer">
+  TEST!!!
   {% if footer_logo %}
     {% image footer_logo fill-100x100 as img %}
     <img src="{{ img.url }}" loading="eager" alt="Footer Logo" class="logo-footer">
   {% endif %}
   
-  <div class="paragraph-footer">
-    {{ footer_body|safe }}<br>
+  <div class="paragraph-footer"> 
+    TEST!!!
+    {{ footer_body|richtext }}<br>
   </div>
-</div>
-
-
-{% load wagtailcore_tags %}
-
-<div class="block-footer-down">
-  {% if footer_copyright %}
-    <div class="text-footer-down">{{ footer_copyright|richtext }}<br></div>
-  {% else %}
-    <div class="text-footer-down">Copyright CyBotany, Institute. All rights reserved. Built with <a href="https://wagtail.org/" target="_blank" class="link-footer-down">Wagtail</a><br></div>
-  {% endif %}
-  {% if footer_credit %}
-    <div class="text-footer-down">{{ footer_credit|richtext }}<br></div>
-  {% endif %}
 </div>

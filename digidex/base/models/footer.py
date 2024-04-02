@@ -38,12 +38,12 @@ class FooterContent(
 
     def get_preview_context(self, request, mode_name):
         return {
-            "footer_body": self.body,
-            "footer_logo": self.logo,
+            "body": self.body,
+            "logo": self.logo,
         }
 
     class Meta(wg_models.TranslatableMixin.Meta):
-        verbose_name_plural = "Footer contents"
+        verbose_name_plural = "Footer Contents"
 
 
 @snippets.register_snippet
@@ -77,8 +77,8 @@ class FooterNotice(
 
     def get_preview_context(self, request, mode_name):
         return {
-            "footer_copyright": self.copyright,
-            "footer_credit": self.credit
+            "copyright": self.copyright,
+            "credit": self.credit
         }
 
     class Meta(wg_models.TranslatableMixin.Meta):
