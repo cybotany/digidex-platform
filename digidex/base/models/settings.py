@@ -4,7 +4,23 @@ from wagtail.admin import panels
 from wagtail.contrib.settings import models as wg_settings
 
 @wg_settings.register_setting
-class AboutUsSettings(wg_settings.BaseGenericSetting):
+class NavigationSettings(wg_settings.BaseGenericSetting):
+    email = models.EmailField(
+        null=True,
+        blank=True,
+        help_text='Support Email Address'
+    )
+    phone_number = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+        help_text='Support Phone Number'
+    )
+    chat = models.URLField(
+        null=True,
+        blank=True,
+        help_text='URL to launch Support Chat'
+    )
     company = models.ForeignKey(
         'wagtailcore.Page',
         null=True,
@@ -19,20 +35,6 @@ class AboutUsSettings(wg_settings.BaseGenericSetting):
         on_delete=models.SET_NULL,
         related_name='+',
     )
-
-    panels = [
-        panels.MultiFieldPanel(
-            [
-                panels.FieldPanel('company'),
-                panels.FieldPanel('contact'),
-            ],
-            "About Us Links",
-        ),
-    ]
-
-
-@wg_settings.register_setting
-class NewsAndEventsSettings(wg_settings.BaseGenericSetting):
     solutions = models.ForeignKey(
         'wagtailcore.Page',
         null=True,
@@ -47,20 +49,6 @@ class NewsAndEventsSettings(wg_settings.BaseGenericSetting):
         on_delete=models.SET_NULL,
         related_name='+',
     )
-
-    panels = [
-        panels.MultiFieldPanel(
-            [
-                panels.FieldPanel('blog'),
-                panels.FieldPanel('solutions'),
-            ],
-            "News & Events Links",
-        ),
-    ]
-
-
-@wg_settings.register_setting
-class SocialMediaSettings(wg_settings.BaseGenericSetting):
     twitter = models.URLField(
         verbose_name="Twitter URL",
         blank=True
@@ -70,7 +58,30 @@ class SocialMediaSettings(wg_settings.BaseGenericSetting):
         blank=True
     )
 
-    panels = [       
+    panels = [
+        panels.MultiFieldPanel(
+            [
+                panels.FieldPanel("email"),
+                panels.FieldPanel("phone_number"),
+                panels.FieldPanel("chat"),
+            ],
+            heading="Support Contact Information",
+        ),
+        panels.MultiFieldPanel(
+            [
+                panels.FieldPanel('company'),
+                panels.FieldPanel('contact'),
+            ],
+            "About Us Links",
+        ),
+
+        panels.MultiFieldPanel(
+            [
+                panels.FieldPanel('blog'),
+                panels.FieldPanel('solutions'),
+            ],
+            "News & Events Links",
+        ),
         panels.MultiFieldPanel(
             [
                 panels.FieldPanel("twitter"),
