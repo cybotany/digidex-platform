@@ -14,13 +14,15 @@
           <a href="{{ page.solutions }}" class="link-footer">Solutions</a>
           <a href="{{ page.blog }}" class="link-footer">Blog</a>
         </div>
-        {% with twitter_url=settings.social_media.twitter_url github_url=settings.social_media.github_url %}
           <div class="block-footer">
             <div class="subtitle-footer">Connect With Us<br></div>
-            <a href="{% if github_url %}{{ github_url }}{% else %}#{% endif %}" target="_blank" class="link-footer">GitHub</a>
-            <a href="{% if twitter_url %}{{ twitter_url }}{% else %}#{% endif %}" target="_blank" class="link-footer">Twitter</a>
+            {% with github_url=settings.base.SocialMediaSettings.github_url %}
+              <a href="{% if github_url %}{{ github_url }}{% else %}#{% endif %}" target="_blank" class="link-footer">GitHub</a>
+            {% endwith %}
+            {% with twitter_url=settings.base.SocialMediaSettings.twitter_url %}
+              <a href="{% if twitter_url %}{{ twitter_url }}{% else %}#{% endif %}" target="_blank" class="link-footer">Twitter</a>
+            {% endwith %}
           </div>
-        {% endwith %}
        </div>
       <div class="block-footer-down">
         <div class="text-footer-down">©2024 CyBotany, Institute. All rights reserved. Built with <a href="https://wagtail.org/" target="_blank" class="link-footer-down">Wagtail</a><br></div>
