@@ -3,39 +3,22 @@
   <section class="section-footer">
     <div class="content">
       <div class="base-layout-grid grid-footer">
+        <!-- Support Block -->
         <div class="block-footer">
-          <img src="{% static 'images/logo/plant-logo.svg' %}" loading="eager" alt="" class="logo-footer">
-          <div class="paragraph-footer">Footer Placeholder<br></div>
-          <div class="block-social">
-            <a href="tel:+1(888)123-4567" class="social-link base-inline-block">
-              <img src="{% static 'images/bx/phone-voice.svg' %}" loading="eager" alt="" class="icon-social">
-            </a>
-            <a href="mailto:support@yoursite.com" class="social-link base-inline-block">
-              <img src="{% static 'images/bx/email.svg' %}" loading="eager" alt="" class="icon-social">
-            </a>
-            <a href="#" class="social-link base-inline-block">
-              <img src="{% static 'images/bx/chat-launch.svg' %}" loading="eager" alt="" class="icon-social">
-            </a>
-          </div>
-        </div>
-        <div class="block-footer">
-          <div class="subtitle-footer">Quick Links<br></div>
-          <a href="#" class="link-footer">Solutions</a>
-          <a href="#" class="link-footer">Company</a>
-          <a href="#" class="link-footer">Contact</a>
+          <div class="subtitle-footer">About Us<br></div>
+          <a href="{{ page.company }}" class="link-footer">Company</a>
+          <a href="{{ page.contact }}" class="link-footer">Contact</a>
         </div>
         <div class="block-footer">
           <div class="subtitle-footer">News & Events<br></div>
-          <a href="#" class="link-footer">Licensing</a>
-          <a href="#" class="link-footer">Style Guide</a>
-          <a href="#" class="link-footer">Changelog</a>
+          <a href="{{ page.solutions }}" class="link-footer">Solutions</a>
+          <a href="{{ page.blog }}" class="link-footer">Blog</a>
         </div>
         {% with twitter_url=settings.base.FooterSettings.twitter_url github_url=settings.base.FooterSettings.github_url mastodon_url=settings.base.FooterSettings.mastodon_url %}
           <div class="block-footer">
             <div class="subtitle-footer">Connect With Us<br></div>
             <a href="{% if github_url %}{{ github_url }}{% else %}#{% endif %}" target="_blank" class="link-footer">GitHub</a>
             <a href="{% if twitter_url %}{{ twitter_url }}{% else %}#{% endif %}" target="_blank" class="link-footer">Twitter</a>
-            <a href="{% if linkedin_url %}{{ linkedin_url }}{% else %}#{% endif %}" target="_blank" class="link-footer">Linkedin</a>
           </div>
         {% endwith %}
        </div>

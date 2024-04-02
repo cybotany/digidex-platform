@@ -1,24 +1,24 @@
-# base/models/header.py
+from django.db import models
 from wagtail.admin import panels
-from wagtail import fields
-from wagtail.contrib.settings import models
+from wagtail.contrib.settings import models as _wsettings
 
-from base import blocks as _bblocks
-
-@models.register_setting
-class NotificationBarSettings(models.BaseGenericSetting):
-    notification = fields.StreamField(
-        [
-            ('title', _bblocks.HeadingBlock()),
-            ('icon', _bblocks.IconBlock()),
-        ],
-        null=True,
-        blank=True,
+@_wsettings.register_setting
+class NavigationSettings(_wsettings.BaseGenericSetting):
+    twitter_url = models.URLField(
+        verbose_name="Twitter URL",
+        blank=True
+    )
+    github_url = models.URLField(
+        verbose_name="GitHub URL",
+        blank=True
     )
 
-    panels = [
-        panels.FieldPanel('notification'),
+    panels = [       
+        panels.MultiFieldPanel(
+            [
+                panels.FieldPanel("twitter_url"),
+                panels.FieldPanel("github_url"),
+            ],
+            "Social Media Section Links",
+        )
     ]
-
-    class Meta:
-        verbose_name = "Notification Bar Settings"

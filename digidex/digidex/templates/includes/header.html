@@ -1,10 +1,9 @@
-{% load static wagtailcore_tags navigation_tags wagtailuserbar wagtailsettings %}
+{% load static wagtailcore_tags navigation_tags wagtailuserbar %}
 {% get_site_root as site_root %}
-{% get_notification_bar as notification_bar %}
 
 <header role="banner">
   <section class="section-top-bar">
-    <div class="top-bar-block">{% notification_bar %}</div>
+    <div class="top-bar-block">{% get_notification_bar %}</div>
   </section>
   <div role="banner" class="navbar base-nav">
     <div class="nav-block">

@@ -5,6 +5,7 @@ from base.models import header, footer
 
 register = template.Library()
 
+"""
 @register.inclusion_tag("includes/notification_bar.html", takes_context=True)
 def get_notification_bar(context):
     request = context.get('request')
@@ -15,7 +16,7 @@ def get_notification_bar(context):
     return {
         'notification_settings': notification_settings,
     }
-
+"""
 @register.inclusion_tag("includes/footer.html", takes_context=True)
 def get_footer(context):
     # Access the current site from the request
