@@ -38,6 +38,7 @@
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
+        {% include "includes/utility_header.html" %}
         <main id="main">
             {% block content %}{% endblock %}
         </main>

@@ -15,11 +15,15 @@
           <h1 class="heading-hero">{{ page.heading }}</h1>
           <p class="paragraph-hero">{{ page.paragraph }}</p>
           <div class="button-hero">
-            <a href="{{ page.cta_link_primary }}" class="button base-button">{{ page.cta_text_primary }}</a>
-            <a href="{{ page.cta_link_secondary }}" class="link-button base-inline-block">
+            {% if page.cta_link_primary %}
+              <a href="{{ page.cta_link_primary.url }}" class="button base-button">{{ page.cta_link_primary }}</a>
+            {% endif %}
+            {% if page.cta_link_secondary %}
+            <a href="{{ page.cta_link_secondary.url }}" class="link-button base-inline-block">
               <img src="{% static 'images/bx/support.svg' %}" loading="eager" alt="" class="icon-button">
               <div class="text-button">{{ page.cta_text_secondary }}</div>
             </a>
+            {% endif %}
           </div>
         </div>
         <div class="lottie">
