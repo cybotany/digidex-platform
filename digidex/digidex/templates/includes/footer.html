@@ -14,7 +14,7 @@
           <a href="{{ page.solutions }}" class="link-footer">Solutions</a>
           <a href="{{ page.blog }}" class="link-footer">Blog</a>
         </div>
-        {% with twitter_url=settings.base.FooterSettings.twitter_url github_url=settings.base.FooterSettings.github_url mastodon_url=settings.base.FooterSettings.mastodon_url %}
+        {% with twitter_url=settings.social_media.twitter_url github_url=settings.social_media.github_url %}
           <div class="block-footer">
             <div class="subtitle-footer">Connect With Us<br></div>
             <a href="{% if github_url %}{{ github_url }}{% else %}#{% endif %}" target="_blank" class="link-footer">GitHub</a>
