@@ -1,23 +1,20 @@
 from django import template
 from wagtail import models
 
-from base.models import settings as _settings
+from base import models as _models
 
 register = template.Library()
 
-@register.inclusion_tag("includes/footer.html", takes_context=True)
-def get_footer(context):
-    request = context.get('request')
-    site = models.Site.find_for_request(request) if request else None
-    
-    about_us = _settings.AboutUsSettings.for_site(site) if site else _settings.AboutUsSettings.objects.first()
-    news_and_events = _settings.NewsAndEventsSettings.for_site(site) if site else _settings.NewsAndEventsSettings.objects.first()
-    social_media = _settings.SocialMediaSettings.for_site(site) if site else _settings.SocialMediaSettings.objects.first()
+@register.inclusion_tag("base/includes/footer_text.html", takes_context=True)
+def get_footer_text(context):
+    footer_text = context.get("footer_text", "")
+
+    if not footer_text:
+        instance = _models.FooterText.objects.filter(live=True).first()
+        footer_text = instance.body if instance else ""
 
     return {
-        'about_us': about_us,
-        'news_and_events': news_and_events,
-        'social_media': social_media,
+        "footer_text": footer_text,
     }
 
 

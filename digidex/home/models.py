@@ -12,25 +12,14 @@ class HomePage(Page):
         blank=True,
         null=True
     )
-    cta_link_primary = models.ForeignKey(
+    cta_link = models.ForeignKey(
         'wagtailcore.Page', 
         null=True, 
         blank=True, 
         on_delete=models.SET_NULL, 
         related_name='+'
     )
-    cta_text_primary = models.CharField(
-        blank=True,
-        null=True
-    )
-    cta_link_secondary = models.ForeignKey(
-        'wagtailcore.Page', 
-        null=True, 
-        blank=True, 
-        on_delete=models.SET_NULL, 
-        related_name='+'
-    )
-    cta_text_secondary = models.CharField(
+    cta_text = models.CharField(
         blank=True,
         null=True
     )
@@ -61,17 +50,10 @@ class HomePage(Page):
         ),
         MultiFieldPanel(
             [
-                FieldPanel('cta_link_primary'),
-                FieldPanel('cta_text_primary'),
+                FieldPanel('cta_link'),
+                FieldPanel('cta_text'),
             ],
-            heading="Primary Call To Action",
-        ),
-        MultiFieldPanel(
-            [
-                FieldPanel('cta_link_secondary'),
-                FieldPanel('cta_text_secondary'),
-            ],
-            heading="Secondary Call To Action",
+            heading="Call To Action",
         ),
         MultiFieldPanel(
             [
