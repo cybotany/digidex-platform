@@ -1,9 +1,9 @@
 from django.db import models
 from wagtail.admin import panels
-from wagtail.contrib.settings import models as settings
+from wagtail.contrib.settings import models as _wsettings
 
-@settings.register_setting
-class SupportContactSettings(settings.BaseGenericSetting):
+@_wsettings.register_setting
+class SupportSettings(_wsettings.BaseGenericSetting):
     email = models.EmailField(
         null=True,
         blank=True,

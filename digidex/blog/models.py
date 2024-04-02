@@ -7,7 +7,7 @@ from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel
 from wagtail.search import index
 from modelcluster.fields import ParentalKey
 
-from base.models.body import BasePage
+from base.models.page import BasePage
 
 class BlogIndexPage(BasePage):
     content_panels = Page.content_panels

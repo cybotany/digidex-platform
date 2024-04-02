@@ -1,4 +1,4 @@
-from base.models.body import BasePage
+from base.models.page import BasePage
 
 class CategoryIndexPage(BasePage):
     parent_page_types = ["ecommerce.EcommerceIndexPage"]

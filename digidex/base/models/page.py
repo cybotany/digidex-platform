@@ -1,5 +1,5 @@
 from django.db import models
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel
+from wagtail.admin import panels
 from wagtail.models import Page
 
 class HeadingMixin(models.Model):
@@ -15,10 +15,10 @@ class HeadingMixin(models.Model):
     )
 
     panels = [
-        MultiFieldPanel(
+        panels.MultiFieldPanel(
             [
-                FieldPanel('heading_title'),
-                FieldPanel('heading_intro'),
+                panels.FieldPanel('heading_title'),
+                panels.FieldPanel('heading_intro'),
             ],
             heading="Page Heading",
         ),

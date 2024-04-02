@@ -1,7 +1,7 @@
 from django import template
 from wagtail import models
 
-from base.models import header, footer
+from base.models import footer, navigation
 
 register = template.Library()
 

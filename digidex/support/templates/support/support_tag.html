@@ -1,6 +1,0 @@
-{% load wagtailsettings_tags %}
-{% get_settings %}
-
-<a href="tel:{{ settings.your_app_name.SupportContactSettings.phone_number }}" class="social-link w-inline-block"><img src="images/phone-voice.svg" loading="eager" alt="" class="icon-social"></a>
-<a href="mailto:{{ settings.your_app_name.SupportContactSettings.email }}" class="social-link w-inline-block"><img src="images/email.svg" loading="eager" alt="" class="icon-social"></a>
-<a href="{{ settings.your_app_name.SupportContactSettings.chat }}" class="social-link w-inline-block"><img src="images/chat-launch.svg" loading="eager" alt="" class="icon-social"></a>

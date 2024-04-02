@@ -1,3 +1,2 @@
-from .body import HeadingMixin, BasePage
-#from .header import NotificationBarSettings
-from .footer import FooterSettings
+from .page import HeadingMixin, BasePage
+from .settings import SocialMediaSettings
