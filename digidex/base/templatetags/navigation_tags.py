@@ -1,22 +1,39 @@
 from django import template
 from wagtail import models
 
-from base import models as _models
+from base.models import footer
 
 register = template.Library()
 
-@register.inclusion_tag("base/includes/footer_text.html", takes_context=True)
-def get_footer_text(context):
-    footer_text = context.get("footer_text", "")
-
-    if not footer_text:
-        instance = _models.FooterText.objects.filter(live=True).first()
-        footer_text = instance.body if instance else ""
-
-    return {
-        "footer_text": footer_text,
+@register.inclusion_tag("base/includes/footer_content.html", takes_context=True)
+def get_footer_content(context):
+    DEFAULT_CONTENT = {
+        "body": "",
+        "logo": None,
     }
 
+    _content = footer.FooterContent.objects.first()
+    footer_content = {
+        "body": _content.body if _content else DEFAULT_CONTENT["body"],
+        "logo": _content.logo if _content and _content.logo else DEFAULT_CONTENT["logo"],
+    }
+
+    return footer_content
+
+@register.inclusion_tag("base/includes/footer_notice.html", takes_context=True)
+def get_footer_notice(context):
+    DEFAULT_NOTICE = {
+        "copyright": "",
+        "credit": "",
+    }
+
+    _notice = footer.FooterNotice.objects.first()
+    footer_notice = {
+        "copyright": _notice.copyright if _notice else DEFAULT_NOTICE["copyright"],
+        "credit": _notice.credit if _notice else DEFAULT_NOTICE["credit"],
+    }
+
+    return footer_notice
 
 @register.simple_tag(takes_context=True)
 def get_site_root(context):
