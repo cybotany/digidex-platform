@@ -7,10 +7,8 @@ register = template.Library()
 
 @register.inclusion_tag("includes/footer.html", takes_context=True)
 def get_footer(context):
-    # Access the current site from the request
     request = context.get('request')
     site = models.Site.find_for_request(request) if request else None
-
     social_media = _settings.SocialMediaSettings.for_site(site) if site else _settings.SocialMediaSettings.objects.first()
 
     return {
