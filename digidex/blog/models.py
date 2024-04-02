@@ -1,16 +1,17 @@
 from modelcluster.fields import ParentalKey
 
 from django.db import models
-from wagtail.fields import RichTextField
-from wagtail.models import Page, Orderable
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel
+from wagtail import fields
+from wagtail import models as wt_models
+from wagtail.admin import panels
 from wagtail.search import index
 from modelcluster.fields import ParentalKey
 
-from base.models.page import BasePage
+class BlogIndexPage(wt_models.Page):
+    heading = fields.RichTextField(blank=True)
+    intro = fields.RichTextField(blank=True)
 
-class BlogIndexPage(BasePage):
-    content_panels = Page.content_panels
+    content_panels = wt_models.Page.content_panels
 
     def get_context(self, request):
         context = super().get_context(request)
@@ -19,9 +20,21 @@ class BlogIndexPage(BasePage):
         return context
 
 
-class BlogPage(BasePage):
+class BlogPage(wt_models.Page):
+    heading = fields.RichTextField(blank=True)
+    intro = fields.RichTextField(blank=True)
     date = models.DateField("Post date")
-    body = RichTextField(blank=True)
+    body = fields.RichTextField(blank=True)
+
+    search_fields = wt_models.Page.search_fields + [
+        index.SearchField('body'),
+    ]
+
+    content_panels = wt_models.Page.content_panels + [
+        panels.FieldPanel('date'),
+        panels.FieldPanel('body'),
+        panels.InlinePanel('gallery_images', label="Gallery images"),
+    ]
 
     def main_image(self):
         gallery_item = self.gallery_images.first()
@@ -30,18 +43,8 @@ class BlogPage(BasePage):
         else:
             return None
 
-    search_fields = Page.search_fields + [
-        index.SearchField('body'),
-    ]
 
-    content_panels = Page.content_panels + [
-        FieldPanel('date'),
-        FieldPanel('body'),
-        InlinePanel('gallery_images', label="Gallery images"),
-    ]
-
-
-class BlogPageGalleryImage(Orderable):
+class BlogPageGalleryImage(wt_models.Orderable):
     page = ParentalKey(
         BlogPage,
         on_delete=models.CASCADE,
@@ -58,6 +61,6 @@ class BlogPageGalleryImage(Orderable):
     )
 
     panels = [
-        FieldPanel('image'),
-        FieldPanel('caption'),
+        panels.FieldPanel('image'),
+        panels.FieldPanel('caption'),
     ]
