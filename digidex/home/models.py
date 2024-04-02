@@ -34,6 +34,22 @@ class HomePage(Page):
         blank=True,
         null=True
     )
+    feature_1 = models.CharField(
+        blank=True,
+        null=True
+    )
+    feature_2 = models.CharField(
+        blank=True,
+        null=True
+    )
+    feature_3 = models.CharField(
+        blank=True,
+        null=True
+    )
+    feature_4 = models.CharField(
+        blank=True,
+        null=True
+    )
 
     content_panels = Page.content_panels + [
         MultiFieldPanel(
@@ -56,6 +72,15 @@ class HomePage(Page):
                 FieldPanel('alt_cta_text'),
             ],
             heading="Secondary Call To Action",
+        ),
+        MultiFieldPanel(
+            [
+                FieldPanel('feature_1'),
+                FieldPanel('feature_2'),
+                FieldPanel('feature_3'),
+                FieldPanel('feature_4'),
+            ],
+            heading="Lottie Features",
         ),
     ]
 
