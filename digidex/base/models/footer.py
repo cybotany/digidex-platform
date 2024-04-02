@@ -1,3 +1,4 @@
+# base/models/footer.py
 from django.db import models
 from wagtail import fields
 from wagtail import models as wg_models
@@ -12,22 +13,12 @@ class FooterContent(
     wg_models.TranslatableMixin,
     models.Model,
 ):
-
-    body = fields.RichTextField(
+    paragraph = fields.RichTextField(
         help_text="Main content for the footer."
-    )
-    logo = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name="+",
-        help_text="Logo to display in the footer."
     )
 
     panels = [
-        panels.FieldPanel("body"),
-        panels.FieldPanel("logo"),
+        panels.FieldPanel("paragraph"),
     ]
 
     def __str__(self):
@@ -38,12 +29,11 @@ class FooterContent(
 
     def get_preview_context(self, request, mode_name):
         return {
-            "body": self.body,
-            "logo": self.logo,
+            "footer_content": self.paragraph,
         }
 
     class Meta(wg_models.TranslatableMixin.Meta):
-        verbose_name_plural = "Footer Contents"
+        verbose_name_plural = "Footer Content"
 
 
 @snippets.register_snippet
@@ -54,18 +44,13 @@ class FooterNotice(
     wg_models.TranslatableMixin,
     models.Model,
 ):
-    copyright = fields.RichTextField(
-        help_text="Copyright notices for the footer.",
-        blank=True
-    )
-    credit = fields.RichTextField(
-        help_text="Site credits for the footer.",
+    notice = fields.RichTextField(
+        help_text="Copyright and Credit notices for the footer.",
         blank=True
     )
 
     panels = [
-        panels.FieldPanel("copyright"),
-        panels.FieldPanel("credit"),
+        panels.FieldPanel("notice"),
         panels.PublishingPanel(),
     ]
 
@@ -77,8 +62,7 @@ class FooterNotice(
 
     def get_preview_context(self, request, mode_name):
         return {
-            "copyright": self.copyright,
-            "credit": self.credit
+            "footer_notice": self.notice
         }
 
     class Meta(wg_models.TranslatableMixin.Meta):

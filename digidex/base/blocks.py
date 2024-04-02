@@ -78,17 +78,6 @@ class ParagraphBlock(BaseStructBlock):
         icon = "pilcrow"
 
 
-class ContentBlock(BaseStructBlock):
-    heading = HeadingBlock(
-        max_length=50,
-        help_text="Enter the heading text here"
-    )
-    paragraph = ParagraphBlock(
-        required=False,
-        help_text="Enter the body here"
-    )
-
-
 class ImageBlock(BaseStructBlock):
     image = BaseImageBlock(
         required=True

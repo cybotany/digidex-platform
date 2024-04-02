@@ -5,6 +5,28 @@ from wagtail.contrib.settings import models as wg_settings
 
 @wg_settings.register_setting
 class NavigationSettings(wg_settings.BaseGenericSetting):
+    logo = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+        help_text="Company Logo."
+    )
+    company = models.ForeignKey(
+        'wagtailcore.Page',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+    )
+    contact = models.ForeignKey(
+        'wagtailcore.Page',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+    )
     email = models.EmailField(
         null=True,
         blank=True,
@@ -20,20 +42,6 @@ class NavigationSettings(wg_settings.BaseGenericSetting):
         null=True,
         blank=True,
         help_text='URL to launch Support Chat'
-    )
-    company = models.ForeignKey(
-        'wagtailcore.Page',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+',
-    )
-    contact = models.ForeignKey(
-        'wagtailcore.Page',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+',
     )
     solutions = models.ForeignKey(
         'wagtailcore.Page',
@@ -60,6 +68,13 @@ class NavigationSettings(wg_settings.BaseGenericSetting):
 
     panels = [
         panels.MultiFieldPanel(
+            [   panels.FieldPanel('logo'),
+                panels.FieldPanel('company'),
+                panels.FieldPanel('contact'),
+            ],
+            "About Us Links",
+        ),
+        panels.MultiFieldPanel(
             [
                 panels.FieldPanel("email"),
                 panels.FieldPanel("phone_number"),
@@ -67,14 +82,6 @@ class NavigationSettings(wg_settings.BaseGenericSetting):
             ],
             heading="Support Contact Information",
         ),
-        panels.MultiFieldPanel(
-            [
-                panels.FieldPanel('company'),
-                panels.FieldPanel('contact'),
-            ],
-            "About Us Links",
-        ),
-
         panels.MultiFieldPanel(
             [
                 panels.FieldPanel('blog'),
