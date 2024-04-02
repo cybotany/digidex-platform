@@ -3,28 +3,34 @@ from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 
 class HomePage(Page):
-    hero_heading = models.CharField(
+    heading = models.CharField(
         max_length=255,
         blank=True,
         null=True
     )
-    hero_paragraph = models.TextField(
+    paragraph = models.TextField(
         blank=True,
         null=True
     )
-    hero_cta_link = models.URLField(
+    cta_link = models.ForeignKey(
+        'wagtailcore.Page', 
+        null=True, 
+        blank=True, 
+        on_delete=models.SET_NULL, 
+        related_name='+'
+    )
+    cta_text = models.CharField(
         blank=True,
         null=True
     )
-    hero_cta_text = models.CharField(
-        blank=True,
-        null=True
+    alt_cta_link = models.ForeignKey(
+        'wagtailcore.Page', 
+        null=True, 
+        blank=True, 
+        on_delete=models.SET_NULL, 
+        related_name='+'
     )
-    alt_hero_cta_link = models.URLField(
-        blank=True,
-        null=True
-    )
-    alt_hero_cta_text = models.CharField(
+    alt_cta_text = models.CharField(
         blank=True,
         null=True
     )
@@ -32,24 +38,24 @@ class HomePage(Page):
     content_panels = Page.content_panels + [
         MultiFieldPanel(
             [
-                FieldPanel('hero_heading'),
-                FieldPanel('hero_paragraph'),
+                FieldPanel('heading'),
+                FieldPanel('paragraph'),
             ],
             heading="Hero Content",
         ),
         MultiFieldPanel(
             [
-                FieldPanel('hero_cta_link'),
-                FieldPanel('hero_cta_text'),
+                FieldPanel('cta_link'),
+                FieldPanel('cta_text'),
             ],
-            heading="Primary Hero Button",
+            heading="Primary Call To Action",
         ),
         MultiFieldPanel(
             [
-                FieldPanel('alt_hero_cta_link'),
-                FieldPanel('alt_hero_cta_text'),
+                FieldPanel('alt_cta_link'),
+                FieldPanel('alt_cta_text'),
             ],
-            heading="Secondary Hero Button",
+            heading="Secondary Call To Action",
         ),
     ]
 
