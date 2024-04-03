@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags%}
 
 {% block body_class %}{% endblock %}
 
@@ -17,7 +17,7 @@
     <div class="content narrow">
       <img alt="" loading="eager" src="" class="image-main-post">
       <div class="post-body">
-        <div class="rich-text-block base-dyn-bind-empty base-richtext">
+        <div class="rich-text-block base-richtext">
           {{ page.body|richtext }}
         </div>
       </div>

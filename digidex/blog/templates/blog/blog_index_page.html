@@ -18,14 +18,11 @@
   </section>
   <section class="section">
     <div class="content">
-      {% if blogposts %}
         <div class="collection-list-wrapper-posts large base-dyn-list">
           <div role="list" class="collection-list-posts large base-dyn-items">
-            {% with blogposts.first as featured_post %}
               <div role="listitem" class="base-dyn-item">
                 <div class="block-post large">
                   <a href="{{ featured_post.url }}" class="link-post-thumbnail large base-inline-block">
-                    {% image featured_post.specific.main_image fill-600x338 as img %}
                     <img alt="" loading="eager" src="{{ img.url }}" class="image-post-thumbnail large">
                   </a>
                   <div class="post large">
