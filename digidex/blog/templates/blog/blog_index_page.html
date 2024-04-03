@@ -15,9 +15,9 @@
     </div>
   </section>
   {% if empty_blog %}
-    {% include "blog/empty.html" %}
+    {% include "blog/includes/empty.html" %}
   {% else %}
-    {% include "blog/featured_post.html" %}
-    {% include "blog/post_grid.html" %}
+    {% include "blog/includes/featured.html" %}
+    {% include "blog/includes/grid.html" %}
   {% endif %}
 {% endblock %}

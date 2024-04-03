@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% load wagtailcore_tags wagtailimages_tags%}
 
-{% block content %}
+{% with featured=featured_post.specific %}
   <section class="section-top padding-0">
     <div class="content">
       <div class="block-top">
-        <div class="date-top">{{ page.date }}</div>
-        <h1 class="heading-top">{{ page.heading }}</h1>
-        <p class="paragraph-top blog-post">{{ page.intro }}</p>
+        <div class="date-top"></div>
+        <h1 class="heading-top"></h1>
+        <p class="paragraph-top blog-post"></p>
       </div>
     </div>
   </section>
@@ -21,7 +21,4 @@
       </div>
     </div>
   </section>
-  <p>
-    <a href="{{ page.get_parent.url }}">Return to blog</a>
-  </p>
-{% endblock %}
+{% endwith %}
