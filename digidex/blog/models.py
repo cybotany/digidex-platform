@@ -19,7 +19,14 @@ class BlogIndexPage(wt_models.Page):
     def get_context(self, request):
         context = super().get_context(request)
         blogpages = self.get_children().live().order_by('-first_published_at')
-        context['blogpages'] = blogpages
+
+        if blogpages:
+            context['featured_blog'] = blogpages[0]
+            context['blogpages'] = blogpages[1:]
+        else:
+            context['featured_blog'] = None
+            context['blogpages'] = None
+
         return context
 
 

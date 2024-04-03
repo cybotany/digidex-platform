@@ -8,61 +8,65 @@
 {% block body_class %}template-blogindexpage{% endblock %}
 
 {% block content %}
-  <section class="section-top">
-    <div class="content">
-      <div class="block-top">
-        <h1 class="heading-top">{{ page.heading }}</h1>
-        <p class="paragraph-top">{{ page.intro }}</p>
-      </div>
+<section class="section-top">
+  <div class="content">
+    <div class="block-top">
+      <h1 class="heading-top">{{ page.heading }}</h1>
+      <p class="paragraph-top">{{ page.intro }}</p>
     </div>
-  </section>
-  <section class="section">
-    <div class="content">
+  </div>
+</section>
+<section class="section">
+  <div class="content">
+    {% if featured_blog %}
+      {% with featured=featured_blog.specific %}
         <div class="collection-list-wrapper-posts large base-dyn-list">
           <div role="list" class="collection-list-posts large base-dyn-items">
-              <div role="listitem" class="base-dyn-item">
-                <div class="block-post large">
-                  <a href="{{ featured_post.url }}" class="link-post-thumbnail large base-inline-block">
-                    <img alt="" loading="eager" src="{{ img.url }}" class="image-post-thumbnail large">
+            <div role="listitem" class="base-dyn-item">
+              <div class="block-post large">
+                <a href="{% pageurl featured %}" class="link-post-thumbnail large base-inline-block">
+                  {% with featured.main_image as main_image %}
+                    {% if main_image %}{% image main_image fill-120x80 class="image-post-thumbnail large" %}{% endif %}
+                  {% endwith %}
+                </a>
+                <div class="post large">
+                  <div class="date">{{ featured.date }}</div>
+                  <a href="{% pageurl featured %}" class="link-heading-post large base-inline-block">
+                    <h3 class="heading-post">{{ featured.title }}</h3>
                   </a>
-                  <div class="post large">
-                    <div class="date">{{ featured_post.specific.date }}</div>
-                    <a href="{{ featured_post.url }}" class="link-heading-post large base-inline-block">
-                      <h3 class="heading-post">{{ featured_post.title }}</h3>
-                    </a>
-                    <p class="paragraph-post large">{{ featured_post.specific.intro }}</p>
-                    <a href="{{ featured_post.url }}" class="link-block base-inline-block">
-                      <div class="text-link">Read more</div>
-                      <div class="block-icon-link">
-                        <img src="{% static 'images/bx/arrow.svg' %}" loading="eager" alt="" class="icon-link">
-                      </div>
-                    </a>
-                  </div>
+                  <p class="paragraph-post large">{{ featured.body|richtext }}</p>
+                  <a href="{% pageurl featured %}" class="link-block base-inline-block">
+                    <div class="text-link">Read more</div>
+                    <div class="block-icon-link">
+                      <img src="{% static 'images/bx/arrow.svg' %}" loading="eager" alt="" class="icon-link">
+                    </div>
+                  </a>
                 </div>
               </div>
-            {% endwith %}
+            </div>
           </div>
         </div>
-      {% endif %}
-      <div class="collection-list-wrapper-posts base-dyn-list">
-        <div role="list" class="collection-list-posts base-dyn-items">
-          {% for post in blogposts %}
-            {% if not forloop.first %}
+      {% endwith %}
+    {% endif %}
+    {% if blogpages %}
+      {% for post in blogpages %}
+        {% with post=post.specific %}
+          <div class="collection-list-wrapper-posts base-dyn-list">
+            <div role="list" class="collection-list-posts base-dyn-items">
               <div role="listitem" class="base-dyn-item">
                 <div class="block-post">
-                  <a href="{{ post.url }}" class="link-post-thumbnail base-inline-block">
+                  <a href="{% pageurl post %}" class="link-post-thumbnail base-inline-block">
                     {% with post.main_image as main_image %}
-                      {% if main_image %}{% image main_image fill-160x100 %}{% endif %}
+                      {% if main_image %}{% image main_image fill-120x80 class="image-post-thumbnail" %}{% endif %}
                     {% endwith %}
-                    <img alt="" loading="eager" src="" class="image-post-thumbnail">
                   </a>
                   <div class="post">
-                    <div class="date">{{ post.specific.date }}</div>
-                    <a href="{{ post.url }}" class="link-heading-post base-inline-block">
+                    <div class="date">{{ post.date }}</div>
+                    <a href="{% pageurl post %}" class="link-heading-post base-inline-block">
                       <h4 class="heading-post">{{ post.title }}</h4>
                     </a>
-                    <p class="paragraph-post">{{ featured_post.specific.intro }}</p>
-                    <a href="{{ post.url }}" class="link-block base-inline-block">
+                    <p class="paragraph-post">{{ post.body|richtext }}</p>
+                    <a href="{% pageurl post %}" class="link-block base-inline-block">
                       <div class="text-link">Read more</div>
                       <div class="block-icon-link">
                         <img src="{% static 'images/bx/arrow.svg' %}" loading="eager" alt="" class="icon-link">
@@ -71,15 +75,11 @@
                   </div>
                 </div>
               </div>
-            {% endif %}
-          {% endfor %}
-        </div>
-        {% if not blogposts %}
-          <div class="empty-state base-dyn-empty">
-            <div class="text-empty">No items found.</div>
+            </div>
           </div>
-        {% endif %}
-      </div>
+        {% endwith %}
+      {% endfor %}
+    {% endif %}
     </div>
   </section>
 {% endblock %}

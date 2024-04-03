@@ -1,0 +1,32 @@
+
+
+{% if featured_blog %}
+{% with featured=featured_blog.specific %}
+  <div class="collection-list-wrapper-posts large base-dyn-list">
+    <div role="list" class="collection-list-posts large base-dyn-items">
+      <div role="listitem" class="base-dyn-item">
+        <div class="block-post large">
+          <a href="{% pageurl featured %}" class="link-post-thumbnail large base-inline-block">
+            {% with featured.main_image as main_image %}
+              {% if main_image %}{% image main_image fill-120x80 class="image-post-thumbnail large" %}{% endif %}
+            {% endwith %}
+          </a>
+          <div class="post large">
+            <div class="date">featured.date</div>
+            <a href="{% pageurl featured %}" class="link-heading-post large base-inline-block">
+              <h3 class="heading-post">{{ featured.title }}</h3>
+            </a>
+            <p class="paragraph-post large">{{ featured.body|richtext }}</p>
+            <a href="{% pageurl featured %}" class="link-block base-inline-block">
+              <div class="text-link">Read more</div>
+              <div class="block-icon-link">
+                <img src="{% static 'images/bx/arrow.svg' %}" loading="eager" alt="" class="icon-link">
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endwith %}
+{% endif %}
