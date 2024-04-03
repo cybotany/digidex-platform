@@ -287,3 +287,44 @@ figcaption {
     padding-left: 0%;
   }
 }
+
+.text-link {
+  color: var(--accent-a1);
+  letter-spacing: -.02em;
+  font-size: 1em;
+  font-weight: 500;
+  line-height: 120%;
+}
+
+.icon-link {
+  width: 1em;
+  height: 1em;
+}
+
+.block-icon-link {
+  width: 1.375em;
+  height: 1.375em;
+  background-color: var(--accent-b1);
+  border-radius: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.link-block {
+  grid-column-gap: .5em;
+  border-radius: 50px;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: .3em;
+  padding-bottom: .3em;
+  padding-right: .3em;
+  text-decoration: none;
+  transition: background-color .3s cubic-bezier(.25, .46, .45, .94), padding .3s cubic-bezier(.25, .46, .45, .94);
+  display: flex;
+}
+
+.link-block:hover {
+  background-color: var(--accent-b1);
+  padding-left: 1em;
+}
