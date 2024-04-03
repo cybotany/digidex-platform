@@ -2,6 +2,8 @@ from django.db import models
 from django import forms
 
 from modelcluster import fields as mc_fields
+from modelcluster.contrib import taggit as mc_taggit
+from taggit import models as tg_models
 
 from wagtail import fields
 from wagtail import models as wt_models
@@ -31,14 +33,31 @@ class BlogIndexPage(wt_models.Page):
         return context
 
 
-class BlogPage(wt_models.Page):
-    heading = models.CharField(max_length=250)
-    intro = models.CharField(max_length=250)
+class BlogPageTag(tg_models.TaggedItemBase):
+    content_object = mc_fields.ParentalKey(
+        'BlogPage',
+        related_name='tagged_items',
+        on_delete=models.CASCADE
+    )
 
+
+class BlogPage(wt_models.Page):
     date = models.DateField("Post date")
-    body = fields.RichTextField(blank=True)
     authors = mc_fields.ParentalManyToManyField(
         'blog.Author',
+        blank=True
+    )
+    tags = mc_taggit.ClusterTaggableManager(
+        through=BlogPageTag,
+        blank=True
+    )
+    heading = models.CharField(
+        max_length=250
+    )
+    intro = models.CharField(
+        max_length=250
+    )
+    body = fields.RichTextField(
         blank=True
     )
 
@@ -59,6 +78,7 @@ class BlogPage(wt_models.Page):
             [
                 panels.FieldPanel('date'),
                 panels.FieldPanel('authors', widget=forms.CheckboxSelectMultiple),
+                panels.FieldPanel('tags'),
             ],
             heading="Blog information"
         ),
