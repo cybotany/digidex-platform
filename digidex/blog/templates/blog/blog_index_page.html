@@ -5,8 +5,6 @@
   <link rel="stylesheet" href="{% static 'css/blog.css' %}">
 {% endblock extra_css %}
 
-{% block body_class %}template-blogindexpage{% endblock %}
-
 {% block content %}
 <section class="section-top">
   <div class="content">
@@ -16,77 +14,14 @@
     </div>
   </div>
 </section>
-<section class="section">
-  <div class="content">
+  {% if empty_blog %}
+    {% include "blog/empty.html" %}
+  {% else %}
     {% if featured_blog %}
-      {% with featured=featured_blog.specific %}
-        <div class="collection-list-wrapper-posts large base-dyn-list">
-          <div role="list" class="collection-list-posts large base-dyn-items">
-            <div role="listitem" class="base-dyn-item">
-              <div class="block-post large">
-                <a href="{% pageurl featured %}" class="link-post-thumbnail large base-inline-block">
-                  {% with featured.main_image as main_image %}
-                    {% if main_image %}{% image main_image fill-120x80 class="image-post-thumbnail large" %}{% endif %}
-                  {% endwith %}
-                </a>
-                <div class="post large">
-                  <div class="date">{{ featured.date }}</div>
-                  <a href="{% pageurl featured %}" class="link-heading-post large base-inline-block">
-                    <h3 class="heading-post">{{ featured.title }}</h3>
-                  </a>
-                  <p class="paragraph-post large">{{ featured.body|richtext }}</p>
-                  <a href="{% pageurl featured %}" class="link-block base-inline-block">
-                    <div class="text-link">Read more</div>
-                    <div class="block-icon-link">
-                      <img src="{% static 'images/bx/arrow.svg' %}" loading="eager" alt="" class="icon-link">
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      {% endwith %}
+      {% include "blog/featured_post.html" %}
     {% endif %}
     {% if blogpages %}
-      {% for post in blogpages %}
-        {% with post=post.specific %}
-          <div class="collection-list-wrapper-posts base-dyn-list">
-            <div role="list" class="collection-list-posts base-dyn-items">
-              <div role="listitem" class="base-dyn-item">
-                <div class="block-post">
-                  <a href="{% pageurl post %}" class="link-post-thumbnail base-inline-block">
-                    {% with post.main_image as main_image %}
-                      {% if main_image %}{% image main_image fill-120x80 class="image-post-thumbnail" %}{% endif %}
-                    {% endwith %}
-                  </a>
-                  <div class="post">
-                    <div class="date">{{ post.date }}</div>
-                    <a href="{% pageurl post %}" class="link-heading-post base-inline-block">
-                      <h4 class="heading-post">{{ post.title }}</h4>
-                    </a>
-                    <p class="paragraph-post">{{ post.body|richtext }}</p>
-                    <a href="{% pageurl post %}" class="link-block base-inline-block">
-                      <div class="text-link">Read more</div>
-                      <div class="block-icon-link">
-                        <img src="{% static 'images/bx/arrow.svg' %}" loading="eager" alt="" class="icon-link">
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        {% endwith %}
-      {% endfor %}
+      {% include "blog/post_grid.html" %}
     {% endif %}
-    {% if empty_blog %}
-      <div class="collection-list-wrapper-posts base-dyn-list">
-        <div class="empty-state w-dyn-empty">
-          <div class="text-empty">No blog posts found.</div>
-        </div>
-      </div>
-    {% endif %}
-  </div>
-</section>
+  {% endif %}
 {% endblock %}
