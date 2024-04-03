@@ -6,22 +6,18 @@
 {% endblock extra_css %}
 
 {% block content %}
-<section class="section-top">
-  <div class="content">
-    <div class="block-top">
-      <h1 class="heading-top">{{ page.heading }}</h1>
-      <p class="paragraph-top">{{ page.intro }}</p>
+  <section class="section-top">
+    <div class="content">
+      <div class="block-top">
+        <h1 class="heading-top">{{ page.heading }}</h1>
+        <p class="paragraph-top">{{ page.intro }}</p>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
   {% if empty_blog %}
     {% include "blog/empty.html" %}
   {% else %}
-    {% if featured_blog %}
-      {% include "blog/featured_post.html" %}
-    {% endif %}
-    {% if blogpages %}
-      {% include "blog/post_grid.html" %}
-    {% endif %}
+    {% include "blog/featured_post.html" %}
+    {% include "blog/post_grid.html" %}
   {% endif %}
 {% endblock %}
