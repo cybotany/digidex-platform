@@ -1,0 +1,12 @@
+{% if self.link.internal %}
+  <a href="{{ self.link.internal.url }}" class="link-block base-inline-block">
+{% elif self.link.external %}
+  <a href="{{ self.link.external }}" class="link-block base-inline-block">
+{% else %}
+  <a href="#" class="link-block base-inline-block">
+{% endif %}
+  <div class="text-link">{{ self.text }}</div>
+  <div class="block-icon-link">
+    <img src="{{ self.icon.url }}" loading="eager" alt="" class="icon-link">
+  </div>
+</a>
