@@ -111,6 +111,17 @@ class BlogPageGalleryImage(wt_models.Orderable):
     ]
 
 
+class BlogTagIndexPage(wt_models.Page):
+
+    def get_context(self, request):
+        tag = request.GET.get('tag')
+        blogpages = BlogPage.objects.filter(tags__name=tag)
+
+        context = super().get_context(request)
+        context['blogpages'] = blogpages
+        return context
+
+
 @wt_snippets.register_snippet
 class Author(models.Model):
     name = models.CharField(
