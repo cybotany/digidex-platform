@@ -32,6 +32,7 @@ class BlogIndexPage(wt_models.Page):
 class BlogPage(wt_models.Page):
     heading = models.CharField(max_length=250)
     intro = models.CharField(max_length=250)
+
     date = models.DateField("Post date")
     body = fields.RichTextField(blank=True)
 

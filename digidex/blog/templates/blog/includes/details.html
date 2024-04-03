@@ -1,24 +1,23 @@
-{% extends "base.html" %}
 {% load wagtailcore_tags wagtailimages_tags%}
 
-{% with featured=featured_post.specific %}
-  <section class="section-top padding-0">
-    <div class="content">
-      <div class="block-top">
-        <div class="date-top"></div>
-        <h1 class="heading-top"></h1>
-        <p class="paragraph-top blog-post"></p>
-      </div>
+<section class="section-top padding-0">
+  <div class="content">
+    <div class="block-top">
+      <div class="date-top">{{ page.date }}</div>
+      <h1 class="heading-top">{{ page.heading }}</h1>
+      <p class="paragraph-top blog-post">{{ page.intro }}</p>
     </div>
-  </section>
-  <section class="section">
-    <div class="content narrow">
-      <img alt="" loading="eager" src="" class="image-main-post">
+  </div>
+</section>
+<section class="section">
+  <div class="content narrow">
+    {% for item in page.gallery_images.all %}
+      {% image item.image fill-320x240 class="image-main-post" %}
       <div class="post-body">
         <div class="rich-text-block base-richtext">
           {{ page.body|richtext }}
         </div>
       </div>
-    </div>
-  </section>
-{% endwith %}
+    {% endfor %}
+  </div>
+</section>
