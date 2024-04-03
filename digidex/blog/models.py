@@ -8,10 +8,13 @@ from wagtail.search import index
 from modelcluster.fields import ParentalKey
 
 class BlogIndexPage(wt_models.Page):
-    heading = fields.RichTextField(blank=True)
-    intro = fields.RichTextField(blank=True)
+    heading = models.CharField(max_length=250)
+    intro = models.CharField(max_length=250)
 
-    content_panels = wt_models.Page.content_panels
+    content_panels = wt_models.Page.content_panels + [
+        panels.FieldPanel('heading'),
+        panels.FieldPanel('intro'),
+    ]
 
     def get_context(self, request):
         context = super().get_context(request)
@@ -21,20 +24,10 @@ class BlogIndexPage(wt_models.Page):
 
 
 class BlogPage(wt_models.Page):
-    heading = fields.RichTextField(blank=True)
-    intro = fields.RichTextField(blank=True)
+    heading = models.CharField(max_length=250)
+    intro = models.CharField(max_length=250)
     date = models.DateField("Post date")
     body = fields.RichTextField(blank=True)
-
-    search_fields = wt_models.Page.search_fields + [
-        index.SearchField('body'),
-    ]
-
-    content_panels = wt_models.Page.content_panels + [
-        panels.FieldPanel('date'),
-        panels.FieldPanel('body'),
-        panels.InlinePanel('gallery_images', label="Gallery images"),
-    ]
 
     def main_image(self):
         gallery_item = self.gallery_images.first()
@@ -42,6 +35,19 @@ class BlogPage(wt_models.Page):
             return gallery_item.image
         else:
             return None
+
+    search_fields = wt_models.Page.search_fields + [
+        panels.FieldPanel('intro'),
+        index.SearchField('body'),
+    ]
+
+    content_panels = wt_models.Page.content_panels + [
+        panels.FieldPanel('heading'),
+        panels.FieldPanel('intro'),
+        panels.FieldPanel('date'),
+        panels.FieldPanel('body'),
+        panels.InlinePanel('gallery_images', label="Gallery images"),
+    ]
 
 
 class BlogPageGalleryImage(wt_models.Orderable):
