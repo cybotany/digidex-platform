@@ -1,11 +1,13 @@
-from modelcluster.fields import ParentalKey
-
 from django.db import models
+from django import forms
+
+from modelcluster import fields as mc_fields
+
 from wagtail import fields
 from wagtail import models as wt_models
 from wagtail.admin import panels
 from wagtail.search import index
-from modelcluster.fields import ParentalKey
+from wagtail.snippets import models as wt_snippets
 
 class BlogIndexPage(wt_models.Page):
     heading = models.CharField(max_length=250)
@@ -35,6 +37,10 @@ class BlogPage(wt_models.Page):
 
     date = models.DateField("Post date")
     body = fields.RichTextField(blank=True)
+    authors = mc_fields.ParentalManyToManyField(
+        'blog.Author',
+        blank=True
+    )
 
     def main_image(self):
         gallery_item = self.gallery_images.first()
@@ -49,16 +55,22 @@ class BlogPage(wt_models.Page):
     ]
 
     content_panels = wt_models.Page.content_panels + [
+        panels.MultiFieldPanel(
+            [
+                panels.FieldPanel('date'),
+                panels.FieldPanel('authors', widget=forms.CheckboxSelectMultiple),
+            ],
+            heading="Blog information"
+        ),
         panels.FieldPanel('heading'),
         panels.FieldPanel('intro'),
-        panels.FieldPanel('date'),
         panels.FieldPanel('body'),
         panels.InlinePanel('gallery_images', label="Gallery images"),
     ]
 
 
 class BlogPageGalleryImage(wt_models.Orderable):
-    page = ParentalKey(
+    page = mc_fields.ParentalKey(
         BlogPage,
         on_delete=models.CASCADE,
         related_name='gallery_images'
@@ -77,3 +89,28 @@ class BlogPageGalleryImage(wt_models.Orderable):
         panels.FieldPanel('image'),
         panels.FieldPanel('caption'),
     ]
+
+
+@wt_snippets.register_snippet
+class Author(models.Model):
+    name = models.CharField(
+        max_length=255
+    )
+    author_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    panels = [
+        panels.FieldPanel('name'),
+        panels.FieldPanel('author_image'),
+    ]
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = 'Authors'

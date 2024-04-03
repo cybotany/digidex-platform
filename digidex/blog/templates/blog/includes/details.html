@@ -15,6 +15,20 @@
       {% image item.image fill-320x240 class="image-main-post" %}
       <div class="post-body">
         <div class="rich-text-block base-richtext">
+          {% with authors=page.authors.all %}
+            {% if authors %}
+              <h3>Posted by:</h3>
+              <ul>
+                  {% for author in authors %}
+                      <li style="display: inline">
+                          {% image author.author_image fill-40x60 style="vertical-align: middle" %}
+                          {{ author.name }}
+                      </li>
+                  {% endfor %}
+              </ul>
+            {% endif %}
+          {% endwith %}
+          
           {{ page.body|richtext }}
         </div>
       </div>
