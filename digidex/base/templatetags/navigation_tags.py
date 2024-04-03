@@ -7,29 +7,27 @@ register = template.Library()
 
 @register.inclusion_tag("base/includes/footer_content.html", takes_context=True)
 def get_footer_content(context):
-    DEFAULT_CONTENT = {
-        "paragraph": "",
-    }
+    footer_content = context.get("footer_content", "")
 
-    _content = footer.FooterContent.objects.first()
-    footer_content = {
-        "paragraph": _content.paragraph if _content else DEFAULT_CONTENT["paragraph"],
-    }
+    if not footer_content:
+        instance = footer.FooterContent.objects.filter(live=True).first()
+        footer_content = instance.paragraph if instance else ""
 
-    return footer_content
+    return {
+        "footer_content": footer_content,
+    }
 
 @register.inclusion_tag("base/includes/footer_notice.html", takes_context=True)
 def get_footer_notice(context):
-    DEFAULT_NOTICE = {
-        "notice": "",
-    }
+    footer_notice = context.get("footer_notice", "")
 
-    _notice = footer.FooterNotice.objects.first()
-    footer_notice = {
-        "notice": _notice.notice if _notice else DEFAULT_NOTICE["notice"],
-    }
+    if not footer_notice:
+        instance = footer.FooterNotice.objects.filter(live=True).first()
+        footer_notice = instance.notice if instance else ""
 
-    return footer_notice
+    return {
+        "footer_notice": footer_notice,
+    }
 
 @register.simple_tag(takes_context=True)
 def get_site_root(context):

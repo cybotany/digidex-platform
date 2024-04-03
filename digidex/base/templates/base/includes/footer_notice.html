@@ -1,7 +1,3 @@
 {% load wagtailcore_tags %}
 
-<div class="block-footer-down">
-  {% if notice %}
-    <div class="text-footer-down">{{ notice }}<br></div>
-  {% endif %}
-</div>
+<div class="text-footer-down">{{ footer_notice|richtext }}</div>
