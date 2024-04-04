@@ -1,0 +1,58 @@
+.subtitle-clients {
+  opacity: .7;
+  color: var(--heading);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  margin-bottom: 2.3em;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
+}
+
+.subtitle {
+  background-color: var(--white);
+  color: var(--heading);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  border-radius: .6em;
+  margin-bottom: .7em;
+  padding: .5em 1em;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
+  box-shadow: 0 10px 20px -10px rgba(20, 23, 24, .05);
+}
+
+.subtitle.white {
+  color: var(--white);
+  background-color: rgba(255, 255, 255, .1);
+}
+
+.subtitle.blue {
+  background-color: var(--accent-b1);
+  color: var(--accent-a1);
+}
+
+.subtitle-footer {
+  color: rgba(20, 23, 24, .5);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  margin-bottom: 1.7em;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
+}
+
+.subtitle-product {
+  color: rgba(20, 23, 24, .5);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  margin-bottom: 1.4em;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
+}

@@ -1,0 +1,18 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="top-bar-block">
+  <!-- Render the information text -->
+  {% if self.information %}
+    <div class="top-bar">
+      {% include_block self.information %}
+    </div>
+  {% endif %}
+  <!-- Render the list of links -->  
+  {% if self.links %}
+    <div class="top-bar">
+      {% for link in self.links %}
+        {% include_block link %}
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
