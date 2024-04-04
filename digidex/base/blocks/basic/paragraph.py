@@ -1,12 +1,14 @@
 from wagtail import blocks
 
-class _ParagraphBlock(blocks.RichTextBlock):
-    text = blocks.RichTextBlock()
+class _Paragraph(blocks.RichTextBlock):
+    pass
+
+
+class ParagraphBlock(blocks.StructBlock):
+    text = _Paragraph(
+        required=True
+    )
 
     class Meta:
         icon = "pilcrow"
-
-
-class ParagraphBlock(_ParagraphBlock):
-    class Meta:
-        template = "base/blocks/paragraph_block.html"
+        template = "base/blocks/basic/paragraph_block.html"

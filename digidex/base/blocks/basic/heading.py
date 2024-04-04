@@ -1,12 +1,12 @@
 from wagtail import blocks
 
-class _HeadingBlock(blocks.StructBlock):
-    text = blocks.CharBlock(
-        classname="title",
+class _Heading(blocks.CharBlock):
+    pass
+
+class HeadingBlock(blocks.StructBlock):
+    text = _Heading(
         required=True
     )
-
-class HeadingBlock(_HeadingBlock):
     size = blocks.ChoiceBlock(
         choices=[
             ("", "Select a heading size"),
@@ -23,4 +23,4 @@ class HeadingBlock(_HeadingBlock):
 
     class Meta:
         icon = "title"
-        template = "base/blocks/heading_block.html"
+        template = "base/blocks/basic/heading_block.html"

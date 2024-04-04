@@ -1,8 +1,11 @@
 from wagtail import blocks
 from wagtail.images import blocks as image_blocks
 
-class ImageFigureBlock(blocks.StructBlock):
-    image = image_blocks.ImageChooserBlock(
+class _ImageBlock(image_blocks.ImageChooserBlock):
+    pass
+
+class ImageBlock(blocks.StructBlock):
+    image = _ImageBlock(
         required=True
     )
     caption = blocks.CharBlock(
@@ -14,4 +17,4 @@ class ImageFigureBlock(blocks.StructBlock):
 
     class Meta:
         icon = "image"
-        template = "base/blocks/image_figure_block.html"
+        template = "base/blocks/basic/image_figure_block.html"
