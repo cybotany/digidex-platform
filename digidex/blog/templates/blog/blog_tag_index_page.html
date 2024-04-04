@@ -2,7 +2,14 @@
 {% load wagtailcore_tags %}
 
 {% block content %}
-
+  <section class="section-top">
+    <div class="content">
+      <div class="block-top">
+        <h1 class="heading-top">{{ page.heading }}</h1>
+        <p class="paragraph-top">{{ page.intro }}</p>
+      </div>
+    </div>
+  </section>
     {% if request.GET.tag %}
         <h4>Showing pages tagged "{{ request.GET.tag }}"</h4>
     {% endif %}
