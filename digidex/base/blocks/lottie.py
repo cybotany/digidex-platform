@@ -1,8 +1,10 @@
 from wagtail import blocks
 from wagtail.documents import blocks as doc_blocks
 
+from base.blocks import basic as _bblocks
+
 class _LottieAnimationBlock(blocks.StructBlock):
-    animation_file = doc_blocks.DocumentChooserBlock(
+    file = doc_blocks.DocumentChooserBlock(
         required=True,
         help_text="Select the Lottie JSON file."
     )
@@ -15,12 +17,12 @@ class _LottieAnimationBlock(blocks.StructBlock):
         default=True,
         help_text="Enable to autoplay the animation."
     )
-    animation_duration = blocks.FloatBlock(
+    duration = blocks.FloatBlock(
         required=False,
         help_text="Duration of the animation in seconds.",
         default=0
     )
-    animation_direction = blocks.ChoiceBlock(
+    direction = blocks.ChoiceBlock(
         choices=[
             (1, "Normal"),
             (-1, "Reverse")
@@ -39,10 +41,6 @@ class _LottieAnimationBlock(blocks.StructBlock):
     )
     blurred = blocks.BooleanBlock()
 
-    class Meta:
-        icon = "media"
-        template = "base/blocks/lottie/animation_block.html"
-
 
 class LottieBlock(blocks.ListBlock):
     """
@@ -54,4 +52,30 @@ class LottieBlock(blocks.ListBlock):
 
     class Meta:
         label = 'Lottie Animations'
-        template = 'base/blocks/lottie/block.html'
+        template = 'base/blocks/lottie/base_block.html'
+
+
+class LottieFeatureBlock(blocks.StructBlock):
+    widget_id = blocks.CharBlock(
+        required=False,
+        help_text="Unique widget identifier for JS/CSS"
+    )
+
+    icon = _bblocks._ImageBlock(
+        required=True,
+        help_text="Feature icon"
+    )
+    text = blocks.TextBlock(
+        required=True,
+        help_text="Feature description"
+    )
+
+
+class FeaturesBlock(blocks.ListBlock):
+
+    def __init__(self, **kwargs):
+        super().__init__(LottieFeatureBlock(), **kwargs)
+
+    class Meta:
+        label = 'Lottie Features'
+        template = 'base/blocks/lottie/features_block.html'
