@@ -7,8 +7,12 @@ from base import blocks
 class BlogIndexPage(wt_models.Page):
     body = fields.StreamField(
         [
-            ('page_heading', blocks.PageHeadingBlock()),
-        ]
+            ('heading', blocks.HeadingBlock()),
+            ('paragraph', blocks.ParagraphBlock()),
+        ],
+        blank=True,
+        null=True,
+        use_json_field=True
     )
 
     content_panels = wt_models.Page.content_panels + [
