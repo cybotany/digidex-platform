@@ -1,8 +1,11 @@
 from wagtail import blocks
-from wagtail.images import blocks as img_blocks
+from wagtail.images import blocks as image_blocks
+from wagtail.embeds import blocks as embed_blocks
 
-class ImageBlock(blocks.StructBlock):
-    image = img_blocks.ImageChooserBlock(
+from base.constants import PREDEFINED_CSS_STYLES
+
+class ImageFigureBlock(blocks.StructBlock):
+    image = image_blocks.ImageChooserBlock(
         required=True
     )
     caption = blocks.CharBlock(
@@ -14,25 +17,18 @@ class ImageBlock(blocks.StructBlock):
 
     class Meta:
         icon = "image"
-        template = "base/blocks/image_block.html"
-
-
-class LinkPageBlock(blocks.PageChooserBlock):
-    class Meta:
-        icon = "link"
-        template = "base/blocks/link_block.html"
-
-
-class LinkURLBlock(blocks.URLBlock):
-    class Meta:
-        icon = "link-external"
-        template = "base/blocks/link_block.html"
+        template = "base/blocks/image_figure_block.html"
 
 
 class HeadingBlock(blocks.CharBlock):
-    heading_text = blocks.CharBlock(
+    text = blocks.CharBlock(
         classname="title",
         required=True
+    )
+    style = blocks.ChoiceBlock(
+        choices=PREDEFINED_CSS_STYLES,
+        blank=True,
+        required=False,
     )
     size = blocks.ChoiceBlock(
         choices=[
@@ -54,11 +50,30 @@ class HeadingBlock(blocks.CharBlock):
 
 
 class ParagraphBlock(blocks.RichTextBlock):
-    content = blocks.RichTextBlock()
+    text = blocks.RichTextBlock()
+    style = blocks.ChoiceBlock(
+        choices=PREDEFINED_CSS_STYLES,
+        blank=True,
+        required=False,
+    )
 
     class Meta:
         icon = "pilcrow"
         template = "base/blocks/paragraph_block.html"
+
+
+class SectionBlock(blocks.StreamBlock):
+    heading_block = HeadingBlock()
+    paragraph_block = ParagraphBlock()
+    image_block = ImageFigureBlock()
+    embed_block = embed_blocks.EmbedBlock(
+        help_text="Insert a URL to embed. For example, https://www.youtube.com/watch?v=SGJFWirQ3ks",
+        icon="media",
+    )
+
+    class Meta:
+        icon = "doc-full"
+        template = "base/blocks/section_block.html"
 
 
 class PageHeadingBlock(blocks.StructBlock):
