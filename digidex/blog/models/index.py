@@ -7,8 +7,7 @@ from base import blocks
 class BlogIndexPage(wt_models.Page):
     body = fields.StreamField(
         [
-            ('heading', blocks.HeadingBlock()),
-            ('paragraph', blocks.ParagraphBlock()),
+            ('page_heading', blocks.PageHeadingBlock()),
         ],
         blank=True,
         null=True,

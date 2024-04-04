@@ -59,3 +59,17 @@ class ParagraphBlock(blocks.RichTextBlock):
     class Meta:
         icon = "pilcrow"
         template = "base/blocks/paragraph_block.html"
+
+
+class PageHeadingBlock(blocks.StructBlock):
+    heading = blocks.CharBlock(
+        required=True,
+        classname="full title"
+    )
+    introduction = blocks.RichTextBlock(
+        required=False
+    )
+
+    class Meta:
+        template = 'base/blocks/page_heading_block.html'
+        icon = 'title'
