@@ -2,7 +2,7 @@
 {% load wagtailcore_tags %}
 
 {% block content %}
-  <!-- Iterate over heading and paragraph block -->
+  <!-- Iterate over PageHeading block -->
   {% for block in page.body %}
     {% include_block block %}
   {% endfor %}
