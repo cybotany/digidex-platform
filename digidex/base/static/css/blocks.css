@@ -1,12 +1,3 @@
-.top-bar-block {
-  width: 100%;
-  max-width: 75em;
-  grid-column-gap: 1em;
-  justify-content: space-between;
-  align-items: center;
-  display: flex;
-}
-
 .block-hero {
   flex-direction: column;
   justify-content: center;

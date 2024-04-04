@@ -1,4 +1,4 @@
-.section-top-bar {
+.section-notification-bar {
   background-color: var(--accent-a1);
   flex-direction: column;
   justify-content: center;
@@ -7,12 +7,7 @@
   display: flex;
 }
 
-.content {
-  width: 100%;
-  max-width: 75em;
-}
-
-.top-bar-block {
+.notification-bar-block {
   width: 100%;
   max-width: 75em;
   grid-column-gap: 1em;
@@ -21,14 +16,14 @@
   display: flex;
 }
 
-.top-bar {
+.notification-bar {
   grid-column-gap: 1.87em;
   justify-content: center;
   align-items: center;
   display: flex;
 }
 
-.info-top-bar {
+.info-notification-bar {
   opacity: .7;
   color: var(--white);
   letter-spacing: -.02em;
@@ -36,7 +31,7 @@
   line-height: 120%;
 }
 
-.link-top-bar {
+.link-notification-bar {
   grid-column-gap: .35em;
   opacity: .7;
   justify-content: center;
@@ -46,16 +41,16 @@
   display: flex;
 }
 
-.link-top-bar:hover {
+.link-notification-bar:hover {
   opacity: 1;
 }
 
-.icon-top-bar {
+.icon-notification-bar {
   width: 1.125em;
   height: 1.125em;
 }
 
-.text-top-bar {
+.text-notification-bar {
   color: var(--white);
   letter-spacing: -.02em;
   font-size: .87em;
@@ -63,12 +58,12 @@
 }
 
 @media screen and (max-width: 991px) {
-  .section-top-bar {
+  .section-notification-bar {
     padding-top: .8em;
     padding-bottom: .8em;
   }
     
-  .top-bar-block {
+  .notification-bar-block {
     grid-row-gap: .6em;
     flex-direction: column;
     align-items: flex-start;
@@ -76,12 +71,12 @@
 }
 
 @media screen and (max-width: 479px) {
-  .section-top-bar {
+  .section-notification-bar {
     padding-left: 1.5em;
     padding-right: 1.5em;
   }
     
-  .top-bar {
+  .notification-bar {
     grid-row-gap: .6em;
     flex-direction: column;
     align-items: flex-start;

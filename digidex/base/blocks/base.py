@@ -1,31 +1,7 @@
 from wagtail import blocks
 from wagtail.images import blocks as image_blocks
 
-from base.constants import PREDEFINED_HEADING_STYLES, PREDEFINED_SUBTITLE_STYLES, PREDEFINED_BLOCK_STYLES, PREDEFINED_PARAGRAPH_STYLES, PREDEFINED_GRID_STYLES, PREDEFINED_SECTION_STYLES
-
-class NotificationIconBlock(blocks.StructBlock):
-    """
-    A StructBlock for individual icon links in the notification bar.
-    """
-    url = blocks.URLBlock(
-        required=True,
-        help_text="Link URL"
-    )
-    icon = image_blocks.ImageChooserBlock(
-        required=True,
-        help_text="Icon Image"
-    )
-    text = blocks.CharBlock(
-        required=True,
-        max_length=255,
-        help_text="Link Text"
-    )
-
-    class Meta:
-        template = 'base/blocks/notification/icon_block.html'
-        icon = 'link'
-        label = 'Icon Link'
-
+from .constants import PREDEFINED_HEADING_STYLES, PREDEFINED_SUBTITLE_STYLES, PREDEFINED_PARAGRAPH_STYLES, PREDEFINED_GRID_STYLES, PREDEFINED_SECTION_STYLES
 
 class ImageFigureBlock(blocks.StructBlock):
     image = image_blocks.ImageChooserBlock(
@@ -98,7 +74,7 @@ class SubtitleBlock(blocks.CharBlock):
 
     class Meta:
         icon = "title"
-        template = "base/blocks/heading_block.html"
+        template = "base/blocks/subtitle_block.html"
 
 
 class ParagraphBlock(blocks.RichTextBlock):
@@ -115,11 +91,11 @@ class ParagraphBlock(blocks.RichTextBlock):
 
 
 class BaseBlock(blocks.StructBlock):
-    style = blocks.ChoiceBlock(
-        choices=PREDEFINED_BLOCK_STYLES,
-        default='grid',
-        label='Grid Style',
-    )
+    #style = blocks.ChoiceBlock(
+    #    choices=PREDEFINED_BLOCK_STYLES,
+    #    default='grid',
+    #    label='Grid Style',
+    #)
 
     class Meta:
         template = 'blocks/grid_block.html'
