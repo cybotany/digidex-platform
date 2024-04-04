@@ -1,5 +1,6 @@
 from wagtail import blocks
-from wagtail.images import blocks as image_blocks
+
+from base.blocks.basic import image
 
 class _NotificationInformationBlock(blocks.CharBlock):
     """
@@ -23,7 +24,7 @@ class _NotificationIconBlock(blocks.StructBlock):
         required=True,
         help_text="Link URL"
     )
-    icon = image_blocks.ImageChooserBlock(
+    icon = image._ImageBlock(
         required=True,
         help_text="Icon Image"
     )

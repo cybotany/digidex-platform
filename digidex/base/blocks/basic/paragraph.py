@@ -1,11 +1,11 @@
 from wagtail import blocks
 
-class _Paragraph(blocks.RichTextBlock):
+class _ParagraphBlock(blocks.RichTextBlock):
     pass
 
 
 class ParagraphBlock(blocks.StructBlock):
-    text = _Paragraph(
+    text = _ParagraphBlock(
         required=True
     )
 

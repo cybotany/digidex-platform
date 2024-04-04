@@ -1,10 +1,10 @@
 from wagtail import blocks
 
-class _Heading(blocks.CharBlock):
+class _HeadingBlock(blocks.CharBlock):
     pass
 
 class HeadingBlock(blocks.StructBlock):
-    text = _Heading(
+    text = _HeadingBlock(
         required=True
     )
     size = blocks.ChoiceBlock(

@@ -1,15 +1,15 @@
 from wagtail import blocks
 
-from base.blocks.basic import image as _bblocks
+from base.blocks.basic import heading, paragraph
 
 class PageHeadingBlock(blocks.StructBlock):
     """
     Page Heading Block
     """
-    heading = _bblocks.HeadingBlock(
+    heading = heading._HeadingBlock(
         required=True
     )
-    introduction = _bblocks.ParagraphBlock(
+    introduction = paragraph._ParagraphBlock(
         required=False
     )
 
