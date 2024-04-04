@@ -2,11 +2,9 @@
 {% load wagtailcore_tags %}
 
 {% block content %}
-  <!-- Iterate over PageHeading block -->
   {% for block in page.body %}
     {% include_block block %}
   {% endfor %}
-  <!-- Check if the blog is empty and display content accordingly -->
   {% if empty_blog %}
     {% include "blog/includes/empty.html" %}
   {% else %}
