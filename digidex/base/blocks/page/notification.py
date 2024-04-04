@@ -1,6 +1,6 @@
 from wagtail import blocks
 
-from base.blocks.basic import image
+from base.blocks import basic
 
 class _NotificationInformationBlock(blocks.CharBlock):
     """
@@ -24,7 +24,7 @@ class _NotificationIconBlock(blocks.StructBlock):
         required=True,
         help_text="Link URL"
     )
-    icon = image._ImageBlock(
+    icon = basic._ImageBlock(
         required=True,
         help_text="Icon Image"
     )
@@ -42,7 +42,7 @@ class _NotificationIconBlock(blocks.StructBlock):
 
 class _NotificationIconListBlock(blocks.ListBlock):
     """
-    A ListBlock that allows for 0 to 3 IconLinkBlocks.
+    A ListBlock that allows for 0 to 3 _NotificationIconBlocks.
     """
 
     def __init__(self, **kwargs):

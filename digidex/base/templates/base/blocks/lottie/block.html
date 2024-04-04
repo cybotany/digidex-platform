@@ -1,0 +1,7 @@
+{% load wagtailcore_tags %}
+
+<div class="block-lottie">
+  {% for animation in value %}
+    {% include "base/blocks/lottie/animation_block.html" with value=animation %}
+  {% endfor %}
+</div>
