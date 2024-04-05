@@ -1,6 +1,10 @@
 {% load wagtailcore_tags %}
 
 <div class="base-layout-grid grid-hero">
-  {% include_block self.block %}
-  {% include_block self.lottie %}
+  {% for block in self.block %}
+    {% include_block block %}
+  {% endfor %}
+  {% for block in self.lottie %}
+    {% include_block block %}
+  {% endfor %}
 </div>
