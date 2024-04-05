@@ -88,7 +88,7 @@ class ImageBlock(blocks.StructBlock):
 
     class Meta:
         icon = "image"
-        template = "base/blocks/basic/image_figure_block.html"
+        template = "base/blocks/basic/image_block.html"
 
 
 class Button(blocks.StructBlock):
@@ -105,7 +105,7 @@ class Button(blocks.StructBlock):
 
 class ButtonBlock(Button):
     class Meta:
-        template = 'base/blocks/basic/button_block.html'
+        template = 'base/blocks/buttons/button_block.html'
 
 
 class IconButtonBlock(Button):
@@ -114,7 +114,7 @@ class IconButtonBlock(Button):
     )
     
     class Meta:
-        template = 'base/blocks/basic/icon_button_block.html'
+        template = 'base/blocks/buttons/icon_button_block.html'
         icon = 'placeholder'
         label = 'Icon Button'
 
