@@ -13,7 +13,3 @@ class HeroBlock(basic.BasicBlock):
 class HeroGrid(basic.StructGrid):
     cta = HeroBlock()
     lottie = lottie.Lottie()
-
-    class Meta:
-        icon = "placeholder"
-        template = "home/blocks/hero_grid.html"
