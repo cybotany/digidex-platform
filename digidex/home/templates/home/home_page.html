@@ -3,9 +3,9 @@
 
 {% block content %}
     <!-- Iterate over the StreamField 'page' -->
-    {% for block in page.page %}
+    {% for block in page.section %}
         <!-- Check if the block type is 'hero_section' -->
-        {% if block.block_type == 'hero_section' %}
+        {% if block.block_type == 'hero' %}
             <!-- Render the hero section -->
             {% include_block block %}
         {% endif %}

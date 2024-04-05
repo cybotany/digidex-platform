@@ -5,7 +5,7 @@ from wagtail.admin import panels
 from home import blocks
 
 class HomePage(models.Page):
-    sections = fields.StreamField(
+    section = fields.StreamField(
         [
             ('hero', blocks.HeroSection()),
         ],
@@ -15,7 +15,7 @@ class HomePage(models.Page):
     )
 
     content_panels = models.Page.content_panels + [
-        panels.FieldPanel('sections'),
+        panels.FieldPanel('section'),
     ]
 
     class Meta:
