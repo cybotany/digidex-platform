@@ -10,4 +10,4 @@ class HeroSection(_bblocks._SectionBlock):
 
     class Meta:
         icon = "placeholder"
-        template = "base/blocks/page/hero_section.html"
+        template = "base/blocks/sections/hero.html"

@@ -14,7 +14,7 @@ class _NotificationInformationBlock(blocks.CharBlock):
 
     class Meta:
         label = 'Notification Text'
-        template = 'base/blocks/page/notification/information_block.html'
+        template = 'base/blocks/sections/notification/information_block.html'
 
 class _NotificationIconBlock(blocks.StructBlock):
     """
@@ -36,7 +36,7 @@ class _NotificationIconBlock(blocks.StructBlock):
 
     class Meta:
         label = 'Icon Link'
-        template = 'base/blocks/page/notification/icon_block.html'
+        template = 'base/blocks/sections/notification/icon_block.html'
         icon = 'link'
 
 
@@ -50,7 +50,7 @@ class _NotificationIconListBlock(blocks.ListBlock):
 
     class Meta:
         label = 'Icon Links'
-        template = 'base/blocks/page/notification/icon_list_block.html'
+        template = 'base/blocks/sections/notification/icon_list_block.html'
 
 
 class NotificationBarBlock(blocks.StructBlock):
@@ -66,5 +66,5 @@ class NotificationBarBlock(blocks.StructBlock):
 
     class Meta:
         label = 'Notification Bar'
-        template = 'base/blocks/page/notification_bar.html'
+        template = 'base/blocks/sections/notification_bar.html'
         icon = 'link'

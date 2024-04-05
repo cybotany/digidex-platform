@@ -14,6 +14,6 @@ class PageHeadingBlock(blocks.StructBlock):
     )
 
     class Meta:
-        template = 'base/blocks/page/page_heading.html'
+        template = 'base/blocks/sections/page_heading.html'
         icon = 'title'
         label = 'Page Heading'
