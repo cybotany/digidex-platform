@@ -1,0 +1,24 @@
+{% load wagtailcore_tags %}
+<div class="lottie">
+    {% for block in self %}
+        {% if block.block_type == 'lines' %}
+            {% include_block block %}
+        {% endif %}
+    {% endfor %}
+
+    {% for block in self %}
+        {% if block.block_type == 'animation' %}
+            <div class="lottie-animations">
+                {% include_block block %}
+            </div>
+        {% endif %}
+    {% endfor %}
+
+    {% for block in self %}
+        {% if block.block_type == 'features' %}
+            <div class="lottie-features">
+                {% include_block block %}
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
