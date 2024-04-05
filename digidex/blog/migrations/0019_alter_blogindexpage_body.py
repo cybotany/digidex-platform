@@ -16,6 +16,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='blogindexpage',
             name='body',
-            field=wagtail.fields.StreamField([('page_heading', wagtail.blocks.StructBlock([('heading', base.blocks.basic._HeadingBlock(required=True)), ('introduction', base.blocks.basic._ParagraphBlock(required=False))]))], blank=True, null=True),
+            field=wagtail.fields.StreamField([('page_heading', wagtail.blocks.StructBlock([('heading', base.blocks.basic.Heading(required=True)), ('introduction', base.blocks.basic.Paragraph(required=False))]))], blank=True, null=True),
         ),
     ]
