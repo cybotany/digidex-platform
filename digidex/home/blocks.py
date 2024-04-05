@@ -1,11 +1,19 @@
 from base.blocks import basic, lottie
 
-class HeroSection(basic.Section):
+class HeroBlock(basic.BasicBlock):
     heading = basic.Heading()
-    introduction = basic.Paragraph()
+    paragraph = basic.Paragraph()
     button = basic.ButtonBlock()
+
+    class Meta:
+        icon = "placeholder"
+        template = "home/blocks/hero_block.html"
+
+
+class HeroGrid(basic.StructGrid):
+    block = HeroBlock()
     lottie = lottie.Lottie()
 
     class Meta:
         icon = "placeholder"
-        template = "home/blocks/hero.html"
+        template = "home/blocks/hero_grid.html"

@@ -48,6 +48,26 @@ class ParagraphBlock(blocks.StructBlock):
         template = "base/blocks/basic/paragraph_block.html"
 
 
+class BasicBlock(blocks.StructBlock):
+    """
+    Used internally for predesigned blocks
+    """
+    pass
+
+
+class StructGrid(blocks.StreamBlock):
+    """
+    Used internally for predesigned blocks
+    """
+    pass
+
+class StreamGrid(blocks.StructBlock):
+    """
+    Used internally for predesigned blocks
+    """
+    pass
+
+
 class Image(image_blocks.ImageChooserBlock):
     """
     Used internally for predesigned blocks
@@ -71,25 +91,6 @@ class ImageBlock(blocks.StructBlock):
         template = "base/blocks/basic/image_figure_block.html"
 
 
-class Section(blocks.StreamBlock):
-    """
-    Used internally for predesigned blocks
-    """
-    pass
-
-
-class SectionBlock(Section):
-    heading = HeadingBlock()
-    paragraph = ParagraphBlock()
-    image = ImageBlock()
-
-    class Meta:
-        icon = "placeholder"
-        template = "base/blocks/basic/section_block.html"
-        label = "Section Block"
-        group = "Basic Blocks"
-
-
 class Button(blocks.StructBlock):
     """
     Used internally for predesigned blocks
@@ -105,8 +106,6 @@ class Button(blocks.StructBlock):
 class ButtonBlock(Button):
     class Meta:
         template = 'base/blocks/basic/button_block.html'
-        icon = 'placeholder'
-        label = 'Button'
 
 
 class IconButtonBlock(Button):
