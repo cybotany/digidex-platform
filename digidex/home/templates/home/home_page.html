@@ -5,7 +5,13 @@
   <section class="section-hero">
     <div class="content">
       <div class="base-layout-grid grid-hero">
-        {{ page.hero }}
+        <div class="block-hero">
+          <h1 class="heading-hero">{{ self.heading }}</h1>
+          <p class="paragraph-hero">{{ self.paragraph }}</p>
+          <div class="button-hero">
+            {% include_block self.button %}
+          </div>
+        </div>
       </div>
     </div>
   </section>
