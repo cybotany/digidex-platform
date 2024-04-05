@@ -8,4 +8,4 @@ class HeroSection(basic.Section):
 
     class Meta:
         icon = "placeholder"
-        template = "base/blocks/sections/hero.html"
+        template = "home/blocks/hero.html"

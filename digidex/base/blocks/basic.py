@@ -125,3 +125,26 @@ class IconButtonBlock(Button):
         template = 'base/blocks/basic/icon_button_block.html'
         icon = 'placeholder'
         label = 'Icon Button'
+
+
+class PageHeading(blocks.StructBlock):
+    """
+    Page Heading Block
+    """
+    heading = Heading(
+        required=True
+    )
+    introduction = Paragraph(
+        required=False
+    )
+
+
+class PageHeadingBlock(PageHeading):
+    """
+    Page Heading Block
+    """
+
+    class Meta:
+        template = 'base/blocks/sections/heading.html'
+        icon = 'title'
+        label = 'Page Heading'
