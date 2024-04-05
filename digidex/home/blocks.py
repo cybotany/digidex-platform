@@ -5,9 +5,13 @@ class HeroBlock(basic.BasicBlock):
     paragraph = basic.Paragraph()
     button = basic.ButtonBlock()
 
+    class Meta:
+        icon = "placeholder"
+        template = "home/blocks/hero_block.html"
+
 
 class HeroGrid(basic.StructGrid):
-    block = HeroBlock()
+    cta = HeroBlock()
     lottie = lottie.Lottie()
 
     class Meta:
