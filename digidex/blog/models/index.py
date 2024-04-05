@@ -2,12 +2,12 @@ from wagtail import models as wt_models
 from wagtail import fields
 from wagtail.admin import panels
 
-from base.blocks.page import heading
+from base.blocks import basic
 
 class BlogIndexPage(wt_models.Page):
     body = fields.StreamField(
         [
-            ('page_heading', heading.PageHeadingBlock()),
+            ('page_heading', basic.PageHeadingBlock()),
         ],
         blank=True,
         null=True,

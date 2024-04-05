@@ -1,10 +1,13 @@
 {% extends "home/base.html" %}
-{% load static wagtailcore_tags %}
+{% load wagtailcore_tags %}
 
 {% block content %}
-  <section class="section-hero">
-    <div class="content">
-
-    </div>
-  </section>
+    <!-- Iterate over the StreamField 'page' -->
+    {% for block in page.page %}
+        <!-- Check if the block type is 'hero_section' -->
+        {% if block.block_type == 'hero_section' %}
+            <!-- Render the hero section -->
+            {% include_block block %}
+        {% endif %}
+    {% endfor %}
 {% endblock content %}
