@@ -1,22 +1,22 @@
 from wagtail import blocks
 from wagtail.documents import blocks as doc_blocks
 
-from base.blocks import basic as _bblocks
+from base.blocks import basic
 
-class _VerticalLinesBlock(blocks.IntegerBlock):
+class VerticalLines(blocks.IntegerBlock):
     pass
 
 
-class _HorizontalLinesBlock(blocks.IntegerBlock):
+class HorizontalLines(blocks.IntegerBlock):
     pass
 
 
-class _LottieLinesBlock(blocks.StructBlock):
-    vertical = _VerticalLinesBlock(
+class LottieLines(blocks.StructBlock):
+    vertical = VerticalLines(
         required=False,
         help_text="Number of vertical lines."
     )
-    horizontal = _HorizontalLinesBlock(
+    horizontal = HorizontalLines(
         required=False,
         help_text="Number of horizontal lines."
     )
@@ -26,7 +26,7 @@ class _LottieLinesBlock(blocks.StructBlock):
         template = 'base/blocks/lottie/line_block.html'
 
 
-class _AnimationBlock(blocks.StructBlock):
+class Animation(blocks.StructBlock):
     file = doc_blocks.DocumentChooserBlock(
         required=True,
         help_text="Select the Lottie JSON file."
@@ -65,26 +65,26 @@ class _AnimationBlock(blocks.StructBlock):
     blurred = blocks.BooleanBlock()
 
 
-class _LottieAnimationBlock(blocks.ListBlock):
+class LottieAnimation(blocks.ListBlock):
     """
     A ListBlock that allows for 0 to 3 _LottieAnimationBlocks.
     """
 
     def __init__(self, **kwargs):
-        super().__init__(_AnimationBlock(), **kwargs)
+        super().__init__(Animation(), **kwargs)
 
     class Meta:
         label = 'Lottie Animations'
         template = 'base/blocks/lottie/animation_block.html'
 
 
-class _LottieFeatureBlock(blocks.StructBlock):
+class Feature(blocks.StructBlock):
     widget_id = blocks.CharBlock(
         required=False,
         help_text="Unique widget identifier for JS/CSS"
     )
 
-    icon = _bblocks._ImageBlock(
+    icon = basic.Image(
         required=True,
         help_text="Feature icon"
     )
@@ -94,10 +94,10 @@ class _LottieFeatureBlock(blocks.StructBlock):
     )
 
 
-class _FeaturesBlock(blocks.ListBlock):
+class FeatureList(blocks.ListBlock):
 
     def __init__(self, **kwargs):
-        super().__init__(_LottieFeatureBlock(), **kwargs)
+        super().__init__(Feature(), **kwargs)
 
     class Meta:
         label = 'Lottie Features'
@@ -105,10 +105,9 @@ class _FeaturesBlock(blocks.ListBlock):
 
 
 class Lottie(blocks.StructBlock):
-    lines = _LottieLinesBlock()
-    animation = _LottieAnimationBlock() 
-    features = _FeaturesBlock()
+    lines = LottieLines()
+    animation = LottieAnimation() 
+    features = FeatureList()
 
     class Meta:
         template = "base/blocks/lottie/base.html"
-

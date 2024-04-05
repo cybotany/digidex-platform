@@ -1,0 +1,18 @@
+{% load wagtailcore_tags static %}
+
+<section class="section-hero">
+  <div style="opacity:0" class="content">
+    <div class="base-layout-grid grid-hero">
+      <div class="block-hero">
+        <h1 class="heading-hero">{{ page.heading }}</h1>
+        <p class="paragraph-hero">{{ page.introduction }}</p>
+        <div class="button-hero">
+          <div class="button-hero">
+            {% include_block page.button %}
+          </div>
+        </div>
+      </div>
+      {% include_block page.lottie %}
+    </div>
+  </div>
+</section>

@@ -2,7 +2,7 @@ from wagtail import blocks
 
 from base.blocks import basic
 
-class _NotificationInformationBlock(blocks.CharBlock):
+class NotificationInformation(blocks.CharBlock):
     """
     A CharBlock for text-based information in the notification bar.
     """
@@ -16,7 +16,8 @@ class _NotificationInformationBlock(blocks.CharBlock):
         label = 'Notification Text'
         template = 'base/blocks/sections/notification/information_block.html'
 
-class _NotificationIconBlock(blocks.StructBlock):
+
+class NotificationIcon(blocks.StructBlock):
     """
     A StructBlock for individual icon links in the notification bar.
     """
@@ -24,7 +25,7 @@ class _NotificationIconBlock(blocks.StructBlock):
         required=True,
         help_text="Link URL"
     )
-    icon = basic._ImageBlock(
+    icon = basic.Image(
         required=True,
         help_text="Icon Image"
     )
@@ -40,13 +41,13 @@ class _NotificationIconBlock(blocks.StructBlock):
         icon = 'link'
 
 
-class _NotificationIconListBlock(blocks.ListBlock):
+class NotificationIconList(blocks.ListBlock):
     """
     A ListBlock that allows for 0 to 3 _NotificationIconBlocks.
     """
 
     def __init__(self, **kwargs):
-        super().__init__(_NotificationIconBlock(), **kwargs)
+        super().__init__(NotificationInformation(), **kwargs)
 
     class Meta:
         label = 'Icon Links'
@@ -57,10 +58,10 @@ class NotificationBarBlock(blocks.StructBlock):
     """
     A StructBlock for the notification bar.
     """
-    information = _NotificationInformationBlock(
+    information = NotificationInformation(
         required=True,
     )
-    links = _NotificationIconListBlock(
+    links = NotificationIconList(
         required=False,
     )
 

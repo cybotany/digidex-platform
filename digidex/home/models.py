@@ -2,6 +2,8 @@ from django.db import models
 from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 
+from home.blocks import HeroSection
+
 class HomePage(Page):
     heading = models.CharField(
         max_length=255,

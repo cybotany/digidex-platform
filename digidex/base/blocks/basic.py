@@ -1,50 +1,15 @@
 from wagtail import blocks
 from wagtail.images import blocks as image_blocks
 
-class _HeadingBlock(blocks.CharBlock):
+class Heading(blocks.CharBlock):
     """
     Used internally for predesigned blocks
     """
     pass
 
-class _SubtitleBlock(blocks.CharBlock):
-    """
-    Used internally for predesigned blocks
-    """
-    pass
-
-class _ParagraphBlock(blocks.RichTextBlock):
-    """
-    Used internally for predesigned blocks
-    """
-    pass
-
-class _ImageBlock(image_blocks.ImageChooserBlock):
-    """
-    Used internally for predesigned blocks
-    """
-    pass
-
-class _BasicBlock(blocks.StructBlock):
-    """
-    Used internally for predesigned blocks
-    """
-    pass
-
-class _GridBlock(blocks.StreamBlock):
-    """
-    Used internally for predesigned blocks
-    """
-    pass
-
-class _SectionBlock(blocks.StreamBlock):
-    """
-    Used internally for predesigned blocks
-    """
-    pass
 
 class HeadingBlock(blocks.StructBlock):
-    text = _HeadingBlock(
+    text = Heading(
         required=True
     )
     size = blocks.ChoiceBlock(
@@ -66,16 +31,15 @@ class HeadingBlock(blocks.StructBlock):
         template = "base/blocks/basic/heading_block.html"
 
 
-class SubtitleBlock(blocks.CharBlock):
-    text = _SubtitleBlock()
-
-    class Meta:
-        icon = "placeholder"
-        template = "base/blocks/basic/subtitle_block.html"
+class Paragraph(blocks.RichTextBlock):
+    """
+    Used internally for predesigned blocks
+    """
+    pass
 
 
 class ParagraphBlock(blocks.StructBlock):
-    text = _ParagraphBlock(
+    text = Paragraph(
         required=True
     )
 
@@ -84,8 +48,15 @@ class ParagraphBlock(blocks.StructBlock):
         template = "base/blocks/basic/paragraph_block.html"
 
 
+class Image(image_blocks.ImageChooserBlock):
+    """
+    Used internally for predesigned blocks
+    """
+    pass
+
+
 class ImageBlock(blocks.StructBlock):
-    image = _ImageBlock(
+    image = Image(
         required=True
     )
     caption = blocks.CharBlock(
@@ -100,7 +71,38 @@ class ImageBlock(blocks.StructBlock):
         template = "base/blocks/basic/image_figure_block.html"
 
 
-class BasicButtonBlock(blocks.StructBlock):
+class Section(blocks.StreamBlock):
+    """
+    Used internally for predesigned blocks
+    """
+    pass
+
+
+class SectionBlock(Section):
+    heading = HeadingBlock()
+    paragraph = ParagraphBlock()
+    image = ImageBlock()
+
+    class Meta:
+        icon = "placeholder"
+        template = "base/blocks/basic/section_block.html"
+        label = "Section Block"
+        group = "Basic Blocks"
+
+
+class Button(blocks.StructBlock):
+    """
+    Used internally for predesigned blocks
+    """
+    page = blocks.PageChooserBlock(
+        required=True
+    )
+    text = blocks.CharBlock(
+        required=True
+    )
+
+
+class ButtonBlock(Button):
     page = blocks.PageChooserBlock(
         required=True
     )
@@ -109,19 +111,13 @@ class BasicButtonBlock(blocks.StructBlock):
     )
     
     class Meta:
-        template = 'base/blocks/basic/basic_button_block.html'
+        template = 'base/blocks/basic/button_block.html'
         icon = 'placeholder'
         label = 'Button'
 
 
-class IconButtonBlock(blocks.StructBlock):
-    icon = _ImageBlock(
-        required=True
-    )
-    page = blocks.PageChooserBlock(
-        required=True
-    )
-    text = blocks.CharBlock(
+class IconButtonBlock(Button):
+    icon = Image(
         required=True
     )
     
@@ -129,20 +125,3 @@ class IconButtonBlock(blocks.StructBlock):
         template = 'base/blocks/basic/icon_button_block.html'
         icon = 'placeholder'
         label = 'Icon Button'
-
-
-class BasicBlock(_BasicBlock):
-    class Meta:
-        icon = "placeholder"
-
-
-class GridBlock(_GridBlock):
-    class Meta:
-        icon = "placeholder"
-        template = "base/blocks/basic/grid_block.html"
-
-
-class SectionBlock(_SectionBlock):
-    class Meta:
-        icon = "placeholder"
-        template = "base/blocks/basic/section_block.html"
