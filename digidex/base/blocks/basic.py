@@ -100,6 +100,37 @@ class ImageBlock(blocks.StructBlock):
         template = "base/blocks/basic/image_figure_block.html"
 
 
+class BasicButtonBlock(blocks.StructBlock):
+    page = blocks.PageChooserBlock(
+        required=True
+    )
+    text = blocks.CharBlock(
+        required=True
+    )
+    
+    class Meta:
+        template = 'base/blocks/basic/basic_button_block.html'
+        icon = 'placeholder'
+        label = 'Button'
+
+
+class IconButtonBlock(blocks.StructBlock):
+    icon = _ImageBlock(
+        required=True
+    )
+    page = blocks.PageChooserBlock(
+        required=True
+    )
+    text = blocks.CharBlock(
+        required=True
+    )
+    
+    class Meta:
+        template = 'base/blocks/basic/icon_button_block.html'
+        icon = 'placeholder'
+        label = 'Icon Button'
+
+
 class BasicBlock(_BasicBlock):
     class Meta:
         icon = "placeholder"
