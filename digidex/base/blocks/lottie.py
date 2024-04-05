@@ -62,7 +62,9 @@ class Animation(blocks.StructBlock):
         default="svg",
         help_text="Rendering mode of the animation."
     )
-    blurred = blocks.BooleanBlock()
+    blurred = blocks.BooleanBlock(
+        required=False
+    )
 
 
 class LottieAnimation(blocks.ListBlock):
@@ -89,7 +91,7 @@ class Feature(blocks.StructBlock):
         help_text="Feature icon"
     )
     text = blocks.TextBlock(
-        required=True,
+        required=False,
         help_text="Feature description"
     )
 

@@ -21,16 +21,16 @@ class NotificationIcon(blocks.StructBlock):
     """
     A StructBlock for individual icon links in the notification bar.
     """
-    url = blocks.URLBlock(
-        required=True,
-        help_text="Link URL"
-    )
     icon = basic.Image(
         required=True,
         help_text="Icon Image"
     )
+    url = blocks.URLBlock(
+        required=False,
+        help_text="Link URL"
+    )
     text = blocks.CharBlock(
-        required=True,
+        required=False,
         max_length=255,
         help_text="Link Text"
     )

@@ -98,18 +98,11 @@ class Button(blocks.StructBlock):
         required=True
     )
     text = blocks.CharBlock(
-        required=True
+        required=False
     )
 
 
 class ButtonBlock(Button):
-    page = blocks.PageChooserBlock(
-        required=True
-    )
-    text = blocks.CharBlock(
-        required=True
-    )
-    
     class Meta:
         template = 'base/blocks/basic/button_block.html'
         icon = 'placeholder'
