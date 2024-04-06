@@ -106,10 +106,10 @@ class FeatureList(blocks.ListBlock):
         template = 'base/blocks/lottie/feature_block.html'
 
 
-class Lottie(blocks.StructBlock):
+class LottieBlock(blocks.StructBlock):
     lines = LottieLines()
     animation = LottieAnimation() 
     features = FeatureList()
 
     class Meta:
-        template = "base/blocks/lottie/base.html"
+        template = "base/blocks/lottie/lottie_block.html"

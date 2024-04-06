@@ -1,4 +1,4 @@
 from base.blocks import basic
 
-class HeroGrid(basic.BasicStreamBlock):
+class HeroCallToAction(basic.BasicStreamBlock):
     pass

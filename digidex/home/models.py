@@ -6,7 +6,7 @@ from home import blocks
 
 class HomePage(models.Page):
     hero = fields.StreamField(
-        blocks.HeroGrid(),
+        blocks.HeroCallToAction(),
         blank=True,
         null=True,
         use_json_field=True
