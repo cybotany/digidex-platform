@@ -7,8 +7,7 @@ from home import blocks
 class HomePage(models.Page):
     body = fields.StreamField(
         [
-            ('hero', blocks.HeroBlock()),
-            ('lottie', blocks.HeroLottie()),  
+            ('hero', blocks.HeroBlock()),  
         ],
         null=True,
         blank=True
