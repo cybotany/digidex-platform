@@ -1,7 +1,14 @@
 from wagtail import blocks
 from wagtail.images import blocks as image_blocks
 
-class HeadingBlock(blocks.StructBlock):
+class BasicStructBlock(blocks.StructBlock):
+    """
+    Used internally for predesigned blocks
+    """
+    pass
+
+
+class HeadingBlock(BasicStructBlock):
     text = blocks.CharBlock(
         required=True
     )
@@ -29,7 +36,7 @@ class HeadingBlock(blocks.StructBlock):
         template = "base/blocks/basic/heading_block.html"
 
 
-class ParagraphBlock(blocks.StructBlock):
+class ParagraphBlock(BasicStructBlock):
     text = blocks.RichTextBlock(
         required=True
     )
@@ -39,26 +46,6 @@ class ParagraphBlock(blocks.StructBlock):
         template = "base/blocks/basic/paragraph_block.html"
 
 
-class BasicBlock(blocks.StructBlock):
-    """
-    Used internally for predesigned blocks
-    """
-    pass
-
-
-class StructGrid(blocks.StreamBlock):
-    """
-    Used internally for predesigned blocks
-    """
-    pass
-
-class StreamGrid(blocks.StructBlock):
-    """
-    Used internally for predesigned blocks
-    """
-    pass
-
-
 class ImageBlock(image_blocks.ImageChooserBlock):
     """
     Used internally for predesigned blocks
@@ -66,7 +53,7 @@ class ImageBlock(image_blocks.ImageChooserBlock):
     pass
 
 
-class ImageFigureBlock(blocks.StructBlock):
+class ImageFigureBlock(BasicStructBlock):
     image = ImageBlock(
         required=True
     )
@@ -82,10 +69,7 @@ class ImageFigureBlock(blocks.StructBlock):
         template = "base/blocks/basic/image_figure_block.html"
 
 
-class Button(blocks.StructBlock):
-    """
-    Used internally for predesigned blocks
-    """
+class Button(BasicStructBlock):
     page = blocks.PageChooserBlock(
         required=True
     )
@@ -105,12 +89,17 @@ class IconButtonBlock(Button):
     )
     
     class Meta:
-        template = 'base/blocks/basic/icon_button_block.html'
-        icon = 'placeholder'
-        label = 'Icon Button'
+        template = 'base/blocks/buttons/icon_button_block.html'
 
 
-class PageHeading(blocks.StructBlock):
+class BasicStreamBlock(blocks.StreamBlock):
+    heading = HeadingBlock()
+    paragraph = ParagraphBlock()
+    button = ButtonBlock()
+    icon_button = IconButtonBlock()
+
+
+class PageHeadingBlock(BasicStructBlock):
     """
     Page Heading Block
     """
@@ -120,12 +109,6 @@ class PageHeading(blocks.StructBlock):
     introduction = ParagraphBlock(
         required=False
     )
-
-
-class PageHeadingBlock(PageHeading):
-    """
-    Page Heading Block
-    """
 
     class Meta:
         template = 'base/blocks/sections/heading.html'

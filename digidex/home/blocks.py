@@ -1,7 +1,4 @@
-from base.blocks import basic, lottie
+from base.blocks import basic
 
-class HeroGrid(basic.StructGrid):
-    heading = basic.HeadingBlock()
-    paragraph = basic.ParagraphBlock()
-    button = basic.ButtonBlock()
-    lottie = lottie.Lottie()
+class HeroGrid(basic.BasicStreamBlock):
+    pass

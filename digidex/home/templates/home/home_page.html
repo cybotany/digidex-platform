@@ -2,5 +2,11 @@
 {% load wagtailcore_tags %}
 
 {% block content %}
-  {{ page.hero }}
+<section class="section-hero">
+  <div class="content">
+    <div class="base-layout-grid grid-hero">
+      {{ page.hero}}
+    </div>
+  </div>
+</section>
 {% endblock %}
