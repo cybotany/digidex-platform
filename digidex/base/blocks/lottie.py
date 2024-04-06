@@ -104,12 +104,3 @@ class FeatureList(blocks.ListBlock):
     class Meta:
         label = 'Lottie Features'
         template = 'base/blocks/lottie/feature_block.html'
-
-
-class LottieBlock(blocks.StructBlock):
-    lines = LottieLines()
-    animation = LottieAnimation() 
-    features = FeatureList()
-
-    class Meta:
-        template = "base/blocks/lottie/lottie_block.html"

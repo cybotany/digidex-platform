@@ -5,15 +5,17 @@ from wagtail.admin import panels
 from home import blocks
 
 class HomePage(models.Page):
-    hero = fields.StreamField(
-        blocks.HeroCallToAction(),
-        blank=True,
+    body = fields.StreamField(
+        [
+            ('hero', blocks.HeroBlock()),
+            ('lottie', blocks.HeroLottie()),  
+        ],
         null=True,
-        use_json_field=True
+        blank=True
     )
 
     content_panels = models.Page.content_panels + [
-        panels.FieldPanel('hero'),
+        panels.FieldPanel('body'),
     ]
 
     class Meta:

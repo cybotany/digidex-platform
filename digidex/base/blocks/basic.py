@@ -8,6 +8,61 @@ class BasicStructBlock(blocks.StructBlock):
     pass
 
 
+class ImageBlock(image_blocks.ImageChooserBlock):
+    """
+    Used internally for predesigned blocks
+    """
+    pass
+
+
+class TextBlock(BasicStructBlock):
+    text = blocks.CharBlock(
+        required=True
+    )
+    style = blocks.CharBlock(
+        blank=True,
+        default="text",
+        required=False
+    )
+
+    class Meta:
+        template = 'base/blocks/text_block.html'
+
+
+class IconBlock(BasicStructBlock):
+    icon = ImageBlock(
+        required=True,
+        help_text="Select an icon for the info block"
+    )
+    style = blocks.CharBlock(
+        blank=True,
+        default="icon",
+        required=False
+    )
+
+    class Meta:
+        template = 'base/blocks/icon_block.html'
+        icon = 'image'
+        label = 'Icon'
+
+
+class LinkBlock(BasicStructBlock):
+    icon = ImageBlock(
+        required=True,
+        help_text="Select an icon for the info block"
+    )
+    style = blocks.CharBlock(
+        blank=True,
+        default="icon",
+        required=False
+    )
+
+    class Meta:
+        template = 'base/blocks/link_block.html'
+        icon = 'image'
+        label = 'Icon'
+
+
 class HeadingBlock(BasicStructBlock):
     text = blocks.CharBlock(
         required=True
@@ -25,10 +80,9 @@ class HeadingBlock(BasicStructBlock):
         blank=True,
         required=False
     )
-    class_name = blocks.CharBlock(
+    style = blocks.CharBlock(
         default="heading",
         required=False,
-        help_text="CSS class for styling"
     )
 
     class Meta:
@@ -40,22 +94,14 @@ class ParagraphBlock(BasicStructBlock):
     text = blocks.TextBlock(
         required=True
     )
-    class_name = blocks.CharBlock(
+    style = blocks.CharBlock(
         default="paragraph",
         required=False,
-        help_text="CSS class for styling"
     )
 
     class Meta:
         icon = "pilcrow"
         template = "base/blocks/basic/paragraph_block.html"
-
-
-class ImageBlock(image_blocks.ImageChooserBlock):
-    """
-    Used internally for predesigned blocks
-    """
-    pass
 
 
 class ImageFigureBlock(BasicStructBlock):
