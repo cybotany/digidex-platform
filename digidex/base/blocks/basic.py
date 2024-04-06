@@ -37,7 +37,7 @@ class HeadingBlock(BasicStructBlock):
 
 
 class ParagraphBlock(BasicStructBlock):
-    text = blocks.RichTextBlock(
+    text = blocks.TextBlock(
         required=True
     )
     classname = blocks.CharBlock(
