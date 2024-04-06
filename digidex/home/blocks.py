@@ -1,12 +1,10 @@
-from wagtail import blocks
-
 from base.blocks import basic, lottie
 
 
 class InformationBlock(basic.BasicStructBlock):
-    text = basic.TextBlock()
-    icon = basic.IconBlock()
-    link = blocks.PageChooserBlock()
+    text = basic.BasicTextBlock()
+    icon = basic.BasicIconBlock()
+    link = basic.BasicInternalLinkBlock()
 
     class Meta:
         template = "home/blocks/information_block.html"
@@ -14,9 +12,9 @@ class InformationBlock(basic.BasicStructBlock):
 
 class HeroBlock(basic.BasicStructBlock):
     information = InformationBlock()
-    heading = basic.HeadingBlock()
-    paragraph = basic.ParagraphBlock()
-    cta = basic.ButtonBlock()
+    heading = basic.BasicHeadingBlock()
+    paragraph = basic.BasicParagraphBlock()
+    cta = basic.BasicButtonBlock()
 
     class Meta:
         template = "home/blocks/hero_block.html"

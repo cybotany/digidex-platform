@@ -1,69 +1,74 @@
 from wagtail import blocks
 from wagtail.images import blocks as image_blocks
+from wagtail.documents import blocks as doc_blocks
 
 class BasicStructBlock(blocks.StructBlock):
     """
-    Used internally for predesigned blocks
+    Used internally
     """
     pass
 
 
-class ImageBlock(image_blocks.ImageChooserBlock):
+class BasicIntegerBlock(blocks.IntegerBlock):
     """
-    Used internally for predesigned blocks
+    Used internally
     """
     pass
 
 
-class TextBlock(BasicStructBlock):
-    text = blocks.CharBlock(
-        required=True
-    )
-    style = blocks.CharBlock(
-        blank=True,
-        default="text",
-        required=False
-    )
-
-    class Meta:
-        template = 'base/blocks/text_block.html'
+class BasicFloatBlock(blocks.FloatBlock):
+    """
+    Used internally
+    """
+    pass
 
 
-class IconBlock(BasicStructBlock):
-    icon = ImageBlock(
-        required=True,
-        help_text="Select an icon for the info block"
-    )
-    style = blocks.CharBlock(
-        blank=True,
-        default="icon",
-        required=False
-    )
-
-    class Meta:
-        template = 'base/blocks/icon_block.html'
-        icon = 'image'
-        label = 'Icon'
+class BasicChoiceBlock(blocks.ChoiceBlock):
+    """
+    Used internally
+    """
+    pass
 
 
-class LinkBlock(BasicStructBlock):
-    icon = ImageBlock(
-        required=True,
-        help_text="Select an icon for the info block"
-    )
-    style = blocks.CharBlock(
-        blank=True,
-        default="icon",
-        required=False
-    )
-
-    class Meta:
-        template = 'base/blocks/link_block.html'
-        icon = 'image'
-        label = 'Icon'
+class BasicListBlock(blocks.ListBlock):
+    """
+    Used internally
+    """
+    pass
 
 
-class HeadingBlock(BasicStructBlock):
+class BasicBooleanBlock(blocks.BooleanBlock):
+    """
+    Used internally
+    """
+    pass
+
+
+class BasicCharBlock(blocks.CharBlock):
+    """
+    Used internally
+    """
+    pass
+
+
+class BasicImageBlock(image_blocks.ImageChooserBlock):
+    """
+    Used internally
+    """
+    pass
+
+
+class BasicDocumentBlock(doc_blocks.DocumentChooserBlock):
+    """
+    Used internally
+    """
+    pass
+
+
+class BasicHeadingBlock(BasicStructBlock):
+    """
+    Used internally
+    """
     text = blocks.CharBlock(
         required=True
     )
@@ -87,10 +92,13 @@ class HeadingBlock(BasicStructBlock):
 
     class Meta:
         icon = "title"
-        template = "base/blocks/basic/heading_block.html"
+        template = "base/blocks/heading_block.html"
 
 
-class ParagraphBlock(BasicStructBlock):
+class BasicParagraphBlock(BasicStructBlock):
+    """
+    Used internally
+    """
     text = blocks.TextBlock(
         required=True
     )
@@ -101,63 +109,141 @@ class ParagraphBlock(BasicStructBlock):
 
     class Meta:
         icon = "pilcrow"
-        template = "base/blocks/basic/paragraph_block.html"
+        template = "base/blocks/paragraph_block.html"
 
 
-class ImageFigureBlock(BasicStructBlock):
-    image = ImageBlock(
-        required=True
+class BasicIconBlock(BasicStructBlock):
+    """
+    Used internally
+    """
+    icon = BasicImageBlock(
+        required=True,
+        help_text="Select an icon for the info block"
     )
-    caption = blocks.CharBlock(
+    style = blocks.CharBlock(
+        blank=True,
+        default="icon",
         required=False
     )
-    attribution = blocks.CharBlock(
+
+    class Meta:
+        template = 'base/blocks/icon_block.html'
+        icon = 'image'
+        label = 'Icon'
+
+
+class BasicInternalLinkBlock(BasicStructBlock):
+    """
+    Used internally
+    """
+    page = blocks.PageChooserBlock(
+        required=False,
+        help_text="Select an internal page to link to."
+    )
+    style = blocks.CharBlock(
+        blank=True,
+        default="link",
+        required=False
+    )
+
+    class Meta:
+        icon = 'link'
+        label = 'Internal Page Link'
+
+
+class BasicExternalLinkBlock(BasicStructBlock):
+    """
+    Used internally
+    """
+    url = blocks.URLBlock(
+        required=False,
+        help_text="Select an external URL to link to."
+    )
+    style = blocks.CharBlock(
+        blank=True,
+        default="link",
+        required=False
+    )
+
+    class Meta:
+        icon = 'link'
+        label = 'External URL Link'
+
+
+class BasicTextBlock(BasicStructBlock):
+    """
+    Used internally
+    """
+    text = blocks.CharBlock(
+        required=True
+    )
+    style = blocks.CharBlock(
+        blank=True,
+        default="text",
+        required=False
+    )
+
+    class Meta:
+        template = 'base/blocks/text_block.html'
+
+
+class BasicButton(BasicStructBlock):
+    """
+    Used internally
+    """
+    page = BasicInternalLinkBlock()
+    text = BasicTextBlock()
+    style = blocks.CharBlock(
+        blank=True,
+        default="text",
+        required=False
+    )
+
+
+class BasicButtonBlock(BasicButton):
+    """
+    Used internally
+    """
+    class Meta:
+        template = 'base/blocks/button_block.html'
+
+
+class BasicIconButtonBlock(BasicButton):
+    """
+    Used internally
+    """
+    icon = BasicIconBlock(
+        required=True
+    )
+    
+    class Meta:
+        template = 'base/blocks/icon_button_block.html'
+
+
+class BasicFigureBlock(BasicStructBlock):
+    """
+    Used internally
+     """
+    image = BasicImageBlock(
+        required=True
+    )
+    caption = BasicCharBlock(
+        required=False
+    )
+    attribution = BasicCharBlock(
         required=False
     )
 
     class Meta:
         icon = "image"
-        template = "base/blocks/basic/image_figure_block.html"
-
-
-class Button(BasicStructBlock):
-    page = blocks.PageChooserBlock(
-        required=True
-    )
-    text = blocks.CharBlock(
-        required=False
-    )
-
-
-class ButtonBlock(Button):
-    class Meta:
-        template = 'base/blocks/buttons/button_block.html'
-
-
-class IconButtonBlock(Button):
-    icon = ImageBlock(
-        required=True
-    )
-    
-    class Meta:
-        template = 'base/blocks/buttons/icon_button_block.html'
+        template = "base/blocks/figure_block.html"
 
 
 class BasicStreamBlock(blocks.StreamBlock):
-    heading = HeadingBlock()
-    paragraph = ParagraphBlock()
-    button = ButtonBlock()
-    icon_button = IconButtonBlock()
-
-
-class PageHeadingBlock(BasicStructBlock):
     """
-    Page Heading Block
+    Used internally
     """
-    heading = HeadingBlock()
-    paragraph = ParagraphBlock()
-
-    class Meta:
-        template = 'base/blocks/sections/heading.html'
-        icon = 'title'
-        label = 'Page Heading'
+    heading = BasicHeadingBlock()
+    paragraph = BasicParagraphBlock()
+    button = BasicButtonBlock()
+    icon_button = BasicIconButtonBlock()
