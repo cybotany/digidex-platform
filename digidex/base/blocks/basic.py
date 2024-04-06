@@ -108,12 +108,8 @@ class PageHeadingBlock(BasicStructBlock):
     """
     Page Heading Block
     """
-    heading = HeadingBlock(
-        required=True
-    )
-    introduction = ParagraphBlock(
-        required=False
-    )
+    heading = HeadingBlock()
+    paragraph = ParagraphBlock()
 
     class Meta:
         template = 'base/blocks/sections/heading.html'
