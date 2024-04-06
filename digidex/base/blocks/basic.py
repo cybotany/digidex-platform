@@ -25,7 +25,7 @@ class HeadingBlock(BasicStructBlock):
         blank=True,
         required=False
     )
-    classname = blocks.CharBlock(
+    class_name = blocks.CharBlock(
         default="heading",
         required=False,
         help_text="CSS class for styling"
@@ -40,7 +40,7 @@ class ParagraphBlock(BasicStructBlock):
     text = blocks.TextBlock(
         required=True
     )
-    classname = blocks.CharBlock(
+    class_name = blocks.CharBlock(
         default="paragraph",
         required=False,
         help_text="CSS class for styling"
