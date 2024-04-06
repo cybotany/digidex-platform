@@ -21,7 +21,7 @@ class NotificationIcon(blocks.StructBlock):
     """
     A StructBlock for individual icon links in the notification bar.
     """
-    icon = basic.Image(
+    icon = basic.ImageBlock(
         required=True,
         help_text="Icon Image"
     )

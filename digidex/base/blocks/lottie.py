@@ -86,7 +86,7 @@ class Feature(blocks.StructBlock):
         help_text="Unique widget identifier for JS/CSS"
     )
 
-    icon = basic.Image(
+    icon = basic.ImageBlock(
         required=True,
         help_text="Feature icon"
     )
