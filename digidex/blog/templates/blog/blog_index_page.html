@@ -2,9 +2,7 @@
 {% load wagtailcore_tags %}
 
 {% block content %}
-  {% for block in page.body %}
-    {% include_block block %}
-  {% endfor %}
+  {% include_block page.body %}
   {% if empty_blog %}
     {% include "blog/includes/empty.html" %}
   {% else %}
