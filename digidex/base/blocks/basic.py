@@ -23,7 +23,7 @@ class HeadingBlock(BasicStructBlock):
             ("h6", "H6"),
         ],
         blank=True,
-        required=False,
+        required=False
     )
     classname = blocks.CharBlock(
         default="heading",
