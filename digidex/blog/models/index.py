@@ -8,7 +8,6 @@ class BlogIndexPage(wt_models.Page):
     body = fields.StreamField(
         basic.PageHeadingBlock(),
         blank=True,
-        null=True,
         use_json_field=True
     )
 
