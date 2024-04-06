@@ -8,6 +8,7 @@ class HomePage(models.Page):
     hero = fields.StreamField(
         blocks.HeroCallToAction(),
         blank=True,
+        null=True,
         use_json_field=True
     )
 
