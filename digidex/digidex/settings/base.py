@@ -17,6 +17,11 @@ from dotenv import load_dotenv
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
+dotenv_path = os.path.join(BASE_DIR, '.env')
+load_dotenv(dotenv_path)
+
+SECRET_KEY = os.environ.get('SECRET_KEY', '')
+
 # Application definition
 INSTALLED_APPS = [
     "accounts",
@@ -103,11 +108,11 @@ WSGI_APPLICATION = "digidex.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('DB_DATABASE'),
-        'USER': os.environ.get('DB_USERNAME'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': os.environ.get('DB_HOST'),
-        'PORT': os.environ.get('DB_PORT'),
+        'NAME': os.environ.get('DB_NAME', ''),
+        'USER': os.environ.get('DB_USERNAME', ''),
+        'PASSWORD': os.environ.get('DB_PASSWORD', ''),
+        'HOST': os.environ.get('DB_HOST', ''),
+        'PORT': os.environ.get('DB_PORT', ''),
     }
 }
 
@@ -172,8 +177,6 @@ STORAGES = {
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "digidex"
-
-WAGTAILADMIN_BASE_URL = "http://127.0.0.1:8000"
 
 WAGTAILIMAGES_EXTENSIONS = ['gif', 'jpg', 'jpeg', 'png', 'webp', 'svg']
 
