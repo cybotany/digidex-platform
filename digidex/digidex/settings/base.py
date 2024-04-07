@@ -121,11 +121,11 @@ WSGI_APPLICATION = "digidex.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('CMS_DATABASE_NAME'),
-        'USER': os.environ.get('CMS_DATABASE_USER'),
-        'PASSWORD': os.environ.get('CMS_DATABASE_PASSWORD'),
-        'HOST': os.environ.get('CMS_DATABASE_HOST'),
-        'PORT': os.environ.get('CMS_DATABASE_PORT'),
+        'NAME': os.environ.get('DB_DATABASE'),
+        'USER': os.environ.get('DB_USERNAME'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),
+        'PORT': os.environ.get('DB_PORT'),
     }
 }
 
