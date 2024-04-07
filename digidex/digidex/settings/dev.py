@@ -1,18 +1,17 @@
 from .base import *
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-@u8i(hsjlxkjbn)x97pn#lypz#)^0&%viyw4f$^e#vgn2pen+@"
 
-# SECURITY WARNING: define the correct hosts in production!
 ALLOWED_HOSTS = ["*"]
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
+STATICFILES_DIRS = [
+    os.path.join(PROJECT_DIR, "static"),
+]
 
-try:
-    from .local import *
-except ImportError:
-    pass
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")

@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     "rest_framework",
-
+    "storages",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
@@ -66,19 +66,6 @@ MIDDLEWARE = [
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
     "allauth.account.middleware.AccountMiddleware",
 ]
-
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        # For each OAuth based provider, either add a ``SocialApp``
-        # (``socialaccount`` app) containing the required client
-        # credentials, or list them here:
-        'APP': {
-            'client_id': '123',
-            'secret': '456',
-            'key': ''
-        }
-    }
-}
 
 ROOT_URLCONF = "digidex.urls"
 
@@ -163,14 +150,7 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 
-STATICFILES_DIRS = [
-    os.path.join(PROJECT_DIR, "static"),
-]
-
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = "/static/"
-
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
 
 # Default storage settings, with the staticfiles storage updated.
