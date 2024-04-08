@@ -1,5 +1,3 @@
-from wagtail import blocks
-
 from base.blocks import basic
 
 
@@ -17,7 +15,7 @@ class NotificationIcon(basic.BasicStructBlock):
         icon = 'link'
 
 
-class NotificationIconList(blocks.ListBlock):
+class NotificationIconList(basic.BasicListBlock):
     """
     A ListBlock that allows for 0 to 3 _NotificationIconBlocks.
     """
