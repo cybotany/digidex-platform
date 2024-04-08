@@ -5,7 +5,8 @@
         {% endslot %}
     </label>
     {% if attrs.type == "textarea" %}
-        <textarea {% if attrs.required %}required{% endif %}
+        <textarea class="textarea base-input"
+                  {% if attrs.required %}required{% endif %}
                   {% if attrs.rows %}rows="{{ attrs.rows }}"{% endif %}
                   {% if attrs.disabled %}disabled{% endif %}
                   {% if attrs.readonly %}readonly{% endif %}
@@ -14,7 +15,8 @@
                   {% if attrs.id %}id="{{ attrs.id }}"{% endif %}
                   {% if attrs.placeholder %}placeholder="{{ attrs.placeholder }}"{% endif %}>{% slot value %}{% endslot %}</textarea>
     {% else %}
-        <input {% if attrs.required %}required{% endif %}
+        <input class="text-field base-input"
+               {% if attrs.required %}required{% endif %}
                {% if attrs.disabled %}disabled{% endif %}
                {% if attrs.readonly %}readonly{% endif %}
                {% if attrs.checked %}checked{% endif %}
