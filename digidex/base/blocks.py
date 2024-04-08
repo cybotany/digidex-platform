@@ -153,35 +153,33 @@ class BasicFigureBlock(BasicStructBlock):
         template = "base/blocks/figure_block.html"
 
 
-from digidex.base import blocks
-
 class LottieLines(blocks.BasicStructBlock):
-    vertical = blocks.BasicIntegerBlock(
+    vertical = BasicIntegerBlock(
         required=False,
         help_text="Number of vertical lines."
     )
-    horizontal = blocks.BasicIntegerBlock(
+    horizontal = BasicIntegerBlock(
         required=False,
         help_text="Number of horizontal lines."
     )
 
 
-class Animation(blocks.BasicStructBlock):
-    file = blocks.BasicDocumentBlock(
+class Animation(BasicStructBlock):
+    file = BasicDocumentBlock(
         required=True
     )
-    loop = blocks.BasicBooleanBlock(
+    loop = BasicBooleanBlock(
         required=False
     )
-    autoplay = blocks.BasicBooleanBlock(
+    autoplay = BasicBooleanBlock(
         required=False,
         default=True
     )
-    duration = blocks.BasicFloatBlock(
+    duration = BasicFloatBlock(
         required=False,
         default=0
     )
-    direction = blocks.BasicChoiceBlock(
+    direction = BasicChoiceBlock(
         choices=[
             (1, "Normal"),
             (-1, "Reverse")
@@ -189,7 +187,7 @@ class Animation(blocks.BasicStructBlock):
         default=1,
         help_text="Play animation in normal or reverse direction."
     )
-    renderer = blocks.BasicChoiceBlock(
+    renderer = BasicChoiceBlock(
         choices=[
             ("svg", "SVG"),
             ("canvas", "Canvas"),
@@ -198,12 +196,12 @@ class Animation(blocks.BasicStructBlock):
         default="svg",
         help_text="Rendering mode of the animation."
     )
-    blurred = blocks.BasicBooleanBlock(
+    blurred = BasicBooleanBlock(
         required=False
     )
 
 
-class LottieAnimation(blocks.BasicListBlock):
+class LottieAnimation(BasicListBlock):
     """
     PLACEHOLDER
     """
@@ -211,4 +209,4 @@ class LottieAnimation(blocks.BasicListBlock):
         super().__init__(Animation(), **kwargs)
 
     class Meta:
-        template = 'base/blocks/lottie/animation_block.html'
+        template = 'base/blocks/animation_block.html'
