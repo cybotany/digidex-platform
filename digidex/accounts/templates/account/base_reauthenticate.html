@@ -8,7 +8,7 @@
     {% element h1 %}
         {% trans "Confirm Access" %}
     {% endelement %}
-    <p>{% blocktranslate %}Please reauthenticate to safeguard your account.{% endblocktranslate %}</p>
+    <p class="paragraph-account">{% blocktranslate %}Please reauthenticate to safeguard your account.{% endblocktranslate %}</p>
     {% block reauthenticate_content %}{% endblock %}
     {% if reauthentication_alternatives %}
         {% element hr %}
