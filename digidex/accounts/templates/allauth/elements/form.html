@@ -1,9 +1,11 @@
 {% load allauth %}
-<div class="form-block base-form">
-    <form method="{{ attrs.method }}" action="{{ attrs.action }}">
-        {% slot body %}
-        {% endslot %}
-        {% slot actions %}
-        {% endslot %}
-    </form>
+<div class="account-form">
+    <div class="form-block base-form">
+        <form method="{{ attrs.method }}" action="{{ attrs.action }}">
+            {% slot body %}
+            {% endslot %}
+            {% slot actions %}
+            {% endslot %}
+        </form>
+    </div>
 </div>
