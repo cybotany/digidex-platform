@@ -1,7 +1,0 @@
-{% load wagtailcore_tags %}
-
-{% if self.page %}
-  <a href="{% pageurl self.page %}" class="{{ self.page.style }}">{{ self.cta }}</a>
-{% else %}
-  <a href="#" class="{{ self.page.style }}">{{ self.cta }}</a>
-{% endif %}

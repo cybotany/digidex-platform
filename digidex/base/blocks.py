@@ -134,17 +134,6 @@ class BasicStreamBlock(blocks.StreamBlock):
     paragraph = BasicParagraphBlock()
 
 
-class BasicButtonBlock(BasicStructBlock):
-    """
-    Used internally
-    """
-    page = BasicInternalLinkBlock()
-    cta = BasicCharBlock()
-
-    class Meta:
-        template = 'base/blocks/button_block.html'
-
-
 class BasicFigureBlock(BasicStructBlock):
     """
     Used internally
@@ -162,3 +151,64 @@ class BasicFigureBlock(BasicStructBlock):
     class Meta:
         icon = "image"
         template = "base/blocks/figure_block.html"
+
+
+from digidex.base import blocks
+
+class LottieLines(blocks.BasicStructBlock):
+    vertical = blocks.BasicIntegerBlock(
+        required=False,
+        help_text="Number of vertical lines."
+    )
+    horizontal = blocks.BasicIntegerBlock(
+        required=False,
+        help_text="Number of horizontal lines."
+    )
+
+
+class Animation(blocks.BasicStructBlock):
+    file = blocks.BasicDocumentBlock(
+        required=True
+    )
+    loop = blocks.BasicBooleanBlock(
+        required=False
+    )
+    autoplay = blocks.BasicBooleanBlock(
+        required=False,
+        default=True
+    )
+    duration = blocks.BasicFloatBlock(
+        required=False,
+        default=0
+    )
+    direction = blocks.BasicChoiceBlock(
+        choices=[
+            (1, "Normal"),
+            (-1, "Reverse")
+        ],
+        default=1,
+        help_text="Play animation in normal or reverse direction."
+    )
+    renderer = blocks.BasicChoiceBlock(
+        choices=[
+            ("svg", "SVG"),
+            ("canvas", "Canvas"),
+            ("html", "HTML")
+        ],
+        default="svg",
+        help_text="Rendering mode of the animation."
+    )
+    blurred = blocks.BasicBooleanBlock(
+        required=False
+    )
+
+
+class LottieAnimation(blocks.BasicListBlock):
+    """
+    PLACEHOLDER
+    """
+    def __init__(self, **kwargs):
+        super().__init__(Animation(), **kwargs)
+
+    class Meta:
+        template = 'base/blocks/lottie/animation_block.html'

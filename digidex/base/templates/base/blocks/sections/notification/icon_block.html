@@ -1,7 +1,0 @@
-{% load wagtailimages_tags %}
-
-<a href="{{ value.url }}" class="link-top-bar base-inline-block">
-  {% image value.icon fill-32x32 as img %}
-  <img src="{{ img.url }}" loading="eager" alt="{{ value.icon.alt }}" class="icon-top-bar">
-  <div class="text-top-bar">{{ value.text }}</div>
-</a>

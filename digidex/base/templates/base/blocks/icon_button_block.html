@@ -1,7 +1,0 @@
-{% load wagtailcore_tags wagtailimages_tags %}
-
-<a href="{% pageurl page %}" class="link-button base-inline-block">
-    {% image icon original as img %}
-    <img src="{{ img.url }}" width="{{ img.width }}" height="{{ img.height }}" loading="eager" alt="{{ text }}" class="icon-button">
-    <div class="text-button">{{ text }}</div>
-</a>

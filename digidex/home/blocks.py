@@ -1,29 +1,46 @@
-from base.blocks import basic, lottie
+from base import blocks
 
 
-class InformationBlock(basic.BasicStructBlock):
-    text = basic.BasicTextBlock()
-    icon = basic.BasicImageBlock()
-    link = basic.BasicInternalLinkBlock()
+class LottieFeature(blocks.BasicStructBlock):
+    icon = blocks.BasicImageBlock()
+    text = blocks.BasicTextBlock()
+    style = blocks.BasicCharBlock(
+        default="",
+        required=False,
+        help_text="Unique css identifier for animation."
+    )
+
+
+class LottieFeatureList(blocks.BasicListBlock):
+    def __init__(self, **kwargs):
+        super().__init__(LottieFeature(), **kwargs)
+
+    class Meta:
+        template = 'base/blocks/lottie/feature_block.html'
+
+
+class InformationBlock(blocks.BasicStructBlock):
+    text = blocks.BasicTextBlock()
+    icon = blocks.BasicImageBlock()
+    link = blocks.BasicInternalLinkBlock()
 
     class Meta:
         template = "home/blocks/information_block.html"
 
 
-class HeroBlock(basic.BasicStructBlock):
+class HeroBlock(blocks.BasicStructBlock):
     information = InformationBlock()
-    heading = basic.BasicHeadingBlock()
-    paragraph = basic.BasicParagraphBlock()
-    cta = basic.BasicButtonBlock()
+    heading = blocks.BasicHeadingBlock()
+    paragraph = blocks.BasicParagraphBlock()
 
     class Meta:
         template = "home/blocks/hero_block.html"
 
 
-class HeroLottie(basic.BasicStructBlock):
-    lines = lottie.LottieLines()
-    animation = lottie.LottieAnimation() 
-    features = lottie.FeatureList()
+class HeroLottie(blocks.BasicStructBlock):
+    lines = blocks.LottieLines()
+    animation = blocks.LottieAnimation() 
+    features = LottieFeatureList()
 
     class Meta:
         template = "home/blocks/hero_lottie.html"
