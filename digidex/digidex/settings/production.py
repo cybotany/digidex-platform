@@ -15,6 +15,8 @@ if "EMAIL_HOST" in os.environ:
     EMAIL_PORT = os.getenv("EMAIL_PORT")
     EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS")
 
+CSRF_TRUSTED_ORIGINS = os.getenv("DJANGO_CSRF_TRUSTED_ORIGINS", "").split(",")
+
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 SECURE_SSL_REDIRECT = True
