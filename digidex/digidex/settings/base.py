@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     "rest_framework",
-    "storages",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
