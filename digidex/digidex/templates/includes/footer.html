@@ -10,16 +10,16 @@
         <div class="block-footer">
           <div class="subtitle-footer">About Us<br></div>
           {% with company=settings.base.NavigationSettings.company %}
-            <a href="{% pageurl company %}" class="link-footer">Company</a>
+            <a href="#" class="link-footer">Company</a>
           {% endwith %}
           {% with contact=settings.base.NavigationSettings.contact %}
-            <a href="{% pageurl contact %}" class="link-footer">Contact</a>
+            <a href="#" class="link-footer">Contact</a>
           {% endwith %}
         </div>
         <div class="block-footer">
           <div class="subtitle-footer">News & Events<br></div>
           {% with solutions=settings.base.NavigationSettings.solutions %}
-            <a href="{% pageurl solutions %}" class="link-footer">Solutions</a>
+            <a href="#" class="link-footer">Solutions</a>
           {% endwith %}
           {% with blog=settings.base.NavigationSettings.blog %} 
             <a href="{% pageurl blog %}" class="link-footer">Blog</a>
