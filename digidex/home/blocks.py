@@ -3,7 +3,7 @@ from base.blocks import basic, lottie
 
 class InformationBlock(basic.BasicStructBlock):
     text = basic.BasicTextBlock()
-    icon = basic.BasicIconBlock()
+    icon = basic.BasicImageBlock()
     link = basic.BasicInternalLinkBlock()
 
     class Meta:
