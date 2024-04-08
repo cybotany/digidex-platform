@@ -153,7 +153,7 @@ class BasicFigureBlock(BasicStructBlock):
         template = "base/blocks/figure_block.html"
 
 
-class LottieLines(blocks.BasicStructBlock):
+class LottieLines(BasicStructBlock):
     vertical = BasicIntegerBlock(
         required=False,
         help_text="Number of vertical lines."

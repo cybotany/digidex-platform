@@ -129,7 +129,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
+.env*
 .venv
 env/
 venv/
@@ -163,12 +163,10 @@ dmypy.json
 cython_debug/
 
 # Private settings file
-.env
+.env*
 
 # Pytest ini file
 *.ini
 
 # staticfiles
 staticfiles/
-
-.python-version
