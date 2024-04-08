@@ -4,13 +4,14 @@ Django settings for digidex project.
 import os
 from dotenv import load_dotenv
 
+load_dotenv()
+
+SECRET_KEY = os.getenv('SECRET_KEY')
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS").split(",")
+CSRF_TRUSTED_ORIGINS = os.getenv("DJANGO_CSRF_TRUSTED_ORIGINS").split(",")
+
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
-
-dotenv_path = os.path.join(BASE_DIR, '.env')
-load_dotenv(dotenv_path)
-
-SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 INSTALLED_APPS = [
     "accounts",
@@ -93,11 +94,11 @@ WSGI_APPLICATION = "digidex.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('DB_NAME', ''),
-        'USER': os.environ.get('DB_USERNAME', ''),
-        'PASSWORD': os.environ.get('DB_PASSWORD', ''),
-        'HOST': os.environ.get('DB_HOST', ''),
-        'PORT': os.environ.get('DB_PORT', ''),
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USERNAME'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
     }
 }
 
@@ -142,7 +143,8 @@ STORAGES = {
 }
 
 # Wagtail settings
-WAGTAIL_SITE_NAME = "digidex"
+WAGTAIL_SITE_NAME = "DigiDex"
+WAGTAILADMIN_BASE_URL = os.getenv("WAGTAILADMIN_BASE_URL")
 WAGTAILIMAGES_EXTENSIONS = ['gif', 'jpg', 'jpeg', 'png', 'webp', 'svg']
 WAGTAILSEARCH_BACKENDS = {
     "default": {
@@ -171,17 +173,6 @@ ACCOUNT_USERNAME_BLACKLIST = [
     'assets', 'img', 'admin', 'login', 'logout', 'signup', 'register',
 ]
 ACCOUNT_PRESERVE_USERNAME_CASING = False
-ACCOUNT_FORMS = {
-    'add_email': 'allauth.account.forms.AddEmailForm',
-    'change_password': 'allauth.account.forms.ChangePasswordForm',
-    'login': 'allauth.account.forms.LoginForm',
-    'reset_password': 'allauth.account.forms.ResetPasswordForm',
-    'reset_password_from_key': 'allauth.account.forms.ResetPasswordKeyForm',
-    'set_password': 'allauth.account.forms.SetPasswordForm',
-    'signup': 'allauth.account.forms.SignupForm',
-    'user_token': 'allauth.account.forms.UserTokenForm',
-}
-#ACCOUNT_SIGNUP_FORM_CLASS = 'digidex.forms.SignupForm'
 
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
 ACCOUNT_EMAIL_NOTIFICATIONS = True
