@@ -5,7 +5,7 @@ class NotificationIcon(basic.BasicStructBlock):
     """
     A StructBlock for individual icon links in the notification bar.
     """
-    icon = basic.BasicIconBlock()
+    icon = basic.BasicImageBlock()
     link = basic.BasicInternalLinkBlock()
     text = basic.BasicTextBlock()
 

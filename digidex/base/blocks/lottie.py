@@ -72,7 +72,7 @@ class Feature(basic.BasicStructBlock):
     """
     PLACEHOLDER
     """
-    icon = basic.BasicIconBlock()
+    icon = basic.BasicImageBlock()
     text = basic.BasicTextBlock()
     style = basic.BasicCharBlock(
         default="",

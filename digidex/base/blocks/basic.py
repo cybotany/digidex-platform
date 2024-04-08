@@ -51,6 +51,13 @@ class BasicCharBlock(blocks.CharBlock):
     pass
 
 
+class BasicTextBlock(blocks.TextBlock):
+    """
+    Used internally
+    """
+    pass
+
+
 class BasicImageBlock(image_blocks.ImageChooserBlock):
     """
     Used internally
@@ -85,126 +92,31 @@ class BasicHeadingBlock(BasicStructBlock):
         blank=True,
         required=False
     )
-    style = BasicCharBlock(
-        default="heading",
-        required=False,
-    )
 
     class Meta:
         icon = "title"
         template = "base/blocks/heading_block.html"
 
 
-class BasicParagraphBlock(BasicStructBlock):
+class BasicParagraphBlock(blocks.RichTextBlock):
     """
     Used internally
     """
-    text = blocks.TextBlock(
-        required=True
-    )
-    style = BasicCharBlock(
-        default="paragraph",
-        required=False,
-    )
-
-    class Meta:
-        icon = "pilcrow"
-        template = "base/blocks/paragraph_block.html"
+    pass
 
 
-class BasicIconBlock(BasicStructBlock):
+class BasicInternalLinkBlock(blocks.PageChooserBlock):
     """
     Used internally
     """
-    icon = BasicImageBlock(
-        required=True,
-        help_text="Select an icon for the info block"
-    )
-    style = BasicCharBlock(
-        blank=True,
-        default="icon",
-        required=False
-    )
-
-    class Meta:
-        template = 'base/blocks/icon_block.html'
-        icon = 'image'
+    pass
 
 
-class BasicInternalLinkBlock(BasicStructBlock):
+class BasicExternalLinkBlock(blocks.URLBlock):
     """
     Used internally
     """
-    page = blocks.PageChooserBlock(
-        required=False,
-        help_text="Select an internal page to link to."
-    )
-    style = BasicCharBlock(
-        blank=True,
-        default="link",
-        required=False
-    )
-
-    class Meta:
-        icon = 'link'
-
-
-class BasicExternalLinkBlock(BasicStructBlock):
-    """
-    Used internally
-    """
-    url = blocks.URLBlock(
-        required=False,
-        help_text="Select an external URL to link to."
-    )
-    style = BasicCharBlock(
-        blank=True,
-        default="link",
-        required=False
-    )
-
-    class Meta:
-        icon = 'link'
-
-
-class BasicTextBlock(BasicStructBlock):
-    """
-    Used internally
-    """
-    content = blocks.TextBlock()
-    style = BasicCharBlock(
-        blank=True,
-        default="text",
-        required=False
-    )
-
-    class Meta:
-        template = 'base/blocks/text_block.html'
-
-
-class BasicButtonBlock(BasicStructBlock):
-    """
-    Used internally
-    """
-    page = BasicInternalLinkBlock()
-    url = BasicExternalLinkBlock()
-    cta = BasicCharBlock()
-
-    class Meta:
-        template = 'base/blocks/button_block.html'
-
-
-class BasicIconButtonBlock(BasicStructBlock):
-    """
-    Used internally
-    """
-    page = BasicInternalLinkBlock()
-    url = BasicExternalLinkBlock()
-    cta = BasicTextBlock()
-    icon = BasicIconBlock()
-    
-    class Meta:
-        template = 'base/blocks/icon_button_block.html'
+    pass
 
 
 class BasicListBlock(blocks.ListBlock):
@@ -212,6 +124,25 @@ class BasicListBlock(blocks.ListBlock):
     Used internally
     """
     pass
+
+
+class BasicStreamBlock(blocks.StreamBlock):
+    """
+    Used internally
+    """
+    heading = BasicHeadingBlock()
+    paragraph = BasicParagraphBlock()
+
+
+class BasicButtonBlock(BasicStructBlock):
+    """
+    Used internally
+    """
+    page = BasicInternalLinkBlock()
+    cta = BasicCharBlock()
+
+    class Meta:
+        template = 'base/blocks/button_block.html'
 
 
 class BasicFigureBlock(BasicStructBlock):
@@ -231,11 +162,3 @@ class BasicFigureBlock(BasicStructBlock):
     class Meta:
         icon = "image"
         template = "base/blocks/figure_block.html"
-
-
-class BasicStreamBlock(blocks.StreamBlock):
-    """
-    Used internally
-    """
-    heading = BasicHeadingBlock()
-    paragraph = BasicParagraphBlock()
