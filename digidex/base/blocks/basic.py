@@ -129,7 +129,6 @@ class BasicIconBlock(BasicStructBlock):
     class Meta:
         template = 'base/blocks/icon_block.html'
         icon = 'image'
-        label = 'Icon'
 
 
 class BasicInternalLinkBlock(BasicStructBlock):
@@ -148,7 +147,6 @@ class BasicInternalLinkBlock(BasicStructBlock):
 
     class Meta:
         icon = 'link'
-        label = 'Internal Page Link'
 
 
 class BasicExternalLinkBlock(BasicStructBlock):
@@ -167,7 +165,6 @@ class BasicExternalLinkBlock(BasicStructBlock):
 
     class Meta:
         icon = 'link'
-        label = 'External URL Link'
 
 
 class BasicTextBlock(BasicStructBlock):
@@ -242,5 +239,3 @@ class BasicStreamBlock(blocks.StreamBlock):
     """
     heading = BasicHeadingBlock()
     paragraph = BasicParagraphBlock()
-    button = BasicButtonBlock()
-    icon_button = BasicIconButtonBlock()

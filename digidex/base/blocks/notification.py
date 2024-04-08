@@ -10,7 +10,6 @@ class NotificationIcon(basic.BasicStructBlock):
     text = basic.BasicTextBlock()
 
     class Meta:
-        label = 'Icon Link'
         template = 'base/blocks/sections/notification/icon_block.html'
         icon = 'link'
 
@@ -24,7 +23,6 @@ class NotificationIconList(basic.BasicListBlock):
         super().__init__(NotificationIcon(), **kwargs)
 
     class Meta:
-        label = 'Icon Links'
         template = 'base/blocks/sections/notification/icon_list_block.html'
 
 

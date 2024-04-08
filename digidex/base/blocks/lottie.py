@@ -14,7 +14,6 @@ class LottieLines(basic.BasicStructBlock):
     )
 
     class Meta:
-        label = 'Lottie Lines'
         template = 'base/blocks/lottie/line_block.html'
 
 
@@ -23,21 +22,17 @@ class Animation(basic.BasicStructBlock):
     PLACEHOLDER
     """
     file = basic.BasicDocumentBlock(
-        required=True,
-        help_text="Select the Lottie JSON file."
+        required=True
     )
     loop = basic.BasicBooleanBlock(
-        required=False,
-        help_text="Enable to loop the animation."
+        required=False
     )
     autoplay = basic.BasicBooleanBlock(
         required=False,
-        default=True,
-        help_text="Enable to autoplay the animation."
+        default=True
     )
     duration = basic.BasicFloatBlock(
         required=False,
-        help_text="Duration of the animation in seconds.",
         default=0
     )
     direction = basic.BasicChoiceBlock(
@@ -70,7 +65,6 @@ class LottieAnimation(basic.BasicListBlock):
         super().__init__(Animation(), **kwargs)
 
     class Meta:
-        label = 'Lottie Animations'
         template = 'base/blocks/lottie/animation_block.html'
 
 
@@ -95,5 +89,4 @@ class FeatureList(basic.BasicListBlock):
         super().__init__(Feature(), **kwargs)
 
     class Meta:
-        label = 'Lottie Features'
         template = 'base/blocks/lottie/feature_block.html'
