@@ -1,9 +1,7 @@
 {% extends "utility.html" %}
 {% load static wagtailcore_tags %}
 
-{% block extra_head %}
-  <link rel="stylesheet" type="text/css" href="{% static 'css/account.css' %}">
-{% endblock extra_head %}
+{% block extra_head %}{% endblock extra_head %}
 
 {% block body %}
   {% if messages %}
@@ -42,4 +40,5 @@
   </div>  
   {% block content %}{% endblock content %}
 {% endblock body %}
+
 {% block extra_body %}{% endblock extra_body %}
