@@ -1,33 +1,28 @@
 {% extends "account/base_entrance.html" %}
 {% load i18n %}
 {% load allauth account %}
+
 {% block head_title %}
-    {% trans "Login" %}
+  {% trans "Login" %}
 {% endblock head_title %}
+
 {% block content %}
-    {% element h1 %}
-        {% trans "Sign In" %}
-    {% endelement %}
-    {% url 'account_login' as login_url %}
+  {% url 'account_login' as login_url %}
     {% element form form=form method="post" action=login_url tags="entrance,login" %}
-        {% slot body %}
-            {% csrf_token %}
-            {% element fields form=form unlabeled=True %}
-            {% endelement %}
-            {% if redirect_field_value %}
-                <input type="hidden"
-                       name="{{ redirect_field_name }}"
-                       value="{{ redirect_field_value }}" />
-            {% endif %}
-        {% endslot %}
-        {% slot actions %}
-            {% element button type="submit" tags="prominent,login" %}
-                {% trans "Sign In" %}
-            {% endelement %}
-        {% endslot %}
+      {% slot body %}
+        {% element h1 %}{% trans "Sign In" %}{% endelement %}
+        {% csrf_token %}
+        {% element fields form=form unlabeled=True %}{% endelement %}
+        {% if redirect_field_value %}
+          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+      {% endslot %}
+      {% slot actions %}
+        {% element button type="submit" tags="prominent,login" %}{% trans "Sign In" %}{% endelement %}
+      {% endslot %}
     {% endelement %}
     {% if SOCIALACCOUNT_ENABLED %}
-        {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
+      {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
     {% endif %}
     <div class="text-account">
       {% blocktrans %}Not registered? <a href="{{ signup_url }}" class="link-account">Create account</a>{% endblocktrans %}
