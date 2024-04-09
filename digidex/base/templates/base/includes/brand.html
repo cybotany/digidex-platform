@@ -1,3 +1,9 @@
-<a href="index.html" class="brand-center base-nav-brand">
-    <img src="images/logo.svg" loading="eager" alt="" class="logo">
+{% load static wagtailcore_tags %}
+
+<a href="{% pageurl site_root %}" aria-current="page" class="brand base-nav-brand base--current">
+  <img src="{% static 'images/logo/plant.svg' %}" loading="eager" alt="" class="logo">
+</a>
+
+<a href="{% pageurl site_root %}" aria-current="page" class="brand-center base-nav-brand">
+  <img src="{% static 'images/logo/plant.svg' %}" loading="eager" alt="" class="logo">
 </a>

@@ -1,12 +1,19 @@
-{% if notification_settings %}
-  {% for block in notification_settings.notification %}
-    <div class="top-bar">
-      {% if block.block_type == 'title' %}
-        <div class="info-top-bar">{{ block.value }}</div>
-      {% elif block.block_type == 'icon' %}
-        <!-- Adjust the following line according to how your IconBlock is structured -->
-        <img src="{{ block.value.url }}" loading="eager" alt="" class="icon-top-bar">
-      {% endif %}
-    </div>
+{% load static i18n %}
+
+{% if messages %}
+  {% for message in messages %}
+    <section class="section-top-bar">
+      <div class="top-bar-block">
+        <div class="top-bar">
+          <div class="info-top-bar">{{ message }}</div>
+        </div>
+        <div class="top-bar">
+          <a href="#" class="link-top-bar base-inline-block">
+            <img src="{% static 'images/bx/chat.svg' %}" loading="eager" alt="" class="icon-top-bar">
+            <div class="text-top-bar">{% trans "Chat" %}</div>
+          </a>
+        </div>
+      </div>
+    </section>
   {% endfor %}
 {% endif %}

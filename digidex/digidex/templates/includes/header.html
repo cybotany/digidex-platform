@@ -1,43 +1,7 @@
-{% load static wagtailcore_tags navigation_tags wagtailuserbar %}
-{% get_site_root as site_root %}
+{% load wagtailuserbar %}
 
 <header role="banner">
-  <div role="banner" class="navbar base-nav">
-    <div class="nav-block">
-      <div class="nav">
-        <a href="{% pageurl site_root %}" aria-current="page" class="brand base-nav-brand base--current">
-          <img src="{% static 'images/logo/plant.svg' %}" loading="eager" alt="" class="logo">
-        </a>
-        <nav role="navigation" class="nav-menu base-nav-menu">
-          {% for menuitem in site_root.get_children.live.in_menu %}
-            <a href="{% pageurl menuitem %}" class="nav-link base-nav-link">{{ menuitem.title }}</a>{% if not forloop.last %} | {% endif %}
-          {% endfor %}
-          <div class="button-mobile">
-            {% if user.is_authenticated %}
-              <a href="#" class="nav-button-outline base-button">Profile</a>
-              <a href="{% url 'account_logout' %}" class="nav-button base-button">Logout</a>
-            {% else %}
-              <a href="{% url 'account_login' %}" class="nav-button-outline base-button">Login</a>
-              <a href="{% url 'account_signup' %}" class="nav-button base-button">Get Started</a>
-            {% endif %}
-          </div>
-        </nav>
-      </div>
-      <div class="nav">
-        <div class="button-desktop">
-          {% if user.is_authenticated %}
-            <a href="#" class="nav-button-outline base-button">Profile</a>
-            <a href="{% url 'account_logout' %}" class="nav-button base-button">Logout</a>
-          {% else %}
-            <a href="{% url 'account_login' %}" class="nav-button-outline base-button">Login</a>
-            <a href="{% url 'account_signup' %}" class="nav-button base-button">Get Started</a>
-          {% endif %}
-        </div>
-        <div class="menu-button base-nav-button">
-          <div class="icon-menu base-icon-nav-menu"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-  {% wagtailuserbar "bottom-right" %}
+  {% wagtailuserbar "top-right" %}
+  {% include "includes/notification.html" %}
+  {% include "includes/navigation.html" %}
 </header>
