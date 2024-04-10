@@ -19,6 +19,15 @@ class LottieFeatureList(blocks.BasicListBlock):
         template = 'base/blocks/lottie/feature_block.html'
 
 
+class HeroLottie(blocks.BasicStructBlock):
+    lines = blocks.LottieLines()
+    animation = blocks.LottieAnimation() 
+    features = LottieFeatureList()
+
+    class Meta:
+        template = "home/blocks/hero_lottie.html"
+
+
 class InformationBlock(blocks.BasicStructBlock):
     text = blocks.BasicTextBlock()
     icon = blocks.BasicImageBlock()
@@ -29,18 +38,8 @@ class InformationBlock(blocks.BasicStructBlock):
 
 
 class HeroBlock(blocks.BasicStructBlock):
-    information = InformationBlock()
     heading = blocks.BasicHeadingBlock()
     paragraph = blocks.BasicParagraphBlock()
 
     class Meta:
         template = "home/blocks/hero_block.html"
-
-
-class HeroLottie(blocks.BasicStructBlock):
-    lines = blocks.LottieLines()
-    animation = blocks.LottieAnimation() 
-    features = LottieFeatureList()
-
-    class Meta:
-        template = "home/blocks/hero_lottie.html"
