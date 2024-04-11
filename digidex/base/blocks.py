@@ -79,7 +79,7 @@ class BasicHeadingBlock(BasicStructBlock):
     text = BasicCharBlock(
         required=True
     )
-    size = BasicCharBlock(
+    size = BasicChoiceBlock(
         choices=[
             ("", "Select a heading size"),
             ("h1", "H1"),
@@ -89,8 +89,7 @@ class BasicHeadingBlock(BasicStructBlock):
             ("h5", "H5"),
             ("h6", "H6"),
         ],
-        blank=True,
-        required=False
+        default="h2"
     )
 
     class Meta:
@@ -151,62 +150,3 @@ class BasicFigureBlock(BasicStructBlock):
     class Meta:
         icon = "image"
         template = "base/blocks/figure_block.html"
-
-
-class LottieLines(BasicStructBlock):
-    vertical = BasicIntegerBlock(
-        required=False,
-        help_text="Number of vertical lines."
-    )
-    horizontal = BasicIntegerBlock(
-        required=False,
-        help_text="Number of horizontal lines."
-    )
-
-
-class Animation(BasicStructBlock):
-    file = BasicDocumentBlock(
-        required=True
-    )
-    loop = BasicBooleanBlock(
-        required=False
-    )
-    autoplay = BasicBooleanBlock(
-        required=False,
-        default=True
-    )
-    duration = BasicFloatBlock(
-        required=False,
-        default=0
-    )
-    direction = BasicChoiceBlock(
-        choices=[
-            (1, "Normal"),
-            (-1, "Reverse")
-        ],
-        default=1,
-        help_text="Play animation in normal or reverse direction."
-    )
-    renderer = BasicChoiceBlock(
-        choices=[
-            ("svg", "SVG"),
-            ("canvas", "Canvas"),
-            ("html", "HTML")
-        ],
-        default="svg",
-        help_text="Rendering mode of the animation."
-    )
-    blurred = BasicBooleanBlock(
-        required=False
-    )
-
-
-class LottieAnimation(BasicListBlock):
-    """
-    PLACEHOLDER
-    """
-    def __init__(self, **kwargs):
-        super().__init__(Animation(), **kwargs)
-
-    class Meta:
-        template = 'base/blocks/animation_block.html'

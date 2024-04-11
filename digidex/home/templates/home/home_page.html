@@ -4,19 +4,7 @@
 {% block content %}
 <section class="section-hero">
   <div class="content">
-    <div class="base-layout-grid grid-hero">
-      {% for block in page.body %} 
-        {% if block.block_type == 'lottie' %}
-          <div class="lottie">
-            {% include_block block %}
-          </div>
-        {% else %}
-          <div class="block-{{ block.block_type }}">
-            {% include_block block %}
-          </div>
-        {% endif %}
-      {% endfor %}
-    </div>
+    <div class="base-layout-grid grid-hero"></div>
   </div>
 </section>
 {% endblock %}

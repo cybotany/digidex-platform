@@ -2,13 +2,18 @@ from wagtail import models as wt_models
 from wagtail import fields
 from wagtail.admin import panels
 
-from blog import blocks
+from base import blocks
 
 class BlogIndexPage(wt_models.Page):
     body = fields.StreamField(
-        blocks.BlogStreamBlock(),
-        blank=True,
+        [
+            ('heading', blocks.BasicHeadingBlock()),
+            ('paragraph', blocks.BasicParagraphBlock()),
+            ('image', blocks.BasicImageBlock()),
+            ('document', blocks.BasicDocumentBlock()),
+        ],
         null=True,
+        blank=True,
         use_json_field=True
     )
 
