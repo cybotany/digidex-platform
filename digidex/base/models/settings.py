@@ -1,7 +1,9 @@
 # base/models/settings.py
 from django.db import models
+
 from wagtail.admin import panels
 from wagtail.contrib.settings import models as wg_settings
+
 
 @wg_settings.register_setting
 class NavigationSettings(wg_settings.BaseGenericSetting):
