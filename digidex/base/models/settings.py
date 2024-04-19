@@ -6,7 +6,7 @@ from wagtail.contrib.settings import models as wg_settings
 
 
 @wg_settings.register_setting
-class NavigationSettings(wg_settings.BaseGenericSetting):
+class SiteSettings(wg_settings.BaseGenericSetting):
     logo = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
