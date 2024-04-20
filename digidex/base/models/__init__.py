@@ -1,2 +1,3 @@
 from .settings import SiteSettings
-from .snippets import AdvertisementBannerSnippet, PageFooterSnippet
+from .footer import PageFooter
+from .header import AdvertisementBanner

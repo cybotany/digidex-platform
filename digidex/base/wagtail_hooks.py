@@ -2,10 +2,10 @@ from wagtail.snippets.models import models as s_models
 from wagtail.snippets.views import snippets as s_views
 from wagtail.admin import panels
 
-from base.models import snippets as _snippets
+from base.models import header, footer
 
-class HeaderAdvertisementViewSet(s_views.SnippetViewSet):
-    model = _snippets.AdvertisementBannerSnippet
+class AdvertisementBannerViewSet(s_views.SnippetViewSet):
+    model = header.AdvertisementBanner
 
     panels = [
         panels.FieldPanel("url"),
@@ -13,11 +13,11 @@ class HeaderAdvertisementViewSet(s_views.SnippetViewSet):
         panels.PublishingPanel(),
     ]
 
-s_models.register_snippet(HeaderAdvertisementViewSet)
+s_models.register_snippet(AdvertisementBannerViewSet)
 
 
 class PageFooterViewSet(s_views.SnippetViewSet):
-    model = _snippets.PageFooterSnippet
+    model = footer.PageFooter
 
     panels = [
         panels.FieldPanel("content"),
