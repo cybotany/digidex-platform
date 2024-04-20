@@ -5,38 +5,36 @@
       <div class="base-layout-grid grid-footer">
         <div class="block-footer">
           <img src="{% static 'images/logo/plant.svg' %}" loading="eager" alt="Footer Logo" class="logo-footer">
-          {% get_footer_content %}
         </div>
         <div class="block-footer">
           <div class="subtitle-footer">About Us<br></div>
-          {% with company=settings.base.NavigationSettings.company %}
+          {% with company=settings.base.SiteSettings.company %}
             <a href="#" class="link-footer">Company</a>
           {% endwith %}
-          {% with contact=settings.base.NavigationSettings.contact %}
+          {% with contact=settings.base.SiteSettings.contact %}
             <a href="#" class="link-footer">Contact</a>
           {% endwith %}
         </div>
         <div class="block-footer">
           <div class="subtitle-footer">News & Events<br></div>
-          {% with solutions=settings.base.NavigationSettings.solutions %}
+          {% with solutions=settings.base.SiteSettings.solutions %}
             <a href="#" class="link-footer">Solutions</a>
           {% endwith %}
-          {% with blog=settings.base.NavigationSettings.blog %} 
+          {% with blog=settings.base.SiteSettings.blog %} 
             <a href="#" class="link-footer">Blog</a>
           {% endwith %}
         </div>
           <div class="block-footer">
             <div class="subtitle-footer">Connect With Us<br></div>
-            {% with github=settings.base.NavigationSettings.github %}
+            {% with github=settings.base.SiteSettings.github %}
               <a href="{% if github %}{{ github }}{% else %}#{% endif %}" target="_blank" class="link-footer">GitHub</a>
             {% endwith %}
-            {% with twitter=settings.base.NavigationSettings.twitter %}
+            {% with twitter=settings.base.SiteSettings.twitter %}
               <a href="{% if twitter %}{{ twitter }}{% else %}#{% endif %}" target="_blank" class="link-footer">Twitter</a>
             {% endwith %}
           </div>
        </div>
        <div class="block-footer-down">
-         {% get_footer_notice %}
        </div>
     </div>
   </section>
