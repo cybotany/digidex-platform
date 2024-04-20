@@ -1,4 +1,4 @@
-from wagtail.snippets.models import models as s_models
+from wagtail.snippets import models as s_models
 from wagtail.snippets.views import snippets as s_views
 from wagtail.admin import panels
 
