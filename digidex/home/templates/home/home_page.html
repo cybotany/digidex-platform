@@ -1,10 +1,72 @@
 {% extends "home/base.html" %}
-{% load wagtailcore_tags %}
+{% load static wagtailcore_tags %}
 
 {% block content %}
 <section class="section-hero">
   <div class="content">
-    <div class="base-layout-grid grid-hero"></div>
+    <div class="base-layout-grid grid-hero">
+      <div class="block-hero">       
+        <!-- Hero Heading and Paragraph -->
+        <h1 class="heading-hero">{{ page.hero_heading }}</h1>
+        <p class="paragraph-hero">{{ page.hero_paragraph }}</p>
+        <!-- Hero CTA Buttons -->
+        <div class="button-hero">
+          {% if page.hero_primary_cta_link %}
+            <a href="{{ page.hero_primary_cta_link }}" class="button base-button">{{ page.hero_primary_cta_text }}</a>
+          {% endif %}
+          {% if page.hero_secondary_cta_link %}
+            <a href="{{ page.hero_secondary_cta_link }}" class="link-button base-inline-block">
+              <img src="{% static 'images/bx/support.svg' %}" loading="eager" alt="" class="icon-button">
+              <div class="text-button">{{ page.hero_secondary_cta_text }}</div>
+            </a>
+          {% endif %}
+        </div>
+      </div>
+      <div id="" data-w-id="" class="lottie">
+        <!-- Lottie Grid Lines -->
+        <div class="lines-a1">
+          <div class="line-w"></div>
+          <div class="line-w"></div>
+          <div class="line-w"></div>
+          <div class="line-w"></div>
+          <div class="line-w"></div>
+          <div class="line-w"></div>
+        </div>
+        <div class="lines-a2">
+          <div class="line-h"></div>
+          <div class="line-h"></div>
+          <div class="line-h"></div>
+          <div class="line-h"></div>
+          <div class="line-h"></div>
+          <div class="line-h"></div>
+        </div>
+        <!-- Lottie Animations -->
+        <div class="block-lottie">
+          <div class="lottie-animation-1" data-w-id="" data-animation-type="lottie" data-src="{% static 'documents/lottie/A1-White.json' %}" data-loop="0" data-direction="1" data-autoplay="0" data-is-ix2-target="1" data-renderer="svg" data-default-duration="2.5" data-duration="0"></div>
+          <div class="lottie-animation-2" data-w-id="" data-animation-type="lottie" data-src="{% static 'documents/lottie/A2-Green.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="19.5" data-duration="0"></div>
+          <div class="lottie-animation-2-blur" data-w-id="" data-animation-type="lottie" data-src="{% static 'documents/lottie/A2-Green.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="19.5" data-duration="0"></div>
+        </div>
+        <!-- Lottie Features -->
+        <div class="features-lottie">
+          <div data-w-id="" style="-webkit-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="feature-lottie-block">
+            <img src="{% static 'images/bx/check.svg' %}" loading="eager" alt="" class="icon-feature-lottie">
+            <div class="text-feature-lottie">Advanced Security</div>
+          </div>
+          <div data-w-id="" style="-webkit-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="feature-lottie-block a2">
+            <img src="{% static 'images/bx/tachometer.svg' %}" loading="eager" alt="" class="icon-feature-lottie">
+            <div class="text-feature-lottie">Performance</div>
+          </div>
+          <div data-w-id="" style="-webkit-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="feature-lottie-block a3">
+            <img src="{% static 'images/bx/rocket.svg' %}" loading="eager" alt="" class="icon-feature-lottie">
+            <div class="text-feature-lottie">99.99% Uptime</div>
+          </div>
+          <div data-w-id="" style="-webkit-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0)" class="feature-lottie-block a4">
+            <img src="{% static 'images/bx/cloud-snow.svg' %}" loading="eager" alt="" class="icon-feature-lottie">
+            <div class="text-feature-lottie">Unlimited Scaling</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 {% endblock %}
