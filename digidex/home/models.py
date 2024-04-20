@@ -5,6 +5,7 @@ from wagtail import models as wt_models
 
 class HomePage(wt_models.Page):
     hero_heading = models.CharField(
+        blank=True,
         max_length=255,
         verbose_name="Hero Heading"
     )
@@ -13,6 +14,7 @@ class HomePage(wt_models.Page):
         verbose_name="Hero Paragraph"
     )
     hero_primary_cta_text = models.CharField(
+        blank=True,
         max_length=255,
         verbose_name="Primary CTA Text"
     )
@@ -21,6 +23,7 @@ class HomePage(wt_models.Page):
         verbose_name="Primary CTA Link"
     )
     hero_secondary_cta_text = models.CharField(
+        blank=True,
         max_length=255,
         verbose_name="Secondary CTA Text"
     )
