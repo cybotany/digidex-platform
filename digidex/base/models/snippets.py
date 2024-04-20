@@ -37,11 +37,33 @@ class AdvertisementBannerSnippet(_BaseSnippet):
         verbose_name_plural = "Advertisements"
 
 
+class CopyrightSnippet(models.Model):
+    text = models.TextField()
+    year = models.IntegerField()
+
+    def __str__(self):
+        return f"Copyright {self.year} - {self.text}"
+
+
+class CreditSnippet(models.Model):
+    text = models.TextField()
+
+    def __str__(self):
+        return self.text
+
 
 class PageFooterSnippet(_BaseSnippet):
     content = fields.RichTextField()
-    copyright = fields.RichTextField()
-    credit = fields.RichTextField()
+    copyright = models.ForeignKey(
+        CopyrightSnippet,
+        on_delete=models.SET_NULL,
+        null=True
+    )
+    credit = models.ForeignKey(
+        CreditSnippet,
+        on_delete=models.SET_NULL,
+        null=True
+    )
 
     def __str__(self):
         return "Page Footer"
