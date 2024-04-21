@@ -2072,6 +2072,10 @@ figcaption {
   position: relative;
 }
 
+.lottie-animation-1 {
+  width: 100%;
+}
+
 .lottie-animation-2 {
   z-index: 10;
   width: 100%;
@@ -2080,10 +2084,6 @@ figcaption {
   bottom: 0%;
   left: 0%;
   right: 0%;
-}
-
-.lottie-animation-1 {
-  width: 100%;
 }
 
 .lottie-animation-2-blur {
@@ -2134,6 +2134,13 @@ figcaption {
 
 .feature-lottie-block.a4 {
   margin-right: 15%;
+}
+
+.feature-lottie-transform {
+  -webkit-transform: translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
+  -moz-transform: translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
+  -ms-transform: translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
+  transform: translate3d(0, 0, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);
 }
 
 .text-feature-lottie {
