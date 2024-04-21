@@ -3283,6 +3283,17 @@ figcaption {
   margin-bottom: .38em;
 }
 
+@media screen and (max-width: 991px) {
+  .section-top {
+    padding-top: 4.5em;
+    padding-bottom: 0;
+  }
+
+  .paragraph-top {
+    font-size: 1em;
+  }
+}
+
 @media screen and (max-width: 767px) {
   .section-top {
     padding-top: 3.5em;
@@ -3385,6 +3396,12 @@ figcaption {
   align-items: flex-start;
   padding-right: 15%;
   display: flex;
+}
+
+@media screen and (max-width: 991px) {
+  .block-left {
+    padding-right: 10%;
+  }
 }
 
 .list {
@@ -3591,6 +3608,22 @@ figcaption {
   display: flex;
 }
 
+@media screen and (max-width: 991px) {
+  .grid-team {
+    grid-column-gap: 1.13em;
+    grid-row-gap: 1.13em;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .grid-team {
+    grid-column-gap: .87em;
+    grid-row-gap: .87em;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 @media screen and (max-width: 479px) {
   .grid-team {
     grid-column-gap: .6em;
@@ -3751,6 +3784,56 @@ figcaption {
   width: 100%;
   object-fit: cover;
   border-radius: .87em;
+}
+
+@media screen and (max-width: 991px) {
+  .collection-list-posts {
+    grid-column-gap: 1.13em;
+    grid-row-gap: 3em;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .collection-list-wrapper-posts.large {
+    margin-bottom: 3em;
+  }
+
+  .image-post-thumbnail {
+    height: 28vw;
+  }
+
+  .post.large {
+    padding: 3.4em 3.2em;
+  }
+
+  .post-body {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .collection-list-posts {
+    grid-row-gap: 2em;
+    grid-template-columns: 1fr;
+  }
+
+  .block-post.large {
+    grid-template-columns: 1fr;
+  }
+
+  .collection-list-wrapper-posts.large {
+    margin-bottom: 2em;
+  }
+
+  .image-post-thumbnail,
+  .image-post-thumbnail.large {
+    height: 50vw;
+  }
+
+  .post-body {
+    padding-top: 2.9em;
+    padding-bottom: 2.9em;
+  }
 }
 
 @media screen and (max-width: 479px) {
@@ -4539,6 +4622,16 @@ figcaption {
   line-height: 140%;
 }
 
+@media screen and (max-width: 991px) {
+  .link-category {
+    padding: 1em 1.2em;
+  }
+
+  .block-categories {
+    flex-direction: column;
+  }
+}
+
 @media screen and (max-width: 479px) {
   .block-categories {
     font-size: .9em;
@@ -4607,6 +4700,12 @@ figcaption {
   grid-template-columns: 1fr 2fr;
   align-items: start;
   position: relative;
+}
+
+@media screen and (max-width: 991px) {
+  .grid-product {
+    grid-template-columns: 1fr;
+  }
 }
 
 .add-to-cart {
@@ -4724,6 +4823,14 @@ figcaption {
   box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
 }
 
+@media screen and (max-width: 991px) {
+  .product-sticky {
+    padding: 3.1em;
+    position: relative;
+    top: auto;
+  }
+}
+
 .ecommerce-form {
   min-height: auto;
   background-color: rgba(0, 0, 0, 0);
@@ -4737,6 +4844,21 @@ figcaption {
   grid-template-rows: auto;
   grid-template-columns: 2fr 1fr;
   align-items: start;
+}
+
+@media screen and (max-width: 991px) {
+  .collection-list-shop {
+    grid-column-gap: 1.13em;
+    grid-row-gap: 1.13em;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .collection-list-shop, 
+  .ecommerce-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .ecommerce-contents {
@@ -4896,6 +5018,19 @@ figcaption {
   box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
 }
 
+@media screen and (max-width: 991px) {
+  .page-body {
+    padding: 4em 10%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .page-body {
+    padding-top: 3em;
+    padding-bottom: 3em;
+  }
+}
+
 @media screen and (max-width: 479px) {
   .page-body {
     padding-top: 2em;
@@ -4996,6 +5131,18 @@ figcaption {
 
 .hex-color.white {
   color: var(--white);
+}
+
+@media screen and (max-width: 991px) {
+  .grid-colors {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .grid-colors {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @media screen and (max-width: 479px) {
@@ -5099,6 +5246,18 @@ figcaption {
   padding: 1.3em;
 }
 
+@media screen and (max-width: 991px) {
+  .grid-icon-licensing {
+    grid-template-columns: auto auto auto auto auto auto;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .grid-icon-licensing {
+    grid-template-columns: auto auto auto auto;
+  }
+}
+
 @media screen and (max-width: 479px) {
   .grid-licensing {
     grid-template-columns: 1fr;
@@ -5121,149 +5280,143 @@ figcaption {
   font-weight: 500;
 }
 
-@media screen and (max-width: 991px) {
-  .section-top {
-    padding-top: 4.5em;
-    padding-bottom: 0;
-  }
+#landing-block-hero,
+#landing-lottie-hero,
+#landing-solution-item-1,
+#landing-solution-item-2,
+#landing-solution-item-3,
+#landing-solution-item-4,
+#landing-company-lottie,
+#landing-block-right,
+#landing-company-numbers-blue,
+#landing-company-numbers-green,
+#landing-feature-item-1,
+#landing-feature-item-2,
+#landing-feature-item-3,
+#landing-feature-item-4,
+#landing-feature-item-5,
+#landing-feature-item-6,
+#landing-block-reviews,
+#landing-reviews-wrapper,
+#landing-reviews-block-right,
+#landing-reviews-block-faq-left,
+#landing-reviews-block-faq-right,
+#landing-block-footer-item-1,
+#landing-block-footer-item-2,
+#landing-block-footer-item-3,
+#landing-block-footer-item-4,
+#landing-block-banner,
+#landing-lottie-banner,
 
-  .paragraph-top {
-    font-size: 1em;
-  }
+#company-about-us-blue,
+#company-about-us-green,
+#company-about-us-red,
+#company-lottie,
+#company-quote,
+#company-team-cofounder-1,
+#company-team-cofounder-2,
+#company-team-security-analyst,
+#company-team-devops-engineer,
+#company-team-customer-support,
+#company-team-marketing-specialist,
+#company-team-data-analyst,
+#company-team-finance-specialist,
+#company-block-reviews,
+#company-reviews-wrapper,
+#company-reviews-block-right,
 
-  .block-left {
-    padding-right: 10%;
-  }
+#contact-reviews-block-faq-left,
+#contact-reviews-block-faq-right,
 
-  .grid-team {
-    grid-column-gap: 1.13em;
-    grid-row-gap: 1.13em;
-    grid-template-columns: 1fr 1fr 1fr;
-  }
+#category-block-faq-left,
+#category-block-faq-right,
 
-  .collection-list-posts {
-    grid-column-gap: 1.13em;
-    grid-row-gap: 3em;
-    grid-template-columns: 1fr 1fr;
-  }
+#product-content,
+#product-features-item-1,
+#product-features-item-2,
+#product-features-item-3,
+#product-features-item-4,
+#product-features-item-5,
+#product-features-item-6,
 
-  .collection-list-wrapper-posts.large {
-    margin-bottom: 3em;
-  }
+#licensing-lottie-template-1,
+#licensing-lottie-template-2
+#licensing-team-6,
+#licensing-team-8,
+#licensing-team-7,
+#licensing-team-2,
 
-  .image-post-thumbnail {
-    height: 28vw;
-  }
+#licensing-icon-1,
+#licensing-icon-2,
+#licensing-icon-3,
+#licensing-icon-4,
+#licensing-icon-5,
+#licensing-icon-6,
+#licensing-icon-7,
+#licensing-icon-8,
+#licensing-icon-9,
+#licensing-icon-10,
+#licensing-icon-11,
+#licensing-icon-12,
+#licensing-icon-13,
+#licensing-icon-14,
+#licensing-icon-15,
+#licensing-icon-16,
+#licensing-icon-17,
+#licensing-icon-18,
+#licensing-icon-19,
+#licensing-icon-20,
+#licensing-icon-21,
+#licensing-icon-22,
 
-  .post.large {
-    padding: 3.4em 3.2em;
-  }
+#pricing-navbar,
+#pricing-block-faq-left,
+#pricing-block-faq-right,
 
-  .post-body {
-    padding-left: 10%;
-    padding-right: 10%;
-  }
+#solutions-large-blue-item,
+#solutions-large-green-item,
+#solutions-product-item-1,
+#solutions-product-item-2,
+#solutions-product-item-3,
+#solutions-product-item-4,
+#solutions-block-left,
+#solutions-lottie-right,
+#solutions-features-item-1,
+#solutions-features-item-2,
+#solutions-features-item-3,
+#solutions-features-item-4,
+#solutions-features-item-5,
+#solutions-features-item-6,
+#solutions-lottie-left,
+#solutions-block-right,
+#solutions-blue-numbers,
+#solutions-green-numbers,
 
-  .collection-list-shop {
-    grid-column-gap: 1.13em;
-    grid-row-gap: 1.13em;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .link-category {
-    padding: 1em 1.2em;
-  }
-
-  .block-categories {
-    flex-direction: column;
-  }
-
-  .grid-product {
-    grid-template-columns: 1fr;
-  }
-
-  .product-sticky {
-    padding: 3.1em;
-    position: relative;
-    top: auto;
-  }
-
-  .page-body {
-    padding: 4em 10%;
-  }
-
-  .grid-colors {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-
-  .grid-icon-licensing {
-    grid-template-columns: auto auto auto auto auto auto;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .grid-team {
-    grid-column-gap: .87em;
-    grid-row-gap: .87em;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .collection-list-posts {
-    grid-row-gap: 2em;
-    grid-template-columns: 1fr;
-  }
-
-  .block-post.large {
-    grid-template-columns: 1fr;
-  }
-
-  .collection-list-wrapper-posts.large {
-    margin-bottom: 2em;
-  }
-
-  .image-post-thumbnail, .image-post-thumbnail.large {
-    height: 50vw;
-  }
-
-  .post-body {
-    padding-top: 2.9em;
-    padding-bottom: 2.9em;
-  }
-
-  .collection-list-shop, .ecommerce-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .page-body {
-    padding-top: 3em;
-    padding-bottom: 3em;
-  }
-
-  .grid-colors {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .grid-icon-licensing {
-    grid-template-columns: auto auto auto auto;
-  }
-}
-
-#w-node-_37b3a8d2-c553-a736-f678-9b56fa1506c8-0e941739, #w-node-a4cb2e2c-97ad-0ff4-4b5f-cbaa674163ff-0e941739, #w-node-b9884999-5af6-d1ff-eb07-8badfae39427-0e941739, #w-node-f8cf0b0a-7bff-358b-dba5-0aa0133e001c-0e941739, #w-node-a3434d13-0c41-9ad3-e49d-ef8ec3aa6675-0e941739, #w-node-ed2a8ead-6789-73b8-380f-ef99f7042f78-0e941739, #w-node-_462e3ae4-d17a-4ca9-c67e-daf8b068f90e-0e941739, #w-node-a033bb4d-fb8b-e335-6cb2-c443ca8c4bc8-0e941739, #w-node-_418ca167-2aa7-6102-c555-e760a541672d-0e941739, #w-node-_789e64b8-db23-92f3-fc78-b228e61599d1-0e941739, #w-node-_73c7f32a-11c4-52e7-6886-cdc2875e5856-0e941739, #w-node-a64c2106-90fa-a11e-de5a-7f571bc9fce5-0e941739, #w-node-_0eca363f-fcbf-20ff-a3f9-4b4bf2a0943e-0e941739, #w-node-_81b66805-7f46-c6fe-7448-2cfdb89d7797-0e941739, #w-node-_4e0c3da6-b2da-b4cc-3c51-1794343837c2-0e941739, #w-node-_5ab9e50c-66fe-3297-aab0-dd8ca1a56cd6-0e941739, #w-node-_8081eb8c-b88a-c806-4272-6a0eab494de7-0e941739, #w-node-f0ea6266-7176-7ad5-06e9-ad15d7af875d-0e941739, #w-node-dd03f682-5e31-981d-1bc3-e09cb94f042f-0e941739, #w-node-_5c6c8a4e-7945-f2b2-64e6-05e263274560-0e941739, #w-node-_539ba9ce-4f69-f850-0ad8-b7f312d9e8c7-0e941739, #w-node-d0458a27-e73f-e612-462d-65302581b228-2581b225, #w-node-d0458a27-e73f-e612-462d-65302581b234-2581b225, #w-node-d0458a27-e73f-e612-462d-65302581b24c-2581b225, #w-node-d0458a27-e73f-e612-462d-65302581b240-2581b225, #w-node-fa5a991c-5956-883f-ada3-90790b0053f4-0b0053f1, #w-node-fa5a991c-5956-883f-ada3-90790b0053fc-0b0053f1, #w-node-_0cd70b74-ab87-0e37-8c12-0b38f4d52384-0e94173f, #w-node-afed3ac8-3177-ec05-990a-39f68f9eb356-0e94173f, #w-node-_84b383cf-f2f3-bea7-8c05-b0fd748b650d-0e94173f, #w-node-ef8907ed-ca22-ade3-43fc-33a830f840f2-0e94173f, #w-node-ef8907ed-ca22-ade3-43fc-33a830f84105-0e94173f, #w-node-_2351d0c9-a38d-c3f1-19a0-86639b9befd4-0e94173f, #w-node-_2b554ef2-66cc-1f87-36f9-dec8f5421416-0e94173f, #w-node-_0b233eff-b5e1-bcf1-7c3e-8291f92fad59-0e94173f, #w-node-_94ac81a6-9f7e-a653-c594-3ef40ce8e7ba-0e94173f, #w-node-_254d2427-e57b-8abe-9d0e-ce1d14e5a9e6-0e94173f, #w-node-a898ce16-5799-e429-3346-5c5addbc5566-0e94173f, #w-node-_5f12ca6a-d3d1-3d89-3c54-1984acb258fe-0e94173f, #w-node-_479c54ea-5d2d-648b-c33f-74592da3e1a2-0e94173f, #w-node-_40f515c9-a2fe-edb7-7d1d-764cfb887974-0e94173f, #w-node-_40f515c9-a2fe-edb7-7d1d-764cfb887975-0e94173f, #w-node-_40f515c9-a2fe-edb7-7d1d-764cfb88797c-0e94173f, #w-node-_10a5bec3-f22d-3b1c-b8ff-3c2548c2c49f-0e941740, #w-node-_10a5bec3-f22d-3b1c-b8ff-3c2548c2c4bb-0e941740, #w-node-fa5afabc-a52b-507f-b843-6bbd60cbabf6-0e941741, #w-node-fa5afabc-a52b-507f-b843-6bbd60cbac12-0e941741, #w-node-_5363f964-1550-406b-86ab-876ba9bec06f-0e941743, #w-node-fe319464-75bf-79e4-1d0f-9e588fb063fb-0e941743, #w-node-fe319464-75bf-79e4-1d0f-9e588fb06402-0e941743, #w-node-fe319464-75bf-79e4-1d0f-9e588fb06409-0e941743, #w-node-fe319464-75bf-79e4-1d0f-9e588fb06410-0e941743, #w-node-fe319464-75bf-79e4-1d0f-9e588fb06417-0e941743, #w-node-fe319464-75bf-79e4-1d0f-9e588fb0641e-0e941743, #w-node-_62ab79b9-6032-891d-05d1-d48df402ca5a-0e941747, #w-node-_0b14b95b-c6e2-7002-10aa-43a2d12ef01b-0e941747, #w-node-_1ed9bd89-0019-64e2-5b75-d1a6bbea8869-0e941747, #w-node-_99ac6bff-1bf5-a05a-9d0c-9b325070b661-0e941747, #w-node-_0016a792-801a-b9d7-b457-6e60c9cec84c-0e941747, #w-node-a0e5c115-ea09-beab-b4f4-2e1ac60bb639-0e941747, #w-node-_17a23c16-d9df-b7fc-4cc7-046d36bc9e0d-0e941747, #w-node-f1634648-5459-ee2f-c769-034c3844fd38-0e941747, #w-node-_5092c0dc-2443-f6eb-e21d-1dcc5e340488-0e941747, #w-node-b11d4944-2ba8-3268-e095-3b09f035a977-0e941747, #w-node-_0f9864ad-3796-a1d5-be37-9d6247e30e46-0e941747, #w-node-bd7a7f8a-46f8-9878-613d-8ec95513e4a1-0e941747, #w-node-_280ce3f4-0b01-1e17-1712-e3f362ff0188-0e941747, #w-node-e9136a8e-c2f0-afc7-f368-34cb9b16efb7-0e941747, #w-node-_3658a508-b024-6c37-ee42-57a494e44767-0e941747, #w-node-_14658c5f-9491-ad2f-8412-3d615088303f-0e941747, #w-node-_3fd93bc6-3195-1ccd-b1b1-a8a6dd1e8e76-0e941747, #w-node-cb35293c-8748-d6ce-b43d-58be49efc9fc-0e941747, #w-node-_7b15da3a-978b-ad8f-0c7e-9034e2b084dc-0e941747, #w-node-_0e6c5cff-a430-b7b6-f0c1-426922754e03-0e941747, #w-node-_526b2d8f-5a99-d381-312e-6ff47d271bc1-0e941747, #w-node-_0f80b63c-e731-9a99-305d-5547092ec8f2-0e941747, #w-node-f2f49a57-b72e-0639-6bee-5df1cdc28b9c-0e941747, #w-node-_4e3d5f87-7bd7-0135-3e25-991c9ba63478-0e941747, #w-node-_880abb12-b877-9f0a-0223-83f67f274e74-0e941747, #w-node-a9745e51-8f3f-0bb7-ff0d-ce589b3504a7-0e941747, #w-node-_18534a7d-369e-8233-6351-b814f2cc93cb-0e941747, #w-node-_1aec6a9d-2bfc-5c3b-4e43-693962c19581-0e941747, #w-node-_10a5bec3-f22d-3b1c-b8ff-3c2548c2c49f-0e94174b, #w-node-_10a5bec3-f22d-3b1c-b8ff-3c2548c2c4bb-0e94174b, #w-node-_0cd70b74-ab87-0e37-8c12-0b38f4d52384-0e94174c, #w-node-_0817c525-b533-bda4-24da-6118e0cbf305-0e94174c, #w-node-_06ca0ded-afc5-2e76-cccb-1e42fc83d8fe-0e94174c, #w-node-_06ca0ded-afc5-2e76-cccb-1e42fc83d909-0e94174c, #w-node-_06ca0ded-afc5-2e76-cccb-1e42fc83d917-0e94174c, #w-node-_06ca0ded-afc5-2e76-cccb-1e42fc83d922-0e94174c, #w-node-_84ec0c4e-ce73-a401-5d92-2ee6464d9388-0e94174c, #w-node-_84ec0c4e-ce73-a401-5d92-2ee6464d9375-0e94174c, #w-node-baba0ec0-6945-6e93-e03a-9c3e439ad2a4-0e94174c, #w-node-baba0ec0-6945-6e93-e03a-9c3e439ad2ab-0e94174c, #w-node-baba0ec0-6945-6e93-e03a-9c3e439ad2b2-0e94174c, #w-node-baba0ec0-6945-6e93-e03a-9c3e439ad2b9-0e94174c, #w-node-baba0ec0-6945-6e93-e03a-9c3e439ad2c0-0e94174c, #w-node-baba0ec0-6945-6e93-e03a-9c3e439ad2c7-0e94174c, #w-node-e0a700b7-f8d1-c9fd-11cf-eea47df8bd7d-0e94174c, #w-node-e0a700b7-f8d1-c9fd-11cf-eea47df8bd90-0e94174c, #w-node-e0a700b7-f8d1-c9fd-11cf-eea47df8bd99-0e94174c, #w-node-e0a700b7-f8d1-c9fd-11cf-eea47df8bd9f-0e94174c, #w-node-_32c8226f-33dd-fbaa-d45d-060a456aaf95-0e94174d, #w-node-b387dea9-8019-c2f6-be02-402e509d0d3f-0e94174d, #w-node-e1ae69f4-ecd5-f39a-5fc9-1f700408dd57-0e94174d, #w-node-_1fb25b1f-87ef-df55-75d4-03cf0ca91c9a-0e94174d, #w-node-dae830aa-7d74-8280-15df-739305051422-0e94174d, #w-node-_17c4775c-9fd6-f8ab-9d9f-9d2fece60496-0e94174d, #w-node-_971632f7-d243-a370-a389-ccd2fd07720a-0e94174d, #w-node-_47171186-af89-bff0-fc97-dc7fc0cc80ae-0e94174d, #w-node-_37f28855-38c9-315b-3bed-658dfea6c532-0e94174d, #w-node-c1f37475-78be-77d4-3517-e9edc471daa8-0e94174d, #w-node-fef66e34-bed4-14f1-f94b-58a82175ce80-0e94174d, #w-node-_86c75230-b171-2a4a-b09f-aae835e2572a-0e94174d {
+#template-color-white,
+#template-color-background,
+#template-color-border,
+#template-color-accent-a1,
+#template-color-accent-a2,
+#template-color-accent-a3,
+#template-color-accent-a4,
+#template-color-accent-b1,
+#template-color-accent-b2 {
   grid-area: span 1 / span 1 / span 1 / span 1;
 }
 
 @media screen and (max-width: 991px) {
-  #w-node-_84b383cf-f2f3-bea7-8c05-b0fd748b650d-0e94173f {
+  #company-about-us-red {
     grid-area: span 1 / span 2 / span 1 / span 2;
   }
 }
 
 @media screen and (max-width: 767px) {
-  #w-node-a033bb4d-fb8b-e335-6cb2-c443ca8c4bc8-0e941739, #w-node-dd03f682-5e31-981d-1bc3-e09cb94f042f-0e941739 {
+  #landing-company-block-right,
+  #landing-reviews-block-right {
     order: -9999;
   }
 
-  #w-node-_84b383cf-f2f3-bea7-8c05-b0fd748b650d-0e94173f {
+  #company-about-us-red {
     grid-area: span 1 / span 1 / span 1 / span 1;
   }
 }
