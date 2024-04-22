@@ -1,11 +1,11 @@
 {% extends "home/base.html" %}
-{% load static wagtailcore_tags %}
+{% load static wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
 <section class="section-hero">
   <div class="content">
     <div class="base-layout-grid grid-hero">
-      <div id="hero-content" class="block-hero">       
+      <div id="hero-content" class="block-hero">
         <!-- Hero Heading and Paragraph -->
         <h1 class="heading-hero">{{ page.hero_heading }}</h1>
         <p class="paragraph-hero">{{ page.hero_paragraph }}</p>
@@ -41,12 +41,14 @@
         <!-- Lottie Features -->
         <div class="features-lottie">
           {% for feature in page.lottie_features.all %}
-            <div data-id="{{ feature.id }}" class="feature-lottie-block">
-              {% if feature.icon %}
-                <img src="{{ feature.icon.url }}" loading="eager" alt="" class="icon-feature-lottie">
-              {% endif %}
-              <div class="text-feature-lottie">{{ feature.text }}</div>
-          </div>
+            {% with feature_counter=forloop.counter %}
+              <div data-id="hero-features-{% feature_counter %}" class="feature-lottie-block {% if feature_counter > 1 %}a{{ feature_counter }}{% endif %}">
+                {% if feature.icon %}
+                  {% image feature.icon original class="icon-feature-lottie" %}
+                {% endif %}
+                <div class="text-feature-lottie">{{ feature.text }}</div>
+            </div>
+            {% endwith %}
           {% endfor %}
         </div>      
       </div>
