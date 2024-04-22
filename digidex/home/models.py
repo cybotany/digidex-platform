@@ -2,10 +2,10 @@ from django.db import models
 
 from wagtail.admin import panels
 from wagtail import models as wt_models
-
+from modelcluster import fields as mc_fields
 
 class LottieFeature(wt_models.Orderable):
-    page = models.ForeignKey(
+    page = mc_fields.ParentalKey(
         'HomePage', 
         on_delete=models.CASCADE,
         related_name='lottie_features'
