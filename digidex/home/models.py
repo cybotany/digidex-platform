@@ -2,7 +2,58 @@ from django.db import models
 
 from wagtail.admin import panels
 from wagtail import models as wt_models
+from wagtail import fields as wt_fields
 from modelcluster import fields as mc_fields
+
+
+class HomePageSection(wt_models.Orderable):
+    _STYLES = (
+        ('default', 'Default'),
+        ('top-bar', 'Top Bar'),
+        ('top', 'Top'),
+        ('hero', 'Hero'),
+        ('footer', 'Footer'),
+        ('full', 'Full'),
+    )
+
+    page = mc_fields.ParentalKey(
+        'HomePage',
+        related_name='sections'
+    )
+    heading = models.CharField(
+        max_length=75,
+        blank=True
+    )
+    subtitle = models.CharField(
+        max_length=25,
+        blank=True
+    )
+    paragraph = models.CharField(
+        max_length=255,
+        blank=True
+    )
+    content = wt_fields.RichTextField(
+        blank=True
+    )
+    style = models.CharField(
+        max_length=10,
+        choices=_STYLES,
+        default='default',
+        blank=True
+    )
+    
+    panels = [
+        panels.FieldPanel('heading'),
+        panels.FieldPanel('subtitle'),
+        panels.FieldPanel('paragraph'),
+        panels.FieldPanel('content'),
+        panels.FieldPanel('style'),
+    ]
+
+    class Meta:
+        verbose_name = "section"
+        verbose_name_plural = "sections"
+
 
 class LottieFeature(wt_models.Orderable):
     page = mc_fields.ParentalKey(
