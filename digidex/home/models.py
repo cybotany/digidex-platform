@@ -2,7 +2,6 @@ from django.db import models
 
 from wagtail.admin import panels
 from wagtail import models as wt_models
-from wagtail.images.edit_handlers import ImageChooserPanel
 
 
 class LottieFeature(wt_models.Orderable):
@@ -24,7 +23,7 @@ class LottieFeature(wt_models.Orderable):
     )
 
     panels = [
-        ImageChooserPanel('icon'),
+        panels.FieldPanel('icon'),
         panels.FieldPanel('text'),
     ]
 
