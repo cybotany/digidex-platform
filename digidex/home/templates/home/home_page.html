@@ -40,23 +40,15 @@
         </div>
         <!-- Lottie Features -->
         <div class="features-lottie">
-          <div data-id="" class="feature-lottie-block">
-            <img src="{% static 'images/bx/check.svg' %}" loading="eager" alt="" class="icon-feature-lottie">
-            <div class="text-feature-lottie">Advanced Security</div>
-          </div>
-          <div data-id="" class="feature-lottie-block a2">
-            <img src="{% static 'images/bx/tachometer.svg' %}" loading="eager" alt="" class="icon-feature-lottie">
-            <div class="text-feature-lottie">Performance</div>
-          </div>
-          <div data-id="" class="feature-lottie-block a3">
-            <img src="{% static 'images/bx/rocket.svg' %}" loading="eager" alt="" class="icon-feature-lottie">
-            <div class="text-feature-lottie">99.99% Uptime</div>
-          </div>
-          <div data-id="" class="feature-lottie-block a4">
-            <img src="{% static 'images/bx/cloud-snow.svg' %}" loading="eager" alt="" class="icon-feature-lottie">
-            <div class="text-feature-lottie">Unlimited Scaling</div>
-          </div>
-        </div>
+          {% for feature in page.lottie_features.all %}
+            <div data-id="{{ feature.id }}" class="feature-lottie-block">
+              {% if feature.icon %}
+                <img src="{{ feature.icon.url }}" loading="eager" alt="" class="icon-feature-lottie">
+              {% endif %}
+              <div class="text-feature-lottie">{{ feature.text }}</div>
+            </div>
+          {% endfor %}
+        </div> 
       </div>
     </div>
   </div>
