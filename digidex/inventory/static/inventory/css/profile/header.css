@@ -1,0 +1,240 @@
+.content-profile {
+  background-color: var(--background);
+  padding: 2em;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.block-profile {
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: center;
+  align-items: center;
+  margin-bottom: 1em;
+  display: flex;
+}
+
+.profile-heading {
+  max-width: 9em;
+  margin-bottom: .5em;
+}
+
+.grid-profile {
+  grid-column-gap: 3em;
+  grid-row-gap: 1.8em;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 2fr;
+}
+
+.profile-avatar {
+  grid-column-gap: 1.3em;
+  grid-row-gap: 1.3em;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1.2em;
+  padding-bottom: 1.2em;
+  display: flex;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.avatar-image {
+  border-radius: 50%;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  max-width: 150px;
+  margin-bottom: 15px;
+}
+
+.profile-text {
+  width: 100%;
+  max-width: 32em;
+  color: rgba(20, 23, 24, .6);
+  text-align: center;
+  margin-top: 1.4em;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: .87em;
+  line-height: 140%;
+}
+
+.profile-link {
+  color: rgba(20, 23, 24, .6);
+  transition: color .3s cubic-bezier(.25, .46, .45, .94);
+}
+
+.profile-link:hover {
+  color: var(--strong-green);
+}
+
+.profile-bio {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  padding: 0;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 300px;
+}
+
+.tab-headings {
+  display: flex;
+  justify-content: space-between;
+  width:100%;
+  position: relative;
+  z-index: 2;
+}
+
+.tab-heading,
+.tab-content {
+  border-radius: 15px;
+}
+
+.tab-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  flex: 1;
+  padding: 1em;
+  background-color: var(--accent-red);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  margin: 0;
+  position: relative; 
+  border-radius: 15px 15px 0 0;
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.tab-heading:first-child, .tab-heading:last-child {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.tab-heading.active {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.tab-heading:not(.active):hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.tab-content {
+  display: none;
+  margin-top: -2px;
+  flex-grow: 2;
+  position: relative;
+  z-index: 1;
+}
+
+.tab-content.active {
+  display: flex;
+  flex-grow: 2;
+  padding: 1em;
+  border-top: none; 
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+  transform: translateY(-2px);
+  z-index: 3;
+}
+
+.icon-bio {
+  width: 2em;
+  height: 2em;
+  margin-bottom: 5px;
+}
+
+.tab-heading[data-tab-target="#bio"] {
+  background-color: var(--accent-red);
+}
+.tab-heading[data-tab-target="#plants"] {
+  background-color: var(--accent-green);
+}
+.tab-heading[data-tab-target="#pets"] {
+  background-color: var(--accent-blue);
+}
+
+#bio.tab-content {
+  background-color: var(--light-red);
+}
+
+#plants.tab-content {
+  background-color: var(--light-green);
+}
+
+#pets.tab-content {
+  background-color: var(--light-blue);
+}
+
+.bio-text,
+.plant-text,
+.pet-text {
+  font-weight: 500;
+  line-height: 130%;
+}
+
+.bio-text {
+  color: var(--strong-red);
+}
+
+.plant-text {
+  color: var(--strong-green);
+}
+
+.pet-text {
+  color: var(--strong-blue);
+}
+
+@media screen and (max-width: 767px) {
+  .grid-profile {
+    height: auto;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .tab-headings, .tab-content {
+    flex-grow: 0;
+  }
+
+  .tab-content.active {
+    padding: 0.8em;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .grid-profile {
+    grid-row-gap: 1.2em;
+    grid-template-columns: 1fr;
+  }
+
+  .profile-avatar {
+    grid-column-gap: 1em;
+    grid-row-gap: 1em;
+    padding-top: .8em;
+    padding-bottom: .8em;
+  }
+
+  .profile-bio {
+    height: auto;
+    grid-column-gap: 1em;
+    grid-row-gap: 1em;
+    padding-top: .8em;
+    padding-bottom: .8em;
+  }
+
+  .tab-headings, .tab-content {
+    flex-grow: 0;
+  }
+
+  .tab-content.active {
+    padding: 0.8em;
+  }
+}
