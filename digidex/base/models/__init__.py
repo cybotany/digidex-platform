@@ -1,3 +1,3 @@
-from .settings import SiteSettings
 from .footer import PageFooter
 from .header import AdvertisementBanner
+from .settings import SiteSettings

@@ -2494,14 +2494,14 @@ figcaption {
   right: 0%;
 }
 
-.grid-numbers {
+.grid-statistics {
   grid-column-gap: .87em;
   grid-row-gap: .87em;
   grid-template-rows: auto;
   align-items: start;
 }
 
-.numbers {
+.statistics {
   grid-column-gap: .5em;
   grid-row-gap: .5em;
   background-color: var(--accent-b1);
@@ -2513,25 +2513,25 @@ figcaption {
   display: flex;
 }
 
-.numbers.green {
+.statistics.blue {
   background-color: var(--accent-b3);
 }
 
-.icon-numbers {
+.icon-statistics {
   width: 2em;
   height: 2em;
 }
 
-.heading-numbers {
+.heading-statistics {
   color: var(--accent-a1);
   font-weight: 500;
 }
 
-.heading-numbers.green {
+.heading-statistics.green {
   color: var(--accent-a3);
 }
 
-.text-numbers {
+.text-statistics {
   max-width: 11em;
   color: var(--accent-a1);
   letter-spacing: -.02em;
@@ -2540,25 +2540,25 @@ figcaption {
   line-height: 130%;
 }
 
-.text-numbers.green {
+.text-statistics.green {
   color: var(--accent-a3);
 }
 
 @media screen and (max-width: 991px) {
-  .grid-numbers {
+  .grid-statistics {
     font-size: .9em;
   }
 }
 
 @media screen and (max-width: 767px) {
-  .grid-numbers {
+  .grid-statistics {
     width: 100%;
     font-size: 1em;
   }
 }
 
 @media screen and (max-width: 479px) {
-  .grid-numbers {
+  .grid-statistics {
     grid-template-columns: 1fr;
   }
 }
@@ -5304,8 +5304,9 @@ figcaption {
 
 #company-lottie,
 #company-content,
-#company-numbers-blue,
-#company-numbers-green,
+#company-statistic-1,
+#company-statistic-2,
+#company-statistic-3,
 
 #home-feature-1,
 #home-feature-2,
@@ -5329,9 +5330,9 @@ figcaption {
 #footer-container-3,
 #footer-container-4,
 
-#company-about-us-blue,
-#company-about-us-green,
-#company-about-us-red,
+#company-about-us-1,
+#company-about-us-2,
+#company-about-us-3,
 #company-lottie,
 #company-quote,
 #company-team-cofounder-1,
@@ -5361,8 +5362,8 @@ figcaption {
 #product-features-item-6,
 
 #pricing-navbar,
-#pricing-block-faq-left,
-#pricing-block-faq-right,
+#pricing-block-faq-1,
+#pricing-block-faq-2,
 
 #solutions-large-blue-item,
 #solutions-large-green-item,
@@ -5380,8 +5381,8 @@ figcaption {
 #solutions-features-item-6,
 #solutions-lottie-left,
 #solutions-block-right,
-#solutions-blue-numbers,
-#solutions-green-numbers {
+#solutions-blue-statistics,
+#solutions-green-statistics {
   grid-area: span 1 / span 1 / span 1 / span 1;
 }
 
