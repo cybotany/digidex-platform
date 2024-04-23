@@ -1,15 +1,10 @@
-import logging
-logger = logging.getLogger(__name__)
-
 from django.shortcuts import render, get_object_or_404
 from django.http import Http404, HttpResponseRedirect
 from django.contrib import messages
 
-from digidex.link.models.nfc import base as nfc_link
-from digidex.inventory.models import Plant, Pet
-from digidex.inventory.forms import PlantForm, PetForm
+from link import models
 
-class LinkDigit(nfc_link.AbstractNfcLink):
+class LinkDigit(models.AbstractNfcLink):
     template_name = "inventory/digit/creation-page.html"
 
     def get_form_kwargs(self):
@@ -28,9 +23,9 @@ class LinkDigit(nfc_link.AbstractNfcLink):
 
     def get_form_and_model(self, use):
         if use == 'plant_label':
-            return PlantForm, Plant
+            return 1, 2
         elif use in ['dog_tag', 'cat_tag']:
-            return PetForm, Pet
+            return 1, 1
         else:
             raise ValueError("Unsupported tag use type")
 

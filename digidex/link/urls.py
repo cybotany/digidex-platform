@@ -1,8 +1,8 @@
 from django.urls import path
 
-from digidex.link.views.nfc.tag import base as ntag
+from link import views
 
 app_name = 'link'
 urlpatterns = [
-    path('digit/<str:serial_number>/', ntag.LinkDigit.as_view(), name='digit'),
+    path('digit/<str:serial_number>/', views.LinkDigit.as_view(), name='digit'),
 ]
