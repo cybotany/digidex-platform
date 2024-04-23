@@ -31,7 +31,7 @@
         <h2 class="heading">{{ page.company_heading }}</h2>
         <p class="paragraph">{{ page.company_paragraph }}</p>
         <div class="base-layout-grid grid-statistics">
-          {% for statistic in page.company_statistics.all %}
+          {% for statistic in page.company_statistic.all %}
             {% with statistic_counter=forloop.counter %}
               <div id="company-statistic-{ statistic_counter }" class="statistics">
                 {% if statistic.icon %}

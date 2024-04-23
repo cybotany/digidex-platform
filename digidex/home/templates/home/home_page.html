@@ -40,7 +40,7 @@
         </div>
         <!-- Lottie Features -->
         <div class="features-lottie">
-          {% for feature in page.hero_features.all %}
+          {% for feature in page.lottie_feature.all %}
             {% with feature_counter=forloop.counter %}
               <div data-id="hero-feature-{ feature_counter }" class="feature-lottie-block {% if feature_counter > 1 %}a{{ feature_counter }}{% endif %}">
                 {% if feature.icon %}

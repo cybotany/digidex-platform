@@ -9,7 +9,7 @@ class LottieFeature(wt_models.Orderable):
     page = mc_fields.ParentalKey(
         'HomePage', 
         on_delete=models.CASCADE,
-        related_name='hero_features'
+        related_name='lottie_feature'
     )
     icon = models.ForeignKey(
         'wagtailimages.Image', 
@@ -33,7 +33,7 @@ class CompanyStatistic(wt_models.Orderable):
     page = mc_fields.ParentalKey(
         'HomePage', 
         on_delete=models.CASCADE,
-        related_name='company_statistics'
+        related_name='company_statistic'
     )
     icon = models.ForeignKey(
         'wagtailimages.Image', 
@@ -60,6 +60,36 @@ class CompanyStatistic(wt_models.Orderable):
         panels.FieldPanel('heading'),
         panels.FieldPanel('text'),
     ]
+
+
+class ProductFeature(wt_models.Orderable):
+    page = mc_fields.ParentalKey(
+        'HomePage',
+        related_name='feature'
+    )
+    icon = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    heading = models.CharField(
+        max_length=255
+    )
+    paragraph = models.CharField(
+        max_length=255
+    )
+    
+    panels = [
+        panels.FieldPanel('icon'),
+        panels.FieldPanel('heading'),
+        panels.FieldPanel('paragraph'),
+    ]
+
+    class Meta:
+        verbose_name = "Product Feature"
+        verbose_name_plural = "Product Features"
 
 
 class HomePage(wt_models.Page):
@@ -95,6 +125,16 @@ class HomePage(wt_models.Page):
         blank=True,
         verbose_name="Company Paragraph"
     )
+    feature_subtitle = models.CharField(
+        blank=True,
+        max_length=255,
+        verbose_name="Feature Subtitle"
+    )
+    feature_heading = models.CharField(
+        blank=True,
+        max_length=255,
+        verbose_name="Feature Heading"
+    )
 
     content_panels = wt_models.Page.content_panels + [
         panels.MultiFieldPanel(
@@ -103,7 +143,7 @@ class HomePage(wt_models.Page):
                 panels.FieldPanel('hero_paragraph'),
                 panels.FieldPanel('hero_cta_text'),
                 panels.FieldPanel('hero_cta_link'),
-                panels.InlinePanel('hero_features', label="Lottie Features"),
+                panels.InlinePanel('lottie_feature', label="Lottie Features"),
             ], heading="Hero Section"
         ),
         panels.MultiFieldPanel(
@@ -111,8 +151,15 @@ class HomePage(wt_models.Page):
                 panels.FieldPanel('company_subtitle'),
                 panels.FieldPanel('company_heading'),
                 panels.FieldPanel('company_paragraph'),
-                panels.InlinePanel('company_statistics', label="Company Statistics"),
-            ], heading="Company Content Section"
+                panels.InlinePanel('company_statistic', label="Company Statistics"),
+            ], heading="Company Section"
+        ),
+        panels.MultiFieldPanel(
+            [
+                panels.FieldPanel('feature_subtitle'),
+                panels.FieldPanel('feature_heading'),
+                panels.InlinePanel('feature', label="Product Features"),
+            ], heading="Feature Section"
         ),
     ]
 
