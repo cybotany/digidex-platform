@@ -9,7 +9,7 @@ class LottieFeature(wt_models.Orderable):
     page = mc_fields.ParentalKey(
         'HomePage', 
         on_delete=models.CASCADE,
-        related_name='lottie_features'
+        related_name='hero_features'
     )
     icon = models.ForeignKey(
         'wagtailimages.Image', 
@@ -103,7 +103,7 @@ class HomePage(wt_models.Page):
                 panels.FieldPanel('hero_paragraph'),
                 panels.FieldPanel('hero_cta_text'),
                 panels.FieldPanel('hero_cta_link'),
-                panels.InlinePanel('lottie_features', label="Lottie Features"),
+                panels.InlinePanel('hero_features', label="Lottie Features"),
             ], heading="Hero Section"
         ),
         panels.MultiFieldPanel(
