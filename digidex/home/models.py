@@ -29,6 +29,31 @@ class LottieFeature(wt_models.Orderable):
     ]
 
 
+class SolutionItem(wt_models.Orderable):
+    page = mc_fields.ParentalKey(
+        'HomePage',
+        on_delete=models.CASCADE,
+        related_name='solution_item'
+    )
+    heading = models.CharField(
+        max_length=255
+    )
+    paragraph = models.TextField()
+    url = models.URLField()
+    tag = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True
+    )
+
+    panels = [
+        panels.FieldPanel('heading'),
+        panels.FieldPanel('paragraph'),
+        panels.FieldPanel('url'),
+        panels.FieldPanel('tag'),
+    ]
+
+
 class CompanyStatistic(wt_models.Orderable):
     page = mc_fields.ParentalKey(
         'HomePage', 
@@ -146,6 +171,7 @@ class HomePage(wt_models.Page):
                 panels.InlinePanel('lottie_feature', label="Lottie Features"),
             ], heading="Hero Section"
         ),
+        panels.InlinePanel('solution_item', label="Solution Items"),
         panels.MultiFieldPanel(
             [
                 panels.FieldPanel('company_subtitle'),
