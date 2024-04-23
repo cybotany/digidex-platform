@@ -1,12 +1,14 @@
-# base/models/settings.py
+# base/models/snippets.py
 from django.db import models
 
+from wagtail import models as wt_models
 from wagtail.admin import panels
-from wagtail.contrib.settings import models as wg_settings
+from wagtail.contrib.settings import models as wt_settings
+from wagtail.snippets import models as wt_snippets
 
 
-@wg_settings.register_setting
-class SiteSettings(wg_settings.BaseGenericSetting):
+@wt_settings.register_setting
+class SiteSettings(wt_settings.BaseGenericSetting):
     logo = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -82,7 +84,7 @@ class SiteSettings(wg_settings.BaseGenericSetting):
                 panels.FieldPanel("phone_number"),
                 panels.FieldPanel("chat"),
             ],
-            heading="Support Contact Information",
+            "Support Contact Information",
         ),
         panels.MultiFieldPanel(
             [
@@ -99,3 +101,73 @@ class SiteSettings(wg_settings.BaseGenericSetting):
             "Social Media Section Links",
         )
     ]
+
+
+@wt_snippets.register_snippet
+class HeaderAdvertisement(wt_models.DraftStateMixin, wt_models.RevisionMixin, wt_models.PreviewableMixin, wt_models.TranslatableMixin, models.Model):
+    url = models.URLField(
+        null=True,
+        blank=True
+    )
+    text = models.TextField(
+        max_length=255
+    )
+
+    panels = [
+        panels.FieldPanel("url"),
+        panels.FieldPanel("text"),
+        panels.PublishingPanel(),
+    ]
+
+    def __str__(self):
+        return self.text
+
+    def get_preview_template(self, request, mode_name):
+        return "base.html"
+
+    def get_preview_context(self, request, mode_name):
+        return {
+            "header_text": self.text,
+        }
+
+    class Meta(wt_models.TranslatableMixin.Meta):
+        verbose_name_plural = "Advertisements"
+
+
+@wt_snippets.register_snippet
+class PageFooter(wt_models.DraftStateMixin, wt_models.RevisionMixin, wt_models.PreviewableMixin, wt_models.TranslatableMixin, models.Model):
+    paragraph = models.TextField(
+        max_length=255,
+        null=True
+    )
+    copyright = models.TextField(
+        max_length=50,
+        null=True
+    )
+    credit = models.TextField(
+        max_length=50,
+        null=True
+    )
+
+    panels = [
+        panels.FieldPanel("paragraph"),
+        panels.FieldPanel("copyright"),
+        panels.FieldPanel("credit"),
+        panels.PublishingPanel(),
+    ]
+
+    def __str__(self):
+        return "Page Footer"
+
+    def get_preview_template(self, request, mode_name):
+        return "base.html"
+
+    def get_preview_context(self, request, mode_name):
+        return {
+            "paragraph": self.paragraph,
+            "copyright": self.copyright,
+            "credit": self.credit,
+        }
+
+    class Meta(wt_models.TranslatableMixin.Meta):
+        verbose_name_plural = "Footer Contents"
