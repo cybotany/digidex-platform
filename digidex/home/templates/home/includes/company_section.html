@@ -1,0 +1,49 @@
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+<section class="section">
+  <div class="content">
+    <div class="base-layout-grid grid">
+      <div id="company-lottie" data-id="" class="lottie">
+        <div class="lines-b1">
+          <div class="line-w"></div>
+          <div class="line-w"></div>
+          <div class="line-w"></div>
+          <div class="line-w"></div>
+          <div class="line-w"></div>
+          <div class="line-w"></div>
+        </div>
+        <div class="lines-b2">
+          <div class="line-h"></div>
+          <div class="line-h"></div>
+          <div class="line-h"></div>
+          <div class="line-h"></div>
+          <div class="line-h"></div>
+          <div class="line-h"></div>
+        </div>
+        <div class="block-lottie">
+          <div class="lottie-animation-1" data-id="" data-animation-type="lottie" data-src="{% static 'documents/lottie/B1-White.json' %}" data-loop="0" data-direction="1" data-autoplay="0" data-is-ix2-target="1" data-renderer="svg" data-default-duration="2.5" data-duration="0"></div>
+          <div class="lottie-animation-2" data-id="" data-animation-type="lottie" data-src="{% static 'documents/lottie/B2-Green.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="16" data-duration="0"></div>
+          <div class="lottie-animation-2-blur" data-id="" data-animation-type="lottie" data-src="{% static 'documents/lottie/B2-Green.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="16" data-duration="0"></div>
+        </div>
+      </div>
+      <div id="company-content" class="block-right">
+        <div class="subtitle">{{ page.company_subtitle }}<br></div>
+        <h2 class="heading">{{ page.company_heading }}</h2>
+        <p class="paragraph">{{ page.company_paragraph }}</p>
+        <div class="base-layout-grid grid-statistics">
+          {% for statistic in page.company_statistics.all %}
+            {% with statistic_counter=forloop.counter %}
+              <div id="company-statistic-{ statistic_counter }" class="statistics">
+                {% if statistic.icon %}
+                  {% image statistic.icon original class="icon-statistic" %}
+                {% endif %}
+                <h4 class="heading-statistics">{{ statistic.heading }}</h4>
+                <div class="text-statistics">{{ statistic.text }}</div>
+              </div>
+            {% endwith %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
