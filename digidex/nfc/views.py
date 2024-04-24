@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import Http404, HttpResponseRedirect
 from django.contrib import messages
 
-from link import models
+from digidex.nfc import models
 
 class LinkDigit(models.AbstractNfcLink):
     template_name = "inventory/digit/creation-page.html"
