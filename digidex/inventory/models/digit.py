@@ -2,7 +2,7 @@ import uuid
 from django.db import models, transaction
 
 
-class Digit(models.Model):
+class UserDigit(models.Model):
     """
     Abstract base model for digitized entities, serving as a bridge between physical specimens and their digital representations.
 
@@ -80,9 +80,7 @@ class Digit(models.Model):
         if self.ntag:
             self.ntag.reset_to_default()
             self.ntag.save()
-        super(Digit, self).delete(*args, **kwargs)
+        super(UserDigit, self).delete(*args, **kwargs)
 
     class Meta:
         ordering = ['-created_at']
-
-
