@@ -28,6 +28,10 @@ class User(AbstractUser):
     )
 
 
+class ProfileIndexPage(wt_models.Page):
+    subpage_types = ['accounts.UserProfilePage']
+
+
 class UserProfilePage(wt_models.Page):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
