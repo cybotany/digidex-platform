@@ -1,0 +1,46 @@
+{% load static wagtailcore_tags %}
+
+<footer class="footer">
+  <section class="footer__section">
+    <div class="footer__content">
+      <div class="footer__grid">
+        {% get_snippet 'Footer' as footer %}
+        {% if footer %}
+          <div id="footer-container-1" class="footer__block">
+            <img src="{% static 'images/logo/plant.svg' %}" loading="eager" alt="Footer Logo" class="footer__logo">
+            <p class="footer__paragraph">{{ footer.copyright }}</p>
+            <div class="footer__social-links">
+              <a href="tel:{{ footer.phone }}" class="footer__social-link">
+                <img src="{% static 'images/phone-voice.svg' %}" loading="eager" alt="Phone Contact" class="footer__social-icon">
+              </a>
+              <a href="mailto:{{ footer.email }}" class="footer__social-link">
+                <img src="{% static 'images/email.svg' %}" loading="eager" alt="Email Contact" class="footer__social-icon">
+              </a>
+              <a href="{{ footer.chat_link }}" class="footer__social-link">
+                <img src="{% static 'images/chat-launch.svg' %}" loading="eager" alt="Chat Launch" class="footer__social-icon">
+              </a>
+            </div>
+          </div>
+          <div id="footer-container-2" class="footer__block">
+            <p class="footer__subtitle">About Us</p>
+            <a href="{{ footer.company_link }}" class="footer__link">Company</a>
+            <a href="{{ footer.contact_link }}" class="footer__link">Contact</a>
+          </div>
+          <div id="footer-container-3" class="footer__block">
+            <p class="footer__subtitle">News & Events</p>
+            <a href="{{ footer.solutions_link }}" class="footer__link">Solutions</a>
+            <a href="{{ footer.blog_link }}" class="footer__link">Blog</a>
+          </div>
+          <div id="footer-container-4" class="footer__block">
+            <p class="footer__subtitle">Connect With Us</p>
+            <a href="{{ footer.github_link }}" target="_blank" class="footer__link">GitHub</a>
+            <a href="{{ footer.twitter_link }}" target="_blank" class="footer__link">Twitter</a>
+          </div>
+        {% else %}
+          <p>Footer settings are not configured yet.</p>
+        {% endif %}
+      </div>
+      <div class="footer__copy">© 2024 DigiDex</div>
+    </div>
+  </section>
+</footer>
