@@ -83,6 +83,5 @@ class Digit(models.Model):
         super(Digit, self).delete(*args, **kwargs)
 
     class Meta:
-        abstract = True
         ordering = ['-created_at']
         

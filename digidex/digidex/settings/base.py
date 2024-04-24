@@ -18,6 +18,8 @@ INSTALLED_APPS = [
     "blog",
     "home",
     "search",
+    "inventory",
+    "nfc",
 
     "wagtail.contrib.settings",
     "wagtail.contrib.forms",
