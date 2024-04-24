@@ -3,7 +3,7 @@ from django.db import models
 from django.urls import reverse
 
 
-class NearFieldCommunication(models.Model):
+class NearFieldCommunicationTag(models.Model):
     """
     Abstract base class for NFC (Near Field Communication) technology, providing common attributes.
 
@@ -16,6 +16,16 @@ class NearFieldCommunication(models.Model):
         created_at (DateTimeField): The date and time when the Link instance was created.
         last_modified (DateTimeField): The date and time when the Link instance was last modified.
     """
+    NTAG_TYPES = [
+        ('NTAG_213', 'NTAG 213'),
+        ('NTAG_215', 'NTAG 215'),
+        ('NTAG_216', 'NTAG 216'),
+    ]
+    NTAG_USES = [
+        ('plant', 'Plant'),
+        ('pet', 'Pet'),
+    ]
+
     serial_number = models.CharField(
         max_length=32,
         unique=True,
@@ -47,6 +57,21 @@ class NearFieldCommunication(models.Model):
         verbose_name="Active",
         help_text="Indicates whether the link is currently active and mapped to a digital object."
     )
+    type = models.CharField(
+        max_length=25,
+        blank=True,
+        choices=NTAG_TYPES, 
+        default='NTAG_213',
+        verbose_name="NTAG Type",
+        help_text="The type of the NTAG."
+    )
+    use = models.CharField(
+        max_length=20,
+        choices=NTAG_USES,
+        default='plant',
+        verbose_name="NTAG Use",
+        help_text="The intended use of the NTAG."
+    )
     created_at = models.DateTimeField(
         auto_now_add=True,
         verbose_name="Created At",
@@ -57,6 +82,12 @@ class NearFieldCommunication(models.Model):
         verbose_name="Last Modified",
         help_text="The date and time when the link instance was last modified."
     )
+
+    def __str__(self):
+        """
+        Returns a string representation of the NTAG instance, primarily based on its unique serial number.
+        """
+        return f"{self.type} - {self.serial_number}"
 
     def activate_link(self, user):
         """
@@ -97,59 +128,6 @@ class NearFieldCommunication(models.Model):
             str: The absolute URL for the NFC instance.
         """
         return reverse('link:digit', kwargs={'serial_number': self.serial_number})
-
-    class Meta:
-        abstract = True
-
-
-class NTAG(NearFieldCommunication):
-    """
-    Model representing NFC tags (NTAGs). Inherits common attributes from NFC and can
-    include NTAG-specific fields and methods.
-    """
-    NTAG_TYPES = [
-        ('NTAG_424_DNA_TagTamper', 'NTAG 424 DNA TagTamper'),
-        ('NTAG_424_DNA', 'NTAG 424 DNA'),
-        ('NTAG_426Q_DNA', 'NTAG 426Q DNA'),
-        ('NTAG_223_DNA', 'NTAG 223 DNA'),
-        ('NTAG_224_DNA', 'NTAG 224 DNA'),
-        ('NTAG_223_DNA_StatusDetect', 'NTAG 223 DNA StatusDetect'),
-        ('NTAG_224_DNA_StatusDetect', 'NTAG 224 DNA StatusDetect'),
-        ('NTAG_213_TagTamper', 'NTAG 213 TagTamper'),
-        ('NTAG_213', 'NTAG 213'),
-        ('NTAG_215', 'NTAG 215'),
-        ('NTAG_216', 'NTAG 216'),
-        ('NTAG_210', 'NTAG 210'),
-        ('NTAG_212', 'NTAG 212'),
-    ]
-
-    NTAG_USES = [
-        ('plant_label', 'Plant Label'),
-        ('dog_tag', 'Dog Tag'),
-        ('cat_tag', 'Cat Tag'),
-    ]
-
-    type = models.CharField(
-        max_length=25,
-        blank=True,
-        choices=NTAG_TYPES, 
-        default='NTAG_213',
-        verbose_name="NTAG Type",
-        help_text="The type of the NTAG."
-    )
-    use = models.CharField(
-        max_length=20,
-        choices=NTAG_USES,
-        default='plant_label',
-        verbose_name="NTAG Use",
-        help_text="The intended use of the NTAG."
-    )
-
-    def __str__(self):
-        """
-        Returns a string representation of the NTAG instance, primarily based on its unique serial number.
-        """
-        return f"{self.type} - {self.serial_number}"
 
     class Meta:
         verbose_name = "NTAG"

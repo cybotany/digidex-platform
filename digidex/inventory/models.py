@@ -38,7 +38,7 @@ class Digit(models.Model):
         help_text="A short description of the digitized entity."
     )
     ntag = models.OneToOneField(
-        'link.NTAG',
+        'nfc.NearFieldCommunicationTag',
         null=True,
         blank=True,
         on_delete=models.CASCADE,

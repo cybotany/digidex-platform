@@ -1,6 +1,6 @@
 from django.urls import path
 
-from digidex.nfc import views
+from nfc import views
 
 app_name = 'link'
 urlpatterns = [
