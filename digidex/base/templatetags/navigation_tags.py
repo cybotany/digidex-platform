@@ -1,4 +1,5 @@
 from django import template
+
 from wagtail import models
 
 register = template.Library()
