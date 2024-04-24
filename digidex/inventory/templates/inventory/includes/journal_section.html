@@ -1,0 +1,30 @@
+
+
+<section class="section">
+  <div class="content">
+    <div class="collection-list-wrapper-posts large base-dyn-list">
+      <div role="list" class="collection-list-posts large base-dyn-items">
+        {% if journal_entries %}
+          {% for entry in journal_entries %}
+            <div role="listitem" class="base-dyn-item">
+              <div class="block-post large">
+                {% if entry.image %}
+                  <img src="{{ entry.image.url }}" alt="Journal Image" class="image-post-thumbnail large">
+                {% else %}
+                  <img src="{% static 'digidex/images/placeholder.svg' %}" alt="Journal Image Placeholder" class="image-post-thumbnail large">
+                {% endif %}
+                <div class="post large">
+                  <div class="date">{{ entry.created_at }}</div>
+                  <h3 class="heading-post">Entry {{ entry.entry_number }}</h3>
+                  {% if entry.content %}
+                    <p class="paragraph-post large">{{ summarized_content }}</p>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
