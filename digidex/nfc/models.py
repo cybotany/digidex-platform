@@ -17,9 +17,9 @@ class NearFieldCommunicationTag(models.Model):
         last_modified (DateTimeField): The date and time when the Link instance was last modified.
     """
     NTAG_TYPES = [
-        ('NTAG_213', 'NTAG 213'),
-        ('NTAG_215', 'NTAG 215'),
-        ('NTAG_216', 'NTAG 216'),
+        ('ntag_213', 'NTAG 213'),
+        ('ntag_215', 'NTAG 215'),
+        ('ntag_216', 'NTAG 216'),
     ]
     NTAG_USES = [
         ('plant', 'Plant'),
