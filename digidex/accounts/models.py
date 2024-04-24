@@ -10,10 +10,12 @@ from wagtail.admin import panels
 
 class User(AbstractUser):
     username = models.CharField(
-        max_length=32
+        max_length=32,
+        unique=True
     )
     slug = models.SlugField(
         unique=True,
+        db_index=True,
         verbose_name="User Slug",
         help_text="Used for it's SEO-friendly properties on the front-end."
     )
@@ -86,7 +88,8 @@ class UserProfile(models.Model):
 class UserProfilePage(wt_models.Page):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
+        null=True,
         related_name='profile_page',
         help_text='The user associated with this profile.'
     )
