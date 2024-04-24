@@ -166,7 +166,7 @@ WAGTAIL_FRONTEND_LOGIN_URL = LOGIN_URL
 #ACCOUNT_ADAPTER = 'digidex.users.adapter.DigiDexAdapter'
 
 ACCOUNT_USERNAME_MIN_LENGTH = 3
-ACCOUNT_USERNAME_VALIDATORS = 'some.module.validators.custom_username_validators'
+#ACCOUNT_USERNAME_VALIDATORS = 'some.module.validators.custom_username_validators'
 ACCOUNT_USERNAME_BLACKLIST = [
     'admin', 'administrator', 'root', 'sysadmin', 'webmaster',
     'support', 'helpdesk', 'moderator', 'superuser', 'guest', 
@@ -181,17 +181,4 @@ ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
 ACCOUNT_EMAIL_NOTIFICATIONS = True
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'SCOPE': [
-            'profile',
-            'email',
-        ],
-        'AUTH_PARAMS': {
-            'access_type': 'online',
-        },
-        'FETCH_USERINFO' : True,
-        'OAUTH_PKCE_ENABLED': True,
-    }
-}
+ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 3
