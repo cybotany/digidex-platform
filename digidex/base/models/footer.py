@@ -11,7 +11,6 @@ class FooterInformation(
     DraftStateMixin,
     RevisionMixin,
     PreviewableMixin,
-    TranslatableMixin,
     models.Model,
 ):
     paragraph = models.TextField(
@@ -51,7 +50,6 @@ class FooterInternalLinks(
     DraftStateMixin,
     RevisionMixin,
     PreviewableMixin,
-    TranslatableMixin,
     models.Model,
 ):
     blog = models.ForeignKey(
@@ -114,7 +112,6 @@ class FooterSocialLinks(
     DraftStateMixin,
     RevisionMixin,
     PreviewableMixin,
-    TranslatableMixin,
     models.Model,
 ):
     github = models.URLField(

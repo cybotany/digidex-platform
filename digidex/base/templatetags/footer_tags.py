@@ -4,7 +4,7 @@ from base.models import footer
 register = template.Library()
 
 @register.inclusion_tag("base/includes/footer/information.html", takes_context=True)
-def get_footer_information(context):
+def footer_information(context):
     information = footer.FooterInformation.objects.filter().first()
     if not information:
         information = {
@@ -24,7 +24,7 @@ def get_footer_information(context):
     return information
 
 @register.inclusion_tag("base/includes/footer/internal_links.html", takes_context=True)
-def get_footer_internal_links(context):
+def footer_internal_links(context):
     internal_links = footer.FooterInternalLinks.objects.filter().first()
     if not internal_links:
         internal_links = {
@@ -45,7 +45,7 @@ def get_footer_internal_links(context):
 
 
 @register.inclusion_tag("base/includes/footer/social_links.html", takes_context=True)
-def get_footer_social_links(context):
+def footer_social_links(context):
     social_links = footer.FooterSocialLinks.objects.filter().first()
     if not social_links:
         social_links = {
