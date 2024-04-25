@@ -1,52 +1,50 @@
 {% load static navigation_tags wagtailcore_tags %}
-<footer>
-  <section class="section-footer">
-    <div class="content">
-      <div class="base-layout-grid grid-footer">
-        <div id="footer-container-1" class="block-footer">
-          <img src="{% static 'images/logo/plant.svg' %}" loading="eager" alt="Footer Logo" class="logo-footer">
-          <div class="paragraph-footer">Fast, Reliable, Secure - Your Website Deserves the Best Hosting<br></div>
-          <div class="block-social">
-            <a href="tel:+1(888)123-4567" class="social-link base-inline-block">
-              <img src="images/phone-voice.svg" loading="eager" alt="" class="icon-social">
-            </a>
-            <a href="mailto:support@yoursite.com" class="social-link base-inline-block">
-              <img src="images/email.svg" loading="eager" alt="" class="icon-social">
-            </a>
-            <a href="#" class="social-link base-inline-block">
-              <img src="images/chat-launch.svg" loading="eager" alt="" class="icon-social">
-            </a>
+<footer class="footer">
+  <section class="footer__section">
+    <div class="content footer__content">
+      <div class="base-layout-grid footer__grid">
+        {% get_snippet 'PageFooter' as footer %}
+        {% if footer %}
+          <div id="footer-container-1" class="footer__block">
+            <img src="{% static 'images/logo/plant.svg' %}" loading="eager" alt="Footer Logo" class="footer__logo">
+            <div class="footer__paragraph">{{ footer.paragraph }}<br></div>
+            <div class="footer__support-links">
+              <a href="tel:{{ footer.phone }}" class="footer__social-link base-inline-block">
+                <img src="{% static 'images/phone-voice.svg' %}" loading="eager" alt="Phone Contact" class="footer__social-icon">
+              </a>
+              <a href="mailto:{{ footer.email }}" class="footer__social-link base-inline-block">
+                <img src="{% static 'images/email.svg' %}" loading="eager" alt="Email Contact" class="footer__social-icon">
+              </a>
+              <a href="{{ footer.chat_link }}" class="footer__social-link base-inline-block">
+                <img src="{% static 'images/chat-launch.svg' %}" loading="eager" alt="Chat Launch" class="footer__social-icon">
+              </a>
+            </div>
           </div>
-        </div>
-        <div id="footer-container-2" class="block-footer">
-          <div class="subtitle-footer">About Us<br></div>
-          {% with company=settings.base.SiteSettings.company %}
-            <a href="#" class="link-footer">Company</a>
-          {% endwith %}
-          {% with contact=settings.base.SiteSettings.contact %}
-            <a href="#" class="link-footer">Contact</a>
-          {% endwith %}
-        </div>
-        <div id="footer-container-3" class="block-footer">
-          <div class="subtitle-footer">News & Events<br></div>
-          {% with solutions=settings.base.SiteSettings.solutions %}
-            <a href="#" class="link-footer">Solutions</a>
-          {% endwith %}
-          {% with blog=settings.base.SiteSettings.blog %} 
-            <a href="#" class="link-footer">Blog</a>
-          {% endwith %}
-        </div>
-        <div id="footer-container-4" class="block-footer">
-          <div class="subtitle-footer">Connect With Us<br></div>
-          {% with github=settings.base.SiteSettings.github %}
-            <a href="{% if github %}{{ github }}{% else %}#{% endif %}" target="_blank" class="link-footer">GitHub</a>
-          {% endwith %}
-          {% with twitter=settings.base.SiteSettings.twitter %}
-            <a href="{% if twitter %}{{ twitter }}{% else %}#{% endif %}" target="_blank" class="link-footer">Twitter</a>
-          {% endwith %}
-        </div>
+          <div id="footer-container-2" class="footer__block">
+            <p class="footer__subtitle">Useful Links</p>
+            <a href="{{ footer.blog }}" class="footer__link">Blog</a>
+            <a href="{{ footer.company }}" class="footer__link">Company</a>
+            <a href="{{ footer.solutions }}" class="footer__link">Solutions</a>
+            <a href="{{ footer.support }}" class="footer__link">Support</a>
+          </div>
+          <div id="footer-container-3" class="footer__block">
+            <div class="footer__subtitle">Connect With Us<br></div>
+            {% with github=settings.base.SiteSettings.github %}
+              <a href="{% if github %}{{ github }}{% else %}#{% endif %}" target="_blank" class="footer__link">GitHub</a>
+            {% endwith %}
+            {% with twitter=settings.base.SiteSettings.twitter %}
+              <a href="{% if twitter %}{{ twitter }}{% else %}#{% endif %}" target="_blank" class="footer__link">Twitter</a>
+            {% endwith %}
+          </div>
+          <div id="footer-container-3" class="footer__block">
+            <p class="footer__subtitle">Connect With Us</p>
+            <a href="{{ footer.github_link }}" target="_blank" class="footer__link">GitHub</a>
+            <a href="{{ footer.twitter_link }}" target="_blank" class="footer__link">Twitter</a>
+          </div>
       </div>
-      <div class="block-footer-down">© 2024 DigiDex</div>
+      <div class="footer__block-down">
+        <div class="footer__block-down">© 2024 DigiDex. Built with <a href="https://wagtail.org/" target="_blank" class="footer__link-down">Wagtail</a><br></div>
+      </div>
     </div>
   </section>
 </footer>

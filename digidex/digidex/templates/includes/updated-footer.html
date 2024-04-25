@@ -4,7 +4,7 @@
   <section class="footer__section">
     <div class="footer__content">
       <div class="footer__grid">
-        {% get_snippet 'Footer' as footer %}
+        {% get_snippet 'PageFooter' as footer %}
         {% if footer %}
           <div id="footer-container-1" class="footer__block">
             <img src="{% static 'images/logo/plant.svg' %}" loading="eager" alt="Footer Logo" class="footer__logo">
@@ -40,7 +40,7 @@
           <p>Footer settings are not configured yet.</p>
         {% endif %}
       </div>
-      <div class="footer__copy">© 2024 DigiDex</div>
+      <div class="footer__copy">{{ footer.copyright }}</div>
     </div>
   </section>
 </footer>
