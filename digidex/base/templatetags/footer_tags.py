@@ -1,11 +1,17 @@
 from django import template
 
-from digidex.base.models.footer import PageFooter
+from base.models.footer import PageFooter
 
 register = template.Library()
 
-@register.inclusion_tag('tags/footer.html')
-def render_footer():
+@register.inclusion_tag("base/includes/footer_text.html", takes_context=True)
+def get_footer_text(context):
+    footer_text = context.get("footer_text", "")
+
+    if not footer_text:
+        instance = FooterText.objects.filter(live=True).first()
+        footer_text = instance.body if instance else ""
+
     return {
-        'footer': PageFooter.objects.first()
-        }
+        "footer_text": footer_text,
+    }
