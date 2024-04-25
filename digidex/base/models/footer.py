@@ -2,7 +2,7 @@
 from django.db import models
 
 from wagtail.admin import panels
-from wagtail.models import DraftStateMixin, RevisionMixin, PreviewableMixin, TranslatableMixin
+from wagtail.models import DraftStateMixin, RevisionMixin, PreviewableMixin
 from wagtail.snippets.models import register_snippet
 
 

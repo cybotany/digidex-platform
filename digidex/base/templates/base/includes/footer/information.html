@@ -3,24 +3,16 @@
 
 <div id="footer-information" class="footer__block">
   <img src="{% static 'images/plant.svg' %}" loading="eager" alt="Logo (Footer)" class="footer__logo">
-  {% if footer_information.paragraph %}
-    <div class="footer__paragraph">{{ footer_information.paragraph }}<br></div>
-  {% endif %}
+  <div class="footer__paragraph">{{ footer_information.paragraph }}<br></div>
   <div class="footer__support-links">
-    {% if footer_information.paragraph %}
-      <a href="tel:{{ footer_information.phone_number }}" class="footer__social-link base-inline-block">
-        <img src="{% static 'images/phone-voice.svg' %}" loading="eager" alt="Phone Contact" class="footer__social-icon">
-      </a>
-    {% endif %}
-    {% if footer_information.email %}
-      <a href="mailto:{{ footer_information.email }}" class="footer__social-link base-inline-block">
-        <img src="{% static 'images/email.svg' %}" loading="eager" alt="Email Contact" class="footer__social-icon">
-      </a>
-    {% endif %}
-    {% if footer_information.chat %}
-      <a href="{{ footer_information.chat }}" class="footer__social-link base-inline-block">
-        <img src="{% static 'images/chat-launch.svg' %}" loading="eager" alt="Chat Launch" class="footer__social-icon">
-      </a>
-    {% endif %}
+    <a href="tel:{{ footer_information.phone_number }}" class="footer__social-link base-inline-block">
+      <img src="{% static 'images/phone-voice.svg' %}" loading="eager" alt="Phone Contact" class="footer__social-icon">
+    </a>
+    <a href="mailto:{{ footer_information.email }}" class="footer__social-link base-inline-block">
+      <img src="{% static 'images/email.svg' %}" loading="eager" alt="Email Contact" class="footer__social-icon">
+    </a>
+    <a href="{{ footer_information.chat }}" class="footer__social-link base-inline-block">
+      <img src="{% static 'images/chat-launch.svg' %}" loading="eager" alt="Chat Launch" class="footer__social-icon">
+    </a>
   </div>
 </div>

@@ -8,10 +8,10 @@ def footer_information(context):
     information = footer.FooterInformation.objects.filter().first()
     if not information:
         information = {
-            'paragraph': '',
-            'phone_number': '',
-            'email': '',
-            'chat': ''
+            'paragraph': 'Footer Information Placeholder',
+            'phone_number': '+1(888)123-4567',
+            'email': 'support@yoursite.com',
+            'chat': '#'
         }
     else:
         information = {
