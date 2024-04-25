@@ -4,42 +4,12 @@
   <section class="footer__section">
     <div class="content">
       <div class="base-layout-grid footer__grid">
-        {% get_snippet 'PageFooter' as footer %}
-        {% if footer %}
-
-        {% get_footer_content %}
-          <div id="footer-container-1" class="footer__block">
-            <img src="{% static 'images/logo/plant.svg' %}" loading="eager" alt="Footer Logo" class="footer__logo">
-            <div class="footer__paragraph">{{ footer.paragraph }}<br></div>
-            <div class="footer__support-links">
-              <a href="tel:{{ footer.phone }}" class="footer__social-link base-inline-block">
-                <img src="{% static 'images/phone-voice.svg' %}" loading="eager" alt="Phone Contact" class="footer__social-icon">
-              </a>
-              <a href="mailto:{{ footer.email }}" class="footer__social-link base-inline-block">
-                <img src="{% static 'images/email.svg' %}" loading="eager" alt="Email Contact" class="footer__social-icon">
-              </a>
-              <a href="{{ footer.chat_link }}" class="footer__social-link base-inline-block">
-                <img src="{% static 'images/chat-launch.svg' %}" loading="eager" alt="Chat Launch" class="footer__social-icon">
-              </a>
-            </div>
-          </div>
-          {% get_footer_useful_links %}
-          <div id="footer-container-2" class="footer__block">
-            <p class="footer__subtitle">Useful Links</p>
-            <a href="{{ footer.blog }}" class="footer__link">Blog</a>
-            <a href="{{ footer.company }}" class="footer__link">Company</a>
-            <a href="{{ footer.solutions }}" class="footer__link">Solutions</a>
-            <a href="{{ footer.support }}" class="footer__link">Support</a>
-          </div>
-          {% get_footer_social_links %}
-          <div id="footer-container-3" class="footer__block">
-            <p class="footer__subtitle">Connect With Us</p>
-            <a href="{{ footer.github }}" target="_blank" class="footer__link">GitHub</a>
-            <a href="{{ footer.twitter }}" target="_blank" class="footer__link">Twitter</a>
-          </div>
+        {% get_footer_information %}
+        {% get_footer_internal_links %}
+        {% get_footer_social_links %}
       </div>
       <div class="footer__block-down">
-        <div class="footer__text-down">© 2024 DigiDex. Built with <a href="https://wagtail.org/" target="_blank" class="footer__link-down">Wagtail</a><br></div>
+        {% get_footer_copyright %}
       </div>
     </div>
   </section>

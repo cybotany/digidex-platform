@@ -6,7 +6,7 @@ from wagtail.snippets.models import register_snippet
 
 
 @register_snippet
-class FooterInformationalContent(models.Model):
+class FooterInformation(models.Model):
     paragraph = models.TextField(
         max_length=255,
         blank=True,
@@ -33,47 +33,13 @@ class FooterInformationalContent(models.Model):
         panels.FieldPanel('phone_number'),
         panels.FieldPanel('email'),
         panels.FieldPanel('chat'),
-        panels.FieldPanel('copyright'),
     ]
 
     def __str__(self):
-        return "Footer Content"
+        return "Footer Information"
 
     class Meta:
-        verbose_name = "Main Footer Content"
-
-
-@register_snippet
-class FooterSocialLinks(models.Model):
-    github = models.URLField(
-        verbose_name="GitHub URL",
-        max_length=255,
-        blank=True,
-        null=True
-    )
-    twitter = models.URLField(
-        verbose_name="Twitter URL",
-        max_length=255,
-        blank=True,
-        null=True
-    )
-
-    panels = [
-        panels.FieldPanel("twitter"),
-        panels.FieldPanel("github"),
-    ]
-
-    def __str__(self):
-        return "Footer Social Links"
-
-    def get_preview_template(self, request, mode_name):
-        return "base.html"
-
-    def get_preview_context(self, request, mode_name):
-        return {
-            "github_url": self.github,
-            "twitter_url": self.twitter
-        }
+        verbose_name = "Primary Footer Information"
 
 
 @register_snippet
@@ -134,8 +100,41 @@ class FooterInternalLinks(models.Model):
 
 
 @register_snippet
-class FooterCopyrightText(models.Model):
-    copyright = models.URLField(
+class FooterSocialLinks(models.Model):
+    github = models.URLField(
+        verbose_name="GitHub URL",
+        max_length=255,
+        blank=True,
+        null=True
+    )
+    twitter = models.URLField(
+        verbose_name="Twitter URL",
+        max_length=255,
+        blank=True,
+        null=True
+    )
+
+    panels = [
+        panels.FieldPanel("github"),
+        panels.FieldPanel("twitter"),
+    ]
+
+    def __str__(self):
+        return "Footer Social Links"
+
+    def get_preview_template(self, request, mode_name):
+        return "base.html"
+
+    def get_preview_context(self, request, mode_name):
+        return {
+            "github_url": self.github,
+            "twitter_url": self.twitter
+        }
+
+
+@register_snippet
+class FooterCopyright(models.Model):
+    copyright = models.TextField(
         max_length=255,
         blank=True,
         null=True
@@ -143,7 +142,6 @@ class FooterCopyrightText(models.Model):
 
     panels = [
         panels.FieldPanel("copyright"),
-        panels.PublishingPanel(),
     ]
 
     def __str__(self):

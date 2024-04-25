@@ -1,0 +1,12 @@
+<!-- base/templates/base/includes/footer/social_links.html -->
+{% load static %}
+
+<div id="footer-social-links" class="footer__block">
+  <p class="footer__subtitle">Connect With Us</p>
+  {% if footer_social_links.blog %}
+    <a href="{{ footer_social_links.github }}" target="_blank" class="footer__link">GitHub</a>
+  {% endif %}
+  {% if footer_social_links.twitter %}
+    <a href="{{ footer_social_links.twitter }}" target="_blank" class="footer__link">Twitter</a>
+  {% endif %}
+</div>
