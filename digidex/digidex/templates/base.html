@@ -37,11 +37,11 @@
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
-        {% include "includes/header.html" %}
+        {% include "base/includes/header.html" %}
         <main id="main">
             {% block content %}{% endblock %}
         </main>
-        {% include "includes/footer.html" %}
+        {% include "base/includes/footer.html" %}
         
         {# Global javascript #}
         <script type="text/javascript" src="{% static 'js/digidex.js' %}"></script>

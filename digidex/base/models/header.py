@@ -1,4 +1,4 @@
-# base/models/snippets.py
+# base/models/header.py
 from django.db import models
 
 from wagtail import models as wt_models
