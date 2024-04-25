@@ -67,5 +67,5 @@ def get_footer_copyright(context):
     copyright = instance.copyright if instance else ""
     
     return {
-        'footer_copyright': copyright
+        'copyright': copyright
     }
