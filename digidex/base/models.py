@@ -3,7 +3,7 @@ from django.db import models
 
 from wagtail import models as wt_models
 from wagtail.admin import panels
-from wagtail.contrib.models import register_setting, BaseGenericSetting
+from wagtail.contrib.settings.models import register_setting, BaseGenericSetting
 from wagtail.snippets.models import register_snippet
 
 
@@ -79,27 +79,37 @@ class PageFooter(models.Model):
         max_length=255,
         blank=True
     )
-    blog = models.URLField(
+    blog = models.ForeignKey(
         'wagtailcore.Page',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+',
+        verbose_name="Blog Page"
     )
-    company = models.URLField(
-        max_length=255,
-        blank=True
-    )
-    solutions = models.URLField(
+    company = models.ForeignKey(
         'wagtailcore.Page',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+',
+        verbose_name="Company Page"
     )
-    support = models.URLField(
-        max_length=255,
-        blank=True
+    solutions = models.ForeignKey(
+        'wagtailcore.Page',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name="Solutions Page"
+    )
+    support = models.ForeignKey(
+        'wagtailcore.Page',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name="Support Page"
     )
     github = models.URLField(
         verbose_name="GitHub URL",
@@ -128,10 +138,10 @@ class PageFooter(models.Model):
             "Support Contact Information"),
         panels.MultiFieldPanel(
             [
-                panels.FieldPanel('blog'),
-                panels.FieldPanel('company'),
-                panels.FieldPanel('solutions'),
-                panels.FieldPanel('support'),
+                panels.PageChooserPanel('blog'),
+                panels.PageChooserPanel('company'),
+                panels.PageChooserPanel('solutions'),
+                panels.PageChooserPanel('support'),
             ],
             "Useful Links"),
         panels.MultiFieldPanel(
