@@ -2,11 +2,18 @@
 from django.db import models
 
 from wagtail.admin import panels
+from wagtail.models import DraftStateMixin, RevisionMixin, PreviewableMixin, TranslatableMixin
 from wagtail.snippets.models import register_snippet
 
 
 @register_snippet
-class FooterInformation(models.Model):
+class FooterInformation(
+    DraftStateMixin,
+    RevisionMixin,
+    PreviewableMixin,
+    TranslatableMixin,
+    models.Model,
+):
     paragraph = models.TextField(
         max_length=255,
         blank=True,
@@ -40,7 +47,13 @@ class FooterInformation(models.Model):
 
 
 @register_snippet
-class FooterInternalLinks(models.Model):
+class FooterInternalLinks(
+    DraftStateMixin,
+    RevisionMixin,
+    PreviewableMixin,
+    TranslatableMixin,
+    models.Model,
+):
     blog = models.ForeignKey(
         'wagtailcore.Page',
         null=True,
@@ -97,7 +110,13 @@ class FooterInternalLinks(models.Model):
 
 
 @register_snippet
-class FooterSocialLinks(models.Model):
+class FooterSocialLinks(
+    DraftStateMixin,
+    RevisionMixin,
+    PreviewableMixin,
+    TranslatableMixin,
+    models.Model,
+):
     github = models.URLField(
         verbose_name="GitHub URL",
         max_length=255,
