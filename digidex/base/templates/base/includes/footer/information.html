@@ -1,13 +1,8 @@
 <!-- base/templates/base/includes/footer/information.html -->
-{% load static wagtailcore_tags %}
-{% get_site as site %}
+{% load static %}
 
 <div id="footer-information" class="footer__block">
-  {% with site.settings.base_sitesettings as settings %}
-    {% if settings.logo %}
-      <img src="{{ settings.logo.file.url }}" loading="eager" alt="Footer Logo" class="footer__logo">
-    {% endif %}
-  {% endwith %}
+  <img src="{% static 'images/plant.svg' %}" loading="eager" alt="Logo (Footer)" class="footer__logo">
   {% if footer_information.paragraph %}
     <div class="footer__paragraph">{{ footer_information.paragraph }}<br></div>
   {% endif %}

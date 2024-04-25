@@ -5,7 +5,7 @@
   <div class="nav-block">
     <div class="nav">
       <a href="{% pageurl site_root %}" aria-current="page" class="brand base-nav-brand base--current">
-        <img src="{% static 'images/logo/plant.svg' %}" loading="eager" alt="" class="logo">
+        <img src="{% static 'images/plant.svg' %}" loading="eager" alt="" class="logo">
       </a>
       <nav role="navigation" class="nav-menu base-nav-menu">
         {% for menuitem in site_root.get_children.live.in_menu %}
