@@ -38,9 +38,6 @@ class FooterInformation(models.Model):
     def __str__(self):
         return "Footer Information"
 
-    class Meta:
-        verbose_name = "Primary Footer Information"
-
 
 @register_snippet
 class FooterInternalLinks(models.Model):
@@ -145,7 +142,7 @@ class FooterCopyright(models.Model):
     ]
 
     def __str__(self):
-        return "Footer Social Links"
+        return "Footer Copyright"
 
     def get_preview_template(self, request, mode_name):
         return "base.html"
