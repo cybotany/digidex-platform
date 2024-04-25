@@ -127,27 +127,3 @@ class FooterSocialLinks(models.Model):
             "github_url": self.github,
             "twitter_url": self.twitter
         }
-
-
-@register_snippet
-class FooterCopyright(models.Model):
-    copyright = models.TextField(
-        max_length=255,
-        blank=True,
-        null=True
-    )
-
-    panels = [
-        panels.FieldPanel("copyright"),
-    ]
-
-    def __str__(self):
-        return "Footer Copyright"
-
-    def get_preview_template(self, request, mode_name):
-        return "base.html"
-
-    def get_preview_context(self, request, mode_name):
-        return {
-            "copyright_text": self.copyright
-        }

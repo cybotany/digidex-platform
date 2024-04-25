@@ -59,13 +59,3 @@ def get_footer_social_links(context):
         }
     
     return social_links
-
-
-@register.inclusion_tag("base/includes/footer/copyright.html", takes_context=True)
-def get_footer_copyright(context):
-    instance = footer.FooterCopyright.objects.filter().first()
-    copyright = instance.copyright if instance else ""
-    
-    return {
-        'copyright': copyright
-    }
