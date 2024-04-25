@@ -56,28 +56,38 @@ class NavigationBar(wt_models.DraftStateMixin, wt_models.RevisionMixin, wt_model
 
 @register_snippet
 class PageFooter(models.Model):
+    paragraph = models.TextField(
+        max_length=255,
+        blank=True,
+        null=True
+    )
     copyright = models.CharField(
         max_length=255,
-        blank=True
+        blank=True,
+        null=True
     )
     credits = models.CharField(
         max_length=255,
-        blank=True
+        blank=True,
+        null=True
     )
     phone_number = models.CharField(
         verbose_name="Support Phone Number",
         max_length=50,
-        blank=True
+        blank=True,
+        null=True
     )
     email = models.EmailField(
         verbose_name="Support Email Address",
         max_length=255,
-        blank=True
+        blank=True,
+        null=True
     )
     chat = models.URLField(
         verbose_name="Support Chat URL",
         max_length=255,
-        blank=True
+        blank=True,
+        null=True
     )
     blog = models.ForeignKey(
         'wagtailcore.Page',
@@ -114,17 +124,20 @@ class PageFooter(models.Model):
     github = models.URLField(
         verbose_name="GitHub URL",
         max_length=255,
-        blank=True
+        blank=True,
+        null=True
     )
     twitter = models.URLField(
         verbose_name="Twitter URL",
         max_length=255,
-        blank=True
+        blank=True,
+        null=True
     )
 
     panels = [
         panels.MultiFieldPanel(
             [
+                panels.FieldPanel('paragraph'),
                 panels.FieldPanel('copyright'),
                 panels.FieldPanel('credits'),
             ],
@@ -135,7 +148,7 @@ class PageFooter(models.Model):
                 panels.FieldPanel('email'),
                 panels.FieldPanel('chat'),
             ],
-            "Support Contact Information"),
+            "Contact Information"),
         panels.MultiFieldPanel(
             [
                 panels.PageChooserPanel('blog'),
