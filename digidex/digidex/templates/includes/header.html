@@ -1,20 +1,5 @@
 {% load wagtailuserbar wagtailcore_tags header_tags %}
 
 <header class="navbar base-navbar" role="banner">
-  <div class="navbar__container">
-    {% wagtailuserbar "top-right" %}
-    {% get_header_navbar_logo %}
-    <nav class="navbar__menu" role="navigation">
-      {% get_header_navbar_menu %}
-      <div class="navbar__actions--mobile">
-        {% get_header_navbar_mobile %}
-      </div>
-    </nav>
-    <div class="navbar__actions--desktop">
-      {% get_header_navbar_desktop %}
-    </div>
-    <button class="menu-button base-navbar-button" type="button">
-      <span class="icon-menu base-icon-navbar-menu"></span>
-    </button>
-  </div>
+  {% get_header_navbar %}
 </header>
