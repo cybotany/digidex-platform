@@ -1,5 +1,15 @@
+{% load navigation_tags %}
+
+{% with github_url=settings.base.NavigationSettings.github twitter_url=settings.base.NavigationSettings.twitter linkedin_url=settings.base.NavigationSettings.linkedin %}
 <div id="footer-social-links" class="footer__block">
   <p class="footer__subtitle">Connect With Us</p>
-  <a href="{{ github }}" target="_blank" class="footer__link">GitHub</a>
-  <a href="{{ twitter }}" target="_blank" class="footer__link">Twitter</a>
+  {% if github_url %}
+    <a href="{{ github_url }}" class="footer__link">GitHub</a>
+  {% endif %}
+  {% if twitter_url %}
+    <a href="{{ twitter_url }}" class="footer__link">Twitter</a>
+  {% endif %}
+  {% if linkedin_url %}
+    <a href="{{ linkedin_url }}" class="footer__link">Linkedin</a>
+  {% endif %}
 </div>

@@ -1,2 +1,2 @@
-from .footer import FooterInformation, FooterInternalLinks, FooterSocialLinks
-from .settings import SiteSettings
+from .footer import FooterParagraph, FooterCopyright
+from .settings import NavigationSettings
