@@ -1,0 +1,9 @@
+{% load navigation_tags%}
+
+{% with login_url=settings.base.NavigationSettings.login signup_url=settings.base.NavigationSettings.signup %}
+  {% if login_url %}
+    <a href="{{ login_url }}" class="nav-button-outline w-button">Login</a>
+  {% endif %}
+  {% if signup_url %}
+    <a href="{{ signup_url }}" class="nav-button-outline w-button">Signup</a>
+  {% endif %}

@@ -104,7 +104,7 @@ class NavigationSettings(BaseGenericSetting):
     )
 
     panels = [
-        panels.ImageChooserPanel('logo'),
+        panels.FieldPanel('logo'),
         panels.MultiFieldPanel(
             [
                 panels.FieldPanel('email'),
@@ -114,19 +114,19 @@ class NavigationSettings(BaseGenericSetting):
         ),
         panels.MultiFieldPanel(
             [
-                panels.FieldPanel('signup'),
-                panels.FieldPanel('login'),
-                panels.FieldPanel('profile'),
-                panels.FieldPanel('logout'),
+                panels.PageChooserPanel('signup'),
+                panels.PageChooserPanel('login'),
+                panels.PageChooserPanel('profile'),
+                panels.PageChooserPanel('logout'),
             ],
             heading="User Management Pages"
         ),
         panels.MultiFieldPanel(
             [
-                panels.FieldPanel('blog'),
-                panels.FieldPanel('company'),
-                panels.FieldPanel('solutions'),
-                panels.FieldPanel('support'),
+                panels.PageChooserPanel('blog'),
+                panels.PageChooserPanel('company'),
+                panels.PageChooserPanel('solutions'),
+                panels.PageChooserPanel('support'),
             ],
             heading="Internal Site Pages"
         ),

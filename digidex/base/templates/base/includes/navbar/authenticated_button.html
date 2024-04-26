@@ -1,0 +1,9 @@
+{% load navigation_tags%}
+
+{% with profile_url=settings.base.NavigationSettings.profile logout_url=settings.base.NavigationSettings.logout %}
+  {% if profile_url %}
+    <a href="{{ profile_url }}" class="footer__link">Profile</a>
+  {% endif %}
+  {% if logout_url %}
+    <a href="{{ logout_url }}" class="footer__link">Logout</a>
+  {% endif %}
