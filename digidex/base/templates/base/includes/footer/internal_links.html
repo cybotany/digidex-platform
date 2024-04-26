@@ -1,18 +1,7 @@
-<!-- base/templates/base/includes/footer/internal_links.html -->
-{% load static %}
-
 <div id="footer-useful-links" class="footer__block">
   <p class="footer__subtitle">Useful Links</p>
-  {% if footer_internal_links.blog %}
-    <a href="{{ footer_internal_links.blog }}" class="footer__link">Blog</a>
-  {% endif %}
-  {% if footer_internal_links.company %}
-    <a href="{{ footer_internal_links.company }}" class="footer__link">Company</a>
-  {% endif %}
-  {% if footer_internal_links.solutions %}
-    <a href="{{ footer_internal_links.solutions }}" class="footer__link">Solutions</a>
-  {% endif %}
-  {% if footer_internal_links.support %}
-    <a href="{{ footer_internal_links.support }}" class="footer__link">Support</a>
-  {% endif %}
+  <a href="{{ footer_internal_links.blog }}" class="footer__link">Blog</a>
+  <a href="{{ footer_internal_links.company }}" class="footer__link">Company</a>
+  <a href="{{ footer_internal_links.solutions }}" class="footer__link">Solutions</a>
+  <a href="{{ footer_internal_links.support }}" class="footer__link">Support</a>
 </div>
