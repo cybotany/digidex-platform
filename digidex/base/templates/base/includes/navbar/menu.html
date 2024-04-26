@@ -1,36 +1,7 @@
-{% load static i18n wagtailcore_tags navigation_tags %}
+{% load wagtailcore_tags navigation_tags %}
 {% get_site_root as site_root %}
 
-<header class="navbar" role="banner">
-  <div class="navbar__container">
-    <a href="{% pageurl site_root %}" aria-current="page" class="navbar__brand">
-      <img src="{% static 'images/logo.svg' %}" loading="eager" alt="Company Logo" class="navbar__logo">
-    </a>
-    <nav class="navbar__menu" role="navigation">
-      {% for menuitem in site_root.get_children.live.in_menu %}
-        <a href="{% pageurl menuitem %}" class="navbar__link">{{ menuitem.title }}</a>
-      {% endfor %}
-      <div class="navbar__actions navbar__actions--mobile">
-        {% if user.is_authenticated %}
-          <a href="{% url 'account_email' %}" class="navbar__button navbar__button--outline">{% trans "Profile" %}</a>
-          <a href="{% url 'account_logout' %}" class="navbar__button">{% trans "Log Out" %}</a>
-        {% else %}
-          <a href="{% url 'account_login' %}" class="navbar__button navbar__button--outline">{% trans "Log In" %}</a>
-          <a href="{% url 'account_signup' %}" class="navbar__button">{% trans "Sign Up" %}</a>
-        {% endif %}
-      </div>
-    </nav>
-    <div class="navbar__actions navbar__actions--desktop">
-      {% if user.is_authenticated %}
-        <a href="{% url 'account_email' %}" class="navbar__button navbar__button--outline">{% trans "Profile" %}</a>
-        <a href="{% url 'account_logout' %}" class="navbar__button">{% trans "Log Out" %}</a>
-      {% else %}
-        <a href="{% url 'account_login' %}" class="navbar__button navbar__button--outline">{% trans "Log In" %}</a>
-        <a href="{% url 'account_signup' %}" class="navbar__button">{% trans "Sign Up" %}</a>
-      {% endif %}
-    </div>
-    <button class="menu-button navbar__toggle" type="button">
-      <span class="icon-menu"></span>
-    </button>
-  </div>
-</header>
+{% for menuitem in site_root.get_children.live.in_menu %}
+  <a href="{% pageurl menuitem %}" class="navbar__link">{{ menuitem.title }}</a>
+{% endfor %}
+

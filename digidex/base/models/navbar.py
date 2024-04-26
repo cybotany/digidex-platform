@@ -1,114 +1,70 @@
-# base/models/header.py
 from django.db import models
-
-from wagtail import models as wt_models
-from wagtail.admin import panels
+from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
 from wagtail.snippets.models import register_snippet
+from wagtail.core.models import ClusterableModel
 
 
 @register_snippet
-class NavbarMenu(wt_models.DraftStateMixin, wt_models.RevisionMixin, wt_models.PreviewableMixin, wt_models.TranslatableMixin, models.Model):
-    text = models.TextField(
+class AuthenticatedNavbarButton(ClusterableModel):
+    link = models.URLField(
+        verbose_name="Link URL"
+        )
+    text = models.CharField(
+        verbose_name="Button Text",
         max_length=255
+    )
+    fill = models.CharField(
+        verbose_name="Button Fill",
+        max_length=255, help_text="Outline or Solid"
     )
 
     panels = [
-        panels.FieldPanel("url"),
-        panels.FieldPanel("text"),
-        panels.PublishingPanel(),
+        MultiFieldPanel(
+            [
+                FieldPanel('link'),
+                FieldPanel('text'),
+                FieldPanel('fill'),
+            ],
+            heading="Authenticated User Button Configuration"
+        ),
     ]
 
     def __str__(self):
         return self.text
 
-    def get_preview_template(self, request, mode_name):
-        return "base.html"
-
-    def get_preview_context(self, request, mode_name):
-        return {
-            "header_text": self.text,
-        }
-
-    class Meta(wt_models.TranslatableMixin.Meta):
-        verbose_name = "Navigation Bar"
-
+    class Meta:
+        verbose_name = "Authenticated Navbar Button"
+        verbose_name_plural = "Authenticated Navbar Buttons"
 
 @register_snippet
-class Navbar(wt_models.DraftStateMixin, wt_models.RevisionMixin, wt_models.PreviewableMixin, wt_models.TranslatableMixin, models.Model):
-    text = models.TextField(
+class NonAuthenticatedNavbarButton(ClusterableModel):
+    link = models.URLField(
+        verbose_name="Link URL"
+    )
+    text = models.CharField(
+        verbose_name="Button Text",
         max_length=255
+    )
+    fill = models.CharField(
+        verbose_name="Button Fill",
+        max_length=255,
+        help_text="Outline or Solid"
     )
 
     panels = [
-        panels.FieldPanel("url"),
-        panels.FieldPanel("text"),
-        panels.PublishingPanel(),
+        MultiFieldPanel(
+            [
+                FieldPanel('link'),
+                FieldPanel('text'),
+                FieldPanel('fill'),
+            ],
+            heading="Non-Authenticated User Button Configuration"
+        ),
     ]
 
     def __str__(self):
         return self.text
 
-    def get_preview_template(self, request, mode_name):
-        return "base.html"
-
-    def get_preview_context(self, request, mode_name):
-        return {
-            "header_text": self.text,
-        }
-
-    class Meta(wt_models.TranslatableMixin.Meta):
-        verbose_name = "Navigation Bar"
-
-
-@register_snippet
-class NavbarMenu(wt_models.DraftStateMixin, wt_models.RevisionMixin, wt_models.PreviewableMixin, wt_models.TranslatableMixin, models.Model):
-    text = models.TextField(
-        max_length=255
-    )
-
-    panels = [
-        panels.FieldPanel("url"),
-        panels.FieldPanel("text"),
-        panels.PublishingPanel(),
-    ]
-
-    def __str__(self):
-        return self.text
-
-    def get_preview_template(self, request, mode_name):
-        return "base.html"
-
-    def get_preview_context(self, request, mode_name):
-        return {
-            "header_text": self.text,
-        }
-
-    class Meta(wt_models.TranslatableMixin.Meta):
-        verbose_name = "Navigation Bar"
-
-
-@register_snippet
-class NavbarMenu(wt_models.DraftStateMixin, wt_models.RevisionMixin, wt_models.PreviewableMixin, wt_models.TranslatableMixin, models.Model):
-    text = models.TextField(
-        max_length=255
-    )
-
-    panels = [
-        panels.FieldPanel("url"),
-        panels.FieldPanel("text"),
-        panels.PublishingPanel(),
-    ]
-
-    def __str__(self):
-        return self.text
-
-    def get_preview_template(self, request, mode_name):
-        return "base.html"
-
-    def get_preview_context(self, request, mode_name):
-        return {
-            "header_text": self.text,
-        }
-
-    class Meta(wt_models.TranslatableMixin.Meta):
-        verbose_name = "Navigation Bar"
+    class Meta:
+        verbose_name = "Non-Authenticated Navbar Button"
+        verbose_name_plural = "Non-Authenticated Navbar Buttons"
