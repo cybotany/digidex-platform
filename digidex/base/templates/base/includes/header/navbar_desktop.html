@@ -1,0 +1,10 @@
+{% load static i18n wagtailcore_tags navigation_tags %}
+{% get_site_root as site_root %}
+
+{% if user.is_authenticated %}
+  <a href="{% url 'account_email' %}" class="navbar__button navbar__button--outline">{% trans "Profile" %}</a>
+  <a href="{% url 'account_logout' %}" class="navbar__button">{% trans "Log Out" %}</a>
+{% else %}
+  <a href="{% url 'account_login' %}" class="navbar__button navbar__button--outline">{% trans "Log In" %}</a>
+  <a href="{% url 'account_signup' %}" class="navbar__button">{% trans "Sign Up" %}</a>
+{% endif %}

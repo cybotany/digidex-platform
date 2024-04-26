@@ -1,4 +1,4 @@
-# base/models/header.py
+# base/models/advert.py
 from django.db import models
 
 from wagtail import models as wt_models
@@ -7,7 +7,11 @@ from wagtail.snippets.models import register_snippet
 
 
 @register_snippet
-class Header(wt_models.DraftStateMixin, wt_models.RevisionMixin, wt_models.PreviewableMixin, wt_models.TranslatableMixin, models.Model):
+class AdvertBanner(wt_models.DraftStateMixin, wt_models.RevisionMixin, wt_models.PreviewableMixin, wt_models.TranslatableMixin, models.Model):
+    url = models.URLField(
+        null=True,
+        blank=True
+    )
     text = models.TextField(
         max_length=255
     )
@@ -26,8 +30,9 @@ class Header(wt_models.DraftStateMixin, wt_models.RevisionMixin, wt_models.Previ
 
     def get_preview_context(self, request, mode_name):
         return {
-            "header_text": self.text,
+            "advert_text": self.text,
         }
 
     class Meta(wt_models.TranslatableMixin.Meta):
-        verbose_name = "Navigation Bar"
+        verbose_name = "Advert Banner"
+        verbose_name_plural = "Advert Banners"
