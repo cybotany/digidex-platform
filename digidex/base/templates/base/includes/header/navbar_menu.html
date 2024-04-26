@@ -2,5 +2,5 @@
 {% get_site_root as site_root %}
 
 {% for menuitem in site_root.get_children.live.in_menu %}
-  <a href="{% pageurl menuitem %}" class="navbar__link">{{ menuitem.title }}</a>
+  <a href="{% pageurl menuitem %}" class="navbar__link base-navbar-link">{{ menuitem.title }}</a>
 {% endfor %}
