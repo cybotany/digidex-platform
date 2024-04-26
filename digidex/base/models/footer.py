@@ -41,6 +41,9 @@ class FooterInformation(
         panels.FieldPanel('chat'),
     ]
 
+    def get_preview_template(self, request, mode_name):
+        return 'base.html'
+
     def __str__(self):
         return "Footer Information"
 
@@ -142,4 +145,33 @@ class FooterSocialLinks(
         return {
             "github_url": self.github,
             "twitter_url": self.twitter
+        }
+
+
+@register_snippet
+class FooterCopyright(
+    DraftStateMixin,
+    RevisionMixin,
+    PreviewableMixin,
+    models.Model,
+):
+    text = models.TextField(
+        max_length=255,
+        blank=True,
+        null=True
+    )
+
+    panels = [
+        panels.FieldPanel("text"),
+    ]
+
+    def __str__(self):
+        return "Footer Copyright"
+
+    def get_preview_template(self, request, mode_name):
+        return "base.html"
+
+    def get_preview_context(self, request, mode_name):
+        return {
+            "copyright_text": self.text
         }

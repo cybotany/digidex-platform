@@ -4,12 +4,12 @@
   <section class="footer__section">
     <div class="content">
       <div class="base-layout-grid footer__grid">
-        {% footer_information %}
-        {% footer_internal_links %}
-        {% footer_social_links %}
+        {% get_footer_information %}
+        {% get_footer_internal_links %}
+        {% get_footer_social_links %}
       </div>
       <div class="footer__block-down">
-        <div class="text-footer-down">All Rights Reserved. Built with <a href="https://wagtail.org/" target="_blank" class="link-footer-down">Wagtail</a><br></div>
+        {% get_footer_social_links %}
       </div>
     </div>
   </section>
