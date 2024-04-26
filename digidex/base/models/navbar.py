@@ -1,7 +1,7 @@
 from django.db import models
-from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
+from wagtail.admin import panels
 from wagtail.snippets.models import register_snippet
-from wagtail.core.models import ClusterableModel
+from wagtail.models import ClusterableModel
 
 
 @register_snippet
@@ -19,11 +19,11 @@ class AuthenticatedNavbarButton(ClusterableModel):
     )
 
     panels = [
-        MultiFieldPanel(
+        panels.MultiFieldPanel(
             [
-                FieldPanel('link'),
-                FieldPanel('text'),
-                FieldPanel('fill'),
+                panels.FieldPanel('link'),
+                panels.FieldPanel('text'),
+                panels.FieldPanel('fill'),
             ],
             heading="Authenticated User Button Configuration"
         ),
@@ -52,11 +52,11 @@ class NonAuthenticatedNavbarButton(ClusterableModel):
     )
 
     panels = [
-        MultiFieldPanel(
+        panels.MultiFieldPanel(
             [
-                FieldPanel('link'),
-                FieldPanel('text'),
-                FieldPanel('fill'),
+                panels.FieldPanel('link'),
+                panels.FieldPanel('text'),
+                panels.FieldPanel('fill'),
             ],
             heading="Non-Authenticated User Button Configuration"
         ),
