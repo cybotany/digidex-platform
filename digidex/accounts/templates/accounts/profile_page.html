@@ -5,11 +5,11 @@
   <section class="profile__section">
     <div class="profile__content">
       <div class="section__heading">
-        <h2 class="profile__heading">{{ profile.user.username }}</h2>
+        <h2 class="profile__heading">{{ user.username }}</h2>
       </div>
       <div class="base-layout-grid profile__grid">
-        {% include 'accounts/includes/profile.html' %}
-        {% include 'inventory/includes/digitized_collection.html' %}
+        {% include 'accounts/includes/user_profile.html' %}
+        {% include 'accounts/includes/profile_collection.html' %}
     </div>
   </section>
 {% endblock %}
