@@ -1,33 +1,30 @@
 from django import template
+
 from base.models import footer
 
 register = template.Library()
 
 @register.inclusion_tag("base/includes/footer/paragraph.html", takes_context=True)
 def get_footer_paragraph(context):
-    instance = footer.FooterParagraph.objects.filter().first()
-    if not instance:
-        instance = {
-            'paragraph': 'Footer Paragraph Placeholder',
-        }
-    else:
-        instance = {
-            'paragraph': instance.paragraph
-        }
+    footer_paragraph = context.get("footer_paragraph", "")
     
-    return instance
+    if not footer_paragraph:
+        instance = footer.FooterParagraph.objects.filter(live=True).first()
+        footer_paragraph = instance.paragraph if instance else "Footer Paragraph Placeholder"
+    
+    return {
+        "footer_paragraph": footer_paragraph
+    }
 
 
 @register.inclusion_tag("base/includes/footer/copyright.html", takes_context=True)
 def get_footer_copyright(context):
-    instance = footer.FooterCopyright.objects.filter().first()
-    if not instance:
-        copyright = {
-            'copyright':  'All Rights Reserved'
-        }
-    else:
-        copyright = {
-            'copyright': instance.text
-        }
+    footer_copyright = context.get("footer_copyright", "")
+
+    if not footer_copyright:
+        instance = footer.FooterCopyright.objects.filter(live=True).first()
+        footer_copyright = instance.copyright if instance else "All Rights Reserved"
     
-    return copyright
+    return {
+        "footer_copyright": footer_copyright
+    }

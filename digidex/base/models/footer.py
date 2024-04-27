@@ -23,11 +23,16 @@ class FooterParagraph(
         panels.FieldPanel('paragraph'),
     ]
 
+    def __str__(self):
+        return "Footer Paragraph"
+
     def get_preview_template(self, request, mode_name):
         return 'base.html'
 
-    def __str__(self):
-        return "Footer Information"
+    def get_preview_context(self, request, mode_name):
+        return {
+            "footer_paragraph": self.paragraph
+        }
 
 
 @register_snippet
@@ -37,14 +42,14 @@ class FooterCopyright(
     PreviewableMixin,
     models.Model,
 ):
-    text = models.TextField(
+    copyright = models.TextField(
         max_length=255,
         blank=True,
         null=True
     )
 
     panels = [
-        panels.FieldPanel("text"),
+        panels.FieldPanel("copyright"),
     ]
 
     def __str__(self):
@@ -55,5 +60,5 @@ class FooterCopyright(
 
     def get_preview_context(self, request, mode_name):
         return {
-            "copyright_text": self.text
+            "copyright_text": self.copyright
         }
