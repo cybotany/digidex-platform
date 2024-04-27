@@ -6,10 +6,10 @@ from wagtail.admin import panels
 
 
 class ProfileIndexPage(wt_models.Page):
-    subpage_types = ['inventory.UserProfilePage']
+    subpage_types = ['inventory.ProfilePage']
 
 
-class UserProfilePage(wt_models.Page):
+class ProfilePage(wt_models.Page):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,
