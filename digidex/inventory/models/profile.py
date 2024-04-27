@@ -6,7 +6,7 @@ from wagtail.admin import panels
 
 
 class ProfileIndexPage(wt_models.Page):
-    subpage_types = ['accounts.ProfilePage']
+    subpage_types = ['inventory.UserProfilePage']
 
 
 class UserProfilePage(wt_models.Page):
