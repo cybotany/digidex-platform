@@ -1,12 +1,12 @@
 from django.db import models
 
 from wagtail.admin import panels
-from wagtail import models as wt_models
-from modelcluster import fields as mc_fields
+from wagtail.models import Page
+from modelcluster.fields import ParentalKey, Orderable
 
 
-class LottieFeature(wt_models.Orderable):
-    page = mc_fields.ParentalKey(
+class LottieFeature(Orderable):
+    page = ParentalKey(
         'HomePage', 
         on_delete=models.CASCADE,
         related_name='lottie_feature'
@@ -29,8 +29,8 @@ class LottieFeature(wt_models.Orderable):
     ]
 
 
-class SolutionItem(wt_models.Orderable):
-    page = mc_fields.ParentalKey(
+class SolutionItem(Orderable):
+    page = ParentalKey(
         'HomePage',
         on_delete=models.CASCADE,
         related_name='solution_item'
@@ -54,8 +54,8 @@ class SolutionItem(wt_models.Orderable):
     ]
 
 
-class CompanyStatistic(wt_models.Orderable):
-    page = mc_fields.ParentalKey(
+class CompanyStatistic(Orderable):
+    page = ParentalKey(
         'HomePage', 
         on_delete=models.CASCADE,
         related_name='company_statistic'
@@ -87,8 +87,8 @@ class CompanyStatistic(wt_models.Orderable):
     ]
 
 
-class ProductFeature(wt_models.Orderable):
-    page = mc_fields.ParentalKey(
+class ProductFeature(Orderable):
+    page = ParentalKey(
         'HomePage',
         related_name='feature'
     )
@@ -117,7 +117,7 @@ class ProductFeature(wt_models.Orderable):
         verbose_name_plural = "Product Features"
 
 
-class HomePage(wt_models.Page):
+class HomePage(Page):
     hero_heading = models.CharField(
         blank=True,
         max_length=255,
@@ -161,7 +161,7 @@ class HomePage(wt_models.Page):
         verbose_name="Feature Heading"
     )
 
-    content_panels = wt_models.Page.content_panels + [
+    content_panels = Page.content_panels + [
         panels.MultiFieldPanel(
             [
                 panels.FieldPanel('hero_heading'),
