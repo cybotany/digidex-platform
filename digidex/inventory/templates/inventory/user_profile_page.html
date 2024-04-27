@@ -8,8 +8,16 @@
           <h2 class="heading">{{ user.username }}</h2>
         </div>
         <div class="base-layout-grid grid">
-          {% include 'inventory/includes/user_profile.html' %}
-          {% include 'inventory/includes/profile_collection.html' %}
+          <div class="profile"> 
+            {% include 'inventory/includes/start_date.html' %}
+            {% include 'inventory/includes/profile/avatar.html' %}
+            {% include 'inventory/includes/profile/bio.html' %}
+             
+            {% if is_owner %}
+              {% include 'inventory/includes/profile/update.html' %}
+            {% endif %}
+          </div>
+          {% include 'inventory/includes/profile/collection.html' %}
         </div>
       </div>
     </div>
