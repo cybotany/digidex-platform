@@ -2,6 +2,4 @@
 
 {% if profile.avatar %}
   <img src="{{ profile.avatar.url }}" alt="User avatar" class="avatar-image">
-{% else %}
-  <img src="{% static 'digidex/images/placeholder.svg' %}" alt="No Image Available" class="avatar-image">
 {% endif %}
