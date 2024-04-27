@@ -42,7 +42,9 @@
             {% block content %}{% endblock %}
         </main>
         {% include "includes/footer.html" %}
-        
+
+        {% wagtailuserbar %}
+    
         {# Global javascript #}
         <script type="text/javascript" src="{% static 'js/digidex.js' %}"></script>
 

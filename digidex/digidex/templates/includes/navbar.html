@@ -1,10 +1,10 @@
 <div data-id="header-navbar" role="banner" class="navbar base-navbar">
   <div class="navbar__container">
-    <div class="nav">
+    <div class="navbar__item">
       {% include "base/includes/navbar/logo.html" %}
-      <nav role="navigation" class="navbar__menu base-nav-menu">
+      <nav class="navbar__menu base-nav-menu" role="navigation">
         {% include "base/includes/navbar/menu.html" %}
-        <div class="navbar__actions navbar__actions--mobile">
+        <div class="navbar__buttons--mobile">
           {% if user.is_authenticated %}
             {% include "base/includes/navbar/authenticated_button.html" %}
           {% else %}
@@ -13,16 +13,16 @@
         </div>
       </nav>
     </div>
-    <div class="nav">
-      <div class="button-desktop">
+    <div class="navbar__item">
+      <div class="navbar__buttons--desktop">
         {% if user.is_authenticated %}
           {% include "base/includes/navbar/authenticated_button.html" %}
         {% else %}
           {% include "base/includes/navbar/non_authenticated_button.html" %}
         {% endif %}
       </div>
-      <div class="menu-button base-navbar-button">
-        <div class="icon-menu base-icon-navbar-menu"></div>
+      <div class="menu__button base-navbar-button">
+        <div class="menu__icon base-icon-navbar-menu"></div>
       </div>
     </div>
   </div>
