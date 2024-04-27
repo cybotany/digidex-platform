@@ -1,5 +1,5 @@
 {% if user.is_authenticated %}
-  <a href="{% url 'user_profile' slug=user.slug %}" class="navbar__button--outline base-button">{{ user.username }}</a>
+  <a href="{% url 'user_profile' slug=user.slug %}" class="navbar__button--outline base-button">{{ user.username|capfirst }}</a>
   <a href="{{ account_logout }}" class="navbar__button base-button">Logout</a>
 {% else %}
   <a href="{{ account_login }}" class="navbar__button base-button">Login</a>

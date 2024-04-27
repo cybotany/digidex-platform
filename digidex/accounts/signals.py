@@ -14,7 +14,7 @@ def create_user_profile_page(sender, instance, created, **kwargs):
             user_profile_page = _models.ProfilePage(
                 title=f"{instance.username}'s Profile",
                 user=instance,
-                slug=instance.slug  # Assuming slug field is populated
+                slug=instance.slug
             )
             root_profile_page.add_child(instance=user_profile_page)
             user_profile_page.save_revision().publish()
