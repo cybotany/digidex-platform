@@ -160,7 +160,7 @@ SIGNUP_URL = 'account_signup'
 LOGIN_URL = 'account_login'
 WAGTAIL_FRONTEND_LOGIN_URL = LOGIN_URL
 
-#ACCOUNT_ADAPTER = 'digidex.users.adapter.DigiDexAdapter'
+ACCOUNT_PRESERVE_USERNAME_CASING = False
 
 ACCOUNT_USERNAME_MIN_LENGTH = 3
 #ACCOUNT_USERNAME_VALIDATORS = 'some.module.validators.custom_username_validators'
@@ -187,8 +187,6 @@ ACCOUNT_USERNAME_BLACKLIST = [
     'test', 'testing', 'demo', 'example', 'batch', 'status',
     'django-admin',
 ]
-
-ACCOUNT_PRESERVE_USERNAME_CASING = False
 
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
 ACCOUNT_EMAIL_NOTIFICATIONS = True
