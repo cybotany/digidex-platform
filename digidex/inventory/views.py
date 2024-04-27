@@ -9,4 +9,4 @@ def user_profile(request, slug):
     if hasattr(user, 'profile_page'):
         return redirect(user.profile_page.url)
     else:
-        return render(request, 'inventory/includes/profile/missing.html', {'user': user})
+        return render(request, 'inventory/includes/profile/missing_page.html', {'user': user})
