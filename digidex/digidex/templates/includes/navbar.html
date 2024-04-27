@@ -5,21 +5,13 @@
       <nav class="navbar__menu base-nav-menu" role="navigation">
         {% include "base/includes/navbar/menu.html" %}
         <div class="navbar__buttons--mobile">
-          {% if user.is_authenticated %}
-            {% include "base/includes/navbar/authenticated_set.html" %}
-          {% else %}
-            {% include "base/includes/navbar/non_authenticated_set.html" %}
-          {% endif %}
+          {% include "base/includes/navbar/buttons.html" %}
         </div>
       </nav>
     </div>
     <div class="navbar__item">
       <div class="navbar__buttons--desktop">
-        {% if user.is_authenticated %}
-          {% include "base/includes/navbar/authenticated_set.html" %}
-        {% else %}
-          {% include "base/includes/navbar/non_authenticated_set.html" %}
-        {% endif %}
+        {% include "base/includes/navbar/buttons.html" %}
       </div>
       <div class="menu__button base-navbar-button">
         <div class="menu__icon base-icon-navbar-menu"></div>

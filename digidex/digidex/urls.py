@@ -6,9 +6,11 @@ from wagtail.admin import urls as wagtailadmin_urls
 from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
+from accounts import views as profile_views
 from search import views as search_views
 
 urlpatterns = [
+    path('<slug:slug>/', profile_views.user_profile, name='user_profile'),
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
