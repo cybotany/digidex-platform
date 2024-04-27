@@ -6,9 +6,9 @@
         {% include "base/includes/navbar/menu.html" %}
         <div class="navbar__buttons--mobile">
           {% if user.is_authenticated %}
-            {% include "base/includes/navbar/authenticated_button.html" %}
+            {% include "base/includes/navbar/authenticated_set.html" %}
           {% else %}
-            {% include "base/includes/navbar/non_authenticated_button.html" %}
+            {% include "base/includes/navbar/non_authenticated_set.html" %}
           {% endif %}
         </div>
       </nav>
@@ -16,9 +16,9 @@
     <div class="navbar__item">
       <div class="navbar__buttons--desktop">
         {% if user.is_authenticated %}
-          {% include "base/includes/navbar/authenticated_button.html" %}
+          {% include "base/includes/navbar/authenticated_set.html" %}
         {% else %}
-          {% include "base/includes/navbar/non_authenticated_button.html" %}
+          {% include "base/includes/navbar/non_authenticated_set.html" %}
         {% endif %}
       </div>
       <div class="menu__button base-navbar-button">
