@@ -1,85 +1,19 @@
-from wagtail import blocks
-from wagtail.images import blocks as image_blocks
-from wagtail.documents import blocks as doc_blocks
-
-class BasicStructBlock(blocks.StructBlock):
-    """
-    Used internally
-    """
-    pass
-
-
-class BasicIntegerBlock(blocks.IntegerBlock):
-    """
-    Used internally
-    """
-    pass
+from wagtail.blocks import (
+    CharBlock,
+    ChoiceBlock,
+    RichTextBlock,
+    StreamBlock,
+    StructBlock,
+)
+from wagtail.embeds.blocks import EmbedBlock
+from wagtail.images.blocks import ImageChooserBlock
 
 
-class BasicFloatBlock(blocks.FloatBlock):
-    """
-    Used internally
-    """
-    pass
-
-
-class BasicChoiceBlock(blocks.ChoiceBlock):
-    """
-    Used internally
-    """
-    pass
-
-
-class BasicListBlock(blocks.ListBlock):
-    """
-    Used internally
-    """
-    pass
-
-
-class BasicBooleanBlock(blocks.BooleanBlock):
-    """
-    Used internally
-    """
-    pass
-
-
-class BasicCharBlock(blocks.CharBlock):
-    """
-    Used internally
-    """
-    pass
-
-
-class BasicTextBlock(blocks.TextBlock):
-    """
-    Used internally
-    """
-    pass
-
-
-class BasicImageBlock(image_blocks.ImageChooserBlock):
-    """
-    Used internally
-    """
-    pass
-
-
-class BasicDocumentBlock(doc_blocks.DocumentChooserBlock):
-    """
-    Used internally
-    """
-    pass
-
-
-class BasicHeadingBlock(BasicStructBlock):
-    """
-    Used internally
-    """
-    text = BasicCharBlock(
+class HeadingBlock(StructBlock):
+    heading = CharBlock(
         required=True
     )
-    size = BasicChoiceBlock(
+    size = ChoiceBlock(
         choices=[
             ("", "Select a heading size"),
             ("h1", "H1"),
@@ -97,56 +31,48 @@ class BasicHeadingBlock(BasicStructBlock):
         template = "base/blocks/heading_block.html"
 
 
-class BasicParagraphBlock(blocks.RichTextBlock):
-    """
-    Used internally
-    """
-    pass
-
-
-class BasicInternalLinkBlock(blocks.PageChooserBlock):
-    """
-    Used internally
-    """
-    pass
-
-
-class BasicExternalLinkBlock(blocks.URLBlock):
-    """
-    Used internally
-    """
-    pass
-
-
-class BasicListBlock(blocks.ListBlock):
-    """
-    Used internally
-    """
-    pass
-
-
-class BasicStreamBlock(blocks.StreamBlock):
-    """
-    Used internally
-    """
-    heading = BasicHeadingBlock()
-    paragraph = BasicParagraphBlock()
-
-
-class BasicFigureBlock(BasicStructBlock):
-    """
-    Used internally
-     """
-    image = BasicImageBlock(
+class ImageBlock(StructBlock):
+    image = ImageChooserBlock(
         required=True
     )
-    caption = BasicCharBlock(
+    caption = CharBlock(
         required=False
     )
-    attribution = BasicCharBlock(
+    attribution = CharBlock(
         required=False
     )
 
     class Meta:
         icon = "image"
-        template = "base/blocks/figure_block.html"
+        template = "base/blocks/image_block.html"
+
+
+class FAQBlock(StructBlock):
+    question = CharBlock(
+        required=True,
+        max_length=255
+    )
+    answer = CharBlock(
+        required=True,
+        max_length=255
+    )
+    icon = ImageChooserBlock(
+        required=False
+    )
+
+    class Meta:
+        icon = 'question'
+        template = 'base/blocks/faq_block.html'
+        label = 'FAQ'
+
+
+class BaseStreamBlock(StreamBlock):
+    heading_block = HeadingBlock()
+    paragraph_block = RichTextBlock(
+        icon="pilcrow"
+    )
+    image_block = ImageBlock()
+    embed_block = EmbedBlock(
+        help_text="Insert a URL to embed. For example, https://www.youtube.com/watch?v=SGJFWirQ3ks",
+        icon="media",
+    )
