@@ -8,7 +8,6 @@ from wagtail.documents import urls as wagtaildocs_urls
 
 from search.views import search
 
-from inventory import urls as inventory_urls
 from nfc import urls as nfc_urls
 
 urlpatterns = [
@@ -18,7 +17,6 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path("search/", search, name="search"),
     path('nfc/', include(nfc_urls)),
-    path('u/', include(inventory_urls))
 ]
 
 if settings.DEBUG:

@@ -143,7 +143,7 @@ STORAGES = {
 }
 
 # Wagtail settings
-WAGTAIL_SITE_NAME = "DigiDex"
+WAGTAIL_SITE_NAME = "https://digidex.app"
 WAGTAILADMIN_BASE_URL = os.getenv("WAGTAILADMIN_BASE_URL")
 WAGTAILIMAGES_EXTENSIONS = ['gif', 'jpg', 'jpeg', 'png', 'webp', 'svg']
 WAGTAILSEARCH_BACKENDS = {
