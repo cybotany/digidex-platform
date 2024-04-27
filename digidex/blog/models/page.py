@@ -1,30 +1,31 @@
 from django.db import models
 from django import forms
 
-from modelcluster import fields as mc_fields
-from modelcluster.contrib import taggit as mc_taggit
-from taggit import models as tg_models
+from modelcluster.fields import ParentalKey, ParentalManyToManyField
+from modelcluster.contrib.taggit import ClusterTaggableManager
+from taggit.models import TaggedItemBase
 
-from wagtail import fields
-from wagtail import models as wt_models
-from wagtail.admin import panels
-from wagtail.search import index
+from wagtail.fields import RichTextField
+from wagtail.models import Page
+from wagtail.admin.panels import MultiFieldPanel, FieldPanel, InlinePanel
+from wagtail.search.index import SearchField
 
-class BlogPageTag(tg_models.TaggedItemBase):
-    content_object = mc_fields.ParentalKey(
+
+class BlogPageTag(TaggedItemBase):
+    content_object = ParentalKey(
         'blog.BlogPage',
         related_name='tagged_items',
         on_delete=models.CASCADE
     )
 
 
-class BlogPage(wt_models.Page):
+class BlogPage(Page):
     date = models.DateField("Post date")
-    authors = mc_fields.ParentalManyToManyField(
+    authors = ParentalManyToManyField(
         'blog.Author',
         blank=True
     )
-    tags = mc_taggit.ClusterTaggableManager(
+    tags = ClusterTaggableManager(
         through=BlogPageTag,
         blank=True
     )
@@ -34,7 +35,7 @@ class BlogPage(wt_models.Page):
     intro = models.CharField(
         max_length=250
     )
-    body = fields.RichTextField(
+    body = RichTextField(
         blank=True
     )
 
@@ -45,27 +46,27 @@ class BlogPage(wt_models.Page):
         else:
             return None
 
-    search_fields = wt_models.Page.search_fields + [
-        panels.FieldPanel('intro'),
-        index.SearchField('body'),
+    search_fields = Page.search_fields + [
+        FieldPanel('intro'),
+        SearchField('body'),
     ]
 
-    content_panels = wt_models.Page.content_panels + [
-        panels.MultiFieldPanel(
+    content_panels = Page.content_panels + [
+        MultiFieldPanel(
             [
-                panels.FieldPanel('date'),
-                panels.FieldPanel('authors', widget=forms.CheckboxSelectMultiple),
-                panels.FieldPanel('tags'),
+                FieldPanel('date'),
+                FieldPanel('authors', widget=forms.CheckboxSelectMultiple),
+                FieldPanel('tags'),
             ],
             heading="Blog information"
         ),
-        panels.FieldPanel('heading'),
-        panels.FieldPanel('intro'),
-        panels.FieldPanel('body'),
-        panels.InlinePanel('gallery_images', label="Gallery images"),
+        FieldPanel('heading'),
+        FieldPanel('intro'),
+        FieldPanel('body'),
+        InlinePanel('gallery_images', label="Gallery images"),
     ]
 
-class BlogTagIndexPage(wt_models.Page):
+class BlogTagIndexPage(Page):
 
     def get_context(self, request):
         tag = request.GET.get('tag')

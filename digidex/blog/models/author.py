@@ -1,14 +1,14 @@
 from django.db import models
 
-from wagtail.admin import panels
-from wagtail.snippets import models as wt_snippets
+from wagtail.admin.panels import FieldPanel
+from wagtail.snippets.models import register_snippet
 
-@wt_snippets.register_snippet
+@register_snippet
 class Author(models.Model):
     name = models.CharField(
         max_length=255
     )
-    author_image = models.ForeignKey(
+    image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
         blank=True,
@@ -17,8 +17,8 @@ class Author(models.Model):
     )
 
     panels = [
-        panels.FieldPanel('name'),
-        panels.FieldPanel('author_image'),
+        FieldPanel('name'),
+        FieldPanel('image'),
     ]
 
     def __str__(self):

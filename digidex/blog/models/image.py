@@ -1,11 +1,11 @@
 from django.db import models
 
-from modelcluster import fields as mc_fields
-from wagtail import models as wt_models
-from wagtail.admin import panels
+from modelcluster.fields import ParentalKey
+from wagtail.models import Orderable
+from wagtail.admin.panels import FieldPanel
 
-class BlogPageGalleryImage(wt_models.Orderable):
-    page = mc_fields.ParentalKey(
+class BlogPageGalleryImage(Orderable):
+    page = ParentalKey(
         'blog.BlogPage',
         on_delete=models.CASCADE,
         related_name='gallery_images'
@@ -21,6 +21,6 @@ class BlogPageGalleryImage(wt_models.Orderable):
     )
 
     panels = [
-        panels.FieldPanel('image'),
-        panels.FieldPanel('caption'),
+        FieldPanel('image'),
+        FieldPanel('caption'),
     ]
