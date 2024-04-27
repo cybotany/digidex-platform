@@ -5,7 +5,7 @@ from django.urls import reverse
 
 class NearFieldCommunicationTag(models.Model):
     """
-    Abstract base class for NFC (Near Field Communication) technology, providing common attributes.
+    Base class for NFC (Near Field Communication) technology, providing common attributes.
 
     Attributes:
         serial_number (CharField): The unique serial number associated with the NFC tag.

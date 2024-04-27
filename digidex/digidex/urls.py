@@ -2,6 +2,8 @@ from django.conf import settings
 from django.urls import include, path
 from django.contrib import admin
 
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
@@ -15,9 +17,10 @@ urlpatterns = [
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
     path('accounts/', include('allauth.urls')),
+    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('<slug:slug>/', profile_views.user_profile, name='user_profile'),
 ]
-
 
 if settings.DEBUG:
     from django.conf.urls.static import static
