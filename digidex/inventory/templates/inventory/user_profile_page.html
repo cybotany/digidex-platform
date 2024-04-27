@@ -1,4 +1,4 @@
-{% extends "accounts/base.html" %}
+{% extends "inventory/base.html" %}
 
 {% block content %}
   <section class="section">
@@ -8,8 +8,8 @@
           <h2 class="heading">{{ user.username }}</h2>
         </div>
         <div class="base-layout-grid grid">
-          {% include 'accounts/includes/user_profile.html' %}
-          {% include 'accounts/includes/profile_collection.html' %}
+          {% include 'inventory/includes/user_profile.html' %}
+          {% include 'inventory/includes/profile_collection.html' %}
         </div>
       </div>
     </div>
