@@ -1,2 +1,2 @@
-from .profile import ProfileIndexPage, UserProfilePage
+from .profile import ProfileIndexPage, ProfilePage
 from .digit import UserDigit
