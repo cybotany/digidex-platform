@@ -3122,7 +3122,7 @@ figcaption {
   display: flex;
 }
 
-.text-footer--down {
+.footer__text--down {
   color: rgba(20, 23, 24, .5);
   letter-spacing: .05em;
   text-transform: uppercase;
