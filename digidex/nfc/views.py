@@ -1,12 +1,12 @@
 from rest_framework import viewsets
 
-from nfc import serializers, models
+from nfc.models import NearFieldCommunicationTag
+from nfc.serializers import NearFieldCommunicationTagSerializer
 
 class NearFieldCommunicationTagViewSet(viewsets.ModelViewSet):
 
-    queryset = models.NearFieldCommunicationTag.objects.all()
-    serializer_class = serializers.NearFieldCommunicationTagSerializer
+    queryset = NearFieldCommunicationTag.objects.all()
+    serializer_class = NearFieldCommunicationTagSerializer
 
     def perform_create(self, serializer):
-        # Here you can add any custom logic you need before saving a new NFC Tag
         serializer.save()

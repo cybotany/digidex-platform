@@ -2,24 +2,32 @@ from django.conf import settings
 from django.urls import include, path
 from django.contrib import admin
 
+from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
-from accounts import views as profile_views
-from search import views as search_views
+from search.views import search
+
+from inventory import urls as inventory_urls
+from nfc import urls as nfc_urls
+
+router = DefaultRouter()
+router.register(r'ntags', NearFieldCommunicationTagViewSet)
 
 urlpatterns = [
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
-    path("search/", search_views.search, name="search"),
     path('accounts/', include('allauth.urls')),
+    path('api/', include(router.urls)),
+    path("search/", search, name="search"),
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('<slug:slug>/', profile_views.user_profile, name='user_profile'),
+    path('nfc/', include(nfc_urls)),
+    path('u/', include(inventory_urls))
 ]
 
 if settings.DEBUG:

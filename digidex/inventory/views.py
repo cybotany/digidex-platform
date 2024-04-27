@@ -1,9 +1,19 @@
 from django import views
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404, HttpResponseRedirect
 from django.contrib import messages
 
-from nfc import models
+from accounts.models import User
+from nfc.models import NearFieldCommunicationTag
+
+def user_profile(request, slug):
+    user = get_object_or_404(User, slug=slug)
+    
+    if hasattr(user, 'profile_page'):
+        return redirect(user.profile_page.url)
+    else:
+        return render(request, 'accounts/missing_profile.html', {'user': user})
+
 
 class LinkDigit(views.View):
     template_name = "inventory/digit/creation-page.html"
@@ -20,7 +30,7 @@ class LinkDigit(views.View):
         serial_number = self.kwargs.get('serial_number')
         if not serial_number:
             raise Http404("No serial number provided")
-        return get_object_or_404(models.NearFieldCommunicationTag, serial_number=serial_number)
+        return get_object_or_404(NearFieldCommunicationTag, serial_number=serial_number)
 
     def get(self, request, *args, **kwargs):
         ntag = self.get_object()
