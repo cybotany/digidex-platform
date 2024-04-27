@@ -43,16 +43,6 @@ class User(AbstractUser):
 class ProfileIndexPage(wt_models.Page):
     subpage_types = ['accounts.ProfilePage']
 
-    def route(self, request, path_components):
-        if path_components:
-            slug = path_components[0]
-            profile_page = ProfilePage.objects.child_of(self).filter(slug=slug).first()
-            if profile_page:
-                return profile_page.serve(request), []
-        
-        # If no page is found fall back to default routing
-        return super().route(request, path_components)
-
 
 class ProfilePage(wt_models.Page):
     user = models.OneToOneField(
@@ -102,11 +92,6 @@ class ProfilePage(wt_models.Page):
 
     def __str__(self):
         return f"{self.user.username}'s Profile"
-
-    def get_url_parts(self, request=None):
-        site_id, root_url, page_path = super().get_url_parts(request=request)
-        page_path = self.slug + '/'
-        return (site_id, root_url, page_path)
 
     class Meta:
         verbose_name = "User Profile"
