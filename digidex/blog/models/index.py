@@ -1,24 +1,19 @@
-from wagtail import models as wt_models
-from wagtail import fields
-from wagtail.admin import panels
+from wagtail.models import Page
+from wagtail.fields import StreamField
+from wagtail.admin.panels import FieldPanel
 
-from base import blocks
+from blog.blocks import BlogStreamBlock
 
-class BlogIndexPage(wt_models.Page):
-    body = fields.StreamField(
-        [
-            ('heading', blocks.BasicHeadingBlock()),
-            ('paragraph', blocks.BasicParagraphBlock()),
-            ('image', blocks.BasicImageBlock()),
-            ('document', blocks.BasicDocumentBlock()),
-        ],
+class BlogIndexPage(Page):
+    body = StreamField(
+        BlogStreamBlock(),
         null=True,
         blank=True,
-        use_json_field=True
+        use_json_field=True,
     )
 
-    content_panels = wt_models.Page.content_panels + [
-        panels.FieldPanel('body'),
+    content_panels = Page.content_panels + [
+        FieldPanel('body'),
     ]
 
     def get_context(self, request):
