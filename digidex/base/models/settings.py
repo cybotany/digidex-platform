@@ -70,38 +70,6 @@ class NavigationSettings(BaseGenericSetting):
         null=True,
         verbose_name="Phone Number"
     )
-    signup = models.ForeignKey(
-        'wagtailcore.Page',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+',
-        verbose_name="Signup User Page"
-    )
-    login = models.ForeignKey(
-        'wagtailcore.Page',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+',
-        verbose_name="Login User Page"
-    )
-    profile = models.ForeignKey(
-        'wagtailcore.Page',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+',
-        verbose_name="User Profile Page"
-    )
-    logout = models.ForeignKey(
-        'wagtailcore.Page',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+',
-        verbose_name="Logout User Page"
-    )
 
     panels = [
         panels.FieldPanel('logo'),
@@ -111,15 +79,6 @@ class NavigationSettings(BaseGenericSetting):
                 panels.FieldPanel('phone_number'),
             ],
             heading="Contact Methods"
-        ),
-        panels.MultiFieldPanel(
-            [
-                panels.PageChooserPanel('signup'),
-                panels.PageChooserPanel('login'),
-                panels.PageChooserPanel('profile'),
-                panels.PageChooserPanel('logout'),
-            ],
-            heading="User Management Pages"
         ),
         panels.MultiFieldPanel(
             [

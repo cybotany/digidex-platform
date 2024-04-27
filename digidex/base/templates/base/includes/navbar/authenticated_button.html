@@ -1,10 +1,2 @@
-{% load navigation_tags%}
-
-{% with profile_url=settings.base.NavigationSettings.profile logout_url=settings.base.NavigationSettings.logout %}
-  {% if profile_url %}
-    <a href="{{ profile_url }}" class="navbar__button--outline base-button">Profile</a>
-  {% endif %}
-  {% if logout_url %}
-    <a href="{{ logout_url }}" class="navbar__button base-button">Logout</a>
-  {% endif %}
-{% endwith %}
+<a href="#" class="navbar__button--outline base-button">Profile</a>
+<a href="{{ account_logout }}" class="navbar__button base-button">Logout</a>
