@@ -8,15 +8,12 @@ from wagtail.documents import urls as wagtaildocs_urls
 
 from search.views import search
 
-from nfc import urls as nfc_urls
-
 urlpatterns = [
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     path('accounts/', include('allauth.urls')),
     path("search/", search, name="search"),
-    path('nfc/', include(nfc_urls)),
 ]
 
 if settings.DEBUG:
@@ -29,10 +26,6 @@ if settings.DEBUG:
 
 urlpatterns = urlpatterns + [
     # For anything not caught by a more specific rule above, hand over to
-    # Wagtail's page serving mechanism. This should be the last pattern in
-    # the list:
+    # Wagtail's page serving mechanism.
     path("", include(wagtail_urls)),
-    # Alternatively, if you want Wagtail pages to be served from a subpath
-    # of your site, rather than the site root:
-    #    path("pages/", include(wagtail_urls)),
 ]
