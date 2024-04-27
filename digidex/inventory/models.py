@@ -4,7 +4,7 @@ from django.db import models, transaction
 
 class UserDigit(models.Model):
     """
-    Abstract base model for digitized entities, serving as a bridge between physical specimens and their digital representations.
+    Base model for digitized entities, serving as a bridge between physical specimens and their digital representations.
 
     Attributes:
         uuid (UUIDField): The unique identifier associated with each Digit.

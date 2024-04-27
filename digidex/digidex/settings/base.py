@@ -165,7 +165,7 @@ WAGTAIL_FRONTEND_LOGIN_URL = LOGIN_URL
 ACCOUNT_USERNAME_MIN_LENGTH = 3
 #ACCOUNT_USERNAME_VALIDATORS = 'some.module.validators.custom_username_validators'
 ACCOUNT_USERNAME_BLACKLIST = [
-    'admin', 'administrator', 'root', 'sysadmin', 'webmaster',
+    'admin', 'administrator', 'root', 'sysadmin', 'webmaster', 'django-admin',
     'support', 'helpdesk', 'moderator', 'superuser', 'guest',
     'anonymous', 'nobody', 'user', 'null', 'undefined', 'localhost',
     'default', 'public', 'system', 'official', 'security', 'info',
@@ -180,11 +180,12 @@ ACCOUNT_USERNAME_BLACKLIST = [
     'notification', 'alerts', 'blog', 'forum', 'wiki', 'help', 'search',
     'dev', 'developer', 'cors', 'about', 'privacy', 'legal', 'terms',
     'services', 'document', 'documents', 'download', 'downloads', 'error', 'errors', '403', '404', '500',
+    'accounts', 'company', 'nfc', 'inventory'
     'new', 'all', 'any', 'every', 'site', 'api-key', 'reset', 'change',
     'start', 'stop', 'edit', 'delete', 'remove', 'read', 'write', 'list',
     'create', 'update', 'confirm', 'save', 'load', 'logout', 'signin', 'signout',
     'test', 'testing', 'demo', 'example', 'batch', 'status',
-    'accounts', 'django-admin', 'company', 'support', 'blog', 'nfc', 'inventory'
+    'django-admin',
 ]
 
 ACCOUNT_PRESERVE_USERNAME_CASING = False

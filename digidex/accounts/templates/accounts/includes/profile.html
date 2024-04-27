@@ -1,0 +1,9 @@
+<div class="account-profile"> 
+  {% include 'accounts/includes/start_date.html' %}
+  {% include 'accounts/includes/profile_avatar.html' %}
+  {% include 'accounts/includes/profile_bio.html' %}
+   
+  {% if is_owner %}
+    {% include 'accounts/includes/update_profile.html' %}
+  {% endif %}
+</div>

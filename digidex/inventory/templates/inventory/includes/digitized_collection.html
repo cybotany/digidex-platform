@@ -1,0 +1,24 @@
+{% if digit_count == 0 %}
+<div class="empty-digit-state base-dyn-empty">
+  <div class="digit-text-empty">No digits found.</div>
+</div>
+{% else %}
+<!-- Digits -->
+<div class="collection-list-wrapper-digits base-dyn-list">
+  <div role="list" class="collection-list-digits base-dyn-items">
+    {% for digit in digits %}
+      <div role="listitem" class="base-dyn-item">
+        <a href="{{ digit.get_absolute_url }}" class="block-digit-link">
+          <div class="block-digit">
+            <div class="digit">
+              <div class="date">{{ digit.last_modified }}</div>
+              <h3 class="heading-digit">{{ digit.name }}</h3>
+              <p class="paragraph-digit">{{ digit.description }}</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
