@@ -66,15 +66,17 @@ class UserPage(Page):
 class Digit(models.Model):
     user_page = models.ForeignKey(
         'UserPage',
+        null=True,
         on_delete=models.CASCADE,
         related_name='user_digits'
     )
     name = models.CharField(
         max_length=100,
-        null=False,
+        null=True,
         blank=False
     )
     slug = models.SlugField(
+        null=True,
         db_index=True,
         verbose_name="Digit Slug"
     )

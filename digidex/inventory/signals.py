@@ -8,7 +8,7 @@ from inventory.models import UserIndexPage, UserPage
 User = get_user_model()
 
 @receiver(post_save, sender=User)
-def create_user_profile_page(sender, instance, created, **kwargs):
+def create_user_page(sender, instance, created, **kwargs):
     if created:
         with transaction.atomic():
             root_user_page = UserIndexPage.objects.first()
