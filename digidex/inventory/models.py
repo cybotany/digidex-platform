@@ -1,14 +1,16 @@
 import uuid
 
-from django.utils.text import slugify
 from django.db import models
 from django.conf import settings
+from django.utils.text import slugify
 
 from modelcluster.fields import ParentalKey
+from modelcluster.contrib.taggit import ClusterTaggableManager
+from taggit.models import TaggedItemBase
 
 from wagtail.models import Page, Orderable
 from wagtail.fields import RichTextField
-from wagtail.admin.panels import FieldPanel, PageChooserPanel, InlinePanel
+from wagtail.admin.panels import FieldPanel, PageChooserPanel, InlinePanel, MultiFieldPanel
 from wagtail.search import index
 
 from nfc.models import NearFieldCommunicationTag
@@ -42,6 +44,14 @@ class UserPage(Page):
     biography = RichTextField(
         blank=True,
         null=True
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name="Created At"
+    )
+    last_modified = models.DateTimeField(
+        auto_now=True,
+        verbose_name="Last Modified"
     )
 
     search_fields = Page.search_fields + [
@@ -96,15 +106,6 @@ class Digit(Orderable):
         on_delete=models.CASCADE,
         related_name='digit'
     )
-    created_at = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name="Created At"
-    )
-    last_modified = models.DateTimeField(
-        auto_now=True,
-        verbose_name="Last Modified"
-    )
-
 
     def save(self, *args, **kwargs):
         if not self.pk:
@@ -119,8 +120,13 @@ class Digit(Orderable):
 
         super(Digit, self).save(*args, **kwargs)
 
-    class Meta:
-        ordering = ['-created_at']
+
+class DigitPageTag(TaggedItemBase):
+    content_object = ParentalKey(
+        'DigitPage',
+        related_name='tagged_items',
+        on_delete=models.CASCADE
+    )
 
 
 class DigitPage(Page):
@@ -137,6 +143,18 @@ class DigitPage(Page):
     description = RichTextField(
         blank=True
     )
+    tags = ClusterTaggableManager(
+        through=DigitPageTag,
+        blank=True
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name="Created At"
+    )
+    last_modified = models.DateTimeField(
+        auto_now=True,
+        verbose_name="Last Modified"
+    )
 
     search_fields = Page.search_fields + [
         index.SearchField('get_digit_name', partial_match=True, boost=2),
@@ -144,8 +162,14 @@ class DigitPage(Page):
     ]
 
     content_panels = Page.content_panels + [
+        MultiFieldPanel(
+            [
+                PageChooserPanel('user'),
+                FieldPanel('tags'),
+            ],
+            heading="Digit Metadata"
+        ),
         FieldPanel('digit'),
-        PageChooserPanel('user'),
         FieldPanel('description'),
         InlinePanel('digit_images', label="Digit images"),
     ]
@@ -194,3 +218,15 @@ class DigitPageGalleryImage(Orderable):
         FieldPanel('image'),
         FieldPanel('caption'),
     ]
+
+
+class DigitTagIndexPage(Page):
+
+    def get_context(self, request):
+        # Filter by tag
+        tag = request.GET.get('tag')
+        digitpages = DigitPage.objects.filter(tags__name=tag)
+        # Update template context
+        context = super().get_context(request)
+        context['digitpages'] = digitpages
+        return context
