@@ -1,5 +1,6 @@
 import uuid
 
+from django.utils.text import slugify
 from django.db import models
 from django.conf import settings
 
@@ -63,17 +64,26 @@ class UserPage(Page):
 
 
 class Digit(models.Model):
+    user_page = models.ForeignKey(
+        'UserPage',
+        on_delete=models.CASCADE,
+        related_name='user_digits'
+    )
+    name = models.CharField(
+        max_length=100,
+        null=False,
+        blank=False
+    )
+    slug = models.SlugField(
+        db_index=True,
+        verbose_name="Digit Slug"
+    )
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
         editable=False,
         db_index=True,
         verbose_name="Digit UUID"
-    )
-    name = models.CharField(
-        max_length=50,
-        null=False,
-        blank=False
     )
     ntag = models.OneToOneField(
         NearFieldCommunicationTag,
@@ -90,6 +100,20 @@ class Digit(models.Model):
         auto_now=True,
         verbose_name="Last Modified"
     )
+
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            # Create a unique slug for the digit within the scope of the user
+            self.slug = slugify(self.name)
+            original_slug = self.slug
+            count = 1
+
+            while Digit.objects.filter(user_page=self.user_page, slug=self.slug).exists():
+                self.slug = f'{original_slug}-{count}'
+                count += 1
+
+        super(Digit, self).save(*args, **kwargs)
 
     class Meta:
         ordering = ['-created_at']
@@ -124,3 +148,15 @@ class DigitPage(Page):
     def get_digit_name(self):
         """Method to return the name of the digitized object."""
         return self.digit.name
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            base_slug = slugify(self.digit.name)
+            self.slug = base_slug
+            count = 1
+
+            while DigitPage.objects.filter(slug=self.slug, user=self.user).exists():
+                self.slug = f'{base_slug}-{count}'
+                count += 1
+
+        super(DigitPage, self).save(*args, **kwargs)

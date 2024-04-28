@@ -17,6 +17,7 @@ class User(AbstractUser):
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
+        editable=False,
         db_index=True,
         verbose_name="User UUID"
     )
