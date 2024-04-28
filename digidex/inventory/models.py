@@ -4,9 +4,11 @@ from django.utils.text import slugify
 from django.db import models
 from django.conf import settings
 
-from wagtail.models import Page
+from modelcluster.fields import ParentalKey
+
+from wagtail.models import Page, Orderable
 from wagtail.fields import RichTextField
-from wagtail.admin.panels import FieldPanel, PageChooserPanel
+from wagtail.admin.panels import FieldPanel, PageChooserPanel, InlinePanel
 from wagtail.search import index
 
 from nfc.models import NearFieldCommunicationTag
@@ -63,12 +65,12 @@ class UserPage(Page):
         verbose_name = "User Page"
 
 
-class Digit(models.Model):
-    user_page = models.ForeignKey(
+class Digit(Orderable):
+    page = ParentalKey(
         'UserPage',
         null=True,
         on_delete=models.CASCADE,
-        related_name='user_digits'
+        related_name='digits'
     )
     name = models.CharField(
         max_length=100,
@@ -111,7 +113,7 @@ class Digit(models.Model):
             original_slug = self.slug
             count = 1
 
-            while Digit.objects.filter(user_page=self.user_page, slug=self.slug).exists():
+            while Digit.objects.filter(page=self.page, slug=self.slug).exists():
                 self.slug = f'{original_slug}-{count}'
                 count += 1
 
@@ -145,7 +147,15 @@ class DigitPage(Page):
         FieldPanel('digit'),
         PageChooserPanel('user'),
         FieldPanel('description'),
+        InlinePanel('gallery_images', label="Gallery images"),
     ]
+
+    def get_main_image(self):
+        gallery_item = self.gallery_images.first()
+        if gallery_item:
+            return gallery_item.image
+        else:
+            return None
 
     def get_digit_name(self):
         """Method to return the name of the digitized object."""
@@ -162,3 +172,22 @@ class DigitPage(Page):
                 count += 1
 
         super(DigitPage, self).save(*args, **kwargs)
+
+
+class DigitPageGalleryImage(Orderable):
+    page = ParentalKey(
+        DigitPage,
+        on_delete=models.CASCADE,
+        related_name='gallery_images'
+    )
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.CASCADE,
+        related_name='+'
+    )
+    caption = models.CharField(blank=True, max_length=250)
+
+    panels = [
+        FieldPanel('image'),
+        FieldPanel('caption'),
+    ]
