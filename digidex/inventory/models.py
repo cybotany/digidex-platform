@@ -1,6 +1,6 @@
 import uuid
 
-from django.db import models, transaction
+from django.db import models
 from django.conf import settings
 
 from wagtail.models import Page
@@ -26,7 +26,7 @@ class UserIndexPage(Page):
 class UserPage(Page):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
+        on_delete=models.PROTECT,
         related_name="user_pages"
     )
     avatar = models.ForeignKey(
@@ -98,13 +98,13 @@ class Digit(models.Model):
 class DigitPage(Page):
     digit = models.ForeignKey(
         Digit,
-        on_delete=models.CASCADE,
+        on_delete=models.PROTECT,
         related_name='pages'
     )
     user = models.ForeignKey(
         UserPage,
-        on_delete=models.CASCADE,
-        related_name='items'
+        on_delete=models.PROTECT,
+        related_name='digits'
     )
     description = RichTextField(
         blank=True
