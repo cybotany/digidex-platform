@@ -132,7 +132,7 @@ class DigitPage(Page):
     user = models.ForeignKey(
         UserPage,
         on_delete=models.PROTECT,
-        related_name='digits'
+        related_name='digit_pages'
     )
     description = RichTextField(
         blank=True
@@ -147,13 +147,13 @@ class DigitPage(Page):
         FieldPanel('digit'),
         PageChooserPanel('user'),
         FieldPanel('description'),
-        InlinePanel('gallery_images', label="Gallery images"),
+        InlinePanel('digit_images', label="Digit images"),
     ]
 
     def get_main_image(self):
-        gallery_item = self.gallery_images.first()
-        if gallery_item:
-            return gallery_item.image
+        digit_item = self.digit_images.first()
+        if digit_item:
+            return digit_item.image
         else:
             return None
 
@@ -178,14 +178,17 @@ class DigitPageGalleryImage(Orderable):
     page = ParentalKey(
         DigitPage,
         on_delete=models.CASCADE,
-        related_name='gallery_images'
+        related_name='digit_images'
     )
     image = models.ForeignKey(
         'wagtailimages.Image',
         on_delete=models.CASCADE,
         related_name='+'
     )
-    caption = models.CharField(blank=True, max_length=250)
+    caption = models.CharField(
+        blank=True,
+        max_length=250
+    )
 
     panels = [
         FieldPanel('image'),
