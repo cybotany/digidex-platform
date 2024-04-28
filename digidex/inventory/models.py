@@ -1,35 +1,33 @@
 import uuid
+
 from django.db import models, transaction
 from django.conf import settings
 
 from wagtail.models import Page
 from wagtail.fields import RichTextField
-from wagtail.admin.panels import FieldPanel, ImageChooserPanel, PageChooserPanel
+from wagtail.admin.panels import FieldPanel, PageChooserPanel
+from wagtail.search import index
+
+from nfc.models import NearFieldCommunicationTag
 
 
-class UserProfileIndexPage(Page):
-    intro = RichTextField(
+class UserIndexPage(Page):
+    body = RichTextField(
         blank=True
     )
 
     content_panels = Page.content_panels + [
-        FieldPanel('intro', classname="full")
+        FieldPanel('body', classname="full")
     ]
 
-    subpage_types = ['inventory.UserProfilePage']
-
-    def get_context(self, request, *args, **kwargs):
-        context = super().get_context(request, *args, **kwargs)
-        profiles = self.get_children().live().order_by('title')
-        context['profiles'] = profiles
-        return context
+    subpage_types = ['inventory.UserPage']
 
 
-class UserProfilePage(Page):
+class UserPage(Page):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        related_name="profile_pages"
+        related_name="user_pages"
     )
     avatar = models.ForeignKey(
         'wagtailimages.Image', 
@@ -38,27 +36,33 @@ class UserProfilePage(Page):
         on_delete=models.SET_NULL, 
         related_name='+'
     )
-    biography = models.TextField(
-        max_length=500,
+    biography = RichTextField(
         blank=True,
-        help_text='A short biography of the user.'
-    )
-    location = models.CharField(
-        max_length=30,
-        blank=True,
-        help_text='The location of the user.'
+        null=True
     )
 
-    content_panels = Page.content_panels + [
-        ImageChooserPanel('avatar'),
-        FieldPanel('biography'),
-        FieldPanel('location')
+    search_fields = Page.search_fields + [
+        index.SearchField('get_username', partial_match=True, boost=2),
+        index.SearchField('biography'),
     ]
 
-    subpage_types = ['inventory.UserDigitPage']
+    content_panels = Page.content_panels + [
+        FieldPanel('user'),
+        FieldPanel('avatar'),
+        FieldPanel('biography')
+    ]
+
+    subpage_types = ['inventory.DigitPage']
+
+    def get_username(self):
+        """Method to return the username of the associated user."""
+        return self.user.username
+
+    class Meta:
+        verbose_name = "User Page"
 
 
-class UserDigit(models.Model):
+class Digit(models.Model):
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
@@ -68,20 +72,15 @@ class UserDigit(models.Model):
     )
     name = models.CharField(
         max_length=50,
-        null=True,
-        blank=True
-    )
-    description = models.TextField(
-        max_length=500,
-        null=True,
-        blank=True
+        null=False,
+        blank=False
     )
     ntag = models.OneToOneField(
-        'nfc.NearFieldCommunicationTag',
+        NearFieldCommunicationTag,
         null=True,
         blank=True,
         on_delete=models.CASCADE,
-        related_name='%(class)s'
+        related_name='digit'
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
@@ -92,45 +91,36 @@ class UserDigit(models.Model):
         verbose_name="Last Modified"
     )
 
-    @classmethod
-    def create_digit(cls, form_data, link, user):
-        with transaction.atomic():    
-            digit = cls.objects.create(
-                ntag=link,
-                **form_data
-            )
-            link.user = user
-            link.active = True
-            link.save()
-
-            return digit
-
-    def delete(self, *args, **kwargs):
-        """
-        Overrides the delete method of the model to include custom deletion logic.
-        """
-        if self.ntag:
-            self.ntag.reset_to_default()
-            self.ntag.save()
-        super(UserDigit, self).delete(*args, **kwargs)
-
     class Meta:
         ordering = ['-created_at']
 
 
-class UserDigitPage(Page):
+class DigitPage(Page):
     digit = models.ForeignKey(
-        UserDigit,
+        Digit,
         on_delete=models.CASCADE,
         related_name='pages'
     )
-    owner = models.ForeignKey(
-        UserProfilePage,
+    user = models.ForeignKey(
+        UserPage,
         on_delete=models.CASCADE,
         related_name='items'
     )
+    description = RichTextField(
+        blank=True
+    )
+
+    search_fields = Page.search_fields + [
+        index.SearchField('get_digit_name', partial_match=True, boost=2),
+        index.SearchField('description'),
+    ]
 
     content_panels = Page.content_panels + [
         FieldPanel('digit'),
-        PageChooserPanel('owner'),
+        PageChooserPanel('user'),
+        FieldPanel('description'),
     ]
+
+    def get_digit_name(self):
+        """Method to return the name of the digitized object."""
+        return self.digit.name
