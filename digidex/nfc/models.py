@@ -9,8 +9,6 @@ class NearFieldCommunicationTag(models.Model):
 
     Attributes:
         serial_number (CharField): The unique serial number associated with the NFC tag.
-        eeprom (BinaryField): The EEPROM data associated with the NFC tag.
-        counter (PositiveIntegerField): The counter value associated with the NFC tag.
         user (ForeignKey): The user who created the journal entry, linked to the user model.
         active (BooleanField): A flag indicating whether the Link is active and mapped to a digital object.
         created_at (DateTimeField): The date and time when the Link instance was created.
@@ -32,17 +30,6 @@ class NearFieldCommunicationTag(models.Model):
         db_index=True,
         verbose_name="Tag Serial Number",
         help_text="The unique serial number associated with the NFC tag."
-    )
-    eeprom = models.BinaryField(
-        null=True,
-        blank=True,
-        verbose_name="EEPROM",
-        help_text="The EEPROM data associated with the NFC tag."
-    )
-    counter = models.PositiveIntegerField(
-        default=0,
-        verbose_name="Counter",
-        help_text="The counter value associated with the NFC tag."
     )
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,

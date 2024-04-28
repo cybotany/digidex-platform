@@ -1,7 +1,6 @@
 import uuid
 from django.utils.text import slugify
 from django.db import models
-from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 
 
@@ -13,15 +12,13 @@ class User(AbstractUser):
     slug = models.SlugField(
         unique=True,
         db_index=True,
-        verbose_name="Username Slug",
-        help_text="Used for it's SEO-friendly properties on the front-end."
+        verbose_name="Username Slug"
     )
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
         db_index=True,
-        verbose_name="User UUID",
-        help_text="Used for it's universally unique identifying properties for external users."
+        verbose_name="User UUID"
     )
 
     def save(self, *args, **kwargs):

@@ -5,7 +5,7 @@ from wagtail.admin.panels import MultiFieldPanel, FieldPanel, InlinePanel
 from wagtail.models import Orderable, Page
 from modelcluster.fields import ParentalKey
 
-from .blocks import HomeStreamBlock
+from home.blocks import HomeStreamBlock
 
 class LottieFeature(Orderable):
     page = ParentalKey(
