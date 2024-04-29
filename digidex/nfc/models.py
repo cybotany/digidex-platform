@@ -24,6 +24,8 @@ class NearFieldCommunicationTag(models.Model):
     )
     digit = models.ForeignKey(
         Digit,
+        blank=True,
+        null=True,
         on_delete=models.CASCADE,
         related_name="nfc_tags",
         verbose_name="Digital Object",
