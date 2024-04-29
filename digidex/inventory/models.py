@@ -10,8 +10,11 @@ from taggit.models import TaggedItemBase
 
 from wagtail.models import Page, Orderable
 from wagtail.fields import RichTextField
-from wagtail.admin.panels import FieldPanel, PageChooserPanel, InlinePanel, MultiFieldPanel
+from wagtail.admin.panels import FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel, PublishingPanel, PageChooserPanel
 from wagtail.search import index
+
+from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
+from wagtail.contrib.forms.panels import FormSubmissionsPanel
 
 
 class UserIndexPage(Page):
@@ -32,35 +35,13 @@ class UserPage(Page):
         on_delete=models.PROTECT,
         related_name="user_pages"
     )
-    avatar = models.ForeignKey(
-        'wagtailimages.Image', 
-        null=True, 
-        blank=True, 
-        on_delete=models.SET_NULL, 
-        related_name='+'
-    )
-    biography = RichTextField(
-        blank=True,
-        null=True
-    )
-    created_at = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name="Created At"
-    )
-    last_modified = models.DateTimeField(
-        auto_now=True,
-        verbose_name="Last Modified"
-    )
 
     search_fields = Page.search_fields + [
         index.SearchField('get_username', partial_match=True, boost=2),
-        index.SearchField('biography'),
     ]
 
     content_panels = Page.content_panels + [
         FieldPanel('user'),
-        FieldPanel('avatar'),
-        FieldPanel('biography')
     ]
 
     subpage_types = ['inventory.DigitPage']
@@ -69,8 +50,12 @@ class UserPage(Page):
         """Method to return the username of the associated user."""
         return self.user.username
 
+    def get_biography(self):
+        """Method to return the biography of the associated user."""
+        return self.user.biography
+
     class Meta:
-        verbose_name = "User Page"
+        verbose_name = "User Profile Page"
 
 
 class Digit(Orderable):
@@ -97,6 +82,10 @@ class Digit(Orderable):
         db_index=True,
         verbose_name="Digit UUID"
     )
+    description = RichTextField(
+        blank=True,
+        null=True
+    )
 
     def save(self, *args, **kwargs):
         if not self.pk:
@@ -109,6 +98,48 @@ class Digit(Orderable):
                 count += 1
 
         super(Digit, self).save(*args, **kwargs)
+
+
+class DigitFormField(AbstractFormField):
+    page = ParentalKey(
+        'DigitRegistrationFormPage',
+        on_delete=models.CASCADE,
+        related_name='form_fields'
+    )
+
+
+class DigitRegistrationFormPage(AbstractEmailForm):
+    intro = RichTextField(
+        blank=True
+    )
+    thank_you_text = RichTextField(
+        blank=True
+    )
+
+    content_panels = AbstractEmailForm.content_panels + [
+        FormSubmissionsPanel(),
+        FieldPanel('intro'),
+        InlinePanel('form_fields', label="Digit Fields"),
+        FieldPanel('thank_you_text'),
+    ]
+
+    def process_form_submission(self, form):
+        # Create a Digit instance from the form data
+        digit = Digit(
+            user=form.cleaned_data.get('user'),
+            name=form.cleaned_data['name']
+        )
+        digit.save()
+
+        digit_page = DigitPage(
+            title=digit.name,
+            digit=digit,
+            user=form.cleaned_data.get('user_page')  # Assume a UserPage instance is provided
+        )
+        self.add_child(instance=digit_page)
+        digit_page.save_revision().publish()
+
+        return super().process_form_submission(form)
 
 
 class DigitPageTag(TaggedItemBase):
@@ -130,9 +161,6 @@ class DigitPage(Page):
         on_delete=models.PROTECT,
         related_name='digit_pages'
     )
-    description = RichTextField(
-        blank=True
-    )
     tags = ClusterTaggableManager(
         through=DigitPageTag,
         blank=True
@@ -148,7 +176,7 @@ class DigitPage(Page):
 
     search_fields = Page.search_fields + [
         index.SearchField('get_digit_name', partial_match=True, boost=2),
-        index.SearchField('description'),
+        index.SearchField('get_digit_description', partial_match=True, boost=2),
     ]
 
     content_panels = Page.content_panels + [
@@ -160,7 +188,6 @@ class DigitPage(Page):
             heading="Digit Metadata"
         ),
         FieldPanel('digit'),
-        FieldPanel('description'),
         InlinePanel('digit_images', label="Digit images"),
     ]
 
@@ -174,6 +201,10 @@ class DigitPage(Page):
     def get_digit_name(self):
         """Method to return the name of the digitized object."""
         return self.digit.name
+
+    def get_digit_description(self):
+        """Method to return the description of the digitized object."""
+        return self.digit.description
 
     def save(self, *args, **kwargs):
         if not self.pk:
@@ -211,12 +242,9 @@ class DigitPageGalleryImage(Orderable):
 
 
 class DigitTagIndexPage(Page):
-
     def get_context(self, request):
-        # Filter by tag
         tag = request.GET.get('tag')
         digitpages = DigitPage.objects.filter(tags__name=tag)
-        # Update template context
         context = super().get_context(request)
         context['digitpages'] = digitpages
         return context

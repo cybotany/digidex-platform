@@ -1,7 +1,10 @@
 import uuid
+
 from django.utils.text import slugify
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+
+from wagtail.fields import RichTextField
 
 
 class User(AbstractUser):
@@ -21,6 +24,26 @@ class User(AbstractUser):
         db_index=True,
         verbose_name="User UUID"
     )
+    avatar = models.ForeignKey(
+        'wagtailimages.Image', 
+        null=True, 
+        blank=True, 
+        on_delete=models.SET_NULL, 
+        related_name='+'
+    )
+    biography = RichTextField(
+        blank=True,
+        null=True
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name="Created At"
+    )
+    last_modified = models.DateTimeField(
+        auto_now=True,
+        verbose_name="Last Modified"
+    )
+
 
     def save(self, *args, **kwargs):
         if not self.slug:
