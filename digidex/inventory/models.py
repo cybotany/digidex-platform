@@ -3,6 +3,7 @@ import uuid
 from django.db import models
 from django.conf import settings
 from django.utils.text import slugify
+from django.http import HttpResponseRedirect
 
 from modelcluster.fields import ParentalKey
 from modelcluster.contrib.taggit import ClusterTaggableManager
@@ -10,10 +11,10 @@ from taggit.models import TaggedItemBase
 
 from wagtail.models import Page, Orderable
 from wagtail.fields import RichTextField
-from wagtail.admin.panels import FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel, PublishingPanel, PageChooserPanel
+from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel, PageChooserPanel
 from wagtail.search import index
 
-from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
+from wagtail.contrib.forms.models import AbstractForm, AbstractFormField
 from wagtail.contrib.forms.panels import FormSubmissionsPanel
 
 
@@ -108,7 +109,7 @@ class DigitFormField(AbstractFormField):
     )
 
 
-class DigitRegistrationFormPage(AbstractEmailForm):
+class DigitRegistrationFormPage(AbstractForm):
     intro = RichTextField(
         blank=True
     )
@@ -116,7 +117,7 @@ class DigitRegistrationFormPage(AbstractEmailForm):
         blank=True
     )
 
-    content_panels = AbstractEmailForm.content_panels + [
+    content_panels = AbstractForm.content_panels + [
         FormSubmissionsPanel(),
         FieldPanel('intro'),
         InlinePanel('form_fields', label="Digit Fields"),
@@ -124,7 +125,6 @@ class DigitRegistrationFormPage(AbstractEmailForm):
     ]
 
     def process_form_submission(self, form):
-        # Create a Digit instance from the form data
         digit = Digit(
             user=form.cleaned_data.get('user'),
             name=form.cleaned_data['name']
@@ -134,12 +134,12 @@ class DigitRegistrationFormPage(AbstractEmailForm):
         digit_page = DigitPage(
             title=digit.name,
             digit=digit,
-            user=form.cleaned_data.get('user_page')  # Assume a UserPage instance is provided
+            user=form.cleaned_data.get('user_page')  # Assuming a UserPage instance is provided
         )
         self.add_child(instance=digit_page)
         digit_page.save_revision().publish()
 
-        return super().process_form_submission(form)
+        return HttpResponseRedirect(digit_page.url)
 
 
 class DigitPageTag(TaggedItemBase):

@@ -1,33 +1,38 @@
-from django.views import View
-from django.shortcuts import get_object_or_404, redirect
-from django.http import Http404
+import requests
+
+from django.shortcuts import redirect, render
+from django.http import HttpResponse
+from django.core.exceptions import ValidationError
 
 from nfc.models import NearFieldCommunicationTag
 
-class LinkDigit(View):
+def view_ntag(request, serial_number):
+    try:
+        ntag = NearFieldCommunicationTag.objects.get(serial_number=serial_number)
+        url = ntag.get_digit_page_url()
+        return redirect(url)
+    except NearFieldCommunicationTag.DoesNotExist:
+        return HttpResponse("NTAG not found", status=404)
+    except ValidationError as e:
+        return HttpResponse(str(e), status=400)
 
 
-    def get_object(self, serial_number):
-        """
-        Retrieves an NTAG by its serial number or raises a 404 error if not found.
-        """
-        if not serial_number:
-            raise Http404("No serial number provided")
-        return get_object_or_404(NearFieldCommunicationTag, serial_number=serial_number)
+def create_digit(self, user):
+    if self.digit:
+        return {'status': 'error', 'message': "There's already an associated digit for this tag."}
 
-    def get(self, request, *args, **kwargs):
-        serial_number = kwargs.get('serial_number')
-        ntag = self.get_object(serial_number)
-
-        if ntag.digit:
-            return redirect(ntag.digit.page())
-
+    api_url = 'http://example.com/api/create-digit'
+    try:
+        response = requests.post(
+            api_url,
+            data={
+                'user_id': user.id,
+                'serial_number': self.serial_number
+            }
+        )
+        if response.status_code == 302:
+            return {'status': 'success', 'redirect_url': response.json().get('redirect_url')}
         else:
-            return redirect('inventory:digit_page_list')
-
-    def post(self, request, *args, **kwargs):
-        serial_number = request.POST.get('serial_number')
-        ntag = self.get_object(serial_number)
-        ntag.activate_link()
-
-        return redirect(ntag.digit_page.get_absolute_url())
+            return {'status': 'error', 'message': "Unable to process the digit registration."}
+    except requests.RequestException as e:
+        return {'status': 'error', 'message': str(e)}

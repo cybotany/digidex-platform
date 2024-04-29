@@ -1,6 +1,6 @@
 from django.db import models
-
-from inventory.models import Digit
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 
 
 class NearFieldCommunicationTag(models.Model):
@@ -17,49 +17,46 @@ class NearFieldCommunicationTag(models.Model):
     serial_number = models.CharField(
         max_length=32,
         unique=True,
-        db_index=True,
-        verbose_name="Tag Serial Number"
+        db_index=True
     )
     digit = models.OneToOneField(
-        Digit,
+        'inventory.Digit',
         blank=True,
         null=True,
         on_delete=models.CASCADE,
-        related_name="ntag",
-        verbose_name="Digital Object"
+        related_name="ntag"
     )
     active = models.BooleanField(
-        default=False,
-        verbose_name="Active"
+        default=False
     )
     created_at = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name="Created At"
+        auto_now_add=True
     )
     last_modified = models.DateTimeField(
-        auto_now=True,
-        verbose_name="Last Modified"
+        auto_now=True
     )
 
     def __str__(self):
-        """
-        Returns a string representation of the NTAG instance, primarily based on its unique serial number.
-        """
         return f"{self.serial_number}"
 
     def activate_link(self):
-        """
-        Activates the link, associating it with a user and setting it as active.
-        """
         self.active = True
         self.save()
 
     def deactivate_link(self):
-        """
-        Deactivates the link, making it inactive.
-        """
         self.active = False
         self.save()
+
+    def get_digit(self):
+        if not self.digit:
+            raise ValidationError(_("No associated digit found for this tag."))
+        return self.digit
+
+    def get_digit_page_url(self):
+        digit = self.get_digit()
+        if not hasattr(digit, 'page'):
+            raise ValidationError(_("DigitPage does not exist for the associated digit."))
+        return digit.page.url
 
     class Meta:
         verbose_name = "NTAG"
