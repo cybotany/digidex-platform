@@ -1,5 +1,5 @@
 from django.views import View
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.http import Http404
 
 from nfc.models import NearFieldCommunicationTag
@@ -19,13 +19,8 @@ class LinkDigit(View):
         serial_number = kwargs.get('serial_number')
         ntag = self.get_object(serial_number)
 
-        if ntag.active:
-            return self.activate_link(ntag)
-        return ntag
+        if ntag.digit_page:
+            return redirect(ntag.digit_page.get_absolute_url())
 
-    def get_form_initial(self, ntag):
-        """
-        Optionally customize initial form data based on the NTAG instance.
-        """
-        return {}
-
+        else:
+            return redirect('inventory:digit_page_list')

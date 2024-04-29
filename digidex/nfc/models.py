@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.db import models
 
-from inventory.models import Digit
+from inventory.models import DigitPage
 
 
 class NearFieldCommunicationTag(models.Model):
@@ -19,32 +19,27 @@ class NearFieldCommunicationTag(models.Model):
         max_length=32,
         unique=True,
         db_index=True,
-        verbose_name="Tag Serial Number",
-        help_text="The unique serial number associated with the NFC tag."
+        verbose_name="Tag Serial Number"
     )
-    digit = models.ForeignKey(
-        Digit,
+    digit_page = models.ForeignKey(
+        DigitPage,
         blank=True,
         null=True,
         on_delete=models.CASCADE,
         related_name="nfc_tags",
-        verbose_name="Digital Object",
-        help_text="The digital object linked to the NFC tag."
+        verbose_name="Digital Object"
     )
     active = models.BooleanField(
         default=False,
-        verbose_name="Active",
-        help_text="Indicates whether the link is currently active and mapped to a digital object."
+        verbose_name="Active"
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
-        verbose_name="Created At",
-        help_text="The date and time when the link instance was created."
+        verbose_name="Created At"
     )
     last_modified = models.DateTimeField(
         auto_now=True,
-        verbose_name="Last Modified",
-        help_text="The date and time when the link instance was last modified."
+        verbose_name="Last Modified"
     )
 
     def __str__(self):
