@@ -141,6 +141,13 @@ class DigitRegistrationFormPage(AbstractForm):
 
         return HttpResponseRedirect(digit_page.url)
 
+    def serve(self, request, *args, **kwargs):
+        serial_number = request.GET.get('serial_number')
+        form_context = {
+            'serial_number': serial_number
+        }
+        return super().serve(request, *args, **kwargs, extra_context=form_context)
+
 
 class DigitPageTag(TaggedItemBase):
     content_object = ParentalKey(

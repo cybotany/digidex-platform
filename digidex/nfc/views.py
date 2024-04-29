@@ -20,21 +20,21 @@ def handle_common_exceptions(view_func):
     return wrapper
 
 @handle_common_exceptions
-def view_ntag(request, serial_number):
+def view_ntag(request, ntag_id):
     try:
-        ntag = NearFieldCommunicationTag.objects.get(serial_number=serial_number)
+        ntag = NearFieldCommunicationTag.objects.get(id=ntag_id)
         if not ntag.digit:
             messages.info(request, "No digit is associated with this NTAG. Please create one. You will be prompted to login if you are not already.")
-            return redirect('create_digit_view', serial_number=serial_number)
+            return redirect('link-ntag', ntag_id=ntag_id)
         url = ntag.get_digit_page_url()
         return redirect(url)
     except ValidationError as e:
         return HttpResponse(str(e), status=400)
 
 @login_required
-def link_ntag(request, serial_number):
+def link_ntag(request, ntag_id):
     try:
-        ntag = NearFieldCommunicationTag.objects.get(serial_number=serial_number)
+        ntag = NearFieldCommunicationTag.objects.get(id=ntag_id)
         if ntag.digit:
             messages.info(request, "A digit is already associated with this NTAG.")
             return redirect(ntag.get_digit_page_url())
@@ -44,7 +44,7 @@ def link_ntag(request, serial_number):
             messages.error(request, "Digit registration form page not found.")
             return redirect('error_page_url')
 
-        query_string = f"serial_number={serial_number}"
+        query_string = f"ntag_id={ntag_id}"
         form_url = f"{form_page.url}?{query_string}"
         return redirect(form_url)
 
