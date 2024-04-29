@@ -14,7 +14,12 @@
 </form>
 
 {% if search_results %}
-<ul>
+
+{# Add this paragraph to display the details of results found: #}
+<p>You searched{% if search_query %} for “{{ search_query }}”{% endif %}, {{ search_results.paginator.count }} result{{ search_results.paginator.count|pluralize }} found.</p>
+
+{# Replace the <ul> HTML element with the <ol> html element: #}
+<ol>
     {% for result in search_results %}
     <li>
         <h4><a href="{% pageurl result %}">{{ result }}</a></h4>
@@ -23,7 +28,12 @@
         {% endif %}
     </li>
     {% endfor %}
-</ul>
+</ol>
+
+{# Improve pagination by adding: #}
+{% if search_results.paginator.num_pages > 1 %}
+    <p>Page {{ search_results.number }} of {{ search_results.paginator.num_pages }}, showing {{ search_results|length }} result{{ search_results|pluralize }} out of {{ search_results.paginator.count }}</p>
+{% endif %}
 
 {% if search_results.has_previous %}
 <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}">Previous</a>
@@ -32,6 +42,7 @@
 {% if search_results.has_next %}
 <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}">Next</a>
 {% endif %}
+
 {% elif search_query %}
 No results found
 {% endif %}

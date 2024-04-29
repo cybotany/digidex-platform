@@ -24,3 +24,10 @@ class LinkDigit(View):
 
         else:
             return redirect('inventory:digit_page_list')
+
+    def post(self, request, *args, **kwargs):
+        serial_number = request.POST.get('serial_number')
+        ntag = self.get_object(serial_number)
+        ntag.activate_link()
+
+        return redirect(ntag.digit_page.get_absolute_url())
