@@ -19,8 +19,8 @@ class LinkDigit(View):
         serial_number = kwargs.get('serial_number')
         ntag = self.get_object(serial_number)
 
-        if ntag.digit_page:
-            return redirect(ntag.digit_page.get_absolute_url())
+        if ntag.digit:
+            return redirect(ntag.digit.page())
 
         else:
             return redirect('inventory:digit_page_list')

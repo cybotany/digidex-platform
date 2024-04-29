@@ -151,10 +151,10 @@ class DigitPageTag(TaggedItemBase):
 
 
 class DigitPage(Page):
-    digit = models.ForeignKey(
+    digit = models.OneToOneField(
         Digit,
         on_delete=models.PROTECT,
-        related_name='pages'
+        related_name='page'
     )
     user = models.ForeignKey(
         UserPage,

@@ -20,12 +20,12 @@ class NearFieldCommunicationTag(models.Model):
         db_index=True,
         verbose_name="Tag Serial Number"
     )
-    digit = models.ForeignKey(
+    digit = models.OneToOneField(
         Digit,
         blank=True,
         null=True,
         on_delete=models.CASCADE,
-        related_name="nfc_tags",
+        related_name="ntag",
         verbose_name="Digital Object"
     )
     active = models.BooleanField(
