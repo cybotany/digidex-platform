@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.db import models
-from django.urls import reverse
+
+from inventory.models import Digit
 
 
 class NearFieldCommunicationTag(models.Model):
@@ -14,16 +15,6 @@ class NearFieldCommunicationTag(models.Model):
         created_at (DateTimeField): The date and time when the Link instance was created.
         last_modified (DateTimeField): The date and time when the Link instance was last modified.
     """
-    NTAG_TYPES = [
-        ('ntag_213', 'NTAG 213'),
-        ('ntag_215', 'NTAG 215'),
-        ('ntag_216', 'NTAG 216'),
-    ]
-    NTAG_USES = [
-        ('plant', 'Plant'),
-        ('pet', 'Pet'),
-    ]
-
     serial_number = models.CharField(
         max_length=32,
         unique=True,
@@ -31,33 +22,17 @@ class NearFieldCommunicationTag(models.Model):
         verbose_name="Tag Serial Number",
         help_text="The unique serial number associated with the NFC tag."
     )
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        verbose_name="User",
-        help_text="The user associated with this link."
+    digit = models.ForeignKey(
+        Digit,
+        on_delete=models.CASCADE,
+        related_name="nfc_tags",
+        verbose_name="Digital Object",
+        help_text="The digital object linked to the NFC tag."
     )
     active = models.BooleanField(
         default=False,
         verbose_name="Active",
         help_text="Indicates whether the link is currently active and mapped to a digital object."
-    )
-    type = models.CharField(
-        max_length=25,
-        blank=True,
-        choices=NTAG_TYPES, 
-        default='NTAG_213',
-        verbose_name="NTAG Type",
-        help_text="The type of the NTAG."
-    )
-    use = models.CharField(
-        max_length=20,
-        choices=NTAG_USES,
-        default='plant',
-        verbose_name="NTAG Use",
-        help_text="The intended use of the NTAG."
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
@@ -74,13 +49,12 @@ class NearFieldCommunicationTag(models.Model):
         """
         Returns a string representation of the NTAG instance, primarily based on its unique serial number.
         """
-        return f"{self.type} - {self.serial_number}"
+        return f"{self.serial_number}"
 
-    def activate_link(self, user):
+    def activate_link(self):
         """
         Activates the link, associating it with a user and setting it as active.
         """
-        self.user = user
         self.active = True
         self.save()
 
@@ -90,31 +64,6 @@ class NearFieldCommunicationTag(models.Model):
         """
         self.active = False
         self.save()
-
-    def check_access(self, user):
-        """
-        Checks if a user has access to the link.
-        """
-        return self.active and self.user == user
-
-    def reset_to_default(self):
-        """
-        Resets the link to its default settings.
-        """
-        self.active = False
-        self.user = None
-        self.save()
-
-    def get_absolute_url(self):
-        """
-        Returns the absolute URL for the NFC instance.
-        
-        This URL is unique for each NFC link and can be used to access specific resources or views related to it.
-
-        Returns:
-            str: The absolute URL for the NFC instance.
-        """
-        return reverse('link:digit', kwargs={'serial_number': self.serial_number})
 
     class Meta:
         verbose_name = "NTAG"

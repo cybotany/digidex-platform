@@ -1,29 +1,31 @@
-from django import views
-from django.shortcuts import render, get_object_or_404
-from django.http import Http404, HttpResponseRedirect
+from django.views import View
+from django.shortcuts import get_object_or_404
+from django.http import Http404
 
 from nfc.models import NearFieldCommunicationTag
 
+class LinkDigit(View):
 
-class LinkDigit(views.View):
-    template_name = "inventory/digit/creation-page.html"
 
-    def get_object(self):
-        serial_number = self.kwargs.get('serial_number')
+    def get_object(self, serial_number):
+        """
+        Retrieves an NTAG by its serial number or raises a 404 error if not found.
+        """
         if not serial_number:
             raise Http404("No serial number provided")
         return get_object_or_404(NearFieldCommunicationTag, serial_number=serial_number)
 
     def get(self, request, *args, **kwargs):
-        ntag = self.get_object()
-        linked_digit = ntag.get_digit()
-        if ntag.active and linked_digit:
-            return HttpResponseRedirect(linked_digit.get_absolute_url())
-        else:
-            FormClass, _ = self.get_form_and_model(ntag.use)
-            form = FormClass(**self.get_form_kwargs())
-            context = {
-                'form': form,
-                'ntag': ntag
-            }
-            return render(request, self.template_name, context)
+        serial_number = kwargs.get('serial_number')
+        ntag = self.get_object(serial_number)
+
+        if ntag.active:
+            return self.activate_link(ntag)
+        return ntag
+
+    def get_form_initial(self, ntag):
+        """
+        Optionally customize initial form data based on the NTAG instance.
+        """
+        return {}
+

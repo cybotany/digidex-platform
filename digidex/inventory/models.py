@@ -13,8 +13,6 @@ from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel, PageChooserPanel, InlinePanel, MultiFieldPanel
 from wagtail.search import index
 
-from nfc.models import NearFieldCommunicationTag
-
 
 class UserIndexPage(Page):
     body = RichTextField(
@@ -76,7 +74,7 @@ class UserPage(Page):
 
 
 class Digit(Orderable):
-    page = ParentalKey(
+    user = ParentalKey(
         'UserPage',
         null=True,
         on_delete=models.CASCADE,
@@ -99,17 +97,9 @@ class Digit(Orderable):
         db_index=True,
         verbose_name="Digit UUID"
     )
-    ntag = models.OneToOneField(
-        NearFieldCommunicationTag,
-        null=True,
-        blank=True,
-        on_delete=models.CASCADE,
-        related_name='digit'
-    )
 
     def save(self, *args, **kwargs):
         if not self.pk:
-            # Create a unique slug for the digit within the scope of the user
             self.slug = slugify(self.name)
             original_slug = self.slug
             count = 1
