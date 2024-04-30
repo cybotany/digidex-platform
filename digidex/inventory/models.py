@@ -31,7 +31,7 @@ class UserIndexPage(Page):
 
 
 class UserPage(Page):
-    user = models.ForeignKey(
+    user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT,
         related_name="user_pages"
@@ -45,7 +45,7 @@ class UserPage(Page):
         FieldPanel('user'),
     ]
 
-    subpage_types = ['inventory.DigitPage']
+    subpage_types = ['inventory.DigitRegistrationFormPage', 'inventory.DigitPage']
 
     def get_username(self):
         """Method to return the username of the associated user."""
@@ -60,10 +60,9 @@ class UserPage(Page):
 
 
 class Digit(Orderable):
-    user = ParentalKey(
-        'UserPage',
-        null=True,
-        on_delete=models.CASCADE,
+    user_page = ParentalKey(
+        UserPage,
+        on_delete=models.PROTECT,
         related_name='digits'
     )
     name = models.CharField(
@@ -142,9 +141,11 @@ class DigitRegistrationFormPage(AbstractForm):
         return HttpResponseRedirect(digit_page.url)
 
     def serve(self, request, *args, **kwargs):
-        serial_number = request.GET.get('serial_number')
+        user_id = request.GET.get('user_id')
+        ntag_id = request.GET.get('ntag_id')
         form_context = {
-            'serial_number': serial_number
+            'user_id': user_id,
+            'ntag_id': ntag_id
         }
         return super().serve(request, *args, **kwargs, extra_context=form_context)
 
@@ -163,7 +164,7 @@ class DigitPage(Page):
         on_delete=models.PROTECT,
         related_name='page'
     )
-    user = models.ForeignKey(
+    user_page = ParentalKey(
         UserPage,
         on_delete=models.PROTECT,
         related_name='digit_pages'
@@ -189,7 +190,7 @@ class DigitPage(Page):
     content_panels = Page.content_panels + [
         MultiFieldPanel(
             [
-                PageChooserPanel('user'),
+                PageChooserPanel('user_page'),
                 FieldPanel('tags'),
             ],
             heading="Digit Metadata"

@@ -20,3 +20,10 @@ def create_user_page(sender, instance, created, **kwargs):
                 )
                 root_user_page.add_child(instance=user_page)
                 user_page.save_revision().publish()
+
+@receiver(post_save, sender=User)
+def create_user_collection(sender, instance, created, **kwargs):
+    if created:
+        # This block runs only when a new user is created
+        root_collection = Collection.get_first_root_node()
+        user_collection = root_collection.add_child(name=f"User {instance.username} Collection")
