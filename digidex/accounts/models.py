@@ -1,10 +1,13 @@
 import uuid
 
-from django.utils.text import slugify
 from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 
+from wagtail.models import Page
 from wagtail.fields import RichTextField
+from wagtail.admin.panels import FieldPanel
+from wagtail.search import index
 
 
 class User(AbstractUser):
@@ -12,17 +15,20 @@ class User(AbstractUser):
         max_length=32,
         unique=True
     )
-    slug = models.SlugField(
-        unique=True,
-        db_index=True,
-        verbose_name="Username Slug"
-    )
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
         editable=False,
         db_index=True,
         verbose_name="User UUID"
+    )
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.PROTECT,
+        related_name="profile"
     )
     avatar = models.ForeignKey(
         'wagtailimages.Image', 
@@ -44,15 +50,55 @@ class User(AbstractUser):
         verbose_name="Last Modified"
     )
 
+    def __str__(self):
+        return self.user.username
 
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.username)
-            original_slug = self.slug
-            count = 0
+    class Meta:
+        verbose_name = "User Profile"
 
-            while User.objects.filter(slug=self.slug).exists():
-                count += 1
-                self.slug = f'{original_slug}-{count}'
 
-        super(User, self).save(*args, **kwargs)
+class UserProfileIndexPage(Page):
+    body = RichTextField(
+        blank=True
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel('body', classname="full")
+    ]
+
+    subpage_types = ['accounts.UserProfilePage']
+
+
+class UserProfilePage(Page):
+    user_profile = models.OneToOneField(
+        UserProfile,
+        on_delete=models.PROTECT,
+        related_name="user_pages"
+    )
+
+    search_fields = Page.search_fields + [
+        index.SearchField('get_username', partial_match=True, boost=2),
+        index.SearchField('get_biography', partial_match=True, boost=1),
+    ]
+
+    content_panels = Page.content_panels + [
+        FieldPanel('user_profile__avatar'),
+        FieldPanel('user_profile__biography'),
+    ]
+
+    subpage_types = [
+        'digitization.DigitizedObjectRegistrationPage',
+        'digitization.UserDigitiziedObjectPage',
+        'digitization.UserDigitiziedObjectTagIndexPage'
+    ]
+
+    def get_username(self):
+        """Method to return the username of the associated user."""
+        return self.user_profile.user.username
+
+    def get_biography(self):
+        """Method to return the biography of the associated user."""
+        return self.user_profile.biography
+
+    class Meta:
+        verbose_name = "User Profile Page"

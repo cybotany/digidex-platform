@@ -1,176 +1,48 @@
-import uuid
-
 from django.db import models
-from django.conf import settings
-from django.utils.text import slugify
-from django.http import HttpResponseRedirect
 
 from modelcluster.fields import ParentalKey
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from taggit.models import TaggedItemBase
 
 from wagtail.models import Page, Orderable
-from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel, PageChooserPanel
 from wagtail.search import index
 
-from wagtail.contrib.forms.models import AbstractForm, AbstractFormField
-from wagtail.contrib.forms.panels import FormSubmissionsPanel
 
-
-class UserIndexPage(Page):
-    body = RichTextField(
-        blank=True
-    )
-
-    content_panels = Page.content_panels + [
-        FieldPanel('body', classname="full")
-    ]
-
-    subpage_types = ['inventory.UserPage']
-
-
-class UserPage(Page):
-    user = models.OneToOneField(
-        settings.AUTH_USER_MODEL,
+class UserDigitizedObject(Orderable):
+    user_profile = ParentalKey(
+        'accounts.UserProfilePage',
         on_delete=models.PROTECT,
-        related_name="user_pages"
+        related_name='user_digits'
     )
-
-    search_fields = Page.search_fields + [
-        index.SearchField('get_username', partial_match=True, boost=2),
-    ]
-
-    content_panels = Page.content_panels + [
-        FieldPanel('user'),
-    ]
-
-    subpage_types = ['inventory.DigitRegistrationFormPage', 'inventory.DigitPage']
-
-    def get_username(self):
-        """Method to return the username of the associated user."""
-        return self.user.username
-
-    def get_biography(self):
-        """Method to return the biography of the associated user."""
-        return self.user.biography
-
-    class Meta:
-        verbose_name = "User Profile Page"
-
-
-class Digit(Orderable):
-    user_page = ParentalKey(
-        UserPage,
-        on_delete=models.PROTECT,
-        related_name='digits'
-    )
-    name = models.CharField(
-        max_length=100,
-        null=True,
-        blank=False
-    )
-    slug = models.SlugField(
-        null=True,
-        db_index=True,
-        verbose_name="Digit Slug"
-    )
-    uuid = models.UUIDField(
-        default=uuid.uuid4,
-        unique=True,
-        editable=False,
-        db_index=True,
-        verbose_name="Digit UUID"
-    )
-    description = RichTextField(
-        blank=True,
-        null=True
-    )
-
-    def save(self, *args, **kwargs):
-        if not self.pk:
-            self.slug = slugify(self.name)
-            original_slug = self.slug
-            count = 1
-
-            while Digit.objects.filter(page=self.page, slug=self.slug).exists():
-                self.slug = f'{original_slug}-{count}'
-                count += 1
-
-        super(Digit, self).save(*args, **kwargs)
-
-
-class DigitFormField(AbstractFormField):
-    page = ParentalKey(
-        'DigitRegistrationFormPage',
+    digitized_object = models.OneToOneField(
+        'digitization.DigitizedObject',
         on_delete=models.CASCADE,
-        related_name='form_fields'
+        related_name='user_associations'
     )
 
 
-class DigitRegistrationFormPage(AbstractForm):
-    intro = RichTextField(
-        blank=True
-    )
-    thank_you_text = RichTextField(
-        blank=True
-    )
-
-    content_panels = AbstractForm.content_panels + [
-        FormSubmissionsPanel(),
-        FieldPanel('intro'),
-        InlinePanel('form_fields', label="Digit Fields"),
-        FieldPanel('thank_you_text'),
-    ]
-
-    def process_form_submission(self, form):
-        digit = Digit(
-            user=form.cleaned_data.get('user'),
-            name=form.cleaned_data['name']
-        )
-        digit.save()
-
-        digit_page = DigitPage(
-            title=digit.name,
-            digit=digit,
-            user=form.cleaned_data.get('user_page')  # Assuming a UserPage instance is provided
-        )
-        self.add_child(instance=digit_page)
-        digit_page.save_revision().publish()
-
-        return HttpResponseRedirect(digit_page.url)
-
-    def serve(self, request, *args, **kwargs):
-        user_id = request.GET.get('user_id')
-        ntag_id = request.GET.get('ntag_id')
-        form_context = {
-            'user_id': user_id,
-            'ntag_id': ntag_id
-        }
-        return super().serve(request, *args, **kwargs, extra_context=form_context)
-
-
-class DigitPageTag(TaggedItemBase):
+class UserDigitiziedObjectPageTag(TaggedItemBase):
     content_object = ParentalKey(
-        'DigitPage',
+        'digitization.UserDigitiziedObjectPage',
         related_name='tagged_items',
         on_delete=models.CASCADE
     )
 
 
-class DigitPage(Page):
-    digit = models.OneToOneField(
-        Digit,
+class UserDigitiziedObjectPage(Page):
+    user_digit = models.OneToOneField(
+        'digitization.UserDigitizedObject',
         on_delete=models.PROTECT,
         related_name='page'
     )
-    user_page = ParentalKey(
-        UserPage,
+    user_profile = ParentalKey(
+        'accounts.UserProfilePage',
         on_delete=models.PROTECT,
         related_name='digit_pages'
     )
     tags = ClusterTaggableManager(
-        through=DigitPageTag,
+        through=UserDigitiziedObjectPageTag,
         blank=True
     )
     created_at = models.DateTimeField(
@@ -208,28 +80,16 @@ class DigitPage(Page):
 
     def get_digit_name(self):
         """Method to return the name of the digitized object."""
-        return self.digit.name
+        return self.user_digit.name
 
     def get_digit_description(self):
         """Method to return the description of the digitized object."""
-        return self.digit.description
-
-    def save(self, *args, **kwargs):
-        if not self.pk:
-            base_slug = slugify(self.digit.name)
-            self.slug = base_slug
-            count = 1
-
-            while DigitPage.objects.filter(slug=self.slug, user=self.user).exists():
-                self.slug = f'{base_slug}-{count}'
-                count += 1
-
-        super(DigitPage, self).save(*args, **kwargs)
+        return self.user_digit.description
 
 
-class DigitPageGalleryImage(Orderable):
+class DigitiziedObjectPageGalleryImage(Orderable):
     page = ParentalKey(
-        DigitPage,
+        UserDigitiziedObjectPage,
         on_delete=models.CASCADE,
         related_name='digit_images'
     )
@@ -249,10 +109,10 @@ class DigitPageGalleryImage(Orderable):
     ]
 
 
-class DigitTagIndexPage(Page):
+class UserDigitiziedObjectTagIndexPage(Page):
     def get_context(self, request):
         tag = request.GET.get('tag')
-        digitpages = DigitPage.objects.filter(tags__name=tag)
+        digitpages = UserDigitiziedObjectPage.objects.filter(tags__name=tag)
         context = super().get_context(request)
         context['digitpages'] = digitpages
         return context
