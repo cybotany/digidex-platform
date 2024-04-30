@@ -1,14 +1,5 @@
 {% load wagtailcore_tags wagtailimages_tags%}
 
-<section class="section-top padding-0">
-  <div class="content">
-    <div class="block-top">
-      <div class="date-top">{{ page.date }}</div>
-      <h1 class="heading-top">{{ page.heading }}</h1>
-      <p class="paragraph-top blog-post">{{ page.intro }}</p>
-    </div>
-  </div>
-</section>
 <section class="section">
   <div class="content narrow">
     {% for item in page.gallery_images.all %}
