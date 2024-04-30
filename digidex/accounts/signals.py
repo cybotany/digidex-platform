@@ -1,16 +1,9 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from wagtail.signals import wagtail_ready
 from wagtail.models import Collection
 
 from accounts.models import User
-
-@receiver(wagtail_ready)
-def create_accounts_collection(sender, **kwargs):
-    root_collection = Collection.get_first_root_node()
-    if not root_collection.get_children().filter(name="Accounts").exists():
-        root_collection.add_child(name="Accounts")
 
 @receiver(post_save, sender=User)
 def create_user_assets(sender, instance, created, **kwargs):

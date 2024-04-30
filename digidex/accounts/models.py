@@ -3,8 +3,6 @@ import uuid
 from django.db import models, transaction
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser, Group, Permission
-from django.contrib.messages import add_message
-from django.contrib.messages.constants import SUCCESS
 
 from wagtail.models import Page, Collection, GroupCollectionPermission
 from wagtail.fields import RichTextField
