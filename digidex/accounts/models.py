@@ -11,10 +11,6 @@ from wagtail.search import index
 
 
 class User(AbstractUser):
-    username = models.CharField(
-        max_length=32,
-        unique=True
-    )
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
@@ -28,13 +24,13 @@ class User(AbstractUser):
         if created:
             self.groups.add(user_group)
             self.save()
-        return user_group, created
+        return created
 
     def create_user_profile(self):
         profile, created = UserProfile.objects.get_or_create(user=self)
         if created:
             profile.save() 
-        return profile, created
+        return created
 
 
 class UserProfile(models.Model):
@@ -63,57 +59,15 @@ class UserProfile(models.Model):
         verbose_name="Last Modified"
     )
 
-    def create_user_collection(self, parent=None):
-        if parent is None:
-            parent = Collection.get_first_root_node()
-
-        user_collection_name = f"{self.user.username}'s Collection"
-        collection = parent.add_child(name=user_collection_name)
-        self.set_collection_permissions(collection)
-        return collection
-
-    def set_collection_permissions(self, collection):
-        user_group, _ = self.user.create_user_group()
-        permissions = ['add', 'change', 'delete', 'view']
-        for permission in permissions:
-            permission_codename = f'{permission}_{collection._meta.model_name}'
-            perm, _ = Permission.objects.get_or_create(codename=permission_codename)
-            GroupCollectionPermission.objects.get_or_create(
-                group=user_group,
-                collection=collection,
-                permission=perm
-            )
-
-        admin_group, _ = Group.objects.get_or_create(name='Admins')
-        for permission in permissions:
-            permission_codename = f'{permission}_{collection._meta.model_name}'
-            perm, _ = Permission.objects.get_or_create(codename=permission_codename)
-            GroupCollectionPermission.objects.get_or_create(
-                group=admin_group,
-                collection=collection,
-                permission=perm
-            )
-
-    def create_user_profile_page(self):
-        homepage = Site.objects.get(is_default_site=True).root_page
-        root_user_page = UserProfileIndexPage.objects.child_of(homepage).first()
-        if root_user_page is None:
-            root_user_page = UserProfileIndexPage(title="User Profiles", slug='u')
-            homepage.add_child(instance=root_user_page)
-            root_user_page.save_revision().publish()
-
-        root_user_page.refresh_from_db()
-
+    def create_user_profile_page(self, parent):
         user_page = UserProfilePage(
             title=f"{self.user.username}'s Inventory",
             owner=self.user,
             slug=self.user.username.replace(' ', '-').lower(),
             profile=self
         )
-        
-        root_user_page.add_child(instance=user_page)
+        parent.add_child(instance=user_page)
         user_page.save_revision().publish()
-
         return user_page.url
 
     def __str__(self):
@@ -163,6 +117,27 @@ class UserProfilePage(Page):
     #    'inventory.UserDigitizedObjectTagIndexPage'
     #]
 
+    def create_user_collection(self, parent=None):
+        if parent is None:
+            parent = Collection.get_first_root_node()
+
+        user_collection_name = f"{self.user.username}'s Collection"
+        collection = parent.add_child(name=user_collection_name)
+        self.set_collection_permissions(collection)
+        return collection
+
+    def set_collection_permissions(self, collection):
+        user_group, _ = self.user.create_user_group()
+        permissions = ['add', 'change', 'delete', 'view']
+        for permission in permissions:
+            permission_codename = f'{permission}_{collection._meta.model_name}'
+            perm, _ = Permission.objects.get_or_create(codename=permission_codename)
+            GroupCollectionPermission.objects.get_or_create(
+                group=user_group,
+                collection=collection,
+                permission=perm
+            )
+    
     def get_username(self):
         """Method to return the username of the associated user."""
         if self.profile:
