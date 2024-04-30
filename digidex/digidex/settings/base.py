@@ -13,15 +13,15 @@ PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 INSTALLED_APPS = [
+    "api",
     "accounts",
     "base",
     "blog",
-    "home",
-    "search",
     "digitization",
+    "home",
     "inventory",
     "nfc",
-    "api",
+    "search",
 
     "wagtail.contrib.settings",
     "wagtail.contrib.forms",

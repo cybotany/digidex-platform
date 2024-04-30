@@ -70,7 +70,7 @@ class UserProfileIndexPage(Page):
 
 
 class UserProfilePage(Page):
-    user_profile = models.OneToOneField(
+    profile = models.OneToOneField(
         UserProfile,
         on_delete=models.PROTECT,
         related_name="user_pages",
@@ -87,26 +87,26 @@ class UserProfilePage(Page):
     ]
 
     content_panels = Page.content_panels + [
-        FieldPanel('user_profile'),
+        FieldPanel('profile'),
         FieldPanel('body'),
     ]
 
     subpage_types = [
         'digitization.DigitizedObjectRegistrationPage',
-        'digitization.UserDigitizedObjectPage',
-        'digitization.UserDigitizedObjectTagIndexPage'
+        'inventory.UserDigitizedObjectPage',
+        'inventory.UserDigitizedObjectTagIndexPage'
     ]
 
     def get_username(self):
         """Method to return the username of the associated user."""
-        if self.user_profile:
-            return self.user_profile.user.username
+        if self.profile:
+            return self.profile.user.username
         return "No User"
 
     def get_biography(self):
         """Method to return the biography of the associated user."""
-        if self.user_profile:
-            return self.user_profile.biography
+        if self.profile:
+            return self.profile.biography
         return "No Biography"
 
     class Meta:

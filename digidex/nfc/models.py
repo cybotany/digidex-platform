@@ -9,7 +9,7 @@ class NearFieldCommunicationTag(models.Model):
 
     Attributes:
         serial_number (CharField): The unique serial number associated with the NFC tag.
-        user (ForeignKey): The user who created the journal entry, linked to the user model.
+        digit (OneToOneField): The digital object associated with the NFC tag.
         active (BooleanField): A flag indicating whether the Link is active and mapped to a digital object.
         created_at (DateTimeField): The date and time when the Link instance was created.
         last_modified (DateTimeField): The date and time when the Link instance was last modified.
@@ -20,7 +20,7 @@ class NearFieldCommunicationTag(models.Model):
         db_index=True
     )
     digit = models.OneToOneField(
-        'inventory.Digit',
+        'inventory.UserDigitizedObject',
         blank=True,
         null=True,
         on_delete=models.CASCADE,
