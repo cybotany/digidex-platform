@@ -22,19 +22,19 @@ class UserDigitizedObject(Orderable):
     )
 
 
-class UserDigitiziedObjectPageTag(TaggedItemBase):
+class UserDigitizedObjectPageTag(TaggedItemBase):
     content_object = ParentalKey(
-        'digitization.UserDigitiziedObjectPage',
+        'digitization.UserDigitizedObjectPage',
         related_name='tagged_items',
         on_delete=models.CASCADE
     )
 
 
-class UserDigitiziedObjectPage(Page):
+class UserDigitizedObjectPage(Page):
     user_digit = models.OneToOneField(
         'digitization.UserDigitizedObject',
         on_delete=models.PROTECT,
-        related_name='page'
+        related_name='digit_page'
     )
     user_profile = ParentalKey(
         'accounts.UserProfilePage',
@@ -42,7 +42,7 @@ class UserDigitiziedObjectPage(Page):
         related_name='digit_pages'
     )
     tags = ClusterTaggableManager(
-        through=UserDigitiziedObjectPageTag,
+        through=UserDigitizedObjectPageTag,
         blank=True
     )
     created_at = models.DateTimeField(
@@ -62,12 +62,12 @@ class UserDigitiziedObjectPage(Page):
     content_panels = Page.content_panels + [
         MultiFieldPanel(
             [
-                PageChooserPanel('user_page'),
+                FieldPanel('user_profile'),
                 FieldPanel('tags'),
             ],
             heading="Digit Metadata"
         ),
-        FieldPanel('digit'),
+        FieldPanel('user_digit'),
         InlinePanel('digit_images', label="Digit images"),
     ]
 
@@ -80,18 +80,18 @@ class UserDigitiziedObjectPage(Page):
 
     def get_digit_name(self):
         """Method to return the name of the digitized object."""
-        return self.user_digit.name
+        return self.user_digit.digitized_object.name
 
     def get_digit_description(self):
         """Method to return the description of the digitized object."""
-        return self.user_digit.description
+        return self.user_digit.digitized_object.description
 
 
-class DigitiziedObjectPageGalleryImage(Orderable):
+class DigitizedObjectPageGalleryImage(Orderable):
     page = ParentalKey(
-        UserDigitiziedObjectPage,
+        UserDigitizedObjectPage,
         on_delete=models.CASCADE,
-        related_name='digit_images'
+        related_name='digitized_object_images'
     )
     image = models.ForeignKey(
         'wagtailimages.Image',
@@ -109,10 +109,10 @@ class DigitiziedObjectPageGalleryImage(Orderable):
     ]
 
 
-class UserDigitiziedObjectTagIndexPage(Page):
+class UserDigitizedObjectTagIndexPage(Page):
     def get_context(self, request):
         tag = request.GET.get('tag')
-        digitpages = UserDigitiziedObjectPage.objects.filter(tags__name=tag)
+        digitpages = UserDigitizedObjectPage.objects.filter(tags__name=tag)
         context = super().get_context(request)
         context['digitpages'] = digitpages
         return context

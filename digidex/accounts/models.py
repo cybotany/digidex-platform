@@ -73,7 +73,12 @@ class UserProfilePage(Page):
     user_profile = models.OneToOneField(
         UserProfile,
         on_delete=models.PROTECT,
-        related_name="user_pages"
+        related_name="user_pages",
+        help_text="Link to the associated user profile."
+    )
+    body = RichTextField(
+        blank=True,
+        help_text="Additional content about the user."
     )
 
     search_fields = Page.search_fields + [
@@ -82,23 +87,27 @@ class UserProfilePage(Page):
     ]
 
     content_panels = Page.content_panels + [
-        FieldPanel('user_profile__avatar'),
-        FieldPanel('user_profile__biography'),
+        FieldPanel('user_profile'),
+        FieldPanel('body'),
     ]
 
     subpage_types = [
         'digitization.DigitizedObjectRegistrationPage',
-        'digitization.UserDigitiziedObjectPage',
-        'digitization.UserDigitiziedObjectTagIndexPage'
+        'digitization.UserDigitizedObjectPage',
+        'digitization.UserDigitizedObjectTagIndexPage'
     ]
 
     def get_username(self):
         """Method to return the username of the associated user."""
-        return self.user_profile.user.username
+        if self.user_profile:
+            return self.user_profile.user.username
+        return "No User"
 
     def get_biography(self):
         """Method to return the biography of the associated user."""
-        return self.user_profile.biography
+        if self.user_profile:
+            return self.user_profile.biography
+        return "No Biography"
 
     class Meta:
         verbose_name = "User Profile Page"

@@ -2,6 +2,7 @@ import uuid
 
 from django.db import models
 from django.shortcuts import redirect
+from django.urls import reverse
 
 from modelcluster.fields import ParentalKey
 
@@ -75,7 +76,7 @@ class DigitizedObjectRegistrationPage(AbstractForm):
             description=form.cleaned_data.get('description', '')
         )
         digitized_object.save()
-        return redirect('/thank-you/')
+        return redirect(reverse('thank-you'))
 
     def serve(self, request, *args, **kwargs):
         user_id = request.GET.get('user_id')

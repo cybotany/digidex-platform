@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 from nfc.models import NearFieldCommunicationTag
-from inventory.models import DigitRegistrationFormPage
+from digitization.models import DigitizedObjectRegistrationPage
 
 def handle_common_exceptions(view_func):
     def wrapper(request, *args, **kwargs):
@@ -39,7 +39,7 @@ def link_ntag(request, ntag_id):
             messages.info(request, "A digit is already associated with this NTAG.")
             return redirect(ntag.get_digit_page_url())
 
-        form_page = DigitRegistrationFormPage.objects.first()
+        form_page = DigitizedObjectRegistrationPage.objects.first()
         if not form_page:
             messages.error(request, "Digit registration form page not found.")
             return redirect('error_page_url')
