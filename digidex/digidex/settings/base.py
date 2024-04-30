@@ -14,7 +14,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 INSTALLED_APPS = [
     "api",
-    "accounts",
+    "accounts.apps.AccountsConfig",
     "base",
     "blog",
     "digitization",

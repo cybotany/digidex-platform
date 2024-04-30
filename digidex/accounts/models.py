@@ -1,10 +1,12 @@
 import uuid
 
-from django.db import models
+from django.db import models, transaction
 from django.conf import settings
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, Group, Permission
+from django.contrib.messages import add_message
+from django.contrib.messages.constants import SUCCESS
 
-from wagtail.models import Page
+from wagtail.models import Page, Collection, GroupCollectionPermission
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 from wagtail.search import index
@@ -22,6 +24,21 @@ class User(AbstractUser):
         db_index=True,
         verbose_name="User UUID"
     )
+
+    def create_user_group(self):
+        with transaction.atomic():
+            user_group, created = Group.objects.get_or_create(name=f"user_{self.username}_group")
+            if created:
+                self.groups.add(user_group)
+                self.save()
+            return user_group, created
+
+    def create_user_profile(self):
+        with transaction.atomic():
+            profile, created = UserProfile.objects.get_or_create(user=self)
+            if created:
+                profile.save() 
+            return profile, created
 
 
 class UserProfile(models.Model):
@@ -49,6 +66,53 @@ class UserProfile(models.Model):
         auto_now=True,
         verbose_name="Last Modified"
     )
+
+    def create_user_collection(self, parent=None):
+        if parent is None:
+            parent = Collection.get_first_root_node()
+
+        user_collection_name = f"{self.user.username}'s Collection"
+        collection = parent.add_child(name=user_collection_name)
+        self.set_collection_permissions(collection)
+        return collection
+
+    def set_collection_permissions(self, collection):
+        user_group, _ = self.user.create_user_group()
+        permissions = ['add', 'change', 'delete', 'view']
+        for permission in permissions:
+            permission_codename = f'{permission}_{collection._meta.model_name}'
+            perm, _ = Permission.objects.get_or_create(codename=permission_codename)
+            GroupCollectionPermission.objects.get_or_create(
+                group=user_group,
+                collection=collection,
+                permission=perm
+            )
+
+        admin_group, _ = Group.objects.get_or_create(name='Admins')
+        for permission in permissions:
+            permission_codename = f'{permission}_{collection._meta.model_name}'
+            perm, _ = Permission.objects.get_or_create(codename=permission_codename)
+            GroupCollectionPermission.objects.get_or_create(
+                group=admin_group,
+                collection=collection,
+                permission=perm
+            )
+
+    def create_user_profile_page(self):
+        with transaction.atomic():
+            root_user_page = UserProfileIndexPage.objects.first()
+            if root_user_page:
+                user_page = UserProfilePage(
+                    title=f"{self.user.username}'s Inventory",
+                    owner=self.user,
+                    slug=self.user.username
+                )
+                root_user_page.add_child(instance=user_page)
+                user_page.save_revision().publish()
+                
+                return user_page.url
+            else:
+                return None
 
     def __str__(self):
         return self.user.username
