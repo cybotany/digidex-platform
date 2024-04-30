@@ -4,7 +4,7 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser, Group, Permission
 
-from wagtail.models import Page, Collection, GroupCollectionPermission
+from wagtail.models import Page, Collection, GroupCollectionPermission, Site
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 from wagtail.search import index
@@ -95,11 +95,11 @@ class UserProfile(models.Model):
             )
 
     def create_user_profile_page(self):
-        root_user_page = UserProfileIndexPage.objects.first()
+        homepage = Site.objects.get(is_default_site=True).root_page
+        root_user_page = UserProfileIndexPage.objects.child_of(homepage).first()
         if root_user_page is None:
-            site_root = Page.objects.get(id=1)
             root_user_page = UserProfileIndexPage(title="User Profiles", slug='user-profiles')
-            site_root.add_child(instance=root_user_page)
+            homepage.add_child(instance=root_user_page)
             root_user_page.save_revision().publish()
 
         root_user_page.refresh_from_db()
