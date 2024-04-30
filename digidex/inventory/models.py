@@ -59,6 +59,10 @@ class UserDigitizedObjectPage(Page):
         index.SearchField('get_digit_description', partial_match=True, boost=1),
     ]
 
+    subpage_types = [
+        'inventory.UserDigitizedObjectTagIndexPage'
+    ]
+
     content_panels = Page.content_panels + [
         MultiFieldPanel(
             [

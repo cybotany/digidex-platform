@@ -1,0 +1,9 @@
+{% extends "accounts/base.html" %}
+{% load wagtailcore_tags%}
+
+{% block content %}
+  {% include "accounts/includes/details.html" %}
+  <p>
+    <a href="{{ page.get_parent.url }}">Back</a>
+  </p>
+{% endblock %}

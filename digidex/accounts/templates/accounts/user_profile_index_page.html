@@ -1,0 +1,7 @@
+{% extends "accounts/base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+  {% include_block page.body %}
+  {% include "accounts/includes/featured.html" %}
+{% endblock %}
