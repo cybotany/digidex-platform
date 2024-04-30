@@ -16,6 +16,11 @@ class BlogIndexPage(Page):
         FieldPanel('body'),
     ]
 
+    subpage_types = [
+        'blog.BlogPage',
+        'blog.BlogTagIndexPage'
+    ]
+
     def get_context(self, request):
         context = super().get_context(request)
         blogpages = self.get_children().live().order_by('-first_published_at')

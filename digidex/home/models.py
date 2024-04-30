@@ -31,6 +31,7 @@ class LottieFeature(Orderable):
     ]
 
 
+
 class HomePage(Page):
     hero_heading = models.CharField(
         blank=True,
@@ -67,6 +68,11 @@ class HomePage(Page):
             ], heading="Hero Section"
         ),
         FieldPanel("body"),
+    ]
+
+    subpage_types = [
+        'accounts.UserProfileIndexPage',
+        'blog.BlogIndexPage'
     ]
 
     class Meta:
