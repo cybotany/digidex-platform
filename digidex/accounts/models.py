@@ -98,19 +98,19 @@ class UserProfile(models.Model):
         root_user_page = UserProfileIndexPage.objects.first()
         if root_user_page is None:
             site_root = Page.objects.get(id=1)
-            root_user_page = UserProfileIndexPage(
-                title="User Profiles",
-                slug='user-profiles'
-            )
+            root_user_page = UserProfileIndexPage(title="User Profiles", slug='user-profiles')
             site_root.add_child(instance=root_user_page)
             root_user_page.save_revision().publish()
-        
+
+        root_user_page.refresh_from_db()
+
         user_page = UserProfilePage(
             title=f"{self.user.username}'s Inventory",
             owner=self.user,
             slug=self.user.username.replace(' ', '-').lower(),
             profile=self
         )
+        
         root_user_page.add_child(instance=user_page)
         user_page.save_revision().publish()
 
