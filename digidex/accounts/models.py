@@ -1,6 +1,6 @@
 import uuid
 
-from django.db import models, transaction
+from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser, Group, Permission
 
@@ -24,19 +24,17 @@ class User(AbstractUser):
     )
 
     def create_user_group(self):
-        with transaction.atomic():
-            user_group, created = Group.objects.get_or_create(name=f"user_{self.username}_group")
-            if created:
-                self.groups.add(user_group)
-                self.save()
-            return user_group, created
+        user_group, created = Group.objects.get_or_create(name=f"user_{self.username}_group")
+        if created:
+            self.groups.add(user_group)
+            self.save()
+        return user_group, created
 
     def create_user_profile(self):
-        with transaction.atomic():
-            profile, created = UserProfile.objects.get_or_create(user=self)
-            if created:
-                profile.save() 
-            return profile, created
+        profile, created = UserProfile.objects.get_or_create(user=self)
+        if created:
+            profile.save() 
+        return profile, created
 
 
 class UserProfile(models.Model):
@@ -97,20 +95,18 @@ class UserProfile(models.Model):
             )
 
     def create_user_profile_page(self):
-        with transaction.atomic():
-            root_user_page = UserProfileIndexPage.objects.first()
-            if root_user_page:
-                user_page = UserProfilePage(
-                    title=f"{self.user.username}'s Inventory",
-                    owner=self.user,
-                    slug=self.user.username
-                )
-                root_user_page.add_child(instance=user_page)
-                user_page.save_revision().publish()
-                
-                return user_page.url
-            else:
-                return None
+        root_user_page = UserProfileIndexPage.objects.first()
+        if root_user_page:
+            user_page = UserProfilePage(
+                title=f"{self.user.username}'s Inventory",
+                owner=self.user,
+                slug=self.user.username
+            )
+            root_user_page.add_child(instance=user_page)
+            user_page.save_revision().publish()
+            return user_page.url
+        else:
+            return None
 
     def __str__(self):
         return self.user.username
