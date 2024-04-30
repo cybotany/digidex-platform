@@ -1,0 +1,35 @@
+{% load static wagtailcore_tags wagtailimages_tags %}
+<section class="section">
+  <div class="content">    
+    <div class="collection-list-wrapper-posts base-dyn-list">
+      <div role="list" class="collection-list-posts base-dyn-items">
+        {% for post in blogpages %}
+          {% with post=post.specific %}
+            <div role="listitem" class="base-dyn-item">
+              <div class="block-post">
+                <a href="{% pageurl post %}" class="link-post-thumbnail base-inline-block">
+                  {% with post.main_image as main_image %}
+                      {% if main_image %}{% image main_image fill-120x80 class="image-post-thumbnail" %}{% endif %}
+                    {% endwith %}
+                  </a>
+                  <div class="post">
+                  <div class="date">{{ post.date }}</div>
+                  <a href="{% pageurl post %}" class="link-heading-post base-inline-block">
+                    <h4 class="heading-post">{{ post.title }}</h4>
+                  </a>
+                  <p class="paragraph-post">{{ post.body|richtext }}</p>
+                  <a href="{% pageurl post %}" class="link-block base-inline-block">
+                    <div class="text-link">Read more</div>
+                    <div class="block-icon-link">
+                      <img src="{% static 'images/bx/arrow.svg' %}" loading="eager" alt="" class="icon-link">
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          {% endwith %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>

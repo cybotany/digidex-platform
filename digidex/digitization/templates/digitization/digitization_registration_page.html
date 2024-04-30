@@ -1,0 +1,14 @@
+{% extends "blog/base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+  {% include_block page.body %}
+  {% if empty_blog %}
+    {% include "blog/includes/empty.html" %}
+  {% else %}
+    {% include "blog/includes/featured.html" %}
+    {% if blogpages %}
+      {% include "blog/includes/grid.html" %}
+    {% endif %}
+  {% endif %}
+{% endblock %}
