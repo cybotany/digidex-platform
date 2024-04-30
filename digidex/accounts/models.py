@@ -97,7 +97,7 @@ class UserProfile(models.Model):
     def create_user_profile_page(self):
         root_user_page = UserProfileIndexPage.objects.first()
         if root_user_page is None:
-            site_root = Page.objects.get(id=1)  # Adjust this as needed based on your site tree structure
+            site_root = Page.objects.get(id=1)
             root_user_page = UserProfileIndexPage(
                 title="User Profiles",
                 slug='user-profiles'
@@ -108,7 +108,8 @@ class UserProfile(models.Model):
         user_page = UserProfilePage(
             title=f"{self.user.username}'s Inventory",
             owner=self.user,
-            slug=self.user.username
+            slug=self.user.username.replace(' ', '-').lower(),
+            profile=self
         )
         root_user_page.add_child(instance=user_page)
         user_page.save_revision().publish()
