@@ -96,17 +96,24 @@ class UserProfile(models.Model):
 
     def create_user_profile_page(self):
         root_user_page = UserProfileIndexPage.objects.first()
-        if root_user_page:
-            user_page = UserProfilePage(
-                title=f"{self.user.username}'s Inventory",
-                owner=self.user,
-                slug=self.user.username
+        if root_user_page is None:
+            site_root = Page.objects.get(id=1)  # Adjust this as needed based on your site tree structure
+            root_user_page = UserProfileIndexPage(
+                title="User Profiles",
+                slug='user-profiles'
             )
-            root_user_page.add_child(instance=user_page)
-            user_page.save_revision().publish()
-            return user_page.url
-        else:
-            return None
+            site_root.add_child(instance=root_user_page)
+            root_user_page.save_revision().publish()
+        
+        user_page = UserProfilePage(
+            title=f"{self.user.username}'s Inventory",
+            owner=self.user,
+            slug=self.user.username
+        )
+        root_user_page.add_child(instance=user_page)
+        user_page.save_revision().publish()
+
+        return user_page.url
 
     def __str__(self):
         return self.user.username
