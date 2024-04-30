@@ -98,7 +98,7 @@ class UserProfile(models.Model):
         homepage = Site.objects.get(is_default_site=True).root_page
         root_user_page = UserProfileIndexPage.objects.child_of(homepage).first()
         if root_user_page is None:
-            root_user_page = UserProfileIndexPage(title="User Profiles", slug='user-profiles')
+            root_user_page = UserProfileIndexPage(title="User Profiles", slug='u')
             homepage.add_child(instance=root_user_page)
             root_user_page.save_revision().publish()
 
@@ -157,11 +157,11 @@ class UserProfilePage(Page):
         FieldPanel('body'),
     ]
 
-    subpage_types = [
-        'digitization.DigitizedObjectRegistrationPage',
-        'inventory.UserDigitizedObjectPage',
-        'inventory.UserDigitizedObjectTagIndexPage'
-    ]
+    #subpage_types = [
+    #    'digitization.DigitizedObjectRegistrationPage',
+    #    'inventory.UserDigitizedObjectPage',
+    #    'inventory.UserDigitizedObjectTagIndexPage'
+    #]
 
     def get_username(self):
         """Method to return the username of the associated user."""
