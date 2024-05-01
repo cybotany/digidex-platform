@@ -1,0 +1,9 @@
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+<a href="#" class="link-profile-avatar large base-inline-block">
+  {% if page.profile.avatar %}
+    {% image page.profile.avatar fill-120x80 class="image-profile-avatar large" %}
+  {% else %}
+    <img src="{% static 'images/account-box.svg' %}" class="image-profile-avatar large" alt="Default Avatar">
+  {% endif %}
+</a>

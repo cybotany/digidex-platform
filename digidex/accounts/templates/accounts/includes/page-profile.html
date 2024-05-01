@@ -1,0 +1,16 @@
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+<section class="section">
+  <div class="content">    
+    <div class="collection-list-wrapper-posts large base-dyn-list">
+      <div role="list" class="collection-list-posts large base-dyn-items">
+        <div role="listitem" class="base-dyn-item">
+          <div class="block-post large">
+            {% include "accounts/includes/profile/profile-avatar.html" %}
+            {% include "accounts/includes/profile/profile-body.html" %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

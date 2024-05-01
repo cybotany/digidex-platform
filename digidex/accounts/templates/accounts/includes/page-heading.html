@@ -3,18 +3,18 @@
 <section class="section-top padding-0">
   <div class="content">
     <div class="block-top">
-      {% include "inventory/includes/heading/heading-title.html" %}
-      {% include "inventory/includes/heading/heading-introduction.html" %}
+      {% include "accounts/includes/heading/heading-title.html" %}
+      {% include "accounts/includes/heading/heading-introduction.html" %}
     </div>
     <div class="block-button">
       {% with parent=page.get_parent %}
         {% if parent and parent.url != request.path %}
-          {% include "inventory/includes/heading/parent-button.html" %}
+          {% include "accounts/includes/heading/parent-button.html" %}
         {% endif %}
       {% endwith %}
       {% with children=page.get_children %}
         {% if children.exists %}
-          {% include "inventory/includes/heading/child-button.html" %}
+          {% include "accounts/includes/heading/child-button.html" %}
         {% endif %}
       {% endwith %}
     </div>
