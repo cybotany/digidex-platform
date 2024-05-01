@@ -2,6 +2,7 @@
 {% load wagtailcore_tags%}
 
 {% block content %}
+  {% include "accounts/includes/profile.html" %}
   {{ page.body }}
   <p>
     <a href="{{ page.get_parent.url }}">Back</a>

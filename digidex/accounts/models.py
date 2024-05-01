@@ -46,10 +46,6 @@ class UserProfile(models.Model):
         on_delete=models.SET_NULL, 
         related_name='+'
     )
-    biography = RichTextField(
-        blank=True,
-        null=True
-    )
     created_at = models.DateTimeField(
         auto_now_add=True,
         verbose_name="Created At"
@@ -103,7 +99,6 @@ class UserProfilePage(Page):
 
     search_fields = Page.search_fields + [
         index.SearchField('get_username', partial_match=True, boost=2),
-        index.SearchField('get_biography', partial_match=True, boost=1),
     ]
 
     content_panels = Page.content_panels + [
@@ -143,12 +138,6 @@ class UserProfilePage(Page):
         if self.profile:
             return self.profile.user.username
         return "No User"
-
-    def get_biography(self):
-        """Method to return the biography of the associated user."""
-        if self.profile:
-            return self.profile.biography
-        return "No Biography"
 
     class Meta:
         verbose_name = "User Profile Page"
