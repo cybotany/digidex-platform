@@ -46,9 +46,9 @@ class UserProfile(models.Model):
         on_delete=models.SET_NULL, 
         related_name='+'
     )
-    body = RichTextField(
+    bio = RichTextField(
         blank=True,
-        help_text="Additional content about the user."
+        help_text="Short Biography about the user."
     )
     created_at = models.DateTimeField(
         auto_now_add=True,

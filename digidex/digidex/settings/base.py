@@ -160,7 +160,11 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
 SIGNUP_URL = 'account_signup'
 LOGIN_URL = 'account_login'
+LOGIN_REDIRECT_URL = 'wagtailadmin_home'
+
 WAGTAIL_FRONTEND_LOGIN_URL = LOGIN_URL
+
+ACCOUNT_ADAPTER = 'accounts.adapters.CustomAccountAdapter'
 
 ACCOUNT_PRESERVE_USERNAME_CASING = False
 
