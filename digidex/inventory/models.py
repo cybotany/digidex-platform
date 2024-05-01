@@ -9,7 +9,7 @@ from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.search import index
 
 
-class UserDigitizedObjectIndexPage(Page):
+class UserDigitizedObjectInventoryPage(Page):
     intro = models.TextField(
         blank=True,
         help_text="Introduction text to display at the top of the index page."
@@ -36,7 +36,7 @@ class UserDigitizedObjectIndexPage(Page):
 
 class UserDigitizedObject(Orderable):
     user_inventory = ParentalKey(
-        'inventory.UserDigitizedObjectIndexPage',
+        'inventory.UserDigitizedObjectInventoryPage',
         on_delete=models.PROTECT,
         related_name='user_digits'
     )
@@ -80,7 +80,7 @@ class UserDigitizedObjectPage(Page):
     ]
 
     parent_page_types = [
-        'inventory.UserDigitizedObjectIndexPage'
+        'inventory.UserDigitizedObjectInventoryPage'
     ]
 
     subpage_types = [

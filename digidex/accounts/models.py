@@ -130,7 +130,7 @@ class UserProfilePage(Page):
     ]
 
     subpage_types = [
-        'inventory.UserDigitizedObjectIndexPage'
+        'inventory.UserDigitizedObjectInventoryPage'
     ]
 
     def create_user_collection(self, parent=None):
