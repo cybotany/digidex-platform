@@ -6,19 +6,29 @@
       <div role="list" class="collection-list-posts large base-dyn-items">
         <div role="listitem" class="base-dyn-item">
           <div class="block-post large">
-            {% if page.profile.avatar %}
-              {% image page.profile.avatar fill-120x80 class="image-post-thumbnail large" %}
-            {% else %}
-              <img src="{% static 'images/account-box.svg' %}" class="image-post-thumbnail large" alt="Default Avatar">
-            {% endif %}
+            <a href="#" class="link-post-thumbnail large base-inline-block">
+              {% if page.profile.avatar %}
+                {% image page.profile.avatar fill-120x80 class="image-post-thumbnail large" %}
+              {% else %}
+                <img src="{% static 'images/account-box.svg' %}" class="image-post-thumbnail large" alt="Default Avatar">
+              {% endif %}
+            </a>
             <div class="post large">
               <div class="date">{{ page.profile.created_at }}</div>
-              <h3 class="heading-post">{{ page.profile.user.username }}</h3>
+              <a href="#" class="link-heading-post large base-inline-block">
+                <h3 class="heading-post">{{ page.profile.user.username }}</h3>
+              </a>
               {% if page.profile.bio %}
                 <p class="paragraph-post large">{{ page.profile.bio|richtext }}</p>
               {% else %}
                 <p class="paragraph-post large">No bio available.</p>
               {% endif %}
+              <a href="#" class="link-block base-inline-block">
+                <div class="text-link">Read more</div>
+                <div class="block-icon-link">
+                  <img src="{% static 'images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
+                </div>
+              </a>
             </div>
           </div>
         </div>
