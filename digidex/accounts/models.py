@@ -119,11 +119,7 @@ class UserProfilePage(Page):
         FieldPanel('profile'),
     ]
 
-    #subpage_types = [
-    #    'digitization.DigitizedObjectRegistrationPage',
-    #    'inventory.UserDigitizedObjectPage',
-    #    'inventory.UserDigitizedObjectTagIndexPage'
-    #]
+    subpage_types = ['inventory.UserDigitizedObjectIndexPage']
 
     def create_user_collection(self, parent=None):
         if parent is None:

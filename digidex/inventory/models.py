@@ -9,9 +9,32 @@ from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.search import index
 
 
+class UserDigitizedObjectIndexPage(Page):
+    intro = models.TextField(
+        blank=True,
+        help_text="Introduction text to display at the top of the index page."
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel('intro'),
+    ]
+
+    parent_page_types = ['accounts.UserProfilePage']
+    subpage_types = [
+        'digitization.DigitizedObjectRegistrationPage',
+        'inventory.UserDigitizedObjectPage',
+        'inventory.UserDigitizedObjectTagIndexPage'
+    ]
+
+    def get_context(self, request):
+        context = super().get_context(request)
+        context['digit_objects'] = UserDigitizedObjectPage.objects.child_of(self).live()
+        return context
+
+
 class UserDigitizedObject(Orderable):
     profile = ParentalKey(
-        'accounts.UserProfilePage',
+        'inventory.UserDigitizedObjectIndexPage',
         on_delete=models.PROTECT,
         related_name='user_digits'
     )
