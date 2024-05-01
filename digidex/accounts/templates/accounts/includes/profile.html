@@ -8,11 +8,17 @@
           <div class="block-post large">
             {% if page.profile.avatar %}
               {% image page.profile.avatar fill-120x80 class="image-post-thumbnail large" %}
+            {% else %}
+              <img src="{% static 'images/account-box.svg' %}" class="image-post-thumbnail large" alt="Default Avatar">
             {% endif %}
             <div class="post large">
               <div class="date">{{ page.profile.created_at }}</div>
               <h3 class="heading-post">{{ page.profile.user.username }}</h3>
-              <p class="paragraph-post large">{{ page.body|richtext }}</p>
+              {% if page.profile.bio %}
+                <p class="paragraph-post large">{{ page.profile.bio|richtext }}</p>
+              {% else %}
+                <p class="paragraph-post large">No bio available.</p>
+              {% endif %}
             </div>
           </div>
         </div>
