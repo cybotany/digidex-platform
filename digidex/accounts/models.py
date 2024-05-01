@@ -74,18 +74,30 @@ class UserProfile(models.Model):
 
 
 class UserProfileIndexPage(Page):
-    body = RichTextField(
+    heading = models.CharField(
+        max_length=255,
+        blank=True
+    )
+    intro = RichTextField(
         blank=True
     )
 
     content_panels = Page.content_panels + [
-        FieldPanel('body', classname="full")
+        FieldPanel('heading'),
+        FieldPanel('intro'),
     ]
 
     subpage_types = ['accounts.UserProfilePage']
 
 
 class UserProfilePage(Page):
+    heading = models.CharField(
+        max_length=255,
+        blank=True
+    )
+    intro = RichTextField(
+        blank=True
+    )
     profile = models.OneToOneField(
         UserProfile,
         on_delete=models.PROTECT,
@@ -102,6 +114,8 @@ class UserProfilePage(Page):
     ]
 
     content_panels = Page.content_panels + [
+        FieldPanel('heading'),
+        FieldPanel('intro'),
         FieldPanel('profile'),
         FieldPanel('body'),
     ]

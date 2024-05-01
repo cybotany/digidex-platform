@@ -6,13 +6,13 @@
       <div role="list" class="collection-list-posts large base-dyn-items">
         <div role="listitem" class="base-dyn-item">
           <div class="block-post large">
-            {% if profile.profile.avatar %}
-              {% image profile.profile.avatar fill-120x80 class="image-post-thumbnail large" %}
+            {% if page.profile.avatar %}
+              {% image page.profile.avatar fill-120x80 class="image-post-thumbnail large" %}
             {% endif %}
             <div class="post large">
-              <div class="date">{{ profile.profile.created_at }}</div>
-              <h3 class="heading-post">{{ profile.profile.user.username }}</h3>
-              <p class="paragraph-post large">{{ profile.body|richtext }}</p>
+              <div class="date">{{ page.profile.created_at }}</div>
+              <h3 class="heading-post">{{ page.profile.user.username }}</h3>
+              <p class="paragraph-post large">{{ page.body|richtext }}</p>
             </div>
           </div>
         </div>
