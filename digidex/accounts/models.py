@@ -105,7 +105,7 @@ class UserProfilePage(Page):
     profile = models.OneToOneField(
         UserProfile,
         on_delete=models.PROTECT,
-        related_name="user_pages",
+        related_name="profile_page",
         help_text="Link to the associated user profile."
     )
 

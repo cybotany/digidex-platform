@@ -1,7 +1,9 @@
+{% load static wagtailcore_tags%}
+
 {% if user.is_authenticated %}
-  {% with user.profile.user_pages.first as user_profile_page %}
-  <a href="{{ user_profile_page.url }}" class="navbar__button--outline base-button">Profile</a>
-  <a href="{% url 'account_logout' %}" class="navbar__button base-button">Logout</a>
+  {% with user.profile.profile_page as user_profile_page %}
+    <a href="{% pageurl user_profile_page %}" class="navbar__button--outline base-button">Profile</a>
+    <a href="{% url 'account_logout' %}" class="navbar__button base-button">Logout</a>
   {% endwith %}
 {% else %}
   <a href="{% url 'account_login' %}" class="navbar__button base-button">Login</a>
