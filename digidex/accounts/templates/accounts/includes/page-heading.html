@@ -7,14 +7,14 @@
       {% include "accounts/includes/heading/heading-introduction.html" %}
     </div>
     <div class="block-button">
+      {% with children=page.get_children %}
+        {% if children.exists %}
+          {% include "accounts/includes/heading/children-button.html" %}
+        {% endif %}
+      {% endwith %}
       {% with parent=page.get_parent %}
         {% if parent and parent.url != request.path %}
           {% include "accounts/includes/heading/parent-button.html" %}
-        {% endif %}
-      {% endwith %}
-      {% with children=page.get_children %}
-        {% if children.exists %}
-          {% include "accounts/includes/heading/child-button.html" %}
         {% endif %}
       {% endwith %}
     </div>

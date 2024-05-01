@@ -1,0 +1,5 @@
+{% load wagtailcore_tags %}
+
+{% with children=page.get_children %}
+  <a href="{{ children.url }}" class="button-small base-button">Children Button</a>
+{% endwith %}
