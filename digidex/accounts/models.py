@@ -46,6 +46,10 @@ class UserProfile(models.Model):
         on_delete=models.SET_NULL, 
         related_name='+'
     )
+    body = RichTextField(
+        blank=True,
+        help_text="Additional content about the user."
+    )
     created_at = models.DateTimeField(
         auto_now_add=True,
         verbose_name="Created At"
@@ -104,10 +108,6 @@ class UserProfilePage(Page):
         related_name="user_pages",
         help_text="Link to the associated user profile."
     )
-    body = RichTextField(
-        blank=True,
-        help_text="Additional content about the user."
-    )
 
     search_fields = Page.search_fields + [
         index.SearchField('get_username', partial_match=True, boost=2),
@@ -117,7 +117,6 @@ class UserProfilePage(Page):
         FieldPanel('heading'),
         FieldPanel('intro'),
         FieldPanel('profile'),
-        FieldPanel('body'),
     ]
 
     #subpage_types = [
