@@ -1,4 +1,8 @@
-{% extends "accounts/base.html" %}
+{% extends "base.html" %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'accounts/css/accounts.css' %}">
+{% endblock %}
 
 {% block extra_head %}{% endblock extra_head %}
 
