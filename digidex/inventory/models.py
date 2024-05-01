@@ -19,9 +19,11 @@ class UserDigitizedObjectIndexPage(Page):
         FieldPanel('intro'),
     ]
 
-    parent_page_types = ['accounts.UserProfilePage']
+    parent_page_types = [
+        'accounts.UserProfilePage'
+    ]
+
     subpage_types = [
-        'digitization.DigitizedObjectRegistrationPage',
         'inventory.UserDigitizedObjectPage',
         'inventory.UserDigitizedObjectTagIndexPage'
     ]
@@ -33,7 +35,7 @@ class UserDigitizedObjectIndexPage(Page):
 
 
 class UserDigitizedObject(Orderable):
-    profile = ParentalKey(
+    user_inventory = ParentalKey(
         'inventory.UserDigitizedObjectIndexPage',
         on_delete=models.PROTECT,
         related_name='user_digits'
@@ -59,11 +61,6 @@ class UserDigitizedObjectPage(Page):
         on_delete=models.PROTECT,
         related_name='digit_page'
     )
-    user_profile = ParentalKey(
-        'accounts.UserProfilePage',
-        on_delete=models.PROTECT,
-        related_name='digit_pages'
-    )
     tags = ClusterTaggableManager(
         through=UserDigitizedObjectPageTag,
         blank=True
@@ -80,6 +77,10 @@ class UserDigitizedObjectPage(Page):
     search_fields = Page.search_fields + [
         index.SearchField('get_digit_name', partial_match=True, boost=2),
         index.SearchField('get_digit_description', partial_match=True, boost=1),
+    ]
+
+    parent_page_types = [
+        'inventory.UserDigitizedObjectIndexPage'
     ]
 
     subpage_types = [
