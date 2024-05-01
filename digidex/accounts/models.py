@@ -4,7 +4,7 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser, Group, Permission
 
-from wagtail.models import Page, Collection, GroupCollectionPermission, Site
+from wagtail.models import Page, Collection, GroupCollectionPermission
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 from wagtail.search import index
@@ -91,7 +91,13 @@ class UserProfileIndexPage(Page):
         FieldPanel('intro'),
     ]
 
-    subpage_types = ['accounts.UserProfilePage']
+    parent_page_types = [
+        'home.HomePage'
+    ]
+
+    subpage_types = [
+        'accounts.UserProfilePage'
+    ]
 
 
 class UserProfilePage(Page):
@@ -119,7 +125,13 @@ class UserProfilePage(Page):
         FieldPanel('profile'),
     ]
 
-    subpage_types = ['inventory.UserDigitizedObjectIndexPage']
+    parent_page_types = [
+        'accounts.UserProfileIndexPage'
+    ]
+
+    subpage_types = [
+        'inventory.UserDigitizedObjectIndexPage'
+    ]
 
     def create_user_collection(self, parent=None):
         if parent is None:
