@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 
 from modelcluster.fields import ParentalKey
 from modelcluster.contrib.taggit import ClusterTaggableManager
@@ -32,6 +33,11 @@ class UserDigitizedObjectInventoryPage(Page):
         context = super().get_context(request)
         context['digit_objects'] = UserDigitizedObjectPage.objects.child_of(self).live()
         return context
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.slug = slugify('inventory')
+        super().save(*args, **kwargs)
 
 
 class UserDigitizedObject(Orderable):
