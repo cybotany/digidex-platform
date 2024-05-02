@@ -1,6 +1,7 @@
 import uuid
 
 from django.db import models
+from django.urls import reverse
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
@@ -63,7 +64,13 @@ class NearFieldCommunicationTag(models.Model):
             raise ValidationError(_("No associated digit found for this tag."))
         return self.digit
 
-    def get_digit_page_url(self):
+    def get_static_url(self):
+        """
+        Returns the URL for the 'view-ntag' view for this specific NFC tag.
+        """
+        return reverse('view-ntag', kwargs={'uuid': self.uuid})
+
+    def get_dynamic_url(self):
         digit = self.get_digit()
         if not hasattr(digit, 'page'):
             raise ValidationError(_("DigitPage does not exist for the associated digit."))
