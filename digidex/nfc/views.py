@@ -6,6 +6,8 @@ from django.contrib.auth.decorators import login_required
 
 from nfc.models import NearFieldCommunicationTag
 from digitization.forms import DigitizedObjectForm
+from inventory.models import UserDigitizedObject, UserDigitizedObjectInventoryPage
+from accounts.models import UserProfilePage 
 
 def view_ntag(request, _uuid):
     try:
@@ -22,19 +24,38 @@ def view_ntag(request, _uuid):
 def link_ntag(request, uuid):
     ntag = get_object_or_404(NearFieldCommunicationTag, uuid=uuid)
 
+    try:
+        user_profile_page = UserProfilePage.objects.get(user=request.user)
+    except UserProfilePage.DoesNotExist:
+        messages.error(request, "No profile page found for the current user.")
+        return redirect('error_url')
+
+    try:
+        inventory_page = UserDigitizedObjectInventoryPage.objects.child_of(user_profile_page).first()
+        if not inventory_page:
+            messages.error(request, "No inventory page found for the current user.")
+            return redirect('error_url')
+    except UserDigitizedObjectInventoryPage.DoesNotExist:
+        messages.error(request, "Failed to find an inventory page linked to your profile.")
+        return redirect('error_url')
+
     if request.method == 'POST':
         form = DigitizedObjectForm(request.POST)
         if form.is_valid():
-            digit = form.save(commit=False)
-            digit.save()
-            ntag.digit = digit
+            digit = form.save()
+            user_digit = UserDigitizedObject.objects.create(
+                page=inventory_page,
+                digit=digit
+            )
+
+            ntag.digit = user_digit
             ntag.save()
+
             messages.success(request, "Digitized object has been successfully linked.")
-            url = ntag.get_dynamic_url()
-            return redirect(url)
+            return redirect(ntag.get_dynamic_url())
         else:
             messages.error(request, "There were errors in your form. Please correct them.")
     else:
         form = DigitizedObjectForm()
 
-    return render(request, 'digitized_object/create.html', {'form': form, 'uuid': uuid})
+    return render(request, "digitization/includes/page/heading.html", {'form': form, 'uuid': uuid})
