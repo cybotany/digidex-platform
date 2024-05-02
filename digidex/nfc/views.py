@@ -13,7 +13,7 @@ def view_ntag(request, _uuid):
         if not ntag.digit:
             messages.info(request, "No digit is associated with this NTAG. Please create one. You will be prompted to login if you are not already.")
             return redirect('link-ntag', uuid=_uuid)
-        url = ntag.get_digit_page_url()
+        url = ntag.get_dynamic_url()
         return redirect(url)
     except ValidationError as e:
         return HttpResponse(str(e), status=400)
@@ -30,7 +30,8 @@ def link_ntag(request, uuid):
             ntag.digit = digit
             ntag.save()
             messages.success(request, "Digitized object has been successfully linked.")
-            return redirect('success_url')
+            url = ntag.get_dynamic_url()
+            return redirect(url)
         else:
             messages.error(request, "There were errors in your form. Please correct them.")
     else:
