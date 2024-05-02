@@ -1,5 +1,5 @@
 {% load wagtailcore_tags %}
 
-{% with parent=page.get_parent %}
-  <a href="{{ parent.url }}" class="button-small base-button">Parent Button</a>
+{% with parent_page=page.get_parent %}
+  <a href="{{ parent_page.url }}" class="button-outline-small base-button">{{ parent_page.title }}</a>
 {% endwith %}

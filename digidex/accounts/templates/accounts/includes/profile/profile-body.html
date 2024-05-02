@@ -1,19 +1,21 @@
 {% load static wagtailcore_tags wagtailimages_tags %}
 
-<div class="post large">
-  <div class="date">{{ page.profile.created_at }}</div>
-  <a href="#" class="link-heading-post large base-inline-block">
-    <h3 class="heading-post">{{ page.profile.user.username }}</h3>
-  </a>
-  {% if page.profile.bio %}
-    <p class="paragraph-post large">{{ page.profile.bio|richtext }}</p>
-  {% else %}
-    <p class="paragraph-post large">No bio available.</p>
-  {% endif %}
-  <a href="#" class="link-block base-inline-block">
-    <div class="text-link">Read more</div>
-    <div class="block-icon-link">
-      <img src="{% static 'images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
-    </div>
-  </a>
-</div>
+{% with child_page=page.get_child_page %}
+  <div class="post large">
+    <div class="date">{{ page.profile.created_at }}</div>
+    <a href="{{ child_page.url }}" class="link-heading-post large base-inline-block">
+      <h3 class="heading-post">{{ page.profile.user.username }}</h3>
+    </a>
+    {% if page.profile.bio %}
+      <p class="paragraph-post large">{{ page.profile.bio|richtext }}</p>
+    {% else %}
+      <p class="paragraph-post large">No bio available.</p>
+    {% endif %}
+    <a href="{{ child_page.url }}" class="link-block base-inline-block">
+      <div class="text-link">{{ child_page.title }}</div>
+      <div class="block-icon-link">
+        <img src="{% static 'images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
+      </div>
+    </a>
+  </div>
+{% endwith %}

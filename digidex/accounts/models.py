@@ -9,6 +9,7 @@ from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 from wagtail.search import index
 
+from inventory.models import UserDigitizedObjectInventoryPage
 
 class User(AbstractUser):
     uuid = models.UUIDField(
@@ -159,6 +160,13 @@ class UserProfilePage(Page):
         if self.profile:
             return self.profile.user.username
         return "No User"
+
+    def get_child_page(self):
+        """
+        This method returns the UserDigitizedObjectInventoryPage associated with this profile page.
+        Assumes there is at most one such page per UserProfilePage.
+        """
+        return self.get_children().type(UserDigitizedObjectInventoryPage).first().specific
 
     class Meta:
         verbose_name = "User Profile Page"
