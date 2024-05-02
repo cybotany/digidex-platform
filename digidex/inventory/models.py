@@ -29,12 +29,6 @@ class UserDigitizedObjectInventoryPage(Page):
         'inventory.UserDigitizedObjectTagIndexPage'
     ]
 
-    def get_context(self, request):
-        context = super().get_context(request)
-        user_profile = request.user.profile
-        context['page_children'] = UserDigitizedObjectPage.objects.child_of(self).filter(user_digit__digit__owner=user_profile).live()
-        return context
-
     def save(self, *args, **kwargs):
         if not self.id:
             self.slug = slugify('inventory')

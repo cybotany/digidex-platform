@@ -3,9 +3,9 @@
 <section class="section">
   <div style="opacity:0" class="content">
     <div class="collection-list-wrapper-digits base-dyn-list">
-      {% if page_children %}
+      {% if page.itemized_digits %}
         <div role="list" class="collection-list-digits base-dyn-items">
-          {% for child_item in page_children %}
+          {% for digit in page.itemized_digits.all %}
             <div role="listitem" class="base-dyn-item">
               <div class="block-digit">
                 {% include 'inventory/includes/grid/digit-thumbnail.html' %}
