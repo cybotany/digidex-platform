@@ -1,22 +1,10 @@
 {% load wagtailcore_tags %}
 
-<section class="section-top padding-0">
+<section class="section-top">
   <div class="content">
     <div class="block-top">
       {% include "base/includes/heading/title.html" %}
       {% include "base/includes/heading/introduction.html" %}
-    </div>
-    <div class="block-button">
-      {% with children=page.get_children %}
-        {% if children.exists %}
-          {% include "base/includes/buttons/child-page-button.html" %}
-        {% endif %}
-      {% endwith %}
-      {% with parent=page.get_parent %}
-        {% if parent and parent.url != request.path %}
-          {% include "base/includes/buttons/parent-page-button.html" %}
-        {% endif %}
-      {% endwith %}
     </div>
   </div>
 </section>
