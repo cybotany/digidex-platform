@@ -31,7 +31,8 @@ class UserDigitizedObjectInventoryPage(Page):
 
     def get_context(self, request):
         context = super().get_context(request)
-        context['digit_objects'] = UserDigitizedObjectPage.objects.child_of(self).live()
+        user_profile = request.user.profile
+        context['page_children'] = UserDigitizedObjectPage.objects.child_of(self).filter(user_digit__digit__owner=user_profile).live()
         return context
 
     def save(self, *args, **kwargs):
@@ -41,10 +42,10 @@ class UserDigitizedObjectInventoryPage(Page):
 
 
 class UserDigitizedObject(Orderable):
-    user_inventory = ParentalKey(
+    page = ParentalKey(
         'inventory.UserDigitizedObjectInventoryPage',
         on_delete=models.PROTECT,
-        related_name='user_digits'
+        related_name='itemized_digits'
     )
     digit = models.OneToOneField(
         'digitization.DigitizedObject',

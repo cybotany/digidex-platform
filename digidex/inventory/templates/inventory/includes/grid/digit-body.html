@@ -1,7 +1,7 @@
 {% load static wagtailcore_tags wagtailimages_tags %}
 
-<p class="paragraph-digit"></p>
-<a href="{% pageurl digit %}" class="link-block base-inline-block">
+<p class="paragraph-digit">{{ child_item.get_digit_description }}</p>
+<a href="{{ child_item.page.url }}" class="link-block base-inline-block">
   <div class="text-link">Read more</div>
   <div class="block-icon-link">
     <img src="{% static 'images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">

@@ -1,5 +1,5 @@
 {% load wagtailcore_tags %}
 
-<a href="{% pageurl digit %}" class="link-heading-digit base-inline-block">
-  <h4 class="heading-digit"></h4>
+<a href="{{ child_item.page.url }}" class="link-heading-digit base-inline-block">
+  <h4 class="heading-digit">{{ child_item.get_digit_name }}</h4>
 </a>
