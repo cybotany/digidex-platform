@@ -7,7 +7,7 @@ from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
 from search.views import search
-from nfc.views import view_ntag, link_ntag
+from nfc import urls as nfc_urls
 
 urlpatterns = [
     path("django-admin/", admin.site.urls),
@@ -15,8 +15,7 @@ urlpatterns = [
     path("documents/", include(wagtaildocs_urls)),
     path('accounts/', include('allauth.urls')),
     path("search/", search, name="search"),
-    path("ntag/view/<int:ntag_id>/", view_ntag, name="view-ntag"),
-    path("ntag/link/<int:ntag_id>/", link_ntag, name="link-ntag"),
+    path('nfc/', include(nfc_urls)),
 ]
 
 if settings.DEBUG:

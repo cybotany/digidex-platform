@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
@@ -8,12 +10,18 @@ class NearFieldCommunicationTag(models.Model):
     Base class for NFC (Near Field Communication) technology, providing common attributes.
 
     Attributes:
+        uuid (UUIDField): The unique identifier for the Link instance.
         serial_number (CharField): The unique serial number associated with the NFC tag.
         digit (OneToOneField): The digital object associated with the NFC tag.
         active (BooleanField): A flag indicating whether the Link is active and mapped to a digital object.
         created_at (DateTimeField): The date and time when the Link instance was created.
         last_modified (DateTimeField): The date and time when the Link instance was last modified.
     """
+    uuid = models.UUIDField(
+        default=uuid.uuid4, 
+        editable=False, 
+        unique=True
+    )
     serial_number = models.CharField(
         max_length=32,
         unique=True,
