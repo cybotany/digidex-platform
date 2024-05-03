@@ -18,6 +18,7 @@ class UserDigitizedObjectInventoryPage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('intro'),
+        InlinePanel('itemized_digits', label="Digits in Inventory"),
     ]
 
     parent_page_types = [
