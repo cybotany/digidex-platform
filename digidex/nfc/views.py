@@ -21,8 +21,8 @@ def view_ntag(request, _uuid):
         return HttpResponse(str(e), status=400)
 
 @login_required
-def link_ntag(request, uuid):
-    ntag = get_object_or_404(NearFieldCommunicationTag, uuid=uuid)
+def link_ntag(request, _uuid):
+    ntag = get_object_or_404(NearFieldCommunicationTag, uuid=_uuid)
 
     try:
         user_profile_page = UserProfilePage.objects.get(user=request.user)
@@ -58,4 +58,4 @@ def link_ntag(request, uuid):
     else:
         form = DigitizedObjectForm()
 
-    return render(request, "digitization/includes/page/heading.html", {'form': form, 'uuid': uuid})
+    return render(request, "digitization/link_digit.html", {'form': form})
