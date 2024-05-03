@@ -1,35 +1,37 @@
 {% extends "digitization/base.html" %}
 
-<section class="section-full">
-  <div class="content">
-    <div class="account-form">
-      <h2 class="account-heading">Create Digit</h2>
-      <div class="form-block base-form">
-        <!-- Render Form -->
-        <form method="post" class="form">
-          {% csrf_token %}
-          <!-- Render Name Field -->
-          <div>
-            {{ form.name }}
-            <div class="error-message">
-              {% if form.name.errors %}
-                <span class="text-error">{{ form.name.errors|striptags }}</span>
+{% block content %}
+  <section class="section-full">
+    <div class="content">
+      <div class="account-form">
+        <h2 class="account-heading">Create Digit</h2>
+        <div class="form-block base-form">
+          <!-- Render Form -->
+          <form method="post" class="form">
+            {% csrf_token %}
+            <!-- Render Name Field -->
+            <div>
+              {{ form.name }}
+              <div class="error-message">
+                {% if form.name.errors %}
+                  <span class="text-error">{{ form.name.errors|striptags }}</span>
+                {% endif %}
+              </div>
+            </div>
+            <!-- Render Description Field -->
+            <div>
+              {{ form.description }}
+              {% if form.description.errors %}
+                <div class="error-message">
+                  <span class="text-error">{{ form.description.errors|striptags }}</span>
+                </div>
               {% endif %}
             </div>
-          </div>
-          <!-- Render Description Field -->
-          <div>
-            {{ form.description }}
-            {% if form.description.errors %}
-              <div class="error-message">
-                <span class="text-error">{{ form.description.errors|striptags }}</span>
-              </div>
-            {% endif %}
-          </div>
-          <!-- Render Submit Button -->
-          <input type="submit" value="Create" class="submit-button base-button"> 
-        </form>
+            <!-- Render Submit Button -->
+            <input type="submit" value="Create" class="submit-button base-button"> 
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+{% endblock %}
