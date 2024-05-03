@@ -36,7 +36,7 @@ class UserDigitizedObjectInventoryPage(Page):
 
 
 class UserDigitizedObject(Orderable):
-    page = ParentalKey(
+    parent = ParentalKey(
         'inventory.UserDigitizedObjectInventoryPage',
         on_delete=models.PROTECT,
         related_name='itemized_digits'
@@ -60,7 +60,7 @@ class UserDigitizedObjectPage(Page):
     user_digit = models.OneToOneField(
         'inventory.UserDigitizedObject',
         on_delete=models.PROTECT,
-        related_name='digit_page'
+        related_name='detail_page'
     )
     tags = ClusterTaggableManager(
         through=UserDigitizedObjectPageTag,
@@ -98,6 +98,19 @@ class UserDigitizedObjectPage(Page):
         FieldPanel('user_digit'),
         InlinePanel('digitized_object_images', label="Digit images"),
     ]
+
+    def save(self, *args, **kwargs):
+        creating = not self.pk
+        super().save(*args, **kwargs)
+        if creating:
+            inventory_page = self.parent.specific
+            new_page = UserDigitizedObjectPage(
+                title=self.get_digit_name(),
+                user_digit=self,
+                slug=slugify(self.get_digit_name())
+            )
+            inventory_page.add_child(instance=new_page)
+            new_page.save_revision().publish() 
 
     def get_main_image(self):
         digit_item = self.digitized_object_images.first()
