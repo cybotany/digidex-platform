@@ -2,7 +2,7 @@
 Django settings for digidex project.
 """
 import os
-from dotenv import load_dotenv
+from datetime import timedelta
 
 load_dotenv()
 
@@ -142,15 +142,6 @@ STORAGES = {
     "staticfiles": {
         "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
     },
-}
-
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
 }
 
 # Wagtail settings
