@@ -2,7 +2,7 @@
 
 {% with child_page=page.get_child_page %}
   <div class="post large">
-    <div class="date">{{ page.profile.created_at }}</div>
+    <div class="date">{{ page.profile.created_at|date:"F Y" }}</div>
     <a href="{{ child_page.url }}" class="link-heading-post large base-inline-block">
       <h3 class="heading-post">{{ page.profile.user.username }}</h3>
     </a>

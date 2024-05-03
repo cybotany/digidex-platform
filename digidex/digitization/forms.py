@@ -1,12 +1,19 @@
 from django import forms
-from .models import DigitizedObject
+
+from digitization.models import DigitizedObject
 
 class DigitizedObjectForm(forms.ModelForm):
     class Meta:
         model = DigitizedObject
-        fields = ['name', 'description']
+        fields = ['name', 'description',]
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'text-field base-input'
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'text-field textarea'
+            }),
+        }
 
-    def __init__(self, *args, **kwargs):
-        super(DigitizedObjectForm, self).__init__(*args, **kwargs)
-        self.fields['name'].widget.attrs.update({'class': 'form-control'})
-        self.fields['description'].widget.attrs.update({'class': 'form-control rich-text'})
+    def clean(self):
+       pass
