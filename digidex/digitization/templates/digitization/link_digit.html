@@ -10,23 +10,19 @@
           <form method="post" class="form">
             {% csrf_token %}
             <!-- Render Name Field -->
-            <div>
-              {{ form.name }}
+            {{ form.name }}
+              {% if form.name.errors %}
               <div class="error-message">
-                {% if form.name.errors %}
-                  <span class="text-error">{{ form.name.errors|striptags }}</span>
-                {% endif %}
+                <div class="text-error">{{ form.name.errors|striptags }}</div>
               </div>
-            </div>
-            <!-- Render Description Field -->
-            <div>
-              {{ form.description }}
-              {% if form.description.errors %}
-                <div class="error-message">
-                  <span class="text-error">{{ form.description.errors|striptags }}</span>
-                </div>
               {% endif %}
-            </div>
+            <!-- Render Description Field -->
+            {{ form.description }}
+            {% if form.description.errors %}
+              <div class="error-message">
+                <div class="text-error">{{ form.description.errors|striptags }}</div>
+              </div>
+            {% endif %}
             <!-- Render Submit Button -->
             <input type="submit" value="Create" class="submit-button base-button"> 
           </form>
