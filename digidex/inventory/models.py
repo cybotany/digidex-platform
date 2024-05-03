@@ -48,6 +48,7 @@ class UserDigitizedObject(Orderable):
         related_name='user_associations'
     )
 
+    @transaction.atomic
     def save(self, *args, **kwargs):
         creating = not self.pk
         super().save(*args, **kwargs)
