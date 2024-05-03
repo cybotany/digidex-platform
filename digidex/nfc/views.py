@@ -14,7 +14,7 @@ def view_ntag(request, _uuid):
         ntag = NearFieldCommunicationTag.objects.get(uuid=_uuid)
         if not ntag.digit:
             messages.info(request, "No digit is associated with this NTAG. Please create one. You will be prompted to login if you are not already.")
-            return redirect('link-ntag', uuid=_uuid)
+            return redirect('link-ntag', _uuid=_uuid)
         url = ntag.get_dynamic_url()
         return redirect(url)
     except ValidationError as e:
