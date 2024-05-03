@@ -144,6 +144,15 @@ STORAGES = {
     },
 }
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+}
+
 # Wagtail settings
 WAGTAIL_SITE_NAME = "https://digidex.app"
 WAGTAILADMIN_BASE_URL = os.getenv("WAGTAILADMIN_BASE_URL")
