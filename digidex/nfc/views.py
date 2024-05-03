@@ -24,7 +24,9 @@ def link_ntag(request, _uuid):
         form = DigitizedObjectForm(request.POST)
         if form.is_valid():
             digit = form.save()
+            
             user_digit = digit.create_user_association(request.user)
+            digit.save()
 
             ntag = get_object_or_404(NearFieldCommunicationTag, uuid=_uuid)
             ntag.digit = user_digit
