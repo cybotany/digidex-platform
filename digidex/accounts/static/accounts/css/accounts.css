@@ -91,15 +91,13 @@
 .body-blue {
   background-color: #0d32f5;
 }
-@media screen and (min-width: 991px) {
 
-}
-@media screen and (max-width: 991px) {
-
-}
-@media screen and (max-width: 767px) {
-
-}
 @media screen and (max-width: 479px) {
+  .account-form {
+    padding: 2em;
+  }
 
+  .paragraph-account {
+    margin-bottom: 1em;
+  }
 }

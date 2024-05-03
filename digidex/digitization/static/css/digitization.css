@@ -14,7 +14,7 @@
   padding: .5em .3em;
 }
 
-.account-form {
+.digitization-form {
   z-index: 50;
   width: 100%;
   max-width: 32em;
@@ -32,30 +32,30 @@
   box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
 }
 
-.account-form.blue {
+.digitization-form.blue {
   background-color: var(--accent-a1);
   box-shadow: none;
 }
 
-.heading-account {
+.heading-digitization {
   max-width: 9em;
   margin-bottom: .3em;
 }
 
-.heading-account.white {
+.heading-digitization.white {
   color: var(--white);
 }
 
-.paragraph-account {
+.paragraph-digitization {
   max-width: 23em;
   margin-bottom: 1.8em;
 }
 
-.paragraph-account.white {
+.paragraph-digitization.white {
   color: rgba(255, 255, 255, .8);
 }
 
-.text-account {
+.text-digitization {
   width: 100%;
   max-width: 32em;
   color: rgba(20, 23, 24, .6);
@@ -67,39 +67,38 @@
   line-height: 140%;
 }
 
-.text-account.white {
+.text-digitization.white {
   color: rgba(255, 255, 255, .5);
 }
 
-.link-account {
+.link-digitization {
   color: rgba(20, 23, 24, .6);
   transition: color .3s cubic-bezier(.25, .46, .45, .94);
 }
 
-.link-account:hover {
+.link-digitization:hover {
   color: var(--accent-a1);
 }
 
-.link-account.white {
+.link-digitization.white {
   color: rgba(255, 255, 255, .5);
 }
 
-.link-account.white:hover {
+.link-digitization.white:hover {
   color: var(--white);
 }
 
 .body-blue {
   background-color: #0d32f5;
 }
-@media screen and (min-width: 991px) {
 
-}
-@media screen and (max-width: 991px) {
 
-}
-@media screen and (max-width: 767px) {
-
-}
 @media screen and (max-width: 479px) {
+  .digitization-form {
+    padding: 2em;
+  }
 
+  .paragraph-digitization {
+    margin-bottom: 1em;
+  }
 }
