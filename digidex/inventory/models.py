@@ -53,13 +53,20 @@ class UserDigitizedObject(Orderable):
         super().save(*args, **kwargs)
         if creating:
             inventory_page = self.parent.specific
+            digit_name = self.get_digit_name()
             new_page = UserDigitizedObjectPage(
-                title=self.get_digit_name(),
+                title=f"{digit_name}'s Details",
                 user_digit=self,
-                slug=slugify(self.get_digit_name())
+                slug=slugify(digit_name)
             )
             inventory_page.add_child(instance=new_page)
-            new_page.save_revision().publish() 
+            new_page.save_revision().publish()
+
+    def get_digit_name(self):
+        return self.digit.name
+
+    def get_digit_description(self):
+        return self.digit.description
 
 
 class UserDigitizedObjectPageTag(TaggedItemBase):
@@ -120,13 +127,13 @@ class UserDigitizedObjectPage(Page):
         else:
             return None
 
-    def get_digit_name(self):
+    def get_detailed_digit_name(self):
         """Method to return the name of the digitized object."""
-        return self.user_digit.digit.name
+        return self.user_digit.get_digit_name()
 
-    def get_digit_description(self):
+    def get_detailed_digit_description(self):
         """Method to return the description of the digitized object."""
-        return self.user_digit.digit.description
+        return self.user_digit.get_digit_description()
 
 
 class DigitizedObjectPageGalleryImage(Orderable):
