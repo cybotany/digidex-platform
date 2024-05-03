@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models, transaction
 from django.utils.text import slugify
 
 from modelcluster.fields import ParentalKey
@@ -46,6 +46,19 @@ class UserDigitizedObject(Orderable):
         on_delete=models.CASCADE,
         related_name='user_associations'
     )
+
+    def save(self, *args, **kwargs):
+        creating = not self.pk
+        super().save(*args, **kwargs)
+        if creating:
+            inventory_page = self.parent.specific
+            new_page = UserDigitizedObjectPage(
+                title=self.get_digit_name(),
+                user_digit=self,
+                slug=slugify(self.get_digit_name())
+            )
+            inventory_page.add_child(instance=new_page)
+            new_page.save_revision().publish() 
 
 
 class UserDigitizedObjectPageTag(TaggedItemBase):
@@ -98,19 +111,6 @@ class UserDigitizedObjectPage(Page):
         FieldPanel('user_digit'),
         InlinePanel('digitized_object_images', label="Digit images"),
     ]
-
-    def save(self, *args, **kwargs):
-        creating = not self.pk
-        super().save(*args, **kwargs)
-        if creating:
-            inventory_page = self.parent.specific
-            new_page = UserDigitizedObjectPage(
-                title=self.get_digit_name(),
-                user_digit=self,
-                slug=slugify(self.get_digit_name())
-            )
-            inventory_page.add_child(instance=new_page)
-            new_page.save_revision().publish() 
 
     def get_main_image(self):
         digit_item = self.digitized_object_images.first()

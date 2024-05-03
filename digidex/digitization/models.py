@@ -4,6 +4,9 @@ from django.db import models
 
 from wagtail.fields import RichTextField
 
+from accounts.models import UserProfilePage
+from inventory.models import UserDigitizedObjectInventoryPage, UserDigitizedObject
+
 
 class DigitizedObject(models.Model):
     """
@@ -38,3 +41,21 @@ class DigitizedObject(models.Model):
     last_modified = models.DateTimeField(
         auto_now=True
     )
+
+    def create_user_association(self, user):
+        """
+        Create a user association with the digitized object.
+
+        Args:
+            user (User): The user to associate with the digitized object.
+
+        Returns:
+            UserDigitizedObject: The user digitized object association.
+        """
+        user_profile_page = UserProfilePage.objects.get(profile=user.profile)
+        user_inventory_page = UserDigitizedObjectInventoryPage.objects.child_of(user_profile_page).first()
+        user_association = UserDigitizedObject.objects.create(
+            parent=user_inventory_page,
+            digit=self
+        )
+        return user_association
