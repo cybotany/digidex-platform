@@ -20,5 +20,5 @@ class RegisterNearFieldCommunicationTag(APIView):
         ntag, created = NearFieldCommunicationTag.objects.update_or_create(
             serial_number=serial_number
         )
-        ntag_url = request.build_absolute_uri(ntag.get_absolute_url())
+        ntag_url = request.build_absolute_uri(ntag.get_static_url())
         return Response({"ntag_url": ntag_url}, status=status.HTTP_201_CREATED)
