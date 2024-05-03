@@ -44,7 +44,7 @@ def link_ntag(request, _uuid):
         if form.is_valid():
             digit = form.save()
             user_digit = UserDigitizedObject.objects.create(
-                page=inventory_page,
+                parent=inventory_page,
                 digit=digit
             )
 
