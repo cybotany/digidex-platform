@@ -25,7 +25,7 @@ def link_ntag(request, _uuid):
     ntag = get_object_or_404(NearFieldCommunicationTag, uuid=_uuid)
 
     try:
-        user_profile_page = UserProfilePage.objects.get(user=request.user)
+        user_profile_page = UserProfilePage.objects.get(profile=request.user.profile)
     except UserProfilePage.DoesNotExist:
         messages.error(request, "No profile page found for the current user.")
         return redirect('error_url')
