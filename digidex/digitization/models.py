@@ -2,11 +2,6 @@ import uuid
 
 from django.db import models
 
-from wagtail.fields import RichTextField
-
-from accounts.models import UserProfilePage
-from inventory.models import UserDigitizedObjectInventoryPage, UserDigitizedObject
-
 
 class DigitizedObject(models.Model):
     """
@@ -15,7 +10,7 @@ class DigitizedObject(models.Model):
     Attributes:
         name (CharField): The name of the digitized object.
         uuid (UUIDField): The unique identifier for the digitized object.
-        description (RichTextField): A detailed description of the digitized object.
+        description (TextField): A detailed description of the digitized object.
         created_at (DateTimeField): The date and time the digitized object was created.
         last_modified (DateTimeField): The date and time the digitized object was last modified.
     """
@@ -31,7 +26,7 @@ class DigitizedObject(models.Model):
         null=True,
         blank=False
     )
-    description = RichTextField(
+    description = models.TextField(
         blank=True,
         null=True
     )
@@ -42,20 +37,19 @@ class DigitizedObject(models.Model):
         auto_now=True
     )
 
-    def create_user_association(self, user):
-        """
-        Create a user association with the digitized object.
 
-        Args:
-            user (User): The user to associate with the digitized object.
-
-        Returns:
-            UserDigitizedObject: The user digitized object association.
-        """
-        user_profile_page = UserProfilePage.objects.get(profile=user.profile)
-        user_inventory_page = UserDigitizedObjectInventoryPage.objects.child_of(user_profile_page).first()
-        user_association = UserDigitizedObject.objects.create(
-            parent=user_inventory_page,
-            digit=self
-        )
-        return user_association
+class DigitizedObjectImage(models.Model):
+    digit = models.ForeignKey(
+        DigitizedObject,
+        on_delete=models.CASCADE,
+        related_name='images'
+    )
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.CASCADE,
+        related_name='+'
+    )
+    caption = models.CharField(
+        blank=True, 
+        max_length=250
+    )

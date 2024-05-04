@@ -4,8 +4,10 @@ from django.core.exceptions import ValidationError
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
+from digitization.forms import DigitizedObjectForm, DigitizedObjectImageFormSet
+from digitization.models import DigitizedObject
+
 from nfc.models import NearFieldCommunicationTag
-from digitization.forms import DigitizedObjectForm
 
 def view_ntag(request, _uuid):
     try:
@@ -20,22 +22,34 @@ def view_ntag(request, _uuid):
 
 @login_required
 def link_ntag(request, _uuid):
+    ntag = get_object_or_404(NearFieldCommunicationTag, uuid=_uuid)
+    if ntag.digit:
+        return redirect(ntag.get_dynamic_url())
+
     if request.method == 'POST':
         form = DigitizedObjectForm(request.POST)
         if form.is_valid():
-            digit = form.save()
-            
-            user_digit = digit.create_user_association(request.user)
-            digit.save()
+            digit = form.save(commit=False)
+            formset = DigitizedObjectImageFormSet(request.POST, request.FILES, instance=digit)
 
-            ntag = get_object_or_404(NearFieldCommunicationTag, uuid=_uuid)
-            ntag.digit = user_digit
-            ntag.save()
-            messages.success(request, "Digitized object has been successfully linked.")
-            return redirect(ntag.get_dynamic_url())
+            if formset.is_valid():
+                digit.save()  # Save the DigitizedObject once we know the formset is also valid
+                formset.save()
+                ntag.digit = digit
+                ntag.save()
+                messages.success(request, "Digitized object and images have been successfully linked.")
+                return redirect(ntag.get_dynamic_url())
+            else:
+                messages.error(request, "There were errors in the images form. Please correct them.")
         else:
             messages.error(request, "There were errors in your form. Please correct them.")
+
     else:
         form = DigitizedObjectForm()
+        formset = DigitizedObjectImageFormSet()
 
-    return render(request, "digitization/link_ntag.html", {'form': form})
+    return render(request, "digitization/link_ntag.html", {
+        'form': form,
+        'formset': formset,
+        'ntag': ntag
+    })
