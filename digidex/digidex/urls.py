@@ -8,6 +8,7 @@ from wagtail.documents import urls as wagtaildocs_urls
 
 from search.views import search
 from nfc import urls as nfc_urls
+from api import urls as api_urls
 
 urlpatterns = [
     path("django-admin/", admin.site.urls),
@@ -16,6 +17,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path("search/", search, name="search"),
     path('nfc/', include(nfc_urls)),
+    path('api/', include(api_urls)),
 ]
 
 if settings.DEBUG:
