@@ -1,17 +1,28 @@
 from django import forms
-from django.forms import inlineformset_factory
 
 from digitization.models import DigitizedObject, DigitizedObjectImage
 
 class DigitizedObjectForm(forms.ModelForm):
     class Meta:
         model = DigitizedObject
-        fields = ['name', 'description']
+        fields = ['name', 'description',]
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'text-field base-input'
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'text-field textarea'
+            }),
+        }
 
-DigitizedObjectImageFormSet = inlineformset_factory(
-    DigitizedObject,
-    DigitizedObjectImage,
-    fields=('image', 'caption'),
-    extra=1,
-    can_delete=True
-)
+
+class DigitizedObjectImageForm(forms.ModelForm):
+    class Meta:
+        model = DigitizedObjectImage
+        fields = ['image', 'caption']
+        widgets = {
+            'image': forms.FileInput(),
+            'caption': forms.Textarea(attrs={
+                'class': 'text-field base-input'
+            }),
+        }
