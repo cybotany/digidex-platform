@@ -18,7 +18,11 @@ class RegisterNearFieldCommunicationTag(APIView):
             return Response({"error": "Serial Number not provided."}, status=status.HTTP_400_BAD_REQUEST)
         
         ntag, created = NearFieldCommunicationTag.objects.update_or_create(
-            serial_number=serial_number
+            serial_number=serial_number,
+            defaults={'active': True}
         )
-        ntag_url = request.build_absolute_uri(ntag.get_static_url())
-        return Response({"ntag_url": ntag_url}, status=status.HTTP_201_CREATED)
+
+        _url = request.build_absolute_uri(ntag.get_static_url())
+        _status = status.HTTP_201_CREATED if created else status.HTTP_200_OK
+
+        return Response({"ntag_url": _url}, status=_status)
