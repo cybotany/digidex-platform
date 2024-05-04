@@ -1,7 +1,7 @@
 import uuid
 from django.db import models
 
-from inventory.models import UserDigitizedObject
+from inventory.models import UserDigitizedObject, UserDigitizedObjectPage
 
 class DigitizedObject(models.Model):
     """
@@ -43,6 +43,21 @@ class DigitizedObject(models.Model):
     def set_user_association(self, user):
         return UserDigitizedObject.objects.create(user=user, digit=self)
 
+    def get_user_association(self):
+        return UserDigitizedObject.objects.get(digit=self)
+
+    def get_user_association(self):
+        return UserDigitizedObject.objects.get(digit=self)
+
+    def get_associated_page_url(self):
+        try:
+            user_digit = self.get_user_association()
+            user_digit_page = user_digit.detail_page 
+            return user_digit_page.url if user_digit_page else None
+        except UserDigitizedObject.DoesNotExist:
+            return None
+        except UserDigitizedObjectPage.DoesNotExist:
+            return None
 
 class DigitizedObjectImage(models.Model):
     digit = models.ForeignKey(

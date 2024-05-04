@@ -67,11 +67,17 @@ class NearFieldCommunicationTag(models.Model):
         """
         return reverse('view-ntag', kwargs={'_uuid': self.uuid})
 
-    #def get_digitized_asset_url(self):
-    #    _digitized_object = self.digitized_object()
-    #    if not hasattr(_digitized_object, 'page'):
-    #        raise ValidationError(_("DigitPage does not exist for the associated digit."))
-    #    return _digitized_object.page.url
+    def get_digitized_object_url(self):
+        """
+        Fetch the URL for the UserDigitizedObjectPage associated with the digitized object linked to this NFC tag.
+        """
+        if not self.digitized_object:
+            raise ValidationError(_("No associated digit found for this tag."))
+
+        try:
+            return self.digitized_object.get_associated_page_url()
+        except AttributeError:
+            raise ValidationError(_("The digitized object is not correctly configured to find its page."))
 
     class Meta:
         verbose_name = "NTAG"
