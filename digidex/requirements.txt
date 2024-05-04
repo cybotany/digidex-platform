@@ -22,12 +22,14 @@ djangorestframework-simplejwt==5.3.1
 draftjs-exporter==5.0.0
 et-xmlfile==1.1.0
 filetype==1.2.0
+flake8==7.0.0
 html5lib==1.1
 idna==3.6
 iniconfig==2.0.0
 jmespath==1.0.1
 l18n==2021.3
 laces==0.1.1
+mccabe==0.7.0
 oauthlib==3.2.2
 openpyxl==3.1.2
 packaging==24.0
@@ -35,7 +37,9 @@ pillow==10.2.0
 pillow_heif==0.15.0
 pluggy==1.5.0
 psycopg2-binary==2.9.9
+pycodestyle==2.11.1
 pycparser==2.21
+pyflakes==3.2.0
 PyJWT==2.8.0
 pytest==8.2.0
 pytest-cov==5.0.0
