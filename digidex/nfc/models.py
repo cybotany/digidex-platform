@@ -56,9 +56,6 @@ class NearFieldCommunicationTag(models.Model):
         self.active = False
         self.save()
 
-    def get_serial_number(self):
-        return self.serial_number
-
     def get_digit(self):
         if not self.digit:
             raise ValidationError(_("No associated digit found for this tag."))

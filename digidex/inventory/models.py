@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.text import slugify
 
 from wagtail.models import Page, Orderable
-from wagtail.admin.panels import FieldPanel, InlinePanel
+from wagtail.admin.panels import FieldPanel
 from wagtail.search import index
 
 
@@ -14,7 +14,6 @@ class UserDigitizedObjectInventoryPage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('intro'),
-        InlinePanel('itemized_digits', label="Digits in Inventory"),
     ]
 
     parent_page_types = [
@@ -67,7 +66,7 @@ class UserDigitizedObjectPage(Page):
 
     search_fields = Page.search_fields + [
         index.SearchField('get_digit_name', partial_match=True, boost=2),
-        index.SearchField('get_detailed_digit_description', partial_match=True, boost=1),
+        index.SearchField('get_digit_description', partial_match=True, boost=1),
     ]
 
     parent_page_types = [
