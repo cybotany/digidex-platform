@@ -68,7 +68,7 @@ class NearFieldCommunicationTag(models.Model):
         """
         Returns the URL for the 'view-ntag' view for this specific NFC tag.
         """
-        return reverse('view-ntag', kwargs={'uuid': self.uuid})
+        return reverse('view-ntag', kwargs={'_uuid': self.uuid})
 
     def get_dynamic_url(self):
         digit = self.get_digit()
