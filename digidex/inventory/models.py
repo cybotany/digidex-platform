@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 
-from wagtail.models import Page, Orderable
+from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel
 from wagtail.search import index
 
@@ -30,8 +30,8 @@ class UserDigitizedObjectInventoryPage(Page):
         super().save(*args, **kwargs)
 
 
-class UserDigitizedObject(Orderable):
-    user = models.OneToOneField(
+class UserDigitizedObject(models.Model):
+    user = models.ForeignKey(
         'accounts.User',
         on_delete=models.CASCADE,
         related_name='user_digits'
@@ -39,7 +39,7 @@ class UserDigitizedObject(Orderable):
     digit = models.OneToOneField(
         'digitization.DigitizedObject',
         on_delete=models.CASCADE,
-        related_name='user_associations'
+        related_name='user_association'
     )
 
     def get_digit_name(self):
