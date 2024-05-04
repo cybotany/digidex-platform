@@ -154,19 +154,40 @@ class UserProfilePage(Page):
                 collection=collection,
                 permission=perm
             )
+
+    def create_user_inventory_page(self):
+        inventory_page = UserDigitizedObjectInventoryPage(
+            title=f"{self.user.username}'s Inventory",
+            slug='inventory'
+        )
+        self.add_child(instance=inventory_page)
+        inventory_page.save_revision().publish()
+        return inventory_page
+
+    def get_inventory_page(self):
+        """
+        Fetch the UserDigitizedObjectInventoryPage associated with this profile page.
+        Assumes there is at most one such page per UserProfilePage.
+        """
+        inventory_page = self.get_children().type(UserDigitizedObjectInventoryPage).first()
+        if inventory_page:
+            return inventory_page.specific
+        else:
+            self.create_user_inventory_page()
     
     def get_username(self):
-        """Method to return the username of the associated user."""
+        """
+        Method to return the username of the associated user.
+        """
         if self.profile:
             return self.profile.user.username
         return "No User"
 
     def get_child_page(self):
         """
-        This method returns the UserDigitizedObjectInventoryPage associated with this profile page.
-        Assumes there is at most one such page per UserProfilePage.
+        Method to return the UserDigitizedObjectInventoryPage associated with this profile page.
         """
-        return self.get_children().type(UserDigitizedObjectInventoryPage).first().specific
+        self.get_inventory_page()
 
     class Meta:
         verbose_name = "User Profile Page"

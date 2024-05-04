@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils.text import slugify
 
 from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel
@@ -24,11 +23,6 @@ class UserDigitizedObjectInventoryPage(Page):
         'inventory.UserDigitizedObjectPage'
     ]
 
-    def save(self, *args, **kwargs):
-        if not self.id:
-            self.slug = slugify('inventory')
-        super().save(*args, **kwargs)
-
 
 class UserDigitizedObject(models.Model):
     user = models.ForeignKey(
@@ -47,6 +41,21 @@ class UserDigitizedObject(models.Model):
 
     def get_digit_description(self):
         return self.digit.description
+
+    def create_digit_page(self):
+        inventory_page = UserDigitizedObjectInventoryPage.objects.filter(owner=self.user).first()
+        
+        if not inventory_page:
+            return None
+        
+        user_digit_page = UserDigitizedObjectPage(
+            title=f"Digitized Object: {self.get_digit_name()}",
+            user_digit=self
+        )
+        inventory_page.add_child(instance=user_digit_page)  
+        user_digit_page.save_revision().publish()
+
+        return user_digit_page
 
 
 class UserDigitizedObjectPage(Page):

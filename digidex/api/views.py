@@ -22,7 +22,7 @@ class RegisterNearFieldCommunicationTag(APIView):
             defaults={'active': True}
         )
 
-        _url = request.build_absolute_uri(ntag.get_static_url())
+        _url = request.build_absolute_uri(ntag.get_absolute_url())
         _status = status.HTTP_201_CREATED if created else status.HTTP_200_OK
 
         return Response({"ntag_url": _url}, status=_status)

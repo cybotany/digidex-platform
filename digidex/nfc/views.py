@@ -9,7 +9,7 @@ def route_ntag_url(request, _uuid):
         ntag = NearFieldCommunicationTag.objects.get(uuid=_uuid)
         if not ntag.digitized_object:
             return redirect('digitization:link_ntag', ntag_uuid=_uuid)
-        url = ntag.get_dynamic_url()
+        url = ntag.get_digitized_asset_url()
         return redirect(url)
     except ValidationError as e:
         return HttpResponse(str(e), status=400)

@@ -56,22 +56,22 @@ class NearFieldCommunicationTag(models.Model):
         self.active = False
         self.save()
 
-    def digitized_object(self):
+    def get_digitized_object(self):
         if not self.digitized_object:
             raise ValidationError(_("No associated digit found for this tag."))
         return self.digitized_object
 
-    def get_static_url(self):
+    def get_absolute_url(self):
         """
         Returns the URL for the 'view-ntag' view for this specific NFC tag.
         """
         return reverse('view-ntag', kwargs={'_uuid': self.uuid})
 
-    def get_dynamic_url(self):
-        _digitized_object = self.digitized_object()
-        if not hasattr(_digitized_object, 'page'):
-            raise ValidationError(_("DigitPage does not exist for the associated digit."))
-        return _digitized_object.page.url
+    #def get_digitized_asset_url(self):
+    #    _digitized_object = self.digitized_object()
+    #    if not hasattr(_digitized_object, 'page'):
+    #        raise ValidationError(_("DigitPage does not exist for the associated digit."))
+    #    return _digitized_object.page.url
 
     class Meta:
         verbose_name = "NTAG"

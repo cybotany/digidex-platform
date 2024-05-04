@@ -1,7 +1,7 @@
 import uuid
-
 from django.db import models
 
+from inventory.models import UserDigitizedObject
 
 class DigitizedObject(models.Model):
     """
@@ -36,6 +36,12 @@ class DigitizedObject(models.Model):
     last_modified = models.DateTimeField(
         auto_now=True
     )
+
+    def __str__(self):
+        return f"{self.name}"
+
+    def set_user_association(self, user):
+        return UserDigitizedObject.objects.create(user=user, digit=self)
 
 
 class DigitizedObjectImage(models.Model):
