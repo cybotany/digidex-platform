@@ -47,7 +47,7 @@ class UserProfile(models.Model):
         on_delete=models.SET_NULL, 
         related_name='+'
     )
-    bio = RichTextField(
+    bio = models.TextField(
         blank=True,
         help_text="Short Biography about the user."
     )

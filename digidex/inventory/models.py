@@ -1,7 +1,5 @@
-from django.db import models, transaction
+from django.db import models
 from django.utils.text import slugify
-
-from modelcluster.fields import ParentalKey
 
 from wagtail.models import Page, Orderable
 from wagtail.admin.panels import FieldPanel, InlinePanel
@@ -34,31 +32,16 @@ class UserDigitizedObjectInventoryPage(Page):
 
 
 class UserDigitizedObject(Orderable):
-    parent = ParentalKey(
-        'inventory.UserDigitizedObjectInventoryPage',
-        on_delete=models.PROTECT,
-        related_name='itemized_digits'
+    user = models.OneToOneField(
+        'accounts.User',
+        on_delete=models.CASCADE,
+        related_name='user_digits'
     )
     digit = models.OneToOneField(
         'digitization.DigitizedObject',
         on_delete=models.CASCADE,
         related_name='user_associations'
     )
-
-    @transaction.atomic
-    def save(self, *args, **kwargs):
-        creating = not self.pk
-        super().save(*args, **kwargs)
-        if creating:
-            inventory_page = self.parent.specific
-            digit_name = self.get_digit_name()
-            new_page = UserDigitizedObjectPage(
-                title=f"{digit_name}'s Details",
-                user_digit=self,
-                slug=slugify(digit_name)
-            )
-            inventory_page.add_child(instance=new_page)
-            new_page.save_revision().publish()
 
     def get_digit_name(self):
         return self.digit.name
@@ -83,7 +66,7 @@ class UserDigitizedObjectPage(Page):
     )
 
     search_fields = Page.search_fields + [
-        index.SearchField('get_detailed_digit_name', partial_match=True, boost=2),
+        index.SearchField('get_digit_name', partial_match=True, boost=2),
         index.SearchField('get_detailed_digit_description', partial_match=True, boost=1),
     ]
 
@@ -95,10 +78,10 @@ class UserDigitizedObjectPage(Page):
         FieldPanel('user_digit')
     ]
 
-    def get_detailed_digit_name(self):
+    def get_digit_name(self):
         """Method to return the name of the digitized object."""
         return self.user_digit.get_digit_name()
 
-    def get_detailed_digit_description(self):
+    def get_digit_description(self):
         """Method to return the description of the digitized object."""
         return self.user_digit.get_digit_description()
