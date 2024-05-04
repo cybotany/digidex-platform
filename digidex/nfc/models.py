@@ -28,8 +28,8 @@ class NearFieldCommunicationTag(models.Model):
         unique=True,
         db_index=True
     )
-    digit = models.OneToOneField(
-        'inventory.UserDigitizedObject',
+    digitized_object = models.OneToOneField(
+        'digitization.DigitizedObject',
         blank=True,
         null=True,
         on_delete=models.CASCADE,
@@ -56,10 +56,10 @@ class NearFieldCommunicationTag(models.Model):
         self.active = False
         self.save()
 
-    def get_digit(self):
-        if not self.digit:
+    def digitized_object(self):
+        if not self.digitized_object:
             raise ValidationError(_("No associated digit found for this tag."))
-        return self.digit
+        return self.digitized_object
 
     def get_static_url(self):
         """
@@ -68,10 +68,10 @@ class NearFieldCommunicationTag(models.Model):
         return reverse('view-ntag', kwargs={'_uuid': self.uuid})
 
     def get_dynamic_url(self):
-        digit = self.get_digit()
-        if not hasattr(digit, 'page'):
+        _digitized_object = self.digitized_object()
+        if not hasattr(_digitized_object, 'page'):
             raise ValidationError(_("DigitPage does not exist for the associated digit."))
-        return digit.page.url
+        return _digitized_object.page.url
 
     class Meta:
         verbose_name = "NTAG"
