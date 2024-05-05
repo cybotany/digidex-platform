@@ -14,7 +14,7 @@ def link_ntag_and_digit(request, ntag_uuid):
             ntag = get_object_or_404(NearFieldCommunicationTag, uuid=ntag_uuid)
             ntag.digitized_object = _digitized_object
             ntag.save()
-            return redirect('link_user', digit_uuid=_digitized_object.uuid)
+            return redirect('digitization:link_user', digit_uuid=_digitized_object.uuid)
     else:
         form = DigitizedObjectForm()
 
@@ -26,7 +26,7 @@ def link_digit_and_user(request, digit_uuid):
     _digitized_object.set_user_association(request.user)
     _digitized_object.save()
 
-    return redirect('link_image', digit_uuid=digit_uuid)
+    return redirect('digitization:link_image', digit_uuid=digit_uuid)
 
 @login_required
 def link_digit_and_image(request, digit_uuid):
