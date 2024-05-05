@@ -24,14 +24,14 @@ def link_ntag_and_digit(request, ntag_uuid):
 @login_required
 def link_digit_and_user(request, digit_uuid):
     _digitized_object = get_object_or_404(DigitizedObject, uuid=digit_uuid)
-    _digitized_object.set_user_association(request.user)
-    _digitized_object.save()
+    _user_digit = _digitized_object.set_user_association(request.user)
+    _user_digit.save()
+    _user_digit_page = _user_digit.create_digit_page()
 
-    digit_page_url = _digitized_object.get_associated_page_url()
-    if digit_page_url:
-        return HttpResponseRedirect(digit_page_url)
-    else:
-        raise Http404("No associated page found for the digitized object.")
+    if not _user_digit_page:
+        raise Http404("User Digitized Object Page could not be created.")
+    redirect(_user_digit_page.url)
+
 
 @login_required
 def link_digit_and_image(request, digit_uuid):
@@ -43,6 +43,7 @@ def link_digit_and_image(request, digit_uuid):
             image_obj = form.save(commit=False)
             image_obj.digit = _digitized_object
             image_obj.save()
+            _user_digit_page_url = _digitized_object.get_associated_page_url()
             return redirect('some_success_url')
     else:
         form = DigitizedObjectImageForm()
