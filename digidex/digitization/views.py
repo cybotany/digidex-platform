@@ -36,7 +36,7 @@ def link_digit_and_image(request, digit_uuid):
         form = DigitizedObjectImageForm(request.POST, request.FILES)
         if form.is_valid():
             image_obj = form.save(commit=False)
-            image_obj.digitized_object = _digitized_object
+            image_obj.digit = _digitized_object
             image_obj.save()
             return redirect('some_success_url')
     else:
