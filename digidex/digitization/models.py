@@ -71,6 +71,7 @@ class DigitizedObjectImage(models.Model):
         related_name='+'
     )
     caption = models.CharField(
-        blank=True, 
+        blank=True,
+        null=True,
         max_length=250
     )
