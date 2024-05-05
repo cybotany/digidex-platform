@@ -75,7 +75,7 @@ class NearFieldCommunicationTag(models.Model):
         Returns:
             A URL path as a string.
         """
-        return reverse('nfc:route_ntag', kwargs={'uuid': self.uuid})
+        return reverse('nfc:route_ntag', kwargs={'_uuid': self.uuid})
 
     def get_digitized_object(self):
         """

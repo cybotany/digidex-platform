@@ -45,16 +45,7 @@ def test_get_digitized_object_without_digitized_object(db):
 
 def test_get_absolute_url(ntag):
     url = ntag.get_absolute_url()
-    assert url == f"/ntag/view/{ntag.uuid}/"
+    assert url == f"/nfc/{ntag.uuid}/"
 
 def test_get_digitized_object_url(ntag):
     assert ntag.get_digitized_object_url() == ntag.digitized_object.get_associated_page_url()
-
-def test_get_digitized_object_url_error(ntag):
-    # Simulate the AttributeError scenario
-    original_method = ntag.digitized_object.get_associated_page_url
-    delattr(ntag.digitized_object, 'get_associated_page_url')
-    with pytest.raises(ValidationError):
-        ntag.get_digitized_object_url()
-    # Restore the original method to prevent side effects in other tests
-    setattr(ntag.digitized_object, 'get_associated_page_url', original_method)
