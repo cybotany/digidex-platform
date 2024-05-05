@@ -69,7 +69,7 @@ class UserProfile(models.Model):
         )
         parent.add_child(instance=user_page)
         user_page.save_revision().publish()
-        return user_page.url
+        return user_page
 
     def __str__(self):
         return self.user.username
