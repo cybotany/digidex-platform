@@ -24,11 +24,13 @@ class DigitizedObject(models.Model):
     name = models.CharField(
         max_length=100,
         null=True,
-        blank=False
+        blank=False,
+        help_text="Enter the name of the digitized object."
     )
     description = models.TextField(
         blank=True,
-        null=True
+        null=True,
+        help_text="Provide a detailed description of the object."
     )
     created_at = models.DateTimeField(
         auto_now_add=True
@@ -68,10 +70,12 @@ class DigitizedObjectImage(models.Model):
     image = models.ForeignKey(
         'wagtailimages.Image',
         on_delete=models.CASCADE,
-        related_name='+'
+        related_name='+',
+        help_text="Select an image to associate with the digitized object."
     )
     caption = models.CharField(
         blank=True,
         null=True,
-        max_length=250
+        max_length=250,
+        help_text="Enter a caption for the image."
     )
