@@ -91,7 +91,6 @@ AUTHENTICATION_BACKENDS = [
 
 WSGI_APPLICATION = "digidex.wsgi.application"
 
-# Database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -100,6 +99,9 @@ DATABASES = {
         'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': os.getenv('DB_HOST'),
         'PORT': os.getenv('DB_PORT'),
+        'TEST': {
+            'NAME': 'test_' + os.getenv('DB_NAME'),
+        },
     }
 }
 

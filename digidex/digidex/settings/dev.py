@@ -2,6 +2,8 @@ from .base import *
 
 DEBUG = True
 
+FORMS_URLFIELD_ASSUME_HTTPS = False
+
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 STATICFILES_DIRS = [
