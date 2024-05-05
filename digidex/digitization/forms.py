@@ -25,9 +25,7 @@ class DigitizedObjectImageForm(forms.ModelForm):
         model = DigitizedObjectImage
         fields = ['image', 'caption']
         widgets = {
-            'image': forms.FileInput(
-                attrs={'class': 'text-field base-input'}
-            ),
+            'image': forms.FileInput(),
             'caption': forms.TextInput(
                 attrs={'class': 'text-field base-input'}
             ),
