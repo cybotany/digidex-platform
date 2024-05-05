@@ -134,16 +134,38 @@ class UserProfilePage(Page):
         'inventory.UserDigitizedObjectInventoryPage'
     ]
 
+    def get_user(self):
+        """
+        Method to return the username of the associated user.
+        """
+        if self.profile:
+            return self.profile.user
+        return "No User"
+
+
+    def get_username(self):
+        """
+        Method to return the username of the associated user.
+        """
+        return self.get_user().username
+
     def create_user_collection(self, parent=None):
+        """
+        Method to create a user collection for the associated user.
+        """
+        _username = self.get_username()
         if parent is None:
             parent = Collection.get_first_root_node()
 
-        user_collection_name = f"{self.user.username}'s Collection"
+        user_collection_name = f"{_username}'s Collection"
         collection = parent.add_child(name=user_collection_name)
         self.set_collection_permissions(collection)
         return collection
 
     def set_collection_permissions(self, collection):
+        """
+        Method to set permissions for the user collection.
+        """
         user_group, _ = self.user.create_user_group()
         permissions = ['add', 'change', 'delete', 'view']
         for permission in permissions:
@@ -156,8 +178,12 @@ class UserProfilePage(Page):
             )
 
     def create_user_inventory_page(self):
+        """
+        Method to create a UserDigitizedObjectInventoryPage associated with this profile page.
+        """
+        _username = self.get_username()
         inventory_page = UserDigitizedObjectInventoryPage(
-            title=f"{self.user.username}'s Inventory",
+            title=f"{_username}'s Inventory",
             slug='inventory'
         )
         self.add_child(instance=inventory_page)
@@ -174,14 +200,6 @@ class UserProfilePage(Page):
             return inventory_page.specific
         else:
             self.create_user_inventory_page()
-    
-    def get_username(self):
-        """
-        Method to return the username of the associated user.
-        """
-        if self.profile:
-            return self.profile.user.username
-        return "No User"
 
     def get_child_page(self):
         """
