@@ -4,8 +4,6 @@ from .base import *
 
 DEBUG = False
 
-FORMS_URLFIELD_ASSUME_HTTPS = True
-
 WAGTAIL_REDIRECTS_FILE_STORAGE = "cache"
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
