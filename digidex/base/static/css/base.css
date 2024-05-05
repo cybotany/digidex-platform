@@ -4049,6 +4049,10 @@ figcaption {
   color: var(--accent-a4);
 }
 
+.required-asterisk {
+  color: red;
+}
+
 .section-full {
   flex: 1;
   justify-content: center;
@@ -4562,7 +4566,7 @@ figcaption {
   line-height: 110%;
 }
 
---green-tag-product {
+.green-tag-product {
   background-color: var(--accent-a3);
   color: var(--white);
   letter-spacing: .05em;

@@ -9,12 +9,14 @@ class DigitizedObjectForm(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(
                 attrs={
-                    'class': 'text-field base-input'
+                    'class': 'text-field base-input',
+                    'placeholder': 'Enter the name of the digitized object'
                 }
             ),
             'description': forms.Textarea(
                 attrs={
-                    'class': 'text-field textarea'
+                    'class': 'text-field textarea',
+                    'placeholder': 'Provide a detailed description of the object'
                 }
             ),
         }
@@ -25,8 +27,15 @@ class DigitizedObjectImageForm(forms.ModelForm):
         model = DigitizedObjectImage
         fields = ['image', 'caption']
         widgets = {
-            'image': forms.FileInput(),
+            'image': forms.FileInput(
+                attrs={
+                    'placeholder': 'Provide an image of the object',
+                }
+            ),
             'caption': forms.TextInput(
-                attrs={'class': 'text-field base-input'}
+                attrs={
+                    'class': 'text-field base-input',
+                    'placeholder': 'Provide a caption for the image'
+                }
             ),
         }
