@@ -1,5 +1,6 @@
-from django.shortcuts import redirect, render, get_object_or_404
+from django.shortcuts import redirect, render, get_object_or_404, get_object_or_404, Http404
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 
 from nfc.models import NearFieldCommunicationTag
 from digitization.forms import DigitizedObjectForm, DigitizedObjectImageForm
@@ -26,7 +27,11 @@ def link_digit_and_user(request, digit_uuid):
     _digitized_object.set_user_association(request.user)
     _digitized_object.save()
 
-    return redirect('digitization:link_image', digit_uuid=digit_uuid)
+    digit_page_url = _digitized_object.get_associated_page_url()
+    if digit_page_url:
+        return HttpResponseRedirect(digit_page_url)
+    else:
+        raise Http404("No associated page found for the digitized object.")
 
 @login_required
 def link_digit_and_image(request, digit_uuid):

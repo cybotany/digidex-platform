@@ -48,9 +48,6 @@ class DigitizedObject(models.Model):
     def get_user_association(self):
         return UserDigitizedObject.objects.get(digit=self)
 
-    def get_user_association(self):
-        return UserDigitizedObject.objects.get(digit=self)
-
     def get_associated_page_url(self):
         try:
             user_digit = self.get_user_association()
