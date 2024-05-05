@@ -31,6 +31,6 @@ def create_user_profile_page(sender, instance, created, **kwargs):
         user_page.set_collection_permissions(user_collection)
 
 @receiver(post_save, sender=UserProfilePage)
-def create_user_inventory_page(sender, instance, created, **kwargs):
+def create_user_inventory(sender, instance, created, **kwargs):
     if created:
         instance.create_user_inventory_page()
