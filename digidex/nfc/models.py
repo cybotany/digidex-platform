@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
-from .validators import module_format_validator, ComponentCountValidator
+from .validators import validate_ntag_serial
 
 
 class NearFieldCommunicationTag(models.Model):
@@ -35,7 +35,8 @@ class NearFieldCommunicationTag(models.Model):
     serial_number = models.CharField(
         max_length=32,
         unique=True,
-        db_index=True
+        db_index=True,
+        validators=[validate_ntag_serial]
     )
     ntag_type = models.CharField(
         max_length=50,
