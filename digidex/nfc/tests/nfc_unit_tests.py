@@ -2,22 +2,6 @@ import pytest
 from django.core.exceptions import ValidationError
 
 from nfc.models import NearFieldCommunicationTag
-from digitization.models import DigitizedObject
-
-@pytest.fixture
-def digitized_object(db):
-    return DigitizedObject.objects.create(
-        name="Sample Object",
-        description="A sample digitized object."
-    )
-
-@pytest.fixture
-def ntag(db, digitized_object):
-    return NearFieldCommunicationTag.objects.create(
-        serial_number='1234567890ABCDEF',
-        digitized_object=digitized_object,
-        active=False
-    )
 
 def test_activate_link(ntag):
     ntag.activate_link()
@@ -58,11 +42,9 @@ def test_invalid_serial_number(db):
         )
 
 def test_valid_ntag_type(ntag):
-    # Valid ntag type
     assert ntag.ntag_type == 'NTAG 213'
 
 def test_invalid_ntag_type(db):
-    # Invalid ntag type
     with pytest.raises(ValidationError):
         NearFieldCommunicationTag.objects.create(
             serial_number='01:23:45:67:89:AB:CD:EF:01:10',

@@ -1,22 +1,8 @@
 import pytest
-from django.test import TestCase
 from django.utils import timezone
 
-from accounts.models import User
 from digitization.models import DigitizedObject
 from inventory.models import UserDigitizedObject
-
-
-@pytest.fixture
-def test_user(db):
-    return User.objects.create(username='testuser', password='testpass123')
-
-@pytest.fixture
-def digitized_object(db):
-    return DigitizedObject.objects.create(
-        name="Ancient Manuscript",
-        description="Detailed description of the manuscript."
-    )
 
 def test_digitized_object_creation(digitized_object):
     """ Test the creation of a DigitizedObject and validate its properties. """
@@ -30,16 +16,16 @@ def test_digitized_object_str_representation(digitized_object):
     """ Test the string representation of the DigitizedObject. """
     assert str(digitized_object) == "Ancient Manuscript"
 
-def test_set_user_association(digitized_object, test_user, db):
+def test_set_user_association(digitized_object, user, db):
     """ Test the set_user_association method. """
-    association = digitized_object.set_user_association(test_user)
-    assert association.user == test_user
+    association = digitized_object.set_user_association(user)
+    assert association.user == user
     assert association.digit == digitized_object
 
-def test_get_user_association(digitized_object, test_user, db):
+def test_get_user_association(digitized_object, user, db):
     """ Test retrieving the user association. """
     DigitizedObject.objects.create(name="Another Object")
-    association = digitized_object.set_user_association(test_user)
+    association = digitized_object.set_user_association(user)
     retrieved_association = digitized_object.get_user_association()
     assert retrieved_association == association
 

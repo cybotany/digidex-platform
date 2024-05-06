@@ -1,20 +1,6 @@
-import pytest
 from django.urls import reverse
-from django.test import Client
 
 from nfc.models import NearFieldCommunicationTag
-
-@pytest.fixture
-def client():
-    return Client()
-
-@pytest.fixture
-def active_nfc_tag(db):
-    return NearFieldCommunicationTag.objects.create(uuid='12345', active=True)
-
-@pytest.fixture
-def inactive_nfc_tag(db):
-    return NearFieldCommunicationTag.objects.create(uuid='54321', active=False)
 
 def test_inactive_ntag_returns_403(client, inactive_nfc_tag):
     url = reverse('route_ntag_url', kwargs={'_uuid': inactive_nfc_tag.uuid})
