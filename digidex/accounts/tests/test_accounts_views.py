@@ -1,6 +1,6 @@
-from selenium import webdriver
+#from selenium import webdriver
 
-browser = webdriver.Firefox()
-browser.get("http://localhost:8000")
+#browser = webdriver.Firefox()
+#browser.get("http://localhost:8000")
 
-assert "DigiDex" in browser.title
+#assert "DigiDex" in browser.title

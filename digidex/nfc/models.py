@@ -35,8 +35,7 @@ class NearFieldCommunicationTag(models.Model):
     serial_number = models.CharField(
         max_length=32,
         unique=True,
-        db_index=True,
-        validators=[module_format_validator]
+        db_index=True
     )
     ntag_type = models.CharField(
         max_length=50,
@@ -63,18 +62,6 @@ class NearFieldCommunicationTag(models.Model):
     def __str__(self):
         """Return the serial number as the string representation of the NFC tag."""
         return self.serial_number
-
-    def clean(self):
-        """
-        Custom validation to check the component count for specific NTAG types.
-        """
-        super().clean()
-        if self.ntag_type in ['NTAG 213', 'NTAG 215', 'NTAG 216']:
-            ComponentCountValidator(7)(self.serial_number)
-
-    def save(self, *args, **kwargs):
-        self.clean()
-        super().save(*args, **kwargs)
 
     def activate_link(self):
         """
