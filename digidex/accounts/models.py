@@ -1,9 +1,7 @@
 import uuid
-
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser, Group, Permission
-
 from wagtail.models import Page, Collection, GroupCollectionPermission
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
@@ -142,7 +140,6 @@ class UserProfilePage(Page):
         if self.profile:
             return self.profile.user
         return "No User"
-
 
     def get_username(self):
         """

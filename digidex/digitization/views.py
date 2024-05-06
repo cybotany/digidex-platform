@@ -1,6 +1,5 @@
 from django.shortcuts import redirect, render, get_object_or_404, get_object_or_404, Http404
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
 
 from nfc.models import NearFieldCommunicationTag
 from digitization.forms import DigitizedObjectForm, DigitizedObjectImageForm
