@@ -31,7 +31,7 @@ def test_get_digitized_object_url(ntag):
     assert ntag.get_digitized_object_url() == ntag.digitized_object.get_associated_page_url()
 
 def test_valid_serial_number(ntag):
-    assert ntag.serial_number == '01:23:45:67:89:AB:CD:EF:01:10'
+    assert ntag.serial_number == '01:23:45:67:89:AB:CD'
 
 def test_invalid_serial_number(db):
     with pytest.raises(ValidationError):

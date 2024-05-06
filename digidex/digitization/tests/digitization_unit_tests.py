@@ -14,7 +14,7 @@ def test_digitized_object_creation(digitized_object):
 
 def test_digitized_object_str_representation(digitized_object):
     """ Test the string representation of the DigitizedObject. """
-    assert str(digitized_object) == "Cream Shiba Inu with a curly tail."
+    assert str(digitized_object) == "Kira"
 
 def test_set_user_association(digitized_object, user, db):
     """ Test the set_user_association method. """
