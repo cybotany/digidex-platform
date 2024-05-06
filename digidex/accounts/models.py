@@ -2,6 +2,7 @@ import uuid
 from django.db import models, transaction
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser, Group, Permission
+from django.utils.text import slugify
 from wagtail.models import Page, Collection, GroupCollectionPermission
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
@@ -89,7 +90,7 @@ class UserProfile(models.Model):
             defaults={
                 'title': f"{self.user.username}'s Profile",
                 'owner': self.user,
-                'slug': self.user.username.replace(' ', '-').lower()
+                'slug': slugify(self.user.username)
             }
         )
         if created:
@@ -162,19 +163,19 @@ class UserProfilePage(Page):
         'inventory.UserDigitizedObjectInventoryPage'
     ]
 
-    def get_content(self):
+    def get_profile(self):
         """
         Method to return the content (User Profile) being managed in this page.
         """
         if self.profile:
             return self.profile
-        return "No User"
+        return "No User Profile Found."
 
     def get_username(self):
         """
         Method to return the username of the associated owner.
         """
-        _profile = self.get_content()
+        _profile = self.get_profile()
         return _profile.user.username
 
     def create_inventory_page(self):
@@ -184,6 +185,7 @@ class UserProfilePage(Page):
         _username = self.get_username()
         inventory_page = UserDigitizedObjectInventoryPage(
             title=f"{_username}'s Inventory",
+            owner=self.profile.user,
             slug='inventory'
         )
         self.add_child(instance=inventory_page)

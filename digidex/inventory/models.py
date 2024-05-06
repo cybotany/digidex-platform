@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel
 from wagtail.search import index
@@ -49,6 +50,8 @@ class UserDigitizedObject(models.Model):
         
         user_digit_page = UserDigitizedObjectPage(
             title=f"Digitized Object: {self.get_digit_name()}",
+            owner=self.user,
+            slug=slugify(self.digit.name),
             user_digit=self
         )
         inventory_page.add_child(instance=user_digit_page)  
