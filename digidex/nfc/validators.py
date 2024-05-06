@@ -1,9 +1,19 @@
 from django.core.validators import RegexValidator
+from django.core.validators import BaseValidator
+from django.utils.deconstruct import deconstructible
+from django.utils.translation import gettext_lazy as _
 
-SERIAL_NUMBER_REGEX = '^([0-9A-Fa-f]{2}:){9}[0-9A-Fa-f]{2}$'
-
-serial_number_validator = RegexValidator(
-    regex=SERIAL_NUMBER_REGEX,
-    message=("Serial number must be in the format XX:XX:XX:XX:XX:XX:XX"),
-    code='invalid_serial_number'
+module_format_validator = RegexValidator(
+    regex='^([0-9A-Fa-f]{2}:)+$',
+    message="Each component of the serial number must be two hexadecimal characters followed by a colon.",
+    code='invalid_module_format'
 )
+
+@deconstructible
+class ComponentCountValidator(BaseValidator):
+    compare = lambda self, a, b: a != b
+    message = _("Ensure the serial number contains exactly %(limit_value)d components.")
+    code = 'invalid_component_count'
+
+    def clean(self, x):
+        return len(x.split(':')) - 1
