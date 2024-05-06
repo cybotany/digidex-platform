@@ -7,13 +7,13 @@ from digitization.models import DigitizedObject
 
 @pytest.fixture
 def user(db):
-    return User.objects.create_user(username='testuser', password='testpass123')
+    return User.objects.create_user(username='test_pet_owner', password='testpass123')
 
 @pytest.fixture
 def digitized_object(db):
     return DigitizedObject.objects.create(
-        name="Ancient Manuscript",
-        description="Detailed description of the manuscript."
+        name="Kira",
+        description="Cream Shiba Inu with a curly tail."
     )
 
 @pytest.fixture

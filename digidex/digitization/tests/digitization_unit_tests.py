@@ -7,14 +7,14 @@ from inventory.models import UserDigitizedObject
 def test_digitized_object_creation(digitized_object):
     """ Test the creation of a DigitizedObject and validate its properties. """
     assert digitized_object.uuid is not None
-    assert digitized_object.name == "Ancient Manuscript"
-    assert digitized_object.description == "Detailed description of the manuscript."
+    assert digitized_object.name == "Kira"
+    assert digitized_object.description == "Cream Shiba Inu with a curly tail."
     assert isinstance(digitized_object.created_at, timezone.datetime)
     assert isinstance(digitized_object.last_modified, timezone.datetime)
 
 def test_digitized_object_str_representation(digitized_object):
     """ Test the string representation of the DigitizedObject. """
-    assert str(digitized_object) == "Ancient Manuscript"
+    assert str(digitized_object) == "Cream Shiba Inu with a curly tail."
 
 def test_set_user_association(digitized_object, user, db):
     """ Test the set_user_association method. """
