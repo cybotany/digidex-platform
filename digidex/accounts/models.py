@@ -52,7 +52,7 @@ class User(AbstractUser):
                 defaults={'depth': 1}
             )
             user_collection_name = f"{self.username}'s Collection"
-            collection, created = users_root_collection.add_child(
+            collection = users_root_collection.add_child(
                 name=user_collection_name
             )
             self.set_collection_permissions(collection)

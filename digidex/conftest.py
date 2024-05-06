@@ -1,4 +1,3 @@
-import uuid
 import pytest
 from django.test import Client
 
@@ -7,8 +6,12 @@ from nfc.models import NearFieldCommunicationTag
 from digitization.models import DigitizedObject
 
 @pytest.fixture
+def client():
+    return Client()
+
+@pytest.fixture
 def user(db):
-    return User.objects.create_user(username='test_pet_owner', password='testpass123')
+    return User.objects.create(username='test_pet_owner', password='testpass123')
 
 @pytest.fixture
 def digitized_object(db):
@@ -18,16 +21,23 @@ def digitized_object(db):
     )
 
 @pytest.fixture
-def ntag(db, digitized_object):
+def ntag(db):
+    test_digitized_object = DigitizedObject.objects.create(
+        name="Kira",
+        description="Cream Shiba Inu with a curly tail."
+    )
     return NearFieldCommunicationTag.objects.create(
         serial_number='01:23:45:67:89:AB:CD',
-        digitized_object=digitized_object,
-        active=False
+        digitized_object=test_digitized_object,
+        active=True
     )
 
 @pytest.fixture
-def client():
-    return Client()
+def ntag_without_digitized_object(db):
+    return NearFieldCommunicationTag.objects.create(
+        serial_number='CD:AB:89:67:45:23:01',
+        active=True
+    )
 
 @pytest.fixture
 def active_nfc_tag(db):

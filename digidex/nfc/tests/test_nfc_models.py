@@ -15,13 +15,9 @@ def test_deactivate_link(ntag):
 def test_get_digitized_object(ntag):
     assert ntag.get_digitized_object() == ntag.digitized_object
 
-def test_get_digitized_object_without_digitized_object(db):
-    ntag = NearFieldCommunicationTag.objects.create(
-        serial_number='9876543210FEDCBA',
-        active=False
-    )
+def test_get_digitized_object_without_digitized_object(ntag_without_digitized_object):
     with pytest.raises(ValidationError):
-        ntag.get_digitized_object()
+        ntag_without_digitized_object.get_digitized_object()
 
 def test_get_absolute_url(ntag):
     url = ntag.get_absolute_url()
