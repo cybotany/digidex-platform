@@ -1,7 +1,7 @@
 import pytest
-from django.contrib.auth.models import User
 from django.test import Client
 
+from accounts.models import User
 from nfc.models import NearFieldCommunicationTag
 from digitization.models import DigitizedObject
 
@@ -19,7 +19,7 @@ def digitized_object(db):
 @pytest.fixture
 def ntag(db, digitized_object):
     return NearFieldCommunicationTag.objects.create(
-        serial_number='12:34:56:78:AB:CD:EF',
+        serial_number='01:23:45:67:89:AB:CD',
         digitized_object=digitized_object,
         active=False
     )
