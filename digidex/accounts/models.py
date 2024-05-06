@@ -114,6 +114,13 @@ class UserProfilePage(Page):
         related_name="profile_page",
         help_text="Link to the associated user profile."
     )
+    owner = models.OneToOneField(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        help_text="The user who owns this page."
+    )
 
     search_fields = Page.search_fields + [
         index.SearchField('get_username', partial_match=True, boost=2),
@@ -123,6 +130,7 @@ class UserProfilePage(Page):
         FieldPanel('heading'),
         FieldPanel('intro'),
         FieldPanel('profile'),
+        FieldPanel('owner'),
     ]
 
     parent_page_types = [
@@ -133,25 +141,33 @@ class UserProfilePage(Page):
         'inventory.UserDigitizedObjectInventoryPage'
     ]
 
-    def get_user(self):
+    def get_owner(self):
         """
-        Method to return the username of the associated user.
+        Method to return the owner of the page.
         """
-        if self.profile:
-            return self.profile.user
+        if self.owner:
+            return self.owner
         return "No User"
 
-    def get_username(self):
+    def get_content(self):
         """
-        Method to return the username of the associated user.
+        Method to return the content (User Profile) being managed in this page.
         """
-        return self.get_user().username
+        if self.profile:
+            return self.profile
+        return "No User"
+
+    def get_owner_username(self):
+        """
+        Method to return the username of the associated owner.
+        """
+        return self.get_owner().username
 
     def create_user_collection(self, parent=None):
         """
         Method to create a user collection for the associated user.
         """
-        _username = self.get_username()
+        _username = self.get_owner_username()
         if parent is None:
             parent = Collection.get_first_root_node()
 

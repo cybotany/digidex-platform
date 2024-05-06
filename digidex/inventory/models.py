@@ -1,5 +1,4 @@
 from django.db import models
-
 from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel
 from wagtail.search import index
@@ -9,6 +8,13 @@ class UserDigitizedObjectInventoryPage(Page):
     intro = models.TextField(
         blank=True,
         help_text="Introduction text to display at the top of the index page."
+    )
+    owner = models.OneToOneField(
+        'accounts.User',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        help_text="The user who owns this page."
     )
 
     content_panels = Page.content_panels + [
@@ -71,6 +77,13 @@ class UserDigitizedObjectPage(Page):
     last_modified = models.DateTimeField(
         auto_now=True,
         verbose_name="Last Modified"
+    )
+    owner = models.OneToOneField(
+        'accounts.User',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        help_text="The user who owns this page."
     )
 
     search_fields = Page.search_fields + [
