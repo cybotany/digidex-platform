@@ -45,3 +45,27 @@ def test_get_absolute_url(ntag):
 
 def test_get_digitized_object_url(ntag):
     assert ntag.get_digitized_object_url() == ntag.digitized_object.get_associated_page_url()
+
+def test_valid_serial_number(ntag):
+    assert ntag.serial_number == '01:23:45:67:89:AB:CD:EF:01:10'
+
+def test_invalid_serial_number(db):
+    with pytest.raises(ValidationError):
+        NearFieldCommunicationTag.objects.create(
+            serial_number='01:23:45:6789:AB:CD:EF:01:10',
+            ntag_type='NTAG 213',
+            active=False
+        )
+
+def test_valid_ntag_type(ntag):
+    # Valid ntag type
+    assert ntag.ntag_type == 'NTAG 213'
+
+def test_invalid_ntag_type(db):
+    # Invalid ntag type
+    with pytest.raises(ValidationError):
+        NearFieldCommunicationTag.objects.create(
+            serial_number='01:23:45:67:89:AB:CD:EF:01:10',
+            ntag_type='Invalid Type',
+            active=False
+        )
