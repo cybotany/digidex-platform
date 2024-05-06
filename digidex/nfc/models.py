@@ -4,6 +4,9 @@ from django.urls import reverse
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
+from .validators import serial_number_validator
+
+
 class NearFieldCommunicationTag(models.Model):
     """
     Represents an NFC (Near Field Communication) tag in the system, associated with a digitized object.
@@ -18,6 +21,11 @@ class NearFieldCommunicationTag(models.Model):
         created_at (DateTimeField): Timestamp indicating when the record was first created.
         last_modified (DateTimeField): Timestamp indicating when the record was last updated.
     """
+    NTAG_TYPES = (
+        ('NTAG 213', 'NTAG 213'),
+        ('NTAG 215', 'NTAG 215'),
+        ('NTAG 216', 'NTAG 216'),
+    )
 
     uuid = models.UUIDField(
         default=uuid.uuid4, 
@@ -27,7 +35,13 @@ class NearFieldCommunicationTag(models.Model):
     serial_number = models.CharField(
         max_length=32,
         unique=True,
-        db_index=True
+        db_index=True,
+        validators=[serial_number_validator]
+    )
+    ntag_type = models.CharField(
+        max_length=50,
+        choices=NTAG_TYPES,
+        default='NTAG 213'
     )
     digitized_object = models.OneToOneField(
         'digitization.DigitizedObject',
