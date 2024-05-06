@@ -11,6 +11,7 @@ from wagtail.search import index
 
 from inventory.models import UserDigitizedObjectInventoryPage
 
+
 class User(AbstractUser):
     uuid = models.UUIDField(
         default=uuid.uuid4,
