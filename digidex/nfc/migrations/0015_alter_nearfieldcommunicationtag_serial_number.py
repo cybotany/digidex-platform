@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='nearfieldcommunicationtag',
             name='serial_number',
-            field=models.CharField(db_index=True, max_length=32, unique=True, validators=[django.core.validators.RegexValidator(code='invalid_serial_number', message='Serial number must be in the format XX:XX:XX:XX:XX:XX:XX', regex='^([0-9A-Fa-f]{2}:){7}[0-9A-Fa-f]{2}$')]),
+            field=models.CharField(db_index=True, max_length=32, unique=True),
         ),
     ]
