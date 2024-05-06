@@ -19,10 +19,6 @@ def ntag(db, digitized_object):
         active=False
     )
 
-def test_create_ntag(ntag):
-    assert ntag.serial_number == '1234567890ABCDEF'
-    assert not ntag.active
-
 def test_activate_link(ntag):
     ntag.activate_link()
     assert ntag.active

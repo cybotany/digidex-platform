@@ -1,51 +1,38 @@
 import pytest
-from django.core.exceptions import ValidationError
+from django.urls import reverse
+from django.test import Client
 
 from nfc.models import NearFieldCommunicationTag
-from digitization.models import DigitizedObject
 
 @pytest.fixture
-def digitized_object(db):
-    return DigitizedObject.objects.create(
-        name="Sample Object",
-        description="A sample digitized object."
-    )
+def client():
+    return Client()
 
 @pytest.fixture
-def ntag(db, digitized_object):
-    return NearFieldCommunicationTag.objects.create(
-        serial_number='1234567890ABCDEF',
-        digitized_object=digitized_object,
-        active=False
-    )
+def active_nfc_tag(db):
+    return NearFieldCommunicationTag.objects.create(uuid='12345', active=True)
 
-def test_create_ntag(ntag):
-    assert ntag.serial_number == '1234567890ABCDEF'
-    assert not ntag.active
+@pytest.fixture
+def inactive_nfc_tag(db):
+    return NearFieldCommunicationTag.objects.create(uuid='54321', active=False)
 
-def test_activate_link(ntag):
-    ntag.activate_link()
-    assert ntag.active
+def test_inactive_ntag_returns_403(client, inactive_nfc_tag):
+    url = reverse('route_ntag_url', kwargs={'_uuid': inactive_nfc_tag.uuid})
+    response = client.get(url)
+    assert response.status_code == 403
 
-def test_deactivate_link(ntag):
-    ntag.activate_link()
-    ntag.deactivate_link()
-    assert not ntag.active
+def test_active_ntag_redirects_to_digitized_object(client, active_nfc_tag, mocker):
+    mocker.patch.object(NearFieldCommunicationTag, 'get_digitized_object_url', return_value="http://example.com/digit_page")
+    active_nfc_tag.digitized_object = mocker.MagicMock()
+    active_nfc_tag.save()
 
-def test_get_digitized_object(ntag):
-    assert ntag.get_digitized_object() == ntag.digitized_object
+    url = reverse('route_ntag_url', kwargs={'_uuid': active_nfc_tag.uuid})
+    response = client.get(url)
+    assert response.status_code == 302
+    assert response['Location'] == "http://example.com/digit_page"
 
-def test_get_digitized_object_without_digitized_object(db):
-    ntag = NearFieldCommunicationTag.objects.create(
-        serial_number='9876543210FEDCBA',
-        active=False
-    )
-    with pytest.raises(ValidationError):
-        ntag.get_digitized_object()
-
-def test_get_absolute_url(ntag):
-    url = ntag.get_absolute_url()
-    assert url == f"/nfc/{ntag.uuid}/"
-
-def test_get_digitized_object_url(ntag):
-    assert ntag.get_digitized_object_url() == ntag.digitized_object.get_associated_page_url()
+def test_active_ntag_redirects_to_link_ntag_when_no_digitized_object(client, active_nfc_tag):
+    url = reverse('route_ntag_url', kwargs={'_uuid': active_nfc_tag.uuid})
+    response = client.get(url)
+    assert response.status_code == 302
+    assert response['Location'] == reverse('digitization:link_ntag', kwargs={'ntag_uuid': active_nfc_tag.uuid})
