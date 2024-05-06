@@ -1,5 +1,5 @@
 from django.core.validators import RegexValidator
-from django.core.validators import BaseValidator
+from django.core.exceptions import ValidationError
 from django.utils.deconstruct import deconstructible
 from django.utils.translation import gettext_lazy as _
 
@@ -10,10 +10,15 @@ module_format_validator = RegexValidator(
 )
 
 @deconstructible
-class ComponentCountValidator(BaseValidator):
-    compare = lambda self, a, b: a != b
-    message = _("Ensure the serial number contains exactly %(limit_value)d components.")
-    code = 'invalid_component_count'
+class ComponentCountValidator:
+    def __init__(self, count):
+        self.count = count
 
-    def clean(self, x):
-        return len(x.split(':')) - 1
+    def __call__(self, value):
+        actual_count = len(value.split(':')) - 1
+        if actual_count != self.count:
+            raise ValidationError(
+                _("Ensure the serial number contains exactly %(count)d components (found %(actual_count)d)."),
+                params={'count': self.count, 'actual_count': actual_count},
+                code='invalid_component_count'
+            )

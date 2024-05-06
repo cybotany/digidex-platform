@@ -70,7 +70,7 @@ class NearFieldCommunicationTag(models.Model):
         """
         super().clean()
         if self.ntag_type in ['NTAG 213', 'NTAG 215', 'NTAG 216']:
-            ComponentCountValidator(7).validate(self.serial_number)
+            ComponentCountValidator(7)(self.serial_number)
 
     def save(self, *args, **kwargs):
         self.clean()
