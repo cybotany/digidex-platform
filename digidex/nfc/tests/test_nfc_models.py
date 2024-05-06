@@ -47,7 +47,7 @@ def test_valid_ntag_type(ntag):
 def test_invalid_ntag_type(db):
     with pytest.raises(ValidationError):
         NearFieldCommunicationTag.objects.create(
-            serial_number='01:23:45:67:89:AB:CD:EF:01:10',
+            serial_number='01:23:45:67:89:AB:CD',
             ntag_type='Invalid Type',
             active=False
         )

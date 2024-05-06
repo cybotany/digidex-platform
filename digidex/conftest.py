@@ -1,3 +1,4 @@
+import uuid
 import pytest
 from django.test import Client
 
@@ -30,8 +31,8 @@ def client():
 
 @pytest.fixture
 def active_nfc_tag(db):
-    return NearFieldCommunicationTag.objects.create(uuid='12345', active=True)
+    return NearFieldCommunicationTag.objects.create(uuid='127611e2-1f20-4b01-b9eb-390360e04b6b', active=True)
 
 @pytest.fixture
 def inactive_nfc_tag(db):
-    return NearFieldCommunicationTag.objects.create(uuid='54321', active=False)
+    return NearFieldCommunicationTag.objects.create(uuid='127611e2-1f20-4b01-b9eb-390360e04b6b', active=False)

@@ -4,7 +4,7 @@ from django.utils import timezone
 from digitization.models import DigitizedObject
 from inventory.models import UserDigitizedObject
 
-def test_digitized_object_creation(digitized_object):
+def test_digitized_object_creation(digitized_object, db):
     """ Test the creation of a DigitizedObject and validate its properties. """
     assert digitized_object.uuid is not None
     assert digitized_object.name == "Kira"
@@ -12,7 +12,7 @@ def test_digitized_object_creation(digitized_object):
     assert isinstance(digitized_object.created_at, timezone.datetime)
     assert isinstance(digitized_object.last_modified, timezone.datetime)
 
-def test_digitized_object_str_representation(digitized_object):
+def test_digitized_object_str_representation(digitized_object, db):
     """ Test the string representation of the DigitizedObject. """
     assert str(digitized_object) == "Kira"
 
