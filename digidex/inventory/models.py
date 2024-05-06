@@ -9,13 +9,6 @@ class UserDigitizedObjectInventoryPage(Page):
         blank=True,
         help_text="Introduction text to display at the top of the index page."
     )
-    owner = models.OneToOneField(
-        'accounts.User',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        help_text="The user who owns this page."
-    )
 
     content_panels = Page.content_panels + [
         FieldPanel('intro'),
@@ -61,8 +54,6 @@ class UserDigitizedObject(models.Model):
         inventory_page.add_child(instance=user_digit_page)  
         user_digit_page.save_revision().publish()
 
-        return user_digit_page
-
 
 class UserDigitizedObjectPage(Page):
     user_digit = models.OneToOneField(
@@ -77,13 +68,6 @@ class UserDigitizedObjectPage(Page):
     last_modified = models.DateTimeField(
         auto_now=True,
         verbose_name="Last Modified"
-    )
-    owner = models.OneToOneField(
-        'accounts.User',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        help_text="The user who owns this page."
     )
 
     search_fields = Page.search_fields + [

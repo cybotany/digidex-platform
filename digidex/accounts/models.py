@@ -1,5 +1,5 @@
 import uuid
-from django.db import models
+from django.db import models, transaction
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser, Group, Permission
 from wagtail.models import Page, Collection, GroupCollectionPermission
@@ -26,11 +26,35 @@ class User(AbstractUser):
             self.save()
         return created
 
-    def create_user_profile(self):
-        profile, created = UserProfile.objects.get_or_create(user=self)
-        if created:
-            profile.save() 
-        return created
+    def set_collection_permissions(self, collection):
+        """
+        Method to set permissions for the user collection.
+        """
+        user_group, _ = self.create_user_group()
+        permissions = ['add', 'change', 'delete', 'view']
+        for permission in permissions:
+            permission_codename = f'{permission}_{collection._meta.model_name}'
+            perm, _ = Permission.objects.get_or_create(codename=permission_codename)
+            GroupCollectionPermission.objects.get_or_create(
+                group=user_group,
+                collection=collection,
+                permission=perm
+            )
+
+    def create_user_collection(self):
+        """
+        Method to create a user collection for the associated user.
+        """
+        with transaction.atomic():
+            users_root_collection, _ = Collection.objects.get_or_create(
+                name='Users',
+                defaults={'depth': 1}
+            )
+            user_collection_name = f"{self.username}'s Collection"
+            collection, created = users_root_collection.add_child(
+                name=user_collection_name
+            )
+            self.set_collection_permissions(collection)
 
 
 class UserProfile(models.Model):
@@ -59,16 +83,21 @@ class UserProfile(models.Model):
         verbose_name="Last Modified"
     )
 
-    def create_user_profile_page(self, parent):
-        user_page = UserProfilePage(
-            title=f"{self.user.username}'s Inventory",
-            owner=self.user,
-            slug=self.user.username.replace(' ', '-').lower(),
-            profile=self
+    def create_user_profile_page(self):
+        profile_page, created = UserProfilePage.objects.get_or_create(
+            profile=self,
+            defaults={
+                'title': f"{self.user.username}'s Profile",
+                'owner': self.user,
+                'slug': self.user.username.replace(' ', '-').lower()
+            }
         )
-        parent.add_child(instance=user_page)
-        user_page.save_revision().publish()
-        return user_page
+        if created:
+            profile_index_page = UserProfileIndexPage.objects.get(title="User Profiles")
+            profile_index_page.add_child(instance=profile_page)
+            profile_page.save_revision().publish()
+
+        return profile_page
 
     def __str__(self):
         return self.user.username
@@ -114,13 +143,6 @@ class UserProfilePage(Page):
         related_name="profile_page",
         help_text="Link to the associated user profile."
     )
-    owner = models.OneToOneField(
-        User,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        help_text="The user who owns this page."
-    )
 
     search_fields = Page.search_fields + [
         index.SearchField('get_username', partial_match=True, boost=2),
@@ -130,7 +152,6 @@ class UserProfilePage(Page):
         FieldPanel('heading'),
         FieldPanel('intro'),
         FieldPanel('profile'),
-        FieldPanel('owner'),
     ]
 
     parent_page_types = [
@@ -141,14 +162,6 @@ class UserProfilePage(Page):
         'inventory.UserDigitizedObjectInventoryPage'
     ]
 
-    def get_owner(self):
-        """
-        Method to return the owner of the page.
-        """
-        if self.owner:
-            return self.owner
-        return "No User"
-
     def get_content(self):
         """
         Method to return the content (User Profile) being managed in this page.
@@ -157,41 +170,14 @@ class UserProfilePage(Page):
             return self.profile
         return "No User"
 
-    def get_owner_username(self):
+    def get_username(self):
         """
         Method to return the username of the associated owner.
         """
-        return self.get_owner().username
+        _profile = self.get_content()
+        return _profile.user.username
 
-    def create_user_collection(self, parent=None):
-        """
-        Method to create a user collection for the associated user.
-        """
-        _username = self.get_owner_username()
-        if parent is None:
-            parent = Collection.get_first_root_node()
-
-        user_collection_name = f"{_username}'s Collection"
-        collection = parent.add_child(name=user_collection_name)
-        self.set_collection_permissions(collection)
-        return collection
-
-    def set_collection_permissions(self, collection):
-        """
-        Method to set permissions for the user collection.
-        """
-        user_group, _ = self.user.create_user_group()
-        permissions = ['add', 'change', 'delete', 'view']
-        for permission in permissions:
-            permission_codename = f'{permission}_{collection._meta.model_name}'
-            perm, _ = Permission.objects.get_or_create(codename=permission_codename)
-            GroupCollectionPermission.objects.get_or_create(
-                group=user_group,
-                collection=collection,
-                permission=perm
-            )
-
-    def create_user_inventory_page(self):
+    def create_inventory_page(self):
         """
         Method to create a UserDigitizedObjectInventoryPage associated with this profile page.
         """
@@ -213,7 +199,7 @@ class UserProfilePage(Page):
         if inventory_page:
             return inventory_page.specific
         else:
-            self.create_user_inventory_page()
+            self.create_inventory_page()
 
     def get_child_page(self):
         """
