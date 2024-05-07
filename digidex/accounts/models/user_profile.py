@@ -85,7 +85,7 @@ class UserProfilePage(Page):
     ]
 
     parent_page_types = [
-        'accounts.UserProfileIndexPage'
+        'home.UserProfileIndexPage'
     ]
 
     subpage_types = [

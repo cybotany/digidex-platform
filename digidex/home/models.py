@@ -45,7 +45,7 @@ class HomePage(Page):
     ]
 
     subpage_types = [
-        'accounts.UserProfileIndexPage'
+        'home.UserProfileIndexPage'
     ]
 
     def create_user_profile_index_page(self):
