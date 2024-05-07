@@ -10,7 +10,7 @@ def client():
     return Client()
 
 @pytest.fixture
-def user(db):
+def new_user(db):
     return User.objects.create(username='test_pet_owner', password='testpass123')
 
 @pytest.fixture

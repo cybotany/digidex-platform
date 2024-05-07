@@ -101,7 +101,16 @@ DATABASES = {
         'PORT': os.getenv('DB_PORT'),
         'TEST': {
             'NAME': os.getenv('TEST_DB_NAME'),
+            'SERIALIZE': False,
         },
+    },
+    'fallback': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postgres',  # Default utility database
+        'USER': os.getenv('DB_USERNAME'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
     }
 }
 

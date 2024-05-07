@@ -15,15 +15,15 @@ def test_digitized_object_str_representation(digitized_object, db):
     """ Test the string representation of the DigitizedObject. """
     assert str(digitized_object) == "Kira"
 
-def test_setting_user_association(digitized_object, user, db):
+def test_setting_user_association(digitized_object, new_user, db):
     """ Test the set_user_association method. """
-    association = digitized_object.set_user_association(user)
-    assert association.user == user
+    association = digitized_object.set_user_association(new_user)
+    assert association.user == new_user
     assert association.digit == digitized_object
 
-def test_getting_user_association(digitized_object, user, db):
+def test_getting_user_association(digitized_object, new_user, db):
     """ Test retrieving the user association. """
-    association = digitized_object.set_user_association(user)
+    association = digitized_object.set_user_association(new_user)
     retrieved_association = digitized_object.get_user_association()
     assert retrieved_association == association
 

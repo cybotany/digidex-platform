@@ -35,7 +35,7 @@ class User(AbstractUser):
         permissions = ['add', 'change', 'delete', 'view']
         for permission in permissions:
             permission_codename = f'{permission}_{collection._meta.model_name}'
-            perm = Permission.objects.get_or_create(codename=permission_codename)
+            perm, created = Permission.objects.get_or_create(codename=permission_codename)
             GroupCollectionPermission.objects.get_or_create(
                 group=user_group,
                 collection=collection,
