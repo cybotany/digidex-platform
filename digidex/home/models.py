@@ -1,35 +1,10 @@
 from django.db import models
 
 from wagtail.fields import StreamField
-from wagtail.admin.panels import MultiFieldPanel, FieldPanel, InlinePanel
-from wagtail.models import Orderable, Page
-from modelcluster.fields import ParentalKey
+from wagtail.admin.panels import MultiFieldPanel, FieldPanel
+from wagtail.models import Page
 
 from home.blocks import HomeStreamBlock
-
-
-class LottieFeature(Orderable):
-    page = ParentalKey(
-        'HomePage',
-        on_delete=models.CASCADE,
-        related_name='lottie_feature'
-    )
-    icon = models.ForeignKey(
-        'wagtailimages.Image',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name='+'
-    )
-    text = models.CharField(
-        max_length=25,
-        blank=True
-    )
-
-    panels = [
-        FieldPanel('icon'),
-        FieldPanel('text'),
-    ]
 
 
 class HomePage(Page):
@@ -64,7 +39,6 @@ class HomePage(Page):
                 FieldPanel('hero_paragraph'),
                 FieldPanel('hero_cta_text'),
                 FieldPanel('hero_cta_link'),
-                InlinePanel('lottie_feature', label="Lottie Features"),
             ], heading="Hero Section"
         ),
         FieldPanel("body"),
