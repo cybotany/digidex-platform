@@ -1,5 +1,6 @@
 from wagtail.models import Page, Site
 
+
 class SiteCreator:
     @staticmethod
     def create_site(hostname, site_name, root_page_class, children_pages):

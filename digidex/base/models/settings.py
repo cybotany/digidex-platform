@@ -4,6 +4,7 @@ from django.db import models
 from wagtail.admin import panels
 from wagtail.contrib.settings.models import register_setting, BaseGenericSetting
 
+
 @register_setting
 class NavigationSettings(BaseGenericSetting):
     logo = models.ForeignKey(

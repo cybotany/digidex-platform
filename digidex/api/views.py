@@ -16,7 +16,7 @@ class RegisterNearFieldCommunicationTag(APIView):
 
         if not serial_number:
             return Response({"error": "Serial Number not provided."}, status=status.HTTP_400_BAD_REQUEST)
-        
+
         ntag, created = NearFieldCommunicationTag.objects.update_or_create(
             serial_number=serial_number,
             defaults={'active': True}
