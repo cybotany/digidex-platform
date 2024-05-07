@@ -1,5 +1,4 @@
 import pytest
-from django.db.models import Count
 from wagtail.models import Collection
 
 @pytest.mark.django_db

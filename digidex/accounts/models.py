@@ -25,17 +25,23 @@ class User(AbstractUser):
         Method to create a user collection for the associated user.
         """
         with transaction.atomic():
+            # Ensure the 'Users' root collection exists
             users_root_collection, _ = Collection.objects.get_or_create(
                 name='Users',
                 defaults={'depth': 1}
             )
+
+            # Create the specific user's collection under 'Users'
             user_collection_name = f"{self.username}'s Collection"
-            collection, created = users_root_collection.add_child(
+            user_collection = users_root_collection.add_child(
                 name=user_collection_name
             )
-            if created:
-                UserCollection.objects.create(user=self, collection=collection)
-        return collection
+
+            # Create or get a UserCollection linking the user to the new collection
+            user_collection_link, created = UserCollection.objects.get_or_create(
+                user=self, collection=user_collection
+            )
+            return user_collection_link
 
 
 class UserCollection(models.Model):
@@ -90,8 +96,6 @@ class UserProfile(models.Model):
             profile_index_page = UserProfileIndexPage.objects.get(title="User Profiles")
             profile_index_page.add_child(instance=profile_page)
             profile_page.save_revision().publish()
-
-        return profile_page
 
     def __str__(self):
         return self.user.username
@@ -183,7 +187,6 @@ class UserProfilePage(Page):
         )
         self.add_child(instance=inventory_page)
         inventory_page.save_revision().publish()
-        return inventory_page
 
     def get_inventory_page(self):
         """
