@@ -31,7 +31,6 @@ class LottieFeature(Orderable):
     ]
 
 
-
 class HomePage(Page):
     hero_heading = models.CharField(
         blank=True,

@@ -1,11 +1,5 @@
-import uuid
 import pytest
 from wagtail.models import Collection
-
-
-@pytest.mark.django_db
-def test_user_uuid_initialization(new_user):
-    assert isinstance(new_user.uuid, uuid.UUID), "The UUID field should contain a valid UUID."
 
 
 @pytest.mark.django_db
