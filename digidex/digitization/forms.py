@@ -2,6 +2,7 @@ from django import forms
 
 from digitization.models import DigitizedObject, DigitizedObjectImage
 
+
 class DigitizedObjectForm(forms.ModelForm):
     class Meta:
         model = DigitizedObject

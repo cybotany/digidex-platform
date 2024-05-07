@@ -1,9 +1,10 @@
-from django.shortcuts import redirect, render, get_object_or_404, get_object_or_404, Http404
+from django.shortcuts import redirect, render, get_object_or_404, Http404
 from django.contrib.auth.decorators import login_required
 
 from nfc.models import NearFieldCommunicationTag
 from digitization.forms import DigitizedObjectForm, DigitizedObjectImageForm
 from digitization.models import DigitizedObject
+
 
 @login_required
 def link_ntag_and_digit(request, ntag_uuid):
@@ -19,6 +20,7 @@ def link_ntag_and_digit(request, ntag_uuid):
         form = DigitizedObjectForm()
 
     return render(request, "digitization/link_ntag_and_digit.html", {'form': form})
+
 
 @login_required
 def link_digit_and_user(request, digit_uuid):
@@ -43,7 +45,7 @@ def link_digit_and_image(request, digit_uuid):
             image_obj.digit = _digitized_object
             image_obj.save()
             _user_digit_page_url = _digitized_object.get_associated_page_url()
-            return redirect('some_success_url')
+            return redirect(_user_digit_page_url)
     else:
         form = DigitizedObjectImageForm()
 

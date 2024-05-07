@@ -13,6 +13,7 @@ from wagtail.search.index import SearchField
 
 from blog.blocks import BlogStreamBlock
 
+
 class BlogIndexPage(Page):
     body = StreamField(
         BlogStreamBlock(),
@@ -97,6 +98,7 @@ class BlogPage(Page):
         FieldPanel('body'),
         InlinePanel('gallery_images', label="Gallery images"),
     ]
+
 
 class BlogTagIndexPage(Page):
 

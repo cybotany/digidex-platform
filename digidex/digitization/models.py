@@ -3,6 +3,7 @@ from django.db import models
 
 from inventory.models import UserDigitizedObject, UserDigitizedObjectPage
 
+
 class DigitizedObject(models.Model):
     """
     Base class for digitized objects, providing common attributes.
@@ -51,12 +52,13 @@ class DigitizedObject(models.Model):
     def get_associated_page_url(self):
         try:
             user_digit = self.get_user_association()
-            user_digit_page = user_digit.detail_page 
+            user_digit_page = user_digit.detail_page
             return user_digit_page.url if user_digit_page else None
         except UserDigitizedObject.DoesNotExist:
             return None
         except UserDigitizedObjectPage.DoesNotExist:
             return None
+
 
 class DigitizedObjectImage(models.Model):
     digit = models.ForeignKey(

@@ -4,6 +4,7 @@ from modelcluster.fields import ParentalKey
 from wagtail.models import Orderable
 from wagtail.admin.panels import FieldPanel
 
+
 class BlogPageGalleryImage(Orderable):
     page = ParentalKey(
         'blog.BlogPage',
