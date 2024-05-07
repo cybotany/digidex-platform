@@ -58,29 +58,6 @@ class UserProfile(models.Model):
         verbose_name = "User Profile"
 
 
-class UserProfileIndexPage(Page):
-    heading = models.CharField(
-        max_length=255,
-        blank=True
-    )
-    intro = RichTextField(
-        blank=True
-    )
-
-    content_panels = Page.content_panels + [
-        FieldPanel('heading'),
-        FieldPanel('intro'),
-    ]
-
-    parent_page_types = [
-        'home.HomePage'
-    ]
-
-    subpage_types = [
-        'accounts.UserProfilePage'
-    ]
-
-
 class UserProfilePage(Page):
     heading = models.CharField(
         max_length=255,

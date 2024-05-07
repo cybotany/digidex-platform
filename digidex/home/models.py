@@ -1,6 +1,6 @@
-from django.db import models
+from django.db import models, transaction
 
-from wagtail.fields import StreamField
+from wagtail.fields import StreamField, RichTextField
 from wagtail.admin.panels import MultiFieldPanel, FieldPanel
 from wagtail.models import Page
 
@@ -48,6 +48,44 @@ class HomePage(Page):
         'accounts.UserProfileIndexPage'
     ]
 
+    def create_user_profile_index_page(self):
+        if not self.get_children().type(UserProfileIndexPage).exists():
+            with transaction.atomic():
+                user_profile_index_page = UserProfileIndexPage(
+                    title="Users",
+                    heading="Welcome to User Profiles",
+                    intro="This is a list of user profiles.",
+                    slug="u"
+                )
+                self.add_child(instance=user_profile_index_page)
+                return user_profile_index_page
+        else:
+            # Return the existing page
+            return self.get_children().type(UserProfileIndexPage).first()
+
     class Meta:
         verbose_name = "Home Page"
         verbose_name_plural = "Home Pages"
+
+
+class UserProfileIndexPage(Page):
+    heading = models.CharField(
+        max_length=255,
+        blank=True
+    )
+    intro = RichTextField(
+        blank=True
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel('heading'),
+        FieldPanel('intro'),
+    ]
+
+    parent_page_types = [
+        'home.HomePage'
+    ]
+
+    subpage_types = [
+        'accounts.UserProfilePage'
+    ]
