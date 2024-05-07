@@ -15,9 +15,9 @@ class User(AbstractUser):
 
     def build_root_user_collection(self):
         return Collection.objects.get_or_create(
-                name='Users',
-                defaults={'depth': 1}
-            )
+            name='Users',
+            defaults={'depth': 1}
+        )
 
     def build_user_collection_name(self):
         return f"{self.username}'s Collection"
@@ -27,10 +27,10 @@ class User(AbstractUser):
         Method to check if a user collection already exists for the associated user.
         """
         return Collection.objects.filter(
-                name=collection_name, 
-                depth=root_collection.depth + 1, 
-                path__startswith=root_collection.path
-            ).first()
+            name=collection_name,
+            depth=root_collection.depth + 1,
+            path__startswith=root_collection.path
+        ).first()
 
     def create_user_collection(self):
         """
@@ -67,4 +67,3 @@ class UserCollection(models.Model):
         on_delete=models.CASCADE,
         related_name='owner'
     )
-

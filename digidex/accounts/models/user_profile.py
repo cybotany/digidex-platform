@@ -16,10 +16,10 @@ class UserProfile(models.Model):
         related_name="profile"
     )
     avatar = models.ForeignKey(
-        'wagtailimages.Image', 
-        null=True, 
-        blank=True, 
-        on_delete=models.SET_NULL, 
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
         related_name='+'
     )
     bio = models.TextField(

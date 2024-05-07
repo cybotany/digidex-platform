@@ -1,36 +1,35 @@
 import pytest
 from wagtail.models import Collection
 
+
 @pytest.mark.django_db
 def test_create_user_collection(new_user):
-    # Precondition: Ensure there is no collection named "Users" initially
-    assert Collection.objects.filter(name='Users').count() == 0
+    user_collection_link = new_user.create_user_collection()
+    user_collection = user_collection_link.collection
 
-    # Call the method to test
-    user_collection = new_user.create_user_collection()
+    expected_name = f"{new_user.username}'s Collection"
+    users_root_collection = Collection.objects.get(name="Users")
 
-    # Check that the root collection 'Users' is created
-    users_root = Collection.objects.get(name='Users')
-    assert users_root is not None
-    assert users_root.depth == 1  # assuming 'Users' is at root depth
+    assert user_collection.name == expected_name
+    assert user_collection.depth == users_root_collection.depth + 1
+    assert user_collection.path.startswith(users_root_collection.path)
+    assert Collection.objects.filter(name=expected_name, path__startswith=users_root_collection.path).count() == 1
 
-    # Check that the user collection is created under 'Users'
-    assert user_collection.name == f"{new_user.username}'s Collection"
-    assert user_collection.get_parent() == users_root
-
-    # Check that the collection is indeed linked to the user somehow if applicable
-    # This is optional and depends on your application design
-    # For example, you might want to check if there's a foreign key from collection to user
 
 @pytest.mark.django_db
-def test_create_user_collection_idempotent(new_user):
-    # Call the create_user_collection method twice
-    collection1 = new_user.create_user_collection()
-    collection2 = new_user.create_user_collection()
+def test_prevent_multiple_user_collections(new_user):
+    new_user.create_user_collection()
+    new_user.create_user_collection()
 
-    # Check that calling it a second time does not create a new collection
-    assert collection1 == collection2
-    assert Collection.objects.filter(name=f"{new_user.username}'s Collection").count() == 1
+    expected_name = f"{new_user.username}'s Collection"
+    users_root_collection = Collection.objects.get(name="Users")
+    assert Collection.objects.filter(name=expected_name, path__startswith=users_root_collection.path).count() == 1
 
-    # Optional: Check the total number of collections named "Users"
-    assert Collection.objects.filter(name='Users').count() == 1
+
+@pytest.mark.django_db
+def test_user_collection_link(new_user):
+    user_collection_link = new_user.create_user_collection()
+
+    assert user_collection_link.user == new_user
+    collection_name = f"{new_user.username}'s Collection"
+    assert user_collection_link.collection.name == collection_name
