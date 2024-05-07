@@ -125,8 +125,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Internationalization
 LANGUAGE_CODE = "en-us"
+
 TIME_ZONE = "UTC"
+
 USE_I18N = True
+
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
@@ -168,32 +171,23 @@ SIMPLE_JWT = {
     'TOKEN_TYPE_CLAIM': 'token_type',
 }
 
-# Wagtail settings
-WAGTAIL_SITE_NAME = "https://digidex.app"
-WAGTAILADMIN_BASE_URL = os.getenv("WAGTAILADMIN_BASE_URL")
-WAGTAILIMAGES_EXTENSIONS = ['gif', 'jpg', 'jpeg', 'png', 'webp', 'svg']
-WAGTAILSEARCH_BACKENDS = {
-    "default": {
-        "BACKEND": "wagtail.search.backends.database",
-    }
-}
-
 # ALLAUTH settings
 AUTH_USER_MODEL = 'accounts.User'
+
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
 SIGNUP_URL = 'account_signup'
-LOGIN_URL = 'account_login'
-LOGIN_REDIRECT_URL = 'wagtailadmin_home'
 
-WAGTAIL_FRONTEND_LOGIN_URL = LOGIN_URL
+LOGIN_URL = 'account_login'
+
+LOGIN_REDIRECT_URL = 'wagtailadmin_home'
 
 ACCOUNT_ADAPTER = 'accounts.adapters.CustomAccountAdapter'
 
 ACCOUNT_PRESERVE_USERNAME_CASING = False
 
 ACCOUNT_USERNAME_MIN_LENGTH = 3
-# ACCOUNT_USERNAME_VALIDATORS = 'some.module.validators.custom_username_validators'
+
 ACCOUNT_USERNAME_BLACKLIST = [
     'admin', 'administrator', 'root', 'sysadmin', 'webmaster', 'django-admin',
     'support', 'helpdesk', 'moderator', 'superuser', 'guest',
@@ -219,10 +213,25 @@ ACCOUNT_USERNAME_BLACKLIST = [
 ]
 
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
+
 ACCOUNT_EMAIL_NOTIFICATIONS = True
+
 ACCOUNT_EMAIL_REQUIRED = True
+
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
+# Wagtail settings
+WAGTAIL_SITE_NAME = "digidex"
+
+WAGTAILIMAGES_EXTENSIONS = ['gif', 'jpg', 'jpeg', 'png', 'webp', 'svg']
+
+WAGTAIL_FRONTEND_LOGIN_URL = LOGIN_URL
+
+WAGTAILSEARCH_BACKENDS = {
+    "default": {
+        "BACKEND": "wagtail.search.backends.database",
+    }
+}
 
 LOG_DIR = os.path.join(BASE_DIR, 'logs')
 if not os.path.exists(LOG_DIR):

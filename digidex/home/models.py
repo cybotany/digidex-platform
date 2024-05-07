@@ -60,7 +60,6 @@ class HomePage(Page):
                 self.add_child(instance=user_profile_index_page)
                 return user_profile_index_page
         else:
-            # Return the existing page
             return self.get_children().type(UserProfileIndexPage).first()
 
     class Meta:
