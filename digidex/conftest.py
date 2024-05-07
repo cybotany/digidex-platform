@@ -1,9 +1,10 @@
 import pytest
 from django.test import Client
+from wagtail.tests.utils import WagtailPageTests
+from wagtail.models import Site, Page
 
+from home.models import HomePage, UserProfileIndexPage
 from accounts.models import User
-from nfc.models import NearFieldCommunicationTag
-from digitization.models import DigitizedObject
 
 
 @pytest.fixture
@@ -17,39 +18,16 @@ def new_user(db):
 
 
 @pytest.fixture
-def digitized_object(db):
-    return DigitizedObject.objects.create(
-        name="Kira",
-        description="Cream Shiba Inu with a curly tail."
-    )
-
-
-@pytest.fixture
-def ntag(db):
-    test_digitized_object = DigitizedObject.objects.create(
-        name="Kira",
-        description="Cream Shiba Inu with a curly tail."
-    )
-    return NearFieldCommunicationTag.objects.create(
-        serial_number='01:23:45:67:89:AB:CD',
-        digitized_object=test_digitized_object,
-        active=True
-    )
-
+def home_page():
+    root_page = Page.objects.get(id=1)
+    home_page = HomePage(title="Home", slug="home")
+    root_page.add_child(instance=home_page)
+    return home_page
 
 @pytest.fixture
-def ntag_without_digitized_object(db):
-    return NearFieldCommunicationTag.objects.create(
-        serial_number='CD:AB:89:67:45:23:01',
-        active=True
-    )
-
-
-@pytest.fixture
-def active_nfc_tag(db):
-    return NearFieldCommunicationTag.objects.create(uuid='127611e2-1f20-4b01-b9eb-390360e04b6b', active=True)
-
-
-@pytest.fixture
-def inactive_nfc_tag(db):
-    return NearFieldCommunicationTag.objects.create(uuid='127611e2-1f20-4b01-b9eb-390360e04b6b', active=False)
+def user_profile_index_page():
+    home_page = HomePage.objects.get(slug="home")
+    user_profile_index_page = UserProfileIndexPage(
+        title="Users", heading="Welcome", intro="Profiles Intro", slug="u")
+    home_page.add_child(instance=user_profile_index_page)
+    return user_profile_index_page
