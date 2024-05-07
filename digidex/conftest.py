@@ -11,7 +11,7 @@ def client():
 
 @pytest.fixture
 def new_user(db):
-    return User.objects.create(username='test_pet_owner', password='testpass123')
+    return User.objects.create_user(username='testuser', password='testpass123')
 
 @pytest.fixture
 def digitized_object(db):

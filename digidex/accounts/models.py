@@ -1,9 +1,9 @@
 import uuid
 from django.db import models, transaction
 from django.conf import settings
-from django.contrib.auth.models import AbstractUser, Group, Permission
+from django.contrib.auth.models import AbstractUser
 from django.utils.text import slugify
-from wagtail.models import Page, Collection, GroupCollectionPermission
+from wagtail.models import Page, Collection
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 from wagtail.search import index
@@ -20,28 +20,6 @@ class User(AbstractUser):
         verbose_name="User UUID"
     )
 
-    def create_user_group(self):
-        user_group, created = Group.objects.get_or_create(name=f"user_{self.username}_group")
-        if created:
-            self.groups.add(user_group)
-            self.save()
-        return created
-
-    def set_collection_permissions(self, collection):
-        """
-        Method to set permissions for the user collection.
-        """
-        user_group, _ = self.create_user_group()
-        permissions = ['add', 'change', 'delete', 'view']
-        for permission in permissions:
-            permission_codename = f'{permission}_{collection._meta.model_name}'
-            perm, created = Permission.objects.get_or_create(codename=permission_codename)
-            GroupCollectionPermission.objects.get_or_create(
-                group=user_group,
-                collection=collection,
-                permission=perm
-            )
-
     def create_user_collection(self):
         """
         Method to create a user collection for the associated user.
@@ -52,10 +30,25 @@ class User(AbstractUser):
                 defaults={'depth': 1}
             )
             user_collection_name = f"{self.username}'s Collection"
-            collection = users_root_collection.add_child(
+            collection, created = users_root_collection.add_child(
                 name=user_collection_name
             )
-            self.set_collection_permissions(collection)
+            if created:
+                UserCollection.objects.create(user=self, collection=collection)
+        return collection
+
+
+class UserCollection(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name='user_collection'
+    )
+    collection = models.OneToOneField(
+        Collection,
+        on_delete=models.CASCADE,
+        related_name='owner'
+    )
 
 
 class UserProfile(models.Model):
