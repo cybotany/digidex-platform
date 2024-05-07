@@ -1,7 +1,6 @@
 import pytest
 from django.test import Client
-from wagtail.tests.utils import WagtailPageTests
-from wagtail.models import Site, Page
+from wagtail.models import Page
 
 from home.models import HomePage, UserProfileIndexPage
 from accounts.models import User

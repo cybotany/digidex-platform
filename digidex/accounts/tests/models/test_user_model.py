@@ -35,7 +35,7 @@ def test_transaction_atomicity(new_user, monkeypatch):
     with pytest.raises(Exception):
         new_user.create_user_collection()
     # Check that no collections have been added
-    assert Collection.objects.count() == 1, "No new collections should be created on error."
+    assert Collection.objects.count() == 0, "No new collections should be created on error."
 
 
 @pytest.mark.django_db
