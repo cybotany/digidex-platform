@@ -25,6 +25,19 @@ def test_check_for_existing_collection(new_user):
     assert result == new_user_collection, "Should find the existing collection correctly."
 
 
+@pytest.mark.django_db(transaction=True)
+def test_transaction_atomicity(new_user, monkeypatch):
+    # Simulate an error during collection creation
+    def mock_add_child(self, **kwargs):
+        raise Exception("Simulated error")
+
+    monkeypatch.setattr(Collection, 'add_child', mock_add_child)
+    with pytest.raises(Exception):
+        new_user.create_user_collection()
+    # Check that no collections have been added
+    assert Collection.objects.count() == 1, "No new collections should be created on error."
+
+
 @pytest.mark.django_db
 def test_create_user_collection(new_user):
     # Create user collection and assert it exists as expected

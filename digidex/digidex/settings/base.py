@@ -17,7 +17,6 @@ INSTALLED_APPS = [
     "accounts",
     "api",
     "base",
-    "blog",
     "digitization",
     "home",
     "inventory",
