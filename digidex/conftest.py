@@ -24,8 +24,6 @@ def digitized_object(db):
     )
 
 
-
-
 @pytest.fixture
 def ntag(db):
     test_digitized_object = DigitizedObject.objects.create(

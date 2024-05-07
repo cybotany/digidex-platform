@@ -194,7 +194,7 @@ ACCOUNT_ADAPTER = 'accounts.adapters.CustomAccountAdapter'
 ACCOUNT_PRESERVE_USERNAME_CASING = False
 
 ACCOUNT_USERNAME_MIN_LENGTH = 3
-#ACCOUNT_USERNAME_VALIDATORS = 'some.module.validators.custom_username_validators'
+# ACCOUNT_USERNAME_VALIDATORS = 'some.module.validators.custom_username_validators'
 ACCOUNT_USERNAME_BLACKLIST = [
     'admin', 'administrator', 'root', 'sysadmin', 'webmaster', 'django-admin',
     'support', 'helpdesk', 'moderator', 'superuser', 'guest',

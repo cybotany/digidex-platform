@@ -44,17 +44,17 @@ class UserDigitizedObject(models.Model):
 
     def create_digit_page(self):
         inventory_page = UserDigitizedObjectInventoryPage.objects.filter(owner=self.user).first()
-        
+
         if not inventory_page:
             return None
-        
+
         user_digit_page = UserDigitizedObjectPage(
             title=f"Digitized Object: {self.get_digit_name()}",
             owner=self.user,
             slug=slugify(self.digit.name),
             user_digit=self
         )
-        inventory_page.add_child(instance=user_digit_page)  
+        inventory_page.add_child(instance=user_digit_page)
         user_digit_page.save_revision().publish()
 
 

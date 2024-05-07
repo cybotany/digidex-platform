@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 
 from nfc.models import NearFieldCommunicationTag
 
+
 def route_ntag_url(request, _uuid):
     ntag = get_object_or_404(NearFieldCommunicationTag, uuid=_uuid)
     try:

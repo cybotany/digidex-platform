@@ -7,15 +7,16 @@ from modelcluster.fields import ParentalKey
 
 from home.blocks import HomeStreamBlock
 
+
 class LottieFeature(Orderable):
     page = ParentalKey(
-        'HomePage', 
+        'HomePage',
         on_delete=models.CASCADE,
         related_name='lottie_feature'
     )
     icon = models.ForeignKey(
-        'wagtailimages.Image', 
-        on_delete=models.SET_NULL, 
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
         null=True,
         blank=True,
         related_name='+'

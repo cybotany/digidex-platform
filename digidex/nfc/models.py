@@ -28,8 +28,8 @@ class NearFieldCommunicationTag(models.Model):
     )
 
     uuid = models.UUIDField(
-        default=uuid.uuid4, 
-        editable=False, 
+        default=uuid.uuid4,
+        editable=False,
         unique=True
     )
     serial_number = models.CharField(
