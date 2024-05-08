@@ -1,10 +1,12 @@
 from django.db import models
 from django.conf import settings
+from django.urls import reverse
 from wagtail.models import Page
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 from wagtail.search import index
 
+from profiles.forms import UserProfileForm
 from inventory.models import UserDigitizedObjectInventoryPage
 
 
@@ -62,10 +64,21 @@ class UserProfile(models.Model):
         verbose_name="User Slug"
     )
 
-    def create_profile_page(self):
+    def get_profile_page(self):
+        """
+        Retrieves the associated UserProfilePage. Raises a specific exception if not found.
+        """
         try:
-            profile_page = UserProfilePage.objects.get(profile=self)
-            return profile_page
+            return UserProfilePage.objects.get(profile=self)
+        except UserProfilePage.DoesNotExist:
+            raise UserProfilePage.DoesNotExist("Profile page for user does not exist.")
+
+    def create_profile_page(self):
+        """
+        Creates a new UserProfilePage for the user if it does not already exist.
+        """
+        try:
+            return self.get_profile_page()
         except UserProfilePage.DoesNotExist:
             profile_page = UserProfilePage(
                 title=f"{self.user.username}'s Profile",
@@ -79,7 +92,7 @@ class UserProfile(models.Model):
             try:
                 profile_index_page = UserProfileIndexPage.objects.get(slug='u')
             except UserProfileIndexPage.DoesNotExist:
-                raise Exception("Profile index page does not exist.")
+                raise UserProfileIndexPage.DoesNotExist("Default User Profile Index Page does not exist.")
 
             profile_index_page.add_child(instance=profile_page)
             profile_page.save_revision().publish()
@@ -182,6 +195,21 @@ class UserProfilePage(Page):
             return inventory_page.specific
         else:
             self.create_inventory_page()
+
+    def get_profile_form(self):
+        """
+        Retrieve an instance of the profile form filled with the UserProfile data.
+        """
+        if self.profile:
+            return UserProfileForm(instance=self.profile)
+        return UserProfileForm()
+
+    def get_profile_form_url(self):
+        """
+        Retrieve the URL for the profile form view.
+        Assumes a named URL pattern 'profile_form' that handles the form.
+        """
+        return reverse('profile_form', kwargs={'user_slug': self.slug})
 
     class Meta:
         verbose_name = "User Profile Page"
