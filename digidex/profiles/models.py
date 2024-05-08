@@ -153,17 +153,20 @@ class UserProfilePage(Page):
         """
         Method to create a UserDigitizedObjectInventoryPage associated with this profile page.
         """
-        if self.profile:
-            owner = self.get_user()
-            username = self.get_username()
+        existing_inventory_page = self.get_inventory_page()
+        if existing_inventory_page:
+            return existing_inventory_page
+
+        owner = self.get_user()
+        username = self.get_username()
 
         inventory_page = UserDigitizedObjectInventoryPage(
             title=f"{username}'s Inventory",
             owner=owner,
             slug='inventory',
-            heading=f"{username}'s Inventory",
+            heading="Inventory",
             intro=f"Welcome to {username}'s inventory page.",
-            
+
         )
         self.add_child(instance=inventory_page)
         inventory_page.save_revision().publish()
