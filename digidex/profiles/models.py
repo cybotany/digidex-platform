@@ -63,24 +63,27 @@ class UserProfile(models.Model):
     )
 
     def create_profile_page(self):
-        profile_page, created = UserProfilePage.objects.get_or_create(
-            profile=self,
-            defaults={
-                'title': f"{self.user.username}'s Profile",
-                'owner': self.user,
-                'slug': self.slug
-            }
-        )
+        try:
+            profile_page = UserProfilePage.objects.get(profile=self)
+            return profile_page
+        except UserProfilePage.DoesNotExist:
+            profile_page = UserProfilePage(
+                title=f"{self.user.username}'s Profile",
+                owner=self.user,
+                slug=self.slug,
+                heading=f"{self.user.username}",
+                intro=f"Welcome to {self.user.username}'s profile page.",
+                profile=self
+            )
 
-        if created:
             try:
                 profile_index_page = UserProfileIndexPage.objects.get(slug='u')
             except UserProfileIndexPage.DoesNotExist:
                 raise Exception("Profile index page does not exist.")
+
             profile_index_page.add_child(instance=profile_page)
             profile_page.save_revision().publish()
-
-        return profile_page
+            return profile_page
 
     def __str__(self):
         return self.user.username
