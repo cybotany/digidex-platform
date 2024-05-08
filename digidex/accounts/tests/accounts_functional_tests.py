@@ -1,4 +1,6 @@
 import pytest
+from django.test import TestCase
+from wagtail.test.utils import WagtailPageTestCase
 
 
 @pytest.mark.usefixtures("browser")
@@ -15,3 +17,8 @@ class TestNewVisitor:
         pytest.fail("Finish the test!")
 
         # Satisfied, she goes back to sleep
+
+
+class SmokeTest(TestCase):
+    def test_bad_maths(self):
+        self.assertEqual(1 + 1, 3)
