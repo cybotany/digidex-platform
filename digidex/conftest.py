@@ -13,11 +13,6 @@ def client():
 
 
 @pytest.fixture
-def new_user(db):
-    return User.objects.create_user(username='testuser', password='testpass123')
-
-
-@pytest.fixture
 def home_page():
     root_page = Page.objects.get(id=1)
     home_page = HomePage(title="Home", slug="home")
@@ -32,3 +27,8 @@ def user_profile_index_page():
         title="Users", heading="Welcome", intro="Profiles Intro", slug="u")
     home_page.add_child(instance=user_profile_index_page)
     return user_profile_index_page
+
+
+@pytest.fixture
+def new_user(db):
+    return User.objects.create_user(username='testuser', password='testpass123')
