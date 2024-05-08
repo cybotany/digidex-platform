@@ -1,6 +1,5 @@
 from django.db import models
 from django.conf import settings
-from django.utils.text import slugify
 from wagtail.models import Page
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
@@ -63,28 +62,17 @@ class UserProfile(models.Model):
         verbose_name="User Slug"
     )
 
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            base_slug = slugify(self.user.username)
-            unique_slug = base_slug
-            num = 1
-            while UserProfile.objects.filter(slug=unique_slug).exists():
-                unique_slug = f'{base_slug}-{num}'
-                num += 1
-            self.slug = unique_slug
-        super(UserProfile, self).save(*args, **kwargs)
-
     def create_profile_page(self):
         profile_page, created = UserProfilePage.objects.get_or_create(
             profile=self,
             defaults={
                 'title': f"{self.user.username}'s Profile",
                 'owner': self.user,
-                'slug': slugify(self.user.username)
+                'slug': self.slug
             }
         )
         if created:
-            profile_index_page = UserProfileIndexPage.objects.get(title="User Profiles")
+            profile_index_page = UserProfileIndexPage.objects.get(title="Users")
             profile_index_page.add_child(instance=profile_page)
             profile_page.save_revision().publish()
 
