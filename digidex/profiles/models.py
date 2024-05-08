@@ -165,11 +165,5 @@ class UserProfilePage(Page):
         else:
             self.create_inventory_page()
 
-    def get_child_page(self):
-        """
-        Method to return the UserDigitizedObjectInventoryPage associated with this profile page.
-        """
-        self.get_inventory_page()
-
     class Meta:
         verbose_name = "User Profile Page"
