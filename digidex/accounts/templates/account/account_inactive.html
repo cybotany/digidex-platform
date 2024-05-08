@@ -1,9 +1,10 @@
 {% extends "allauth/layouts/entrance.html" %}
-{% load i18n %}
-{% load allauth %}
-{% block head_title %}
+{% load i18n allauth %}
+
+{% block title %}
     {% trans "Account Inactive" %}
-{% endblock head_title %}
+{% endblock title %}
+
 {% block content %}
     {% element h1 %}
         {% trans "Account Inactive" %}

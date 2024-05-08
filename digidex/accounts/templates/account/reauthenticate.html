@@ -1,6 +1,6 @@
 {% extends "account/base_reauthenticate.html" %}
-{% load allauth %}
-{% load i18n %}
+{% load allauth i18n %}
+
 {% block reauthenticate_content %}
     <p class="paragraph-account">{% blocktranslate %}Enter your password:{% endblocktranslate %}</p>
     {% url 'account_reauthenticate' as action_url %}

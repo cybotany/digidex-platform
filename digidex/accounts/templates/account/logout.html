@@ -1,9 +1,9 @@
 {% extends "account/base_manage.html" %}
 {% load allauth i18n %}
 
-{% block head_title %}
-  {% trans "Signin" %}
-{% endblock head_title %}
+{% block title %}
+  {% trans "Logout" %}
+{% endblock title %}
 
 {% block content %}
   {% url 'account_logout' as action_url %}

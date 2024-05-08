@@ -1,9 +1,9 @@
 {% extends "account/base_entrance.html" %}
 {% load allauth i18n %}
 
-{% block head_title %}
+{% block title %}
   {% trans "Signup" %}
-{% endblock head_title %}
+{% endblock title %}
 
 {% block content %}
   {% url 'account_signup' as action_url %}
