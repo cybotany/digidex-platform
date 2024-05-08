@@ -16,7 +16,7 @@ class UserDigitizedObjectInventoryPage(Page):
     ]
 
     parent_page_types = [
-        'accounts.UserProfilePage'
+        'profiles.UserProfilePage'
     ]
 
     subpage_types = [
