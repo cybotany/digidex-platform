@@ -11,5 +11,6 @@ def user_profile_signal(sender, instance, created, **kwargs):
     """
     Signal to create a user profile immediately a new user instance is created.
     """
-    if created:
-        create_user_profile(instance)
+    pass
+    #if created:
+    #    create_user_profile(instance)
