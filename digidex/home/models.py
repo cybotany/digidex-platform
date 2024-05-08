@@ -1,10 +1,11 @@
 from django.db import models, transaction
 
-from wagtail.fields import StreamField, RichTextField
+from wagtail.fields import StreamField
 from wagtail.admin.panels import MultiFieldPanel, FieldPanel
 from wagtail.models import Page
 
 from home.blocks import HomeStreamBlock
+from accounts.models import UserProfileIndexPage
 
 
 class HomePage(Page):
@@ -45,7 +46,7 @@ class HomePage(Page):
     ]
 
     subpage_types = [
-        'home.UserProfileIndexPage'
+        'accounts.UserProfileIndexPage'
     ]
 
     def create_user_profile_index_page(self):
@@ -65,26 +66,3 @@ class HomePage(Page):
     class Meta:
         verbose_name = "Home Page"
         verbose_name_plural = "Home Pages"
-
-
-class UserProfileIndexPage(Page):
-    heading = models.CharField(
-        max_length=255,
-        blank=True
-    )
-    intro = RichTextField(
-        blank=True
-    )
-
-    content_panels = Page.content_panels + [
-        FieldPanel('heading'),
-        FieldPanel('intro'),
-    ]
-
-    parent_page_types = [
-        'home.HomePage'
-    ]
-
-    subpage_types = [
-        'accounts.UserProfilePage'
-    ]

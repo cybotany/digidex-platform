@@ -12,8 +12,8 @@ class UserProfileForm(forms.ModelForm):
         }),
         required=False
     )
-    body = forms.CharField(
-        widget=RichTextAreaWidget(attrs={
+    bio = forms.CharField(
+        widget=forms.Textarea(attrs={
             'class': 'text-field base-input',
             'placeholder': 'Short biography'
         }),
@@ -22,4 +22,4 @@ class UserProfileForm(forms.ModelForm):
 
     class Meta:
         model = UserProfile
-        fields = ['avatar', 'description']
+        fields = ['avatar', 'bio']

@@ -7,7 +7,4 @@ class CustomAccountAdapter(DefaultAccountAdapter):
         """
         Returns the URL to redirect to after a successful email confirmation.
         """
-        if hasattr(request.user, 'profile'):
-            return reverse('profile_update')
-        else:
-            return reverse('profile_create')
+        return reverse('accounts:update_profile')

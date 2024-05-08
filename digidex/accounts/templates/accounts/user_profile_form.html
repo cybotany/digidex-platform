@@ -1,0 +1,33 @@
+{% extends "accounts/base.html" %}
+
+{% block content %}
+  <section class="section-full">
+    <div class="content">
+      <div class="account-form">
+        <h2 class="account-heading">Update your profile</h2>
+        <div class="form-block base-form">
+          <!-- Render Form -->
+          <form method="post" class="form">
+            {% csrf_token %}
+            <!-- Render Avatar Field -->
+            {{ form.avatar }}
+              {% if form.image.errors %}
+              <div class="error-message">
+                <div class="text-error">{{ form.image.errors|striptags }}</div>
+              </div>
+              {% endif %}
+            <!-- Render Bio Field -->
+            {{ form.bio }}
+            {% if form.caption.errors %}
+              <div class="error-message">
+                <div class="text-error">{{ form.caption.errors|striptags }}</div>
+              </div>
+            {% endif %}
+            <!-- Render Submit Button -->
+            <input type="submit" value="Create" class="submit-button base-button"> 
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

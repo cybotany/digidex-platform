@@ -1,13 +1,107 @@
-from django.db import models
+import uuid
+from django.db import models, transaction
+from django.contrib.auth.models import AbstractUser
 from django.conf import settings
 from django.utils.text import slugify
-from wagtail.models import Page
+from wagtail.models import Page, Collection
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 from wagtail.search import index
 
 from home.models import UserProfileIndexPage
 from inventory.models import UserDigitizedObjectInventoryPage
+
+
+class User(AbstractUser):
+    uuid = models.UUIDField(
+        default=uuid.uuid4,
+        unique=True,
+        editable=False,
+        db_index=True,
+        verbose_name="User UUID"
+    )
+
+    def build_root_user_collection(self):
+        return Collection.objects.get_or_create(
+            name='Users',
+            defaults={'depth': 1}
+        )
+
+    def build_user_collection_name(self):
+        return f"{self.username}'s Collection"
+
+    def check_for_existing_collection(self, collection_name, root_collection):
+        """
+        Method to check if a user collection already exists for the associated user.
+        """
+        return Collection.objects.filter(
+            name=collection_name,
+            depth=root_collection.depth + 1,
+            path__startswith=root_collection.path
+        ).first()
+
+    def create_user_collection(self):
+        """
+        Method to create or retrieve a user collection for the associated user.
+        """
+        with transaction.atomic():
+            users_root_collection, _ = self.build_root_user_collection()
+            user_collection_name = self.build_user_collection_name()
+            user_collection = self.check_for_existing_collection(user_collection_name, users_root_collection)
+            if not user_collection:
+                user_collection = users_root_collection.add_child(
+                    name=user_collection_name
+                )
+            user_collection_link, created = UserCollection.objects.get_or_create(
+                user=self,
+                collection=user_collection
+            )
+            return user_collection_link
+
+    def get_profile(self):
+        """
+        Method to create or retrieve and update a user profile for this user.
+        """
+        profile, created = UserProfile.objects.get_or_create(user=self)
+        if created:
+            profile.save()
+        return profile
+
+
+class UserCollection(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name='user_collection'
+    )
+    collection = models.OneToOneField(
+        Collection,
+        on_delete=models.CASCADE,
+        related_name='owner'
+    )
+
+
+class UserProfileIndexPage(Page):
+    heading = models.CharField(
+        max_length=255,
+        blank=True
+    )
+    intro = RichTextField(
+        blank=True
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel('heading'),
+        FieldPanel('intro'),
+    ]
+
+    parent_page_types = [
+        'home.HomePage'
+    ]
+
+    subpage_types = [
+        'accounts.UserProfilePage'
+    ]
 
 
 class UserProfile(models.Model):
@@ -36,7 +130,7 @@ class UserProfile(models.Model):
         verbose_name="Last Modified"
     )
 
-    def create_user_profile_page(self):
+    def get_page(self):
         profile_page, created = UserProfilePage.objects.get_or_create(
             profile=self,
             defaults={
@@ -85,7 +179,7 @@ class UserProfilePage(Page):
     ]
 
     parent_page_types = [
-        'home.UserProfileIndexPage'
+        'accounts.UserProfileIndexPage'
     ]
 
     subpage_types = [
