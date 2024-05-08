@@ -222,7 +222,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
 # Wagtail settings
-WAGTAIL_SITE_NAME = "digidex"
+WAGTAIL_SITE_NAME = "DigiDex"
 
 WAGTAILIMAGES_EXTENSIONS = ['gif', 'jpg', 'jpeg', 'png', 'webp', 'svg']
 

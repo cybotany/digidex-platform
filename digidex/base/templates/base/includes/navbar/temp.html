@@ -1,0 +1,9 @@
+{% load wagtailcore_tags%}
+
+{% if user.is_authenticated %}
+    <a href="#" class="navbar__button--outline base-button">Profile</a>
+    <a href="{% url 'account_logout' %}" class="navbar__button base-button">Logout</a>
+{% else %}
+  <a href="{% url 'account_login' %}" class="navbar__button base-button">Login</a>
+  <a href="{% url 'account_signup' %}" class="navbar__button--outline base-button">Sign Up</a>
+{% endif %}
