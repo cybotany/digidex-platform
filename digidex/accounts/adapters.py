@@ -7,4 +7,5 @@ class DigidexAccountAdapter(DefaultAccountAdapter):
         """
         Returns the URL to redirect to after a successful email confirmation.
         """
-        return reverse('profiles:update_user_profile')
+        user_slug = request.user.slug
+        return reverse('profiles:update_user_profile', kwargs={'user_slug': user_slug})

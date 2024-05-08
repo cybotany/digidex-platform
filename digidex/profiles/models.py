@@ -1,7 +1,7 @@
-from django.db import models, transaction
+from django.db import models
 from django.conf import settings
 from django.utils.text import slugify
-from wagtail.models import Page, Collection
+from wagtail.models import Page
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 from wagtail.search import index
@@ -30,12 +30,6 @@ class UserProfileIndexPage(Page):
     subpage_types = [
         'accounts.UserProfilePage'
     ]
-
-    def build_root_user_collection(self):
-        return Collection.objects.get_or_create(
-            name='Users',
-            defaults={'depth': 1}
-        )
 
 
 class UserProfile(models.Model):
@@ -120,37 +114,6 @@ class UserProfilePage(Page):
         'inventory.UserDigitizedObjectInventoryPage'
     ]
 
-    def build_user_collection_name(self):
-        return f"{self.username}'s Collection"
-
-    def check_for_existing_collection(self, collection_name, root_collection):
-        """
-        Method to check if a user collection already exists for the associated user.
-        """
-        return Collection.objects.filter(
-            name=collection_name,
-            depth=root_collection.depth + 1,
-            path__startswith=root_collection.path
-        ).first()
-
-    def create_user_collection(self):
-        """
-        Method to create or retrieve a user collection for the associated user.
-        """
-        with transaction.atomic():
-            users_root_collection, _ = self.build_root_user_collection()
-            user_collection_name = self.build_user_collection_name()
-            user_collection = self.check_for_existing_collection(user_collection_name, users_root_collection)
-            if not user_collection:
-                user_collection = users_root_collection.add_child(
-                    name=user_collection_name
-                )
-            user_collection_link, created = UserProfilePageCollection.objects.get_or_create(
-                user=self,
-                collection=user_collection
-            )
-            return user_collection_link
-
     def get_profile(self):
         """
         Method to return the content (User Profile) being managed in this page.
@@ -199,17 +162,3 @@ class UserProfilePage(Page):
 
     class Meta:
         verbose_name = "User Profile Page"
-
-
-
-class UserProfilePageCollection(models.Model):
-    user = models.OneToOneField(
-        User,
-        on_delete=models.CASCADE,
-        related_name='user_collection'
-    )
-    collection = models.OneToOneField(
-        Collection,
-        on_delete=models.CASCADE,
-        related_name='owner'
-    )

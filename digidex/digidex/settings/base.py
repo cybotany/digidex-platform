@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     "home",
     "inventory",
     "nfc",
+    "profiles",
     "search",
 
     "wagtail.contrib.settings",
