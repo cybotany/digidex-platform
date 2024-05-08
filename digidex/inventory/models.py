@@ -6,12 +6,17 @@ from wagtail.search import index
 
 
 class UserDigitizedObjectInventoryPage(Page):
+    heading = models.CharField(
+        max_length=255,
+        blank=True
+    )
     intro = models.TextField(
         blank=True,
         help_text="Introduction text to display at the top of the index page."
     )
 
     content_panels = Page.content_panels + [
+        FieldPanel('heading'),
         FieldPanel('intro'),
     ]
 

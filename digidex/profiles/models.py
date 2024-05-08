@@ -131,24 +131,39 @@ class UserProfilePage(Page):
         """
         if self.profile:
             return self.profile
-        return "No User Profile Found."
+        return None
+
+    def get_user(self):
+        """
+        Method to return the content (User Profile) being managed in this page.
+        """
+        if self.profile:
+            return self.profile.user
+        return None
 
     def get_username(self):
         """
         Method to return the username of the associated owner.
         """
-        _profile = self.get_profile()
-        return _profile.user.username
+        if self.profile:
+            return self.profile.user.username
+        return None
 
     def create_inventory_page(self):
         """
         Method to create a UserDigitizedObjectInventoryPage associated with this profile page.
         """
-        _username = self.get_username()
+        if self.profile:
+            owner = self.get_user()
+            username = self.get_username()
+
         inventory_page = UserDigitizedObjectInventoryPage(
-            title=f"{_username}'s Inventory",
-            owner=self.profile.user,
-            slug='inventory'
+            title=f"{username}'s Inventory",
+            owner=owner,
+            slug='inventory',
+            heading=f"{username}'s Inventory",
+            intro=f"Welcome to {username}'s inventory page.",
+            
         )
         self.add_child(instance=inventory_page)
         inventory_page.save_revision().publish()
