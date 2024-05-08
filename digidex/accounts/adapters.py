@@ -1,5 +1,7 @@
 from allauth.account.adapter import DefaultAccountAdapter
-from django.urls import reverse
+
+from profiles.utils import create_user_profile
+
 
 class DigidexAccountAdapter(DefaultAccountAdapter):
 
@@ -7,5 +9,6 @@ class DigidexAccountAdapter(DefaultAccountAdapter):
         """
         Returns the URL to redirect to after a successful email confirmation.
         """
-        user_slug = request.user.username  # Ensure you are using the correct attribute for slug
-        return reverse('profiles:update_user_profile', kwargs={'user_slug': user_slug})
+        user_profile = create_user_profile(request.user)
+        user_profile_page = user_profile.create_profile_page()
+        return user_profile_page.get_url()
