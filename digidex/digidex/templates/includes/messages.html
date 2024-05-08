@@ -1,0 +1,10 @@
+{% load messages %}
+
+<!-- Display Django messages -->
+<div id="messages">
+  {% for message in messages %}
+    <div class="{% if message.tags %}{{ message.tags }}{% endif %} message">
+      {{ message }}
+    </div>
+  {% endfor %}
+</div>
