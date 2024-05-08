@@ -24,6 +24,7 @@ def home_page():
     root_page.add_child(instance=home_page)
     return home_page
 
+
 @pytest.fixture
 def user_profile_index_page():
     home_page = HomePage.objects.get(slug="home")

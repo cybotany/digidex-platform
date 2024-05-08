@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 
 from profiles.forms import UserProfileForm
 
+
 @login_required
 def update_user_profile_view(request, user_slug):
     user = request.user
@@ -15,7 +16,7 @@ def update_user_profile_view(request, user_slug):
             new_profile = form.save(commit=False)
             new_profile.user = user
             new_profile.save()
-            return redirect('page')
+            return redirect(page)
     else:
         form = UserProfileForm(instance=profile)
 
