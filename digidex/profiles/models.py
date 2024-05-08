@@ -71,8 +71,12 @@ class UserProfile(models.Model):
                 'slug': self.slug
             }
         )
+
         if created:
-            profile_index_page = UserProfileIndexPage.objects.get(title="Users")
+            try:
+                profile_index_page = UserProfileIndexPage.objects.get(slug='u')
+            except UserProfileIndexPage.DoesNotExist:
+                raise Exception("Profile index page does not exist.")
             profile_index_page.add_child(instance=profile_page)
             profile_page.save_revision().publish()
 
