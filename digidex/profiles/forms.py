@@ -1,7 +1,6 @@
 from django import forms
-from wagtail.admin.widgets import RichTextAreaWidget
 
-from accounts.models import UserProfile
+from profiles.models import UserProfile
 
 
 class UserProfileForm(forms.ModelForm):

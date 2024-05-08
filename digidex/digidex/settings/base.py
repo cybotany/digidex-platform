@@ -182,7 +182,7 @@ LOGIN_URL = 'account_login'
 
 LOGIN_REDIRECT_URL = 'wagtailadmin_home'
 
-ACCOUNT_ADAPTER = 'accounts.adapters.CustomAccountAdapter'
+ACCOUNT_ADAPTER = 'accounts.adapters.DigidexAccountAdapter'
 
 ACCOUNT_PRESERVE_USERNAME_CASING = False
 

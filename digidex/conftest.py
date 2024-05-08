@@ -2,8 +2,9 @@ import pytest
 from django.test import Client
 from wagtail.models import Page
 
-from home.models import HomePage, UserProfileIndexPage
+from home.models import HomePage
 from accounts.models import User
+from profiles.models import UserProfileIndexPage
 
 
 @pytest.fixture

@@ -1,8 +1,8 @@
 from django.urls import path
 
-from accounts import views
+from profiles import views
 
-app_name = 'accounts'
+app_name = 'profiles'
 urlpatterns = [
-    path('<uuid:ntag_uuid>/link/ntag/', views.update_user_profile_view, name='update_profile'),
+    path('<slug:user_slug>/update/', views.update_user_profile_view, name='update_user_profile'),
 ]

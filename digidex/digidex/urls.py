@@ -10,16 +10,18 @@ from search.views import search
 from nfc import urls as nfc_urls
 from digitization import urls as digitization_urls
 from api import urls as api_urls
+from profiles import urls as profile_urls
 
 urlpatterns = [
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
-    path('accounts/', include('allauth.urls')),
+    path('account/', include('allauth.urls')),
     path("search/", search, name="search"),
     path('nfc/', include(nfc_urls)),
     path('digitization/', include(digitization_urls)),
     path('api/', include(api_urls)),
+    path('u/', include(profile_urls)),
 ]
 
 if settings.DEBUG:
