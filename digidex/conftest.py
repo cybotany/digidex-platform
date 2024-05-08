@@ -1,15 +1,19 @@
 import pytest
-from django.test import Client
 from wagtail.models import Page
 
 from home.models import HomePage
 from accounts.models import User
 from profiles.models import UserProfileIndexPage
+from selenium import webdriver
 
 
-@pytest.fixture
-def client():
-    return Client()
+@pytest.fixture(scope="class")
+def browser():
+    # Set up the browser once for all tests in this class
+    driver = webdriver.Firefox()
+    yield driver
+    # Quit the browser after all tests have run
+    driver.quit()
 
 
 @pytest.fixture
