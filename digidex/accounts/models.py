@@ -8,7 +8,6 @@ from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 from wagtail.search import index
 
-from home.models import UserProfileIndexPage
 from inventory.models import UserDigitizedObjectInventoryPage
 
 

@@ -1,11 +1,10 @@
-from django.db import models, transaction
+from django.db import models
 
 from wagtail.fields import StreamField
 from wagtail.admin.panels import MultiFieldPanel, FieldPanel
 from wagtail.models import Page
 
 from home.blocks import HomeStreamBlock
-from accounts.models import UserProfileIndexPage
 
 
 class HomePage(Page):
@@ -48,20 +47,6 @@ class HomePage(Page):
     subpage_types = [
         'accounts.UserProfileIndexPage'
     ]
-
-    def create_user_profile_index_page(self):
-        if not self.get_children().type(UserProfileIndexPage).exists():
-            with transaction.atomic():
-                user_profile_index_page = UserProfileIndexPage(
-                    title="Users",
-                    heading="Welcome to User Profiles",
-                    intro="This is a list of user profiles.",
-                    slug="u"
-                )
-                self.add_child(instance=user_profile_index_page)
-                return user_profile_index_page
-        else:
-            return self.get_children().type(UserProfileIndexPage).first()
 
     class Meta:
         verbose_name = "Home Page"
