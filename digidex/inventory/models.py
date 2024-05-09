@@ -41,10 +41,12 @@ class UserDigitizedObject(models.Model):
         related_name='user_association'
     )
 
-    def get_digit_name(self):
+    @property
+    def digit_name(self):
         return self.digit.name
 
-    def get_digit_description(self):
+    @property
+    def digit_description(self):
         return self.digit.description
 
     def create_digit_page(self):
@@ -54,9 +56,9 @@ class UserDigitizedObject(models.Model):
             return None
 
         user_digit_page = UserDigitizedObjectPage(
-            title=f"Digitized Object: {self.get_digit_name()}",
+            title=f"Digitized Object: {self.digit_name}",
             owner=self.user,
-            slug=slugify(self.digit.name),
+            slug=slugify(self.digit_name),
             user_digit=self
         )
         inventory_page.add_child(instance=user_digit_page)
@@ -80,8 +82,8 @@ class UserDigitizedObjectPage(Page):
     )
 
     search_fields = Page.search_fields + [
-        index.SearchField('get_digit_name', partial_match=True, boost=2),
-        index.SearchField('get_digit_description', partial_match=True, boost=1),
+        index.SearchField('digit_name', partial_match=True, boost=2),
+        index.SearchField('digit_description', partial_match=True, boost=1),
     ]
 
     parent_page_types = [
@@ -92,10 +94,12 @@ class UserDigitizedObjectPage(Page):
         FieldPanel('user_digit')
     ]
 
-    def get_digit_name(self):
+    @property
+    def digit_name(self):
         """Method to return the name of the digitized object."""
-        return self.user_digit.get_digit_name()
+        return self.user_digit.digit_name
 
-    def get_digit_description(self):
+    @property
+    def digit_description(self):
         """Method to return the description of the digitized object."""
-        return self.user_digit.get_digit_description()
+        return self.user_digit.digit_description

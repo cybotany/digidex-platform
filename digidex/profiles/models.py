@@ -174,10 +174,10 @@ class UserProfilePage(Page):
         Method to create a UserDigitizedObjectInventoryPage associated with this profile page.
         """
         try:
-            return self.get_inventory_page()
+            return self.inventory_page()
         except UserDigitizedObjectInventoryPage.DoesNotExist:
-            owner = self.get_user()
-            username = self.get_username().title()
+            owner = self.user
+            username = self.username.title()
 
             inventory_page = UserDigitizedObjectInventoryPage(
                 title=f"{username}'s Inventory",
