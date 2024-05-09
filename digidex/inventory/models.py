@@ -1,9 +1,12 @@
 from django.apps import apps
 from django.db import models
 from django.utils.text import slugify
-from wagtail.models import Page
-from wagtail.admin.panels import FieldPanel
+from modelcluster.fields import ParentalKey
+from wagtail.models import Page, Orderable
+from wagtail.admin.panels import FieldPanel, InlinePanel
 from wagtail.search import index
+
+from digitization.models import DigitizedObject, DigitizedObjectImage
 
 
 class UserDigitizedObjectInventoryPage(Page):
@@ -31,6 +34,7 @@ class UserDigitizedObjectInventoryPage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('heading'),
         FieldPanel('intro'),
+        InlinePanel('user_digitized_objects', label="Digitized Objects"),
     ]
 
     parent_page_types = [
@@ -42,16 +46,16 @@ class UserDigitizedObjectInventoryPage(Page):
     ]
 
 
-class UserDigitizedObject(models.Model):
+class UserDigitizedObject(Orderable, DigitizedObject):
+    page = ParentalKey(
+        UserDigitizedObjectInventoryPage,
+        on_delete=models.CASCADE,
+        related_name='user_digitized_objects'
+    )
     user_profile = models.ForeignKey(
         'profiles.UserProfile',
         on_delete=models.CASCADE,
         related_name='user_digits'
-    )
-    digit = models.OneToOneField(
-        'digitization.DigitizedObject',
-        on_delete=models.CASCADE,
-        related_name='user_association'
     )
 
     @property
@@ -89,6 +93,38 @@ class UserDigitizedObject(models.Model):
         inventory_page.add_child(instance=user_digit_page)
         user_digit_page.save_revision().publish()
         return user_digit_page
+
+    def __str__(self):
+        return f"{self.name}"
+
+    def get_associated_page_url(self):
+        try:
+            user_digit_page = self.detail_page
+            return user_digit_page.url if user_digit_page else None
+        except UserDigitizedObject.DoesNotExist:
+            return None
+        except UserDigitizedObjectPage.DoesNotExist:
+            return None
+
+
+class UserDigitizedObjectImage(Orderable, DigitizedObjectImage):
+    digit = ParentalKey(
+        UserDigitizedObject,
+        on_delete=models.CASCADE,
+        related_name='images'
+    )
+    
+    @property
+    def digit_name(self):
+        return self.digit.name
+    
+    @property
+    def digit_description(self):
+        return self.digit.description
+    
+    @property
+    def image_caption(self):
+        return self.caption
 
 
 class UserDigitizedObjectPage(Page):
