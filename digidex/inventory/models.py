@@ -1,3 +1,4 @@
+from django.apps import apps
 from django.db import models
 from django.utils.text import slugify
 from wagtail.models import Page
@@ -15,6 +16,18 @@ class UserDigitizedObjectInventoryPage(Page):
         help_text="Introduction text to display at the top of the index page."
     )
 
+    @property
+    def profile_page(self):
+        UserProfilePage = apps.get_model('profiles', 'UserProfilePage')
+        parent = self.get_parent()
+        if isinstance(parent.specific, UserProfilePage):
+            return parent.specific
+        return None 
+
+    @property
+    def profile(self):
+        return self.profile_page.profile
+
     content_panels = Page.content_panels + [
         FieldPanel('heading'),
         FieldPanel('intro'),
@@ -30,8 +43,8 @@ class UserDigitizedObjectInventoryPage(Page):
 
 
 class UserDigitizedObject(models.Model):
-    user = models.ForeignKey(
-        'accounts.User',
+    user_profile = models.ForeignKey(
+        'profiles.UserProfile',
         on_delete=models.CASCADE,
         related_name='user_digits'
     )
@@ -40,6 +53,18 @@ class UserDigitizedObject(models.Model):
         on_delete=models.CASCADE,
         related_name='user_association'
     )
+
+    @property
+    def user(self):
+        return self.user_profile.user
+
+    @property
+    def username(self):
+        return self.user.username
+
+    @property
+    def digit_description(self):
+        return self.digit.description
 
     @property
     def digit_name(self):
