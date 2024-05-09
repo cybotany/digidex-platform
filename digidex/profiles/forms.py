@@ -1,7 +1,7 @@
 from django import forms
 
 
-class UserProfileForm(forms.ModelForm):
+class UserProfileForm(forms.Form):
     avatar = forms.ImageField(
         label='Upload Avatar',
         widget=forms.FileInput(attrs={

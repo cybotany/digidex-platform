@@ -211,7 +211,8 @@ class UserProfilePage(Page):
         Retrieve the URL for the profile form view.
         Assumes a named URL pattern 'profile_form' that handles the form.
         """
-        return reverse('profiles:profile_form', kwargs={'user_slug': self.slug})
+        profile = self.get_profile()
+        return reverse('profiles:profile_form', kwargs={'profile_slug': profile.slug})
 
     class Meta:
         verbose_name = "User Profile Page"
