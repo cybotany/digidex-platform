@@ -1,7 +1,5 @@
 from django import forms
 
-from profiles.models import UserProfile
-
 
 class UserProfileForm(forms.ModelForm):
     avatar = forms.ImageField(
@@ -18,7 +16,3 @@ class UserProfileForm(forms.ModelForm):
         }),
         required=False
     )
-
-    class Meta:
-        model = UserProfile
-        fields = ['avatar', 'bio']

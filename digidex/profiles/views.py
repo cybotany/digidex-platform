@@ -18,13 +18,14 @@ def profile_form_view(request, user_slug):
     user_profile_page = user_profile.get_profile_page()
 
     if request.method == 'POST':
-        form = user_profile_page.get_profile_form(data=request.POST, files=request.FILES, instance=user_profile)
+        form = user_profile_page.get_profile_form(data=request.POST, files=request.FILES)
         if form.is_valid():
-            new_profile = form.save(commit=False)
-            new_profile.user = requesting_user
-            new_profile.save()
-            return redirect(user_profile_page)
+            user_profile.bio = form.cleaned_data['bio']
+            if 'avatar' in request.FILES:
+                user_profile.avatar = form.cleaned_data['avatar']
+            user_profile.save()
+            return redirect(user_profile_page.url)
     else:
-        form = user_profile_page.get_profile_form(instance=user_profile)
+        form = user_profile_page.get_profile_form()
 
     return render(request, 'profiles/user_profile_form.html', {'form': form})

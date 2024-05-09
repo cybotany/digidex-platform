@@ -5,10 +5,8 @@ from profiles.models import UserProfileIndexPage, UserProfile
 
 
 def create_user_profile_index_page():
-    # Get the root page where 'HomePage' is a direct child of the root
     root_page = Page.objects.get(url_path='/home/')
 
-    # Check if the 'Users' page already exists to avoid duplicates
     if not UserProfileIndexPage.objects.filter(slug='u').exists():
         user_profile_index_page = UserProfileIndexPage(
             title='Users',

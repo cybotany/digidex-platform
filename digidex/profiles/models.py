@@ -200,16 +200,18 @@ class UserProfilePage(Page):
         """
         Retrieve an instance of the profile form filled with the UserProfile data.
         """
-        if self.profile:
-            return UserProfileForm(instance=self.profile)
-        return UserProfileForm()
+        profile_data = {
+            'bio': self.profile.bio,
+            'avatar': self.profile.avatar if self.profile.avatar else None
+        }
+        return UserProfileForm(initial=profile_data)
 
     def get_profile_form_url(self):
         """
         Retrieve the URL for the profile form view.
         Assumes a named URL pattern 'profile_form' that handles the form.
         """
-        return reverse('profile_form', kwargs={'user_slug': self.slug})
+        return reverse('profiles:profile_form', kwargs={'user_slug': self.slug})
 
     class Meta:
         verbose_name = "User Profile Page"
