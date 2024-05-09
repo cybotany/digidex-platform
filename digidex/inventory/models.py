@@ -61,6 +61,7 @@ class UserDigitizedObject(models.Model):
         )
         inventory_page.add_child(instance=user_digit_page)
         user_digit_page.save_revision().publish()
+        return user_digit_page
 
 
 class UserDigitizedObjectPage(Page):
