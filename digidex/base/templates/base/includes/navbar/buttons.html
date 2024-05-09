@@ -1,10 +1,17 @@
 {% load wagtailcore_tags%}
 
 {% if user.is_authenticated %}
-  {% with user.profile.profile_page as user_profile_page %}
-    <a href="{% pageurl user_profile_page %}" id="navbar_profile_button" class="navbar__button--outline base-button">Profile</a>
-    <a href="{% url 'account_logout' %}" id="navbar_logout_button" class="navbar__button base-button">Logout</a>
-  {% endwith %}
+  {% if user.profile.profile_page %}
+    {% with user_profile_page=user.profile.profile_page %}
+      <a href="{% pageurl user_profile_page %}" id="navbar_profile_button" class="navbar__button--outline base-button">Profile</a>
+    {% endwith %}
+  {% endif %} 
+  {% if user.profile.profile_page.inventory_page %}
+    {% with user_inventory_page=user.profile.profile_page.inventory_page %}
+      <a href="{% pageurl user_inventory_page %}" id="navbar_profile_button" class="navbar__button--outline base-button">Inventory</a>
+    {% endwith %}
+  {% endif %}
+  <a href="{% url 'account_logout' %}" id="navbar_logout_button" class="navbar__button base-button">Logout</a>
 {% else %}
   <a href="{% url 'account_login' %}" id="navbar_login_button" class="navbar__button base-button">Login</a>
   <a href="{% url 'account_signup' %}" id="navbar_signup_button" class="navbar__button--outline base-button">Sign Up</a>

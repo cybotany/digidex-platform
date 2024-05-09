@@ -122,7 +122,7 @@ class UserProfilePage(Page):
     )
 
     search_fields = Page.search_fields + [
-        index.SearchField('get_username', partial_match=True, boost=2),
+        index.SearchField('username', partial_match=True, boost=2),
     ]
 
     content_panels = Page.content_panels + [
@@ -139,15 +139,8 @@ class UserProfilePage(Page):
         'inventory.UserDigitizedObjectInventoryPage'
     ]
 
-    def get_profile(self):
-        """
-        Method to return the content (User Profile) being managed in this page.
-        """
-        if self.profile:
-            return self.profile
-        return None
-
-    def get_user(self):
+    @property
+    def user(self):
         """
         Method to return the content (User Profile) being managed in this page.
         """
@@ -155,7 +148,8 @@ class UserProfilePage(Page):
             return self.profile.user
         return None
 
-    def get_username(self):
+    @property
+    def username(self):
         """
         Method to return the username of the associated owner.
         """
@@ -163,39 +157,38 @@ class UserProfilePage(Page):
             return self.profile.user.username
         return None
 
-    def create_inventory_page(self):
+    @property
+    def inventory_page(self):
         """
-        Method to create a UserDigitizedObjectInventoryPage associated with this profile page.
-        """
-        existing_inventory_page = self.get_inventory_page()
-        if existing_inventory_page:
-            return existing_inventory_page
-
-        owner = self.get_user()
-        username = self.get_username().title()
-
-        inventory_page = UserDigitizedObjectInventoryPage(
-            title=f"{username}'s Inventory",
-            owner=owner,
-            slug='inventory',
-            heading="Inventory",
-            intro=f"Welcome to {username}'s Inventory Page.",
-
-        )
-        self.add_child(instance=inventory_page)
-        inventory_page.save_revision().publish()
-        return inventory_page
-
-    def get_inventory_page(self):
-        """
-        Fetch the UserDigitizedObjectInventoryPage associated with this profile page.
+        Property to fetch the UserDigitizedObjectInventoryPage associated with this profile page.
         Assumes there is at most one such page per UserProfilePage.
         """
         inventory_page = self.get_children().type(UserDigitizedObjectInventoryPage).first()
         if inventory_page:
             return inventory_page.specific
         else:
-            self.create_inventory_page()
+            raise UserDigitizedObjectInventoryPage.DoesNotExist("Inventory page for user does not exist.")
+
+    def create_inventory_page(self):
+        """
+        Method to create a UserDigitizedObjectInventoryPage associated with this profile page.
+        """
+        try:
+            return self.get_inventory_page()
+        except UserDigitizedObjectInventoryPage.DoesNotExist:
+            owner = self.get_user()
+            username = self.get_username().title()
+
+            inventory_page = UserDigitizedObjectInventoryPage(
+                title=f"{username}'s Inventory",
+                owner=owner,
+                slug='inventory',
+                heading="Inventory",
+                intro=f"Welcome to {username}'s Inventory Page.",
+            )
+            self.add_child(instance=inventory_page)
+            inventory_page.save_revision().publish()
+            return inventory_page
 
     def get_profile_form(self, data=None, files=None):
         """
@@ -215,8 +208,7 @@ class UserProfilePage(Page):
         Retrieve the URL for the profile form view.
         Assumes a named URL pattern 'profile_form' that handles the form.
         """
-        profile = self.get_profile()
-        return reverse('profiles:profile_form', kwargs={'profile_slug': profile.slug})
+        return reverse('profiles:profile_form', kwargs={'profile_slug': self.profile.slug})
 
     class Meta:
         verbose_name = "User Profile Page"
