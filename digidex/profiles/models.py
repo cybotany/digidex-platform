@@ -197,14 +197,17 @@ class UserProfilePage(Page):
         else:
             self.create_inventory_page()
 
-    def get_profile_form(self):
+    def get_profile_form(self, data=None, files=None):
         """
-        Retrieve an instance of the profile form filled with the UserProfile data.
+        Retrieve an instance of the profile form.
+        Can be initialized with data and files for form submissions.
         """
         profile_data = {
             'bio': self.profile.bio,
             'avatar': self.profile.avatar if self.profile.avatar else None
         }
+        if data or files:
+            return UserProfileForm(data=data, files=files, initial=profile_data)
         return UserProfileForm(initial=profile_data)
 
     def get_profile_form_url(self):
