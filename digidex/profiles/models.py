@@ -80,12 +80,13 @@ class UserProfile(models.Model):
         try:
             return self.get_profile_page()
         except UserProfilePage.DoesNotExist:
+            _username = self.user.username.title()
             profile_page = UserProfilePage(
-                title=f"{self.user.username}'s Profile",
+                title=f"{_username}'s Profile",
                 owner=self.user,
                 slug=self.slug,
-                heading=f"{self.user.username}",
-                intro=f"Welcome to {self.user.username}'s profile page.",
+                heading=f"{_username}",
+                intro=f"Welcome to {_username}'s Profile Page.",
                 profile=self
             )
 
@@ -171,14 +172,14 @@ class UserProfilePage(Page):
             return existing_inventory_page
 
         owner = self.get_user()
-        username = self.get_username()
+        username = self.get_username().title()
 
         inventory_page = UserDigitizedObjectInventoryPage(
             title=f"{username}'s Inventory",
             owner=owner,
             slug='inventory',
             heading="Inventory",
-            intro=f"Welcome to {username}'s inventory page.",
+            intro=f"Welcome to {username}'s Inventory Page.",
 
         )
         self.add_child(instance=inventory_page)
