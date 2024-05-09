@@ -11,11 +11,11 @@ def link_ntag_and_digit(request, ntag_uuid):
     if request.method == 'POST':
         form = DigitizedObjectForm(request.POST)
         if form.is_valid():
-            _digitized_object = form.save()
+            digitized_object = form.save()
             ntag = get_object_or_404(NearFieldCommunicationTag, uuid=ntag_uuid)
-            ntag.digitized_object = _digitized_object
+            ntag.digitized_object = digitized_object
             ntag.save()
-            return redirect('digitization:link_user', digit_uuid=_digitized_object.uuid)
+            return redirect('digitization:link_user', digit_uuid=digitized_object.uuid)
     else:
         form = DigitizedObjectForm()
 
@@ -24,28 +24,28 @@ def link_ntag_and_digit(request, ntag_uuid):
 
 @login_required
 def link_digit_and_user(request, digit_uuid):
-    _digitized_object = get_object_or_404(DigitizedObject, uuid=digit_uuid)
-    _user_digit = _digitized_object.set_user_association(request.user)
-    _user_digit.save()
-    _user_digit_page = _user_digit.create_digit_page()
+    digitized_object = get_object_or_404(DigitizedObject, uuid=digit_uuid)
+    user_digit = digitized_object.set_user_association(request.user)
+    user_digit.save()
+    user_digit_page = user_digit.create_digit_page()
 
-    if not _user_digit_page:
+    if not user_digit_page:
         raise Http404("User Digitized Object Page could not be created.")
-    redirect(_user_digit_page.url)
+    redirect(user_digit_page.url)
 
 
 @login_required
 def link_digit_and_image(request, digit_uuid):
-    _digitized_object = get_object_or_404(DigitizedObject, uuid=digit_uuid)
+    digitized_object = get_object_or_404(DigitizedObject, uuid=digit_uuid)
 
     if request.method == 'POST':
         form = DigitizedObjectImageForm(request.POST, request.FILES)
         if form.is_valid():
             image_obj = form.save(commit=False)
-            image_obj.digit = _digitized_object
+            image_obj.digit = digitized_object
             image_obj.save()
-            _user_digit_page_url = _digitized_object.get_associated_page_url()
-            return redirect(_user_digit_page_url)
+            user_digit_page_url = digitized_object.get_associated_page_url()
+            return redirect(user_digit_page_url)
     else:
         form = DigitizedObjectImageForm()
 

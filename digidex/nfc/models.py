@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
-from .validators import validate_ntag_serial
+from nfc.validators import validate_ntag_serial
 
 
 class NearFieldCommunicationTag(models.Model):
@@ -115,10 +115,10 @@ class NearFieldCommunicationTag(models.Model):
         Returns:
             A URL path as a string.
         """
-        _mapped_digitized_object = self.get_digitized_object()
+        mapped_digitized_object = self.get_digitized_object()
 
         try:
-            return _mapped_digitized_object.get_associated_page_url()
+            return mapped_digitized_object.get_associated_page_url()
         except AttributeError:
             raise ValidationError(_("The digitized object is not correctly configured to find its page."))
 
