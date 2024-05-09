@@ -44,7 +44,7 @@ class DigitizedObject(models.Model):
         return f"{self.name}"
 
     def set_user_association(self, user):
-        return UserDigitizedObject.objects.create(user=user, digit=self)
+        return UserDigitizedObject.objects.create(user_profile=user, digit=self)
 
     def get_user_association(self):
         return UserDigitizedObject.objects.get(digit=self)

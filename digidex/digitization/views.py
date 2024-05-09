@@ -25,7 +25,7 @@ def link_ntag_and_digit(request, ntag_uuid):
 @login_required
 def link_digit_and_user(request, digit_uuid):
     digitized_object = get_object_or_404(DigitizedObject, uuid=digit_uuid)
-    user_digit = digitized_object.set_user_association(request.user)
+    user_digit = digitized_object.set_user_association(request.user.profile)
     user_digit.save()
     user_digit_page = user_digit.create_digit_page()
 
