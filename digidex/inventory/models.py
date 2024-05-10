@@ -5,8 +5,9 @@ from modelcluster.fields import ParentalKey
 from wagtail.models import Page, Orderable
 from wagtail.admin.panels import FieldPanel, InlinePanel
 from wagtail.search import index
+from wagtail.fields import RichTextField
 
-from digitization.models import DigitizedObject, DigitizedObjectImage
+from digitization.models import DigitizedObject, DigitizedObjectJournal
 
 
 class UserDigitizedObjectInventoryPage(Page):
@@ -45,7 +46,6 @@ class UserDigitizedObjectInventoryPage(Page):
         'inventory.UserDigitizedObjectPage'
     ]
 
-
 class UserDigitizedObject(Orderable, DigitizedObject):
     page = ParentalKey(
         UserDigitizedObjectInventoryPage,
@@ -56,6 +56,11 @@ class UserDigitizedObject(Orderable, DigitizedObject):
         'profiles.UserProfile',
         on_delete=models.CASCADE,
         related_name='user_digits'
+    )
+    detail_page = models.OneToOneField(
+        'inventory.UserDigitizedObjectPage',
+        on_delete=models.PROTECT,
+        related_name='user_digit'
     )
 
     @property
@@ -107,11 +112,51 @@ class UserDigitizedObject(Orderable, DigitizedObject):
             return None
 
 
-class UserDigitizedObjectImage(Orderable, DigitizedObjectImage):
-    digit = ParentalKey(
+class UserDigitizedObjectPage(Page):
+    heading = models.CharField(
+        max_length=255,
+        blank=True
+    )
+    intro = RichTextField(
+        blank=True
+    )
+
+    search_fields = Page.search_fields + [
+        index.SearchField('digit_name', partial_match=True, boost=2),
+        index.SearchField('digit_description', partial_match=True, boost=1),
+    ]
+
+    parent_page_types = [
+        'inventory.UserDigitizedObjectInventoryPage'
+    ]
+
+    content_panels = Page.content_panels + [
+        FieldPanel('heading'),
+        FieldPanel('intro'),
+        FieldPanel('user_digit')
+    ]
+
+    @property
+    def digit_name(self):
+        """Method to return the name of the digitized object."""
+        return self.user_digit.digit_name
+
+    @property
+    def digit_description(self):
+        """Method to return the description of the digitized object."""
+        return self.user_digit.digit_description
+
+
+class UserDigitizedObjectJournal(Orderable, DigitizedObjectJournal):
+    digit = models.OneToOneField(
         UserDigitizedObject,
         on_delete=models.CASCADE,
-        related_name='images'
+        related_name='journal'
+    )
+    page = ParentalKey(
+        UserDigitizedObjectPage,
+        on_delete=models.CASCADE,
+        related_name='journal_entries'
     )
     
     @property
@@ -125,42 +170,3 @@ class UserDigitizedObjectImage(Orderable, DigitizedObjectImage):
     @property
     def image_caption(self):
         return self.caption
-
-
-class UserDigitizedObjectPage(Page):
-    user_digit = models.OneToOneField(
-        'inventory.UserDigitizedObject',
-        on_delete=models.PROTECT,
-        related_name='detail_page'
-    )
-    created_at = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name="Created At"
-    )
-    last_modified = models.DateTimeField(
-        auto_now=True,
-        verbose_name="Last Modified"
-    )
-
-    search_fields = Page.search_fields + [
-        index.SearchField('digit_name', partial_match=True, boost=2),
-        index.SearchField('digit_description', partial_match=True, boost=1),
-    ]
-
-    parent_page_types = [
-        'inventory.UserDigitizedObjectInventoryPage'
-    ]
-
-    content_panels = Page.content_panels + [
-        FieldPanel('user_digit')
-    ]
-
-    @property
-    def digit_name(self):
-        """Method to return the name of the digitized object."""
-        return self.user_digit.digit_name
-
-    @property
-    def digit_description(self):
-        """Method to return the description of the digitized object."""
-        return self.user_digit.digit_description

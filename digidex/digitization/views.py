@@ -1,52 +1,37 @@
-from django.shortcuts import redirect, render, get_object_or_404, Http404
+from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
 from nfc.models import NearFieldCommunicationTag
-from digitization.forms import DigitizedObjectForm, DigitizedObjectImageForm
-from digitization.models import DigitizedObject
+from inventory.forms import UserDigitizedObjectForm, UserDigitizedObjectJournalForm
+from inventory.models import UserDigitizedObject
 
 
 @login_required
 def link_ntag_and_digit(request, ntag_uuid):
+    user_profile = request.user.profile
     if request.method == 'POST':
-        form = DigitizedObjectForm(request.POST)
+        form = UserDigitizedObjectForm(request.POST)
         if form.is_valid():
-            digitized_object = form.save()
+            digitized_object = form.save(user_profile, commit=True)
             ntag = get_object_or_404(NearFieldCommunicationTag, uuid=ntag_uuid)
             ntag.digitized_object = digitized_object
             ntag.save()
-            return redirect('digitization:link_user', digit_uuid=digitized_object.uuid)
+            return redirect(digitized_object.get_associated_page_url())
     else:
-        form = DigitizedObjectForm()
+        form = UserDigitizedObjectForm()
 
     return render(request, "digitization/link_ntag_and_digit.html", {'form': form})
 
-
 @login_required
-def link_digit_and_user(request, digit_uuid):
-    digitized_object = get_object_or_404(DigitizedObject, uuid=digit_uuid)
-    user_digit = digitized_object.set_user_association(request.user.profile)
-    user_digit.save()
-    user_digit_page = user_digit.create_digit_page()
-
-    if not user_digit_page:
-        raise Http404("User Digitized Object Page could not be created.")
-    redirect(user_digit_page.url)
-
-
-@login_required
-def link_digit_and_image(request, digit_uuid):
-    digitized_object = get_object_or_404(DigitizedObject, uuid=digit_uuid)
+def link_digit_and_journal(request, digit_uuid):
+    digitized_object = get_object_or_404(UserDigitizedObject, uuid=digit_uuid)
 
     if request.method == 'POST':
-        form = DigitizedObjectImageForm(request.POST, request.FILES)
+        form = UserDigitizedObjectJournalForm(request.POST, request.FILES)
         if form.is_valid():
-            image_obj = form.save(commit=False)
-            image_obj.digit = digitized_object
-            image_obj.save()
-            user_digit_page_url = digitized_object.get_associated_page_url()
-            return redirect(user_digit_page_url)
+            journal_entry = form.save(digitized_object, commit=True)
+            return redirect(journal_entry.get_associated_page_url())
     else:
-        form = DigitizedObjectImageForm()
+        form = UserDigitizedObjectJournalForm()
 
-    return render(request, "digitization/link_digit_and_image.html", {'form': form})
+    return render(request, "digitization/link_digit_and_journal.html", {'form': form})

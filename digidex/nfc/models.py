@@ -44,7 +44,7 @@ class NearFieldCommunicationTag(models.Model):
         default='NTAG 213'
     )
     digitized_object = models.OneToOneField(
-        'digitization.DigitizedObject',
+        'inventory.UserDigitizedObject',
         on_delete=models.CASCADE,
         blank=True,
         null=True,
