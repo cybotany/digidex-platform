@@ -74,11 +74,11 @@ class UserDigitizedObject(Orderable, DigitizedObject):
 
     @property
     def digit_description(self):
-        return self.digit.description
+        return self.description
 
     @property
     def digit_name(self):
-        return self.digit.name
+        return self.name
 
     def create_digit_page(self):
         inventory_page = UserDigitizedObjectInventoryPage.objects.filter(owner=self.user).first()

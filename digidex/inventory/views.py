@@ -14,20 +14,28 @@ def link_ntag_and_digit(request, profile_slug, ntag_uuid):
     user_profile = get_object_or_404(UserProfile, slug=profile_slug)
 
     requesting_user = request.user
-
     if requesting_user != user_profile.user:
-        requesting_user_page = requesting_user.profile.get_profile_page() 
-        redirect(requesting_user_page.url)
-    
+        requesting_user_page = requesting_user.profile.get_profile_page()
+        return redirect(requesting_user_page.url)
+
     if request.method == 'POST':
         form = UserDigitizedObjectForm(request.POST)
         if form.is_valid():
-            digitized_object = form.save(user_profile, commit=True)
-            ntag = get_object_or_404(NearFieldCommunicationTag, uuid=ntag_uuid)
-            ntag.digitized_object = digitized_object
-            ntag.save()
-            digitized_object_page = digitized_object.detail_page
-            return redirect(digitized_object_page.url)
+            digitized_object = form.save(commit=False)
+            digitized_object.user_profile = user_profile
+
+            digitized_object_page = digitized_object.create_digit_page()
+            if digitized_object_page:
+                digitized_object.detail_page = digitized_object_page
+                digitized_object.save()
+
+                ntag = get_object_or_404(NearFieldCommunicationTag, uuid=ntag_uuid)
+                ntag.digitized_object = digitized_object
+                ntag.save()
+
+                return redirect(digitized_object_page.url)
+            else:
+                return HttpResponseForbidden("Failed to create a detail page for the digitized object.")
     else:
         form = UserDigitizedObjectForm()
 
