@@ -114,6 +114,7 @@ class UserDigitizedObject(Orderable, DigitizedObject):
             self.page = inventory_page
             self.detail_page = user_digit_page
             self.save() 
+        return self.detail_page
 
     def __str__(self):
         return f"{self.digit_name}"
