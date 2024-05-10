@@ -3,7 +3,7 @@
 <section class="section">
   <div class="content">
     <div class="collection-list-wrapper-digits base-dyn-list">
-      {% if page.user_digitized_objects %}
+      {% if page.user_digitized_objects.exists %}
         <div role="list" class="collection-list-digits base-dyn-items">
           {% for item in page.user_digitized_objects.all %}
             <div role="listitem" class="base-dyn-item">
