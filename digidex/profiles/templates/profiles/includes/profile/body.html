@@ -1,6 +1,5 @@
 {% load static wagtailcore_tags wagtailimages_tags %}
 
-{% with profile_form_url=page.get_profile_form_url %}
   <div class="post large">
     <div class="date">{{ page.profile.created_at|date:"F Y" }}</div>
     <a href="{{ inventory_page.url }}" class="link-heading-post large base-inline-block">
@@ -12,7 +11,7 @@
       <p class="paragraph-post large">No bio available.</p>
     {% endif %}
     {% if request.user == page.owner %}
-      <a href="{{ profile_form_url }}" class="link-block base-inline-block">
+      <a href="{{ page.form_url }}" class="link-block base-inline-block">
         <div class="text-link">Update Profile</div>
         <div class="block-icon-link">
           <img src="{% static 'images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
@@ -20,4 +19,3 @@
       </a>
     {% endif %}
   </div>
-{% endwith %}

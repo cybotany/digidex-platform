@@ -6,7 +6,6 @@ from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 from wagtail.search import index
 
-from profiles.forms import UserProfileForm
 from inventory.models import UserDigitizedObjectInventoryPage
 
 

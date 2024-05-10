@@ -29,4 +29,5 @@ def profile_form_view(request, profile_slug):
             return redirect(user_profile_page.url)
     else:
         form = UserProfileForm(initial={'bio': user_profile.bio, 'avatar': user_profile.avatar})
-        return render(request, 'profiles/user_profile_form.html', {'form': form})
+    
+    return render(request, 'profiles/user_profile_form.html', {'form': form})
