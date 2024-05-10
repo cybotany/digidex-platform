@@ -1,6 +1,7 @@
 from django.apps import apps
 from django.db import models
 from django.utils.text import slugify
+from django.core.exceptions import ObjectDoesNotExist
 from modelcluster.fields import ParentalKey
 from wagtail.models import Page, Orderable
 from wagtail.admin.panels import FieldPanel, InlinePanel
@@ -81,26 +82,24 @@ class UserDigitizedObject(Orderable, DigitizedObject):
         return self.name
 
     def create_digit_page(self):
-        if self.detail_page:
-            return self.detail_page
-        
         inventory_page = UserDigitizedObjectInventoryPage.objects.filter(owner=self.user).first()
         if not inventory_page:
-            return None
+            raise ObjectDoesNotExist("User has no inventory page.")
+        try:
+            if self.detail_page:
+                pass
+        except ObjectDoesNotExist:
+            user_digit_page = UserDigitizedObjectPage(
+                title=f"Digitized Object: {self.digit_name}",
+                owner=self.user,
+                slug=slugify(self.digit_name),
+                user_digit=self
+            )
+            inventory_page.add_child(instance=user_digit_page)
+            user_digit_page.save_revision().publish()
 
-        user_digit_page = UserDigitizedObjectPage(
-            title=f"Digitized Object: {self.digit_name}",
-            owner=self.user,
-            slug=slugify(self.digit_name),
-            user_digit=self
-        )
-        inventory_page.add_child(instance=user_digit_page)
-        user_digit_page.save_revision().publish()
-
-        self.detail_page = user_digit_page
-        self.save() 
-
-        return user_digit_page
+            self.detail_page = user_digit_page
+            self.save() 
 
     def __str__(self):
         return f"{self.name}"
