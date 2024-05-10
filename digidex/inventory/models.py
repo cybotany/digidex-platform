@@ -26,7 +26,7 @@ class UserDigitizedObjectInventoryPage(Page):
         parent = self.get_parent()
         if isinstance(parent.specific, UserProfilePage):
             return parent.specific
-        return None 
+        return None
 
     @property
     def profile(self):
@@ -45,6 +45,7 @@ class UserDigitizedObjectInventoryPage(Page):
     subpage_types = [
         'inventory.UserDigitizedObjectPage'
     ]
+
 
 class UserDigitizedObject(Orderable, DigitizedObject):
     page = ParentalKey(
@@ -78,10 +79,6 @@ class UserDigitizedObject(Orderable, DigitizedObject):
     @property
     def digit_name(self):
         return self.digit.name
-
-    @property
-    def digit_description(self):
-        return self.digit.description
 
     def create_digit_page(self):
         inventory_page = UserDigitizedObjectInventoryPage.objects.filter(owner=self.user).first()
@@ -148,15 +145,15 @@ class UserDigitizedObjectNote(Orderable, DigitizedObjectNote):
         on_delete=models.CASCADE,
         related_name='digit_notes'
     )
-    
+
     @property
     def digit_name(self):
         return self.digit.name
-    
+
     @property
     def digit_description(self):
         return self.digit.description
-    
+
     @property
     def image_caption(self):
         return self.caption

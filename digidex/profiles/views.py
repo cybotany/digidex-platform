@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 from django.contrib.auth import get_user_model
 
+from profiles.forms import UserProfileForm
+
 User = get_user_model()
 
 
@@ -18,14 +20,11 @@ def profile_form_view(request, profile_slug):
     user_profile_page = user_profile.get_profile_page()
 
     if request.method == 'POST':
-        form = user_profile_page.get_profile_form(data=request.POST, files=request.FILES)
+        form = UserProfileForm(data=request.POST, files=request.FILES, instance=user_profile)
         if form.is_valid():
-            user_profile.bio = form.cleaned_data['bio']
-            if 'avatar' in request.FILES:
-                user_profile.avatar = form.cleaned_data['avatar']
-            user_profile.save()
+            form.save()
             return redirect(user_profile_page.url)
     else:
-        form = user_profile_page.get_profile_form()
+        form = UserProfileForm(instance=user_profile)
 
     return render(request, 'profiles/user_profile_form.html', {'form': form})

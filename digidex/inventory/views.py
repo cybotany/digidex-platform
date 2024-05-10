@@ -22,6 +22,7 @@ def link_ntag_and_digit(request, ntag_uuid):
 
     return render(request, "inventory/link_ntag_and_digit.html", {'form': form})
 
+
 @login_required
 def add_digit_note(request, digit_uuid):
     digitized_object = get_object_or_404(UserDigitizedObject, uuid=digit_uuid)
