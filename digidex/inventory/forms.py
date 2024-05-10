@@ -1,6 +1,6 @@
 from django import forms
 
-from inventory.models import UserDigitizedObject, UserDigitizedObjectJournal
+from inventory.models import UserDigitizedObject, UserDigitizedObjectNote
 
 
 class UserDigitizedObjectForm(forms.Form):
@@ -50,11 +50,11 @@ class UserDigitizedObjectNoteForm(forms.Form):
     )
 
     def save(self, user_digitized_object, commit=True):
-        journal_entry = UserDigitizedObjectJournal(
+        digit_note = UserDigitizedObjectNote(
             digit=user_digitized_object,
             image=self.cleaned_data['image'],
             caption=self.cleaned_data['caption']
         )
         if commit:
-            journal_entry.save()
-        return journal_entry
+            digit_note.save()
+        return digit_note

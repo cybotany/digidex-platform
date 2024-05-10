@@ -60,7 +60,7 @@ class UserDigitizedObject(Orderable, DigitizedObject):
     detail_page = models.OneToOneField(
         'inventory.UserDigitizedObjectPage',
         on_delete=models.PROTECT,
-        related_name='user_digit'
+        related_name='detailed_digit'
     )
 
     @property
@@ -124,18 +124,17 @@ class UserDigitizedObjectPage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('heading'),
         FieldPanel('intro'),
-        FieldPanel('user_digit')
     ]
 
     @property
     def digit_name(self):
         """Method to return the name of the digitized object."""
-        return self.user_digit.digit_name
+        return self.detailed_digit.digit_name
 
     @property
     def digit_description(self):
         """Method to return the description of the digitized object."""
-        return self.user_digit.digit_description
+        return self.detailed_digit.digit_description
 
 
 class UserDigitizedObjectNote(Orderable, DigitizedObjectNote):
