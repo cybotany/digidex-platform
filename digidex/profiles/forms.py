@@ -1,7 +1,9 @@
 from django import forms
 
+from profiles.models import UserProfile
 
-class UserProfileForm(forms.Form):
+
+class UserProfileForm(forms.ModelForm):
     avatar = forms.ImageField(
         label='Upload Avatar',
         widget=forms.FileInput(attrs={
@@ -16,3 +18,7 @@ class UserProfileForm(forms.Form):
         }),
         required=False
     )
+
+    class Meta:
+        model = UserProfile
+        fields = ['bio', 'avatar']

@@ -169,6 +169,14 @@ class UserProfilePage(Page):
         else:
             raise UserDigitizedObjectInventoryPage.DoesNotExist("Inventory page for user does not exist.")
 
+    @property
+    def form_url(self):
+        """
+        Retrieve the URL for the profile form view.
+        Assumes a named URL pattern 'profile_form' that handles the form.
+        """
+        return reverse('profiles:profile_form', kwargs={'profile_slug': self.profile.slug})
+
     def create_inventory_page(self):
         """
         Method to create a UserDigitizedObjectInventoryPage associated with this profile page.
@@ -189,26 +197,6 @@ class UserProfilePage(Page):
             self.add_child(instance=inventory_page)
             inventory_page.save_revision().publish()
             return inventory_page
-
-    def get_profile_form(self, data=None, files=None):
-        """
-        Retrieve an instance of the profile form.
-        Can be initialized with data and files for form submissions.
-        """
-        profile_data = {
-            'bio': self.profile.bio,
-            'avatar': self.profile.avatar if self.profile.avatar else None
-        }
-        if data or files:
-            return UserProfileForm(data=data, files=files, initial=profile_data)
-        return UserProfileForm(initial=profile_data)
-
-    def get_profile_form_url(self):
-        """
-        Retrieve the URL for the profile form view.
-        Assumes a named URL pattern 'profile_form' that handles the form.
-        """
-        return reverse('profiles:profile_form', kwargs={'profile_slug': self.profile.slug})
 
     class Meta:
         verbose_name = "User Profile Page"
