@@ -93,10 +93,18 @@ class UserDigitizedObject(Orderable, DigitizedObject):
             if self.detail_page:
                 pass
         except ObjectDoesNotExist:
+            base_slug = slugify(self.digit_name)
+            unique_slug = base_slug
+            counter = 1
+           
+            while Page.objects.filter(slug=unique_slug, path__startswith=self.get_parent().path).exists():
+                unique_slug = f"{base_slug}-{counter}"
+                counter += 1
+
             user_digit_page = UserDigitizedObjectPage(
                 title=f"Digitized Object: {self.digit_name}",
                 owner=self.user,
-                slug=slugify(self.digit_name),
+                slug=unique_slug,
                 heading=self.digit_name,
                 intro=self.digit_description
             )
