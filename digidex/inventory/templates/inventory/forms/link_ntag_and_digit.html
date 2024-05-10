@@ -1,31 +1,31 @@
-{% extends "digitization/base.html" %}
+{% extends "inventory/base.html" %}
 {% load i18n %}
 
 {% block title %}
-  {% trans "Update Digit" %}
+  {% trans "Create Digit" %}
 {% endblock title %}
 
 {% block content %}
   <section class="section-full">
     <div class="content">
-      <div class="digitization-form">
-        <h2 class="digitization-heading">Link Image and Digit</h2>
+      <div class="inventory-form">
+        <h2 class="inventory-heading">Create Digit</h2>
         <div class="form-block base-form">
           <!-- Render Form -->
           <form method="post" class="form">
             {% csrf_token %}
-            <!-- Render Image Field -->
-            {{ form.image }}
-              {% if form.image.errors %}
+            <!-- Render Name Field -->
+            {{ form.name }}
+              {% if form.name.errors %}
               <div class="error-message">
-                <div class="text-error">{{ form.image.errors|striptags }}</div>
+                <div class="text-error">{{ form.name.errors|striptags }}</div>
               </div>
               {% endif %}
-            <!-- Render Caption Field -->
-            {{ form.caption }}
-            {% if form.caption.errors %}
+            <!-- Render Description Field -->
+            {{ form.description }}
+            {% if form.description.errors %}
               <div class="error-message">
-                <div class="text-error">{{ form.caption.errors|striptags }}</div>
+                <div class="text-error">{{ form.description.errors|striptags }}</div>
               </div>
             {% endif %}
             <!-- Render Submit Button -->
