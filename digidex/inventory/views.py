@@ -3,7 +3,6 @@ from django.http import HttpResponseForbidden
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
-from nfc.models import NearFieldCommunicationTag
 from inventory.forms import UserDigitizedObjectForm, UserDigitizedObjectNoteForm
 from inventory.models import UserDigitizedObject
 
@@ -26,13 +25,10 @@ def link_ntag_and_digit(request, profile_slug, ntag_uuid):
 
             digitized_object_page = digitized_object.create_digit_page()
             if digitized_object_page:
-                digitized_object.detail_page = digitized_object_page
-                digitized_object.save()
-
+                NearFieldCommunicationTag = apps.get_model('nfc', 'NearFieldCommunicationTag')
                 ntag = get_object_or_404(NearFieldCommunicationTag, uuid=ntag_uuid)
                 ntag.digitized_object = digitized_object
                 ntag.save()
-
                 return redirect(digitized_object_page.url)
             else:
                 return HttpResponseForbidden("Failed to create a detail page for the digitized object.")
@@ -49,14 +45,13 @@ def add_digit_note(request, profile_slug, digit_uuid):
 
     requesting_user = request.user
     if requesting_user != user_profile.user:
-        requesting_user_page = requesting_user.profile.get_profile_page() 
-        redirect(requesting_user_page.url)
-
-    digitized_object = get_object_or_404(UserDigitizedObject, uuid=digit_uuid)
+        requesting_user_profile_page = requesting_user.profile.get_profile_page() 
+        redirect(requesting_user_profile_page.url)
 
     if request.method == 'POST':
         form = UserDigitizedObjectNoteForm(request.POST, request.FILES)
         if form.is_valid():
+            digitized_object = get_object_or_404(UserDigitizedObject, uuid=digit_uuid)
             digitized_object_note = form.save(digitized_object, commit=True)
             return redirect(digitized_object_note.digit_detail_page_url)
     else:

@@ -81,8 +81,10 @@ class UserDigitizedObject(Orderable, DigitizedObject):
         return self.name
 
     def create_digit_page(self):
+        if self.detail_page:
+            return self.detail_page
+        
         inventory_page = UserDigitizedObjectInventoryPage.objects.filter(owner=self.user).first()
-
         if not inventory_page:
             return None
 
@@ -94,6 +96,10 @@ class UserDigitizedObject(Orderable, DigitizedObject):
         )
         inventory_page.add_child(instance=user_digit_page)
         user_digit_page.save_revision().publish()
+
+        self.detail_page = user_digit_page
+        self.save() 
+
         return user_digit_page
 
     def __str__(self):

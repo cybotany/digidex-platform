@@ -21,9 +21,8 @@ class UserDigitizedObjectForm(forms.Form):
         )
     )
 
-    def save(self, user_profile, commit=True):
+    def save(self, commit=False):
         digitized_object = UserDigitizedObject(
-            user_profile=user_profile,
             name=self.cleaned_data['name'],
             description=self.cleaned_data['description']
         )
