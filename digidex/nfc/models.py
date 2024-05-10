@@ -1,6 +1,5 @@
 import uuid
-from django.db import models, transaction
-from django.apps import apps
+from django.db import models
 from django.urls import reverse
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
@@ -65,6 +64,16 @@ class NearFieldCommunicationTag(models.Model):
         """Return the serial number as the string representation of the NFC tag."""
         return self.serial_number
 
+    @property
+    def user_profile(self):
+        if self.digitized_object:
+            return self.digitized_object.user_profile
+        return None
+
+    @property
+    def username(self):
+        return self.user.username
+
     def activate_link(self):
         """
         Activates the NFC tag, indicating it is in use and linked to an object.
@@ -83,30 +92,20 @@ class NearFieldCommunicationTag(models.Model):
         self.active = False
         self.save()
 
-    def get_absolute_url(self):
+    @property
+    def url(self):
         """
         Constructs the absolute URL to view this specific NFC tag.
 
         Returns:
             A URL path as a string.
         """
+        if not self.active:
+            return None
         return reverse('nfc:route_ntag', kwargs={'_uuid': self.uuid})
 
-    def get_digitized_object(self):
-        """
-        Retrieves the digitized object associated with this NFC tag.
-
-        Raises:
-            ValidationError: If no digitized object is associated with this tag.
-
-        Returns:
-            The associated DigitizedObject instance.
-        """
-        if not self.digitized_object:
-            raise ValidationError(_("No associated digit found for this tag."))
-        return self.digitized_object
-
-    def get_digitized_object_url(self):
+    @property
+    def digitized_object_page(self):
         """
         Retrieves the URL for the web page associated with the digitized object of this NFC tag.
 
@@ -116,12 +115,24 @@ class NearFieldCommunicationTag(models.Model):
         Returns:
             A URL path as a string.
         """
-        mapped_digitized_object = self.get_digitized_object()
+        if not self.digitized_object:
+            return None
+        return self.digitized_object.detail_page
 
-        try:
-            return mapped_digitized_object.get_associated_page_url()
-        except AttributeError:
-            raise ValidationError(_("The digitized object is not correctly configured to find its page."))
+    @property
+    def user_inventory_page(self):
+        """
+        Retrieves the URL for the web page associated with the digitized object of this NFC tag.
+
+        Raises:
+            ValidationError: If no digitized object is associated, or the digitized object does not support URL retrieval.
+
+        Returns:
+            A URL path as a string.
+        """
+        if not self.digitized_object:
+            return None
+        return self.digitized_object.page
 
     class Meta:
         verbose_name = "NTAG"

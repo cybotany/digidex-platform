@@ -30,8 +30,7 @@ def add_digit_note(request, digit_uuid):
         form = UserDigitizedObjectNoteForm(request.POST, request.FILES)
         if form.is_valid():
             digitized_object_note = form.save(digitized_object, commit=True)
-            digitized_object_page = digitized_object.detail_page
-            return redirect(digitized_object_page.url)
+            return redirect(digitized_object_note.digit_detail_page_url)
     else:
         form = UserDigitizedObjectNoteForm()
 

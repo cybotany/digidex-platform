@@ -160,3 +160,19 @@ class UserDigitizedObjectNote(Orderable, DigitizedObjectNote):
     @property
     def image_caption(self):
         return self.caption
+
+    @property
+    def digit_inventory_page(self):
+        return self.digit.page
+
+    @property
+    def digit_inventory_page_url(self):
+        return self.digit_inventory_page.url
+
+    @property
+    def digit_detail_page(self):
+        return self.digit.detail_page
+
+    @property
+    def digit_detail_page_url(self):
+        return self.digit_detail_page.url
