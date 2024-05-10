@@ -12,7 +12,7 @@ def route_ntag_url(request, _uuid):
             return HttpResponse("This NFC tag is not active.", status=403)
 
         if not ntag.digitized_object:
-            return redirect('inventory:create_digitized_object', ntag_uuid=_uuid)
+            return redirect('inventory:link_ntag', ntag_uuid=_uuid)
         digit_page_url = ntag.get_digitized_object_url()
         return redirect(digit_page_url)
     except ValidationError as e:

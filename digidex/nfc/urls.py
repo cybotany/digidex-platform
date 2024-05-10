@@ -6,10 +6,3 @@ app_name = 'nfc'
 urlpatterns = [
     path('<uuid:_uuid>/', views.route_ntag_url, name='route_ntag'),
 ]
-
-app_name = 'digitization'
-urlpatterns = [
-    path('<uuid:ntag_uuid>/link/ntag/', views.link_ntag_and_digit, name='link_ntag'),
-    path('<uuid:digit_uuid>/link/user/', views.link_digit_and_user, name='link_user'),
-    path('<uuid:digit_uuid>/link/image/', views.link_digit_and_image, name='link_image'),
-]
