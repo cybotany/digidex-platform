@@ -59,6 +59,7 @@ class UserProfile(models.Model):
     )
     slug = models.SlugField(
         unique=True,
+        db_index=True,
         max_length=255,
         verbose_name="User Slug"
     )

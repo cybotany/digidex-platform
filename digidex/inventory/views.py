@@ -1,3 +1,5 @@
+from django.apps import apps
+from django.http import HttpResponseForbidden
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
@@ -7,11 +9,20 @@ from inventory.models import UserDigitizedObject
 
 
 @login_required
-def link_ntag_and_digit(request, ntag_uuid):
+def link_ntag_and_digit(request, profile_slug, ntag_uuid):
+    UserProfile = apps.get_model('profiles', 'UserProfile')
+    user_profile = get_object_or_404(UserProfile, slug=profile_slug)
+
+    requesting_user = request.user
+
+    if requesting_user != user_profile.user:
+        requesting_user_page = requesting_user.profile.get_profile_page() 
+        redirect(requesting_user_page.url)
+    
     if request.method == 'POST':
         form = UserDigitizedObjectForm(request.POST)
         if form.is_valid():
-            digitized_object = form.save(request.user.profile, commit=True)
+            digitized_object = form.save(user_profile, commit=True)
             ntag = get_object_or_404(NearFieldCommunicationTag, uuid=ntag_uuid)
             ntag.digitized_object = digitized_object
             ntag.save()
@@ -24,7 +35,15 @@ def link_ntag_and_digit(request, ntag_uuid):
 
 
 @login_required
-def add_digit_note(request, digit_uuid):
+def add_digit_note(request, profile_slug, digit_uuid):
+    UserProfile = apps.get_model('profiles', 'UserProfile')
+    user_profile = get_object_or_404(UserProfile, slug=profile_slug)
+
+    requesting_user = request.user
+    if requesting_user != user_profile.user:
+        requesting_user_page = requesting_user.profile.get_profile_page() 
+        redirect(requesting_user_page.url)
+
     digitized_object = get_object_or_404(UserDigitizedObject, uuid=digit_uuid)
 
     if request.method == 'POST':

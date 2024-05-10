@@ -11,7 +11,11 @@ def route_ntag_url(request, _uuid):
         if not ntag.active:
             return HttpResponse("This NFC tag is not active.", status=403)
         if not ntag.digitized_object:
-            return redirect('link_ntag', ntag_uuid=_uuid)
+            if not request.user.is_authenticated:
+                login_url = "account_login"
+                return redirect(login_url)
+            profile_slug = request.user.profile.slug
+            return redirect('profiles:link_ntag', profile_slug=profile_slug, ntag_uuid=_uuid)
         return redirect(ntag.digitized_object_page.url)
 
     except ValidationError as e:
