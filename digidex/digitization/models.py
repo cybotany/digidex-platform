@@ -42,7 +42,7 @@ class DigitizedObject(models.Model):
         abstract = True
 
 
-class DigitizedObjectJournal(models.Model):
+class DigitizedObjectNote(models.Model):
     digit = models.ForeignKey(
         DigitizedObject,
         on_delete=models.CASCADE,

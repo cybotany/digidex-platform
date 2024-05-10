@@ -32,7 +32,7 @@ class UserDigitizedObjectForm(forms.Form):
         return digitized_object
 
 
-class UserDigitizedObjectJournalForm(forms.Form):
+class UserDigitizedObjectNoteForm(forms.Form):
     image = forms.ImageField(
         widget=forms.FileInput(
             attrs={

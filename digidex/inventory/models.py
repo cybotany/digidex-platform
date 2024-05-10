@@ -7,7 +7,7 @@ from wagtail.admin.panels import FieldPanel, InlinePanel
 from wagtail.search import index
 from wagtail.fields import RichTextField
 
-from digitization.models import DigitizedObject, DigitizedObjectJournal
+from digitization.models import DigitizedObject, DigitizedObjectNote
 
 
 class UserDigitizedObjectInventoryPage(Page):
@@ -102,15 +102,6 @@ class UserDigitizedObject(Orderable, DigitizedObject):
     def __str__(self):
         return f"{self.name}"
 
-    def get_associated_page_url(self):
-        try:
-            user_digit_page = self.detail_page
-            return user_digit_page.url if user_digit_page else None
-        except UserDigitizedObject.DoesNotExist:
-            return None
-        except UserDigitizedObjectPage.DoesNotExist:
-            return None
-
 
 class UserDigitizedObjectPage(Page):
     heading = models.CharField(
@@ -147,16 +138,16 @@ class UserDigitizedObjectPage(Page):
         return self.user_digit.digit_description
 
 
-class UserDigitizedObjectJournal(Orderable, DigitizedObjectJournal):
+class UserDigitizedObjectNote(Orderable, DigitizedObjectNote):
     digit = models.OneToOneField(
         UserDigitizedObject,
         on_delete=models.CASCADE,
-        related_name='journal'
+        related_name='notes'
     )
     page = ParentalKey(
         UserDigitizedObjectPage,
         on_delete=models.CASCADE,
-        related_name='journal_entries'
+        related_name='digit_notes'
     )
     
     @property
