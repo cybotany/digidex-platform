@@ -64,6 +64,10 @@ class UserProfile(models.Model):
         verbose_name="User Slug"
     )
 
+    @property
+    def _username(self):
+        return self.user.username.title()
+
     def get_profile_page(self):
         """
         Retrieves the associated UserProfilePage. Raises a specific exception if not found.
@@ -80,13 +84,12 @@ class UserProfile(models.Model):
         try:
             return self.get_profile_page()
         except UserProfilePage.DoesNotExist:
-            _username = self.user.username.title()
             profile_page = UserProfilePage(
-                title=f"{_username}'s Profile",
+                title=f"{self._username}'s Profile",
                 owner=self.user,
                 slug=self.slug,
-                heading=f"{_username}",
-                intro=f"Welcome to {_username}'s Profile Page.",
+                heading=f"{self._username}",
+                intro=f"Welcome to {self._username}'s Profile Page.",
                 profile=self
             )
 
@@ -100,7 +103,7 @@ class UserProfile(models.Model):
             return profile_page
 
     def __str__(self):
-        return self.user.username
+        return self._username
 
     class Meta:
         verbose_name = "User Profile"
@@ -158,6 +161,10 @@ class UserProfilePage(Page):
         return None
 
     @property
+    def _username(self):
+        return self.username.title()
+
+    @property
     def inventory_page(self):
         """
         Property to fetch the UserDigitizedObjectInventoryPage associated with this profile page.
@@ -185,14 +192,13 @@ class UserProfilePage(Page):
             return self.inventory_page()
         except UserDigitizedObjectInventoryPage.DoesNotExist:
             owner = self.user
-            username = self.username.title()
 
             inventory_page = UserDigitizedObjectInventoryPage(
-                title=f"{username}'s Inventory",
+                title=f"{self._username}'s Inventory",
                 owner=owner,
                 slug='inventory',
                 heading="Inventory",
-                intro=f"Welcome to {username}'s Inventory Page.",
+                intro=f"Welcome to {self._username}'s Inventory Page.",
             )
             self.add_child(instance=inventory_page)
             inventory_page.save_revision().publish()

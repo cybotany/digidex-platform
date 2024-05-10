@@ -74,12 +74,16 @@ class UserDigitizedObject(Orderable, DigitizedObject):
         return self.user.username
 
     @property
+    def _username(self):
+        return self.username.title()
+
+    @property
     def digit_description(self):
         return self.description
 
     @property
     def digit_name(self):
-        return self.name
+        return self.name.title()
 
     def create_digit_page(self):
         inventory_page = UserDigitizedObjectInventoryPage.objects.filter(owner=self.user).first()
@@ -93,7 +97,8 @@ class UserDigitizedObject(Orderable, DigitizedObject):
                 title=f"Digitized Object: {self.digit_name}",
                 owner=self.user,
                 slug=slugify(self.digit_name),
-                user_digit=self
+                heading=self.digit_name,
+                intro=self.digit_description
             )
             inventory_page.add_child(instance=user_digit_page)
             user_digit_page.save_revision().publish()
@@ -102,7 +107,7 @@ class UserDigitizedObject(Orderable, DigitizedObject):
             self.save() 
 
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.digit_name}"
 
 
 class UserDigitizedObjectPage(Page):
@@ -153,11 +158,11 @@ class UserDigitizedObjectNote(Orderable, DigitizedObjectNote):
 
     @property
     def digit_name(self):
-        return self.digit.name
+        return self.digit.digit_name
 
     @property
     def digit_description(self):
-        return self.digit.description
+        return self.digit.digit_description
 
     @property
     def image_caption(self):
