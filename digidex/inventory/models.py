@@ -103,6 +103,7 @@ class UserDigitizedObject(Orderable, DigitizedObject):
             inventory_page.add_child(instance=user_digit_page)
             user_digit_page.save_revision().publish()
 
+            self.page = inventory_page
             self.detail_page = user_digit_page
             self.save() 
 
