@@ -151,8 +151,6 @@ STORAGES = {
 
 # Default storage settings, with the staticfiles storage updated.
 if "SPACES_BUCKET_NAME" in os.environ:
-    INSTALLED_APPS.append("storages")
-    
     AWS_STORAGE_BUCKET_NAME = os.getenv("SPACES_BUCKET_NAME")
     AWS_S3_REGION_NAME = os.getenv("AWS_S3_REGION_NAME")
     AWS_S3_ENDPOINT_URL = os.getenv("SPACES_ENDPOINT_URL")
