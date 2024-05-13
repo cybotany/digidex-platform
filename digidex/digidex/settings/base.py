@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     "nfc",
     "profiles",
     "search",
+    "storages",
 
     "wagtail.contrib.settings",
     "wagtail.contrib.forms",
@@ -138,18 +139,32 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
-STATIC_URL = "/static/"
-MEDIA_URL = "/media/"
 
-# Default storage settings, with the staticfiles storage updated.
 STORAGES = {
     "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
     },
     "staticfiles": {
         "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
     },
 }
+
+# Default storage settings, with the staticfiles storage updated.
+if "SPACES_BUCKET_NAME" in os.environ:
+    INSTALLED_APPS.append("storages")
+    
+    AWS_STORAGE_BUCKET_NAME = os.getenv("SPACES_BUCKET_NAME")
+    AWS_S3_REGION_NAME = os.getenv("AWS_S3_REGION_NAME")
+    AWS_S3_ENDPOINT_URL = os.getenv("SPACES_ENDPOINT_URL")
+    AWS_S3_CUSTOM_DOMAIN = os.getenv('SPACES_CUSTOM_DOMAIN')
+    AWS_S3_ACCESS_KEY_ID = os.getenv("SPACES_ACCESS_KEY")
+    AWS_S3_SECRET_ACCESS_KEY = os.getenv("SPACES_SECRET_KEY")
+    AWS_S3_OBJECT_PARAMETERS = {
+        'CacheControl': 'max-age=86400',
+    }
+
+    STATIC_URL = '{}/static/'.format(AWS_S3_CUSTOM_DOMAIN)
+    MEDIA_URL = '{}/media/'.format(AWS_S3_CUSTOM_DOMAIN)
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
