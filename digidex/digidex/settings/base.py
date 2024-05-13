@@ -160,7 +160,7 @@ if "SPACES_BUCKET_NAME" in os.environ:
     AWS_S3_OBJECT_PARAMETERS = {
         'CacheControl': 'max-age=86400',
     }
-
+    AWS_S3_FILE_OVERWRITE = False
     STATIC_URL = '{}/static/'.format(AWS_S3_CUSTOM_DOMAIN)
     MEDIA_URL = '{}/media/'.format(AWS_S3_CUSTOM_DOMAIN)
 
