@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.urls import reverse
+
 from wagtail.models import Page
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
@@ -38,12 +39,10 @@ class UserProfile(models.Model):
         on_delete=models.PROTECT,
         related_name="profile"
     )
-    avatar = models.ForeignKey(
-        'wagtailimages.Image',
+    avatar = models.ImageField(
+        upload_to='avatars/',
         null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
+        blank=True
     )
     bio = models.TextField(
         blank=True,
