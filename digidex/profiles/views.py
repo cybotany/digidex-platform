@@ -20,14 +20,13 @@ def profile_form_view(request, profile_slug):
     user_profile_page = user_profile.get_profile_page()
 
     if request.method == 'POST':
-        form = UserProfileForm(data=request.POST, files=request.FILES)
+        form = UserProfileForm(request.POST, request.FILES, instance=user_profile)
         if form.is_valid():
-            user_profile.bio = form.cleaned_data['bio']
-            if 'avatar' in request.FILES:
-                user_profile.avatar = form.cleaned_data['avatar']
-            user_profile.save()
+            updated_profile = form.save(commit=False)
+            # Ensure profile avatar is sized appropriately here
+            updated_profile.save()
             return redirect(user_profile_page.url)
     else:
-        form = UserProfileForm(initial={'bio': user_profile.bio, 'avatar': user_profile.avatar})
+        form = UserProfileForm(instance=user_profile)
     
     return render(request, 'profiles/user_profile_form.html', {'form': form})

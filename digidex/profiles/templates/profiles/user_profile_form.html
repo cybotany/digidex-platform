@@ -12,20 +12,20 @@
         <h2 class="account-heading">Update your profile</h2>
         <div class="form-block base-form">
           <!-- Render Form -->
-          <form method="post" class="form">
+          <form method="post" class="form" enctype="multipart/form-data">
             {% csrf_token %}
             <!-- Render Avatar Field -->
             {{ form.avatar }}
-              {% if form.image.errors %}
+            {% if form.avatar.errors %}
               <div class="error-message">
-                <div class="text-error">{{ form.image.errors|striptags }}</div>
+                <div class="text-error">{{ form.avatar.errors|striptags }}</div>
               </div>
-              {% endif %}
+            {% endif %}
             <!-- Render Bio Field -->
             {{ form.bio }}
-            {% if form.caption.errors %}
+            {% if form.bio.errors %}
               <div class="error-message">
-                <div class="text-error">{{ form.caption.errors|striptags }}</div>
+                <div class="text-error">{{ form.bio.errors|striptags }}</div>
               </div>
             {% endif %}
             <!-- Render Submit Button -->
