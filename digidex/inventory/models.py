@@ -2,16 +2,67 @@ from django.apps import apps
 from django.db import models
 from django.utils.text import slugify
 from django.core.exceptions import ObjectDoesNotExist
+
 from modelcluster.fields import ParentalKey
 from wagtail.models import Page, Orderable
 from wagtail.admin.panels import FieldPanel, InlinePanel
 from wagtail.search import index
 from wagtail.fields import RichTextField
 
-from digitization.models import DigitizedObject, DigitizedObjectNote
+from digitization.models import DigitizedObjectInventory, DigitizedObject, DigitizedObjectNote
 
 
-class UserDigitizedObjectInventoryPage(Page):
+class UserInventory(Orderable, DigitizedObjectInventory):
+    profile_page = ParentalKey(
+        'profiles.UserProfilePage',
+        on_delete=models.CASCADE,
+        related_name='inventories'
+    )
+    detail_page = models.OneToOneField(
+        'inventory.UserInventoryPage',
+        on_delete=models.PROTECT,
+        related_name='detailed_digit'
+    )
+
+    @property
+    def profile(self):
+        return self.profile_page.profile
+
+    @property
+    def user(self):
+        return self.profile.user
+
+    @property
+    def username(self):
+        return self.user.username
+
+    @property
+    def _username(self):
+        return self.username.title()
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            user_inventories = UserInventory.objects.filter(profile_page=self.profile_page)
+            count = user_inventories.count() + 1
+            default_name = f"Box {count}"
+            self.name = self.name or default_name
+            self.slug = self.slug or slugify(self.name)
+        
+        original_slug = self.slug
+        unique_slug = original_slug
+        num = 1
+        while UserInventory.objects.filter(profile_page=self.profile_page, slug=unique_slug).exclude(pk=self.pk).exists():
+            unique_slug = f"{original_slug}-{num}"
+            num += 1
+        self.slug = unique_slug
+
+        super().save(*args, **kwargs)
+
+    class Meta:
+        unique_together = ('profile_page', 'slug')
+
+
+class UserInventoryPage(Page):
     heading = models.CharField(
         max_length=255,
         blank=True
@@ -19,6 +70,11 @@ class UserDigitizedObjectInventoryPage(Page):
     intro = models.TextField(
         blank=True,
         help_text="Introduction text to display at the top of the index page."
+    )
+    inventory = models.OneToOneField(
+        UserInventory,
+        on_delete=models.PROTECT,
+        related_name='inventory_page'
     )
 
     @property
@@ -50,7 +106,7 @@ class UserDigitizedObjectInventoryPage(Page):
 
 class UserDigitizedObject(Orderable, DigitizedObject):
     page = ParentalKey(
-        UserDigitizedObjectInventoryPage,
+        UserInventoryPage,
         on_delete=models.CASCADE,
         related_name='user_digitized_objects'
     )
@@ -86,7 +142,7 @@ class UserDigitizedObject(Orderable, DigitizedObject):
         return self.name.title()
 
     def create_digit_page(self):
-        inventory_page = UserDigitizedObjectInventoryPage.objects.filter(owner=self.user).first()
+        inventory_page = UserInventoryPage.objects.filter(owner=self.user).first()
         if not inventory_page:
             raise ObjectDoesNotExist("User has no inventory page.")
         try:
@@ -135,7 +191,7 @@ class UserDigitizedObjectPage(Page):
     ]
 
     parent_page_types = [
-        'inventory.UserDigitizedObjectInventoryPage'
+        'inventory.UserInventoryPage'
     ]
 
     content_panels = Page.content_panels + [

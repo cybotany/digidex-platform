@@ -7,7 +7,7 @@ from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 from wagtail.search import index
 
-from inventory.models import UserDigitizedObjectInventoryPage
+from inventory.models import UserInventoryPage
 
 
 class UserProfileIndexPage(Page):
@@ -39,6 +39,12 @@ class UserProfile(models.Model):
         on_delete=models.PROTECT,
         related_name="profile"
     )
+    slug = models.SlugField(
+        unique=True,
+        db_index=True,
+        max_length=255,
+        verbose_name="User Slug"
+    )
     avatar = models.ImageField(
         upload_to='avatars/',
         null=True,
@@ -55,12 +61,6 @@ class UserProfile(models.Model):
     last_modified = models.DateTimeField(
         auto_now=True,
         verbose_name="Last Modified"
-    )
-    slug = models.SlugField(
-        unique=True,
-        db_index=True,
-        max_length=255,
-        verbose_name="User Slug"
     )
 
     @property
@@ -138,7 +138,7 @@ class UserProfilePage(Page):
     ]
 
     subpage_types = [
-        'inventory.UserDigitizedObjectInventoryPage'
+        'inventory.UserInventoryPage'
     ]
 
     @property
@@ -166,14 +166,14 @@ class UserProfilePage(Page):
     @property
     def inventory_page(self):
         """
-        Property to fetch the UserDigitizedObjectInventoryPage associated with this profile page.
+        Property to fetch the UserInventoryPage associated with this profile page.
         Assumes there is at most one such page per UserProfilePage.
         """
-        inventory_page = self.get_children().type(UserDigitizedObjectInventoryPage).first()
+        inventory_page = self.get_children().type(UserInventoryPage).first()
         if inventory_page:
             return inventory_page.specific
         else:
-            raise UserDigitizedObjectInventoryPage.DoesNotExist("Inventory page for user does not exist.")
+            raise UserInventoryPage.DoesNotExist("Inventory page for user does not exist.")
 
     @property
     def form_url(self):
@@ -185,14 +185,14 @@ class UserProfilePage(Page):
 
     def create_inventory_page(self):
         """
-        Method to create a UserDigitizedObjectInventoryPage associated with this profile page.
+        Method to create a UserInventoryPage associated with this profile page.
         """
         try:
             return self.inventory_page()
-        except UserDigitizedObjectInventoryPage.DoesNotExist:
+        except UserInventoryPage.DoesNotExist:
             owner = self.user
 
-            inventory_page = UserDigitizedObjectInventoryPage(
+            inventory_page = UserInventoryPage(
                 title=f"{self._username}'s Inventory",
                 owner=owner,
                 slug='inventory',

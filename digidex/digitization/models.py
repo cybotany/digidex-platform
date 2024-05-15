@@ -1,5 +1,45 @@
 import uuid
 from django.db import models
+from django.template.defaultfilters import slugify
+
+
+class DigitizedObjectInventory(models.Model):
+    """
+    Base class for digitized object inventories, providing common attributes.
+
+    Attributes:
+        name (CharField): The name of the digitized object inventory.
+        uuid (UUIDField): The unique identifier for the digitized object inventory.
+        slug (SlugField): The unique slug for the digitized object inventory.
+    """
+    uuid = models.UUIDField(
+        default=uuid.uuid4,
+        unique=True,
+        editable=False,
+        db_index=True,
+        verbose_name="Digitized Object UUID"
+    )
+    name = models.CharField(
+        max_length=100,
+        null=False,
+        blank=False,
+        default='Inventory',
+        help_text="Digitized Object Inventory name."
+    )
+    slug = models.SlugField(
+        unique=True,
+        db_index=True,
+        max_length=255,
+        verbose_name="Digitized Object Inventory Slug"
+    )
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
+    class Meta:
+        abstract = True
+
 
 
 class DigitizedObject(models.Model):
