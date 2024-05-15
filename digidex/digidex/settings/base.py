@@ -234,6 +234,8 @@ ACCOUNT_EMAIL_REQUIRED = True
 
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
+ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Digidex] "
+
 # Wagtail settings
 WAGTAIL_SITE_NAME = "DigiDex"
 
