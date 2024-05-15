@@ -4,6 +4,10 @@ from .base import *
 
 DEBUG = False
 
+MIDDLEWARE.append("whitenoise.middleware.WhiteNoiseMiddleware")
+
+STORAGES["staticfiles"]["BACKEND"] = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
 if "EMAIL_HOST" in os.environ:
@@ -13,25 +17,9 @@ if "EMAIL_HOST" in os.environ:
     EMAIL_PORT = os.getenv("EMAIL_PORT")
     EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS")
 
-CSRF_TRUSTED_ORIGINS = os.getenv("DJANGO_CSRF_TRUSTED_ORIGINS", "").split(",")
-
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "handlers": {
-        "console": {
-            "class": "logging.StreamHandler",
-        },
-    },
-    "loggers": {
-        "django": {
-            "handlers": ["console"],
-            "level": os.getenv("DJANGO_LOG_LEVEL", "INFO"),
-        },
-    },
-}
-
 SESSION_COOKIE_SECURE = True
+
+CSRF_TRUSTED_ORIGINS = os.getenv("DJANGO_CSRF_TRUSTED_ORIGINS", "").split(",")
 
 CSRF_COOKIE_SECURE = True
 
