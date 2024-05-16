@@ -53,13 +53,14 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "django.middleware.security.SecurityMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
     "allauth.account.middleware.AccountMiddleware",
 ]
@@ -134,7 +135,23 @@ USE_I18N = True
 
 USE_TZ = True
 
+# Default storage settings
+AWS_STORAGE_BUCKET_NAME = os.getenv("SPACES_BUCKET_NAME")
+AWS_S3_REGION_NAME = os.getenv("AWS_S3_REGION_NAME")
+AWS_S3_ENDPOINT_URL = os.getenv("SPACES_ENDPOINT_URL")
+AWS_S3_CUSTOM_DOMAIN = os.getenv('SPACES_CUSTOM_DOMAIN')
+AWS_S3_ACCESS_KEY_ID = os.getenv("SPACES_ACCESS_KEY")
+AWS_S3_SECRET_ACCESS_KEY = os.getenv("SPACES_SECRET_KEY")
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+AWS_S3_FILE_OVERWRITE = False
+MEDIA_URL = '{}/media/'.format(AWS_S3_CUSTOM_DOMAIN)
+
 # Static files (CSS, JavaScript, Images)
+STATIC_URL = '{}/static/'.format(AWS_S3_CUSTOM_DOMAIN)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
@@ -148,21 +165,6 @@ STORAGES = {
         "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
     },
 }
-
-# Default storage settings, with the staticfiles storage updated.
-if "SPACES_BUCKET_NAME" in os.environ:
-    AWS_STORAGE_BUCKET_NAME = os.getenv("SPACES_BUCKET_NAME")
-    AWS_S3_REGION_NAME = os.getenv("AWS_S3_REGION_NAME")
-    AWS_S3_ENDPOINT_URL = os.getenv("SPACES_ENDPOINT_URL")
-    AWS_S3_CUSTOM_DOMAIN = os.getenv('SPACES_CUSTOM_DOMAIN')
-    AWS_S3_ACCESS_KEY_ID = os.getenv("SPACES_ACCESS_KEY")
-    AWS_S3_SECRET_ACCESS_KEY = os.getenv("SPACES_SECRET_KEY")
-    AWS_S3_OBJECT_PARAMETERS = {
-        'CacheControl': 'max-age=86400',
-    }
-    AWS_S3_FILE_OVERWRITE = False
-    STATIC_URL = '{}/static/'.format(AWS_S3_CUSTOM_DOMAIN)
-    MEDIA_URL = '{}/media/'.format(AWS_S3_CUSTOM_DOMAIN)
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
