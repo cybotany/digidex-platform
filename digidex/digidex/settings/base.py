@@ -3,6 +3,7 @@ Django settings for digidex project.
 """
 import os
 from datetime import timedelta
+from logging.handlers import TimedRotatingFileHandler
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -276,8 +277,11 @@ LOGGING = {
     'handlers': {
         'file': {
             'level': 'WARNING',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs/digidex.log'),
+            'class': 'path.to.your.CustomTimedRotatingFileHandler',
+            'base_log_dir': LOG_DIR,
+            'when': 'midnight',
+            'interval': 1,
+            'backupCount': 30,  # Keep logs for the last 30 days
             'formatter': 'verbose',
         },
         'console': {
