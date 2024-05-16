@@ -277,7 +277,7 @@ LOGGING = {
     'handlers': {
         'file': {
             'level': 'WARNING',
-            'class': 'digidex.base.utils.handlers.CustomTimedRotatingFileHandler',
+            'class': 'base.utils.handlers.CustomTimedRotatingFileHandler',
             'base_log_dir': LOG_DIR,
             'when': 'midnight',
             'interval': 1,

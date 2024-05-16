@@ -1,5 +1,4 @@
 import os
-import logging
 from logging.handlers import TimedRotatingFileHandler
 from datetime import datetime
 
@@ -7,7 +6,9 @@ from datetime import datetime
 class CustomTimedRotatingFileHandler(TimedRotatingFileHandler):
     def __init__(self, base_log_dir, *args, **kwargs):
         self.base_log_dir = base_log_dir
-        super().__init__(*args, **kwargs)
+        # Set a temporary filename during initialization
+        temp_filename = os.path.join(base_log_dir, 'temp.log')
+        super().__init__(temp_filename, *args, **kwargs)
 
     def _open(self):
         # Get the current year and month
