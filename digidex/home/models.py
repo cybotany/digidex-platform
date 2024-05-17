@@ -1,10 +1,7 @@
 from django.db import models
 
-from wagtail.fields import StreamField
 from wagtail.admin.panels import MultiFieldPanel, FieldPanel
 from wagtail.models import Page
-
-from home.blocks import HomeStreamBlock
 
 
 class HomePage(Page):
@@ -26,11 +23,6 @@ class HomePage(Page):
         blank=True,
         verbose_name="Hero CTA Link"
     )
-    body = StreamField(
-        HomeStreamBlock(),
-        blank=True,
-        use_json_field=True,
-    )
 
     content_panels = Page.content_panels + [
         MultiFieldPanel(
@@ -41,7 +33,6 @@ class HomePage(Page):
                 FieldPanel('hero_cta_link'),
             ], heading="Hero Section"
         ),
-        FieldPanel("body"),
     ]
 
     subpage_types = [
