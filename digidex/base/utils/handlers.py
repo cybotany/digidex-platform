@@ -23,5 +23,5 @@ class CustomTimedRotatingFileHandler(TimedRotatingFileHandler):
         os.makedirs(log_dir, exist_ok=True)
         
         # Set the filename with the day
-        self.baseFilename = os.path.join(log_dir, f'{day_name}{day}.log')
+        self.baseFilename = os.path.join(log_dir, f'{day_name}-{day}.log')
         return super()._open()
