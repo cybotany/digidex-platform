@@ -14,7 +14,8 @@ class CustomTimedRotatingFileHandler(TimedRotatingFileHandler):
         # Get the current year and month
         current_time = datetime.now()
         year = current_time.strftime('%Y')
-        month = current_time.strftime('%m')
+        month = current_time.strftime('%B')
+        day_name = current_time.strftime('%A')
         day = current_time.strftime('%d')
         
         # Create year/month directories
@@ -22,5 +23,5 @@ class CustomTimedRotatingFileHandler(TimedRotatingFileHandler):
         os.makedirs(log_dir, exist_ok=True)
         
         # Set the filename with the day
-        self.baseFilename = os.path.join(log_dir, f'{day}.log')
+        self.baseFilename = os.path.join(log_dir, f'{day_name}{day}.log')
         return super()._open()
