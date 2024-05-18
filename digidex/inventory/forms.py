@@ -6,7 +6,7 @@ from inventory.models import UserInventory, UserDigit, JournalEntry
 class UserInventoryForm(forms.ModelForm):
     class Meta:
         model = UserInventory
-        fields = ('name')
+        fields = ('name',)
         widgets = {
             'name': forms.TextInput(
                 attrs={
@@ -20,7 +20,7 @@ class UserInventoryForm(forms.ModelForm):
 class UserDigitForm(forms.ModelForm):
     class Meta:
         model = UserDigit
-        fields = ('name', 'description')
+        fields = ('name', 'description',)
         widgets = {
             'name': forms.TextInput(
                 attrs={
@@ -40,7 +40,7 @@ class UserDigitForm(forms.ModelForm):
 class JournalEntryForm(forms.ModelForm):
     class Meta:
         model = JournalEntry
-        fields = ('image', 'caption')
+        fields = ('image', 'caption',)
         widgets = {
             'image': forms.FileInput(
                 attrs={
