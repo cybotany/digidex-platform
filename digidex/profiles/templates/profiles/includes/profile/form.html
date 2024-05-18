@@ -1,0 +1,21 @@
+
+<!-- Render Form -->
+<form method="post" class="form" enctype="multipart/form-data">
+  {% csrf_token %}
+  <!-- Render Avatar Field -->
+  {{ form.avatar }}
+  {% if form.avatar.errors %}
+    <div class="error-message">
+      <div class="text-error">{{ form.avatar.errors|striptags }}</div>
+    </div>
+  {% endif %}
+  <!-- Render Bio Field -->
+  {{ form.bio }}
+  {% if form.bio.errors %}
+    <div class="error-message">
+      <div class="text-error">{{ form.bio.errors|striptags }}</div>
+    </div>
+  {% endif %}
+  <!-- Render Submit Button -->
+  <input type="submit" value="Update" class="submit-button base-button"> 
+</form>

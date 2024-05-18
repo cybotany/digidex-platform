@@ -1,11 +1,7 @@
 {% load static wagtailcore_tags wagtailimages_tags %}
 
-{% with child_page=page.get_child_page %}
-  <a href="{{ child_page.url }}" class="link-profile-avatar large base-inline-block">
-    {% if page.profile.avatar %}
-      <img src="{{ page.profile.avatar.url }}" alt="Profile Avatar" class="image-profile-avatar large">
-    {% else %}
-      <img src="{% static 'images/account-box.svg' %}" class="image-profile-avatar large" alt="Default Avatar">
-    {% endif %}
-  </a>
-{% endwith %}
+<a href="#" class="link-profile-avatar large base-inline-block">
+  {% if page.profile.avatar %}
+    <img src="{{ page.profile.avatar.url }}" alt="Profile Avatar" class="image-profile-avatar large">
+  {% endif %}
+</a>
