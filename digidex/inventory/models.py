@@ -92,7 +92,7 @@ class UserInventoryPage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('heading'),
         FieldPanel('intro'),
-        InlinePanel('user_digitized_objects', label="Digitized Objects"),
+        InlinePanel('user_digits', label="Digitized Objects"),
     ]
 
     parent_page_types = [
@@ -108,7 +108,7 @@ class UserDigit(Orderable, DigitizedObject):
     page = ParentalKey(
         UserInventoryPage,
         on_delete=models.CASCADE,
-        related_name='user_digitized_objects'
+        related_name='itemized_digits'
     )
     user_profile = models.ForeignKey(
         'profiles.UserProfile',
@@ -158,7 +158,7 @@ class UserDigit(Orderable, DigitizedObject):
                 counter += 1
 
             user_digit_page = UserDigitPage(
-                title=f"Digitized Object: {self.digit_name}",
+                title={self.digit_name},
                 owner=self.user,
                 slug=unique_slug,
                 heading=self.digit_name,

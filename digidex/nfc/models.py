@@ -14,7 +14,7 @@ class NearFieldCommunicationTag(models.Model):
     Attributes:
         uuid (UUIDField): Auto-generated unique identifier for each NFC tag.
         serial_number (CharField): Unique serial number of the NFC tag. Used for physical identification.
-        digitized_object (OneToOneField): Optional link to a digitized object that this NFC tag represents.
+        digit (OneToOneField): Optional link to the user digit that this NFC tag maps to.
         active (BooleanField): Status flag indicating whether the NFC tag is active (in use).
         created_at (DateTimeField): Timestamp indicating when the record was first created.
         last_modified (DateTimeField): Timestamp indicating when the record was last updated.
