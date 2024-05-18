@@ -41,25 +41,18 @@ class UserInventory(Orderable, DigitizedObjectInventory):
         return self.username.title()
 
     def save(self, *args, **kwargs):
-        if not self.pk:
-            user_inventories = UserInventory.objects.filter(profile_page=self.profile_page)
-            count = user_inventories.count() + 1
-            default_name = f"Box {count}"
-            self.name = self.name or default_name
-            self.slug = self.slug or slugify(self.name)
-        
-        original_slug = self.slug
-        unique_slug = original_slug
+        original_name = self.name
+        unique_name = original_name
         num = 1
-        while UserInventory.objects.filter(profile_page=self.profile_page, slug=unique_slug).exclude(pk=self.pk).exists():
-            unique_slug = f"{original_slug}-{num}"
+        while UserInventory.objects.filter(profile_page=self.profile_page, name=unique_name).exclude(pk=self.pk).exists():
+            unique_name = f"{original_name} ({num})"
             num += 1
-        self.slug = unique_slug
-
+        self.name = unique_name
+        self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
     class Meta:
-        unique_together = ('profile_page', 'slug')
+        unique_together = ('profile_page', 'name')
 
 
 class UserInventoryPage(Page):
