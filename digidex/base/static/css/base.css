@@ -2513,7 +2513,11 @@ figcaption {
   display: flex;
 }
 
-.statistics--blue {
+.statistics.red {
+  background-color: var(--accent-b2);
+}
+
+.statistics.blue {
   background-color: var(--accent-b3);
 }
 
@@ -2527,7 +2531,11 @@ figcaption {
   font-weight: 500;
 }
 
-.heading-statistics--green {
+.heading-statistics.red {
+  color: var(--accent-a2);
+}
+
+.heading-statistics.blue {
   color: var(--accent-a3);
 }
 
@@ -2540,7 +2548,11 @@ figcaption {
   line-height: 130%;
 }
 
-.text-statistics--green {
+.text-statistics.red {
+  color: var(--accent-a2);
+}
+
+.text-statistics.blue {
   color: var(--accent-a3);
 }
 
