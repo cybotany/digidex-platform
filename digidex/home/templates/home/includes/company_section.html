@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags wagtailimages_tags %}
+{% load static %}
 
 <section class="section">
   <div class="content">
@@ -32,12 +32,12 @@
         <p class="paragraph">Sit venenatis mattis fringilla molestie duis sit diam enim. Sed tempor habitasse mi duis tincidunt aliquet metus at. Cursus iaculis ac enim risus quam vulputate.</p>
         <div class="base-layout-grid grid-statistics">
           <div id="company-statistic-1" class="numbers">
-            <img src="images/app-connectivity.svg" loading="eager" alt="" class="icon-numbers">
+            <img src="{% static 'images/app-connectivity.svg' %}" loading="eager" alt="" class="icon-numbers">
             <h4 class="heading-numbers">3,500,000+</h4>
             <div class="text-numbers">websites currently hosted.</div>
           </div>
           <div id="company-statistic-2" class="numbers green">
-            <img src="images/content-delivery-network.svg" loading="eager" alt="" class="icon-numbers">
+            <img src="{% static 'images/content-delivery-network.svg' %}" loading="eager" alt="" class="icon-numbers">
             <h4 class="heading-numbers green">50,000+</h4>
             <div class="text-numbers green">servers around the world</div>
           </div>
