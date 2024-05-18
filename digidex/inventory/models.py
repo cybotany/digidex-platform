@@ -92,7 +92,7 @@ class UserInventoryPage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('heading'),
         FieldPanel('intro'),
-        InlinePanel('user_digits', label="Digitized Objects"),
+        InlinePanel('itemized_digits', label="Itemized Digits"),
     ]
 
     parent_page_types = [
