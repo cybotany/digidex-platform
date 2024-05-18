@@ -9,7 +9,7 @@ from wagtail.admin.panels import FieldPanel, InlinePanel
 from wagtail.search import index
 from wagtail.fields import RichTextField
 
-from digitization.models import DigitizedObjectInventory, DigitizedObject, DigitizedObjectNote
+from digitization.models import DigitizedObjectInventory, DigitizedObject, DigitizedObjectJournalEntry
 
 
 class UserInventory(Orderable, DigitizedObjectInventory):
@@ -100,11 +100,11 @@ class UserInventoryPage(Page):
     ]
 
     subpage_types = [
-        'inventory.UserDigitizedObjectPage'
+        'inventory.UserDigitPage'
     ]
 
 
-class UserDigitizedObject(Orderable, DigitizedObject):
+class UserDigit(Orderable, DigitizedObject):
     page = ParentalKey(
         UserInventoryPage,
         on_delete=models.CASCADE,
@@ -116,7 +116,7 @@ class UserDigitizedObject(Orderable, DigitizedObject):
         related_name='user_digits'
     )
     detail_page = models.OneToOneField(
-        'inventory.UserDigitizedObjectPage',
+        'inventory.UserDigitPage',
         on_delete=models.PROTECT,
         related_name='detailed_digit'
     )
@@ -157,7 +157,7 @@ class UserDigitizedObject(Orderable, DigitizedObject):
                 unique_slug = f"{base_slug}-{counter}"
                 counter += 1
 
-            user_digit_page = UserDigitizedObjectPage(
+            user_digit_page = UserDigitPage(
                 title=f"Digitized Object: {self.digit_name}",
                 owner=self.user,
                 slug=unique_slug,
@@ -176,7 +176,7 @@ class UserDigitizedObject(Orderable, DigitizedObject):
         return f"{self.digit_name}"
 
 
-class UserDigitizedObjectPage(Page):
+class UserDigitPage(Page):
     heading = models.CharField(
         max_length=255,
         blank=True
@@ -210,16 +210,16 @@ class UserDigitizedObjectPage(Page):
         return self.detailed_digit.digit_description
 
 
-class UserDigitizedObjectNote(Orderable, DigitizedObjectNote):
+class JournalEntry(Orderable, DigitizedObjectJournalEntry):
     digit = models.OneToOneField(
-        UserDigitizedObject,
+        UserDigit,
         on_delete=models.CASCADE,
-        related_name='notes'
+        related_name='journal_entries'
     )
     page = ParentalKey(
-        UserDigitizedObjectPage,
+        UserDigitPage,
         on_delete=models.CASCADE,
-        related_name='digit_notes'
+        related_name='digit_journal_entries'
     )
 
     @property

@@ -82,7 +82,7 @@ class DigitizedObject(models.Model):
         abstract = True
 
 
-class DigitizedObjectNote(models.Model):
+class DigitizedObjectJournalEntry(models.Model):
     digit = models.ForeignKey(
         DigitizedObject,
         on_delete=models.CASCADE,

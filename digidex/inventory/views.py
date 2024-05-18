@@ -3,8 +3,8 @@ from django.http import HttpResponseForbidden
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
-from inventory.forms import UserDigitizedObjectForm, UserDigitizedObjectNoteForm
-from inventory.models import UserDigitizedObject
+from inventory.forms import UserDigitForm, JournalEntryForm
+from inventory.models import UserDigit
 
 
 @login_required
@@ -18,7 +18,7 @@ def link_ntag_and_digit(request, profile_slug, ntag_uuid):
         return redirect(requesting_user_page.url)
 
     if request.method == 'POST':
-        form = UserDigitizedObjectForm(request.POST)
+        form = UserDigitForm(request.POST)
         if form.is_valid():
             digitized_object = form.save(commit=False)
             digitized_object.user_profile = user_profile
@@ -33,7 +33,7 @@ def link_ntag_and_digit(request, profile_slug, ntag_uuid):
             else:
                 return HttpResponseForbidden("Failed to create a detail page for the digitized object.")
     else:
-        form = UserDigitizedObjectForm()
+        form = UserDigitForm()
 
     return render(request, "inventory/link_ntag_and_digit.html", {'form': form})
 
@@ -49,12 +49,12 @@ def add_digit_note(request, profile_slug, digit_uuid):
         redirect(requesting_user_profile_page.url)
 
     if request.method == 'POST':
-        form = UserDigitizedObjectNoteForm(request.POST, request.FILES)
+        form = JournalEntryForm(request.POST, request.FILES)
         if form.is_valid():
-            digitized_object = get_object_or_404(UserDigitizedObject, uuid=digit_uuid)
+            digitized_object = get_object_or_404(UserDigit, uuid=digit_uuid)
             digitized_object_note = form.save(digitized_object, commit=True)
             return redirect(digitized_object_note.digit_detail_page_url)
     else:
-        form = UserDigitizedObjectNoteForm()
+        form = JournalEntryForm()
 
     return render(request, "inventory/add_digit_note.html", {'form': form})

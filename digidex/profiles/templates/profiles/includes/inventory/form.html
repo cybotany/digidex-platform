@@ -1,14 +1,11 @@
 {% load wagtailcore_tags %}
 
 <div class="inventory">
-  <div class="subtitle blue">contact form<br></div>
-    <h2 class="heading">Let&#x27;s Talk Hosting</h2>
-    <div class="form-block base-form">
+  <h2 class="heading">Create Inventory Page</h2>
+  <div class="form-block base-form">
     <form id="inventory-form" class="form">
-      <input class="text-field base-input" maxlength="256" name="name" data-name="Name" placeholder="Name" type="text" id="name">
-      <input class="text-field base-input" maxlength="256" name="email" data-name="Email" placeholder="Email" type="email" id="email" required="">
-      <textarea placeholder="Message" maxlength="5000" id="Message" name="Message" data-name="Message" class="textarea base-input"></textarea>
-      <input type="submit" data-wait="Please wait..." class="submit-button base-button" value="Submit">
+      <textarea class="textarea base-input"></textarea>
+      <input type="submit" value="Submit" class="submit-button base-button">
     </form>
     <div class="success-message base-form-done">
       <div class="text-success">Thank you! Your submission has been received!</div>

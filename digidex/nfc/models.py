@@ -41,8 +41,8 @@ class NearFieldCommunicationTag(models.Model):
         choices=NTAG_TYPES,
         default='NTAG 213'
     )
-    digitized_object = models.OneToOneField(
-        'inventory.UserDigitizedObject',
+    digit = models.OneToOneField(
+        'inventory.UserDigit',
         on_delete=models.CASCADE,
         blank=True,
         null=True,
@@ -64,8 +64,8 @@ class NearFieldCommunicationTag(models.Model):
 
     @property
     def user_profile(self):
-        if self.digitized_object:
-            return self.digitized_object.user_profile
+        if self.digit:
+            return self.digit.user_profile
         return None
 
     @property
@@ -103,7 +103,7 @@ class NearFieldCommunicationTag(models.Model):
         return reverse('nfc:route_ntag', kwargs={'_uuid': self.uuid})
 
     @property
-    def digitized_object_page(self):
+    def digit_page(self):
         """
         Retrieves the URL for the web page associated with the digitized object of this NFC tag.
 
@@ -113,9 +113,9 @@ class NearFieldCommunicationTag(models.Model):
         Returns:
             A URL path as a string.
         """
-        if not self.digitized_object:
+        if not self.digit:
             return None
-        return self.digitized_object.detail_page
+        return self.digit.detail_page
 
     @property
     def user_inventory_page(self):
@@ -128,9 +128,9 @@ class NearFieldCommunicationTag(models.Model):
         Returns:
             A URL path as a string.
         """
-        if not self.digitized_object:
+        if not self.digit:
             return None
-        return self.digitized_object.page
+        return self.digit.page
 
     class Meta:
         verbose_name = "NTAG"
