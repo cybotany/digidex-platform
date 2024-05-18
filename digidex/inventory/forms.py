@@ -1,7 +1,6 @@
 from django import forms
 
-from inventory.models import UserDigitizedObject, UserDigitizedObjectNote
-
+from inventory.models import UserInventory, UserDigitizedObject, UserDigitizedObjectNote
 
 class UserDigitizedObjectForm(forms.Form):
     name = forms.CharField(
