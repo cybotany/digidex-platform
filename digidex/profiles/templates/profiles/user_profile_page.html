@@ -19,13 +19,11 @@
   
   <section class="section">
     <div sclass="content">
-      {% include "profiles/includes/inventory/grid.html" %}
-      <div class="inventory">
-        <h2 class="heading">Create Inventory Page</h2>
-        <div class="form-block base-form">
-          {% include "profiles/includes/inventory/form.html" %}
-        </div>
-      </div>
+      {% if page.inventories.exists %}
+        {% include "profiles/includes/inventory/grid.html" %}
+      {% else %}
+        {% include "profiles/includes/inventory/missing.html" %}
+      {% endif %}
     </div>
   </section>
 {% endblock %}
