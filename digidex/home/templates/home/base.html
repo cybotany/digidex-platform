@@ -5,6 +5,9 @@
   <link rel="stylesheet" href="{% static 'home/css/home.css' %}">
 {% endblock %}
 
-{% block content %}{% endblock %}
+{% block body %}
+  {% include "base/includes/page/heading.html" %}
+  {% block content %}{% endblock %}
+{% endblock %}
 
 {% block extra_js %}{% endblock %}

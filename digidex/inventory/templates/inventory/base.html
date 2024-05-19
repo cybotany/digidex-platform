@@ -5,4 +5,7 @@
   <link rel="stylesheet" href="{% static 'inventory/css/inventory.css' %}">
 {% endblock extra_css %}
 
-{% block content %}{% endblock content %}
+{% block body %}
+  {% include "base/includes/page/heading.html" %}
+  {% block content %}{% endblock %}
+{% endblock %}
