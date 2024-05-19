@@ -1,5 +1,10 @@
 {% extends "inventory/base.html" %}
 
 {% block content %}
-  {% include "inventory/includes/inventory/section.html" %}
+  <section class="section">
+    <div sclass="content">
+      {% include "inventory/includes/inventory/grid.html" %}
+      {% include "inventory/includes/inventory/form.html" %}
+    </div>
+  </section>
 {% endblock %}
