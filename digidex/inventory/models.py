@@ -46,6 +46,12 @@ class UserInventory(Orderable):
         null=True,
         blank=True
     )
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+    last_modified = models.DateTimeField(
+        auto_now=True
+    )
 
     @property
     def profile(self):
