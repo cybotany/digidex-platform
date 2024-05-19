@@ -29,4 +29,4 @@ def profile_form_view(request, profile_slug):
     else:
         form = UserProfileForm(instance=user_profile)
     
-    return render(request, 'profiles/user_profile_form.html', {'form': form})
+    return render(request, 'profiles/user_profile_update.html', {'form': form})
