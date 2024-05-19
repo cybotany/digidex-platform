@@ -1,4 +1,4 @@
-.collection-list-profiles {
+.profile {
   grid-column-gap: 1.5em;
   grid-row-gap: 3.4em;
   grid-template-rows: auto;
@@ -7,7 +7,7 @@
   display: grid;
 }
 
-.collection-list-profiles.large {
+.profile.large {
   grid-template-columns: 1fr;
 }
 
@@ -30,18 +30,18 @@
   display: grid;
 }
 
-.collection-list-wrapper-profiles.large {
+.profile-wrapper.large {
   margin-bottom: 3.4em;
 }
 
-.image-profile-avatar {
+.profile-avatar {
   width: 100%;
   height: 15em;
   object-fit: cover;
   border-radius: .87em;
 }
 
-.image-profile-avatar.large {
+.profile-avatar.large {
   height: auto;
   max-height: 40em;
 }
@@ -57,7 +57,7 @@
   display: flex;
 }
 
-.profile {
+.profile-content {
   width: 100%;
   flex-direction: column;
   justify-content: flex-start;
@@ -66,7 +66,7 @@
   display: flex;
 }
 
-.profile.large {
+.profile-content.large {
   justify-content: center;
   padding: 4.3em 4.5em;
 }
@@ -89,6 +89,11 @@
   font-size: .7em;
   font-weight: 500;
   line-height: 130%;
+}
+
+.heading-profile {
+  max-width: 9em;
+  margin-bottom: .3em;
 }
 
 .paragraph-profile {
@@ -145,21 +150,21 @@
 }
 
 @media screen and (max-width: 991px) {
-  .collection-list-profiles {
+  .profile {
     grid-column-gap: 1.13em;
     grid-row-gap: 3em;
     grid-template-columns: 1fr 1fr;
   }
 
-  .collection-list-wrapper-profiles.large {
+  .profile-wrapper.large {
     margin-bottom: 3em;
   }
 
-  .image-profile-avatar {
+  .profile-avatar {
     height: 28vw;
   }
 
-  .profile.large {
+  .profile-content.large {
     padding: 3.4em 3.2em;
   }
 
@@ -169,7 +174,7 @@
   }
 }
 @media screen and (max-width: 767px) {
-  .collection-list-profiles {
+  .profile {
     grid-row-gap: 2em;
     grid-template-columns: 1fr;
   }
@@ -178,12 +183,12 @@
     grid-template-columns: 1fr;
   }
 
-  .collection-list-wrapper-profiles.large {
+  .profile-wrapper.large {
     margin-bottom: 2em;
   }
 
-  .image-profile-avatar,
-  .image-profile-avatar.large {
+  .profile-avatar,
+  .profile-avatar.large {
     height: 50vw;
   }
 
@@ -193,15 +198,15 @@
   }
 }
 @media screen and (max-width: 479px) {
-  .collection-list-profiles {
+  .profile {
     grid-row-gap: 1.5em;
   }
 
-  .collection-list-wrapper-profiles.large {
+  .profile-wrapper.large {
     margin-bottom: 1.5em;
   }
 
-  .profile, .profile.large {
+  .profile-content, .profile-content.large {
     padding: 1.8em 2.2em;
   }
 
