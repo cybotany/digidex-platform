@@ -1,12 +1,5 @@
 {% load i18n %} 
 
-<div class="collection-list-wrapper-posts large base-dyn-list">
-  <div role="list" class="collection-list-posts large base-dyn-items">
-    <div role="listitem" class="base-dyn-item">
-      <div class="block-post large">
-        {% include "profiles/includes/inventory/explanation.html" %}
-        {% include "profiles/includes/inventory/form.html" %}
-      </div>
-    </div>
-  </div>
+<div class="empty-state base-dyn-empty">
+  <div class="text-empty">{% trans "No items found." %}</div>
 </div>

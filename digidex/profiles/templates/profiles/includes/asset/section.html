@@ -16,43 +16,15 @@
       <div role="list" class="asset-item-collection base-dyn-items">
         <div role="listitem" class="base-dyn-item">
           <div class="asset-item">
-            <div class="block-icon-asset-item">
-              <img src="{% static 'images/google/tree.svg' %}" alt="" loading="eager" class="icon-asset-item">
-            </div>
-            <a href="#" class="link-asset-item base-inline-block">
-              <h3 class="heading-asset-item"></h3>
-            </a>
-            <div class="block-price">
-              <div class="text-price">New Price</div>
-              <div class="compare-at-price">Original Price</div>
-            </div>
-            <p class="paragraph-description"></p>
-            <div class="subtitle-asset-item">Features<br></div>
-            <div class="block-features-asset-item">
-              <div class="features-asset-item">
-                <img src="{% static 'images/bx/check-green.svg' %}" loading="eager" alt="" class="icon-features-asset-item">
-                <h6 class="heading-features-asset-item"></h6>
-              </div>
-              <div class="features-asset-item">
-                <img src="{% static 'images/bx/check-green.svg' %}" loading="eager" alt="" class="icon-features-asset-item">
-                <h6 class="heading-features-asset-item"></h6>
-              </div>
-              <div class="features-asset-item">
-                <img src="{% static 'images/bx/check-green.svg' %}" loading="eager" alt="" class="icon-features-asset-item">
-                <h6 class="heading-features-asset-item"></h6>
-              </div>
-              <div class="features-asset-item">
-                <img src="{% static 'images/bx/check-green.svg' %}" loading="eager" alt="" class="icon-features-asset-item">
-                <h6 class="heading-features-asset-item"></h6>
-              </div>
-              <div class="features-asset-item">
-                <img src="{% static 'images/bx/check-green.svg' %}" loading="eager" alt="" class="icon-features-asset-item">
-                <h6 class="heading-features-asset-item"></h6>
-              </div>
-            </div>
-            <a href="#" class="button base-button">View Asset</a>
+            {% include 'profiles/includes/asset/item/thumbnail.html' %}
+            {% include 'profiles/includes/asset/item/heading.html' %}
+            {% include 'profiles/includes/asset/item/paragraph.html' %}
+            <div class="subtitle-asset-item">Analytics<br></div>
+            {% include 'profiles/includes/asset/item/paragraph.html' %}
+            <a href="#" class="button base-button">View Details</a>
           </div>
         </div>
+        {% include 'profiles/includes/asset/item/missing.html' %}
       </div>
     </div>
   </div>
