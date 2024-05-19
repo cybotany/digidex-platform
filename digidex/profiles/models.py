@@ -9,6 +9,8 @@ from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 from wagtail.search import index
 
+from base.utils.storage import PublicMediaStorage, PrivateMediaStorage
+
 
 def user_avatar_path(instance, filename):
     extension = filename.split('.')[-1]
@@ -51,6 +53,7 @@ class UserProfile(models.Model):
         verbose_name="User Slug"
     )
     avatar = models.ImageField(
+        storage=PublicMediaStorage(),
         upload_to=user_avatar_path,
         null=True,
         blank=True

@@ -147,12 +147,18 @@ AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
 AWS_S3_FILE_OVERWRITE = False
-MEDIA_URL = '{}/media/'.format(AWS_S3_CUSTOM_DOMAIN)
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Public and Private Media Storage
+PUBLIC_MEDIA_ROOT = 'media/public'
+PRIVATE_MEDIA_ROOT = 'media/private'
+
+# Media URLs
+PUBLIC_MEDIA_URL = '{}/{}/'.format(AWS_S3_CUSTOM_DOMAIN, PUBLIC_MEDIA_ROOT)
+PRIVATE_MEDIA_URL = '{}/{}/'.format(AWS_S3_CUSTOM_DOMAIN, PRIVATE_MEDIA_ROOT)
 
 # Static files (CSS, JavaScript, Images)
-STATIC_URL = '{}/static/'.format(AWS_S3_CUSTOM_DOMAIN)
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL = '{}/static/'.format(AWS_S3_CUSTOM_DOMAIN)
 
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
