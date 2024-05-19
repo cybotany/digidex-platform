@@ -9,8 +9,6 @@ from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 from wagtail.search import index
 
-from inventory.forms import UserInventoryForm
-
 
 class UserProfileIndexPage(Page):
     heading = models.CharField(
@@ -210,6 +208,7 @@ class UserProfilePage(Page):
         return user_inventory
 
     def serve(self, request):
+        from inventory.forms import UserInventoryForm
         form = UserInventoryForm()
         if request.method == 'POST':
             form = UserInventoryForm(request.POST)

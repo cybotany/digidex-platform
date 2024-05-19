@@ -1,10 +1,10 @@
-from django.apps import apps
 from django import forms
+
+from inventory.models import UserInventory, UserDigit, JournalEntry
 
 
 class UserInventoryForm(forms.ModelForm):
     class Meta:
-        UserInventory = apps.get_model('inventory', 'UserInventory')
         model = UserInventory
         fields = ('name', 'description',)
         widgets = {
@@ -25,7 +25,6 @@ class UserInventoryForm(forms.ModelForm):
 
 class UserDigitForm(forms.ModelForm):
     class Meta:
-        UserDigit = apps.get_model('inventory', 'UserDigit')
         model = UserDigit
         fields = ('name', 'description',)
         widgets = {
@@ -46,7 +45,6 @@ class UserDigitForm(forms.ModelForm):
 
 class JournalEntryForm(forms.ModelForm):
     class Meta:
-        JournalEntry = apps.get_model('inventory', 'JournalEntry')
         model = JournalEntry
         fields = ('image', 'caption',)
         widgets = {
