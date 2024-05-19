@@ -3,11 +3,7 @@ from django.http import HttpResponseForbidden
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
-
-from inventory.models import UserInventory
-
 from digitization.forms import UserDigitForm
-from digitization.models import UserDigit
 
 
 @login_required
