@@ -1,4 +1,5 @@
 from django.utils.text import slugify
+
 from wagtail.models import Page
 
 from profiles.models import UserProfileIndexPage, UserProfile

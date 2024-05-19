@@ -9,7 +9,7 @@ from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 from wagtail.search import index
 
-from base.utils.storage import PublicMediaStorage, PrivateMediaStorage
+from base.utils.storage import PublicMediaStorage
 
 
 def user_avatar_path(instance, filename):

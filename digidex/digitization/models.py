@@ -30,31 +30,27 @@ class UserDigit(Orderable):
         null=True,
         help_text="Digitized object description."
     )
+    inventory_page = ParentalKey(
+        'inventory.UserInventoryPage',
+        on_delete=models.CASCADE,
+        related_name='itemized_digits'
+    )
+    slug = models.SlugField(
+        unique=True,
+        db_index=True,
+        max_length=255,
+        verbose_name="Digitized Object Slug"
+    )
     created_at = models.DateTimeField(
         auto_now_add=True
     )
     last_modified = models.DateTimeField(
         auto_now=True
     )
-    page = ParentalKey(
-        UserInventoryPage,
-        on_delete=models.CASCADE,
-        related_name='itemized_digits'
-    )
-    user_profile = models.ForeignKey(
-        'profiles.UserProfile',
-        on_delete=models.CASCADE,
-        related_name='user_digits'
-    )
-    detail_page = models.OneToOneField(
-        'inventory.UserDigitPage',
-        on_delete=models.PROTECT,
-        related_name='detailed_digit'
-    )
 
     @property
     def user(self):
-        return self.user_profile.user
+        return self.inventory_page.profile_page.profile.user
 
     @property
     def username(self):
@@ -73,8 +69,7 @@ class UserDigit(Orderable):
         return self.name.title()
 
     def create_digit_page(self):
-        inventory_page = UserInventoryPage.objects.filter(owner=self.user).first()
-        if not inventory_page:
+        if not self.inventory_page:
             raise ObjectDoesNotExist("User has no inventory page.")
         try:
             if self.detail_page:
@@ -95,10 +90,9 @@ class UserDigit(Orderable):
                 heading=self.digit_name,
                 intro=self.digit_description
             )
-            inventory_page.add_child(instance=user_digit_page)
+            self.inventory_page.add_child(instance=user_digit_page)
             user_digit_page.save_revision().publish()
 
-            self.page = inventory_page
             self.detail_page = user_digit_page
             self.save() 
         return self.detail_page
