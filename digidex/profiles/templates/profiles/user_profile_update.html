@@ -5,11 +5,13 @@
   {% trans "Update Profile" %}
 {% endblock title %}
 
-{% block content %}
-  <section class="utility-page-wrap">
-    <div class="utility-page-content base-password-page base-form">
-      <h2 class="account-heading">Update Profile</h2>
-        {% include "profiles/includes/profile/form.html" %}
-    </div>
-  </section>
+{% block body %}
+  {% block content %}
+    <section class="utility-page-wrap">
+      <div class="utility-page-content base-password-page base-form">
+        <h2 class="account-heading">Update Profile</h2>
+          {% include "profiles/includes/profile/form.html" %}
+      </div>
+    </section>
+  {% endblock %}
 {% endblock %}
