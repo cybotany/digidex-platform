@@ -2,11 +2,14 @@ from django.apps import apps
 from django.db import models
 from django.conf import settings
 from django.urls import reverse
+from django.shortcuts import render
 
 from wagtail.models import Page
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 from wagtail.search import index
+
+from inventory.forms import UserInventoryForm
 
 
 class UserProfileIndexPage(Page):
@@ -205,6 +208,16 @@ class UserProfilePage(Page):
         user_inventory.save()
 
         return user_inventory
+
+    def serve(self, request):
+        form = UserInventoryForm()
+        if request.method == 'POST':
+            form = UserInventoryForm(request.POST)
+            if form.is_valid():
+                user_inventory = form.save()
+                user_inventory_page = user_inventory.create_page()
+                return reverse(user_inventory_page.url)
+        return render(request, self.template, {'page': self, 'form': form})
 
     class Meta:
         verbose_name = "User Profile Page"
