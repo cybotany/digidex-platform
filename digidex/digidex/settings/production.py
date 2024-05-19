@@ -4,7 +4,7 @@ from .base import *
 
 DEBUG = False
 
-STORAGES["staticfiles"]["BACKEND"] = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATIC_ROOT = 'staticfiles/'
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
