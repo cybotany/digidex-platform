@@ -42,7 +42,7 @@ class NearFieldCommunicationTag(models.Model):
         default='NTAG 213'
     )
     digit = models.OneToOneField(
-        'inventory.UserDigit',
+        'digitization.UserDigit',
         on_delete=models.CASCADE,
         blank=True,
         null=True,

@@ -137,5 +137,5 @@ class UserInventoryPage(Page):
     ]
 
     subpage_types = [
-        'inventory.UserDigitPage'
+        'digitization.UserDigitPage'
     ]
