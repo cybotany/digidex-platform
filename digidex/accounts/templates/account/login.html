@@ -2,14 +2,14 @@
 {% load allauth i18n account %}
 
 {% block title %}
-  {% trans "Sign In" %}
+  {% trans "Login" %}
 {% endblock title %}
 
 {% block content %}
   {% url 'account_login' as login_url %}
     {% element form form=form method="post" action=login_url tags="entrance,login" %}
       {% slot body %}
-        {% element h1 %}{% trans "Sign In" %}{% endelement %}
+        {% element h1 %}{% trans "Login" %}{% endelement %}
         {% csrf_token %}
         {% element fields form=form unlabeled=True %}{% endelement %}
         {% if redirect_field_value %}
@@ -17,7 +17,7 @@
         {% endif %}
       {% endslot %}
       {% slot actions %}
-        {% element button type="submit" tags="prominent,login" %}{% trans "Sign In" %}{% endelement %}
+        {% element button type="submit" tags="prominent,login" %}{% trans "Login" %}{% endelement %}
       {% endslot %}
     {% endelement %}
     {% if SOCIALACCOUNT_ENABLED %}
