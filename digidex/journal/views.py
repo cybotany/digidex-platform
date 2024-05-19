@@ -2,8 +2,7 @@ from django.apps import apps
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
-from digitization.models import UserDigit
-
+from journal.forms import JournalEntryForm
 
 @login_required
 def add_digit_note(request, profile_slug, digit_uuid):
@@ -18,10 +17,11 @@ def add_digit_note(request, profile_slug, digit_uuid):
     if request.method == 'POST':
         form = JournalEntryForm(request.POST, request.FILES)
         if form.is_valid():
-            digitized_object = get_object_or_404(UserDigit, uuid=digit_uuid)
-            digitized_object_note = form.save(digitized_object, commit=True)
-            return redirect(digitized_object_note.digit_detail_page_url)
+            UserDigit = apps.get_model('digitization', 'UserDigit')
+            digit = get_object_or_404(UserDigit, uuid=digit_uuid)
+            digit_note = form.save(digit, commit=True)
+            return redirect(digit_note.digit_detail_page_url)
     else:
         form = JournalEntryForm()
 
-    return render(request, "inventory/add_digit_note.html", {'form': form})
+    return render(request, "journal/record_journal_entry.html", {'form': form})

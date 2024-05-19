@@ -4,5 +4,5 @@ from journal.views import add_digit_note
 
 app_name = 'journal'
 urlpatterns = [
-    path('<slug:profile_slug>/add/digit/<uuid:digit_uuid>/note/', add_digit_note, name='add_digit_note'),
+    path('add/digit/<uuid:digit_uuid>/note/', add_digit_note, name='add_digit_note'),
 ]
