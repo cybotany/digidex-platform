@@ -1,3 +1,4 @@
+from django.apps import apps
 from django.db import models
 from django.conf import settings
 from django.urls import reverse
@@ -6,8 +7,6 @@ from wagtail.models import Page
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 from wagtail.search import index
-
-from inventory.models import UserInventoryPage
 
 
 class UserProfileIndexPage(Page):
@@ -51,6 +50,7 @@ class UserProfile(models.Model):
         blank=True
     )
     bio = models.TextField(
+        null=True,
         blank=True,
         help_text="Short Biography about the user."
     )
@@ -164,18 +164,6 @@ class UserProfilePage(Page):
         return self.username.title()
 
     @property
-    def inventory_page(self):
-        """
-        Property to fetch the UserInventoryPage associated with this profile page.
-        Assumes there is at most one such page per UserProfilePage.
-        """
-        inventory_page = self.get_children().type(UserInventoryPage).first()
-        if inventory_page:
-            return inventory_page.specific
-        else:
-            raise UserInventoryPage.DoesNotExist("Inventory page for user does not exist.")
-
-    @property
     def form_url(self):
         """
         Retrieve the URL for the profile form view.
@@ -183,25 +171,40 @@ class UserProfilePage(Page):
         """
         return reverse('profiles:profile_form', kwargs={'profile_slug': self.profile.slug})
 
-    def create_inventory_page(self):
+    def create_inventory(self, name):
         """
         Method to create a UserInventoryPage associated with this profile page.
+        
+        Args:
+            name (str): The name of the new UserInventory instance.
         """
-        try:
-            return self.inventory_page()
-        except UserInventoryPage.DoesNotExist:
-            owner = self.user
+        UserInventory = apps.get_model('inventory', 'UserInventory')
+        
+        # Create the UserInventory instance with the provided name
+        user_inventory = UserInventory(
+            profile_page=self,
+            name=name,
+        )
 
-            inventory_page = UserInventoryPage(
-                title=f"{self._username}'s Inventory",
-                owner=owner,
-                slug='inventory',
-                heading="Inventory",
-                intro=f"Welcome to {self._username}'s Inventory Page.",
-            )
-            self.add_child(instance=inventory_page)
-            inventory_page.save_revision().publish()
-            return inventory_page
+        # Save the UserInventory instance to the database and generate the slug
+        user_inventory.save()
+
+        # Create a corresponding UserInventoryPage
+        UserInventoryPage = apps.get_model('inventory', 'UserInventoryPage')
+        inventory_page = UserInventoryPage(
+            title=f"{user_inventory.name} - {self._username}",
+            slug=user_inventory.slug,
+            heading=user_inventory.name,
+            intro=user_inventory.description if hasattr(user_inventory, 'description') else "",
+        )
+        self.add_child(instance=inventory_page)
+        inventory_page.save_revision().publish()
+
+        # Link the UserInventory to the created UserInventoryPage
+        user_inventory.detail_page = inventory_page
+        user_inventory.save()
+
+        return user_inventory
 
     class Meta:
         verbose_name = "User Profile Page"

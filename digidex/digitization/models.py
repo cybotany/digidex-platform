@@ -26,6 +26,11 @@ class DigitizedObjectInventory(models.Model):
         default='Inventory',
         help_text="Digitized Object Inventory name."
     )
+    description = models.TextField(
+        blank=True,
+        null=True,
+        help_text="Digitized object Inventory description."
+    )
     slug = models.SlugField(
         unique=True,
         db_index=True,

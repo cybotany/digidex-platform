@@ -21,7 +21,9 @@ class UserInventory(Orderable, DigitizedObjectInventory):
     detail_page = models.OneToOneField(
         'inventory.UserInventoryPage',
         on_delete=models.PROTECT,
-        related_name='detailed_digit'
+        related_name='detailed_digit',
+        null=True,
+        blank=True
     )
 
     @property
@@ -50,6 +52,27 @@ class UserInventory(Orderable, DigitizedObjectInventory):
         self.name = unique_name
         self.slug = slugify(self.name)
         super().save(*args, **kwargs)
+
+    def create_page(self):
+        """
+        Method to create a UserInventoryPage associated with this UserInventory instance.
+        """
+        UserInventoryPage = apps.get_model('inventory', 'UserInventoryPage')
+        
+        inventory_page = UserInventoryPage(
+            title=f"{self._username}'s Inventory: {self.name}",
+            slug=slugify(self.name),
+            heading="Inventory",
+            intro=f"Welcome to {self._username}'s Inventory Page.",
+        )
+        self.profile_page.add_child(instance=inventory_page)
+        inventory_page.save_revision().publish()
+        
+        # Link the UserInventory to the created UserInventoryPage
+        self.detail_page = inventory_page
+        self.save()
+
+        return inventory_page
 
     class Meta:
         unique_together = ('profile_page', 'name')
