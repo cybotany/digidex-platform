@@ -19,6 +19,10 @@
   
   <section class="section">
     <div sclass="content">
+      <div class="block-heading center">
+        <div class="subtitle">Party<br></div>
+        <h2 class="heading">Most Important Digitized Assets</h2>
+      </div>
       {% if page.inventories.exists %}
         {% include "profiles/includes/inventory/grid.html" %}
       {% else %}
@@ -26,4 +30,19 @@
       {% endif %}
     </div>
   </section>
+
+  <section class="section">
+    <div sclass="content">
+      <div class="block-heading center">
+        <div class="subtitle">Inventory<br></div>
+        <h2 class="heading">Grouped Digitized Assets</h2>
+      </div>
+      {% if page.inventories.exists %}
+        {% include "profiles/includes/party/grid.html" %}
+      {% else %}
+        {% include "profiles/includes/party/missing.html" %}
+      {% endif %}
+    </div>
+  </section>
+
 {% endblock %}
