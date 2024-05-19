@@ -1,0 +1,14 @@
+{% load static wagtailcore_tags %}
+
+<div class="collection-list-wrapper-assets base-dyn-list">
+  <div role="list" class="collection-list-assets base-dyn-items">
+    {% for inventory in page.inventories.all %}
+      <div role="listitem" class="collection-item-assets base-dyn-item" alt="" loading="eager">
+        <a href="{{ inventory.detail_page.url }}" class="link-asset base-inline-block">
+          <img src="{% static 'images/ibm/cloud-dedicated-host.svg' %}" class="icon-asset">
+          <div class="text-asset">{{ inventory.name }}</div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+</div>

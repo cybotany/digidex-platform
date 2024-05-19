@@ -6,18 +6,16 @@
       <div class="block-assets">
         <a href="#" aria-current="page" class="link-asset base-inline-block base--current">
           <img src="{% static 'images/switcher.svg' %}" loading="eager" alt="" class="icon-asset">
-          <div class="text-asset">All</div>
+          <div class="text-asset">Party</div>
         </a>
-        <div class="collection-list-wrapper-assets base-dyn-list">
-          <div role="list" class="collection-list-assets base-dyn-items">
-            <div role="listitem" class="collection-item-assets base-dyn-item" alt="" loading="eager">
-              <a href="#" class="link-asset base-inline-block">
-                <img src="{% static 'images/ibm/cloud-dedicated-host.svg' %}" class="icon-asset">
-                <div class="text-asset">Party</div>
-              </a>
-            </div>
-          </div>
-        </div>
+        {% if page.inventories.exists %}
+          {% include 'profiles/includes/asset/category/list.html' %}
+        {% else %}
+          <a href="#" aria-current="page" class="link-asset base-inline-block base--current">
+            <img src="{% static 'images/switcher.svg' %}" loading="eager" alt="" class="icon-asset">
+            <div class="text-asset">Create Group</div>
+          </a>
+        {% endif %}
       </div>
     </div>
     <div class="asset-item-collection-wrapper base-dyn-list">
