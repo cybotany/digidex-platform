@@ -4,17 +4,11 @@
   <div class="content">
     <div class="block">
       <div class="block-assets">
-        <a href="#" aria-current="page" class="link-asset base-inline-block base--current">
-          <img src="{% static 'images/switcher.svg' %}" loading="eager" alt="" class="icon-asset">
-          <div class="text-asset">Party</div>
-        </a>
+        {% include 'profiles/includes/asset/category/default.html' %}
         {% if page.inventories.exists %}
           {% include 'profiles/includes/asset/category/list.html' %}
         {% else %}
-          <a href="#" aria-current="page" class="link-asset base-inline-block base--current">
-            <img src="{% static 'images/google/add-circle.svg' %}" loading="eager" alt="" class="icon-asset">
-            <div class="text-asset">Create Group</div>
-          </a>
+          {% include 'profiles/includes/asset/category/add.html' %}
         {% endif %}
       </div>
     </div>
