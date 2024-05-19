@@ -10,6 +10,11 @@ from wagtail.admin.panels import FieldPanel
 from wagtail.search import index
 
 
+def user_avatar_path(instance, filename):
+    extension = filename.split('.')[-1]
+    return f'users/{instance.user.username}/avatar.{extension}'
+
+
 class UserProfileIndexPage(Page):
     heading = models.CharField(
         max_length=255,
@@ -46,7 +51,7 @@ class UserProfile(models.Model):
         verbose_name="User Slug"
     )
     avatar = models.ImageField(
-        upload_to='avatars/',
+        upload_to=user_avatar_path,
         null=True,
         blank=True
     )
