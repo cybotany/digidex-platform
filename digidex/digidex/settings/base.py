@@ -159,7 +159,7 @@ PUBLIC_MEDIA_URL = '{}/{}/'.format(AWS_S3_CUSTOM_DOMAIN, PUBLIC_MEDIA_ROOT)
 PRIVATE_MEDIA_URL = '{}/{}/'.format(AWS_S3_CUSTOM_DOMAIN, PRIVATE_MEDIA_ROOT)
 
 # Static files (CSS, JavaScript, Images)
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '{}/static/'.format(AWS_S3_CUSTOM_DOMAIN)
 
 STATICFILES_FINDERS = [
