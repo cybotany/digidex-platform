@@ -15,6 +15,7 @@ PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 INSTALLED_APPS = [
+    
     "accounts",
     "api",
     "base",
@@ -25,6 +26,7 @@ INSTALLED_APPS = [
     "profiles",
     "search",
     "storages",
+    "whitenoise.runserver_nostatic",
 
     "wagtail.contrib.settings",
     "wagtail.contrib.forms",
