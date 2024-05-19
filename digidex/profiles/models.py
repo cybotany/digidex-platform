@@ -6,7 +6,7 @@ from django.shortcuts import render
 
 from wagtail.models import Page
 from wagtail.fields import RichTextField
-from wagtail.admin.panels import FieldPanel
+from wagtail.admin.panels import FieldPanel, InlinePanel
 from wagtail.search import index
 
 from base.utils.storage import PublicMediaStorage
@@ -140,6 +140,7 @@ class UserProfilePage(Page):
         FieldPanel('heading'),
         FieldPanel('intro'),
         FieldPanel('profile'),
+        InlinePanel('inventories', label="User Inventories"),
     ]
 
     parent_page_types = [
@@ -187,9 +188,8 @@ class UserProfilePage(Page):
         Args:
             name (str): The name of the new UserInventory instance.
         """
-        UserInventory = apps.get_model('inventory', 'UserInventory')
-        
         # Create the UserInventory instance with the provided name
+        UserInventory = apps.get_model('inventory', 'UserInventory')
         user_inventory = UserInventory(
             profile_page=self,
             name=name,
@@ -217,6 +217,7 @@ class UserProfilePage(Page):
 
     def serve(self, request):
         from inventory.forms import UserInventoryForm
+        
         form = UserInventoryForm()
         if request.method == 'POST':
             form = UserInventoryForm(request.POST)

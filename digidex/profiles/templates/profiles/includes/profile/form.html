@@ -1,7 +1,8 @@
 <!-- Render Form -->
-<form method="post" class="utility-page-form base-password-page" enctype="multipart/form-data">
+<form id="profile-form" class="utility-page-form base-password-page" enctype="multipart/form-data">
   {% csrf_token %}
   <!-- Render Avatar Field -->
+  <label for="{{ form.avatar.id_for_label }}">Avatar:</label>
   {{ form.avatar }}
   {% if form.avatar.errors %}
     <div class="error-message">
@@ -9,6 +10,7 @@
     </div>
   {% endif %}
   <!-- Render Bio Field -->
+  <label for="{{ form.bio.id_for_label }}">Bio:</label>
   {{ form.bio }}
   {% if form.bio.errors %}
     <div class="error-message">
@@ -17,4 +19,5 @@
   {% endif %}
   <!-- Render Submit Button -->
   <input type="submit" value="Update" class="submit-button base-button"> 
+  {{ form.non_field_errors }}
 </form>
