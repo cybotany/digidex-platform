@@ -1,5 +1,5 @@
 {% extends "profiles/base.html" %}
-{% load wagtailcore_tags%}
+{% load static wagtailcore_tags%}
 
 {% block content %}
   <!-- Profile Section -->
@@ -17,32 +17,47 @@
       </div>
     </div>
   </section>
-  <!-- Party Section --> 
   <section class="section">
-    <div sclass="content">
-      <div class="block-heading center">
-        <div class="subtitle">Party<br></div>
-        <h2 class="heading">Important Digitized Assets</h2>
+    <div class="content">
+      <div class="block-top">
+        <h1 class="heading-top">Digitized Assets</h1>
+        <div class="block-categories">
+          <div class="collection-list-wrapper-categories base-dyn-list">
+            <div role="list" class="collection-list-categories base-dyn-items">
+              <div role="listitem" class="collection-item-categories base-dyn-item" alt="" loading="eager">
+                <a href="#" class="link-category base-inline-block">
+                  <img src="{% static 'images/switcher.svg' %}" class="icon-category">
+                  <div class="text-category">All</div>
+                </a>
+              </div>
+              <div role="listitem" class="collection-item-categories base-dyn-item" alt="" loading="eager">
+                <a href="#" class="link-category base-inline-block">
+                  <img src="{% static 'images/ibm/cloud-dedicated-host.svg' %}" class="icon-category">
+                  <div class="text-category">Dedicated Hosting</div>
+                </a>
+              </div>
+              <div role="listitem" class="collection-item-categories base-dyn-item">
+                <a href="#" class="link-category base-inline-block">
+                  <img src="{% static 'images/ibm/cloud-data-ops.svg' %}" class="icon-category" alt="" loading="eager">
+                  <div class="text-category">Cloud Hosting</div>
+                </a>
+              </div>
+              <div role="listitem" class="collection-item-categories base-dyn-item">
+                <a href="#" class="link-category base-inline-block">
+                  <img src="{% static 'images/object-storage.svg' %}" class="icon-category" alt="" loading="eager">
+                  <div class="text-category">VPS Hosting</div>
+                </a>
+              </div>
+              <div role="listitem" class="collection-item-categories base-dyn-item">
+                <a href="#" class="link-category base-inline-block">
+                  <img src="{% static 'images/edge-node-alt.svg' %}" class="icon-category" alt="" loading="eager">
+                  <div class="text-category">Shared Hosting</div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      {% if page.inventories.exists %}
-        {% include "profiles/includes/party/grid.html" %}
-      {% else %}
-        {% include "profiles/includes/party/missing.html" %}
-      {% endif %}
-    </div>
-  </section>
-  <!-- Inventory Section -->
-  <section class="section">
-    <div sclass="content">
-      <div class="block-heading center">
-        <div class="subtitle">Inventory<br></div>
-        <h2 class="heading">Grouped Digitized Assets</h2>
-      </div>
-      {% if page.inventories.exists %}
-        {% include "profiles/includes/inventory/grid.html" %}
-      {% else %}
-        {% include "profiles/includes/inventory/missing.html" %}
-      {% endif %}
     </div>
   </section>
 {% endblock %}
