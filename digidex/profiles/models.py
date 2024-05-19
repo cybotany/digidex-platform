@@ -2,7 +2,7 @@ from django.apps import apps
 from django.db import models
 from django.conf import settings
 from django.urls import reverse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from wagtail.models import Page
 from wagtail.fields import RichTextField
@@ -217,14 +217,19 @@ class UserProfilePage(Page):
 
     def serve(self, request):
         from inventory.forms import UserInventoryForm
-        
+
         form = UserInventoryForm()
         if request.method == 'POST':
             form = UserInventoryForm(request.POST)
             if form.is_valid():
-                user_inventory = form.save()
+                user_inventory = form.save(commit=False)
+                user_inventory.profile_page = self
+                user_inventory.save()
                 user_inventory_page = user_inventory.create_page()
-                return reverse(user_inventory_page.url)
+                return redirect(user_inventory_page.url)
+            else:
+                # Add error handling and feedback
+                return render(request, self.template, {'page': self, 'form': form, 'errors': form.errors})
         return render(request, self.template, {'page': self, 'form': form})
 
     class Meta:
