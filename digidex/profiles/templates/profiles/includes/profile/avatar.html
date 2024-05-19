@@ -1,7 +1,5 @@
-{% load static wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
-<a href="#" class="link-profile-avatar large base-inline-block">
-  {% if page.profile.avatar %}
-    <img src="{{ page.profile.avatar.url }}" alt="Profile Avatar" class="image-profile-avatar large">
-  {% endif %}
-</a>
+{% if page.profile.avatar %}
+  <img src="{{ page.profile.avatar.url }}" alt="Profile Avatar" class="image-profile-avatar large">
+{% endif %}

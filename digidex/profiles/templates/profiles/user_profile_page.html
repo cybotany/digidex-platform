@@ -2,5 +2,18 @@
 {% load wagtailcore_tags%}
 
 {% block content %}
-  {% include "profiles/includes/profile/section.html" %}
+  <section class="section">
+    <div class="content">    
+      <div class="collection-list-wrapper-posts large base-dyn-list">
+        <div role="list" class="collection-list-posts large base-dyn-items">
+          <div role="listitem" class="base-dyn-item">
+            <div class="block-post large">
+              {% include "profiles/includes/profile/avatar.html" %}
+              {% include "profiles/includes/profile/body.html" %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 {% endblock %}
