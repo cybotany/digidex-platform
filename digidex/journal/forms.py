@@ -1,6 +1,6 @@
 from django import forms
 
-from _journal.models import JournalEntry
+from journal.models import JournalEntry
 
 
 class JournalEntryForm(forms.ModelForm):

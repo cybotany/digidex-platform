@@ -10,16 +10,8 @@ from wagtail.admin.panels import FieldPanel, InlinePanel
 from wagtail.search import index
 from wagtail.fields import RichTextField
 
-from digitization.models import DigitizedObject, DigitizedObjectJournalEntry
 
-
-
-class DigitizedObjectJournalEntry(models.Model):
-    digit = models.ForeignKey(
-        DigitizedObject,
-        on_delete=models.CASCADE,
-        related_name='images'
-    )
+class JournalEntry(Orderable):
     image = models.ForeignKey(
         'wagtailimages.Image',
         on_delete=models.CASCADE,
@@ -32,20 +24,13 @@ class DigitizedObjectJournalEntry(models.Model):
         max_length=250,
         help_text="Image caption."
     )
-
-    class Meta:
-        abstract = True
-
-
-
-class JournalEntry(Orderable, DigitizedObjectJournalEntry):
     digit = models.OneToOneField(
-        UserDigit,
+        "digitization.UserDigit",
         on_delete=models.CASCADE,
         related_name='journal_entries'
     )
     page = ParentalKey(
-        UserDigitPage,
+        "digitization.UserDigitPage",
         on_delete=models.CASCADE,
         related_name='digit_journal_entries'
     )
