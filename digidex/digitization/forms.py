@@ -1,17 +1,17 @@
 from django import forms
 
-from inventory.models import UserInventory
+from digitization.models import UserDigit
 
 
-class UserInventoryForm(forms.ModelForm):
+class UserDigitForm(forms.ModelForm):
     class Meta:
-        model = UserInventory
+        model = UserDigit
         fields = ('name', 'description',)
         widgets = {
             'name': forms.TextInput(
                 attrs={
                     'class': 'text-field base-input',
-                    'placeholder': 'Enter the name of the inventory'
+                    'placeholder': 'Enter the name of the digitized object'
                 }
             ),
             'description': forms.Textarea(

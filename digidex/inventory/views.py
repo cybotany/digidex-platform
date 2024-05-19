@@ -3,8 +3,11 @@ from django.http import HttpResponseForbidden
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
-from inventory.forms import UserDigitForm, JournalEntryForm
-from inventory.models import UserDigit
+
+from inventory.models import UserInventory
+
+from digitization.forms import UserDigitForm
+from digitization.models import UserDigit
 
 
 @login_required
@@ -37,7 +40,7 @@ def link_ntag_and_digit(request, profile_slug, ntag_uuid):
 
     return render(request, "inventory/link_ntag_and_digit.html", {'form': form})
 
-
+"""
 @login_required
 def add_digit_note(request, profile_slug, digit_uuid):
     UserProfile = apps.get_model('profiles', 'UserProfile')
@@ -58,3 +61,4 @@ def add_digit_note(request, profile_slug, digit_uuid):
         form = JournalEntryForm()
 
     return render(request, "inventory/add_digit_note.html", {'form': form})
+"""
