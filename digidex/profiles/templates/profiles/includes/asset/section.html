@@ -2,27 +2,22 @@
 
 <section class="section">
   <div class="content">
-    <div class="block">
-      <div class="block-assets">
-        {% include 'profiles/includes/asset/category/default.html' %}
-        {% if page.inventories.exists %}
-          {% include 'profiles/includes/asset/category/list.html' %}
-        {% else %}
-          {% include 'profiles/includes/asset/category/add.html' %}
-        {% endif %}
-      </div>
+    <div class="block-asset-categories block">
+      {% include 'profiles/includes/asset/category/default.html' %}
+      {% if page.inventories.exists %}
+        {% include 'profiles/includes/asset/category/list.html' %}
+      {% endif %}
+      {% include 'profiles/includes/asset/category/add.html' %}
     </div>
     <div class="asset-item-collection-wrapper base-dyn-list">
       <div role="list" class="asset-item-collection base-dyn-items">
-        <div role="listitem" class="base-dyn-item">
-          <div class="asset-item">
-            {% include 'profiles/includes/asset/item/thumbnail.html' %}
-            {% include 'profiles/includes/asset/item/heading.html' %}
-            {% include 'profiles/includes/asset/item/paragraph.html' %}
-            <div class="subtitle-asset-item">Analytics<br></div>
-            {% include 'profiles/includes/asset/item/journal/block.html' %}
-            {% include 'profiles/includes/asset/item/link.html' %}
-          </div>
+        <div role="listitem" class="asset-item base-dyn-item">
+          {% include 'profiles/includes/asset/item/thumbnail.html' %}
+          {% include 'profiles/includes/asset/item/heading.html' %}
+          {% include 'profiles/includes/asset/item/paragraph.html' %}
+          {% include 'profiles/includes/asset/item/journal/subtitle.html' %}
+          {% include 'profiles/includes/asset/item/journal/block.html' %}
+          {% include 'profiles/includes/asset/item/cta.html' %}
         </div>
         {% include 'profiles/includes/asset/item/missing.html' %}
       </div>

@@ -1,13 +1,13 @@
 {% load static wagtailcore_tags %}
 
-<div class="collection-list-wrapper-assets base-dyn-list">
-  <div role="list" class="collection-list-assets base-dyn-items">
+<div class="asset-category-collection-wrapper base-dyn-list">
+  <div role="list" class="asset-category-collection base-dyn-items">
     {% for inventory in page.inventories.all %}
       {% if inventory.name != "Party" %}
-        <div role="listitem" class="collection-item-assets base-dyn-item" alt="" loading="eager">
-          <a href="{{ inventory.detail_page.url }}" class="link-asset base-inline-block">
-            <img src="{% static 'images/ibm/cloud-dedicated-host.svg' %}" class="icon-asset">
-            <div class="text-asset">{{ inventory.name }}</div>
+        <div role="listitem" class="asset-category base-dyn-item" alt="" loading="eager">
+          <a href="{{ inventory.detail_page.url }}" class="link-asset-category base-inline-block">
+            <img src="{% static 'images/ibm/cloud-dedicated-host.svg' %}" class="icon-asset-category">
+            <div class="text-asset-category">{{ inventory.name }}</div>
           </a>
         </div>
       {% endif %}
