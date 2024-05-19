@@ -2,9 +2,12 @@
 {% load static %}
 
 {% block extra_css %}
-  <link rel="stylesheet" href="{% static 'accounts/css/profile.css' %}">
+  <link rel="stylesheet" href="{% static 'profiles/css/profiles.css' %}">
 {% endblock %}
 
-{% block content %}{% endblock %}
+{% block body %}
+  {% include "base/includes/page/heading.html" %}
+  {% block content %}{% endblock %}
+{% endblock %}
 
 {% block extra_js %}{% endblock %}
