@@ -216,21 +216,36 @@ class UserProfilePage(Page):
         return user_inventory
 
     def serve(self, request):
-        from inventory.forms import UserInventoryForm
+        context = self.get_context(request)
+        context['selected_inventory'] = self.get_selected_inventory(request)
+        context['form'] = self.get_inventory_form(request)
 
-        form = UserInventoryForm()
         if request.method == 'POST':
-            form = UserInventoryForm(request.POST)
+            form = context['form']
             if form.is_valid():
                 user_inventory = form.save(commit=False)
                 user_inventory.profile_page = self
                 user_inventory.save()
-                user_inventory_page = user_inventory.create_page()
-                return redirect(user_inventory_page.url)
+                user_inventory.create_page()
+                return redirect(self.url)
             else:
-                # Add error handling and feedback
-                return render(request, self.template, {'page': self, 'form': form, 'errors': form.errors})
-        return render(request, self.template, {'page': self, 'form': form})
+                context['errors'] = form.errors
+
+        return render(request, self.template, context)
+
+    def get_selected_inventory(self, request):
+        UserInventory = apps.get_model('inventory', 'UserInventory')
+        inventory_id = request.GET.get('inventory_id')
+        if inventory_id:
+            try:
+                return self.inventories.get(pk=inventory_id)
+            except UserInventory.DoesNotExist:
+                return None
+        return self.inventories.first()
+
+    def get_inventory_form(self, request):
+        from inventory.forms import UserInventoryForm
+        return UserInventoryForm(request.POST or None)
 
     class Meta:
         verbose_name = "User Profile Page"
