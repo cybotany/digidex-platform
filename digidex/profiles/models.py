@@ -217,7 +217,6 @@ class UserProfilePage(Page):
 
     def serve(self, request):
         context = self.get_context(request)
-        context['selected_inventory'] = self.get_selected_inventory(request)
         context['form'] = self.get_inventory_form(request)
 
         if request.method == 'POST':
@@ -232,16 +231,6 @@ class UserProfilePage(Page):
                 context['errors'] = form.errors
 
         return render(request, self.template, context)
-
-    def get_selected_inventory(self, request):
-        UserInventory = apps.get_model('inventory', 'UserInventory')
-        inventory_id = request.GET.get('inventory_id')
-        if inventory_id:
-            try:
-                return self.inventories.get(pk=inventory_id)
-            except UserInventory.DoesNotExist:
-                return None
-        return self.inventories.first()
 
     def get_inventory_form(self, request):
         from inventory.forms import UserInventoryForm
