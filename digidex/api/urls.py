@@ -14,15 +14,15 @@ jwt_urls = [
     path('refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
 
-digitization_urls = [
-    path('', digitization_api.DigitizationListView.as_view(), name='digitization-list'),
-    path('<int:pk>/', digitization_api.DigitizationDetailView.as_view(), name='digitization-detail'),
-]
+#digitization_urls = [
+#    path('', digitization_api.DigitizationListView.as_view(), name='digitization-list'),
+#    path('<int:pk>/', digitization_api.DigitizationDetailView.as_view(), name='digitization-detail'),
+#]
 
-inventory_urls = [
-    path('', inventory_api.UserInventoryListView.as_view(), name='inventory-list'),
-    path('<int:pk>/', inventory_api.UserInventoryDetailView.as_view(), name='inventory-detail'),
-]
+#inventory_urls = [
+#    path('', inventory_api.UserInventoryListView.as_view(), name='inventory-list'),
+#    path('<int:pk>/', inventory_api.UserInventoryDetailView.as_view(), name='inventory-detail'),
+#]
 
 #journal_urls = [
 #    path('', journal_api.JournalListView.as_view(), name='journal-list'),
