@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     "inventory",
     "journal",
     "nfc",
+    "party",
     "profiles",
     "search",
     "storages",
