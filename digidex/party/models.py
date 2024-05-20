@@ -13,7 +13,7 @@ class UserParty(models.Model):
     profile_page = models.OneToOneField(
         'profiles.UserProfilePage',
         on_delete=models.CASCADE,
-        related_name='inventories'
+        related_name='party'
     )
     created_at = models.DateTimeField(
         auto_now_add=True
