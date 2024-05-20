@@ -1,58 +1,49 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // Function to show selected inventory content and hide others
-  function showInventoryContent(inventoryId) {
-    fetch(`/api/inventories/${inventoryId}/`)
+  loadCategories();
+});
+
+function loadCategories() {
+  fetch('/api/inventory-groups/')
       .then(response => response.json())
       .then(data => {
-        const contentWrapper = document.querySelector('.asset-item-collection.base-dyn-items');
-        contentWrapper.innerHTML = '';  // Clear existing content
+          const container = document.getElementById('asset-categories-list');
+          container.innerHTML = `<a href="#" class="link-asset-category base-inline-block" onclick="loadAssets('party')">
+              <div class="text-asset-category">Party</div>
+          </a>`;
+          data.forEach(group => {
+              container.innerHTML += `<a href="#" class="link-asset-category base-inline-block" onclick="loadAssets('${group.name}')">
+                  <div class="text-asset-category">${group.name}</div>
+              </a>`;
+          });
+          loadAssets('party');  // Load assets for the 'party' category by default
+      });
+}
 
-        data.asset_items.forEach(asset => {
-          const assetItem = `
-            <div role="listitem" class="base-dyn-item">
-              <div class="asset-item">
-                <div class="block-icon-asset-item">
-                  <img src="{% static 'images/google/tree.svg' %}" alt="" loading="eager" class="icon-asset-item">
-                </div>
-                <a href="${asset.url}" class="link-asset-item base-inline-block">
-                  <h3 class="heading-asset-item">${asset.name}</h3>
-                </a>
-                <div class="block-price">
-                  <div class="text-price">${asset.new_price}</div>
-                  <div class="compare-at-price">${asset.original_price}</div>
-                </div>
-                <p class="paragraph-description">${asset.description}</p>
-                <div class="subtitle-asset-item">Features<br></div>
-                <div class="block-features-asset-item">
-                  ${asset.features.map(feature => `
-                    <div class="features-asset-item">
-                      <img src="{% static 'images/bx/check-green.svg' %}" loading="eager" alt="" class="icon-features-asset-item">
-                      <h6 class="heading-features-asset-item">${feature}</h6>
-                    </div>
-                  `).join('')}
-                </div>
-                <a href="${asset.url}" class="button base-button">View Asset</a>
-              </div>
-            </div>
-          `;
-          contentWrapper.innerHTML += assetItem;
-        });
-      })
-      .catch(error => console.error('Error fetching inventory data:', error));
-  }
-
-  // Add event listeners to inventory buttons
-  document.querySelectorAll('.block-assets .link-asset').forEach(button => {
-    button.addEventListener('click', function(event) {
-      event.preventDefault();
-      const inventoryId = this.getAttribute('data-inventory-id');
-      showInventoryContent(inventoryId);
-    });
-  });
-
-  // Show the first inventory by default
-  const firstInventoryButton = document.querySelector('.block-assets .link-asset');
-  if (firstInventoryButton) {
-    showInventoryContent(firstInventoryButton.getAttribute('data-inventory-id'));
-  }
-});
+function loadAssets(category) {
+  fetch(`/api/assets/${category}/`)
+      .then(response => response.json())
+      .then(data => {
+          const container = document.getElementById('asset-items-list');
+          container.innerHTML = '';
+          if (data.length > 0) {
+              data.forEach(asset => {
+                  container.innerHTML += `
+                      <div role="listitem" class="asset-item base-dyn-item">
+                          <div class="block-icon-asset-item">
+                              <img src="${asset.icon_url}" alt="" class="icon-asset-item">
+                          </div>
+                          <a href="#" class="link-asset-item base-inline-block">
+                              <h3 class="heading-asset-item">${asset.name}</h3>
+                          </a>
+                          <p class="paragraph-description">${asset.description}</p>
+                          <div class="subtitle-asset-item">${asset.subtitle}</div>
+                          <a href="#" class="button base-button">View Details</a>
+                      </div>`;
+              });
+          } else {
+              container.innerHTML = `<div class="empty-state base-dyn-empty">
+                  <div class="text-empty">No items found.</div>
+              </div>`;
+          }
+      });
+}
