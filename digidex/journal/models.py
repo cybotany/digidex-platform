@@ -1,14 +1,9 @@
 import uuid
 from django.apps import apps
 from django.db import models
-from django.utils.text import slugify
-from django.core.exceptions import ObjectDoesNotExist
 
 from modelcluster.fields import ParentalKey
-from wagtail.models import Page, Orderable
-from wagtail.admin.panels import FieldPanel, InlinePanel
-from wagtail.search import index
-from wagtail.fields import RichTextField
+from wagtail.models import Orderable
 
 
 class JournalEntry(Orderable):

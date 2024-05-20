@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     "digitization",
     "home",
     "inventory",
+    "journal",
     "nfc",
     "profiles",
     "search",
