@@ -1,48 +1,29 @@
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework.routers import DefaultRouter
 from django.urls import include, path
 
-from api.views import (
-    digitization as digitization_api,
-    inventory as inventory_api,
-    journal as journal_api,
-    nfc as nfc_api,
-    party as party_api,
-)
+from api.views.digitization import UserDigitViewSet
+from api.views.inventory import UserInventoryViewSet
+from api.views.journal import JournalEntryViewSet
+from api.views.nfc import RegisterNearFieldCommunicationTag
+from api.views.party import UserPartyViewSet
+from api.views.profiles import UserProfileViewSet
 
 jwt_urls = [
     path('', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
 
-#digitization_urls = [
-#    path('', digitization_api.DigitizationListView.as_view(), name='digitization-list'),
-#    path('<int:pk>/', digitization_api.DigitizationDetailView.as_view(), name='digitization-detail'),
-#]
+router = DefaultRouter()
+router.register('digitization', UserDigitViewSet)
+router.register('inventory', UserInventoryViewSet)
+router.register('journal', JournalEntryViewSet)
+router.register('party', UserPartyViewSet)
+router.register('profiles', UserProfileViewSet)
 
-#inventory_urls = [
-#    path('', inventory_api.UserInventoryListView.as_view(), name='inventory-list'),
-#    path('<int:pk>/', inventory_api.UserInventoryDetailView.as_view(), name='inventory-detail'),
-#]
-
-#journal_urls = [
-#    path('', journal_api.JournalListView.as_view(), name='journal-list'),
-#    path('<int:pk>/', journal_api.JournalDetailView.as_view(), name='journal-detail'),
-#]
-
-nfc_urls = [
-    path('register/', nfc_api.RegisterNearFieldCommunicationTag.as_view(), name='register-ntag'),
-]
-
-#party_urls = [
-#    path('', party_api.PartyListView.as_view(), name='party-list'),
-#    path('party/<int:pk>/', party_api.PartyDetailView.as_view(), name='party-detail'),
-#]
 
 app_name = 'api'
 urlpatterns = [
     path('token/', include(jwt_urls)),
-#    path('inventory/', include(inventory_urls)),
-#    path('journal/', include(journal_urls)),
-    path('nfc/', include(nfc_urls)),
-#    path('party/', include(party_urls)),
+    path('nfc/register/', RegisterNearFieldCommunicationTag.as_view(), name='register-ntag'),
 ]

@@ -5,7 +5,7 @@ from digitization.models import UserDigit
 from api.serializers.digitization import UserDigitSerializer
 
 
-class UserDigitListView(viewsets.ReadOnlyModelViewSet):
+class UserDigitViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = UserDigit.objects.all()
     serializer_class = UserDigitSerializer
     permission_classes = [IsAuthenticated]
