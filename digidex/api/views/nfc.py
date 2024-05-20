@@ -5,8 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from nfc.models import NearFieldCommunicationTag
-# from inventory.models import UserDigitizedObject
-# from inventory.serializers import UserDigitizedObjectSerializer
+from api.serializers.nfc import NearFieldCommunicationTagSerializer
 
 
 class RegisterNearFieldCommunicationTag(APIView):
@@ -28,8 +27,3 @@ class RegisterNearFieldCommunicationTag(APIView):
         _status = status.HTTP_201_CREATED if created else status.HTTP_200_OK
 
         return Response({"ntag_url": _url}, status=_status)
-
-
-# class UserDigitizedObjectViewSet(viewsets.ModelViewSet):
-#    queryset = UserDigitizedObject.objects.all()
-#    serializer_class = UserDigitizedObjectSerializer
