@@ -158,11 +158,17 @@ PRIVATE_MEDIA_ROOT = 'media/private'
 PUBLIC_MEDIA_URL = '{}/{}/'.format(AWS_S3_CUSTOM_DOMAIN, PUBLIC_MEDIA_ROOT)
 PRIVATE_MEDIA_URL = '{}/{}/'.format(AWS_S3_CUSTOM_DOMAIN, PRIVATE_MEDIA_ROOT)
 
-# Static files (CSS, JavaScript, Images)
-STATIC_ROOT = 'staticfiles/'
+# Static files (CSS, JavaScript, Images
 STATIC_URL = '{}/static/'.format(AWS_S3_CUSTOM_DOMAIN)
 
+STATIC_ROOT = 'staticfiles/'
+
+STATICFILES_DIRS = [
+    '{}/{}/'.format(BASE_DIR, 'digidex'),
+]
+
 STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 
