@@ -10,14 +10,9 @@ User = get_user_model()
 
 
 @login_required
-def create_digit_with_ntag(request, ntag_uuid):
+def link_ntag(request, ntag_uuid):
     UserProfile = apps.get_model('profiles', 'UserProfile')
-    user_profile = get_object_or_404(UserProfile, slug=profile_slug)
-
-    requesting_user = request.user
-    if requesting_user != user_profile.user:
-        requesting_user_page = requesting_user.profile.get_profile_page()
-        return redirect(requesting_user_page.url)
+    user_profile = get_object_or_404(UserProfile, user=request.user)
 
     if request.method == 'POST':
         form = UserDigitForm(request.POST)
@@ -37,4 +32,4 @@ def create_digit_with_ntag(request, ntag_uuid):
     else:
         form = UserDigitForm()
 
-    return render(request, "digitization/create_digit_with_ntag.html", {'form': form})
+    return render(request, "digitization/link_ntag.html", {'form': form})

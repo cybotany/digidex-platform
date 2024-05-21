@@ -1,8 +1,8 @@
 from django.urls import path
 
-from digitization import views
+from digitization.views import link_ntag
 
 app_name = 'digitization'
 urlpatterns = [
-    path('link-ntag/<uuid:ntag_uuid>/', views.create_digit_with_ntag, name='link_ntag'),
+    path('ntag/<uuid:ntag_uuid>/', link_ntag, name='link_ntag'),
 ]
