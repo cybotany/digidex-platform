@@ -4,6 +4,8 @@ from .base import *
 
 DEBUG = False
 
+ALLOWED_HOSTS = ['digidex.app', 'www.digidex.app']
+
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
 if "EMAIL_HOST" in os.environ:
