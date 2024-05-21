@@ -4,8 +4,6 @@ from .base import *
 
 DEBUG = False
 
-STATIC_ROOT = 'staticfiles/'
-
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
 if "EMAIL_HOST" in os.environ:

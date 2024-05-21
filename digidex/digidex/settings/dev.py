@@ -2,8 +2,6 @@ from .base import *
 
 DEBUG = True
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 WAGTAILADMIN_BASE_URL = "http://127.0.0.1:8000"
