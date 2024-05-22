@@ -25,5 +25,5 @@ router.register('profiles', UserProfileViewSet)
 app_name = 'api'
 urlpatterns = [
     path('token/', include(jwt_urls)),
-    path('nfc/register/', RegisterNearFieldCommunicationTag.as_view(), name='register-ntag'),
+    path('nfc/tag/registration/', RegisterNearFieldCommunicationTag.as_view(), name='register-ntag'),
 ]
