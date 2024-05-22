@@ -24,9 +24,9 @@
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍩</text></svg>"/>
 
         {# Global stylesheets #}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/webflow.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'base/css/reset.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'base/css/webflow.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'base/css/base.css' %}">
     
         <link href="https://fonts.googleapis.com" rel="preconnect">
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
@@ -48,7 +48,7 @@
         {% wagtailuserbar %}
     
         {# Global javascript #}
-        <script type="text/javascript" src="{% static 'js/digidex.js' %}"></script>
+        <script type="text/javascript" src="{% static 'base/js/digidex.js' %}"></script>
 
         {% block extra_js %}{% endblock %}
     </body>
