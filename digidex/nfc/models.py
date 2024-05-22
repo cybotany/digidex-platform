@@ -100,7 +100,7 @@ class NearFieldCommunicationTag(models.Model):
         """
         if not self.active:
             return None
-        return reverse('nfc:route_ntag', kwargs={'_uuid': self.uuid})
+        return reverse('nfc:route_ntag', kwargs={'ntag_uuid': self.uuid})
 
     @property
     def digit_page(self):

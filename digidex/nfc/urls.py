@@ -4,5 +4,5 @@ from nfc import views
 
 app_name = 'nfc'
 urlpatterns = [
-    path('<uuid:_uuid>/', views.route_ntag_url, name='route_ntag'),
+    path('<uuid:ntag_uuid>/', views.route_ntag_url, name='route_ntag'),
 ]

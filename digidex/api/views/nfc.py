@@ -5,7 +5,6 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from nfc.models import NearFieldCommunicationTag
-from api.serializers.nfc import NearFieldCommunicationTagSerializer
 
 
 class RegisterNearFieldCommunicationTag(APIView):
@@ -23,7 +22,7 @@ class RegisterNearFieldCommunicationTag(APIView):
             defaults={'active': True}
         )
 
-        _url = request.build_absolute_uri(ntag.get_absolute_url())
+        absolute_url = request.build_absolute_uri(ntag.url)
         _status = status.HTTP_201_CREATED if created else status.HTTP_200_OK
 
-        return Response({"ntag_url": _url}, status=_status)
+        return Response({"ntag_url": absolute_url}, status=_status)
