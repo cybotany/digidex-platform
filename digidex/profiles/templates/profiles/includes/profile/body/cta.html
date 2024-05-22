@@ -4,14 +4,14 @@
   <a href="{{ page.form_url }}" class="link-block base-inline-block">
     <div class="text-link">Update Profile</div>
     <div class="block-icon-link">
-      <img src="{% static 'images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
+      <img src="{% static 'base/images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
     </div>
   </a>
 {% else %}
   <a href="mailto:{{ page.profile.email }}" class="link-block base-inline-block">
     <div class="text-link">Message</div>
     <div class="block-icon-link">
-      <img src="{% static 'images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
+      <img src="{% static 'base/images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
     </div>
   </a>
 {% endif %}
