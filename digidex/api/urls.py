@@ -14,12 +14,12 @@ jwt_urls = [
     path('refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
 
-router = DefaultRouter()
-router.register('digitization', UserDigitViewSet)
-router.register('inventory', UserInventoryViewSet)
-router.register('journal', JournalEntryViewSet)
-router.register('party', UserPartyViewSet)
-router.register('profiles', UserProfileViewSet)
+#router = DefaultRouter()
+#router.register('digitization', UserDigitViewSet)
+#router.register('inventory', UserInventoryViewSet)
+#router.register('journal', JournalEntryViewSet)
+#router.register('party', UserPartyViewSet)
+#router.register('profiles', UserProfileViewSet)
 
 
 app_name = 'api'
