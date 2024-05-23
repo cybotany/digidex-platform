@@ -1,0 +1,13 @@
+{% load wagtailcore_tags %}
+
+<section class="section-top">
+  <div class="content">
+    <div class="block-top">
+      {% if page.heading %}
+       <h1 class="heading-top">{{ page.heading }}</h1>
+      {% else %}
+        <h1 class="heading-top">No heading available</h1>
+      {% endif %}
+    </div>
+  </div>
+</section>

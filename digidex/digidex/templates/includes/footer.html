@@ -1,15 +1,5 @@
-{% load wagtailcore_tags footer_tags %}
+{% load wagtailcore_tags %}
 
 <footer class="footer">
-  <section class="footer__section">
-    <div class="content">
-      <div class="base-layout-grid footer__grid">
-        {% get_footer_paragraph %}
-        {% include "base/includes/footer/links.html" %}
-      </div>
-      <div class="footer__block--down">
-        {% get_footer_copyright %}
-      </div>
-    </div>
-  </section>
+  {% include "base/layouts/footer.html" %}
 </footer>

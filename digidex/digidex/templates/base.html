@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags wagtailuserbar %}
+{% load static wagtailcore_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -38,15 +38,11 @@
 
     <body class="{% block body_class %}{% endblock %}">
         {% include "includes/header.html" %}
-        {% include "includes/messages.html" %}
-        
         <main id="main">
             {% block body %}{% endblock %}
         </main>
         {% include "includes/footer.html" %}
 
-        {% wagtailuserbar %}
-    
         {# Global javascript #}
         <script type="text/javascript" src="{% static 'base/js/digidex.js' %}"></script>
 
