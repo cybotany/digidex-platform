@@ -2,10 +2,21 @@
 {% load static %}
 
 {% block content %}
-  {% include "profiles/includes/profile/section.html" %}
-  {% include "profiles/includes/asset/section.html" %}
+  <section class="section">
+    <div class="content">    
+      {% include 'profiles/elements/panel.html' %}
+    </div>
+  </section>
+  <section class="section">
+    <div class="content">
+      {% include 'profiles/elements/tabs.html' %}
+      <div id="asset-items-list" class="asset-item-collection-wrapper base-dyn-list">
+        <div role="list" class="asset-item-collection base-dyn-items">
+          {% include 'profiles/elements/card.html' %}
+        </div>
+      </div>
+    </div>
+  </section>
 {% endblock %}
 
-{% block extra_js %}
-  <script type="text/javascript" src="{% static 'profiles/js/assets.js' %}"></script>
-{% endblock %}
+{% block extra_js %}{% endblock %}
