@@ -6,6 +6,8 @@ from api.serializers.party import UserPartySerializer
 
 
 class UserPartyViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = UserParty.objects.all()
     serializer_class = UserPartySerializer
     permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return UserParty.objects.filter(user=self.request.user)

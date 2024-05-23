@@ -1,49 +1,40 @@
-document.addEventListener('DOMContentLoaded', function() {
-  loadInventories();
-});
-
-function loadCategories() {
-    fetch('/api/inventory/')
+document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelectorAll('.link-asset-category');
+    const assetItemsList = document.querySelector('#asset-items-list .asset-item-collection');
+    const noAssetsMessage = document.querySelector('#no-assets-message');
+  
+    function loadAssets(category) {
+      fetch(`/api/${category}`)
         .then(response => response.json())
         .then(data => {
-            const container = document.getElementById('asset-categories');
-            container.innerHTML = `<a href="#" class="link-asset-category base-inline-block" onclick="loadAssets('party')">
-                <div class="text-asset-category">Party</div>
-            </a>`;
-            data.forEach(group => {
-                container.innerHTML += `<a href="#" class="link-asset-category base-inline-block" onclick="loadAssets('${group.name}')">
-                    <div class="text-asset-category">${group.name}</div>
-                </a>`;
+          assetItemsList.innerHTML = '';
+          if (data.assets.length > 0) {
+            data.assets.forEach(asset => {
+              const assetCard = document.createElement('div');
+              assetCard.className = 'asset-card';
+              assetCard.innerHTML = `<div class="card-content">${asset.name}</div>`;
+              assetItemsList.appendChild(assetCard);
             });
-            loadAssets('party');  // Load assets for the 'party' category by default
-        });
-}
-
-function loadAssets(category) {
-    fetch(`/api/assets/${category}/`)
-        .then(response => response.json())
-        .then(data => {
-            const container = document.getElementById('assets-list');
-            container.innerHTML = '';  // Clear existing assets
-            if (data.length > 0) {
-                data.forEach(asset => {
-                    container.innerHTML += `
-                        <div role="listitem" class="asset-item base-dyn-item">
-                            <div class="block-icon-asset-item">
-                                <img src="${asset.icon_url}" alt="" class="icon-asset-item">
-                            </div>
-                            <a href="#" class="link-asset-item base-inline-block">
-                                <h3 class="heading-asset-item">${asset.name}</h3>
-                            </a>
-                            <p class="paragraph-description">${asset.description}</p>
-                            <div class="subtitle-asset-item">${asset.subtitle}</div>
-                            <a href="#" class="button base-button">View Details</a>
-                        </div>`;
-                });
-            } else {
-                container.innerHTML = `<div class="empty-state base-dyn-empty">
-                    <div class="text-empty">No items found.</div>
-                </div>`;
-            }
-        });
-}
+            noAssetsMessage.style.display = 'none';
+          } else {
+            noAssetsMessage.style.display = 'block';
+          }
+        })
+        .catch(error => console.error('Error loading assets:', error));
+    }
+  
+    tabs.forEach(tab => {
+      tab.addEventListener('click', (event) => {
+        event.preventDefault(); // Prevent default anchor behavior
+        tabs.forEach(t => t.classList.remove('base--current'));
+        tab.classList.add('base--current');
+        const category = tab.querySelector('.text-asset-category').textContent.trim().toLowerCase();
+        loadAssets(category);
+      });
+    });
+  
+    // Load assets for the initial active tab
+    const initialCategory = document.querySelector('.link-asset-category.base--current .text-asset-category').textContent.trim().toLowerCase();
+    loadAssets(initialCategory);
+  });
+  

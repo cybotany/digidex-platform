@@ -4,6 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from inventory.models import UserInventory
 from api.serializers.inventory import UserInventorySerializer
 
+
 class UserInventoryViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = UserInventorySerializer
     permission_classes = [IsAuthenticated]
