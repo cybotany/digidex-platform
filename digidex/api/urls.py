@@ -14,16 +14,17 @@ jwt_urls = [
     path('refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
 
-#router = DefaultRouter()
-#router.register('digitization', UserDigitViewSet)
-#router.register('inventory', UserInventoryViewSet)
-#router.register('journal', JournalEntryViewSet)
-#router.register('party', UserPartyViewSet)
-#router.register('profiles', UserProfileViewSet)
+router = DefaultRouter()
+router.register('digitization', UserDigitViewSet, basename='digitization')
+router.register('inventory', UserInventoryViewSet, basename='inventory')
+router.register('journal', JournalEntryViewSet, basename='journal')
+router.register('party', UserPartyViewSet, basename='party')
+router.register('profiles', UserProfileViewSet, basename='profiles')
 
 
 app_name = 'api'
 urlpatterns = [
     path('token/', include(jwt_urls)),
     path('nfc/tag/registration/', RegisterNearFieldCommunicationTag.as_view(), name='register-ntag'),
+    path('', include(router.urls)),
 ]
