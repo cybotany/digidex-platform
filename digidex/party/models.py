@@ -1,6 +1,10 @@
 import uuid
+from django.apps import apps
 from django.db import models
+from django.contrib.auth import get_user_model
 
+
+User = get_user_model()
 
 class UserParty(models.Model):
     uuid = models.UUIDField(
@@ -10,8 +14,8 @@ class UserParty(models.Model):
         db_index=True,
         verbose_name="Digitized Object UUID"
     )
-    profile = models.OneToOneField(
-        'profiles.UserProfile',
+    user = models.OneToOneField(
+        User,
         on_delete=models.CASCADE,
         related_name='party'
     )
@@ -23,8 +27,14 @@ class UserParty(models.Model):
     )
 
     @property
-    def user(self):
-        return self.profile.user
+    def profile(self):
+        UserProfile = apps.get_model('profiles', 'UserProfile')
+        user_profile = UserProfile.objects.get(user=self.user)
+        return user_profile
+
+    @property
+    def profile_page(self):
+        return self.profile.get_profile_page()
 
     @property
     def username(self):
