@@ -10,8 +10,8 @@ class UserParty(models.Model):
         db_index=True,
         verbose_name="Digitized Object UUID"
     )
-    profile_page = models.OneToOneField(
-        'profiles.UserProfilePage',
+    profile = models.OneToOneField(
+        'profiles.UserProfile',
         on_delete=models.CASCADE,
         related_name='party'
     )
@@ -21,10 +21,6 @@ class UserParty(models.Model):
     last_modified = models.DateTimeField(
         auto_now=True
     )
-
-    @property
-    def profile(self):
-        return self.profile_page.profile
 
     @property
     def user(self):

@@ -110,6 +110,15 @@ class UserProfile(models.Model):
             profile_page.save_revision().publish()
             return profile_page
 
+    def get_or_create_user_party(self):
+        """
+        Method to get or create a UserParty instance associated with this user profile.
+        """
+        UserParty = apps.get_model('party', 'UserParty')
+        
+        user_party, created = UserParty.objects.get_or_create(profile=self)
+        return user_party
+
     def __str__(self):
         return self._username
 
