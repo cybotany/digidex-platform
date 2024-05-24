@@ -28,13 +28,13 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault(); // Prevent default anchor behavior
         tabs.forEach(t => t.classList.remove('base--current'));
         tab.classList.add('base--current');
-        const category = tab.querySelector('.text-asset-category').textContent.trim().toLowerCase();
+        const category = tab.getAttribute('data-category');
         loadAssets(category);
       });
     });
   
     // Load assets for the initial active tab
-    const initialCategory = document.querySelector('.link-asset-category.base--current .text-asset-category').textContent.trim().toLowerCase();
+    const initialCategory = document.querySelector('.link-asset-category.base--current').getAttribute('data-category');
     loadAssets(initialCategory);
   });
   
