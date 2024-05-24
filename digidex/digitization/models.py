@@ -1,5 +1,4 @@
 import uuid
-from django.apps import apps
 from django.db import models
 from django.utils.text import slugify
 from django.core.exceptions import ObjectDoesNotExist
@@ -20,13 +19,15 @@ class DigitalObjectPage(Page):
     intro = RichTextField(
         blank=True
     )
-    content_type = models.ForeignKey(
+    digital_type = models.ForeignKey(
         ContentType,
         on_delete=models.CASCADE
     )
-    object_id = models.PositiveIntegerField()
+    object_id = models.PositiveIntegerField(
+        db_index=True
+    )
     digital_object = GenericForeignKey(
-        'content_type',
+        'digital_type',
         'object_id'
     )
 
@@ -83,10 +84,10 @@ class DigitalObject(models.Model):
         return "No description available."
 
     @property
-    def page(self):
+    def digit_page(self):
         try:
             return DigitalObjectPage.objects.get(
-                content_type=ContentType.objects.get_for_model(self),
+                digital_type=ContentType.objects.get_for_model(self),
                 object_id=self.pk
             )
         except DigitalObjectPage.DoesNotExist:
@@ -106,7 +107,7 @@ class DigitalPartyObject(DigitalObject):
     def create_digit_page(self):
         user_profile_page = self.party.profile_page
         try:
-            if self.page:
+            if self.digit_page:
                 pass
         except ObjectDoesNotExist:
             base_slug = slugify(self.digit_name)
@@ -140,6 +141,10 @@ class DigitalInventoryObject(DigitalObject):
     )
 
     @property
+    def user(self):
+        return self.inventory.user
+
+    @property
     def username(self):
         return self.user.username
 
@@ -159,7 +164,7 @@ class DigitalInventoryObject(DigitalObject):
             unique_slug = base_slug
             counter = 1
            
-            while Page.objects.filter(slug=unique_slug, path__startswith=self.get_parent().path).exists():
+            while Page.objects.filter(slug=unique_slug, path__startswith=user_inventory_page.path).exists():
                 unique_slug = f"{base_slug}-{counter}"
                 counter += 1
 
@@ -170,7 +175,7 @@ class DigitalInventoryObject(DigitalObject):
                 heading=self.digit_name,
                 intro=self.digit_description
             )
-            self.page.add_child(instance=user_digit_page)
+            user_inventory_page.add_child(instance=user_digit_page)
             user_digit_page.save_revision().publish()
 
             self.detail_page = user_digit_page
