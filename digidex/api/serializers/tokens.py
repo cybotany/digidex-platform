@@ -3,7 +3,7 @@ from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
 
 
-class CustomTokenObtainPairSerializer(serializers.Serializer):
+class UserTokenObtainPairSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField()
 
