@@ -17,7 +17,6 @@ def profile_form_view(request, profile_slug):
         return HttpResponseForbidden("You are not allowed to edit this profile.")
 
     user_profile = page_owner.profile
-    user_profile_page = user_profile.get_profile_page()
 
     if request.method == 'POST':
         form = UserProfileForm(request.POST, request.FILES, instance=user_profile)
@@ -25,7 +24,7 @@ def profile_form_view(request, profile_slug):
             updated_profile = form.save(commit=False)
             # Ensure profile avatar is sized appropriately here
             updated_profile.save()
-            return redirect(user_profile_page.url)
+            return redirect(user_profile.page.url)
     else:
         form = UserProfileForm(instance=user_profile)
     

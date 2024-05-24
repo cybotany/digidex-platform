@@ -1,8 +1,8 @@
 {% load i18n wagtailcore_tags%}
 
 {% if user.is_authenticated %}
-  {% if user.profile.profile_page %}
-    {% with user_profile_page=user.profile.profile_page %}
+  {% if user.profile.page %}
+    {% with user_profile_page=user.profile.page %}
       <a href="{% pageurl user_profile_page %}" id="navbar_profile_button" class="navbar__button--outline base-button">Profile</a>
     {% endwith %}
   {% endif %}
