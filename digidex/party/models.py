@@ -1,9 +1,7 @@
 import uuid
 from django.db import models
-from django.contrib.auth import get_user_model
+from django.conf import settings
 
-
-User = get_user_model()
 
 class UserParty(models.Model):
     uuid = models.UUIDField(
@@ -14,9 +12,9 @@ class UserParty(models.Model):
         verbose_name="Digitized Object UUID"
     )
     user = models.OneToOneField(
-        User,
-        on_delete=models.CASCADE,
-        related_name='party'
+        settings.AUTH_USER_MODEL,
+        on_delete=models.PROTECT,
+        related_name="party"
     )
     created_at = models.DateTimeField(
         auto_now_add=True
