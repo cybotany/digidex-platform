@@ -20,7 +20,7 @@ router.register('inventory', UserInventoryViewSet, basename='inventory')
 router.register('journal', JournalEntryViewSet, basename='journal')
 router.register('party', UserPartyViewSet, basename='party')
 router.register('profiles', UserProfileViewSet, basename='profiles')
-
+router.register('tokens', UserProfileViewSet, basename='profiles')
 
 app_name = 'api'
 urlpatterns = [
