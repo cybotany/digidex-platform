@@ -6,7 +6,7 @@ from modelcluster.fields import ParentalKey
 from wagtail.models import Orderable
 
 
-class JournalEntry(Orderable):
+class JournalEntry(models.Model):
     image = models.ForeignKey(
         'wagtailimages.Image',
         on_delete=models.CASCADE,
@@ -20,14 +20,9 @@ class JournalEntry(Orderable):
         help_text="Image caption."
     )
     digit = models.OneToOneField(
-        "digitization.UserDigit",
+        "digitization.DigitalObject",
         on_delete=models.CASCADE,
         related_name='journal_entries'
-    )
-    page = ParentalKey(
-        "digitization.UserDigitPage",
-        on_delete=models.CASCADE,
-        related_name='digit_journal_entries'
     )
 
     @property

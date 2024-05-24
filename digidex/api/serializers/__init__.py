@@ -1,4 +1,4 @@
-from .digitization import UserDigitSerializer
+from .digitization import DigitalObjectSerializer
 from .inventory import UserInventorySerializer
 from .journal import JournalEntrySerializer
 from .nfc import NearFieldCommunicationTagSerializer

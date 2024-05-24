@@ -13,17 +13,16 @@ PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 INSTALLED_APPS = [
-    
-    "accounts",
-    "api",
     "base",
-    "digitization",
-    "home",
+    "accounts",
+    "profiles",
+    "party",
     "inventory",
+    "digitization",
     "journal",
     "nfc",
-    "party",
-    "profiles",
+    "api",
+    "home",
     "search",
     "storages",
     "whitenoise.runserver_nostatic",

@@ -3,11 +3,6 @@ from django.contrib.auth import get_user_model
 from django.apps import apps
 
 User = get_user_model()
-UserInventory = apps.get_model('inventory', 'UserInventory')
-UserParty = apps.get_model('party', 'UserParty')
-DigitalObject = apps.get_model('digitization', 'DigitalObject')
-ContentType = apps.get_model('contenttypes', 'ContentType')
-
 
 class DigitalObjectForm(forms.Form):
     name = forms.CharField(
@@ -29,7 +24,7 @@ class DigitalObjectForm(forms.Form):
         required=False
     )
     inventory = forms.ModelChoiceField(
-        queryset=UserInventory.objects.none(),
+        queryset=apps.get_model('inventory', 'UserInventory').objects.none(),
         widget=forms.Select(
             attrs={
                 'class': 'select-field base-input',
@@ -39,7 +34,7 @@ class DigitalObjectForm(forms.Form):
         required=False
     )
     party = forms.ModelChoiceField(
-        queryset=UserParty.objects.none(),
+        queryset=apps.get_model('party', 'UserParty').objects.none(),
         widget=forms.HiddenInput(),
         required=False
     )
@@ -48,8 +43,8 @@ class DigitalObjectForm(forms.Form):
         user = kwargs.pop('user', None)
         super(DigitalObjectForm, self).__init__(*args, **kwargs)
         if user:
-            self.fields['inventory'].queryset = UserInventory.objects.filter(user=user)
-            self.fields['party'].queryset = UserParty.objects.filter(user=user)
+            self.fields['inventory'].queryset = apps.get_model('inventory', 'UserInventory').objects.filter(user=user)
+            self.fields['party'].queryset = apps.get_model('party', 'UserParty').objects.filter(user=user)
             if self.fields['party'].queryset.exists():
                 self.fields['party'].initial = self.fields['party'].queryset.first().pk
         self.user = user
@@ -63,10 +58,10 @@ class DigitalObjectForm(forms.Form):
         if not inventory and not party:
             raise forms.ValidationError("You must select either an inventory or a party.")
 
-        content_object = inventory if inventory else UserParty.objects.get(pk=party)
-        content_type = ContentType.objects.get_for_model(content_object)
+        content_object = inventory if inventory else apps.get_model('party', 'UserParty').objects.get(pk=party)
+        content_type = apps.get_model('contenttypes', 'ContentType').objects.get_for_model(content_object)
 
-        digital_object = DigitalObject.objects.create(
+        digital_object = apps.get_model('digitization', 'DigitalObject').objects.create(
             name=name,
             description=description,
             content_type=content_type,

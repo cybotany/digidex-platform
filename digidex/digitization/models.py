@@ -12,9 +12,6 @@ from wagtail.search import index
 from wagtail.fields import RichTextField
 
 
-UserParty = apps.get_model('parties', 'UserParty')
-UserInventory = apps.get_model('inventory', 'UserInventory')
-
 class DigitalObjectPage(Page):
     heading = models.CharField(
         max_length=255,
@@ -25,8 +22,8 @@ class DigitalObjectPage(Page):
     )
     digital_object = models.ForeignKey(
         'digitization.DigitalObject',
-        on_delete=models.CASCADE,
-        related_name='party_digits'
+        on_delete=models.PROTECT,
+        related_name='page'
     )
 
     search_fields = Page.search_fields + [
@@ -103,9 +100,9 @@ class DigitalObject(models.Model):
 
     def create_digit_page(self):
         parent_page = None
-        if isinstance(self.content_object, UserParty):
+        if isinstance(self.content_object, apps.get_model('parties', 'UserParty')):
             parent_page = self.content_object.profile_page
-        elif isinstance(self.content_object, UserInventory):
+        elif isinstance(self.content_object, apps.get_model('inventory', 'UserInventory')):
             parent_page = self.content_object.page
 
         if not parent_page:

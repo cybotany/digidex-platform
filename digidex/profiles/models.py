@@ -149,7 +149,6 @@ class UserProfilePage(Page):
         FieldPanel('heading'),
         FieldPanel('intro'),
         FieldPanel('profile'),
-        InlinePanel('inventories', label="User Inventories"),
     ]
 
     parent_page_types = [

@@ -83,6 +83,7 @@ class UserInventory(models.Model):
             title=f"{self._username}'s Inventory: {self.name}",
             slug=self.slug,
             heading=self.name.title(),
+            owner=self.user,
             intro=f"Welcome to {self._username}'s Inventory Page.",
         )
         self.profile_page.add_child(instance=inventory_page)
@@ -120,5 +121,5 @@ class UserInventoryPage(Page):
     ]
 
     subpage_types = [
-        'digitization.UserDigitPage'
+        'digitization.DigitalObjectPage'
     ]

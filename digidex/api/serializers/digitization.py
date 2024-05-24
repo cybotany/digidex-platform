@@ -1,9 +1,9 @@
 from rest_framework import serializers
 
-from digitization.models import UserDigit
+from digitization.models import DigitalObject
 
 
-class UserDigitSerializer(serializers.ModelSerializer):
+class DigitalObjectSerializer(serializers.ModelSerializer):
     class Meta:
-        model = UserDigit
+        model = DigitalObject
         fields = ['id', 'name', 'description']
