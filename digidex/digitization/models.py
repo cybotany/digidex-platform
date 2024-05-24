@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from django.apps import apps
 from django.utils.text import slugify
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.contenttypes.fields import GenericForeignKey
@@ -11,6 +12,9 @@ from wagtail.search import index
 from wagtail.fields import RichTextField
 
 
+UserParty = apps.get_model('parties', 'UserParty')
+UserInventory = apps.get_model('inventory', 'UserInventory')
+
 class DigitalObjectPage(Page):
     heading = models.CharField(
         max_length=255,
@@ -19,16 +23,10 @@ class DigitalObjectPage(Page):
     intro = RichTextField(
         blank=True
     )
-    digital_type = models.ForeignKey(
-        ContentType,
-        on_delete=models.CASCADE
-    )
-    object_id = models.PositiveIntegerField(
-        db_index=True
-    )
-    digital_object = GenericForeignKey(
-        'digital_type',
-        'object_id'
+    digital_object = models.ForeignKey(
+        'digitization.DigitalObject',
+        on_delete=models.CASCADE,
+        related_name='party_digits'
     )
 
     search_fields = Page.search_fields + [
@@ -66,6 +64,17 @@ class DigitalObject(models.Model):
         max_length=255,
         verbose_name="Digitized Object Slug"
     )
+    content_type = models.ForeignKey(
+        ContentType,
+        on_delete=models.CASCADE
+    )
+    object_id = models.PositiveIntegerField(
+        db_index=True
+    )
+    content_object = GenericForeignKey(
+        'content_type',
+        'object_id'
+    )
     created_at = models.DateTimeField(
         auto_now_add=True
     )
@@ -87,25 +96,21 @@ class DigitalObject(models.Model):
     def digit_page(self):
         try:
             return DigitalObjectPage.objects.get(
-                digital_type=ContentType.objects.get_for_model(self),
-                object_id=self.pk
+                digital_object=self
             )
         except DigitalObjectPage.DoesNotExist:
             raise ObjectDoesNotExist("There's no page for this digitized object.")
 
-    class Meta:
-        abstract = True
-
-
-class DigitalPartyObject(DigitalObject):
-    party = models.ForeignKey(
-        'party.UserParty',
-        on_delete=models.CASCADE,
-        related_name='party_digits'
-    )
-    
     def create_digit_page(self):
-        user_profile_page = self.party.profile_page
+        parent_page = None
+        if isinstance(self.content_object, UserParty):
+            parent_page = self.content_object.profile_page
+        elif isinstance(self.content_object, UserInventory):
+            parent_page = self.content_object.page
+
+        if not parent_page:
+            raise ObjectDoesNotExist("There's no parent page to create the digit page under.")
+
         try:
             if self.digit_page:
                 pass
@@ -113,73 +118,23 @@ class DigitalPartyObject(DigitalObject):
             base_slug = slugify(self.digit_name)
             unique_slug = base_slug
             counter = 1
-           
-            while Page.objects.filter(slug=unique_slug, path__startswith=self.get_parent().path).exists():
+
+            while Page.objects.filter(slug=unique_slug, path__startswith=parent_page.path).exists():
                 unique_slug = f"{base_slug}-{counter}"
                 counter += 1
 
             user_digit_page = DigitalObjectPage(
-                title={self.digit_name},
-                owner=self.user,
+                title=self.digit_name,
+                owner=self.content_object.user,
                 slug=unique_slug,
                 heading=self.digit_name,
                 intro=self.digit_description
             )
-            user_profile_page.page.add_child(instance=user_digit_page)
+            parent_page.add_child(instance=user_digit_page)
             user_digit_page.save_revision().publish()
 
             self.detail_page = user_digit_page
-            self.save() 
-        return self.detail_page
-
-
-class DigitalInventoryObject(DigitalObject):
-    inventory = models.ForeignKey(
-        'inventory.UserInventory',
-        on_delete=models.CASCADE,
-        related_name='itemized_digits'
-    )
-
-    @property
-    def user(self):
-        return self.inventory.user
-
-    @property
-    def username(self):
-        return self.user.username
-
-    @property
-    def _username(self):
-        return self.username.title()
-
-    def create_digit_page(self):
-        user_inventory_page = self.inventory.page
-        if not user_inventory_page:
-            raise ObjectDoesNotExist("There's no inventory page to create the digit page under.")
-        try:
-            if self.detail_page:
-                pass
-        except ObjectDoesNotExist:
-            base_slug = slugify(self.digit_name)
-            unique_slug = base_slug
-            counter = 1
-           
-            while Page.objects.filter(slug=unique_slug, path__startswith=user_inventory_page.path).exists():
-                unique_slug = f"{base_slug}-{counter}"
-                counter += 1
-
-            user_digit_page = DigitalObjectPage(
-                title={self.digit_name},
-                owner=self.user,
-                slug=unique_slug,
-                heading=self.digit_name,
-                intro=self.digit_description
-            )
-            user_inventory_page.add_child(instance=user_digit_page)
-            user_digit_page.save_revision().publish()
-
-            self.detail_page = user_digit_page
-            self.save() 
+            self.save()
         return self.detail_page
 
     def __str__(self):

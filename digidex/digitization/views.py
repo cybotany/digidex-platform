@@ -4,22 +4,17 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 from django.contrib.auth import get_user_model
 
-from digitization.forms import UserDigitForm
+from digitization.forms import DigitalObjectForm
 
 User = get_user_model()
 
 
 @login_required
 def link_ntag(request, ntag_uuid):
-    UserProfile = apps.get_model('profiles', 'UserProfile')
-    user_profile = get_object_or_404(UserProfile, user=request.user)
-
     if request.method == 'POST':
-        form = UserDigitForm(request.POST)
+        form = DigitalObjectForm(request.POST, user=request.user)
         if form.is_valid():
-            digitized_object = form.save(commit=False)
-            digitized_object.user_profile = user_profile
-
+            digitized_object = form.save()
             digitized_object_page = digitized_object.create_digit_page()
             if digitized_object_page:
                 NearFieldCommunicationTag = apps.get_model('nfc', 'NearFieldCommunicationTag')
@@ -30,6 +25,6 @@ def link_ntag(request, ntag_uuid):
             else:
                 return HttpResponseForbidden("Failed to create a detail page for the digitized object.")
     else:
-        form = UserDigitForm()
+        form = DigitalObjectForm(user=request.user)
 
     return render(request, "digitization/link_ntag.html", {'form': form})
