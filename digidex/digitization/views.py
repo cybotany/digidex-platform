@@ -19,7 +19,7 @@ def link_ntag(request, ntag_uuid):
             if digitized_object_page:
                 NearFieldCommunicationTag = apps.get_model('nfc', 'NearFieldCommunicationTag')
                 ntag = get_object_or_404(NearFieldCommunicationTag, uuid=ntag_uuid)
-                ntag.digitized_object = digitized_object
+                ntag.digit = digitized_object
                 ntag.save()
                 return redirect(digitized_object_page.url)
             else:

@@ -101,7 +101,7 @@ class DigitalObject(models.Model):
     def create_digit_page(self):
         parent_page = None
         if isinstance(self.content_object, apps.get_model('parties', 'UserParty')):
-            parent_page = self.content_object.profile_page
+            parent_page = self.content_object.user.profile.page
         elif isinstance(self.content_object, apps.get_model('inventory', 'UserInventory')):
             parent_page = self.content_object.page
 
