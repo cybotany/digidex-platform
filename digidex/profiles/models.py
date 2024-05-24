@@ -150,10 +150,6 @@ class UserProfilePage(Page):
         'profiles.UserProfileIndexPage'
     ]
 
-    subpage_types = [
-        'inventory.UserInventoryPage'
-    ]
-
     @property
     def user(self):
         """
@@ -183,46 +179,6 @@ class UserProfilePage(Page):
         Assumes a named URL pattern 'profile_form' that handles the form.
         """
         return reverse('profiles:profile_form', kwargs={'profile_slug': self.profile.slug})
-
-    def create_inventory(self, name):
-        """
-        Method to create a UserInventoryPage associated with this profile page.
-        
-        Args:
-            name (str): The name of the new UserInventory instance.
-        """
-        # Create the UserInventory instance with the provided name
-        UserInventory = apps.get_model('inventory', 'UserInventory')
-        user_inventory = UserInventory(
-            profile_page=self,
-            name=name,
-        )
-
-        # Save the UserInventory instance to the database and generate the slug
-        user_inventory.save()
-
-        # Create a corresponding UserInventoryPage
-        UserInventoryPage = apps.get_model('inventory', 'UserInventoryPage')
-        inventory_page = UserInventoryPage(
-            title=f"{user_inventory.name} - {self._username}",
-            slug=user_inventory.slug,
-            heading=user_inventory.name,
-            intro=user_inventory.description if hasattr(user_inventory, 'description') else "",
-        )
-        self.add_child(instance=inventory_page)
-        inventory_page.save_revision().publish()
-
-        # Link the UserInventory to the created UserInventoryPage
-        user_inventory.detail_page = inventory_page
-        user_inventory.save()
-
-        return user_inventory
-
-    def get_context(self, request):
-        context = super().get_context(request)
-        context['inventory'] = apps.get_model('inventory', 'UserInventory').objects.filter(user=self.request.user)
-        context['party'] = apps.get_model('party', 'UserParty').objects.filter(user=self.request.user)
-        return context
 
     class Meta:
         verbose_name = "User Profile Page"
