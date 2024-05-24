@@ -1,5 +1,4 @@
 import uuid
-from django.apps import apps
 from django.db import models
 from django.contrib.auth import get_user_model
 
@@ -25,21 +24,3 @@ class UserParty(models.Model):
     last_modified = models.DateTimeField(
         auto_now=True
     )
-
-    @property
-    def profile(self):
-        UserProfile = apps.get_model('profiles', 'UserProfile')
-        user_profile = UserProfile.objects.get(user=self.user)
-        return user_profile
-
-    @property
-    def profile_page(self):
-        return self.profile.get_profile_page()
-
-    @property
-    def username(self):
-        return self.user.username
-
-    @property
-    def _username(self):
-        return self.username.title()

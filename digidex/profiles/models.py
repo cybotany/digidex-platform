@@ -2,11 +2,10 @@ from django.apps import apps
 from django.db import models
 from django.conf import settings
 from django.urls import reverse
-from django.shortcuts import render, redirect
 
 from wagtail.models import Page
 from wagtail.fields import RichTextField
-from wagtail.admin.panels import FieldPanel, InlinePanel
+from wagtail.admin.panels import FieldPanel
 from wagtail.search import index
 
 from base.utils.storage import PublicMediaStorage
@@ -72,10 +71,6 @@ class UserProfile(models.Model):
         verbose_name="Last Modified"
     )
 
-    @property
-    def _username(self):
-        return self.user.username.title()
-
     def get_profile_page(self):
         """
         Retrieves the associated UserProfilePage. Raises a specific exception if not found.
@@ -93,11 +88,11 @@ class UserProfile(models.Model):
             return self.get_profile_page()
         except UserProfilePage.DoesNotExist:
             profile_page = UserProfilePage(
-                title=f"{self._username}'s Profile",
+                title=f"{self.user._username}'s Profile",
                 owner=self.user,
                 slug=self.slug,
-                heading=f"{self._username}",
-                intro=f"Welcome to {self._username}'s Profile Page.",
+                heading=f"{self.user._username}",
+                intro=f"Welcome to {self.user._username}'s Profile Page.",
                 profile=self
             )
 
@@ -120,7 +115,7 @@ class UserProfile(models.Model):
         return user_party
 
     def __str__(self):
-        return self._username
+        return self.user._username
 
     class Meta:
         verbose_name = "User Profile"
@@ -223,26 +218,11 @@ class UserProfilePage(Page):
 
         return user_inventory
 
-    def serve(self, request):
-        context = self.get_context(request)
-        context['form'] = self.get_inventory_form(request)
-
-        if request.method == 'POST':
-            form = context['form']
-            if form.is_valid():
-                user_inventory = form.save(commit=False)
-                user_inventory.profile_page = self
-                user_inventory.save()
-                user_inventory.create_page()
-                return redirect(self.url)
-            else:
-                context['errors'] = form.errors
-
-        return render(request, self.template, context)
-
-    def get_inventory_form(self, request):
-        from inventory.forms import UserInventoryForm
-        return UserInventoryForm(request.POST or None)
+    def get_context(self, request):
+        context = super().get_context(request)
+        context['inventory'] = apps.get_model('inventory', 'UserInventory').objects.filter(user=self.request.user)
+        context['party'] = apps.get_model('party', 'UserParty').objects.filter(user=self.request.user)
+        return context
 
     class Meta:
         verbose_name = "User Profile Page"

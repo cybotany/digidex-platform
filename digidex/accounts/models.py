@@ -11,3 +11,25 @@ class User(AbstractUser):
         db_index=True,
         verbose_name="User UUID"
     )
+
+    @property
+    def user_profile(self):
+        if hasattr(self, 'profile'):
+            return self.profile
+        return None
+
+    @property
+    def user_inventory(self):
+        if hasattr(self, 'inventory'):
+            return self.inventory
+        return None
+
+    @property
+    def user_party(self):
+        if hasattr(self, 'party'):
+            return self.party
+        return None
+
+    @property
+    def _username(self):
+        return self.username.title()
