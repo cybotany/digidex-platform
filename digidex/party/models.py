@@ -22,3 +22,22 @@ class UserParty(models.Model):
     last_modified = models.DateTimeField(
         auto_now=True
     )
+
+
+class UserPartyDigit(models.Model):
+    user_party = models.ForeignKey(
+        'party.UserParty',
+        on_delete=models.CASCADE,
+        related_name="digits"
+    )
+    digit = models.ForeignKey(
+        'digitization.DigitalObject',
+        on_delete=models.CASCADE,
+        related_name="party"
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+    last_modified = models.DateTimeField(
+        auto_now=True
+    )
