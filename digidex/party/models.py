@@ -30,6 +30,9 @@ class UserParty(models.Model):
         )
         return user_party_digit
 
+    def get_all_digits(self):
+        return self.digits.all() if self.digits.exists() else None
+
 
 class UserPartyDigit(models.Model):
     user_party = models.ForeignKey(

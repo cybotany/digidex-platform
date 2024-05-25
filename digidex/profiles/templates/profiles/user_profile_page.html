@@ -18,7 +18,7 @@
       <div id="asset-items-list" class="asset-item-collection-wrapper base-dyn-list">
         <div role="list" class="asset-item-collection base-dyn-items">
           {% for digit in party_digits %}
-            {% include 'profiles/elements/card.html' %}
+            {% include 'profiles/elements/card.html' with item=digit %}
           {% empty %}
             {% include 'profiles/elements/empty.html' %}
           {% endfor %}

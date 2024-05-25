@@ -17,6 +17,6 @@ class User(AbstractUser):
         return self.username.title()
 
     def get_party_digits(self):
-        if self.party.digits.exist():
-            return self.party.digits.all()
+        if hasattr(self, 'party'):
+            return self.party.get_all_digits()
         return None

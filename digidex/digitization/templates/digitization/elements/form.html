@@ -16,14 +16,6 @@
       <div class="text-error">{{ form.description.errors|striptags }}</div>
     </div>
   {% endif %}
-  <!-- Render Inventory Field -->
-  <label for="{{ form.inventory.id_for_label }}">Inventory:</label>
-  {{ form.inventory }}
-  {% if form.inventory.errors %}
-    <div class="error-message">
-      <div class="text-error">{{ form.inventory.errors|striptags }}</div>
-    </div>
-  {% endif %}
   <!-- Render Submit Button -->
   <input type="submit" value="Create" class="submit-button base-button"> 
   {{ form.non_field_errors }}

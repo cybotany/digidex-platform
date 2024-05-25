@@ -11,9 +11,9 @@ User = get_user_model()
 
 @login_required
 def link_ntag(request, ntag_uuid):
+    user = request.user
     if request.method == 'POST':
-        user = request.user
-        form = DigitalObjectForm(request.POST, user=user)
+        form = DigitalObjectForm(request.POST)
         if form.is_valid():
             digital_object = form.save()            
             user.party.add_digit(digital_object)
@@ -30,6 +30,6 @@ def link_ntag(request, ntag_uuid):
             else:
                 return HttpResponseForbidden("Failed to create a detail page for the digitized object.")
     else:
-        form = DigitalObjectForm(user=user)
+        form = DigitalObjectForm()
 
     return render(request, "digitization/link_ntag.html", {'form': form})
