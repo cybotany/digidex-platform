@@ -15,8 +15,11 @@ def link_ntag(request, ntag_uuid):
     if request.method == 'POST':
         form = DigitalObjectForm(request.POST)
         if form.is_valid():
-            digital_object = form.save()            
+            digital_object = form.save()
             user.party.add_digit(digital_object)
+            
+            journal = digital_object.create_journal()
+            journal.save()
 
             digit_parent_page = user.profile.page
             digital_object_page = digital_object.create_digit_page(digit_parent_page)

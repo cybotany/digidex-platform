@@ -1,6 +1,5 @@
 import uuid
 from django.db import models
-from django.conf import settings
 
 from base.utils.storage import PublicMediaStorage
 
@@ -18,9 +17,9 @@ class EntryCollection(models.Model):
         verbose_name="Journal Entry Collection UUID"
     )
     digit = models.OneToOneField(
-        settings.AUTH_USER_MODEL,
+        'digitization.DigitalObject',
         on_delete=models.PROTECT,
-        related_name="journal",
+        related_name='journal'
     )
     created_at = models.DateTimeField(
         auto_now_add=True
@@ -38,6 +37,9 @@ class EntryCollection(models.Model):
 
     def get_all_entries(self):
         return self.entries.all() if self.entries.exists() else None
+
+    def __str__(self):
+        return f"Journal Entry Collection: {self.uuid}"
 
 
 

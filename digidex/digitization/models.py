@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from django.apps import apps
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils.text import slugify
 
@@ -83,6 +84,18 @@ class DigitalObject(models.Model):
         digitized_object_page.save_revision().publish()
         return digitized_object_page
 
+    def create_journal(self):
+        journal = apps.get_model('journal', 'EntryCollection').objects.create(
+            digit=self
+        )
+        return journal
+
+    def get_journal_entries(self):
+        journal_collection = self.journal
+        if journal_collection:
+            return journal_collection.get_all_entries()
+        return None
+
     def __str__(self):
         return f"{self.digit_name}"
 
@@ -109,3 +122,8 @@ class DigitalObjectPage(Page):
         FieldPanel('heading'),
         FieldPanel('intro'),
     ]
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context['journal_entries'] = self.digit.get_journal_entries()
+        return context
