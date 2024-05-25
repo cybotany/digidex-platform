@@ -70,6 +70,9 @@ class UserProfile(models.Model):
         verbose_name="Last Modified"
     )
 
+    def get_digits(self):
+        return self.user.get_party_digits()
+
     def __str__(self):
         return self.user._username
 
@@ -102,7 +105,7 @@ class UserProfilePage(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context['user_party'] = self.profile.user.user_party
+        context['party_digits'] = self.profile.get_digits()
         return context
 
     search_fields = Page.search_fields + [

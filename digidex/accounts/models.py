@@ -13,15 +13,13 @@ class User(AbstractUser):
     )
 
     @property
+    def _username(self):
+        return self.username.title()
+
+    @property
     def user_profile(self):
         if hasattr(self, 'profile'):
             return self.profile
-        return None
-
-    @property
-    def user_inventory(self):
-        if hasattr(self, 'inventory'):
-            return self.inventory
         return None
 
     @property
@@ -30,6 +28,6 @@ class User(AbstractUser):
             return self.party
         return None
 
-    @property
-    def _username(self):
-        return self.username.title()
+    def get_party_digits(self):
+        if self.user_party:
+            return self.user_party.digits.all()

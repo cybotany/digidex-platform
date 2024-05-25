@@ -17,9 +17,12 @@
       </div>
       <div id="asset-items-list" class="asset-item-collection-wrapper base-dyn-list">
         <div role="list" class="asset-item-collection base-dyn-items">
-          {% include 'profiles/elements/card.html' %}
+          {% for digit in party_digits %}
+            {% include 'profiles/elements/card.html' %}
+          {% empty %}
+            {% include 'profiles/elements/empty.html' %}
+          {% endfor %}
         </div>
-        <div id="no-assets-message" style="display: none;">No assets in this category.</div>
       </div>
     </div>
   </section>
