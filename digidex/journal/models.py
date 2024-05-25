@@ -1,17 +1,57 @@
 import uuid
-from django.apps import apps
 from django.db import models
+from django.conf import settings
 
-from modelcluster.fields import ParentalKey
-from wagtail.models import Orderable
+from base.utils.storage import PublicMediaStorage
 
 
-class JournalEntry(models.Model):
-    image = models.ForeignKey(
-        'wagtailimages.Image',
+def journal_image_path(instance, filename):
+    extension = filename.split('.')[-1]
+    return f'journals/{instance.journal.uuid}/images/{uuid.uuid4()}.{extension}'
+
+class EntryCollection(models.Model):
+    uuid = models.UUIDField(
+        default=uuid.uuid4,
+        unique=True,
+        editable=False,
+        db_index=True,
+        verbose_name="Journal Entry Collection UUID"
+    )
+    digit = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.PROTECT,
+        related_name="journal",
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+    last_modified = models.DateTimeField(
+        auto_now=True
+    )
+
+    def add_entry(self, digit):
+        journal_entry, created = Entry.objects.get_or_create(
+            user_party=self,
+            digit=digit
+        )
+        return journal_entry
+
+    def get_all_entries(self):
+        return self.entries.all() if self.entries.exists() else None
+
+
+
+class Entry(models.Model):
+    journal = models.ForeignKey(
+        EntryCollection,
         on_delete=models.CASCADE,
-        related_name='+',
-        help_text="Digitized object image."
+        related_name="entries"
+    )
+    image = models.ImageField(
+        storage=PublicMediaStorage(),
+        upload_to=journal_image_path,
+        null=True,
+        blank=True
     )
     caption = models.CharField(
         blank=True,
@@ -19,36 +59,14 @@ class JournalEntry(models.Model):
         max_length=250,
         help_text="Image caption."
     )
-    digit = models.OneToOneField(
-        "digitization.DigitalObject",
-        on_delete=models.CASCADE,
-        related_name='journal_entries'
+    note = models.TextField(
+        blank=True,
+        null=True,
+        help_text="Journal entry note."
     )
-
-    @property
-    def digit_name(self):
-        return self.digit.digit_name
-
-    @property
-    def digit_description(self):
-        return self.digit.digit_description
-
-    @property
-    def image_caption(self):
-        return self.caption
-
-    @property
-    def digit_inventory_page(self):
-        return self.digit.page
-
-    @property
-    def digit_inventory_page_url(self):
-        return self.digit_inventory_page.url
-
-    @property
-    def digit_detail_page(self):
-        return self.digit.detail_page
-
-    @property
-    def digit_detail_page_url(self):
-        return self.digit_detail_page.url
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+    last_modified = models.DateTimeField(
+        auto_now=True
+    )

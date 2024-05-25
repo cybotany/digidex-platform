@@ -3,7 +3,26 @@
 {% block content %}
 <section class="section">
   <div class="content">    
-    {% include 'digitization/elements/panel.html' %}
+    {% include 'digitization/elements/panel.html' with item=page.digit %}
+    <section class="section">
+      <div class="content">
+        <div class="block-asset-categories block">
+          <a href="#" aria-current="page" class="link-asset-category base-inline-block base--current" data-category="party">
+            <img src="{% static 'base/images/switcher.svg' %}" loading="eager" alt="" class="icon-asset-category">
+            <div class="text-asset-category">All Entries</div>
+          </a>
+        </div>
+        <div id="asset-items-list" class="asset-item-collection-wrapper base-dyn-list">
+          <div role="list" class="asset-item-collection base-dyn-items">
+            {% for entry in journal_entries %}
+              {% include 'digitization/elements/card.html' with item=entry %}
+            {% empty %}
+              {% include 'digitization/elements/empty.html' %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </section>
 {% endblock %}
