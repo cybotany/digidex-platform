@@ -16,18 +16,7 @@ class User(AbstractUser):
     def _username(self):
         return self.username.title()
 
-    @property
-    def user_profile(self):
-        if hasattr(self, 'profile'):
-            return self.profile
-        return None
-
-    @property
-    def user_party(self):
-        if hasattr(self, 'party'):
-            return self.party
-        return None
-
     def get_party_digits(self):
-        if self.user_party:
-            return self.user_party.digits.all()
+        if self.party.digits.exist():
+            return self.party.digits.all()
+        return None

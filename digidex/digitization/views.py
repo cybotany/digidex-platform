@@ -12,19 +12,24 @@ User = get_user_model()
 @login_required
 def link_ntag(request, ntag_uuid):
     if request.method == 'POST':
-        form = DigitalObjectForm(request.POST, user=request.user)
+        user = request.user
+        form = DigitalObjectForm(request.POST, user=user)
         if form.is_valid():
-            digitized_object = form.save()
-            digitized_object_page = digitized_object.create_digit_page()
-            if digitized_object_page:
+            digital_object = form.save()            
+            user.party.add_digit(digital_object)
+
+            digit_parent_page = user.profile.page
+            digital_object_page = digital_object.create_digit_page(digit_parent_page)
+            
+            if digital_object_page:
                 NearFieldCommunicationTag = apps.get_model('nfc', 'NearFieldCommunicationTag')
                 ntag = get_object_or_404(NearFieldCommunicationTag, uuid=ntag_uuid)
-                ntag.digit = digitized_object
+                ntag.digit = digital_object
                 ntag.save()
-                return redirect(digitized_object_page.url)
+                return redirect(digital_object_page.url)
             else:
                 return HttpResponseForbidden("Failed to create a detail page for the digitized object.")
     else:
-        form = DigitalObjectForm(user=request.user)
+        form = DigitalObjectForm(user=user)
 
     return render(request, "digitization/link_ntag.html", {'form': form})

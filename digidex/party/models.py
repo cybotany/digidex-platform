@@ -23,6 +23,13 @@ class UserParty(models.Model):
         auto_now=True
     )
 
+    def add_digit(self, digit):
+        user_party_digit, created = UserPartyDigit.objects.get_or_create(
+            user_party=self,
+            digit=digit
+        )
+        return user_party_digit
+
 
 class UserPartyDigit(models.Model):
     user_party = models.ForeignKey(

@@ -59,6 +59,19 @@ class DigitalObject(models.Model):
         except DigitalObjectPage.DoesNotExist:
             raise ObjectDoesNotExist("There's no page for this digitized object.")
 
+    def create_digit_page(self, parent_page):
+        digitized_object_page = DigitalObjectPage(
+            title=self.name,
+            slug=self.slug,
+            heading=self.name,
+            owner=parent_page.owner,
+            intro=self.description or '',
+            digital_object=self,
+        )
+        parent_page.add_child(instance=digitized_object_page)
+        digitized_object_page.save_revision().publish()
+        return digitized_object_page
+
     def __str__(self):
         return f"{self.digit_name}"
 

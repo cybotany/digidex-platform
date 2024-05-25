@@ -70,6 +70,24 @@ class UserProfile(models.Model):
         verbose_name="Last Modified"
     )
 
+    def create_profile_page(self):
+        try:
+            parent_page = UserProfileIndexPage.objects.get(slug='u')
+        except UserProfileIndexPage.DoesNotExist:
+            return None
+
+        profile_page = UserProfilePage(
+            title=f"{self.user.username}'s Profile",
+            owner=self.profile.user,
+            slug=self.slug,
+            heading=self.user.username,
+            intro=self.bio or '',
+            profile=self,
+        )
+        parent_page.add_child(instance=profile_page)
+        profile_page.save_revision().publish()
+        return profile_page
+
     def get_digits(self):
         return self.user.get_party_digits()
 
