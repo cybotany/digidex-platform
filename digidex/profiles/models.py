@@ -70,7 +70,6 @@ class UserProfile(models.Model):
         verbose_name="Last Modified"
     )
 
-
     def __str__(self):
         return self.user._username
 
@@ -100,6 +99,11 @@ class UserProfilePage(Page):
     @property
     def form_url(self):
         return reverse('profiles:profile_form', kwargs={'profile_slug': self.profile.slug})
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context['user_party'] = self.profile.user.user_party
+        return context
 
     search_fields = Page.search_fields + [
         index.SearchField('username', partial_match=True, boost=2),
