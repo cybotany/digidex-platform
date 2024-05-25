@@ -1,9 +1,0 @@
-{% load static wagtailcore_tags wagtailimages_tags %}
-
-<p class="paragraph-digit">{{ digit.description }}</p>
-<a href="{{ digit.digit_page.url }}" class="link-block base-inline-block">
-  <div class="text-link">Read more</div>
-  <div class="block-icon-link">
-    <img src="{% static 'base/images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
-  </div>
-</a>

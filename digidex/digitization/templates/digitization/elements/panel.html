@@ -1,0 +1,33 @@
+{% load static wagtailcore_tags%}
+
+<div class="profile-wrapper large">
+  <div class="profile large">
+    <div class="block-profile large">
+      {% if page.profile.avatar %}
+        <img src="{{ page.profile.avatar.url }}" alt="Profile Avatar" class="profile-avatar large">
+      {% endif %}
+      <div class="profile-content large">
+        <div class="date">{{ page.profile.created_at|date:"F Y" }}</div>
+        <h3 class="heading-profile">{{ page.profile.user.username }}</h3>
+        {% if page.profile.bio %}
+          <p class="paragraph-profile large">{{ page.profile.bio|richtext }}</p>
+        {% endif %}
+        {% if request.user == page.owner %}
+        <a href="{{ page.form_url }}" class="link-block base-inline-block">
+          <div class="text-link">Update Profile</div>
+          <div class="block-icon-link">
+            <img src="{% static 'base/images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
+          </div>
+        </a>
+      {% else %}
+        <a href="mailto:{{ page.profile.email }}" class="link-block base-inline-block">
+          <div class="text-link">Message</div>
+          <div class="block-icon-link">
+            <img src="{% static 'base/images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
+          </div>
+        </a>
+      {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

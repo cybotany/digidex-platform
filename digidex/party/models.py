@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from django.apps import apps
 from django.conf import settings
 
 
@@ -51,3 +52,17 @@ class UserPartyDigit(models.Model):
     last_modified = models.DateTimeField(
         auto_now=True
     )
+
+    @property
+    def digit_name(self):
+        return self.digit.digit_name
+
+    @property
+    def digit_description(self):
+        if self.digit.digit_description:
+            return self.digit.digit_description
+        return "No description available."
+
+    @property
+    def digit_page(self):
+        return self.digit.digit_page

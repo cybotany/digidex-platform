@@ -1,6 +1,7 @@
 import uuid
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils.text import slugify
 
 from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel
@@ -54,19 +55,29 @@ class DigitalObject(models.Model):
     def digit_page(self):
         try:
             return DigitalObjectPage.objects.get(
-                digital_object=self
+                digit=self
             )
         except DigitalObjectPage.DoesNotExist:
             raise ObjectDoesNotExist("There's no page for this digitized object.")
 
+    def create_unique_slug(self, parent_page, base_slug):
+        slug = base_slug
+        counter = 1
+        while DigitalObjectPage.objects.filter(slug=slug, path__startswith=parent_page.path).exists():
+            slug = f"{base_slug}-{counter}"
+            counter += 1
+        return slug
+
     def create_digit_page(self, parent_page):
+        base_slug = slugify(self.name)
+        unique_slug = self.create_unique_slug(parent_page, base_slug)
         digitized_object_page = DigitalObjectPage(
             title=self.name,
-            slug=self.slug,
+            slug=unique_slug,
             heading=self.name,
             owner=parent_page.owner,
             intro=self.description or '',
-            digital_object=self,
+            digit=self,
         )
         parent_page.add_child(instance=digitized_object_page)
         digitized_object_page.save_revision().publish()
@@ -84,7 +95,7 @@ class DigitalObjectPage(Page):
     intro = RichTextField(
         blank=True
     )
-    digital_object = models.ForeignKey(
+    digit = models.ForeignKey(
         'digitization.DigitalObject',
         on_delete=models.PROTECT,
         related_name='page'
