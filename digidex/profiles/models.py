@@ -89,7 +89,8 @@ class UserProfile(models.Model):
         return profile_page
 
     def get_digits(self):
-        return self.user.get_party_digits()
+        return None
+        #return self.user.get_inventory_digits()
 
     def __str__(self):
         return self.user._username
@@ -123,7 +124,7 @@ class UserProfilePage(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context['party_digits'] = self.profile.get_digits()
+        context['digits'] = self.profile.get_digits()
         return context
 
     search_fields = Page.search_fields + [

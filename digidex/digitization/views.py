@@ -18,7 +18,6 @@ def link_ntag(request, ntag_uuid):
         form = DigitalObjectForm(request.POST)
         if form.is_valid():
             digital_object = form.save()
-            user.party.add_digit(digital_object)
             
             journal = digital_object.create_journal()
             journal.save()

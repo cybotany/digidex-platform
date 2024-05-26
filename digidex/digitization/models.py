@@ -102,7 +102,6 @@ class DigitalObject(models.Model):
         related_models = [
             ('journal', 'EntryCollection'),
             ('nfc', 'NearFieldCommunicationTag'),
-            ('party', 'UserPartyDigit')
         ]
 
         for app_label, model_name in related_models:

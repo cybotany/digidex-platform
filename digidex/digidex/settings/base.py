@@ -16,7 +16,6 @@ INSTALLED_APPS = [
     "base",
     "accounts",
     "profiles",
-    "party",
     "inventory",
     "digitization",
     "journal",

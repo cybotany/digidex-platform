@@ -5,7 +5,7 @@ from digitization.models import DigitalObject
 class DigitalObjectForm(forms.ModelForm):
     class Meta:
         model = DigitalObject
-        fields = ['name', 'description']
+        fields = ['name', 'description',]
         widgets = {
             'name': forms.TextInput(
                 attrs={

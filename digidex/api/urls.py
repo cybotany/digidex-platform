@@ -6,7 +6,6 @@ from api.views.digitization import DigitalObjectViewSet
 from api.views.inventory import UserInventoryViewSet
 from api.views.journal import JournalEntryViewSet
 from api.views.nfc import RegisterNearFieldCommunicationTag
-from api.views.party import UserPartyViewSet
 from api.views.profiles import UserProfileViewSet
 
 token_urls = [
@@ -18,7 +17,6 @@ router = DefaultRouter()
 router.register('digitization', DigitalObjectViewSet, basename='digitization')
 router.register('inventory', UserInventoryViewSet, basename='inventory')
 router.register('journal', JournalEntryViewSet, basename='journal')
-router.register('party', UserPartyViewSet, basename='party')
 router.register('profiles', UserProfileViewSet, basename='profiles')
 
 app_name = 'api'

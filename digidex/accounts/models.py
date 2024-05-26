@@ -15,8 +15,3 @@ class User(AbstractUser):
     @property
     def _username(self):
         return self.username.title()
-
-    def get_party_digits(self):
-        if hasattr(self, 'party'):
-            return self.party.get_all_digits()
-        return None
