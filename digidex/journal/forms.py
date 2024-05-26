@@ -1,12 +1,12 @@
 from django import forms
 
-from journal.models import JournalEntry
+from journal.models import Entry
 
 
 class JournalEntryForm(forms.ModelForm):
     class Meta:
-        model = JournalEntry
-        fields = ('image', 'caption',)
+        model = Entry
+        fields = ('image', 'caption', 'note',)
         widgets = {
             'image': forms.FileInput(
                 attrs={
@@ -17,6 +17,12 @@ class JournalEntryForm(forms.ModelForm):
                 attrs={
                     'class': 'text-field base-input',
                     'placeholder': 'Provide a caption for the image'
+                }
+            ),
+            'note': forms.Textarea(
+                attrs={
+                    'class': 'textarea base-input',
+                    'placeholder': 'Provide a note for the journal entry (optional).'
                 }
             )
         }

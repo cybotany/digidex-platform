@@ -3,6 +3,7 @@ from django.db import models
 from django.apps import apps
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils.text import slugify
+from django.urls import reverse
 
 from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel
@@ -30,7 +31,6 @@ class DigitalObject(models.Model):
         help_text="Digitized object description."
     )
     slug = models.SlugField(
-        unique=True,
         db_index=True,
         max_length=255,
         verbose_name="Digitized Object Slug"
@@ -123,7 +123,13 @@ class DigitalObjectPage(Page):
         FieldPanel('intro'),
     ]
 
+    @property
+    def form_url(self):
+        profile = self.owner.profile
+        return reverse('digitization:digit_form', kwargs={'profile_slug': profile.slug})
+
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
+        context['journal'] = self.digit.journal
         context['journal_entries'] = self.digit.get_journal_entries()
         return context

@@ -1,30 +1,22 @@
 {% load static wagtailcore_tags wagtailimages_tags %}
 
-<section class="section">
-  <div class="content">
-    <div class="collection-list-wrapper-posts base-dyn-list">
-      <div role="list" class="collection-list-posts base-dyn-items">
-        <div role="listitem" class="base-dyn-item">
-          <div class="block-post">
-            <a href="{{ digit.digit_page.url }}" class="link-digit-thumbnail base-inline-block">
-              <img alt="" loading="eager" src="" class="image-digit-thumbnail">
-            </a>
-            <div class="post">
-              <div class="date">{{ digit.created_at }}</div>
-              <a href="{{ digit.digit_page.url }}" class="link-heading-digit base-inline-block">
-                <h4 class="heading-digit">{{ digit.digit_name }}</h4>
-              </a>
-              <p class="paragraph-digit">{{ digit.digit_description }}</p>
-              <a href="{{ digit.digit_page.url }}" class="link-block base-inline-block">
-                <div class="text-link">Read more</div>
-                <div class="block-icon-link">
-                  <img src="{% static 'base/images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
-                </div>
-              </a>
-            </div>
-          </div>
+<div role="listitem" class="base-dyn-item">
+  <div class="block-post">
+    <a href="" class="link-digit-thumbnail base-inline-block">
+      <img alt="" loading="eager" src="" class="image-digit-thumbnail">
+    </a>
+    <div class="post">
+      <div class="date"></div>
+      <a href="" class="link-heading-digit base-inline-block">
+        <h4 class="heading-digit"></h4>
+      </a>
+      <p class="paragraph-digit"></p>
+      <a href="" class="link-block base-inline-block">
+        <div class="text-link">Read more</div>
+        <div class="block-icon-link">
+          <img src="{% static 'base/images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
         </div>
-      </div>
+      </a>
     </div>
   </div>
-</section>
+</div>
