@@ -12,6 +12,18 @@
         {% if item.digit_description %}
           <p class="paragraph-profile large">{{ item.digit_description }}</p>
         {% endif %}
+        {% if request.user == page.owner %}
+          <a href="{{ digit.form_url }}" class="link-block base-inline-block">
+            <div class="text-link">Update Digit</div>
+            <div class="block-icon-link">
+              <img src="{% static 'base/images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
+            </div>
+          </a>
+          <form method="post" action="{{ page.delete_url }}" class="link-block base-inline-block">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        {% endif %}
       </div>
     </div>
   </div>

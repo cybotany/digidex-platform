@@ -91,10 +91,31 @@ class DigitalObject(models.Model):
         return journal
 
     def get_journal_entries(self):
-        journal_collection = self.journal
-        if journal_collection:
-            return journal_collection.get_all_entries()
-        return None
+        try:
+            journal_collection = self.journal
+            if journal_collection:
+                return journal_collection.get_all_entries()
+        except ObjectDoesNotExist:
+            return None
+
+    def delete(self, *args, **kwargs):
+        related_models = [
+            ('journal', 'EntryCollection'),
+            ('nfc', 'NearFieldCommunicationTag'),
+            ('party', 'UserPartyDigit')
+        ]
+
+        for app_label, model_name in related_models:
+            model = apps.get_model(app_label, model_name)
+            related_objects = model.objects.filter(digit=self)
+            for obj in related_objects:
+                obj.delete()
+
+        try:
+            digital_object_page = DigitalObjectPage.objects.get(digit=self)
+            digital_object_page.delete()
+        except DigitalObjectPage.DoesNotExist:
+            pass
 
     def __str__(self):
         return f"{self.digit_name}"
@@ -128,8 +149,11 @@ class DigitalObjectPage(Page):
         profile = self.owner.profile
         return reverse('digitization:digit_form', kwargs={'profile_slug': profile.slug})
 
+    @property
+    def delete_url(self):
+        return reverse('digitization:delete_digit', kwargs={'digit_uuid': self.digit.uuid})
+
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context['journal'] = self.digit.journal
         context['journal_entries'] = self.digit.get_journal_entries()
         return context
