@@ -1,10 +1,10 @@
 from rest_framework import serializers
 
-from inventory.models import UserInventory
+from inventory.models import Category
 
-class UserInventorySerializer(serializers.ModelSerializer):
+class CategorySerializer(serializers.ModelSerializer):
     detail_page_url = serializers.SerializerMethodField()
 
     class Meta:
-        model = UserInventory
+        model = Category
         fields = ['uuid', 'name', 'description', 'created_at', 'last_modified',]

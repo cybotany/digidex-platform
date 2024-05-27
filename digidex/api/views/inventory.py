@@ -2,14 +2,14 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication
 
-from inventory.models import UserInventory
-from api.serializers.inventory import UserInventorySerializer
+from inventory.models import Category
+from api.serializers.inventory import CategorySerializer
 
 
-class UserInventoryViewSet(viewsets.ReadOnlyModelViewSet):
-    serializer_class = UserInventorySerializer
+class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = CategorySerializer
     permission_classes = [IsAuthenticated]
     authentication_classes = [SessionAuthentication]
 
     def get_queryset(self):
-        return UserInventory.objects.filter(user=self.request.user)
+        return Category.objects.filter(user=self.request.user)

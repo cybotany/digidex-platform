@@ -80,7 +80,7 @@ class CategoryPage(Page):
     ]
 
     parent_page_types = [
-        'profiles.UserProfilePage'
+        'accounts.UserPage'
     ]
 
     subpage_types = [

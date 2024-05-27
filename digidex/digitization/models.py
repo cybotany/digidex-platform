@@ -37,7 +37,7 @@ class DigitalObject(models.Model):
         related_name="digits",
     )
     inventory = models.ForeignKey(
-        "inventory.UserInventory",
+        "inventory.Category",
         on_delete=models.SET_NULL,
         null=True
     )

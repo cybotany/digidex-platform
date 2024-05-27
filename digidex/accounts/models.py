@@ -12,20 +12,6 @@ from wagtail.search import index
 from base.utils.storage import PublicMediaStorage
 
 
-class User(AbstractUser):
-    uuid = models.UUIDField(
-        default=uuid.uuid4,
-        unique=True,
-        editable=False,
-        db_index=True,
-        verbose_name="User UUID"
-    )
-
-    @property
-    def _username(self):
-        return self.username.title()
-
-
 def user_avatar_path(instance, filename):
     extension = filename.split('.')[-1]
     return f'users/{instance.user.username}/avatar.{extension}'
@@ -52,6 +38,42 @@ class UserIndexPage(Page):
     subpage_types = [
         'accounts.UserPage'
     ]
+
+
+class User(AbstractUser):
+    uuid = models.UUIDField(
+        default=uuid.uuid4,
+        unique=True,
+        editable=False,
+        db_index=True,
+        verbose_name="User UUID"
+    )
+
+    def create_profile_page(self):
+        try:
+            parent_page = UserIndexPage.objects.get(slug='u')
+        except UserIndexPage.DoesNotExist:
+            return None
+
+        profile_page = UserPage(
+            title=f"{self.user.username}'s Profile",
+            owner=self.profile.user,
+            slug=self.slug,
+            heading=self.user.username,
+            intro=self.bio or '',
+            profile=self,
+        )
+        parent_page.add_child(instance=profile_page)
+        profile_page.save_revision().publish()
+        return profile_page
+
+    def get_digits(self):
+        return None
+        #return self.user.get_inventory_digits()
+
+    @property
+    def _username(self):
+        return self.username.title()
 
 
 class UserProfile(models.Model):
@@ -85,28 +107,6 @@ class UserProfile(models.Model):
         auto_now=True,
         verbose_name="Last Modified"
     )
-
-    def create_profile_page(self):
-        try:
-            parent_page = UserIndexPage.objects.get(slug='u')
-        except UserIndexPage.DoesNotExist:
-            return None
-
-        profile_page = UserPage(
-            title=f"{self.user.username}'s Profile",
-            owner=self.profile.user,
-            slug=self.slug,
-            heading=self.user.username,
-            intro=self.bio or '',
-            profile=self,
-        )
-        parent_page.add_child(instance=profile_page)
-        profile_page.save_revision().publish()
-        return profile_page
-
-    def get_digits(self):
-        return None
-        #return self.user.get_inventory_digits()
 
     def __str__(self):
         return self.user._username
@@ -150,7 +150,6 @@ class UserPage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('heading'),
         FieldPanel('intro'),
-        FieldPanel('profile'),
     ]
 
     parent_page_types = [
