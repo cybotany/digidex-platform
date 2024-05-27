@@ -65,6 +65,34 @@ class User(AbstractUser):
             self.slug = slug
         super().save(*args, **kwargs)
 
+    def create_page(self):
+        try:
+            user_index_page = UserIndexPage.objects.get(slug='u')
+        except UserIndexPage.DoesNotExist:
+            print('UserIndexPage does not exist. Please create it first.')
+            return None
+
+        if not UserPage.objects.filter(user=self).exists():
+            user_page = UserPage(
+                title=f"{self.username}'s Profile",
+                slug=self.slug,
+                user=self
+            )
+            user_index_page.add_child(instance=user_page)
+            user_page.save_revision().publish()
+
+            print(f'UserPage for user {self.username} created and added successfully!')
+            return user_page
+        else:
+            print(f'UserPage for user {self.username} already exists.')
+            return UserPage.objects.get(user=self)
+
+    def create_profile(self):
+        profile, created = UserProfile.objects.get_or_create(user=self)
+        if created:
+            profile.save()
+        return profile
+
     def get_digits(self):
         return None
         #return self.user.get_inventory_digits()
