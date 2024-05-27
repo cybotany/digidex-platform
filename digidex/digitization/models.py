@@ -1,6 +1,7 @@
 import uuid
 from django.db import models
 from django.apps import apps
+from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils.text import slugify
 from django.urls import reverse
@@ -30,10 +31,15 @@ class DigitalObject(models.Model):
         null=True,
         help_text="Digitized object description."
     )
-    slug = models.SlugField(
-        db_index=True,
-        max_length=255,
-        verbose_name="Digitized Object Slug"
+    owner = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.PROTECT,
+        related_name="digits",
+    )
+    inventory = models.ForeignKey(
+        "inventory.UserInventory",
+        on_delete=models.SET_NULL,
+        null=True
     )
     created_at = models.DateTimeField(
         auto_now_add=True
@@ -142,11 +148,6 @@ class DigitalObjectPage(Page):
         FieldPanel('heading'),
         FieldPanel('intro'),
     ]
-
-    @property
-    def form_url(self):
-        profile = self.owner.profile
-        return reverse('digitization:digit_form', kwargs={'profile_slug': profile.slug})
 
     @property
     def delete_url(self):

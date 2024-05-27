@@ -1,6 +1,6 @@
 from allauth.account.adapter import DefaultAccountAdapter
 
-from profiles.utils import create_user_profile
+from accounts.utils import create_user_profile
 
 
 class DigidexAccountAdapter(DefaultAccountAdapter):

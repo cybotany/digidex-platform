@@ -22,7 +22,7 @@ def link_ntag(request, ntag_uuid):
             journal = digital_object.create_journal()
             journal.save()
 
-            digit_parent_page = user.profile.page
+            digit_parent_page = user.page
             digital_object_page = digital_object.create_digit_page(digit_parent_page)
             
             if digital_object_page:
@@ -46,5 +46,5 @@ def delete_digit(request, digit_uuid):
         digit = get_object_or_404(apps.get_model('digitization', 'DigitalObject'), uuid=digit_uuid)
         digit.delete()
         messages.success(request, 'Digital object deleted successfully.')
-        return redirect(user.profile.page.url)
-    return redirect(user.profile.page.url)
+        return redirect(user.page.url)
+    return redirect(user.page.url)

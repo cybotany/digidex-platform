@@ -2,7 +2,7 @@ from django.utils.text import slugify
 
 from wagtail.models import Page
 
-from profiles.models import UserProfileIndexPage, UserProfile
+from accounts.models import UserProfileIndexPage, UserProfile
 
 
 def create_user_profile_index_page():
