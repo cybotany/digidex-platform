@@ -1,11 +1,9 @@
-from django.utils.text import slugify
-
 from wagtail.models import Page
 
 from accounts.models import UserIndexPage, UserProfile
 
 
-def create_user_profile_index_page():
+def create_user_index_page():
     root_page = Page.objects.get(url_path='/home/')
 
     if not UserIndexPage.objects.filter(slug='u').exists():
@@ -27,10 +25,8 @@ def create_user_profile(user):
     """
     Create a user profile if it doesn't exist.
     """
-    user_slug = slugify(user.username)
     profile, created = UserProfile.objects.get_or_create(
-        user=user,
-        defaults={'slug': user_slug}
+        user=user
     )
     if created:
         profile.save()
