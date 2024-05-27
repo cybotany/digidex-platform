@@ -9,8 +9,8 @@ User = get_user_model()
 
 
 @login_required
-def profile_form_view(request, profile_slug):
-    page_owner = get_object_or_404(User, username=profile_slug)
+def profile_form_view(request, user_slug):
+    page_owner = get_object_or_404(User, username=user_slug)
     requesting_user = request.user
 
     if page_owner != requesting_user:

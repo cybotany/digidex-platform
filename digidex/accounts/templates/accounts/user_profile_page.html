@@ -1,10 +1,10 @@
-{% extends "profiles/base.html" %}
+{% extends "accounts/base.html" %}
 {% load static %}
 
 {% block content %}
   <section class="section">
     <div class="content">    
-      {% include 'profiles/elements/panel.html' %}
+      {% include 'accounts/elements/panel.html' %}
     </div>
   </section>
   <section class="section">
@@ -18,9 +18,9 @@
       <div id="asset-items-list" class="asset-item-collection-wrapper base-dyn-list">
         <div role="list" class="asset-item-collection base-dyn-items">
           {% for digit in digits %}
-            {% include 'profiles/elements/card.html' with item=digit %}
+            {% include 'accounts/elements/card.html' with item=digit %}
           {% empty %}
-            {% include 'profiles/elements/empty.html' %}
+            {% include 'accounts/elements/empty.html' %}
           {% endfor %}
         </div>
       </div>

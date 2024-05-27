@@ -6,7 +6,6 @@ from wagtail.admin import urls as wagtailadmin_urls
 from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
-from accounts.views import profile_form_view
 from search.views import search
 
 urlpatterns = [
@@ -18,7 +17,7 @@ urlpatterns = [
     path('nfc/', include('nfc.urls')),
     path('digitize/', include('digitization.urls')),
     path('api/', include('api.urls')),
-    path('u/<slug:profile_slug>/update/', profile_form_view, name='profile_form'),
+    path('u/', include('accounts.urls')),
 ]
 
 if settings.DEBUG:

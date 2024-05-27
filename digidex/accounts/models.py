@@ -1,6 +1,5 @@
 import uuid
 from django.db import models
-from django.conf import settings
 from django.urls import reverse
 from django.contrib.auth.models import AbstractUser
 
@@ -14,7 +13,7 @@ from base.utils.storage import PublicMediaStorage
 
 def user_avatar_path(instance, filename):
     extension = filename.split('.')[-1]
-    return f'users/{instance.user.username}/avatar.{extension}'
+    return f'users/{instance.username}/avatar.{extension}'
 
 
 class UserIndexPage(Page):
@@ -48,24 +47,28 @@ class User(AbstractUser):
         db_index=True,
         verbose_name="User UUID"
     )
+    slug = models.SlugField(
+        unique=True,
+        db_index=True,
+        max_length=255,
+        verbose_name="User Slug"
+    )
 
-    def create_profile_page(self):
+    def create_page(self):
         try:
             parent_page = UserIndexPage.objects.get(slug='u')
         except UserIndexPage.DoesNotExist:
             return None
 
-        profile_page = UserPage(
-            title=f"{self.user.username}'s Profile",
-            owner=self.profile.user,
+        page = UserPage(
+            title=f"{self.username}'s Profile",
+            owner=self,
+            user=self,
             slug=self.slug,
-            heading=self.user.username,
-            intro=self.bio or '',
-            profile=self,
         )
-        parent_page.add_child(instance=profile_page)
-        profile_page.save_revision().publish()
-        return profile_page
+        parent_page.add_child(instance=page)
+        page.save_revision().publish()
+        return page
 
     def get_digits(self):
         return None
@@ -78,15 +81,9 @@ class User(AbstractUser):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(
-        settings.AUTH_USER_MODEL,
+        User,
         on_delete=models.PROTECT,
         related_name="profile"
-    )
-    slug = models.SlugField(
-        unique=True,
-        db_index=True,
-        max_length=255,
-        verbose_name="User Slug"
     )
     avatar = models.ImageField(
         storage=PublicMediaStorage(),
@@ -116,15 +113,8 @@ class UserProfile(models.Model):
 
 
 class UserPage(Page):
-    heading = models.CharField(
-        max_length=255,
-        blank=True
-    )
-    intro = RichTextField(
-        blank=True
-    )
-    profile = models.OneToOneField(
-        UserProfile,
+    user = models.OneToOneField(
+        User,
         on_delete=models.PROTECT,
         help_text="Link to the associated user profile.",
         related_name="page"
@@ -132,24 +122,19 @@ class UserPage(Page):
 
     @property
     def username(self):
-        return self.profile.user.username
+        return self.user.username
 
     @property
     def form_url(self):
-        return reverse('accounts:profile_form', kwargs={'profile_slug': self.profile.slug})
+        return reverse('accounts:profile_form', kwargs={'profile_slug': self.slug})
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context['digits'] = self.profile.get_digits()
+        context['digits'] = self.get_digits()
         return context
 
     search_fields = Page.search_fields + [
         index.SearchField('username', partial_match=True, boost=2),
-    ]
-
-    content_panels = Page.content_panels + [
-        FieldPanel('heading'),
-        FieldPanel('intro'),
     ]
 
     parent_page_types = [
@@ -157,4 +142,4 @@ class UserPage(Page):
     ]
 
     class Meta:
-        verbose_name = "User Profile Page"
+        verbose_name = "User Page"
