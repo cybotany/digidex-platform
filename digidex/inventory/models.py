@@ -79,10 +79,10 @@ class CategoryPage(Page):
         FieldPanel('intro'),
     ]
 
-    parent_page_types = [
-        'accounts.UserPage'
-    ]
+    #parent_page_types = [
+    #    'accounts.UserPage'
+    #]
 
-    subpage_types = [
-        'digitization.DigitalObjectPage'
-    ]
+    #subpage_types = [
+    #    'digitization.DigitalObjectPage'
+    #]

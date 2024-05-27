@@ -65,22 +65,6 @@ class User(AbstractUser):
             self.slug = slug
         super().save(*args, **kwargs)
 
-    def create_page(self):
-        try:
-            parent_page = UserIndexPage.objects.get(slug='u')
-        except UserIndexPage.DoesNotExist:
-            return None
-
-        page = UserPage(
-            title=f"{self.username}'s Profile",
-            owner=self,
-            user=self,
-            slug=self.slug,
-        )
-        parent_page.add_child(instance=page)
-        page.save_revision().publish()
-        return page
-
     def get_digits(self):
         return None
         #return self.user.get_inventory_digits()
