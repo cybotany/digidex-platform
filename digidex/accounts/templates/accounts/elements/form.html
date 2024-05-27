@@ -1,5 +1,5 @@
 <!-- Render Form -->
-<form id="profile-form" method="port" class="utility-page-form base-password-page" enctype="multipart/form-data">
+<form id="profile-form" method="post" action="{% url 'profile_form' user.slug %}" class="utility-page-form base-password-page" enctype="multipart/form-data">
   {% csrf_token %}
   <!-- Render Avatar Field -->
   <label for="{{ form.avatar.id_for_label }}">Avatar:</label>

@@ -4,7 +4,7 @@
   <div class="profile large">
     <div class="block-profile large">
       {% if page.owner.profile.avatar %}
-        <img src="{{ page.profile.avatar.url }}" alt="Profile Avatar" class="profile-avatar large">
+        <img src="{{ page.owner.profile.avatar.url }}" alt="Profile Avatar" class="profile-avatar large">
       {% endif %}
       <div class="profile-content large">
         <div class="date">{{ page.owner.profile.created_at|date:"F Y" }}</div>

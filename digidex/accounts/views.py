@@ -10,7 +10,7 @@ User = get_user_model()
 
 @login_required
 def profile_form_view(request, user_slug):
-    page_owner = get_object_or_404(User, username=user_slug)
+    page_owner = get_object_or_404(User, slug=user_slug)
     requesting_user = request.user
 
     if page_owner != requesting_user:
@@ -21,9 +21,8 @@ def profile_form_view(request, user_slug):
     if request.method == 'POST':
         form = UserProfileForm(request.POST, request.FILES, instance=user_profile)
         if form.is_valid():
-            updated_profile = form.save(commit=False)
-            updated_profile.save()
-            return redirect(updated_profile.page.url)
+            form.save()
+            return redirect(page_owner.page.url)
     else:
         form = UserProfileForm(instance=user_profile)
     
