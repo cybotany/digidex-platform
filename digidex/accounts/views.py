@@ -22,9 +22,8 @@ def profile_form_view(request, user_slug):
         form = UserProfileForm(request.POST, request.FILES, instance=user_profile)
         if form.is_valid():
             updated_profile = form.save(commit=False)
-            # Ensure profile avatar is sized appropriately here
             updated_profile.save()
-            return redirect(user_profile.page.url)
+            return redirect(updated_profile.page.url)
     else:
         form = UserProfileForm(instance=user_profile)
     

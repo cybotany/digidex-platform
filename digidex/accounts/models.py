@@ -118,7 +118,7 @@ class UserPage(Page):
 
     @property
     def form_url(self):
-        return reverse('accounts:profile_form', kwargs={'profile_slug': self.user.slug})
+        return reverse('profile_form', kwargs={'user_slug': self.user.slug})
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)

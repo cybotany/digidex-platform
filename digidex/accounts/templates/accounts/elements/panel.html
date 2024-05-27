@@ -8,8 +8,8 @@
       {% endif %}
       <div class="profile-content large">
         <div class="date">{{ page.owner.profile.created_at|date:"F Y" }}</div>
-        <h3 class="heading-profile">{{ page.profile.user.username }}</h3>
-        {% if page.profile.bio %}
+        <h3 class="heading-profile">{{ page.owner.profile.user.username }}</h3>
+        {% if page.owner.profile.bio %}
           <p class="paragraph-profile large">{{ page.owner.profile.bio|richtext }}</p>
         {% endif %}
         {% if request.user == page.owner %}
@@ -20,7 +20,7 @@
           </div>
         </a>
       {% else %}
-        <a href="mailto:{{ page.profile.email }}" class="link-block base-inline-block">
+        <a href="#" class="link-block base-inline-block">
           <div class="text-link">Message</div>
           <div class="block-icon-link">
             <img src="{% static 'base/images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
