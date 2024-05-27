@@ -1,12 +1,12 @@
 import uuid
 from django.db import models
 from django.urls import reverse
+from django.utils.text import slugify
 from django.contrib.auth.models import AbstractUser
 
 from wagtail.models import Page
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
-from wagtail.search import index
 
 from base.utils.storage import PublicMediaStorage
 
@@ -53,6 +53,17 @@ class User(AbstractUser):
         max_length=255,
         verbose_name="User Slug"
     )
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            base_slug = slugify(self.username)
+            slug = base_slug
+            counter = 1
+            while User.objects.filter(slug=slug).exists():
+                slug = f"{base_slug}-{counter}"
+                counter += 1
+            self.slug = slug
+        super().save(*args, **kwargs)
 
     def create_page(self):
         try:
@@ -132,10 +143,6 @@ class UserPage(Page):
         context = super().get_context(request, *args, **kwargs)
         context['digits'] = self.get_digits()
         return context
-
-    search_fields = Page.search_fields + [
-        index.SearchField('username', partial_match=True, boost=2),
-    ]
 
     parent_page_types = [
         'accounts.UserIndexPage'

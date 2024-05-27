@@ -7,9 +7,6 @@ from django.utils.text import slugify
 from django.urls import reverse
 
 from wagtail.models import Page
-from wagtail.admin.panels import FieldPanel
-from wagtail.search import index
-from wagtail.fields import RichTextField
 
 
 class DigitalObject(models.Model):
@@ -31,7 +28,7 @@ class DigitalObject(models.Model):
         null=True,
         help_text="Digitized object description."
     )
-    owner = models.OneToOneField(
+    user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT,
         related_name="digits",
@@ -81,9 +78,7 @@ class DigitalObject(models.Model):
         digitized_object_page = DigitalObjectPage(
             title=self.name,
             slug=unique_slug,
-            heading=self.name,
-            owner=parent_page.owner,
-            intro=self.description or '',
+            owner=self.user,
             digit=self,
         )
         parent_page.add_child(instance=digitized_object_page)
@@ -127,27 +122,11 @@ class DigitalObject(models.Model):
 
 
 class DigitalObjectPage(Page):
-    heading = models.CharField(
-        max_length=255,
-        blank=True
-    )
-    intro = RichTextField(
-        blank=True
-    )
     digit = models.ForeignKey(
         'digitization.DigitalObject',
         on_delete=models.PROTECT,
         related_name='page'
     )
-
-    search_fields = Page.search_fields + [
-        index.SearchField('heading', partial_match=True, boost=2)
-    ]
-
-    content_panels = Page.content_panels + [
-        FieldPanel('heading'),
-        FieldPanel('intro'),
-    ]
 
     @property
     def delete_url(self):
