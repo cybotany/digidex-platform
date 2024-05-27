@@ -74,9 +74,9 @@ class User(AbstractUser):
 
         if not UserPage.objects.filter(user=self).exists():
             user_page = UserPage(
-                title=f"{self.username}'s Profile",
+                title=f"{self.username}'s Page",
                 slug=self.slug,
-                user=self
+                owner=self
             )
             user_index_page.add_child(instance=user_page)
             user_page.save_revision().publish()
@@ -93,13 +93,44 @@ class User(AbstractUser):
             profile.save()
         return profile
 
+    @property
+    def page(self):
+        try:
+            return UserPage.objects.get(owner=self)
+        except UserPage.DoesNotExist:
+            return None
+
     def get_digits(self):
         return None
-        #return self.user.get_inventory_digits()
+
+    def __str__(self):
+        return self.username.title()
+
+
+class UserPage(Page):
+    @property
+    def user(self):
+        return self.owner
 
     @property
-    def _username(self):
-        return self.username.title()
+    def username(self):
+        return self.owner.username.title()
+
+    @property
+    def form_url(self):
+        return reverse('accounts:profile_form', kwargs={'profile_slug': self.user.slug})
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context['digits'] = None # self.get_digits()
+        return context
+
+    parent_page_types = [
+        'accounts.UserIndexPage'
+    ]
+
+    class Meta:
+        verbose_name = "User Page"
 
 
 class UserProfile(models.Model):
@@ -128,37 +159,12 @@ class UserProfile(models.Model):
         verbose_name="Last Modified"
     )
 
+    @property
+    def username(self):
+        return self.user.username.title()
+
     def __str__(self):
-        return self.user._username
+        return f"{self.username}'s Profile"
 
     class Meta:
         verbose_name = "User Profile"
-
-
-class UserPage(Page):
-    user = models.OneToOneField(
-        User,
-        on_delete=models.PROTECT,
-        help_text="Link to the associated user profile.",
-        related_name="page"
-    )
-
-    @property
-    def username(self):
-        return self.user.username
-
-    @property
-    def form_url(self):
-        return reverse('accounts:profile_form', kwargs={'profile_slug': self.slug})
-
-    def get_context(self, request, *args, **kwargs):
-        context = super().get_context(request, *args, **kwargs)
-        context['digits'] = self.get_digits()
-        return context
-
-    parent_page_types = [
-        'accounts.UserIndexPage'
-    ]
-
-    class Meta:
-        verbose_name = "User Page"
