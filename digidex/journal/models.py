@@ -17,7 +17,7 @@ class EntryCollection(models.Model):
         verbose_name="Journal Entry Collection UUID"
     )
     digit = models.OneToOneField(
-        'digitization.DigitalObject',
+        'inventory.ItemizedDigit',
         on_delete=models.PROTECT,
         related_name='journal'
     )

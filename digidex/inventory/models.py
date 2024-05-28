@@ -1,6 +1,5 @@
 import uuid
 from django.db import models
-from django.apps import apps
 from django.contrib import messages
 from django.conf import settings
 from django.utils.text import slugify
@@ -110,63 +109,68 @@ class ItemizedDigit(models.Model):
         return self.digit.last_modified
 
     @property
+    def user(self):
+        return self.category.user
+
+    @property
+    def user_slug(self):
+        return f"u/{self.user.slug}"
+
+    @property
+    def category_slug(self):
+        return slugify(self.category.name)
+
+    @property
+    def digit_slug(self):
+        return slugify(self.name)
+
+    @property
+    def full_slug(self):
+        return f"{self.user_slug}/{self.category_slug}/{self.digit_slug}"
+
+    @property
     def digit_page(self):
         try:
             return InventoryPage.objects.select_related('digit').get(
-                digit=self
+                slug=self.slug
             )
         except InventoryPage.DoesNotExist:
             raise InventoryPage("There's no page for this digitized object.")
 
     def create_unique_slug(self):
-        category_slug = slugify(self.category.name)
-        digit_slug = slugify(self.name)
         
-        slug = f"{category_slug}/{digit_slug}"
+        slug = self.full_slug
         counter = 1
 
-        while InventoryPage.objects.filter(slug=slug, path__startswith=category_slug.path).exists():
+        while InventoryPage.objects.filter(slug=slug).exists():
             slug = f"{slug}-{counter}"
             counter += 1
         return slug
 
     def create_digit_page(self):
-        parent_page = self.category.page
-        unique_slug = self.create_unique_slug()
+        parent_page = self.user.page
         digit_page = InventoryPage(
             title=self.name,
-            slug=unique_slug,
+            slug=self.slug,
             owner=self.user,
+            heading=self.name,
+            intro=self.description,
             digit=self,
         )
         parent_page.add_child(instance=digit_page)
         digit_page.save_revision().publish()
         return digit_page
 
+    def save(self, *args, **kwargs):
+        self.slug = self.create_unique_slug()
+        super().save(*args, **kwargs)
+
     @classmethod
     def get_queryset(cls):
         return super().get_queryset().select_related('digit')
 
-    def delete(self, *args, **kwargs):
-        related_models = [
-            ('journal', 'EntryCollection'),
-            ('nfc', 'NearFieldCommunicationTag'),
-        ]
-
-        for app_label, model_name in related_models:
-            model = apps.get_model(app_label, model_name)
-            related_objects = model.objects.filter(digit=self)
-            for obj in related_objects:
-                obj.delete()
-
-        try:
-            digital_object_page = InventoryPage.objects.get(digit=self)
-            digital_object_page.delete()
-        except InventoryPage.DoesNotExist:
-            pass
-
     def __str__(self):
-        return f"{self.digit_name}"
+        return f"{self.name}"
 
     class Meta:
         unique_together = ('category', 'digit')
