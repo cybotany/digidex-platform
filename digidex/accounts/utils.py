@@ -36,3 +36,9 @@ def create_user_profile(user):
     Create a user profile for the given user.
     """
     return user.create_profile()
+
+def create_user_party(user):
+    """
+    Create a category named 'Party' in the inventory app for the given user.
+    """
+    return user.create_party()

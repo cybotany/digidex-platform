@@ -33,11 +33,6 @@ class DigitalObject(models.Model):
         on_delete=models.PROTECT,
         related_name="digits",
     )
-    inventory = models.ForeignKey(
-        "inventory.Category",
-        on_delete=models.SET_NULL,
-        null=True
-    )
     created_at = models.DateTimeField(
         auto_now_add=True
     )

@@ -1,5 +1,7 @@
 import uuid
 from django.db import models
+from django.contrib import messages
+from django.apps import apps
 from django.urls import reverse
 from django.utils.text import slugify
 from django.contrib.auth.models import AbstractUser
@@ -74,7 +76,7 @@ class User(AbstractUser):
 
         if not UserPage.objects.filter(user=self).exists():
             user_page = UserPage(
-                title=f"{self.username}'s Page",
+                title=f"{self.__str__()}'s Page",
                 slug=self.slug,
                 owner=self
             )
@@ -86,12 +88,44 @@ class User(AbstractUser):
         else:
             print(f'UserPage for user {self.username} already exists.')
             return UserPage.objects.get(user=self)
-
+    
     def create_profile(self):
-        profile, created = UserProfile.objects.get_or_create(user=self)
+        profile, created = UserProfile.objects.select_related('user').get_or_create(user=self)
         if created:
             profile.save()
         return profile
+
+    def list_categories(self):
+        return self.inventory_categories.prefetch_related('itemized_digits').all()
+
+    def add_category(self, name):
+        Category = apps.get_model('inventory', 'Category')
+        category, created = Category.objects.get_or_create(
+            user=self,
+            name=name,
+            defaults={'is_party': name == "Party"}
+        )
+        return category, created
+
+    def get_category(self, name):
+        return self.inventory_categories.prefetch_related('itemized_digits').get(name=name)
+
+    def remove_category(self, name):
+        category = self.get_category(name)
+        category.delete()
+        message = f"Inventory category '{name}' was removed."
+        messages.info(message)
+        return category
+
+    def create_party(self):
+        party, created = self.add_category("Party")
+        if created:
+            party.save()
+        return party
+
+    def get_category_digits(self, category):
+        inventory_category = self.get_category(category)
+        return inventory_category.list_digits()
 
     @property
     def page(self):
@@ -99,9 +133,6 @@ class User(AbstractUser):
             return UserPage.objects.get(owner=self)
         except UserPage.DoesNotExist:
             return None
-
-    def get_digits(self):
-        return None
 
     def __str__(self):
         return self.username.title()
@@ -117,17 +148,21 @@ class UserPage(Page):
         return self.owner.username.title()
 
     @property
-    def form_url(self):
+    def profile_form_url(self):
         return reverse('profile_form', kwargs={'user_slug': self.user.slug})
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context['digits'] = None # self.get_digits()
+        context['party_digits'] = None # self.get_digits()
         return context
 
     parent_page_types = [
         'accounts.UserIndexPage'
     ]
+
+    @classmethod
+    def get_queryset(cls):
+        return super().get_queryset().select_related('owner')
 
     class Meta:
         verbose_name = "User Page"
@@ -168,3 +203,7 @@ class UserProfile(models.Model):
 
     class Meta:
         verbose_name = "User Profile"
+
+    @classmethod
+    def get_queryset(cls):
+        return super().get_queryset().select_related('user')
