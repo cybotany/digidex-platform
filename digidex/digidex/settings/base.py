@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     "accounts",
     "inventory",
     "digitization",
+    "gbif",
     "journal",
     "nfc",
     "api",
