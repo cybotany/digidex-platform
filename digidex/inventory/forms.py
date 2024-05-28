@@ -1,5 +1,6 @@
 from django import forms
 
+from digitization.models import DigitalObject
 from inventory.models import Category, ItemizedDigit
 
 
@@ -23,9 +24,12 @@ class InventoryCategoryForm(forms.ModelForm):
         }
 
 
-class ItemizedDigitForm(forms.ModelForm):
+class ItemizedDigitForm(forms.Form):
+    category = forms.ModelChoiceField(
+        queryset=Category.objects.none(),
+        required=True
+    )
     class Meta:
-        model = ItemizedDigit
         fields = ['name', 'description',]
         widgets = {
             'name': forms.TextInput(
@@ -41,3 +45,9 @@ class ItemizedDigitForm(forms.ModelForm):
                 }
             ),
         }
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        super(ItemizedDigitForm, self).__init__(*args, **kwargs)
+        if user:
+            self.fields['category'].queryset = Category.objects.filter(user=user)

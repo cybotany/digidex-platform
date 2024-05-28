@@ -80,3 +80,6 @@ class Entry(models.Model):
     @classmethod
     def get_queryset(cls):
         return super().get_queryset().select_related('journal')
+
+    def __str__(self):
+        return f"Entry on {self.created_at} for journal {self.journal.uuid}"
