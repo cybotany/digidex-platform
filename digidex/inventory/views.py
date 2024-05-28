@@ -14,7 +14,7 @@ User = get_user_model()
 def link_ntag(request, ntag_uuid):
     user = request.user
     if request.method == 'POST':
-        form = ItemizedDigitForm(request.POST)
+        form = ItemizedDigitForm(request.POST, user=user)
         if form.is_valid():
             category = form.cleaned_data['category']
             digit = apps.get_model('digitization', 'DigitalObject').objects.create(
@@ -22,16 +22,13 @@ def link_ntag(request, ntag_uuid):
                 description=form.cleaned_data['description'],
                 user=request.user
             )
-            digit.save()
-
             journal = digit.create_journal()
             journal.save()
 
             itemized_digit = apps.get_model('inventory', 'ItemizedDigit').objects.create(category=category, digit=digit)
-            itemized_digit.save()
-
+            itemized_digit.save() 
+            
             digit_page = itemized_digit.create_digit_page()
-            itemized_digit.save()
 
             if digit_page:
                 NearFieldCommunicationTag = apps.get_model('nfc', 'NearFieldCommunicationTag')
@@ -42,7 +39,7 @@ def link_ntag(request, ntag_uuid):
             else:
                 return HttpResponseForbidden("Failed to create a detail page for the digitized object.")
     else:
-        form = ItemizedDigitForm()
+        form = ItemizedDigitForm(user=user)
 
     return render(request, "inventory/link_ntag.html", {'form': form})
 

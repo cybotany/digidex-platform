@@ -1,6 +1,13 @@
-<!-- Render Form -->
-<form id="inventory-form" class="form">
+<form method="post" class="form">
   {% csrf_token %}
+  <!-- Render Category Field -->
+  <label for="{{ form.category.id_for_label }}">Category:</label>
+  {{ form.category }}
+  {% if form.category.errors %}
+    <div class="error-message">
+      <div class="text-error">{{ form.category.errors|striptags }}</div>
+    </div>
+  {% endif %}
   <!-- Render Name Field -->
   <label for="{{ form.name.id_for_label }}">Name:</label>
   {{ form.name }}
@@ -17,6 +24,7 @@
       <div class="text-error">{{ form.description.errors|striptags }}</div>
     </div>
   {% endif %}
-  <input type="submit" value="Submit" class="submit-button base-button">
+  <!-- Render Submit Button -->
+  <input type="submit" value="Create" class="submit-button base-button"> 
   {{ form.non_field_errors }}
 </form>

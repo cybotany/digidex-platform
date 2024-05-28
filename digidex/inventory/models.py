@@ -53,16 +53,32 @@ class Category(models.Model):
     )
 
     def save(self, *args, **kwargs):
-        if not self.is_party:
-            original_name = self.name
-            unique_name = original_name
-            num = 1
-            while Category.objects.filter(user=self.user, name=unique_name).exclude(pk=self.pk).exists():
-                unique_name = f"{original_name} ({num})"
-                num += 1
-            self.name = unique_name
-            self.slug = f"inv/{slugify(self.name)}"
+        if not self.pk:
+            if self.is_party:
+                self.slug = ""
+            else:
+                original_name = self.name
+                unique_name = original_name
+                num = 1
+                while Category.objects.filter(user=self.user, name=unique_name).exists():
+                    unique_name = f"{original_name} ({num})"
+                    num += 1
+                self.name = unique_name
+                self.slug = f"inv/{slugify(self.name)}"
         super().save(*args, **kwargs)
+
+        if not hasattr(self, 'page'):
+            self.create_category_page()
+
+    def create_category_page(self):
+        parent_page = self.user.page
+        category_page = CategoryPage(
+            title=self.name,
+            slug=self.slug,
+            category=self
+        )
+        parent_page.add_child(instance=category_page)
+        category_page.save_revision().publish()
 
     def list_digits(self):
         return self.itemized_digits.select_related('digit').all()
@@ -143,15 +159,15 @@ class ItemizedDigit(models.Model):
         parent_page = self.category.page
         base_slug = slugify(self.name)
         unique_slug = self.create_unique_slug(parent_page, base_slug)
-        digitized_object_page = ItemizedDigitPage(
+        digit_page = ItemizedDigitPage(
             title=self.name,
             slug=unique_slug,
             owner=self.user,
             digit=self,
         )
-        parent_page.add_child(instance=digitized_object_page)
-        digitized_object_page.save_revision().publish()
-        return digitized_object_page
+        parent_page.add_child(instance=digit_page)
+        digit_page.save_revision().publish()
+        return digit_page
 
     @classmethod
     def get_queryset(cls):
