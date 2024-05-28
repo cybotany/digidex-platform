@@ -1,11 +1,11 @@
 from django import forms
 
-from inventory.models import UserInventory
+from inventory.models import Category, ItemizedDigit
 
 
-class UserInventoryForm(forms.ModelForm):
+class InventoryCategoryForm(forms.ModelForm):
     class Meta:
-        model = UserInventory
+        model = Category
         fields = ('name', 'description',)
         widgets = {
             'name': forms.TextInput(
@@ -20,4 +20,24 @@ class UserInventoryForm(forms.ModelForm):
                     'placeholder': 'Provide a detailed description of the object'
                 }
             )
+        }
+
+
+class ItemizedDigitForm(forms.ModelForm):
+    class Meta:
+        model = ItemizedDigit
+        fields = ['name', 'description',]
+        widgets = {
+            'name': forms.TextInput(
+                attrs={
+                    'class': 'text-field base-input',
+                    'placeholder': 'Enter the name of the digitized object'
+                }
+            ),
+            'description': forms.Textarea(
+                attrs={
+                    'class': 'text-field textarea',
+                    'placeholder': 'Provide a detailed description of the object'
+                }
+            ),
         }

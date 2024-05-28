@@ -12,9 +12,9 @@ def route_ntag_url(request, ntag_uuid):
         if not ntag.active:
             return HttpResponse("This NFC tag is not active.", status=403)
         if not ntag.digit:
-            url = reverse('digitization:link_ntag', kwargs={'ntag_uuid': ntag_uuid})
+            url = reverse('link_ntag', kwargs={'ntag_uuid': ntag_uuid})
             return redirect(url)
-        return redirect(ntag.digit.url)
+        return redirect(ntag.digit.page.url)
 
     except ValidationError as e:
         return HttpResponse(str(e), status=400)

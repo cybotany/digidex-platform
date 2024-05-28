@@ -15,7 +15,6 @@ urlpatterns = [
     path('account/', include('allauth.urls')),
     path("search/", search, name="search"),
     path('nfc/', include('nfc.urls')),
-    path('digitize/', include('digitization.urls')),
     path('api/', include('api.urls')),
     path('u/', include('accounts.urls')),
 ]

@@ -125,7 +125,7 @@ class DigitalObjectPage(Page):
 
     @property
     def delete_url(self):
-        return reverse('digitization:delete_digit', kwargs={'digit_uuid': self.digit.uuid})
+        return reverse('inventory:delete_digit', kwargs={'digit_uuid': self.digit.uuid})
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
