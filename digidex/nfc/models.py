@@ -113,24 +113,9 @@ class NearFieldCommunicationTag(models.Model):
         Returns:
             A URL path as a string.
         """
-        if not self.digit:
-            return None
-        return self.digit.detail_page
-
-    @property
-    def user_inventory_page(self):
-        """
-        Retrieves the URL for the web page associated with the digitized object of this NFC tag.
-
-        Raises:
-            ValidationError: If no digitized object is associated, or the digitized object does not support URL retrieval.
-
-        Returns:
-            A URL path as a string.
-        """
-        if not self.digit:
-            return None
-        return self.digit.page
+        if hasattr(self, 'digit'):
+            return self.digit.page
+        return None
 
     class Meta:
         verbose_name = "NTAG"

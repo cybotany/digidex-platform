@@ -13,7 +13,7 @@
           <p class="paragraph-profile large">{{ page.owner.profile.bio|richtext }}</p>
         {% endif %}
         {% if request.user == page.owner %}
-        <a href="{{ page.profile_form_url }}" class="link-block base-inline-block">
+        <a href="{% url 'accounts:profile_form' request.user.slug %}" class="link-block base-inline-block">
           <div class="text-link">Update Profile</div>
           <div class="block-icon-link">
             <img src="{% static 'base/images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">

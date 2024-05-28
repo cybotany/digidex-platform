@@ -147,10 +147,6 @@ class UserPage(Page):
     def username(self):
         return self.owner.username.title()
 
-    @property
-    def profile_form_url(self):
-        return reverse('profile_form', kwargs={'user_slug': self.user.slug})
-
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         context['party_digits'] = None # self.get_digits()

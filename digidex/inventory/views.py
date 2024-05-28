@@ -17,18 +17,20 @@ def link_ntag(request, ntag_uuid):
         form = ItemizedDigitForm(request.POST, user=user)
         if form.is_valid():
             category = form.cleaned_data['category']
-            digit = apps.get_model('digitization', 'DigitalObject').objects.create(
+            _digit = apps.get_model('digitization', 'DigitalObject').objects.create(
                 name=form.cleaned_data['name'],
                 description=form.cleaned_data['description'],
                 user=request.user
             )
+            digit = apps.get_model('inventory', 'ItemizedDigit').objects.create(category=category, digit=_digit)
+            digit.save()
+
+            digit_page = digit.create_page()
+            digit_page.save()
+    
             journal = digit.create_journal()
             journal.save()
 
-            itemized_digit = apps.get_model('inventory', 'ItemizedDigit').objects.create(category=category, digit=digit)
-            itemized_digit.save() 
-            
-            digit_page = itemized_digit.create_digit_page()
 
             if digit_page:
                 NearFieldCommunicationTag = apps.get_model('nfc', 'NearFieldCommunicationTag')

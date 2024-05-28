@@ -75,6 +75,19 @@ class Category(models.Model):
 
 
 class ItemizedDigit(models.Model):
+    uuid = models.UUIDField(
+        default=uuid.uuid4,
+        unique=True,
+        editable=False,
+        db_index=True,
+        verbose_name="Inventory Category UUID"
+    )
+    slug = models.SlugField(
+        max_length=255,
+        unique=True,
+        editable=False,
+        db_index=True
+    )
     category = models.ForeignKey(
         'inventory.Category',
         on_delete=models.CASCADE,
@@ -84,12 +97,6 @@ class ItemizedDigit(models.Model):
         'digitization.DigitalObject',
         on_delete=models.CASCADE,
         related_name='inventory_category'
-    )
-    slug = models.SlugField(
-        max_length=255,
-        unique=True,
-        editable=False,
-        db_index=True
     )
 
     @property

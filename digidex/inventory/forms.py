@@ -30,7 +30,7 @@ class ItemizedDigitForm(forms.ModelForm):
         required=True,
         widget=forms.Select(
             attrs={
-                'class': 'dropdown',
+                'class': 'select-field base-input',
                 'placeholder': 'Select a category'
             }
         )
