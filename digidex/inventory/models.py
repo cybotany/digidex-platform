@@ -16,6 +16,13 @@ class Category(models.Model):
         db_index=True,
         verbose_name="Inventory Category UUID"
     )
+    slug = models.SlugField(
+        max_length=255,
+        unique=True,
+        editable=False,
+        db_index=True,
+        verbose_name="Inventory Category Slug"
+    )
     name = models.CharField(
         max_length=100,
         null=False,
@@ -44,6 +51,52 @@ class Category(models.Model):
         auto_now=True
     )
 
+    def save(self, *args, **kwargs):
+        if not self.is_party:
+            self.name = self.create_unique_name()
+            self.slug = self.create_unique_slug()
+        super().save(*args, **kwargs)
+
+    @property
+    def parent_page(self):
+        return self.user.page
+
+    def create_unique_name(self):
+        base_name = self.name
+        name = base_name
+        counter = 1
+
+        while Category.objects.filter(user=self.user, name=name).exists():
+            name = f"{base_name} {counter}"
+            counter += 1
+        return name
+
+    def create_unique_slug(self):
+        base_slug = slugify(self.name)
+        slug = base_slug
+        counter = 1
+
+        parent_page = self.parent_page
+
+        while InventoryCategoryPage.objects.filter(parent=parent_page, slug=slug).exists():
+            slug = f"{base_slug}-{counter}"
+            counter += 1
+        return slug
+
+    def create_page(self):
+        self.slug = self.create_unique_slug()
+        category_page = InventoryCategoryPage(
+            title=self.name,
+            slug=self.slug,
+            owner=self.user,
+            heading=self.name,
+            intro=self.description,
+            category=self,
+        )
+        self.parent_page.add_child(instance=category_page)
+        category_page.save_revision().publish()
+        return category_page
+
     def list_digits(self):
         return self.itemized_digits.select_related('digit').all()
 
@@ -70,8 +123,39 @@ class Category(models.Model):
         messages.info(message)
         return itemized_digit
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         unique_together = ('user', 'name')
+
+
+class InventoryCategoryPage(Page):
+    heading = models.CharField(
+        max_length=255,
+        blank=True
+    )
+    intro = models.TextField(
+        blank=True
+    )
+    category = models.OneToOneField(
+        Category,
+        on_delete=models.PROTECT,
+        related_name='page'
+    )
+
+    parent_page_types = [
+        'accounts.UserPage'
+    ]
+
+    @classmethod
+    def get_queryset(cls):
+        return super().get_queryset().select_related('category')
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context['itemized_digits'] = self.category.list_digits()
+        return context
 
 
 class ItemizedDigit(models.Model):
@@ -80,13 +164,14 @@ class ItemizedDigit(models.Model):
         unique=True,
         editable=False,
         db_index=True,
-        verbose_name="Inventory Category UUID"
+        verbose_name="Inventory Digit UUID"
     )
     slug = models.SlugField(
         max_length=255,
         unique=True,
         editable=False,
-        db_index=True
+        db_index=True,
+        verbose_name="Inventory Digit Slug"
     )
     category = models.ForeignKey(
         'inventory.Category',
@@ -120,70 +205,51 @@ class ItemizedDigit(models.Model):
         return self.category.user
 
     @property
-    def user_slug(self):
-        return f"u/{self.user.slug}"
+    def parent_page(self):
+        return self.category.page
 
-    @property
-    def category_slug(self):
-        return slugify(self.category.name)
-
-    @property
-    def digit_slug(self):
-        return slugify(self.name)
-
-    @property
-    def full_slug(self):
-        return f"{self.user_slug}/{self.category_slug}/{self.digit_slug}"
-
-    @property
-    def digit_page(self):
-        try:
-            return InventoryPage.objects.select_related('digit').get(
-                slug=self.slug
-            )
-        except InventoryPage.DoesNotExist:
-            raise InventoryPage("There's no page for this digitized object.")
+    def save(self, *args, **kwargs):
+        self.slug = self.create_unique_slug()
+        super().save(*args, **kwargs)
 
     def create_unique_slug(self):
-        
-        slug = self.full_slug
+        base_slug = slugify(self.name)
+        slug = base_slug
         counter = 1
 
-        while InventoryPage.objects.filter(slug=slug).exists():
-            slug = f"{slug}-{counter}"
+        parent_page = self.parent_page
+
+        while ItemizedDigitPage.objects.filter(parent=parent_page, slug=slug).exists():
+            slug = f"{base_slug}-{counter}"
             counter += 1
         return slug
 
-    def create_digit_page(self):
-        parent_page = self.user.page
-        digit_page = InventoryPage(
+    def create_page(self):
+        slug = self.create_unique_slug()
+        category_page = ItemizedDigitPage(
             title=self.name,
-            slug=self.slug,
+            slug=slug,
             owner=self.user,
             heading=self.name,
             intro=self.description,
             digit=self,
         )
-        parent_page.add_child(instance=digit_page)
-        digit_page.save_revision().publish()
-        return digit_page
-
-    def save(self, *args, **kwargs):
-        self.slug = self.create_unique_slug()
-        super().save(*args, **kwargs)
+        self.parent_page.add_child(instance=category_page)
+        category_page.save_revision().publish()
+        return category_page
 
     @classmethod
     def get_queryset(cls):
         return super().get_queryset().select_related('digit')
 
     def __str__(self):
-        return f"{self.name}"
+        return self.name.title()
 
     class Meta:
         unique_together = ('category', 'digit')
 
 
-class InventoryPage(Page):
+class ItemizedDigitPage(Page):
     heading = models.CharField(
         max_length=255,
         blank=True
@@ -198,7 +264,7 @@ class InventoryPage(Page):
     )
 
     parent_page_types = [
-        'accounts.UserPage'
+        'inventory.InventoryCategoryPage',
     ]
 
     @classmethod
@@ -211,6 +277,6 @@ class InventoryPage(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context['itemized_digits'] = self.category.list_digits()
         context['journal_entries'] = self.digit.get_journal_entries().prefetch_related('related_model')
         return context
+

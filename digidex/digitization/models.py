@@ -24,7 +24,7 @@ class DigitalObject(models.Model):
         null=True,
         help_text="Digitized object description."
     )
-    user = models.OneToOneField(
+    user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT,
         related_name="digits",
