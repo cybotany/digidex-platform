@@ -63,7 +63,7 @@ class Category(models.Model):
         super().save(*args, **kwargs)
 
     def list_digits(self):
-        return self.itemized_digits.prefetch_related('digit').all()
+        return self.itemized_digits.select_related('digit').all()
 
     def add_digit(self, digit):
         itemized_digit, created = ItemizedDigit.objects.select_related('digit').get_or_create(

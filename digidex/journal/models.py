@@ -29,8 +29,8 @@ class EntryCollection(models.Model):
     )
 
     def add_entry(self, digit):
-        journal_entry, created = Entry.objects.get_or_create(
-            user_party=self,
+        journal_entry, created = Entry.objects.select_related('digit').get_or_create(
+            journal=self,
             digit=digit
         )
         return journal_entry
@@ -40,6 +40,10 @@ class EntryCollection(models.Model):
 
     def __str__(self):
         return f"Journal Entry Collection: {self.uuid}"
+
+    @classmethod
+    def get_queryset(cls):
+        return super().get_queryset().select_related('digit').prefetch_related('entries')
 
 
 
@@ -72,3 +76,7 @@ class Entry(models.Model):
     last_modified = models.DateTimeField(
         auto_now=True
     )
+
+    @classmethod
+    def get_queryset(cls):
+        return super().get_queryset().select_related('journal')

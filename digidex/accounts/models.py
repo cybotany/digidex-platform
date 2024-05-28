@@ -125,7 +125,7 @@ class User(AbstractUser):
 
     def get_category_digits(self, category):
         inventory_category = self.get_category(category)
-        return inventory_category.list_digits()
+        return inventory_category.list_digits().select_related('digit')
 
     @property
     def page(self):

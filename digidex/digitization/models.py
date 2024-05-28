@@ -53,7 +53,7 @@ class DigitalObject(models.Model):
     @property
     def digit_page(self):
         try:
-            return DigitalObjectPage.objects.get(
+            return DigitalObjectPage.objects.select_related('digit').get(
                 digit=self
             )
         except DigitalObjectPage.DoesNotExist:
@@ -90,7 +90,7 @@ class DigitalObject(models.Model):
         try:
             journal_collection = self.journal
             if journal_collection:
-                return journal_collection.get_all_entries()
+                return journal_collection.get_all_entries().select_related('journal').prefetch_related('digit')
         except ObjectDoesNotExist:
             return None
 
@@ -129,5 +129,9 @@ class DigitalObjectPage(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context['journal_entries'] = self.digit.get_journal_entries()
+        context['journal_entries'] = self.digit.get_journal_entries().prefetch_related('related_model')
         return context
+
+    @classmethod
+    def get_queryset(cls):
+        return super().get_queryset().select_related('digit')

@@ -135,3 +135,7 @@ class NearFieldCommunicationTag(models.Model):
     class Meta:
         verbose_name = "NTAG"
         verbose_name_plural = "NTAGs"
+
+    @classmethod
+    def get_queryset(cls):
+        return super().get_queryset().select_related('digit')
