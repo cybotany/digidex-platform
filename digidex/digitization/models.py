@@ -3,10 +3,6 @@ from django.db import models
 from django.apps import apps
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
-from django.utils.text import slugify
-from django.urls import reverse
-
-from wagtail.models import Page
 
 
 class DigitalObject(models.Model):
@@ -50,36 +46,6 @@ class DigitalObject(models.Model):
             return self.description
         return "No description available."
 
-    @property
-    def digit_page(self):
-        try:
-            return DigitalObjectPage.objects.select_related('digit').get(
-                digit=self
-            )
-        except DigitalObjectPage.DoesNotExist:
-            raise ObjectDoesNotExist("There's no page for this digitized object.")
-
-    def create_unique_slug(self, parent_page, base_slug):
-        slug = base_slug
-        counter = 1
-        while DigitalObjectPage.objects.filter(slug=slug, path__startswith=parent_page.path).exists():
-            slug = f"{base_slug}-{counter}"
-            counter += 1
-        return slug
-
-    def create_digit_page(self, parent_page):
-        base_slug = slugify(self.name)
-        unique_slug = self.create_unique_slug(parent_page, base_slug)
-        digitized_object_page = DigitalObjectPage(
-            title=self.name,
-            slug=unique_slug,
-            owner=self.user,
-            digit=self,
-        )
-        parent_page.add_child(instance=digitized_object_page)
-        digitized_object_page.save_revision().publish()
-        return digitized_object_page
-
     def create_journal(self):
         journal = apps.get_model('journal', 'EntryCollection').objects.create(
             digit=self
@@ -106,32 +72,5 @@ class DigitalObject(models.Model):
             for obj in related_objects:
                 obj.delete()
 
-        try:
-            digital_object_page = DigitalObjectPage.objects.get(digit=self)
-            digital_object_page.delete()
-        except DigitalObjectPage.DoesNotExist:
-            pass
-
     def __str__(self):
         return f"{self.digit_name}"
-
-
-class DigitalObjectPage(Page):
-    digit = models.ForeignKey(
-        'digitization.DigitalObject',
-        on_delete=models.PROTECT,
-        related_name='page'
-    )
-
-    @property
-    def delete_url(self):
-        return reverse('inventory:delete_digit', kwargs={'digit_uuid': self.digit.uuid})
-
-    def get_context(self, request, *args, **kwargs):
-        context = super().get_context(request, *args, **kwargs)
-        context['journal_entries'] = self.digit.get_journal_entries().prefetch_related('related_model')
-        return context
-
-    @classmethod
-    def get_queryset(cls):
-        return super().get_queryset().select_related('digit')
