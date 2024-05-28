@@ -2,6 +2,9 @@ from django.db import models
 
 
 class Taxon(models.Model):
+    taxon_id = models.BigIntegerField(
+        primary_key=True
+    )
     dataset_id = models.CharField(
         max_length=255
     )

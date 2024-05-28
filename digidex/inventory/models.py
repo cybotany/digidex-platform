@@ -7,7 +7,6 @@ from django.utils.text import slugify
 from django.urls import reverse
 
 from wagtail.models import Page
-from wagtail.admin.panels import FieldPanel
 
 
 class Category(models.Model):
@@ -30,12 +29,6 @@ class Category(models.Model):
         null=True,
         help_text="Inventory Category description."
     )
-    slug = models.SlugField(
-        unique=True,
-        db_index=True,
-        max_length=255,
-        verbose_name="Inventory Category Slug"
-    )
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT,
@@ -51,34 +44,6 @@ class Category(models.Model):
     last_modified = models.DateTimeField(
         auto_now=True
     )
-
-    def save(self, *args, **kwargs):
-        if not self.pk:
-            if self.is_party:
-                self.slug = ""
-            else:
-                original_name = self.name
-                unique_name = original_name
-                num = 1
-                while Category.objects.filter(user=self.user, name=unique_name).exists():
-                    unique_name = f"{original_name} ({num})"
-                    num += 1
-                self.name = unique_name
-                self.slug = f"inv/{slugify(self.name)}"
-        super().save(*args, **kwargs)
-
-        if not hasattr(self, 'page'):
-            self.create_category_page()
-
-    def create_category_page(self):
-        parent_page = self.user.page
-        category_page = CategoryPage(
-            title=self.name,
-            slug=self.slug,
-            category=self
-        )
-        parent_page.add_child(instance=category_page)
-        category_page.save_revision().publish()
 
     def list_digits(self):
         return self.itemized_digits.select_related('digit').all()
@@ -121,6 +86,12 @@ class ItemizedDigit(models.Model):
         on_delete=models.CASCADE,
         related_name='inventory_category'
     )
+    slug = models.SlugField(
+        max_length=255,
+        unique=True,
+        editable=False,
+        db_index=True
+    )
 
     @property
     def name(self):
@@ -141,25 +112,28 @@ class ItemizedDigit(models.Model):
     @property
     def digit_page(self):
         try:
-            return ItemizedDigitPage.objects.select_related('digit').get(
+            return InventoryPage.objects.select_related('digit').get(
                 digit=self
             )
-        except ItemizedDigitPage.DoesNotExist:
-            raise ItemizedDigitPage("There's no page for this digitized object.")
+        except InventoryPage.DoesNotExist:
+            raise InventoryPage("There's no page for this digitized object.")
 
-    def create_unique_slug(self, parent_page, base_slug):
-        slug = base_slug
+    def create_unique_slug(self):
+        category_slug = slugify(self.category.name)
+        digit_slug = slugify(self.name)
+        
+        slug = f"{category_slug}/{digit_slug}"
         counter = 1
-        while ItemizedDigitPage.objects.filter(slug=slug, path__startswith=parent_page.path).exists():
-            slug = f"{base_slug}-{counter}"
+
+        while InventoryPage.objects.filter(slug=slug, path__startswith=category_slug.path).exists():
+            slug = f"{slug}-{counter}"
             counter += 1
         return slug
 
     def create_digit_page(self):
         parent_page = self.category.page
-        base_slug = slugify(self.name)
-        unique_slug = self.create_unique_slug(parent_page, base_slug)
-        digit_page = ItemizedDigitPage(
+        unique_slug = self.create_unique_slug()
+        digit_page = InventoryPage(
             title=self.name,
             slug=unique_slug,
             owner=self.user,
@@ -186,9 +160,9 @@ class ItemizedDigit(models.Model):
                 obj.delete()
 
         try:
-            digital_object_page = ItemizedDigitPage.objects.get(digit=self)
+            digital_object_page = InventoryPage.objects.get(digit=self)
             digital_object_page.delete()
-        except ItemizedDigitPage.DoesNotExist:
+        except InventoryPage.DoesNotExist:
             pass
 
     def __str__(self):
@@ -198,7 +172,7 @@ class ItemizedDigit(models.Model):
         unique_together = ('category', 'digit')
 
 
-class CategoryPage(Page):
+class InventoryPage(Page):
     heading = models.CharField(
         max_length=255,
         blank=True
@@ -206,41 +180,19 @@ class CategoryPage(Page):
     intro = models.TextField(
         blank=True
     )
-    category = models.OneToOneField(
-        Category,
-        on_delete=models.PROTECT,
-        related_name='page'
-    )
-
-    content_panels = Page.content_panels + [
-        FieldPanel('heading'),
-        FieldPanel('intro'),
-    ]
-
-    def get_context(self, request, *args, **kwargs):
-        context = super().get_context(request, *args, **kwargs)
-        context['itemized_digits'] = self.category.list_digits()
-        return context
-
-    parent_page_types = [
-        'accounts.UserPage'
-    ]
-
-    subpage_types = [
-        'inventory.ItemizedDigitPage'
-    ]
-
-    @classmethod
-    def get_queryset(cls):
-        return super().get_queryset().select_related('category')
-
-
-class ItemizedDigitPage(Page):
     digit = models.ForeignKey(
         ItemizedDigit,
         on_delete=models.PROTECT,
         related_name='page'
     )
+
+    parent_page_types = [
+        'accounts.UserPage'
+    ]
+
+    @classmethod
+    def get_queryset(cls):
+        return super().get_queryset().select_related('digit')
 
     @property
     def delete_url(self):
@@ -248,9 +200,6 @@ class ItemizedDigitPage(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
+        context['itemized_digits'] = self.category.list_digits()
         context['journal_entries'] = self.digit.get_journal_entries().prefetch_related('related_model')
         return context
-
-    @classmethod
-    def get_queryset(cls):
-        return super().get_queryset().select_related('digit')
