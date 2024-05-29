@@ -242,7 +242,7 @@ class ItemizedDigit(models.Model):
         super().save(*args, **kwargs)
 
     def create_unique_slug(self):
-        base_slug = slugify(self.name)
+        base_slug = slugify(self.name) if self.name else 'digit'
         slug = base_slug
         counter = 1
 
@@ -279,16 +279,19 @@ class ItemizedDigit(models.Model):
         try:
             journal_collection = self.journal
             if journal_collection:
-                return journal_collection.get_all_entries().select_related('journal').prefetch_related('digit')
+                entries = journal_collection.get_all_entries()
+                if entries is not None:
+                    return entries.select_related('journal').prefetch_related('digit')
         except ObjectDoesNotExist:
-            return []
+            pass
+        return []
 
     def get_card_details(self):
         return {
             'name': self.name if self.name else 'Unnamed',
             'description': self.description if self.description else 'No description available.',
             'last_modified': self.last_modified,
-            'pageurl': self.page.url if hasattr(self, 'page') else '#',
+            'pageurl': self.page.url if self.page else '#',
         }
 
     def delete(self, *args, **kwargs):
@@ -302,7 +305,7 @@ class ItemizedDigit(models.Model):
             related_objects = model.objects.filter(digit=self)
             for obj in related_objects:
                 obj.delete()
-        
+
         super().delete(*args, **kwargs)
 
     @classmethod
