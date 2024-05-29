@@ -1,16 +1,16 @@
 {% load static wagtailcore_tags%}
 
-<div class="profile-wrapper large">
-  <div class="profile large">
-    <div class="block-profile large">
+<div class="panel-wrapper">
+  <div class="panel">
+    <div class="block-panel">
       {% if page.owner.profile.avatar %}
-        <img src="{{ page.owner.profile.avatar.url }}" alt="Profile Avatar" class="profile-avatar large">
+        <img src="{{ page.owner.profile.avatar.url }}" alt="Profile Avatar" class="panel-avatar">
       {% endif %}
-      <div class="profile-content large">
+      <div class="panel-content">
         <div class="date">{{ page.owner.profile.created_at|date:"F Y" }}</div>
-        <h3 class="heading-profile">{{ page.owner.profile.user.username }}</h3>
+        <h3 class="heading-panel">{{ page.owner.profile.user.username }}</h3>
         {% if page.owner.profile.bio %}
-          <p class="paragraph-profile large">{{ page.owner.profile.bio|richtext }}</p>
+          <p class="paragraph-panel">{{ page.owner.profile.bio|richtext }}</p>
         {% endif %}
         {% if request.user == page.owner %}
         <a href="{% url 'accounts:profile_form' request.user.slug %}" class="link-block base-inline-block">

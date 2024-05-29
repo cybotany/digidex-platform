@@ -2,8 +2,7 @@ import pytest
 from wagtail.models import Page
 
 from home.models import HomePage
-from accounts.models import User
-from profiles.models import UserProfileIndexPage
+from accounts.models import UserIndexPage, User
 from selenium import webdriver
 
 
@@ -25,12 +24,12 @@ def home_page():
 
 
 @pytest.fixture
-def user_profile_index_page():
+def user_index_page():
     home_page = HomePage.objects.get(slug="home")
-    user_profile_index_page = UserProfileIndexPage(
+    user_index_page = UserIndexPage(
         title="Users", heading="Welcome", intro="Profiles Intro", slug="u")
-    home_page.add_child(instance=user_profile_index_page)
-    return user_profile_index_page
+    home_page.add_child(instance=user_index_page)
+    return user_index_page
 
 
 @pytest.fixture

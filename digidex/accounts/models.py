@@ -198,6 +198,16 @@ class UserProfile(models.Model):
     def username(self):
         return self.user.username.title()
 
+    def get_template_panel_data(self):
+        return {
+            'name': self.username,
+            'description': self.bio if self.bio else 'No description available.',
+            'created_at': self.created_at.strftime('%b %d, %Y'),
+            'detail_url': self.page.url if self.page else '#',
+            'deletion_url': self.page.url if self.page else '#',
+            'update_url': self.page.url if self.page else '#',
+        }
+
     def __str__(self):
         return f"{self.username}'s Profile"
 
