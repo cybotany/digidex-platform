@@ -4,7 +4,7 @@
 {% block content %}
   <section class="section">
     <div class="content">    
-      {% include 'accounts/elements/panel.html' %}
+      {% include 'accounts/elements/panel.html' with panel=panel %}
     </div>
   </section>
   <section class="section">
@@ -14,24 +14,14 @@
         <div class="block-asset-categories block">
           <a href="#" aria-current="page" class="link-asset-category base-inline-block base--current">
             <img src="{% static 'base/images/switcher.svg' %}" loading="eager" alt="" class="icon-asset-category">
-            <div class="text-asset-category">All Categories</div>
+            <div class="text-asset-category">Party</div>
           </a>
-          <div class="collection-list-wrapper-categories base-dyn-list">
-            <div role="list" class="collection-list-categories base-dyn-items">
-              <div role="listitem" class="collection-item-categories base-dyn-item">
-                <a href="#" class="link-category base-inline-block">
-                  <img src="{% static 'base/images/switcher.svg' %}" alt="" loading="eager" class="icon-category">
-                  <div class="text-category">Party</div>
-                </a>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
       <div id="asset-items-list" class="asset-item-collection-wrapper base-dyn-list">
         <div role="list" class="asset-item-collection base-dyn-items">
-          {% for category in categories %}
-            {% include 'accounts/elements/card.html' with item=category %}
+          {% for card in cards %}
+            {% include 'accounts/elements/card.html' with item=card %}
           {% empty %}
             {% include 'accounts/elements/empty.html' %}
           {% endfor %}

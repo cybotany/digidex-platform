@@ -3,30 +3,36 @@
 <div class="panel-wrapper">
   <div class="panel">
     <div class="block-panel">
-      {% if page.owner.profile.image %}
-        <img src="{{ page.owner.profile.image.url }}" alt="Profile Avatar" class="panel-avatar">
+      {% if panel.image_url %}
+        <img src="{{ panel.image_url }}" alt="Profile Avatar" class="panel-avatar">
       {% endif %}
       <div class="panel-content">
-        <div class="date">Joined: {{ page.owner.profile.created_at}}</div>
-        <h3 class="heading-panel">{{ page.owner.profile.user.username }}</h3>
-        {% if page.owner.profile.bio %}
-          <p class="paragraph-panel">{{ page.owner.profile.bio|richtext }}</p>
+        <div class="date">Joined: {{ panel.created_at}}</div>
+        <h3 class="heading-panel">{{ panel.name }}</h3>
+        {% if panel.description %}
+          <p class="paragraph-panel">{{ panel.description|richtext }}</p>
         {% endif %}
         {% if request.user == page.owner %}
-        <a href="{% url 'accounts:update_account' request.user.slug %}" class="link-block base-inline-block">
-          <div class="text-link">Update Profile</div>
-          <div class="block-icon-link">
-            <img src="{% static 'base/images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
-          </div>
-        </a>
-      {% else %}
-        <a href="#" class="link-block base-inline-block">
-          <div class="text-link">Message</div>
-          <div class="block-icon-link">
-            <img src="{% static 'base/images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
-          </div>
-        </a>
-      {% endif %}
+          <a href="{{ panel.update_url }}" class="link-block base-inline-block">
+            <div class="text-link">Update Account</div>
+            <div class="block-icon-link">
+              <img src="{% static 'base/images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
+            </div>
+          </a>
+          <a href="{{ panel.delete_url }}" class="link-block base-inline-block">
+            <div class="text-link">Delete Account</div>
+            <div class="block-icon-link">
+              <img src="{% static 'base/images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
+            </div>
+          </a>
+        {% else %}
+          <a href="#" class="link-block base-inline-block">
+            <div class="text-link">Message</div>
+            <div class="block-icon-link">
+              <img src="{% static 'base/images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
+            </div>
+          </a>
+        {% endif %}
       </div>
     </div>
   </div>

@@ -11,7 +11,7 @@
       <div class="utility-page-content base-password-page base-form">
         <h3 class="account-heading">Delete Account</h3>
         <!-- Render Form -->
-        <form id="profile-form" method="post" action="{% url 'accounts:delete_user' user.slug %}" class="utility-page-form base-password-page" enctype="multipart/form-data">
+        <form id="profile-form" method="post" action="{% url 'accounts:delete_account' user.slug %}" class="utility-page-form base-password-page" enctype="multipart/form-data">
           {% csrf_token %}
           <!-- Render Avatar Field -->
           <label for="{{ form.avatar.id_for_label }}">Confirm Account Deletion:</label>
@@ -22,7 +22,7 @@
             </div>
           {% endif %}
           <!-- Render Submit Button -->
-          <input type="submit" value="Update" class="submit-button base-button"> 
+          <input type="submit" value="Delete" class="submit-button base-button"> 
           {{ form.non_field_errors }}
         </form>
       </div>

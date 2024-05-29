@@ -207,9 +207,8 @@ class UserProfile(models.Model):
         return {
             'name': self.username,
             'description': self.bio or 'No description available.',
-            'image': self.image.url if self.image else 'No image available.',
+            'image_url': self.image.url if self.image else None,
             'created_at': self.created_at.strftime('%b %d, %Y'),
-            'detail_url': self.user.get_page().url if self.user.get_page() else '#',
             'delete_url': reverse('accounts:delete_account', kwargs={'user_slug': self.user.slug}),
             'update_url': reverse('accounts:update_account', kwargs={'user_slug': self.user.slug})
         }
