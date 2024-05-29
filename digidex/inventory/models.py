@@ -1,9 +1,11 @@
 import uuid
 from django.db import models
+from django.apps import apps
 from django.contrib import messages
 from django.conf import settings
 from django.utils.text import slugify
 from django.urls import reverse
+from django.core.exceptions import ObjectDoesNotExist
 
 from wagtail.models import Page
 
@@ -55,6 +57,9 @@ class Category(models.Model):
         if not self.is_party:
             self.name = self.create_unique_name()
             self.slug = self.create_unique_slug()
+        else:
+            self.name = 'Party'
+            self.slug = 'party'
         super().save(*args, **kwargs)
 
     @property
@@ -84,7 +89,6 @@ class Category(models.Model):
         return slug
 
     def create_page(self):
-        self.slug = self.create_unique_slug()
         category_page = InventoryCategoryPage(
             title=self.name,
             slug=self.slug,
@@ -133,9 +137,11 @@ class Category(models.Model):
 class InventoryCategoryPage(Page):
     heading = models.CharField(
         max_length=255,
+        null=True,
         blank=True
     )
     intro = models.TextField(
+        null=True,
         blank=True
     )
     category = models.OneToOneField(
@@ -237,6 +243,34 @@ class ItemizedDigit(models.Model):
         self.parent_page.add_child(instance=category_page)
         category_page.save_revision().publish()
         return category_page
+
+    def create_journal(self):
+        journal = apps.get_model('journal', 'EntryCollection').objects.create(
+            digit=self
+        )
+        return journal
+
+    def get_journal_entries(self):
+        try:
+            journal_collection = self.journal
+            if journal_collection:
+                return journal_collection.get_all_entries().select_related('journal').prefetch_related('digit')
+        except ObjectDoesNotExist:
+            return None
+
+    def delete(self, *args, **kwargs):
+        related_models = [
+            ('journal', 'EntryCollection'),
+            ('nfc', 'NearFieldCommunicationTag'),
+        ]
+
+        for app_label, model_name in related_models:
+            model = apps.get_model(app_label, model_name)
+            related_objects = model.objects.filter(digit=self)
+            for obj in related_objects:
+                obj.delete()
+        
+        super().delete(*args, **kwargs)
 
     @classmethod
     def get_queryset(cls):

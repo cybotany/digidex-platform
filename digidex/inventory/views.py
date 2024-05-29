@@ -22,11 +22,10 @@ def link_ntag(request, ntag_uuid):
                 description=form.cleaned_data['description'],
                 user=request.user
             )
+            _digit.save()
             digit = apps.get_model('inventory', 'ItemizedDigit').objects.create(category=category, digit=_digit)
             digit.save()
-
             digit_page = digit.create_page()
-            digit_page.save()
     
             journal = digit.create_journal()
             journal.save()

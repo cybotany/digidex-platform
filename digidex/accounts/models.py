@@ -105,6 +105,9 @@ class User(AbstractUser):
             name=name,
             defaults={'is_party': name == "Party"}
         )
+        if created:
+            category.save()
+            category.create_page()
         return category, created
 
     def get_category(self, name):
@@ -119,9 +122,7 @@ class User(AbstractUser):
 
     def create_party(self):
         party, created = self.add_category("Party")
-        if created:
-            party.save()
-        return party
+        return party, created
 
     def get_category_digits(self, category):
         inventory_category = self.get_category(category)
