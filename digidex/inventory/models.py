@@ -64,7 +64,7 @@ class Category(models.Model):
 
     @property
     def parent_page(self):
-        return self.user.page
+        return self.user.page if self.user else None
 
     def create_unique_name(self):
         base_name = self.name
@@ -82,10 +82,10 @@ class Category(models.Model):
         counter = 1
 
         parent_page = self.parent_page
-
-        while InventoryCategoryPage.objects.filter(parent=parent_page, slug=slug).exists():
-            slug = f"{base_slug}-{counter}"
-            counter += 1
+        if parent_page:
+            while InventoryCategoryPage.objects.filter(slug=slug, path__startswith=parent_page.path).exists():
+                slug = f"{base_slug}-{counter}"
+                counter += 1
         return slug
 
     def create_page(self):
@@ -97,8 +97,10 @@ class Category(models.Model):
             intro=self.description,
             category=self,
         )
-        self.parent_page.add_child(instance=category_page)
-        category_page.save_revision().publish()
+        parent_page = self.parent_page
+        if parent_page:
+            parent_page.add_child(instance=category_page)
+            category_page.save_revision().publish()
         return category_page
 
     def list_digits(self):
@@ -118,14 +120,27 @@ class Category(models.Model):
         return itemized_digit
 
     def get_digit(self, digit):
-        return self.itemized_digits.select_related('digit').get(digit=digit)
+        try:
+            return self.itemized_digits.select_related('digit').get(digit=digit)
+        except ItemizedDigit.DoesNotExist:
+            return None
 
     def remove_digit(self, digit):
         itemized_digit = self.get_digit(digit)
-        itemized_digit.delete()
-        message = f"'{digit.name}' was removed from the category '{self.name}'."
-        messages.info(message)
+        if itemized_digit:
+            itemized_digit.delete()
+            message = f"'{digit.name}' was removed from the category '{self.name}'."
+            messages.info(message)
         return itemized_digit
+
+    def get_card_details(self):
+        return {
+            'name': self.name if self.name else 'Unnamed',
+            'description': self.description if self.description else 'No description available.',
+            'last_modified': self.last_modified,
+            'pageurl': self.page.url if hasattr(self, 'page') else '#',
+            'is_party': self.is_party,
+        }
 
     def __str__(self):
         return self.name
@@ -160,7 +175,7 @@ class InventoryCategoryPage(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context['itemized_digits'] = self.category.list_digits()
+        context['itemized_digits'] = self.category.list_digits() if self.category else []
         return context
 
 
@@ -192,27 +207,27 @@ class ItemizedDigit(models.Model):
 
     @property
     def name(self):
-        return self.digit.name
+        return self.digit.name if self.digit else None
 
     @property
     def description(self):
-        return self.digit.description
+        return self.digit.description if self.digit else None
 
     @property
     def created_at(self):
-        return self.digit.created_at
+        return self.digit.created_at if self.digit else None
 
     @property
     def last_modified(self):
-        return self.digit.last_modified
+        return self.digit.last_modified if self.digit else None
 
     @property
     def user(self):
-        return self.category.user
+        return self.category.user if self.category else None
 
     @property
     def parent_page(self):
-        return self.category.page
+        return self.category.page if self.category else None
 
     def save(self, *args, **kwargs):
         self.slug = self.create_unique_slug()
@@ -224,15 +239,15 @@ class ItemizedDigit(models.Model):
         counter = 1
 
         parent_page = self.parent_page
-
-        while ItemizedDigitPage.objects.filter(parent=parent_page, slug=slug).exists():
-            slug = f"{base_slug}-{counter}"
-            counter += 1
+        if parent_page:
+            while ItemizedDigitPage.objects.filter(slug=slug, path__startswith=parent_page.path).exists():
+                slug = f"{base_slug}-{counter}"
+                counter += 1
         return slug
 
     def create_page(self):
         slug = self.create_unique_slug()
-        category_page = ItemizedDigitPage(
+        digit_page = ItemizedDigitPage(
             title=self.name,
             slug=slug,
             owner=self.user,
@@ -240,9 +255,11 @@ class ItemizedDigit(models.Model):
             intro=self.description,
             digit=self,
         )
-        self.parent_page.add_child(instance=category_page)
-        category_page.save_revision().publish()
-        return category_page
+        parent_page = self.parent_page
+        if parent_page:
+            parent_page.add_child(instance=digit_page)
+            digit_page.save_revision().publish()
+        return digit_page
 
     def create_journal(self):
         journal = apps.get_model('journal', 'EntryCollection').objects.create(
@@ -256,7 +273,7 @@ class ItemizedDigit(models.Model):
             if journal_collection:
                 return journal_collection.get_all_entries().select_related('journal').prefetch_related('digit')
         except ObjectDoesNotExist:
-            return None
+            return []
 
     def delete(self, *args, **kwargs):
         related_models = [
@@ -277,7 +294,7 @@ class ItemizedDigit(models.Model):
         return super().get_queryset().select_related('digit')
 
     def __str__(self):
-        return self.name.title()
+        return self.name.title() if self.name else 'Unnamed'
 
     class Meta:
         unique_together = ('category', 'digit')
@@ -311,6 +328,5 @@ class ItemizedDigitPage(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context['journal_entries'] = self.digit.get_journal_entries().prefetch_related('related_model')
+        context['journal_entries'] = self.digit.get_journal_entries() if self.digit else []
         return context
-

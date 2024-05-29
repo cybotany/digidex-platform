@@ -4,10 +4,11 @@
   <div class="block-icon-asset-item">
     <img src="{% static 'base/images/google/tree.svg' %}" alt="" loading="eager" class="icon-asset-item">
   </div>
-  <a href="{{ item.digit_page.url }}" class="link-asset-item base-inline-block">
-    <h3 class="heading-asset-item">{{ item.digit_name }}</h3>
+  <div class="date">LAST MODIFIED: {{ item.last_modified }}</div>
+  <a href="{{ item.pageurl }}" class="link-asset-item base-inline-block">
+    <h3 class="heading-asset-item">{{ item.name }}</h3>
   </a>
-  <p class="paragraph-description">{{ item.digit_description }}</p>
+  <p class="paragraph-description">{{ item.description }}</p>
   <div class="subtitle-asset-item">Analytics<br></div>
   <div class="block-features-asset-item">
     <div class="features-asset-item">
@@ -23,5 +24,5 @@
       <h6 class="heading-features-asset-item"></h6>
     </div>
   </div>
-  <a href="{{ item.digit_page.url }}" class="button base-button">View Details</a>
+  <a href="{{ item.pageurl }}" class="button base-button">View Details</a>
 </div>

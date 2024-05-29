@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 
 from .base import *
 
@@ -31,11 +32,11 @@ LOGGING = {
     'handlers': {
         'file': {
             'level': 'WARNING',
-            'class': 'base.utils.handlers.CustomTimedRotatingFileHandler',
-            'base_log_dir': LOG_DIR,
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': os.path.join(LOG_DIR, f'digidex_{datetime.now().strftime("%Y-%m-%d")}.log'),
             'when': 'midnight',
             'interval': 1,
-            'backupCount': 30,  # Keep logs for the last 30 days
+            'backupCount': 30,
             'formatter': 'verbose',
         },
         'console': {

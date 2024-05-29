@@ -17,8 +17,8 @@
       </div>
       <div id="asset-items-list" class="asset-item-collection-wrapper base-dyn-list">
         <div role="list" class="asset-item-collection base-dyn-items">
-          {% for digit in digits %}
-            {% include 'accounts/elements/card.html' with item=digit %}
+          {% for category in categories %}
+            {% include 'accounts/elements/card.html' with item=category %}
           {% empty %}
             {% include 'accounts/elements/empty.html' %}
           {% endfor %}

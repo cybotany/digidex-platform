@@ -2,7 +2,6 @@ import uuid
 from django.db import models
 from django.contrib import messages
 from django.apps import apps
-from django.urls import reverse
 from django.utils.text import slugify
 from django.contrib.auth.models import AbstractUser
 
@@ -96,7 +95,7 @@ class User(AbstractUser):
         return profile
 
     def list_categories(self):
-        return self.inventory_categories.prefetch_related('itemized_digits').all()
+        return self.inventory_categories.prefetch_related('itemized_digits')
 
     def add_category(self, name):
         Category = apps.get_model('inventory', 'Category')
@@ -124,16 +123,20 @@ class User(AbstractUser):
         party, created = self.add_category("Party")
         return party, created
 
-    def get_category_digits(self, category):
-        inventory_category = self.get_category(category)
-        return inventory_category.list_digits().select_related('digit')
-
     @property
     def page(self):
         try:
             return UserPage.objects.get(owner=self)
         except UserPage.DoesNotExist:
             return None
+
+    @property
+    def category_cards(self):
+        card_details_list = []
+        categories = self.list_categories()
+        for category in categories:
+            card_details_list.append(category.get_card_details())
+        return card_details_list
 
     def __str__(self):
         return self.username.title()
@@ -150,7 +153,7 @@ class UserPage(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context['party_digits'] = None # self.get_digits()
+        context['categories'] = self.user.category_cards
         return context
 
     parent_page_types = [
