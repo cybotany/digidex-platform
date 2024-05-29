@@ -1,7 +1,5 @@
 from allauth.account.adapter import DefaultAccountAdapter
 
-from accounts.utils import create_user_profile
-
 
 class DigidexAccountAdapter(DefaultAccountAdapter):
 
@@ -9,6 +7,7 @@ class DigidexAccountAdapter(DefaultAccountAdapter):
         """
         Returns the URL to redirect to after a successful email confirmation.
         """
-        user_profile = create_user_profile(request.user)
-        user_profile_page = user_profile.create_profile_page()
-        return user_profile_page.get_url()
+        user = request.user
+        user_profile = user.create_profile()
+        user_page = user.create_page()
+        return user_page.page.url()
