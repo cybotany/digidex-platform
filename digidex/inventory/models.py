@@ -237,6 +237,14 @@ class ItemizedDigit(models.Model):
     def parent_page(self):
         return self.category.page if self.category else None
 
+    @property
+    def note_cards(self):
+        card_details_list = []
+        notes = self.list_notes()
+        for note in notes:
+            card_details_list.append(note.get_card_details())
+        return card_details_list
+
     def save(self, *args, **kwargs):
         self.slug = self.create_unique_slug()
         super().save(*args, **kwargs)
@@ -347,5 +355,6 @@ class ItemizedDigitPage(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
+        # context['notes'] = self.digit.note_cards
         context['journal_entries'] = self.digit.get_journal_entries() if self.digit else []
         return context

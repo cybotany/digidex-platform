@@ -38,6 +38,14 @@ class EntryCollection(models.Model):
     def get_all_entries(self):
         return self.entries.all() if self.entries.exists() else None
 
+    def get_card_details(self):
+        return {
+            'name': self.digit.name if self.digit else 'Unnamed',
+            'description': self.digit.description if self.digit.description else 'No description available.',
+            'last_modified': self.last_modified,
+            'pageurl': '#' # self.page.url if self.page else '#',
+        }
+
     def __str__(self):
         return f"Journal Entry Collection: {self.uuid}"
 

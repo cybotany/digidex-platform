@@ -2,8 +2,16 @@
 
 {% block content %}
   <section class="section">
-    <div sclass="content">
-      {% include "inventory/layouts/grid.html" %}
+    <div class="content">
+      <div id="asset-items-list" class="asset-item-collection-wrapper base-dyn-list">
+        <div role="list" class="asset-item-collection base-dyn-items">
+          {% for digit in digits %}
+            {% include 'inventory/elements/card.html' with item=digit %}
+          {% empty %}
+            {% include 'inventory/elements/empty.html' %}
+          {% endfor %}
+        </div>
+      </div>
     </div>
   </section>
 {% endblock %}
