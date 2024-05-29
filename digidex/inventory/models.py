@@ -104,7 +104,7 @@ class Category(models.Model):
         return category_page
 
     def list_digits(self):
-        return self.itemized_digits.select_related('digit').all()
+        return self.itemized_digits.select_related('digit')
 
     def add_digit(self, digit):
         itemized_digit, created = ItemizedDigit.objects.select_related('digit').get_or_create(
@@ -142,6 +142,14 @@ class Category(models.Model):
             'is_party': self.is_party,
         }
 
+    @property
+    def digit_cards(self):
+        card_details_list = []
+        digits = self.list_digits()
+        for digit in digits:
+            card_details_list.append(digit.get_card_details())
+        return card_details_list
+
     def __str__(self):
         return self.name
 
@@ -175,7 +183,7 @@ class InventoryCategoryPage(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context['itemized_digits'] = self.category.list_digits() if self.category else []
+        context['digits'] = self.category.digit_cards
         return context
 
 
@@ -275,6 +283,14 @@ class ItemizedDigit(models.Model):
         except ObjectDoesNotExist:
             return []
 
+    def get_card_details(self):
+        return {
+            'name': self.name if self.name else 'Unnamed',
+            'description': self.description if self.description else 'No description available.',
+            'last_modified': self.last_modified,
+            'pageurl': self.page.url if hasattr(self, 'page') else '#',
+        }
+
     def delete(self, *args, **kwargs):
         related_models = [
             ('journal', 'EntryCollection'),
@@ -308,7 +324,7 @@ class ItemizedDigitPage(Page):
     intro = models.TextField(
         blank=True
     )
-    digit = models.ForeignKey(
+    digit = models.OneToOneField(
         ItemizedDigit,
         on_delete=models.PROTECT,
         related_name='page'
