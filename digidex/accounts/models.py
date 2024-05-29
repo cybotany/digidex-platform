@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.apps import apps
 from django.utils.text import slugify
 from django.contrib.auth.models import AbstractUser
+from django.urls import reverse
 
 from wagtail.models import Page
 from wagtail.fields import RichTextField
@@ -18,26 +19,16 @@ def user_avatar_path(instance, filename):
 
 
 class UserIndexPage(Page):
-    heading = models.CharField(
-        max_length=255,
-        blank=True
-    )
-    intro = RichTextField(
-        blank=True
-    )
+    heading = models.CharField(max_length=255, blank=True)
+    intro = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
         FieldPanel('heading'),
         FieldPanel('intro'),
     ]
 
-    parent_page_types = [
-        'home.HomePage'
-    ]
-
-    subpage_types = [
-        'accounts.UserPage'
-    ]
+    parent_page_types = ['home.HomePage']
+    subpage_types = ['accounts.UserPage']
 
 
 class User(AbstractUser):
@@ -57,45 +48,60 @@ class User(AbstractUser):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            base_slug = slugify(self.username)
-            slug = base_slug
-            counter = 1
-            while User.objects.filter(slug=slug).exists():
-                slug = f"{base_slug}-{counter}"
-                counter += 1
-            self.slug = slug
+            self.slug = self._generate_unique_slug()
         super().save(*args, **kwargs)
 
+    def _generate_unique_slug(self):
+        base_slug = slugify(self.username)
+        slug = base_slug
+        counter = 1
+        while User.objects.filter(slug=slug).exists():
+            slug = f"{base_slug}-{counter}"
+            counter += 1
+        return slug
+
     def create_page(self):
-        try:
-            user_index_page = UserIndexPage.objects.get(slug='u')
-        except UserIndexPage.DoesNotExist:
+        user_index_page = self._get_user_index_page()
+        if not user_index_page:
             print('UserIndexPage does not exist. Please create it first.')
             return None
 
-        if not UserPage.objects.filter(user=self).exists():
+        if not UserPage.objects.filter(owner=self).exists():
             user_page = UserPage(
-                title=f"{self.__str__()}'s Page",
+                title=f"{self}'s Page",
                 slug=self.slug,
                 owner=self
             )
             user_index_page.add_child(instance=user_page)
             user_page.save_revision().publish()
-
             print(f'UserPage for user {self.username} created and added successfully!')
             return user_page
         else:
             print(f'UserPage for user {self.username} already exists.')
-            return UserPage.objects.get(user=self)
-    
+            return UserPage.objects.get(owner=self)
+
+    def get_page(self):
+        try:
+            return UserPage.objects.get(owner=self)
+        except UserPage.DoesNotExist:
+            return self.create_page()
+
+    def _get_user_index_page(self):
+        try:
+            return UserIndexPage.objects.get(slug='u')
+        except UserIndexPage.DoesNotExist:
+            return None
+
     def create_profile(self):
-        profile, created = UserProfile.objects.select_related('user').get_or_create(user=self)
+        profile, created = UserProfile.objects.get_or_create(user=self)
         if created:
             profile.save()
         return profile
 
-    def list_categories(self):
-        return self.inventory_categories.prefetch_related('itemized_digits')
+    def get_profile(self):
+        if hasattr(self, 'profile'):
+            return self.profile
+        return self.create_profile()
 
     def add_category(self, name):
         Category = apps.get_model('inventory', 'Category')
@@ -119,24 +125,24 @@ class User(AbstractUser):
         messages.info(message)
         return category
 
+    def list_categories(self):
+        return self.inventory_categories.prefetch_related('itemized_digits')
+
     def create_party(self):
         party, created = self.add_category("Party")
         return party, created
 
     @property
     def page(self):
-        try:
-            return UserPage.objects.get(owner=self)
-        except UserPage.DoesNotExist:
-            return None
+        return self.get_page()
 
     @property
-    def category_cards(self):
-        card_details_list = []
-        categories = self.list_categories()
-        for category in categories:
-            card_details_list.append(category.get_card_details())
-        return card_details_list
+    def template_cards(self):
+        return [category.get_card_details() for category in self.list_categories()]
+
+    @property
+    def template_panel(self):
+        return self.get_profile().get_panel_details()
 
     def __str__(self):
         return self.username.title()
@@ -153,12 +159,11 @@ class UserPage(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context['categories'] = self.user.category_cards
+        context['panel'] = self.user.template_panel
+        context['cards'] = self.user.template_cards
         return context
 
-    parent_page_types = [
-        'accounts.UserIndexPage'
-    ]
+    parent_page_types = ['accounts.UserIndexPage']
 
     @classmethod
     def get_queryset(cls):
@@ -174,7 +179,7 @@ class UserProfile(models.Model):
         on_delete=models.PROTECT,
         related_name="profile"
     )
-    avatar = models.ImageField(
+    image = models.ImageField(
         storage=PublicMediaStorage(),
         upload_to=user_avatar_path,
         null=True,
@@ -198,14 +203,22 @@ class UserProfile(models.Model):
     def username(self):
         return self.user.username.title()
 
-    def get_template_panel_data(self):
+    def get_panel_details(self):
         return {
             'name': self.username,
-            'description': self.bio if self.bio else 'No description available.',
+            'description': self.bio or 'No description available.',
+            'image': self.image.url if self.image else 'No image available.',
             'created_at': self.created_at.strftime('%b %d, %Y'),
-            'detail_url': self.page.url if self.page else '#',
-            'deletion_url': self.page.url if self.page else '#',
-            'update_url': self.page.url if self.page else '#',
+            'detail_url': self.user.get_page().url if self.user.get_page() else '#',
+            'delete_url': reverse('accounts:delete_account', kwargs={'user_slug': self.user.slug}),
+            'update_url': reverse('accounts:update_account', kwargs={'user_slug': self.user.slug})
+        }
+
+    def get_card_details(self):
+        return {
+            'name': self.username,
+            'description': self.bio or 'No description available.',
+            'detail_url': self.user.get_page().url if self.user.get_page() else '#'
         }
 
     def __str__(self):

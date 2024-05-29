@@ -3,6 +3,18 @@ from django import forms
 from accounts.models import UserProfile
 
 
+class DeleteUserForm(forms.Form):
+    delete = forms.BooleanField(
+        label='Upload Avatar',
+        widget=forms.CheckboxInput(
+            attrs={
+                'class': 'base-radio',
+            }
+        ),
+        required=True
+    )
+
+
 class UserProfileForm(forms.ModelForm):
     avatar = forms.ImageField(
         label='Upload Avatar',

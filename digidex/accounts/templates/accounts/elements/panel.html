@@ -3,17 +3,17 @@
 <div class="panel-wrapper">
   <div class="panel">
     <div class="block-panel">
-      {% if page.owner.profile.avatar %}
-        <img src="{{ page.owner.profile.avatar.url }}" alt="Profile Avatar" class="panel-avatar">
+      {% if page.owner.profile.image %}
+        <img src="{{ page.owner.profile.image.url }}" alt="Profile Avatar" class="panel-avatar">
       {% endif %}
       <div class="panel-content">
-        <div class="date">{{ page.owner.profile.created_at|date:"F Y" }}</div>
+        <div class="date">Joined: {{ page.owner.profile.created_at}}</div>
         <h3 class="heading-panel">{{ page.owner.profile.user.username }}</h3>
         {% if page.owner.profile.bio %}
           <p class="paragraph-panel">{{ page.owner.profile.bio|richtext }}</p>
         {% endif %}
         {% if request.user == page.owner %}
-        <a href="{% url 'accounts:profile_form' request.user.slug %}" class="link-block base-inline-block">
+        <a href="{% url 'accounts:update_account' request.user.slug %}" class="link-block base-inline-block">
           <div class="text-link">Update Profile</div>
           <div class="block-icon-link">
             <img src="{% static 'base/images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">

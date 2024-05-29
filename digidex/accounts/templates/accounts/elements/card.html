@@ -4,7 +4,7 @@
   <div class="block-icon-asset-item">
     <img src="{% static 'base/images/google/tree.svg' %}" alt="" loading="eager" class="icon-asset-item">
   </div>
-  <div class="date">LAST MODIFIED: {{ item.last_modified }}</div>
+  <div class="date">Created: {{ item.created_at }}</div>
   <a href="{{ item.pageurl }}" class="link-asset-item base-inline-block">
     <h3 class="heading-asset-item">{{ item.name }}</h3>
   </a>

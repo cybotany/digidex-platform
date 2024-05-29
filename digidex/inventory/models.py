@@ -137,13 +137,13 @@ class Category(models.Model):
         return {
             'name': self.name if self.name else 'Unnamed',
             'description': self.description if self.description else 'No description available.',
-            'last_modified': self.last_modified,
+            'created_at': self.created_at,
             'pageurl': self.page.url if hasattr(self, 'page') else '#',
             'is_party': self.is_party,
         }
 
     @property
-    def digit_cards(self):
+    def template_cards(self):
         card_details_list = []
         digits = self.list_digits()
         for digit in digits:
@@ -183,7 +183,7 @@ class InventoryCategoryPage(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context['digits'] = self.category.digit_cards
+        context['cards'] = self.category.template_cards
         return context
 
 
