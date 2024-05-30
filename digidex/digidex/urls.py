@@ -16,7 +16,7 @@ urlpatterns = [
     path("search/", search, name="search"),
     path('nfc/', include('nfc.urls')),
     path('api/', include('api.urls')),
-    path('u/', include('accounts.urls')),
+    path('u/', include('inventory.urls')),
 ]
 
 if settings.DEBUG:

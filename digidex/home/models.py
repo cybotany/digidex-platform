@@ -25,7 +25,7 @@ class HomePage(Page):
     ]
 
     subpage_types = [
-        'accounts.UserIndexPage'
+        'accounts.UserProfileIndexPage'
     ]
 
     class Meta:
