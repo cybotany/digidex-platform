@@ -206,7 +206,7 @@ SIGNUP_URL = 'account_signup'
 
 LOGIN_URL = 'account_login'
 
-LOGIN_REDIRECT_URL = 'wagtailadmin_home'
+ACCOUNT_ADAPTER = 'accounts.adapter.DigidexAccountAdapter'
 
 ACCOUNT_PRESERVE_USERNAME_CASING = False
 

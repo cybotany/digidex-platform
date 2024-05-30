@@ -1,50 +1,48 @@
-{% extends "base.html" %}
+{% extends "base/utility.html" %}
 {% load i18n %}
 
 {% block title %}
   {% trans "Create Digit" %}
 {% endblock title %}
 
-{% block body %}
-  {% block content %}
-    <section class="section-full">
-      <div class="content">
-        <div class="inventory-form">
-          <h2 class="inventory-heading">Create Digit</h2>
-          <div class="form-block base-form">
-            <form method="post" class="form">
-              {% csrf_token %}
-              <!-- Render Category Field -->
-              <label for="{{ form.category.id_for_label }}">Category:</label>
-              {{ form.category }}
-              {% if form.category.errors %}
-                <div class="error-message">
-                  <div class="text-error">{{ form.category.errors|striptags }}</div>
-                </div>
-              {% endif %}
-              <!-- Render Name Field -->
-              <label for="{{ form.name.id_for_label }}">Name:</label>
-              {{ form.name }}
-              {% if form.name.errors %}
-                <div class="error-message">
-                  <div class="text-error">{{ form.name.errors|striptags }}</div>
-                </div>
-              {% endif %}
-              <!-- Render Description Field -->
-              <label for="{{ form.description.id_for_label }}">Description:</label>
-              {{ form.description }}
-              {% if form.description.errors %}
-                <div class="error-message">
-                  <div class="text-error">{{ form.description.errors|striptags }}</div>
-                </div>
-              {% endif %}
-              <!-- Render Submit Button -->
-              <input type="submit" value="Create" class="submit-button base-button"> 
-              {{ form.non_field_errors }}
-            </form>            
-          </div>
+{% block content %}
+  <section class="section-full">
+    <div class="content">
+      <div class="inventory-form">
+        <h2 class="inventory-heading">Create Digit</h2>
+        <div class="form-block base-form">
+          <form method="post" class="form">
+            {% csrf_token %}
+            <!-- Render Category Field -->
+            <label for="{{ form.category.id_for_label }}">Category:</label>
+            {{ form.category }}
+            {% if form.category.errors %}
+              <div class="error-message">
+                <div class="text-error">{{ form.category.errors|striptags }}</div>
+              </div>
+            {% endif %}
+            <!-- Render Name Field -->
+            <label for="{{ form.name.id_for_label }}">Name:</label>
+            {{ form.name }}
+            {% if form.name.errors %}
+              <div class="error-message">
+                <div class="text-error">{{ form.name.errors|striptags }}</div>
+              </div>
+            {% endif %}
+            <!-- Render Description Field -->
+            <label for="{{ form.description.id_for_label }}">Description:</label>
+            {{ form.description }}
+            {% if form.description.errors %}
+              <div class="error-message">
+                <div class="text-error">{{ form.description.errors|striptags }}</div>
+              </div>
+            {% endif %}
+            <!-- Render Submit Button -->
+            <input type="submit" value="Create" class="submit-button base-button"> 
+            {{ form.non_field_errors }}
+          </form>            
         </div>
       </div>
-    </section>
-  {% endblock %}
+    </div>
+  </section>
 {% endblock %}

@@ -297,17 +297,6 @@ class ItemizedDigit(models.Model):
         )
         return journal
 
-    def get_journal_entries(self):
-        try:
-            journal_collection = self.journal
-            if journal_collection:
-                entries = journal_collection.get_all_entries()
-                if entries is not None:
-                    return entries.select_related('journal').prefetch_related('digit')
-        except ObjectDoesNotExist:
-            pass
-        return []
-
     def get_panel_details(self):
         return {
             'name': self._name,
@@ -381,9 +370,13 @@ class ItemizedDigit(models.Model):
         return reverse('accounts:delete_digit', kwargs={'digit_uuid': self.uuid})
 
     @property
-    def note_cards(self):
+    def digit_panel(self):
+        return self.get_panel_details()
+
+    @property
+    def journal_cards(self):
         card_details_list = []
-        notes = self.list_notes()
+        notes = [] # self.list_notes()
         for note in notes:
             card_details_list.append(note.get_card_details())
         return card_details_list
@@ -421,12 +414,8 @@ class ItemizedDigitPage(Page):
     def get_queryset(cls):
         return super().get_queryset().select_related('digit')
 
-    @property
-    def delete_url(self):
-        return reverse('inventory:delete_digit', kwargs={'digit_uuid': self.digit.uuid})
-
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        # context['notes'] = self.digit.note_cards
-        context['journal_entries'] = self.digit.get_journal_entries() if self.digit else []
+        context['digit_panel'] = self.digit.digit_panel
+        context['journal_cards'] = self.digit.journal_cards
         return context

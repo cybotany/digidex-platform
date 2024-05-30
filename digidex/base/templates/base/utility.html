@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'accounts/css/accounts.css' %}">
+{% endblock %}
+
+{% block body %}
+  <header>
+    {% include 'base/layouts/messages.html' %}
+  </header>
+  <main id="main">
+    <section class="utility-page-wrap">
+      {% block content %}{% endblock %}
+    </section>
+  </main>
+{% endblock %}
+{% block extra_js %}{% endblock %}

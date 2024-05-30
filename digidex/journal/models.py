@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from django.contrib import messages
 
 from base.utils.storage import PublicMediaStorage
 
@@ -28,22 +29,48 @@ class EntryCollection(models.Model):
         auto_now=True
     )
 
+    def list_entries(self):
+        return self.entries.select_related('journal')
+
     def add_entry(self, digit):
-        journal_entry, created = Entry.objects.select_related('digit').get_or_create(
+        journal_entry, created = Entry.objects.select_related('journal').create(
             journal=self,
             digit=digit
         )
+        message = f"New entry created for '{digit.name}'!"
+        messages.info(message)
         return journal_entry
 
-    def get_all_entries(self):
-        return self.entries.all() if self.entries.exists() else None
+    def get_entry(self, entry_number):
+        try:
+            return self.entries.select_related('journal').get(entry_number=entry_number)
+        except Entry.DoesNotExist:
+            return None
+
+    def remove_entry(self, entry_number):
+        entry = self.get_entry(entry_number)
+        if entry:
+            entry.delete()
+            message = f"Entry '{entry_number}' was removed."
+            messages.info(message)
+        return None
+
+    def get_panel_details(self):
+        return {
+            'name': self._name,
+            'description': self._description,
+            'date': self._date,
+            'image_url': self._image_url,
+            'delete_url': self._delete_url,
+            'update_url': self._update_url
+        }
 
     def get_card_details(self):
         return {
-            'name': self.digit.name if self.digit else 'Unnamed',
-            'description': self.digit.description if self.digit.description else 'No description available.',
-            'last_modified': self.last_modified,
-            'pageurl': '#' # self.page.url if self.page else '#',
+            'name': self._name,
+            'description': self._description,
+            'last_modified': self._date,
+            'pageurl': self._page_url # self.page.url if self.page else '#',
         }
 
     def __str__(self):
@@ -52,7 +79,6 @@ class EntryCollection(models.Model):
     @classmethod
     def get_queryset(cls):
         return super().get_queryset().select_related('digit').prefetch_related('entries')
-
 
 
 class Entry(models.Model):
@@ -66,6 +92,10 @@ class Entry(models.Model):
         upload_to=journal_image_path,
         null=True,
         blank=True
+    )
+    entry_number = models.PositiveIntegerField(
+        default=1,
+        help_text="Entry number in the journal."
     )
     caption = models.CharField(
         blank=True,

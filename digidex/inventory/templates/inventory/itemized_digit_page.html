@@ -1,17 +1,6 @@
 {% extends "inventory/base.html" %}
 
 {% block content %}
-  <section class="section">
-    <div class="content">
-      <div id="asset-items-list" class="asset-item-collection-wrapper base-dyn-list">
-        <div role="list" class="asset-item-collection base-dyn-items">
-          {% for digit in digits %}
-            {% include 'base/elements/card.html' with card=digit %}
-          {% empty %}
-            {% include 'base/elements/empty.html' %}
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-  </section>
+  {% include 'base/elements/panel.html' with panel=digit_panel %}
+  {% include 'base/elements/card.html' with cards=journal_cards %}
 {% endblock %}

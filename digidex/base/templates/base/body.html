@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'accounts/css/assets.css' %}">
+{% endblock %}
+
+{% block body %}
+  <header>
+    {% include 'base/layouts/messages.html' %}
+    {% include 'base/layouts/navbar.html' %}
+  </header>
+  <main id="main">
+      {% block content %}{% endblock %}
+  </main>
+  {% include "includes/footer.html" %}
+{% endblock %}
+
+{% block extra_js %}{% endblock %}

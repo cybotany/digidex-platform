@@ -1,8 +1,19 @@
-<!-- Display Django messages -->
-<div id="messages">
-  {% for message in messages %}
-    <div class="{% if message.tags %}{{ message.tags }}{% endif %} message">
-      {{ message }}
-    </div>
-  {% endfor %}
-</div>
+{% load static %}
+
+{% if messages %}
+  <section class="section-top-bar">
+    {% for message in messages %}
+      <div class="top-bar-block">
+        <div class="top-bar">
+          <div class="info-top-bar">{{ message }}</div>
+        </div>
+        <div class="top-bar">
+          <a href="#" class="link-top-bar base-inline-block">
+            <img src="{% static 'base/images/bx/chat.svg' %}" loading="eager" alt="" class="icon-top-bar">
+            <div class="text-top-bar">ICON</div>
+          </a>
+        </div>
+      </div>
+    {% endfor %}
+  </section>
+{% endif %}

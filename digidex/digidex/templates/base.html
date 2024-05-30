@@ -37,15 +37,8 @@
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
-        {% include "includes/header.html" %}
-        <main id="main">
-            {% block content %}{% endblock %}
-        </main>
-        {% include "includes/footer.html" %}
-
-        {# Global javascript #}
-        <script type="text/javascript" src="{% static 'base/js/digidex.js' %}"></script>
-
+        {% block body %}{% endblock %}
         {% block extra_js %}{% endblock %}
+        <script type="text/javascript" src="{% static 'base/js/digidex.js' %}"></script>
     </body>
 </html>

@@ -1,5 +1,7 @@
 {% extends "allauth/layouts/base.html" %}
 
-<div class="content">
-  {% block content %}{% endblock %}
-</div>
+{% block body %}
+  <div class="utility-page-content base-password-page base-form">
+    {% block content %}{% endblock content%}
+  </div>
+{% endblock body %}
