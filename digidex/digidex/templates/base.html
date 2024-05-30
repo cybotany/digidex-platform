@@ -36,6 +36,11 @@
         {% block extra_css %}{% endblock %}
     </head>
 
+    <header>
+      {% include 'base/layouts/messages.html' %}
+      {% include 'base/layouts/navbar.html' %}
+    </header>
+
     <body class="{% block body_class %}{% endblock %}">
         {% block body %}{% endblock %}
         {% block extra_js %}{% endblock %}

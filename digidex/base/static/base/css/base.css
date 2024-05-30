@@ -2247,11 +2247,19 @@ figcaption {
 }
 
 .text-link {
-  color: var(--accent-a1);
+  color: var(--accent-a3);
   letter-spacing: -.02em;
   font-size: 1em;
   font-weight: 500;
   line-height: 120%;
+}
+
+.text-link.update {
+  color: var(--accent-a3);
+}
+
+.text-link.delete {
+  color: var(--accent-a2);
 }
 
 .icon-link {
@@ -2267,6 +2275,14 @@ figcaption {
   justify-content: center;
   align-items: center;
   display: flex;
+}
+
+.block-icon-link.update {
+  background-color: var(--accent-b3);
+}
+
+.block-icon-link.delete {
+  background-color: var(--accent-b2);
 }
 
 .link-block {
@@ -2285,6 +2301,14 @@ figcaption {
 .link-block:hover {
   background-color: var(--accent-b1);
   padding-left: 1em;
+}
+
+.link-block.update:hover {
+  background-color: var(--accent-b3);
+}
+
+.link-block.delete:hover {
+  background-color: var(--accent-b2);
 }
 
 .yellow-tag {

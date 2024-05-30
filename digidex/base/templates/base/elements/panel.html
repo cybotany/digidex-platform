@@ -24,18 +24,20 @@
                 <p class="paragraph-post large">{{ panel.description }}</p>
               {% endif %}
               {% if request.user == page.owner %}
-                <a href="{{ panel.update_url }}" class="link-block base-inline-block">
-                  <div class="text-link">Update Account</div>
-                  <div class="block-icon-link">
-                    <img src="{% static 'base/images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
-                  </div>
-                </a>
-                <a href="{{ panel.delete_url }}" class="link-block base-inline-block">
-                  <div class="text-link">Delete Account</div>
-                  <div class="block-icon-link">
-                    <img src="{% static 'base/images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
-                  </div>
-                </a>
+                <div class="block-button">
+                  <a href="{{ panel.update_url }}" class="link-block base-inline-block update">
+                    <div class="text-link update">Update</div>
+                    <div class="block-icon-link update">
+                      <img src="{% static 'base/images/bx/arrow-blue.svg' %}" loading="eager" alt="" class="icon-link">
+                    </div>
+                  </a>
+                  <a href="{{ panel.delete_url }}" class="link-block base-inline-block delete">
+                    <div class="text-link delete">Delete</div>
+                    <div class="block-icon-link delete">
+                      <img src="{% static 'base/images/bx/arrow-red.svg' %}" loading="eager" alt="" class="icon-link">
+                    </div>
+                  </a>
+                </div>
               {% else %}
                 <a href="#" class="link-block base-inline-block">
                   <div class="text-link">Message</div>
