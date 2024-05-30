@@ -77,7 +77,6 @@ def delete_category_view(request, category_uuid):
     return render(request, 'inventory/delete_category.html', {'form': form})
 
 
-
 @login_required
 def update_digit_view(request, digit_uuid):
     digit = get_object_or_404(apps.get_model('Inventory', 'ItemizedDigit'), uuid=digit_uuid)

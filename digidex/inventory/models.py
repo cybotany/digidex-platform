@@ -173,11 +173,11 @@ class Category(models.Model):
 
     @property
     def _update_url(self):
-        return reverse('inventory:update_category', kwargs={'user_slug': self.user.slug})
+        return reverse('accounts:update_category', kwargs={'category_uuid': self.uuid})
 
     @property
     def _delete_url(self):
-        return reverse('inventory:delete_category', kwargs={'user_slug': self.user.slug})
+        return reverse('accounts:delete_category', kwargs={'category_uuid': self.uuid})
 
     @property
     def _parent_page(self):
@@ -339,6 +339,14 @@ class ItemizedDigit(models.Model):
                 obj.delete()
 
         super().delete(*args, **kwargs)
+    
+    @property
+    def _user(self):
+        return self.category.user if self.category else None
+
+    @property
+    def _parent_page(self):
+        return self.category.page if self.category else None
 
     @property
     def _name(self):
@@ -349,20 +357,28 @@ class ItemizedDigit(models.Model):
         return self.digit.description if self.digit else None
 
     @property
-    def _created_at(self):
+    def _date(self):
         return self.digit.created_at if self.digit else None
 
     @property
-    def _last_modified(self):
-        return self.digit.last_modified if self.digit else None
+    def _image_url(self):
+        return None
 
     @property
-    def _user(self):
-        return self.category.user if self.category else None
+    def _page(self):
+        return self.page if hasattr(self, 'page') else None
 
     @property
-    def _parent_page(self):
-        return self.category.page if self.category else None
+    def _page_url(self):
+        return self._page.url if self._page else '#'
+
+    @property
+    def _update_url(self):
+        return reverse('accounts:update_digit', kwargs={'digit_uuid': self.uuid})
+
+    @property
+    def _delete_url(self):
+        return reverse('accounts:delete_digit', kwargs={'digit_uuid': self.uuid})
 
     @property
     def note_cards(self):
