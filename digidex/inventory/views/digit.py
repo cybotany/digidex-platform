@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 
-from inventory.forms.forms import ItemizedDigitForm, InventoryDeletionForm, InventoryCategoryForm
+from inventory.forms import InventoryDigitForm, InventoryDigitDeletionForm
 
 
 User = get_user_model()
@@ -15,7 +15,7 @@ User = get_user_model()
 def link_ntag_view(request, ntag_uuid):
     user = request.user
     if request.method == 'POST':
-        form = ItemizedDigitForm(request.POST, user=user)
+        form = InventoryDigitForm(request.POST, user=user)
         if form.is_valid():
             category = form.cleaned_data['category']
             _digit = apps.get_model('digitization', 'DigitalObject').objects.create(
@@ -41,61 +41,30 @@ def link_ntag_view(request, ntag_uuid):
             else:
                 return HttpResponseForbidden("Failed to create a detail page for the digitized object.")
     else:
-        form = ItemizedDigitForm(user=user)
+        form = InventoryDigitForm(user=user)
 
     return render(request, "inventory/link_ntag.html", {'form': form})
-
-
-@login_required
-def update_category_view(request, category_uuid):
-    category = get_object_or_404(apps.get_model('Inventory', 'Category'), uuid=category_uuid)
-    if request.method == 'POST':
-        form = InventoryCategoryForm(request.POST, instance=category)
-        if form.is_valid():
-            updated_category = form.save()
-            messages.success(request, f'{updated_category.name} successfully updated')
-            return redirect(updated_category._page.url)
-    else:
-        form = InventoryCategoryForm(instance=category)
-    
-    return render(request, 'inventory/update_category.html', {'form': form})
-
-
-@login_required
-def delete_category_view(request, category_uuid):
-    if request.method == 'POST':
-        form = InventoryDeletionForm(request.POST)
-        if form.is_valid():
-            category = get_object_or_404(apps.get_model('Inventory', 'Category'), uuid=category_uuid)
-            _name = category.name
-            category.delete()
-            messages.success(request, f'Category {_name} successfully deleted')
-            return redirect(reverse('home'))
-    else:
-        form = InventoryDeletionForm()
-    
-    return render(request, 'inventory/delete_category.html', {'form': form})
 
 
 @login_required
 def update_digit_view(request, digit_uuid):
     digit = get_object_or_404(apps.get_model('Inventory', 'ItemizedDigit'), uuid=digit_uuid)
     if request.method == 'POST':
-        form = ItemizedDigitForm(request.POST, request.FILES, instance=digit)
+        form = InventoryDigitForm(request.POST, request.FILES, instance=digit)
         if form.is_valid():
             form.save()
             messages.success(request, 'Profile successfully updated')
             return redirect(digit.page.url)
     else:
-        form = ItemizedDigitForm(instance=digit)
+        form = InventoryDigitForm(instance=digit)
     
-    return render(request, 'inventory/update_digit.html', {'form': form})
+    return render(request, 'inventory/digit/update.html', {'form': form})
 
 
 @login_required
 def delete_digit_view(request, digit_uuid):
     if request.method == 'POST':
-        form = InventoryDeletionForm(request.POST)
+        form = InventoryDigitDeletionForm(request.POST)
         if form.is_valid():
             digit = get_object_or_404(apps.get_model('Inventory', 'ItemizedDigit'), uuid=digit_uuid)
             _name = digit.name
@@ -103,6 +72,6 @@ def delete_digit_view(request, digit_uuid):
             messages.success(request, f'Digit {_name} successfully deleted')
             return redirect(reverse('home'))
     else:
-        form = InventoryDeletionForm()
+        form = InventoryDigitDeletionForm()
     
-    return render(request, 'inventory/delete_digit.html', {'form': form})
+    return render(request, 'inventory/digit/delete.html', {'form': form})

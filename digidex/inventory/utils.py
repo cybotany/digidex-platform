@@ -19,6 +19,19 @@ def get_or_create_user_profile_index_page():
         return None
 
 
+def get_or_create_user_profile(user):
+    """
+    Create a user profile for the given user.
+    """
+    UserProfile = apps.get_model('inventory', 'UserProfile')
+    if not UserProfile.objects.filter(user=user).exists():
+        user_profile = UserProfile(user=user)
+        user_profile.save()
+        return user_profile
+    else:
+        return UserProfile.objects.get(user=user)
+
+
 def get_or_create_user_profile_page(user_profile):
     """
     Create a user page for the given user.

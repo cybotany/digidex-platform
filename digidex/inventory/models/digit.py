@@ -7,7 +7,7 @@ from django.urls import reverse
 from wagtail.models import Page
 
 
-class ItemizedDigit(models.Model):
+class InventoryDigit(models.Model):
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
@@ -44,14 +44,14 @@ class ItemizedDigit(models.Model):
 
         parent_page = self._parent_page
         if parent_page:
-            while ItemizedDigitPage.objects.filter(slug=slug, path__startswith=parent_page.path).exists():
+            while InventoryDigitPage.objects.filter(slug=slug, path__startswith=parent_page.path).exists():
                 slug = f"{base_slug}-{counter}"
                 counter += 1
         return slug
 
     def create_page(self):
         slug = self.create_unique_slug()
-        digit_page = ItemizedDigitPage(
+        digit_page = InventoryDigitPage(
             title=self.name,
             slug=slug,
             owner=self.user,
@@ -137,11 +137,11 @@ class ItemizedDigit(models.Model):
 
     @property
     def _update_url(self):
-        return reverse('accounts:update_digit', kwargs={'digit_uuid': self.uuid})
+        return reverse('inventory:update_digit', kwargs={'digit_uuid': self.uuid})
 
     @property
     def _delete_url(self):
-        return reverse('accounts:delete_digit', kwargs={'digit_uuid': self.uuid})
+        return reverse('inventory:delete_digit', kwargs={'digit_uuid': self.uuid})
 
     @property
     def digit_panel(self):
@@ -166,7 +166,7 @@ class ItemizedDigit(models.Model):
         unique_together = ('category', 'digit')
 
 
-class ItemizedDigitPage(Page):
+class InventoryDigitPage(Page):
     heading = models.CharField(
         max_length=255,
         blank=True
@@ -175,7 +175,7 @@ class ItemizedDigitPage(Page):
         blank=True
     )
     digit = models.OneToOneField(
-        ItemizedDigit,
+        InventoryDigit,
         on_delete=models.PROTECT,
         related_name='page'
     )

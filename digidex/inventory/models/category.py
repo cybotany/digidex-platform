@@ -103,7 +103,7 @@ class Category(models.Model):
         return self.itemized_digits.select_related('digit')
 
     def add_digit(self, digit):
-        itemized_digit, created = ItemizedDigit.objects.select_related('digit').get_or_create(
+        itemized_digit, created = apps.get_models('inventory', 'InventoryDigit').objects.select_related('digit').get_or_create(
             category=self,
             digit=digit
         )
@@ -118,7 +118,7 @@ class Category(models.Model):
     def get_digit(self, digit):
         try:
             return self.itemized_digits.select_related('digit').get(digit=digit)
-        except ItemizedDigit.DoesNotExist:
+        except apps.get_models('inventory', 'InventoryDigit').DoesNotExist:
             return None
 
     def remove_digit(self, digit):
@@ -173,11 +173,11 @@ class Category(models.Model):
 
     @property
     def _update_url(self):
-        return reverse('accounts:update_category', kwargs={'category_uuid': self.uuid})
+        return reverse('inventory:update_category', kwargs={'category_uuid': self.uuid})
 
     @property
     def _delete_url(self):
-        return reverse('accounts:delete_category', kwargs={'category_uuid': self.uuid})
+        return reverse('inventory:delete_category', kwargs={'category_uuid': self.uuid})
 
     @property
     def _parent_page(self):

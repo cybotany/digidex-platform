@@ -5,13 +5,13 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 from django.urls import reverse
 
-from accounts.forms import UserProfileForm, DeleteUserForm
+from inventory.forms import UserProfileForm, DeleteUserForm
 
 User = get_user_model()
 
 
 @login_required
-def update_account_view(request, user_slug):
+def update_profile_view(request, user_slug):
     page_owner = get_object_or_404(User, slug=user_slug)
     requesting_user = request.user
 
@@ -29,11 +29,11 @@ def update_account_view(request, user_slug):
     else:
         form = UserProfileForm(instance=user_profile)
     
-    return render(request, 'accounts/update_account.html', {'form': form})
+    return render(request, 'accounts/profile/update.html', {'form': form})
 
 
 @login_required
-def delete_account_view(request, user_slug):
+def delete_profile_view(request, user_slug):
     page_owner = get_object_or_404(User, slug=user_slug)
     requesting_user = request.user
 
@@ -50,5 +50,5 @@ def delete_account_view(request, user_slug):
     else:
         form = DeleteUserForm()
     
-    return render(request, 'accounts/delete_account.html', {'form': form})
+    return render(request, 'accounts/profile/delete.html', {'form': form})
     

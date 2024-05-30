@@ -1,25 +1,30 @@
-from django.urls import path
-
-from inventory.views.category import link_ntag_view, update_category_view, delete_category_view, update_digit_view, delete_digit_view
-
-urlpatterns = [
-    path('ntag/<uuid:ntag_uuid>/link', link_ntag_view, name='link_ntag'),
-
-    path('category/<uuid:category_uuid>/update', update_category_view, name='update_category'),
-    path('category/<uuid:category_uuid>/delete', delete_category_view, name='delete_category'),
-
-    path('digit/<uuid:digit_uuid>/update', update_digit_view, name='update_digit'),
-    path('digit/<uuid:digit_uuid>/delete', delete_digit_view, name='delete_digit'),
-]
-
-
 from django.urls import path, include
 
-from inventory.views.profile import update_account_view, delete_account_view
+from inventory import views
 
-app_name = 'accounts'
+digit_urls = [
+    path('update/', views.update_digit_view, name='update_digit'),
+    path('delete/', views.delete_digit_view, name='delete_digit'),
+]
+
+category_urls = [
+    path('update/', views.update_category_view, name='update_category'),
+    path('delete/', views.delete_category_view, name='delete_category'),
+    path('<slug:digit_slug>/', include(digit_urls)),
+]
+
+ntag_urls = [
+    path('<uuid:ntag_uuid>', views.link_ntag_view, name='link_ntag'),
+]
+
+profile_urls = [
+    path('update/', views.update_profile_view, name='update_profile'),
+    path('delete/', views.delete_profile_view, name='delete_profile'),
+    path('ntag/', include(ntag_urls)),
+    path('<slug:category_slug>/', include(category_urls)),
+]
+
+app_name = 'inventory'
 urlpatterns = [
-    path('inv/', include('inventory.urls')),
-    path('<slug:user_slug>/update/', update_account_view, name='update_account'),
-    path('<slug:user_slug>/delete/', delete_account_view, name='delete_account'),
+    path('<slug:profile_slug>/', include(profile_urls)),
 ]

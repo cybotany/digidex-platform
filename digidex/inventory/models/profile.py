@@ -113,11 +113,11 @@ class UserProfile(models.Model):
 
     @property
     def _update_url(self):
-        return reverse('accounts:update_account', kwargs={'user_slug': self.slug})
+        return reverse('inventory:update_profile', kwargs={'user_slug': self.slug})
 
     @property
     def _delete_url(self):
-        return reverse('accounts:delete_account', kwargs={'user_slug': self.slug})
+        return reverse('inventory:delete_profile', kwargs={'user_slug': self.slug})
 
     def get_panel_details(self):
         return {
