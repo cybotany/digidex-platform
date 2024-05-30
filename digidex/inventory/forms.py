@@ -59,3 +59,14 @@ class ItemizedDigitForm(forms.ModelForm):
         super(ItemizedDigitForm, self).__init__(*args, **kwargs)
         if user:
             self.fields['category'].queryset = Category.objects.filter(user=user)
+
+
+class InventoryDeletionForm(forms.Form):
+    delete = forms.BooleanField(
+        widget=forms.CheckboxInput(
+            attrs={
+                'class': 'base-radio',
+            }
+        ),
+        required=True
+    )

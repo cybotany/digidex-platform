@@ -77,8 +77,8 @@ class Category(models.Model):
         slug = base_slug
         counter = 1
 
-        parent_page = self.parent_page
-        if parent_page:
+        parent_page = self._parent_page
+        if self._parent_page:
             while InventoryCategoryPage.objects.filter(slug=slug, path__startswith=parent_page.path).exists():
                 slug = f"{base_slug}-{counter}"
                 counter += 1
@@ -93,7 +93,7 @@ class Category(models.Model):
             intro=self.description,
             category=self,
         )
-        parent_page = self.parent_page
+        parent_page = self.self._parent_page
         if parent_page:
             parent_page.add_child(instance=category_page)
             category_page.save_revision().publish()
@@ -180,7 +180,7 @@ class Category(models.Model):
         return reverse('inventory:delete_category', kwargs={'user_slug': self.user.slug})
 
     @property
-    def parent_page(self):
+    def _parent_page(self):
         return self.user.page if self.user else None
 
     @property
@@ -259,38 +259,6 @@ class ItemizedDigit(models.Model):
         related_name='inventory_category'
     )
 
-    @property
-    def name(self):
-        return self.digit.name if self.digit else None
-
-    @property
-    def description(self):
-        return self.digit.description if self.digit else None
-
-    @property
-    def created_at(self):
-        return self.digit.created_at if self.digit else None
-
-    @property
-    def last_modified(self):
-        return self.digit.last_modified if self.digit else None
-
-    @property
-    def user(self):
-        return self.category.user if self.category else None
-
-    @property
-    def parent_page(self):
-        return self.category.page if self.category else None
-
-    @property
-    def note_cards(self):
-        card_details_list = []
-        notes = self.list_notes()
-        for note in notes:
-            card_details_list.append(note.get_card_details())
-        return card_details_list
-
     def save(self, *args, **kwargs):
         self.slug = self.create_unique_slug()
         super().save(*args, **kwargs)
@@ -300,7 +268,7 @@ class ItemizedDigit(models.Model):
         slug = base_slug
         counter = 1
 
-        parent_page = self.parent_page
+        parent_page = self._parent_page
         if parent_page:
             while ItemizedDigitPage.objects.filter(slug=slug, path__startswith=parent_page.path).exists():
                 slug = f"{base_slug}-{counter}"
@@ -317,7 +285,7 @@ class ItemizedDigit(models.Model):
             intro=self.description,
             digit=self,
         )
-        parent_page = self.parent_page
+        parent_page = self._parent_page
         if parent_page:
             parent_page.add_child(instance=digit_page)
             digit_page.save_revision().publish()
@@ -340,12 +308,22 @@ class ItemizedDigit(models.Model):
             pass
         return []
 
+    def get_panel_details(self):
+        return {
+            'name': self._name,
+            'description': self._description,
+            'date': self._date,
+            'image_url': self._image_url,
+            'delete_url': self._delete_url,
+            'update_url': self._update_url
+        }
+
     def get_card_details(self):
         return {
-            'name': self.name if self.name else 'Unnamed',
-            'description': self.description if self.description else 'No description available.',
-            'last_modified': self.last_modified,
-            'pageurl': self.page.url if self.page else '#',
+            'name': self._name,
+            'description': self._description,
+            'date': self._date,
+            'page_url': self._page_url
         }
 
     def delete(self, *args, **kwargs):
@@ -361,6 +339,38 @@ class ItemizedDigit(models.Model):
                 obj.delete()
 
         super().delete(*args, **kwargs)
+
+    @property
+    def _name(self):
+        return self.digit.name if self.digit else None
+
+    @property
+    def _description(self):
+        return self.digit.description if self.digit else None
+
+    @property
+    def _created_at(self):
+        return self.digit.created_at if self.digit else None
+
+    @property
+    def _last_modified(self):
+        return self.digit.last_modified if self.digit else None
+
+    @property
+    def _user(self):
+        return self.category.user if self.category else None
+
+    @property
+    def _parent_page(self):
+        return self.category.page if self.category else None
+
+    @property
+    def note_cards(self):
+        card_details_list = []
+        notes = self.list_notes()
+        for note in notes:
+            card_details_list.append(note.get_card_details())
+        return card_details_list
 
     @classmethod
     def get_queryset(cls):

@@ -5,7 +5,7 @@ from accounts.models import UserProfile
 
 class DeleteUserForm(forms.Form):
     delete = forms.BooleanField(
-        label='Upload Avatar',
+        label='Delete Account',
         widget=forms.CheckboxInput(
             attrs={
                 'class': 'base-radio',
