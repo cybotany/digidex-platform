@@ -2,17 +2,6 @@
 {% load static %}
 
 {% block content %}
-  <section class="section">
-    <div class="content">
-      <div id="asset-items-list" class="asset-item-collection-wrapper base-dyn-list">
-        <div role="list" class="asset-item-collection base-dyn-items">
-          {% for digit in digits %}
-            {% include 'inventory/elements/card.html' with item=digit %}
-          {% empty %}
-            {% include 'inventory/elements/empty.html' %}
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-  </section>
+  {% include 'base/elements/panel.html' with panel=category_panel %}
+  {% include 'base/elements/card.html' with cards=digit_cards %}
 {% endblock %}

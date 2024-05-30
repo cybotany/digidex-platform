@@ -6,9 +6,9 @@
       <div id="asset-items-list" class="asset-item-collection-wrapper base-dyn-list">
         <div role="list" class="asset-item-collection base-dyn-items">
           {% for digit in digits %}
-            {% include 'inventory/elements/card.html' with item=digit %}
+            {% include 'base/elements/card.html' with card=digit %}
           {% empty %}
-            {% include 'inventory/elements/empty.html' %}
+            {% include 'base/elements/empty.html' %}
           {% endfor %}
         </div>
       </div>

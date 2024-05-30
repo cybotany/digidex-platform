@@ -1,0 +1,53 @@
+{% load static wagtailcore_tags %}
+
+<section class="section">
+  <div class="content">  
+    <div class="collection-list-wrapper-posts large base-dyn-list">
+      <div role="list" class="collection-list-posts large base-dyn-items">
+        <div role="listitem" class="base-dyn-item">
+          <div class="block-post large">
+            {% if panel.image_url %}
+              <a href="#" class="link-post-thumbnail large base-inline-block">
+                <img src="{{ panel.image_url }}" alt="" loading="eager" class="image-post-thumbnail large">
+              </a>
+            {% endif %}
+            <div class="post large">
+              {% if panel.date %}
+                <div class="date">{{ panel.date}}</div>
+              {% endif %}
+              {% if panel.name %}
+                <a href="#" class="link-heading-post large base-inline-block">
+                  <h3 class="heading-post">{{ panel.name }}</h3>
+                </a>
+              {% endif %}
+              {% if panel.description %}
+                <p class="paragraph-post large">{{ panel.description }}</p>
+              {% endif %}
+              {% if request.user == page.owner %}
+                <a href="{{ panel.update_url }}" class="link-block base-inline-block">
+                  <div class="text-link">Update Account</div>
+                  <div class="block-icon-link">
+                    <img src="{% static 'base/images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
+                  </div>
+                </a>
+                <a href="{{ panel.delete_url }}" class="link-block base-inline-block">
+                  <div class="text-link">Delete Account</div>
+                  <div class="block-icon-link">
+                    <img src="{% static 'base/images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
+                  </div>
+                </a>
+              {% else %}
+                <a href="#" class="link-block base-inline-block">
+                  <div class="text-link">Message</div>
+                  <div class="block-icon-link">
+                    <img src="{% static 'base/images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
+                  </div>
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,42 @@
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+<section class="section">
+  <div class="content">
+    <div id="asset-items-list" class="asset-item-collection-wrapper base-dyn-list">
+      <div role="list" class="asset-item-collection base-dyn-items">
+        {% for card in cards %}
+          <div role="listitem" class="asset-item base-dyn-item">
+            <div class="block-icon-asset-item">
+              <img src="{% static 'base/images/google/tree.svg' %}" alt="" loading="eager" class="icon-asset-item">
+            </div>
+            <div class="date">{{ card.date }}</div>
+            <a href="{{ card.page_url }}" class="link-asset-item base-inline-block">
+              <h3 class="heading-asset-item">{{ card.name }}</h3>
+            </a>
+            <p class="paragraph-description">{{ card.description }}</p>
+            <div class="subtitle-asset-item">Analytics<br></div>
+            <div class="block-features-asset-item">
+              <div class="features-asset-item">
+                <img src="{% static 'base/images/bx/check-green.svg' %}" loading="eager" alt="" class="icon-features-asset-item">
+                <h6 class="heading-features-asset-item"></h6>
+              </div>
+              <div class="features-asset-item">
+                <img src="{% static 'base/images/bx/check-green.svg' %}" loading="eager" alt="" class="icon-features-asset-item">
+                <h6 class="heading-features-asset-item"></h6>
+              </div>
+              <div class="features-asset-item">
+                <img src="{% static 'base/images/bx/check-green.svg' %}" loading="eager" alt="" class="icon-features-asset-item">
+                <h6 class="heading-features-asset-item"></h6>
+              </div>
+            </div>
+            <a href="{{ card.page_url }}" class="button base-button">View Details</a>
+          </div>
+        {% empty %}
+          <div class="empty-state base-dyn-empty">
+            <div class="text-empty">No cards found.</div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>

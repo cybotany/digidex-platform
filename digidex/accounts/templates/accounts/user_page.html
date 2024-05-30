@@ -1,32 +1,7 @@
 {% extends "accounts/base.html" %}
-{% load static %}
 
-{% block content %}
-  <section class="section">
-    <div class="content">    
-      {% include 'accounts/elements/panel.html' with panel=panel %}
-    </div>
-  </section>
-  <section class="section">
-    <div class="content">
-      <div class="block">
-        <h3 class="heading-center">Inventory</h3>
-        <div class="block-asset-categories block">
-          <a href="#" aria-current="page" class="link-asset-category base-inline-block base--current">
-            <img src="{% static 'base/images/switcher.svg' %}" loading="eager" alt="" class="icon-asset-category">
-            <div class="text-asset-category">Party</div>
-          </a>
-        </div>
-      </div>
-      <div id="asset-items-list" class="asset-item-collection-wrapper base-dyn-list">
-        <div role="list" class="asset-item-collection base-dyn-items">
-          {% for card in cards %}
-            {% include 'accounts/elements/card.html' with item=card %}
-          {% empty %}
-            {% include 'accounts/elements/empty.html' %}
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-  </section>
+{% block content %} 
+  {% include 'base/elements/panel.html' with panel=profile_panel %}
+  {% include 'base/elements/list.html' with list=inventory_list %}
+  {% include 'base/elements/card.html' with cards=category_cards %}
 {% endblock %}

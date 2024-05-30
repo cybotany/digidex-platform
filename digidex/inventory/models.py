@@ -62,10 +62,6 @@ class Category(models.Model):
             self.slug = 'party'
         super().save(*args, **kwargs)
 
-    @property
-    def parent_page(self):
-        return self.user.page if self.user else None
-
     def create_unique_name(self):
         base_name = self.name
         name = base_name
@@ -133,17 +129,66 @@ class Category(models.Model):
             messages.info(message)
         return itemized_digit
 
+    def get_panel_details(self):
+        return {
+            'name': self._name,
+            'description': self._description,
+            'date': self._date,
+            'image_url': self._image_url,
+            'delete_url': self._delete_url,
+            'update_url': self._update_url
+        }
+
     def get_card_details(self):
         return {
-            'name': self.name if self.name else 'Unnamed',
-            'description': self.description if self.description else 'No description available.',
-            'created_at': self.created_at,
-            'pageurl': self.page.url if hasattr(self, 'page') else '#',
-            'is_party': self.is_party,
+            'name': self._name,
+            'description': self._description,
+            'date': self._date,
+            'page_url': self._page_url
         }
 
     @property
-    def template_cards(self):
+    def _name(self):
+        return self.name.title()
+
+    @property
+    def _description(self):
+        return self.description or 'No description available.'
+
+    @property
+    def _date(self):
+        return self.created_at.strftime('%b %d, %Y')
+
+    @property
+    def _image_url(self):
+        return None
+
+    @property
+    def _page(self):
+        return self.page if hasattr(self, 'page') else None
+
+    @property
+    def _page_url(self):
+        return self._page.url if self._page else '#'
+
+    @property
+    def _update_url(self):
+        return reverse('inventory:update_category', kwargs={'user_slug': self.user.slug})
+
+    @property
+    def _delete_url(self):
+        return reverse('inventory:delete_category', kwargs={'user_slug': self.user.slug})
+
+    @property
+    def parent_page(self):
+        return self.user.page if self.user else None
+
+    @property
+    def category_panel(self):
+        return self.get_panel_details()
+
+    @property
+    def digit_cards(self):
         card_details_list = []
         digits = self.list_digits()
         for digit in digits:
@@ -183,7 +228,8 @@ class InventoryCategoryPage(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context['cards'] = self.category.template_cards
+        context['category_panel'] = self.category.category_panel
+        context['digit_cards'] = self.category.digit_cards
         return context
 
 

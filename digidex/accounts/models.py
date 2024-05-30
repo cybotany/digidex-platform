@@ -159,8 +159,8 @@ class UserPage(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context['panel'] = self.user.template_panel
-        context['cards'] = self.user.template_cards
+        context['profile_panel'] = self.user.template_panel
+        context['category_cards'] = self.user.template_cards
         return context
 
     parent_page_types = ['accounts.UserIndexPage']
@@ -200,28 +200,57 @@ class UserProfile(models.Model):
     )
 
     @property
-    def username(self):
+    def _name(self):
         return self.user.username.title()
+
+    @property
+    def _description(self):
+        return self.bio or 'No description available.'
+
+    @property
+    def _date(self):
+        return self.created_at.strftime('%b %d, %Y')
+
+    @property
+    def _image_url(self):
+        return self.image.url if self.image else None
+
+    @property
+    def _page(self):
+        return self.user.page
+
+    @property
+    def _page_url(self):
+        return self._page.url
+
+    @property
+    def _update_url(self):
+        return reverse('accounts:update_account', kwargs={'user_slug': self.user.slug})
+
+    @property
+    def _delete_url(self):
+        return reverse('accounts:delete_account', kwargs={'user_slug': self.user.slug})
 
     def get_panel_details(self):
         return {
-            'name': self.username,
-            'description': self.bio or 'No description available.',
-            'image_url': self.image.url if self.image else None,
-            'created_at': self.created_at.strftime('%b %d, %Y'),
-            'delete_url': reverse('accounts:delete_account', kwargs={'user_slug': self.user.slug}),
-            'update_url': reverse('accounts:update_account', kwargs={'user_slug': self.user.slug})
+            'name': self._name,
+            'description': self._description,
+            'date': self._date,
+            'image_url': self._image_url,
+            'delete_url': self._delete_url,
+            'update_url': self._update_url
         }
 
     def get_card_details(self):
         return {
-            'name': self.username,
-            'description': self.bio or 'No description available.',
-            'detail_url': self.user.get_page().url if self.user.get_page() else '#'
+            'name': self._name,
+            'description': self._description,
+            'date': self._date,
+            'page_url': self._page_url
         }
 
     def __str__(self):
-        return f"{self.username}'s Profile"
+        return f"{self._name}'s Profile"
 
     class Meta:
         verbose_name = "User Profile"
