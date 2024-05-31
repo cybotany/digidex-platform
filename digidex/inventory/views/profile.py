@@ -1,3 +1,4 @@
+from django.apps import apps
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import get_user_model, logout
@@ -11,8 +12,8 @@ User = get_user_model()
 
 
 @login_required
-def update_profile_view(request, profile_slug):
-    page_owner = get_object_or_404(User, slug=profile_slug)
+def update_profile_view(request, user_slug):
+    page_owner = get_object_or_404(User, slug=user_slug)
     requesting_user = request.user
 
     if page_owner != requesting_user:
@@ -33,8 +34,8 @@ def update_profile_view(request, profile_slug):
 
 
 @login_required
-def delete_profile_view(request, profile_slug):
-    page_owner = get_object_or_404(User, slug=profile_slug)
+def delete_profile_view(request, user_slug):
+    page_owner = get_object_or_404(User, slug=user_slug)
     requesting_user = request.user
 
     if page_owner != requesting_user:

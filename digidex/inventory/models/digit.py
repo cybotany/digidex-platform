@@ -1,9 +1,13 @@
 import uuid
 from django.db import models
-from django.utils.text import slugify
+from django.contrib import messages
 from django.urls import reverse
 
 from wagtail.models import Page
+from wagtail.fields import RichTextField
+from wagtail.admin.panels import FieldPanel
+
+from base.utils.storage import PublicMediaStorage
 
 
 class InventoryDigit(models.Model):
@@ -13,13 +17,6 @@ class InventoryDigit(models.Model):
         editable=False,
         db_index=True,
         verbose_name="Inventory Digit UUID"
-    )
-    slug = models.SlugField(
-        max_length=255,
-        unique=True,
-        editable=False,
-        db_index=True,
-        verbose_name="Inventory Digit Slug"
     )
     category = models.ForeignKey(
         'inventory.Category',
@@ -32,10 +29,26 @@ class InventoryDigit(models.Model):
         related_name='inventory_category'
     )
 
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.digit.name)
-        super().save(*args, **kwargs)
+    def add_entry(self, description):
+        Entry = self.card_model
+        entry = Entry.objects.create(
+            note=description
+        )
+        entry.save()
+        return entry
+
+    def get_entry(self, number):
+        return self.inventory_categories.prefetch_related('itemized_digits').get(entry_number=number)
+
+    def remove_entry(self, number):
+        entry = self.get_entry(number)
+        entry.delete()
+        message = "Journal entry was removed."
+        messages.info(message)
+        return entry
+
+    def list_entries(self):
+        return self.inventory_categories.prefetch_related('itemized_digits')
 
     def get_panel_details(self):
         return {
@@ -97,7 +110,7 @@ class InventoryDigit(models.Model):
     @property
     def slug_kwargs(self):
         return {
-            'profile_slug': self.user_profile.slug,
+            'user_slug': self.user_profile.slug,
             'category_slug': self.category.slug
         }
 
@@ -118,16 +131,9 @@ class InventoryDigit(models.Model):
         return reverse('inventory:delete_digit', kwargs={'digit_uuid': self.uuid})
 
     @property
-    def digit_panel(self):
-        return self.get_panel_details()
-
-    @property
-    def journal_cards(self):
-        card_details_list = []
-        notes = [] # self.list_notes()
-        for note in notes:
-            card_details_list.append(note.get_card_details())
-        return card_details_list
+    def card_model(self):
+        from journal.models import Entry
+        return Entry
 
     @classmethod
     def get_queryset(cls):

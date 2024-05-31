@@ -26,5 +26,5 @@ profile_urls = [
 
 app_name = 'inventory'
 urlpatterns = [
-    path('<slug:profile_slug>/', include(profile_urls)),
+    path('<slug:user_slug>/', include(profile_urls)),
 ]

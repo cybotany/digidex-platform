@@ -99,8 +99,11 @@ def get_or_create_inventory_digit_journal(digit):
     """
     Create a journal for the given digit.
     """
-    from journal.models import EntryCollection
-    journal = EntryCollection.objects.create(
-        digit=digit
-    )
+    EntryCollection = apps.get_model('journal', 'EntryCollection')
+    if not EntryCollection.objects.filter(digit=digit).exists():
+        journal = EntryCollection.objects.create(
+            digit=digit
+        )
+    else:
+        journal = EntryCollection.objects.get(digit=digit)
     return journal

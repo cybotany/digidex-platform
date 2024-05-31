@@ -2,7 +2,6 @@ import uuid
 from django.db import models 
 from django.contrib import messages
 from django.urls import reverse
-from django.utils.text import slugify
 
 from wagtail.models import Page
 from wagtail.fields import RichTextField
@@ -22,12 +21,6 @@ class UserProfile(models.Model):
         editable=False,
         db_index=True,
         verbose_name="User Profile UUID"
-    )
-    slug = models.SlugField(
-        unique=True,
-        db_index=True,
-        max_length=255,
-        verbose_name="User Profile Slug"
     )
     user = models.OneToOneField(
         'accounts.User',
@@ -54,11 +47,6 @@ class UserProfile(models.Model):
         auto_now=True,
         verbose_name="Last Modified"
     )
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.user.username)
-        super().save(*args, **kwargs)
 
     def add_category(self, name):
         Category = self.card_model
@@ -120,7 +108,7 @@ class UserProfile(models.Model):
     @property
     def slug_kwargs(self):
         return {
-            'profile_slug': self.slug,
+            'user_slug': self.user.slug,
         }
 
     @property

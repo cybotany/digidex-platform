@@ -34,8 +34,8 @@ class Category(models.Model):
         null=True,
         help_text="Inventory Category description."
     )
-    user_profile = models.ForeignKey(
-        'inventory.UserProfile',
+    user = models.ForeignKey(
+        'accounts.User',
         on_delete=models.PROTECT,
         related_name="inventory_categories",
     )
@@ -59,7 +59,7 @@ class Category(models.Model):
         super().save(*args, **kwargs)
 
     def add_digit(self, digit):
-        InventoryDigit = self._card_model
+        InventoryDigit = self.card_model
         itemized_digit, created = InventoryDigit.objects.select_related('digit').get_or_create(
             category=self,
             digit=digit
@@ -73,7 +73,7 @@ class Category(models.Model):
         return itemized_digit
 
     def get_digit(self, digit):
-        InventoryDigit = self._card_model
+        InventoryDigit = self.card_model
         try:
             return self.itemized_digits.select_related('digit').get(digit=digit)
         except InventoryDigit.DoesNotExist:
@@ -83,7 +83,7 @@ class Category(models.Model):
         itemized_digit = self.get_digit(digit)
         if itemized_digit:
             itemized_digit.delete()
-            message = f"'{digit.name}' was removed from the category '{self.name}'."
+            message = "Digit removed."
             messages.info(message)
         return itemized_digit
 
@@ -127,7 +127,7 @@ class Category(models.Model):
     @property
     def slug_kwargs(self):
         return {
-            'profile_slug': self.user_profile.slug,
+            'user_slug': self.user.slug,
             'category_slug': self.slug
         }
 
@@ -159,7 +159,7 @@ class Category(models.Model):
         return f"{self.display_name}'s Inventory Category"
 
     class Meta:
-        unique_together = ('user_profile', 'name')
+        unique_together = ('user', 'name')
 
 
 class InventoryCategoryPage(Page):

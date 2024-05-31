@@ -10,16 +10,23 @@ class DigitalObject(models.Model):
         db_index=True,
         verbose_name="Digitized Object UUID"
     )
+    slug = models.SlugField(
+        max_length=255,
+        unique=True,
+        editable=False,
+        db_index=True,
+        verbose_name="Digitized Object Slug"
+    )
     name = models.CharField(
         max_length=100,
         null=True,
         blank=False,
-        help_text="Digitized object name."
+        help_text="Digitized Object Name."
     )
     description = models.TextField(
         blank=True,
         null=True,
-        help_text="Digitized object description."
+        help_text="Digitized Object Description."
     )
     created_at = models.DateTimeField(
         auto_now_add=True
