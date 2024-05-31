@@ -2,25 +2,23 @@
 
 <section class="section">
   <div class="content">
+    {% for item in list }
     <div class="block-asset-categories block">
-      <a href="#" aria-current="page" class="link-asset-category base-inline-block base--current">
-        <img src="{% static 'base/images/switcher.svg' %}" loading="eager" alt="" class="icon-asset-category">
-        <div class="text-asset-category">All Categories</div>
-      </a>
       <div class="collection-list-wrapper-categories base-dyn-list">
         <div role="list" class="collection-list-categories base-dyn-items">
           <div role="listitem" class="collection-item-categories base-dyn-item">
             <a href="#" class="link-asset-category base-inline-block">
-              <img alt="" loading="eager" src="" class="icon-asset-category">
-              <div class="text-asset-category"></div>
+              <img src="{% static 'base/images/google/pet.svg' %}" alt="" loading="eager" class="icon-asset-category">
+              <div class="text-asset-category">All {{item.plural}}</div>
             </a>
           </div>
         </div>
       </div>
       <a href="#" aria-current="page" class="link-asset-category base-inline-block base--current">
         <img src="{% static 'base/images/google/add-circle.svg' %}" loading="eager" alt="" class="icon-asset-category">
-        <div class="text-asset-category">Add Category</div>
+        <div class="text-asset-category">Add {{item.singular}}</div>
       </a>
     </div>
+    {% endfor %}
   </div>
 </section>

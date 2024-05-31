@@ -13,14 +13,15 @@ category_urls = [
     path('<slug:digit_slug>/', include(digit_urls)),
 ]
 
-ntag_urls = [
-    path('<uuid:ntag_uuid>', views.link_ntag_view, name='link_ntag'),
-]
+#additional_urls = [
+#    path('', views.add_category_view, name='add_category'),
+#    path('<uuid:ntag_uuid>/', views.add_digit_view, name='add_digit'),
+#]
 
 profile_urls = [
     path('update/', views.update_profile_view, name='update_profile'),
     path('delete/', views.delete_profile_view, name='delete_profile'),
-    path('ntag/', include(ntag_urls)),
+#    path('add/', include(additional_urls)),
     path('<slug:category_slug>/', include(category_urls)),
 ]
 

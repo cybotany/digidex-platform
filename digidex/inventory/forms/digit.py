@@ -4,7 +4,7 @@ from base.forms import AssetDeletionCheckbox
 from inventory.models import DigitalObject, Category
 
 
-class InventoryDigitForm(forms.ModelForm):
+class DigitalObjectForm(forms.ModelForm):
     category = forms.ModelChoiceField(
         queryset=Category.objects.none(),
         required=True,
@@ -36,7 +36,7 @@ class InventoryDigitForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
-        super(InventoryDigitForm, self).__init__(*args, **kwargs)
+        super(DigitalObjectForm, self).__init__(*args, **kwargs)
         if user:
             self.fields['category'].queryset = Category.objects.filter(user=user)
 

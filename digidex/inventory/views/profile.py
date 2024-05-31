@@ -52,4 +52,3 @@ def delete_profile_view(request, user_slug):
         form = DeleteUserForm()
     
     return render(request, 'inventory/profile/delete.html', {'form': form, 'url': page_owner.profile.update_url})
-    

@@ -1,21 +1,21 @@
 from django.apps import apps
-from django.http import HttpResponseForbidden
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseForbidden
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 
-from inventory.forms import InventoryDigitForm, InventoryDigitDeletionForm
+from inventory.forms import DigitalObjectForm, InventoryDigitDeletionForm
 
 
 User = get_user_model()
 
 @login_required
-def link_ntag_view(request, ntag_uuid):
+def add_digit_view(request, user_slug):
     user = request.user
     if request.method == 'POST':
-        form = InventoryDigitForm(request.POST, user=user)
+        form = DigitalObjectForm(request.POST, user=user)
         if form.is_valid():
             category = form.cleaned_data['category']
             _digit = apps.get_model('digitization', 'DigitalObject').objects.create(
@@ -41,28 +41,27 @@ def link_ntag_view(request, ntag_uuid):
             else:
                 return HttpResponseForbidden("Failed to create a detail page for the digitized object.")
     else:
-        form = InventoryDigitForm(user=user)
+        form = DigitalObjectForm(user=user)
 
     return render(request, "inventory/link_ntag.html", {'form': form})
 
-
 @login_required
-def update_digit_view(request, digit_uuid):
+def update_digit_view(request, user_slug, category_slug, digit_slug):
     digit = get_object_or_404(apps.get_model('Inventory', 'ItemizedDigit'), uuid=digit_uuid)
     if request.method == 'POST':
-        form = InventoryDigitForm(request.POST, request.FILES, instance=digit)
+        form = DigitalObjectForm(request.POST, request.FILES, instance=digit)
         if form.is_valid():
             form.save()
             messages.success(request, 'Profile successfully updated')
             return redirect(digit.page.url)
     else:
-        form = InventoryDigitForm(instance=digit)
+        form = DigitalObjectForm(instance=digit)
     
     return render(request, 'inventory/digit/update.html', {'form': form})
 
 
 @login_required
-def delete_digit_view(request, digit_uuid):
+def delete_digit_view(request, user_slug, category_slug, digit_slug):
     if request.method == 'POST':
         form = InventoryDigitDeletionForm(request.POST)
         if form.is_valid():

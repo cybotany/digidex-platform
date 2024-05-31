@@ -4,7 +4,7 @@ from base.forms import AssetDeletionCheckbox
 from inventory.models import Category
 
 
-class InventoryCategoryForm(forms.ModelForm):
+class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
         fields = ('name', 'description',)
@@ -23,5 +23,5 @@ class InventoryCategoryForm(forms.ModelForm):
             )
         }
 
-class InventoryCategoryDeletionForm(AssetDeletionCheckbox):
+class CategoryDeletionForm(AssetDeletionCheckbox):
     pass

@@ -25,9 +25,21 @@ class User(AbstractUser):
             return self.profile.page
         return None
 
+    @property
+    def parent_slug(self):
+        return 'u'
+
+    @property
+    def base_slug(self):
+        return slugify(self.username)
+
+    @property
+    def full_slug(self):
+        return f'{self.parent_slug}/{self.base_slug}'
+
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.username)
+            self.slug = self.full_slug
         super().save(*args, **kwargs)
 
     def __str__(self):

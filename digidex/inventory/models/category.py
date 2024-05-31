@@ -34,8 +34,8 @@ class Category(models.Model):
         null=True,
         help_text="Inventory Category description."
     )
-    profile = models.ForeignKey(
-        'inventory.UserProfile',
+    user = models.ForeignKey(
+        'accounts.User',
         on_delete=models.PROTECT,
         related_name="inventory_categories",
     )
@@ -125,8 +125,20 @@ class Category(models.Model):
         return None
 
     @property
+    def parent_slug(self):
+        return 'u'
+
+    @property
+    def base_slug(self):
+        return slugify(self.name)
+
+    @property
+    def full_slug(self):
+        return f'{self.parent_slug}/{self.base_slug}'
+
+    @property
     def slug_kwargs(self):
-        return self.profile.slug_kwargs.update({'category_slug': self.slug})
+        return self.user.slug_kwargs.update({'category_slug': self.slug})
 
     @property
     def _page(self):
