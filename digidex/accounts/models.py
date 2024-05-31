@@ -37,6 +37,12 @@ class User(AbstractUser):
     def full_slug(self):
         return f'{self.parent_slug}/{self.base_slug}'
 
+    @property
+    def slug_kwargs(self):
+        return {
+            'user_slug': self.base_slug
+        }
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = self.full_slug

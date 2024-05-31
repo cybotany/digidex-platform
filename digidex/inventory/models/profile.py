@@ -23,7 +23,7 @@ class UserProfile(models.Model):
         db_index=True,
         verbose_name="User Profile UUID"
     )
-    user = models.ForeignKey(
+    user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT,
         related_name="profile",
@@ -52,7 +52,7 @@ class UserProfile(models.Model):
     def add_category(self, name):
         Category = self.card_model
         category = Category.objects.create(
-            user=self,
+            user=self.user,
             name=name,
             defaults={'is_party': name == "Party"}
         )
@@ -60,7 +60,7 @@ class UserProfile(models.Model):
         return category
 
     def get_category(self, name):
-        return self.inventory_categories.prefetch_related('itemized_digits').get(name=name)
+        return self.user.inventory_categories.prefetch_related('itemized_digits').get(name=name)
 
     def remove_category(self, name):
         category = self.get_category(name)
@@ -70,7 +70,7 @@ class UserProfile(models.Model):
         return category
 
     def list_categories(self):
-        return self.inventory_categories.prefetch_related('itemized_digits')
+        return self.user.inventory_categories.prefetch_related('itemized_digits')
 
     def get_panel_details(self):
         return {
