@@ -1,6 +1,6 @@
 from django import forms
 
-from journal.models import Entry
+from inventory.models.journal import Entry
 
 
 class JournalEntryForm(forms.ModelForm):

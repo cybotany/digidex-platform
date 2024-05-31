@@ -1,8 +1,7 @@
 from django import forms
 
 from base.forms import AssetDeletionCheckbox
-from digitization.models import DigitalObject
-from inventory.models import Category
+from inventory.models import DigitalObject, Category
 
 
 class InventoryDigitForm(forms.ModelForm):

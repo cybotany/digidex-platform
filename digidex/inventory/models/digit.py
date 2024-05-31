@@ -9,6 +9,53 @@ from wagtail.admin.panels import FieldPanel
 
 from base.utils.storage import PublicMediaStorage
 
+class DigitalObject(models.Model):
+    uuid = models.UUIDField(
+        default=uuid.uuid4,
+        unique=True,
+        editable=False,
+        db_index=True,
+        verbose_name="Digitized Object UUID"
+    )
+    slug = models.SlugField(
+        max_length=255,
+        unique=True,
+        editable=False,
+        db_index=True,
+        verbose_name="Digitized Object Slug"
+    )
+    name = models.CharField(
+        max_length=100,
+        null=True,
+        blank=False,
+        help_text="Digitized Object Name."
+    )
+    description = models.TextField(
+        blank=True,
+        null=True,
+        help_text="Digitized Object Description."
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+    last_modified = models.DateTimeField(
+        auto_now=True
+    )
+
+    @property
+    def digit_name(self):
+        return self.name.title()
+
+    @property
+    def digit_description(self):
+        if self.description:
+            return self.description
+        return "No description available."
+
+
+    def __str__(self):
+        return f"{self.digit_name}"
+
 
 class InventoryDigit(models.Model):
     uuid = models.UUIDField(
@@ -132,7 +179,7 @@ class InventoryDigit(models.Model):
 
     @property
     def card_model(self):
-        from journal.models import Entry
+        from journal.journal import Entry
         return Entry
 
     @classmethod
