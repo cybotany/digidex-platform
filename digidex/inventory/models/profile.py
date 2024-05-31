@@ -1,6 +1,5 @@
 import uuid
 from django.db import models 
-from django.apps import apps
 from django.contrib import messages
 from django.urls import reverse
 from django.utils.text import slugify
@@ -31,7 +30,7 @@ class UserProfile(models.Model):
         verbose_name="User Profile Slug"
     )
     user = models.OneToOneField(
-        apps.get_model('accounts', 'User'),
+        'accounts.User',
         on_delete=models.PROTECT,
         related_name="profile"
     )
@@ -62,7 +61,7 @@ class UserProfile(models.Model):
         super().save(*args, **kwargs)
 
     def add_category(self, name):
-        Category = apps.get_model('inventory', 'Category')
+        from inventory.models.category import Category
         category = Category.objects.create(
             user=self,
             name=name,
@@ -173,7 +172,7 @@ class UserProfileIndexPage(Page):
     ]
 
     parent_page_types = ['home.HomePage']
-    subpage_types = ['accounts.UserProfilePage']
+    subpage_types = ['inventory.UserProfilePage']
 
 
 class UserProfilePage(Page):
@@ -197,7 +196,7 @@ class UserProfilePage(Page):
         context['category_cards'] = self.user.template_cards
         return context
     
-    parent_page_types = ['accounts.UserProfileIndexPage']
+    parent_page_types = ['inventory.UserProfileIndexPage']
 
     @classmethod
     def get_queryset(cls):

@@ -1,12 +1,10 @@
 import uuid
 from django.db import models
-from django.apps import apps
 from django.contrib import messages
 from django.conf import settings
 from django.utils.text import slugify
 from django.urls import reverse
-from django.core.exceptions import ObjectDoesNotExist
-
+\
 from wagtail.models import Page
 
 
@@ -103,7 +101,8 @@ class Category(models.Model):
         return self.itemized_digits.select_related('digit')
 
     def add_digit(self, digit):
-        itemized_digit, created = apps.get_models('inventory', 'InventoryDigit').objects.select_related('digit').get_or_create(
+        InventoryDigit = self._card_model
+        itemized_digit, created = InventoryDigit.objects.select_related('digit').get_or_create(
             category=self,
             digit=digit
         )
@@ -116,9 +115,10 @@ class Category(models.Model):
         return itemized_digit
 
     def get_digit(self, digit):
+        InventoryDigit = self._card_model
         try:
             return self.itemized_digits.select_related('digit').get(digit=digit)
-        except apps.get_models('inventory', 'InventoryDigit').DoesNotExist:
+        except InventoryDigit.DoesNotExist:
             return None
 
     def remove_digit(self, digit):
@@ -184,6 +184,11 @@ class Category(models.Model):
         return self.user.page if self.user else None
 
     @property
+    def _card_model(self):
+        from inventory.models import InventoryDigit
+        return InventoryDigit
+
+    @property
     def category_panel(self):
         return self.get_panel_details()
 
@@ -219,7 +224,7 @@ class InventoryCategoryPage(Page):
     )
 
     parent_page_types = [
-        'accounts.UserPage'
+        'inventory.UserProfilePage'
     ]
 
     @classmethod

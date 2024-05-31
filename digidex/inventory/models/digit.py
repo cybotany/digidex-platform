@@ -1,6 +1,5 @@
 import uuid
 from django.db import models
-from django.apps import apps
 from django.utils.text import slugify
 from django.urls import reverse
 
@@ -66,7 +65,8 @@ class InventoryDigit(models.Model):
         return digit_page
 
     def create_journal(self):
-        journal = apps.get_model('journal', 'EntryCollection').objects.create(
+        from journal.models import EntryCollection
+        journal = EntryCollection.objects.create(
             digit=self
         )
         return journal
@@ -90,6 +90,7 @@ class InventoryDigit(models.Model):
         }
 
     def delete(self, *args, **kwargs):
+        from django.apps import apps
         related_models = [
             ('journal', 'EntryCollection'),
             ('nfc', 'NearFieldCommunicationTag'),
