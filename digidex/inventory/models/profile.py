@@ -61,7 +61,7 @@ class UserProfile(models.Model):
         super().save(*args, **kwargs)
 
     def add_category(self, name):
-        from inventory.models.category import Category
+        Category = self._card_model
         category = Category.objects.create(
             user=self,
             name=name,
@@ -82,6 +82,24 @@ class UserProfile(models.Model):
 
     def list_categories(self):
         return self.inventory_categories.prefetch_related('itemized_digits')
+
+    def get_panel_details(self):
+        return {
+            'name': self._name,
+            'description': self._description,
+            'date': self._date,
+            'image_url': self._image_url,
+            'delete_url': self._delete_url,
+            'update_url': self._update_url
+        }
+
+    def get_card_details(self):
+        return {
+            'name': self._name,
+            'description': self._description,
+            'date': self._date,
+            'page_url': self._page_url
+        }
 
     @property
     def _name(self):
@@ -118,33 +136,10 @@ class UserProfile(models.Model):
     def _delete_url(self):
         return reverse('inventory:delete_profile', kwargs={'user_slug': self.slug})
 
-    def get_panel_details(self):
-        return {
-            'name': self._name,
-            'description': self._description,
-            'date': self._date,
-            'image_url': self._image_url,
-            'delete_url': self._delete_url,
-            'update_url': self._update_url
-        }
-
-    def get_list_details(self):
-        return {
-            'name': self._name,
-            'description': self._description,
-            'date': self._date,
-            'image_url': self._image_url,
-            'delete_url': self._delete_url,
-            'update_url': self._update_url
-        }
-
-    def get_card_details(self):
-        return {
-            'name': self._name,
-            'description': self._description,
-            'date': self._date,
-            'page_url': self._page_url
-        }
+    @property
+    def _card_model(self):
+        from inventory.models import Category
+        return Category
 
     def __str__(self):
         return f"{self._name}'s Profile"
@@ -190,17 +185,29 @@ class UserProfilePage(Page):
     def username(self):
         return self.owner.username.title()
 
+    @property
+    def page_panel(self):
+        return self.profile.get_panel_details()
+
+    @property
+    def page_cards(self):
+        card_list = []
+        categories = self.profile.list_categories()
+        for catagory in categories:
+            card_list.append(catagory.get_card_details())
+        return card_list
+
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context['profile_panel'] = self.user.template_panel
-        context['category_cards'] = self.user.template_cards
+        context['profile_panel'] = self.page_panel
+        context['category_cards'] = self.page_cards
         return context
     
     parent_page_types = ['inventory.UserProfileIndexPage']
 
     @classmethod
     def get_queryset(cls):
-        return super().get_queryset().select_related('owner')
+        return super().get_queryset().select_related('profile')
 
     class Meta:
         verbose_name = "User Page"
