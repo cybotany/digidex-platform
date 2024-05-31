@@ -111,12 +111,6 @@ class UserProfile(models.Model):
         return self.image.url if self.image else None
 
     @property
-    def slug_kwargs(self):
-        return {
-            'user_slug': self.user.slug,
-        }
-
-    @property
     def _page(self):
         if not hasattr(self, 'page'):
             from inventory.utils import get_or_create_user_profile_page
@@ -129,11 +123,11 @@ class UserProfile(models.Model):
 
     @property
     def update_url(self):
-        return reverse('inventory:update_profile', kwargs=self.slug_kwargs)
+        return reverse('inventory:update_profile', kwargs=self.user.slug_kwargs)
 
     @property
     def delete_url(self):
-        return reverse('inventory:delete_profile', kwargs=self.slug_kwargs)
+        return reverse('inventory:delete_profile', kwargs=self.user.slug_kwargs)
 
     @property
     def card_model(self):

@@ -2,6 +2,7 @@ import uuid
 from django.db import models
 from django.conf import settings
 from django.urls import reverse
+from django.utils.text import slugify
 
 from wagtail.models import Page
 
@@ -92,8 +93,20 @@ class DigitalObject(models.Model):
         return None
 
     @property
+    def parent_slug(self):
+        return self.category.full_slug
+
+    @property
+    def base_slug(self):
+        return slugify(self.name)
+
+    @property
+    def full_slug(self):
+        return f'{self.parent_slug}/{self.base_slug}'
+
+    @property
     def slug_kwargs(self):
-        return self.category.slug_kwargs.update({'digit_slug': self.slug})
+        return self.category.slug_kwargs.update({'digit_slug': self.base_slug})
 
     @property
     def _page(self):
@@ -105,11 +118,11 @@ class DigitalObject(models.Model):
 
     @property
     def update_url(self):
-        return reverse('inventory:update_digit', kwargs={'digit_slug': self.slug})
+        return reverse('inventory:update_digit', kwargs=self.slug_kwargs)
 
     @property
     def delete_url(self):
-        return reverse('inventory:delete_digit', kwargs={'digit_slug': self.slug})
+        return reverse('inventory:delete_digit', kwargs=self.slug_kwargs)
 
     @property
     def card_model(self):

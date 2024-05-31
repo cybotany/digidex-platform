@@ -52,11 +52,8 @@ class Category(models.Model):
     )
 
     def save(self, *args, **kwargs):
-        if not self.is_party:
-            self.slug = slugify(self.name)
-        else:
-            self.name = 'Party'
-            self.slug = 'party'
+        if not self.slug:
+            self.slug = self.full_slug
         super().save(*args, **kwargs)
 
     def add_digit(self, digit):
@@ -127,10 +124,12 @@ class Category(models.Model):
 
     @property
     def parent_slug(self):
-        return 'u'
+        return self.user.full_slug
 
     @property
     def base_slug(self):
+        if self.is_party:
+            return 'party'
         return slugify(self.name)
 
     @property
@@ -139,7 +138,7 @@ class Category(models.Model):
 
     @property
     def slug_kwargs(self):
-        return self.user.slug_kwargs.update({'category_slug': self.slug})
+        return self.user.slug_kwargs.update({'category_slug': self.base_slug})
 
     @property
     def _page(self):
