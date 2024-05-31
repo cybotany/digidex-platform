@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from django.conf import settings  
 from django.contrib import messages
 from django.utils.text import slugify
 from django.urls import reverse
@@ -35,7 +36,7 @@ class Category(models.Model):
         help_text="Inventory Category description."
     )
     user = models.ForeignKey(
-        'accounts.User',
+        settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT,
         related_name="inventory_categories",
     )
@@ -168,7 +169,7 @@ class Category(models.Model):
         return f"{self.display_name}'s Inventory Category"
 
     class Meta:
-        unique_together = ('profile', 'name')
+        unique_together = ('user', 'name')
 
 
 class CategoryPage(Page):

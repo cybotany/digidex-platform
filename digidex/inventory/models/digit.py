@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from django.conf import settings
 from django.urls import reverse
 
 from wagtail.models import Page
@@ -24,6 +25,11 @@ class DigitalObject(models.Model):
         'inventory.Category',
         on_delete=models.CASCADE,
         related_name='itemized_digits'
+    )
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.PROTECT,
+        related_name="itemized_digits",
     )
     name = models.CharField(
         max_length=100,

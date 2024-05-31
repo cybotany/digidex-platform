@@ -1,5 +1,6 @@
 import uuid
 from django.db import models 
+from django.conf import settings
 from django.contrib import messages
 from django.urls import reverse
 
@@ -22,10 +23,10 @@ class UserProfile(models.Model):
         db_index=True,
         verbose_name="User Profile UUID"
     )
-    user = models.OneToOneField(
-        'accounts.User',
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT,
-        related_name="profile"
+        related_name="profile",
     )
     image = models.ImageField(
         storage=PublicMediaStorage(),

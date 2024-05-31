@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from django.conf import settings
 from django.contrib import messages
 from django.urls import reverse
 
@@ -102,6 +103,11 @@ class Entry(models.Model):
         EntryCollection,
         on_delete=models.CASCADE,
         related_name="entries"
+    )
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.PROTECT,
+        related_name="journal_entries",
     )
     image = models.ImageField(
         storage=PublicMediaStorage(),
