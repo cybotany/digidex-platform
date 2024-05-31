@@ -29,11 +29,11 @@ class EntryCollection(models.Model):
         auto_now=True
     )
 
-    def list_entries(self):
-        return self.entries.select_related('journal')
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
 
     def add_entry(self, digit):
-        journal_entry, created = Entry.objects.select_related('journal').create(
+        journal_entry = Entry.objects.select_related('journal').create(
             journal=self,
             digit=digit
         )
@@ -55,6 +55,10 @@ class EntryCollection(models.Model):
             messages.info(message)
         return None
 
+
+    def list_entries(self):
+        return self.entries.select_related('journal')
+
     def get_panel_details(self):
         return {
             'name': self._name,
@@ -75,6 +79,9 @@ class EntryCollection(models.Model):
 
     def __str__(self):
         return f"Journal Entry Collection: {self.uuid}"
+
+    class Meta:
+        verbose_name = "Journal Entry Collection"
 
     @classmethod
     def get_queryset(cls):

@@ -43,7 +43,7 @@ def get_or_create_user_profile_page(user_profile):
             title=f"{user_profile._name}'s Profile",
             slug=user_profile.slug,
             owner=user_profile.user,
-            profile=user_profile,
+            user_profile=user_profile,
         )
         user_index_page = get_or_create_user_profile_index_page()
         user_index_page.add_child(instance=user_profile_page)
@@ -62,13 +62,45 @@ def get_or_create_inventory_category_page(category):
         category_page = InventoryCategoryPage(
             title=category.name,
             slug=category.slug,
-            owner=category.profile.user,
+            owner=category.user_profile.user,
             category=category
         )
 
-        parent_page = get_or_create_user_profile_page(category.profile)
+        parent_page = get_or_create_user_profile_page(category.user_profile)
         parent_page.add_child(instance=category_page)
         category_page.save_revision().publish()
     else:
         category_page = InventoryCategoryPage.objects.get(category=category)
     return category_page
+
+
+def get_or_create_inventory_digit_page(digit):
+    """
+    Create a user page for the given user.
+    """
+    InventoryDigitPage = apps.get_model('inventory', 'InventoryDigitPage')
+    if not InventoryDigitPage.objects.filter(digit=digit).exists():
+        digit_page = InventoryDigitPage(
+            title=digit.name,
+            slug=digit.slug,
+            owner=digit.user_profile.user,
+            digit=digit
+        )
+
+        parent_page = get_or_create_inventory_category_page(digit.category)
+        parent_page.add_child(instance=digit_page)
+        digit_page.save_revision().publish()
+    else:
+        digit_page = InventoryDigitPage.objects.get(digit=digit)
+    return digit_page
+
+
+def get_or_create_inventory_digit_journal(digit):
+    """
+    Create a journal for the given digit.
+    """
+    from journal.models import EntryCollection
+    journal = EntryCollection.objects.create(
+        digit=digit
+    )
+    return journal

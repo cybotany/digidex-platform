@@ -33,43 +33,9 @@ class InventoryDigit(models.Model):
     )
 
     def save(self, *args, **kwargs):
-        self.slug = self.create_unique_slug()
+        if not self.slug:
+            self.slug = slugify(self.digit.name)
         super().save(*args, **kwargs)
-
-    def create_unique_slug(self):
-        base_slug = slugify(self.name) if self.name else 'digit'
-        slug = base_slug
-        counter = 1
-
-        parent_page = self._parent_page
-        if parent_page:
-            while InventoryDigitPage.objects.filter(slug=slug, path__startswith=parent_page.path).exists():
-                slug = f"{base_slug}-{counter}"
-                counter += 1
-        return slug
-
-    def create_page(self):
-        slug = self.create_unique_slug()
-        digit_page = InventoryDigitPage(
-            title=self.name,
-            slug=slug,
-            owner=self.user,
-            heading=self.name,
-            intro=self.description,
-            digit=self,
-        )
-        parent_page = self._parent_page
-        if parent_page:
-            parent_page.add_child(instance=digit_page)
-            digit_page.save_revision().publish()
-        return digit_page
-
-    def create_journal(self):
-        from journal.models import EntryCollection
-        journal = EntryCollection.objects.create(
-            digit=self
-        )
-        return journal
 
     def get_panel_details(self):
         return {
@@ -127,6 +93,13 @@ class InventoryDigit(models.Model):
     @property
     def _image_url(self):
         return None
+
+    @property
+    def slug_kwargs(self):
+        return {
+            'profile_slug': self.user_profile.slug,
+            'category_slug': self.category.slug
+        }
 
     @property
     def _page(self):

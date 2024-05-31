@@ -92,37 +92,44 @@ class Category(models.Model):
 
     def get_panel_details(self):
         return {
-            'name': self._name,
-            'description': self._description,
-            'date': self._date,
-            'image_url': self._image_url,
-            'delete_url': self._delete_url,
-            'update_url': self._update_url
+            'name': self.display_name,
+            'description': self.display_description,
+            'date': self.display_date,
+            'image_url': self.image_url,
+            'delete_url': self.delete_url,
+            'update_url': self.update_url
         }
 
     def get_card_details(self):
         return {
-            'name': self._name,
-            'description': self._description,
-            'date': self._date,
-            'page_url': self._page_url
+            'name': self.display_name,
+            'description': self.display_description,
+            'date': self.display_date,
+            'page_url': self.page_url
         }
 
     @property
-    def _name(self):
+    def display_name(self):
         return self.name.title()
 
     @property
-    def _description(self):
+    def display_description(self):
         return self.description or 'No description available.'
 
     @property
-    def _date(self):
+    def display_date(self):
         return self.created_at.strftime('%b %d, %Y')
 
     @property
-    def _image_url(self):
+    def image_url(self):
         return None
+
+    @property
+    def slug_kwargs(self):
+        return {
+            'profile_slug': self.user_profile.slug,
+            'category_slug': self.slug
+        }
 
     @property
     def _page(self):
@@ -132,24 +139,24 @@ class Category(models.Model):
         return self.page
 
     @property
-    def _page_url(self):
-        return self._page.url
+    def page_url(self):
+        return self.page.url
 
     @property
-    def _update_url(self):
-        return reverse('inventory:update_category', kwargs={'category_slug': self.slug})
+    def update_url(self):
+        return reverse('inventory:update_category', kwargs=self.slug_kwargs)
 
     @property
-    def _delete_url(self):
-        return reverse('inventory:delete_category', kwargs={'category_slug': self.slug})
+    def delete_url(self):
+        return reverse('inventory:delete_category', kwargs=self.slug_kwargs)
 
     @property
-    def _card_model(self):
+    def card_model(self):
         from inventory.models import InventoryDigit
         return InventoryDigit
 
     def __str__(self):
-        return self.name
+        return f"{self.display_name}'s Inventory Category"
 
     class Meta:
         unique_together = ('user_profile', 'name')
@@ -187,12 +194,15 @@ class InventoryCategoryPage(Page):
             card_list.append(digit.get_card_details())
         return card_list
 
-    @classmethod
-    def get_queryset(cls):
-        return super().get_queryset().select_related('category')
-
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         context['category_panel'] = self.page_panel
         context['digit_cards'] = self.page_cards
         return context
+
+    @classmethod
+    def get_queryset(cls):
+        return super().get_queryset().select_related('category')
+
+    class Meta:
+        verbose_name = "Inventory Category Page"

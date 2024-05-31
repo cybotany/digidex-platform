@@ -1,6 +1,5 @@
 import uuid
 from django.db import models
-from django.conf import settings
 
 
 class DigitalObject(models.Model):
@@ -21,11 +20,6 @@ class DigitalObject(models.Model):
         blank=True,
         null=True,
         help_text="Digitized object description."
-    )
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.PROTECT,
-        related_name="digits",
     )
     created_at = models.DateTimeField(
         auto_now_add=True

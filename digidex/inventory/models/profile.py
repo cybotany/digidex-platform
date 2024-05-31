@@ -61,7 +61,7 @@ class UserProfile(models.Model):
         super().save(*args, **kwargs)
 
     def add_category(self, name):
-        Category = self._card_model
+        Category = self.card_model
         category = Category.objects.create(
             user=self,
             name=name,
@@ -85,37 +85,43 @@ class UserProfile(models.Model):
 
     def get_panel_details(self):
         return {
-            'name': self._name,
-            'description': self._description,
-            'date': self._date,
-            'image_url': self._image_url,
-            'delete_url': self._delete_url,
-            'update_url': self._update_url
+            'name': self.display_name,
+            'description': self.display_description,
+            'date': self.display_date,
+            'image_url': self.image_url,
+            'delete_url': self.delete_url,
+            'update_url': self.update_url
         }
 
     def get_card_details(self):
         return {
-            'name': self._name,
-            'description': self._description,
-            'date': self._date,
-            'page_url': self._page_url
+            'name': self.display_name,
+            'description': self.display_description,
+            'date': self.display_date,
+            'page_url': self.page_url
         }
 
     @property
-    def _name(self):
+    def display_name(self):
         return self.user.username.title()
 
     @property
-    def _description(self):
+    def display_description(self):
         return self.bio or 'No description available.'
 
     @property
-    def _date(self):
+    def display_date(self):
         return self.created_at.strftime('%b %d, %Y')
 
     @property
-    def _image_url(self):
+    def image_url(self):
         return self.image.url if self.image else None
+
+    @property
+    def slug_kwargs(self):
+        return {
+            'profile_slug': self.slug,
+        }
 
     @property
     def _page(self):
@@ -125,24 +131,24 @@ class UserProfile(models.Model):
         return self.page
 
     @property
-    def _page_url(self):
+    def page_url(self):
         return self._page.url
 
     @property
-    def _update_url(self):
-        return reverse('inventory:update_profile', kwargs={'user_slug': self.slug})
+    def update_url(self):
+        return reverse('inventory:update_profile', kwargs=self.slug_kwargs)
 
     @property
-    def _delete_url(self):
-        return reverse('inventory:delete_profile', kwargs={'user_slug': self.slug})
+    def delete_url(self):
+        return reverse('inventory:delete_profile', kwargs=self.slug_kwargs)
 
     @property
-    def _card_model(self):
+    def card_model(self):
         from inventory.models import Category
         return Category
 
     def __str__(self):
-        return f"{self._name}'s Profile"
+        return f"{self.display_name}'s Profile"
 
     class Meta:
         verbose_name = "User Profile"
@@ -166,8 +172,13 @@ class UserProfileIndexPage(Page):
         FieldPanel('intro'),
     ]
 
-    parent_page_types = ['home.HomePage']
-    subpage_types = ['inventory.UserProfilePage']
+    parent_page_types = [
+        'home.HomePage'
+    ]
+
+    subpage_types = [
+        'inventory.UserProfilePage'
+    ]
 
 
 class UserProfilePage(Page):
@@ -177,13 +188,9 @@ class UserProfilePage(Page):
         related_name="page"
     )
 
-    @property
-    def user(self):
-        return self.owner
-
-    @property
-    def username(self):
-        return self.owner.username.title()
+    parent_page_types = [
+        'inventory.UserProfileIndexPage'
+    ]
 
     @property
     def page_panel(self):
@@ -202,12 +209,10 @@ class UserProfilePage(Page):
         context['profile_panel'] = self.page_panel
         context['category_cards'] = self.page_cards
         return context
-    
-    parent_page_types = ['inventory.UserProfileIndexPage']
 
     @classmethod
     def get_queryset(cls):
         return super().get_queryset().select_related('profile')
 
     class Meta:
-        verbose_name = "User Page"
+        verbose_name = "User Profile Page"
