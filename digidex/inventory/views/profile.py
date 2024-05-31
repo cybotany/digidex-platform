@@ -30,7 +30,7 @@ def update_profile_view(request, user_slug):
     else:
         form = UserProfileForm(instance=user_profile)
     
-    return render(request, 'accounts/profile/update.html', {'form': form})
+    return render(request, 'inventory/profile/update.html', {'form': form, 'url': user_profile.update_url})
 
 
 @login_required
@@ -51,5 +51,5 @@ def delete_profile_view(request, user_slug):
     else:
         form = DeleteUserForm()
     
-    return render(request, 'accounts/profile/delete.html', {'form': form})
+    return render(request, 'inventory/profile/delete.html', {'form': form, 'url': page_owner.profile.update_url})
     

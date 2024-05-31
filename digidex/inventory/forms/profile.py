@@ -5,7 +5,7 @@ from inventory.models import UserProfile
 
 
 class UserProfileForm(forms.ModelForm):
-    avatar = forms.ImageField(
+    image = forms.ImageField(
         label='Upload Avatar',
         widget=forms.FileInput(
             attrs={
@@ -26,7 +26,7 @@ class UserProfileForm(forms.ModelForm):
 
     class Meta:
         model = UserProfile
-        fields = ('bio', 'avatar',)
+        fields = ('bio', 'image',)
 
 
 class DeleteUserForm(AssetDeletionCheckbox):

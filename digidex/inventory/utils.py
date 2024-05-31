@@ -40,10 +40,10 @@ def get_or_create_user_profile_page(user_profile):
     UserProfilePage = apps.get_model('inventory', 'UserProfilePage')
     if not UserProfilePage.objects.filter(profile=user_profile).exists():
         user_profile_page = UserProfilePage(
-            title=f"{user_profile._name}'s Profile",
-            slug=user_profile.slug,
+            title=f"{user_profile.display_name}'s Profile",
+            slug=user_profile.user.slug,
             owner=user_profile.user,
-            user_profile=user_profile,
+            profile=user_profile,
         )
         user_index_page = get_or_create_user_profile_index_page()
         user_index_page.add_child(instance=user_profile_page)

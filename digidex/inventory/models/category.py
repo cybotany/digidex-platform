@@ -34,8 +34,8 @@ class Category(models.Model):
         null=True,
         help_text="Inventory Category description."
     )
-    user = models.ForeignKey(
-        'accounts.User',
+    profile = models.ForeignKey(
+        'inventory.UserProfile',
         on_delete=models.PROTECT,
         related_name="inventory_categories",
     )
@@ -158,8 +158,8 @@ class Category(models.Model):
     def __str__(self):
         return f"{self.display_name}'s Inventory Category"
 
-    class Meta:
-        unique_together = ('user', 'name')
+    #class Meta:
+    #    unique_together = ('user_profile', 'name')
 
 
 class InventoryCategoryPage(Page):

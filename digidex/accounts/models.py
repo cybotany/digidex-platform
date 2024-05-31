@@ -19,6 +19,12 @@ class User(AbstractUser):
         verbose_name="User Slug"
     )
 
+    @property
+    def page(self):
+        if hasattr(self, 'profile'):
+            return self.profile.page
+        return None
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.username)

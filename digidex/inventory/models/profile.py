@@ -90,8 +90,12 @@ class UserProfile(models.Model):
         }
 
     @property
+    def username(self):
+        return self.user.username
+
+    @property
     def display_name(self):
-        return self.user.username.title()
+        return self.username.title()
 
     @property
     def display_description(self):
