@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib import messages
 from django.utils.text import slugify
 from django.urls import reverse
-\
+
 from wagtail.models import Page
 
 
@@ -59,8 +59,8 @@ class Category(models.Model):
         super().save(*args, **kwargs)
 
     def add_digit(self, digit):
-        InventoryDigit = self.card_model
-        itemized_digit, created = InventoryDigit.objects.select_related('digit').get_or_create(
+        DigitalObject = self.card_model
+        itemized_digit, created = DigitalObject.objects.select_related('digit').get_or_create(
             category=self,
             digit=digit
         )
@@ -73,10 +73,10 @@ class Category(models.Model):
         return itemized_digit
 
     def get_digit(self, digit):
-        InventoryDigit = self.card_model
+        DigitalObject = self.card_model
         try:
             return self.itemized_digits.select_related('digit').get(digit=digit)
-        except InventoryDigit.DoesNotExist:
+        except DigitalObject.DoesNotExist:
             return None
 
     def remove_digit(self, digit):
@@ -126,10 +126,7 @@ class Category(models.Model):
 
     @property
     def slug_kwargs(self):
-        return {
-            'user_slug': self.user.slug,
-            'category_slug': self.slug
-        }
+        return self.profile.slug_kwargs.update({'category_slug': self.slug})
 
     @property
     def _page(self):
@@ -152,17 +149,17 @@ class Category(models.Model):
 
     @property
     def card_model(self):
-        from inventory.models import InventoryDigit
-        return InventoryDigit
+        from inventory.models import DigitalObject
+        return DigitalObject
 
     def __str__(self):
         return f"{self.display_name}'s Inventory Category"
 
-    #class Meta:
-    #    unique_together = ('user_profile', 'name')
+    class Meta:
+        unique_together = ('profile', 'name')
 
 
-class InventoryCategoryPage(Page):
+class CategoryPage(Page):
     heading = models.CharField(
         max_length=255,
         null=True,

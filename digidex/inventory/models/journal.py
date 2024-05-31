@@ -1,6 +1,7 @@
 import uuid
 from django.db import models
 from django.contrib import messages
+from django.urls import reverse
 
 from base.utils.storage import PublicMediaStorage
 
@@ -17,8 +18,8 @@ class EntryCollection(models.Model):
         db_index=True,
         verbose_name="Journal Entry Collection UUID"
     )
-    digit = models.OneToOneField(
-        'inventory.InventoryDigit',
+    digital_object = models.OneToOneField(
+        'inventory.DigitalObject',
         on_delete=models.PROTECT,
         related_name='journal'
     )
@@ -28,33 +29,6 @@ class EntryCollection(models.Model):
     last_modified = models.DateTimeField(
         auto_now=True
     )
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-
-    def add_entry(self, digit):
-        journal_entry = Entry.objects.select_related('journal').create(
-            journal=self,
-            digit=digit
-        )
-        message = f"New entry created for '{digit.name}'!"
-        messages.info(message)
-        return journal_entry
-
-    def get_entry(self, entry_number):
-        try:
-            return self.entries.select_related('journal').get(entry_number=entry_number)
-        except Entry.DoesNotExist:
-            return None
-
-    def remove_entry(self, entry_number):
-        entry = self.get_entry(entry_number)
-        if entry:
-            entry.delete()
-            message = f"Entry '{entry_number}' was removed."
-            messages.info(message)
-        return None
-
 
     def list_entries(self):
         return self.entries.select_related('journal')
@@ -77,6 +51,41 @@ class EntryCollection(models.Model):
             'pageurl': self._page_url # self.page.url if self.page else '#',
         }
 
+    @property
+    def display_name(self):
+        return self.digital_object.display_name
+
+    @property
+    def display_description(self):
+        return self.digital_object.display_description
+
+    @property
+    def display_date(self):
+        return self.digital_object.display_date
+
+    @property
+    def image_url(self):
+        return None
+
+    @property
+    def _page(self):
+        if not hasattr(self, 'page'):
+            from inventory.utils import get_or_create_inventory_journal_page
+            get_or_create_inventory_journal_page(self)
+        return self.page
+
+    @property
+    def page_url(self):
+        return self.page.url
+
+    @property
+    def update_url(self):
+        return reverse('inventory:update_journal', kwargs=self.slug_kwargs)
+
+    @property
+    def delete_url(self):
+        return reverse('inventory:delete_journal', kwargs=self.slug_kwargs)
+
     def __str__(self):
         return f"Journal Entry Collection: {self.uuid}"
 
@@ -85,7 +94,7 @@ class EntryCollection(models.Model):
 
     @classmethod
     def get_queryset(cls):
-        return super().get_queryset().select_related('digit').prefetch_related('entries')
+        return super().get_queryset().select_related('digital_object').prefetch_related('entries')
 
 
 class Entry(models.Model):
@@ -121,6 +130,43 @@ class Entry(models.Model):
     last_modified = models.DateTimeField(
         auto_now=True
     )
+
+    def get_panel_details(self):
+        return {
+            'name': self._name,
+            'description': self._description,
+            'date': self._date,
+            'image_url': self._image_url,
+            'delete_url': self._delete_url,
+            'update_url': self._update_url
+        }
+
+    def get_card_details(self):
+        return {
+            'name': self._name,
+            'description': self._description,
+            'last_modified': self._date,
+            'pageurl': self._page_url # self.page.url if self.page else '#',
+        }
+
+    @property
+    def _page(self):
+        if not hasattr(self, 'page'):
+            from inventory.utils import get_or_create_inventory_category_page
+            get_or_create_inventory_category_page(self)
+        return self.page
+
+    @property
+    def page_url(self):
+        return self.page.url
+
+    @property
+    def update_url(self):
+        return reverse('inventory:update_journal', kwargs=self.slug_kwargs)
+
+    @property
+    def delete_url(self):
+        return reverse('inventory:delete_category', kwargs=self.slug_kwargs)
 
     @classmethod
     def get_queryset(cls):

@@ -41,8 +41,8 @@ class NearFieldCommunicationTag(models.Model):
         choices=NTAG_TYPES,
         default='NTAG 213'
     )
-    digit = models.OneToOneField(
-        'inventory.InventoryDigit',
+    digital_object = models.OneToOneField(
+        'inventory.DigitalObject',
         on_delete=models.CASCADE,
         blank=True,
         null=True,
@@ -61,16 +61,6 @@ class NearFieldCommunicationTag(models.Model):
     def __str__(self):
         """Return the serial number as the string representation of the NFC tag."""
         return self.serial_number
-
-    @property
-    def user_profile(self):
-        if self.digit:
-            return self.digit.user_profile
-        return None
-
-    @property
-    def username(self):
-        return self.user.username
 
     def activate_link(self):
         """
@@ -113,8 +103,8 @@ class NearFieldCommunicationTag(models.Model):
         Returns:
             A URL path as a string.
         """
-        if hasattr(self, 'digit'):
-            return self.digit.page
+        if hasattr(self, 'digital_object'):
+            return self.digital_object.page
         return None
 
     class Meta:
@@ -123,4 +113,4 @@ class NearFieldCommunicationTag(models.Model):
 
     @classmethod
     def get_queryset(cls):
-        return super().get_queryset().select_related('digit')
+        return super().get_queryset().select_related('digital_object')
