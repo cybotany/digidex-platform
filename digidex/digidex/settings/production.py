@@ -1,5 +1,4 @@
 import os
-from datetime import datetime
 
 from .base import *
 
@@ -17,11 +16,11 @@ LOGGING = {
     'formatters': {
         'verbose': {
             'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
-            'style': '{',
+            'style': "{",
         },
         'simple': {
             'format': '{levelname} {message}',
-            'style': '{',
+            'style': "{",
         },
     },
     'filters': {
@@ -33,11 +32,13 @@ LOGGING = {
         'file': {
             'level': 'WARNING',
             'class': 'logging.handlers.TimedRotatingFileHandler',
-            'filename': os.path.join(LOG_DIR, f'digidex_{datetime.now().strftime("%Y-%m-%d")}.log'),
+            'filename': os.path.join(LOG_DIR, 'digidex.log'),
             'when': 'midnight',
             'interval': 1,
             'backupCount': 30,
             'formatter': 'verbose',
+            'encoding': 'utf-8',
+            'suffix': '%Y-%m-%d',
         },
         'console': {
             'class': 'logging.StreamHandler',
