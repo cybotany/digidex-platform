@@ -39,10 +39,7 @@ LOGGING = {
             'filename': LOG_PATH,
             'when': 'midnight',
             'interval': 1,
-            'backupCount': 30,
             'formatter': 'verbose',
-            'encoding': 'utf-8',
-            'suffix': '%Y-%m-%d',
         },
         'console': {
             'class': 'logging.StreamHandler',
@@ -68,16 +65,6 @@ LOGGING = {
         },
     },
 }
-
-import logging
-logger = logging.getLogger(__name__)
-try:
-    if not os.access(LOG_DIR, os.W_OK):
-        logger.error(f"Log directory {LOG_DIR} is not writable.")
-    if not os.access(LOG_PATH, os.W_OK):
-        logger.error(f"Log file {LOG_PATH} is not writable.")
-except Exception as e:
-    logger.error(f"Error accessing log directory or file: {e}")
 
 
 if "EMAIL_HOST" in os.environ:
