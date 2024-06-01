@@ -9,13 +9,10 @@ ALLOWED_HOSTS = ['digidex.app', 'www.digidex.app']
 LOG_DIR = os.path.join(BASE_DIR, 'logs')
 if not os.path.exists(LOG_DIR):
     os.makedirs(LOG_DIR)
-os.chmod(LOG_DIR, 0o755)
 
 LOG_PATH = os.path.join(LOG_DIR, 'digidex.log')
 if not os.path.exists(LOG_PATH):
     open(LOG_PATH, 'a').close()
-os.chmod(LOG_PATH, 0o644)
-
 
 LOGGING = {
     'version': 1,
