@@ -1,13 +1,4 @@
-{% extends "base/utility.html" %}
-{% load i18n %}
-
-{% block title %}
-  {% trans "Create Digit" %}
-{% endblock title %}
-
-{% block content %}
-  <h3 class="account-heading">Create Digit</h3>
-  <form method="post" class="form">
+<form method="post" class="form">
   {% csrf_token %}
     <!-- Render Category Field -->
     <label for="{{ form.category.id_for_label }}">Category:</label>
@@ -36,5 +27,4 @@
     <!-- Render Submit Button -->
     <input type="submit" value="Create" class="submit-button base-button"> 
     {{ form.non_field_errors }}
-  </form>            
-{% endblock %}
+</form>     

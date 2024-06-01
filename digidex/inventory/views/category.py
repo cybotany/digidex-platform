@@ -28,7 +28,8 @@ def add_category_view(request, user_slug):
 
 @login_required
 def update_category_view(request, user_slug, category_slug):
-    category = get_object_or_404(apps.get_model('Inventory', 'Category'), slug=category_slug)
+    fullslug = f"{user_slug}/{category_slug}"
+    category = get_object_or_404(apps.get_model('inventory', 'Category'), slug=fullslug)
     if request.method == 'POST':
         form = CategoryForm(request.POST, instance=category)
         if form.is_valid():
@@ -46,7 +47,8 @@ def delete_category_view(request, user_slug, category_slug):
     if request.method == 'POST':
         form = CategoryDeletionForm(request.POST)
         if form.is_valid():
-            category = get_object_or_404(apps.get_model('Inventory', 'Category'), slug=category_slug)
+            fullslug = f"{user_slug}/{category_slug}"
+            category = get_object_or_404(apps.get_model('inventory', 'Category'), slug=fullslug)
             _name = category.name
             category.delete()
             messages.success(request, f'Category {_name} successfully deleted')

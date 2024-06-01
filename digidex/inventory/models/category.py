@@ -86,7 +86,7 @@ class Category(models.Model):
         return itemized_digit
 
     def list_digits(self):
-        return self.itemized_digits.select_related('digit')
+        return self.itemized_digits.select_related('category')
 
     def get_panel_details(self):
         return {
@@ -138,7 +138,9 @@ class Category(models.Model):
 
     @property
     def slug_kwargs(self):
-        return self.user.slug_kwargs.update({'category_slug': self.base_slug})
+        base_kwargs = self.user.slug_kwargs
+        base_kwargs['category_slug'] = self.base_slug
+        return base_kwargs
 
     @property
     def _page(self):
@@ -165,7 +167,7 @@ class Category(models.Model):
         return DigitalObject
 
     def __str__(self):
-        return f"{self.display_name}'s Inventory Category"
+        return f"Inventory Category {self.display_name}"
 
     class Meta:
         unique_together = ('user', 'name')

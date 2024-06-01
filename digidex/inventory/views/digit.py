@@ -12,7 +12,7 @@ from inventory.forms import DigitalObjectForm, InventoryDigitDeletionForm
 User = get_user_model()
 
 @login_required
-def add_digit_view(request, user_slug):
+def add_digit_view(request, user_slug, ntag_uuid):
     user = request.user
     if request.method == 'POST':
         form = DigitalObjectForm(request.POST, user=user)
@@ -43,11 +43,11 @@ def add_digit_view(request, user_slug):
     else:
         form = DigitalObjectForm(user=user)
 
-    return render(request, "inventory/link_ntag.html", {'form': form})
+    return render(request, "inventory/digit/add.html", {'form': form})
 
 @login_required
 def update_digit_view(request, user_slug, category_slug, digit_slug):
-    digit = get_object_or_404(apps.get_model('Inventory', 'ItemizedDigit'), uuid=digit_uuid)
+    digit = get_object_or_404(apps.get_model('inventory', 'ItemizedDigit'), uuid=digit_uuid)
     if request.method == 'POST':
         form = DigitalObjectForm(request.POST, request.FILES, instance=digit)
         if form.is_valid():
@@ -65,7 +65,7 @@ def delete_digit_view(request, user_slug, category_slug, digit_slug):
     if request.method == 'POST':
         form = InventoryDigitDeletionForm(request.POST)
         if form.is_valid():
-            digit = get_object_or_404(apps.get_model('Inventory', 'ItemizedDigit'), uuid=digit_uuid)
+            digit = get_object_or_404(apps.get_model('inventory', 'ItemizedDigit'), uuid=digit_uuid)
             _name = digit.name
             digit.delete()
             messages.success(request, f'Digit {_name} successfully deleted')

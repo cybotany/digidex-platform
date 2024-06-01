@@ -106,7 +106,9 @@ class DigitalObject(models.Model):
 
     @property
     def slug_kwargs(self):
-        return self.category.slug_kwargs.update({'digit_slug': self.base_slug})
+        base_kwargs = self.user.slug_kwargs
+        base_kwargs['digit_slug'] = self.base_slug
+        return base_kwargs
 
     @property
     def _page(self):
