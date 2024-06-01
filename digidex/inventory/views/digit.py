@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 from django.shortcuts import render, redirect, get_object_or_404
+from django.utils.text import slugify
 
 from inventory.forms import DigitalObjectForm, InventoryDigitDeletionForm
 
@@ -16,10 +17,11 @@ def add_digit_view(request, ntag_uuid):
     if request.method == 'POST':
         form = DigitalObjectForm(request.POST, user=user)
         if form.is_valid():
-            category = form.cleaned_data['category']
-            digit = apps.get_model('digitization', 'DigitalObject').objects.create(
+            digit = apps.get_model('inventory', 'DigitalObject').objects.create(
                 name=form.cleaned_data['name'],
                 description=form.cleaned_data['description'],
+                category=form.cleaned_data['category'],
+                slug=slugify(form.cleaned_data['name']),
                 user=request.user
             )
             digit.save()
@@ -32,7 +34,7 @@ def add_digit_view(request, ntag_uuid):
             if digit_page:
                 NearFieldCommunicationTag = apps.get_model('nfc', 'NearFieldCommunicationTag')
                 ntag = get_object_or_404(NearFieldCommunicationTag, uuid=ntag_uuid)
-                ntag.digit = digit
+                ntag.digital_object = digit
                 ntag.save()
                 return redirect(digit_page.url)
             else:
@@ -45,7 +47,7 @@ def add_digit_view(request, ntag_uuid):
 @login_required
 def update_digit_view(request, user_slug, category_slug, digit_slug):
     fullslug = f"{user_slug}/{category_slug}/{digit_slug}"
-    digit = get_object_or_404(apps.get_model('inventory', 'ItemizedDigit'), slug=fullslug)
+    digit = get_object_or_404(apps.get_model('inventory', 'DigitalObject'), slug=fullslug)
     if request.method == 'POST':
         form = DigitalObjectForm(request.POST, request.FILES, instance=digit)
         if form.is_valid():
@@ -65,7 +67,7 @@ def delete_digit_view(request, user_slug, category_slug, digit_slug):
         form = InventoryDigitDeletionForm(request.POST)
         if form.is_valid():
             fullslug = f"{user_slug}/{category_slug}/{digit_slug}"
-            digit = get_object_or_404(apps.get_model('inventory', 'ItemizedDigit'), slug=fullslug)
+            digit = get_object_or_404(apps.get_model('inventory', 'DigitalObject'), slug=fullslug)
             _name = digit.name
             digit.delete()
             messages.success(request, f'Digit {_name} successfully deleted')

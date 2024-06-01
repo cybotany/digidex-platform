@@ -72,38 +72,3 @@ def get_or_create_inventory_category_page(category):
     else:
         category_page = CategoryPage.objects.get(category=category)
     return category_page
-
-
-def get_or_create_inventory_digit_page(digit):
-    """
-    Create a user page for the given user.
-    """
-    DigitalObjectPage = apps.get_model('inventory', 'DigitalObjectPage')
-    if not DigitalObjectPage.objects.filter(digit=digit).exists():
-        digit_page = DigitalObjectPage(
-            title=digit.name,
-            slug=digit.base_slug,
-            owner=digit.user_profile.user,
-            digit=digit
-        )
-
-        parent_page = get_or_create_inventory_category_page(digit.category)
-        parent_page.add_child(instance=digit_page)
-        digit_page.save_revision().publish()
-    else:
-        digit_page = DigitalObjectPage.objects.get(digit=digit)
-    return digit_page
-
-
-def get_or_create_inventory_digit_journal(digit):
-    """
-    Create a journal for the given digit.
-    """
-    EntryCollection = apps.get_model('journal', 'EntryCollection')
-    if not EntryCollection.objects.filter(digit=digit).exists():
-        journal = EntryCollection.objects.create(
-            digit=digit
-        )
-    else:
-        journal = EntryCollection.objects.get(digit=digit)
-    return journal

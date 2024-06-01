@@ -22,6 +22,6 @@ profile_urls = [
 
 app_name = 'inventory'
 urlpatterns = [
-    path('ntag/<uuid:ntag_uuid>/', views.add_digit_view, name='add_digit'),
+    path('link/<uuid:ntag_uuid>/', views.add_digit_view, name='add_digit'),
     path('<slug:user_slug>/', include(profile_urls)),
 ]

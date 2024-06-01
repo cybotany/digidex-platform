@@ -6,6 +6,8 @@ from django.utils.text import slugify
 
 from wagtail.models import Page
 
+from inventory.utils import get_or_create_inventory_category_page
+
 
 class DigitalObject(models.Model):
     uuid = models.UUIDField(
@@ -54,7 +56,23 @@ class DigitalObject(models.Model):
         if hasattr(self, 'journal'):
             return self.journal
         EntryCollection = self.card_model
-        return EntryCollection.objects.create(digit=self)
+        return EntryCollection.objects.create(digital_object=self)
+
+    def create_page(self):
+        if not DigitalObjectPage.objects.filter(digit=self).exists():
+            digit_page = DigitalObjectPage(
+                title=self.name,
+                slug=self.base_slug,
+                owner=self.user,
+                digit=self
+            )
+
+            parent_page = get_or_create_inventory_category_page(self.category)
+            parent_page.add_child(instance=digit_page)
+            digit_page.save_revision().publish()
+        else:
+            digit_page = DigitalObjectPage.objects.get(digit=self)
+        return digit_page
 
     def get_panel_details(self):
         return {
@@ -112,7 +130,9 @@ class DigitalObject(models.Model):
 
     @property
     def _page(self):
-        return self.page if hasattr(self, 'page') else None
+        if hasattr(self, 'page'):
+            return self.page
+        return get_or_create_inventory_digit_page(self)
 
     @property
     def page_url(self):
