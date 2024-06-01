@@ -16,11 +16,9 @@ LOGGING = {
     'formatters': {
         'verbose': {
             'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
-            'style': "{",
         },
         'simple': {
             'format': '{levelname} {message}',
-            'style': "{",
         },
     },
     'filters': {
@@ -64,6 +62,7 @@ LOGGING = {
         },
     },
 }
+
 
 if "EMAIL_HOST" in os.environ:
     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
