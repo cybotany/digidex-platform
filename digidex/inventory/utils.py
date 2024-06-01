@@ -41,7 +41,7 @@ def get_or_create_user_profile_page(user_profile):
     if not UserProfilePage.objects.filter(profile=user_profile).exists():
         user_profile_page = UserProfilePage(
             title=f"{user_profile.display_name}'s Profile",
-            slug=user_profile.user.slug,
+            slug=user_profile.user.base_slug,
             owner=user_profile.user,
             profile=user_profile,
         )
@@ -57,20 +57,20 @@ def get_or_create_inventory_category_page(category):
     """
     Create a user page for the given user.
     """
-    InventoryCategoryPage = apps.get_model('inventory', 'InventoryCategoryPage')    
-    if not InventoryCategoryPage.objects.filter(category=category).exists():
-        category_page = InventoryCategoryPage(
+    CategoryPage = apps.get_model('inventory', 'CategoryPage')    
+    if not CategoryPage.objects.filter(category=category).exists():
+        category_page = CategoryPage(
             title=category.name,
-            slug=category.slug,
-            owner=category.user_profile.user,
+            slug=category.base_slug,
+            owner=category.user,
             category=category
         )
 
-        parent_page = get_or_create_user_profile_page(category.user_profile)
+        parent_page = get_or_create_user_profile_page(category.user.profile)
         parent_page.add_child(instance=category_page)
         category_page.save_revision().publish()
     else:
-        category_page = InventoryCategoryPage.objects.get(category=category)
+        category_page = CategoryPage.objects.get(category=category)
     return category_page
 
 
@@ -78,11 +78,11 @@ def get_or_create_inventory_digit_page(digit):
     """
     Create a user page for the given user.
     """
-    InventoryDigitPage = apps.get_model('inventory', 'InventoryDigitPage')
-    if not InventoryDigitPage.objects.filter(digit=digit).exists():
-        digit_page = InventoryDigitPage(
+    DigitalObjectPage = apps.get_model('inventory', 'DigitalObjectPage')
+    if not DigitalObjectPage.objects.filter(digit=digit).exists():
+        digit_page = DigitalObjectPage(
             title=digit.name,
-            slug=digit.slug,
+            slug=digit.base_slug,
             owner=digit.user_profile.user,
             digit=digit
         )
@@ -91,7 +91,7 @@ def get_or_create_inventory_digit_page(digit):
         parent_page.add_child(instance=digit_page)
         digit_page.save_revision().publish()
     else:
-        digit_page = InventoryDigitPage.objects.get(digit=digit)
+        digit_page = DigitalObjectPage.objects.get(digit=digit)
     return digit_page
 
 

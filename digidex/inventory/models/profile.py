@@ -122,6 +122,10 @@ class UserProfile(models.Model):
         return self._page.url
 
     @property
+    def category_form(self):
+        return reverse('inventory:add_category', kwargs=self.user.slug_kwargs)
+
+    @property
     def update_url(self):
         return reverse('inventory:update_profile', kwargs=self.user.slug_kwargs)
 
@@ -194,7 +198,8 @@ class UserProfilePage(Page):
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         context['profile_panel'] = self.page_panel
-        context['category_cards'] = self.page_cards
+        context['form_url'] = self.profile.category_form
+        context['digit_cards'] = self.page_cards
         return context
 
     @classmethod

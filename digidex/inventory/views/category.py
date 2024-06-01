@@ -11,8 +11,24 @@ from inventory.forms import CategoryForm, CategoryDeletionForm
 User = get_user_model()
 
 @login_required
+def add_category_view(request, user_slug):
+    user = get_object_or_404(User, slug=user_slug)
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            category = form.save(commit=False)
+            category.user = user
+            category.save()
+            messages.success(request, f'{category.name} successfully added.')
+            return redirect(category._page.url)
+    else:
+        form = CategoryForm()
+    
+    return render(request, 'inventory/category/add.html', {'form': form})
+
+@login_required
 def update_category_view(request, user_slug, category_slug):
-    category = get_object_or_404(apps.get_model('Inventory', 'Category'), slug=category_uuid)
+    category = get_object_or_404(apps.get_model('Inventory', 'Category'), slug=category_slug)
     if request.method == 'POST':
         form = CategoryForm(request.POST, instance=category)
         if form.is_valid():
@@ -30,7 +46,7 @@ def delete_category_view(request, user_slug, category_slug):
     if request.method == 'POST':
         form = CategoryDeletionForm(request.POST)
         if form.is_valid():
-            category = get_object_or_404(apps.get_model('Inventory', 'Category'), uuid=category_uuid)
+            category = get_object_or_404(apps.get_model('Inventory', 'Category'), slug=category_slug)
             _name = category.name
             category.delete()
             messages.success(request, f'Category {_name} successfully deleted')

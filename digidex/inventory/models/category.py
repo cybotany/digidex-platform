@@ -149,7 +149,7 @@ class Category(models.Model):
 
     @property
     def page_url(self):
-        return self.page.url
+        return self._page.url
 
     @property
     def update_url(self):
