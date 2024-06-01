@@ -104,7 +104,7 @@ class DigitalObject(models.Model):
     
     @property
     def display_date(self):
-        return self.digit.created_at if self.digit else None
+        return self.created_at
 
     @property
     def image_url(self):
@@ -124,7 +124,7 @@ class DigitalObject(models.Model):
 
     @property
     def slug_kwargs(self):
-        base_kwargs = self.user.slug_kwargs
+        base_kwargs = self.category.slug_kwargs
         base_kwargs['digit_slug'] = self.base_slug
         return base_kwargs
 
@@ -132,7 +132,7 @@ class DigitalObject(models.Model):
     def _page(self):
         if hasattr(self, 'page'):
             return self.page
-        return get_or_create_inventory_digit_page(self)
+        return self.create_page()
 
     @property
     def page_url(self):
@@ -170,7 +170,7 @@ class DigitalObjectPage(Page):
     intro = models.TextField(
         blank=True
     )
-    digit = models.OneToOneField(
+    digital_object = models.OneToOneField(
         'inventory.DigitalObject',
         on_delete=models.PROTECT,
         related_name='page'
@@ -193,16 +193,16 @@ class DigitalObjectPage(Page):
 
     @property
     def page_panel(self):
-        return self.digit.get_panel_details()
+        return self.digital_object.get_panel_details()
 
     @property
     def page_cards(self):
         card_list = []
-        entries = self.journal.list_entries()
+        entries = self.digital_object.journal.list_entries()
         for entry in entries:
             card_list.append(entry.get_card_details())
         return card_list
 
     @classmethod
     def get_queryset(cls):
-        return super().get_queryset().select_related('digit')
+        return super().get_queryset().select_related('journal')
