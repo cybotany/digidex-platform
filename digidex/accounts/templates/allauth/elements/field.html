@@ -1,7 +1,23 @@
 {% load allauth %}
 
-<label for="{{ attrs.id }}">{% slot label %}{% endslot %}</label>
-{% if attrs.type == "textarea" %}
+{% if attrs.type == "checkbox" or attrs.type == "radio" %}
+    <input {% if attrs.required %}required{% endif %}
+          name="{{ attrs.name }}"
+          class="form-check-input"
+          id="{{ attrs.id }}"
+          value="{{ attrs.value|default_if_none:"" }}"
+          {% if attrs.disabled %}disabled{% endif %}
+          {% if attrs.checked %}checked{% endif %}
+          type="{{ attrs.type }}">
+    <label class="form-check-label" for="{{ attrs.id }}">
+      {% slot label %}
+      {% endslot %}
+    </label>
+{% elif attrs.type == "textarea" %}
+  <label class="form-check-label" for="{{ attrs.id }}">
+    {% slot label %}
+    {% endslot %}
+  </label>
   <textarea class="textarea base-input"
     {% if attrs.required %}required{% endif %}
     {% if attrs.rows %}rows="{{ attrs.rows }}"{% endif %}
@@ -11,7 +27,17 @@
     {% if attrs.name %}name="{{ attrs.name }}"{% endif %}
     {% if attrs.id %}id="{{ attrs.id }}"{% endif %}
     {% if attrs.placeholder %}placeholder="{{ attrs.placeholder }}"{% endif %}>{% slot value %}{% endslot %}</textarea>
+{% elif attrs.type == "hidden" %}
+  <input {% if attrs.required %}required{% endif %}
+    name="{{ attrs.name }}"
+    id="{{ attrs.id }}"
+    value="{{ attrs.value|default_if_none:"" }}"
+    type="hidden">
 {% else %}
+  <label class="" for="{{ attrs.id }}">
+    {% slot label %}
+    {% endslot %}
+  </label>
   <input class="text-field base-input"
     {% if attrs.required %}required{% endif %}
     {% if attrs.disabled %}disabled{% endif %}

@@ -37,7 +37,7 @@ class Category(models.Model):
     )
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
         related_name="inventory_categories",
     )
     is_party = models.BooleanField(
@@ -55,6 +55,11 @@ class Category(models.Model):
         if not self.slug:
             self.slug = self.full_slug
         super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        if hasattr(self, 'page'):
+            self.page.delete()
+        super().delete(*args, **kwargs)
 
     def add_digit(self, digit):
         DigitalObject = self.card_model

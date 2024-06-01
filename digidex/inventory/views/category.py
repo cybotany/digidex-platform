@@ -44,6 +44,7 @@ def update_category_view(request, user_slug, category_slug):
 
 @login_required
 def delete_category_view(request, user_slug, category_slug):
+    user = get_object_or_404(User, slug=user_slug)
     if request.method == 'POST':
         form = CategoryDeletionForm(request.POST)
         if form.is_valid():
@@ -52,7 +53,7 @@ def delete_category_view(request, user_slug, category_slug):
             _name = category.name
             category.delete()
             messages.success(request, f'Category {_name} successfully deleted')
-            return redirect(reverse('home'))
+            return redirect(user.page.url)
     else:
         form = CategoryDeletionForm()
     

@@ -29,7 +29,7 @@ class DigitalObject(models.Model):
     )
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
         related_name="itemized_digits",
     )
     name = models.CharField(
@@ -160,6 +160,17 @@ class DigitalObjectPage(Page):
         'inventory.CategoryPage',
     ]
 
+    def delete(self, *args, **kwargs):
+        if hasattr(self, 'page'):
+            self.page.delete()
+        super().delete(*args, **kwargs)
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context['digit_panel'] = self.page_panel
+        context['journal_cards'] = self.page_cards
+        return context
+
     @property
     def page_panel(self):
         return self.digit.get_panel_details()
@@ -171,12 +182,6 @@ class DigitalObjectPage(Page):
         for entry in entries:
             card_list.append(entry.get_card_details())
         return card_list
-
-    def get_context(self, request, *args, **kwargs):
-        context = super().get_context(request, *args, **kwargs)
-        context['digit_panel'] = self.page_panel
-        context['journal_cards'] = self.page_cards
-        return context
 
     @classmethod
     def get_queryset(cls):

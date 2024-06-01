@@ -21,7 +21,7 @@ class EntryCollection(models.Model):
     )
     digital_object = models.OneToOneField(
         'inventory.DigitalObject',
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
         related_name='journal'
     )
     created_at = models.DateTimeField(

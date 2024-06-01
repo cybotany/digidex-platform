@@ -4,7 +4,6 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse
 
 from inventory.forms import DigitalObjectForm, InventoryDigitDeletionForm
 
@@ -45,12 +44,13 @@ def add_digit_view(request, ntag_uuid):
 
 @login_required
 def update_digit_view(request, user_slug, category_slug, digit_slug):
-    digit = get_object_or_404(apps.get_model('inventory', 'ItemizedDigit'), uuid=digit_uuid)
+    fullslug = f"{user_slug}/{category_slug}/{digit_slug}"
+    digit = get_object_or_404(apps.get_model('inventory', 'ItemizedDigit'), slug=fullslug)
     if request.method == 'POST':
         form = DigitalObjectForm(request.POST, request.FILES, instance=digit)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Profile successfully updated')
+            messages.success(request, 'Digital object successfully updated')
             return redirect(digit.page.url)
     else:
         form = DigitalObjectForm(instance=digit)
@@ -60,14 +60,16 @@ def update_digit_view(request, user_slug, category_slug, digit_slug):
 
 @login_required
 def delete_digit_view(request, user_slug, category_slug, digit_slug):
+    user = get_object_or_404(User, slug=user_slug)
     if request.method == 'POST':
         form = InventoryDigitDeletionForm(request.POST)
         if form.is_valid():
-            digit = get_object_or_404(apps.get_model('inventory', 'ItemizedDigit'), uuid=digit_uuid)
+            fullslug = f"{user_slug}/{category_slug}/{digit_slug}"
+            digit = get_object_or_404(apps.get_model('inventory', 'ItemizedDigit'), slug=fullslug)
             _name = digit.name
             digit.delete()
             messages.success(request, f'Digit {_name} successfully deleted')
-            return redirect(reverse('home'))
+            return redirect(user.page.url)
     else:
         form = InventoryDigitDeletionForm()
     

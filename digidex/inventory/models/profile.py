@@ -25,7 +25,7 @@ class UserProfile(models.Model):
     )
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
         related_name="profile",
     )
     image = models.ImageField(
@@ -48,6 +48,11 @@ class UserProfile(models.Model):
         auto_now=True,
         verbose_name="Last Modified"
     )
+
+    def delete(self, *args, **kwargs):
+        if hasattr(self, 'page'):
+            self.page.delete()
+        super().delete(*args, **kwargs)
 
     def add_category(self, name):
         Category = self.card_model
