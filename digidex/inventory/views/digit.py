@@ -12,19 +12,17 @@ from inventory.forms import DigitalObjectForm, InventoryDigitDeletionForm
 User = get_user_model()
 
 @login_required
-def add_digit_view(request, user_slug, ntag_uuid):
-    user = request.user
+def add_digit_view(request, ntag_uuid):
+    user=request.user
     if request.method == 'POST':
         form = DigitalObjectForm(request.POST, user=user)
         if form.is_valid():
             category = form.cleaned_data['category']
-            _digit = apps.get_model('digitization', 'DigitalObject').objects.create(
+            digit = apps.get_model('digitization', 'DigitalObject').objects.create(
                 name=form.cleaned_data['name'],
                 description=form.cleaned_data['description'],
                 user=request.user
             )
-            _digit.save()
-            digit = apps.get_model('inventory', 'ItemizedDigit').objects.create(category=category, digit=_digit)
             digit.save()
             digit_page = digit.create_page()
     

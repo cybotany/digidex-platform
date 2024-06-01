@@ -104,7 +104,7 @@ class NearFieldCommunicationTag(models.Model):
             A URL path as a string.
         """
         if hasattr(self, 'digital_object'):
-            return self.digital_object.page
+            return self.digital_object.page_url
         return None
 
     class Meta:

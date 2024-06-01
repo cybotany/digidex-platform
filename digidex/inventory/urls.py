@@ -13,19 +13,15 @@ category_urls = [
     path('<slug:digit_slug>/', include(digit_urls)),
 ]
 
-additional_urls = [
-    path('', views.add_category_view, name='add_category'),
-    path('<uuid:ntag_uuid>/', views.add_digit_view, name='add_digit'),
-]
-
 profile_urls = [
     path('update/', views.update_profile_view, name='update_profile'),
     path('delete/', views.delete_profile_view, name='delete_profile'),
-    path('add/', include(additional_urls)),
+    path('add/', views.add_category_view, name='add_category'),
     path('<slug:category_slug>/', include(category_urls)),
 ]
 
 app_name = 'inventory'
 urlpatterns = [
+    path('ntag/<uuid:ntag_uuid>/', views.add_digit_view, name='add_digit'),
     path('<slug:user_slug>/', include(profile_urls)),
 ]

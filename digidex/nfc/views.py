@@ -12,7 +12,7 @@ def route_ntag_url(request, ntag_uuid):
         if not ntag.active:
             return HttpResponse("This NFC tag is not active.", status=403)
         if not ntag.digital_object:
-            url = reverse('inventory:link_ntag', kwargs={'ntag_uuid': ntag_uuid})
+            url = reverse('inventory:add_digit', kwargs={'ntag_uuid': ntag_uuid})
             return redirect(url)
         return redirect(ntag.digital_object.page.url)
 
