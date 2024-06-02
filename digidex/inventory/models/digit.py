@@ -32,7 +32,7 @@ class DigitalObject(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        related_name="itemized_digits",
+        related_name="digital_objects",
     )
     name = models.CharField(
         max_length=100,
@@ -51,6 +51,18 @@ class DigitalObject(models.Model):
     last_modified = models.DateTimeField(
         auto_now=True
     )
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = self.full_slug
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        if hasattr(self, 'page'):
+            self.page.delete()
+        if hasattr(self, 'journal'):
+            self.journal.delete()
+        super().delete(*args, **kwargs)
 
     def create_journal(self):
         if hasattr(self, 'journal'):

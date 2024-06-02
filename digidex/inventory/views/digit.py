@@ -21,7 +21,6 @@ def add_digit_view(request, ntag_uuid):
                 name=form.cleaned_data['name'],
                 description=form.cleaned_data['description'],
                 category=form.cleaned_data['category'],
-                slug=slugify(form.cleaned_data['name']),
                 user=request.user
             )
             digit.save()

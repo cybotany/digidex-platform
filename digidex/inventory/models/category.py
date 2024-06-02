@@ -1,7 +1,7 @@
 import uuid
 from django.db import models
+from django.core.exceptions import ValidationError
 from django.conf import settings  
-from django.contrib import messages
 from django.utils.text import slugify
 from django.urls import reverse
 
@@ -57,22 +57,26 @@ class Category(models.Model):
         super().save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
+        if self.digitized_objects.exists():
+            raise ValidationError(
+                f"Cannot delete category '{self.name}' because it contains digitized objects. "
+                "Please move or delete all digitized objects first."
+            )
         if hasattr(self, 'page'):
             self.page.delete()
         super().delete(*args, **kwargs)
 
     def add_digit(self, digit):
         DigitalObject = self.card_model
-        itemized_digit, created = DigitalObject.objects.select_related('digit').get_or_create(
+        if DigitalObject.objects.filter(category=self, digit=digit).exists():
+            raise ValidationError(
+                f"'{digit.name}' already exists in the category '{self.name}'."
+            )
+
+        itemized_digit = DigitalObject.objects.create(
             category=self,
             digit=digit
         )
-        if created:
-            message = f"'{digit.name}' was created in the category '{self.name}'."
-        else:
-            message = f"'{digit.name}' already exists in the category '{self.name}'."
-
-        messages.info(message)
         return itemized_digit
 
     def get_digit(self, digit):
@@ -80,15 +84,19 @@ class Category(models.Model):
         try:
             return self.itemized_digits.select_related('digit').get(digit=digit)
         except DigitalObject.DoesNotExist:
-            return None
+            raise ValidationError(
+                f"The digit '{digit.name}' does not exist in the category '{self.name}'."
+            )
 
     def remove_digit(self, digit):
         itemized_digit = self.get_digit(digit)
         if itemized_digit:
             itemized_digit.delete()
-            message = "Digit removed."
-            messages.info(message)
-        return itemized_digit
+            return itemized_digit
+        else:
+            raise ValidationError(
+                f"The digit '{digit.name}' does not exist in the category '{self.name}'."
+            )
 
     def list_digits(self):
         return self.itemized_digits.select_related('category')
