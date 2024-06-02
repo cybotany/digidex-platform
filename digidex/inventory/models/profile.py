@@ -204,6 +204,7 @@ class UserProfilePage(Page):
         context = super().get_context(request, *args, **kwargs)
         context['profile_panel'] = self.page_panel
         context['form_url'] = self.profile.category_form
+        context['form_model'] = 'Category'       
         context['digit_cards'] = self.page_cards
         return context
 

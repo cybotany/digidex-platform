@@ -1,5 +1,6 @@
 from django import forms
 
+from base.forms import AssetDeletionCheckbox
 from inventory.models.journal import Entry
 
 
@@ -26,3 +27,6 @@ class JournalEntryForm(forms.ModelForm):
                 }
             )
         }
+
+class InventoryDigitDeletionForm(AssetDeletionCheckbox):
+    pass

@@ -71,19 +71,19 @@ class DigitalObject(models.Model):
         return EntryCollection.objects.create(digital_object=self)
 
     def create_page(self):
-        if not DigitalObjectPage.objects.filter(digit=self).exists():
+        if not DigitalObjectPage.objects.filter(digital_object=self).exists():
             digit_page = DigitalObjectPage(
                 title=self.name,
                 slug=self.base_slug,
                 owner=self.user,
-                digit=self
+                digital_object=self
             )
 
             parent_page = get_or_create_inventory_category_page(self.category)
             parent_page.add_child(instance=digit_page)
             digit_page.save_revision().publish()
         else:
-            digit_page = DigitalObjectPage.objects.get(digit=self)
+            digit_page = DigitalObjectPage.objects.get(digital_object=self)
         return digit_page
 
     def get_panel_details(self):
