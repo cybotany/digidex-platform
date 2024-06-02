@@ -57,7 +57,7 @@ class Category(models.Model):
         super().save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
-        if self.digitized_objects.exists():
+        if self.itemized_digits.exists():
             raise ValidationError(
                 f"Cannot delete category '{self.name}' because it contains digitized objects. "
                 "Please move or delete all digitized objects first."

@@ -43,7 +43,7 @@ class NearFieldCommunicationTag(models.Model):
     )
     digital_object = models.OneToOneField(
         'inventory.DigitalObject',
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         blank=True,
         null=True,
         related_name="ntag"
