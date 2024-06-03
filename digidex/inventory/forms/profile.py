@@ -1,10 +1,9 @@
 from django import forms
 
 from base.forms import AssetDeletionCheckbox
-from inventory.models import UserProfilePage
 
 
-class UserProfileForm(forms.ModelForm):
+class UserProfileForm(forms.Form):
     image = forms.ImageField(
         label='Upload Avatar',
         widget=forms.FileInput(
@@ -23,11 +22,6 @@ class UserProfileForm(forms.ModelForm):
         ),
         required=False
     )
-
-    class Meta:
-        model = UserProfilePage
-        fields = ('bio', 'image',)
-
 
 class DeleteUserForm(AssetDeletionCheckbox):
     pass

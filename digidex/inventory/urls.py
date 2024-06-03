@@ -14,9 +14,6 @@ category_urls = [
 ]
 
 profile_urls = [
-    path('update/', views.update_profile_view, name='update_profile'),
-    path('delete/', views.delete_profile_view, name='delete_profile'),
-    path('add/', views.add_category_view, name='add_category'),
     path('<slug:category_slug>/', include(category_urls)),
 ]
 
