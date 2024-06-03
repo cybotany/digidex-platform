@@ -20,36 +20,23 @@ def get_or_create_user_profile_index_page():
     return user_index_page
 
 
-def get_or_create_user_profile(user):
-    """
-    Create a user profile for the given user.
-    """
-    UserProfile = apps.get_model('inventory', 'UserProfile')
-    if not UserProfile.objects.filter(user=user).exists():
-        user_profile = UserProfile(user=user)
-        user_profile.save()
-    else:
-        user_profile = UserProfile.objects.get(user=user)
-    return user_profile
-
-
-def get_or_create_user_profile_page(user_profile):
+def get_or_create_user_profile_page(user):
     """
     Create a user page for the given user.
     """
     UserProfilePage = apps.get_model('inventory', 'UserProfilePage')
-    if not UserProfilePage.objects.filter(profile=user_profile).exists():
+    if not UserProfilePage.objects.filter(profile=user).exists():
         user_profile_page = UserProfilePage(
-            title=f"{user_profile.display_name}'s Profile",
-            slug=user_profile.user.base_slug,
-            owner=user_profile.user,
-            profile=user_profile,
+            title=f"{user.username.title()}'s Profile",
+            slug=user.user.base_slug,
+            owner=user.user,
+            profile=user,
         )
         user_index_page = get_or_create_user_profile_index_page()
         user_index_page.add_child(instance=user_profile_page)
         user_profile_page.save_revision().publish()
     else:
-        user_profile_page = UserProfilePage.objects.get(profile=user_profile)
+        user_profile_page = UserProfilePage.objects.get(profile=user)
     return user_profile_page
 
 

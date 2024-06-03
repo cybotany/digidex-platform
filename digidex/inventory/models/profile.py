@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from django.conf import settings
 
 from wagtail.models import Page
 from wagtail.fields import RichTextField
@@ -37,6 +38,14 @@ class UserProfileIndexPage(Page):
 
 
 class UserProfilePage(Page):
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.PROTECT,
+        db_index=True,
+        null=True,
+        related_name='profile',
+        verbose_name="User Profile User"
+    )
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
