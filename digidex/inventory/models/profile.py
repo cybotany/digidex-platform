@@ -20,7 +20,7 @@ from inventory.forms import UserProfileForm, InventoryCategoryForm, DeleteUserFo
 
 def user_avatar_path(instance, filename):
     extension = filename.split('.')[-1]
-    return f'users/{instance.owner.username}/avatar.{extension}'
+    return f'users/{instance.uuid}/avatar.{extension}'
 
 
 class UserProfileIndexPage(Page):
@@ -103,54 +103,68 @@ class UserProfilePage(RoutablePageMixin, Page):
         extension = filename.split('.')[-1]
         return f'{self.get_upload_to_base_path()}/{subdirectory}/{uuid.uuid4()}.{extension}'
 
+    def get_inventory_categories(self):
+        return self.inventory_categories.select_related('detail_page').all()
+
+    def get_page_panel_details(self):
+        return {
+            'name': self.user.username,
+            'date': self.created_at, 
+            'description': self.introduction,
+            'update_url': self.reverse_subpage('update_profile_view'),
+            'delete_url': self.reverse_subpage('delete_profile_view'),
+        }
+
+    def get_page_card_details(self):
+        return {
+            'add_url': self.reverse_subpage('add_category_view'),
+            'page_cards': self.get_inventory_categories()
+        }
+
     def get_context(self, request, *args, **kwargs):
-        context = super().get_context(request, *args, **kwargs)     
+        context = super().get_context(request, *args, **kwargs)
+        context['page_panel'] = self.get_page_panel_details
+        context['page_cards'] = self.get_page_card_details()
         return context
 
-    @route(r'^update/$')
+    @route(r'^update/$', name='update_profile_view')
     @login_required
-    def update_profile_view(self, request):
+    def update_view(self, request):
         page_owner = self.user
-        requesting_user = request.user
-
-        if page_owner != requesting_user:
+        if page_owner != request.user:
             return HttpResponseForbidden("You are not allowed to edit this profile.")
-
-        user_profile = page_owner.profile
 
         if request.method == 'POST':
             form = UserProfileForm(request.POST, request.FILES)
             if form.is_valid():
                 if 'image' in form.cleaned_data:
-                    user_profile.image = form.cleaned_data['image']
+                    self.image = form.cleaned_data['image']
                 if 'bio' in form.cleaned_data:
-                    user_profile.introduction = form.cleaned_data['bio']
-                user_profile.save()
+                    self.introduction = form.cleaned_data['bio']
+                self.save()
                 messages.success(request, 'Profile successfully updated')
                 return redirect(self.url)
         else:
             initial_data = {
-                'bio': user_profile.introduction,
-                'image': user_profile.image
+                'bio': self.introduction,
+                'image': self.image
             }
             form = UserProfileForm(initial=initial_data)
 
         return render(request, 'inventory/profile/update.html', {'form': form, 'url': self.url})
 
-    @route(r'^delete/$')
+    @route(r'^delete/$', 'delete_profile_view')
     @login_required
-    def delete_profile_view(self, request):
+    def delete_view(self, request):
         page_owner = self.user
-        requesting_user = request.user
-
-        if page_owner != requesting_user:
+        if page_owner != request.user:
             return HttpResponseForbidden("You are not allowed to edit this profile.")
 
         if request.method == 'POST':
             form = DeleteUserForm(request.POST)
             if form.is_valid():
                 logout(request)
-                requesting_user.delete()
+                page_owner.delete()
                 messages.success(request, 'Account successfully deleted')
                 return redirect(reverse('home'))
         else:
@@ -158,13 +172,11 @@ class UserProfilePage(RoutablePageMixin, Page):
 
         return render(request, 'inventory/profile/delete.html', {'form': form, 'url': self.url})
 
-    @route(r'^add/$')
+    @route(r'^add/$', name='add_category_view')
     @login_required
-    def add_category_view(self, request):
+    def add_view(self, request):
         page_owner = self.user
-        requesting_user = request.user
-
-        if page_owner != requesting_user:
+        if page_owner != request.user:
             return HttpResponseForbidden("You are not allowed to edit this profile.")
         
         if request.method == 'POST':
@@ -172,8 +184,7 @@ class UserProfilePage(RoutablePageMixin, Page):
             if form.is_valid():
                 category = apps.get_model('inventory', 'Category')(
                     name=form.cleaned_data['name'],
-                    description=form.cleaned_data['description'],
-                    user=page_owner
+                    description=form.cleaned_data['description']
                 )
                 category.save()
                 messages.success(request, f'{category.name} successfully added.')
