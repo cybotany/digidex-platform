@@ -1,7 +1,7 @@
 from django import forms
 
 from base.forms import AssetDeletionCheckbox
-from inventory.models import UserProfile
+from inventory.models import UserProfilePage
 
 
 class UserProfileForm(forms.ModelForm):
@@ -25,7 +25,7 @@ class UserProfileForm(forms.ModelForm):
     )
 
     class Meta:
-        model = UserProfile
+        model = UserProfilePage
         fields = ('bio', 'image',)
 
 

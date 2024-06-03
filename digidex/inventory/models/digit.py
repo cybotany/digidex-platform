@@ -40,21 +40,10 @@ class DigitalObjectPage(Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context['digit_panel'] = self.page_panel
-        context['journal_cards'] = self.page_cards
         return context
 
-    @property
-    def page_panel(self):
-        return self.digital_object.get_panel_details()
-
-    @property
-    def page_cards(self):
-        card_list = []
-        entries = self.digital_object.journal.list_entries()
-        for entry in entries:
-            card_list.append(entry.get_card_details())
-        return card_list
+    def __str__(self):
+        return self.name.title()
 
 
 class DigitalObjectCategory(Orderable):
@@ -68,27 +57,6 @@ class DigitalObjectCategory(Orderable):
         on_delete=models.CASCADE,
         related_name='+'
     )
-
-    def get_panel_details(self):
-        return {
-            'name': self.display_name,
-            'description': self.display_description,
-            'date': self.display_date,
-            'image_url': self.image_url,
-            'delete_url': self.delete_url,
-            'update_url': self.update_url
-        }
-
-    def get_card_details(self):
-        return {
-            'name': self.display_name,
-            'description': self.display_description,
-            'date': self.display_date,
-            'page_url': self.page_url
-        } 
-
-    def __str__(self):
-        return self.display_name
 
 
 class DigitalObjectJournalEntry(Orderable, JournalEntry):

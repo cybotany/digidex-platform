@@ -10,7 +10,7 @@ from base.utils.storage import PublicMediaStorage
 
 def user_avatar_path(instance, filename):
     extension = filename.split('.')[-1]
-    return f'users/{instance.username}/avatar.{extension}'
+    return f'users/{instance.owner.username}/avatar.{extension}'
 
 
 class UserProfileIndexPage(Page):
@@ -86,9 +86,7 @@ class UserProfilePage(Page):
         return f'{self.get_upload_to_base_path()}/{subdirectory}/{uuid.uuid4()}.{extension}'
 
     def get_context(self, request, *args, **kwargs):
-        context = super().get_context(request, *args, **kwargs)
-        context['form_url'] = self.category_form
-        context['form_model'] = 'Category'       
+        context = super().get_context(request, *args, **kwargs)     
         return context
 
     class Meta:

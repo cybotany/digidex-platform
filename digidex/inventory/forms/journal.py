@@ -1,12 +1,12 @@
 from django import forms
 
 from base.forms import AssetDeletionCheckbox
-from inventory.models.journal import Entry
+from inventory.models.journal import JournalEntry
 
 
 class JournalEntryForm(forms.ModelForm):
     class Meta:
-        model = Entry
+        model = JournalEntry
         fields = ('image', 'caption', 'note',)
         widgets = {
             'image': forms.FileInput(

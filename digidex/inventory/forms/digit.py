@@ -1,12 +1,12 @@
 from django import forms
 
 from base.forms import AssetDeletionCheckbox
-from inventory.models import DigitalObject, Category
+from inventory.models import DigitalObjectPage, InventoryCategoryPage
 
 
 class DigitalObjectForm(forms.ModelForm):
     category = forms.ModelChoiceField(
-        queryset=Category.objects.none(),
+        queryset=InventoryCategoryPage.objects.none(),
         required=True,
         widget=forms.Select(
             attrs={
@@ -17,7 +17,7 @@ class DigitalObjectForm(forms.ModelForm):
     )
 
     class Meta:
-        model = DigitalObject
+        model = DigitalObjectPage
         fields = ['name', 'description']
         widgets = {
             'name': forms.TextInput(
@@ -38,7 +38,7 @@ class DigitalObjectForm(forms.ModelForm):
         user = kwargs.pop('user', None)
         super(DigitalObjectForm, self).__init__(*args, **kwargs)
         if user:
-            self.fields['category'].queryset = Category.objects.filter(user=user)
+            self.fields['category'].queryset = InventoryCategoryPage.objects.filter(user=user)
 
 
 class InventoryDigitDeletionForm(AssetDeletionCheckbox):

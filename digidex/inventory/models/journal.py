@@ -6,7 +6,7 @@ from base.utils.storage import PublicMediaStorage
 
 def journal_image_path(instance, filename):
     extension = filename.split('.')[-1]
-    return f'journals/{instance.journal.uuid}/images/{uuid.uuid4()}.{extension}'
+    return f'journals/{instance.uuid}/images/{uuid.uuid4()}.{extension}'
 
 
 class JournalEntry(models.Model):
@@ -40,10 +40,6 @@ class JournalEntry(models.Model):
     last_modified = models.DateTimeField(
         auto_now=True
     )
-
-    @classmethod
-    def get_queryset(cls):
-        return super().get_queryset().select_related('page')
 
     def __str__(self):
         return f"Journal entry made on{self.created_at}."

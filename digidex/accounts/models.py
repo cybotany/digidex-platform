@@ -20,33 +20,8 @@ class User(AbstractUser):
     )
 
     @property
-    def page(self):
-        if hasattr(self, 'profile'):
-            return self.profile.page
-        return None
-
-    @property
-    def parent_slug(self):
-        return 'u'
-
-    @property
-    def base_slug(self):
+    def get_slug(self):
         return slugify(self.username)
-
-    @property
-    def full_slug(self):
-        return self.base_slug
-
-    @property
-    def slug_kwargs(self):
-        return {
-            'user_slug': self.slug
-        }
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = self.full_slug
-        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.username.title()

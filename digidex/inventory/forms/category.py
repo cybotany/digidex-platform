@@ -1,12 +1,12 @@
 from django import forms
 
 from base.forms import AssetDeletionCheckbox
-from inventory.models import Category
+from inventory.models import InventoryCategoryPage
 
 
 class CategoryForm(forms.ModelForm):
     class Meta:
-        model = Category
+        model = InventoryCategoryPage
         fields = ('name', 'description',)
         widgets = {
             'name': forms.TextInput(
