@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
+from django.utils.text import slugify
 from django.urls import reverse
 
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
@@ -106,15 +107,19 @@ class UserProfilePage(RoutablePageMixin, Page):
             'delete_url': self.reverse_subpage('delete_profile_view'),
         }
 
-    def get_page_card_details(self):
+    def get_page_list_details(self):
         return {
             'add_url': self.reverse_subpage('add_category_view'),
-            'page_cards': self.get_children()
+            'form_model': 'Category',
         }
+
+    def get_page_card_details(self):
+        return self.get_children()
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context['page_panel'] = self.get_page_panel_details
+        context['page_panel'] = self.get_page_panel_details()
+        context['page_tabs'] = self.get_page_list_details()
         context['page_cards'] = self.get_page_card_details()
         return context
 
@@ -171,15 +176,19 @@ class UserProfilePage(RoutablePageMixin, Page):
             return HttpResponseForbidden("You are not allowed to edit this profile.")
         
         if request.method == 'POST':
-            form = InventoryCategoryForm(request.POST, request.FILES)
+            form = InventoryCategoryForm(request.POST)
             if form.is_valid():
-                category = apps.get_model('inventory', 'Category')(
-                    name=form.cleaned_data['name'],
+                name = form.cleaned_data['name']
+                category_page = apps.get_model('inventory', 'InventoryCategoryPage')(
+                    title=f"{name.title()}'s Inventory",
+                    slug=slugify(name),
+                    owner=page_owner,
+                    name=name,
                     description=form.cleaned_data['description']
                 )
-                category.save()
-                messages.success(request, f'{category.name} successfully added.')
-                return redirect(category._page.url)
+                self.add_child(instance=category_page)
+                messages.success(request, f'{category_page.name} successfully added!')
+                return redirect(category_page.url)
         else:
             form = InventoryCategoryForm()
         
