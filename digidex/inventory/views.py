@@ -12,15 +12,14 @@ User = get_user_model()
 @login_required
 def add_digit_view(request, ntag_uuid, user_slug):
     user_profile = get_object_or_404(apps.get_model('inventory', 'UserProfilePage'), slug=user_slug)
-    
-    party_category_page = user_profile.get_children().type(apps.get_model('inventory', 'InventoryCategoryPage')).filter(is_party=True).first()
+    party_category_page = user_profile.get_children().type(apps.get_model('inventory', 'InventoryCategoryPage')).filter(slug='party').first()
+    user = user_profile.owner
 
     if request.method == 'POST':
         form = DigitalObjectForm(request.POST)
-        name = form.cleaned_data['name']
-        user = user_profile.owner
         if form.is_valid():
-            digital_object_page = apps.get_model('inventory', 'DigitalObjectPage').objects.create(
+            name = form.cleaned_data['name']
+            digital_object_page = apps.get_model('inventory', 'DigitalObjectPage')(
                 title=f"{name.title()}'s Inventory",
                 slug=slugify(name),
                 owner=user,
@@ -42,6 +41,6 @@ def add_digit_view(request, ntag_uuid, user_slug):
             else:
                 return HttpResponseForbidden("Party category page not found.")
     else:
-        form = DigitalObjectForm(user=user)
+        form = DigitalObjectForm()
 
     return render(request, "inventory/digit/add.html", {'form': form})
