@@ -96,9 +96,6 @@ class UserProfilePage(RoutablePageMixin, Page):
         'inventory.InventoryCategoryPage'
     ]
 
-    def get_inventory_categories(self):
-        return self.inventory_categories.select_related('detail_page').all()
-
     def get_page_panel_details(self):
         return {
             'name': self.user.username,
@@ -112,7 +109,7 @@ class UserProfilePage(RoutablePageMixin, Page):
     def get_page_card_details(self):
         return {
             'add_url': self.reverse_subpage('add_category_view'),
-            'page_cards': self.get_inventory_categories()
+            'page_cards': self.get_children()
         }
 
     def get_context(self, request, *args, **kwargs):
@@ -174,7 +171,7 @@ class UserProfilePage(RoutablePageMixin, Page):
             return HttpResponseForbidden("You are not allowed to edit this profile.")
         
         if request.method == 'POST':
-            form = InventoryCategoryForm(request.POST)
+            form = InventoryCategoryForm(request.POST, request.FILES)
             if form.is_valid():
                 category = apps.get_model('inventory', 'Category')(
                     name=form.cleaned_data['name'],

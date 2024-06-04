@@ -11,7 +11,7 @@ from wagtail.fields import RichTextField
 from wagtail.models import Page, Orderable
 from wagtail.admin.panels import FieldPanel
 
-from inventory.forms import InventoryCategoryForm, InventoryCategoryDeletionForm
+from inventory.forms import InventoryCategoryForm, InventoryCategoryDeletionForm, InventoryCategoryJournalEntryForm
 
 from .journal import JournalEntry
 
@@ -59,6 +59,22 @@ class InventoryCategoryPage(RoutablePageMixin, Page):
     subpage_types = [
         'inventory.InventoryCategoryPage'
     ]
+
+    def get_page_panel_details(self):
+        return {
+            'name': self.user.username,
+            'image': self.image,
+            'date': self.created_at, 
+            'description': self.introduction,
+            'update_url': self.reverse_subpage('update_category_view'),
+            'delete_url': self.reverse_subpage('delete_category_view'),
+        }
+
+    def get_page_card_details(self):
+        return {
+        #    'add_url': self.reverse_subpage('add_entry_view'),
+            'page_cards': self.get_children()
+        }
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
@@ -108,6 +124,31 @@ class InventoryCategoryPage(RoutablePageMixin, Page):
             form = InventoryCategoryDeletionForm()
 
         return render(request, 'inventory/category/delete.html', {'form': form, 'url': self.url})
+
+    @route(r'^add/$', name='add_category_entry_view')
+    @login_required
+    def add_view(self, request):
+        page_owner = self.user
+        if page_owner != request.user:
+            return HttpResponseForbidden("You are not allowed to update this page.")
+        
+        if request.method == 'POST':
+            form = InventoryCategoryJournalEntryForm(request.POST, request.FILES)
+            if form.is_valid():
+                journal_entry = InventoryCategoryJournalEntryForm(
+                    image=form.cleaned_data['image'],
+                    caption=form.cleaned_data['caption'],
+                    note=form.cleaned_data['note'],
+                    page=self
+                )
+                journal_entry.save()
+                messages.success(request, 'Journal entry successfully added.')
+                return redirect(self.url)
+        else:
+            form = InventoryCategoryJournalEntryForm()
+        
+        return render(request, 'inventory/category/journal.html', {'form': form})
+
 
     class Meta:
         verbose_name = "Inventory Category Page"

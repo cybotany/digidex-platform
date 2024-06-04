@@ -51,6 +51,22 @@ class DigitalObjectPage(RoutablePageMixin, Page):
         'inventory.InventoryCategoryPage',
     ]
 
+    def get_page_panel_details(self):
+        return {
+            'name': self.user.username,
+            'image': self.image,
+            'date': self.created_at, 
+            'description': self.introduction,
+            'update_url': self.reverse_subpage('update_digit_view'),
+            'delete_url': self.reverse_subpage('delete_digit_view'),
+        }
+
+    def get_page_card_details(self):
+        return {
+        #    'add_url': self.reverse_subpage('add_entry_view'),
+            'page_cards': self.get_children()
+        }
+
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         return context
@@ -100,27 +116,29 @@ class DigitalObjectPage(RoutablePageMixin, Page):
         
         return render(request, 'inventory/digit/delete.html', {'form': form})
 
-    @route(r'^add/$', name='add_entry_view')
+    @route(r'^add/$', name='add_digit_entry_view')
     @login_required
     def add_view(self, request):
         page_owner = self.user
         if page_owner != request.user:
-            return HttpResponseForbidden("You are not allowed to edit this profile.")
+            return HttpResponseForbidden("You are not allowed to update this page.")
         
         if request.method == 'POST':
-            form = DigitalObjectJournalEntryForm(request.POST)
+            form = DigitalObjectJournalEntryForm(request.POST, request.FILES)
             if form.is_valid():
-                category = apps.get_model('inventory', 'Category')(
-                    name=form.cleaned_data['name'],
-                    description=form.cleaned_data['description']
+                journal_entry = DigitalObjectJournalEntry(
+                    image=form.cleaned_data['image'],
+                    caption=form.cleaned_data['caption'],
+                    note=form.cleaned_data['note'],
+                    page=self
                 )
-                category.save()
-                messages.success(request, f'{category.name} successfully added.')
-                return redirect(category._page.url)
+                journal_entry.save()
+                messages.success(request, 'Journal entry successfully added.')
+                return redirect(self.url)
         else:
             form = DigitalObjectJournalEntryForm()
         
-        return render(request, 'inventory/category/add.html', {'form': form})
+        return render(request, 'inventory/digit/journal.html', {'form': form})
 
     def __str__(self):
         return self.name.title()

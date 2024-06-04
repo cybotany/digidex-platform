@@ -1,0 +1,7 @@
+{% extends "inventory/category/base.html" %}
+{% load i18n %}
+
+{% block content %}
+  <h3 class="account-heading">{% trans "Add Journal Entry" %}</h3>
+  {% include "inventory/journal/entry.html" %}
+{% endblock %}
