@@ -3,7 +3,6 @@ from django.db import models
 from django.apps import apps
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 
 from modelcluster.fields import ParentalKey
@@ -64,18 +63,13 @@ class DigitalObjectPage(RoutablePageMixin, Page):
     def get_page_list_details(self):
         return {
             'add_url': self.reverse_subpage('add_digit_entry_view'),
-            'form_model': 'Digit',
+            'form_model': 'Journal Entry',
         }
 
     def get_page_card_details(self):
         return self.get_children()
 
-    def get_context(self, request, *args, **kwargs):
-        context = super().get_context(request, *args, **kwargs)
-        return context
-
     @route(r'^update/$', name='update_digit_view')
-    @login_required
     def update_digit_view(self, request):
         page_owner = self.owner
         if page_owner != request.user:
@@ -101,7 +95,6 @@ class DigitalObjectPage(RoutablePageMixin, Page):
         return render(request, 'inventory/digit/update.html', {'form': form})
 
     @route(r'^delete/$', 'delete_digit_view')
-    @login_required
     def delete_digit_view(self, request):
         page_owner = self.owner
         if page_owner != request.user:
@@ -120,7 +113,6 @@ class DigitalObjectPage(RoutablePageMixin, Page):
         return render(request, 'inventory/digit/delete.html', {'form': form})
 
     @route(r'^add/$', name='add_digit_entry_view')
-    @login_required
     def add_view(self, request):
         page_owner = self.owner
         if page_owner != request.user:
@@ -142,6 +134,13 @@ class DigitalObjectPage(RoutablePageMixin, Page):
             form = DigitalObjectJournalEntryForm()
         
         return render(request, 'inventory/digit/journal.html', {'form': form})
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context['page_panel'] = self.get_page_panel_details()
+        context['page_tabs'] = self.get_page_list_details()
+        context['page_cards'] = self.get_page_card_details()
+        return context
 
     def __str__(self):
         return self.name.title()
