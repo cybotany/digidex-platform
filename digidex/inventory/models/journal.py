@@ -5,9 +5,14 @@ from base.utils.storage import PublicMediaStorage
 
 
 def journal_image_path(instance, filename):
+    detail_page = instance.page
+    owner = detail_page.owner
+    if detail_page.specific_class.__name__ == 'InventoryCategoryPage':
+        subdirectory = 'categories'
+    else:
+        subdirectory = 'objects'
     extension = filename.split('.')[-1]
-    return f'journals/{instance.uuid}/images/{uuid.uuid4()}.{extension}'
-
+    return f'users/{owner.uuid}/{subdirectory}/{detail_page.uuid}/{uuid.uuid4()}.{extension}'
 
 class JournalEntry(models.Model):
     uuid = models.UUIDField(

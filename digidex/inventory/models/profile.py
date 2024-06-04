@@ -74,7 +74,7 @@ class UserProfilePage(RoutablePageMixin, Page):
         blank=True,
         verbose_name="User Profile Heading"
     )
-    introduction = models.TextField(
+    introduction = RichTextField(
         null=True,
         blank=True,
         help_text="Short Biography about the user."
@@ -96,12 +96,9 @@ class UserProfilePage(RoutablePageMixin, Page):
         'inventory.InventoryCategoryPage'
     ]
 
-    def get_upload_to_base_path(self):
-        return f'users/{self.uuid}'
-
-    def get_upload_to(self, subdirectory, filename):
+    def get_upload_to(self, filename):
         extension = filename.split('.')[-1]
-        return f'{self.get_upload_to_base_path()}/{subdirectory}/{uuid.uuid4()}.{extension}'
+        return f'users/{self.user.uuid}/avatar.{extension}'
 
     def get_inventory_categories(self):
         return self.inventory_categories.select_related('detail_page').all()

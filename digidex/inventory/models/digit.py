@@ -42,6 +42,11 @@ class DigitalObjectPage(RoutablePageMixin, Page):
         auto_now=True
     )
 
+    content_panels = Page.content_panels + [
+        FieldPanel('name'),
+        FieldPanel('description'),
+    ]
+
     parent_page_types = [
         'inventory.InventoryCategoryPage',
     ]
@@ -103,7 +108,7 @@ class DigitalObjectPage(RoutablePageMixin, Page):
             return HttpResponseForbidden("You are not allowed to edit this profile.")
         
         if request.method == 'POST':
-            form = InventoryCategoryForm(request.POST)
+            form = DigitalObjectJournalEntryForm(request.POST)
             if form.is_valid():
                 category = apps.get_model('inventory', 'Category')(
                     name=form.cleaned_data['name'],
@@ -113,7 +118,7 @@ class DigitalObjectPage(RoutablePageMixin, Page):
                 messages.success(request, f'{category.name} successfully added.')
                 return redirect(category._page.url)
         else:
-            form = InventoryCategoryForm()
+            form = DigitalObjectJournalEntryForm()
         
         return render(request, 'inventory/category/add.html', {'form': form})
 

@@ -11,8 +11,7 @@ from wagtail.fields import RichTextField
 from wagtail.models import Page, Orderable
 from wagtail.admin.panels import FieldPanel
 
-from base.utils.storage import PublicMediaStorage
-from inventory.forms import InventoryCategoryForm, InventoryCategoryDeletionForm, InventoryCategoryJournalEntryForm
+from inventory.forms import InventoryCategoryForm, InventoryCategoryDeletionForm
 
 from .journal import JournalEntry
 
@@ -47,6 +46,11 @@ class InventoryCategoryPage(RoutablePageMixin, Page):
     last_modified = models.DateTimeField(
         auto_now=True
     )
+
+    content_panels = Page.content_panels + [
+        FieldPanel('name'),
+        FieldPanel('description'),
+    ]
 
     parent_page_types = [
         'inventory.UserProfilePage'
