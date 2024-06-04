@@ -7,7 +7,7 @@
 
 {% block content %}
   <h3 class="account-heading">Delete Account</h3>
-  <form id="profile-form" method="post" action="{{ url }}" class="utility-page-form base-password-page" enctype="multipart/form-data">
+  <form id="profile-form" method="post" class="utility-page-form base-password-page" enctype="multipart/form-data">
   {% csrf_token %}
     <label for="{{ form.delete.id_for_label }}">Confirm Account Deletion:</label>
     {{ form.delete }}

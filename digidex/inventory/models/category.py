@@ -2,9 +2,9 @@ import uuid
 from django.db import models
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 from django.core.exceptions import ValidationError
+from django.utils.text import slugify
 
 from modelcluster.fields import ParentalKey
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
@@ -74,24 +74,25 @@ class InventoryCategoryPage(RoutablePageMixin, Page):
     def get_page_list_details(self):
         return {
             'add_url': self.reverse_subpage('add_category_entry_view'),
-            'form_model': 'Category',
+            'form_model': 'Journal Entry',
         }
 
     def get_page_card_details(self):
         return self.get_children()
 
     @route(r'^update/$', name='update_category_view')
-    @login_required
     def update_view(self, request):
-        page_owner = self.user
+        page_owner = self.owner
         if page_owner != request.user:
             return HttpResponseForbidden("You are not allowed to edit this profile.")
 
         if request.method == 'POST':
-            form = InventoryCategoryForm(request.POST, request.FILES)
+            form = InventoryCategoryForm(request.POST)
             if form.is_valid():
                 if 'name' in form.cleaned_data:
-                    self.name = form.cleaned_data['name']
+                    name = form.cleaned_data['name']
+                    self.name = name
+                    self.slug = slugify(name)
                 if 'description' in form.cleaned_data:
                     self.description = form.cleaned_data['description']
                 self.save()
@@ -107,9 +108,8 @@ class InventoryCategoryPage(RoutablePageMixin, Page):
         return render(request, 'inventory/category/update.html', {'form': form, 'url': self.url})
 
     @route(r'^delete/$', 'delete_category_view')
-    @login_required
     def delete_view(self, request):
-        page_owner = self.user
+        page_owner = self.owner
         if page_owner != request.user:
             return HttpResponseForbidden("You are not allowed to edit this profile.")
 
@@ -126,9 +126,8 @@ class InventoryCategoryPage(RoutablePageMixin, Page):
         return render(request, 'inventory/category/delete.html', {'form': form, 'url': self.url})
 
     @route(r'^add/$', name='add_category_entry_view')
-    @login_required
     def add_view(self, request):
-        page_owner = self.user
+        page_owner = self.owner
         if page_owner != request.user:
             return HttpResponseForbidden("You are not allowed to update this page.")
         

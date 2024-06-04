@@ -122,7 +122,7 @@ class DigitalObjectPage(RoutablePageMixin, Page):
     @route(r'^add/$', name='add_digit_entry_view')
     @login_required
     def add_view(self, request):
-        page_owner = self.user
+        page_owner = self.owner
         if page_owner != request.user:
             return HttpResponseForbidden("You are not allowed to update this page.")
         
