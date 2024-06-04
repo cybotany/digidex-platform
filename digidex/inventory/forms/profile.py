@@ -13,7 +13,7 @@ class UserProfileForm(forms.Form):
         ),
         required=False
     )
-    bio = forms.CharField(
+    introduction = forms.CharField(
         widget=forms.Textarea(
             attrs={
                 'class': 'text-field base-input',

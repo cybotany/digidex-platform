@@ -112,18 +112,6 @@ class InventoryCategoryPage(RoutablePageMixin, Page):
     class Meta:
         verbose_name = "Inventory Category Page"
 
-class UserInventoryCategory(Orderable):
-    page = ParentalKey(
-        'inventory.UserProfilePage',
-        on_delete=models.CASCADE,
-        related_name='inventory_categories'
-    )
-    detail_page = models.OneToOneField(
-        'inventory.InventoryCategoryPage',
-        on_delete=models.CASCADE,
-        related_name='+'
-    )
-
 
 class InventoryCategoryJournalEntry(Orderable, JournalEntry):
     page = ParentalKey(

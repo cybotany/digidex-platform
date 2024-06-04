@@ -6,9 +6,9 @@
       <div role="list" class="collection-list-posts large base-dyn-items">
         <div role="listitem" class="base-dyn-item">
           <div class="block-post large">
-            {% if panel.image_url %}
+            {% if panel.image %}
               <a href="#" class="link-post-thumbnail large base-inline-block">
-                <img src="{{ panel.image_url }}" alt="" loading="eager" class="image-post-thumbnail large">
+                <img src="{{ panel.image.url }}" alt="" loading="eager" class="image-post-thumbnail large">
               </a>
             {% endif %}
             <div class="post large">

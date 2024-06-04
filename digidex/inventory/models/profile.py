@@ -96,16 +96,13 @@ class UserProfilePage(RoutablePageMixin, Page):
         'inventory.InventoryCategoryPage'
     ]
 
-    def get_upload_to(self, filename):
-        extension = filename.split('.')[-1]
-        return f'users/{self.user.uuid}/avatar.{extension}'
-
     def get_inventory_categories(self):
         return self.inventory_categories.select_related('detail_page').all()
 
     def get_page_panel_details(self):
         return {
             'name': self.user.username,
+            'image': self.image,
             'date': self.created_at, 
             'description': self.introduction,
             'update_url': self.reverse_subpage('update_profile_view'),
@@ -136,14 +133,14 @@ class UserProfilePage(RoutablePageMixin, Page):
             if form.is_valid():
                 if 'image' in form.cleaned_data:
                     self.image = form.cleaned_data['image']
-                if 'bio' in form.cleaned_data:
-                    self.introduction = form.cleaned_data['bio']
+                if 'introduction' in form.cleaned_data:
+                    self.introduction = form.cleaned_data['introduction']
                 self.save()
                 messages.success(request, 'Profile successfully updated')
                 return redirect(self.url)
         else:
             initial_data = {
-                'bio': self.introduction,
+                'introduction': self.introduction,
                 'image': self.image
             }
             form = UserProfileForm(initial=initial_data)

@@ -126,19 +126,6 @@ class DigitalObjectPage(RoutablePageMixin, Page):
         return self.name.title()
 
 
-class DigitalObjectCategory(Orderable):
-    page = ParentalKey(
-        'inventory.InventoryCategoryPage',
-        on_delete=models.CASCADE,
-        related_name='itemized_digits'
-    )
-    detail_page = models.OneToOneField(
-        'inventory.DigitalObjectPage',
-        on_delete=models.CASCADE,
-        related_name='+'
-    )
-
-
 class DigitalObjectJournalEntry(Orderable, JournalEntry):
     page = ParentalKey(
         'inventory.DigitalObjectPage',
