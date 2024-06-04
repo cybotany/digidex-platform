@@ -53,19 +53,22 @@ class DigitalObjectPage(RoutablePageMixin, Page):
 
     def get_page_panel_details(self):
         return {
-            'name': self.user.username,
-            'image': self.image,
+            'name': self.name,
+            'image': None, #self.image,
             'date': self.created_at, 
-            'description': self.introduction,
+            'description': self.description,
             'update_url': self.reverse_subpage('update_digit_view'),
             'delete_url': self.reverse_subpage('delete_digit_view'),
         }
 
-    def get_page_card_details(self):
+    def get_page_list_details(self):
         return {
-        #    'add_url': self.reverse_subpage('add_entry_view'),
-            'page_cards': self.get_children()
+            'add_url': self.reverse_subpage('add_digit_entry_view'),
+            'form_model': 'Digit',
         }
+
+    def get_page_card_details(self):
+        return self.get_children()
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)

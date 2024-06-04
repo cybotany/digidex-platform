@@ -1,28 +1,45 @@
+# myapp/management/commands/create_party_category.py
+
 from django.core.management.base import BaseCommand
-from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
+from django.utils.text import slugify
 
-from inventory.models import UserProfile
-from inventory.utils import get_or_create_user_profile, get_or_create_user_profile_page
-
-User = get_user_model()
-
+from inventory.models import UserProfileIndexPage, UserProfilePage
+from inventory.signals import create_default_category
 
 class Command(BaseCommand):
-    help = 'Create a user page and user profile for any active users who don\'t currently have a profile/page.'
+    help = 'Manually create a party category for an existing user'
+
+    def add_arguments(self, parser):
+        parser.add_argument('username', type=str, help='Username of the user to create the party category for')
 
     def handle(self, *args, **kwargs):
-        active_users_without_profile = User.objects.filter(is_active=True, profile__isnull=True)
-        active_user_profiles_without_page = UserProfile.objects.filter(is_active=True, page__isnull=True)
+        username = kwargs['username']
+        try:
+            user = User.objects.get(username=username)
+            user_profile_page, created = UserProfilePage.objects.get_or_create(
+                owner=user,
+                defaults={
+                    'title': f"{user.username}'s Profile",
+                    'slug': slugify(user.username),
+                    'heading': f"{user.username}'s Profile",
+                    'introduction': "Welcome to my profile!"
+                }
+            )
+            
+            if created:
+                # Adding the newly created UserProfilePage to UserProfileIndexPage
+                user_profile_index = UserProfileIndexPage.objects.first()
+                if user_profile_index:
+                    user_profile_index.add_child(instance=user_profile_page)
+                    user_profile_page.save_revision().publish()
+                    self.stdout.write(self.style.SUCCESS(f'Successfully created UserProfilePage for user {username}'))
 
-        self.stdout.write(f'Found {active_users_without_profile.count()} active users without a profile.')
-        self.stdout.write(f'Found {active_user_profiles_without_page.count()} active users without a page.')
-
-        for user in active_users_without_profile:
-            get_or_create_user_profile(user)
-            self.stdout.write(self.style.SUCCESS(f'Created profile for user {user.username}'))
-
-        for user in active_user_profiles_without_page:
-            get_or_create_user_profile_page(user.profile)
-            self.stdout.write(self.style.SUCCESS(f'Created page for user {user.username}'))
-
-        self.stdout.write(self.style.SUCCESS('Successfully populated user data.'))
+            # Now create the party category
+            create_default_category(sender=UserProfilePage, instance=user_profile_page, created=True)
+            self.stdout.write(self.style.SUCCESS(f'Successfully ensured party category for user {username}'))
+        
+        except User.DoesNotExist:
+            self.stdout.write(self.style.ERROR(f'User with username {username} does not exist'))
+        except Exception as e:
+            self.stdout.write(self.style.ERROR(f'Error: {e}'))

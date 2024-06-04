@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
+from django.core.exceptions import ValidationError
 
 from modelcluster.fields import ParentalKey
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
@@ -62,23 +63,22 @@ class InventoryCategoryPage(RoutablePageMixin, Page):
 
     def get_page_panel_details(self):
         return {
-            'name': self.user.username,
-            'image': self.image,
+            'name': self.name,
+            'image': None, # self.image,
             'date': self.created_at, 
-            'description': self.introduction,
+            'description': self.description,
             'update_url': self.reverse_subpage('update_category_view'),
             'delete_url': self.reverse_subpage('delete_category_view'),
         }
 
-    def get_page_card_details(self):
+    def get_page_list_details(self):
         return {
-        #    'add_url': self.reverse_subpage('add_entry_view'),
-            'page_cards': self.get_children()
+            'add_url': self.reverse_subpage('add_category_entry_view'),
+            'form_model': 'Category',
         }
 
-    def get_context(self, request, *args, **kwargs):
-        context = super().get_context(request, *args, **kwargs)
-        return context
+    def get_page_card_details(self):
+        return self.get_children()
 
     @route(r'^update/$', name='update_category_view')
     @login_required
@@ -148,6 +148,24 @@ class InventoryCategoryPage(RoutablePageMixin, Page):
             form = InventoryCategoryJournalEntryForm()
         
         return render(request, 'inventory/category/journal.html', {'form': form})
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context['page_panel'] = self.get_page_panel_details()
+        context['page_tabs'] = self.get_page_list_details()
+        context['page_cards'] = self.get_page_card_details()
+        return context
+
+    def clean(self):
+        super().clean()
+        forbidden_keywords = ['add', 'update', 'delete', 'admin']
+        if any(keyword in self.name.lower() for keyword in forbidden_keywords):
+            raise ValidationError(f'The name cannot contain any of the following keywords: {", ".join(forbidden_keywords)}')
+
+        # Check if the parent already has an object with the same name or slug
+        siblings = self.get_siblings(inclusive=False)
+        if siblings.filter(title=self.title).exists() or siblings.filter(slug=self.slug).exists():
+            raise ValidationError('An inventory category with this name or slug already exists in this parent.')
 
 
     class Meta:

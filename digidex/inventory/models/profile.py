@@ -187,6 +187,7 @@ class UserProfilePage(RoutablePageMixin, Page):
                     description=form.cleaned_data['description']
                 )
                 self.add_child(instance=category_page)
+                category_page.save_revision().publish()
                 messages.success(request, f'{category_page.name} successfully added!')
                 return redirect(category_page.url)
         else:
