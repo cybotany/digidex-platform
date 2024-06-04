@@ -7,34 +7,40 @@ from django.utils.text import slugify
 
 from inventory.forms import DigitalObjectForm
 
-
 User = get_user_model()
 
 @login_required
 def add_digit_view(request, ntag_uuid, user_slug):
     user_profile = get_object_or_404(apps.get_model('inventory', 'UserProfilePage'), slug=user_slug)
+    
+    party_category_page = user_profile.get_children().type(apps.get_model('inventory', 'InventoryCategoryPage')).filter(is_party=True).first()
+
     if request.method == 'POST':
         form = DigitalObjectForm(request.POST)
         name = form.cleaned_data['name']
+        user = user_profile.owner
         if form.is_valid():
-            digital_object = apps.get_model('inventory', 'DigitalObjectPage').objects.create(
+            digital_object_page = apps.get_model('inventory', 'DigitalObjectPage').objects.create(
                 title=f"{name.title()}'s Inventory",
                 slug=slugify(name),
-                owner=page_owner,
+                owner=user,
                 name=name,
-                description=form.cleaned_data['description']
+                description=form.cleaned_data['description'],
             )
-            digit.save()
+            if party_category_page:
+                party_category_page.add_child(instance=digital_object_page)
+                digital_object_page.save_revision().publish()
 
-
-            if digit:
-                NearFieldCommunicationTag = apps.get_model('nfc', 'NearFieldCommunicationTag')
-                ntag = get_object_or_404(NearFieldCommunicationTag, uuid=ntag_uuid)
-                ntag.digital_object = digit
-                ntag.save()
-                return redirect(digit_page.url)
+                if digital_object_page:
+                    NearFieldCommunicationTag = apps.get_model('nfc', 'NearFieldCommunicationTag')
+                    ntag = get_object_or_404(NearFieldCommunicationTag, uuid=ntag_uuid)
+                    ntag.page = digital_object_page
+                    ntag.save()
+                    return redirect(digital_object_page.url)
+                else:
+                    return HttpResponseForbidden("Failed to create a detail page for the digitized object.")
             else:
-                return HttpResponseForbidden("Failed to create a detail page for the digitized object.")
+                return HttpResponseForbidden("Party category page not found.")
     else:
         form = DigitalObjectForm(user=user)
 

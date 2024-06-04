@@ -38,7 +38,7 @@ def create_default_category(sender, instance, created, **kwargs):
                 slug='party',
                 owner=instance.owner,
                 name="Party",
-                heading=f"{instance.owner.username}'s Party",
+                description=f"{instance.owner.username}'s Party",
                 is_party=True
             )
             instance.add_child(instance=inventory_category_page)

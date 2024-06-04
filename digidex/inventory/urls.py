@@ -4,5 +4,5 @@ from inventory import views
 
 app_name = 'inventory'
 urlpatterns = [
-    path('link/<uuid:ntag_uuid>/', views.add_digit_view, name='add_digit'),
+    path('<slug:user_slug>/link/<uuid:ntag_uuid>/', views.add_digit_view, name='add_digit'),
 ]
