@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags %}
+{% load static wagtailcore_tags wagtailimages_tags %}
 
 <section class="section">
   <div class="content">  
@@ -8,7 +8,7 @@
           <div class="block-post large">
             {% if panel.image %}
               <a href="#" class="link-post-thumbnail large base-inline-block">
-                <img src="{{ panel.image.url }}" alt="" loading="eager" class="image-post-thumbnail large">
+                {% image panel.image original class="image-post-thumbnail large" %}
               </a>
             {% endif %}
             <div class="post large">

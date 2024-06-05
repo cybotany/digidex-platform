@@ -148,15 +148,7 @@ AWS_S3_OBJECT_PARAMETERS = {
 }
 AWS_S3_FILE_OVERWRITE = False
 
-# Public and Private Media Storage
-PUBLIC_MEDIA_ROOT = 'media/public'
-PRIVATE_MEDIA_ROOT = 'media/private'
-
-# Media URLs
-PUBLIC_MEDIA_URL = '{}/{}/'.format(AWS_S3_CUSTOM_DOMAIN, PUBLIC_MEDIA_ROOT)
-PRIVATE_MEDIA_URL = '{}/{}/'.format(AWS_S3_CUSTOM_DOMAIN, PRIVATE_MEDIA_ROOT)
-
-# Static files (CSS, JavaScript, Images
+MEDIA_URL = '{}/media/'.format(AWS_S3_CUSTOM_DOMAIN)
 STATIC_URL = '{}/static/'.format(AWS_S3_CUSTOM_DOMAIN)
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
@@ -248,7 +240,7 @@ ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Digidex] "
 # Wagtail settings
 WAGTAIL_SITE_NAME = "DigiDex"
 
-WAGTAILIMAGES_EXTENSIONS = ['gif', 'jpg', 'jpeg', 'png', 'webp', 'svg']
+WAGTAILIMAGES_EXTENSIONS = ['gif', 'jpg', 'jpeg', 'png', 'webp']
 
 WAGTAIL_FRONTEND_LOGIN_URL = LOGIN_URL
 

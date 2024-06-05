@@ -12,6 +12,8 @@ from django.urls import reverse
 
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.models import Page
+from wagtail.images.models import Image
+from wagtail.images import get_image_model
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 
@@ -63,12 +65,12 @@ class UserProfilePage(RoutablePageMixin, Page):
         db_index=True,
         verbose_name="User Profile UUID"
     )
-    image = models.ImageField(
-        storage=PublicMediaStorage(),
-        upload_to=user_avatar_path,
+    image = models.ForeignKey(
+        'wagtailimages.Image',
         null=True,
         blank=True,
-        verbose_name="User Profile Avatar"
+        on_delete=models.SET_NULL,
+        related_name='+'
     )
     heading = models.CharField(
         max_length=100,
@@ -134,8 +136,15 @@ class UserProfilePage(RoutablePageMixin, Page):
         if request.method == 'POST':
             form = UserProfileForm(request.POST, request.FILES)
             if form.is_valid():
-                if 'image' in form.cleaned_data:
-                    self.image = form.cleaned_data['image']
+                if 'image' in form.cleaned_data and form.cleaned_data['image']:
+                    ImageModel = get_image_model()
+                    image = ImageModel(
+                        title='User Avatar',
+                        file=form.cleaned_data['image']
+                    )
+                    image.save()
+                    self.image = image
+
                 if 'introduction' in form.cleaned_data:
                     self.introduction = form.cleaned_data['introduction']
                 self.save()
@@ -144,7 +153,7 @@ class UserProfilePage(RoutablePageMixin, Page):
         else:
             initial_data = {
                 'introduction': self.introduction,
-                'image': self.image
+                'image': self.image.file if self.image else None,
             }
             form = UserProfileForm(initial=initial_data)
 
