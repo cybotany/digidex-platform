@@ -50,6 +50,10 @@ class DigitalObjectPage(RoutablePageMixin, Page):
         'inventory.InventoryCategoryPage',
     ]
 
+    @property
+    def image(self):
+        return self.get_main_image()
+
     def get_main_image(self):
         entries = self.journal_entries.first()
         if entries:

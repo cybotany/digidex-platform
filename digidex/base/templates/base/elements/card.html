@@ -9,23 +9,23 @@
             {% with card.specific as card %}
               <div role="listitem" class="asset-item base-dyn-item">
                 <div class="block-icon-asset-item">
-                  <img src="{% static 'base/images/google/tree.svg' %}" alt="" loading="eager" class="icon-asset-item">
+                  {% if card.image %}
+                    <img src="{{ card.image.url }}" alt="" loading="eager" class="icon-asset-item">
+                  {% else %}
+                    <img src="{% static 'base/images/google/tree.svg' %}" alt="" loading="eager" class="icon-asset-item">
+                  {% endif %}
                 </div>
-                <div class="date">{{ card.created_at }}</div>
+                {% if card.date %}
+                  <div class="date">{{ card.date }}</div>
+                {% endif %}
                 <a href="{{ card.url }}" class="link-asset-item base-inline-block">
                   <h3 class="heading-asset-item">{{ card.name }}</h3>
                 </a>
-                <p class="paragraph-description">{{ card.description }}</p>
+                {% if card.description %}
+                  <p class="paragraph-description">{{ card.description }}</p>
+                {% endif %}
                 <div class="subtitle-asset-item">Analytics<br></div>
                 <div class="block-features-asset-item">
-                  <div class="features-asset-item">
-                    <img src="{% static 'base/images/bx/check-green.svg' %}" loading="eager" alt="" class="icon-features-asset-item">
-                    <h6 class="heading-features-asset-item"></h6>
-                  </div>
-                  <div class="features-asset-item">
-                    <img src="{% static 'base/images/bx/check-green.svg' %}" loading="eager" alt="" class="icon-features-asset-item">
-                    <h6 class="heading-features-asset-item"></h6>
-                  </div>
                   <div class="features-asset-item">
                     <img src="{% static 'base/images/bx/check-green.svg' %}" loading="eager" alt="" class="icon-features-asset-item">
                     <h6 class="heading-features-asset-item"></h6>

@@ -5,6 +5,20 @@
     <div class="block-asset-categories block">
       <div class="collection-list-wrapper-categories base-dyn-list">
         <div role="list" class="collection-list-categories base-dyn-items">
+          {% for descendant in tabs.descendants %}
+            {% with descendant.specific as descendant %}
+              <div role="listitem" class="collection-item-categories base-dyn-item">
+                <a href="{{ descendant.url }}" class="link-asset-category base-inline-block">
+                  {% if descendant.image %}
+                    <img src="{{ descendant.image.url }}" alt="" loading="eager" class="icon-asset-item">
+                  {% else %}
+                    <img src="{% static 'base/images/google/tree.svg' %}" alt="" loading="eager" class="icon-asset-item">
+                  {% endif %}
+                  <div class="text-asset-category">{{ descendant.name }}</div>
+                </a>
+              </div>
+            {% endwith %}
+          {% endfor %}
           <div role="listitem" class="collection-item-categories base-dyn-item">
             <a href="{{ tabs.add_url }}" aria-current="page" class="link-asset-category base-inline-block base--current">
               <img src="{% static 'base/images/google/add-circle.svg' %}" loading="eager" alt="" class="icon-asset-category">

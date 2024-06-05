@@ -107,19 +107,20 @@ class UserProfilePage(RoutablePageMixin, Page):
             'delete_url': self.reverse_subpage('delete_profile_view'),
         }
 
-    def get_page_list_details(self):
+    def get_page_tab_details(self):
         return {
+            'descendants': self.get_children(),
             'add_url': self.reverse_subpage('add_category_view'),
             'form_model': 'Category',
         }
 
     def get_page_card_details(self):
-        return self.get_children()
+        return self.get_first_child().get_children()
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         context['page_panel'] = self.get_page_panel_details()
-        context['page_tabs'] = self.get_page_list_details()
+        context['page_tabs'] = self.get_page_tab_details()
         context['page_cards'] = self.get_page_card_details()
         return context
 
