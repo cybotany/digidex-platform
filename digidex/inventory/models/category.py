@@ -61,10 +61,16 @@ class InventoryCategoryPage(RoutablePageMixin, Page):
         'inventory.InventoryCategoryPage'
     ]
 
+    def get_main_image(self):
+        entries = self.journal_entries.first()
+        if entries:
+            return entries.image
+        return None
+
     def get_page_panel_details(self):
         return {
             'name': self.name,
-            'image': None, # self.image,
+            'image': self.get_main_image(),
             'date': self.created_at, 
             'description': self.description,
             'update_url': self.reverse_subpage('update_category_view'),

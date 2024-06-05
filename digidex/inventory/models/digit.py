@@ -50,10 +50,16 @@ class DigitalObjectPage(RoutablePageMixin, Page):
         'inventory.InventoryCategoryPage',
     ]
 
+    def get_main_image(self):
+        entries = self.journal_entries.first()
+        if entries:
+            return entries.image
+        return None
+
     def get_page_panel_details(self):
         return {
             'name': self.name,
-            'image': None, #self.image,
+            'image': self.get_main_image(),
             'date': self.created_at, 
             'description': self.description,
             'update_url': self.reverse_subpage('update_digit_view'),
@@ -67,7 +73,9 @@ class DigitalObjectPage(RoutablePageMixin, Page):
         }
 
     def get_page_card_details(self):
-        return self.get_children()
+        if hasattr(self, 'journal_entries'):
+            return self.journal_entries.all()
+        return None
 
     @route(r'^update/$', name='update_digit_view')
     def update_digit_view(self, request):

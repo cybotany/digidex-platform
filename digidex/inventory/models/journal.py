@@ -12,7 +12,7 @@ def journal_image_path(instance, filename):
     else:
         subdirectory = 'objects'
     extension = filename.split('.')[-1]
-    return f'users/{owner.uuid}/{subdirectory}/{detail_page.uuid}/{uuid.uuid4()}.{extension}'
+    return f'users/{owner.uuid}/{subdirectory}/{detail_page.id}/{uuid.uuid4()}.{extension}'
 
 class JournalEntry(models.Model):
     uuid = models.UUIDField(
