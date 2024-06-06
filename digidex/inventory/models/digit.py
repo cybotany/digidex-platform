@@ -13,7 +13,6 @@ from wagtail.fields import RichTextField
 from wagtail.models import Page, Orderable
 
 from inventory.forms import DigitalObjectForm, DigitalObjectDeletionForm, DigitalObjectJournalEntryForm
-from .journal import JournalEntry
 
 
 class DigitalObjectPage(RoutablePageMixin, Page):
@@ -171,9 +170,43 @@ class DigitalObjectPage(RoutablePageMixin, Page):
         return self.name.title()
 
 
-class DigitalObjectJournalEntry(Orderable, JournalEntry):
+class DigitalObjectJournalEntry(Orderable):
+    uuid = models.UUIDField(
+        default=uuid.uuid4,
+        unique=True,
+        editable=False,
+        db_index=True,
+        verbose_name="Journal Entry Collection UUID"
+    )
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    caption = models.CharField(
+        blank=True,
+        null=True,
+        max_length=250,
+        help_text="Image caption."
+    )
+    note = models.TextField(
+        blank=True,
+        null=True,
+        help_text="Journal entry note."
+    )
     page = ParentalKey(
         'inventory.DigitalObjectPage',
         on_delete=models.CASCADE,
         related_name='journal_entries',
     )
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+    last_modified = models.DateTimeField(
+        auto_now=True
+    )
+
+    def __str__(self):
+        return f"Journal entry made on{self.created_at}."

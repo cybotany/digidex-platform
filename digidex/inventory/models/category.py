@@ -6,16 +6,12 @@ from django.http import HttpResponseForbidden
 from django.core.exceptions import ValidationError
 from django.utils.text import slugify
 
-from modelcluster.fields import ParentalKey
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.fields import RichTextField
-from wagtail.models import Page, Orderable
+from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel
-from wagtail.images import get_image_model
 
-from inventory.forms import InventoryCategoryForm, InventoryCategoryDeletionForm, InventoryCategoryJournalEntryForm
-
-from .journal import JournalEntry
+from inventory.forms import InventoryCategoryForm, InventoryCategoryDeletionForm
 
 
 class InventoryCategoryPage(RoutablePageMixin, Page):
@@ -62,16 +58,10 @@ class InventoryCategoryPage(RoutablePageMixin, Page):
         'inventory.InventoryCategoryPage'
     ]
 
-    def get_main_image(self):
-        entries = self.journal_entries.first()
-        if entries:
-            return entries.image
-        return None
-
     def get_page_panel_details(self):
         return {
             'name': self.name,
-            'image': self.get_main_image(),
+            'image': None,
             'date': self.created_at, 
             'description': self.description,
             'update_url': self.reverse_subpage('update_category_view'),
@@ -80,7 +70,7 @@ class InventoryCategoryPage(RoutablePageMixin, Page):
 
     def get_page_list_details(self):
         return {
-            'add_url': self.reverse_subpage('add_category_entry_view'),
+            'add_url': '#',
             'form_model': 'Journal Entry',
         }
 
@@ -132,41 +122,6 @@ class InventoryCategoryPage(RoutablePageMixin, Page):
 
         return render(request, 'inventory/category/delete.html', {'form': form, 'url': self.url})
 
-    @route(r'^add/$', name='add_category_entry_view')
-    def add_view(self, request):
-        page_owner = self.owner
-        if page_owner != request.user:
-            return HttpResponseForbidden("You are not allowed to update this page.")
-        
-        if request.method == 'POST':
-            form = InventoryCategoryJournalEntryForm(request.POST, request.FILES)
-            if form.is_valid():
-                image_file = form.cleaned_data.get('image_file')
-                caption = form.cleaned_data.get('caption')
-                note = form.cleaned_data.get('note')
-
-                # Create the Wagtail Image object
-                image = None
-                if image_file:
-                    ImageModel = get_image_model()
-                    image = ImageModel.objects.create(
-                        title=image_file.name,
-                        file=image_file,
-                    )
-                journal_entry = InventoryCategoryJournalEntryForm(
-                    page=self,
-                    image=image,
-                    caption=caption,
-                    note=note,
-                )
-                journal_entry.save()
-                messages.success(request, 'Journal entry successfully added.')
-                return redirect(self.url)
-        else:
-            form = InventoryCategoryJournalEntryForm()
-        
-        return render(request, 'inventory/category/journal.html', {'form': form})
-
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         context['page_panel'] = self.get_page_panel_details()
@@ -188,11 +143,3 @@ class InventoryCategoryPage(RoutablePageMixin, Page):
 
     class Meta:
         verbose_name = "Inventory Category Page"
-
-
-class InventoryCategoryJournalEntry(Orderable, JournalEntry):
-    page = ParentalKey(
-        'inventory.InventoryCategoryPage',
-        on_delete=models.CASCADE,
-        related_name='journal_entries',
-    )
