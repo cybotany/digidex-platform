@@ -15,6 +15,8 @@ from wagtail.models import Page, Orderable
 from inventory.forms import DigitalObjectForm, DigitalObjectDeletionForm, DigitalObjectJournalEntryForm
 
 
+CustomImageModel = get_image_model()
+
 class DigitalObjectPage(RoutablePageMixin, Page):
     uuid = models.UUIDField(
         default=uuid.uuid4,
@@ -49,6 +51,18 @@ class DigitalObjectPage(RoutablePageMixin, Page):
     parent_page_types = [
         'inventory.InventoryCategoryPage',
     ]
+
+    @property
+    def collection(self):
+        if self.get_collection():
+            return self.get_collection()
+        return self.create_collection()
+
+    def get_collection(self):
+        return self.owner.collection.get_children().filter(name=self.name).first()
+
+    def create_collection(self):
+        return self.owner.collection.add_child(name=self.name)
 
     @property
     def image(self):
@@ -140,15 +154,15 @@ class DigitalObjectPage(RoutablePageMixin, Page):
                 # Create the Wagtail Image object
                 image = None
                 if image_file:
-                    ImageModel = get_image_model()
-                    image = ImageModel.objects.create(
+                    image = CustomImageModel.objects.create(
                         title=image_file.name,
                         file=image_file,
+                        caption=caption,
+                        collection=self.collection
                     )
                 journal_entry = DigitalObjectJournalEntry(
                     page=self,
                     image=image,
-                    caption=caption,
                     note=note,
                 )
                 journal_entry.save()
@@ -179,17 +193,11 @@ class DigitalObjectJournalEntry(Orderable):
         verbose_name="Journal Entry Collection UUID"
     )
     image = models.ForeignKey(
-        'wagtailimages.Image',
+        CustomImageModel,
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+'
-    )
-    caption = models.CharField(
-        blank=True,
-        null=True,
-        max_length=250,
-        help_text="Image caption."
     )
     note = models.TextField(
         blank=True,

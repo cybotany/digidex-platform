@@ -30,7 +30,8 @@ def create_user_profile(sender, instance, created, **kwargs):
 
                 root_users_collection, created = Collection.objects.get_or_create(name='Users')
                 user_collection = Collection.objects.create(name=f"{instance.username}'s Collection", parent=root_users_collection)
-                user_collection.save()            
+                user_collection.save()
+                instance.collection = user_collection         
             else:
                 logger.error("UserProfileIndexPage does not exist.")
         except Exception as e:

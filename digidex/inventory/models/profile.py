@@ -16,9 +16,10 @@ from wagtail.images import get_image_model
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 
-from base.utils.storage import PublicMediaStorage
 from inventory.forms import UserProfileForm, InventoryCategoryForm, DeleteUserForm
 
+
+CustomImageModel = get_image_model()
 
 def user_avatar_path(instance, filename):
     extension = filename.split('.')[-1]
@@ -65,7 +66,7 @@ class UserProfilePage(RoutablePageMixin, Page):
         verbose_name="User Profile UUID"
     )
     image = models.ForeignKey(
-        'wagtailimages.Image',
+        CustomImageModel,
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
@@ -136,8 +137,7 @@ class UserProfilePage(RoutablePageMixin, Page):
             form = UserProfileForm(request.POST, request.FILES)
             if form.is_valid():
                 if 'image' in form.cleaned_data and form.cleaned_data['image']:
-                    ImageModel = get_image_model()
-                    image = ImageModel(
+                    image = CustomImageModel(
                         title='User Avatar',
                         file=form.cleaned_data['image']
                     )
