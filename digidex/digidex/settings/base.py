@@ -241,6 +241,8 @@ ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Digidex] "
 # Wagtail settings
 WAGTAIL_SITE_NAME = "DigiDex"
 
+WAGTAILIMAGES_IMAGE_MODEL = 'base.models.image.DigiDexImage'
+
 WAGTAILIMAGES_EXTENSIONS = ['gif', 'jpg', 'jpeg', 'png', 'webp']
 
 WAGTAIL_FRONTEND_LOGIN_URL = LOGIN_URL

@@ -1,7 +1,6 @@
 import logging
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from django.contrib.auth.models import Group
 from django.contrib.auth import get_user_model
 from django.utils.text import slugify
 from wagtail.models import Collection
