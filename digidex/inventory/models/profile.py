@@ -12,7 +12,6 @@ from django.urls import reverse
 
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.models import Page
-from wagtail.images.models import Image
 from wagtail.images import get_image_model
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel

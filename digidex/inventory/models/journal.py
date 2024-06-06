@@ -22,11 +22,12 @@ class JournalEntry(models.Model):
         db_index=True,
         verbose_name="Journal Entry Collection UUID"
     )
-    image = models.ImageField(
-        storage=PublicMediaStorage(),
-        upload_to=journal_image_path,
+    image = models.ForeignKey(
+        'wagtailimages.Image',
         null=True,
-        blank=True
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
     )
     caption = models.CharField(
         blank=True,
@@ -48,3 +49,6 @@ class JournalEntry(models.Model):
 
     def __str__(self):
         return f"Journal entry made on{self.created_at}."
+
+    class Meta:
+        abstract = True

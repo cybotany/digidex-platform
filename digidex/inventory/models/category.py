@@ -11,6 +11,7 @@ from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.fields import RichTextField
 from wagtail.models import Page, Orderable
 from wagtail.admin.panels import FieldPanel
+from wagtail.images import get_image_model
 
 from inventory.forms import InventoryCategoryForm, InventoryCategoryDeletionForm, InventoryCategoryJournalEntryForm
 
@@ -140,11 +141,23 @@ class InventoryCategoryPage(RoutablePageMixin, Page):
         if request.method == 'POST':
             form = InventoryCategoryJournalEntryForm(request.POST, request.FILES)
             if form.is_valid():
+                image_file = form.cleaned_data.get('image_file')
+                caption = form.cleaned_data.get('caption')
+                note = form.cleaned_data.get('note')
+
+                # Create the Wagtail Image object
+                image = None
+                if image_file:
+                    ImageModel = get_image_model()
+                    image = ImageModel.objects.create(
+                        title=image_file.name,
+                        file=image_file,
+                    )
                 journal_entry = InventoryCategoryJournalEntryForm(
-                    image=form.cleaned_data['image'],
-                    caption=form.cleaned_data['caption'],
-                    note=form.cleaned_data['note'],
-                    page=self
+                    page=self,
+                    image=image,
+                    caption=caption,
+                    note=note,
                 )
                 journal_entry.save()
                 messages.success(request, 'Journal entry successfully added.')

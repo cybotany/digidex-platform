@@ -146,6 +146,7 @@ AWS_S3_SECRET_ACCESS_KEY = os.getenv("SPACES_SECRET_KEY")
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
+AWS_DEFAULT_ACL = 'public-read'
 AWS_S3_FILE_OVERWRITE = False
 
 MEDIA_URL = '{}/media/'.format(AWS_S3_CUSTOM_DOMAIN)
