@@ -1,32 +1,22 @@
 {% load static wagtailimages_tags %}
 
-<section class="section">
-  <div class="content">
-    <div class="block-categories block">
-      <div class="collection-list-wrapper-categories base-dyn-list">
-        <div role="list" class="collection-list-categories base-dyn-items">
-          {% for descendant in tabs.descendants %}
-            {% with descendant.specific as descendant %}
-              <div role="listitem" class="collection-item-categories base-dyn-item">
-                <a href="{{ descendant.url }}" class="link-category base-inline-block base--current">
-                  {% if descendant.image %}
-                    <img src="{{ descendant.image.url }}" alt="" loading="eager" class="icon-category">
-                  {% else %}
-                    <img src="{% static 'base/images/google/tree.svg' %}" alt="" loading="eager" class="icon-category">
-                  {% endif %}
-                  <div class="text-category">{{ descendant.name }}</div>
-                </a>
-              </div>
-            {% endwith %}
-          {% endfor %}
+<div class="block-categories block">
+  <div class="collection-list-wrapper-categories base-dyn-list">
+    <div role="list" class="collection-list-categories base-dyn-items">
+      {% for descendant in tabs.descendants %}
+        {% with descendant.specific as descendant %}
           <div role="listitem" class="collection-item-categories base-dyn-item">
-            <a href="{{ tabs.add_url }}" aria-current="page" class="link-category base-inline-block">
-              <img src="{% static 'base/images/google/add-circle.svg' %}" loading="eager" alt="" class="icon-category">
-              <div class="text-category">Add {{ tabs.form_model}}</div>
+            <a href="{{ descendant.url }}" class="link-category base-inline-block base--current">
+              {% if descendant.image %}
+                <img src="{{ descendant.image.url }}" alt="" loading="eager" class="icon-category">
+              {% else %}
+                <img src="{% static 'base/images/google/tree.svg' %}" alt="" loading="eager" class="icon-category">
+              {% endif %}
+                <div class="text-category">{{ descendant.name }}</div>
             </a>
           </div>
-        </div>
-      </div>
+        {% endwith %}
+      {% endfor %}
     </div>
   </div>
-</section>
+</div>

@@ -2,6 +2,15 @@
 
 {% block content %} 
   {% include 'base/elements/panel.html' with panel=page_panel %}
-  {% include 'base/elements/tab.html' with tabs=page_tabs %}
-  {% include 'base/elements/card.html' with cards=page_cards %}
+  <section class="section">
+    <div class="content">
+      <div class="page-body">
+        <div class="block-top">
+          <h3 class="heading-top">User Inventory</h3>
+          {% include 'base/elements/tab.html' with tabs=page_tabs %}
+        </div>
+        {% include 'base/elements/card.html' with cards=page_cards %}
+      </div>
+    </div>
+  </section>
 {% endblock %}
