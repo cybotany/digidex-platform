@@ -46,10 +46,9 @@ class Command(BaseCommand):
     def create_user_profile_page(self, user, user_profile_index):
         if not UserProfilePage.objects.filter(slug=slugify(user.username)).exists():
             user_profile_page = UserProfilePage(
-                title=f"{user.username}'s Profile",
+                title=f"{user.formatted_name}'s Profile",
                 slug=slugify(user.username),
                 owner=user,
-                heading=f"{user.username}'s Profile",
                 introduction="Welcome to my profile!",
                 user=user
             )
@@ -74,17 +73,17 @@ class Command(BaseCommand):
             name=f"{user.username}'s Collection",
         )
         root_users_collection.add_child(instance=user_collection)
-        self.stdout.write(self.style.SUCCESS(f'Successfully created collection for user {user.username}'))
+        self.stdout.write(self.style.SUCCESS(f'Successfully created collection for user {user.formatted_name}'))
         return user_collection
 
     def create_inventory_category_page(self, user, user_profile_page):
         if not InventoryCategoryPage.objects.filter(slug='party', owner=user).exists():
             inventory_category_page = InventoryCategoryPage(
-                title=f"{user.username}'s Inventory - Party",
+                title=f"{user.formatted_name}'s Inventory - Party",
                 slug='party',
                 owner=user,
                 name="Party",
-                description=f"{user.username}'s Party",
+                description=f"{user.formatted_name}'s Party",
                 is_party=True
             )
             user_profile_page.add_child(instance=inventory_category_page)

@@ -19,17 +19,17 @@ def create_user_profile(sender, instance, created, **kwargs):
             user_profile_index = UserProfileIndexPage.objects.first()
             if user_profile_index:
                 user_profile_page = UserProfilePage(
-                    title=f"{instance.username}'s Profile",
+                    title=f"{instance.formatted_name}'s Profile",
                     slug=slug,
                     owner=instance,
-                    heading=f"{instance.username}'s Profile",
-                    introduction="Welcome to my profile!"
+                    introduction="Welcome to my profile!",
+                    user=instance
                 )
                 user_profile_index.add_child(instance=user_profile_page)
                 user_profile_page.save_revision().publish()
 
                 root_users_collection, created = Collection.objects.get_or_create(name='Users')
-                user_collection = Collection.objects.create(name=f"{instance.username}'s Collection", parent=root_users_collection)
+                user_collection = Collection.objects.create(name=f"{instance.formatted_name}'s Collection", parent=root_users_collection)
                 user_collection.save()
                 instance.collection = user_collection         
             else:
@@ -42,11 +42,11 @@ def create_default_category(sender, instance, created, **kwargs):
     if created:
         try:
             inventory_category_page = InventoryCategoryPage(
-                title=f"{instance.owner.username}'s Inventory - Party",
+                title=f"{instance.user.formatted_name}'s Inventory - Party",
                 slug='party',
-                owner=instance.owner,
+                owner=instance.user,
                 name="Party",
-                description=f"{instance.owner.username}'s Party",
+                description=f"{instance.user.formatted_name}'s Party",
                 is_party=True
             )
             instance.add_child(instance=inventory_category_page)

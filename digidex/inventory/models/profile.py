@@ -72,11 +72,6 @@ class UserProfilePage(RoutablePageMixin, Page):
         on_delete=models.SET_NULL,
         related_name='+'
     )
-    heading = models.CharField(
-        max_length=100,
-        blank=True,
-        verbose_name="User Profile Heading"
-    )
     introduction = RichTextField(
         null=True,
         blank=True,
@@ -90,6 +85,11 @@ class UserProfilePage(RoutablePageMixin, Page):
         auto_now=True,
         verbose_name="Last Modified"
     )
+
+    content_panels = Page.content_panels + [
+        FieldPanel('image'),
+        FieldPanel('introduction'),
+    ]
 
     parent_page_types = [
         'inventory.UserProfileIndexPage'

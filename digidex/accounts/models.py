@@ -1,7 +1,6 @@
 import uuid
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.utils.text import slugify
 
 from wagtail.models import Collection
 
@@ -29,8 +28,12 @@ class User(AbstractUser):
     )
 
     @property
-    def get_slug(self):
-        return slugify(self.username)
+    def formatted_date(self):
+        return self.date_joined.strftime('%B %d, %Y')
+    
+    @property
+    def formatted_name(self):
+        return self.username.title()
 
     def __str__(self):
-        return self.username.title()
+        return f"User: {self.formatted_name}"
