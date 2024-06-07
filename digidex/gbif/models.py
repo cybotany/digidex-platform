@@ -59,7 +59,7 @@ class Taxon(models.Model):
         null=True,
         blank=True
     )
-    name_published_in = models.CharField(
+    name_published_in = models.TextField(
         max_length=255,
         null=True,
         blank=True
