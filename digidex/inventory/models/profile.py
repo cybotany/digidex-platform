@@ -139,7 +139,8 @@ class UserProfilePage(RoutablePageMixin, Page):
                 if 'image' in form.cleaned_data and form.cleaned_data['image']:
                     image = CustomImageModel(
                         title='User Avatar',
-                        file=form.cleaned_data['image']
+                        file=form.cleaned_data['image'],
+                        collection=self.user.collection
                     )
                     image.save()
                     self.image = image

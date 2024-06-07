@@ -69,9 +69,9 @@ class DigitalObjectPage(RoutablePageMixin, Page):
         return self.get_main_image()
 
     def get_main_image(self):
-        entries = self.journal_entries.first()
-        if entries:
-            return entries.image
+        entry = self.journal_entries.order_by('-created_at').first()
+        if entry:
+            return entry.image
         return None
 
     def get_page_panel_details(self):
@@ -147,19 +147,20 @@ class DigitalObjectPage(RoutablePageMixin, Page):
         if request.method == 'POST':
             form = DigitalObjectJournalEntryForm(request.POST, request.FILES)
             if form.is_valid():
-                image_file = form.cleaned_data.get('image_file')
+                image_file = form.cleaned_data.get('image')
                 caption = form.cleaned_data.get('caption')
                 note = form.cleaned_data.get('note')
 
                 # Create the Wagtail Image object
                 image = None
                 if image_file:
-                    image = CustomImageModel.objects.create(
+                    image = CustomImageModel(
                         title=image_file.name,
                         file=image_file,
                         caption=caption,
                         collection=self.collection
                     )
+                    image.save()
                 journal_entry = DigitalObjectJournalEntry(
                     page=self,
                     image=image,
@@ -217,4 +218,4 @@ class DigitalObjectJournalEntry(Orderable):
     )
 
     def __str__(self):
-        return f"Journal entry made on{self.created_at}."
+        return f"Journal entry made on {self.created_at}."

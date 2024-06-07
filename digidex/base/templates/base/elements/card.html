@@ -8,13 +8,11 @@
           {% if card %}
             {% with card.specific as card %}
               <div role="listitem" class="asset-item base-dyn-item">
-                <div class="block-icon-asset-item">
-                  {% if card.image %}
-                    <img src="{{ card.image.url }}" alt="" loading="eager" class="icon-asset-item">
-                  {% else %}
-                    <img src="{% static 'base/images/google/tree.svg' %}" alt="" loading="eager" class="icon-asset-item">
-                  {% endif %}
-                </div>
+                {% if card.image %}
+                  <div class="block-icon-asset-item">
+                    {% image card.image original class="icon-asset-item" %}
+                  </div>
+                {% endif %}
                 {% if card.date %}
                   <div class="date">{{ card.date }}</div>
                 {% endif %}
