@@ -16,7 +16,6 @@ INSTALLED_APPS = [
     "base",
     "accounts",
     "inventory",
-    "gbif",
     "nfc",
     "api",
     "home",
