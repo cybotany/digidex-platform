@@ -74,11 +74,19 @@ class DigitalObjectPage(RoutablePageMixin, Page):
             return entry.image
         return None
 
+    @property
+    def formatted_date(self):
+        return self.created_at.strftime('%B %d, %Y')
+    
+    @property
+    def formatted_name(self):
+        return self.name.title()
+
     def get_page_panel_details(self):
         return {
-            'name': self.name,
+            'name': self.formatted_name,
             'image': self.get_main_image(),
-            'date': self.created_at, 
+            'date': self.formatted_date, 
             'description': self.description,
             'update_url': self.reverse_subpage('update_digit_view'),
             'delete_url': self.reverse_subpage('delete_digit_view'),
@@ -95,11 +103,12 @@ class DigitalObjectPage(RoutablePageMixin, Page):
             cards = []
             for entry in self.journal_entries.all():
                 cards.append({
+                    'name': f"Journal Entry {entry.entry_number}",
                     'image': entry.image,
                     'description': entry.note,
-                    'date': entry.created_at,
+                    'date': entry.formatted_date,
                 })
-
+            return cards
         return None
 
     @route(r'^update/$', name='update_digit_view')
@@ -228,6 +237,10 @@ class DigitalObjectJournalEntry(Orderable):
     last_modified = models.DateTimeField(
         auto_now=True
     )
+
+    @property
+    def formatted_date(self):
+        return self.created_at.strftime('%B %d, %Y')
     
     def save(self, *args, **kwargs):
         if not self.entry_number:

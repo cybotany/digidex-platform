@@ -99,11 +99,19 @@ class UserProfilePage(RoutablePageMixin, Page):
         'inventory.InventoryCategoryPage'
     ]
 
+    @property
+    def formatted_date(self):
+        return self.created_at.strftime('%B %d, %Y')
+    
+    @property
+    def formatted_name(self):
+        return self.user.username.title()
+
     def get_page_panel_details(self):
         return {
-            'name': self.user.username,
+            'name': self.formatted_name,
             'image': self.image,
-            'date': self.created_at, 
+            'date': self.formatted_date, 
             'description': self.introduction,
             'update_url': self.reverse_subpage('update_profile_view'),
             'delete_url': self.reverse_subpage('delete_profile_view'),

@@ -2254,6 +2254,10 @@ figcaption {
   line-height: 120%;
 }
 
+.text-link.parent {
+  color: var(--accent-a1);
+}
+
 .text-link.update {
   color: var(--accent-a3);
 }
@@ -2277,6 +2281,10 @@ figcaption {
   display: flex;
 }
 
+.block-icon-link.parent {
+  background-color: var(--accent-b1);
+}
+
 .block-icon-link.update {
   background-color: var(--accent-b3);
 }
@@ -2298,9 +2306,17 @@ figcaption {
   display: flex;
 }
 
+.link-block.parent {
+  padding-left: .3em;
+}
+
 .link-block:hover {
   background-color: var(--accent-b1);
   padding-left: 1em;
+}
+
+.link-block.parent:hover {
+  padding-right: 1em;
 }
 
 .link-block.update:hover {
@@ -2329,7 +2345,7 @@ figcaption {
   right: 2em;
 }
 
---green-tag {
+.green-tag {
   background-color: var(--accent-a3);
   color: var(--white);
   letter-spacing: .05em;
@@ -5198,6 +5214,16 @@ figcaption {
   .grid-colors {
     grid-template-columns: 1fr;
   }
+}
+
+.block-parent-button {
+  grid-column-gap: .8em;
+  grid-row-gap: .8em;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3em;
+  display: flex;
 }
 
 .block-button {
