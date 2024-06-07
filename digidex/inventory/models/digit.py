@@ -92,7 +92,14 @@ class DigitalObjectPage(RoutablePageMixin, Page):
 
     def get_page_card_details(self):
         if hasattr(self, 'journal_entries'):
-            return self.journal_entries.all()
+            cards = []
+            for entry in self.journal_entries.all():
+                cards.append({
+                    'image': entry.image,
+                    'description': entry.note,
+                    'date': entry.created_at,
+                })
+
         return None
 
     @route(r'^update/$', name='update_digit_view')
@@ -210,12 +217,27 @@ class DigitalObjectJournalEntry(Orderable):
         on_delete=models.CASCADE,
         related_name='journal_entries',
     )
+    entry_number = models.PositiveIntegerField(
+        default=1,
+        editable=False,
+        verbose_name="Journal Entry Number"
+    )
     created_at = models.DateTimeField(
         auto_now_add=True
     )
     last_modified = models.DateTimeField(
         auto_now=True
     )
+    
+    def save(self, *args, **kwargs):
+        if not self.entry_number:
+            last_entry = DigitalObjectJournalEntry.objects.filter(page=self.page).order_by('-entry_number').first()
+            if last_entry:
+                self.entry_number = last_entry.entry_number + 1
+            else:
+                self.entry_number = 1
+
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"Journal entry made on {self.created_at}."
