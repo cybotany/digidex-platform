@@ -5,26 +5,24 @@
     {% for card in cards %}
       {% if card %}
         {% with card.specific as card %}
-          <div role="listitem" class="base-dyn-item">
-            <div class="block-asset">
-              <a href="#" class="link-asset-thumbnail base-inline-block">
-                {% if card.image %}
-                  {% image card.image original class="image-asset-thumbnail" %}
-                {% endif %}
+          <div role="listitem" class="block-asset base-dyn-item">
+            <a href="#" class="link-asset-thumbnail base-inline-block">
+              {% if card.image %}
+                {% image card.image original class="image-asset-thumbnail" %}
+              {% endif %}
+            </a>
+            <div class="asset">
+              {% if card.date %}
+                <div class="date">{{ card.date }}</div>
+              {% endif %}
+              <a href="{{ card.url }}" class="link-heading-asset base-inline-block">
+                <h3 class="heading-asset">{{ card.name }}</h3>
               </a>
-              <div class="asset">
-                {% if card.date %}
-                  <div class="date">{{ card.date }}</div>
-                {% endif %}
-                <a href="{{ card.url }}" class="link-heading-asset base-inline-block">
-                  <h3 class="heading-asset">{{ card.name }}</h3>
-                </a>
-                {% if card.description %}
-                  <p class="paragraph-asset">{{ card.description }}</p>
-                {% endif %}
-                <a href="{{ card.url }}" class="button base-button">Details</a>
-              </div>
-            </div>  
+              {% if card.description %}
+                <p class="paragraph-asset">{{ card.description }}</p>
+              {% endif %}
+              <a href="{{ card.url }}" class="button-small base-button">Details</a>
+            </div>
           </div>
         {% endwith %}
       {% else %}
