@@ -34,10 +34,12 @@
     value="{{ attrs.value|default_if_none:"" }}"
     type="hidden">
 {% else %}
-  <label class="" for="{{ attrs.id }}">
-    {% slot label %}
-    {% endslot %}
-  </label>
+  {% if not attrs.unlabeled %}
+    <label class="" for="{{ attrs.id }}">
+        {% slot label %}
+        {% endslot %}
+    </label>
+  {% endif %}
   <input class="text-field base-input"
     {% if attrs.required %}required{% endif %}
     {% if attrs.disabled %}disabled{% endif %}
@@ -49,8 +51,21 @@
     {% if attrs.autocomplete %}autocomplete="{{ attrs.autocomplete }}"{% endif %}
     value="{{ attrs.value|default_if_none:"" }}"
     type="{{ attrs.type }}">
-{% endif %}
-  
-{% if slots.help_text %}
-  <span>{% slot help_text %}{% endslot %}</span>
+    {% if attrs.unlabeled %}
+    <label class="" for="{{ attrs.id }}">
+        {% slot label %}
+        {% endslot %}
+    </label>
+  {% endif %}
+  {% if slots.help_text %}
+      <div class="account__text">
+          {% slot help_text %}
+          {% endslot %}
+      </div>
+  {% endif %}
+  {% if attrs.errors %}
+      {% for error in attrs.errors %}
+        <div class="error__text">{{ error }}</div>
+      {% endfor %}
+  {% endif %}
 {% endif %}
