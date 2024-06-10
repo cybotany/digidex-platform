@@ -82,35 +82,6 @@ class DigitalObjectPage(RoutablePageMixin, Page):
     def formatted_name(self):
         return self.name.title()
 
-    def get_page_panel_details(self):
-        return {
-            'name': self.formatted_name,
-            'image': self.get_main_image(),
-            'date': self.formatted_date, 
-            'description': self.description,
-            'update_url': self.reverse_subpage('update_digit_view'),
-            'delete_url': self.reverse_subpage('delete_digit_view'),
-        }
-
-    def get_page_list_details(self):
-        return {
-            'add_url': self.reverse_subpage('add_digit_entry_view'),
-            'form_model': 'Journal Entry',
-        }
-
-    def get_page_card_details(self):
-        if hasattr(self, 'journal_entries'):
-            cards = []
-            for entry in self.journal_entries.all():
-                cards.append({
-                    'name': f"Journal Entry {entry.entry_number}",
-                    'image': entry.image,
-                    'description': entry.note,
-                    'date': entry.formatted_date,
-                })
-            return cards
-        return None
-
     @route(r'^update/$', name='update_digit_view')
     def update_digit_view(self, request):
         page_owner = self.owner
@@ -190,11 +161,43 @@ class DigitalObjectPage(RoutablePageMixin, Page):
         
         return render(request, 'inventory/digit/journal.html', {'form': form})
 
+    def get_card_details(self):
+        return {
+            'name': self.formatted_name,
+            'image': self.image,
+            'date': self.formatted_date,
+            'description': self.description or 'No description available',
+            'detail_url': self.url,
+        }
+
+    def get_cards(self):
+        if hasattr(self, 'journal_entries'):
+            cards = self.journal_entries.all()
+            return cards
+        return []
+
+    def get_panel(self):
+        return {
+            'name': self.formatted_name,
+            'image': self.image,
+            'date': self.formatted_date, 
+            'description': self.description,
+            'update_url': self.reverse_subpage('update_digit_view'),
+            'delete_url': self.reverse_subpage('delete_digit_view'),
+        }
+
+    def get_tabs(self):
+        return {
+            'descendants': [],
+            'add_url': self.reverse_subpage('add_digit_entry_view'),
+            'form_model': 'Journal Entry',
+        }
+
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context['page_panel'] = self.get_page_panel_details()
-        context['page_tabs'] = self.get_page_list_details()
-        context['page_cards'] = self.get_page_card_details()
+        context['page_panel'] = self.get_panel()
+        context['page_tabs'] = self.get_tabs()
+        context['page_cards'] = self.get_cards()
         return context
 
     def __str__(self):
@@ -241,6 +244,13 @@ class DigitalObjectJournalEntry(Orderable):
     @property
     def formatted_date(self):
         return self.created_at.strftime('%B %d, %Y')
+
+    def get_details(self):
+        return {
+            'image': self.image,
+            'date': self.formatted_date,
+            'note': self.note,
+        }
     
     def save(self, *args, **kwargs):
         if not self.entry_number:

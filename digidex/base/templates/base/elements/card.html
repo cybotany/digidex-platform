@@ -3,33 +3,29 @@
 <div id="asset-items-list" class="collection-list-wrapper-assets base-dyn-list">
   <div role="list" class="collection-list-assets base-dyn-items">
     {% for card in cards %}
-      {% if card %}
-        {% with card.specific as card %}
-          <div role="listitem" class="block-asset base-dyn-item">
-            <a href="#" class="link-asset-thumbnail base-inline-block">
-              {% if card.image %}
-                {% image card.image original class="image-asset-thumbnail" %}
-              {% endif %}
-            </a>
-            <div class="asset">
-              {% if card.date %}
-                <div class="date">{{ card.date }}</div>
-              {% endif %}
-              <a href="{{ card.url }}" class="link-heading-asset base-inline-block">
-                <h3 class="heading-asset">{{ card.name }}</h3>
-              </a>
-              {% if card.description %}
-                <p class="paragraph-asset">{{ card.description }}</p>
-              {% endif %}
-              <a href="{{ card.url }}" class="button-small base-button">Details</a>
-            </div>
-          </div>
-        {% endwith %}
-      {% else %}
-        <div class="empty-state base-dyn-empty">
-          <div class="text-empty">No cards found.</div>
+      <div role="listitem" class="block-asset base-dyn-item">
+        <a href="{{ card.detail_url }}" class="link-asset-thumbnail base-inline-block">
+          {% if card.image %}
+            {% image card.image original class="image-asset-thumbnail" %}
+          {% endif %}
+        </a>
+        <div class="asset">
+          {% if card.date %}
+            <div class="date">{{ card.date }}</div>
+          {% endif %}
+          <a href="{{ card.detail_url }}" class="link-heading-asset base-inline-block">
+            <h3 class="heading-asset">{{ card.name }}</h3>
+          </a>
+          {% if card.description %}
+            <p class="paragraph-asset">{{ card.description }}</p>
+          {% endif %}
+          <a href="{{ card.detail_url }}" class="button base-button">Details</a>
         </div>
-      {% endif %}
+      </div>
+    {% empty %}
+      <div class="empty-state base-dyn-empty">
+        <div class="text-empty">No cards found.</div>
+      </div>
     {% endfor %}
   </div>
 </div>

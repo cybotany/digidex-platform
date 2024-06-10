@@ -58,24 +58,13 @@ class InventoryCategoryPage(RoutablePageMixin, Page):
         'inventory.InventoryCategoryPage'
     ]
 
-    def get_page_panel_details(self):
-        return {
-            'name': self.name,
-            'image': None,
-            'date': self.created_at, 
-            'description': self.description,
-            'update_url': self.reverse_subpage('update_category_view'),
-            'delete_url': self.reverse_subpage('delete_category_view'),
-        }
-
-    def get_page_list_details(self):
-        return {
-            'add_url': '#',
-            'form_model': 'Journal Entry',
-        }
-
-    def get_page_card_details(self):
-        return self.get_children()
+    @property
+    def formatted_date(self):
+        return self.created_at.strftime('%B %d, %Y')
+    
+    @property
+    def formatted_name(self):
+        return self.name.title()
 
     @route(r'^update/$', name='update_category_view')
     def update_view(self, request):
@@ -122,11 +111,33 @@ class InventoryCategoryPage(RoutablePageMixin, Page):
 
         return render(request, 'inventory/category/delete.html', {'form': form, 'url': self.url})
 
+    def get_card_details(self):
+        return {
+            'name': self.formatted_name,
+            'image': None,
+            'date': self.formatted_date,
+            'description': self.description or 'No description available',
+            'detail_url': self.url,
+        }
+
+    def get_panel(self):
+        return {
+            'name': self.formatted_name,
+            'image': None,
+            'date': self.formatted_date, 
+            'description': self.description or 'No description available',
+            'update_url': self.reverse_subpage('update_category_view'),
+            'delete_url': self.reverse_subpage('delete_category_view'),
+        }
+
+    def get_cards(self):
+        cards = self.get_children()
+        return cards
+
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context['page_panel'] = self.get_page_panel_details()
-        context['page_tabs'] = self.get_page_list_details()
-        context['page_cards'] = self.get_page_card_details()
+        context['page_panel'] = self.get_panel()
+        context['page_cards'] = self.get_cards()
         return context
 
     def clean(self):

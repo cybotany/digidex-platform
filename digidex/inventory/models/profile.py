@@ -107,33 +107,6 @@ class UserProfilePage(RoutablePageMixin, Page):
     def formatted_name(self):
         return self.user.username.title()
 
-    def get_page_panel_details(self):
-        return {
-            'name': self.formatted_name,
-            'image': self.image,
-            'date': self.formatted_date, 
-            'description': self.introduction,
-            'update_url': self.reverse_subpage('update_profile_view'),
-            'delete_url': self.reverse_subpage('delete_profile_view'),
-        }
-
-    def get_page_tab_details(self):
-        return {
-            'descendants': self.get_children(),
-            'add_url': self.reverse_subpage('add_category_view'),
-            'form_model': 'Category',
-        }
-
-    def get_page_card_details(self):
-        return self.get_first_child().get_children()
-
-    def get_context(self, request, *args, **kwargs):
-        context = super().get_context(request, *args, **kwargs)
-        context['page_panel'] = self.get_page_panel_details()
-        context['page_tabs'] = self.get_page_tab_details()
-        context['page_cards'] = self.get_page_card_details()
-        return context
-
     @route(r'^update/$', name='update_profile_view')
     @login_required
     def update_view(self, request):
@@ -212,6 +185,51 @@ class UserProfilePage(RoutablePageMixin, Page):
             form = InventoryCategoryForm()
         
         return render(request, 'inventory/category/add.html', {'form': form})
+
+    def get_panel(self):
+        return {
+            'name': self.formatted_name,
+            'image': self.image,
+            'date': self.formatted_date, 
+            'description': self.introduction or 'No description available',
+            'update_url': self.reverse_subpage('update_profile_view'),
+            'delete_url': self.reverse_subpage('delete_profile_view'),
+        }
+
+    def get_inventory(self, tab_name=None):
+        from django.contrib.contenttypes.models import ContentType
+        _categorytype = ContentType.objects.get(app_label='inventory', model='inventorycategorypage')
+        _categories = self.get_children().filter(content_type=_categorytype)
+
+        if tab_name:
+            try:
+                tab = _categories.get(slug=tab_name)
+            except Page.DoesNotExist:
+                pass            
+        else:
+            tab = _categories.get(slug='party')
+        
+        categories = _categories.exclude(id=tab.id)
+        category_list = [category.specific.get_card_details() for category in categories]
+
+        _cardtype = ContentType.objects.get(app_label='inventory', model='digitalobjectpage')
+        _cards = tab.get_children().filter(content_type=_cardtype)
+        
+        card_list = [_card.specific.get_card_details() for _card in _cards]
+     
+        return {
+            'tab': tab.specific,
+            'cards': card_list,
+            'categories': category_list,
+            'add_url': self.reverse_subpage('add_category_view'),
+            'form_model': 'Category',
+        }
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context['page_panel'] = self.get_panel()
+        context['page_inventory'] = self.get_inventory()
+        return context
 
     class Meta:
         verbose_name = "User Profile Page"
