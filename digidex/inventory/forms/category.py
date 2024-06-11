@@ -9,7 +9,7 @@ class InventoryCategoryForm(forms.Form):
         widget=forms.TextInput(
             attrs={
                 'class': 'text-field base-input',
-                'placeholder': 'Enter the name of the inventory'
+                'placeholder': 'Enter the name for the inventory box.'
             }
         ),
         required=True
@@ -18,10 +18,26 @@ class InventoryCategoryForm(forms.Form):
         widget=forms.Textarea(
             attrs={
                 'class': 'text-field textarea',
-                'placeholder': 'Provide a detailed description of the object'
+                'placeholder': 'Provide a detailed description of the inventory box.'
             }
         ),
         required=False
+    )
+    icon = forms.ImageField(
+        widget=forms.FileInput(
+            attrs={
+                'placeholder': 'Provide an icon (optional).',
+            }
+        )
+    )
+    caption = forms.CharField(
+        max_length=255,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'text-field base-input',
+                'placeholder': 'Provide a caption for the image'
+            }
+        )
     )
 
     def clean_name(self):

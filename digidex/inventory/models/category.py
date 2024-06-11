@@ -7,12 +7,15 @@ from django.core.exceptions import ValidationError
 from django.utils.text import slugify
 
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
+from wagtail.images import get_image_model
 from wagtail.fields import RichTextField
 from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel
 
 from inventory.forms import InventoryCategoryForm, InventoryCategoryDeletionForm
 
+
+CustomImageModel = get_image_model()
 
 class InventoryCategoryPage(RoutablePageMixin, Page):
     uuid = models.UUIDField(
@@ -33,6 +36,13 @@ class InventoryCategoryPage(RoutablePageMixin, Page):
         blank=True,
         null=True,
         help_text="Inventory Category description."
+    )
+    icon = models.ForeignKey(
+        CustomImageModel,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
     )
     is_party = models.BooleanField(
         default=False,
