@@ -15,7 +15,6 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 INSTALLED_APPS = [
     "base",
     "accounts",
-    "nfc",
     "inventory",
     "api",
     "home",
@@ -219,7 +218,7 @@ ACCOUNT_USERNAME_BLACKLIST = [
     'notification', 'alerts', 'blog', 'forum', 'wiki', 'help', 'search',
     'dev', 'developer', 'cors', 'about', 'privacy', 'legal', 'terms',
     'services', 'document', 'documents', 'download', 'downloads', 'error', 'errors', '403', '404', '500',
-    'accounts', 'company', 'nfc', 'inventory'
+    'accounts', 'company', 'inventory'
     'new', 'all', 'any', 'every', 'site', 'api-key', 'reset', 'change',
     'start', 'stop', 'edit', 'delete', 'remove', 'read', 'write', 'list',
     'create', 'update', 'confirm', 'save', 'load', 'logout', 'signin', 'signout',
