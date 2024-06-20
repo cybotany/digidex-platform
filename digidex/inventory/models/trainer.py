@@ -2,11 +2,12 @@ import uuid
 from django.db import models
 
 from modelcluster.fields import ParentalKey
-from wagtail.models import Collection, Page, Orderable
+from wagtail.models import Collection, Page
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel, InlinePanel
 
-from .note import Note
+from .note import Note, NoteGalleryImage
+from .nfc import NearFieldCommunicationLink
 
 
 class TrainerPage(Page):
@@ -44,16 +45,33 @@ class TrainerPage(Page):
         'inventory.AssetPage'
     ]
 
-    class Meta:
-        verbose_name = "User Profile Page"
 
-
-class TrainerPageNote(Orderable, Note):
-    page = ParentalKey(
+class TrainerNote(Note):
+    page = models.ForeignKey(
         TrainerPage,
         on_delete=models.CASCADE,
         related_name='notes'
     )
 
     def __str__(self):
-        return f"Trainer Journal Entry {self.uuid}"
+        return f"Trainer Note: {self.uuid}"
+
+
+class TrainerNoteGalleryImage(NoteGalleryImage):
+    note = ParentalKey(
+        TrainerNote,
+        on_delete=models.CASCADE,
+        related_name='gallery_images'
+    )
+
+
+class TrainerNearFieldCommunicationLink(NearFieldCommunicationLink):
+    page = models.OneToOneField(
+        TrainerPage,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='nfc'
+    )
+
+    def __str__(self):
+        return f"Trainer NFC: {self.uuid}"

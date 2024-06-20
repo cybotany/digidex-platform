@@ -12,7 +12,6 @@ class Migration(migrations.Migration):
     dependencies = [
         ('base', '0001_initial'),
         ('inventory', '0001_initial'),
-        ('nfc', '0002_remove_nearfieldcommunicationtag_page'),
         ('wagtailcore', '0091_remove_revision_submitted_for_moderation'),
     ]
 

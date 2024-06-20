@@ -3,11 +3,12 @@ import uuid
 from django.db import models
 
 from modelcluster.fields import ParentalKey
-from wagtail.models import Collection, Page, Orderable
+from wagtail.models import Collection, Page
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel, InlinePanel
 
-from .note import Note
+from .note import Note, NoteGalleryImage
+from .nfc import NearFieldCommunicationLink
 
 
 class InventoryPage(Page):
@@ -51,12 +52,32 @@ class InventoryPage(Page):
         return f"Inventory: {self.name}"
 
 
-class InventoryPageNote(Orderable, Note):
-    page = ParentalKey(
+class InventoryNote(Note):
+    inventory = models.ForeignKey(
         InventoryPage,
         on_delete=models.CASCADE,
         related_name='notes'
     )
 
     def __str__(self):
-        return f"Inventory Journal Entry {self.uuid}"
+        return f"Inventory Note: {self.uuid}"
+
+
+class InventoryNoteGalleryImage(NoteGalleryImage):
+    note = ParentalKey(
+        InventoryNote,
+        on_delete=models.CASCADE,
+        related_name='gallery_images'
+    )
+
+
+class InventoryNearFieldCommunicationLink(NearFieldCommunicationLink):
+    inventory = models.OneToOneField(
+        InventoryPage,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='nfc'
+    )
+
+    def __str__(self):
+        return f"Inventory NFC: {self.uuid}"

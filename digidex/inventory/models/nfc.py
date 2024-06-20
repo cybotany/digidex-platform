@@ -2,8 +2,8 @@ import uuid
 
 from django.db import models
 from django.urls import reverse
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes.fields import GenericForeignKey
+
+from modelcluster.fields import ParentalKey
 
 from inventory.validators import validate_ntag_serial
 
@@ -93,23 +93,17 @@ class NearFieldCommunicationTag(models.Model):
 
 
 class NearFieldCommunicationLink(models.Model):
-    """
-    Represents an NFC (Near Field Communication) tag in the system, associated with a digitized object.
-    """
-    ntag = models.OneToOneField(
-        'NearFieldCommunicationTag',
-        on_delete=models.CASCADE,
-        related_name='link'
-    )
-    object_id = models.PositiveIntegerField(
+    uuid = models.UUIDField(
+        default=uuid.uuid4,
+        unique=True,
+        editable=False,
         db_index=True
     )
-    content_type = models.ForeignKey(
-        ContentType,
-        db_index=True,
-        on_delete=models.CASCADE
+    tag = models.OneToOneField(
+        NearFieldCommunicationTag,
+        on_delete=models.CASCADE,
+        related_name='+'
     )
-    content_object = GenericForeignKey(
-        'content_type',
-        'object_id'
-    )
+
+    class Meta:
+        abstract = True
