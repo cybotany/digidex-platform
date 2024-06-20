@@ -1,7 +1,7 @@
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from django.urls import include, path
 
-from api.views import nfc, gbif, wagtail
+from api.views import nfc, gbif
 
 
 token_urls = [
@@ -20,7 +20,6 @@ gbif_urls = [
 
 app_name = 'api'
 urlpatterns = [
-    path('v2/', wagtail.api_router.urls),
     path('token/', include(token_urls)),
     path('nfc/', include(nfc_urls)),
     path('gbif/', include(gbif_urls)),
