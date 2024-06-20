@@ -14,7 +14,6 @@ urlpatterns = [
     path("documents/", include(wagtaildocs_urls)),
     path('account/', include('allauth.urls')),
     path("search/", search, name="search"),
-    path('nfc/', include('nfc.urls')),
     path('api/', include('api.urls')),
     path('u/', include('inventory.urls')),
 ]

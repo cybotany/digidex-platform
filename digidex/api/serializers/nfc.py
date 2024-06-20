@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from nfc.models import NearFieldCommunicationTag
+from inventory.models import NearFieldCommunicationTag
 
 
 class NearFieldCommunicationTagSerializer(serializers.ModelSerializer):
