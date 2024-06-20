@@ -1,5 +1,7 @@
+import os
+
 from django import template
-from inventory.models import UserProfilePage
+from django.utils.text import slugify
 
 register = template.Library()
 
@@ -9,9 +11,8 @@ def get_user_profile_url(context):
     user = request.user
 
     if user.is_authenticated:
-        try:
-            profile_page = UserProfilePage.objects.get(owner=user)
-            return profile_page.url
-        except UserProfilePage.DoesNotExist:
-            return None
+        return os.path.join(
+            "/",
+            slugify(user.username)
+        )
     return None

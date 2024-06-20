@@ -14,7 +14,6 @@ class NearFieldCommunicationTag(models.Model):
     Attributes:
         uuid (UUIDField): Auto-generated unique identifier for each NFC tag.
         serial_number (CharField): Unique serial number of the NFC tag. Used for physical identification.
-        digit (OneToOneField): Optional link to the user digit that this NFC tag maps to.
         active (BooleanField): Status flag indicating whether the NFC tag is active (in use).
         created_at (DateTimeField): Timestamp indicating when the record was first created.
         last_modified (DateTimeField): Timestamp indicating when the record was last updated.
@@ -40,13 +39,6 @@ class NearFieldCommunicationTag(models.Model):
         max_length=50,
         choices=NTAG_TYPES,
         default='NTAG 213'
-    )
-    page = models.OneToOneField(
-        'inventory.DigitalObjectPage',
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True,
-        related_name="ntag"
     )
     active = models.BooleanField(
         default=False

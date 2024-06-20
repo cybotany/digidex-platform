@@ -25,7 +25,7 @@ class HomePage(Page):
     ]
 
     subpage_types = [
-        'inventory.UserProfileIndexPage'
+        'inventory.TrainerPage'
     ]
 
     class Meta:
