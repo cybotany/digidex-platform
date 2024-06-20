@@ -1,0 +1,16 @@
+<div class="categories__block">
+  <div class="categories__collectionwrapper w-dyn-list">
+    {% for category in categories %}
+      <div role="list" class="categories__collection w-dyn-items">
+        <div role="listitem" class="categories__item w-dyn-item">
+          <a href="#" class="category__link w-inline-block">
+            <img alt="" loading="eager" src="" class="category__icon">
+            <div class="category__text"></div>
+          </a>
+        </div>
+      </div>
+    {% empty %}
+      {% include 'inventory/components/empty.html' with missing_object='categories' %}
+    {% endfor %}
+  </div>
+</div>
