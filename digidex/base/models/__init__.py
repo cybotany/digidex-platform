@@ -1,2 +1,2 @@
 from .user import DigiDexUser
-#from .image import DigiDexImage, DigiDexRendition
+from .image import DigiDexImage, DigiDexRendition
