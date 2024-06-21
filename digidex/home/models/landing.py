@@ -8,11 +8,9 @@ class HomePage(Page):
     hero_heading = models.CharField(
         blank=True,
         max_length=255,
-        verbose_name="Hero Heading"
     )
     hero_paragraph = models.TextField(
         blank=True,
-        verbose_name="Hero Paragraph"
     )
 
     content_panels = Page.content_panels + [
@@ -25,7 +23,7 @@ class HomePage(Page):
     ]
 
     subpage_types = [
-        'inventory.TrainerPage'
+        'home.TrainerPage'
     ]
 
     class Meta:

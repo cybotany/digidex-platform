@@ -2,7 +2,7 @@ from django.db.models.signals import post_migrate
 from django.dispatch import receiver
 from wagtail.models import Site, Page
 
-from home.models import HomePage
+from inventory.models.landing import HomePage
 
 
 @receiver(post_migrate)

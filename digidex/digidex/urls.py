@@ -17,7 +17,6 @@ urlpatterns = [
     path("search/", search, name="search"),
     path('api/v2/', api_router.urls),
     path('api/', include('api.urls')),
-    path('u/', include('inventory.urls')),
 ]
 
 if settings.DEBUG:

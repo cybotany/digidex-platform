@@ -1,8 +1,8 @@
 import pytest
 from wagtail.models import Page
 
-from home.models import HomePage
-from accounts.models import UserIndexPage, User
+from inventory.models.landing import HomePage
+from accounts.models import User
 from selenium import webdriver
 
 
@@ -21,15 +21,6 @@ def home_page():
     home_page = HomePage(title="Home", slug="home")
     root_page.add_child(instance=home_page)
     return home_page
-
-
-@pytest.fixture
-def user_index_page():
-    home_page = HomePage.objects.get(slug="home")
-    user_index_page = UserIndexPage(
-        title="Users", heading="Welcome", intro="Profiles Intro", slug="u")
-    home_page.add_child(instance=user_index_page)
-    return user_index_page
 
 
 @pytest.fixture

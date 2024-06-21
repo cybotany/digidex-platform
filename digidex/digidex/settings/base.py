@@ -14,10 +14,9 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 INSTALLED_APPS = [
     "base",
-    "accounts",
-    "inventory",
-    "api",
+    "users",
     "home",
+    "api",
     "search",
     "storages",
     "whitenoise.runserver_nostatic",
@@ -189,7 +188,7 @@ SIMPLE_JWT = {
 }
 
 # ALLAUTH settings
-AUTH_USER_MODEL = 'accounts.User'
+AUTH_USER_MODEL = 'users.User'
 
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
@@ -197,7 +196,7 @@ SIGNUP_URL = 'account_signup'
 
 LOGIN_URL = 'account_login'
 
-ACCOUNT_ADAPTER = 'accounts.adapter.DigidexAccountAdapter'
+ACCOUNT_ADAPTER = 'users.adapter.DigidexAccountAdapter'
 
 ACCOUNT_PRESERVE_USERNAME_CASING = False
 
@@ -219,7 +218,7 @@ ACCOUNT_USERNAME_BLACKLIST = [
     'notification', 'alerts', 'blog', 'forum', 'wiki', 'help', 'search',
     'dev', 'developer', 'cors', 'about', 'privacy', 'legal', 'terms',
     'services', 'document', 'documents', 'download', 'downloads', 'error', 'errors', '403', '404', '500',
-    'accounts', 'company', 'inventory'
+    'users', 'company', 'inventory'
     'new', 'all', 'any', 'every', 'site', 'api-key', 'reset', 'change',
     'start', 'stop', 'edit', 'delete', 'remove', 'read', 'write', 'list',
     'create', 'update', 'confirm', 'save', 'load', 'logout', 'signin', 'signout',

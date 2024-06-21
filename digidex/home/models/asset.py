@@ -17,8 +17,7 @@ class AssetPage(Page):
         default=uuid.uuid4,
         unique=True,
         editable=False,
-        db_index=True,
-        verbose_name="Inventory Category UUID"
+        db_index=True
     )
     collection = models.ForeignKey(
         Collection,
@@ -48,8 +47,8 @@ class AssetPage(Page):
     ]
 
     parent_page_types = [
-        'inventory.TrainerPage',
-        'inventory.CategoryPage'
+        'home.TrainerPage',
+        'home.CategoryPage'
     ]
 
     subpage_types = []

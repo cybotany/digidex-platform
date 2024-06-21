@@ -1,16 +1,8 @@
-{% extends "index.html" %}
-{% load static %}
-
-{% block extra_css %}
-    <link rel="stylesheet" href="{% static 'base/css/utility.css' %}">
-{% endblock %}
+{% extends "utility.html" %}
 
 {% block title %}Protected Page{% endblock %}
 
-{% block body %}
-    <a href="index.html" class="brand-center w-nav-brand">
-        <img src="images/logo_white.svg" loading="eager" alt="" class="logo">
-    </a>
+{% block content %}
     <div class="utility-page-wrap">
         <div class="utility-page-content w-password-page w-form">
             <div class="subtitle blue">401<br></div>

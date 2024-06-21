@@ -1,5 +1,4 @@
 import uuid
-
 from django.db import models
 
 from modelcluster.fields import ParentalKey
@@ -12,13 +11,12 @@ from .note import Note, NoteGalleryImage
 from .nfc import NearFieldCommunicationLink
 
 
-class CategoryPage(Page):
+class TrainerPage(Page):
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
         editable=False,
-        db_index=True,
-        verbose_name="Category UUID"
+        db_index=True
     )
     collection = models.ForeignKey(
         Collection,
@@ -27,68 +25,61 @@ class CategoryPage(Page):
         on_delete=models.SET_NULL,
         related_name='+'
     )
-    name = models.CharField(
-        max_length=50
-    )
-    description = RichTextField(
-        blank=True,
-        null=True
+    introduction = RichTextField(
+        null=True,
+        blank=True
     )
 
     api_fields = [
         APIField('uuid'),
-        APIField('name'),
-        APIField('description'),
+        APIField('introduction'),
     ]
 
     content_panels = Page.content_panels + [
-        FieldPanel('name'),
-        FieldPanel('description'),
-        InlinePanel('notes', label="Longitudinal Category Notes"),
+        FieldPanel('introduction'),
+        InlinePanel('notes', label="Longitudinal Trainer Notes"),
     ]
 
     parent_page_types = [
-        'inventory.TrainerPage'
+        'home.HomePage'
     ]
 
     subpage_types = [
-        'inventory.AssetPage'
+        'home.CategoryPage',
+        'home.AssetPage'
     ]
 
-    def __str__(self):
-        return f"Category: {self.name}"
 
-
-class CategoryNote(Note):
-    page = models.ForeignKey(
-        CategoryPage,
+class TrainerNote(Note):
+    page = ParentalKey(
+        TrainerPage,
         on_delete=models.CASCADE,
         related_name='notes'
     )
 
     def __str__(self):
-        return f"Category Note: {self.uuid}"
+        return f"Trainer Note: {self.uuid}"
 
 
-class CategoryNoteGalleryImage(NoteGalleryImage):
+class TrainerNoteGalleryImage(NoteGalleryImage):
     note = ParentalKey(
-        CategoryNote,
+        TrainerNote,
         on_delete=models.CASCADE,
         related_name='gallery_images'
     )
 
     panels = NoteGalleryImage.panels +  [
-        InlinePanel('gallery_images', label="Category Note Image Gallery"),
+        InlinePanel('gallery_images', label="Note Image Gallery"),
     ]
 
 
-class CategoryNearFieldCommunicationLink(NearFieldCommunicationLink):
+class TrainerNearFieldCommunicationLink(NearFieldCommunicationLink):
     page = models.OneToOneField(
-        CategoryPage,
+        TrainerPage,
         on_delete=models.SET_NULL,
         null=True,
         related_name='nfc'
     )
 
     def __str__(self):
-        return f"Category NFC: {self.uuid}"
+        return f"Trainer NFC: {self.uuid}"
