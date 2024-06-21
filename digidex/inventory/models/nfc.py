@@ -3,8 +3,6 @@ import uuid
 from django.db import models
 from django.urls import reverse
 
-from modelcluster.fields import ParentalKey
-
 from inventory.validators import validate_ntag_serial
 
 

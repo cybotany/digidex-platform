@@ -3,6 +3,7 @@ import uuid
 from django.db import models
 
 from modelcluster.fields import ParentalKey
+from wagtail.api import APIField
 from wagtail.models import Collection, Page
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel, InlinePanel
@@ -11,13 +12,13 @@ from .note import Note, NoteGalleryImage
 from .nfc import NearFieldCommunicationLink
 
 
-class InventoryPage(Page):
+class CategoryPage(Page):
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
         editable=False,
         db_index=True,
-        verbose_name="Inventory UUID"
+        verbose_name="Category UUID"
     )
     collection = models.ForeignKey(
         Collection,
@@ -34,10 +35,16 @@ class InventoryPage(Page):
         null=True
     )
 
+    api_fields = [
+        APIField('uuid'),
+        APIField('name'),
+        APIField('description'),
+    ]
+
     content_panels = Page.content_panels + [
         FieldPanel('name'),
         FieldPanel('description'),
-        InlinePanel('notes', label="Longitudinal Inventory Notes"),
+        InlinePanel('notes', label="Longitudinal Category Notes"),
     ]
 
     parent_page_types = [
@@ -49,35 +56,46 @@ class InventoryPage(Page):
     ]
 
     def __str__(self):
-        return f"Inventory: {self.name}"
+        return f"Category: {self.name}"
 
 
-class InventoryNote(Note):
-    inventory = models.ForeignKey(
-        InventoryPage,
+class CategoryNote(Note):
+    page = models.ForeignKey(
+        CategoryPage,
         on_delete=models.CASCADE,
         related_name='notes'
     )
 
+    api_fields = [
+        APIField('uuid'),
+        APIField('entry'),
+        APIField('created_at'),
+        APIField('last_modified'),
+    ]
+
     def __str__(self):
-        return f"Inventory Note: {self.uuid}"
+        return f"Category Note: {self.uuid}"
 
 
-class InventoryNoteGalleryImage(NoteGalleryImage):
+class CategoryNoteGalleryImage(NoteGalleryImage):
     note = ParentalKey(
-        InventoryNote,
+        CategoryNote,
         on_delete=models.CASCADE,
         related_name='gallery_images'
     )
 
+    api_fields = [
+        APIField('image'),
+    ]
 
-class InventoryNearFieldCommunicationLink(NearFieldCommunicationLink):
-    inventory = models.OneToOneField(
-        InventoryPage,
+
+class CategoryNearFieldCommunicationLink(NearFieldCommunicationLink):
+    page = models.OneToOneField(
+        CategoryPage,
         on_delete=models.SET_NULL,
         null=True,
         related_name='nfc'
     )
 
     def __str__(self):
-        return f"Inventory NFC: {self.uuid}"
+        return f"Category NFC: {self.uuid}"

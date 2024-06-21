@@ -3,7 +3,6 @@ import uuid
 from django.db import models
 
 from modelcluster.models import ClusterableModel
-from modelcluster.fields import ParentalKey
 from wagtail.images import get_image_model
 from wagtail.fields import RichTextField
 from wagtail.models import Orderable
