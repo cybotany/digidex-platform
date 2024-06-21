@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.http import JsonResponse
 
 from serializers.gbif import get_species_name_suggestions, get_species_backbone
