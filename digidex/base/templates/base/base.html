@@ -1,0 +1,22 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'base/css/base.css' %}">
+{% endblock %}
+
+{% block body %}
+    <header id="header">
+        {% include 'base/components/notification-bar.html' %}
+        {% include 'base/components/navigation-bar.html' %}
+        {% include 'base/components/header.html' %}
+    </header>
+    <main id="main">
+        {% block content %}{% endblock %}
+    </main>
+    <footer id="footer">
+        {% include 'base/components/footer.html' %}
+    </footer>
+{% endblock %}
+
+{% block extra_js %}{% endblock %}

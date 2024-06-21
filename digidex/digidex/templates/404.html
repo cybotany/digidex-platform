@@ -1,12 +1,24 @@
-{% extends "base/utility.html" %}
+{% extends "index.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'base/css/utility.css' %}">
+{% endblock %}
 
 {% block title %}Page not found{% endblock %}
 
-{% block content %}
-  <div class="utility-page-content">
-    <div class="subtitle blue">404<br></div>
-    <h2 class="heading-account">Page Not Found</h2>
-    <p class="paragraph-account">The page you are looking for doesn&#x27;t exist or has been moved</p>
-    <a href="index.html" class="button base-button">Back to Home</a>
-  </div>
+{% block body %}
+    <a href="index.html" class="brand-center w-nav-brand">
+        <img src="images/logo_white.svg" loading="eager" alt="" class="logo">
+    </a>
+    <div class="utility-page-wrap">
+        <div class="utility-page-content">
+            <div class="subtitle blue">404<br></div>
+            <h2 class="heading-account">Page Not Found</h2>
+            <p class="paragraph-account">The page you are looking for doesn&#x27;t exist or has been moved</p>
+            <a href="index.html" class="button base-button">Back to Home</a>
+        </div>
+    </div>
 {% endblock %}
+
+{% block extra_js %}{% endblock %}
