@@ -1,1 +1,11 @@
 {% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'home/css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+  {% include 'includes/categories.html' %}
+  {% include 'includes/assets.html' %}
+{% endblock %}
