@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 
-from api.serializers.gbif import get_species_name_suggestions, get_species_backbone
+from serializers.gbif import get_species_name_suggestions, get_species_backbone
 
 def species_suggestions_view(request):
     query = request.GET.get('query')

@@ -1,7 +1,7 @@
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from django.urls import include, path
 
-from api.views import nfc, gbif
+from .viewsets import nfc, gbif
 
 
 token_urls = [

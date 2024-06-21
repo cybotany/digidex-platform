@@ -15,7 +15,6 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 INSTALLED_APPS = [
     "base",
     "home",
-    "api",
     "search",
     "storages",
     "whitenoise.runserver_nostatic",
