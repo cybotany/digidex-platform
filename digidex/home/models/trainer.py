@@ -41,7 +41,7 @@ class TrainerPage(Page):
     ]
 
     parent_page_types = [
-        'home.HomePage'
+        'home.LandingPage'
     ]
 
     subpage_types = [

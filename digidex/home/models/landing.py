@@ -4,7 +4,7 @@ from wagtail.admin.panels import MultiFieldPanel, FieldPanel
 from wagtail.models import Page
 
 
-class HomePage(Page):
+class LandingPage(Page):
     hero_heading = models.CharField(
         blank=True,
         max_length=255,

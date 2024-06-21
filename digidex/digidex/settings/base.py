@@ -14,7 +14,6 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 INSTALLED_APPS = [
     "base",
-    "users",
     "home",
     "api",
     "search",
@@ -188,7 +187,7 @@ SIMPLE_JWT = {
 }
 
 # ALLAUTH settings
-AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'base.DigiDexUser'
 
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
@@ -196,7 +195,7 @@ SIGNUP_URL = 'account_signup'
 
 LOGIN_URL = 'account_login'
 
-ACCOUNT_ADAPTER = 'users.adapter.DigidexAccountAdapter'
+ACCOUNT_ADAPTER = 'base.adapter.DigidexAccountAdapter'
 
 ACCOUNT_PRESERVE_USERNAME_CASING = False
 
@@ -218,7 +217,7 @@ ACCOUNT_USERNAME_BLACKLIST = [
     'notification', 'alerts', 'blog', 'forum', 'wiki', 'help', 'search',
     'dev', 'developer', 'cors', 'about', 'privacy', 'legal', 'terms',
     'services', 'document', 'documents', 'download', 'downloads', 'error', 'errors', '403', '404', '500',
-    'users', 'company', 'inventory'
+    'base', 'company', 'inventory'
     'new', 'all', 'any', 'every', 'site', 'api-key', 'reset', 'change',
     'start', 'stop', 'edit', 'delete', 'remove', 'read', 'write', 'list',
     'create', 'update', 'confirm', 'save', 'load', 'logout', 'signin', 'signout',
@@ -239,7 +238,7 @@ ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Digidex] "
 # Wagtail settings
 WAGTAIL_SITE_NAME = "DigiDex"
 
-WAGTAILIMAGES_IMAGE_MODEL = 'base.DigiDexImage'
+#WAGTAILIMAGES_IMAGE_MODEL = 'base.DigiDexImage'
 
 WAGTAILIMAGES_EXTENSIONS = ['gif', 'jpg', 'jpeg', 'png', 'webp']
 
