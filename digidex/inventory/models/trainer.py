@@ -53,18 +53,11 @@ class TrainerPage(Page):
 
 
 class TrainerNote(Note):
-    page = models.ForeignKey(
+    page = ParentalKey(
         TrainerPage,
         on_delete=models.CASCADE,
         related_name='notes'
     )
-
-    api_fields = [
-        APIField('uuid'),
-        APIField('entry'),
-        APIField('created_at'),
-        APIField('last_modified'),
-    ]
 
     def __str__(self):
         return f"Trainer Note: {self.uuid}"
@@ -77,8 +70,8 @@ class TrainerNoteGalleryImage(NoteGalleryImage):
         related_name='gallery_images'
     )
 
-    api_fields = [
-        APIField('image'),
+    panels = NoteGalleryImage.panels +  [
+        InlinePanel('gallery_images', label="Note Image Gallery"),
     ]
 
 

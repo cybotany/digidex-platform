@@ -66,13 +66,6 @@ class CategoryNote(Note):
         related_name='notes'
     )
 
-    api_fields = [
-        APIField('uuid'),
-        APIField('entry'),
-        APIField('created_at'),
-        APIField('last_modified'),
-    ]
-
     def __str__(self):
         return f"Category Note: {self.uuid}"
 
@@ -84,8 +77,8 @@ class CategoryNoteGalleryImage(NoteGalleryImage):
         related_name='gallery_images'
     )
 
-    api_fields = [
-        APIField('image'),
+    panels = NoteGalleryImage.panels +  [
+        InlinePanel('gallery_images', label="Category Note Image Gallery"),
     ]
 
 

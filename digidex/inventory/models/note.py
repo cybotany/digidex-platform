@@ -3,10 +3,11 @@ import uuid
 from django.db import models
 
 from modelcluster.models import ClusterableModel
+from wagtail.api import APIField
 from wagtail.images import get_image_model
 from wagtail.fields import RichTextField
 from wagtail.models import Orderable
-from wagtail.admin.panels import FieldPanel, InlinePanel
+from wagtail.admin.panels import FieldPanel
 
 
 DigiDexImageModel = get_image_model()
@@ -29,9 +30,15 @@ class Note(ClusterableModel):
         auto_now=True
     )
 
+    api_fields = [
+        APIField('uuid'),
+        APIField('entry'),
+        APIField('created_at'),
+        APIField('last_modified'),
+    ]
+
     panels = [
         FieldPanel('entry'),
-        InlinePanel('gallery_images', label="Note Image Gallery"),
     ]
 
     class Meta:
@@ -46,6 +53,10 @@ class NoteGalleryImage(Orderable):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+
+    api_fields = [
+        APIField('image'),
+    ]
 
     panels = [
         FieldPanel('image'),
