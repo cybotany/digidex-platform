@@ -3,10 +3,16 @@ import os
 from django import template
 from django.utils.text import slugify
 
+from wagtail.models import Site
+
 register = template.Library()
 
 @register.simple_tag(takes_context=True)
-def get_user_profile_url(context):
+def get_site_root(context):
+    return Site.find_for_request(context["request"]).root_page
+
+@register.simple_tag(takes_context=True)
+def trainer_page_url(context):
     request = context['request']
     user = request.user
 

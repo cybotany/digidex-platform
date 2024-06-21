@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags navigation_tags%}
+{% load static wagtailcore_tags digidex_tags%}
 
 {% get_site_root as site_root %}
 
@@ -14,9 +14,9 @@
         {% endfor %}
         <div class="navbar__buttons--mobile">
           {% if user.is_authenticated %}
-            {% get_user_profile_url as profile_url %}
-            {% if profile_url %}
-              <a href="{{ profile_url }}" id="navbar_profile_button" class="navbar__button--outline base-button">Profile</a>
+            {% get_trainer_page_url as trainer_url %}
+            {% if trainer_url %}
+              <a href="{{ trainer_url }}" id="navbar_profile_button" class="navbar__button--outline base-button">Profile</a>
             {% endif %}
               <a href="{% url 'account_logout' %}" id="navbar_logout_button" class="navbar__button base-button">Sign Out</a>
           {% else %}
@@ -29,9 +29,9 @@
     <div class="navbar__item">
       <div class="navbar__buttons--desktop">
         {% if user.is_authenticated %}
-          {% get_user_profile_url as profile_url %}
-          {% if profile_url %}
-            <a href="{{ profile_url }}" id="navbar_profile_button" class="navbar__button--outline base-button">Profile</a>
+          {% get_trainer_page_url as trainer_url %}
+          {% if trainer_url %}
+            <a href="{{ trainer_url }}" id="navbar_profile_button" class="navbar__button--outline base-button">Profile</a>
           {% endif %}
             <a href="{% url 'account_logout' %}" id="navbar_logout_button" class="navbar__button base-button">Sign Out</a>
         {% else %}
