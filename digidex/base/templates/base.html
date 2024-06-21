@@ -7,15 +7,15 @@
 
 {% block body %}
     <header id="header">
-        {% include 'base/components/notification-bar.html' %}
-        {% include 'base/components/navigation-bar.html' %}
-        {% include 'base/components/header.html' %}
+        {% include 'includes/notification-bar.html' %}
+        {% include 'includes/navigation-bar.html' %}
+        {% include 'includes/header.html' %}
     </header>
     <main id="main">
         {% block content %}{% endblock %}
     </main>
     <footer id="footer">
-        {% include 'base/components/footer.html' %}
+        {% include 'includes/footer.html' %}
     </footer>
 {% endblock %}
 
