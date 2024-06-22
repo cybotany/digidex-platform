@@ -4,15 +4,20 @@ from wagtail.images.models import Image, AbstractImage, AbstractRendition
 
 
 class DigiDexImage(AbstractImage):
-    caption = models.CharField(
+    caption = models.TextField(
         blank=True,
         null=True,
-        max_length=250,
-        help_text="Image caption."
+        max_length=150
+    )
+    alt_text = models.CharField(
+        blank=True,
+        null=True,
+        max_length=75
     )
 
     admin_form_fields = Image.admin_form_fields + (
         'caption',
+        'alt_text',
     )
 
 

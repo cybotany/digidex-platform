@@ -1,37 +1,78 @@
-from wagtail.blocks import (
-    StructBlock,
-    CharBlock,
-    TextBlock,
-    URLBlock,
-    ListBlock
-)
-
+from wagtail.blocks import StructBlock, CharBlock, TextBlock, URLBlock, ListBlock
 from wagtail.images.blocks import ImageChooserBlock
 
 
-class NavigationBlock(StructBlock):
-    logo = ImageChooserBlock(required=True)
-    links = ListBlock(URLBlock())
-    login_link = URLBlock(required=True)
-    get_started_link = URLBlock(required=True)
-    cart_icon = ImageChooserBlock(required=True)
-    cart_quantity = CharBlock(required=True)
+class LinkBlock(StructBlock):
+    link = URLBlock(
+        required=True,
+        help_text="Enter the URL to link to"
+    )
+    text = CharBlock(
+        required=True,
+        help_text="Enter the text to display"
+    )
+
+    class Meta:
+        icon = "link"
+        label = "URL"
+
+
+class ImageLinkBlock(StructBlock):
+    image = ImageChooserBlock(
+        required=True,
+        help_text="Select an image to use"
+    )
+    url = LinkBlock(
+        required=True
+    )
 
 
 class NotificationBlock(StructBlock):
-    heading = CharBlock(required=True)
-    paragraph = TextBlock(required=True)
+    message = CharBlock(
+        required=True
+    )
+    icons = ListBlock(
+        ImageLinkBlock(),
+        required=False
+    )
+
+    class Meta:
+        template = 'base/blocks/notification.html'
+        icon = "notification"
+        label = "Notification"
+
+
+class NavigationBlock(StructBlock):
+    logo = ImageChooserBlock(
+        required=True
+    )
+    links = ListBlock(
+        URLBlock()
+    )
+    login_link = URLBlock(
+        required=True
+    )
+    get_started_link = URLBlock(
+        required=True
+    )
 
 
 class HeaderBlock(StructBlock):
-    logo = ImageChooserBlock(required=True)
-    links = ListBlock(URLBlock())
-    login_link = URLBlock(required=True)
-    get_started_link = URLBlock(required=True)
-    cart_icon = ImageChooserBlock(required=True)
-    cart_quantity = CharBlock(required=True)
+    heading = CharBlock(
+        required=True
+    )
+    subheading = TextBlock(
+        required=False
+    )
 
 
 class FooterBlock(StructBlock):
-    logo = ImageChooserBlock(required=True)
-    description = TextBlock(required=True)
+    image = ImageChooserBlock(
+        required=True
+    )
+    description = TextBlock(
+        required=True
+    )
+    copyright = CharBlock(
+        required=True
+    )
