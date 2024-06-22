@@ -1,13 +1,19 @@
 {% load static %}
 
-{% if messages %}
-  <section class="section-top-bar">
-    {% for message in messages %}
-      <div class="top-bar-block">
-        <div class="top-bar">
-          <div class="info-top-bar">{{ message }}</div>
-        </div>
+<section class="section-top-bar">
+  <div class="top-bar-block">
+    <div class="top-bar">
+      <div class="info-top-bar">{{ banner.message }}</div>
+    </div>
+    {% if banner.icons exists %}
+      <div class="top-bar">
+        {% for icon in banner.icons %}
+          <a href="{{ icon.url }}" class="link-top-bar w-inline-block">
+            <img src="{{ icon.image }}" loading="eager" alt="" class="icon-top-bar">
+            <div class="text-top-bar">{{ icon.text }}</div>
+          </a>
+        {% endfor %}
       </div>
-    {% endfor %}
-  </section>
-{% endif %}
+    {% endif %}
+  </div>
+</section>

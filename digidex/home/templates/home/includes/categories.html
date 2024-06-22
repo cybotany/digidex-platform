@@ -3,9 +3,9 @@
     {% for category in categories %}
       <div role="list" class="categories__collection w-dyn-items">
         <div role="listitem" class="categories__item w-dyn-item">
-          <a href="#" class="category__link w-inline-block">
-            <img alt="" loading="eager" src="" class="category__icon">
-            <div class="category__text"></div>
+          <a href="{{ category.url }}" class="category__link w-inline-block">
+            <img alt="{{ category.image.url }}" loading="eager" src="{{ category.image.caption }}" class="category__icon">
+            <div class="category__text">{{ category.name }}</div>
           </a>
         </div>
       </div>

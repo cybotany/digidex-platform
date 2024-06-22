@@ -1,78 +1,37 @@
 from wagtail.blocks import (
-    CharBlock,
-    ChoiceBlock,
-    RichTextBlock,
-    StreamBlock,
     StructBlock,
+    CharBlock,
+    TextBlock,
+    URLBlock,
+    ListBlock
 )
-from wagtail.embeds.blocks import EmbedBlock
+
 from wagtail.images.blocks import ImageChooserBlock
 
 
-class HeadingBlock(StructBlock):
-    heading = CharBlock(
-        required=True
-    )
-    size = ChoiceBlock(
-        choices=[
-            ("", "Select a heading size"),
-            ("h1", "H1"),
-            ("h2", "H2"),
-            ("h3", "H3"),
-            ("h4", "H4"),
-            ("h5", "H5"),
-            ("h6", "H6"),
-        ],
-        default="h2"
-    )
-
-    class Meta:
-        icon = "title"
-        template = "base/blocks/heading_block.html"
+class NavigationBlock(StructBlock):
+    logo = ImageChooserBlock(required=True)
+    links = ListBlock(URLBlock())
+    login_link = URLBlock(required=True)
+    get_started_link = URLBlock(required=True)
+    cart_icon = ImageChooserBlock(required=True)
+    cart_quantity = CharBlock(required=True)
 
 
-class ImageBlock(StructBlock):
-    image = ImageChooserBlock(
-        required=True
-    )
-    caption = CharBlock(
-        required=False
-    )
-    attribution = CharBlock(
-        required=False
-    )
-
-    class Meta:
-        icon = "image"
-        template = "base/blocks/image_block.html"
+class NotificationBlock(StructBlock):
+    heading = CharBlock(required=True)
+    paragraph = TextBlock(required=True)
 
 
-class FAQBlock(StructBlock):
-    question = CharBlock(
-        required=True,
-        max_length=255
-    )
-    answer = CharBlock(
-        required=True,
-        max_length=255
-    )
-    icon = ImageChooserBlock(
-        required=False
-    )
-
-    class Meta:
-        icon = 'question'
-        template = 'base/blocks/faq_block.html'
-        label = 'FAQ'
+class HeaderBlock(StructBlock):
+    logo = ImageChooserBlock(required=True)
+    links = ListBlock(URLBlock())
+    login_link = URLBlock(required=True)
+    get_started_link = URLBlock(required=True)
+    cart_icon = ImageChooserBlock(required=True)
+    cart_quantity = CharBlock(required=True)
 
 
-class BaseStreamBlock(StreamBlock):
-    heading_block = HeadingBlock()
-    paragraph_block = RichTextBlock(
-        icon="pilcrow"
-    )
-    image_block = ImageBlock()
-    embed_block = EmbedBlock(
-        help_text="Insert a URL to embed. For example, https://www.youtube.com/watch?v=SGJFWirQ3ks",
-        icon="media",
-    )
+class FooterBlock(StructBlock):
+    logo = ImageChooserBlock(required=True)
+    description = TextBlock(required=True)
