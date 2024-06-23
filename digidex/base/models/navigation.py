@@ -51,14 +51,14 @@ class FooterCopyright(
     ]
 
     def __str__(self):
-        return "Footer Copyright"
+        return "Footer Reference"
 
     def get_preview_template(self, request, mode_name):
         return "base.html"
 
     def get_preview_context(self, request, mode_name):
         return {
-            "footer_copyright": self.text
+            "footer_reference": self.text
         }
 
     class Meta(TranslatableMixin.Meta):
