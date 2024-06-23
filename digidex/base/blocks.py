@@ -1,9 +1,9 @@
-from wagtail.blocks import StructBlock, CharBlock, TextBlock, URLBlock, ListBlock
+from wagtail.blocks import StreamBlock, StructBlock, CharBlock, TextBlock, URLBlock, ListBlock, PageChooserBlock
 from wagtail.images.blocks import ImageChooserBlock
 
 
 class LinkBlock(StructBlock):
-    link = URLBlock(
+    url = URLBlock(
         required=True,
         help_text="Enter the URL to link to"
     )
@@ -11,18 +11,21 @@ class LinkBlock(StructBlock):
         required=True,
         help_text="Enter the text to display"
     )
+    image = ImageChooserBlock(
+        required=False,
+        help_text="Select an image to use"
+    )
 
     class Meta:
         icon = "link"
-        label = "URL"
+        label = "Link"
 
 
-class ImageLinkBlock(StructBlock):
-    image = ImageChooserBlock(
-        required=True,
-        help_text="Select an image to use"
-    )
-    url = LinkBlock(
+class ButtonSetBlock(StructBlock):
+    primary = LinkBlock(
+        required=True
+    ),
+    secondary = LinkBlock(
         required=True
     )
 
@@ -31,15 +34,16 @@ class NotificationBlock(StructBlock):
     message = CharBlock(
         required=True
     )
-    icons = ListBlock(
-        ImageLinkBlock(),
-        required=False
+    links = LinkBlock(
+        LinkBlock,
+        required=False,
+        max_num=2,
     )
 
     class Meta:
         template = 'base/blocks/notification.html'
-        icon = "notification"
-        label = "Notification"
+        icon = "info-circle"
+        label = "Notification Bar"
 
 
 class NavigationBlock(StructBlock):
@@ -47,14 +51,18 @@ class NavigationBlock(StructBlock):
         required=True
     )
     links = ListBlock(
-        URLBlock()
+        LinkBlock,
+        required=False,
+        max_num=5
     )
-    login_link = URLBlock(
+    buttons = ButtonSetBlock(
         required=True
     )
-    get_started_link = URLBlock(
-        required=True
-    )
+
+    class Meta:
+        template = 'base/blocks/navigation.html'
+        icon = "bars"
+        label = "Navigation Bar"
 
 
 class HeaderBlock(StructBlock):
@@ -64,6 +72,11 @@ class HeaderBlock(StructBlock):
     subheading = TextBlock(
         required=False
     )
+
+    class Meta:
+        template = 'base/blocks/header.html'
+        icon = "title"
+        label = "Body Header"
 
 
 class FooterBlock(StructBlock):
@@ -76,3 +89,7 @@ class FooterBlock(StructBlock):
     copyright = CharBlock(
         required=True
     )
+
+    class Meta:
+        template = 'base/blocks/footer.html'
+        label = "Body Footer"
