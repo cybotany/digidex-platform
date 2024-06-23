@@ -30,22 +30,6 @@ class ButtonSetBlock(StructBlock):
     )
 
 
-class NotificationBlock(StructBlock):
-    message = CharBlock(
-        required=True
-    )
-    links = LinkBlock(
-        LinkBlock,
-        required=False,
-        max_num=2,
-    )
-
-    class Meta:
-        template = 'base/blocks/notification.html'
-        icon = "info-circle"
-        label = "Notification Bar"
-
-
 class NavigationBlock(StructBlock):
     logo = ImageChooserBlock(
         required=True
@@ -93,3 +77,14 @@ class FooterBlock(StructBlock):
     class Meta:
         template = 'base/blocks/footer.html'
         label = "Body Footer"
+
+
+class PageBlock(StreamBlock):
+    header = HeaderBlock()
+    navigation = NavigationBlock()
+    notification = NotificationBlock()
+    footer = FooterBlock()
+
+    class Meta:
+        icon = "doc-full"
+        label = "Page Block"

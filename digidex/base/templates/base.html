@@ -6,17 +6,9 @@
 {% endblock %}
 
 {% block body %}
-  <header id="header">
-      {% include 'includes/notification.html' %}
-      {% include 'includes/navigation.html' %}
-      {% include 'includes/header.html' %}
-  </header>
   <main id="main">
       {% block content %}{% endblock %}
   </main>
-  <footer id="footer">
-      {% include 'includes/footer.html' %}
-  </footer>
 {% endblock %}
 
 {% block extra_js %}{% endblock %}
