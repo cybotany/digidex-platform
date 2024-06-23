@@ -5,7 +5,7 @@ from django.utils.text import slugify
 
 from wagtail.models import Site
 
-from base.models.navigation import FooterText
+from base.models.navigation import FooterCopyright
 
 register = template.Library()
 
@@ -27,12 +27,12 @@ def get_trainer_page_url(context):
     return None
 
 
-@register.inclusion_tag("base/includes/footer/copyright.html", takes_context=True)
+@register.inclusion_tag("base/includes/footer_copyright.html", takes_context=True)
 def get_footer_copyright(context):
     footer_copyright = context.get("footer_copyright", "")
 
     if not footer_copyright:
-        instance = FooterText.objects.filter(live=True).first()
+        instance = FooterCopyright.objects.filter(live=True).first()
         footer_copyright = instance.body if instance else ""
 
     return {
