@@ -31,14 +31,10 @@
     <link rel="stylesheet" type="text/css" href="{% static 'base/css/webflow.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'base/css/base.css' %}">
 
-    {% block extra_css %}{% endblock %}
   </head>
   <body>
-    {% block body %}{% endblock %}
-        
-    {# Global javascript #}
-    <script src="{% static 'base/js/webflow.js' %}" type="text/javascript"></script>
-        
-    {% block extra_js %}{% endblock %}
+    <main id="main">
+      {% block content %}{% endblock %}
+    </main>        
   </body>
 </html>
