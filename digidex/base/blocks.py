@@ -1,19 +1,14 @@
-from wagtail.blocks import StreamBlock, StructBlock, CharBlock, TextBlock, URLBlock, ListBlock, PageChooserBlock
-from wagtail.images.blocks import ImageChooserBlock
+from wagtail.blocks import StructBlock, CharBlock, URLBlock
 
 
-class LinkBlock(StructBlock):
+class TextLink(StructBlock):
     url = URLBlock(
-        required=True,
+        #required=True,
         help_text="Enter the URL to link to"
     )
     text = CharBlock(
-        required=True,
+        #required=True,
         help_text="Enter the text to display"
-    )
-    image = ImageChooserBlock(
-        required=False,
-        help_text="Select an image to use"
     )
 
     class Meta:
@@ -21,70 +16,38 @@ class LinkBlock(StructBlock):
         label = "Link"
 
 
-class ButtonSetBlock(StructBlock):
-    primary = LinkBlock(
-        required=True
-    ),
-    secondary = LinkBlock(
-        required=True
+class HeadingBlock(StructBlock):
+    subtitle = CharBlock(
+        classname="title",
+        #required=False
     )
-
-
-class NavigationBlock(StructBlock):
-    logo = ImageChooserBlock(
-        required=True
-    )
-    links = ListBlock(
-        LinkBlock,
-        required=False,
-        max_num=5
-    )
-    buttons = ButtonSetBlock(
-        required=True
+    title = CharBlock(
+        classname="title",
+        #required=True
     )
 
     class Meta:
-        template = 'base/blocks/navigation.html'
-        icon = "bars"
-        label = "Navigation Bar"
-
-
-class HeaderBlock(StructBlock):
-    heading = CharBlock(
-        required=True
-    )
-    subheading = TextBlock(
-        required=False
-    )
-
-    class Meta:
-        template = 'base/blocks/header.html'
         icon = "title"
-        label = "Body Header"
+        template = "base/blocks/heading.html"
 
 
-class FooterBlock(StructBlock):
-    image = ImageChooserBlock(
-        required=True
+class GridBlock(StructBlock):
+    pass
+
+
+class FootnoteBlock(StructBlock):
+    text = CharBlock(
+        #required=False
     )
-    description = TextBlock(
-        required=True
-    )
-    copyright = CharBlock(
-        required=True
+    link = TextLink(
+        ##required=True
     )
 
     class Meta:
-        template = 'base/blocks/footer.html'
-        label = "Body Footer"
+        template = "base/blocks/footnote.html"
 
 
-class PageBlock(StreamBlock):
-    header = HeaderBlock()
-    navigation = NavigationBlock()
-    notification = NotificationBlock()
-    footer = FooterBlock()
-
-    class Meta:
-        icon = "doc-full"
-        label = "Page Block"
+class BaseSectionBlock(StructBlock):
+    heading = HeadingBlock()
+    grid = GridBlock()
+    footnote = FootnoteBlock()

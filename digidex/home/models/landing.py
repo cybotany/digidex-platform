@@ -5,37 +5,34 @@ from django.core.exceptions import ValidationError
 from django.urls import reverse
 from django.contrib.auth import REDIRECT_FIELD_NAME
 
-from wagtail.admin.panels import MultiFieldPanel, FieldPanel
+from wagtail.fields import StreamField
+from wagtail.admin.panels import FieldPanel
 from wagtail.models import Page
 
+from home.blocks import SectionBlock
 from home.models import NearFieldCommunicationTag
 
 
 class LandingPage(Page):
-    hero_heading = models.CharField(
+    content = StreamField(
+        SectionBlock(),
         blank=True,
-        max_length=255,
-    )
-    hero_paragraph = models.TextField(
-        blank=True,
+        use_json_field=True
     )
 
     content_panels = Page.content_panels + [
-        MultiFieldPanel(
-            [
-                FieldPanel('hero_heading'),
-                FieldPanel('hero_paragraph'),
-            ], heading="Hero Section"
-        ),
+        FieldPanel("content"),
     ]
 
     subpage_types = [
         'home.TrainerPage'
     ]
 
+    template = 'base.html'
+
     class Meta:
-        verbose_name = "Home Page"
-        verbose_name_plural = "Home Pages"
+        verbose_name = "Landing Page"
+        verbose_name_plural = "Landing Page"
 
 
 def route_ntag(request, ntag_uuid):
