@@ -54,7 +54,7 @@ class BaseSectionBlock(StructBlock):
     class Meta:
         icon = "doc-full"
         label = "Section"
-        template = "base/blocks/base_section.html"
+        template = "base/blocks/section.html"
 
 
 class SectionBlock(StreamBlock):
