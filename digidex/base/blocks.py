@@ -52,17 +52,15 @@ class FootnoteBlock(StructBlock):
         template = "base/blocks/footnote_block.html"
 
 
-class GridBlock(StreamBlock):
-
-    class Meta:
-        template = "base/blocks/grid_block.html"
+class ContentBlock(StreamBlock):
+    pass
 
 
 class Section(StructBlock):
     heading = HeadingBlock(
         required=False
     )
-    grid = GridBlock(
+    content = ContentBlock(
         required=False
     )
     footnote = FootnoteBlock(
@@ -71,3 +69,31 @@ class Section(StructBlock):
 
     class Meta:
         template = "base/includes/section.html"
+
+
+class FeaturedAssetSection(Section):
+    class Meta:
+        icon = "title"
+        template = "home/includes/featured_asset_section.html"
+
+
+class AssetCollectionSection(Section):
+    class Meta:
+        icon = "title"
+        template = "home/includes/asset_collection_section.html"
+
+
+class AssetCategorySection(Section):
+    class Meta:
+        icon = "title"
+        template = "home/includes/asset_category_section.html"
+
+
+class Inventory(StructBlock):
+    featured_asset_section = FeaturedAssetSection()
+    asset_collection_section = AssetCollectionSection()
+    category_section = AssetCategorySection()
+
+    class Meta:
+        icon = "title"
+        template = "home/includes/inventory.html"

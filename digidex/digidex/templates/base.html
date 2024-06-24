@@ -33,8 +33,10 @@
 
   </head>
   <body>
-    {% for section in page.body %}
-      {% include_block section %}
-    {% endfor %}
+    <div id="root">
+      {% for section in page.body %}
+        {% include_block section %}
+      {% endfor %}
+    </div>
   </body>
 </html>

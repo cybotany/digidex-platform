@@ -1,0 +1,12 @@
+<div id="assetCollection" class="assets__collectionwrapper">
+  <div role="list" class="assets__collection">
+    <div class="asset__block" onclick="showLargeAsset(this)" data-id="{{ asset.uuid }}">
+      <img alt="{{ asset.image.caption }}" loading="eager" src="{{ asset.image.url }}" class="asset__thumbnail">
+      <div class="asset">
+        <div class="date">{{ asset.date }}</div>
+        <h4 class="asset__heading">{{ asset.name }}</h4>
+        <p class="asset__paragraph">{{ asset.description }}</p>
+      </div>
+    </div>
+  </div>
+</div>

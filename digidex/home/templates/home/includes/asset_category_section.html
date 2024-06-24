@@ -1,0 +1,22 @@
+<div class="header__block">
+  {% if title.heading %}
+    <h1 class="header__heading">{{ title.heading }}</h1>
+  {% endif %}
+  {% if title.subheading %}
+    <p class="header__subheading">{{ title.subheading }}</p>
+  {% endif %}
+</div>
+<div class="categories__block">
+  <div class="categories__collectionwrapper w-dyn-list">
+    {% for category in categories %}
+      <div role="list" class="categories__collection w-dyn-items">
+        <div role="listitem" class="categories__item w-dyn-item">
+          <a href="{{ category.url }}" class="category__link w-inline-block">
+            <img alt="{{ category.image.url }}" loading="eager" src="{{ category.image.caption }}" class="category__icon">
+            <div class="category__text">{{ category.name }}</div>
+          </a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
