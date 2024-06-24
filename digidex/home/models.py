@@ -5,17 +5,15 @@ from django.core.exceptions import ValidationError
 from django.urls import reverse
 from django.contrib.auth import REDIRECT_FIELD_NAME
 
-from wagtail.fields import StreamField
-from wagtail.admin.panels import FieldPanel
 from wagtail.models import Page
 
 from inventory.models import NearFieldCommunicationTag
 
 
-class LandingPage(Page):
+class HomePage(Page):
 
     subpage_types = [
-        'home.TrainerPage'
+        'inventory.TrainerPage'
     ]
 
     template = 'base.html'

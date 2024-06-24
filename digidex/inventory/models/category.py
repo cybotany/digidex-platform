@@ -47,11 +47,11 @@ class CategoryPage(Page):
     ]
 
     parent_page_types = [
-        'home.TrainerPage'
+        'inventory.TrainerPage'
     ]
 
     subpage_types = [
-        'home.AssetPage'
+        'inventory.AssetPage'
     ]
 
     def __str__(self):

@@ -41,12 +41,12 @@ class TrainerPage(Page):
     ]
 
     parent_page_types = [
-        'home.LandingPage'
+        'home.HomePage'
     ]
 
     subpage_types = [
-        'home.CategoryPage',
-        'home.AssetPage'
+        'inventory.CategoryPage',
+        'inventory.AssetPage'
     ]
 
 
