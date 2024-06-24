@@ -1,0 +1,377 @@
+@import 'static/sass/utils/_variables';
+@import 'static/sass/utils/_mixins';
+
+[class^="base-icon-"],
+[class*=" base-icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'webflow-icons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.base-icon-slider-right:before {
+  content: "\e600";
+}
+.base-icon-slider-left:before {
+  content: "\e601";
+}
+.base-icon-nav-menu:before {
+  content: "\e602";
+}
+.base-icon-arrow-down:before,
+.base-icon-dropdown-toggle:before {
+  content: "\e603";
+}
+.base-form {
+  margin: 0 0 15px;
+}
+.base-form-done {
+  display: none;
+  padding: 20px;
+  text-align: center;
+  background-color: #dddddd;
+}
+.base-form-fail {
+  display: none;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #ffdede;
+}
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+.base-input,
+.base-select {
+  display: block;
+  width: 100%;
+  height: 38px;
+  padding: 8px 12px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333333;
+  vertical-align: middle;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+}
+.base-input:-moz-placeholder,
+.base-select:-moz-placeholder {
+  color: #999;
+}
+.base-input::-moz-placeholder,
+.base-select::-moz-placeholder {
+  color: #999;
+  opacity: 1;
+}
+.base-input::-webkit-input-placeholder,
+.base-select::-webkit-input-placeholder {
+  color: #999;
+}
+.base-input:focus,
+.base-select:focus {
+  border-color: #3898EC;
+  outline: 0;
+}
+.base-input[disabled],
+.base-select[disabled],
+.base-input[readonly],
+.base-select[readonly],
+fieldset[disabled] .base-input,
+fieldset[disabled] .base-select {
+  cursor: not-allowed;
+}
+.base-input[disabled]:not(.base-input-disabled),
+.base-select[disabled]:not(.base-input-disabled),
+.base-input[readonly],
+.base-select[readonly],
+fieldset[disabled]:not(.base-input-disabled) .base-input,
+fieldset[disabled]:not(.base-input-disabled) .base-select {
+  background-color: #eeeeee;
+}
+textarea.base-input,
+textarea.base-select {
+  height: auto;
+}
+.base-select {
+  background-color: #f3f3f3;
+}
+.base-select[multiple] {
+  height: auto;
+}
+.base-form-label {
+  display: inline-block;
+  cursor: pointer;
+  font-weight: normal;
+  margin-bottom: 0px;
+}
+.base-icon-file-upload-remove:before {
+  content: "\e900";
+}
+.base-icon-file-upload-icon:before {
+  content: "\e903";
+}
+.base-file-upload {
+  display: block;
+  margin-bottom: 10px;
+}
+.base-file-upload-input {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -100;
+}
+.base-file-upload-default,
+.base-file-upload-uploading,
+.base-file-upload-success {
+  display: inline-block;
+  color: #333333;
+}
+.base-file-upload-error {
+  display: block;
+  margin-top: 10px;
+}
+.base-file-upload-default.base-hidden,
+.base-file-upload-uploading.base-hidden,
+.base-file-upload-error.base-hidden,
+.base-file-upload-success.base-hidden {
+  display: none;
+}
+.base-file-upload-uploading-btn {
+  display: flex;
+  font-size: 14px;
+  font-weight: normal;
+  cursor: pointer;
+  margin: 0;
+  padding: 8px 12px;
+  border: 1px solid #cccccc;
+  background-color: #fafafa;
+}
+.base-file-upload-file {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+  margin: 0;
+  padding: 8px 9px 8px 11px;
+  border: 1px solid #cccccc;
+  background-color: #fafafa;
+}
+.base-file-upload-file-name {
+  font-size: 14px;
+  font-weight: normal;
+  display: block;
+}
+.base-file-remove-link {
+  margin-top: 3px;
+  margin-left: 10px;
+  width: auto;
+  height: auto;
+  padding: 3px;
+  display: block;
+  cursor: pointer;
+}
+.base-icon-file-upload-remove {
+  margin: auto;
+  font-size: 10px;
+}
+.base-file-upload-error-msg {
+  display: inline-block;
+  color: #ea384c;
+  padding: 2px 0;
+}
+.base-file-upload-info {
+  display: inline-block;
+  line-height: 38px;
+  padding: 0 12px;
+}
+.base-file-upload-label {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: normal;
+  cursor: pointer;
+  margin: 0;
+  padding: 8px 12px;
+  border: 1px solid #cccccc;
+  background-color: #fafafa;
+}
+.base-icon-file-upload-icon,
+.base-icon-file-upload-uploading {
+  display: inline-block;
+  margin-right: 8px;
+  width: 20px;
+}
+.base-icon-file-upload-uploading {
+  height: 20px;
+}
+
+.form-block {
+  width: 100%;
+  margin-top: .4em;
+  margin-bottom: 0;
+}
+.form {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  display: flex;
+}
+
+.submit-button {
+  background-color: var(--strong-green);
+  color: var(--white);
+  letter-spacing: -.02em;
+  border-radius: .87em;
+  padding: 1.2em 1.8em;
+  font-size: 1.12em;
+  font-weight: 500;
+  line-height: 120%;
+  transition: box-shadow .3s cubic-bezier(.25, .46, .45, .94), background-color .3s cubic-bezier(.25, .46, .45, .94);
+}
+.submit-button:hover {
+  box-shadow: 0 15px 40px -10px var(--strong-green);
+}
+.submit-button.yellow {
+  background-color: var(--strong-yellow);
+  color: var(--heading);
+}
+.submit-button.yellow:hover {
+  box-shadow: 0 15px 40px -10px var(--strong-yellow);
+}
+
+.text-field {
+  height: 3.75em;
+  border: 1px solid var(--border);
+  background-color: var(--white);
+  color: var(--heading);
+  border-radius: .87em;
+  margin-bottom: 1.12em;
+  padding: 1em 1.2em;
+  font-size: 1em;
+  line-height: 130%;
+  transition: border-color .3s cubic-bezier(.25, .46, .45, .94);
+}
+.text-field:focus {
+  border-color: var(--strong-green);
+}
+.text-field::-ms-input-placeholder {
+  color: rgba(20, 23, 24, .6);
+}
+.text-field::placeholder {
+  color: rgba(20, 23, 24, .6);
+}
+.text-field.transparent {
+  color: var(--white);
+  background-color: rgba(255, 255, 255, .1);
+  border-color: rgba(255, 255, 255, .2);
+}
+.text-field.transparent:focus {
+  border-color: var(--white);
+}
+.text-field.transparent::-ms-input-placeholder {
+  color: rgba(255, 255, 255, .65);
+}
+.text-field.transparent::placeholder {
+  color: rgba(255, 255, 255, .65);
+}
+
+.textarea {
+max-height: 30em;
+max-width: 100%;
+min-height: 14em;
+min-width: 100%;
+border: 1px solid var(--border);
+background-color: var(--white);
+color: var(--heading);
+border-radius: .87em;
+margin-bottom: 1.12em;
+padding: 1em 1.2em;
+font-size: 1em;
+line-height: 130%;
+transition: border-color .3s cubic-bezier(.25, .46, .45, .94);
+}
+.textarea:focus {
+border-color: var(--strong-green);
+}
+.textarea::-ms-input-placeholder {
+color: rgba(20, 23, 24, .6);
+}
+.textarea::placeholder {
+color: rgba(20, 23, 24, .6);
+}
+
+.error-message {
+  background-color: var(--accent-red);
+  border-radius: .87em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 1em 10%;
+}
+.text-error {
+  color: var(--strong-red);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
+}
+
+.warning-message {
+  background-color: var(--accent-yellow);
+  border-radius: .87em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 1em 10%;
+}
+.text-warning {
+  color: var(--strong-yellow);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
+}
+
+.info-message {
+  background-color: var(--accent-blue);
+  border-radius: .87em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 1em 10%;
+}
+.text-info {
+  color: var(--strong-blue);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
+}
+
+.success-message {
+  background-color: var(--accent-green);
+  border-radius: .87em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 1.5em 10%;
+}
+.text-success {
+  color: var(--strong-green);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
+}

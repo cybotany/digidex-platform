@@ -1,4 +1,4 @@
-from wagtail.blocks import ChoiceBlock, StructBlock, CharBlock, URLBlock, StreamBlock
+from wagtail.blocks import ListBlock, PageChooserBlock, ChoiceBlock, StructBlock, CharBlock, URLBlock, StreamBlock
 
 
 class TextLink(StructBlock):
@@ -52,15 +52,12 @@ class FootnoteBlock(StructBlock):
         template = "base/blocks/footnote_block.html"
 
 
-class ContentBlock(StreamBlock):
-    pass
-
-
 class Section(StructBlock):
     heading = HeadingBlock(
         required=False
     )
-    content = ContentBlock(
+    content = ListBlock(
+        PageChooserBlock(),
         required=False
     )
     footnote = FootnoteBlock(
@@ -71,15 +68,33 @@ class Section(StructBlock):
         template = "base/includes/section.html"
 
 
-class FeaturedAssetSection(Section):
+class FeaturedAssetContent(Section):
+    content = ListBlock(
+        PageChooserBlock(target_model="home.AssetPage"),
+        required=False
+    )
+
     class Meta:
-        icon = "title"
+        template = "home/includes/featured_asset_content.html"
+
+
+class FeaturedAssetSection(Section):
+    content = ListBlock(
+        PageChooserBlock(target_model="home.AssetPage"),
+        required=False
+    )
+
+    class Meta:
         template = "home/includes/featured_asset_section.html"
 
 
 class AssetCollectionSection(Section):
+    content = ListBlock(
+        PageChooserBlock(target_model="home.CategoryPage"),
+        required=False
+    )
+
     class Meta:
-        icon = "title"
         template = "home/includes/asset_collection_section.html"
 
 

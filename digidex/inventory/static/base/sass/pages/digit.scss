@@ -1,0 +1,61 @@
+.content.narrow {
+  max-width: 60em;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  display: flex;
+}
+.page-body {
+  width: 100%;
+  background-color: var(--white);
+  border-radius: .87em;
+  margin-bottom: 1em;
+  padding: 5em 13%;
+  box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
+}
+.hex-color {
+  opacity: .5;
+  color: var(--heading);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  font-family: IBM Plex Mono, sans-serif;
+  font-size: .7em;
+  font-weight: 500;
+  line-height: 130%;
+}
+
+.hex-color.white {
+  color: var(--white);
+}
+
+.font-template {
+  background-color: var(--accent-b1);
+  border-radius: .87em;
+  margin-top: .7em;
+  padding: 1.3em 1.8em;
+}
+
+.ibm-plex-mono {
+  font-family: IBM Plex Mono, sans-serif;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 991px) {
+  .page-body {
+    padding: 4em 10%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .page-body {
+    padding-top: 3em;
+    padding-bottom: 3em;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .page-body {
+    padding-top: 2em;
+    padding-bottom: 2em;
+  }
+}

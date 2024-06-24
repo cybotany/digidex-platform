@@ -1,0 +1,52 @@
+.base-tabs {
+  position: relative;
+}
+.base-tabs:before,
+.base-tabs:after {
+  content: " ";
+  display: table;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  grid-column-end: 2;
+  grid-row-end: 2;
+}
+.base-tabs:after {
+  clear: both;
+}
+.base-tab-menu {
+  position: relative;
+}
+.base-tab-link {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  text-decoration: none;
+  padding: 9px 30px;
+  text-align: left;
+  cursor: pointer;
+  color: #222222;
+  background-color: #dddddd;
+}
+.base-tab-link.base--current {
+  background-color: #C8C8C8;
+}
+.base-tab-link:focus {
+  outline: 0;
+}
+.base-tab-content {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+.base-tab-pane {
+  position: relative;
+  display: none;
+}
+.base--tab-active {
+  display: block;
+}
+@media screen and (max-width: 479px) {
+  .base-tab-link {
+    display: block;
+  }
+}

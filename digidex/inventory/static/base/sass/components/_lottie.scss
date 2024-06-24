@@ -1,0 +1,73 @@
+.lottie {
+  position: relative;
+}
+.lottie-animation-2 {
+  z-index: 10;
+  width: 100%;
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}
+.lottie-animation-1 {
+  width: 100%;
+}
+.lottie-animation-2-blur {
+  z-index: 5;
+  width: 100%;
+  filter: blur(50px);
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}
+.lottie-wrapper {
+  width: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+  position: relative;
+}
+.lottie-banner {
+  position: absolute;
+  top: -6%;
+  bottom: auto;
+  left: auto;
+  right: 0%;
+}
+.lottie-animation-1-banner {
+  width: 100%;
+}
+.lottie-animation-2-banner {
+  z-index: 10;
+  width: 100%;
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}
+.lottie-animation-2-blur-banner {
+  z-index: 5;
+  width: 100%;
+  filter: blur(50px);
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}
+.lottie-template {
+  background-color: var(--background);
+  border-radius: .6em;
+}
+
+@media screen and (max-width: 767px) {
+  .lottie-banner {
+    position: relative;
+    top: 0%;
+  }
+}
