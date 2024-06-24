@@ -1,0 +1,6 @@
+{% load wagtailcore_tags %}
+
+<div class="block-heading">
+  {% include_block value.subtitle with classname=classname %}
+  {% include block value.title with classname=classname %}
+</div>

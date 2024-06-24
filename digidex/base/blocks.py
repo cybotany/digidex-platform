@@ -92,8 +92,8 @@ class SectionContent(StructBlock):
     )
 
     class Meta:
-        label = "Content"
-        template = "base/includes/section_content.html"
+        icon = "doc-full"
+        label = "Section"
 
 
 class Section(StructBlock):
@@ -103,8 +103,3 @@ class Section(StructBlock):
     content = SectionContent(
         required=True
     )
-
-    class Meta:
-        icon = "doc-full"
-        label = "Section"
-        template = "base/includes/section.html"

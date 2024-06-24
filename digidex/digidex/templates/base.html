@@ -34,7 +34,13 @@
   </head>
   <body>
     {% for block in page.body %}
-      {% include_block block %}
+      <section class="section {{ block.classname }}">
+        <div class="content">
+          {% include_block block.content.heading with classname="block.classname" %}
+          {% include_block block.content.grid with classname="block.classname" %}
+          {% include_block block.content.footnote with classname="block.classname" %}
+        </div>
+      </section>
     {% endfor %}
   </body>
 </html>
