@@ -10,12 +10,12 @@ from wagtail.admin.panels import FieldPanel
 from wagtail.models import Page
 
 from home.models import NearFieldCommunicationTag
-from home.blocks import HomeSectionBlock
+from base.blocks import SectionBlock
 
 
 class LandingPage(Page):
     body = StreamField(
-        HomeSectionBlock(),
+        SectionBlock(),
         blank=True,
         use_json_field=True
     )

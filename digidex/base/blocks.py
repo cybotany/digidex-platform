@@ -44,15 +44,21 @@ class FootnoteBlock(StructBlock):
 
 
 class BaseSectionBlock(StructBlock):
-    heading = HeadingBlock(required=False)
-    footnote = FootnoteBlock(required=False)
+    heading = HeadingBlock(
+        required=False
+    )
+    footnote = FootnoteBlock(
+        required=False
+    )
+
+    class Meta:
+        icon = "doc-full"
+        label = "Section"
+        template = "base/blocks/base_section.html"
 
 
 class SectionBlock(StreamBlock):
     section = BaseSectionBlock()
 
     class Meta:
-        icon = "doc-full"
-        label = "Section"
         template = "base/blocks/section.html"
-

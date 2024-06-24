@@ -34,7 +34,9 @@
   </head>
   <body>
     {% block content %}
-      {{ page.body }}
+      {% for block in page.body %}
+        {% include_block block %}
+      {% endfor %}
     {% endblock %}
   </body>
 </html>
