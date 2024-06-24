@@ -1,4 +1,5 @@
+{% load wagtailcore_tags %}
 <div class="content">
-  {{ self.heading }}
-  {{ self.footnote }}
+  {% include_block value.heading %}
+  {% include_block value.footnote %}
 </div>

@@ -1,4 +1,4 @@
-from wagtail.blocks import StructBlock, CharBlock, URLBlock, StreamBlock
+from wagtail.blocks import StructBlock, ChoiceBlock, CharBlock, URLBlock, StreamBlock
 
 
 class TextLink(StructBlock):
@@ -58,7 +58,9 @@ class BaseSectionBlock(StructBlock):
 
 
 class SectionBlock(StreamBlock):
+    style = ChoiceBlock(
+        choices=[
+            ('', 'Default'),
+        ],
+    )
     section = BaseSectionBlock()
-
-    class Meta:
-        template = "base/blocks/section.html"
