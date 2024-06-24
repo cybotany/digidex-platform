@@ -31,10 +31,6 @@ class HeadingBlock(StructBlock):
         template = "base/blocks/heading.html"
 
 
-class GridBlock(StructBlock):
-    pass
-
-
 class FootnoteBlock(StructBlock):
     text = CharBlock(
         required=False
@@ -47,14 +43,13 @@ class FootnoteBlock(StructBlock):
         template = "base/blocks/footnote.html"
 
 
-class ContentBlock(StructBlock):
-    heading = HeadingBlock()
-    grid = GridBlock()
-    footnote = FootnoteBlock()
+class BaseSectionBlock(StructBlock):
+    heading = HeadingBlock(required=False)
+    footnote = FootnoteBlock(required=False)
 
 
-class BaseSectionBlock(StreamBlock):
-    content = ContentBlock()
+class SectionBlock(StreamBlock):
+    section = BaseSectionBlock()
 
     class Meta:
         icon = "doc-full"

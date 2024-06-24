@@ -1,4 +1,4 @@
-from base.blocks import BaseSectionBlock
+from base.blocks import SectionBlock
 
-class SectionBlock(BaseSectionBlock):
+class HomeSectionBlock(SectionBlock):
     pass

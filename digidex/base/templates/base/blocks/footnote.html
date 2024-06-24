@@ -1,3 +1,1 @@
-<div class="block-footnote">
-  <div class="text-footnote">{% if self.text %}{{ self.text }}{% endif%}<a href="{{ self.link.url }}" target="_blank" class="link-footnote">{{ self.link.text }}</a><br></div>
-</div>
+<div class="text-footnote">{% if self.text.exists %}{{ self.text }}{% endif%}<a href="{{ self.link.url }}" target="_blank" class="link-footnote">{{ self.link.text }}</a><br></div>
