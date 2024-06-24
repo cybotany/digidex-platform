@@ -34,7 +34,7 @@ class Title(StructBlock):
     )
 
     class Meta:
-        template = "base/blocks/title.html"
+        template = "base/includes/title.html"
 
 
 class Subtitle(CharBlock):
@@ -43,7 +43,7 @@ class Subtitle(CharBlock):
     )
 
     class Meta:
-        template = "base/blocks/subtitle.html"
+        template = "base/includes/subtitle.html"
 
 
 class HeadingBlock(StructBlock):
@@ -105,6 +105,7 @@ class SectionContent(StructBlock):
     class Meta:
         icon = "doc-full"
         label = "Section"
+        template = "base/includes/section_content.html"
 
 
 class Section(StructBlock):

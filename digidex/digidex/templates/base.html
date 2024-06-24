@@ -35,11 +35,7 @@
   <body>
     {% for section in page.body %}
       <section class="section {{ section.value.classname }}">
-        <div class="content">
-          {% with section.value.content as content %}
-            {% include_block content with classname="section.value.classname" %}
-          {% endwith %}
-        </div>
+        {% include_block section.value.content %}
       </section>
     {% endfor %}
   </body>
