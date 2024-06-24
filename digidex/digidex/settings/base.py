@@ -186,7 +186,7 @@ SIMPLE_JWT = {
 }
 
 # ALLAUTH settings
-AUTH_USER_MODEL = 'base.DigiDexUser'
+AUTH_USER_MODEL = 'accounts.DigiDexUser'
 
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
@@ -194,7 +194,7 @@ SIGNUP_URL = 'account_signup'
 
 LOGIN_URL = 'account_login'
 
-ACCOUNT_ADAPTER = 'base.adapter.DigidexAccountAdapter'
+ACCOUNT_ADAPTER = 'accounts.adapter.DigidexAccountAdapter'
 
 ACCOUNT_PRESERVE_USERNAME_CASING = False
 

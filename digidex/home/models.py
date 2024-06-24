@@ -9,18 +9,10 @@ from wagtail.fields import StreamField
 from wagtail.admin.panels import FieldPanel
 from wagtail.models import Page
 
-from home.models import NearFieldCommunicationTag
-from base.blocks import Inventory
+from inventory.models import NearFieldCommunicationTag
 
 
 class LandingPage(Page):
-    body = StreamField([
-        ('inventory', Inventory())
-    ])
-
-    content_panels = Page.content_panels + [
-        FieldPanel("body"),
-    ]
 
     subpage_types = [
         'home.TrainerPage'

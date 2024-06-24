@@ -3,7 +3,7 @@ import uuid
 from django.db import models
 from django.urls import reverse
 
-from home.validators import validate_ntag_serial
+from inventory.validators import validate_ntag_serial
 
 
 class NearFieldCommunicationTag(models.Model):
