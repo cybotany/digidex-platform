@@ -1,4 +1,4 @@
-from wagtail.blocks import StructBlock, ChoiceBlock, CharBlock, URLBlock, StreamBlock
+from wagtail.blocks import StructBlock, CharBlock, URLBlock, ListBlock, StreamBlock
 
 
 class TextLink(StructBlock):
@@ -14,6 +14,25 @@ class TextLink(StructBlock):
     class Meta:
         icon = "link"
         label = "Link"
+
+
+class Heading(StructBlock):
+    text = CharBlock(
+        required=True
+    )
+
+    class Meta:
+        icon = "title"
+        template = "base/blocks/heading.html"
+
+
+class Subtitle(StructBlock):
+    subtitle = CharBlock(
+        required=True
+    )
+
+    class Meta:
+        template = "base/blocks/subtitle.html"
 
 
 class HeadingBlock(StructBlock):
@@ -43,8 +62,29 @@ class FootnoteBlock(StructBlock):
         template = "base/blocks/footnote.html"
 
 
-class BaseSectionBlock(StructBlock):
+class LeftBlock(StreamBlock):
+
+    class Meta:
+        template = "base/blocks/grid.html"
+
+
+class RightBlock(StreamBlock):
+
+    class Meta:
+        template = "base/blocks/grid.html"
+
+
+class GridBlock(StreamBlock):
+
+    class Meta:
+        template = "base/blocks/grid.html"
+
+
+class SectionContent(StructBlock):
     heading = HeadingBlock(
+        required=False
+    )
+    grid = GridBlock(
         required=False
     )
     footnote = FootnoteBlock(
@@ -52,15 +92,19 @@ class BaseSectionBlock(StructBlock):
     )
 
     class Meta:
+        label = "Contents"
+        template = "base/includes/section_content.html"
+
+
+class Section(StructBlock):
+    content = ListBlock(
+        SectionContent()
+    )
+    classname = CharBlock(
+        required=False
+    )
+
+    class Meta:
         icon = "doc-full"
         label = "Section"
-        template = "base/blocks/section.html"
-
-
-class SectionBlock(StreamBlock):
-    style = ChoiceBlock(
-        choices=[
-            ('', 'Default'),
-        ],
-    )
-    section = BaseSectionBlock()
+        template = "base/includes/section.html"

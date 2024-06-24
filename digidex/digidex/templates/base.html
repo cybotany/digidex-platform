@@ -34,9 +34,7 @@
   </head>
   <body>
     {% for block in page.body %}
-      <section class="section">
-        {% include_block block %}
-      </section>
+      {% include_block block %}
     {% endfor %}
   </body>
 </html>

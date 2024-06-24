@@ -1,6 +1,4 @@
 <div class="block-heading">
-  {% if value.subtitle.exists %}
-    <div class="subtitle">{{ value.subtitle }}<br></div>
-  {% endif %}
-  <h2 class="heading">{{ value.title }}</h2>
+  {% include_block value.subtitle with classname="" %}
+  {% include block value.title with classname="" %}
 </div>
