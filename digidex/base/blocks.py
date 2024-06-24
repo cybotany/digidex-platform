@@ -16,44 +16,23 @@ class TextLink(StructBlock):
         label = "Link"
 
 
-class Title(StructBlock):
-    text = CharBlock(
+class HeadingBlock(StructBlock):
+    subtitle = CharBlock(
+        required=False
+    )
+    title = CharBlock(
+        classname="title",
         required=True
     )
-    size = ChoiceBlock(
+    title_size = ChoiceBlock(
         choices=[
-            ("h1", "H1"),
             ("h2", "H2"),
             ("h3", "H3"),
             ("h4", "H4"),
             ("h5", "H5"),
-            ("h6", "H6"),
         ],
         default="h2",
         required=False
-    )
-
-    class Meta:
-        template = "base/includes/title.html"
-
-
-class Subtitle(CharBlock):
-    text = CharBlock(
-        required=True
-    )
-
-    class Meta:
-        template = "base/includes/subtitle.html"
-
-
-class HeadingBlock(StructBlock):
-    subtitle = Subtitle(
-        classname="title",
-        required=False
-    )
-    title = Title(
-        classname="title",
-        required=True
     )
 
     class Meta:
@@ -71,18 +50,6 @@ class FootnoteBlock(StructBlock):
 
     class Meta:
         template = "base/blocks/footnote_block.html"
-
-
-class LeftBlock(StreamBlock):
-
-    class Meta:
-        template = "base/blocks/right_block.html"
-
-
-class RightBlock(StreamBlock):
-
-    class Meta:
-        template = "base/blocks/left_block.html"
 
 
 class GridBlock(StreamBlock):
@@ -103,8 +70,6 @@ class SectionContent(StructBlock):
     )
 
     class Meta:
-        icon = "doc-full"
-        label = "Section"
         template = "base/includes/section_content.html"
 
 
