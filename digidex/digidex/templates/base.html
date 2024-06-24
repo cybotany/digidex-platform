@@ -34,8 +34,8 @@
   </head>
   <body>
     {% for section in page.body %}
-      <section class="section {{ section.value.classname }}">
-        {% include_block section.value.content %}
+      <section class="section">
+        {% include_block section %}
       </section>
     {% endfor %}
   </body>

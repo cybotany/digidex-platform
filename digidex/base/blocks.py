@@ -58,7 +58,7 @@ class GridBlock(StreamBlock):
         template = "base/blocks/grid_block.html"
 
 
-class SectionContent(StructBlock):
+class Section(StructBlock):
     heading = HeadingBlock(
         required=False
     )
@@ -70,13 +70,4 @@ class SectionContent(StructBlock):
     )
 
     class Meta:
-        template = "base/includes/section_content.html"
-
-
-class Section(StructBlock):
-    classname = CharBlock(
-        required=False
-    )
-    content = SectionContent(
-        required=True
-    )
+        template = "base/includes/section.html"

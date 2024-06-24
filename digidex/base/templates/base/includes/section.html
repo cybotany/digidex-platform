@@ -1,0 +1,9 @@
+{% load wagtailcore_tags %}
+
+<section class="section">
+  {% include_block value.heading %}
+  <div class="content">
+    {% include_block value.grid %}
+  </div>
+  {% include_block value.footnote %}
+</section>
