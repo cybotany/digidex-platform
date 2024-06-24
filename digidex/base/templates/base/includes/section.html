@@ -1,8 +1,5 @@
 {% load wagtailcore_tags %}
 
-<section>
-  <div class="content">
-    {% include_block value.heading %}
-    {% include_block value.footnote %}
-  </div>
+<section class="section {{ value.classname }}">
+  {% include_block value.heading with classname={{ value.classname }} %}
 </section>

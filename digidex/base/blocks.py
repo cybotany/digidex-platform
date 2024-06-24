@@ -1,4 +1,4 @@
-from wagtail.blocks import StructBlock, CharBlock, URLBlock, ListBlock, StreamBlock
+from wagtail.blocks import StructBlock, CharBlock, URLBlock, StreamBlock
 
 
 class TextLink(StructBlock):
@@ -47,7 +47,7 @@ class HeadingBlock(StructBlock):
 
     class Meta:
         icon = "title"
-        template = "base/blocks/heading.html"
+        template = "base/blocks/heading_block.html"
 
 
 class FootnoteBlock(StructBlock):
@@ -59,25 +59,25 @@ class FootnoteBlock(StructBlock):
     )
 
     class Meta:
-        template = "base/blocks/footnote.html"
+        template = "base/blocks/footnote_block.html"
 
 
 class LeftBlock(StreamBlock):
 
     class Meta:
-        template = "base/blocks/grid.html"
+        template = "base/blocks/right_block.html"
 
 
 class RightBlock(StreamBlock):
 
     class Meta:
-        template = "base/blocks/grid.html"
+        template = "base/blocks/left_block.html"
 
 
 class GridBlock(StreamBlock):
 
     class Meta:
-        template = "base/blocks/grid.html"
+        template = "base/blocks/grid_block.html"
 
 
 class SectionContent(StructBlock):
@@ -92,13 +92,13 @@ class SectionContent(StructBlock):
     )
 
     class Meta:
-        label = "Contents"
+        label = "Content"
         template = "base/includes/section_content.html"
 
 
 class Section(StructBlock):
-    content = ListBlock(
-        SectionContent()
+    content = SectionContent(
+        required=True
     )
     classname = CharBlock(
         required=False
