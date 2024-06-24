@@ -16,8 +16,6 @@ class HomePage(Page):
         'inventory.TrainerPage'
     ]
 
-    template = 'base.html'
-
     class Meta:
         verbose_name = "Landing Page"
         verbose_name_plural = "Landing Page"
