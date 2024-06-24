@@ -9,8 +9,8 @@ from wagtail.fields import StreamField
 from wagtail.admin.panels import FieldPanel
 from wagtail.models import Page
 
-from home.blocks import SectionBlock
 from home.models import NearFieldCommunicationTag
+from home.blocks import SectionBlock
 
 
 class LandingPage(Page):

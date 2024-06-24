@@ -1,13 +1,13 @@
-from wagtail.blocks import StructBlock, CharBlock, URLBlock
+from wagtail.blocks import StructBlock, CharBlock, URLBlock, StreamBlock
 
 
 class TextLink(StructBlock):
     url = URLBlock(
-        #required=True,
+        required=True,
         help_text="Enter the URL to link to"
     )
     text = CharBlock(
-        #required=True,
+        required=True,
         help_text="Enter the text to display"
     )
 
@@ -19,11 +19,11 @@ class TextLink(StructBlock):
 class HeadingBlock(StructBlock):
     subtitle = CharBlock(
         classname="title",
-        #required=False
+        required=False
     )
     title = CharBlock(
         classname="title",
-        #required=True
+        required=True
     )
 
     class Meta:
@@ -37,17 +37,27 @@ class GridBlock(StructBlock):
 
 class FootnoteBlock(StructBlock):
     text = CharBlock(
-        #required=False
+        required=False
     )
     link = TextLink(
-        ##required=True
+        required=True
     )
 
     class Meta:
         template = "base/blocks/footnote.html"
 
 
-class BaseSectionBlock(StructBlock):
+class ContentBlock(StructBlock):
     heading = HeadingBlock()
     grid = GridBlock()
     footnote = FootnoteBlock()
+
+
+class BaseSectionBlock(StreamBlock):
+    content = ContentBlock()
+
+    class Meta:
+        icon = "doc-full"
+        label = "Section"
+        template = "base/blocks/section.html"
+

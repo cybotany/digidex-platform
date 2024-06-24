@@ -34,7 +34,11 @@
   </head>
   <body>
     {% block content %}
-      {{ page.body }}
+      {% if page.content %}
+        {{ page.content }}
+      {% else %}
+        <p>No content has been added.</p>
+      {% endif %}
     {% endblock %}
   </body>
 </html>
