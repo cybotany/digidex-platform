@@ -1,5 +1,5 @@
 {% load wagtailcore_tags %}
 
 <section class="section {{ value.classname }}">
-  {% include_block value.heading with classname={{ value.classname }} %}
+  {% include_block value.heading with classname=value.classname %}
 </section>

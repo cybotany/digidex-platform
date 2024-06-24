@@ -97,11 +97,11 @@ class SectionContent(StructBlock):
 
 
 class Section(StructBlock):
-    content = SectionContent(
-        required=True
-    )
     classname = CharBlock(
         required=False
+    )
+    content = SectionContent(
+        required=True
     )
 
     class Meta:
