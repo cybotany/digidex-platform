@@ -1,4 +1,4 @@
-from wagtail.blocks import StructBlock, CharBlock, URLBlock, StreamBlock
+from wagtail.blocks import ChoiceBlock, StructBlock, CharBlock, URLBlock, StreamBlock
 
 
 class TextLink(StructBlock):
@@ -16,18 +16,29 @@ class TextLink(StructBlock):
         label = "Link"
 
 
-class Heading(StructBlock):
+class Title(StructBlock):
     text = CharBlock(
         required=True
     )
+    size = ChoiceBlock(
+        choices=[
+            ("h1", "H1"),
+            ("h2", "H2"),
+            ("h3", "H3"),
+            ("h4", "H4"),
+            ("h5", "H5"),
+            ("h6", "H6"),
+        ],
+        default="h2",
+        required=False
+    )
 
     class Meta:
-        icon = "title"
-        template = "base/blocks/heading.html"
+        template = "base/blocks/title.html"
 
 
-class Subtitle(StructBlock):
-    subtitle = CharBlock(
+class Subtitle(CharBlock):
+    text = CharBlock(
         required=True
     )
 
@@ -36,11 +47,11 @@ class Subtitle(StructBlock):
 
 
 class HeadingBlock(StructBlock):
-    subtitle = CharBlock(
+    subtitle = Subtitle(
         classname="title",
         required=False
     )
-    title = CharBlock(
+    title = Title(
         classname="title",
         required=True
     )

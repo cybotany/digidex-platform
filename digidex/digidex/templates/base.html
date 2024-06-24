@@ -33,12 +33,12 @@
 
   </head>
   <body>
-    {% for block in page.body %}
-      <section class="section {{ block.classname }}">
+    {% for section in page.body %}
+      <section class="section {{ section.value.classname }}">
         <div class="content">
-          {% include_block block.content.heading with classname="block.classname" %}
-          {% include_block block.content.grid with classname="block.classname" %}
-          {% include_block block.content.footnote with classname="block.classname" %}
+          {% with section.value.content as content %}
+            {% include_block content with classname="section.value.classname" %}
+          {% endwith %}
         </div>
       </section>
     {% endfor %}
