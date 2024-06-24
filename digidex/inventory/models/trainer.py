@@ -1,14 +1,10 @@
 import uuid
 from django.db import models
 
-from modelcluster.fields import ParentalKey
 from wagtail.api import APIField
 from wagtail.models import Collection, Page
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel, InlinePanel
-
-from .note import Note, NoteGalleryImage
-from .nfc import NearFieldCommunicationLink
 
 
 class TrainerPage(Page):
@@ -37,7 +33,6 @@ class TrainerPage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('introduction'),
-        InlinePanel('notes', label="Longitudinal Trainer Notes"),
     ]
 
     parent_page_types = [
@@ -45,41 +40,5 @@ class TrainerPage(Page):
     ]
 
     subpage_types = [
-        'inventory.CategoryPage',
         'inventory.AssetPage'
     ]
-
-
-class TrainerNote(Note):
-    page = ParentalKey(
-        TrainerPage,
-        on_delete=models.CASCADE,
-        related_name='notes'
-    )
-
-    def __str__(self):
-        return f"Trainer Note: {self.uuid}"
-
-
-class TrainerNoteGalleryImage(NoteGalleryImage):
-    note = ParentalKey(
-        TrainerNote,
-        on_delete=models.CASCADE,
-        related_name='gallery_images'
-    )
-
-    panels = NoteGalleryImage.panels +  [
-        InlinePanel('gallery_images', label="Note Image Gallery"),
-    ]
-
-
-class TrainerNearFieldCommunicationLink(NearFieldCommunicationLink):
-    page = models.OneToOneField(
-        TrainerPage,
-        on_delete=models.SET_NULL,
-        null=True,
-        related_name='nfc'
-    )
-
-    def __str__(self):
-        return f"Trainer NFC: {self.uuid}"

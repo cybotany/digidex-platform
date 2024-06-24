@@ -48,7 +48,6 @@ class AssetPage(Page):
 
     parent_page_types = [
         'inventory.TrainerPage',
-        'inventory.CategoryPage'
     ]
 
     subpage_types = []
