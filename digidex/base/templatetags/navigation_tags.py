@@ -12,7 +12,7 @@ def get_site_logo(context):
     return Site.find_for_request(context["request"]).root_page
 
 @register.simple_tag(takes_context=True)
-def get_trainer_page_url(context):
+def get_user_page_url(context):
     request = context['request']
     user = request.user
 

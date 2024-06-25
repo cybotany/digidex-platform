@@ -1,8 +1,19 @@
-{% load navigation_tags %}
-
-<footer id="footer">
+{% load static wagtailcore_tags %}
+<footer class="footer">
   <section class="footer__section">
     <div class="content">
+      <div class="base-layout-grid footer__grid">
+        <div id="footer-information" class="footer__block">
+          <img src="{% static 'base/images/google/plant.svg' %}" loading="eager" alt="Logo (Footer)" class="footer__logo">
+          <div class="footer__paragraph">PLACEHOLDER<br></div>
+        </div>
+        {% include "base/includes/links.html" %}
+      </div>
+      <div class="footer__block--down">
+        <div class="footer__text--down">PLACEHOLDER. Built with 
+          <a href="https://wagtail.org/" target="_blank" class="footer__link--down">Wagtail</a><br>
+        </div>
+      </div>
     </div>
   </section>
 </footer>

@@ -1,0 +1,12 @@
+{% load i18n wagtailcore_tags navigation_tags %}
+
+{% if user.is_authenticated %}
+  {% get_user_page_url as url %}
+  {% if url %}
+    <a href="{{ url }}" id="navbar_profile_button" class="navbar__button--outline base-button">Profile</a>
+  {% endif %}
+  <a href="{% url 'account_logout' %}" id="navbar_logout_button" class="navbar__button base-button">Sign Out</a>
+{% else %}
+  <a href="{% url 'account_login' %}" id="navbar_login_button" class="navbar__button base-button">Sign In</a>
+  <a href="{% url 'account_signup' %}" id="navbar_signup_button" class="navbar__button--outline base-button">Sign Up</a>
+{% endif %}

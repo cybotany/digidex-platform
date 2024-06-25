@@ -1,16 +1,42 @@
-{% load static wagtailcore_tags digidex_tags%}
+{% load static wagtailcore_tags navigation_tags%}
 {% get_site_root as site_root %}
 
 <header id="header">
-  <div role="banner" class="base-navbar navbar">
+  <div data-id="header-navbar" role="banner" class="base-navbar navbar">
     <div class="navbar__container">
-        <div class="navbar__item"></div>
-        <div class="navbar__item">
-          <div class="navbar__buttons--desktop"></div>
-          <div class="menu__button base-navbar-button">
-            <div class="menu__icon base-icon-navbar-menu"></div>
+      <div class="navbar__item">
+        <a href="{% pageurl site_root %}" aria-current="page" class="navbar__brand base-navbar-brand base--current">
+          <img src="{% static 'base/images/google/plant.svg' %}" loading="eager" alt="Company Logo" class="navbar__logo">
+        </a>
+        <nav class="navbar__menu base-nav-menu" role="navigation">
+          {% for menuitem in site_root.get_children.live.in_menu %}
+            <a href="{% pageurl menuitem %}" class="navbar__link">{{ menuitem.title }}</a>
+          {% endfor %}
+          <div class="navbar__buttons--mobile">
+            {% include "base/includes/buttons.html" %}
           </div>
+        </nav>
+      </div>
+      <div class="navbar__item">
+        <div class="navbar__buttons--desktop">
+          {% include "base/includes/buttons.html" %}
         </div>
+        <div class="menu__button base-navbar-button">
+          <div class="menu__icon base-icon-navbar-menu"></div>
+        </div>
+      </div>
     </div>
   </div>
+  {% if messages %}
+  <section class="section-top-bar">
+    {% for message in messages %}
+      <div class="top-bar-block">
+        <div class="top-bar">
+          <div class="info-top-bar">{{ message }}</div>
+        </div>
+      </div>
+    {% endfor %}
+  </section>
+{% endif %}
+{% load static %}
 </header>
