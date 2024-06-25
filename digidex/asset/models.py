@@ -64,18 +64,6 @@ class AssetPage(RoutablePageMixin, Page):
     subpage_types = []
 
     @property
-    def collection(self):
-        if self.get_collection():
-            return self.get_collection()
-        return self.create_collection()
-
-    def get_collection(self):
-        return self.owner.collection.get_children().filter(name=self.name).first()
-
-    def create_collection(self):
-        return self.owner.collection.add_child(name=self.name)
-
-    @property
     def image(self):
         return self.get_main_image()
 
@@ -210,9 +198,6 @@ class AssetPage(RoutablePageMixin, Page):
         context['page_tabs'] = self.get_tabs()
         context['page_cards'] = self.get_cards()
         return context
-
-    def __str__(self):
-        return self.name.title()
 
     def __str__(self):
         return f"Asset: {self.name}"
