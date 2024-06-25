@@ -1,6 +1,7 @@
 {% extends "trainer/base.html" %}
 
 {% block content %}
+  {% include 'base/layouts/panel.html' with panel=page_panel %}
   {% include 'base/layouts/featured_asset.html' with featured=featured_asset %}
   {% include 'base/layouts/category_collection.html' with categories=category_collection %}
   {% include 'base/layouts/asset_collection.html' with assets=asset_collection %}
