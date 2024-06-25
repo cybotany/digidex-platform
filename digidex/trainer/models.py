@@ -4,7 +4,7 @@ from django.db import models
 from wagtail.api import APIField
 from wagtail.models import Collection, Page
 from wagtail.fields import RichTextField
-from wagtail.admin.panels import FieldPanel, InlinePanel
+from wagtail.admin.panels import FieldPanel
 
 
 class TrainerPage(Page):
@@ -40,5 +40,5 @@ class TrainerPage(Page):
     ]
 
     subpage_types = [
-        'inventory.AssetPage'
+        'asset.AssetPage'
     ]

@@ -13,7 +13,7 @@ from nfc.models import NearFieldCommunicationTag
 class HomePage(Page):
 
     subpage_types = [
-        'inventory.TrainerPage'
+        'trainer.TrainerPage'
     ]
 
     class Meta:

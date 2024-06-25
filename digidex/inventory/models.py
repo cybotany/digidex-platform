@@ -7,7 +7,7 @@ from wagtail.models import Collection, Page, Orderable
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel, InlinePanel
 
-from .note import Note
+from journal.models import Note
 
 
 class InventoryPage(Page):
@@ -40,11 +40,11 @@ class InventoryPage(Page):
     ]
 
     parent_page_types = [
-        'inventory.TrainerPage'
+        'trainer.TrainerPage'
     ]
 
     subpage_types = [
-        'inventory.AssetPage'
+        'asset.AssetPage'
     ]
 
     def __str__(self):

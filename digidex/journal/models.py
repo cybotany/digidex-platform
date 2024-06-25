@@ -2,14 +2,17 @@ import uuid
 
 from django.db import models
 
+from modelcluster.models import ClusterableModel
+from wagtail.api import APIField
 from wagtail.images import get_image_model
 from wagtail.fields import RichTextField
+from wagtail.models import Orderable
 from wagtail.admin.panels import FieldPanel
 
 
-CustomImageModel = get_image_model()
+DigiDexImageModel = get_image_model()
 
-class Note(models.Model):
+class Note(ClusterableModel):
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
@@ -20,13 +23,6 @@ class Note(models.Model):
         blank=True,
         null=True
     )
-    image = models.ForeignKey(
-        CustomImageModel,
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
     created_at = models.DateTimeField(
         auto_now_add=True
     )
@@ -34,8 +30,35 @@ class Note(models.Model):
         auto_now=True
     )
 
+    api_fields = [
+        APIField('uuid'),
+        APIField('entry'),
+        APIField('created_at'),
+        APIField('last_modified'),
+    ]
+
     panels = [
         FieldPanel('entry'),
+    ]
+
+    class Meta:
+        abstract = True
+
+
+class NoteGalleryImage(Orderable):
+    image = models.ForeignKey(
+        DigiDexImageModel,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    api_fields = [
+        APIField('image'),
+    ]
+
+    panels = [
         FieldPanel('image'),
     ]
 
