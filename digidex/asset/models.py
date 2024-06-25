@@ -8,7 +8,7 @@ from wagtail.models import Collection, Page
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel, InlinePanel
 
-from ..inventory.note import Note, NoteGalleryImage
+from journal.models import Note, NoteGalleryImage
 from nfc.models import NearFieldCommunicationLink
 
 
