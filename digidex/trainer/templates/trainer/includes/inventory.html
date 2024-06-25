@@ -1,0 +1,70 @@
+{% load static wagtailimages_tags %}
+
+<section class="section-top">
+  <div class="content">
+    <div class="block-top">
+      <h1 class="heading-top">{{ inventory.tab.name }}</h1>
+      <p class="paragraph-top">{{ inventory.tab.description }}</p>
+      <div class="block-categories block">
+        <a href="{{ inventory.tab.url }}" aria-current="page" class="link-category base-inline-block base--current">
+          <img src="{% static 'base/images/nfc/directional/nfc_directional_mark_black.png' %}" loading="eager" alt="" class="icon-category">
+          <div class="text-category">{{ inventory.tab.name }}</div>
+        </a>
+        <div class="collection-list-wrapper-categories base-dyn-list">
+          <div role="list" class="collection-list-categories base-dyn-items">
+            {% for category in inventory.categories %}
+              <div role="listitem" class="collection-item-categories base-dyn-item">
+                <a href="{{ category.url }}" class="link-category base-inline-block">
+                  {% if category.image %}
+                    <img src="{{ category.image.url }}" alt="" loading="eager" class="icon-category">
+                  {% else %}
+                    <img src="{% static 'base/images/google/tree.svg' %}" alt="" loading="eager" class="icon-category">
+                  {% endif %}
+                  <div class="text-category">{{ category.name }}</div>
+                </a>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+        <a href="{{ inventory.add_url }}" aria-current="page" class="link-category base-inline-block">
+          <img src="{% static 'base/images/google/add-circle.svg' %}" loading="eager" alt="" class="icon-category">
+          <div class="text-category">Add {{ inventory.form_model }}</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="content">
+    <div id="asset-items-list" class="collection-list-wrapper-assets base-dyn-list">
+      <div role="list" class="collection-list-assets base-dyn-items">
+        {% for card in inventory.cards %}
+          <div role="listitem" class="block-asset base-dyn-item">
+            <a href="{{ card.detail_url }}" class="link-asset-thumbnail base-inline-block">
+              {% if card.image %}
+                {% image card.image original class="image-asset-thumbnail" %}
+              {% endif %}
+            </a>
+            <div class="asset">
+              {% if card.date %}
+                <div class="date">{{ card.date }}</div>
+              {% endif %}
+              <a href="{{ card.detail_url }}" class="link-heading-asset base-inline-block">
+                <h3 class="heading-asset">{{ card.name }}</h3>
+              </a>
+              {% if card.description %}
+                <p class="paragraph-asset">{{ card.description }}</p>
+              {% endif %}
+              <a href="{{ card.detail_url }}" class="button base-button">Details</a>
+            </div>
+          </div>
+        {% empty %}
+          <div class="empty-state base-dyn-empty">
+            <div class="text-empty">No cards found.</div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
