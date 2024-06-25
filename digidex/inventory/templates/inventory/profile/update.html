@@ -1,0 +1,11 @@
+{% extends "base/utility.html" %}
+{% load i18n %}
+
+{% block title %}
+  {% trans "Update Account" %}
+{% endblock title %}
+
+{% block content %}
+  <h3 class="account-heading">Update Account</h3>
+  {% include "inventory/profile/form.html" %}
+{% endblock %}
