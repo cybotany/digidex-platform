@@ -1,0 +1,6 @@
+{% extends "inventory/base.html" %}
+
+{% block content %} 
+  {% include 'base/elements/panel.html' with panel=page_panel %}
+  {% include 'base/layouts/inventory.html' with inventory=page_inventory %}
+{% endblock %}

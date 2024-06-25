@@ -1,0 +1,19 @@
+<form id="profile-form" method="post" class="utility-page-form base-password-page" enctype="multipart/form-data">
+  {% csrf_token %}
+  <label for="{{ form.image.id_for_label }}">Avatar:</label>
+  {{ form.image }}
+  {% if form.image.errors %}
+    <div class="error-message">
+      <div class="text-error">{{ form.image.errors|striptags }}</div>
+    </div>
+  {% endif %}
+  <label for="{{ form.introduction.id_for_label }}">Introduction:</label>
+  {{ form.introduction }}
+  {% if form.introduction.errors %}
+    <div class="error-message">
+      <div class="text-error">{{ form.introduction.errors|striptags }}</div>
+    </div>
+  {% endif %}
+  <input type="submit" value="Submit" class="submit-button base-button"> 
+  {{ form.non_field_errors }}
+</form>

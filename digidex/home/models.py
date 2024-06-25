@@ -7,7 +7,7 @@ from django.contrib.auth import REDIRECT_FIELD_NAME
 
 from wagtail.models import Page
 
-from inventory.models import NearFieldCommunicationTag
+from nfc.models import NearFieldCommunicationTag
 
 
 class HomePage(Page):

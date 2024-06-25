@@ -1,0 +1,22 @@
+{% extends "base/utility.html" %}
+{% load i18n %}
+
+{% block title %}
+  {% trans "Delete Account" %}
+{% endblock title %}
+
+{% block content %}
+  <h3 class="account-heading">Delete Account</h3>
+  <form id="profile-form" method="post" class="utility-page-form base-password-page" enctype="multipart/form-data">
+  {% csrf_token %}
+    <label for="{{ form.delete.id_for_label }}">Confirm Account Deletion:</label>
+    {{ form.delete }}
+    {% if form.delete.errors %}
+      <div class="error-message">
+        <div class="text-error">{{ form.delete.errors|striptags }}</div>
+      </div>
+    {% endif %}
+    <input type="submit" value="Delete" class="submit-button base-button"> 
+    {{ form.non_field_errors }}
+  </form>
+{% endblock %}
