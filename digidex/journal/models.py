@@ -41,9 +41,6 @@ class Note(ClusterableModel):
         FieldPanel('entry'),
     ]
 
-    class Meta:
-        abstract = True
-
 
 class NoteGalleryImage(Orderable):
     image = models.ForeignKey(
@@ -61,6 +58,3 @@ class NoteGalleryImage(Orderable):
     panels = [
         FieldPanel('image'),
     ]
-
-    class Meta:
-        abstract = True

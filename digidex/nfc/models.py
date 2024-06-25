@@ -19,12 +19,6 @@ class NearFieldCommunicationTag(models.Model):
         created_at (DateTimeField): Timestamp indicating when the record was first created.
         last_modified (DateTimeField): Timestamp indicating when the record was last updated.
     """
-    NTAG_TYPES = (
-        ('NTAG 213', 'NTAG 213'),
-        ('NTAG 215', 'NTAG 215'),
-        ('NTAG 216', 'NTAG 216'),
-    )
-
     uuid = models.UUIDField(
         default=uuid.uuid4,
         editable=False,
@@ -35,11 +29,6 @@ class NearFieldCommunicationTag(models.Model):
         unique=True,
         db_index=True,
         validators=[validate_ntag_serial]
-    )
-    ntag_type = models.CharField(
-        max_length=50,
-        choices=NTAG_TYPES,
-        default='NTAG 213'
     )
     active = models.BooleanField(
         default=False
@@ -102,6 +91,3 @@ class NearFieldCommunicationLink(models.Model):
         on_delete=models.CASCADE,
         related_name='+'
     )
-
-    class Meta:
-        abstract = True
