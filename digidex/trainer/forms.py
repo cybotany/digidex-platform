@@ -1,9 +1,7 @@
 from django import forms
 
-from base.forms import AssetDeletionCheckbox
 
-
-class UserProfileForm(forms.Form):
+class TrainerForm(forms.Form):
     image = forms.ImageField(
         label='Upload Avatar',
         widget=forms.FileInput(
@@ -22,6 +20,3 @@ class UserProfileForm(forms.Form):
         ),
         required=False
     )
-
-class DeleteUserForm(AssetDeletionCheckbox):
-    pass
