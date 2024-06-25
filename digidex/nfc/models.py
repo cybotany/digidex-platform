@@ -89,5 +89,5 @@ class NearFieldCommunicationLink(models.Model):
     tag = models.OneToOneField(
         NearFieldCommunicationTag,
         on_delete=models.CASCADE,
-        related_name='+'
+        related_name='mapping'
     )

@@ -42,7 +42,7 @@ class Note(ClusterableModel):
     ]
 
 
-class NoteGalleryImage(Orderable):
+class NoteImageGallery(Orderable):
     image = models.ForeignKey(
         DigiDexImageModel,
         null=True,

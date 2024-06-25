@@ -8,8 +8,8 @@ from wagtail.models import Collection, Page
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel, InlinePanel
 
-from journal.models import Note, NoteGalleryImage
 from nfc.models import NearFieldCommunicationLink
+from journal.models import Note, NoteImageGallery
 
 
 class AssetPage(Page):
@@ -57,7 +57,7 @@ class AssetPage(Page):
 
 
 class AssetNote(Note):
-    page = models.ForeignKey(
+    asset = models.ForeignKey(
         AssetPage,
         on_delete=models.CASCADE,
         related_name='notes'
@@ -67,24 +67,24 @@ class AssetNote(Note):
         return f"Asset Note: {self.uuid}"
 
 
-class AssetNoteGalleryImage(NoteGalleryImage):
+class AssetNoteImageGallery(NoteImageGallery):
     note = ParentalKey(
         AssetNote,
         on_delete=models.CASCADE,
         related_name='gallery_images'
     )
 
-    panels = NoteGalleryImage.panels +  [
+    panels = NoteImageGallery.panels +  [
         InlinePanel('gallery_images', label="Note Image Gallery"),
     ]
 
 
 class AssetNearFieldCommunicationLink(NearFieldCommunicationLink):
-    page = models.OneToOneField(
+    asset = models.OneToOneField(
         AssetPage,
         on_delete=models.SET_NULL,
         null=True,
-        related_name='nfc'
+        related_name='+'
     )
 
     def __str__(self):
