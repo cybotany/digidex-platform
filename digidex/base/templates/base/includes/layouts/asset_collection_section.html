@@ -6,26 +6,27 @@
       <div class="subtitle">{{ section.title }}<br></div>
     </div>
     {% if section.default %}
-    {% with default=section.default %}
-      <div id="largeAssetCollection" class="collection-list-wrapper-assets large base-dyn-list">
-        <div role="list" class="collection-list-assets large base-dyn-items">
-          <div role="listitem" class="block-asset large base-dyn-item">
-            
-            <img alt="{{ default.image.caption }}" loading="eager" src="{{ default.image.url }}" class="link-asset-thumbnail large">
-            <div class="asset large">
-              <div class="date">{{ default.date }}</div>
-              <h3 class="heading-asset large">{{ default.name }}</h3>
-              <p class="paragraph-asset large">{{ default.description }}</p>
-              <a href="{{ default.url }}" class="link-block w-inline-block">
-                <div class="text-link">Read More</div>
-                <div class="link-block-icon">
-                  <img src="{% static 'base/images/bx/arrow.svg' %}" loading="eager" alt="Right Arrow" class="icon-link">
-                </div>
-              </a>
+      {% with default=section.default %}
+        <div id="largeAssetCollection" class="collection-list-wrapper-assets large base-dyn-list">
+          <div role="list" class="collection-list-assets large base-dyn-items">
+            <div role="listitem" class="block-asset large base-dyn-item">
+              
+              <img alt="{{ default.image.caption }}" loading="eager" src="{{ default.image.url }}" class="link-asset-thumbnail large">
+              <div class="asset large">
+                <div class="date">{{ default.date }}</div>
+                <h3 class="heading-asset large">{{ default.title }}</h3>
+                <p class="paragraph-asset large">{{ default.description }}</p>
+                <a href="{{ default.detail_url }}" class="link-block w-inline-block">
+                  <div class="text-link">Read More</div>
+                  <div class="link-block-icon">
+                    <img src="{% static 'base/images/bx/arrow.svg' %}" loading="eager" alt="Right Arrow" class="icon-link">
+                  </div>
+                </a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      {% endwith %}
     {% endif %}
     <div id="asset-items-list" class="collection-list-wrapper-assets base-dyn-list">
       <div role="list" class="collection-list-assets base-dyn-items">
@@ -41,7 +42,7 @@
                 <div class="date">{{ asset.date }}</div>
               {% endif %}
               <a href="{{ asset.detail_url }}" class="link-heading-asset base-inline-block">
-                <h3 class="heading-asset">{{ asset.name }}</h3>
+                <h3 class="heading-asset">{{ asset.title }}</h3>
               </a>
               {% if asset.description %}
                 <p class="paragraph-asset">{{ asset.description }}</p>

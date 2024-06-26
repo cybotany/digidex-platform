@@ -155,12 +155,22 @@ class AssetPage(RoutablePageMixin, Page):
         else:
             form = AssetJournalEntryForm()
         
-        return render(request, 'inventory/digit/journal.html', {'form': form})
+        return render(request, 'asset/includes/journal_form.html', {'form': form})
 
     def get_page_heading(self):
         return {
             'title': self.formatted_title,
             'paragraph': self.description,
+        }
+
+    def get_summary(self):
+        return {
+            'uuid': self.uuid,
+            'title': self.formatted_title,
+            'description': self.description,
+            'date': self.formatted_date,
+            'detail_url': self.url,
+            'image': self.image,
         }
 
     def get_context(self, request, *args, **kwargs):
@@ -169,7 +179,7 @@ class AssetPage(RoutablePageMixin, Page):
         return context
 
     def __str__(self):
-        return f"Asset: {self.title}"
+        return f"Asset: {self.formatted_title}"
 
 
 class AssetNote(Orderable, Note):

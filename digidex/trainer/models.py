@@ -153,9 +153,9 @@ class TrainerPage(RoutablePageMixin, Page):
         return self.get_children().filter(content_type=_categorytype)
 
     def get_asset_collection(self, inventory):
-        _type = ContentType.objects.get(app_label='inventory', model='assetpage')
+        _type = ContentType.objects.get(app_label='asset', model='assetpage')
         _collection = inventory.get_children().filter(content_type=_type)
-        _assets = [_asset.specific.get_card_details() for _asset in _collection]
+        _assets = [_asset.specific.get_summary() for _asset in _collection]
         return _assets
 
     def get_context(self, request, *args, **kwargs):
