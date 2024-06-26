@@ -1,0 +1,31 @@
+{% extends "trainer/base.html" %}
+{% load i18n %}
+
+{% block title %}
+  {% trans "Add Inventory Category" %}
+{% endblock title %}
+
+{% block content %}
+  <form method="post" class="form">
+    {% csrf_token %}
+      <!-- Render Title Field -->
+      <label for="{{ form.title.id_for_label }}">Title:</label>
+      {{ form.title }}
+      {% if form.title.errors %}
+        <div class="error-message">
+          <div class="text-error">{{ form.title.errors|striptags }}</div>
+        </div>
+      {% endif %}
+      <!-- Render Description Field -->
+      <label for="{{ form.description.id_for_label }}">Description:</label>
+      {{ form.description }}
+      {% if form.description.errors %}
+        <div class="error-message">
+          <div class="text-error">{{ form.description.errors|striptags }}</div>
+        </div>
+      {% endif %}
+      <!-- Render Submit Button -->
+      <input type="submit" value="Submit" class="submit-button base-button"> 
+      {{ form.non_field_errors }}
+  </form>
+{% endblock %}     

@@ -31,6 +31,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'base/css/webflow.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'base/css/base.css' %}">
 
+    {# Page stylesheets #}
+    {% block extra_css %}{% endblock %}
   </head>
   <body>
     <div id="root">

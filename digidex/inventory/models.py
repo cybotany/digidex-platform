@@ -119,6 +119,7 @@ class InventoryPage(RoutablePageMixin, Page):
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         context['page_heading'] = self.get_page_heading()
+        return context
 
     class Meta:
         verbose_name = "Inventory Category Page"

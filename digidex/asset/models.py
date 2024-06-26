@@ -52,6 +52,7 @@ class AssetPage(RoutablePageMixin, Page):
     ]
 
     parent_page_types = [
+        'inventory.InventoryPage',
         'trainer.TrainerPage',
     ]
 
@@ -62,9 +63,9 @@ class AssetPage(RoutablePageMixin, Page):
         return self.get_main_image()
 
     def get_main_image(self):
-        entry = self.journal_entries.order_by('-created_at').first()
-        if entry:
-            return entry.image
+        #entry = self.journal_entries.order_by('-created_at').first()
+        #if entry:
+        #    return entry.image
         return None
 
     @property
@@ -77,8 +78,8 @@ class AssetPage(RoutablePageMixin, Page):
     def formatted_title(self):
         return self.title.title()
 
-    @route(r'^update/$', name='update_digit_view')
-    def update_digit_view(self, request):
+    @route(r'^update/$', name='update_asset_view')
+    def update_view(self, request):
         page_owner = self.owner
         if page_owner != request.user:
             return HttpResponseForbidden("You are not authorized to update this digital object.")
@@ -100,10 +101,10 @@ class AssetPage(RoutablePageMixin, Page):
             }
             form = AssetForm(initial=initial_data)
         
-        return render(request, 'inventory/digit/update.html', {'form': form})
+        return render(request, 'asset/include/update_form.html', {'form': form})
 
-    @route(r'^delete/$', 'delete_digit_view')
-    def delete_digit_view(self, request):
+    @route(r'^delete/$', 'delete_asset_view')
+    def delete_view(self, request):
         page_owner = self.owner
         if page_owner != request.user:
             return HttpResponseForbidden("You are not authorized to update this digital object.")
@@ -118,7 +119,7 @@ class AssetPage(RoutablePageMixin, Page):
         else:
             form = DeleteAssetForm()
         
-        return render(request, 'inventory/digit/delete.html', {'form': form})
+        return render(request, 'asset/include/delete_form.html', {'form': form})
 
     @route(r'^add/$', name='add_digit_entry_view')
     def add_view(self, request):
@@ -156,43 +157,15 @@ class AssetPage(RoutablePageMixin, Page):
         
         return render(request, 'inventory/digit/journal.html', {'form': form})
 
-    def get_card_details(self):
+    def get_page_heading(self):
         return {
             'title': self.formatted_title,
-            'image': self.image,
-            'date': self.formatted_date,
-            'description': self.description or 'No description available',
-            'detail_url': self.url,
-        }
-
-    def get_cards(self):
-        if hasattr(self, 'journal_entries'):
-            cards = self.journal_entries.all()
-            return cards
-        return []
-
-    def get_panel(self):
-        return {
-            'title': self.formatted_title,
-            'image': self.image,
-            'date': self.formatted_date, 
-            'description': self.description,
-            'update_url': self.reverse_subpage('update_digit_view'),
-            'delete_url': self.reverse_subpage('delete_digit_view'),
-        }
-
-    def get_tabs(self):
-        return {
-            'descendants': [],
-            'add_url': self.reverse_subpage('add_digit_entry_view'),
-            'form_model': 'Journal Entry',
+            'paragraph': self.description,
         }
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context['page_panel'] = self.get_panel()
-        context['page_tabs'] = self.get_tabs()
-        context['page_cards'] = self.get_cards()
+        context['page_heading'] = self.get_page_heading()
         return context
 
     def __str__(self):

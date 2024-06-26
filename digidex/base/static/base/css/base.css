@@ -4649,7 +4649,7 @@ figcaption {
   display: inline-block;
 }
 
-.category__link {
+.link-category {
   grid-column-gap: .63em;
   grid-row-gap: .63em;
   color: var(--heading);
@@ -4663,11 +4663,11 @@ figcaption {
   display: flex;
 }
 
-.category__link:hover {
+.link-category:hover {
   color: var(--accent-a1);
 }
 
-.category__link.base--current {
+.link-category.base--current {
   background-color: var(--white);
   box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
 }
@@ -4693,7 +4693,7 @@ figcaption {
 }
 
 @media screen and (max-width: 991px) {
-  .category__link {
+  .link-category {
     padding: 1em 1.2em;
   }
 

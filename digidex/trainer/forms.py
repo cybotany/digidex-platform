@@ -35,11 +35,11 @@ class DeleteTrainerForm(forms.Form):
 
 
 class TrainerInventoryForm(forms.Form):
-    name = forms.CharField(
+    title = forms.CharField(
         widget=forms.TextInput(
             attrs={
                 'class': 'text-field base-input',
-                'placeholder': 'Enter the name of the inventory'
+                'placeholder': 'Enter the title of the inventory'
             }
         ),
         required=True
@@ -55,11 +55,11 @@ class TrainerInventoryForm(forms.Form):
     )
 
     def clean_name(self):
-        name = self.cleaned_data['name']
+        title = self.cleaned_data['title']
         forbidden_keywords = ['add', 'update', 'delete', 'admin']
-        if any(keyword in name.lower() for keyword in forbidden_keywords):
-            raise ValidationError(f'The name cannot contain any of the following keywords: {", ".join(forbidden_keywords)}')
-        return name
+        if any(keyword in title.lower() for keyword in forbidden_keywords):
+            raise ValidationError(f'The title cannot contain any of the following keywords: {", ".join(forbidden_keywords)}')
+        return title
 
 
 class TrainerJournalEntryForm(forms.Form):
