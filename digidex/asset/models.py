@@ -37,9 +37,6 @@ class AssetPage(RoutablePageMixin, Page):
         on_delete=models.SET_NULL,
         related_name='+'
     )
-    name = models.CharField(
-        max_length=50
-    )
     description = RichTextField(
         blank=True,
         null=True
@@ -47,12 +44,10 @@ class AssetPage(RoutablePageMixin, Page):
 
     api_fields = [
         APIField('uuid'),
-        APIField('name'),
         APIField('description'),
     ]
 
     content_panels = Page.content_panels + [
-        FieldPanel('name'),
         FieldPanel('description'),
     ]
 
@@ -74,11 +69,13 @@ class AssetPage(RoutablePageMixin, Page):
 
     @property
     def formatted_date(self):
-        return self.first_published_at.strftime('%B %d, %Y')
+        if self.live:
+            return self.first_published_at.strftime('%B %d, %Y')
+        return "Draft"
     
     @property
-    def formatted_name(self):
-        return self.name.title()
+    def formatted_title(self):
+        return self.title.title()
 
     @route(r'^update/$', name='update_digit_view')
     def update_digit_view(self, request):
@@ -89,8 +86,8 @@ class AssetPage(RoutablePageMixin, Page):
         if request.method == 'POST':
             form = AssetForm(request.POST, request.FILES)
             if form.is_valid():
-                if 'name' in form.cleaned_data:
-                    self.name = form.cleaned_data['name']
+                if 'title' in form.cleaned_data:
+                    self.title = form.cleaned_data['title']
                 if 'description' in form.cleaned_data:
                     self.description = form.cleaned_data['description']
                 self.save()
@@ -98,7 +95,7 @@ class AssetPage(RoutablePageMixin, Page):
                 return redirect(self.url)
         else:
             initial_data = {
-                'name': self.name,
+                'title': self.title,
                 'description': self.description
             }
             form = AssetForm(initial=initial_data)
@@ -161,7 +158,7 @@ class AssetPage(RoutablePageMixin, Page):
 
     def get_card_details(self):
         return {
-            'name': self.formatted_name,
+            'title': self.formatted_title,
             'image': self.image,
             'date': self.formatted_date,
             'description': self.description or 'No description available',
@@ -176,7 +173,7 @@ class AssetPage(RoutablePageMixin, Page):
 
     def get_panel(self):
         return {
-            'name': self.formatted_name,
+            'title': self.formatted_title,
             'image': self.image,
             'date': self.formatted_date, 
             'description': self.description,
@@ -199,7 +196,7 @@ class AssetPage(RoutablePageMixin, Page):
         return context
 
     def __str__(self):
-        return f"Asset: {self.name}"
+        return f"Asset: {self.title}"
 
 
 class AssetNote(Orderable, Note):

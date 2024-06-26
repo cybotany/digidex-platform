@@ -67,10 +67,12 @@ class TrainerPage(RoutablePageMixin, Page):
 
     @property
     def formatted_date(self):
-        return self.first_published_at.strftime('%B %d, %Y')
+        if self.live:
+            return self.first_published_at.strftime('%B %d, %Y')
+        return "Draft"
     
     @property
-    def formatted_name(self):
+    def formatted_title(self):
         return self.owner.username.title()
 
     @route(r'^update/$', name='update_profile_view')
@@ -113,7 +115,7 @@ class TrainerPage(RoutablePageMixin, Page):
 
         return render(request, 'trainer/includes/delete.html', {'form': form, 'url': self.url})
 
-    @route(r'^add/$', name='add_category_view')
+    @route(r'^add/$', name='add_inventory_view')
     def add_view(self, request):
         page_owner = self.owner
         if page_owner != request.user:
@@ -122,18 +124,17 @@ class TrainerPage(RoutablePageMixin, Page):
         if request.method == 'POST':
             form = TrainerInventoryForm(request.POST)
             if form.is_valid():
-                name = form.cleaned_data['name']
-                category_page = apps.get_model('inventory', 'InventoryPage')(
-                    title=f"{name.title()}'s Inventory",
-                    slug=slugify(name),
+                title = form.cleaned_data['title'].title()
+                inventory_page = apps.get_model('inventory', 'inventorypage')(
+                    title=f"{title}'s Inventory",
+                    slug=slugify(title),
                     owner=page_owner,
-                    name=name,
                     description=form.cleaned_data['description']
                 )
-                self.add_child(instance=category_page)
-                category_page.save_revision().publish()
-                messages.success(request, f'{category_page.name} successfully added!')
-                return redirect(category_page.url)
+                self.add_child(instance=inventory_page)
+                inventory_page.save_revision().publish()
+                messages.success(request, f'{title} successfully added!')
+                return redirect(inventory_page.url)
         else:
             form = TrainerInventoryForm()
         
@@ -141,7 +142,7 @@ class TrainerPage(RoutablePageMixin, Page):
 
     def get_page_heading(self):
         return {
-            'title': f"{self.formatted_name}'s Profile",
+            'title': f"{self.formatted_title}'s Profile",
             'paragraph': self.introduction,
         }
 
@@ -156,15 +157,15 @@ class TrainerPage(RoutablePageMixin, Page):
         return _assets
 
     def get_context(self, request, *args, **kwargs):
-        """category_collection = self.get_inventory_collection()
-        default_category = category_collection.get(slug='party')
+        category_collection = self.get_inventory_collection()
+        default_category = category_collection.first()
         category_section = {
             'title': 'Inventory',
             'collection': category_collection,
             'default': default_category,
         }
 
-        asset_collection = self.get_asset_collection(default_category)
+        """asset_collection = self.get_asset_collection(default_category)
         default_asset = asset_collection[0]
         asset_section = {
             'title': 'Assets',
@@ -174,7 +175,7 @@ class TrainerPage(RoutablePageMixin, Page):
         
         context = super().get_context(request, *args, **kwargs)
         context['page_heading'] = self.get_page_heading()
-        # context['category_section'] = category_section
+        context['category_section'] = category_section
         # context['asset_section'] = asset_section
         return context
 

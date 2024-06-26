@@ -38,16 +38,12 @@ class InventoryPage(RoutablePageMixin, Page):
         on_delete=models.SET_NULL,
         related_name='+'
     )
-    name = models.CharField(
-        max_length=50
-    )
     description = RichTextField(
         blank=True,
         null=True
     )
 
     content_panels = Page.content_panels + [
-        FieldPanel('name'),
         FieldPanel('description'),
     ]
 
@@ -61,13 +57,15 @@ class InventoryPage(RoutablePageMixin, Page):
 
     @property
     def formatted_date(self):
-        return self.first_published_at.strftime('%B %d, %Y')
+        if self.live:
+            return self.first_published_at.strftime('%B %d, %Y')
+        return "Draft"
     
     @property
-    def formatted_name(self):
-        return self.name.title()
+    def formatted_title(self):
+        return self.title.title()
 
-    @route(r'^update/$', name='update_category_view')
+    @route(r'^update/$', name='update_inventory_view')
     def update_view(self, request):
         page_owner = self.owner
         if page_owner != request.user:
@@ -76,10 +74,10 @@ class InventoryPage(RoutablePageMixin, Page):
         if request.method == 'POST':
             form = InventoryForm(request.POST)
             if form.is_valid():
-                if 'name' in form.cleaned_data:
-                    name = form.cleaned_data['name']
-                    self.name = name
-                    self.slug = slugify(name)
+                if 'title' in form.cleaned_data:
+                    title = form.cleaned_data['title']
+                    self.title = title
+                    self.slug = slugify(title)
                 if 'description' in form.cleaned_data:
                     self.description = form.cleaned_data['description']
                 self.save()
@@ -87,14 +85,14 @@ class InventoryPage(RoutablePageMixin, Page):
                 return redirect(self.url)
         else:
             initial_data = {
-                'name': self.name,
+                'title': self.title,
                 'description': self.description
             }
             form = InventoryForm(initial=initial_data)
 
         return render(request, 'inventory/category/update.html', {'form': form, 'url': self.url})
 
-    @route(r'^delete/$', 'delete_category_view')
+    @route(r'^delete/$', 'delete_inventory_view')
     def delete_view(self, request):
         page_owner = self.owner
         if page_owner != request.user:
@@ -112,40 +110,21 @@ class InventoryPage(RoutablePageMixin, Page):
 
         return render(request, 'inventory/category/delete.html', {'form': form, 'url': self.url})
 
-    def get_card_details(self):
+    def get_page_heading(self):
         return {
-            'name': self.formatted_name,
-            'image': None,
-            'date': self.formatted_date,
-            'description': self.description or 'No description available',
-            'detail_url': self.url,
+            'title': self.formatted_title,
+            'paragraph': self.description,
         }
-
-    def get_panel(self):
-        return {
-            'name': self.formatted_name,
-            'image': None,
-            'date': self.formatted_date, 
-            'description': self.description or 'No description available',
-            'update_url': self.reverse_subpage('update_category_view'),
-            'delete_url': self.reverse_subpage('delete_category_view'),
-        }
-
-    def get_cards(self):
-        cards = self.get_children()
-        return cards
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context['page_panel'] = self.get_panel()
-        context['page_cards'] = self.get_cards()
-        return context
+        context['page_heading'] = self.get_page_heading()
 
     class Meta:
         verbose_name = "Inventory Category Page"
 
     def __str__(self):
-        return f"Inventory: {self.name}"
+        return f"Inventory: {self.title}"
 
 
 class InventoryNote(Orderable, Note):

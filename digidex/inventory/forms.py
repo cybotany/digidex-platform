@@ -2,7 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 
 class InventoryForm(forms.Form):
-    name = forms.CharField(
+    title = forms.CharField(
         widget=forms.TextInput(
             attrs={
                 'class': 'text-field base-input',
@@ -22,11 +22,11 @@ class InventoryForm(forms.Form):
     )
 
     def clean_name(self):
-        name = self.cleaned_data['name']
+        title = self.cleaned_data['title']
         forbidden_keywords = ['add', 'update', 'delete', 'admin']
-        if any(keyword in name.lower() for keyword in forbidden_keywords):
+        if any(keyword in title.lower() for keyword in forbidden_keywords):
             raise ValidationError(f'The name cannot contain any of the following keywords: {", ".join(forbidden_keywords)}')
-        return name
+        return title
 
 
 class DeleteInventoryForm(forms.Form):
