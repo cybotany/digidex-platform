@@ -1,29 +1,51 @@
+{% load static wagtailimage_tags wagtailcore_tags %}
+
 <section class="section">
   <div class="content">
+    {% if section.default %}
+      <div id="largeAssetCollection" class="assets__collectionwrapper--large">
+        <div role="list" class="assets__collection--large">
+          <div role="listitem" class="asset__block--large">
+            <img alt="{{ section.default.image.caption }}" loading="eager" src="{{ asset.image.url }}" class="asset__thumbnail--large">
+            <div class="asset--large">
+              <div class="date">{{ section.default.date }}</div>
+              <h3 class="asset__heading--large">{{ section.default.name }}</h3>
+              <p class="asset__paragraph--large">{{ section.default.description }}</p>
+              <a href="{{ section.default.url }}" class="link__block w-inline-block">
+                <div class="link__text">Read More</div>
+                <div class="link__block--icon">
+                  <img src="{% static 'base/images/bx/arrow.svg' %}" loading="eager" alt="Right Arrow" class="link__icon">
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
     <div id="asset-items-list" class="collection-list-wrapper-assets base-dyn-list">
       <div role="list" class="collection-list-assets base-dyn-items">
-        {% for card in inventory.cards %}
+        {% for asset in section.collection %}
           <div role="listitem" class="block-asset base-dyn-item" onclick="showLargeAsset(this)" data-id="{{ asset.uuid }}">
-            <a href="{{ card.detail_url }}" class="link-asset-thumbnail base-inline-block">
-              {% if card.image %}
-                {% image card.image original class="image-asset-thumbnail" %}
+            <a href="{{ asset.detail_url }}" class="link-asset-thumbnail base-inline-block">
+              {% if asset.image %}
+                {% image asset.image original class="image-asset-thumbnail" %}
               {% endif %}
             </a>
             <div class="asset">
-              {% if card.date %}
-                <div class="date">{{ card.date }}</div>
+              {% if asset.date %}
+                <div class="date">{{ asset.date }}</div>
               {% endif %}
-              <a href="{{ card.detail_url }}" class="link-heading-asset base-inline-block">
-                <h3 class="heading-asset">{{ card.name }}</h3>
+              <a href="{{ asset.detail_url }}" class="link-heading-asset base-inline-block">
+                <h3 class="heading-asset">{{ asset.name }}</h3>
               </a>
-              {% if card.description %}
-                <p class="paragraph-asset">{{ card.description }}</p>
+              {% if asset.description %}
+                <p class="paragraph-asset">{{ asset.description }}</p>
               {% endif %}
             </div>
           </div>
         {% empty %}
           <div class="empty-state base-dyn-empty">
-            <div class="text-empty">No cards found.</div>
+            <div class="text-empty">No {{ asset.title }} found.</div>
           </div>
         {% endfor %}
       </div>

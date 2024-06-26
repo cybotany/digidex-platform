@@ -1,13 +1,16 @@
 <section class="section">
   <div class="content">
+    <div class="block-heading center">
+      <div class="subtitle">{{ section.title }}<br></div>
+    </div>
     <div class="block-categories block">
-      <a href="{{ inventory.tab.url }}" aria-current="page" class="link-category base-inline-block base--current">
+      <a href="{{ section.default.url }}" aria-current="page" class="link-category base-inline-block base--current">
         <img src="{% static 'base/images/nfc/directional/nfc_directional_mark_black.png' %}" loading="eager" alt="" class="icon-category">
-        <div class="text-category">{{ inventory.tab.name }}</div>
+        <div class="text-category">{{ section.default.name }}</div>
       </a>
       <div class="collection-list-wrapper-categories base-dyn-list">
         <div role="list" class="collection-list-categories base-dyn-items">
-          {% for category in inventory.categories %}
+          {% for category in section.collection %}
             <div role="listitem" class="collection-item-categories base-dyn-item">
               <a href="{{ category.url }}" class="link-category base-inline-block">
                 {% if category.image %}
@@ -21,9 +24,9 @@
           {% endfor %}
         </div>
       </div>
-      <a href="{{ inventory.add_url }}" aria-current="page" class="link-category base-inline-block">
+      <a href="{{ section.add_url }}" aria-current="page" class="link-category base-inline-block">
         <img src="{% static 'base/images/google/add-circle.svg' %}" loading="eager" alt="" class="icon-category">
-        <div class="text-category">Add Grouping</div>
+        <div class="text-category">Add {{ section.title }}</div>
       </a>
     </div>
   </div>

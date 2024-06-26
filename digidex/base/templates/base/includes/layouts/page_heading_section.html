@@ -1,8 +1,12 @@
 <section class="section-top">
   <div class="content">
     <div class="block-top">
-      <h1 class="heading-top">{{ inventory.tab.name }}</h1>
-      <p class="paragraph-top">{{ inventory.tab.description }}</p>
+      {% if section.title %}
+        <h1 class="heading-top">{{ section.title }}</h1>
+      {% endif %}
+      {% if section.paragraph %}
+        <p class="paragraph-top">{{ section.paragraph }}</p>
+      {% endif %}
     </div>
   </div>
 </section>

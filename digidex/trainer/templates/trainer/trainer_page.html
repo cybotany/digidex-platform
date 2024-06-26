@@ -1,8 +1,7 @@
 {% extends "trainer/base.html" %}
 
 {% block content %}
-  {% include 'base/layouts/page_heading_section.html' with heading=page_heading %}
-  {% include 'base/layouts/featured_asset_section.html' with featured=featured_asset %}
-  {% include 'base/layouts/category_collection_section.html' with categories=category_collection %}
-  {% include 'base/layouts/asset_collection_section.html' with assets=asset_collection %}
+  {% include 'base/layouts/page_heading_section.html' with section=page_heading %}
+  {% include 'base/layouts/category_collection_section.html' with section=category_section %}
+  {% include 'base/layouts/asset_collection_section.html' with section=asset_section %}
 {% endblock %}
