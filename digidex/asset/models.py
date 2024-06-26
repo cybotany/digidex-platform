@@ -203,7 +203,7 @@ class AssetPage(RoutablePageMixin, Page):
         return f"Asset: {self.name}"
 
 
-class AssetNote(Note):
+class AssetNote(Orderable, Note):
     asset = models.ForeignKey(
         AssetPage,
         on_delete=models.CASCADE,

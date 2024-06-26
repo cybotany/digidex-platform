@@ -16,6 +16,7 @@ from wagtail.images import get_image_model
 from wagtail.models import Collection, Page, Orderable
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel, InlinePanel
+from wagtail.users.models import UserProfile
 
 from nfc.models import NearFieldCommunicationLink
 from journal.models import Note, NoteImageGallery
@@ -61,6 +62,9 @@ class TrainerPage(RoutablePageMixin, Page):
         'asset.AssetPage'
     ]
 
+    def get_user_profile(self):
+        return UserProfile.objects.get(user=self.owner)
+
     @property
     def formatted_date(self):
         return self.first_published_at.strftime('%B %d, %Y')
@@ -78,15 +82,6 @@ class TrainerPage(RoutablePageMixin, Page):
         if request.method == 'POST':
             form = TrainerForm(request.POST, request.FILES)
             if form.is_valid():
-                if 'image' in form.cleaned_data and form.cleaned_data['image']:
-                    image = CustomImageModel(
-                        title='User Avatar',
-                        file=form.cleaned_data['image'],
-                        collection=self.owner.collection
-                    )
-                    image.save()
-                    self.image = image
-
                 if 'introduction' in form.cleaned_data:
                     self.introduction = form.cleaned_data['introduction']
                 self.save()
@@ -95,7 +90,6 @@ class TrainerPage(RoutablePageMixin, Page):
         else:
             initial_data = {
                 'introduction': self.introduction,
-                'image': self.image.file if self.image else None,
             }
             form = TrainerForm(initial=initial_data)
 
@@ -145,30 +139,15 @@ class TrainerPage(RoutablePageMixin, Page):
         
         return render(request, 'trainer/includes/add.html', {'form': form})
 
-    def get_panel(self):
+    def get_page_heading(self):
         return {
-            'name': self.formatted_name,
-            'image': self.image,
-            'date': self.formatted_date, 
-            'description': self.introduction or 'No description available',
-            'update_url': self.reverse_subpage('update_profile_view'),
-            'delete_url': self.reverse_subpage('delete_profile_view'),
+            'title': f"{self.formatted_name}'s Profile",
+            'paragraph': self.introduction,
         }
 
     def get_inventory_collection(self):
         _categorytype = ContentType.objects.get(app_label='inventory', model='InventoryPage')
         return self.get_children().filter(content_type=_categorytype)
-
-    def get_inventory(self, name=None):
-        _collection = self.get_inventory_collection()
-        if name:
-            try:
-                inventory = _collection.get(slug=name)
-            except Page.DoesNotExist:
-                pass            
-        else:
-            inventory = _collection.get(slug='party')
-        return inventory
 
     def get_asset_collection(self, inventory):
         _type = ContentType.objects.get(app_label='inventory', model='AssetPage')
@@ -176,77 +155,34 @@ class TrainerPage(RoutablePageMixin, Page):
         _assets = [_asset.specific.get_card_details() for _asset in _collection]
         return _assets
 
-    def get_category_section(self):
-        return {
-            'name': self.formatted_name,
-            'image': self.image,
-            'date': self.formatted_date, 
-            'description': self.introduction or 'No description available',
-            'update_url': self.reverse_subpage('update_profile_view'),
-            'delete_url': self.reverse_subpage('delete_profile_view'),
-        }
-
-    def get_featured_asset(self):
-        return {
-            'name': self.formatted_name,
-            'image': self.image,
-            'date': self.formatted_date, 
-            'description': self.introduction or 'No description available',
-            'update_url': self.reverse_subpage('update_profile_view'),
-            'delete_url': self.reverse_subpage('delete_profile_view'),
-        }
-
-    def get_asset_collection(self):
-        return {
-            'name': self.formatted_name,
-            'image': self.image,
-            'date': self.formatted_date, 
-            'description': self.introduction or 'No description available',
-            'update_url': self.reverse_subpage('update_profile_view'),
-            'delete_url': self.reverse_subpage('delete_profile_view'),
-        }
-
-    def get_inventory(self, tab_name=None):
-        from django.contrib.contenttypes.models import ContentType
-        _categorytype = ContentType.objects.get(app_label='inventory', model='InventoryPage')
-        _categories = self.get_children().filter(content_type=_categorytype)
-
-        if tab_name:
-            try:
-                tab = _categories.get(slug=tab_name)
-            except Page.DoesNotExist:
-                pass            
-        else:
-            tab = _categories.get(slug='party')
-        
-        categories = _categories.exclude(id=tab.id)
-        category_list = [category.specific.get_card_details() for category in categories]
-
-        _cardtype = ContentType.objects.get(app_label='inventory', model='AssetPage')
-        _cards = tab.get_children().filter(content_type=_cardtype)
-        
-        card_list = [_card.specific.get_card_details() for _card in _cards]
-     
-        return {
-            'tab': tab.specific,
-            'cards': card_list,
-            'categories': category_list,
-            'add_url': self.reverse_subpage('add_category_view'),
-            'form_model': 'Category',
-        }
-
     def get_context(self, request, *args, **kwargs):
+        category_collection = self.get_inventory_collection()
+        default_category = category_collection.get(slug='party')
+        category_section = {
+            'title': 'Inventory',
+            'collection': category_collection,
+            'default': default_category,
+        }
+
+        asset_collection = self.get_asset_collection(default_category)
+        default_asset = asset_collection[0]
+        asset_section = {
+            'title': 'Assets',
+            'collection': asset_collection,
+            'default': default_asset,
+        }
+        
         context = super().get_context(request, *args, **kwargs)
-        context['featured_asset'] = self.get_panel()
-        context['category_collection'] = self.get_inventory()
-        context['asset_collection'] = self.get_inventory()
+        context['page_heading'] = self.get_page_heading()
+        context['category_section'] = category_section
+        context['asset_section'] = asset_section
         return context
 
     class Meta:
-        verbose_name = "User Profile Page"
+        verbose_name = "User Trainer Page"
 
 
-class TrainerNote(Note):
+class TrainerNote(Orderable, Note):
     trainer = models.ForeignKey(
         TrainerPage,
         on_delete=models.CASCADE,
