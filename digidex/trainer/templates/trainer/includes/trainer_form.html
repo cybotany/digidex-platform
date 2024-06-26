@@ -6,7 +6,7 @@
 {% endblock title %}
 
 {% block content %}
-  <h3 class="account-heading">Update Account</h3>
+  <h3 class="account-heading">{% trans "Update Account" %}</h3>
   <form id="profile-form" method="post" class="utility-page-form base-password-page" enctype="multipart/form-data">
     {% csrf_token %}
     <label for="{{ form.image.id_for_label }}">Avatar:</label>

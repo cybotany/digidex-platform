@@ -1,11 +1,15 @@
-{% extends "inventory/digit/base.html" %}
+{% extends "inventory/base.html" %}
 {% load i18n %}
 
+{% block title %}
+  {% trans "Delete Inventory" %}
+{% endblock title %}
+
 {% block content %}
-  <h3 class="account-heading">{% trans "Delete Digital Object" %}</h3>
+  <h3 class="account-heading">{% trans "Delete Inventory" %}</h3>
   <form id="profile-form" method="post" class="utility-page-form base-password-page" enctype="multipart/form-data">
   {% csrf_token %}
-    <label for="{{ form.delete.id_for_label }}">Confirm Digit Deletion:</label>
+    <label for="{{ form.delete.id_for_label }}">{% trans "Confirm Inventory Deletion" %}:</label>
     {{ form.delete }}
     {% if form.delete.errors %}
       <div class="error-message">

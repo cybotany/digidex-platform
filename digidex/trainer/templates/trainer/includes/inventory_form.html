@@ -2,14 +2,15 @@
 {% load i18n %}
 
 {% block title %}
-  {% trans "Add Inventory Category" %}
+  {% trans "Add Inventory" %}
 {% endblock title %}
 
 {% block content %}
+  <h3 class="account-heading">{% trans "Add Inventory Category" %}</h3>
   <form method="post" class="form">
     {% csrf_token %}
       <!-- Render Title Field -->
-      <label for="{{ form.title.id_for_label }}">Title:</label>
+      <label for="{{ form.title.id_for_label }}">{% trans "Title" %}:</label>
       {{ form.title }}
       {% if form.title.errors %}
         <div class="error-message">
@@ -17,7 +18,7 @@
         </div>
       {% endif %}
       <!-- Render Description Field -->
-      <label for="{{ form.description.id_for_label }}">Description:</label>
+      <label for="{{ form.description.id_for_label }}">{% trans "Description" %}:</label>
       {{ form.description }}
       {% if form.description.errors %}
         <div class="error-message">

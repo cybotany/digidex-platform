@@ -1,22 +1,14 @@
-{% extends "asset/base.html" %}
+{% extends "inventory/base.html" %}
 {% load i18n %}
 
 {% block title %}
-  {% trans "Update Asset" %}
+  {% trans "Add Asset" %}
 {% endblock title %}
 
 {% block content %}
-  <h3 class="account-heading">{% trans "Update Digital Asset" %}</h3>
+  <h3 class="account-heading">{% trans "Add Digital Asset" %}</h3>
   <form method="post" class="form">
     {% csrf_token %}
-      <!-- Render Category Field -->
-      <label for="{{ form.category.id_for_label }}">{% trans "Category" %}:</label>
-      {{ form.category }}
-      {% if form.category.errors %}
-        <div class="error-message">
-          <div class="text-error">{{ form.category.errors|striptags }}</div>
-        </div>
-      {% endif %}
       <!-- Render Title Field -->
       <label for="{{ form.title.id_for_label }}">{% trans "Title" %}:</label>
       {{ form.title }}
@@ -36,5 +28,5 @@
       <!-- Render Submit Button -->
       <input type="submit" value="Submit" class="submit-button base-button"> 
       {{ form.non_field_errors }}
-  </form>     
+  </form>        
 {% endblock %}
