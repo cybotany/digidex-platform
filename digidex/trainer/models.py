@@ -59,7 +59,7 @@ class TrainerPage(RoutablePageMixin, Page):
     ]
 
     subpage_types = [
-        'asset.AssetPage'
+        'inventory.InventoryPage'
     ]
 
     def get_user_profile(self):
@@ -146,17 +146,17 @@ class TrainerPage(RoutablePageMixin, Page):
         }
 
     def get_inventory_collection(self):
-        _categorytype = ContentType.objects.get(app_label='inventory', model='InventoryPage')
+        _categorytype = ContentType.objects.get(app_label='inventory', model='inventorypage')
         return self.get_children().filter(content_type=_categorytype)
 
     def get_asset_collection(self, inventory):
-        _type = ContentType.objects.get(app_label='inventory', model='AssetPage')
+        _type = ContentType.objects.get(app_label='inventory', model='assetpage')
         _collection = inventory.get_children().filter(content_type=_type)
         _assets = [_asset.specific.get_card_details() for _asset in _collection]
         return _assets
 
     def get_context(self, request, *args, **kwargs):
-        category_collection = self.get_inventory_collection()
+        """category_collection = self.get_inventory_collection()
         default_category = category_collection.get(slug='party')
         category_section = {
             'title': 'Inventory',
@@ -170,12 +170,12 @@ class TrainerPage(RoutablePageMixin, Page):
             'title': 'Assets',
             'collection': asset_collection,
             'default': default_asset,
-        }
+        }"""
         
         context = super().get_context(request, *args, **kwargs)
         context['page_heading'] = self.get_page_heading()
-        context['category_section'] = category_section
-        context['asset_section'] = asset_section
+        # context['category_section'] = category_section
+        # context['asset_section'] = asset_section
         return context
 
     class Meta:
@@ -189,6 +189,10 @@ class TrainerNote(Orderable, Note):
         related_name='notes'
     )
 
+    panels = Note.panels +  [
+        InlinePanel('gallery_images', label="Note Image Gallery"),
+    ]
+
     def __str__(self):
         return f"Trainer Note: {self.uuid}"
 
@@ -199,10 +203,6 @@ class TrainerNoteImageGallery(NoteImageGallery):
         on_delete=models.CASCADE,
         related_name='gallery_images'
     )
-
-    panels = NoteImageGallery.panels +  [
-        InlinePanel('gallery_images', label="Note Image Gallery"),
-    ]
 
 
 class TrainerNearFieldCommunicationLink(NearFieldCommunicationLink):

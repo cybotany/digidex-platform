@@ -54,7 +54,6 @@ class AssetPage(RoutablePageMixin, Page):
     content_panels = Page.content_panels + [
         FieldPanel('name'),
         FieldPanel('description'),
-        InlinePanel('notes', label="Longitudinal Asset Notes"),
     ]
 
     parent_page_types = [
@@ -210,6 +209,10 @@ class AssetNote(Orderable, Note):
         related_name='notes'
     )
 
+    panels = Note.panels +  [
+        InlinePanel('gallery_images', label="Note Image Gallery"),
+    ]
+
     def __str__(self):
         return f"Asset Note: {self.uuid}"
 
@@ -220,10 +223,6 @@ class AssetNoteImageGallery(NoteImageGallery):
         on_delete=models.CASCADE,
         related_name='gallery_images'
     )
-
-    panels = NoteImageGallery.panels +  [
-        InlinePanel('gallery_images', label="Note Image Gallery"),
-    ]
 
 
 class AssetNearFieldCommunicationLink(NearFieldCommunicationLink):

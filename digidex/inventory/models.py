@@ -49,7 +49,6 @@ class InventoryPage(RoutablePageMixin, Page):
     content_panels = Page.content_panels + [
         FieldPanel('name'),
         FieldPanel('description'),
-        InlinePanel('notes', label="Longitudinal Inventory Notes"),
     ]
 
     parent_page_types = [
@@ -156,6 +155,10 @@ class InventoryNote(Orderable, Note):
         related_name='notes'
     )
 
+    panels = Note.panels + [
+        InlinePanel('gallery_images', label="Note Image Gallery"),
+    ]
+
     def __str__(self):
         return f"Inventory Journal Entry {self.uuid}"
 
@@ -166,10 +169,6 @@ class InventoryNoteImageGallery(NoteImageGallery):
         on_delete=models.CASCADE,
         related_name='gallery_images'
     )
-
-    panels = NoteImageGallery.panels +  [
-        InlinePanel('gallery_images', label="Note Image Gallery"),
-    ]
 
 
 class InventoryNearFieldCommunicationLink(NearFieldCommunicationLink):
