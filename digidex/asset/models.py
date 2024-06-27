@@ -54,24 +54,16 @@ class AssetPage(RoutablePageMixin, Page):
 
     subpage_types = []
 
-    @property
-    def image(self):
-        return self.get_main_image()
-
     def get_main_image(self):
         #entry = self.journal_entries.order_by('-created_at').first()
         #if entry:
         #    return entry.image
         return None
 
-    @property
-    def formatted_date(self):
-        if self.live:
-            return self.first_published_at.strftime('%B %d, %Y')
-        return "Draft"
-    
-    @property
-    def formatted_title(self):
+    def get_formatted_date(self):
+        return 'DraftDate'
+
+    def get_formatted_title(self):
         return self.title.title()
 
     @route(r'^update/$', name='update_asset_view')
@@ -155,24 +147,27 @@ class AssetPage(RoutablePageMixin, Page):
 
     def get_page_heading(self):
         return {
-            'title': self.formatted_title,
+            'title': self.get_formatted_title(),
             'paragraph': self.description,
         }
 
     def get_summary(self):
         return {
             'uuid': self.uuid,
-            'title': self.formatted_title,
+            'title': self.get_formatted_title(),
             'description': self.description,
-            'date': self.formatted_date,
+            'date': self.get_formatted_date(),
             'detail_url': self.url,
-            'image': self.image,
+            'image': self.get_main_image(),
         }
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         context['page_heading'] = self.get_page_heading()
         return context
+
+    class Meta:
+        verbose_name = "Digitized Asset Page"
 
     def __str__(self):
         return f"Asset: {self.formatted_title}"

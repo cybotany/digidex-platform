@@ -61,14 +61,10 @@ class TrainerPage(RoutablePageMixin, Page):
     def get_user_profile(self):
         return UserProfile.objects.get(user=self.owner)
 
-    @property
-    def formatted_date(self):
-        if self.live:
-            return self.first_published_at.strftime('%B %d, %Y')
+    def get_formatted_date(self):
         return "Draft"
     
-    @property
-    def formatted_title(self):
+    def get_formatted_title(self):
         return self.owner.username.title()
 
     @route(r'^update/$', name='update_trainer_view')
@@ -138,7 +134,7 @@ class TrainerPage(RoutablePageMixin, Page):
 
     def get_page_heading(self):
         return {
-            'title': f"Trainer {self.formatted_title}",
+            'title': f"Trainer {self.get_formatted_title()}",
             'paragraph': self.introduction,
             'update_url': self.reverse_subpage('update_trainer_view'),
             'delete_url': self.reverse_subpage('delete_trainer_view'),
@@ -179,4 +175,7 @@ class TrainerPage(RoutablePageMixin, Page):
         return context
 
     class Meta:
-        verbose_name = "User Trainer Page"
+        verbose_name = "Trainer Profile Page"
+
+    def __str__(self):
+        return f"Trainer {self.get_formatted_title()}                 "

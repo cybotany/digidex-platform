@@ -4,6 +4,7 @@ from django.db import models
 from django.apps import apps
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponseForbidden
 from django.utils.text import slugify
 
@@ -51,14 +52,16 @@ class InventoryPage(RoutablePageMixin, Page):
         'asset.AssetPage'
     ]
 
-    @property
-    def formatted_date(self):
-        if self.live:
-            return self.first_published_at.strftime('%B %d, %Y')
-        return "Draft"
-    
-    @property
-    def formatted_title(self):
+    def get_main_image(self):
+        #entry = self.journal_entries.order_by('-created_at').first()
+        #if entry:
+        #    return entry.image
+        return None
+
+    def get_formatted_date(self):
+        return 'DraftDate'
+
+    def get_formatted_title(self):
         return self.title.title()
 
     @route(r'^update/$', name='update_inventory_view')
@@ -108,13 +111,26 @@ class InventoryPage(RoutablePageMixin, Page):
 
     def get_page_heading(self):
         return {
-            'title': self.formatted_title,
+            'title': self.get_formatted_title(),
             'paragraph': self.description,
         }
+
+    def get_asset_collection(self):
+        _type = ContentType.objects.get(app_label='asset', model='assetpage')
+        _collection = self.get_children().filter(content_type=_type)
+        _assets = [_asset.specific.get_summary() for _asset in _collection]
+        _default = _assets[0]
+        asset_section = {
+            'title': 'Assets',
+            'collection': _collection,
+            'default': _default,
+        }
+        return asset_section
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         context['page_heading'] = self.get_page_heading()
+        context['asset_collection'] = self.get_asset_collection()
         return context
 
     class Meta:
