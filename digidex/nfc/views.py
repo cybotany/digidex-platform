@@ -23,7 +23,7 @@ def route_nfc_tag_url(request, ntag_uuid):
         mapped_content = ntag.get_mapped_content()
         
         if mapped_content is None:
-            return redirect(reverse('map_nfc_tag', kwargs={'ntag_uuid': ntag_uuid}))
+            return redirect(reverse('nfc:map_nfc_tag', kwargs={'ntag_uuid': ntag_uuid}))
         
         return redirect(mapped_content.url)
     
