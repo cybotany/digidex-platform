@@ -2,6 +2,8 @@ import uuid
 
 from django.db import models
 from django.urls import reverse
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericForeignKey
 
 from .validators import validate_ntag_serial
 
@@ -62,6 +64,19 @@ class NearFieldCommunicationTag(models.Model):
         self.active = False
         self.save()
 
+    def get_mapped_content(self):
+        """
+        Retrieves the content mapped to this NTAG, regardless of the specific model.
+
+        Returns:
+            The mapped content object or None if no mapping exists.
+        """
+        try:
+            link = self.mapping
+            return link.content_object
+        except NearFieldCommunicationLink.DoesNotExist:
+            return None
+
     @property
     def url(self):
         """
@@ -90,4 +105,15 @@ class NearFieldCommunicationLink(models.Model):
         NearFieldCommunicationTag,
         on_delete=models.CASCADE,
         related_name='mapping'
+    )
+    content_type = models.ForeignKey(
+        ContentType,
+        on_delete=models.CASCADE
+    )
+    object_id = models.PositiveIntegerField(
+        db_index=True
+    )
+    content_object = GenericForeignKey(
+        'content_type',
+        'object_id'
     )

@@ -18,7 +18,6 @@ from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel, InlinePanel
 from wagtail.users.models import UserProfile
 
-from nfc.models import NearFieldCommunicationLink
 from journal.models import Note, NoteImageGallery
 
 from .forms import TrainerForm, DeleteTrainerForm, TrainerInventoryForm, TrainerJournalEntryForm
@@ -207,15 +206,3 @@ class TrainerNoteImageGallery(NoteImageGallery):
         on_delete=models.CASCADE,
         related_name='gallery_images'
     )
-
-
-class TrainerNearFieldCommunicationLink(NearFieldCommunicationLink):
-    trainer = models.OneToOneField(
-        TrainerPage,
-        on_delete=models.SET_NULL,
-        null=True,
-        related_name='+'
-    )
-
-    def __str__(self):
-        return f"Trainer NFC: {self.uuid}"

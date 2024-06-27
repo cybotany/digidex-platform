@@ -15,7 +15,6 @@ from wagtail.models import Collection, Page, Orderable
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel, InlinePanel
 
-from nfc.models import NearFieldCommunicationLink
 from journal.models import Note, NoteImageGallery
 
 from .forms  import InventoryForm, DeleteInventoryForm, InventoryournalEntryForm
@@ -149,15 +148,3 @@ class InventoryNoteImageGallery(NoteImageGallery):
         on_delete=models.CASCADE,
         related_name='gallery_images'
     )
-
-
-class InventoryNearFieldCommunicationLink(NearFieldCommunicationLink):
-    inventory = models.OneToOneField(
-        InventoryPage,
-        on_delete=models.SET_NULL,
-        null=True,
-        related_name='+'
-    )
-
-    def __str__(self):
-        return f"Inventory NFC: {self.uuid}"
