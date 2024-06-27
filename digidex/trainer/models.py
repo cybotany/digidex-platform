@@ -9,18 +9,15 @@ from django.http import HttpResponseForbidden
 from django.utils.text import slugify
 from django.urls import reverse
 
-from modelcluster.fields import ParentalKey
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.api import APIField
 from wagtail.images import get_image_model
-from wagtail.models import Collection, Page, Orderable
+from wagtail.models import Collection, Page
 from wagtail.fields import RichTextField
-from wagtail.admin.panels import FieldPanel, InlinePanel
+from wagtail.admin.panels import FieldPanel
 from wagtail.users.models import UserProfile
 
-from journal.models import Note, NoteImageGallery
-
-from .forms import TrainerForm, DeleteTrainerForm, TrainerInventoryForm, TrainerJournalEntryForm
+from .forms import TrainerForm, DeleteTrainerForm, TrainerInventoryForm
 
 
 CustomImageModel = get_image_model()
@@ -183,26 +180,3 @@ class TrainerPage(RoutablePageMixin, Page):
 
     class Meta:
         verbose_name = "User Trainer Page"
-
-
-class TrainerNote(Orderable, Note):
-    trainer = models.ForeignKey(
-        TrainerPage,
-        on_delete=models.CASCADE,
-        related_name='notes'
-    )
-
-    panels = Note.panels +  [
-        InlinePanel('gallery_images', label="Note Image Gallery"),
-    ]
-
-    def __str__(self):
-        return f"Trainer Note: {self.uuid}"
-
-
-class TrainerNoteImageGallery(NoteImageGallery):
-    note = ParentalKey(
-        TrainerNote,
-        on_delete=models.CASCADE,
-        related_name='gallery_images'
-    )

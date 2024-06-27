@@ -7,15 +7,12 @@ from django.contrib import messages
 from django.http import HttpResponseForbidden
 from django.utils.text import slugify
 
-from modelcluster.fields import ParentalKey
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.images import get_image_model
 from wagtail.api import APIField
-from wagtail.models import Collection, Page, Orderable
+from wagtail.models import Collection, Page
 from wagtail.fields import RichTextField
-from wagtail.admin.panels import FieldPanel, InlinePanel
-
-from journal.models import Note, NoteImageGallery
+from wagtail.admin.panels import FieldPanel
 
 from .forms import AssetForm, DeleteAssetForm, AssetJournalEntryForm
 
@@ -143,13 +140,13 @@ class AssetPage(RoutablePageMixin, Page):
                         collection=self.collection
                     )
                     image.save()
-                journal_entry = AssetNote(
-                    page=self,
-                    image=image,
-                    note=note,
-                )
-                journal_entry.save()
-                messages.success(request, 'Journal entry successfully added.')
+                #journal_entry = AssetNote(
+                #    page=self,
+                #    image=image,
+                #    note=note,
+                #)
+                #journal_entry.save()
+                messages.success(request, 'Journal entry not added since still debugging.')
                 return redirect(self.url)
         else:
             form = AssetJournalEntryForm()
@@ -179,26 +176,3 @@ class AssetPage(RoutablePageMixin, Page):
 
     def __str__(self):
         return f"Asset: {self.formatted_title}"
-
-
-class AssetNote(Orderable, Note):
-    asset = models.ForeignKey(
-        AssetPage,
-        on_delete=models.CASCADE,
-        related_name='notes'
-    )
-
-    panels = Note.panels +  [
-        InlinePanel('gallery_images', label="Note Image Gallery"),
-    ]
-
-    def __str__(self):
-        return f"Asset Note: {self.uuid}"
-
-
-class AssetNoteImageGallery(NoteImageGallery):
-    note = ParentalKey(
-        AssetNote,
-        on_delete=models.CASCADE,
-        related_name='gallery_images'
-    )

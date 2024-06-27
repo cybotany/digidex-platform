@@ -7,17 +7,14 @@ from django.contrib import messages
 from django.http import HttpResponseForbidden
 from django.utils.text import slugify
 
-from modelcluster.fields import ParentalKey
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.images import get_image_model
 from wagtail.api import APIField
-from wagtail.models import Collection, Page, Orderable
+from wagtail.models import Collection, Page
 from wagtail.fields import RichTextField
-from wagtail.admin.panels import FieldPanel, InlinePanel
+from wagtail.admin.panels import FieldPanel
 
-from journal.models import Note, NoteImageGallery
-
-from .forms  import InventoryForm, DeleteInventoryForm, InventoryournalEntryForm
+from .forms  import InventoryForm, DeleteInventoryForm
 
 
 CustomImageModel = get_image_model()
@@ -125,26 +122,3 @@ class InventoryPage(RoutablePageMixin, Page):
 
     def __str__(self):
         return f"Inventory: {self.title}"
-
-
-class InventoryNote(Orderable, Note):
-    inventory = ParentalKey(
-        InventoryPage,
-        on_delete=models.CASCADE,
-        related_name='notes'
-    )
-
-    panels = Note.panels + [
-        InlinePanel('gallery_images', label="Note Image Gallery"),
-    ]
-
-    def __str__(self):
-        return f"Inventory Journal Entry {self.uuid}"
-
-
-class InventoryNoteImageGallery(NoteImageGallery):
-    note = ParentalKey(
-        InventoryNote,
-        on_delete=models.CASCADE,
-        related_name='gallery_images'
-    )
