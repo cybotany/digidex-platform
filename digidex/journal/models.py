@@ -67,7 +67,7 @@ class NoteImageGallery(Orderable):
         related_name='+'
     )
     note = ParentalKey(
-        'journal.Note',
+        Note,
         related_name='images'
     )
 

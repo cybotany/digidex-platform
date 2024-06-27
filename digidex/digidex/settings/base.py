@@ -15,11 +15,11 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 INSTALLED_APPS = [
     "base",
     "accounts",
-    "nfc",
-    "journal",
     "asset",
     "inventory",
     "trainer",
+    "nfc",
+    "journal",
     "home",
     "search",
     "storages",
