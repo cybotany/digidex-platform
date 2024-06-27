@@ -130,7 +130,7 @@ class InventoryPage(RoutablePageMixin, Page):
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         context['page_heading'] = self.get_page_heading()
-        context['asset_collection'] = self.get_asset_collection()
+        context['asset_section'] = self.get_asset_collection()
         return context
 
     class Meta:

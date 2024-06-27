@@ -144,34 +144,20 @@ class TrainerPage(RoutablePageMixin, Page):
         _categorytype = ContentType.objects.get(app_label='inventory', model='inventorypage')
         return self.get_children().filter(content_type=_categorytype)
 
-    def get_asset_collection(self, inventory):
-        _type = ContentType.objects.get(app_label='asset', model='assetpage')
-        _collection = inventory.get_children().filter(content_type=_type)
-        _assets = [_asset.specific.get_summary() for _asset in _collection]
-        return _assets
-
     def get_context(self, request, *args, **kwargs):
-        category_collection = list(self.get_inventory_collection())
-        default_category = category_collection.pop(0) if category_collection else None
-        category_section = {
+        inventory_collection = list(self.get_inventory_collection())
+        default_inventory = inventory_collection.pop(0) if inventory_collection else None
+        inventory_section = {
             'title': 'Inventory',
-            'collection': category_collection,
-            'default': default_category,
+            'collection': inventory_collection,
+            'default': default_inventory,
             'add_url': self.reverse_subpage('add_inventory_view'),
-        }
-
-        asset_collection = self.get_asset_collection(default_category)
-        default_asset = asset_collection[0]
-        asset_section = {
-            'title': 'Assets',
-            'collection': asset_collection,
-            'default': default_asset,
         }
         
         context = super().get_context(request, *args, **kwargs)
         context['page_heading'] = self.get_page_heading()
-        context['category_section'] = category_section
-        context['asset_section'] = asset_section
+        context['category_section'] = inventory_section
+        context['asset_section'] = default_inventory.specific.get_asset_collection()
         return context
 
     class Meta:
