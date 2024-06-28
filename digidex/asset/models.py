@@ -171,4 +171,4 @@ class AssetPage(RoutablePageMixin, Page):
         verbose_name = "Digitized Asset Page"
 
     def __str__(self):
-        return f"Asset: {self.formatted_title}"
+        return f"Asset: {self.get_formatted_title()}"
