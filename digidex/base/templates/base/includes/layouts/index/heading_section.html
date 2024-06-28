@@ -1,5 +1,3 @@
-{% load wagtailcore_tags %}
-
 <section class="section-top">
   <div class="content">
     <div class="block-top">
@@ -7,8 +5,18 @@
         <h1 class="heading-top">{{ section.title }}</h1>
       {% endif %}
       {% if section.paragraph %}
-        {{ section.paragraph|richtext }}
+        <p class="paragraph-top">{{ section.paragraph }}</p>
       {% endif %}
+      {% if section.update_url or section.delete_url %}
+      <div class="block-button">
+        {% if section.update_url %}
+          <a href="{{ section.update_url }}" class="button-small w-button">Update</a>
+        {% endif %}
+        {% if section.delete_url %}
+          <a href="{{ section.delete_url }}" class="button-small dark w-button">Delete</a>
+        {% endif %}
+      </div>
+    {% endif %}
     </div>
   </div>
 </section>

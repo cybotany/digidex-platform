@@ -10,9 +10,7 @@ from django.utils.text import slugify
 
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.images import get_image_model
-from wagtail.api import APIField
 from wagtail.models import Collection, Page
-from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 
 from .forms  import InventoryForm, DeleteInventoryForm
@@ -35,7 +33,7 @@ class InventoryPage(RoutablePageMixin, Page):
         on_delete=models.SET_NULL,
         related_name='+'
     )
-    description = RichTextField(
+    description = models.TextField(
         blank=True,
         null=True
     )

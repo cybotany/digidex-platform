@@ -1,9 +1,25 @@
 <section class="section-top padding-0">
-  <div style="opacity:0" class="content">
+  <div class="content">
     <div class="block-top">
-      <div class="date-top"></div>
-      <h1 class="heading-top"></h1>
-      <p class="paragraph-top blog-post"></p>
+      {% if section.date %}
+        <div class="date-top">{{ section.date }}</div>
+      {% endif %}
+      {% if section.title %}
+        <h1 class="heading-top">{{ section.title }}</h1>
+      {% endif %}
+      {% if section.paragraph %}
+        <p class="paragraph-top blog-post">{{ section.paragraph }}</p>
+      {% endif %}
     </div>
+    {% if section.update_url or section.delete_url %}
+      <div class="block-button">
+        {% if section.update_url %}
+          <a href="{{ section.update_url }}" class="button-small w-button">Update</a>
+        {% endif %}
+        {% if section.delete_url %}
+          <a href="{{ section.delete_url }}" class="button-small dark w-button">Delete</a>
+        {% endif %}
+      </div>
+    {% endif %}
   </div>
 </section>

@@ -13,7 +13,6 @@ from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.api import APIField
 from wagtail.images import get_image_model
 from wagtail.models import Collection, Page
-from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 from wagtail.users.models import UserProfile
 
@@ -36,7 +35,7 @@ class TrainerPage(RoutablePageMixin, Page):
         on_delete=models.SET_NULL,
         related_name='+'
     )
-    introduction = RichTextField(
+    introduction = models.TextField(
         null=True,
         blank=True
     )
