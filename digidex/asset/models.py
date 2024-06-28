@@ -116,7 +116,7 @@ class AssetPage(RoutablePageMixin, Page):
 
         from journal.forms import JournalEntryForm
         if request.method == 'POST':
-            form = JournalEntryForm(request.POST, request.FILES)
+            form = JournalEntryForm(request.POST, request.FILES, collection=self.collection, content_object=self)
             if form.is_valid():
                 note = form.save(commit=False)
                 note.content_object = self
@@ -128,7 +128,7 @@ class AssetPage(RoutablePageMixin, Page):
         else:
             form = JournalEntryForm()
         
-        return render(request, 'asset/includes/journal_form.html', {'form': form})
+        return render(request, 'journal/includes/test_form.html', {'form': form})
 
     def get_page_heading(self):
         return {

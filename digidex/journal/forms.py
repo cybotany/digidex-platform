@@ -1,34 +1,35 @@
 from django import forms
+from django.forms.widgets import ClearableFileInput
 
 from wagtail.images import get_image_model
-from wagtail.admin.forms.models import WagtailAdminModelForm
 
-from .models import Note, NoteImageGallery
+from .models import JournalEntry
 
 
 DigiDexImageModel = get_image_model()
 
-class JournalEntryForm(WagtailAdminModelForm):
-    images = forms.ImageField(
-        widget=forms.ClearableFileInput(attrs={'multiple': True}),
+class JournalEntryForm(forms.ModelForm):
+    image = forms.ImageField(
+        widget=ClearableFileInput(),
         required=False
     )
 
     class Meta:
-        model = Note
-        fields = ['entry', 'images']
+        model = JournalEntry
+        fields = ['entry', 'image']
+
+    def __init__(self, *args, **kwargs):
+        self.collection = kwargs.pop('collection', None)
+        self.content_object = kwargs.pop('content_object', None)
+        super().__init__(*args, **kwargs)
 
     def save(self, commit=True):
-        note = super().save(commit=False)
+        instance = super().save(commit=False)
+        if self.collection:
+            instance.image.collection = self.collection
+        if self.content_object:
+            instance.content_object = self.content_object
         if commit:
-            note.save()
-            images = self.files.getlist('images')
-            for image_file in images:
-                image = DigiDexImageModel(
-                    title=image_file.name,
-                    file=image_file,
-                    collection=note.collection
-                )
-                image.save()
-                NoteImageGallery.objects.create(note=note, image=image)
-        return note
+            instance.save()
+            self.save_m2m()
+        return instance

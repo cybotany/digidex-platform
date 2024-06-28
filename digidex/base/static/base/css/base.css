@@ -4126,7 +4126,7 @@ figcaption {
   padding: .5em .3em;
 }
 
-.account__form {
+.account-form {
   z-index: 50;
   width: 100%;
   max-width: 32em;
@@ -4144,30 +4144,30 @@ figcaption {
   box-shadow: 0 15px 25px -10px rgba(20, 23, 24, .05);
 }
 
-.account__form--blue {
+.account-form.blue {
   background-color: var(--accent-a1);
   box-shadow: none;
 }
 
-.account__heading {
+.heading-account {
   max-width: 9em;
   margin-bottom: .3em;
 }
 
-.account__heading--white {
+.heading-account.white {
   color: var(--white);
 }
 
-.account__paragraph {
+.paragraph-account {
   max-width: 23em;
   margin-bottom: 1.8em;
 }
 
-.account__paragraph--white {
+.paragraph-account.white {
   color: rgba(255, 255, 255, .8);
 }
 
-.account__text {
+.text-account {
   width: 100%;
   max-width: 32em;
   color: rgba(20, 23, 24, .6);
@@ -4179,24 +4179,24 @@ figcaption {
   line-height: 140%;
 }
 
-.account__text--white {
+.text-account.white {
   color: rgba(255, 255, 255, .5);
 }
 
-.account__link {
+.link-account {
   color: rgba(20, 23, 24, .6);
   transition: color .3s cubic-bezier(.25, .46, .45, .94);
 }
 
-.account__link:hover {
+.link-account:hover {
   color: var(--accent-a1);
 }
 
-.account__link--white {
+.link-account.white {
   color: rgba(255, 255, 255, .5);
 }
 
-.account__link--white:hover {
+.link-account.white:hover {
   color: var(--white);
 }
 
@@ -4213,11 +4213,11 @@ figcaption {
     padding-top: 3em;
   }
 
-  .account__form {
+  .account-form {
     padding: 2em;
   }
 
-  .account__paragraph {
+  .paragraph-account {
     margin-bottom: 1em;
   }
 }

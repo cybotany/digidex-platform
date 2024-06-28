@@ -1,6 +1,11 @@
 {% extends "base.html" %}
-{% load static %}
 
-{% block extra_css %}
-  <link rel="stylesheet" type="text/css" href="{% static 'asset/css/asset.css' %}">
-{% endblock %}
+{% block title %}{% endblock %}
+
+{% block extra_css %}{% endblock %}
+
+<div class="section-full">
+  {% block content %}{% endblock %}
+</div>
+
+{% block extra_js %}{% endblock %}

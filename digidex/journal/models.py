@@ -4,28 +4,28 @@ from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 
-from modelcluster.models import ClusterableModel
-from modelcluster.fields import ParentalKey
-
 from wagtail.api import APIField
 from wagtail.images import get_image_model
-from wagtail.fields import RichTextField
-from wagtail.models import Orderable
-from wagtail.admin.panels import FieldPanel, InlinePanel
+from wagtail.admin.panels import FieldPanel
 
 
 DigiDexImageModel = get_image_model()
 
-class Note(ClusterableModel):
+class JournalEntry(models.Model):
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
         editable=False,
         db_index=True
     )
-    entry = RichTextField(
-        blank=True,
-        null=True
+    image = models.ForeignKey(
+        DigiDexImageModel,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    entry = models.TextField(
+        null=False
     )
     content_type = models.ForeignKey(
         ContentType,
@@ -47,34 +47,13 @@ class Note(ClusterableModel):
 
     api_fields = [
         APIField('uuid'),
+        APIField('image'),
         APIField('entry'),
         APIField('created_at'),
         APIField('last_modified'),
     ]
 
     panels = [
-        FieldPanel('entry'),
-        InlinePanel('images', label="Image Gallery"),
-    ]
-
-
-class NoteImageGallery(Orderable):
-    image = models.ForeignKey(
-        DigiDexImageModel,
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-    note = ParentalKey(
-        Note,
-        related_name='images'
-    )
-
-    api_fields = [
-        APIField('image'),
-    ]
-
-    panels = [
         FieldPanel('image'),
+        FieldPanel('entry'),
     ]
