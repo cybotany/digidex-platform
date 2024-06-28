@@ -88,7 +88,7 @@ class AssetPage(RoutablePageMixin, Page):
             }
             form = AssetForm(initial=initial_data)
         
-        return render(request, 'asset/include/update_form.html', {'form': form})
+        return render(request, 'asset/includes/update_form.html', {'form': form})
 
     @route(r'^delete/$', 'delete_asset_view')
     def delete_view(self, request):
@@ -106,7 +106,7 @@ class AssetPage(RoutablePageMixin, Page):
         else:
             form = DeleteAssetForm()
         
-        return render(request, 'asset/include/delete_form.html', {'form': form})
+        return render(request, 'asset/includes/delete_form.html', {'form': form})
 
     @route(r'^add/$', name='add_digit_entry_view')
     def add_view(self, request):
@@ -148,6 +148,8 @@ class AssetPage(RoutablePageMixin, Page):
         return {
             'title': self.get_formatted_title(),
             'paragraph': self.description,
+            'update_url': self.reverse_subpage('update_asset_view'),
+            'delete_url': self.reverse_subpage('delete_asset_view'),
         }
 
     def get_summary(self):
