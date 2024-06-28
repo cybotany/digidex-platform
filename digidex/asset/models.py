@@ -13,7 +13,7 @@ from wagtail.api import APIField
 from wagtail.models import Collection, Page
 from wagtail.admin.panels import FieldPanel
 
-from .forms import AssetForm, DeleteAssetForm, AssetJournalEntryForm
+from .forms import AssetForm, DeleteAssetForm
 
 
 CustomImageModel = get_image_model()
@@ -113,34 +113,20 @@ class AssetPage(RoutablePageMixin, Page):
         page_owner = self.owner
         if page_owner != request.user:
             return HttpResponseForbidden("You are not allowed to update this page.")
-        
-        if request.method == 'POST':
-            form = AssetJournalEntryForm(request.POST, request.FILES)
-            if form.is_valid():
-                image_file = form.cleaned_data.get('image')
-                caption = form.cleaned_data.get('caption')
-                note = form.cleaned_data.get('note')
 
-                # Create the Wagtail Image object
-                image = None
-                if image_file:
-                    image = CustomImageModel(
-                        title=image_file.name,
-                        file=image_file,
-                        caption=caption,
-                        collection=self.collection
-                    )
-                    image.save()
-                #journal_entry = AssetNote(
-                #    page=self,
-                #    image=image,
-                #    note=note,
-                #)
-                #journal_entry.save()
-                messages.success(request, 'Journal entry not added since still debugging.')
+        from journal.forms import JournalEntryForm
+        if request.method == 'POST':
+            form = JournalEntryForm(request.POST, request.FILES)
+            if form.is_valid():
+                note = form.save(commit=False)
+                note.content_object = self
+                note.collection = self.collection
+                note.save()
+                form.save_m2m()
+                messages.success(request, 'Journal entry successfully added.')
                 return redirect(self.url)
         else:
-            form = AssetJournalEntryForm()
+            form = JournalEntryForm()
         
         return render(request, 'asset/includes/journal_form.html', {'form': form})
 
