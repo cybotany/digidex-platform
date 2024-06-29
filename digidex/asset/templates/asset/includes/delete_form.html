@@ -1,13 +1,20 @@
-{% extends "asset/base.html" %}
+{% extends "asset/includes/base.html" %}
 {% load i18n %}
 
 {% block title %}
   {% trans "Delete Asset" %}
 {% endblock title %}
 
+{% block subtitle %}
+  {% trans "Delete" %}
+{% endblock subtitle %}
+
+{% block heading %}
+  {% trans "Delete Digital Asset" %}
+{% endblock heading %}
+
 {% block content %}
-  <h3 class="account-heading">{% trans "Delete Asset" %}</h3>
-  <form id="profile-form" method="post" class="utility-page-form base-password-page" enctype="multipart/form-data">
+  <form method="post" class="form" enctype="multipart/form-data">
   {% csrf_token %}
     <label for="{{ form.delete.id_for_label }}">{% trans "Confirm Digit Deletion" %}:</label>
     {{ form.delete }}

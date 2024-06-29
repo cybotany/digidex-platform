@@ -88,7 +88,7 @@ class InventoryPage(RoutablePageMixin, Page):
             }
             form = InventoryForm(initial=initial_data)
 
-        return render(request, 'inventory/includes/update.html', {'form': form, 'url': self.url})
+        return render(request, 'inventory/includes/update_form.html', {'form': form})
 
     @route(r'^delete/$', 'delete_inventory_view')
     def delete_view(self, request):
@@ -106,7 +106,7 @@ class InventoryPage(RoutablePageMixin, Page):
         else:
             form = DeleteInventoryForm()
 
-        return render(request, 'inventory/includes/delete.html', {'form': form, 'url': self.url})
+        return render(request, 'inventory/includes/delete_form.html', {'form': form})
 
     @route(r'^add/$', name='add_asset_view')
     def add_view(self, request):
