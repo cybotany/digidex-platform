@@ -2,22 +2,26 @@
 
 <section class="section">
   <div class="content narrow">
-    {% for item in section.collection %}
-      <div class="page-body" data-id="{{ item.uuid }}">
-        {% if item.image %}
-          <figure style="max-width:882pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image">
-            <div>
-              {% image item.image original class="image-main-post" alt=item.image.alt %}
-            </div>
-            {% if item.image.caption %}
-              <figcaption>{{ item.image.caption }}</figcaption>
-            {% endif %}
-          </figure>
-        {% endif %}
-        <div class="post-body">
+    <div class="block-heading center">
+      <div class="subtitle">{{ section.title }}<br></div>
+    </div>
+    <div class="page-body">
+      {% for item in section.collection %}
+        <div class="rich-text-block w-richtext" data-id="{{ item.uuid }}">
           <div class="date">{{ item.date }}</div>
-          <div class="rich-text-block w-dyn-bind-empty w-richtext">{{ item.entry|richtext }}</div>
+          {% if item.image %}
+            <figure style="max-width:882pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image">
+              <div>
+                {% image item.image original alt=item.image.alt %}
+              </div>
+              {% if item.image.caption %}
+                <figcaption>{{ item.image.caption }}</figcaption>
+              {% endif %}
+            </figure>
+          {% endif %}
+          {{ item.entry|richtext }}
         </div>
-      </div>
+      {% endfor %}
+    </div>
   </div>
 </section>

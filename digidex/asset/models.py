@@ -165,6 +165,7 @@ class AssetPage(RoutablePageMixin, Page):
         collection = [entry.get_card() for entry in entries]
         add_url = self.reverse_subpage('add_journal_entry_view')
         return {
+            'title': 'Journal',
             'collection': collection,
             'add': add_url,
         }
