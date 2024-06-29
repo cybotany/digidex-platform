@@ -162,17 +162,11 @@ class AssetPage(RoutablePageMixin, Page):
 
     def get_journal_section(self):
         entries = self.get_journal_entries()
-        image = entries[0].image if entries else None
+        collection = [entry.get_card() for entry in entries]
+        add_url = self.reverse_subpage('add_journal_entry_view')
         return {
-            'uuid': self.uuid,
-            'title': self.get_formatted_title(),
-            'paragraph': self.description,
-            'date': self.get_formatted_date(),
-            'add_url': self.reverse_subpage('add_journal_entry_view'),
-            'delete_url': self.reverse_subpage('delete_asset_view'),
-            'update_url': self.reverse_subpage('update_asset_view'),
-            'delete_url': self.reverse_subpage('delete_asset_view'),
-            'entries': entries,
+            'collection': collection,
+            'add': add_url,
         }
 
     def get_card(self):

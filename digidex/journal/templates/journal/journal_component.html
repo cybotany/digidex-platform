@@ -1,11 +1,23 @@
+{% load wagtailimages_tags wagtailcore_tags %}
+
 <section class="section">
   <div class="content narrow">
-    <figure style="max-width:882pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image">
-      <div><img src="../images/style_guide.png" class="image-main-post" loading="lazy" alt=""></div>
-      <figcaption>Pharetra venenatis integer in dignissim aenean vivamus non id.</figcaption>
-    </figure>
-    <div class="post-body">
-      <div class="rich-text-block w-dyn-bind-empty w-richtext"></div>
-    </div>
+    {% for item in section.collection %}
+      <div class="page-body" data-id="{{ item.uuid }}">
+        {% if item.image %}
+          <figure style="max-width:882pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image">
+            <div>
+              {% image item.image original class="image-main-post" alt=item.image.alt %}
+            </div>
+            {% if item.image.caption %}
+              <figcaption>{{ item.image.caption }}</figcaption>
+            {% endif %}
+          </figure>
+        {% endif %}
+        <div class="post-body">
+          <div class="date">{{ item.date }}</div>
+          <div class="rich-text-block w-dyn-bind-empty w-richtext">{{ item.entry|richtext }}</div>
+        </div>
+      </div>
   </div>
 </section>

@@ -57,3 +57,14 @@ class JournalEntry(models.Model):
         FieldPanel('image'),
         FieldPanel('entry'),
     ]
+
+    def get_formatted_date(self):
+        return self.created_at.strftime('%B %d, %Y')
+
+    def get_card(self):
+        return {
+            'uuid': self.uuid,
+            'image': self.image,
+            'entry': self.entry,
+            'date': self.get_formatted_date(),
+        }
