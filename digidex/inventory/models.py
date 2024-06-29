@@ -122,7 +122,7 @@ class InventoryPage(RoutablePageMixin, Page):
         _default = _assets[0]
         asset_section = {
             'title': 'Assets',
-            'collection': _collection,
+            'collection': _assets,
             'default': _default,
         }
         return asset_section

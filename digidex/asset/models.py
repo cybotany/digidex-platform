@@ -1,11 +1,10 @@
 import uuid
 
 from django.db import models
-from django.apps import apps
 from django.shortcuts import render, redirect
+from django.contrib.contenttypes.models import ContentType
 from django.contrib import messages
 from django.http import HttpResponseForbidden
-from django.utils.text import slugify
 
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.images import get_image_model
@@ -53,17 +52,16 @@ class AssetPage(RoutablePageMixin, Page):
 
     subpage_types = []
 
-    def get_main_image(self):
-        #entry = self.journal_entries.order_by('-created_at').first()
-        #if entry:
-        #    return entry.image
-        return None
-
     def get_formatted_date(self):
         return 'DraftDate'
 
     def get_formatted_title(self):
         return self.title.title()
+
+    def get_journal_entries(self, order_by='-created_at'):
+        content_type = ContentType.objects.get_for_model(self)
+        from journal.models import JournalEntry
+        return JournalEntry.objects.filter(content_type=content_type, object_id=self.id).order_by(order_by)
 
     @route(r'^update/$', name='update_asset_view')
     def update_view(self, request):
@@ -101,28 +99,44 @@ class AssetPage(RoutablePageMixin, Page):
             if form.is_valid():
                 parent_page = self.get_parent()
                 self.delete()
-                messages.success(request, 'Digit successfully deleted')
+                messages.success(request, 'Asset successfully deleted')
                 return redirect(parent_page.url)
         else:
             form = DeleteAssetForm()
         
         return render(request, 'asset/includes/delete_form.html', {'form': form})
 
-    @route(r'^add/$', name='add_digit_entry_view')
+    @route(r'^add/$', name='add_journal_entry_view')
     def add_view(self, request):
         page_owner = self.owner
         if page_owner != request.user:
             return HttpResponseForbidden("You are not allowed to update this page.")
 
         from journal.forms import JournalEntryForm
+        from journal.models import JournalEntry
+
         if request.method == 'POST':
-            form = JournalEntryForm(request.POST, request.FILES, collection=self.collection, content_object=self)
+            form = JournalEntryForm(request.POST, request.FILES)
             if form.is_valid():
-                note = form.save(commit=False)
-                note.content_object = self
-                note.collection = self.collection
-                note.save()
-                form.save_m2m()
+                image_file = form.cleaned_data.get('image')
+                caption = form.cleaned_data.get('caption')
+                entry = form.cleaned_data.get('entry')
+
+                image = None
+                if image_file:
+                    image = CustomImageModel(
+                        title=image_file.name,
+                        file=image_file,
+                        caption=caption,
+                        collection=self.collection
+                    )
+                    image.save()
+                journal_entry = JournalEntry(
+                    content_object=self,
+                    image=image,
+                    entry=entry,
+                )
+                journal_entry.save()
                 messages.success(request, 'Journal entry successfully added.')
                 return redirect(self.url)
         else:
@@ -139,13 +153,20 @@ class AssetPage(RoutablePageMixin, Page):
         }
 
     def get_summary(self):
+        entries = self.get_journal_entries()
+        image = entries[0].image if entries else None
         return {
             'uuid': self.uuid,
             'title': self.get_formatted_title(),
-            'description': self.description,
+            'paragraph': self.description,
             'date': self.get_formatted_date(),
+            'add_url': self.reverse_subpage('add_journal_entry_view'),
+            'delete_url': self.reverse_subpage('delete_asset_view'),
+            'update_url': self.reverse_subpage('update_asset_view'),
+            'delete_url': self.reverse_subpage('delete_asset_view'),
             'detail_url': self.url,
-            'image': self.get_main_image(),
+            'entries': entries,
+            'image': image,
         }
 
     def get_context(self, request, *args, **kwargs):
