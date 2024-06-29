@@ -1,0 +1,11 @@
+{% load static wagtailimages_tags wagtailcore_tags %}
+
+<section class="section">
+  <div class="content">
+    <div class="block-heading center">
+      <div class="subtitle">{{ section.title }}<br></div>
+    </div>
+    {% include "base/includes/components/asset/featured.html" %}
+    {% include "base/includes/components/asset/collection.html" %}
+  </div>
+</section>

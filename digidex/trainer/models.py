@@ -4,7 +4,6 @@ from django.apps import apps
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import logout
-from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponseForbidden
 from django.utils.text import slugify
 from django.urls import reverse
@@ -15,6 +14,7 @@ from wagtail.images import get_image_model
 from wagtail.models import Collection, Page
 from wagtail.admin.panels import FieldPanel
 from wagtail.users.models import UserProfile
+from wagtail.users.utils import get_gravatar_url
 
 from .forms import TrainerForm, DeleteTrainerForm, TrainerInventoryForm
 
@@ -60,7 +60,16 @@ class TrainerPage(RoutablePageMixin, Page):
     def get_user_profile(self):
         return UserProfile.objects.get(user=self.owner)
 
+    def get_main_image(self):
+        user_profile = self.get_user_profile()
+        if user_profile.avatar:
+            return user_profile.avatar
+        else:
+            return None
+
     def get_formatted_date(self):
+        if self.live:
+            return self.first_published_at.strftime('%B %d, %Y')
         return "Draft"
     
     def get_formatted_title(self):
@@ -70,7 +79,7 @@ class TrainerPage(RoutablePageMixin, Page):
     def update_view(self, request):
         page_owner = self.owner
         if page_owner != request.user:
-            return HttpResponseForbidden("You are not allowed to edit this profile.")
+            return HttpResponseForbidden("You are not allowed here.")
 
         if request.method == 'POST':
             form = TrainerForm(request.POST, request.FILES)
@@ -92,7 +101,7 @@ class TrainerPage(RoutablePageMixin, Page):
     def delete_view(self, request):
         page_owner = self.owner
         if page_owner != request.user:
-            return HttpResponseForbidden("You are not allowed to edit this profile.")
+            return HttpResponseForbidden("You are not allowed here.")
 
         if request.method == 'POST':
             form = DeleteTrainerForm(request.POST)
@@ -110,7 +119,7 @@ class TrainerPage(RoutablePageMixin, Page):
     def add_view(self, request):
         page_owner = self.owner
         if page_owner != request.user:
-            return HttpResponseForbidden("You are not allowed to edit this profile.")
+            return HttpResponseForbidden("You are not allowed here.")
         
         if request.method == 'POST':
             form = TrainerInventoryForm(request.POST)
@@ -131,32 +140,46 @@ class TrainerPage(RoutablePageMixin, Page):
         
         return render(request, 'trainer/includes/inventory_form.html', {'form': form})
 
-    def get_page_heading(self):
+    def get_heading_section(self):
         return {
-            'title': f"Trainer {self.get_formatted_title()}",
+            'title': self.get_formatted_title(),
+            'date': self.get_formatted_date(),
             'paragraph': self.introduction,
             'update_url': self.reverse_subpage('update_trainer_view'),
             'delete_url': self.reverse_subpage('delete_trainer_view'),
         }
 
     def get_inventory_collection(self):
-        _categorytype = ContentType.objects.get(app_label='inventory', model='inventorypage')
-        return self.get_children().filter(content_type=_categorytype)
+        InventoryPage = apps.get_model('inventory', 'inventorypage')
+        inventories = self.get_children().type(InventoryPage).live().specific()
+        collection = list(inventories)
+        return collection
 
-    def get_context(self, request, *args, **kwargs):
-        inventory_collection = list(self.get_inventory_collection())
-        default_inventory = inventory_collection.pop(0) if inventory_collection else None
+    def get_inventory_section(self):
+        title = 'Inventory'
+        inventories = self.get_inventory_collection()
+        collection = [inventory.get_card() for inventory in inventories]
+        featured = collection.pop(0) if collection else None
         inventory_section = {
-            'title': 'Inventory',
-            'collection': inventory_collection,
-            'default': default_inventory,
-            'add_url': self.reverse_subpage('add_inventory_view'),
+            'title': title,
+            'featured': featured,
+            'collection': collection,
+            'add': self.reverse_subpage('add_inventory_view'),
         }
-        
+        return inventory_section
+
+    def get_card(self):
+        return {
+            'uuid': self.uuid,
+            'title': self.title,
+            'url': self.url,
+            'icon': None
+        }
+
+    def get_context(self, request, *args, **kwargs):       
         context = super().get_context(request, *args, **kwargs)
-        context['page_heading'] = self.get_page_heading()
-        context['category_section'] = inventory_section
-        context['asset_section'] = default_inventory.specific.get_asset_collection()
+        context['heading_section'] = self.get_heading_section()
+        context['inventory_section'] = self.get_inventory_section()
         return context
 
     class Meta:

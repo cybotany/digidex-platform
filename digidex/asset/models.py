@@ -53,7 +53,9 @@ class AssetPage(RoutablePageMixin, Page):
     subpage_types = []
 
     def get_formatted_date(self):
-        return 'DraftDate'
+        if self.live:
+            return self.first_published_at.strftime('%B %d, %Y')
+        return "Draft"
 
     def get_formatted_title(self):
         return self.title.title()
@@ -62,6 +64,11 @@ class AssetPage(RoutablePageMixin, Page):
         content_type = ContentType.objects.get_for_model(self)
         from journal.models import JournalEntry
         return JournalEntry.objects.filter(content_type=content_type, object_id=self.id).order_by(order_by)
+
+    def get_main_image(self):
+        entries = self.get_journal_entries()
+        image = entries[0].image if entries else None
+        return image
 
     @route(r'^update/$', name='update_asset_view')
     def update_view(self, request):
@@ -152,6 +159,16 @@ class AssetPage(RoutablePageMixin, Page):
             'delete_url': self.reverse_subpage('delete_asset_view'),
         }
 
+    def get_card(self):
+        return {
+            'uuid': self.uuid,
+            'title': self.get_formatted_title(),
+            'date': self.get_formatted_date(),
+            'url': self.url,
+            'paragraph': self.description,
+            'image': self.get_main_image(),
+        }
+
     def get_summary(self):
         entries = self.get_journal_entries()
         image = entries[0].image if entries else None
@@ -164,9 +181,7 @@ class AssetPage(RoutablePageMixin, Page):
             'delete_url': self.reverse_subpage('delete_asset_view'),
             'update_url': self.reverse_subpage('update_asset_view'),
             'delete_url': self.reverse_subpage('delete_asset_view'),
-            'detail_url': self.url,
             'entries': entries,
-            'image': image,
         }
 
     def get_context(self, request, *args, **kwargs):

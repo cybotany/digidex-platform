@@ -38,3 +38,24 @@ class DeleteInventoryForm(forms.Form):
         ),
         required=True
     )
+
+
+class InventoryAssetForm(forms.Form):
+    title = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class': 'text-field base-input',
+                'placeholder': 'Enter the title of the digitized object'
+            }
+        ),
+        required=True
+    )
+    description = forms.CharField(
+        widget=forms.Textarea(
+            attrs={
+                'class': 'text-field textarea',
+                'placeholder': 'Provide a detailed description of the object'
+            }
+        ),
+        required=False
+    )

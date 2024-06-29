@@ -56,7 +56,7 @@ class TrainerInventoryForm(forms.Form):
 
     def clean_name(self):
         title = self.cleaned_data['title']
-        forbidden_keywords = ['add', 'update', 'delete', 'admin']
+        forbidden_keywords = ['add', 'journal', 'update', 'delete']
         if any(keyword in title.lower() for keyword in forbidden_keywords):
             raise ValidationError(f'The title cannot contain any of the following keywords: {", ".join(forbidden_keywords)}')
         return title

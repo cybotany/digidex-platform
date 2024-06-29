@@ -1,0 +1,16 @@
+{% load static wagtailcore_tags wagtailimages_tags %} 
+
+<div class="collection-list-wrapper-categories base-dyn-list">
+  <div role="list" class="collection-list-categories base-dyn-items" data-id="{{ trainer.uuid }}">
+    {% for category in section.collection %}
+      <div role="listitem" class="collection-item-categories base-dyn-item" data-id="{{ category.uuid }}">
+        <a href="{{ category.url }}" class="link-category base-inline-block">
+          {% if category.image %}
+            <img src="{{ category.image.url }}" alt="" loading="eager" class="icon-category">
+          {% endif %}
+          <div class="text-category">{{ category.title }}</div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+</div>

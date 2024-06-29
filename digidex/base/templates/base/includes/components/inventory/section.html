@@ -1,0 +1,17 @@
+{% load static wagtailcore_tags wagtailimages_tags %} 
+
+<section class="section">
+  <div class="content">
+    <div class="block-heading center">
+      <div class="subtitle">{{ section.title }}<br></div>
+    </div>
+    <div class="block-categories block">
+      {% include "base/includes/components/inventory/featured.html" %}
+      {% include "base/includes/components/inventory/collection.html" %}
+      <a href="{{ section.add_url }}" aria-current="page" class="link-category base-inline-block">
+        <img src="{% static 'base/images/google/add-circle.svg' %}" loading="eager" alt="" class="icon-category">
+        <div class="text-category">Add {{ section.title }}</div>
+      </a>
+    </div>
+  </div>
+</section>

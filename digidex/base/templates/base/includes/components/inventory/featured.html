@@ -1,0 +1,6 @@
+{% load static wagtailcore_tags wagtailimages_tags %} 
+
+<a href="{{ section.default.url }}" aria-current="page" class="link-category base-inline-block base--current">
+  <img src="{% static 'base/images/nfc/directional/nfc_directional_mark_black.png' %}" loading="eager" alt="" class="icon-category">
+  <div class="text-category">{{ section.default.title }}</div>
+</a>

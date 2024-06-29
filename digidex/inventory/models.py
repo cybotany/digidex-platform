@@ -4,7 +4,6 @@ from django.db import models
 from django.apps import apps
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponseForbidden
 from django.utils.text import slugify
 
@@ -13,7 +12,7 @@ from wagtail.images import get_image_model
 from wagtail.models import Collection, Page
 from wagtail.admin.panels import FieldPanel
 
-from .forms  import InventoryForm, DeleteInventoryForm
+from .forms  import InventoryForm, DeleteInventoryForm, InventoryAssetForm
 
 
 CustomImageModel = get_image_model()
@@ -57,7 +56,9 @@ class InventoryPage(RoutablePageMixin, Page):
         return None
 
     def get_formatted_date(self):
-        return 'DraftDate'
+        if self.live:
+            return self.first_published_at.strftime('%B %d, %Y')
+        return "Draft"
 
     def get_formatted_title(self):
         return self.title.title()
@@ -66,7 +67,7 @@ class InventoryPage(RoutablePageMixin, Page):
     def update_view(self, request):
         page_owner = self.owner
         if page_owner != request.user:
-            return HttpResponseForbidden("You are not allowed to edit this profile.")
+            return HttpResponseForbidden("You are not allowed here.")
 
         if request.method == 'POST':
             form = InventoryForm(request.POST)
@@ -93,7 +94,7 @@ class InventoryPage(RoutablePageMixin, Page):
     def delete_view(self, request):
         page_owner = self.owner
         if page_owner != request.user:
-            return HttpResponseForbidden("You are not allowed to edit this profile.")
+            return HttpResponseForbidden("You are not allowed here.")
 
         if request.method == 'POST':
             form = DeleteInventoryForm(request.POST)
@@ -107,30 +108,71 @@ class InventoryPage(RoutablePageMixin, Page):
 
         return render(request, 'inventory/includes/delete.html', {'form': form, 'url': self.url})
 
-    def get_page_heading(self):
+    @route(r'^add/$', name='add_asset_view')
+    def add_view(self, request):
+        page_owner = self.owner
+        if page_owner != request.user:
+            return HttpResponseForbidden("You are not allowed here.")
+        
+        if request.method == 'POST':
+            form = InventoryAssetForm(request.POST)
+            if form.is_valid():
+                title = form.cleaned_data['title']
+                asset_page = apps.get_model('asset', 'assetpage')(
+                    title=title.title(),
+                    slug=slugify(title),
+                    owner=page_owner,
+                    description=form.cleaned_data['description']
+                )
+                self.add_child(instance=asset_page)
+                asset_page.save_revision().publish()
+                messages.success(request, f'{title} successfully added!')
+                return redirect(asset_page.url)
+        else:
+            form = InventoryAssetForm()
+        
+        return render(request, 'inventory/includes/asset_form.html', {'form': form})
+
+    def get_heading_section(self):
         return {
             'title': self.get_formatted_title(),
+            'date': self.get_formatted_date(),
             'paragraph': self.description,
             'update_url': self.reverse_subpage('update_inventory_view'),
             'delete_url': self.reverse_subpage('delete_inventory_view'),
         }
 
     def get_asset_collection(self):
-        _type = ContentType.objects.get(app_label='asset', model='assetpage')
-        _collection = self.get_children().filter(content_type=_type)
-        _assets = [_asset.specific.get_summary() for _asset in _collection]
-        _default = _assets[0]
+        AssetPage = apps.get_model('asset', 'assetpage')
+        assets = self.get_children().type(AssetPage).live().specific()
+        collection = list(assets)
+        return collection
+
+    def get_asset_section(self):
+        title = 'Assets'
+        assets = self.get_asset_collection()
+        collection = [asset.get_card() for asset in assets]
+        featured = collection.pop(0) if collection else None
         asset_section = {
-            'title': 'Assets',
-            'collection': _assets,
-            'default': _default,
+            'title': title,
+            'featured': featured,
+            'collection': collection,
+            'add': self.reverse_subpage('add_asset_view'),
         }
         return asset_section
 
+    def get_card(self):
+        return {
+            'uuid': self.uuid,
+            'title': self.title,
+            'url': self.url,
+            'icon': None
+        }
+
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context['page_heading'] = self.get_page_heading()
-        context['asset_section'] = self.get_asset_collection()
+        context['page_heading'] = self.get_heading_section()
+        context['asset_section'] = self.get_asset_section()
         return context
 
     class Meta:

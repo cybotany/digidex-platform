@@ -1,0 +1,22 @@
+{% load static wagtailimages_tags %}
+
+<div id="largeAssetCollection" class="collection-list-wrapper-assets large base-dyn-list">
+  <div role="list" class="collection-list-assets large base-dyn-items">
+    <div role="listitem" class="block-asset large base-dyn-item">
+      {% if default.image %}
+        {% image default.image original class="image-asset-thumbnail large" %}
+      {% endif %}
+      <div class="asset large">
+        <div class="date">{{ default.date }}</div>
+        <h3 class="heading-asset large">{{ default.title }}</h3>
+        <p class="paragraph-asset large">{{ default.paragraph }}</p>
+        <a href="{{ default.detail_url }}" class="link-block w-inline-block">
+          <div class="text-link">Read More</div>
+          <div class="link-block-icon">
+            <img src="{% static 'base/images/bx/arrow.svg' %}" loading="eager" alt="Right Arrow" class="icon-link">
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
