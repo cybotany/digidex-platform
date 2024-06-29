@@ -1,6 +1,7 @@
 import uuid
 
 from django.db import models
+from django.apps import apps
 from django.shortcuts import render, redirect
 from django.contrib.contenttypes.models import ContentType
 from django.contrib import messages
@@ -12,7 +13,7 @@ from wagtail.api import APIField
 from wagtail.models import Collection, Page
 from wagtail.admin.panels import FieldPanel
 
-from .forms import AssetForm, DeleteAssetForm
+from .forms import AssetForm, DeleteAssetForm, AssetJournalEntryForm
 
 
 CustomImageModel = get_image_model()
@@ -62,7 +63,7 @@ class AssetPage(RoutablePageMixin, Page):
 
     def get_journal_entries(self, order_by='-created_at'):
         content_type = ContentType.objects.get_for_model(self)
-        from journal.models import JournalEntry
+        JournalEntry = apps.get_model('journal', 'journalentry')
         return JournalEntry.objects.filter(content_type=content_type, object_id=self.id).order_by(order_by)
 
     def get_main_image(self):
@@ -119,11 +120,10 @@ class AssetPage(RoutablePageMixin, Page):
         if page_owner != request.user:
             return HttpResponseForbidden("You are not allowed to update this page.")
 
-        from journal.forms import JournalEntryForm
-        from journal.models import JournalEntry
+        JournalEntry = apps.get_model('journal', 'journalentry')
 
         if request.method == 'POST':
-            form = JournalEntryForm(request.POST, request.FILES)
+            form = AssetJournalEntryForm(request.POST, request.FILES)
             if form.is_valid():
                 image_file = form.cleaned_data.get('image')
                 caption = form.cleaned_data.get('caption')
@@ -147,29 +147,20 @@ class AssetPage(RoutablePageMixin, Page):
                 messages.success(request, 'Journal entry successfully added.')
                 return redirect(self.url)
         else:
-            form = JournalEntryForm()
+            form = AssetJournalEntryForm()
         
         return render(request, 'journal/includes/test_form.html', {'form': form})
 
-    def get_page_heading(self):
+    def get_heading_section(self):
         return {
             'title': self.get_formatted_title(),
+            'date': self.get_formatted_date(),
             'paragraph': self.description,
             'update_url': self.reverse_subpage('update_asset_view'),
             'delete_url': self.reverse_subpage('delete_asset_view'),
         }
 
-    def get_card(self):
-        return {
-            'uuid': self.uuid,
-            'title': self.get_formatted_title(),
-            'date': self.get_formatted_date(),
-            'url': self.url,
-            'paragraph': self.description,
-            'image': self.get_main_image(),
-        }
-
-    def get_summary(self):
+    def get_journal_section(self):
         entries = self.get_journal_entries()
         image = entries[0].image if entries else None
         return {
@@ -184,9 +175,20 @@ class AssetPage(RoutablePageMixin, Page):
             'entries': entries,
         }
 
+    def get_card(self):
+        return {
+            'uuid': self.uuid,
+            'title': self.get_formatted_title(),
+            'date': self.get_formatted_date(),
+            'url': self.url,
+            'paragraph': self.description,
+            'image': self.get_main_image(),
+        }
+
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context['page_heading'] = self.get_page_heading()
+        context['heading_section'] = self.get_heading_section()
+        context['journal_section'] = self.get_journal_section()
         return context
 
     class Meta:

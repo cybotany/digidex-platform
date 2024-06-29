@@ -1,6 +1,6 @@
 {% extends "trainer/base.html" %}
 
 {% block content %}
-  {% include 'base/includes/components/heading/index.html' with section=heading_section %}
-  {% include 'base/includes/components/inventory/section.html' with section=inventory_section %}
+  {% include 'base/layouts/heading_section.html' with section=heading_section %}
+  {% include 'inventory/inventory_component.html' with section=inventory_section %}
 {% endblock %}

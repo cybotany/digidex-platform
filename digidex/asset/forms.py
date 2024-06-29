@@ -1,5 +1,6 @@
 from django import forms
 
+from journal.forms import JournalEntryForm
 
 class AssetForm(forms.Form):
     name = forms.CharField(
@@ -31,3 +32,7 @@ class DeleteAssetForm(forms.Form):
         ),
         required=True
     )
+
+
+class AssetJournalEntryForm(JournalEntryForm):
+    pass

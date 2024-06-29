@@ -1,0 +1,63 @@
+{% load static wagtailimages_tags wagtailcore_tags %}
+
+<section class="section">
+  <div class="content">
+    <div class="block-heading center">
+      <div class="subtitle">{{ section.title }}<br></div>
+    </div>
+    {% with featured=section.featured %}
+      <div id="largeAssetCollection" class="collection-list-wrapper-assets large base-dyn-list">
+        <div role="list" class="collection-list-assets large base-dyn-items">
+          <div role="listitem" class="block-asset large base-dyn-item">
+            {% if featured.image %}
+              {% image featured.image original class="image-asset-thumbnail large" %}
+            {% endif %}
+            <div class="asset large">
+              <div class="date">{{ featured.date }}</div>
+              <h3 class="heading-asset large">{{ featured.title }}</h3>
+              <p class="paragraph-asset large">{{ featured.paragraph }}</p>
+              <a href="{{ featured.detail_url }}" class="link-block w-inline-block">
+                <div class="text-link">Read More</div>
+                <div class="link-block-icon">
+                  <img src="{% static 'base/images/bx/arrow.svg' %}" loading="eager" alt="Right Arrow" class="icon-link">
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endwith %}
+    {% with collection=section.collection %}
+      <div id="asset-items-list" class="collection-list-wrapper-assets base-dyn-list">
+        <div role="list" class="collection-list-assets base-dyn-items">
+          {% for asset in collection %}
+            <div role="listitem" class="block-asset base-dyn-item" onclick="showLargeAsset(this)" data-id="{{ asset.uuid }}">
+              <a href="{{ asset.url }}" class="link-asset-thumbnail base-inline-block">
+                {% if asset.image %}
+                  {% image asset.image original class="image-asset-thumbnail" %}
+                {% endif %}
+              </a>
+              <div class="asset">
+                <div class="date">{{ asset.date }}</div>
+                <a href="{{ asset.url }}" class="link-heading-asset base-inline-block">
+                  <h3 class="heading-asset">{{ asset.title }}</h3>
+                </a>
+                <p class="paragraph-asset">{{ asset.paragraph }}</p>
+                <a href="{{ asset.url }}" class="link-block w-inline-block">
+                  <div class="text-link">Read more</div>
+                  <div class="block-icon-link">
+                    <img src="{% static 'base/images/bx/arrow.svg' %}" loading="eager" alt="" class="icon-link">
+                  </div>
+                </a>
+              </div>
+            </div>
+          {% empty %}
+            <div class="empty-state base-dyn-empty">
+              <div class="text-empty">No assets found.</div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endwith %}
+  </div>
+</section>
