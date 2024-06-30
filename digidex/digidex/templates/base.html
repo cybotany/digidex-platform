@@ -38,9 +38,12 @@
     <div id="root">
       {% include "includes/header.html" %}
       <main>
-        {% block content %}{% endblock %}
+        {% block body %}
+          {% block content %}{% endblock content %}
+        {% endblock body %}
       </main>
       {% include "includes/footer.html" %}
     </div>
+    {% block extra_js %}{% endblock extra_js %}
   </body>
 </html>
