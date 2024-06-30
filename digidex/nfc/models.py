@@ -112,9 +112,12 @@ class NearFieldCommunicationLink(Orderable):
     )
     content_type = models.ForeignKey(
         ContentType,
+        null=True,
+        db_index=True,
         on_delete=models.CASCADE
     )
     object_id = models.PositiveIntegerField(
+        null=True,
         db_index=True
     )
     content_object = GenericForeignKey(
