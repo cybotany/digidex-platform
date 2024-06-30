@@ -1,26 +1,19 @@
-from django.http import JsonResponse
+from wagtail.models import Page
+from wagtail.api.v2.views import PagesAPIViewSet
 
-from pygbif import species
+from .models import AssetPage
 
-def get_species_name_suggestions(query, rank=None, limit=20):
-    return species.name_suggest(q=query, rank=rank, limit=limit)
 
-def get_species_backbone(name, kingdom=None, rank=None):
-    return species.name_backbone(name=name, kingdom=kingdom, rank=rank)
+class AssetPageViewSet(PagesAPIViewSet):
+    model = AssetPage
 
-def species_suggestions_view(request):
-    query = request.GET.get('query')
-    rank = request.GET.get('rank')
-    if not query:
-        return JsonResponse({'error': 'Query parameter is required'}, status=400)
-    suggestions = get_species_name_suggestions(query, rank)
-    return JsonResponse(suggestions, safe=False)
-
-def species_backbone_view(request):
-    name = request.GET.get('name')
-    kingdom = request.GET.get('kingdom')
-    rank = request.GET.get('rank')
-    if not name:
-        return JsonResponse({'error': 'Name parameter is required'}, status=400)
-    backbone = get_species_backbone(name, kingdom, rank)
-    return JsonResponse(backbone, safe=False)
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        uuid = self.request.GET.get('uuid', None)
+        if uuid:
+            try:
+                asset_page = AssetPage.objects.get(uuid=uuid)
+                queryset = asset_page.get_descendants().live().public()
+            except AssetPage.DoesNotExist:
+                queryset = Page.objects.none()
+        return queryset

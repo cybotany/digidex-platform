@@ -156,13 +156,9 @@ class TrainerPage(RoutablePageMixin, Page):
         return collection
 
     def get_inventory_section(self):
-        title = 'Inventory'
         inventories = self.get_inventory_collection()
         collection = [inventory.get_card() for inventory in inventories]
-        featured = collection.pop(0) if collection else None
         inventory_section = {
-            'title': title,
-            'featured': featured,
             'collection': collection,
             'add': self.reverse_subpage('add_inventory_view'),
         }

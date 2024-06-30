@@ -155,13 +155,9 @@ class InventoryPage(RoutablePageMixin, Page):
         return collection
 
     def get_asset_section(self):
-        title = 'Assets'
         assets = self.get_asset_collection()
         collection = [asset.get_card() for asset in assets]
-        featured = collection.pop(0) if collection else None
         asset_section = {
-            'title': title,
-            'featured': featured,
             'collection': collection,
             'add': self.reverse_subpage('add_asset_view'),
         }

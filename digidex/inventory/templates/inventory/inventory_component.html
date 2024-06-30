@@ -2,25 +2,18 @@
 
 <section class="section">
   <div class="content">
-    <div class="block-heading center">
-      <div class="subtitle">{{ section.title }}<br></div>
-    </div>
     <div class="block-categories block">
-      {% with featured=section.featured %}
-        <a href="{{ featured.url }}" aria-current="page" class="link-category base-inline-block base--current">
-            <img src="{% static 'base/images/nfc/directional/nfc_directional_mark_black.png' %}" loading="eager" alt="" class="icon-category">
-            <div class="text-category">{{ featured.title }}</div>
-        </a>
-      {% endwith %}
-      {% with collection=section.collection %}
+      <a href="#" aria-current="page" class="link-category base-inline-block base--current" data-id="{{ trainer.uuid }}">
+        <img src="{% static 'base/images/switcher.svg' %}" loading="eager" alt="" class="icon-category">
+        <div class="text-category">All</div>
+      </a>
+      {% with collection=trainer.collection %}
         <div class="collection-list-wrapper-categories base-dyn-list">
-            <div role="list" class="collection-list-categories base-dyn-items" data-id="{{ trainer.uuid }}">
+          <div role="list" class="collection-list-categories base-dyn-items">
             {% for category in collection %}
                 <div role="listitem" class="collection-item-categories base-dyn-item" data-id="{{ category.uuid }}">
                 <a href="{{ category.url }}" class="link-category base-inline-block">
-                    {% if category.image %}
-                    <img src="{{ category.image.url }}" alt="" loading="eager" class="icon-category">
-                    {% endif %}
+                  <img src="{% static 'base/images/nfc/directional/nfc_directional_mark_black.png' %}" loading="eager" alt="" class="icon-category">
                     <div class="text-category">{{ category.title }}</div>
                 </a>
                 </div>

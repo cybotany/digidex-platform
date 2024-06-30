@@ -5,10 +5,14 @@ from django.urls import reverse
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 
+from modelcluster.fields import ParentalKey
+from modelcluster.models import ClusterableModel
+from wagtail.models import Orderable
+
 from .validators import validate_ntag_serial
 
 
-class NearFieldCommunicationTag(models.Model):
+class NearFieldCommunicationTag(ClusterableModel):
     """
     Represents an NFC (Near Field Communication) tag in the system, associated with a digitized object.
 
@@ -94,14 +98,14 @@ class NearFieldCommunicationTag(models.Model):
         verbose_name_plural = "NTAGs"
 
 
-class NearFieldCommunicationLink(models.Model):
+class NearFieldCommunicationLink(Orderable):
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
         editable=False,
         db_index=True
     )
-    tag = models.OneToOneField(
+    tag = ParentalKey(
         NearFieldCommunicationTag,
         on_delete=models.CASCADE,
         related_name='mapping'

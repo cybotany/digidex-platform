@@ -2,31 +2,28 @@
 
 <section class="section">
   <div class="content">
-    <div class="block-heading center">
-      <div class="subtitle">{{ section.title }}<br></div>
-    </div>
-    {% with featured=section.featured %}
-      <div id="largeAssetCollection" class="collection-list-wrapper-assets large base-dyn-list">
-        <div role="list" class="collection-list-assets large base-dyn-items">
-          <div role="listitem" class="block-asset large base-dyn-item">
-            {% if featured.image %}
-              {% image featured.image original class="image-asset-thumbnail large" %}
-            {% endif %}
-            <div class="asset large">
-              <div class="date">{{ featured.date }}</div>
-              <h3 class="heading-asset large">{{ featured.title }}</h3>
-              <p class="paragraph-asset large">{{ featured.paragraph }}</p>
-              <a href="{{ featured.url }}" class="link-block w-inline-block">
-                <div class="text-link">Read More</div>
-                <div class="link-block-icon">
-                  <img src="{% static 'base/images/bx/arrow.svg' %}" loading="eager" alt="Right Arrow" class="icon-link">
-                </div>
-              </a>
-            </div>
+    <div id="largeAssetCollection" class="collection-list-wrapper-assets large base-dyn-list">
+      <div role="list" class="collection-list-assets large base-dyn-items">
+        <div role="listitem" class="block-asset large base-dyn-item">
+          <a href="" class="link-asset-thumbnail base-inline-block">
+            <img src="" loading="eager" alt="" class="image-asset-thumbnail large">
+          </a>
+          <div class="asset large">
+            <div class="date"></div>
+            <a href="" class="link-heading-asset base-inline-block">
+              <h3 class="heading-asset large"></h3>
+            </a>
+            <p class="paragraph-asset large"></p>
+            <a href="" class="link-block w-inline-block">
+              <div class="text-link">Read More</div>
+              <div class="link-block-icon">
+                <img src="{% static 'base/images/bx/arrow.svg' %}" loading="eager" alt="Right Arrow" class="icon-link">
+              </div>
+            </a>
           </div>
         </div>
       </div>
-    {% endwith %}
+    </div>
     {% with collection=section.collection %}
       <div id="asset-items-list" class="collection-list-wrapper-assets base-dyn-list">
         <div role="list" class="collection-list-assets base-dyn-items">
