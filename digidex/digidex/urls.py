@@ -7,12 +7,8 @@ from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
 from search.views import search
-from .api import api_router, species_suggestions_view, species_backbone_view
+from .api import api_router
 
-gbif_urls = [
-    path('species/suggest/', species_suggestions_view, name='gbif_species_suggestions'),
-    path('species/backbone/', species_backbone_view, name='gbif_species_backbone'),
-]
 
 urlpatterns = [
     path("django-admin/", admin.site.urls),
@@ -20,7 +16,6 @@ urlpatterns = [
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search, name="search"),
     path('api/v2/', api_router.urls),
-    path('api/gbif/', include(gbif_urls)),
     path('nfc/', include('nfc.urls')),
     path('', include('allauth.urls')),
 ]
