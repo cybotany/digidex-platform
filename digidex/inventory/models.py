@@ -139,7 +139,7 @@ class InventoryPage(RoutablePageMixin, Page):
         
         return render(request, 'inventory/includes/asset_form.html', {'form': form})
 
-    def get_heading_section(self):
+    def get_page_heading(self):
         return {
             'title': self.get_formatted_title(),
             'date': self.get_formatted_date(),
@@ -151,17 +151,8 @@ class InventoryPage(RoutablePageMixin, Page):
     def get_asset_collection(self):
         AssetPage = apps.get_model('asset', 'assetpage')
         assets = self.get_children().type(AssetPage).live().specific()
-        collection = list(assets)
-        return collection
-
-    def get_asset_section(self):
-        assets = self.get_asset_collection()
         collection = [asset.get_card() for asset in assets]
-        asset_section = {
-            'collection': collection,
-            'add': self.reverse_subpage('add_asset_view'),
-        }
-        return asset_section
+        return collection
 
     def get_card(self):
         return {
@@ -173,8 +164,8 @@ class InventoryPage(RoutablePageMixin, Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context['heading_section'] = self.get_heading_section()
-        context['asset_section'] = self.get_asset_section()
+        context['page_heading'] = self.get_page_heading()
+        context['asset_collection'] = self.get_asset_collection()
         return context
 
     class Meta:

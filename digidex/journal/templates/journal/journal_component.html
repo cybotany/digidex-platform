@@ -2,11 +2,8 @@
 
 <section class="section">
   <div class="content narrow">
-    <div class="block-heading center">
-      <div class="subtitle">{{ section.title }}<br></div>
-    </div>
     <div class="page-body">
-      {% for item in section.collection %}
+      {% for item in collection %}
         <div class="rich-text-block w-richtext" data-id="{{ item.uuid }}">
           <div class="date">{{ item.date }}</div>
           {% if item.image %}

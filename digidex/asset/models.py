@@ -151,7 +151,7 @@ class AssetPage(RoutablePageMixin, Page):
         
         return render(request, 'journal/includes/test_form.html', {'form': form})
 
-    def get_heading_section(self):
+    def get_page_heading(self):
         return {
             'title': self.get_formatted_title(),
             'date': self.get_formatted_date(),
@@ -160,14 +160,10 @@ class AssetPage(RoutablePageMixin, Page):
             'delete_url': self.reverse_subpage('delete_asset_view'),
         }
 
-    def get_journal_section(self):
+    def get_journal_collection(self):
         entries = self.get_journal_entries()
         collection = [entry.get_card() for entry in entries]
-        add_url = self.reverse_subpage('add_journal_entry_view')
-        return {
-            'collection': collection,
-            'add': add_url,
-        }
+        return collection
 
     def get_card(self):
         return {
@@ -181,8 +177,8 @@ class AssetPage(RoutablePageMixin, Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context['heading_section'] = self.get_heading_section()
-        context['journal_section'] = self.get_journal_section()
+        context['page_heading'] = self.get_page_heading()
+        context['journal_collection'] = self.get_journal_collection()
         return context
 
     class Meta:

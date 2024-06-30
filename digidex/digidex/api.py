@@ -1,12 +1,6 @@
 from wagtail.api.v2.router import WagtailAPIRouter
-
-from asset.api import AssetPageViewSet
-from inventory.api import InventoryPageViewSet
-from trainer.api import TrainerPageViewSet
-
+from wagtail.api.v2.views import PagesAPIViewSet
 
 api_router = WagtailAPIRouter('wagtailapi')
 
-api_router.register_endpoint('asset', AssetPageViewSet)
-api_router.register_endpoint('inventory', InventoryPageViewSet)
-api_router.register_endpoint('trainer', TrainerPageViewSet)
+api_router.register_endpoint('pages', PagesAPIViewSet)

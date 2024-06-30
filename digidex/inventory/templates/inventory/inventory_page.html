@@ -1,6 +1,6 @@
 {% extends "inventory/base.html" %}
 
 {% block content %}
-  {% include 'base/layouts/heading_section.html' with section=heading_section %}
-  {% include 'asset/asset_component.html' with section=asset_section %}
+  {% include 'base/layouts/heading_section.html' with heading=page_heading %}
+  {% include 'asset/asset_component.html' with collection=asset_collection %}
 {% endblock %}

@@ -1,6 +1,6 @@
 {% extends "asset/base.html" %}
 
 {% block content %}
-  {% include 'base/layouts/heading_section.html' with section=heading_section %}
-  {% include 'journal/journal_component.html' with section=journal_section %}
+  {% include 'base/layouts/heading_section.html' with heading=page_heading %}
+  {% include 'journal/journal_component.html' with collection=journal_collection %}
 {% endblock %}

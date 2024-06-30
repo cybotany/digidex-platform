@@ -14,7 +14,6 @@ from wagtail.images import get_image_model
 from wagtail.models import Collection, Page
 from wagtail.admin.panels import FieldPanel
 from wagtail.users.models import UserProfile
-from wagtail.users.utils import get_gravatar_url
 
 from .forms import TrainerForm, DeleteTrainerForm, TrainerInventoryForm
 
@@ -140,7 +139,7 @@ class TrainerPage(RoutablePageMixin, Page):
         
         return render(request, 'trainer/includes/inventory_form.html', {'form': form})
 
-    def get_heading_section(self):
+    def get_page_heading(self):
         return {
             'title': self.get_formatted_title(),
             'date': self.get_formatted_date(),
@@ -152,17 +151,8 @@ class TrainerPage(RoutablePageMixin, Page):
     def get_inventory_collection(self):
         InventoryPage = apps.get_model('inventory', 'inventorypage')
         inventories = self.get_children().type(InventoryPage).live().specific()
-        collection = list(inventories)
+        collection = [inventory.get_card() for inventory in inventories]    
         return collection
-
-    def get_inventory_section(self):
-        inventories = self.get_inventory_collection()
-        collection = [inventory.get_card() for inventory in inventories]
-        inventory_section = {
-            'collection': collection,
-            'add': self.reverse_subpage('add_inventory_view'),
-        }
-        return inventory_section
 
     def get_card(self):
         return {
@@ -174,8 +164,8 @@ class TrainerPage(RoutablePageMixin, Page):
 
     def get_context(self, request, *args, **kwargs):       
         context = super().get_context(request, *args, **kwargs)
-        context['heading_section'] = self.get_heading_section()
-        context['inventory_section'] = self.get_inventory_section()
+        context['page_heading'] = self.get_page_heading()
+        context['inventory_collection'] = self.get_inventory_collection()
         return context
 
     class Meta:
