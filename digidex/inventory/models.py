@@ -9,6 +9,7 @@ from django.utils.text import slugify
 
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.images import get_image_model
+from wagtail.api import APIField
 from wagtail.models import Collection, Page
 from wagtail.admin.panels import FieldPanel
 
@@ -47,6 +48,11 @@ class InventoryPage(RoutablePageMixin, Page):
 
     subpage_types = [
         'asset.AssetPage'
+    ]
+
+    api_fields = [
+        APIField('uuid'),
+        APIField('description'),
     ]
 
     def get_main_image(self):

@@ -1,14 +1,16 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
+from wagtail.api.v2.views import BaseAPIViewSet
 
-from inventory.models import InventoryPage
+from .models import InventoryPage
 
-class InventoryPageAssetSectionView(APIView):
-    def get(self, request, uuid):
-        try:
-            page = InventoryPage.objects.get(uuid=uuid)
-            asset_section = page.get_asset_section()
-            return Response(asset_section, status=status.HTTP_200_OK)
-        except InventoryPage.DoesNotExist:
-            return Response({"error": "Page not found"}, status=status.HTTP_404_NOT_FOUND)
+class InventoryPageViewSet(BaseAPIViewSet):
+    """
+    http://127.0.0.1:8000/api/v2/inventory/?uuid=1290021b-93e5-481a-97c1-37c9f10c1a2c&fields=uuid,description
+    """
+    model = InventoryPage
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        uuid = self.request.GET.get('uuid', None)
+        if uuid:
+            queryset = queryset.filter(uuid=uuid)
+        return queryset
