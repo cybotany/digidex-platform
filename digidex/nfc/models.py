@@ -2,8 +2,6 @@ import uuid
 
 from django.db import models
 from django.urls import reverse
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes.fields import GenericForeignKey
 
 from .validators import validate_ntag_serial
 
@@ -28,15 +26,15 @@ class NearFieldCommunicationTag(models.Model):
     REGULAR_STICKER = 'RS'
     WET_INLAY = 'WI'
     DRY_INLAY = 'DI'
-    NTAG_TYPE_CHOICES = [
-        (PLANT_LABEL, 'Plant Label'),
-        (DOG_TAG, 'Dog Tag'),
-        (CAT_TAG, 'Cat Tag'),
-        (BUBBLE_STICKER, 'Bubble Sticker'),
-        (REGULAR_STICKER, 'Regular Sticker'),
-        (WET_INLAY, 'Wet Inlay'),
-        (DRY_INLAY, 'Dry Inlay'),
-    ]
+    NTAG_FORM_CHOICES = {
+        PLANT_LABEL: 'Plant Label',
+        DOG_TAG: 'Dog Tag',
+        CAT_TAG: 'Cat Tag',
+        BUBBLE_STICKER: 'Bubble Sticker',
+        REGULAR_STICKER: 'Regular Sticker',
+        WET_INLAY: 'Wet Inlay',
+        DRY_INLAY: 'Dry Inlay',
+    }
     uuid = models.UUIDField(
         default=uuid.uuid4,
         editable=False,
@@ -48,13 +46,13 @@ class NearFieldCommunicationTag(models.Model):
         db_index=True,
         validators=[validate_ntag_serial]
     )
-    ntag_type = models.CharField(
+    tag_form = models.CharField(
         max_length=2,
-        choices=NTAG_TYPE_CHOICES,
+        choices=NTAG_FORM_CHOICES,
         default=REGULAR_STICKER
     )
     active = models.BooleanField(
-        default=False
+        default=True
     )
     created_at = models.DateTimeField(
         auto_now_add=True
@@ -65,7 +63,7 @@ class NearFieldCommunicationTag(models.Model):
 
     def __str__(self):
         """Return the serial number as the string representation of the NFC tag."""
-        return f"{self.ntag_type}: {self.serial_number}"
+        return f"{self.NTAG_FORM_CHOICES[self.tag_form]} {self.id}"
 
     def activate_link(self):
         """
@@ -85,22 +83,9 @@ class NearFieldCommunicationTag(models.Model):
         self.active = False
         self.save()
 
-    def get_mapped_content(self):
-        """
-        Retrieves the content mapped to this NTAG, regardless of the specific model.
-
-        Returns:
-            The mapped content object or None if no mapping exists.
-        """
-        try:
-            link = self.mapping
-            return link.content_object
-        except NearFieldCommunicationLink.DoesNotExist:
-            return None
-
     class Meta:
-        verbose_name = "NFC Tag"
-        verbose_name_plural = "NFC Tags"
+        verbose_name = "nfc tag"
+        verbose_name_plural = "nfc tags"
 
 
 class NearFieldCommunicationLink(models.Model):
@@ -113,22 +98,23 @@ class NearFieldCommunicationLink(models.Model):
     tag = models.OneToOneField(
         NearFieldCommunicationTag,
         on_delete=models.CASCADE,
-        related_name='mapping'
+        related_name='nfc_link'
     )
-    content_type = models.ForeignKey(
-        ContentType,
-        null=True,
-        db_index=True,
-        on_delete=models.CASCADE
+    asset = models.OneToOneField(
+        'asset.AssetPage',
+        on_delete=models.CASCADE,
+        related_name='+',
+        null=True
     )
-    object_id = models.PositiveIntegerField(
-        null=True,
-        db_index=True
+    created_at = models.DateTimeField(
+        auto_now_add=True
     )
-    content_object = GenericForeignKey(
-        'content_type',
-        'object_id'
+    last_modified = models.DateTimeField(
+        auto_now=True
     )
+
+    def __str__(self):
+        return f"{self.tag} - {self.asset}"
 
     def get_url(self):
         """
@@ -140,8 +126,5 @@ class NearFieldCommunicationLink(models.Model):
         return reverse('nfc:route_nfc_tag', kwargs={'nfc_uuid': self.uuid})
 
     class Meta:
-        verbose_name = "NFC Link"
-        verbose_name_plural = "NFC Links"
-
-    def __str__(self):
-        return f"{self.tag} - {self.content_object}"
+        verbose_name = "nfc mapping"
+        verbose_name_plural = "nfc mappings"

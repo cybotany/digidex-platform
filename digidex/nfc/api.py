@@ -26,7 +26,6 @@ class RegisterNearFieldCommunicationTag(APIView):
         )
 
         nfc_url = nfc_link.get_url()
-
         absolute_nfc_url = request.build_absolute_uri(nfc_url)
         request_status = status.HTTP_201_CREATED if created else status.HTTP_200_OK
 
