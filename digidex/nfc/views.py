@@ -7,23 +7,23 @@ from django.http import HttpResponse
 from django.core.exceptions import ValidationError
 from django.urls import reverse
 
-from .models import NearFieldCommunicationTag, NearFieldCommunicationLink
+from .models import NearFieldCommunicationLink
 from .forms import NearFieldCommunicationAssetForm
 
 
 User = get_user_model()
 
 
-def route_nfc_tag_url(request, ntag_uuid):
-    ntag = get_object_or_404(NearFieldCommunicationTag, uuid=ntag_uuid)
+def route_nfc_tag_url(request, nfc_uuid):
+    nfc_link = get_object_or_404(NearFieldCommunicationLink, uuid=nfc_uuid)
     try:
-        if not ntag.active:
+        if not nfc_link.tag.active:
             return HttpResponse("This NFC tag is not active.", status=403)
         
-        mapped_content = ntag.get_mapped_content()
+        mapped_content = nfc_link.tag.get_mapped_content()
         
         if mapped_content is None:
-            return redirect(reverse('nfc:map_nfc_tag', kwargs={'ntag_uuid': ntag_uuid}))
+            return redirect(reverse('nfc:map_nfc_tag', kwargs={'nfc_uuid': nfc_uuid}))
         
         return redirect(mapped_content.url)
     
@@ -31,7 +31,7 @@ def route_nfc_tag_url(request, ntag_uuid):
         return HttpResponse(str(e), status=400)
 
 @login_required
-def map_nfc_tag(request, ntag_uuid):
+def map_nfc_tag(request, nfc_uuid):
     user = request.user
     if request.method == 'POST':
         form = NearFieldCommunicationAssetForm(request.POST, user=user)
@@ -50,14 +50,10 @@ def map_nfc_tag(request, ntag_uuid):
             parent_page.add_child(instance=asset)
 
             if asset:
-                ntag = get_object_or_404(NearFieldCommunicationTag, uuid=ntag_uuid)
-                
-                NearFieldCommunicationLink.objects.create(
-                    tag=ntag,
-                    content_type=ContentType.objects.get_for_model(asset),
-                    object_id=asset.id
-                )
-                
+                nfc_link = get_object_or_404(NearFieldCommunicationLink, uuid=nfc_uuid)
+                nfc_link.content_type=ContentType.objects.get_for_model(asset)
+                nfc_link.object_id=asset.id
+                nfc_link.save()          
                 return redirect(asset.url)
             else:
                 return HttpResponse("Failed to create a detail page for the digitized object.")

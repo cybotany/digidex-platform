@@ -5,14 +5,10 @@ from django.urls import reverse
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 
-from modelcluster.fields import ParentalKey
-from modelcluster.models import ClusterableModel
-from wagtail.models import Orderable
-
 from .validators import validate_ntag_serial
 
 
-class NearFieldCommunicationTag(ClusterableModel):
+class NearFieldCommunicationTag(models.Model):
     """
     Represents an NFC (Near Field Communication) tag in the system, associated with a digitized object.
 
@@ -25,6 +21,22 @@ class NearFieldCommunicationTag(ClusterableModel):
         created_at (DateTimeField): Timestamp indicating when the record was first created.
         last_modified (DateTimeField): Timestamp indicating when the record was last updated.
     """
+    PLANT_LABEL = 'PL'
+    DOG_TAG = 'DT'
+    CAT_TAG = 'CT'
+    BUBBLE_STICKER = 'BS'
+    REGULAR_STICKER = 'RS'
+    WET_INLAY = 'WI'
+    DRY_INLAY = 'DI'
+    NTAG_TYPE_CHOICES = [
+        (PLANT_LABEL, 'Plant Label'),
+        (DOG_TAG, 'Dog Tag'),
+        (CAT_TAG, 'Cat Tag'),
+        (BUBBLE_STICKER, 'Bubble Sticker'),
+        (REGULAR_STICKER, 'Regular Sticker'),
+        (WET_INLAY, 'Wet Inlay'),
+        (DRY_INLAY, 'Dry Inlay'),
+    ]
     uuid = models.UUIDField(
         default=uuid.uuid4,
         editable=False,
@@ -35,6 +47,11 @@ class NearFieldCommunicationTag(ClusterableModel):
         unique=True,
         db_index=True,
         validators=[validate_ntag_serial]
+    )
+    ntag_type = models.CharField(
+        max_length=2,
+        choices=NTAG_TYPE_CHOICES,
+        default=REGULAR_STICKER
     )
     active = models.BooleanField(
         default=False
@@ -48,7 +65,7 @@ class NearFieldCommunicationTag(ClusterableModel):
 
     def __str__(self):
         """Return the serial number as the string representation of the NFC tag."""
-        return self.serial_number
+        return f"{self.ntag_type}: {self.serial_number}"
 
     def activate_link(self):
         """
@@ -81,31 +98,19 @@ class NearFieldCommunicationTag(ClusterableModel):
         except NearFieldCommunicationLink.DoesNotExist:
             return None
 
-    @property
-    def url(self):
-        """
-        Constructs the absolute URL to view this specific NFC tag.
-
-        Returns:
-            A URL path as a string.
-        """
-        if not self.active:
-            return None
-        return reverse('nfc:route_ntag', kwargs={'ntag_uuid': self.uuid})
-
     class Meta:
-        verbose_name = "NTAG"
-        verbose_name_plural = "NTAGs"
+        verbose_name = "NFC Tag"
+        verbose_name_plural = "NFC Tags"
 
 
-class NearFieldCommunicationLink(Orderable):
+class NearFieldCommunicationLink(models.Model):
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
         editable=False,
         db_index=True
     )
-    tag = ParentalKey(
+    tag = models.OneToOneField(
         NearFieldCommunicationTag,
         on_delete=models.CASCADE,
         related_name='mapping'
@@ -124,3 +129,19 @@ class NearFieldCommunicationLink(Orderable):
         'content_type',
         'object_id'
     )
+
+    def get_url(self):
+        """
+        Constructs the absolute URL to view this specific NFC tag.
+
+        Returns:
+            A URL path as a string.
+        """
+        return reverse('nfc:route_nfc_tag', kwargs={'nfc_uuid': self.uuid})
+
+    class Meta:
+        verbose_name = "NFC Link"
+        verbose_name_plural = "NFC Links"
+
+    def __str__(self):
+        return f"{self.tag} - {self.content_object}"

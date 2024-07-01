@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
-from nfc.models import NearFieldCommunicationTag
+from nfc.models import NearFieldCommunicationTag, NearFieldCommunicationLink
 
 
 class RegisterNearFieldCommunicationTag(APIView):
@@ -17,12 +17,17 @@ class RegisterNearFieldCommunicationTag(APIView):
         if not serial_number:
             return Response({"error": "Serial Number not provided."}, status=status.HTTP_400_BAD_REQUEST)
 
-        ntag, created = NearFieldCommunicationTag.objects.update_or_create(
+        nfc_tag, _ = NearFieldCommunicationTag.objects.update_or_create(
             serial_number=serial_number,
             defaults={'active': True}
         )
+        nfc_link, created = NearFieldCommunicationLink.objects.get_or_create(
+            tag=nfc_tag
+        )
 
-        absolute_url = request.build_absolute_uri(ntag.url)
-        _status = status.HTTP_201_CREATED if created else status.HTTP_200_OK
+        nfc_url = nfc_link.get_url()
 
-        return Response({"ntag_url": absolute_url}, status=_status)
+        absolute_nfc_url = request.build_absolute_uri(nfc_url)
+        request_status = status.HTTP_201_CREATED if created else status.HTTP_200_OK
+
+        return Response({"nfc_tag_url": absolute_nfc_url}, status=request_status)
