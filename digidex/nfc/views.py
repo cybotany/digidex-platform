@@ -1,7 +1,6 @@
 from django.apps import apps
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.core.exceptions import ValidationError
@@ -14,7 +13,7 @@ from .forms import NearFieldCommunicationAssetForm
 User = get_user_model()
 
 
-def route_nfc_tag_url(request, nfc_uuid):
+def route_nfc_link(request, nfc_uuid):
     nfc_link = get_object_or_404(NearFieldCommunicationLink, uuid=nfc_uuid)
     try:
         if not nfc_link.tag.active:
@@ -31,7 +30,7 @@ def route_nfc_tag_url(request, nfc_uuid):
         return HttpResponse(str(e), status=400)
 
 @login_required
-def map_nfc_tag(request, nfc_uuid):
+def map_nfc_link(request, nfc_uuid):
     user = request.user
     if request.method == 'POST':
         form = NearFieldCommunicationAssetForm(request.POST, user=user)
@@ -51,8 +50,7 @@ def map_nfc_tag(request, nfc_uuid):
 
             if asset:
                 nfc_link = get_object_or_404(NearFieldCommunicationLink, uuid=nfc_uuid)
-                nfc_link.content_type=ContentType.objects.get_for_model(asset)
-                nfc_link.object_id=asset.id
+                nfc_link.asset=asset
                 nfc_link.save()          
                 return redirect(asset.url)
             else:

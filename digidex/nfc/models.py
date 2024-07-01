@@ -38,10 +38,12 @@ class NearFieldCommunicationTag(models.Model):
     uuid = models.UUIDField(
         default=uuid.uuid4,
         editable=False,
-        unique=True
+        unique=True,
+        db_index=True
     )
     serial_number = models.CharField(
         max_length=32,
+        editable=False,
         unique=True,
         db_index=True,
         validators=[validate_ntag_serial]
@@ -123,7 +125,7 @@ class NearFieldCommunicationLink(models.Model):
         Returns:
             A URL path as a string.
         """
-        return reverse('nfc:route_nfc_tag', kwargs={'nfc_uuid': self.uuid})
+        return reverse('nfc:route_nfc', kwargs={'nfc_uuid': self.uuid})
 
     class Meta:
         verbose_name = "nfc mapping"
