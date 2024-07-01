@@ -9,8 +9,8 @@ from .models import NearFieldCommunicationLink
 from .forms import NearFieldCommunicationAssetForm
 
 
-def route_nfc_link(request, nfc_uuid):
-    nfc_link = get_object_or_404(NearFieldCommunicationLink, uuid=nfc_uuid)
+def route_nfc_link(request, link_uuid):
+    nfc_link = get_object_or_404(NearFieldCommunicationLink, uuid=link_uuid)
     try:
         if not nfc_link.tag.active:
             return HttpResponse("This NFC tag is not active.", status=403)
@@ -18,7 +18,7 @@ def route_nfc_link(request, nfc_uuid):
         mapped_content = nfc_link.asset
         
         if mapped_content is None:
-            return redirect(reverse('nfc:map_nfc_tag', kwargs={'nfc_uuid': nfc_uuid}))
+            return redirect(reverse('nfc:map_nfc', kwargs={'link_uuid': link_uuid}))
         
         return redirect(mapped_content.url)
     
@@ -26,7 +26,7 @@ def route_nfc_link(request, nfc_uuid):
         return HttpResponse(str(e), status=400)
 
 @login_required
-def map_nfc_link(request, nfc_uuid):
+def map_nfc_link(request, link_uuid):
     user = request.user
     if request.method == 'POST':
         form = NearFieldCommunicationAssetForm(request.POST, user=user)
@@ -50,7 +50,7 @@ def map_nfc_link(request, nfc_uuid):
             parent_page.add_child(instance=asset)
 
             if asset:
-                nfc_link = get_object_or_404(NearFieldCommunicationLink, uuid=nfc_uuid)
+                nfc_link = get_object_or_404(NearFieldCommunicationLink, uuid=link_uuid)
                 nfc_link.asset=asset
                 nfc_link.save()          
                 return redirect(asset.url)

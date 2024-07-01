@@ -125,7 +125,7 @@ class NearFieldCommunicationLink(models.Model):
         Returns:
             A URL path as a string.
         """
-        return reverse('nfc:route_nfc', kwargs={'nfc_uuid': self.uuid})
+        return reverse('nfc:route_nfc', kwargs={'link_uuid': self.uuid})
 
     class Meta:
         verbose_name = "nfc mapping"

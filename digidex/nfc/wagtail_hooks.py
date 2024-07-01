@@ -1,7 +1,7 @@
 from wagtail.snippets.models import register_snippet
 from wagtail.snippets.views.snippets import SnippetViewSet
 
-from .models import NearFieldCommunicationLink, NearFieldCommunicationTag
+from .models import NearFieldCommunicationTag
 
 
 class NearFieldCommunicationTagViewSet(SnippetViewSet):
@@ -13,13 +13,3 @@ class NearFieldCommunicationTagViewSet(SnippetViewSet):
     list_filter = ["tag_form", "active"]
 
 register_snippet(NearFieldCommunicationTagViewSet)
-
-
-class NearFieldCommunicationLinkViewSet(SnippetViewSet):
-    model = NearFieldCommunicationLink
-    icon = "link"
-    add_to_admin_menu = True
-
-    list_display = ["tag", "asset"]
-
-register_snippet(NearFieldCommunicationLinkViewSet)
