@@ -1,5 +1,4 @@
 from django.apps import apps
-from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
@@ -10,16 +9,13 @@ from .models import NearFieldCommunicationLink
 from .forms import NearFieldCommunicationAssetForm
 
 
-User = get_user_model()
-
-
 def route_nfc_link(request, nfc_uuid):
     nfc_link = get_object_or_404(NearFieldCommunicationLink, uuid=nfc_uuid)
     try:
         if not nfc_link.tag.active:
             return HttpResponse("This NFC tag is not active.", status=403)
         
-        mapped_content = nfc_link.tag.get_mapped_content()
+        mapped_content = nfc_link.asset
         
         if mapped_content is None:
             return redirect(reverse('nfc:map_nfc_tag', kwargs={'nfc_uuid': nfc_uuid}))
@@ -35,17 +31,22 @@ def map_nfc_link(request, nfc_uuid):
     if request.method == 'POST':
         form = NearFieldCommunicationAssetForm(request.POST, user=user)
         if form.is_valid():
-            InventoryPage = apps.get_model('inventory', 'inventorypage')
             AssetPage = apps.get_model('asset', 'assetpage')
-
-            inventory = form.cleaned_data['inventory']
-            parent_page = get_object_or_404(InventoryPage, pk=inventory.id)
-
             asset = AssetPage(
                 title=form.cleaned_data['title'],
                 description=form.cleaned_data['description'],
                 owner=request.user
             )
+
+            inventory = form.cleaned_data.get('inventory')
+            if inventory:
+                InventoryPage = apps.get_model('inventory', 'inventorypage')
+                parent_page = get_object_or_404(InventoryPage, pk=inventory.id)
+    
+            else:
+                TrainerPage = apps.get_model('trainer', 'trainerpage')
+                parent_page = get_object_or_404(TrainerPage, owner=user)
+
             parent_page.add_child(instance=asset)
 
             if asset:

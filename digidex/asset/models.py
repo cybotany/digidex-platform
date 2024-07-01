@@ -18,6 +18,7 @@ from .forms import AssetForm, DeleteAssetForm, AssetJournalEntryForm
 
 CustomImageModel = get_image_model()
 
+
 class AssetPage(RoutablePageMixin, Page):
     uuid = models.UUIDField(
         default=uuid.uuid4,
@@ -32,6 +33,11 @@ class AssetPage(RoutablePageMixin, Page):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+    name = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True
+    )
     description = models.TextField(
         blank=True,
         null=True
@@ -39,10 +45,12 @@ class AssetPage(RoutablePageMixin, Page):
 
     api_fields = [
         APIField('uuid'),
+        APIField('name'),
         APIField('description'),
     ]
 
     content_panels = Page.content_panels + [
+        FieldPanel('name'),
         FieldPanel('description'),
     ]
 

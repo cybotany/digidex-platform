@@ -23,7 +23,7 @@ class NearFieldCommunicationAssetForm(forms.Form):
     )
     inventory = forms.ModelChoiceField(
         queryset=None,
-        required=True,
+        required=False,
         widget=forms.Select(
             attrs={
                 'class': 'dropdown'
