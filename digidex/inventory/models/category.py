@@ -17,18 +17,6 @@ class InventoryCategory(models.Model):
         blank=False,
         null=False
     )
-    collection = models.ForeignKey(
-        Collection,
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-    owner = models.ForeignKey(
-        'UserProfile',
-        on_delete=models.CASCADE,
-        related_name='inventory_categories'
-    )
     name = models.CharField(
         max_length=100,
         blank=False,

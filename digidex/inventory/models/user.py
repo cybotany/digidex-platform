@@ -23,10 +23,3 @@ class UserProfile(models.Model):
         blank=False,
         null=False
     )
-    collection = models.ForeignKey(
-        Collection,
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
