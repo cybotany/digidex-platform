@@ -1,6 +1,11 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
+from wagtail.images import get_image_model
+
+
+DigiDexImageModel = get_image_model()
+
 class InventoryForm(forms.Form):
     title = forms.CharField(
         widget=forms.TextInput(
@@ -60,13 +65,6 @@ class InventoryAssetForm(forms.Form):
         required=False
     )
 
-
-from django import forms
-
-from wagtail.images import get_image_model
-
-
-DigiDexImageModel = get_image_model()
 
 class JournalEntryForm(forms.Form):
     entry = forms.CharField(
