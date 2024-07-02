@@ -12,9 +12,6 @@ from nfc.models import NearFieldCommunicationTag
 
 class HomePage(Page):
 
-    subpage_types = [
-        'trainer.TrainerPage'
-    ]
 
     class Meta:
         verbose_name = "Landing Page"

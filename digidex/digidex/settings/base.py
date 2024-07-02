@@ -18,9 +18,7 @@ INSTALLED_APPS = [
     "nfc",
     "journal",
     "home",
-    "asset",
     "inventory",
-    "trainer",
     "search",
     "storages",
     "whitenoise.runserver_nostatic",
@@ -41,6 +39,7 @@ INSTALLED_APPS = [
     'wagtail.api.v2',
     "modelcluster",
     "taggit",
+    "treebeard",
 
     "django.contrib.admin",
     "django.contrib.auth",

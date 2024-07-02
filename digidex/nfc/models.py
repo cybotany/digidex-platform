@@ -102,8 +102,8 @@ class NearFieldCommunicationLink(models.Model):
         on_delete=models.CASCADE,
         related_name='nfc_link'
     )
-    asset = models.OneToOneField(
-        'asset.AssetPage',
+    organism = models.OneToOneField(
+        'inventory.Organism',
         on_delete=models.CASCADE,
         related_name='+',
         null=True
