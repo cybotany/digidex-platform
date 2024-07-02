@@ -6,7 +6,6 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 
 from wagtail.images import get_image_model
 
-
 DigiDexImageModel = get_image_model()
 
 
