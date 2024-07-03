@@ -5,11 +5,11 @@ from django.http import HttpResponse
 from django.core.exceptions import ValidationError
 from django.urls import reverse
 
-from .models import NearFieldCommunicationLink
+from .models import NearFieldCommunicationTag
 
 
 def route_nfc_link(request, link_uuid):
-    nfc_link = get_object_or_404(NearFieldCommunicationLink, uuid=link_uuid)
+    nfc_link = get_object_or_404(NearFieldCommunicationTag, uuid=link_uuid)
     try:
         if not nfc_link.tag.active:
             return HttpResponse("This NFC tag is not active.", status=403)
@@ -49,7 +49,7 @@ def map_nfc_link(request, link_uuid):
             parent_page.add_child(instance=asset)
 
             if asset:
-                nfc_link = get_object_or_404(NearFieldCommunicationLink, uuid=link_uuid)
+                nfc_link = get_object_or_404(NearFieldCommunicationTag, uuid=link_uuid)
                 nfc_link.asset=asset
                 nfc_link.save()          
                 return redirect(asset.url)

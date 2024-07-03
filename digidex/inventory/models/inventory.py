@@ -14,16 +14,7 @@ from .nfc import NearFieldCommunicationTag
 DigiDexImageModel = get_image_model()
 DigiDexDocumentModel = get_document_model()
 
-class Inventory(Collection):
-    PROFILE = 'P'
-    CATEGORY = 'C'
-    ITEM = 'I'
-    INVENTORY_TYPES = (
-        (PROFILE, 'Profile'),
-        (CATEGORY, 'Category'),
-        (ITEM, 'Item')
-    )
-    
+class Inventory(Collection):    
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
@@ -35,19 +26,12 @@ class Inventory(Collection):
         blank=True,
         null=True
     )
-    type = models.CharField(
-        max_length=1,
-        choices=INVENTORY_TYPES,
-        default=ITEM
-    )
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        related_name='owner'
-    )
-    description = models.TextField(
-        blank=True,
-        null=True
+        on_delete=models.SET_NULL,
+        related_name='owner',
+        null=True,
+        blank=True
     )
     created_at = models.DateTimeField(
         auto_now_add=True
@@ -57,18 +41,46 @@ class Inventory(Collection):
     )
 
 
-class InventoryNote(models.Model):
-    uuid = models.UUIDField(
-        default=uuid.uuid4,
-        unique=True,
-        editable=False,
-        db_index=True
-    )
-    inventory = models.ForeignKey(
-        Inventory,
-        on_delete=models.CASCADE,
-        related_name='notes'
-    )
+    def __str__(self):
+        return f"Inventory Collection: {self.name}"
+
+
+class InventoryProfile(Inventory):
+
+    def get_catagories(self):
+        return self.categories.all()
+
+    def get_items(self):
+        return self.items.all()
+
+    def __str__(self):
+        return f"{self} - Profile"
+
+    class Meta:
+        verbose_name = "Inventory Profile"
+        verbose_name_plural = "Inventory Profiles"
+
+
+class InventoryCategory(Inventory):
+
+    def get_items(self):
+        return self.items.all()
+
+    def __str__(self):
+        return f"{self} - Category"
+
+    class Meta:
+        verbose_name = "Inventory Category"
+        verbose_name_plural = "Inventory Categories"
+
+
+class InventoryItem(Inventory):
+    class Meta:
+        verbose_name = "Inventory Item"
+        verbose_name_plural = "Inventory Items"
+
+
+class InventoryNote(Inventory):
     image = models.ForeignKey(
         DigiDexImageModel,
         null=True,
@@ -84,19 +96,20 @@ class InventoryNote(models.Model):
     entry = models.TextField(
         null=False
     )
-    created_at = models.DateTimeField(
-        auto_now_add=True
-    )
-    last_modified = models.DateTimeField(
-        auto_now=True
-    )
+
+    def __str__(self):
+        return f"{self} - Journal"
+
+    class Meta:
+        verbose_name = "Inventory Journal Entry"
+        verbose_name_plural = "Inventory Journal Entries"
 
 
 class InventoryLink(NearFieldCommunicationTag):
     inventory = models.OneToOneField(
         Inventory,
         on_delete=models.SET_NULL,
-        related_name='nfc_link',
+        related_name='+',
         null=True
     )
 
@@ -113,5 +126,5 @@ class InventoryLink(NearFieldCommunicationTag):
         return reverse('nfc:route_nfc', kwargs={'link_uuid': self.uuid})
 
     class Meta:
-        verbose_name = "NFC Mapping"
-        verbose_name_plural = "NFC Mappings"
+        verbose_name = "Inventory NFC Mapping"
+        verbose_name_plural = "Inventory NFC Mappings"
