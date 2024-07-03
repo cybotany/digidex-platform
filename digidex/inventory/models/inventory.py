@@ -15,11 +15,30 @@ DigiDexImageModel = get_image_model()
 DigiDexDocumentModel = get_document_model()
 
 class Inventory(Collection):
+    PROFILE = 'P'
+    CATEGORY = 'C'
+    ITEM = 'I'
+    INVENTORY_TYPES = (
+        (PROFILE, 'Profile'),
+        (CATEGORY, 'Category'),
+        (ITEM, 'Item')
+    )
+    
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
         editable=False,
         db_index=True
+    )
+    slug = models.SlugField(
+        max_length=100,
+        blank=True,
+        null=True
+    )
+    type = models.CharField(
+        max_length=1,
+        choices=INVENTORY_TYPES,
+        default=ITEM
     )
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -30,25 +49,12 @@ class Inventory(Collection):
         blank=True,
         null=True
     )
-    slug = models.SlugField(
-        max_length=100,
-        blank=True,
-        null=True
-    )
     created_at = models.DateTimeField(
         auto_now_add=True
     )
     last_modified = models.DateTimeField(
         auto_now=True
     )
-
-
-class InventoryCategory(Inventory):
-    pass
-
-
-class InventoryItem(Inventory):
-    pass
 
 
 class InventoryNote(models.Model):
