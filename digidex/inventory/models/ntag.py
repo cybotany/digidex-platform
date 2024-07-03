@@ -16,7 +16,7 @@ def validate_ntag_serial(value):
             params={'value': value},
         )
 
-class NearFieldCommunicationTag(models.Model):
+class InventoryNtag(models.Model):
     """
     Represents an NFC (Near Field Communication) tag in the system, associated with a digitized object.
 
@@ -100,29 +100,23 @@ class NearFieldCommunicationTag(models.Model):
         verbose_name_plural = "nfc tags"
 
 
-class NearFieldCommunicationLink(models.Model):
+class InventoryLink(models.Model):
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
         editable=False,
         db_index=True
     )
-    tag = models.OneToOneField(
-        NearFieldCommunicationTag,
+    ntag = models.OneToOneField(
+        InventoryNtag,
         on_delete=models.CASCADE,
         related_name='nfc_link'
     )
-    content_type = models.ForeignKey(
-        ContentType,
-        db_index=True,
-        on_delete=models.CASCADE
-    )
-    object_id = models.PositiveIntegerField(
-        db_index=True
-    )
-    content_object = GenericForeignKey(
-        'content_type',
-        'object_id'
+    item = models.OneToOneField(
+        'InventoryItem',
+        on_delete=models.CASCADE,
+        related_name='nfc_link',
+        null=True
     )
     created_at = models.DateTimeField(
         auto_now_add=True
@@ -132,7 +126,7 @@ class NearFieldCommunicationLink(models.Model):
     )
 
     def __str__(self):
-        return f"{self.tag} -> {self.content_object}"
+        return f"{self.tag} -> {self.item}"
 
     def get_url(self):
         """
