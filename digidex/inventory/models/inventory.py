@@ -14,7 +14,7 @@ from .nfc import NearFieldCommunicationTag
 DigiDexImageModel = get_image_model()
 DigiDexDocumentModel = get_document_model()
 
-class InventoryCollection(Collection):
+class Inventory(Collection):
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
@@ -43,7 +43,15 @@ class InventoryCollection(Collection):
     )
 
 
-class InventoryCollectionNote(models.Model):
+class InventoryCategory(Inventory):
+    pass
+
+
+class InventoryItem(Inventory):
+    pass
+
+
+class InventoryNote(models.Model):
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
@@ -51,7 +59,7 @@ class InventoryCollectionNote(models.Model):
         db_index=True
     )
     inventory = models.ForeignKey(
-        InventoryCollection,
+        Inventory,
         on_delete=models.CASCADE,
         related_name='notes'
     )
@@ -78,9 +86,9 @@ class InventoryCollectionNote(models.Model):
     )
 
 
-class InventoryCollectionLink(NearFieldCommunicationTag):
+class InventoryLink(NearFieldCommunicationTag):
     inventory = models.OneToOneField(
-        InventoryCollection,
+        Inventory,
         on_delete=models.SET_NULL,
         related_name='nfc_link',
         null=True
