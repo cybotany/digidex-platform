@@ -2,10 +2,7 @@ import uuid
 import re
 
 from django.core.exceptions import ValidationError
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db import models
-from django.urls import reverse
 
 
 def validate_ntag_serial(value):
@@ -16,7 +13,7 @@ def validate_ntag_serial(value):
             params={'value': value},
         )
 
-class InventoryNtag(models.Model):
+class NearFieldCommunicationTag(models.Model):
     """
     Represents an NFC (Near Field Communication) tag in the system, associated with a digitized object.
 
@@ -98,45 +95,3 @@ class InventoryNtag(models.Model):
     class Meta:
         verbose_name = "nfc tag"
         verbose_name_plural = "nfc tags"
-
-
-class InventoryLink(models.Model):
-    uuid = models.UUIDField(
-        default=uuid.uuid4,
-        unique=True,
-        editable=False,
-        db_index=True
-    )
-    ntag = models.OneToOneField(
-        InventoryNtag,
-        on_delete=models.CASCADE,
-        related_name='nfc_link'
-    )
-    item = models.OneToOneField(
-        'InventoryItem',
-        on_delete=models.CASCADE,
-        related_name='nfc_link',
-        null=True
-    )
-    created_at = models.DateTimeField(
-        auto_now_add=True
-    )
-    last_modified = models.DateTimeField(
-        auto_now=True
-    )
-
-    def __str__(self):
-        return f"{self.tag} -> {self.item}"
-
-    def get_url(self):
-        """
-        Constructs the absolute URL to view this specific NFC tag.
-
-        Returns:
-            A URL path as a string.
-        """
-        return reverse('nfc:route_nfc', kwargs={'link_uuid': self.uuid})
-
-    class Meta:
-        verbose_name = "NFC Mapping"
-        verbose_name_plural = "NFC Mappings"
