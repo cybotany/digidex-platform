@@ -17,8 +17,6 @@ DigiDexDocumentModel = get_document_model()
 class Inventory(Collection):
     """
     Represents a collection of inventory items in the system.
-    
-    Root Node
     """
     uuid = models.UUIDField(
         default=uuid.uuid4,
@@ -45,9 +43,8 @@ class Inventory(Collection):
         auto_now=True
     )
 
-
     def __str__(self):
-        return f"Inventory Collection: {self.name}"
+        return f"{self.name} - Inventory"
 
 
 class InventoryProfile(Inventory):
@@ -59,7 +56,7 @@ class InventoryProfile(Inventory):
         return self.items.all()
 
     def __str__(self):
-        return f"{self} - Profile"
+        return f"{self.name} - Profile"
 
     class Meta:
         verbose_name = "Inventory Profile"
@@ -72,7 +69,7 @@ class InventoryCategory(Inventory):
         return self.items.all()
 
     def __str__(self):
-        return f"{self} - Category"
+        return f"{self.name} - Category"
 
     class Meta:
         verbose_name = "Inventory Category"
@@ -80,6 +77,9 @@ class InventoryCategory(Inventory):
 
 
 class InventoryItem(Inventory):
+    def __str__(self):
+        return f"{self.name} - Item"
+
     class Meta:
         verbose_name = "Inventory Item"
         verbose_name_plural = "Inventory Items"
@@ -103,11 +103,11 @@ class InventoryNote(Inventory):
     )
 
     def __str__(self):
-        return f"{self} - Journal"
+        return f"{self.name} - Note"
 
     class Meta:
-        verbose_name = "Inventory Journal Entry"
-        verbose_name_plural = "Inventory Journal Entries"
+        verbose_name = "Inventory Note"
+        verbose_name_plural = "Inventory Notes"
 
 
 class InventoryLink(NearFieldCommunicationTag):
@@ -119,7 +119,9 @@ class InventoryLink(NearFieldCommunicationTag):
     )
 
     def __str__(self):
-        return f"Link for {self.inventory}"
+        if self.inventory:
+            return f"{self} for {self.inventory}"
+        return f"{self} available for mapping"
 
     def get_url(self):
         """

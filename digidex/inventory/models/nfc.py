@@ -71,7 +71,6 @@ class NearFieldCommunicationTag(models.Model):
     )
 
     def __str__(self):
-        """Return the serial number as the string representation of the NFC tag."""
         return f"{self.NTAG_FORM_CHOICES[self.tag_form]} {self.id}"
 
     def activate_link(self):
