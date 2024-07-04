@@ -1,25 +1,13 @@
 import uuid
 
-from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
-from modelcluster.models import ClusterableModel
-
-from wagtail.models import (
-    WorkflowMixin,
-    PreviewableMixin,
-    DraftStateMixin,
-    LockableMixin,
-    RevisionMixin,
-    TranslatableMixin,
-    SpecificMixin,
-    Collection,
-)
+from wagtail.models import Page, Collection
 from wagtail.documents import get_document_model
 from wagtail.images import get_image_model
-from wagtail.search import index
+from wagtail.fields import RichTextField
 
 from .note import Note
 from .nfc import NearFieldCommunicationTag
@@ -29,23 +17,9 @@ DigiDexImageModel = get_image_model()
 DigiDexDocumentModel = get_document_model()
 
 
-class AbstractInventory(
-    WorkflowMixin,
-    PreviewableMixin,
-    DraftStateMixin,
-    LockableMixin,
-    RevisionMixin,
-    TranslatableMixin,
-    SpecificMixin,
-    Collection,
-):
-    class Meta:
-        abstract = True
-
-
-class Inventory(AbstractInventory, index.Indexed, ClusterableModel):
+class Inventory(Page):
     """
-    Represents a collection of inventory items in the system.
+    Acts as the index for all inventory items, categories, and notes.
     """
     uuid = models.UUIDField(
         default=uuid.uuid4,
@@ -53,17 +27,21 @@ class Inventory(AbstractInventory, index.Indexed, ClusterableModel):
         editable=False,
         db_index=True
     )
-    slug = models.SlugField(
-        max_length=100,
+    name = models.CharField(
+        max_length=255,
+        verbose_name=_("name")
+    )
+    description = RichTextField( 
+        blank=True,
+        null=True,
+        verbose_name=_("description")
+    )
+    collection = models.ForeignKey(
+        Collection,
+        on_delete=models.SET_NULL,
+        related_name='+',
         blank=True,
         null=True
-    )
-    owner = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.SET_NULL,
-        related_name='owner',
-        null=True,
-        blank=True
     )
     created_at = models.DateTimeField(
         auto_now_add=True
@@ -72,60 +50,57 @@ class Inventory(AbstractInventory, index.Indexed, ClusterableModel):
         auto_now=True
     )
 
-    def get_default_locale(self):
-        """
-        Finds the default locale to use for this page.
-
-        This will be called just before the initial save.
-        """
-        parent = self.get_parent()
-        if parent is not None:
-            return (
-                parent.specific_class.objects.defer()
-                .select_related("locale")
-                .get(id=parent.id)
-                .locale
-            )
-
-        return super().get_default_locale()
-
-    def __str__(self):
-        return f"{self.name} - Inventory"
-
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=('translation_key', 'locale'),
-                name='unique_translation_key_locale'
-            )
-        ]
+    subpage_types = [
+        'inventory.InventoryProfile',
+    ]
 
 
 class InventoryProfile(Inventory):
-    def __str__(self):
-        return f"{self.name} - Profile"
+
+    parent_page_types = [
+        'inventory.Inventory',
+    ]
+
+    subpage_types = [
+        'inventory.InventoryCategory',
+        'inventory.InventoryItem',
+        'inventory.InventoryNote'
+    ]
 
     class Meta:
-        verbose_name = "Inventory Profile"
-        verbose_name_plural = "Inventory Profiles"
+        verbose_name = _("inventory profile"),
+        verbose_name_plural = _("inventory profiles")
 
 
 class InventoryCategory(Inventory):
-    def __str__(self):
-        return f"{self.name} - Category"
+    parent_page_types = [
+        'inventory.InventoryProfile',
+    ]
+
+    subpage_types = [
+        'inventory.InventoryItem',
+        'inventory.InventoryNote',
+    ]
+
 
     class Meta:
-        verbose_name = "Inventory Category"
-        verbose_name_plural = "Inventory Categories"
+        verbose_name = _("inventory category")
+        verbose_name_plural = _("inventory catagories")
 
 
 class InventoryItem(Inventory):
-    def __str__(self):
-        return f"{self.name} - Item"
+    parent_page_types = [
+        'inventory.InventoryProfile',
+        'inventory.InventoryCategory',
+    ]
+
+    subpage_types = [
+        'inventory.InventoryNote'
+    ]
 
     class Meta:
-        verbose_name = "Inventory Item"
-        verbose_name_plural = "Inventory Items"
+        verbose_name = _("inventory item")
+        verbose_name_plural = _("inventory items")
 
 
 class InventoryNote(Inventory):
@@ -148,12 +123,17 @@ class InventoryNote(Inventory):
         related_name='+'
     )
 
-    def __str__(self):
-        return f"{self.name} - Note"
+    parent_page_types = [
+        'inventory.InventoryProfile',
+        'inventory.InventoryCategory',
+        'inventory.InventoryItem',
+    ]
+
+    subpage_types = []
 
     class Meta:
-        verbose_name = "Inventory Note"
-        verbose_name_plural = "Inventory Notes"
+        verbose_name = _("inventory note")
+        verbose_name_plural = _("inventory notes")
 
 
 class InventoryLink(NearFieldCommunicationTag):
@@ -179,5 +159,5 @@ class InventoryLink(NearFieldCommunicationTag):
         return reverse('nfc:route_nfc', kwargs={'link_uuid': self.uuid})
 
     class Meta:
-        verbose_name = "Inventory NFC Mapping"
-        verbose_name_plural = "Inventory NFC Mappings"
+        verbose_name = _("inventory nfc mapping")
+        verbose_name_plural = _("inventory nfc mappings")
