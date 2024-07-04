@@ -9,7 +9,6 @@ from wagtail.documents import get_document_model
 from wagtail.images import get_image_model
 from wagtail.fields import RichTextField
 
-from .note import Note
 from .nfc import NearFieldCommunicationTag
 
 
@@ -31,10 +30,10 @@ class Inventory(Page):
         max_length=255,
         verbose_name=_("name")
     )
-    description = RichTextField( 
+    body = RichTextField( 
         blank=True,
         null=True,
-        verbose_name=_("description")
+        verbose_name=_("body")
     )
     collection = models.ForeignKey(
         Collection,
@@ -112,12 +111,6 @@ class InventoryNote(Inventory):
     )
     document = models.ForeignKey(
         DigiDexDocumentModel,
-        null=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-    body = models.ForeignKey(
-        Note,
         null=True,
         on_delete=models.SET_NULL,
         related_name='+'
