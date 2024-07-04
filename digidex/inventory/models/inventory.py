@@ -27,6 +27,8 @@ class Inventory(Page):
         db_index=True
     )
     name = models.CharField(
+        null=True,
+        blank=True,
         max_length=255,
         verbose_name=_("name")
     )
