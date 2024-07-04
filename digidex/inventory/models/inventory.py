@@ -72,6 +72,23 @@ class Inventory(AbstractInventory, index.Indexed, ClusterableModel):
         auto_now=True
     )
 
+    def get_default_locale(self):
+        """
+        Finds the default locale to use for this page.
+
+        This will be called just before the initial save.
+        """
+        parent = self.get_parent()
+        if parent is not None:
+            return (
+                parent.specific_class.objects.defer()
+                .select_related("locale")
+                .get(id=parent.id)
+                .locale
+            )
+
+        return super().get_default_locale()
+
     def __str__(self):
         return f"{self.name} - Inventory"
 
