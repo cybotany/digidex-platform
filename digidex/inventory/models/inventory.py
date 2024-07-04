@@ -3,18 +3,47 @@ import uuid
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 
-from wagtail.models import Collection
+from modelcluster.models import ClusterableModel
+
+from wagtail.models import (
+    WorkflowMixin,
+    PreviewableMixin,
+    DraftStateMixin,
+    LockableMixin,
+    RevisionMixin,
+    TranslatableMixin,
+    SpecificMixin,
+    Collection,
+)
 from wagtail.documents import get_document_model
 from wagtail.images import get_image_model
+from wagtail.search import index
 
+from .note import Note
 from .nfc import NearFieldCommunicationTag
 
 
 DigiDexImageModel = get_image_model()
 DigiDexDocumentModel = get_document_model()
 
-class Inventory(Collection):
+
+class AbstractInventory(
+    WorkflowMixin,
+    PreviewableMixin,
+    DraftStateMixin,
+    LockableMixin,
+    RevisionMixin,
+    TranslatableMixin,
+    SpecificMixin,
+    Collection,
+):
+    class Meta:
+        abstract = True
+
+
+class Inventory(AbstractInventory, index.Indexed, ClusterableModel):
     """
     Represents a collection of inventory items in the system.
     """
@@ -46,15 +75,16 @@ class Inventory(Collection):
     def __str__(self):
         return f"{self.name} - Inventory"
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=('translation_key', 'locale'),
+                name='unique_translation_key_locale'
+            )
+        ]
+
 
 class InventoryProfile(Inventory):
-
-    def get_catagories(self):
-        return self.categories.all()
-
-    def get_items(self):
-        return self.items.all()
-
     def __str__(self):
         return f"{self.name} - Profile"
 
@@ -64,10 +94,6 @@ class InventoryProfile(Inventory):
 
 
 class InventoryCategory(Inventory):
-
-    def get_items(self):
-        return self.items.all()
-
     def __str__(self):
         return f"{self.name} - Category"
 
@@ -98,8 +124,11 @@ class InventoryNote(Inventory):
         on_delete=models.SET_NULL,
         related_name='+'
     )
-    entry = models.TextField(
-        null=False
+    body = models.ForeignKey(
+        Note,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
     )
 
     def __str__(self):

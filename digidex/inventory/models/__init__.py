@@ -1,2 +1,2 @@
 from .nfc import NearFieldCommunicationTag
-from .inventory import InventoryProfile, InventoryCategory, InventoryItem, InventoryNote, InventoryLink
+from .inventory import Inventory, InventoryProfile, InventoryCategory, InventoryItem, InventoryNote, InventoryLink
