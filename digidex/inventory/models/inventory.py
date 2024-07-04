@@ -14,7 +14,12 @@ from .nfc import NearFieldCommunicationTag
 DigiDexImageModel = get_image_model()
 DigiDexDocumentModel = get_document_model()
 
-class Inventory(Collection):    
+class Inventory(Collection):
+    """
+    Represents a collection of inventory items in the system.
+    
+    Root Node
+    """
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
