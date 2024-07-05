@@ -15,7 +15,7 @@ coverage==7.5.0
 cryptography==42.0.5
 cycler==0.12.1
 defusedxml==0.7.1
-Django==5.0.2
+Django==5.0.6
 django-allauth==0.61.1
 django-anymail==10.3
 django-filter==23.5
@@ -24,7 +24,7 @@ django-permissionedforms==0.1
 django-storages==1.14.2
 django-taggit==5.0.1
 django-treebeard==4.7.1
-djangorestframework==3.14.0
+djangorestframework==3.15.2
 djangorestframework-simplejwt==5.3.1
 draftjs-exporter==5.0.0
 et-xmlfile==1.1.0
@@ -92,7 +92,7 @@ trio-websocket==0.11.1
 typing_extensions==4.11.0
 url-normalize==1.4.3
 urllib3==2.2.1
-wagtail==6.0.1
+wagtail==6.1.2
 webencodings==0.5.1
 whitenoise==6.6.0
 Willow==1.8.0

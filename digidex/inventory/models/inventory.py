@@ -37,7 +37,7 @@ class Inventory(Page):
         null=True,
         verbose_name=_("body")
     )
-    collection = models.ForeignKey(
+    collection = models.OneToOneField(
         Collection,
         on_delete=models.SET_NULL,
         related_name='+',
