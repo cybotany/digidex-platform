@@ -5,15 +5,11 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 from wagtail.models import Page, Collection
-from wagtail.documents import get_document_model
-from wagtail.images import get_image_model
 from wagtail.fields import RichTextField
+from wagtail.admin.panels import FieldPanel
 
-from .nfc import NearFieldCommunicationTag
-
-
-DigiDexImageModel = get_image_model()
-DigiDexDocumentModel = get_document_model()
+from notes.models import Note
+from nearfieldcommunication.models import NearFieldCommunicationTag
 
 
 class Inventory(Page):
@@ -51,8 +47,13 @@ class Inventory(Page):
         auto_now=True
     )
 
+    content_panels = Page.content_panels + [
+        FieldPanel('name'),
+        FieldPanel('body'),
+    ]
+
     subpage_types = [
-        'inventory.InventoryProfile',
+        'inventory.InventoryCategory',
     ]
 
     class Meta:
@@ -60,31 +61,13 @@ class Inventory(Page):
         verbose_name_plural = _("inventories")
 
 
-class InventoryProfile(Inventory):
-
+class InventoryCategory(Inventory):
     parent_page_types = [
         'inventory.Inventory',
     ]
 
     subpage_types = [
-        'inventory.InventoryCategory',
         'inventory.InventoryItem',
-        'inventory.InventoryNote'
-    ]
-
-    class Meta:
-        verbose_name = _("inventory profile"),
-        verbose_name_plural = _("inventory profiles")
-
-
-class InventoryCategory(Inventory):
-    parent_page_types = [
-        'inventory.InventoryProfile',
-    ]
-
-    subpage_types = [
-        'inventory.InventoryItem',
-        'inventory.InventoryNote',
     ]
 
 
@@ -95,44 +78,15 @@ class InventoryCategory(Inventory):
 
 class InventoryItem(Inventory):
     parent_page_types = [
-        'inventory.InventoryProfile',
+        'inventory.Inventory',
         'inventory.InventoryCategory',
-    ]
-
-    subpage_types = [
-        'inventory.InventoryNote'
-    ]
-
-    class Meta:
-        verbose_name = _("inventory item")
-        verbose_name_plural = _("inventory items")
-
-
-class InventoryNote(Inventory):
-    image = models.ForeignKey(
-        DigiDexImageModel,
-        null=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-    document = models.ForeignKey(
-        DigiDexDocumentModel,
-        null=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-
-    parent_page_types = [
-        'inventory.InventoryProfile',
-        'inventory.InventoryCategory',
-        'inventory.InventoryItem',
     ]
 
     subpage_types = []
 
     class Meta:
-        verbose_name = _("inventory note")
-        verbose_name_plural = _("inventory notes")
+        verbose_name = _("inventory item")
+        verbose_name_plural = _("inventory items")
 
 
 class InventoryLink(NearFieldCommunicationTag):
@@ -160,3 +114,19 @@ class InventoryLink(NearFieldCommunicationTag):
     class Meta:
         verbose_name = _("inventory nfc mapping")
         verbose_name_plural = _("inventory nfc mappings")
+
+
+class InventoryNote(Note):
+    inventory = models.ForeignKey(
+        Inventory,
+        on_delete=models.CASCADE,
+        related_name='notes',
+        null=False
+    )
+
+    def __str__(self):
+        return f"Notes for {self.inventory}"
+
+    class Meta:
+        verbose_name = _("inventory notes")
+        verbose_name_plural = _("inventory notes")

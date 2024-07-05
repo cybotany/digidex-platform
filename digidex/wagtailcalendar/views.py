@@ -29,7 +29,7 @@ def month(request):
     })
 
 class CalendarViewSet(ViewSet):
-    add_to_admin_menu = True
+    add_to_admin_menu = False
     menu_label = "Calendar"
     icon = "date"
     # The `name` will be used for both the URL prefix and the URL namespace.
@@ -64,7 +64,7 @@ def event_detail(request, event_id):
 
 
 class EventViewSet(ViewSet):
-    add_to_admin_menu = True
+    add_to_admin_menu = False
     menu_label = "Events"
     icon = "list-ul"
     name = "events"
