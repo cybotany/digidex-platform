@@ -12,9 +12,9 @@ from notes.models import Note
 from nearfieldcommunication.models import NearFieldCommunicationTag
 
 
-class Inventory(Page):
+class BaseInventory(Page):
     """
-    Acts as the index for all inventory items, categories, and notes.
+    Base class for all inventory items, categories, and notes.
     """
     uuid = models.UUIDField(
         default=uuid.uuid4,
@@ -52,8 +52,17 @@ class Inventory(Page):
         FieldPanel('body'),
     ]
 
+    class Meta:
+        abstract = True
+    
+
+class Inventory(BaseInventory):
+    """
+    Acts as the index for all user-specific inventory members.
+    """
     subpage_types = [
         'inventory.InventoryCategory',
+        'inventory.InventoryItem',
     ]
 
     class Meta:
