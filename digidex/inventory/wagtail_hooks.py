@@ -14,7 +14,7 @@ class InventoryFilterSet(PageListingViewSet.filterset_class):
 
 
 class InventoryViewSet(PageListingViewSet):
-    icon = "user"
+    icon = "desktop"
     menu_label = "Inventory"
     add_to_admin_menu = True
     model = Inventory
@@ -26,7 +26,7 @@ class InventoryViewSet(PageListingViewSet):
     # ]
 
 
-inventory_viewset = InventoryViewSet()
+inventory_viewset = InventoryViewSet("inventory_listing")
 @hooks.register("register_admin_viewset")
 def register_inventory_listing_viewset():
     return inventory_viewset

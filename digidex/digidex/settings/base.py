@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     "accounts",
     "home",
     "inventory",
+    "wagtailcalendar",
     "search",
     "storages",
     "whitenoise.runserver_nostatic",

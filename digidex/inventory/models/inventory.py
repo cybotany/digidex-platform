@@ -55,6 +55,10 @@ class Inventory(Page):
         'inventory.InventoryProfile',
     ]
 
+    class Meta:
+        verbose_name = _("inventory")
+        verbose_name_plural = _("inventories")
+
 
 class InventoryProfile(Inventory):
 
