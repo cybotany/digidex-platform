@@ -1,11 +1,8 @@
-from django.urls import path
 from wagtail import hooks
 
-from .views import index
+from .views import AgendaViewSetGroup
 
 
-@hooks.register('register_admin_urls')
-def register_calendar_url():
-    return [
-        path('calendar/', index, name='calendar'),
-    ]
+@hooks.register("register_admin_viewset")
+def register_viewset():
+    return AgendaViewSetGroup()
