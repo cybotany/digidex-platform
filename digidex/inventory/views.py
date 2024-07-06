@@ -1,13 +1,16 @@
 from django.shortcuts import render
 
-from inventory.components import WelcomePanel, CatagoryPanel
+from inventory.components import HeadingPanel, CategoryPanel, ItemPanel
 
-def welcome_page(request):
+
+def index(request):
+    template = 'inventory/index.html'
+    
     panels = [
-        WelcomePanel(),
-        CatagoryPanel(),
+        HeadingPanel(),
+        CategoryPanel(),
+        ItemPanel(),
     ]
+    context = {'panels': panels}
 
-    render(request, 'inventory/index.html', {
-        'panels': panels,
-    })
+    return render(request, template, context)
