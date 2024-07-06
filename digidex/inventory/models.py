@@ -110,5 +110,5 @@ class Link(NearFieldCommunicationTag):
         return reverse('nfc:route_nfc', kwargs={'link_uuid': self.uuid})
 
     class Meta:
-        verbose_name = _("inventory nfc mapping")
-        verbose_name_plural = _("inventory nfc mappings")
+        verbose_name = _("link")
+        verbose_name_plural = _("links")

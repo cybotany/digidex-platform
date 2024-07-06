@@ -1,8 +1,8 @@
-from wagtail import hooks
+from wagtail.snippets.models import register_snippet
 
-from inventory.components import WelcomePanel
+from inventory.models import Inventory, Category, Item, Link
 
-    
-@hooks.register('construct_homepage_panels')
-def add_another_welcome_panel(request, panels):
-    panels.append(WelcomePanel())
+register_snippet(Inventory)
+register_snippet(Category)
+register_snippet(Item)
+register_snippet(Link)
