@@ -2,18 +2,18 @@
 
 <section class="section">
   <div class="content">
-    <div id="largeAssetCollection" class="collection-list-wrapper-assets large base-dyn-list">
-      <div role="list" class="collection-list-assets large base-dyn-items">
-        <div role="listitem" class="block-asset large base-dyn-item">
-          <a href="" class="link-asset-thumbnail base-inline-block">
-            <img src="" loading="eager" alt="" class="image-asset-thumbnail large">
+    <div id="largeItemCollection" class="collection-list-wrapper-items large base-dyn-list">
+      <div role="list" class="collection-list-items large base-dyn-items">
+        <div role="listitem" class="block-item large base-dyn-item">
+          <a href="" class="link-item-thumbnail base-inline-block">
+            <img src="" loading="eager" alt="" class="image-item-thumbnail large">
           </a>
-          <div class="asset large">
+          <div class="item large">
             <div class="date"></div>
-            <a href="" class="link-heading-asset base-inline-block">
-              <h3 class="heading-asset large"></h3>
+            <a href="" class="link-heading-item base-inline-block">
+              <h3 class="heading-item large"></h3>
             </a>
-            <p class="paragraph-asset large"></p>
+            <p class="paragraph-item large"></p>
             <a href="" class="link-block w-inline-block">
               <div class="text-link">Read More</div>
               <div class="link-block-icon">
@@ -24,22 +24,22 @@
         </div>
       </div>
     </div>
-    <div id="asset-items-list" class="collection-list-wrapper-assets base-dyn-list">
-      <div role="list" class="collection-list-assets base-dyn-items">
-        {% for asset in collection %}
-          <div role="listitem" class="block-asset base-dyn-item" onclick="showLargeAsset(this)" data-id="{{ asset.uuid }}">
-            <a href="{{ asset.url }}" class="link-asset-thumbnail base-inline-block">
-              {% if asset.image %}
-                {% image asset.image original class="image-asset-thumbnail" %}
+    <div id="item-items-list" class="collection-list-wrapper-items base-dyn-list">
+      <div role="list" class="collection-list-items base-dyn-items">
+        {% for item in collection %}
+          <div role="listitem" class="block-item base-dyn-item" onclick="showLargeitem(this)" data-id="{{ item.uuid }}">
+            <a href="{{ item.url }}" class="link-item-thumbnail base-inline-block">
+              {% if item.image %}
+                {% image item.image original class="image-item-thumbnail" %}
               {% endif %}
             </a>
-            <div class="asset">
-              <div class="date">{{ asset.date }}</div>
-              <a href="{{ asset.url }}" class="link-heading-asset base-inline-block">
-                <h3 class="heading-asset">{{ asset.title }}</h3>
+            <div class="item">
+              <div class="date">{{ item.date }}</div>
+              <a href="{{ item.url }}" class="link-heading-item base-inline-block">
+                <h3 class="heading-item">{{ item.title }}</h3>
               </a>
-              <p class="paragraph-asset">{{ asset.paragraph }}</p>
-              <a href="{{ asset.url }}" class="link-block w-inline-block">
+              <p class="paragraph-item">{{ item.paragraph }}</p>
+              <a href="{{ item.url }}" class="link-block w-inline-block">
                 <div class="text-link">Read more</div>
                 <div class="block-icon-link">
                   <img src="{% static 'base/images/bx/arrow.svg' %}" loading="eager" alt="" class="icon-link">
@@ -49,7 +49,7 @@
           </div>
         {% empty %}
           <div class="empty-state base-dyn-empty">
-            <div class="text-empty">No assets found.</div>
+            <div class="text-empty">No items found.</div>
           </div>
         {% endfor %}
       </div>
