@@ -1,8 +1,18 @@
 {% extends "base.html" %}
-{% load static %}
+{% load wagtailadmin_tags %}
 
-{% block extra_css %}
-  <link rel="stylesheet" type="text/css" href="{% static 'inventory/css/inventory.css' %}">
+{% block extra_js %}
+    {{ block.super }}
+    {{ media.js }}
 {% endblock %}
 
-{% block content %} {% endblock %}
+{% block extra_css %}
+    {{ block.super }}
+    {{ media.css }}
+{% endblock %}
+
+{% block content %}
+    {% for panel in panels %}
+        {% component panel %}
+    {% endfor %}
+{% endblock %}

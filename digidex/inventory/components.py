@@ -12,9 +12,17 @@ class WelcomePanel(Component):
         context['username'] = parent_context['request'].user.username
         return context
 
+    class Media:
+        css = {
+            'all': ('inventory/css/inventory.css',)
+        }
+
+
+
 class CatagoryPanel(Component):
     template_name = 'inventory/panels/catagory.html'
 
-
-welcome_panel = WelcomePanel()
-catagory_panel = CatagoryPanel()
+    class Media:
+        css = {
+            'all': ('inventory/css/inventory.css',)
+        }
