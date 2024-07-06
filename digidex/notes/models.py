@@ -12,7 +12,7 @@ from wagtail.fields import RichTextField
 DigiDexImageModel = get_image_model()
 DigiDexDocumentModel = get_document_model()
 
-class Note(Collection):
+class BaseNote(Collection):
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
