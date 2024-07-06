@@ -1,0 +1,18 @@
+{% extends "wagtailadmin/base.html" %}
+{% load wagtailadmin_tags %}
+
+{% block extra_js %}
+    {{ block.super }}
+    {{ media.js }}
+{% endblock %}
+
+{% block extra_css %}
+    {{ block.super }}
+    {{ media.css }}
+{% endblock %}
+
+{% block content %}
+    {% for panel in panels %}
+        {% component panel %}
+    {% endfor %}
+{% endblock %}
