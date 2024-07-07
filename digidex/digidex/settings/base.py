@@ -14,6 +14,10 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 INSTALLED_APPS = [
     "laces",
+    "treebeard",
+    "modelcluster",
+    "taggit",
+    
     "base",
     "accounts",
     "notes",
@@ -39,9 +43,6 @@ INSTALLED_APPS = [
     "wagtail.admin",
     "wagtail",
     'wagtail.api.v2',
-    "modelcluster",
-    "taggit",
-    "treebeard",
 
     "django.contrib.admin",
     "django.contrib.auth",
