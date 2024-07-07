@@ -1,15 +1,15 @@
 from django.shortcuts import render
 
-from inventory.components import HeadingPanel, CategoryPanel, ItemPanel
+from inventory.components import Heading, Category, Item
 
 
 def index(request):
     template = 'inventory/index.html'
     
     panels = [
-        HeadingPanel(),
-        CategoryPanel(),
-        ItemPanel(),
+        Heading(),
+        Category(),
+        Item(),
     ]
     context = {'panels': panels}
 

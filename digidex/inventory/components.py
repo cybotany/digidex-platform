@@ -3,7 +3,16 @@ from django.forms import Media
 from laces.components import Component
 
 
-class HeadingPanel(Component):
+class Section(Component):
+    template_name = "inventory/components/section.html"
+
+    def __init__(self, children: list[Component]):
+        self.children = children
+
+    def get_context_data(self, parent_context=None):
+        return {"children": self.children}
+
+class Heading(Component):
     template_name = 'inventory/components/heading.html'
 
     @property
@@ -13,7 +22,7 @@ class HeadingPanel(Component):
         )
 
 
-class CategoryPanel(Component):
+class Category(Component):
     template_name = 'inventory/components/category.html'
 
     def get_context_data(self, parent_context):
@@ -27,7 +36,7 @@ class CategoryPanel(Component):
         }
 
 
-class ItemPanel(Component):
+class Item(Component):
     template_name = 'inventory/components/item.html'
 
     def get_context_data(self, parent_context):
@@ -45,7 +54,7 @@ class Dashboard(Component):
     template_name = "inventory/components/dashboard.html"
 
     def __init__(self, user):
-        self.heading = HeadingPanel(
+        self.heading = Heading(
             heading=user.username.title(),
             paragraph="Welcome to your inventory dashboard!"
         )

@@ -186,19 +186,19 @@ class UserProfile(models.Model):
         verbose_name_plural = _("user profiles")
 
 
-class Category(Inventory):
+class InventoryCategory(Inventory):
     class Meta:
         verbose_name = _("category")
         verbose_name_plural = _("categories")
 
 
-class Item(Inventory):
+class InventoryItem(Inventory):
     class Meta:
         verbose_name = _("item")
         verbose_name_plural = _("items")
 
 
-class Link(NearFieldCommunicationTag):
+class InventoryLink(NearFieldCommunicationTag):
     inventory = models.OneToOneField(
         Inventory,
         on_delete=models.SET_NULL,
