@@ -31,19 +31,12 @@
     <link rel="stylesheet" type="text/css" href="{% static 'base/css/webflow.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'base/css/digidex.css' %}">
 
-    {# Page stylesheets #}
+    {# Extra stylesheets #}
     {% block extra_css %}{% endblock %}
   </head>
   <body>
-    <div id="root">
-      {% include "includes/header.html" %}
-      <main>
-        {% block body %}
-          {% block content %}{% endblock content %}
-        {% endblock body %}
-      </main>
-      {% include "includes/footer.html" %}
-    </div>
+    {% block body %}{% endblock body %}
+    
     {% block extra_js %}{% endblock extra_js %}
   </body>
 </html>
