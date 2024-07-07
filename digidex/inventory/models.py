@@ -66,14 +66,14 @@ class Inventory(BaseInventory):
     Acts as the index for all user-specific inventory members.
     """
     class Meta:
+        verbose_name = _("inventory")
+        verbose_name_plural = _("inventories")
         constraints = [
             models.UniqueConstraint(
                 fields=('translation_key', 'locale'),
                 name='unique_translation_key_locale_inventory_inventory'
             )
         ]
-        verbose_name = _("inventory")
-        verbose_name_plural = _("inventories")
 
 
 class Category(Inventory):

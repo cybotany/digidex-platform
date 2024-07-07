@@ -1,25 +1,20 @@
-from django.utils.safestring import mark_safe
+from django.forms import Media
 
-from wagtail.admin.ui.components import Component
+from laces.components import Component
 
 
 class HeadingPanel(Component):
-    template_name = 'inventory/panels/heading.html'
+    template_name = 'inventory/components/heading.html'
 
-    def get_context_data(self, parent_context):
-        context = super().get_context_data(parent_context)
-        context['heading'] = parent_context['request'].user.username
-        context['paragraph'] = 'Welcome to the inventory app!'
-        return context
-
-    class Media:
-        css = {
-            'all': ('inventory/css/heading.css',)
-        }
+    @property
+    def media(self):
+        return Media(
+            css = {'all': ('inventory/css/heading.css',)}
+        )
 
 
 class CategoryPanel(Component):
-    template_name = 'inventory/panels/category.html'
+    template_name = 'inventory/components/category.html'
 
     def get_context_data(self, parent_context):
         context = super().get_context_data(parent_context)
@@ -33,7 +28,7 @@ class CategoryPanel(Component):
 
 
 class ItemPanel(Component):
-    template_name = 'inventory/panels/item.html'
+    template_name = 'inventory/components/item.html'
 
     def get_context_data(self, parent_context):
         context = super().get_context_data(parent_context)
@@ -44,3 +39,17 @@ class ItemPanel(Component):
         css = {
             'all': ('inventory/css/item.css',)
         }
+
+
+class Dashboard(Component):
+    template_name = "inventory/components/dashboard.html"
+
+    def __init__(self, user):
+        self.heading = HeadingPanel(
+            heading=user.username.title(),
+            paragraph="Welcome to your inventory dashboard!"
+        )
+        ...
+
+    def get_context_data(self, parent_context=None):
+        return {"heading": self.heading}
