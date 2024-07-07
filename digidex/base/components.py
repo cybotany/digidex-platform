@@ -1,20 +1,47 @@
+from dataclasses import dataclass, asdict
 from django.forms import Media
-
 from laces.components import Component
 
 
 class Section(Component):
-    template_name = "inventory/components/section.html"
+    template_name = "base/components/section.html"
 
     def __init__(self, children: list[Component], style: str = None):
         self.children = children
         if style:
-            self.style = f'heading-{style}'
+            self.style = f'section-{style}'
         else:
-            self.style = 'heading'
+            self.style = 'section'
 
     def get_context_data(self, parent_context=None):
-        return {"children": self.children}
+        return {
+            "children": self.children,
+            "style": self.style
+        }
+
+
+class Block(Component):
+    template_name = 'base/components/block.html'
+
+    def __init__(self, children: list[Component], style: str = None):
+        self.children = children
+        if style:
+            self.style = f'block-{style}'
+        else:
+            self.style = 'block'
+
+    def get_context_data(self, parent_context=None):
+        return {
+            "children": self.children,
+            "style": self.style
+        }
+
+    @property
+    def media(self):
+        return Media(
+            css = {'all': ('base/css/block.css',)}
+        )
+
 
 class Heading(Component):
     template_name = 'base/components/heading.html'
@@ -39,12 +66,12 @@ class Heading(Component):
     @property
     def media(self):
         return Media(
-            css = {'all': ('inventory/css/heading.css',)}
+            css = {'all': ('base/css/heading.css',)}
         )
 
 
 class Paragraph(Component):
-    template_name = 'base/components/heading.html'
+    template_name = 'base/components/paragraph.html'
 
     def __init__(self, text: str, style: str = None):
         self.text = text
@@ -57,28 +84,11 @@ class Paragraph(Component):
     def get_context_data(self, parent_context=None):
         return {
             "text": self.text,
-            "style": self.style}
+            "style": self.style
+        }
 
     @property
     def media(self):
         return Media(
-            css = {'all': ('inventory/css/paragraph.css',)}
+            css = {'all': ('base/css/paragraph.css',)}
         )
-
-
-class Category(Component):
-    template_name = 'inventory/components/category.html'
-
-    def __init__(self, name: str, description: str):
-        self.name = name
-        self.description = description
-
-    def get_context_data(self, parent_context):
-        context = super().get_context_data(parent_context)
-        context['username'] = parent_context['request'].user.username
-        return context
-
-    class Media:
-        css = {
-            'all': ('inventory/css/category.css',)
-        }

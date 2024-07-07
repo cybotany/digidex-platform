@@ -1,20 +1,13 @@
-{% load static laces wagtailimages_tags wagtailcore_tags %}
-
-<section class="section-top padding-0">
-  <div class="content">
-    <div class="block-top">
-      <div class="date-top">{{ date }}</div>
-      <h1 class="heading-top">{{ heading }}</h1>
-      <p class="paragraph-top blog-post">{{ paragraph }}</p>
-    </div>
-  </div>
-</section>
-
-<section class="section-top">
-  <div class="content">
-    <div class="block-top">
-      <h1 class="heading-top">{{ heading }}</h1>
-      <p class="paragraph-top">{{ paragraph }}</p>
-    </div>
-  </div>
-</section>
+{% if size == 1 %}
+  <h1 class="{{ style }}">{{ text }}</h1>
+{% elif size == 2 %}
+  <h2 class="{{ style }}">{{ text }}</h2>
+{% elif size == 3 %}
+  <h3 class="{{ style }}">{{ text }}</h3>
+{% elif size == 4 %}
+  <h4 class="{{ style }}">{{ text }}</h4>
+{% elif size == 5 %}
+  <h5 class="{{ style }}">{{ text }}</h5>
+{% else %}
+   <h6 class="{{ style }}">{{ text }}</h6>
+{% endif %}

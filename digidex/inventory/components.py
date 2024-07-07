@@ -1,18 +1,27 @@
+from dataclasses import dataclass, asdict
 from laces.components import Component
 
-class Category(Component):
-    template_name = 'inventory/components/category.html'
+from inventory.models import UserProfile
 
-    def __init__(self, name: str, description: str):
-        self.name = name
-        self.description = description
 
-    def get_context_data(self, parent_context):
-        context = super().get_context_data(parent_context)
-        context['username'] = parent_context['request'].user.username
-        return context
+@dataclass
+class Categories(Component):
+    template_name = 'inventory/components/categories.html'
 
-    class Media:
-        css = {
-            'all': ('inventory/css/category.css',)
-        }
+    name: str
+    description: str
+
+    @classmethod
+    def from_user(cls, user):
+        user_profile = UserProfile.objects.select_related('inventory').get(user__id=user.id)
+        user_inventory = user_profile.inventory
+        
+        return cls(
+            first_name=user.first_name,
+            last_name=user.last_name,
+            profile_url=profile_url,
+            profile_image_url=user.profile.image.url,
+        )
+
+    def get_context_data(self, parent_context=None):
+        return asdict(self)
