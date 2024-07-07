@@ -16,6 +16,11 @@ class Categories(Component):
         user_profile = UserProfile.objects.select_related('inventory').get(user__id=user.id)
         user_inventory = user_profile.inventory
         
+        children = user_inventory.get_children()
+        if children.exists():
+            name = user_inventory.name
+            description = user_inventory.description
+            
         return cls(
             first_name=user.first_name,
             last_name=user.last_name,
