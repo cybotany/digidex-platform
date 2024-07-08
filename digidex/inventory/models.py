@@ -56,31 +56,32 @@ class AbstractInventory(Page):
         context['documents'] = documents
         return context
 
-    def save(self):
-        self.slug = slugify(self.name)
-        self.collection = self.get_parent().collection
-        super().save()
-
     class Meta:
         abstract = True
 
 
 class InventoryIndex(AbstractInventory):
-    """
-    Acts as the index for all user-specific inventory members.
-    """
+    parent_page_types = []
+    subpage_types = ['inventory.InventoryCategory']
+
     class Meta:
         verbose_name = _("inventory")
         verbose_name_plural = _("inventories")
 
 
 class InventoryCategory(AbstractInventory):
+    parent_page_types = ['inventory.InventoryIndex']
+    subpage_types = ['inventory.InventoryItem']
+
     class Meta:
         verbose_name = _("category")
         verbose_name_plural = _("categories")
 
 
 class InventoryItem(AbstractInventory):
+    parent_page_types = ['inventory.InventoryCategory']
+    subpage_types = []
+
     class Meta:
         verbose_name = _("item")
         verbose_name_plural = _("items")
