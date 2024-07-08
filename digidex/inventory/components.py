@@ -10,7 +10,7 @@ from base.components import (
     IconComponent,
     TextComponent
 )
-from inventory.models import UserProfile
+from inventory.models import InventoryIndex
 
 
 @dataclass
