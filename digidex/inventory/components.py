@@ -21,11 +21,10 @@ class Dashboard(Component):
 
     @classmethod
     def from_user(cls, user):
-        user_profile = UserProfile.objects.select_related('inventory').get(user__id=user.id)
-        user_inventory = user_profile.inventory
-        user_categories = user_inventory.get_children().filter(_type='c')
+        inventory = InventoryIndex.objects.get(owner=user)
+        categories = inventory.get_children()
 
-        if not user_categories.exists():
+        if not categories.exists():
             pass
 
         heading_section = SectionComponent(
@@ -33,14 +32,11 @@ class Dashboard(Component):
                 BlockComponent(
                     children = [
                         HeadingComponent(
-                            text=user_inventory.__str__(),
+                            text=inventory.__str__(),
                             size=1,
                             style='heading-top'
                         ),
-                        ParagraphComponent(
-                            text=user_profile.__str__(),
-                            style='paragraph-top'
-                        ),
+                        BlockComponent()
                     ],
                     style='block-top'
                 )
