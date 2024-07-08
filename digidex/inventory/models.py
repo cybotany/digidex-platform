@@ -114,6 +114,17 @@ class Inventory(
     last_modified = models.DateTimeField(
         auto_now=True
     )
+    _type = models.CharField(
+        choices=[
+            ('r', _("Root")),
+            ('c', _("Category")),
+            ('i', _("Item")),
+        ],
+        max_length=1,
+        null=True,
+        blank=True,
+        verbose_name=_("type")
+    )
 
     node_order_by = ["slug"]
 
@@ -223,7 +234,8 @@ class UserProfile(models.Model):
                     name=user_name,
                     owner=self.user,
                     slug=user_slug,
-                    collection=user_collection
+                    collection=user_collection,
+                    _type='r'
                 )
     
             user_inventory = Inventory.add_root(instance=user_inventory)
@@ -236,12 +248,19 @@ class UserProfile(models.Model):
 
 
 class InventoryCategory(Inventory):
+    def save(self):
+        self._type = 'c'
+        super().save()
     class Meta:
         verbose_name = _("category")
         verbose_name_plural = _("categories")
 
 
 class InventoryItem(Inventory):
+    def save(self):
+        self._type = 'i'
+        super().save()
+
     class Meta:
         verbose_name = _("item")
         verbose_name_plural = _("items")

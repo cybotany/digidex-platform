@@ -1,94 +1,48 @@
 from dataclasses import dataclass, asdict
-from django.forms import Media
+
 from laces.components import Component
 
 
+@dataclass
 class Section(Component):
     template_name = "base/components/section.html"
 
-    def __init__(self, children: list[Component], style: str = None):
-        self.children = children
-        if style:
-            self.style = f'section-{style}'
-        else:
-            self.style = 'section'
+    style: str = 'section'
+    children: list[Component]
 
     def get_context_data(self, parent_context=None):
-        return {
-            "children": self.children,
-            "style": self.style
-        }
+        return asdict(self)
 
 
+@dataclass
 class Block(Component):
     template_name = 'base/components/block.html'
 
-    def __init__(self, children: list[Component], style: str = None):
-        self.children = children
-        if style:
-            self.style = f'block-{style}'
-        else:
-            self.style = 'block'
+    style: str = 'block'
+    children: list[Component]
 
     def get_context_data(self, parent_context=None):
-        return {
-            "children": self.children,
-            "style": self.style
-        }
-
-    @property
-    def media(self):
-        return Media(
-            css = {'all': ('base/css/block.css',)}
-        )
+        return asdict(self)
 
 
+@dataclass
 class Heading(Component):
     template_name = 'base/components/heading.html'
 
-    def __init__(self, text: str, size: int = 2, style: str = None):
-        self.text = text
-        self.size = size
-
-        if style:
-            self.style = f'heading-{style}'
-        else:
-            self.style = 'heading'
-
+    style: str = 'heading'
+    text: str
+    size: int = 2
 
     def get_context_data(self, parent_context=None):
-        return {
-            "text": self.text,
-            "size": self.size,
-            "style": self.style
-        }
-
-    @property
-    def media(self):
-        return Media(
-            css = {'all': ('base/css/heading.css',)}
-        )
+        return asdict(self)
 
 
+@dataclass
 class Paragraph(Component):
     template_name = 'base/components/paragraph.html'
 
-    def __init__(self, text: str, style: str = None):
-        self.text = text
-        
-        if style:
-            self.style = f'paragraph-{style}'
-        else:
-            self.style = 'paragraph'
+    style: str = 'paragraph'
+    text: str
 
     def get_context_data(self, parent_context=None):
-        return {
-            "text": self.text,
-            "style": self.style
-        }
-
-    @property
-    def media(self):
-        return Media(
-            css = {'all': ('base/css/paragraph.css',)}
-        )
+        return asdict(self)

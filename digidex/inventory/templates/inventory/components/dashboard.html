@@ -1,8 +1,5 @@
 {% load laces %}
 
-<div class="dashboard">
-    {% for panel in panels %}
-        {% component panel %}
-    {% endfor %}
-    ...
-</div>
+{% for panel in panels %}
+  {% component panel %}
+{% endfor %}
