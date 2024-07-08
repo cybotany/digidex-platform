@@ -1,5 +1,7 @@
+{% load laces %}
+
 <div class="{{ style }}">
   {% for child in children %}
-    {% include child.template_name with children=child.children style=child.style text=child.text size=child.size %}
+    {% component child %}
   {% endfor %}
 </div>

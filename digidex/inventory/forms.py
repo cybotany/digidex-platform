@@ -1,37 +1,39 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
-from wagtail.images import get_image_model
+from inventory.models import AbstractInventory
 
 
-DigiDexImageModel = get_image_model()
-
-class InventoryForm(forms.Form):
-    title = forms.CharField(
+class InventoryForm(forms.ModelForm):
+    name = forms.CharField(
         widget=forms.TextInput(
             attrs={
                 'class': 'text-field base-input',
-                'placeholder': 'Enter the name of the inventory'
+                'placeholder': 'Enter a name'
             }
         ),
         required=True
     )
-    description = forms.CharField(
+    body = forms.CharField(
         widget=forms.Textarea(
             attrs={
                 'class': 'text-field textarea',
-                'placeholder': 'Provide a detailed description of the object'
+                'placeholder': '(Optional) Provide a description'
             }
         ),
         required=False
     )
 
     def clean_name(self):
-        title = self.cleaned_data['title']
-        forbidden_keywords = ['add', 'update', 'delete', 'admin']
-        if any(keyword in title.lower() for keyword in forbidden_keywords):
+        name = self.cleaned_data['name']
+        forbidden_keywords = ['add', 'update', 'delete', 'remove', 'edit', 'create', 'destroy', 'new', 'old', 'current', 'previous', 'next', 'last', 'first', 'all', 'any', 'some',]
+        if any(keyword in name.lower() for keyword in forbidden_keywords):
             raise ValidationError(f'The name cannot contain any of the following keywords: {", ".join(forbidden_keywords)}')
-        return title
+        return name
+
+    class Meta:
+        model = AbstractInventory
+        fields = ['name', 'body']
 
 
 class DeleteInventoryForm(forms.Form):
@@ -42,64 +44,4 @@ class DeleteInventoryForm(forms.Form):
             }
         ),
         required=True
-    )
-
-
-class InventoryAssetForm(forms.Form):
-    title = forms.CharField(
-        widget=forms.TextInput(
-            attrs={
-                'class': 'text-field base-input',
-                'placeholder': 'Enter the title of the digitized object'
-            }
-        ),
-        required=True
-    )
-    description = forms.CharField(
-        widget=forms.Textarea(
-            attrs={
-                'class': 'text-field textarea',
-                'placeholder': 'Provide a detailed description of the object'
-            }
-        ),
-        required=False
-    )
-
-
-class JournalEntryForm(forms.Form):
-    entry = forms.CharField(
-        widget=forms.Textarea(
-            attrs={
-                'class': 'textarea base-input',
-                'placeholder': 'Provide a entry for the journal entry (optional).'
-            }
-        )
-    )
-    image = forms.ImageField(
-        widget=forms.FileInput(
-            attrs={
-                'placeholder': 'Provide an image of the object',
-            }
-        ),
-        required=False
-    )
-    alt_text = forms.CharField(
-        max_length=25,
-        widget=forms.TextInput(
-            attrs={
-                'class': 'text-field base-input',
-                'placeholder': 'Provide a caption for the image'
-            }
-        ),
-        required=False
-    )
-    caption = forms.CharField(
-        max_length=150,
-        widget=forms.TextInput(
-            attrs={
-                'class': 'text-field base-input',
-                'placeholder': 'Provide a caption for the image'
-            }
-        ),
-        required=False
     )

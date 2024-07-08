@@ -3,81 +3,105 @@ from dataclasses import dataclass, asdict
 from laces.components import Component
 
 
-@dataclass
 class SectionComponent(Component):
+    template_name = "base/components/section.html"
 
-    children: list[Component]
-    style: str = 'section'
-    template_name: str = "base/components/section.html"
+    def __init__(self, children=list[Component], style="section"):
+        self.children = children
+        self.style = style
 
     def get_context_data(self, parent_context=None):
-        return asdict(self)
+        return {
+            "children": self.children,
+            "style": self.style
+        }
 
 
-@dataclass
 class BlockComponent(Component):
+    template_name = 'base/components/block.html'
 
-    children: list[Component]
-    style: str = 'block'
-    template_name: str = 'base/components/block.html'
+    def __init__(self, children=list[Component], style='block'):
+        self.children = children
+        self.style = style
 
     def get_context_data(self, parent_context=None):
-        return asdict(self)
+        return {
+            "children": self.children,
+            "style": self.style
+        }
 
 
-@dataclass
 class HeadingComponent(Component):
+    template_name = 'base/components/heading.html'
 
-    text: str
-    size: int = 2
-    style: str = 'heading'
-    template_name: str = 'base/components/heading.html'
+    def __init__(self, text, size=2, style='heading'):
+        self.text = text
+        self.size = size
+        self.style = style
 
     def get_context_data(self, parent_context=None):
-        return asdict(self)
+        return {
+            "text": self.text,
+            "size": self.size,
+            "style": self.style
+        }
 
 
-@dataclass
 class ParagraphComponent(Component):
+    template_name = 'base/components/paragraph.html'
 
-    text: str
-    style: str = 'paragraph'
-    template_name: str = 'base/components/paragraph.html'
+    def __init__(self, text, style='paragraph'):
+        self.text = text
+        self.style = style
 
     def get_context_data(self, parent_context=None):
-        return asdict(self)
+        return {
+            "text": self.text,
+            "style": self.style
+        }
 
 
-@dataclass
 class LinkComponent(Component):
+    template_name = 'base/components/link.html'
 
-    url: str
-    children: list[Component]
-    style: str = 'link'
-    template_name: str = 'base/components/link.html'
+    def __init__(self, url, children=list[Component], style='link'):
+        self.url = url
+        self.children = children
+        self.style = style
 
     def get_context_data(self, parent_context=None):
-        return asdict(self)
+        return {
+            "url": self.url,
+            "children": self.children,
+            "style": self.style
+        }
 
 
-@dataclass
 class IconComponent(Component):
+    template_name = 'base/components/icon.html'
 
-    source: str
-    alt: str
-    style: str = 'icon'
-    template_name: str = 'base/components/icon.html'
+    def __init__(self, source, alt, style='icon'):
+        self.source = source
+        self.alt = alt
+        self.style = style
 
     def get_context_data(self, parent_context=None):
-        return asdict(self)
+        return {
+            "source": self.source,
+            "alt": self.alt,
+            "style": self.style
+        }
 
 
-@dataclass
 class TextComponent(Component):
+    template_name = 'base/components/text.html'
 
-    text: str
-    style: str = 'text'
-    template_name: str = 'base/components/text.html'
+    def __init__(self, text, style='text'):
+        self.text = text
+        self.style = style
 
     def get_context_data(self, parent_context=None):
-        return asdict(self)
+        return {
+            "text": self.text,
+            "style": self.style
+        }

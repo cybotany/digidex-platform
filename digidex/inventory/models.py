@@ -6,11 +6,12 @@ from django.utils.translation import gettext_lazy as _
 
 from wagtail.documents import get_document_model
 from wagtail.models import Page, Collection
+from wagtail.contrib.routable_page.models import RoutablePageMixin, path, re_path
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 
 
-class AbstractInventory(Page):
+class AbstractInventory(RoutablePageMixin, Page):
     """
     Abstract class for all inventory members.
     """
@@ -50,10 +51,28 @@ class AbstractInventory(Page):
         FieldPanel("collection"),
     ]
 
+    @path('add/', name='add_child_page')
+    def add_child_page(self, request):
+        pass
+
+    @path('update/', name='update_current_page')
+    def update_current_page(self, request):
+        pass
+
+    @path('delete/', name='delete_current_page')
+    def delete_current_page(self, request):
+        pass
+
     def get_context(self, request):
         context = super().get_context(request)
+
         documents = get_document_model().objects.filter(collection=self.collection)
         context['documents'] = documents
+        context['title'] = self.title 
+        context['children'] = self.get_children()
+        context['add_child_page'] = self.reverse_subpage('add_child_page')
+        context['update_current_page'] = self.reverse_subpage('update_current_page')
+        context['delete_current_page'] = self.reverse_subpage('delete_current_page')
         return context
 
     class Meta:
