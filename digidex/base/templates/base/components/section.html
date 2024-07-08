@@ -1,8 +1,9 @@
 {% load laces %}
+
 <section class="{{ style }}">
   <div class="content">
     {% for child in children %}
-      {% component child %}
+      {% include child.template with style=child.style children=child.children %}
     {% endfor %}
   </div>
 </section>

@@ -1,31 +1,10 @@
 from django.shortcuts import render
 
-from base.components import (
-    Section,
-    Block,
-    Heading,
-    Paragraph
-)
-
+from inventory.components import HeadingSection
 
 def index(request):
-    block = Block(
-        children=[
-            Heading(text='Block Heading', size=1, style='top'),
-            Paragraph(text='This is a paragraph in a block.', style='top')
-        ],
-        style='top'
-    )
-    content = Section(
-        children=[
-            block,
-        ],
-        style='top'
-    )
+    content = HeadingSection.from_user(request.user)
     context = {'content': content}
     template = 'inventory/index.html'
-    return render(
-        request,
-        template,
-        context
-    )
+ 
+    return render(request, template, context)

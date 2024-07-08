@@ -1,63 +1,49 @@
 from dataclasses import dataclass, asdict
 from laces.components import Component
 
-from base.components import Section, Block, Heading, Paragraph
+from base.components import (
+    SectionComponent,
+    BlockComponent,
+    HeadingComponent,
+    ParagraphComponent,
+    LinkComponent,
+    IconComponent,
+    TextComponent
+)
 from inventory.models import UserProfile
 
 
-@dataclass
-class Category(Component):
-    template_name = 'inventory/components/category.html'
-
-    name: str
-    description: str
-
-    def get_context_data(self, parent_context=None):
-        return asdict(self)
-
-
-@dataclass
-class CategoriesBlock(Block):
-    def get_context_data(self, parent_context=None):
-        return asdict(self)
-
-
-@dataclass
-class Dashboard(Component):
-    template_name = 'inventory/components/dashboard.html'
-
-    children: list[Component]
+class HeadingSection(SectionComponent):
+    """
+    Heading section for the inventory app.
+    """
 
     @classmethod
     def from_user(cls, user):
         user_profile = UserProfile.objects.select_related('inventory').get(user__id=user.id)
         user_inventory = user_profile.inventory
+        user_categories = user_inventory.get_children().filter(_type='c')
 
-        categories = CategoriesBlock.from_user_inventory(user)
-        block = Block(
-            children=[
-                Heading(text='Block Heading', size=1, style='top'),
-                categories,
-            ],
-            style='top'
-        )
-        content = Section(
-            children=[
-                block,
-            ],
-            style='top'
-        )
+        if not user_categories.exists():
+            pass
         
-        descendants = user_inventory.get_children()
-        if descendants.exists():
-            categories = descendants.filter(_type='c')
-            items = descendants.filter(_type='i')
+        content = BlockComponent(
+            children = [
+                HeadingComponent(
+                    text=user_inventory.__str__(),
+                    size=1,
+                    style='heading-top'
+                ),
+                ParagraphComponent(
+                    text=user_profile.__str__(),
+                    style='paragraph-top'
+                ),
+            ],
+            style='block-top'
+        )
             
         return cls(
-            first_name=user.first_name,
-            last_name=user.last_name,
-            profile_image_url=user.profile.image.url,
+            children=[content],
+            style='section-top'
         )
-
-    def get_context_data(self, parent_context=None):
-        return asdict(self)
+s
