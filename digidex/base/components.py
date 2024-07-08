@@ -5,10 +5,10 @@ from laces.components import Component
 
 @dataclass
 class SectionComponent(Component):
-    template_name = "base/components/section.html"
 
     children: list[Component]
     style: str = 'section'
+    template_name: str = "base/components/section.html"
 
     def get_context_data(self, parent_context=None):
         return asdict(self)
@@ -16,10 +16,10 @@ class SectionComponent(Component):
 
 @dataclass
 class BlockComponent(Component):
-    template_name = 'base/components/block.html'
 
     children: list[Component]
     style: str = 'block'
+    template_name: str = 'base/components/block.html'
 
     def get_context_data(self, parent_context=None):
         return asdict(self)
@@ -27,11 +27,11 @@ class BlockComponent(Component):
 
 @dataclass
 class HeadingComponent(Component):
-    template_name = 'base/components/heading.html'
 
     text: str
     size: int = 2
     style: str = 'heading'
+    template_name: str = 'base/components/heading.html'
 
     def get_context_data(self, parent_context=None):
         return asdict(self)
@@ -39,10 +39,10 @@ class HeadingComponent(Component):
 
 @dataclass
 class ParagraphComponent(Component):
-    template_name = 'base/components/paragraph.html'
 
     text: str
     style: str = 'paragraph'
+    template_name: str = 'base/components/paragraph.html'
 
     def get_context_data(self, parent_context=None):
         return asdict(self)
@@ -50,11 +50,11 @@ class ParagraphComponent(Component):
 
 @dataclass
 class LinkComponent(Component):
-    template_name = 'base/components/link.html'
 
     url: str
     children: list[Component]
     style: str = 'link'
+    template_name: str = 'base/components/link.html'
 
     def get_context_data(self, parent_context=None):
         return asdict(self)
@@ -62,11 +62,11 @@ class LinkComponent(Component):
 
 @dataclass
 class IconComponent(Component):
-    template_name = 'base/components/icon.html'
 
     source: str
     alt: str
     style: str = 'icon'
+    template_name: str = 'base/components/icon.html'
 
     def get_context_data(self, parent_context=None):
         return asdict(self)
@@ -74,10 +74,10 @@ class IconComponent(Component):
 
 @dataclass
 class TextComponent(Component):
-    template_name = 'base/components/text.html'
 
     text: str
     style: str = 'text'
+    template_name: str = 'base/components/text.html'
 
     def get_context_data(self, parent_context=None):
         return asdict(self)

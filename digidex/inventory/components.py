@@ -13,10 +13,11 @@ from base.components import (
 from inventory.models import UserProfile
 
 
-class HeadingSection(SectionComponent):
-    """
-    Heading section for the inventory app.
-    """
+@dataclass
+class Dashboard(Component):
+    template_name: str = 'inventory/components/dashboard.html'
+
+    panels: list = None
 
     @classmethod
     def from_user(cls, user):
@@ -26,24 +27,30 @@ class HeadingSection(SectionComponent):
 
         if not user_categories.exists():
             pass
-        
-        content = BlockComponent(
-            children = [
-                HeadingComponent(
-                    text=user_inventory.__str__(),
-                    size=1,
-                    style='heading-top'
-                ),
-                ParagraphComponent(
-                    text=user_profile.__str__(),
-                    style='paragraph-top'
-                ),
+
+        heading_section = SectionComponent(
+            children=[
+                BlockComponent(
+                    children = [
+                        HeadingComponent(
+                            text=user_inventory.__str__(),
+                            size=1,
+                            style='heading-top'
+                        ),
+                        ParagraphComponent(
+                            text=user_profile.__str__(),
+                            style='paragraph-top'
+                        ),
+                    ],
+                    style='block-top'
+                )
             ],
-            style='block-top'
-        )
-            
-        return cls(
-            children=[content],
             style='section-top'
         )
-s
+        
+        return cls(
+            panels=[heading_section]
+        )
+
+    def get_context_data(self, parent_context=None):
+        return asdict(self)
