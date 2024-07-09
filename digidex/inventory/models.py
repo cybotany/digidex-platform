@@ -6,6 +6,7 @@ from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 from wagtail.documents import get_document_model
+from wagtail.images import get_image_model
 from wagtail.models import Page, Collection
 from wagtail.contrib.routable_page.models import RoutablePageMixin, path, re_path
 from wagtail.fields import RichTextField
@@ -70,14 +71,16 @@ class AbstractInventory(RoutablePageMixin, Page):
     def get_context(self, request):
         context = super().get_context(request)
 
-        base_inventory_url = self.full_url
-
-        documents = get_document_model().objects.filter(collection=self.collection)
+        documents = get_document_model().objects.filter(collection=self.collection).order_by('-created_at')
         context['documents'] = documents
+
+        images = get_image_model().objects.filter(collection=self.collection).order_by('-created_at')
+        context['images'] = images
+        
         context['title'] = self.title 
-        context['add_child_page'] = base_inventory_url + self.reverse_subpage('add_child_page')
-        context['update_current_page'] = base_inventory_url + self.reverse_subpage('update_current_page')
-        context['delete_current_page'] = base_inventory_url + self.reverse_subpage('delete_current_page')
+        context['add_child_page'] = self.full_url + self.reverse_subpage('add_child_page')
+        context['update_current_page'] = self.full_url + self.reverse_subpage('update_current_page')
+        context['delete_current_page'] = self.full_url + self.reverse_subpage('delete_current_page')
 
         logger.debug("Context data: %s", context)
         return context

@@ -1,6 +1,6 @@
 {% load laces %}
 
-<section class="{{ style }}">
+<section class="section{% if style %}-{{ style }}{% endif %}">
   <div class="content">
     {% for child in children %}
       {% component child %}

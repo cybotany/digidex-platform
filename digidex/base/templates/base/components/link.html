@@ -1,1 +1,7 @@
-<a href="{{ url }}" aria-current="page" class="{{ style }} w-inline-block">{{ children }}</a>
+{% load laces %}
+
+<a href="{{ url }}" aria-current="page" class="link{% if style %}-{{ style }}{% endif %} w-inline-block">
+  {% for child in children %}
+    {% component child %}
+  {% endfor %}
+</a>

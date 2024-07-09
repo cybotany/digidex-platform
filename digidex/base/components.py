@@ -1,12 +1,10 @@
-from dataclasses import dataclass, asdict
-
 from laces.components import Component
 
 
 class SectionComponent(Component):
     template_name = "base/components/section.html"
 
-    def __init__(self, children=list[Component], style="section"):
+    def __init__(self, children=list[Component], style=str):
         self.children = children
         self.style = style
 
@@ -20,7 +18,7 @@ class SectionComponent(Component):
 class BlockComponent(Component):
     template_name = 'base/components/block.html'
 
-    def __init__(self, children=list[Component], style='block'):
+    def __init__(self, children=list[Component], style=str):
         self.children = children
         self.style = style
 
@@ -34,7 +32,7 @@ class BlockComponent(Component):
 class HeadingComponent(Component):
     template_name = 'base/components/heading.html'
 
-    def __init__(self, text, size=2, style='heading'):
+    def __init__(self, text=str, size=int, style=str):
         self.text = text
         self.size = size
         self.style = style
@@ -50,7 +48,7 @@ class HeadingComponent(Component):
 class ParagraphComponent(Component):
     template_name = 'base/components/paragraph.html'
 
-    def __init__(self, text, style='paragraph'):
+    def __init__(self, text=str, style=str):
         self.text = text
         self.style = style
 
@@ -64,7 +62,7 @@ class ParagraphComponent(Component):
 class LinkComponent(Component):
     template_name = 'base/components/link.html'
 
-    def __init__(self, url, children=list[Component], style='link'):
+    def __init__(self, url=str, children=list[Component], style=str):
         self.url = url
         self.children = children
         self.style = style
@@ -80,7 +78,7 @@ class LinkComponent(Component):
 class IconComponent(Component):
     template_name = 'base/components/icon.html'
 
-    def __init__(self, source, alt, style='icon'):
+    def __init__(self, source=str, alt=str, style=str):
         self.source = source
         self.alt = alt
         self.style = style
@@ -96,7 +94,7 @@ class IconComponent(Component):
 class TextComponent(Component):
     template_name = 'base/components/text.html'
 
-    def __init__(self, text, style='text'):
+    def __init__(self, text=str, style=str):
         self.text = text
         self.style = style
 
@@ -110,7 +108,7 @@ class TextComponent(Component):
 class CollectionComponent(Component):
     template_name = 'base/components/collection.html'
 
-    def __init__(self, children=list[Component], style='collection'):
+    def __init__(self, children=list[Component], style=str):
         self.children = children
         self.style = style
 
