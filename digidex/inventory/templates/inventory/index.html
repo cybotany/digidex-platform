@@ -2,5 +2,7 @@
 {% load laces %}
 
 {% block body %}
-  {% component content %}
+  {% for panel in panels %}
+    {% component panel %}
+  {% endfor %}
 {% endblock body %}

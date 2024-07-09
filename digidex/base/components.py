@@ -59,8 +59,8 @@ class ParagraphComponent(Component):
         }
 
 
-class LinkComponent(Component):
-    template_name = 'base/components/link.html'
+class LinkWrapperComponent(Component):
+    template_name = 'base/components/link_wrapper.html'
 
     def __init__(self, url=str, children=list[Component], style=str):
         self.url = url
@@ -71,6 +71,22 @@ class LinkComponent(Component):
         return {
             "url": self.url,
             "children": self.children,
+            "style": self.style
+        }
+
+
+class LinkComponent(Component):
+    template_name = 'base/components/link.html'
+
+    def __init__(self, url=str, text=str, style=str):
+        self.url = url
+        self.text = text
+        self.style = style
+
+    def get_context_data(self, parent_context=None):
+        return {
+            "url": self.url,
+            "text": self.text,
             "style": self.style
         }
 
@@ -116,4 +132,34 @@ class CollectionComponent(Component):
         return {
             "children": self.children,
             "style": self.style
+        }
+
+
+class ButtonComponent(Component):
+    template_name = 'base/components/button.html'
+
+    def __init__(self, url=str, text=str, style=str):
+        self.url = url
+        self.text = text
+        self.style = style
+
+    def get_context_data(self, parent_context=None):
+        return {
+            "url": self.url,
+            "text": self.text,
+            "style": self.style
+        }
+
+
+class NavigationComponent(Component):
+    template_name = 'base/components/navigation.html'
+
+    def __init__(self, links=list[Component], buttons=list[Component]):
+        self.links = links
+        self.buttons = buttons
+
+    def get_context_data(self, parent_context=None):
+        return {
+            "links": self.links,
+            "buttons": self.buttons
         }

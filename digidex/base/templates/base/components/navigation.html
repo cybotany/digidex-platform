@@ -1,0 +1,33 @@
+{% load static laces navigation_tags%}
+
+<div data-w-id="9c896d19-12ed-148e-4e5a-1c014986d7c2" data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar base-nav">
+  <div class="nav-block">
+    <div class="nav">
+      {% with get_site_root as site_root %}
+        <a href="{{ site_root }}" class="brand base-nav-brand">
+          <img src="{% static 'base/images/logo/logo.svg' %}" loading="eager" alt="" class="logo">
+        </a>
+      {% endwith %}
+      <nav role="navigation" class="nav-menu base-nav-menu">
+        {% for link in links %}
+          {% component link %}
+        {% endfor %}
+        <div class="button-mobile">
+          {% for button in buttons %}
+            {% component button %}
+          {% endfor %}
+        </div>
+      </nav>
+    </div>
+    <div class="nav">
+      <div class="button-desktop">
+        {% for button in buttons %}
+          {% component button %}
+        {% endfor %}
+      </div>
+      <div class="menu-button base-nav-button">
+        <div class="icon-menu base-icon-nav-menu"></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -28,9 +28,9 @@ def create_user_inventory(sender, instance, created, **kwargs):
         root_page.add_child(instance=inventory)
 
 @receiver(post_save, sender=InventoryIndex)
-def create_user_menu_category(sender, instance, created, **kwargs):
+def create_user_party_category(sender, instance, created, **kwargs):
     if created:
-        name = "Menu"
+        name = "Party"
 
         parent_collection = instance.collection
         category_collection = parent_collection.add(name=name)

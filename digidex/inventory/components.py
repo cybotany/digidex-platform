@@ -1,21 +1,23 @@
-from dataclasses import dataclass, asdict
-from laces.components import Component
+from django.urls import reverse
 
 from base.components import (
     SectionComponent,
     BlockComponent,
     HeadingComponent,
     ParagraphComponent,
+    LinkWrapperComponent,
     LinkComponent,
     IconComponent,
     TextComponent,
-    CollectionComponent
+    CollectionComponent,
+    ButtonComponent,
+    NavigationComponent
 )
 from inventory.models import InventoryIndex
 
 
 def build_category_panel(category):
-    panel = LinkComponent(
+    panel = LinkWrapperComponent(
         url=category.url,
         children=[
             TextComponent(
@@ -77,7 +79,56 @@ def build_top_panel(user):
     )
     return panel
 
+def build_navigation_link_panel(item, style):
+    panel = LinkComponent(
+        url=item.url,
+        text=item.name,
+        style=style
+    )
+    return panel
+
+def build_navigation_button_panel(user, style):
+    panel = []
+
+    if user.is_authenticated:
+        button = ButtonComponent(
+            text='Logout',
+            url=reverse("account_logout"),
+            style=style
+        )
+        panel.append(button)
+    else:
+        buttons = [
+            ButtonComponent(
+                text='Login',
+                url=reverse("account_login"),
+                style=style
+            ),
+            ButtonComponent(
+                text='Signup',
+                url=reverse("account_signup"),
+                style=style
+            )
+        ]
+        panel.extend(buttons)
+
+
 def build_user_navigation(user):
     style = 'nav'
+    links = []
+    buttons = []
+
     inventory = InventoryIndex.objects.get(owner=user)
-    categories = inventory.get_categories()
+
+    party = inventory.get_party()
+    if party.exists():
+        for item in party:
+            links.append(build_navigation_link_panel(item, style))
+
+    buttons.extend(build_navigation_button_panel(user, style))
+
+    panel = NavigationComponent(
+        links=links,
+        buttons=buttons
+    )
+    return panel

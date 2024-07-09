@@ -1,0 +1,7 @@
+{% load laces %}
+
+<a href="{{ url }}" aria-current="page" class="link{% if style %}-{{ style }}{% endif %} base{% if style %}-{{ style }}{% endif %}-block">
+  {% for child in children %}
+    {% component child %}
+  {% endfor %}
+</a>
