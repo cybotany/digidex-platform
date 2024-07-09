@@ -105,3 +105,17 @@ class TextComponent(Component):
             "text": self.text,
             "style": self.style
         }
+
+
+class CollectionComponent(Component):
+    template_name = 'base/components/collection.html'
+
+    def __init__(self, children=list[Component], style='collection'):
+        self.children = children
+        self.style = style
+
+    def get_context_data(self, parent_context=None):
+        return {
+            "children": self.children,
+            "style": self.style
+        }

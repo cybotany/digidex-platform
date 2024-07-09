@@ -13,6 +13,40 @@ from base.components import (
 from inventory.models import InventoryIndex
 
 
+class CategoryComponent(Component):
+    template_name = 'inventory/components/category.html'
+
+    def __init__(self, category):
+        self.category = LinkComponent(
+            url=category.url,
+            children=[
+                IconComponent(
+                    source=None,
+                    alt=None,
+                    style='icon-category'
+                ),
+                TextComponent(
+                    text=category.name,
+                    style='text-category'
+                ),
+            ],
+            style='link-category'
+        )
+        ...
+
+    def get_context_data(self, parent_context=None):
+        return {"category": self.category}
+
+    @classmethod
+    def from_category(cls, category):
+        return cls(
+            name=category.__str__(),
+            items=category.get_items()
+        )
+
+    def get_context_data(self, parent_context=None):
+        return asdict(self)
+
 @dataclass
 class Dashboard(Component):
     template_name: str = 'inventory/components/dashboard.html'

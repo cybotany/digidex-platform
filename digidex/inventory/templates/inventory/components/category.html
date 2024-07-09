@@ -1,6 +1,5 @@
 {% load static laces wagtailimages_tags wagtailcore_tags %}
 
-<a href="pricing.html" aria-current="page" class="link-category w-inline-block w--current">
-  <img src="images/switcher.svg" loading="eager" alt="" class="icon-category">
-  <div class="text-category">Add</div>
-</a>
+<div role="listitem" class="collection-item-categories base-dyn-item">
+  {% component category %}
+</div>

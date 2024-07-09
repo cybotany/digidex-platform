@@ -7,7 +7,7 @@ from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
 from search.views import search
-from inventory.views import index
+# from inventory.views import index
 
 from digidex.api import api_router
 
@@ -19,7 +19,6 @@ urlpatterns = [
     path("search/", search, name="search"),
     path('api/v2/', api_router.urls),
     path('accounts/', include('allauth.urls')),
-    path('', index, name='index'),
 ]
 
 if settings.DEBUG:
