@@ -103,7 +103,7 @@ class InventoryIndex(AbstractInventory):
         return category_items[category]
 
     def get_party(self):
-        self.get_categories().filter(slug='party').first()
+        return self.get_categories().filter(slug='party').first()
 
     def get_items(self):
         items = []

@@ -111,6 +111,7 @@ def build_navigation_button_panel(user, style):
             )
         ]
         panel.extend(buttons)
+    return panel
 
 
 def build_user_navigation(user):
@@ -121,8 +122,9 @@ def build_user_navigation(user):
     inventory = InventoryIndex.objects.get(owner=user)
 
     party = inventory.get_party()
-    if party.exists():
-        for item in party:
+    if party:
+        party_items = party.get_items()
+        for item in party_items:
             links.append(build_navigation_link_panel(item, style))
 
     buttons.extend(build_navigation_button_panel(user, style))
