@@ -76,3 +76,8 @@ def build_top_panel(user):
         style=style
     )
     return panel
+
+def build_user_navigation(user):
+    style = 'nav'
+    inventory = InventoryIndex.objects.get(owner=user)
+    categories = inventory.get_categories()

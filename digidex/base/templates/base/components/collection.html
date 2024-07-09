@@ -1,13 +1,13 @@
-{% load laces %}
+{% load static laces %}
 
 <div class="collection-list-wrapper{% if style %}-{{ style }}{% endif %} base-dyn-list">
   {% if children %}
     <div role="list" class="collection-list{% if style %}-{{ style }}{% endif %} base-dyn-items">
-      <div role="listitem" class="collection-item{% if style %}-{{ style }}{% endif %} base-dyn-item">
-          {% for child in children %}
-              {% component child %}
-          {% endfor %}
-      </div>
+      {% for child in children %}
+        <div role="listitem" class="collection-item{% if style %}-{{ style }}{% endif %} base-dyn-item">
+          {% component child %}
+        </div>
+      {% endfor %}
     </div>
   {% else %}
     <div class="empty-state base-dyn-empty">
