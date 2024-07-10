@@ -7,11 +7,11 @@
       <div class="block-top">
         <h1 class="heading-top">{{ title }}</h1>
         <div class="block-categories">
-          <div class="collection-list-wrapper-categories base-dyn-list">
-            <div role="list" class="collection-list-categories base-dyn-items">
+          <div class="collection-list-wrapper-categories w-dyn-list">
+            <div role="list" class="collection-list-categories w-dyn-items">
               {% for category in categories %}
-                <div role="listitem" class="collection-item-categories base-dyn-item">
-                  <a href="{{ category.url }}" class="link-category base-inline-block">
+                <div role="listitem" class="collection-item-categories w-dyn-item">
+                  <a href="{{ category.url }}" class="link-category w-inline-block">
                     <img src="{% static 'base/images/nfc/directional/nfc_directional_mark_black.png' %}" loading="eager" alt="NFC Directional Icon" class="icon-category">
                     <div class="text-category">{{ category.name }}</div>
                   </a>
@@ -19,7 +19,7 @@
               {% endfor %}
             </div>
           </div>
-          <a href="{{ add_child_page }}" aria-current="page" class="link-category base-inline-block base--current">
+          <a href="{{ add_child_page }}" aria-current="page" class="link-category w-inline-block w--current">
             <img src="{% static 'base/images/google/add-circle.svg' %}" loading="eager" alt="" class="icon-category">
             <div class="text-category">Add</div>
           </a>

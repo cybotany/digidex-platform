@@ -2,15 +2,15 @@
 
 <section class="section">
   <div class="content">
-    <div id="largeItemCollection" class="collection-list-wrapper-items large base-dyn-list">
-      <div role="list" class="collection-list-items large base-dyn-items">
-        <div role="listitem" class="block-item large base-dyn-item">
-          <a href="" class="link-item-thumbnail base-inline-block">
+    <div id="largeItemCollection" class="collection-list-wrapper-items large w-dyn-list">
+      <div role="list" class="collection-list-items large w-dyn-items">
+        <div role="listitem" class="block-item large w-dyn-item">
+          <a href="" class="link-item-thumbnail w-inline-block">
             <img src="" loading="eager" alt="" class="image-item-thumbnail large">
           </a>
           <div class="item large">
             <div class="date"></div>
-            <a href="" class="link-heading-item base-inline-block">
+            <a href="" class="link-heading-item w-inline-block">
               <h3 class="heading-item large"></h3>
             </a>
             <p class="paragraph-item large"></p>
@@ -24,18 +24,18 @@
         </div>
       </div>
     </div>
-    <div id="item-items-list" class="collection-list-wrapper-items base-dyn-list">
-      <div role="list" class="collection-list-items base-dyn-items">
+    <div id="item-items-list" class="collection-list-wrapper-items w-dyn-list">
+      <div role="list" class="collection-list-items w-dyn-items">
         {% for item in collection %}
-          <div role="listitem" class="block-item base-dyn-item" onclick="showLargeitem(this)" data-id="{{ item.uuid }}">
-            <a href="{{ item.url }}" class="link-item-thumbnail base-inline-block">
+          <div role="listitem" class="block-item w-dyn-item" onclick="showLargeitem(this)" data-id="{{ item.uuid }}">
+            <a href="{{ item.url }}" class="link-item-thumbnail w-inline-block">
               {% if item.image %}
                 {% image item.image original class="image-item-thumbnail" %}
               {% endif %}
             </a>
             <div class="item">
               <div class="date">{{ item.date }}</div>
-              <a href="{{ item.url }}" class="link-heading-item base-inline-block">
+              <a href="{{ item.url }}" class="link-heading-item w-inline-block">
                 <h3 class="heading-item">{{ item.title }}</h3>
               </a>
               <p class="paragraph-item">{{ item.paragraph }}</p>
@@ -48,7 +48,7 @@
             </div>
           </div>
         {% empty %}
-          <div class="empty-state base-dyn-empty">
+          <div class="empty-state w-dyn-empty">
             <div class="text-empty">No items found.</div>
           </div>
         {% endfor %}

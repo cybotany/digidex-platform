@@ -18,7 +18,7 @@
     {% slot label %}
     {% endslot %}
   </label>
-  <textarea class="textarea base-input"
+  <textarea class="textarea w-input"
     {% if attrs.required %}required{% endif %}
     {% if attrs.rows %}rows="{{ attrs.rows }}"{% endif %}
     {% if attrs.disabled %}disabled{% endif %}
@@ -40,7 +40,7 @@
         {% endslot %}
     </label>
   {% endif %}
-  <input class="text-field base-input"
+  <input class="text-field w-input"
     {% if attrs.required %}required{% endif %}
     {% if attrs.disabled %}disabled{% endif %}
     {% if attrs.readonly %}readonly{% endif %}
