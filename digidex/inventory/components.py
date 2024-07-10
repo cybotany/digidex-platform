@@ -1,5 +1,7 @@
 from django.urls import reverse
 
+from laces.components import Component
+
 from base.components import (
     SectionComponent,
     BlockComponent,
@@ -11,130 +13,156 @@ from base.components import (
     TextComponent,
     CollectionComponent,
     ButtonComponent,
-    NavigationComponent
+    NavigationComponent,
 )
 from inventory.models import InventoryIndex
 
 
-def build_category_panel(category):
-    panel = LinkWrapperComponent(
-        url=category.url,
-        children=[
-            TextComponent(
-                text=category.name,
-                style='category'
-            ),
-        ],
-        style='category'
-    )
-    return panel
+class ItemComponent(Component):
+    template_name = 'inventory/components/item.html'
 
-def build_categories_panel(category_collection):
-    style='categories'
-    children = []
+    def __init__(self, item):
+        self.date = item.created_at
+        self.url = item.url
+        self.heading = HeadingComponent(
+            text=item.name,
+            size=4,
+            style='post'
+        )
+        self.paragraph = ParagraphComponent(
+            text=item.name,
+            style='post'
+        )
 
-    for category in category_collection:
-        children.append(build_category_panel(category))
-    
-    collection = CollectionComponent(
-        children=children,
-        style=style
-    )
-    panel = BlockComponent(
-        children=[collection,],
-        style=style
-    )
-    return panel
+    def get_context_data(self, parent_context=None):
+        return {
+            "date": self.date,
+            "url": self.url,
+            "heading": self.heading,
+            "paragraph": self.paragraph
+        }
 
 
-def build_top_panel(user):
-    style = 'top'
-    inventory = InventoryIndex.objects.get(owner=user)
+class CategoryComponent(Component):
+    template_name = 'inventory/components/category.html'
 
-    block_contents = [
-        HeadingComponent(
-            text=inventory.__str__(),
-            size=1,
-            style=style
-        ),
-        ParagraphComponent(
-            text=inventory.body,
-            style=style
-        ),
-    ]
+    def __init__(self, category):
+        self.url = category.url
+        self.text = category.name
 
-    categories = inventory.get_categories()
-    if categories.exists():
-        categories_panel = build_categories_panel(categories)
-        block_contents.append(categories_panel)
+    def get_context_data(self, parent_context=None):
+        return {
+            "url": self.url,
+            "text": self.text
+        }
 
-    panel = SectionComponent(
-        children=[
-            BlockComponent(
-                children=block_contents,
+
+class DashboardComponent(Component):
+    template_name = 'inventory/components/dashboard.html'
+
+    def __init__(self, user):
+        self.user = user
+        self.inventory = InventoryIndex.objects.get(owner=user)
+        self.categories = self.inventory.get_categories()
+        self.party = self.inventory.get_party()
+        self.panels = [
+            self.get_navigation_panel(),
+            self.get_top_panel()
+        ]
+
+    def get_context_data(self, parent_context=None):
+        return {
+            "user": self.user,
+            "inventory": self.inventory,
+            "categories": self.categories,
+            "party": self.party
+        }
+
+    def get_navigation_panel(self):
+        panel = NavigationComponent(
+            links=self._get_navigation_links(),
+            buttons=self._get_navigation_buttons()
+        )
+        return panel
+
+    def _get_navigation_links(self):
+        links = []
+        items = self.party.get_items()
+        for item in items:
+            links.append(
+                LinkComponent(
+                    url=item.url,
+                    text=item.name,
+                    style='nav'
+                )
+            )
+        return links
+
+    def _get_navigation_buttons(self):
+        buttons = []
+
+        if self.user.is_authenticated:
+            button = ButtonComponent(
+                text='Logout',
+                url=reverse("account_logout"),
+                style='nav-button-outline'
+            )
+            buttons.append(button)
+        else:
+            buttons = [
+                ButtonComponent(
+                    text='Login',
+                    url=reverse("account_login"),
+                    style='nav-button-outline'
+                ),
+                ButtonComponent(
+                    text='Signup',
+                    url=reverse("account_signup"),
+                    style='nav-button'
+                )
+            ]
+            buttons.extend(buttons)
+        return buttons
+
+    def get_top_panel(self):
+        style = 'top'
+        
+        block_contents = [
+            HeadingComponent(
+                text=self.inventory.__str__(),
+                size=1,
                 style=style
             ),
-        ],
-        style=style
-    )
-    return panel
-
-def build_navigation_link_panel(item, style):
-    panel = LinkComponent(
-        url=item.url,
-        text=item.name,
-        style=style
-    )
-    return panel
-
-def build_navigation_button_panel(user, style):
-    base_style = "button"
-    if style:
-        primary_style = f"{style}-{base_style}-outline"
-        alternate_style = f"{style}-{base_style}"
-    panel = []
-
-    if user.is_authenticated:
-        button = ButtonComponent(
-            text='Logout',
-            url=reverse("account_logout"),
-            style=primary_style
-        )
-        panel.append(button)
-    else:
-        buttons = [
-            ButtonComponent(
-                text='Login',
-                url=reverse("account_login"),
-                style=primary_style
+            ParagraphComponent(
+                text=self.inventory.body,
+                style=style
             ),
-            ButtonComponent(
-                text='Signup',
-                url=reverse("account_signup"),
-                style=alternate_style
-            )
         ]
-        panel.extend(buttons)
-    return panel
 
+        if self.categories:
+            categories = self._get_categories_panel()
+            block_contents.append(categories)
 
-def build_user_navigation(user):
-    style = 'nav'
-    links = []
-    buttons = []
+        panel = SectionComponent(
+            children=[
+                BlockComponent(
+                    children=block_contents,
+                    style=style
+                ),
+            ],
+            style=style
+        )
+        return panel
 
-    inventory = InventoryIndex.objects.get(owner=user)
-
-    party = inventory.get_party()
-    if party:
-        party_items = party.get_items()
-        for item in party_items:
-            links.append(build_navigation_link_panel(item, style))
-
-    buttons.extend(build_navigation_button_panel(user, style))
-
-    panel = NavigationComponent(
-        links=links,
-        buttons=buttons
-    )
-    return panel
+    def _get_categories_panel(self):
+        style='categories'
+        cateory_components = [CategoryComponent(category) for category in self.categories()]
+        categories = CollectionComponent(
+            children=cateory_components,
+            style=style
+        )
+        panel = BlockComponent(
+            children=categories,
+            style=style
+        )
+        return panel

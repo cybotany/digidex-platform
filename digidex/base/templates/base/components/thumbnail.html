@@ -1,0 +1,4 @@
+{% load static %}
+<a href="#" class="link{% if style %}-{{ style }}{% endif %}-thumbnail w-inline-block">
+  <img src="{{ source }}" class="image{% if style %}-{{ style }}{% endif %}-thumbnail" alt="{{ alt }}" loading="eager">
+</a>

@@ -1,8 +1,6 @@
 import uuid
-import logging
 
 from django.db import models
-from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 from wagtail.documents import get_document_model
@@ -11,9 +9,6 @@ from wagtail.models import Page, Collection
 from wagtail.contrib.routable_page.models import RoutablePageMixin, path, re_path
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
-
-
-logger = logging.getLogger(__name__)
 
 
 class AbstractInventory(RoutablePageMixin, Page):
@@ -68,21 +63,18 @@ class AbstractInventory(RoutablePageMixin, Page):
     def delete_current_page(self, request):
         pass
 
+    def get_documents(self):
+        return get_document_model().objects.filter(collection=self.collection)
+
+    def get_images(self):
+        return get_image_model().objects.filter(collection=self.collection)
+
     def get_context(self, request):
-        context = super().get_context(request)
-
-        documents = get_document_model().objects.filter(collection=self.collection).order_by('-created_at')
-        context['documents'] = documents
-
-        images = get_image_model().objects.filter(collection=self.collection).order_by('-created_at')
-        context['images'] = images
-        
+        context = super().get_context(request)        
         context['title'] = self.title 
         context['add_child_page'] = self.full_url + self.reverse_subpage('add_child_page')
         context['update_current_page'] = self.full_url + self.reverse_subpage('update_current_page')
         context['delete_current_page'] = self.full_url + self.reverse_subpage('delete_current_page')
-
-        logger.debug("Context data: %s", context)
         return context
 
     class Meta:
@@ -93,7 +85,9 @@ class InventoryIndex(AbstractInventory):
     parent_page_types = []
     subpage_types = ['inventory.InventoryCategory']
 
-    def get_categories(self):
+    def get_categories(self, exclude_party=True):
+        if exclude_party:
+            return InventoryCategory.objects.child_of(self).exclude(slug='party')
         return InventoryCategory.objects.child_of(self)
 
     def get_category_items(self):
@@ -103,7 +97,7 @@ class InventoryIndex(AbstractInventory):
         return category_items[category]
 
     def get_party(self):
-        return self.get_categories().filter(slug='party').first()
+        return self.get_categories(exclude_party=False).filter(slug='party').first()
 
     def get_items(self):
         items = []
@@ -142,6 +136,12 @@ class InventoryCategory(AbstractInventory):
 class InventoryItem(AbstractInventory):
     parent_page_types = ['inventory.InventoryCategory']
     subpage_types = []
+
+    def get_thumbnail(self):
+        images = self.get_images()
+        if images:
+            return images.first()
+        return None
 
     class Meta:
         verbose_name = _("item")
