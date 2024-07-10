@@ -93,7 +93,7 @@ class NearFieldCommunicationTag(models.Model):
         self.save()
 
     def get_url(self):
-        return reverse('nfc:route_nfc_link', kwargs={'nfc_uuid': self.uuid})
+        return reverse('route_nfc_link', kwargs={'nfc_uuid': self.uuid})
 
     class Meta:
         verbose_name = "nfc tag"
