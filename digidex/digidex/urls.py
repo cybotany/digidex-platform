@@ -10,7 +10,7 @@ from search.views import search
 from inventory.views import inventory
 
 from digidex.api import api_router
-from nearfieldcommunication.api import router
+from nearfieldcommunication import api as nfc_api, urls as nfc_urls
 
 urlpatterns = [
     path("django-admin/", admin.site.urls),
@@ -18,8 +18,9 @@ urlpatterns = [
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search, name="search"),
     path('api/v2/', api_router.urls),
-    path('api/', include(router.urls)),
+    path('api/', include(nfc_api.router.urls)),
     path('accounts/', include('allauth.urls')),
+    path('nfc/', include(nfc_urls.urls)),
     path('', inventory, name='inventory'),
 ]
 

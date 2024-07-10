@@ -30,8 +30,9 @@ class NearFieldCommunicationTagViewSet(viewsets.ModelViewSet):
             defaults={"tag_form": tag_form}
         )
 
-        serializer = self.get_serializer(nfc_tag)
+        serializer = self.get_serializer(nfc_tag, context={'request': request})
         return Response(serializer.data, status=status.HTTP_201_CREATED if created else status.HTTP_200_OK)
+
 
 router = DefaultRouter()
 router.register(r'nfc', NearFieldCommunicationTagViewSet)
