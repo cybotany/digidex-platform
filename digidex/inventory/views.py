@@ -1,16 +1,11 @@
 from django.shortcuts import render
 
-from inventory.components import build_user_navigation, build_top_panel
+from inventory.components import DashboardComponent
 
 def inventory(request):
     template = 'inventory/index.html'
-    top_panel = build_top_panel(request.user)
-    navigation_panel = build_user_navigation(request.user)
     context = {
-        'panels': [
-            navigation_panel,
-            top_panel
-        ]
+        'dashboard': DashboardComponent(request.user)
     }
  
     return render(

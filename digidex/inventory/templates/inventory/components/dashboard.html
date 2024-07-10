@@ -1,3 +1,5 @@
+{% load laces %}
+
 {% for panel in panels %}
-  {% include panel.template_name with children=panel.children style=panel.style %}
+  {% component panel %}
 {% endfor %}

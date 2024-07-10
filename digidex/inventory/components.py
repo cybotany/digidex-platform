@@ -7,9 +7,7 @@ from base.components import (
     BlockComponent,
     HeadingComponent,
     ParagraphComponent,
-    LinkWrapperComponent,
     LinkComponent,
-    IconComponent,
     TextComponent,
     CollectionComponent,
     ButtonComponent,
@@ -72,10 +70,7 @@ class DashboardComponent(Component):
 
     def get_context_data(self, parent_context=None):
         return {
-            "user": self.user,
-            "inventory": self.inventory,
-            "categories": self.categories,
-            "party": self.party
+            "panels": self.panels
         }
 
     def get_navigation_panel(self):
@@ -156,13 +151,23 @@ class DashboardComponent(Component):
 
     def _get_categories_panel(self):
         style='categories'
-        cateory_components = [CategoryComponent(category) for category in self.categories()]
+        cateory_components = [CategoryComponent(category) for category in self.categories]
         categories = CollectionComponent(
             children=cateory_components,
             style=style
         )
         panel = BlockComponent(
-            children=categories,
+            children=[categories],
+            style=style
+        )
+        return panel
+
+    def _get_main_panel(self):
+        style = 'main'
+        items = self.party.get_items()
+        item_components = [ItemComponent(item) for item in items]
+        panel = CollectionComponent(
+            children=item_components,
             style=style
         )
         return panel
