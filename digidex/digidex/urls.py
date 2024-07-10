@@ -20,7 +20,7 @@ urlpatterns = [
     path('api/v2/', api_router.urls),
     path('api/', include(nfc_api.router.urls)),
     path('accounts/', include('allauth.urls')),
-    path('nfc/', include(nfc_urls.urls)),
+    path('nfc/', include(nfc_urls.urlpatterns)),
     path('', inventory, name='inventory'),
 ]
 
