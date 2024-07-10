@@ -6,67 +6,6 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['digidex.app', 'www.digidex.app']
 
-LOG_DIR = os.path.join(BASE_DIR, 'logs')
-if not os.path.exists(LOG_DIR):
-    os.makedirs(LOG_DIR)
-
-LOG_PATH = os.path.join(LOG_DIR, 'digidex.log')
-if not os.path.exists(LOG_PATH):
-    open(LOG_PATH, 'a').close()
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'verbose': {
-            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
-            'style': '{',
-        },
-        'simple': {
-            'format': '{levelname} {message}',
-            'style': '{',
-        },
-    },
-    'filters': {
-        'require_debug_true': {
-            '()': 'django.utils.log.RequireDebugTrue',
-        },
-    },
-    'handlers': {
-        'file': {
-            'level': 'WARNING',
-            'class': 'logging.handlers.TimedRotatingFileHandler',
-            'filename': LOG_PATH,
-            'when': 'midnight',
-            'interval': 1,
-            'formatter': 'verbose',
-        },
-        'console': {
-            'class': 'logging.StreamHandler',
-            'formatter': 'simple',
-            'filters': ['require_debug_true'],
-        },
-        'mail_admins': {
-            'level': 'ERROR',
-            'class': 'django.utils.log.AdminEmailHandler',
-            'formatter': 'verbose',
-        }
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['file', 'console', 'mail_admins'],
-            'level': 'INFO',
-            'propagate': True,
-        },
-        'django.request': {
-            'handlers': ['file', 'mail_admins'],
-            'level': 'ERROR',
-            'propagate': False,
-        },
-    },
-}
-
-
 if "EMAIL_HOST" in os.environ:
     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
     EMAIL_HOST = os.getenv("EMAIL_HOST")
