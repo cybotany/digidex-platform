@@ -88,13 +88,17 @@ def build_navigation_link_panel(item, style):
     return panel
 
 def build_navigation_button_panel(user, style):
+    base_style = "button"
+    if style:
+        primary_style = f"{style}-{base_style}-outline"
+        alternate_style = f"{style}-{base_style}"
     panel = []
 
     if user.is_authenticated:
         button = ButtonComponent(
             text='Logout',
             url=reverse("account_logout"),
-            style=style
+            style=primary_style
         )
         panel.append(button)
     else:
@@ -102,12 +106,12 @@ def build_navigation_button_panel(user, style):
             ButtonComponent(
                 text='Login',
                 url=reverse("account_login"),
-                style=style
+                style=primary_style
             ),
             ButtonComponent(
                 text='Signup',
                 url=reverse("account_signup"),
-                style=style
+                style=alternate_style
             )
         ]
         panel.extend(buttons)

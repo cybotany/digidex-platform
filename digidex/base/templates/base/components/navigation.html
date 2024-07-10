@@ -3,11 +3,9 @@
 <div role="banner" class="navbar base-nav">
   <div class="nav-block">
     <div class="nav">
-      {% with get_site_root as site_root %}
-        <a href="{{ site_root }}" class="brand base-nav-brand">
-          <img src="{% static 'base/images/logo/logo.svg' %}" loading="eager" alt="" class="logo">
-        </a>
-      {% endwith %}
+      <a href="#" class="brand base-nav-brand">
+        <img src="{% static 'base/images/logo/logo-p-1000.png' %}" loading="eager" alt="" class="logo">
+      </a>
       <nav role="navigation" class="nav-menu base-nav-menu">
         {% for link in links %}
           {% component link %}
