@@ -14,6 +14,7 @@ class NearFieldCommunicationTagViewSet(viewsets.ModelViewSet):
     serializer_class = NearFieldCommunicationTagSerializer
     permission_classes = [IsAuthenticated]
     authentication_classes = [JWTAuthentication]
+    lookup_field = 'serial_number'
 
     def create(self, request, *args, **kwargs):
         serial_number = request.data.get('serial_number')
