@@ -1,24 +1,26 @@
+{% load static laces %}
+
 <div class="collection-list-wrapper-posts large w-dyn-list">
-    <div role="list" class="collection-list-posts large w-dyn-items">
-      <div role="listitem" class="w-dyn-item">
-        <div class="block-post large">
-          <a href="{{ url }}" class="link-post-thumbnail large w-inline-block">
-            <img src="" class="image-post-thumbnail large" alt="" loading="eager">
+  <div role="list" class="collection-list-posts large w-dyn-items">
+    <div role="listitem" class="w-dyn-item">
+      <div class="block-post large">
+        <a href="{{ url }}" class="link-post-thumbnail large w-inline-block">
+          <img src="" class="image-post-thumbnail large" alt="" loading="eager">
+        </a>
+        <div class="post large">
+          <div class="date">{{ date }}</div>
+          <a href="{{ url }}" class="link-heading-post large w-inline-block">
+              {% component heading %}
           </a>
-          <div class="post large">
-            <div class="date">{{ date }}</div>
-            <a href="{{ url }}" class="link-heading-post large w-inline-block">
-                {% component heading %}
-            </a>
-            <p class="paragraph-post large"></p>
-            <a href="{{ url }}" class="link-block w-inline-block">
-              <div class="text-link">Read more</div>
-              <div class="block-icon-link">
-                <img src="images/bx-arrow-to-right_blue.svg" loading="eager" alt="" class="icon-link">
-              </div>
-            </a>
-          </div>
+          <p class="paragraph-post large"></p>
+          <a href="{{ url }}" class="link-block w-inline-block">
+            <div class="text-link">Read More</div>
+            <div class="block-icon-link">
+              <img src="{% static 'base/images/bx/arrow-green.svg'}" loading="eager" alt="" class="icon-link">
+            </div>
+          </a>
         </div>
       </div>
     </div>
   </div>
+</div>

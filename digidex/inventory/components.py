@@ -89,6 +89,7 @@ class DashboardComponent(Component):
         self.inventory = InventoryIndex.objects.get(owner=user)
         self.categories = self.inventory.get_categories()
         self.party = self.inventory.get_party()
+        self.items = self.inventory.get_items()
         self.panels = [
             self.get_navigation_panel(),
             self.get_top_panel(),
@@ -191,22 +192,42 @@ class DashboardComponent(Component):
 
 
     def get_body_panel(self):
-        style = 'posts'
-        items = self.get_items()
+        items = self.items
+        children = []
         count_of_items = len(items)
 
         if  count_of_items >= 1:
             featured_item = items.pop(0)
-            item_components = [FeaturedItemComponent(featured_item)]
-            # Check if there are any items left and append if there are
-            if items:
-                _components = [ItemComponent(item) for item in items]
-                item_components.extend(_components)
-        else:
-            item_components = [EmptyComponent(asset='items')]
+            featured_panel = self._get_featured_item_panel(featured_item)
+            children.append(featured_panel)
 
+            # Check if there are any items left
+            if items:
+                items_panel = self._get_items_panel(items)
+                children.append(items_panel)
+
+        else:
+            empty_component = self._get_empty_panel(assets="items")
+            children.append(empty_component)
+
+        panel = SectionComponent(
+            children=children
+        )
+        return panel
+
+
+    def _get_featured_item_panel(self, featured_item):
+        return FeaturedItemComponent(featured_item)
+
+
+    def _get_items_panel(self, items):
+        style = 'posts'
+        item_components = [ItemComponent(item) for item in items]
         panel = CollectionComponent(
             children=item_components,
             style=style
         )
         return panel
+
+    def _get_empty_panel(self, asset):
+        return EmptyComponent(asset=asset)
