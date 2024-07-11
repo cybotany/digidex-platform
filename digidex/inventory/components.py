@@ -32,13 +32,15 @@ class FeaturedItemComponent(Component):
             text=item.name,
             style='post large'
         )
+        self.thumbnail = item.get_thumbnail()
 
     def get_context_data(self, parent_context=None):
         return {
             "date": self.date,
             "url": self.url,
             "heading": self.heading,
-            "paragraph": self.paragraph
+            "paragraph": self.paragraph,
+            "thumbnail": self.thumbnail
         }
 
 
@@ -57,13 +59,15 @@ class ItemComponent(Component):
             text=item.name,
             style='post'
         )
+        self.thumbnail = item.get_thumbnail()
 
     def get_context_data(self, parent_context=None):
         return {
             "date": self.date,
             "url": self.url,
             "heading": self.heading,
-            "paragraph": self.paragraph
+            "paragraph": self.paragraph,
+            "thumbnail": self.thumbnail
         }
 
 

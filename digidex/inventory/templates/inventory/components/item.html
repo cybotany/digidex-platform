@@ -1,8 +1,8 @@
-{% load laces static %}
+{% load laces static wagtailimages_tags %}
 
 <div class="block-post">
   <a href="{{ url }}" class="link-post-thumbnail w-inline-block">
-    <img src="" class="image-post-thumbnail" alt="" loading="eager">
+    {% image thumbnail original class="image-post-thumbnail" alt=thumbail.alt %}
   </a>
   <div class="post">
     <div class="date">{{ date }}</div>

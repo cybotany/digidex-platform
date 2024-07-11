@@ -1,11 +1,11 @@
-{% load static laces %}
+{% load static laces wagtailimages_tags %}
 
 <div class="collection-list-wrapper-posts large w-dyn-list">
   <div role="list" class="collection-list-posts large w-dyn-items">
     <div role="listitem" class="w-dyn-item">
       <div class="block-post large">
         <a href="{{ url }}" class="link-post-thumbnail large w-inline-block">
-          <img src="" class="image-post-thumbnail large" alt="" loading="eager">
+          {% image thumbnail original class="image-post-thumbnail large" alt=thumbail.alt %}
         </a>
         <div class="post large">
           <div class="date">{{ date }}</div>
