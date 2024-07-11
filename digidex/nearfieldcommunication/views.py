@@ -1,9 +1,6 @@
-from django.apps import apps
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404
 from django.http import HttpResponse
 from django.core.exceptions import ValidationError
-from django.urls import reverse
 
 from nearfieldcommunication.models import NearFieldCommunicationTag
 

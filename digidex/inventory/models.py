@@ -10,6 +10,7 @@ from wagtail.contrib.routable_page.models import RoutablePageMixin, path, re_pat
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 
+from nearfieldcommunication.models import NearFieldCommunicationTag
 
 class AbstractInventory(RoutablePageMixin, Page):
     """
@@ -146,3 +147,22 @@ class InventoryItem(AbstractInventory):
     class Meta:
         verbose_name = _("item")
         verbose_name_plural = _("items")
+
+
+class InventoryLink(models.Model):
+    tag = models.OneToOneField(
+        NearFieldCommunicationTag,
+        on_delete=models.CASCADE,
+        related_name='mapping'
+    )
+    resource = models.OneToOneField(
+        Page,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        related_name='+'
+    )
+
+    class Meta:
+        verbose_name = _("link")
+        verbose_name_plural = _("links")
