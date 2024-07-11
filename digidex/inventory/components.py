@@ -162,9 +162,19 @@ class DashboardComponent(Component):
         )
         return panel
 
-    def _get_main_panel(self):
-        style = 'main'
-        items = self.party.get_items()
+    def _get_featured_item_panel(self):
+        style = 'featured'
+        featured_item = self.inventory.get_featured_item()
+        item_component = ItemComponent(featured_item)
+        panel = BlockComponent(
+            children=[item_component],
+            style=style
+        )
+        return panel
+
+    def _get_items_panel(self):
+        style = 'posts'
+        items = self.get_items()
         item_components = [ItemComponent(item) for item in items]
         panel = CollectionComponent(
             children=item_components,

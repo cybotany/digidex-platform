@@ -8,8 +8,4 @@ def inventory(request):
         'dashboard': DashboardComponent(request.user)
     }
  
-    return render(
-        request,
-        template,
-        context
-    )
+    return render(request, template, context)
