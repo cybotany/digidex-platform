@@ -6,12 +6,16 @@ from nearfieldcommunication.models import NearFieldCommunicationTag
 
 
 def route_nfc_link(request, nfc_uuid):
-    ntag = get_object_or_404(NearFieldCommunicationTag, uuid=nfc_uuid)
+    ntag = get_object_or_404(
+        NearFieldCommunicationTag.objects.select_related('mapping__resource'),
+        uuid=nfc_uuid
+    )
     try:
         if not ntag.active:
             return HttpResponse("This NFC tag is not active.", status=403)
         
-        return redirect(ntag.get_url())
-    
+        ntag_mapping = ntag.mapping
+        return redirect(ntag_mapping.resource.url)
+
     except ValidationError as e:
         return HttpResponse(str(e), status=400)

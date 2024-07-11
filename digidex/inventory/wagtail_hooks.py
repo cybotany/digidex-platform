@@ -35,7 +35,8 @@ class InventoryLinkViewSet(SnippetViewSet):
     base_url_path = "internal/inventory/link"
 
     panels = [
-        TitleFieldPanel("resource"),
+        FieldPanel("tag"),
+        FieldPanel("resource"),
     ]
 
 
