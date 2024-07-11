@@ -10,10 +10,36 @@ from base.components import (
     LinkComponent,
     TextComponent,
     CollectionComponent,
+    EmptyComponent,
     ButtonComponent,
     NavigationComponent,
 )
 from inventory.models import InventoryIndex
+
+
+class FeaturedItemComponent(Component):
+    template_name = 'inventory/components/featured_item.html'
+
+    def __init__(self, item):
+        self.date = item.created_at
+        self.url = item.url
+        self.heading = HeadingComponent(
+            text=item.name,
+            size=3,
+            style='post large'
+        )
+        self.paragraph = ParagraphComponent(
+            text=item.name,
+            style='post large'
+        )
+
+    def get_context_data(self, parent_context=None):
+        return {
+            "date": self.date,
+            "url": self.url,
+            "heading": self.heading,
+            "paragraph": self.paragraph
+        }
 
 
 class ItemComponent(Component):
@@ -65,7 +91,8 @@ class DashboardComponent(Component):
         self.party = self.inventory.get_party()
         self.panels = [
             self.get_navigation_panel(),
-            self.get_top_panel()
+            self.get_top_panel(),
+            self.get_body_panel(),
         ]
 
     def get_context_data(self, parent_context=None):
@@ -162,20 +189,22 @@ class DashboardComponent(Component):
         )
         return panel
 
-    def _get_featured_item_panel(self):
-        style = 'featured'
-        featured_item = self.inventory.get_featured_item()
-        item_component = ItemComponent(featured_item)
-        panel = BlockComponent(
-            children=[item_component],
-            style=style
-        )
-        return panel
 
-    def _get_items_panel(self):
+    def get_body_panel(self):
         style = 'posts'
         items = self.get_items()
-        item_components = [ItemComponent(item) for item in items]
+        count_of_items = len(items)
+
+        if  count_of_items >= 1:
+            featured_item = items.pop(0)
+            item_components = [FeaturedItemComponent(featured_item)]
+            # Check if there are any items left and append if there are
+            if items:
+                _components = [ItemComponent(item) for item in items]
+                item_components.extend(_components)
+        else:
+            item_components = [EmptyComponent(asset='items')]
+
         panel = CollectionComponent(
             children=item_components,
             style=style

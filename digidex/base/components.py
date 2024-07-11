@@ -164,17 +164,14 @@ class NavigationComponent(Component):
             "buttons": self.buttons
         }
 
-class LinkBlockComponent(Component):
-    template_name = 'base/components/link_block.html'
 
-    def __init__(self, url=str, text=str):
-        self.url = url
-        if not text:
-            text = 'Read more'
-        self.text = text
+class EmptyComponent(Component):
+    template_name = 'base/components/empty.html'
+
+    def __init__(self, asset=str):
+        self.asset = asset
 
     def get_context_data(self, parent_context=None):
         return {
-            "url": self.url,
-            "text": self.text
+            "asset": self.asset
         }
