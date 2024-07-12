@@ -1,0 +1,31 @@
+{% load static laces navigation_tags%}
+
+<div role="banner" class="navbar w-nav">
+  <div class="nav-block">
+    <div class="nav">
+      <a href="#" class="brand w-nav-brand w--current">
+        <img src="{% static 'base/images/google/plant.svg' %}" loading="eager" alt="DigiDex Logo" class="logo">
+      </a>
+      <nav role="navigation" class="nav-menu w-nav-menu">
+        {% for link in links %}
+          {% component link %}
+        {% endfor %}
+        <div class="button-mobile">
+          {% for button in buttons %}
+            {% component button %}
+          {% endfor %}
+        </div>
+      </nav>
+    </div>
+    <div class="nav">
+      <div class="button-desktop">
+        {% for button in buttons %}
+          {% component button %}
+        {% endfor %}
+      </div>
+      <div class="menu-button w-nav-button">
+        <div class="icon-menu w-icon-nav-menu"></div>
+      </div>
+    </div>
+  </div>
+</div>
