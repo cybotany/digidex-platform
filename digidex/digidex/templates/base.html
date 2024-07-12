@@ -35,16 +35,11 @@
     {% block extra_css %}{% endblock %}
   </head>
   <body>
-    <header>
-      {% block site_header %}{% endblock site_header %}
-    </header>
+    {% include "includes/header.html" %}
     <main>
-      {% block page_header %}{% endblock page_header %}
       {% block body %}{% endblock body %}
       {% block extra_js %}{% endblock extra_js %}
     </main>
-    <footer>
-      {% block site_footer %}{% endblock site_footer %}
-    </footer>
+    {% include "includes/footer.html" %}
   </body>
 </html>

@@ -75,6 +75,37 @@ class LinkComponent(Component):
         }
 
 
+class IconComponent(Component):
+    template_name = 'base/components/icon.html'
+
+    def __init__(self, source=None, alt = None, style=None):
+        self.source = source
+        self.alt = alt
+        self.style = style
+
+    def get_context_data(self, parent_context=None):
+        return {
+            "source": self.source,
+            "alt": self.alt,
+            "style": self.style
+        }
+
+
+class ImageComponent(Component):
+    template_name = 'base/components/image.html'
+
+    def __init__(self, source=str, alt=None, style=None):
+        self.source = source
+        self.alt = alt
+        self.style = style
+
+    def get_context_data(self, parent_context=None):
+        return {
+            "source": self.source,
+            "style": self.style
+        }
+
+
 class TextComponent(Component):
     template_name = 'base/components/text.html'
 

@@ -8,12 +8,12 @@ from base.components import (
     HeadingComponent,
     ParagraphComponent,
     LinkComponent,
+    IconComponent,
     TextComponent,
     CollectionComponent,
     EmptyComponent,
     ButtonComponent,
 )
-from inventory.models import InventoryIndex
 
 
 class ItemComponent(Component):
@@ -51,100 +51,108 @@ class ItemComponent(Component):
         }
 
 
-class ItemCollectionPanel(Component):
-    template_name = 'inventory/panels/items.html'
+class ItemCollectionComponent(Component):
+    template_name = 'inventory/components/item_collection.html'
 
     def __init__(self, items):
         self.items = items
-        self.children = [ItemComponent(item) for item in items]
+
+    def get_featured_item_collection(self, featured_item):
+        style = 'post large'
+        return CollectionComponent(
+            children=[ItemComponent(featured_item, style=style)],
+            style=style,
+        )
+
+    def get_item_collection(self):
+        style = 'post'
+        return CollectionComponent(
+            children=[ItemComponent(item, style) for item in self.items],
+            style=style,
+        )
+
+    def set_panel(self):
+        panel_components = []
+
+        if self.items:
+            featured_item = self.items.pop(0)
+            panel_components.append(self.get_featured_item_collection(featured_item))
+
+            if self.items: # Check if there are any items left
+                panel_components.append(self.get_item_collection())
+
+        else:
+            panel_components.append(EmptyComponent(assets="items"))
+
+        return SectionComponent(children=panel_components)
 
     def get_context_data(self, parent_context=None):
         return {
-            "children": self.children
+            "panel": self.set_panel()
         }
 
 
 class CategoryComponent(Component):
     template_name = 'inventory/components/category.html'
 
-    def __init__(self, category=dict()):
+    def __init__(self, category=dict(), current=False):
         self.category = category
+        self.current = current
+        self.style = 'category'
+
+    def get_icon_component(self):
+        return IconComponent(
+            source=self.category.get('icon_source', ''),
+            alt=self.category.get('alt_text', ''),
+            style=self.style
+        )
+
+    def get_text_component(self):
+        return TextComponent(
+            text=self.category.get('text', 'No text available'),
+            style=self.style
+        )
 
     def get_context_data(self, parent_context=None):
         return {
             "url": self.category.get('url', ''),
-            "text": self.category.get('text', ''),
+            "icon": self.get_icon_component(),
+            "text": self.get_text_component()
         }
 
 
-class CategoryCollectionPanel(Component):
-    template_name = 'inventory/panels/categories.html'
+class CategoryCollectionComponent(Component):
+    template_name = 'inventory/components/category_collection.html'
 
     def __init__(self, categories):
         self.categories = categories
-        self.children = [CategoryComponent(category) for category in categories]
 
-    def get_context_data(self, parent_context=None):
-        return {
-            "children": self.children
-        }
+    def get_current_category(self, current_category):
+        return CategoryComponent(current_category, current=True)
 
-
-class DashboardComponent(Component):
-    template_name = 'inventory/panels/dashboard.html'
-
-    def __init__(self, user):
-        self.user = user
-        self.inventory = InventoryIndex.objects.get(owner=user)
-        self.categories = self.inventory.get_categories()
-        self.party = self.inventory.get_party()
-        self.items = self.inventory.get_items()
-        self.panels = [
-            self.get_body_panel(),
-        ]
-
-    def get_context_data(self, parent_context=None):
-        return {
-            "panels": self.panels
-        }
-
-    def get_body_panel(self):
-        items = self.items
-        children = []
-        count_of_items = len(items)
-
-        if  count_of_items >= 1:
-            featured_item = items.pop(0)
-            featured_panel = self._get_featured_item_panel(featured_item)
-            children.append(featured_panel)
-
-            # Check if there are any items left
-            if items:
-                items_panel = self._get_items_panel(items)
-                children.append(items_panel)
-
-        else:
-            empty_component = self._get_empty_panel(assets="items")
-            children.append(empty_component)
-
-        panel = SectionComponent(
-            children=children
-        )
-        return panel
-
-
-    def _get_featured_item_panel(self, featured_item):
-        return FeaturedItemComponent(featured_item)
-
-
-    def _get_items_panel(self, items):
-        style = 'posts'
-        item_components = [ItemComponent(item) for item in items]
-        panel = CollectionComponent(
-            children=item_components,
+    def get_category_collection(self):
+        style = 'categories'
+        return CollectionComponent(
+            children=[CategoryComponent(category) for category in self.categories],
             style=style
         )
-        return panel
 
-    def _get_empty_panel(self, asset):
-        return EmptyComponent(asset=asset)
+    def set_panel(self):
+        panel_components = []
+
+        if self.categories:
+            current_category = self.categories.pop(0)
+            panel_components.append(self.get_current_category(current_category))
+
+            if self.categories: # Check if there are any categories left
+                panel_components.append(self.get_category_collection())
+
+        else:
+            panel_components.append(EmptyComponent(assets="categories"))
+
+        return SectionComponent(children=panel_components)
+
+    def get_context_data(self, parent_context=None):
+        return {
+            "children": self.set_panel
+        }

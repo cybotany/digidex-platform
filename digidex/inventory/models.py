@@ -106,6 +106,12 @@ class InventoryIndex(AbstractInventory):
             items.extend(category.get_items())
         return items
 
+    def get_component_data(self):
+        return {
+            "categories": self.get_categories(),
+            "items": self.get_items()
+        }
+
     def get_context(self, request):
         context = super().get_context(request)
         context['categories'] = self.get_categories()
@@ -123,6 +129,18 @@ class InventoryCategory(AbstractInventory):
 
     def get_items(self):
         return InventoryItem.objects.child_of(self)
+
+    def get_component_data(self):
+        return {
+            "url": self.url,
+            "icon_source": None,
+            "alt_text": None,
+            "text": self.name,
+        }
+
+    def get_component(self):
+        from inventory.components import CategoryComponent
+        return CategoryComponent(self.get_component_data())
 
     def get_context(self, request):
         context = super().get_context(request)
@@ -143,6 +161,19 @@ class InventoryItem(AbstractInventory):
         if images:
             return images.first()
         return None
+
+    def get_component_data(self):
+        return {
+            "date": self.created_at,
+            "url": self.url,
+            "heading": self.name,
+            "paragraph": self.body,
+            "thumbnail": self.get_thumbnail(),
+        }
+
+    def get_component(self):
+        from inventory.components import ItemComponent
+        return ItemComponent(self.get_component_data())
 
     class Meta:
         verbose_name = _("item")

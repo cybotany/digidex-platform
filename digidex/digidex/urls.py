@@ -2,33 +2,22 @@ from django.conf import settings
 from django.urls import include, path
 from django.contrib import admin
 
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-)
-
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
 from search.views import search
-from inventory.views import inventory
 
 from digidex.api import api_router
-from nearfieldcommunication import api as nfc_api, urls as nfc_urls
 
 urlpatterns = [
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
-    path("search/", search, name="search"),
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/v2/', api_router.urls),
-    path('api/', include(nfc_api.router.urls)),
-    path('accounts/', include('allauth.urls')),
-    path('nfc/', include(nfc_urls.urlpatterns)),
-    path('', inventory, name='inventory'),
+    path("search/", search, name="search"),
+    path('', include('accounts.urls')),
+    path('', include('nearfieldcommunication.urls')),
 ]
 
 if settings.DEBUG:
