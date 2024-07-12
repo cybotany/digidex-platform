@@ -163,6 +163,11 @@ class InventoryLink(models.Model):
         related_name='+'
     )
 
+    def __str__(self):
+        if self.resource:
+            return f"{self.tag} -> {self.resource}"
+        return f"{self.tag} -> None"
+
     class Meta:
         verbose_name = _("link")
         verbose_name_plural = _("links")

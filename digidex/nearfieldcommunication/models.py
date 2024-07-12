@@ -72,7 +72,7 @@ class NearFieldCommunicationTag(models.Model):
     )
 
     def __str__(self):
-        return f"{self.NTAG_FORM_CHOICES[self.tag_form]} {self.id}"
+        return f"{self.NTAG_FORM_CHOICES[self.tag_form]} {self.serial_number}"
 
     def activate_link(self):
         """
