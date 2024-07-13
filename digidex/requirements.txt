@@ -43,9 +43,12 @@ jmespath==1.0.1
 kiwisolver==1.4.5
 l18n==2021.3
 laces==0.1.1
+libusb1==3.1.0
 MarkupSafe==2.1.5
 matplotlib==3.9.0
 mccabe==0.7.0
+ndeflib==0.3.3
+nfcpy==1.0.4
 numpy==1.26.4
 oauthlib==3.2.2
 openpyxl==3.1.2
@@ -58,10 +61,12 @@ pluggy==1.5.0
 psycopg2-binary==2.9.9
 pycodestyle==2.11.1
 pycparser==2.21
+pyDes==2.0.1
 pyflakes==3.2.0
 pygbif==0.6.4
 PyJWT==2.8.0
 pyparsing==3.1.2
+pyserial==3.5
 PySocks==1.7.1
 pytest==8.2.0
 pytest-base-url==2.1.0
