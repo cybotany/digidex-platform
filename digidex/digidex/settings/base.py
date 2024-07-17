@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     "nearfieldcommunication",
     "home",
     "inventory",
+    "gbif",
     "wagtailcalendar",
     "search",
     "storages",

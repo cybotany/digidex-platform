@@ -1,40 +1,46 @@
-from django.shortcuts import render
-from wagtail.admin.viewsets.chooser import ChooserViewSet
 from queryish.rest import APIModel
+from wagtail.admin.viewsets.chooser import ChooserViewSet
 
-from pygbif import occurrences, species
+from pygbif import species
 
-class Pokemon(APIModel):
+
+class GBIFSpecies(APIModel):
     class Meta:
-        base_url = "https://pokeapi.co/api/v2/pokemon/"
-        detail_url = "https://pokeapi.co/api/v2/pokemon/%s/"
-        fields = ["id", "name"]
+        base_url = "https://api.gbif.org/v1/species/"
+        fields = ["key", "scientificName", "rank", "status", "kingdom", "phylum", "class", "order", "family", "genus"]
         pagination_style = "offset-limit"
-        verbose_name_plural = "pokemon"
+        limit_query_param = "limit"
+        offset_query_param = "offset"
 
     @classmethod
-    def from_query_data(cls, data):
-        return cls(
-            id=int(re.match(r'https://pokeapi.co/api/v2/pokemon/(\d+)/', data['url']).group(1)),
-            name=data['name'],
-        )
-
+    def name_backbone(cls, name, **kwargs):
+        return species.name_backbone(name=name, **kwargs)
+    
     @classmethod
-    def from_individual_data(cls, data):
-        return cls(
-            id=data['id'],
-            name=data['name'],
-        )
-
+    def name_suggest(cls, q, **kwargs):
+        return species.name_suggest(q=q, **kwargs)
+    
+    @classmethod
+    def name_usage(cls, **kwargs):
+        return species.name_usage(**kwargs)
+    
+    @classmethod
+    def name_lookup(cls, **kwargs):
+        return species.name_lookup(**kwargs)
+    
+    @classmethod
+    def name_parser(cls, name):
+        return species.name_parser(name)
+    
     def __str__(self):
-        return self.name
+        return self.scientificName
 
 
-class PokemonChooserViewSet(ChooserViewSet):
-    model = Pokemon
+class SpeciesChooserViewSet(ChooserViewSet):
+    model = GBIFSpecies
 
-    choose_one_text = "Choose a pokemon"
-    choose_another_text = "Choose another pokemon"
+    choose_one_text = "Choose a species"
+    choose_another_text = "Choose another species"
 
 
-pokemon_chooser_viewset = PokemonChooserViewSet("pokemon_chooser")
+species_chooser_viewset = SpeciesChooserViewSet("species_chooser")
