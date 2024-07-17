@@ -12,6 +12,7 @@ from wagtail.admin.panels import FieldPanel
 
 from nearfieldcommunication.models import NearFieldCommunicationTag
 
+
 class AbstractInventory(RoutablePageMixin, Page):
     """
     Abstract class for all inventory members.
