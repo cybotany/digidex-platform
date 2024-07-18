@@ -74,7 +74,7 @@ class CategoryCollectionComponent(Component):
                 panel_components.append(self.get_category_collection())
 
         else:
-            panel_components.append(EmptyComponent(assets="categories"))
+            panel_components.append(EmptyComponent(asset="categories"))
 
         return BlockComponent(children=panel_components)
 

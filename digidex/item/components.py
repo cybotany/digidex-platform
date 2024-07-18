@@ -84,7 +84,7 @@ class ItemCollectionComponent(Component):
                 panel_components.append(self.get_item_collection())
 
         else:
-            panel_components.append(EmptyComponent(assets="items"))
+            panel_components.append(EmptyComponent(asset="items"))
 
         return SectionComponent(children=panel_components)
 
