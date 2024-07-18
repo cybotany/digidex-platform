@@ -92,3 +92,15 @@ class ItemCollectionComponent(Component):
         return {
             "panel": self.set_panel()
         }
+
+
+class ItemDashboardComponent(Component):
+    template_name = 'item/components/dashboard.html'
+
+    def __init__(self, user):
+        self.user = user
+        self.is_authenticated = user.is_authenticated
+
+    def get_inventory(self):
+        from inventory.models import InventoryPage
+        return InventoryPage.objects.get(owner=self.user)

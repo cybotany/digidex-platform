@@ -45,15 +45,19 @@ class NavigationComponent(Component):
         return links
 
     def get_navigation_buttons(self):
-        buttons = []
-
         if self.is_authenticated:
-            button = ButtonComponent(
-                text='Logout',
-                url=reverse("account_logout"),
-                style='nav-button-outline'
-            )
-            buttons.append(button)
+            buttons = [
+                ButtonComponent(
+                    text='Account',
+                    url=reverse("account_email"),
+                    style='nav-button-outline'
+                ),
+                ButtonComponent(
+                    text='Logout',
+                    url=reverse("account_logout"),
+                    style='nav-button'
+                )
+            ]   
         else:
             buttons = [
                 ButtonComponent(
@@ -67,7 +71,6 @@ class NavigationComponent(Component):
                     style='nav-button'
                 )
             ]
-            buttons.extend(buttons)
         return buttons
 
     def get_context_data(self, parent_context=None):
