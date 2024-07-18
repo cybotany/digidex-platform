@@ -5,7 +5,7 @@ from django.utils.text import slugify
 
 from wagtail.models import Collection, Page
 
-from inventory.models import InventoryIndex, InventoryLink
+from inventory.models import InventoryPage, InventoryLink
 from nearfieldcommunication.models import NearFieldCommunicationTag
 
 
@@ -20,7 +20,7 @@ def create_user_inventory(sender, instance, created, **kwargs):
         user_collection = parent_collection.add(name=name)
 
         root_page = Page.objects.get(depth=1)
-        inventory = InventoryIndex(
+        inventory = InventoryPage(
             title=f"{name}'s Inventory",
             name=name,
             slug=slugify(name),

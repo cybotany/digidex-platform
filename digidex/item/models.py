@@ -11,7 +11,12 @@ from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 
 
-class InventoryItem(RoutablePageMixin, Page):
+class ItemPage(RoutablePageMixin, Page):
+    parent_page_types = [
+        'category.CategoryPage'
+    ]
+    subpage_types = []
+
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
@@ -65,9 +70,6 @@ class InventoryItem(RoutablePageMixin, Page):
 
     def get_images(self):
         return get_image_model().objects.filter(collection=self.collection)
-
-    parent_page_types = ['category.InventoryCategory']
-    subpage_types = []
 
     def get_thumbnail(self):
         images = self.get_images()

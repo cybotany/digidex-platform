@@ -13,7 +13,12 @@ from wagtail.admin.panels import FieldPanel
 from nearfieldcommunication.models import NearFieldCommunicationTag
 
 
-class InventoryIndex(RoutablePageMixin, Page):
+class InventoryPage(RoutablePageMixin, Page):
+    parent_page_types = []
+    subpage_types = [
+        'category.CategoryPage'
+    ]
+
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
@@ -68,14 +73,11 @@ class InventoryIndex(RoutablePageMixin, Page):
     def get_images(self):
         return get_image_model().objects.filter(collection=self.collection)
 
-    parent_page_types = []
-    subpage_types = ['category.InventoryCategory']
-
     def get_categories(self, exclude_party=True):
-        from category.models import InventoryCategory
+        from category.models import CategoryPage
         if exclude_party:
-            return InventoryCategory.objects.child_of(self).exclude(slug='party')
-        return InventoryCategory.objects.child_of(self)
+            return CategoryPage.objects.child_of(self).exclude(slug='party')
+        return CategoryPage.objects.child_of(self)
 
     def get_category_items(self):
         category_items = {}

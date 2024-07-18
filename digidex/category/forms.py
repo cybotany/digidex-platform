@@ -1,10 +1,10 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
-from inventory.models import InventoryPage
+from category.models import CategoryPage
 
 
-class InventoryPageForm(forms.ModelForm):
+class CategoryPageForm(forms.ModelForm):
     name = forms.CharField(
         widget=forms.TextInput(
             attrs={
@@ -32,11 +32,11 @@ class InventoryPageForm(forms.ModelForm):
         return name
 
     class Meta:
-        model = InventoryPage
+        model = CategoryPage
         fields = ['name', 'body']
 
 
-class DeleteInventoryPageForm(forms.Form):
+class DeleteCategoryPageForm(forms.Form):
     delete = forms.BooleanField(
         widget=forms.CheckboxInput(
             attrs={
