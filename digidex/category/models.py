@@ -89,11 +89,6 @@ class CategoryPage(RoutablePageMixin, Page):
         from category.components import CategoryComponent
         return CategoryComponent(self.get_component_data(), current=current)
 
-    def get_context(self, request):
-        context = super().get_context(request)
-        context['items'] = self.get_items()
-        return context
-
     class Meta:
         verbose_name = _("category")
         verbose_name_plural = _("categories")

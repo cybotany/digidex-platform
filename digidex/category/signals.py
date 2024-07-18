@@ -2,10 +2,10 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.text import slugify
 
-from inventory.models import InventoryIndex
-from category.models import InventoryCategory
+from inventory.models import InventoryPage
+from category.models import CategoryPage
 
-@receiver(post_save, sender=InventoryIndex)
+@receiver(post_save, sender=InventoryPage)
 def create_user_party_category(sender, instance, created, **kwargs):
     if created:
         name = "Party"
@@ -13,7 +13,7 @@ def create_user_party_category(sender, instance, created, **kwargs):
         parent_collection = instance.collection
         category_collection = parent_collection.add(name=name)
 
-        category = InventoryCategory(
+        category = CategoryPage(
             title=name,
             name=name,
             slug=slugify(name),

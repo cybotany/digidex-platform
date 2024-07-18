@@ -63,8 +63,8 @@ class NavigationComponent(Component):
         self.is_authenticated = user.is_authenticated
 
     def get_inventory(self):
-        from inventory.models import InventoryIndex
-        return InventoryIndex.objects.get(owner=self.user)
+        from inventory.models import InventoryPage
+        return InventoryPage.objects.get(owner=self.user)
 
     def get_navigation_links(self):
         links = []
