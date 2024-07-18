@@ -108,9 +108,14 @@ class InventoryIndex(AbstractInventory):
         }
         return HeaderComponent(header)
 
+    def get_navigation(self, request):
+        from home.components import NavigationComponent
+        return NavigationComponent(request.user)
+
     def get_context(self, request):
         context = super().get_context(request)
         context['header'] = self.get_header()
+        context['navigation'] = self.get_navigation(request)
         return context
 
     class Meta:
@@ -129,13 +134,13 @@ class InventoryCategory(AbstractInventory):
         return {
             "url": self.url,
             "icon_source": None,
-            "alt_text": None,
-            "text": self.name,
+            "icon_alt": None,
+            "name": self.name,
         }
 
-    def get_component(self):
+    def get_component(self, current=False):
         from inventory.components import CategoryComponent
-        return CategoryComponent(self.get_component_data())
+        return CategoryComponent(self.get_component_data(), current=current)
 
     def get_context(self, request):
         context = super().get_context(request)
@@ -166,9 +171,9 @@ class InventoryItem(AbstractInventory):
             "thumbnail": self.get_thumbnail(),
         }
 
-    def get_component(self):
+    def get_component(self, featured=False):
         from inventory.components import ItemComponent
-        return ItemComponent(self.get_component_data())
+        return ItemComponent(self.get_component_data(), featured=featured)
 
     class Meta:
         verbose_name = _("item")

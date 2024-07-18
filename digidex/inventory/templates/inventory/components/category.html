@@ -1,6 +1,10 @@
 {% load laces static %}
 
 <a href="{{ url }}" class="link-category w-inline-block {% if current %}w--current{% endif %}">
-  {% component icon %}
+  {% if icon %}
+    {% component icon %}
+  {% else %}
+    <img src="{% static 'base/images/nfc/directional/nfc_directional_mark_black.png' %}" alt="NFC Directional Mark" class="icon-category">
+  {% endif %}
   {% component text %}
 </a>

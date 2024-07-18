@@ -60,8 +60,7 @@ class NavigationComponent(Component):
 
     def __init__(self, user):
         self.user = user
-        self.inventory = self.get_inventory()
-        self.party = self.inventory.get_party()
+        self.is_authenticated = user.is_authenticated
 
     def get_inventory(self):
         from inventory.models import InventoryIndex
@@ -69,21 +68,26 @@ class NavigationComponent(Component):
 
     def get_navigation_links(self):
         links = []
-        items = self.party.get_items()
-        for item in items:
-            links.append(
-                LinkComponent(
-                    url=item.url,
-                    text=item.name,
-                    style='nav'
+
+        if self.is_authenticated:
+            inventory = self.get_inventory()
+            party = inventory.get_party()
+
+            items = party.get_items()
+            for item in items:
+                links.append(
+                    LinkComponent(
+                        url=item.url,
+                        text=item.name,
+                        style='nav'
+                    )
                 )
-            )
         return links
 
     def get_navigation_buttons(self):
         buttons = []
 
-        if self.user.is_authenticated:
+        if self.is_authenticated:
             button = ButtonComponent(
                 text='Logout',
                 url=reverse("account_logout"),

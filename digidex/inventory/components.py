@@ -19,13 +19,18 @@ from base.components import (
 class ItemComponent(Component):
     template_name = 'inventory/components/item.html'
 
-    def __init__(self, item=dict(), style='post'):
+    def __init__(self, item=dict(), featured=None):
         self.heading = self.item.get('heading', 'No heading available')
         self.paragraph = self.item.get('paragraph', 'No paragraph available')
         self.date = self.item.get('date')
         self.url = self.item.get('url')
         self.thumbnail = self.item.get('thumbnail')
-        self.style = style
+        self.style = self.get_style(featured)
+
+    def get_style(self, featured):
+        if featured:
+            return 'post large'
+        return 'post'
 
     def get_heading_component(self):
         return HeadingComponent(
@@ -59,14 +64,14 @@ class ItemCollectionComponent(Component):
     def get_featured_item_collection(self, featured_item):
         style = 'post large'
         return CollectionComponent(
-            children=[ItemComponent(featured_item, style=style)],
+            children=[featured_item.get_component(featured=True)],
             style=style,
         )
 
     def get_item_collection(self):
         style = 'post'
         return CollectionComponent(
-            children=[ItemComponent(item, style) for item in self.items],
+            children=[item.get_component() for item in self.items],
             style=style,
         )
 
@@ -95,27 +100,30 @@ class CategoryComponent(Component):
     template_name = 'inventory/components/category.html'
 
     def __init__(self, category=dict(), current=False):
-        self.category = category
+        self.url = category.get('url')
+        self.icon_source = category.get('icon_source')
+        self.icon_alt = category.get('icon_alt')
+        self.name = category.get('name', 'No name available')
         self.current = current
         self.style = 'category'
 
     def get_icon_component(self):
         return IconComponent(
-            source=self.category.get('icon_source', ''),
-            alt=self.category.get('alt_text', ''),
+            source=self.icon_source,
+            alt=self.icon_alt,
             style=self.style
         )
 
     def get_text_component(self):
         return TextComponent(
-            text=self.category.get('text', 'No text available'),
+            text=self.name,
             style=self.style
         )
 
     def get_context_data(self, parent_context=None):
         return {
-            "url": self.category.get('url', ''),
-            "icon": self.get_icon_component(),
+            "url": self.url,
+            "icon": self.get_icon_component() if self.icon_source else None,
             "text": self.get_text_component()
         }
 
@@ -124,15 +132,15 @@ class CategoryCollectionComponent(Component):
     template_name = 'inventory/components/category_collection.html'
 
     def __init__(self, categories):
-        self.categories = categories
+        self.categories = list(categories)
 
     def get_current_category(self, current_category):
-        return CategoryComponent(current_category, current=True)
+        return current_category.get_component(current=True)
 
     def get_category_collection(self):
         style = 'categories'
         return CollectionComponent(
-            children=[CategoryComponent(category) for category in self.categories],
+            children=[category.get_component() for category in self.categories],
             style=style
         )
 
