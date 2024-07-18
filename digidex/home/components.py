@@ -15,46 +15,6 @@ from base.components import (
 )
 
 
-class NotificationComponent(Component):
-    template_name = 'home/components/notification.html'
-
-    def __init__(self, user):
-        self.user = user
-        self.notifications = self.get_notifications()
-
-    def get_notifications(self):
-        return self.user.notifications.all()
-
-    def get_notification_text(self, notification):
-        return TextComponent(
-            text=notification.message,
-            style='notification'
-        )
-
-    def get_notification_link(self, notification):
-        return LinkComponent(
-            url=notification.url,
-            text='View',
-            style='notification'
-        )
-
-    def get_notification(self, notification):
-        return BlockComponent(
-            children=[
-                self.get_notification_text(notification),
-                self.get_notification_link(notification)
-            ],
-            style='notification'
-        )
-
-    def get_context_data(self, parent_context=None):
-        return {
-            "notifications": CollectionComponent(
-                children=[self.get_notification(notification) for notification in self.notifications]
-            )
-        }
-
-
 class NavigationComponent(Component):
     template_name = 'home/components/navigation.html'
 
