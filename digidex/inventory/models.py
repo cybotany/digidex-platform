@@ -6,17 +6,14 @@ from django.utils.translation import gettext_lazy as _
 from wagtail.documents import get_document_model
 from wagtail.images import get_image_model
 from wagtail.models import Page, Collection
-from wagtail.contrib.routable_page.models import RoutablePageMixin, path, re_path
+from wagtail.contrib.routable_page.models import RoutablePageMixin, path
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 
 from nearfieldcommunication.models import NearFieldCommunicationTag
 
 
-class AbstractInventory(RoutablePageMixin, Page):
-    """
-    Abstract class for all inventory members.
-    """
+class InventoryIndex(RoutablePageMixin, Page):
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
@@ -71,15 +68,11 @@ class AbstractInventory(RoutablePageMixin, Page):
     def get_images(self):
         return get_image_model().objects.filter(collection=self.collection)
 
-    class Meta:
-        abstract = True
-
-
-class InventoryIndex(AbstractInventory):
     parent_page_types = []
-    subpage_types = ['inventory.InventoryCategory']
+    subpage_types = ['category.InventoryCategory']
 
     def get_categories(self, exclude_party=True):
+        from category.models import InventoryCategory
         if exclude_party:
             return InventoryCategory.objects.child_of(self).exclude(slug='party')
         return InventoryCategory.objects.child_of(self)
@@ -101,7 +94,7 @@ class InventoryIndex(AbstractInventory):
 
     def get_header(self):
         from home.components import HeaderComponent
-        from inventory.components import CategoryCollectionComponent
+        from category.components import CategoryCollectionComponent
         header = {
             "heading": self.title,
             "categories": CategoryCollectionComponent(self.get_categories()),
@@ -121,63 +114,6 @@ class InventoryIndex(AbstractInventory):
     class Meta:
         verbose_name = _("inventory")
         verbose_name_plural = _("inventories")
-
-
-class InventoryCategory(AbstractInventory):
-    parent_page_types = ['inventory.InventoryIndex']
-    subpage_types = ['inventory.InventoryItem']
-
-    def get_items(self):
-        return InventoryItem.objects.child_of(self)
-
-    def get_component_data(self):
-        return {
-            "url": self.url,
-            "icon_source": None,
-            "icon_alt": None,
-            "name": self.name,
-        }
-
-    def get_component(self, current=False):
-        from inventory.components import CategoryComponent
-        return CategoryComponent(self.get_component_data(), current=current)
-
-    def get_context(self, request):
-        context = super().get_context(request)
-        context['items'] = self.get_items()
-        return context
-
-    class Meta:
-        verbose_name = _("category")
-        verbose_name_plural = _("categories")
-
-
-class InventoryItem(AbstractInventory):
-    parent_page_types = ['inventory.InventoryCategory']
-    subpage_types = []
-
-    def get_thumbnail(self):
-        images = self.get_images()
-        if images:
-            return images.first()
-        return None
-
-    def get_component_data(self):
-        return {
-            "date": self.created_at,
-            "url": self.url,
-            "heading": self.name,
-            "paragraph": self.body,
-            "thumbnail": self.get_thumbnail(),
-        }
-
-    def get_component(self, featured=False):
-        from inventory.components import ItemComponent
-        return ItemComponent(self.get_component_data(), featured=featured)
-
-    class Meta:
-        verbose_name = _("item")
-        verbose_name_plural = _("items")
 
 
 class InventoryLink(models.Model):

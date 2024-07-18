@@ -5,7 +5,7 @@ from django.utils.text import slugify
 
 from wagtail.models import Collection, Page
 
-from inventory.models import InventoryIndex, InventoryCategory, InventoryLink
+from inventory.models import InventoryIndex, InventoryLink
 from nearfieldcommunication.models import NearFieldCommunicationTag
 
 
@@ -28,23 +28,6 @@ def create_user_inventory(sender, instance, created, **kwargs):
             collection=user_collection
         )
         root_page.add_child(instance=inventory)
-
-@receiver(post_save, sender=InventoryIndex)
-def create_user_party_category(sender, instance, created, **kwargs):
-    if created:
-        name = "Party"
-
-        parent_collection = instance.collection
-        category_collection = parent_collection.add(name=name)
-
-        category = InventoryCategory(
-            title=name,
-            name=name,
-            slug=slugify(name),
-            owner=instance.owner,
-            collection=category_collection
-        )
-        instance.add_child(instance=category)
 
 @receiver(post_save, sender=NearFieldCommunicationTag)
 def create_nfc_inventory_link(sender, instance, created, **kwargs):
