@@ -11,7 +11,7 @@ def create_user_party_category(sender, instance, created, **kwargs):
         name = "Party"
 
         parent_collection = instance.collection
-        category_collection = parent_collection.add(name=name)
+        category_collection = parent_collection.add_child(name=name)
 
         category = CategoryPage(
             title=name,

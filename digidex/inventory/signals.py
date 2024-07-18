@@ -17,7 +17,7 @@ def create_user_inventory(sender, instance, created, **kwargs):
         name = instance.username.title()
         
         parent_collection = Collection.get_first_root_node()
-        user_collection = parent_collection.add(name=name)
+        user_collection = parent_collection.add_child(name=name)
 
         root_page = Page.objects.get(depth=1)
         inventory = InventoryPage(
