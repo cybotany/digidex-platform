@@ -48,8 +48,13 @@ class NavigationComponent(Component):
         if self.is_authenticated:
             buttons = [
                 ButtonComponent(
-                    text='Account',
+                    text='Email',
                     url=reverse("account_email"),
+                    style='nav-button-outline'
+                ),
+                ButtonComponent(
+                    text='Password',
+                    url=reverse("account_change_password"),
                     style='nav-button-outline'
                 ),
                 ButtonComponent(

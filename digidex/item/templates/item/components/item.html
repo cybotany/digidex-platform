@@ -5,7 +5,7 @@
     {% image thumbnail original class="image-post-thumbnail" alt=thumbnail.alt %}
   </a>
   <div class="post">
-    <div class="date">{{ date }}</div>
+    {% component date %}
     <a href="{{ url }}" class="link-heading-post w-inline-block">
       {% component heading %}
     </a>

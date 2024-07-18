@@ -85,7 +85,7 @@ class CategoryCollectionComponent(Component):
 
 
 class CategoryDashboardComponent(Component):
-    template_name = 'category/components/dashboard.html'
+    template_name = 'category/components/category_dashboard.html'
 
     def __init__(self, user):
         self.user = user

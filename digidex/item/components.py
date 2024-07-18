@@ -11,6 +11,7 @@ from base.components import (
     CollectionComponent,
     EmptyComponent,
     ButtonComponent,
+    DateComponent,
 )
 
 
@@ -43,9 +44,14 @@ class ItemComponent(Component):
             style=self.style
         )
 
+    def get_date_component(self):
+        return DateComponent(
+            date=self.date
+        )
+
     def get_context_data(self, parent_context=None):
         return {
-            "date": self.date,
+            "date": self.get_date_component(),
             "url": self.url,
             "heading": self.get_heading_component(),
             "paragraph": self.get_paragraph_component(),
@@ -95,7 +101,7 @@ class ItemCollectionComponent(Component):
 
 
 class ItemDashboardComponent(Component):
-    template_name = 'item/components/dashboard.html'
+    template_name = 'item/components/item_dashboard.html'
 
     def __init__(self, user):
         self.user = user

@@ -160,3 +160,17 @@ class ButtonComponent(Component):
             "text": self.text,
             "style": self.style
         }
+
+
+class DateComponent(Component):
+    template_name = 'base/components/date.html'
+
+    def __init__(self, date=str, style=None):
+        self.date = date
+        self.style = style
+
+    def get_context_data(self, parent_context=None):
+        return {
+            "date": self.date,
+            "style": self.style
+        }
