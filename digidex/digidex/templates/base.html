@@ -29,18 +29,16 @@
     <link rel="stylesheet" type="text/css" href="{% static 'base/css/reset.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'base/css/webflow.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'base/css/digidex.css' %}">
-
-    {# Extra stylesheets #}
-    {% block extra_css %}{% endblock %}
   </head>
   <body>
-    {% include "includes/header.html" %}
+    <header>
+      {% block header %}{% endblock header %}
+    </header>
     <main>
       {% block body %}{% endblock body %}
     </main>
-    {% include "includes/footer.html" %}
-
-    {# Extra JavaScript files #}
-    {% block extra_js %}{% endblock extra_js %}
+    <footer>
+      {% block footer %}{% endblock footer %}
+    </footer>
   </body>
 </html>

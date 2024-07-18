@@ -1,4 +1,8 @@
-{% extends "item/base.html" %}
+{% extends "base.html" %}
+
+{% block header %}
+  {% component navigation %}
+{% endblock header %}
 
 {% block body %}
   <section class="section">
@@ -113,3 +117,6 @@
     </div>
   </section>
 {% endblock body %}
+
+{% block footer %}
+{% endblock footer %}
