@@ -96,23 +96,13 @@ class InventoryPage(RoutablePageMixin, Page):
             items.extend(category.get_items())
         return items
 
-    def get_header(self):
-        from home.components import HeaderComponent
-        from category.components import CategoryCollectionComponent
-        header = {
-            "heading": self.title,
-            "categories": CategoryCollectionComponent(self.get_categories()),
-        }
-        return HeaderComponent(header)
-
-    def get_navigation(self, request):
-        from home.components import NavigationComponent
-        return NavigationComponent(request.user)
+    def get_dashboard(self, request):
+        from inventory.components import InventoryDashboardComponent
+        return InventoryDashboardComponent(request)
 
     def get_context(self, request):
         context = super().get_context(request)
-        context['header'] = self.get_header()
-        context['navigation'] = self.get_navigation(request)
+        context['dashboard'] = self.get_dashboard(request)
         return context
 
     class Meta:

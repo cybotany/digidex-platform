@@ -1,1 +1,26 @@
+{% extends "base.html" %}
 {% load laces %}
+
+{% if header_panels %}
+  {% block header %}
+    {% for panel in header_panels %}
+      {% component panel %}
+    {% endfor %}
+  {% endblock header %}
+{% endif %}
+
+{% if body_panels %}
+  {% block body %}
+    {% for panel in body_panels %}
+      {% component panel %}
+    {% endfor %}
+  {% endblock body %}
+{% endif %}
+
+{% if footer_panels %}
+  {% block footer %}
+    {% for panel in footer_panels %}
+      {% component panel %}
+    {% endfor %}
+  {% endblock footer %}
+{% endif %}

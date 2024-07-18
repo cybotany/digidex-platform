@@ -13,7 +13,10 @@ from base.components import (
     ButtonComponent,
     DateComponent,
 )
-
+from home.components import (
+    NavigationComponent,
+    HeaderComponent,
+)
 
 class ItemComponent(Component):
     template_name = 'item/components/item.html'
@@ -103,10 +106,23 @@ class ItemCollectionComponent(Component):
 class ItemDashboardComponent(Component):
     template_name = 'item/components/item_dashboard.html'
 
-    def __init__(self, user):
-        self.user = user
-        self.is_authenticated = user.is_authenticated
+    def __init__(self, request):
+        self.user = request.user
+        self.is_authenticated = request.user.is_authenticated
 
     def get_inventory(self):
         from inventory.models import InventoryPage
         return InventoryPage.objects.get(owner=self.user)
+
+    def get_navigation(self):
+        return NavigationComponent(self.user)
+
+    def get_panels(self):
+        return [
+            self.get_navigation(),
+        ]
+
+    def get_context_data(self, parent_context=None):
+        return {
+            "panels": self.get_panels()
+        }
