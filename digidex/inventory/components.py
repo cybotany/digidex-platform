@@ -19,35 +19,34 @@ from base.components import (
 class ItemComponent(Component):
     template_name = 'inventory/components/item.html'
 
-    def __init__(self, item=dict(), style=None):
-        self.item = item
-        self.style = self.set_style(style)
-
-    def set_style(self, style):
-        if style:
-            return style
-        return 'post'
+    def __init__(self, item=dict(), style='post'):
+        self.heading = self.item.get('heading', 'No heading available')
+        self.paragraph = self.item.get('paragraph', 'No paragraph available')
+        self.date = self.item.get('date')
+        self.url = self.item.get('url')
+        self.thumbnail = self.item.get('thumbnail')
+        self.style = style
 
     def get_heading_component(self):
         return HeadingComponent(
-            text=self.item.get('heading', 'No heading available'),
+            text=self.heading,
             size=4,
             style=self.style
         )
 
     def get_paragraph_component(self):
         return ParagraphComponent(
-            text=self.item.get('paragraph', 'No paragraph available'),
+            text=self.paragraph,
             style=self.style
         )
 
     def get_context_data(self, parent_context=None):
         return {
-            "date": self.item.get('date', ''),
-            "url": self.item.get('url', ''),
+            "date": self.date,
+            "url": self.url,
             "heading": self.get_heading_component(),
             "paragraph": self.get_paragraph_component(),
-            "thumbnail": self.item.get('thumbnail', '')
+            "thumbnail": self.thumbnail
         }
 
 
@@ -154,5 +153,5 @@ class CategoryCollectionComponent(Component):
 
     def get_context_data(self, parent_context=None):
         return {
-            "children": self.set_panel
+            "panel": self.set_panel
         }

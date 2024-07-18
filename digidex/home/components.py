@@ -114,12 +114,12 @@ class NavigationComponent(Component):
 
 
 class HeaderComponent(Component):
-    template_name = 'home/components/top_panel.html'
+    template_name = 'home/components/header.html'
 
-    def __init__(self, heading=str, paragraph=None, categories=None):
-        self.heading = heading
-        self.paragraph = paragraph
-        self.categories = categories
+    def __init__(self, header=dict()):
+        self.heading = header.get('heading', 'No heading available')
+        self.paragraph = header.get('paragraph')
+        self.categories = header.get('categories')
         self.style = 'top'
 
     def get_heading_component(self):

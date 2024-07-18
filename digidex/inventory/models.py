@@ -71,14 +71,6 @@ class AbstractInventory(RoutablePageMixin, Page):
     def get_images(self):
         return get_image_model().objects.filter(collection=self.collection)
 
-    def get_context(self, request):
-        context = super().get_context(request)        
-        context['title'] = self.title 
-        context['add_child_page'] = self.full_url + self.reverse_subpage('add_child_page')
-        context['update_current_page'] = self.full_url + self.reverse_subpage('update_current_page')
-        context['delete_current_page'] = self.full_url + self.reverse_subpage('delete_current_page')
-        return context
-
     class Meta:
         abstract = True
 
@@ -107,16 +99,18 @@ class InventoryIndex(AbstractInventory):
             items.extend(category.get_items())
         return items
 
-    def get_component_data(self):
-        return {
-            "categories": self.get_categories(),
-            "items": self.get_items()
+    def get_header(self):
+        from home.components import HeaderComponent
+        from inventory.components import CategoryCollectionComponent
+        header = {
+            "heading": self.title,
+            "categories": CategoryCollectionComponent(self.get_categories()),
         }
+        return HeaderComponent(header)
 
     def get_context(self, request):
         context = super().get_context(request)
-        context['categories'] = self.get_categories()
-        context['items'] = self.get_items()
+        context['header'] = self.get_header()
         return context
 
     class Meta:
