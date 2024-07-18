@@ -14,7 +14,9 @@ from nearfieldcommunication.models import NearFieldCommunicationTag
 
 
 class InventoryPage(RoutablePageMixin, Page):
-    parent_page_types = []
+    parent_page_types = [
+        'home.HomePage'
+    ]
     subpage_types = [
         'category.CategoryPage'
     ]

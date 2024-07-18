@@ -6,6 +6,10 @@ from wagtail.admin.panels import FieldPanel
 
 
 class HomePage(Page):
+    subpage_types = [
+        'inventory.InventoryPage'
+    ]
+
     body = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
