@@ -12,7 +12,7 @@ from wagtail.admin.panels import FieldPanel
 
 
 class ItemPage(RoutablePageMixin, Page):
-    template = "item/detail_item.html"
+    template = "item/item_detail.html"
 
     parent_page_types = [
         'category.CategoryPage'
@@ -89,8 +89,8 @@ class ItemPage(RoutablePageMixin, Page):
         }
 
     def get_component(self, featured=False):
-        from item.components import ItemCard
-        return ItemCard(self.get_component_data(), featured=featured)
+        from item.components import ItemPanel
+        return ItemPanel(self.get_component_data())
 
     class Meta:
         verbose_name = _("item")

@@ -14,7 +14,7 @@ from nearfieldcommunication.models import NearFieldCommunicationTag
 
 
 class InventoryPage(RoutablePageMixin, Page):
-    template = "inventory/detail_inventory.html"
+    template = "inventory/inventory_detail.html"
 
     parent_page_types = [
         'home.HomePage'
