@@ -15,7 +15,7 @@ from base.components import (
 )
 
 class ItemPanel(Component):
-    template_name = 'item/components/item_panel.html'
+    template_name = 'item/panels/item_panel.html'
 
     def __init__(self, item=dict()):
         self.heading = self.item.get('heading', 'No heading available')

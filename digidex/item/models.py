@@ -89,7 +89,7 @@ class ItemPage(RoutablePageMixin, Page):
         }
 
     def get_component(self, featured=False):
-        from item.components import ItemPanel
+        from item.panels import ItemPanel
         return ItemPanel(self.get_component_data())
 
     class Meta:

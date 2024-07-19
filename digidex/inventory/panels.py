@@ -2,7 +2,7 @@ from laces.components import Component
 
 
 class InventoryDashboard(Component):
-    template_name = 'inventory/components/inventory_dashboard.html'
+    template_name = 'inventory/panels/inventory_dashboard.html'
 
     def __init__(self, request):
         self.user = request.user

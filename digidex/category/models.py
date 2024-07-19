@@ -88,7 +88,7 @@ class CategoryPage(RoutablePageMixin, Page):
         }
 
     def get_component(self, current=False):
-        from category.components import CategoryPanel
+        from category.panels import CategoryPanel
         return CategoryPanel(self.get_component_data(), current=current)
 
     class Meta:

@@ -15,7 +15,7 @@ from base.components import (
 
 
 class CategoryPanel(Component):
-    template_name = 'category/components/category_panel.html'
+    template_name = 'category/panels/category_panel.html'
 
     def __init__(self, category=dict(), current=False):
         self.url = category.get('url')
