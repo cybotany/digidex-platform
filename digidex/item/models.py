@@ -12,6 +12,8 @@ from wagtail.admin.panels import FieldPanel
 
 
 class ItemPage(RoutablePageMixin, Page):
+    template = "item/detail_item.html"
+
     parent_page_types = [
         'category.CategoryPage'
     ]

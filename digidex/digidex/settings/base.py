@@ -26,7 +26,7 @@ INSTALLED_APPS = [
     "category",
     "item",
     "gbif",
-    "wagtailcalendar",
+    "schedule",
     "search",
     "storages",
     "whitenoise.runserver_nostatic",
