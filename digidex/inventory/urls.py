@@ -1,9 +1,6 @@
-from django.urls import path
+from django.urls import path, include
 
-from inventory.views import InventoryDetailView, InventoryListView
-
-
+app_name = "inventory"
 urlpatterns = [
-    path("<slug:slug>/", InventoryDetailView.as_view(), name="inventory-detail"),
-    path("", InventoryListView.as_view(), name="inventory-list"),
+    path("<slug:slug>/", include('category.urls')),
 ]

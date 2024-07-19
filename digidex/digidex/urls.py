@@ -18,6 +18,7 @@ urlpatterns = [
     path("search/", search, name="search"),
     path('', include('accounts.urls')),
     path('', include('nearfieldcommunication.urls')),
+    path('', include('inventory.urls')),
 ]
 
 if settings.DEBUG:

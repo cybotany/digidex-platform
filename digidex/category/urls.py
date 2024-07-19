@@ -1,9 +1,9 @@
-from django.urls import path
+from django.urls import path, include
 
-from category.views import CategoryDetailView, CategoryListView
+from category.views import CategoryDetailView
 
-
+app_name = "category"
 urlpatterns = [
-    path("<slug:slug>/", CategoryDetailView.as_view(), name="category-detail"),
-    path("", CategoryListView.as_view(), name="category-list"),
+    path("<slug:slug>/detail/", CategoryDetailView.as_view(), name="category-detail"),
+    path("<slug:slug>/", include('item.urls')),
 ]
