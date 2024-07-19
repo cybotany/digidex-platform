@@ -87,8 +87,8 @@ class ItemPage(RoutablePageMixin, Page):
         }
 
     def get_component(self, featured=False):
-        from item.components import ItemComponent
-        return ItemComponent(self.get_component_data(), featured=featured)
+        from item.components import ItemCard
+        return ItemCard(self.get_component_data(), featured=featured)
 
     class Meta:
         verbose_name = _("item")

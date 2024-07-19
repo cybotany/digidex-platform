@@ -86,8 +86,8 @@ class CategoryPage(RoutablePageMixin, Page):
         }
 
     def get_component(self, current=False):
-        from category.components import CategoryComponent
-        return CategoryComponent(self.get_component_data(), current=current)
+        from category.components import CategoryCard
+        return CategoryCard(self.get_component_data(), current=current)
 
     class Meta:
         verbose_name = _("category")

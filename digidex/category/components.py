@@ -14,13 +14,9 @@ from base.components import (
     EmptyComponent,
     ButtonComponent,
 )
-from home.components import (
-    NavigationComponent,
-    HeaderComponent,
-)
 
 
-class CategoryCardComponent(Component):
+class CategoryCard(Component):
     template_name = 'category/components/category_card.html'
 
     def __init__(self, category=dict(), current=False):
@@ -53,7 +49,7 @@ class CategoryCardComponent(Component):
         }
 
 
-class CategoryCollectionComponent(Component):
+class CategoryCollection(Component):
     template_name = 'category/components/category_collection.html'
 
     def __init__(self, categories=list()):
@@ -93,29 +89,4 @@ class CategoryCollectionComponent(Component):
     def get_context_data(self, parent_context=None):
         return {
             "panel": self.set_panel()
-        }
-
-
-class CategoryDashboardComponent(Component):
-    template_name = 'category/components/category_dashboard.html'
-
-    def __init__(self, request):
-        self.user = request.user
-        self.is_authenticated = request.user.is_authenticated
-
-    def get_inventory(self):
-        from inventory.models import InventoryPage
-        return InventoryPage.objects.get(owner=self.user)
-
-    def get_navigation(self):
-        return NavigationComponent(self.user)
-
-    def get_panels(self):
-        return [
-            self.get_navigation(),
-        ]
-
-    def get_context_data(self, parent_context=None):
-        return {
-            "panels": self.get_panels()
         }

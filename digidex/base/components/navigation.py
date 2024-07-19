@@ -3,7 +3,7 @@ from django.forms import Media
 
 from laces.components import Component
 
-from base.components import (
+from .base import (
     SectionComponent,
     BlockComponent,
     HeadingComponent,
@@ -16,8 +16,8 @@ from base.components import (
 )
 
 
-class NavigationComponent(Component):
-    template_name = 'home/components/navigation.html'
+class Navigation(Component):
+    template_name = 'base/navigation.html'
 
     def __init__(self, user):
         self.user = user
@@ -26,7 +26,7 @@ class NavigationComponent(Component):
     @property
     def media(self):
         return Media(
-            css={"all": ("home/css/navigation.css",)}
+            css={"all": ("base/css/navigation.css",)}
         )
 
     def get_inventory(self):
@@ -93,7 +93,7 @@ class NavigationComponent(Component):
 
 
 class HeaderComponent(Component):
-    template_name = 'home/components/header.html'
+    template_name = 'base/header.html'
 
     def __init__(self, header=dict()):
         self.heading = header.get('heading', 'No heading available')
@@ -104,7 +104,7 @@ class HeaderComponent(Component):
     @property
     def media(self):
         return Media(
-            css={"all": ("home/css/header.css",)}
+            css={"all": ("base/css/header.css",)}
         )
 
     def get_heading_component(self):

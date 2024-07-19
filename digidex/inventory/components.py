@@ -1,8 +1,7 @@
 from django.forms import Media
 
 from laces.components import Component, MediaContainer
-
-from home.components import NavigationComponent, HeaderComponent
+from base.components import Navigation, Header 
 
 
 class InventoryDashboardComponent(Component):
@@ -25,23 +24,20 @@ class InventoryDashboardComponent(Component):
         return inventory.title
 
     def get_navigation_panel(self):
-        return NavigationComponent(self.user)
+        return Navigation(self.user)
 
     def get_header_panel(self):
-        from category.components import CategoryCollectionComponent
-        categories = CategoryCollectionComponent(list(self.get_categories()))
+        from category.components import CategoryCollection
+        categories = CategoryCollection(list(self.get_categories()))
         heading = self.get_heading()
-        return HeaderComponent(
+        return Header(
             {
                 "heading": heading,
                 "categories": categories,
             }
         )
 
-    def get_login_panel(self):
-        pass
-
-    def get_header_panels(self):
+    def get_panels(self):
         panels = [
             self.get_navigation_panel(),
         ]
@@ -49,28 +45,8 @@ class InventoryDashboardComponent(Component):
             panels.append(self.get_header_panel())
         return panels
 
-    def get_body_panels(self):
-        panels = []
-        if self.is_authenticated:
-            pass
-        else:
-            panels.append(self.get_login_panel())
-        return panels
-
-    def get_footer_panels(self):
-        panels = []
-        if self.is_authenticated:
-            pass
-        else:
-            pass
-        return panels
-
     def get_context_data(self, parent_context=None):
-        header = self.get_header_panels()
-        body = self.get_body_panels()
-        footer = self.get_footer_panels()
+        panels = self.get_panels()
         return {
-            "header_panels": MediaContainer(header) if header else None,
-            "body_panels": MediaContainer(body) if body else None,
-            "footer_panels": MediaContainer(footer) if footer else None,
+            "panels": MediaContainer(panels),
         }
