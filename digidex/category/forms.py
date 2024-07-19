@@ -1,10 +1,10 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
-from category.models import CategoryPage
+from category.models import Category
 
 
-class CategoryPageForm(forms.ModelForm):
+class CategoryForm(forms.ModelForm):
     name = forms.CharField(
         widget=forms.TextInput(
             attrs={
@@ -32,11 +32,11 @@ class CategoryPageForm(forms.ModelForm):
         return name
 
     class Meta:
-        model = CategoryPage
+        model = Category
         fields = ['name', 'body']
 
 
-class DeleteCategoryPageForm(forms.Form):
+class DeleteCategoryForm(forms.Form):
     delete = forms.BooleanField(
         widget=forms.CheckboxInput(
             attrs={

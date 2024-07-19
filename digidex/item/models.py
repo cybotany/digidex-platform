@@ -5,20 +5,10 @@ from django.utils.translation import gettext_lazy as _
 
 from wagtail.documents import get_document_model
 from wagtail.images import get_image_model
-from wagtail.models import Page, Collection
-from wagtail.contrib.routable_page.models import RoutablePageMixin, path
-from wagtail.fields import RichTextField
-from wagtail.admin.panels import FieldPanel
+from wagtail.models import Collection
 
 
-class ItemPage(RoutablePageMixin, Page):
-    template = "item/item_detail.html"
-
-    parent_page_types = [
-        'category.CategoryPage'
-    ]
-    subpage_types = []
-
+class Item(models.Model):
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
@@ -31,10 +21,11 @@ class ItemPage(RoutablePageMixin, Page):
         blank=True,
         verbose_name=_("name")
     )
-    body = RichTextField( 
-        blank=True,
+    slug = models.SlugField(
+        max_length=255,
         null=True,
-        verbose_name=_("body")
+        blank=True,
+        verbose_name=_("slug")
     )
     collection = models.ForeignKey(
         Collection,
@@ -42,30 +33,17 @@ class ItemPage(RoutablePageMixin, Page):
         null=True,
         related_name='+',
     )
+    body = models.TextField( 
+        blank=True,
+        null=True,
+        verbose_name=_("body")
+    )
     created_at = models.DateTimeField(
         auto_now_add=True
     )
     last_modified = models.DateTimeField(
         auto_now=True
     )
-
-    content_panels = Page.content_panels + [
-        FieldPanel("name"),
-        FieldPanel("body"),
-        FieldPanel("collection"),
-    ]
-
-    @path('add/')
-    def add_child_page(self, request):
-        pass
-
-    @path('update/')
-    def update_current_page(self, request):
-        pass
-
-    @path('delete/')
-    def delete_current_page(self, request):
-        pass
 
     def get_documents(self):
         return get_document_model().objects.filter(collection=self.collection)

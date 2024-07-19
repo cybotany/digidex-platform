@@ -1,10 +1,10 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
-from item.models import ItemPage
+from item.models import Item
 
 
-class ItemPageForm(forms.ModelForm):
+class ItemForm(forms.ModelForm):
     name = forms.CharField(
         widget=forms.TextInput(
             attrs={
@@ -32,11 +32,11 @@ class ItemPageForm(forms.ModelForm):
         return name
 
     class Meta:
-        model = ItemPage
+        model = Item
         fields = ['name', 'body']
 
 
-class DeleteItemPageForm(forms.Form):
+class DeleteItemForm(forms.Form):
     delete = forms.BooleanField(
         widget=forms.CheckboxInput(
             attrs={

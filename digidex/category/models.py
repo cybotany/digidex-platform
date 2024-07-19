@@ -5,22 +5,10 @@ from django.utils.translation import gettext_lazy as _
 
 from wagtail.documents import get_document_model
 from wagtail.images import get_image_model
-from wagtail.models import Page, Collection
-from wagtail.contrib.routable_page.models import RoutablePageMixin, path
-from wagtail.fields import RichTextField
-from wagtail.admin.panels import FieldPanel
+from wagtail.models import Collection
 
 
-class CategoryPage(RoutablePageMixin, Page):
-    template = "category/category_detail.html"
-
-    parent_page_types = [
-        'inventory.InventoryPage'
-    ]
-    subpage_types = [
-        'item.ItemPage'
-    ]
-
+class Category(models.Model):
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
@@ -33,7 +21,7 @@ class CategoryPage(RoutablePageMixin, Page):
         blank=True,
         verbose_name=_("name")
     )
-    body = RichTextField( 
+    body = models.TextField( 
         blank=True,
         null=True,
         verbose_name=_("body")
@@ -51,24 +39,6 @@ class CategoryPage(RoutablePageMixin, Page):
         auto_now=True
     )
 
-    content_panels = Page.content_panels + [
-        FieldPanel("name"),
-        FieldPanel("body"),
-        FieldPanel("collection"),
-    ]
-
-    @path('add/')
-    def add_child_page(self, request):
-        pass
-
-    @path('update/')
-    def update_current_page(self, request):
-        pass
-
-    @path('delete/')
-    def delete_current_page(self, request):
-        pass
-
     def get_documents(self):
         return get_document_model().objects.filter(collection=self.collection)
 
@@ -76,8 +46,8 @@ class CategoryPage(RoutablePageMixin, Page):
         return get_image_model().objects.filter(collection=self.collection)
 
     def get_items(self):
-        from item.models import ItemPage
-        return ItemPage.objects.child_of(self)
+        from item.models import Item
+        return Item.objects.child_of(self)
 
     def get_component_data(self):
         return {

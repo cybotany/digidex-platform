@@ -9,7 +9,7 @@ class InventoryDashboardView(DetailView):
     template_name = "inventory/dashboard.html"
 
     def get_queryset(self):
-        return get_object_or_404(InventoryPage, slug=self.kwargs["slug"])
+        return get_object_or_404(InventoryPage, slug=self.kwargs["inventory_slug"])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
