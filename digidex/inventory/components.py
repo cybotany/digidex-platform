@@ -1,7 +1,6 @@
 from django.forms import Media
 
 from laces.components import Component, MediaContainer
-from base.components import Navigation, Header 
 
 
 class InventoryDashboardComponent(Component):
@@ -22,20 +21,6 @@ class InventoryDashboardComponent(Component):
     def get_heading(self):
         inventory = self.get_inventory()
         return inventory.title
-
-    def get_navigation_panel(self):
-        return Navigation(self.user)
-
-    def get_header_panel(self):
-        from category.components import CategoryCollection
-        categories = CategoryCollection(list(self.get_categories()))
-        heading = self.get_heading()
-        return Header(
-            {
-                "heading": heading,
-                "categories": categories,
-            }
-        )
 
     def get_panels(self):
         panels = [

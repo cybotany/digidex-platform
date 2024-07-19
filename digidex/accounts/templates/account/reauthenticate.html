@@ -4,7 +4,8 @@
 {% block reauthenticate_content %}
     <p class="paragraph-account">{% blocktranslate %}Enter your password:{% endblocktranslate %}</p>
     {% url 'account_reauthenticate' as action_url %}
-    {% element form form=form method="post" action=action_url %}
+    <div class="account-form">
+      {% element form form=form method="post" action=action_url %}
         {% slot body %}
             {% csrf_token %}
             {% element fields form=form unlabeled=True %}
@@ -20,5 +21,6 @@
                 {% trans "Confirm" %}
             {% endelement %}
         {% endslot %}
-    {% endelement %}
+      {% endelement %}
+    </div>
 {% endblock %}
