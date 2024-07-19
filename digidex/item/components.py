@@ -1,4 +1,6 @@
-from laces.components import Component
+from django.forms import Media
+
+from laces.components import Component, MediaContainer
 
 from base.components import (
     SectionComponent,
@@ -19,7 +21,7 @@ from home.components import (
 )
 
 class ItemComponent(Component):
-    template_name = 'item/components/item.html'
+    template_name = 'item/components/item_card.html'
 
     def __init__(self, item=dict(), featured=None):
         self.heading = self.item.get('heading', 'No heading available')
@@ -67,6 +69,12 @@ class ItemCollectionComponent(Component):
 
     def __init__(self, items):
         self.items = items
+
+    @property
+    def media(self):
+        return Media(
+            css={"all": ("item/css/item_collection.css",)}
+        )
 
     def get_featured_item_collection(self, featured_item):
         style = 'post large'

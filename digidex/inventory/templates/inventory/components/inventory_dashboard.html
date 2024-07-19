@@ -1,5 +1,10 @@
-{% extends "base.html" %}
 {% load laces %}
+
+{% block extra_css %}
+  {{ header_panels.media.css }}
+  {{ body_panels.media.css }}
+  {{ footer_panels.media.css }}
+{% endblock extra_css %}
 
 {% if header_panels %}
   {% block header %}
@@ -24,3 +29,5 @@
     {% endfor %}
   {% endblock footer %}
 {% endif %}
+
+{% block extra_js %}{% endblock extra_js %}

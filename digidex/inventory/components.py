@@ -1,4 +1,6 @@
-from laces.components import Component
+from django.forms import Media
+
+from laces.components import Component, MediaContainer
 
 from home.components import NavigationComponent, HeaderComponent
 
@@ -68,7 +70,7 @@ class InventoryDashboardComponent(Component):
         body = self.get_body_panels()
         footer = self.get_footer_panels()
         return {
-            "header_panels": header if header else None,
-            "body_panels": body if body else None,
-            "footer_panels": footer if footer else None,
+            "header_panels": MediaContainer(header) if header else None,
+            "body_panels": MediaContainer(body) if body else None,
+            "footer_panels": MediaContainer(footer) if footer else None,
         }

@@ -1,4 +1,6 @@
-from laces.components import Component
+from django.forms import Media
+
+from laces.components import Component, MediaContainer
 
 from base.components import (
     SectionComponent,
@@ -18,8 +20,8 @@ from home.components import (
 )
 
 
-class CategoryComponent(Component):
-    template_name = 'category/components/category.html'
+class CategoryCardComponent(Component):
+    template_name = 'category/components/category_card.html'
 
     def __init__(self, category=dict(), current=False):
         self.url = category.get('url')
@@ -56,6 +58,12 @@ class CategoryCollectionComponent(Component):
 
     def __init__(self, categories=list()):
         self.categories = categories
+
+    @property
+    def media(self):
+        return Media(
+            css={"all": ("category/css/category.css",)}
+        )
 
     def get_current_category(self, current_category):
         return current_category.get_component(current=True)

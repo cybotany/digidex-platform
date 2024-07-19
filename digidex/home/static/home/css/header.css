@@ -1,3 +1,14 @@
+.section-top {
+  justify-content: center;
+  align-items: center;
+  padding: 6em 2em 1.5em;
+  display: flex;
+}
+
+.section-top.padding-0 {
+  padding-bottom: 0;
+}
+
 .block-top {
   text-align: center;
   flex-direction: column;
