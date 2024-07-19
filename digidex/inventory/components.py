@@ -1,20 +1,6 @@
 from laces.components import Component
 
-from base.components import (
-    SectionComponent,
-    BlockComponent,
-    HeadingComponent,
-    ParagraphComponent,
-    LinkComponent,
-    TextComponent,
-    CollectionComponent,
-    EmptyComponent,
-    ButtonComponent,
-)
-from home.components import (
-    NavigationComponent,
-    HeaderComponent,
-)
+from home.components import NavigationComponent, HeaderComponent
 
 
 class InventoryDashboardComponent(Component):

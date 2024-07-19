@@ -52,20 +52,20 @@
     value="{{ attrs.value|default_if_none:"" }}"
     type="{{ attrs.type }}">
     {% if attrs.unlabeled %}
-    <label class="" for="{{ attrs.id }}">
-        {% slot label %}
-        {% endslot %}
-    </label>
+      <label class="" for="{{ attrs.id }}">
+          {% slot label %}
+          {% endslot %}
+      </label>
   {% endif %}
   {% if slots.help_text %}
-      <div class="account__text">
+      <div class="text-account">
           {% slot help_text %}
           {% endslot %}
       </div>
   {% endif %}
   {% if attrs.errors %}
       {% for error in attrs.errors %}
-        <div class="error__text">{{ error }}</div>
+        <div class="error-text">{{ error }}</div>
       {% endfor %}
   {% endif %}
 {% endif %}
