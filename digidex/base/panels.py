@@ -1,8 +1,9 @@
+from django.urls import reverse
 from django.forms import Media
 
 from laces.components import Component
 
-from .base import (
+from .components import (
     SectionComponent,
     BlockComponent,
     HeadingComponent,
@@ -14,7 +15,8 @@ from .base import (
     ButtonComponent,
 )
 
-class Header(Component):
+
+class HeaderComponent(Component):
     template_name = 'base/header.html'
 
     def __init__(self, header=dict()):
