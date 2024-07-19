@@ -1,9 +1,7 @@
-from django.forms import Media
-
-from laces.components import Component, MediaContainer
+from laces.components import Component
 
 
-class InventoryDashboardComponent(Component):
+class InventoryDashboard(Component):
     template_name = 'inventory/components/inventory_dashboard.html'
 
     def __init__(self, request):
@@ -23,15 +21,7 @@ class InventoryDashboardComponent(Component):
         return inventory.title
 
     def get_panels(self):
-        panels = [
-            self.get_navigation_panel(),
-        ]
-        if self.is_authenticated:
-            panels.append(self.get_header_panel())
-        return panels
+        pass
 
     def get_context_data(self, parent_context=None):
-        panels = self.get_panels()
-        return {
-            "panels": MediaContainer(panels),
-        }
+        pass
