@@ -16,7 +16,7 @@ def get_inventory(user):
 @register.inclusion_tag("base/includes/navigation/logo.html", takes_context=True)
 def get_navigation_logo(context):
     return {
-        "site_root": Site.find_for_request(context["request"]).root_page,
+        "site_root": Site.find_for_request(context["request"]).root_page.url,
     }
 
 

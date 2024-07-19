@@ -1,7 +1,14 @@
 from django.db import models
 
 from wagtail.images.models import Image, AbstractImage, AbstractRendition
-
+from wagtail.admin.panels import (
+    FieldPanel,
+    MultiFieldPanel,
+)
+from wagtail.contrib.settings.models import (
+    BaseGenericSetting,
+    register_setting,
+)
 
 class DigiDexImage(AbstractImage):
     caption = models.TextField(

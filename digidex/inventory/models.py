@@ -96,15 +96,6 @@ class InventoryPage(RoutablePageMixin, Page):
             items.extend(category.get_items())
         return items
 
-    def get_dashboard(self, request):
-        from inventory.components import InventoryDashboardComponent
-        return InventoryDashboardComponent(request)
-
-    def get_context(self, request):
-        context = super().get_context(request)
-        context['dashboard'] = self.get_dashboard(request)
-        return context
-
     class Meta:
         verbose_name = _("inventory")
         verbose_name_plural = _("inventories")
