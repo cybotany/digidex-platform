@@ -1,4 +1,3 @@
-from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from wagtail.models import Page
@@ -7,10 +6,6 @@ from wagtail.admin.panels import FieldPanel
 
 
 class HomePage(Page):
-    subpage_types = [
-        'inventory.InventoryPage'
-    ]
-
     body = RichTextField( 
         blank=True,
         null=True,

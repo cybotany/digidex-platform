@@ -1,7 +1,7 @@
 from django.views.generic.detail import DetailView
 from django.shortcuts import get_object_or_404
 
-from category.models import CategoryPage
+from category.models import Category
 
 
 class CategoryDetailView(DetailView):
@@ -9,7 +9,7 @@ class CategoryDetailView(DetailView):
     template_name = "category/category_detail.html"
 
     def get_queryset(self):
-        return get_object_or_404(CategoryPage, slug=self.kwargs["inventory_slug"])
+        return get_object_or_404(Category, slug=self.kwargs["inventory_slug"])
 
     def get_collection(self, items=None):
         from base.components import CollectionComponent, EmptyComponent

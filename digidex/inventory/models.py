@@ -1,6 +1,7 @@
 import uuid
 
 from django.db import models
+from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
 from wagtail.documents import get_document_model
@@ -20,6 +21,18 @@ class Inventory(models.Model):
         null=True,
         blank=True,
         verbose_name=_("name")
+    )
+    slug = models.SlugField(
+        max_length=255,
+        null=True,
+        blank=True,
+        verbose_name=_("slug")
+    )
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='+',
     )
     body = models.TextField( 
         blank=True,
