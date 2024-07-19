@@ -4,6 +4,6 @@ from category.views import CategoryDetailView
 
 app_name = "category"
 urlpatterns = [
-    path("<slug:slug>/detail/", CategoryDetailView.as_view(), name="category-detail"),
-    path("<slug:slug>/", include('item.urls')),
+    path("<slug:category_slug>/", CategoryDetailView.as_view(), name="category-detail"),
+    path("<slug:category_slug>/<slug:item_slug>/", include('item.urls')),
 ]
