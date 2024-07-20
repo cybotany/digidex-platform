@@ -5,7 +5,8 @@ from django.utils.text import slugify
 
 from wagtail.models import Collection, Page
 
-from inventory.models import Inventory
+from inventory.models import Inventory, Category
+
 
 User = get_user_model()
 
@@ -26,3 +27,20 @@ def create_user_inventory(sender, instance, created, **kwargs):
             collection=user_collection
         )
         root_page.add_child(instance=inventory)
+
+@receiver(post_save, sender=Inventory)
+def create_user_party_category(sender, instance, created, **kwargs):
+    if created:
+        name = "Party"
+
+        parent_collection = instance.collection
+        category_collection = parent_collection.add_child(name=name)
+
+        category = Category(
+            title=name,
+            name=name,
+            slug=slugify(name),
+            owner=instance.owner,
+            collection=category_collection
+        )
+        instance.add_child(instance=category)

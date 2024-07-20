@@ -23,8 +23,6 @@ INSTALLED_APPS = [
     "nearfieldcommunication",
     "home",
     "inventory",
-    "category",
-    "item",
     "gbif",
     "schedule",
     "search",
