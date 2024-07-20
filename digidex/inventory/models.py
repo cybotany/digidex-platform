@@ -1,17 +1,15 @@
 import uuid
 
 from django.db import models
-from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
 from wagtail.documents import get_document_model
 from wagtail.images import get_image_model
 from wagtail.models import Page, Collection
+from wagtail.contrib.routable_page.models import RoutablePageMixin, path, re_path
 
-from inventory.panels import CategoryPanel, ItemPanel
 
-
-class Inventory(Page):
+class Inventory(RoutablePageMixin, Page):
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
@@ -24,6 +22,13 @@ class Inventory(Page):
         null=True,
         related_name='+',
     )
+    type = models.CharField(
+        max_length=10,
+        choices=[
+            ('asset', 'Asset'),
+            ('group', 'Group')
+        ]
+    )
     created_at = models.DateTimeField(
         auto_now_add=True
     )
@@ -31,55 +36,57 @@ class Inventory(Page):
         auto_now=True
     )
 
+    def __str__(self):
+        return self.title
+
+    def is_group(self):
+        return self.type == 'group'
+
+    def is_asset(self):
+        return self.type == 'asset'
+
     def get_documents(self):
         return get_document_model().objects.filter(collection=self.collection)
 
     def get_images(self):
         return get_image_model().objects.filter(collection=self.collection)
 
-    def get_categories(self, exclude_party=True):
-        if exclude_party:
-            return Category.objects.child_of(self).exclude(slug='party')
-        return Category.objects.child_of(self)
+    def get_thumbnail(self):
+        images = self.get_images()
+        if images:
+            return images.first()
+        return None
 
-    def get_category_items(self):
-        category_items = {}
-        for category in self.get_categories():
-            category_items[category] = category.get_items()
-        return category_items[category]
-
-    def get_party(self):
-        return self.get_categories(exclude_party=False).filter(slug='party').first()
-
-    def get_items(self):
-        items = []
-        for category in self.get_categories():
-            items.extend(category.get_items())
-        return items
+    def get_assets(self):
+        return Asset.objects.filter(inventory=self)
 
     class Meta:
-        verbose_name = _("inventory")
-        verbose_name_plural = _("inventories")
+        verbose_name = 'Inventory Page'
+        verbose_name_plural = 'Inventory Pages'
 
 
-class AbstractInventoryCollection(Collection):
+class Asset(models.Model):
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
         editable=False,
         db_index=True
     )
+    inventory = models.ForeignKey(
+        Inventory,
+        on_delete=models.CASCADE,
+        verbose_name=_("inventory"),
+        related_name='assets'
+    )
+    name = models.CharField(
+        max_length=255,
+        verbose_name=_("name")
+    )
     slug = models.SlugField(
         max_length=255,
         null=True,
         blank=True,
         verbose_name=_("slug")
-    )
-    owner = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.SET_NULL,
-        null=True,
-        related_name='+',
     )
     body = models.TextField( 
         blank=True,
@@ -97,54 +104,17 @@ class AbstractInventoryCollection(Collection):
         return self.name
 
     def get_documents(self):
-        return get_document_model().objects.filter(collection=self)
+        return get_document_model().objects.filter(collection=self.inventory.collection)
 
     def get_images(self):
-        return get_image_model().objects.filter(collection=self)
+        return get_image_model().objects.filter(collection=self.inventory.collection)
 
-    class Meta:
-        abstract = True
-
-
-class Category(AbstractInventoryCollection):
-    def get_items(self):
-        return Item.objects.child_of(self)
-
-    def get_component_data(self):
-        return {
-            "url": self.slug,
-            "icon_source": None,
-            "icon_alt": None,
-            "name": self.name,
-        }
-
-    def get_component(self, current=False):
-        return CategoryPanel(self.get_component_data(), current=current)
-
-    class Meta:
-        verbose_name = _("category")
-        verbose_name_plural = _("categories")
-
-
-class Item(AbstractInventoryCollection):
     def get_thumbnail(self):
         images = self.get_images()
         if images:
             return images.first()
         return None
 
-    def get_component_data(self):
-        return {
-            "date": self.created_at,
-            "url": self.slug,
-            "heading": self.name,
-            "paragraph": self.body,
-            "thumbnail": self.get_thumbnail(),
-        }
-
-    def get_component(self, featured=False):
-        return ItemPanel(self.get_component_data())
-
     class Meta:
-        verbose_name = _("item")
-        verbose_name_plural = _("items")
+        verbose_name = _("asset")
+        verbose_name_plural = _("assets")

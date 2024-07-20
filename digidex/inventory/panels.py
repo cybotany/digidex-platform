@@ -15,7 +15,7 @@ from base.components import (
 )
 
 
-class CategoryPanel(Component):
+class GroupPanel(Component):
     template_name = 'inventory/panels/category_panel.html'
 
     def __init__(self, category=dict(), current=False):
@@ -48,34 +48,34 @@ class CategoryPanel(Component):
         }
 
 
-class CategoryCollection(Component):
-    template_name = 'inventory/components/category_collection.html'
+class GroupCollection(Component):
+    template_name = 'inventory/components/group_collection.html'
 
-    def __init__(self, categories=list()):
-        self.categories = categories
+    def __init__(self, groups=list()):
+        self.groups = groups
 
-    def get_current_category(self, current_category):
-        return current_category.get_component(current=True)
+    def get_current_group(self, current_group):
+        return current_group.get_component(current=True)
 
-    def get_category_collection(self):
-        style = 'categories'
+    def get_group_collection(self):
+        style = 'groups'
         return CollectionComponent(
-            children=[category.get_component() for category in self.categories],
+            children=[group.get_component() for group in self.groups],
             style=style
         )
 
     def set_panel(self):
         panel_components = []
 
-        if self.categories:
-            current_category = self.categories.pop(0)
-            panel_components.append(self.get_current_category(current_category))
+        if self.groups:
+            current_group = self.groups.pop(0)
+            panel_components.append(self.get_current_group(current_group))
 
-            if self.categories: # Check if there are any categories left
-                panel_components.append(self.get_category_collection())
+            if self.groups: # Check if there are any groups left
+                panel_components.append(self.get_group_collection())
 
         else:
-            panel_components.append(EmptyComponent(asset="categories"))
+            panel_components.append(EmptyComponent(asset="groups"))
 
         return BlockComponent(children=panel_components)
 
@@ -85,15 +85,15 @@ class CategoryCollection(Component):
         }
 
 
-class ItemPanel(Component):
-    template_name = 'inventory/panels/item_panel.html'
+class AssetPanel(Component):
+    template_name = 'inventory/panels/asset_panel.html'
 
-    def __init__(self, item=dict()):
-        self.heading = self.item.get('heading', 'No heading available')
-        self.paragraph = self.item.get('paragraph', 'No paragraph available')
-        self.date = self.item.get('date')
-        self.url = self.item.get('url')
-        self.thumbnail = self.item.get('thumbnail')
+    def __init__(self, asset=dict()):
+        self.heading = asset.get('heading', 'No heading available')
+        self.paragraph = asset.get('paragraph', 'No paragraph available')
+        self.date = asset.get('date')
+        self.url = asset.get('url')
+        self.thumbnail = asset.get('thumbnail')
         self.style = 'post'
 
     def get_heading_component(self):
