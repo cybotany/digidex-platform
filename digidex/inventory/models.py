@@ -6,16 +6,9 @@ from django.utils.translation import gettext_lazy as _
 from wagtail.documents import get_document_model
 from wagtail.images import get_image_model
 from wagtail.models import Page, Collection
-from wagtail.contrib.routable_page.models import RoutablePageMixin, path, re_path
 
 
-class Inventory(RoutablePageMixin, Page):
-    uuid = models.UUIDField(
-        default=uuid.uuid4,
-        unique=True,
-        editable=False,
-        db_index=True
-    )
+class Inventory(Page):
     collection = models.ForeignKey(
         Collection,
         on_delete=models.SET_NULL,
@@ -28,12 +21,6 @@ class Inventory(RoutablePageMixin, Page):
             ('asset', 'Asset'),
             ('group', 'Group')
         ]
-    )
-    created_at = models.DateTimeField(
-        auto_now_add=True
-    )
-    last_modified = models.DateTimeField(
-        auto_now=True
     )
 
     def __str__(self):
@@ -81,12 +68,6 @@ class Asset(models.Model):
     name = models.CharField(
         max_length=255,
         verbose_name=_("name")
-    )
-    slug = models.SlugField(
-        max_length=255,
-        null=True,
-        blank=True,
-        verbose_name=_("slug")
     )
     body = models.TextField( 
         blank=True,
