@@ -11,6 +11,14 @@ from inventory.validators import validate_ntag_serial
 
 
 class Inventory(Page):
+    parent_page_types = [
+        'home.HomePage',
+        'Inventory'
+    ]
+    subpage_types = [
+        'Inventory'
+    ]
+
     collection = models.ForeignKey(
         Collection,
         on_delete=models.SET_NULL,

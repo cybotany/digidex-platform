@@ -6,6 +6,13 @@ from wagtail.admin.panels import FieldPanel
 
 
 class HomePage(Page):
+    parent_page_types = [
+        'wagtailcore.Page'
+    ]
+    subpage_types = [
+        'inventory.Inventory'
+    ]
+
     body = RichTextField( 
         blank=True,
         null=True,
