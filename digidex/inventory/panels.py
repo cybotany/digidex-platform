@@ -16,13 +16,13 @@ from base.components import (
 
 
 class GroupPanel(Component):
-    template_name = 'inventory/panels/category_panel.html'
+    template_name = 'inventory/panels/group_panel.html'
 
-    def __init__(self, category=dict(), current=False):
-        self.url = category.get('url')
-        self.icon_source = category.get('icon_source')
-        self.icon_alt = category.get('icon_alt')
-        self.name = category.get('name', 'No name available')
+    def __init__(self, group=dict(), current=False):
+        self.url = group.get('url')
+        self.icon_source = group.get('icon_source')
+        self.icon_alt = group.get('icon_alt')
+        self.name = group.get('name', 'No name available')
         self.current = current
         self.style = 'category'
 
@@ -58,7 +58,7 @@ class GroupCollection(Component):
         return current_group.get_component(current=True)
 
     def get_group_collection(self):
-        style = 'groups'
+        style = 'categories'
         return CollectionComponent(
             children=[group.get_component() for group in self.groups],
             style=style

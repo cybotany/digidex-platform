@@ -18,31 +18,24 @@ def create_user_inventory(sender, instance, created, **kwargs):
         parent_collection = Collection.get_first_root_node()
         user_collection = parent_collection.add_child(name=name)
 
+        # Create user's inventory
         root_page = Page.objects.get(depth=1)
-        inventory = Inventory(
+        user_inventory = Inventory(
             title=f"{name}'s Inventory",
-            name=name,
             slug=slugify(name),
             owner=instance,
             collection=user_collection,
-            type='group'  
+            type="group"  
         )
-        root_page.add_child(instance=inventory)
+        root_page.add_child(instance=user_inventory)
 
-@receiver(post_save, sender=Inventory)
-def create_user_party(sender, instance, created, **kwargs):
-    if created:
-        name = "Party"
-
-        parent_collection = instance.collection
-        party_collection = parent_collection.add_child(name=name)
-
-        party = Inventory(
-            title=name,
-            name=name,
-            slug=slugify(name),
-            owner=instance.owner,
+        # Create user's party
+        party_collection = user_collection.add_child(name="Party")
+        user_party = Inventory(
+            title=f"{name}'s Party",
+            slug="party",
+            owner=instance,
             collection=party_collection,
-            type='group'
+            type="group"
         )
-        instance.add_child(instance=party)
+        user_inventory.add_child(instance=user_party)
