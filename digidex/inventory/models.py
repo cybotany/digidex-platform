@@ -1,6 +1,7 @@
 import uuid
 
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 from wagtail.documents import get_document_model
@@ -151,6 +152,9 @@ class InventoryTag(models.Model):
         if created:
             return link
         return link
+
+    def get_url(self):
+        return reverse('link', uuid=self.uuid)
 
     class Meta:
         verbose_name = "ntag"
