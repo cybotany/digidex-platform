@@ -22,7 +22,6 @@ INSTALLED_APPS = [
     "home",
     "accounts",
     "inventory",
-    "link",
     "schedule",
     "search",
     "api",

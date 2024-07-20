@@ -7,7 +7,7 @@ from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
 from search.views import search
-from link.views import link
+from inventory.views import link
 from api.urls import urlpatterns as api_urls
 
 

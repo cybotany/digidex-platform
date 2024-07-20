@@ -5,7 +5,7 @@ from django.utils.text import slugify
 
 from wagtail.models import Collection, Page
 
-from inventory.models import Inventory, InventoryTag
+from inventory.models import InventoryPage, InventoryTag
 
 
 User = get_user_model()
@@ -20,7 +20,7 @@ def create_user_inventory(sender, instance, created, **kwargs):
 
         # Create user's inventory
         root_page = Page.objects.get(depth=1)
-        user_inventory = Inventory(
+        user_inventory = InventoryPage(
             title=f"{name}'s Inventory",
             slug=slugify(name),
             owner=instance,
@@ -31,7 +31,7 @@ def create_user_inventory(sender, instance, created, **kwargs):
 
         # Create user's party
         party_collection = user_collection.add_child(name="Party")
-        user_party = Inventory(
+        user_party = InventoryPage(
             title=f"{name}'s Party",
             slug="party",
             owner=instance,

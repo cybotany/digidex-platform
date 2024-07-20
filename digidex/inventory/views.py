@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, get_object_or_404
 from django.http import HttpResponse
 
-from link.models import InventoryTag
+from inventory.models import InventoryTag
 
 
 def link(request, uuid):

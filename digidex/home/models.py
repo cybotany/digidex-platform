@@ -10,7 +10,7 @@ class HomePage(Page):
         'wagtailcore.Page'
     ]
     subpage_types = [
-        'inventory.Inventory'
+        'inventory.InventoryPage'
     ]
 
     body = RichTextField( 

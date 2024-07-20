@@ -10,13 +10,13 @@ from wagtail.models import Page, Collection
 from inventory.validators import validate_ntag_serial
 
 
-class Inventory(Page):
+class InventoryPage(Page):
     parent_page_types = [
         'home.HomePage',
-        'Inventory'
+        'InventoryPage'
     ]
     subpage_types = [
-        'Inventory'
+        'InventoryPage'
     ]
 
     collection = models.ForeignKey(
@@ -55,14 +55,14 @@ class Inventory(Page):
         return None
 
     def get_assets(self):
-        return Asset.objects.filter(inventory=self)
+        return InventoryAsset.objects.filter(inventory=self)
 
     class Meta:
         verbose_name = 'Inventory Page'
         verbose_name_plural = 'Inventory Pages'
 
 
-class Asset(models.Model):
+class InventoryAsset(models.Model):
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
@@ -70,7 +70,7 @@ class Asset(models.Model):
         db_index=True
     )
     inventory = models.ForeignKey(
-        Inventory,
+        InventoryPage,
         on_delete=models.CASCADE,
         verbose_name=_("inventory"),
         related_name='assets'
@@ -136,7 +136,7 @@ class InventoryTag(models.Model):
     )
 
     def __str__(self):
-        return f"Inventory Tag: {self.serial_number}"
+        return f"NFC Tag: {self.serial_number}"
 
     def activate_tag(self):
         self.active = True
@@ -147,12 +147,40 @@ class InventoryTag(models.Model):
         self.save()
 
     def create_link(self):
-        from link.models import InventoryLink
         link, created = InventoryLink.objects.get_or_create(tag=self)
         if created:
             return link
         return link
 
     class Meta:
-        verbose_name = "inventory tag"
-        verbose_name_plural = "inventory tags"
+        verbose_name = "ntag"
+        verbose_name_plural = "ntags"
+
+
+class InventoryLink(models.Model):
+    inventory = models.OneToOneField(
+        InventoryPage,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name='+'
+    )
+    tag = models.OneToOneField(
+        InventoryTag,
+        on_delete=models.CASCADE,
+        related_name='link'
+    )
+
+    def __str__(self):
+        if self.inventory:
+            return f"{self.tag} -> {self.inventory}"
+        return str(self.tag)
+
+    def get_url(self):
+        if self.inventory:
+            return self.inventory.url
+        return None
+
+    @property
+    def url(self):
+        return self.get_url()
