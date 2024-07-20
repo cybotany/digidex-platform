@@ -16,9 +16,8 @@ urlpatterns = [
     path("documents/", include(wagtaildocs_urls)),
     path('api/v2/', api_router.urls),
     path("search/", search, name="search"),
-    path('', include('accounts.urls')),
-    path('', include('nearfieldcommunication.urls')),
-    path('', include('inventory.urls')),
+    path('account/', include('accounts.urls')),
+    path('nfc/', include('nearfieldcommunication.urls')),
 ]
 
 if settings.DEBUG:

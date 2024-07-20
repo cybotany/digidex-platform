@@ -62,16 +62,12 @@ class Inventory(Page):
         verbose_name_plural = _("inventories")
 
 
-class Category(models.Model):
+class AbstractInventoryCollection(Collection):
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
         editable=False,
         db_index=True
-    )
-    name = models.CharField(
-        max_length=255,
-        verbose_name=_("name")
     )
     slug = models.SlugField(
         max_length=255,
@@ -81,12 +77,6 @@ class Category(models.Model):
     )
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        on_delete=models.SET_NULL,
-        null=True,
-        related_name='+',
-    )
-    collection = models.ForeignKey(
-        Collection,
         on_delete=models.SET_NULL,
         null=True,
         related_name='+',
@@ -103,12 +93,20 @@ class Category(models.Model):
         auto_now=True
     )
 
+    def __str__(self):
+        return self.name
+
     def get_documents(self):
-        return get_document_model().objects.filter(collection=self.collection)
+        return get_document_model().objects.filter(collection=self)
 
     def get_images(self):
-        return get_image_model().objects.filter(collection=self.collection)
+        return get_image_model().objects.filter(collection=self)
 
+    class Meta:
+        abstract = True
+
+
+class Category(AbstractInventoryCollection):
     def get_items(self):
         return Item.objects.child_of(self)
 
@@ -128,49 +126,7 @@ class Category(models.Model):
         verbose_name_plural = _("categories")
 
 
-class Item(models.Model):
-    uuid = models.UUIDField(
-        default=uuid.uuid4,
-        unique=True,
-        editable=False,
-        db_index=True
-    )
-    slug = models.SlugField(
-        max_length=255,
-        null=True,
-        blank=True,
-        verbose_name=_("slug")
-    )
-    owner = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.SET_NULL,
-        null=True,
-        related_name='+',
-    )
-    collection = models.ForeignKey(
-        Collection,
-        on_delete=models.SET_NULL,
-        null=True,
-        related_name='+',
-    )
-    body = models.TextField( 
-        blank=True,
-        null=True,
-        verbose_name=_("body")
-    )
-    created_at = models.DateTimeField(
-        auto_now_add=True
-    )
-    last_modified = models.DateTimeField(
-        auto_now=True
-    )
-
-    def get_documents(self):
-        return get_document_model().objects.filter(collection=self.collection)
-
-    def get_images(self):
-        return get_image_model().objects.filter(collection=self.collection)
-
+class Item(AbstractInventoryCollection):
     def get_thumbnail(self):
         images = self.get_images()
         if images:
