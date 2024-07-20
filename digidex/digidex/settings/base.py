@@ -19,13 +19,14 @@ INSTALLED_APPS = [
     "taggit",
     
     "base",
-    "accounts",
-    "nearfieldcommunication",
     "home",
+    "accounts",
     "inventory",
-    "gbif",
+    "nearfieldcommunication",
+    "link",
     "schedule",
     "search",
+    "api",
     "storages",
     "whitenoise.runserver_nostatic",
 

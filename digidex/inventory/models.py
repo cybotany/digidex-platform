@@ -7,6 +7,8 @@ from wagtail.documents import get_document_model
 from wagtail.images import get_image_model
 from wagtail.models import Page, Collection
 
+from inventory.validators import validate_ntag_serial
+
 
 class Inventory(Page):
     collection = models.ForeignKey(
@@ -99,3 +101,43 @@ class Asset(models.Model):
     class Meta:
         verbose_name = _("asset")
         verbose_name_plural = _("assets")
+
+
+class InventoryTag(models.Model):
+    uuid = models.UUIDField(
+        default=uuid.uuid4,
+        editable=False,
+        unique=True,
+        db_index=True
+    )
+    serial_number = models.CharField(
+        max_length=32,
+        editable=False,
+        unique=True,
+        db_index=True,
+        validators=[validate_ntag_serial]
+    )
+    active = models.BooleanField(
+        default=True
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+    last_modified = models.DateTimeField(
+        auto_now=True
+    )
+
+    def __str__(self):
+        return f"Inventory Tag: {self.serial_number}"
+
+    def activate_link(self):
+        self.active = True
+        self.save()
+
+    def deactivate_link(self):
+        self.active = False
+        self.save()
+
+    class Meta:
+        verbose_name = "inventory tag"
+        verbose_name_plural = "inventory tags"

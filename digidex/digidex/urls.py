@@ -7,17 +7,16 @@ from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
 from search.views import search
+from api.urls import urlpatterns as api_urls
 
-from digidex.api import api_router
 
 urlpatterns = [
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
-    path('api/v2/', api_router.urls),
     path("search/", search, name="search"),
     path('account/', include('accounts.urls')),
-    path('nfc/', include('nearfieldcommunication.urls')),
+    path('api/', include(api_urls)),
 ]
 
 if settings.DEBUG:
