@@ -22,7 +22,6 @@ INSTALLED_APPS = [
     "home",
     "accounts",
     "inventory",
-    "nearfieldcommunication",
     "link",
     "schedule",
     "search",

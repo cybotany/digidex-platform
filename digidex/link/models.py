@@ -21,3 +21,12 @@ class InventoryLink(models.Model):
         if self.inventory:
             return f"{self.tag} -> {self.inventory}"
         return str(self.tag)
+
+    def get_url(self):
+        if self.inventory:
+            return self.inventory.url
+        return None
+
+    @property
+    def url(self):
+        return self.get_url()

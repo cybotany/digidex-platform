@@ -7,6 +7,7 @@ from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
 from search.views import search
+from link.views import link
 from api.urls import urlpatterns as api_urls
 
 
@@ -15,6 +16,7 @@ urlpatterns = [
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search, name="search"),
+    path("link/<uuid:uuid>/", link, name="link"),
     path('account/', include('accounts.urls')),
     path('api/', include(api_urls)),
 ]

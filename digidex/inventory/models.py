@@ -130,13 +130,20 @@ class InventoryTag(models.Model):
     def __str__(self):
         return f"Inventory Tag: {self.serial_number}"
 
-    def activate_link(self):
+    def activate_tag(self):
         self.active = True
         self.save()
 
-    def deactivate_link(self):
+    def deactivate_tag(self):
         self.active = False
         self.save()
+
+    def create_link(self):
+        from link.models import InventoryLink
+        link, created = InventoryLink.objects.get_or_create(tag=self)
+        if created:
+            return link
+        return link
 
     class Meta:
         verbose_name = "inventory tag"

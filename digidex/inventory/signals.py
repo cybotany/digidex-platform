@@ -5,7 +5,7 @@ from django.utils.text import slugify
 
 from wagtail.models import Collection, Page
 
-from inventory.models import Inventory
+from inventory.models import Inventory, InventoryTag
 
 
 User = get_user_model()
@@ -39,3 +39,9 @@ def create_user_inventory(sender, instance, created, **kwargs):
             type="group"
         )
         user_inventory.add_child(instance=user_party)
+
+
+@receiver(post_save, sender=InventoryTag)
+def create_inventory_link(sender, instance, created, **kwargs):
+    if created:
+        instance.create_link()
