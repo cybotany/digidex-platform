@@ -10,7 +10,7 @@ register = template.Library()
 
 def get_inventory(user):
     from inventory.models import InventoryPage
-    return InventoryPage.objects.get(owner=user)
+    return InventoryPage.objects.filter(owner=user, type='root').first()
 
 
 @register.inclusion_tag("base/includes/navigation/logo.html", takes_context=True)
