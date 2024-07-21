@@ -4,9 +4,10 @@ from base.models import AbstractIndexPage
 
 
 class HomePage(AbstractIndexPage):
-    parent_page_types = [
-        'wagtailcore.Page'
-    ]
-
     class Meta:
-        verbose_name = _('homepage')
+        verbose_name = _('home page')
+
+
+class AdminPage(AbstractIndexPage):
+    class Meta:
+        verbose_name = _('home page')
