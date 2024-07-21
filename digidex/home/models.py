@@ -9,4 +9,4 @@ class HomePage(AbstractIndexPage):
     ]
 
     class Meta:
-        verbose_name = 'digidex homepage'
+        verbose_name = _('homepage')

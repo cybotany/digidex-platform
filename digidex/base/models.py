@@ -61,7 +61,8 @@ class AbstractIndexPage(Page):
         verbose_name=_("body")
     )
 
-    content_panels = [
+    content_panels = Page.content_panels + [
+        FieldPanel('collection'),
         FieldPanel('body'),
     ]
 

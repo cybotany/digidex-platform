@@ -18,7 +18,7 @@ class InventoryIndexPage(AbstractIndexPage):
     ]
 
     class Meta:
-        verbose_name = 'inventory index'
+        verbose_name = _('inventory page')
 
 
 class InventoryPage(Page):

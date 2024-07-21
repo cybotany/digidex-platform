@@ -1,6 +1,7 @@
 import uuid
 
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import AbstractUser
 
 from base.models import AbstractIndexPage
@@ -21,4 +22,4 @@ class DigiDexUser(AbstractUser):
 
 class AccountPage(AbstractIndexPage):
     class Meta:
-        verbose_name = 'account page'
+        verbose_name = _('account page')
