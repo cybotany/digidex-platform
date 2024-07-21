@@ -6,11 +6,35 @@ from django.utils.translation import gettext_lazy as _
 from wagtail.documents import get_document_model
 from wagtail.images import get_image_model
 from wagtail.models import Page, Collection
+from wagtail.fields import RichTextField
+from wagtail.admin.panels import FieldPanel
+
+
+class InventoryIndexPage(Page):
+    parent_page_types = [
+        'wagtailcore.Page'
+    ]
+    subpage_types = [
+        'inventory.InventoryPage'
+    ]
+
+    body = RichTextField(
+        blank=True,
+        verbose_name=_('Body'),
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel('body'),
+    ]
+
+    class Meta:
+        verbose_name = 'Inventory Index Page'
+        verbose_name_plural = 'Inventory Index Pages'
 
 
 class InventoryPage(Page):
     parent_page_types = [
-        'home.HomePage',
+        'inventory.InventoryIndexPage',
         'inventory.InventoryPage'
     ]
     subpage_types = [
@@ -31,6 +55,14 @@ class InventoryPage(Page):
             ('root', 'Root'),
         ]
     )
+    body = RichTextField(
+        blank=True,
+        verbose_name=_('Body'),
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel('body'),
+    ]
 
     def __str__(self):
         return self.title

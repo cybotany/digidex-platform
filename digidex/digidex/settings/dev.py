@@ -8,6 +8,7 @@ API_URL = f"{API_URL}.dev"
 APP_URL = f"{APP_URL}.dev"
 
 ALLOWED_HOSTS = [
+    '127.0.0.1',
     ACCOUNT_URL,
     ADMIN_URL,
     API_URL,
