@@ -10,4 +10,4 @@ class HomePage(AbstractIndexPage):
 
 class AdminPage(AbstractIndexPage):
     class Meta:
-        verbose_name = _('home page')
+        verbose_name = _('admin page')

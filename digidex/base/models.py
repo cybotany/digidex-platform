@@ -3,6 +3,8 @@ from django.utils.translation import gettext_lazy as _
 
 from wagtail.models import Page, Collection
 from wagtail.fields import RichTextField
+from wagtail.documents import get_document_model
+from wagtail.images import get_image_model
 from wagtail.images.models import Image, AbstractImage, AbstractRendition
 from wagtail.admin.panels import (
     FieldPanel,
@@ -68,6 +70,12 @@ class AbstractIndexPage(Page):
 
     def __str__(self):
         return self.title
+
+    def get_documents(self):
+        return get_document_model().objects.filter(collection=self.collection)
+
+    def get_images(self):
+        return get_image_model().objects.filter(collection=self.collection)
 
     class Meta:
         abstract = True
