@@ -1,13 +1,8 @@
 from django.utils.translation import gettext_lazy as _
 
-from base.models import AbstractIndexPage
+from base.models import AbstractDigiDexPage
 
 
-class HomePage(AbstractIndexPage):
+class HomePage(AbstractDigiDexPage):
     class Meta:
         verbose_name = _('home page')
-
-
-class AdminPage(AbstractIndexPage):
-    class Meta:
-        verbose_name = _('admin page')

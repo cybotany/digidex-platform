@@ -2,20 +2,13 @@ from .base import *
 
 DEBUG = True
 
-ACCOUNT_URL = f"{ACCOUNT_URL}.dev"
-ADMIN_URL = f"{ADMIN_URL}.dev"
-API_URL = f"{API_URL}.dev"
-APP_URL = f"{APP_URL}.dev"
+DEV_URL = '127.0.0.1'
 
 ALLOWED_HOSTS = [
-    '127.0.0.1',
-    ACCOUNT_URL,
-    ADMIN_URL,
-    API_URL,
-    APP_URL
+    DEV_URL
 ]
 
-WAGTAILADMIN_BASE_URL = f"http://{ADMIN_URL}"
+WAGTAILADMIN_BASE_URL = f"http://{DEV_URL}"
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 

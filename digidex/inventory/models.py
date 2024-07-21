@@ -9,33 +9,18 @@ from wagtail.models import Page, Collection
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 
-from base.models import AbstractIndexPage
+from base.models import AbstractDigiDexPage
 
 
-class InventoryIndexPage(AbstractIndexPage):
-    subpage_types = [
-        'inventory.InventoryPage'
-    ]
-
-    class Meta:
-        verbose_name = _('inventory index')
-
-
-class InventoryPage(Page):
+class InventoryPage(AbstractDigiDexPage):
     parent_page_types = [
-        'inventory.InventoryIndexPage',
+        'home.HomePage',
         'inventory.InventoryPage'
     ]
     subpage_types = [
         'inventory.InventoryPage'
     ]
 
-    collection = models.ForeignKey(
-        Collection,
-        on_delete=models.SET_NULL,
-        null=True,
-        related_name='+',
-    )
     type = models.CharField(
         max_length=10,
         choices=[
@@ -44,19 +29,10 @@ class InventoryPage(Page):
             ('root', 'Root'),
         ]
     )
-    body = RichTextField(
-        blank=True,
-        null=True,
-        verbose_name=_('body'),
-    )
 
-    content_panels = Page.content_panels + [
-        FieldPanel('collection'),
-        FieldPanel('body'),
+    content_panels = AbstractDigiDexPage.content_panels + [
+        FieldPanel('type'),
     ]
-
-    def __str__(self):
-        return self.title
 
     def is_file(self):
         return self.type == 'file'
@@ -66,12 +42,6 @@ class InventoryPage(Page):
 
     def is_root(self):
         return self.type == 'root'
-
-    def get_documents(self):
-        return get_document_model().objects.filter(collection=self.collection)
-
-    def get_images(self):
-        return get_image_model().objects.filter(collection=self.collection)
 
     def get_thumbnail(self):
         images = self.get_images()

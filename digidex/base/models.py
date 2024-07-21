@@ -46,11 +46,7 @@ class DigiDexRendition(AbstractRendition):
         )
 
 
-class AbstractIndexPage(Page):
-    parent_page_types = [
-        'wagtailcore.Page'
-    ]
-
+class AbstractDigiDexPage(Page):
     collection = models.ForeignKey(
         Collection,
         on_delete=models.SET_NULL,

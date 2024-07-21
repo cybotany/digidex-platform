@@ -4,19 +4,13 @@ from .base import *
 
 DEBUG = False
 
-ACCOUNT_URL = f"{ACCOUNT_URL}.tech"
-ADMIN_URL = f"{ADMIN_URL}.tech"
-API_URL = f"{API_URL}.tech"
-APP_URL = f"{APP_URL}.tech"
+PROD_URL = 'digidex.tech'
 
 ALLOWED_HOSTS = [
-    ACCOUNT_URL,
-    ADMIN_URL,
-    API_URL,
-    APP_URL
+    PROD_URL
 ]
 
-WAGTAILADMIN_BASE_URL = f"https://{ADMIN_URL}"
+WAGTAILADMIN_BASE_URL = f"https://{PROD_URL}"
 
 if "EMAIL_HOST" in os.environ:
     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
