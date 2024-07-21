@@ -10,6 +10,7 @@ from wagtail.models import Page, Collection
 
 class InventoryPage(Page):
     parent_page_types = [
+        'home.HomePage',
         'inventory.InventoryPage'
     ]
     subpage_types = [

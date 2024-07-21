@@ -36,6 +36,6 @@ def create_user_inventory(sender, instance, created, **kwargs):
             slug="party",
             owner=instance,
             collection=party_collection,
-            type="group"
+            type="folder"
         )
         user_inventory.add_child(instance=user_party)
