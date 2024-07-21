@@ -9,27 +9,16 @@ from wagtail.models import Page, Collection
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 
+from base.models import AbstractIndexPage
 
-class InventoryIndexPage(Page):
-    parent_page_types = [
-        'wagtailcore.Page'
-    ]
+
+class InventoryIndexPage(AbstractIndexPage):
     subpage_types = [
         'inventory.InventoryPage'
     ]
 
-    body = RichTextField(
-        blank=True,
-        verbose_name=_('Body'),
-    )
-
-    content_panels = Page.content_panels + [
-        FieldPanel('body'),
-    ]
-
     class Meta:
-        verbose_name = 'Inventory Index Page'
-        verbose_name_plural = 'Inventory Index Pages'
+        verbose_name = 'inventory index'
 
 
 class InventoryPage(Page):
@@ -57,7 +46,7 @@ class InventoryPage(Page):
     )
     body = RichTextField(
         blank=True,
-        verbose_name=_('Body'),
+        verbose_name=_('body'),
     )
 
     content_panels = Page.content_panels + [
@@ -92,8 +81,8 @@ class InventoryPage(Page):
         return InventoryAsset.objects.filter(inventory=self)
 
     class Meta:
-        verbose_name = 'Inventory Page'
-        verbose_name_plural = 'Inventory Pages'
+        verbose_name = _('inventory')
+        verbose_name_plural = _('inventories')
 
 
 class InventoryAsset(models.Model):

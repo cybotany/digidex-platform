@@ -1,5 +1,8 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
+from wagtail.models import Page, Collection
+from wagtail.fields import RichTextField
 from wagtail.images.models import Image, AbstractImage, AbstractRendition
 from wagtail.admin.panels import (
     FieldPanel,
@@ -39,3 +42,31 @@ class DigiDexRendition(AbstractRendition):
         unique_together = (
             ('image', 'filter_spec', 'focal_point_key'),
         )
+
+
+class AbstractIndexPage(Page):
+    parent_page_types = [
+        'wagtailcore.Page'
+    ]
+
+    collection = models.ForeignKey(
+        Collection,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='+',
+    )
+    body = RichTextField(
+        blank=True,
+        null=True,
+        verbose_name=_("body")
+    )
+
+    content_panels = [
+        FieldPanel('body'),
+    ]
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        abstract = True
