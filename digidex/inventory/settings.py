@@ -1,3 +1,1 @@
-import os
-
-BASE_URL = "digidex.tech"
+APP_URL = "app.digidex"

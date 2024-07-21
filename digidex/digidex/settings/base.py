@@ -2,7 +2,6 @@
 Django settings for digidex project.
 """
 import os
-from datetime import timedelta
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -11,8 +10,6 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
-
-ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "laces",
@@ -179,27 +176,18 @@ REST_FRAMEWORK = {
     ),
 }
 
-# JWT settings
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
-    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
-    'ROTATE_REFRESH_TOKENS': False,
-    'BLACKLIST_AFTER_ROTATION': True,
-    'ALGORITHM': 'HS256',
-    'SIGNING_KEY': SECRET_KEY,
-    'VERIFYING_KEY': None,
-    'AUTH_HEADER_TYPES': ('Bearer',),
-    'USER_ID_FIELD': 'id',
-    'USER_ID_CLAIM': 'user_id',
-    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
-    'TOKEN_TYPE_CLAIM': 'token_type',
-}
-
 # Account settings
 from accounts.settings import *
+from api.settings import *
+from inventory.settings import *
 
-# Project settings
-from base.settings import *
+ADMIN_URL = "admin.digidex"
+
+WAGTAIL_SITE_NAME = "DigiDex"
+
+WAGTAILIMAGES_IMAGE_MODEL = 'base.DigiDexImage'
+
+WAGTAILIMAGES_EXTENSIONS = ['gif', 'jpg', 'jpeg', 'png', 'webp']
 
 WAGTAIL_FRONTEND_LOGIN_URL = LOGIN_URL
 

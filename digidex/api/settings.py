@@ -1,3 +1,1 @@
-import os
-
-API_SUBDOMAIN = "api"
+API_URL = "api.digidex"

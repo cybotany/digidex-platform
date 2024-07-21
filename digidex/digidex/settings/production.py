@@ -4,25 +4,19 @@ from .base import *
 
 DEBUG = False
 
-ADMIN_SUBDOMAIN = "admin"
-API_SUBDOMAIN = "api"
-APP_SUBDOMAIN = "app"
+ACCOUNT_URL = f"{ACCOUNT_URL}.tech"
+ADMIN_URL = f"{ADMIN_URL}.tech"
+API_URL = f"{API_URL}.tech"
+APP_URL = f"{APP_URL}.tech"
 
-SUBDOMAINS = [
-    ADMIN_SUBDOMAIN,
-    API_SUBDOMAIN,
-    APP_SUBDOMAIN
+ALLOWED_HOSTS = [
+    ACCOUNT_URL,
+    ADMIN_URL,
+    API_URL,
+    APP_URL
 ]
 
-URLS = [
-    f"{ADMIN_SUBDOMAIN}.{BASE_URL}",
-    f"{API_SUBDOMAIN}.{BASE_URL}",
-    f"{APP_SUBDOMAIN}.{BASE_URL}"
-]
-
-ALLOWED_HOSTS = ALLOWED_HOSTS + URLS
-
-WAGTAILADMIN_BASE_URL = f"https://{ADMIN_SUBDOMAIN}.{BASE_URL}"
+WAGTAILADMIN_BASE_URL = f"https://{ADMIN_URL}"
 
 if "EMAIL_HOST" in os.environ:
     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
