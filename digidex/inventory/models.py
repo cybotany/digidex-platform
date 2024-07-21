@@ -1,23 +1,19 @@
 import uuid
 
 from django.db import models
-from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 from wagtail.documents import get_document_model
 from wagtail.images import get_image_model
 from wagtail.models import Page, Collection
 
-from inventory.validators import validate_ntag_serial
-
 
 class InventoryPage(Page):
     parent_page_types = [
-        'home.HomePage',
-        'InventoryPage'
+        'inventory.InventoryPage'
     ]
     subpage_types = [
-        'InventoryPage'
+        'inventory.InventoryPage'
     ]
 
     collection = models.ForeignKey(
@@ -29,19 +25,23 @@ class InventoryPage(Page):
     type = models.CharField(
         max_length=10,
         choices=[
-            ('asset', 'Asset'),
-            ('group', 'Group')
+            ('file', 'File'),
+            ('folder', 'Folder'),
+            ('root', 'Root'),
         ]
     )
 
     def __str__(self):
         return self.title
 
-    def is_group(self):
-        return self.type == 'group'
+    def is_file(self):
+        return self.type == 'file'
 
-    def is_asset(self):
-        return self.type == 'asset'
+    def is_folder(self):
+        return self.type == 'folder'
+
+    def is_root(self):
+        return self.type == 'root'
 
     def get_documents(self):
         return get_document_model().objects.filter(collection=self.collection)
@@ -110,81 +110,3 @@ class InventoryAsset(models.Model):
     class Meta:
         verbose_name = _("asset")
         verbose_name_plural = _("assets")
-
-
-class InventoryTag(models.Model):
-    uuid = models.UUIDField(
-        default=uuid.uuid4,
-        editable=False,
-        unique=True,
-        db_index=True
-    )
-    serial_number = models.CharField(
-        max_length=32,
-        editable=False,
-        unique=True,
-        db_index=True,
-        validators=[validate_ntag_serial]
-    )
-    active = models.BooleanField(
-        default=True
-    )
-    created_at = models.DateTimeField(
-        auto_now_add=True
-    )
-    last_modified = models.DateTimeField(
-        auto_now=True
-    )
-
-    def __str__(self):
-        return f"NFC Tag: {self.serial_number}"
-
-    def activate_tag(self):
-        self.active = True
-        self.save()
-
-    def deactivate_tag(self):
-        self.active = False
-        self.save()
-
-    def create_link(self):
-        link, created = InventoryLink.objects.get_or_create(tag=self)
-        if created:
-            return link
-        return link
-
-    def get_url(self):
-        return reverse('link', uuid=self.uuid)
-
-    class Meta:
-        verbose_name = "ntag"
-        verbose_name_plural = "ntags"
-
-
-class InventoryLink(models.Model):
-    inventory = models.OneToOneField(
-        InventoryPage,
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-        related_name='+'
-    )
-    tag = models.OneToOneField(
-        InventoryTag,
-        on_delete=models.CASCADE,
-        related_name='link'
-    )
-
-    def __str__(self):
-        if self.inventory:
-            return f"{self.tag} -> {self.inventory}"
-        return str(self.tag)
-
-    def get_url(self):
-        if self.inventory:
-            return self.inventory.url
-        return None
-
-    @property
-    def url(self):
-        return self.get_url()

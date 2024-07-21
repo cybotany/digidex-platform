@@ -4,19 +4,15 @@ from django.contrib import admin
 
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail import urls as wagtail_urls
-from wagtail.documents import urls as wagtaildocs_urls
 
-from search.views import search
-from inventory.views import link
-from api.urls import urlpatterns as api_urls
+from inventorytags import urls as inventorytags_urls
+from api import urls as api_urls
 
 
 urlpatterns = [
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
-    path("documents/", include(wagtaildocs_urls)),
-    path("search/", search, name="search"),
-    path("link/<uuid:uuid>/", link, name="link"),
+    path("link/", include(inventorytags_urls)),
     path('account/', include('accounts.urls')),
     path('api/', include(api_urls)),
 ]

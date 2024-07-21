@@ -13,10 +13,9 @@ class HomePage(Page):
         'inventory.InventoryPage'
     ]
 
-    body = RichTextField( 
+    body = RichTextField(
         blank=True,
-        null=True,
-        verbose_name=_("body")
+        verbose_name=_('Body'),
     )
 
     content_panels = Page.content_panels + [

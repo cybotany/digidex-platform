@@ -1,13 +1,13 @@
 from rest_framework import serializers
 
-from inventory.models import InventoryTag
+from inventorytags.models import NearFieldCommunicationTag
 
 
-class InventoryTagSerializer(serializers.ModelSerializer):
+class NearFieldCommunicationTagSerializer(serializers.ModelSerializer):
     url = serializers.SerializerMethodField()
 
     class Meta:
-        model = InventoryTag
+        model = NearFieldCommunicationTag
         fields = ['serial_number', 'active', 'created_at', 'last_modified', 'url']
 
     def get_url(self, obj):
