@@ -27,9 +27,10 @@ def get_navigation_links(context):
     request = context["request"]
     if request.user.is_authenticated:
         inventory = get_inventory(request.user)
-        party = inventory.get_party()
+        #party = inventory.get_party()
+        #items = party.get_items()
 
-        items = party.get_items()
+        items = []
         for item in items:
             links.append(
                 LinkComponent(
