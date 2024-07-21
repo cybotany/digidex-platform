@@ -4,7 +4,25 @@ from .base import *
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['digidex.app', 'www.digidex.app']
+ADMIN_SUBDOMAIN = "admin"
+API_SUBDOMAIN = "api"
+APP_SUBDOMAIN = "app"
+
+SUBDOMAINS = [
+    ADMIN_SUBDOMAIN,
+    API_SUBDOMAIN,
+    APP_SUBDOMAIN
+]
+
+URLS = [
+    f"{ADMIN_SUBDOMAIN}.{BASE_URL}",
+    f"{API_SUBDOMAIN}.{BASE_URL}",
+    f"{APP_SUBDOMAIN}.{BASE_URL}"
+]
+
+ALLOWED_HOSTS = ALLOWED_HOSTS + URLS
+
+WAGTAILADMIN_BASE_URL = f"https://{ADMIN_SUBDOMAIN}.{BASE_URL}"
 
 if "EMAIL_HOST" in os.environ:
     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
