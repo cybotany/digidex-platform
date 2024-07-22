@@ -267,4 +267,4 @@ ROOT_HOSTCONF = 'digidex.hosts'
 
 PARENT_HOST = 'digidex.tech'
 
-DEFAULT_HOST = PARENT_HOST
+DEFAULT_HOST = 'default'
