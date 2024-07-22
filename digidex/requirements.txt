@@ -16,9 +16,11 @@ cryptography==42.0.5
 cycler==0.12.1
 defusedxml==0.7.1
 Django==5.0.6
+django-admin-honeypot==1.1.0
 django-allauth==0.61.1
 django-anymail==10.3
 django-filter==23.5
+django-hosts==6.0
 django-modelcluster==6.3
 django-permissionedforms==0.1
 django-storages==1.14.2

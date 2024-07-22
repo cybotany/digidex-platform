@@ -18,6 +18,8 @@ INSTALLED_APPS = [
     "treebeard",
     "modelcluster",
     "taggit",
+    "admin_honeypot",
+    "django_hosts",
     
     "base",
     "home",
