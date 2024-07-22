@@ -1,7 +1,7 @@
 import uuid
 
 from django.db import models
-from django.urls import reverse
+from django_hosts.resolvers import reverse
 from django.utils.translation import gettext_lazy as _
 
 from inventorytags.validators import validate_serial_number
