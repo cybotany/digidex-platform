@@ -1,6 +1,7 @@
 import uuid
 
 from django.db import models
+from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 from wagtail.documents import get_document_model
@@ -24,8 +25,29 @@ class UserInventoryIndex(BaseInventory):
         'inventory.UserInventory'
     ]
 
-    def get_inventories(self):
-        return self.get_children()
+    def _create_child_collection(self, name):
+        return self.collection.get_children().get_or_create(name=name)
+
+    def _create_child_inventory(self, name, type):
+        child_collection, _ = self._create_child_collection(name)
+        child_inventory = UserInventory(
+            title=name,
+            slug=slugify(name),
+            owner=self.owner,
+            collection=child_collection,
+            type=type
+        )
+        self.add_child(instance=child_inventory)
+        child_inventory.save_revision().publish()
+        return child_inventory
+
+    def create_file(self, name):
+        inventory_file, _ = self._create_child_inventory(name, 'file')
+        return inventory_file
+
+    def create_folder(self, name):
+        inventory_folder, _ = self._create_child_inventory(name, 'folder')
+        return inventory_folder
 
     class Meta:
         verbose_name = _('user inventory index')
@@ -56,35 +78,64 @@ class UserInventory(BaseInventory):
     def is_file(self):
         return self.type == 'file'
 
-    def is_folder(self):
-        return self.type == 'folder'
-
     def get_thumbnail(self):
         images = self.get_images()
         if images:
             return images.first()
         return None
 
-    def get_assets(self):
-        return InventoryAsset.objects.filter(inventory=self)
+    def get_files(self):
+        return InventoryFile.objects.filter(inventory=self)
+
+    def _create_child_collection(self, name):
+        return self.collection.get_children().get_or_create(name=name)
+
+    def _create_child_inventory(self, name, type):
+        child_collection, _ = self._create_child_collection(name)
+        child_inventory = UserInventory(
+            title=name,
+            slug=slugify(name),
+            owner=self.owner,
+            collection=child_collection,
+            type=type
+        )
+        self.add_child(instance=child_inventory)
+        child_inventory.save_revision().publish()
+        return child_inventory
+
+    def create_file(self, name):
+        if self.is_file():
+            return None
+        inventory, _ = self._create_child_inventory(name, 'file')
+        file = InventoryFile.objects.create(
+            name=name,
+            inventory=inventory
+        )
+        return file
+
+    def create_folder(self, name):
+        if self.is_file():
+            return None
+        folder, _ = self._create_child_inventory(name, 'folder')
+        return folder
 
     class Meta:
         verbose_name = _('inventory page')
         verbose_name_plural = _('inventorie pages')
 
 
-class InventoryAsset(models.Model):
+class InventoryFile(models.Model):
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
         editable=False,
         db_index=True
     )
-    inventory = models.ForeignKey(
+    inventory = models.OneToOneField(
         UserInventory,
         on_delete=models.CASCADE,
         verbose_name=_("inventory"),
-        related_name='assets'
+        related_name='file'
     )
     name = models.CharField(
         max_length=255,

@@ -8,7 +8,7 @@ class NearFieldCommunicationTagSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = NearFieldCommunicationTag
-        fields = ['serial_number', 'active', 'created_at', 'last_modified', 'url']
+        fields = ['uuid', 'serial_number', 'active', 'created_at', 'last_modified', 'url']
 
     def get_url(self, obj):
         request = self.context.get('request')
