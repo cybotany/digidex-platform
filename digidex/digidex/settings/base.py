@@ -265,4 +265,6 @@ WAGTAILSEARCH_BACKENDS = {
 # Django Hosts settings
 ROOT_HOSTCONF = 'digidex.hosts'
 
-DEFAULT_HOST = 'default'
+PARENT_HOST = 'digidex.tech'
+
+DEFAULT_HOST = PARENT_HOST
