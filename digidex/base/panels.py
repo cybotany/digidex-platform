@@ -1,4 +1,3 @@
-from django.urls import reverse
 from django.forms import Media
 
 from laces.components import Component

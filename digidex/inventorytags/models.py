@@ -49,7 +49,7 @@ class NearFieldCommunicationTag(models.Model):
         return link
 
     def get_url(self):
-        return reverse('link', args=[str(self.uuid)])
+        return reverse('link', host='link', args=[str(self.uuid)])
 
     class Meta:
         verbose_name = "near field communication tag"

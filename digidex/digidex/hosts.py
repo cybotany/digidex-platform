@@ -10,6 +10,6 @@ host_patterns = patterns('',
     host(r'api', 'api.urls', name='api'),
     host(r'admin', admin.site.urls, name='admin'),
     host(r'cms', cms_urls, name='cms'),
-    host(r'link', 'inventory.urls', name='link'),
+    host(r'link', 'inventorytags.urls', name='tag-link'),
     host(r'', settings.ROOT_URLCONF, name='default'),
 )
