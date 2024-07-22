@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from base.models import AbstractDigiDexPage
 
 
-class DigiDexHomePage(AbstractDigiDexPage):
+class HomePage(AbstractDigiDexPage):
     parent_page_types = [
         'wagtailcore.Page'
     ]
@@ -11,4 +11,4 @@ class DigiDexHomePage(AbstractDigiDexPage):
         'inventory.UserInventoryIndex'
     ]
     class Meta:
-        verbose_name = _('digidex homepage')
+        verbose_name = _('homepage')

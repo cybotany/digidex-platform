@@ -1,17 +1,17 @@
 from wagtail.models import Page, Site, Collection
 
-from home.models import DigiDexHomePage
+from home.models import HomePage
 
 
 def create_homepage():
-    if DigiDexHomePage.objects.exists():
-        print("DigiDexHomePage already exists. No action taken.")
+    if HomePage.objects.exists():
+        print("HomePage already exists. No action taken.")
         return
 
     root_collection = Collection.get_first_root_node()
     home_collection = root_collection.add_child(name="Home")
 
-    homepage = DigiDexHomePage(
+    homepage = HomePage(
         title="Home",
         slug="home",
         collection=home_collection,
@@ -29,5 +29,5 @@ def create_homepage():
             'is_default_site': True,
             }
     )
-    print("DigiDexHomePage created and set as the root page.")
+    print("HomePage created and set as the root page.")
     return homepage

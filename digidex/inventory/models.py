@@ -19,7 +19,7 @@ class BaseInventory(AbstractDigiDexPage):
 
 class UserInventoryIndex(BaseInventory):
     parent_page_types = [
-        'home.DigiDexHomePage'
+        'home.HomePage'
     ]
     subpage_types = [
         'inventory.UserInventory'
