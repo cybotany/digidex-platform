@@ -7,7 +7,8 @@ DEBUG = False
 PROD_URL = 'digidex.tech'
 
 ALLOWED_HOSTS = [
-    PROD_URL
+    PROD_URL,
+    f"www.{PROD_URL}",
 ]
 
 WAGTAILADMIN_BASE_URL = f"https://{PROD_URL}"
