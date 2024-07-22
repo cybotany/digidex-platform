@@ -5,37 +5,43 @@ from django.utils.text import slugify
 
 from wagtail.models import Collection, Page
 
-from inventory.models import InventoryPage
+from inventory.models import UserInventoryIndex, UserInventory
 
 
 User = get_user_model()
 
 @receiver(post_save, sender=User)
 def create_user_inventory(sender, instance, created, **kwargs):
-    if created:
-        name = instance.username.title()
-        
-        parent_collection = Collection.get_first_root_node()
-        user_collection = parent_collection.add_child(name=name)
+    if created:        
+        root_collection = Collection.get_first_root_node()
+        inventory_collection, _ = root_collection.get_children().get_or_create(name="Inventory")
+
+        username = instance.username.title()
+        user_collection, _ = inventory_collection.get_children().get_or_create(name=username)
+
+        homepage = Page.objects.filter(slug='home', depth=2).first()
+        if not homepage:
+            from home.utils import create_homepage
+            homepage = create_homepage()
 
         # Create user's inventory
-        root_page = Page.objects.get(depth=1)
-        user_inventory = InventoryPage(
-            title=f"{name}'s Inventory",
-            slug=slugify(name),
+        user_inventory_index = UserInventoryIndex(
+            title=f"{username}'s Inventory",
+            slug=slugify(username),
             owner=instance,
-            collection=user_collection,
-            type="root"  
+            collection=user_collection
         )
-        root_page.add_child(instance=user_inventory)
+        homepage.add_child(instance=user_inventory_index)
+        user_inventory_index.save_revision().publish()
 
         # Create user's party
-        party_collection = user_collection.add_child(name="Party")
-        user_party = InventoryPage(
-            title=f"{name}'s Party",
+        user_party_collection = user_collection.add_child(name="Party")
+        user_party_inventory = UserInventory(
+            title=f"{username}'s Party",
             slug="party",
             owner=instance,
-            collection=party_collection,
+            collection=user_party_collection,
             type="folder"
         )
-        user_inventory.add_child(instance=user_party)
+        user_inventory_index.add_child(instance=user_party_inventory)
+        user_party_inventory.save_revision().publish()

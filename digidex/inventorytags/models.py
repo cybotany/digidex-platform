@@ -58,7 +58,7 @@ class NearFieldCommunicationTag(models.Model):
 
 class InventoryLink(models.Model):
     inventory = models.OneToOneField(
-        "inventory.InventoryPage",
+        "inventory.BaseInventory",
         on_delete=models.CASCADE,
         null=True,
         blank=True,

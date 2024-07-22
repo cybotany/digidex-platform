@@ -1,8 +1,7 @@
-from django.urls import path, include
+from django.urls import path
 
-from wagtail import urls as wagtail_urls
+from inventorytags.views import link
 
 urlpatterns = [
-    path('link/', include('inventorytags.urls')),
-    path("", include(wagtail_urls)),
+    path("<uuid:uuid>/", link, name="link"),
 ]

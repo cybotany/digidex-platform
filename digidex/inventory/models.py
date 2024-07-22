@@ -5,20 +5,40 @@ from django.utils.translation import gettext_lazy as _
 
 from wagtail.documents import get_document_model
 from wagtail.images import get_image_model
-from wagtail.models import Page, Collection
-from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 
 from base.models import AbstractDigiDexPage
 
 
-class InventoryPage(AbstractDigiDexPage):
+class BaseInventory(AbstractDigiDexPage):
+    class Meta:
+        verbose_name = _('inventory')
+        verbose_name_plural = _('inventories')
+
+
+class UserInventoryIndex(BaseInventory):
     parent_page_types = [
-        'home.HomePage',
-        'inventory.InventoryPage'
+        'home.DigiDexHomePage'
     ]
     subpage_types = [
-        'inventory.InventoryPage'
+        'inventory.UserInventory'
+    ]
+
+    def get_inventories(self):
+        return self.get_children()
+
+    class Meta:
+        verbose_name = _('user inventory index')
+        verbose_name_plural = _('user inventory indexes')
+
+
+class UserInventory(BaseInventory):
+    parent_page_types = [
+        'inventory.UserInventoryIndex',
+        'inventory.UserInventory'
+    ]
+    subpage_types = [
+        'inventory.UserInventory'
     ]
 
     type = models.CharField(
@@ -26,11 +46,10 @@ class InventoryPage(AbstractDigiDexPage):
         choices=[
             ('file', 'File'),
             ('folder', 'Folder'),
-            ('root', 'Root'),
         ]
     )
 
-    content_panels = AbstractDigiDexPage.content_panels + [
+    content_panels = BaseInventory.content_panels + [
         FieldPanel('type'),
     ]
 
@@ -39,9 +58,6 @@ class InventoryPage(AbstractDigiDexPage):
 
     def is_folder(self):
         return self.type == 'folder'
-
-    def is_root(self):
-        return self.type == 'root'
 
     def get_thumbnail(self):
         images = self.get_images()
@@ -65,7 +81,7 @@ class InventoryAsset(models.Model):
         db_index=True
     )
     inventory = models.ForeignKey(
-        InventoryPage,
+        UserInventory,
         on_delete=models.CASCADE,
         verbose_name=_("inventory"),
         related_name='assets'
@@ -102,5 +118,5 @@ class InventoryAsset(models.Model):
         return None
 
     class Meta:
-        verbose_name = _("asset")
-        verbose_name_plural = _("assets")
+        verbose_name = _("inventory asset")
+        verbose_name_plural = _("inventory assets")
