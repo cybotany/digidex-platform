@@ -1,5 +1,5 @@
 from django import template
-from django.conf import settings
+from django_hosts.resolvers import reverse
 
 from wagtail.models import Site
 
@@ -52,17 +52,17 @@ def get_navigation_buttons(context):
         buttons = [
             ButtonComponent(
                 text='Email',
-                url=settings.EMAIL_URL,
+                url=reverse("account_email", host='account'),
                 style='nav-button-outline'
             ),
             ButtonComponent(
                 text='Password',
-                url=settings.PASSWORD_URL,
+                url=reverse("account_change_password", host='account'),
                 style='nav-button-outline'
             ),
             ButtonComponent(
                 text='Logout',
-                url=settings.LOGOUT_URL,
+                url=reverse("account_logout", host='account'),
                 style='nav-button'
             )
         ]   
@@ -70,12 +70,12 @@ def get_navigation_buttons(context):
         buttons = [
             ButtonComponent(
                 text='Login',
-                url=settings.LOGIN_URL,
+                url=reverse("account_login", host='account'),
                 style='nav-button-outline'
             ),
             ButtonComponent(
                 text='Signup',
-                url=settings.SIGNUP_URL,
+                url=reverse("account_signup", host='account'),
                 style='nav-button'
             )
         ]

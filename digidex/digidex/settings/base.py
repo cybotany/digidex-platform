@@ -6,14 +6,19 @@ from datetime import timedelta
 
 from dotenv import load_dotenv
 
-from django_hosts.resolvers import reverse
-
 load_dotenv()
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 BASE_DIR = os.path.dirname(PROJECT_DIR)
+
+ROOT_HOSTCONF = 'digidex.hosts'
+
+PARENT_HOST = 'digidex.tech'
+
+DEFAULT_HOST = 'default'
 
 INSTALLED_APPS = [
     "django_hosts",
@@ -204,16 +209,6 @@ AUTH_USER_MODEL = 'accounts.DigiDexUser'
 
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
-EMAIL_URL = reverse("account_email", host='account')
-
-PASSWORD_URL = reverse("account_change_password", host='account')
-
-LOGOUT_URL = reverse("account_logout", host='account')
-
-LOGIN_URL = reverse("account_login", host='account')
-
-SIGNUP_URL = reverse("account_signup", host='account')
-
 ACCOUNT_ADAPTER = 'accounts.adapter.DigidexAccountAdapter'
 
 ACCOUNT_PRESERVE_USERNAME_CASING = False
@@ -269,10 +264,3 @@ WAGTAILSEARCH_BACKENDS = {
         "BACKEND": "wagtail.search.backends.database",
     }
 }
-
-# Django Hosts settings
-ROOT_HOSTCONF = 'digidex.hosts'
-
-PARENT_HOST = 'digidex.tech'
-
-DEFAULT_HOST = 'default'
