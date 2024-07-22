@@ -257,8 +257,6 @@ WAGTAILIMAGES_IMAGE_MODEL = 'base.DigiDexImage'
 
 WAGTAILIMAGES_EXTENSIONS = ['gif', 'jpg', 'jpeg', 'png', 'webp']
 
-WAGTAIL_FRONTEND_LOGIN_URL = LOGIN_URL
-
 WAGTAILSEARCH_BACKENDS = {
     "default": {
         "BACKEND": "wagtail.search.backends.database",
