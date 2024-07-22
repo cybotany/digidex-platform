@@ -14,13 +14,12 @@ PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 INSTALLED_APPS = [
+    "django_hosts",
     "laces",
     "treebeard",
     "modelcluster",
     "taggit",
-    "admin_honeypot",
-    "django_hosts",
-    
+
     "base",
     "home",
     "accounts",
@@ -61,6 +60,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "django_hosts.middleware.HostsRequestMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -71,6 +71,7 @@ MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
     "allauth.account.middleware.AccountMiddleware",
+    "django_hosts.middleware.HostsResponseMiddleware",
 ]
 
 ROOT_URLCONF = "digidex.urls"
@@ -260,3 +261,8 @@ WAGTAILSEARCH_BACKENDS = {
         "BACKEND": "wagtail.search.backends.database",
     }
 }
+
+# Django Hosts settings
+ROOT_HOSTCONF = 'digidex.hosts'
+
+DEFAULT_HOST = 'default'
