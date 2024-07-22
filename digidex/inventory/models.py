@@ -42,12 +42,10 @@ class UserInventoryIndex(BaseInventory):
         return child_inventory
 
     def create_file(self, name):
-        inventory_file, _ = self._create_child_inventory(name, 'file')
-        return inventory_file
+        return self._create_child_inventory(name, 'file')
 
     def create_folder(self, name):
-        inventory_folder, _ = self._create_child_inventory(name, 'folder')
-        return inventory_folder
+        return self._create_child_inventory(name, 'folder')
 
     class Meta:
         verbose_name = _('user inventory index')

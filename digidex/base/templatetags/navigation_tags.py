@@ -9,8 +9,8 @@ from base.components import ButtonComponent, LinkComponent
 register = template.Library()
 
 def get_inventory(user):
-    from inventory.models import InventoryPage
-    return InventoryPage.objects.filter(owner=user, type='root').first()
+    from inventory.models import UserInventoryIndex
+    return UserInventoryIndex.objects.get(owner=user)
 
 
 @register.inclusion_tag("base/includes/navigation/logo.html", takes_context=True)
