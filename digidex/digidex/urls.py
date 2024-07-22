@@ -2,10 +2,8 @@ from django.conf import settings
 from django.urls import include, path
 
 from wagtail import urls as wagtail_urls
-from accounts import urls as account_urls
 
 urlpatterns = [
-    path("", include(account_urls)),
     path("", include(wagtail_urls)),
 ]
 

@@ -5,6 +5,7 @@ DEBUG = True
 BASE_URL = '127.0.0.1'
 
 API_URL = f"api.{BASE_URL}"
+ACCOUNT_URL = f"account.{BASE_URL}"
 ADMIN_URL = f"admin.{BASE_URL}"
 CMS_URL = f"cms.{BASE_URL}"
 LINK_URL = f"link.{BASE_URL}"
@@ -12,6 +13,7 @@ WWW_URL = f"www.{BASE_URL}"
 
 ALLOWED_HOSTS = [
     BASE_URL,
+    ACCOUNT_URL,
     API_URL,
     ADMIN_URL,
     CMS_URL,

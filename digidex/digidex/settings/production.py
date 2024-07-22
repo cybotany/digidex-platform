@@ -7,6 +7,7 @@ DEBUG = False
 BASE_URL = 'digidex.tech'
 
 PROD_URL = BASE_URL
+ACCOUNT_URL = f"account.{BASE_URL}"
 API_URL = f"api.{BASE_URL}"
 ADMIN_URL = f"admin.{BASE_URL}"
 CMS_URL = f"cms.{BASE_URL}"
@@ -15,6 +16,7 @@ WWW_URL = f"www.{BASE_URL}"
 
 ALLOWED_HOSTS = [
     PROD_URL,
+    ACCOUNT_URL,
     API_URL,
     ADMIN_URL,
     CMS_URL,

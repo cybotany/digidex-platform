@@ -7,6 +7,7 @@ from wagtail.admin import urls as cms_urls
 
 
 host_patterns = patterns('',
+    host(r'account', 'accounts.urls', name='account'),
     host(r'api', 'api.urls', name='api'),
     host(r'admin', admin.site.urls, name='admin'),
     host(r'cms', cms_urls, name='cms'),
