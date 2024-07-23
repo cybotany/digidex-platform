@@ -4,25 +4,6 @@ from .base import *
 
 DEBUG = False
 
-PARENT_HOST = 'digidex.tech'
-
-ACCOUNT_URL = f"account.{PARENT_HOST}"
-API_URL = f"api.{PARENT_HOST}"
-ADMIN_URL = f"admin.{PARENT_HOST}"
-CMS_URL = f"cms.{PARENT_HOST}"
-LINK_URL = f"link.{PARENT_HOST}"
-WWW_URL = f"www.{PARENT_HOST}"
-
-ALLOWED_HOSTS = [
-    PARENT_HOST,
-    ACCOUNT_URL,
-    API_URL,
-    ADMIN_URL,
-    CMS_URL,
-    LINK_URL,
-    WWW_URL,
-]
-
 WAGTAILADMIN_BASE_URL = f"https://{ADMIN_URL}"
 
 if "EMAIL_HOST" in os.environ:

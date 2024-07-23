@@ -16,7 +16,27 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 ROOT_HOSTCONF = 'digidex.hosts'
 
+ROOT_URLCONF = "digidex.urls"
+
 DEFAULT_HOST = 'default'
+
+PARENT_HOST = os.getenv('PARENT_HOST')
+
+API_URL = f"api.{PARENT_HOST}"
+ADMIN_URL = f"admin.{PARENT_HOST}"
+CMS_URL = f"cms.{PARENT_HOST}"
+LINK_URL = f"link.{PARENT_HOST}"
+WWW_URL = f"www.{PARENT_HOST}"
+
+ALLOWED_HOSTS = [
+    PARENT_HOST,
+
+    API_URL,
+    ADMIN_URL,
+    CMS_URL,
+    LINK_URL,
+    WWW_URL,
+]
 
 INSTALLED_APPS = [
     "django_hosts",
@@ -78,8 +98,6 @@ MIDDLEWARE = [
     "allauth.account.middleware.AccountMiddleware",
     "django_hosts.middleware.HostsResponseMiddleware",
 ]
-
-ROOT_URLCONF = "digidex.urls"
 
 TEMPLATES = [
     {
