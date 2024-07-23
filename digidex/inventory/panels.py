@@ -15,7 +15,7 @@ from base.components import (
 )
 
 
-class FolderPanel(Component):
+class CategoryPanel(Component):
     template_name = 'inventory/panels/category_panel.html'
 
     def __init__(self, category=dict(), current=False):
@@ -48,7 +48,7 @@ class FolderPanel(Component):
         }
 
 
-class GroupCollection(Component):
+class CategoryCollection(Component):
     template_name = 'inventory/components/category_collection.html'
 
     def __init__(self, categories=list()):
@@ -86,14 +86,14 @@ class GroupCollection(Component):
 
 
 class AssetPanel(Component):
-    template_name = 'inventory/panels/file_panel.html'
+    template_name = 'inventory/panels/asset_panel.html'
 
-    def __init__(self, file=dict()):
-        self.heading = file.get('heading', 'No heading available')
-        self.paragraph = file.get('paragraph', 'No paragraph available')
-        self.date = file.get('date')
-        self.url = file.get('url')
-        self.thumbnail = file.get('thumbnail')
+    def __init__(self, asset=dict()):
+        self.heading = asset.get('heading', 'No heading available')
+        self.paragraph = asset.get('paragraph', 'No paragraph available')
+        self.date = asset.get('date')
+        self.url = asset.get('url')
+        self.thumbnail = asset.get('thumbnail')
         self.style = 'post'
 
     def get_heading_component(self):
