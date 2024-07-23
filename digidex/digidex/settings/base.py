@@ -21,6 +21,7 @@ PARENT_HOST = 'digidex.tech'
 DEFAULT_HOST = 'default'
 
 INSTALLED_APPS = [
+    'admin_honeypot',
     "django_hosts",
     "laces",
     "treebeard",
