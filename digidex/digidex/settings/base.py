@@ -16,8 +16,6 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 ROOT_HOSTCONF = 'digidex.hosts'
 
-PARENT_HOST = 'digidex.tech'
-
 DEFAULT_HOST = 'default'
 
 INSTALLED_APPS = [
