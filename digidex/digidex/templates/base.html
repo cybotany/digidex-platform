@@ -32,14 +32,9 @@
   
     </head>
   <body>
-    {% include "includes/navigation.html" %}
     {% include "includes/header.html" %}
     <main>
-      <div class="section-full">
-        <div class="content">
-          {% block content %}{% endblock content %}
-        </div>
-      </div>
+      {% block content %}{% endblock content %}
     </main>
     {% include "includes/footer.html" %}
   </body>
