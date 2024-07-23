@@ -1,1 +1,11 @@
-{% extends "base.html" %}
+{% extends "index.html" %}
+
+{% block body %}
+  <main>
+    <section class="section-full">
+      <div class="content">
+        {% block content %}{% endblock content %}
+      </div>
+    </section>
+  </main>
+{% endblock body %}

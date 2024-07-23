@@ -26,15 +26,11 @@
     <script type="text/javascript">WebFont.load({  google: {    families: ["Space Grotesk:regular,500,600,700","IBM Plex Mono:regular,italic,500,500italic,600,600italic,700,700italic"]  }});</script>
 
     {# Global stylesheets #}
-    <link rel="stylesheet" type="text/css" href="{% static 'base/css/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'base/css/normalize.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'base/css/webflow.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'base/css/digidex.css' %}">
   </head>
   <body>
-    {% include "includes/header.html" %}
-    <main>
-      {% block content %}{% endblock content %}
-    </main>
-    {% include "includes/footer.html" %}
+    {% block body %}{% endblock body %}
   </body>
 </html>
