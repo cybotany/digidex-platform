@@ -82,3 +82,33 @@ def get_navigation_buttons(context):
     return {
             "buttons": buttons,
         }
+
+
+@register.inclusion_tag("base/includes/footer/copyright.html", takes_context=True)
+def get_footer_copyright(context):
+    pass
+
+
+@register.inclusion_tag("base/includes/footer/paragraph.html", takes_context=True)
+def get_footer_paragraph(context):
+    pass
+
+
+@register.inclusion_tag("base/includes/footer/icons.html", takes_context=True)
+def get_footer_icons(context):
+    pass
+
+
+@register.inclusion_tag("base/includes/footer/quick_links.html", takes_context=True)
+def get_footer_quick_links(context):
+    pass
+
+
+@register.inclusion_tag("base/includes/footer/internal_links.html", takes_context=True)
+def get_footer_internal_links(context):
+    pass
+
+
+@register.inclusion_tag("base/includes/footer/social_links.html", takes_context=True)
+def get_footer_support_links(context):
+    pass

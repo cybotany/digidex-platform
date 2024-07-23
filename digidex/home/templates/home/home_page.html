@@ -1,3 +1,7 @@
 {% extends "base.html" %}
 
-{% block content %}{% endblock content %}
+{% block content %}
+  {% include "home/includes/hero_section.html" %}
+  {% include "home/includes/features_section.html" %}
+  {% include "home/includes/company_section.html" %}
+{% endblock %}
