@@ -1,10 +1,12 @@
-{% load static laces navigation_tags %}
+{% load navigation_tags %}
 
 <header>
   <div role="banner" class="navbar w-nav">
     <div class="nav-block">
       <div class="nav">
-        {% get_navigation_logo %}
+        <a href="{% get_site_root %}" class="brand w-nav-brand w--current">
+          <img src="{% get_site_logo %}" loading="eager" alt="DigiDex Logo" class="logo">
+        </a>
         <nav role="navigation" class="nav-menu w-nav-menu">
           {% get_navigation_links %}
           <div class="button-mobile">

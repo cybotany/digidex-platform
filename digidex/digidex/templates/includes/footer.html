@@ -1,8 +1,16 @@
+{% load navigation_tags %}
+
 <footer>
   <section class="section-footer">
     <div class="content">
+      <div class="w-layout-grid grid-footer">
+        <div class="block-footer">
+          <img src="{% get_site_logo %}" loading="eager" alt="DigiDex Logo" class="logo-footer">
+          {% get_footer_paragraph %}
+        </div>
+      </div>
       <div class="block-footer-down">
-        <div class="text-footer-down">All rights reserved. Built with <a href="https://wagtail.org/" target="_blank" class="link-footer-down">Wagtail</a><br></div>
+        {% get_footer_copyright %}
       </div>
     </div>
   </section>

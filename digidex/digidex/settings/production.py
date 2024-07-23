@@ -4,7 +4,7 @@ from .base import *
 
 DEBUG = False
 
-WAGTAILADMIN_BASE_URL = f"https://{ADMIN_URL}"
+WAGTAILADMIN_BASE_URL = f"https://{CMS_URL}"
 
 if "EMAIL_HOST" in os.environ:
     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"

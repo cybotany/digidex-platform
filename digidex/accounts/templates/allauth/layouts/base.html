@@ -1,6 +1,12 @@
 {% extends "index.html" %}
+{% load navigation_tags %}
 
 {% block body %}
+  <header>
+    <a href="{% get_site_root %}" class="brand-center w-nav-brand">
+      <img src="{% get_site_logo %}" loading="eager" alt="DigiDex Logo" class="logo">
+    </a>
+  </header>
   <main>
     <section class="section-full">
       <div class="content">

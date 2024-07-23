@@ -2,7 +2,7 @@ from .base import *
 
 DEBUG = True
 
-WAGTAILADMIN_BASE_URL = f"http://{ADMIN_URL}"
+WAGTAILADMIN_BASE_URL = f"http://{CMS_URL}"
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 

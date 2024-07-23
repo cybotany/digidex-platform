@@ -3,6 +3,7 @@ from django.urls import reverse
 
 from wagtail.models import Site
 
+from base.models import DigiDexLogo, DigiDexFooterParagraph, DigiDexFooterCopyright
 from base.components import ButtonComponent, LinkComponent
 
 
@@ -13,10 +14,41 @@ def get_inventory(user):
     return UserInventoryIndex.objects.get(owner=user)
 
 
-@register.inclusion_tag("base/includes/navigation/logo.html", takes_context=True)
-def get_navigation_logo(context):
+@register.simple_tag(takes_context=True)
+def get_site_root(context):
+    return Site.find_for_request(context["request"]).root_page.url
+
+
+@register.simple_tag(takes_context=True)
+def get_site_logo(context):
+    instance = DigiDexLogo.objects.first()
+    digidex_logo = instance.logo if instance else ""
+    return digidex_logo
+
+
+@register.inclusion_tag("base/includes/footer/paragraph.html", takes_context=True)
+def get_footer_paragraph(context):
+    footer_paragraph = context.get("footer_paragraph", "")
+
+    if not footer_paragraph:
+        instance = DigiDexFooterParagraph.objects.filter(live=True).first()
+        footer_paragraph = instance.paragraph if instance else ""
+
     return {
-        "site_root": Site.find_for_request(context["request"]).root_page.url,
+        "footer_paragraph": footer_paragraph,
+    }
+
+
+@register.inclusion_tag("base/includes/footer/copyright.html", takes_context=True)
+def get_footer_copyright(context):
+    footer_copyright = context.get("footer_copyright", "")
+
+    if not footer_copyright:
+        instance = DigiDexFooterCopyright.objects.filter(live=True).first()
+        footer_copyright = instance.copyright if instance else "All rights reserved."
+
+    return {
+        "footer_copyright": footer_copyright,
     }
 
 
@@ -82,33 +114,3 @@ def get_navigation_buttons(context):
     return {
             "buttons": buttons,
         }
-
-
-@register.inclusion_tag("base/includes/footer/copyright.html", takes_context=True)
-def get_footer_copyright(context):
-    pass
-
-
-@register.inclusion_tag("base/includes/footer/paragraph.html", takes_context=True)
-def get_footer_paragraph(context):
-    pass
-
-
-@register.inclusion_tag("base/includes/footer/icons.html", takes_context=True)
-def get_footer_icons(context):
-    pass
-
-
-@register.inclusion_tag("base/includes/footer/quick_links.html", takes_context=True)
-def get_footer_quick_links(context):
-    pass
-
-
-@register.inclusion_tag("base/includes/footer/internal_links.html", takes_context=True)
-def get_footer_internal_links(context):
-    pass
-
-
-@register.inclusion_tag("base/includes/footer/social_links.html", takes_context=True)
-def get_footer_support_links(context):
-    pass
