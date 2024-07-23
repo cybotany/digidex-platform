@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     "accounts",
     "inventory",
     "inventorytags",
-    "schedule",
     "search",
     "api",
     "storages",
