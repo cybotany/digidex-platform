@@ -41,11 +41,11 @@ class UserInventoryIndex(BaseInventory):
         child_inventory.save_revision().publish()
         return child_inventory
 
-    def create_file(self, name):
-        return self._create_child_inventory(name, 'file')
+    def create_asset(self, name):
+        return self._create_child_inventory(name, 'asset')
 
-    def create_folder(self, name):
-        return self._create_child_inventory(name, 'folder')
+    def create_category(self, name):
+        return self._create_child_inventory(name, 'category')
 
     class Meta:
         verbose_name = _('user inventory index')
@@ -64,8 +64,8 @@ class UserInventory(BaseInventory):
     type = models.CharField(
         max_length=10,
         choices=[
-            ('file', 'File'),
-            ('folder', 'Folder'),
+            ('asset', 'Asset'),
+            ('category', 'Category'),
         ]
     )
 
@@ -73,8 +73,8 @@ class UserInventory(BaseInventory):
         FieldPanel('type'),
     ]
 
-    def is_file(self):
-        return self.type == 'file'
+    def is_asset(self):
+        return self.type == 'asset'
 
     def get_thumbnail(self):
         images = self.get_images()
@@ -82,8 +82,8 @@ class UserInventory(BaseInventory):
             return images.first()
         return None
 
-    def get_files(self):
-        return InventoryFile.objects.filter(inventory=self)
+    def get_assets(self):
+        return InventoryAsset.objects.filter(inventory=self)
 
     def _create_child_collection(self, name):
         return self.collection.get_children().get_or_create(name=name)
@@ -101,28 +101,28 @@ class UserInventory(BaseInventory):
         child_inventory.save_revision().publish()
         return child_inventory
 
-    def create_file(self, name):
-        if self.is_file():
+    def create_asset(self, name):
+        if self.is_asset():
             return None
-        inventory, _ = self._create_child_inventory(name, 'file')
-        file = InventoryFile.objects.create(
+        inventory, _ = self._create_child_inventory(name, 'asset')
+        asset = InventoryAsset.objects.create(
             name=name,
             inventory=inventory
         )
-        return file
+        return asset
 
-    def create_folder(self, name):
-        if self.is_file():
+    def create_category(self, name):
+        if self.is_asset():
             return None
-        folder, _ = self._create_child_inventory(name, 'folder')
-        return folder
+        category, _ = self._create_child_inventory(name, 'category')
+        return category
 
     class Meta:
         verbose_name = _('inventory page')
         verbose_name_plural = _('inventorie pages')
 
 
-class InventoryFile(models.Model):
+class InventoryAsset(models.Model):
     uuid = models.UUIDField(
         default=uuid.uuid4,
         unique=True,
@@ -133,7 +133,7 @@ class InventoryFile(models.Model):
         UserInventory,
         on_delete=models.CASCADE,
         verbose_name=_("inventory"),
-        related_name='file'
+        related_name='asset'
     )
     name = models.CharField(
         max_length=255,

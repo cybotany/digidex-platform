@@ -35,5 +35,5 @@ def create_user_inventory(user):
     return user_inventory
 
 def create_user_party(user_inventory):
-    user_party = user_inventory.create_folder("Party")
+    user_party = user_inventory.create_category("Party")
     return user_party
