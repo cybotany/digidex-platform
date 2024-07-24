@@ -1,16 +1,35 @@
-{% extends "utility.html" %}
+{% extends "index.html" %}
+{% load wagtailcore_tags wagtailimages_tags navigation_tags %}
 
 {% block title %}Protected Page{% endblock %}
 
-{% block content %}
-  <div class="utility-page-wrap">
-    <div class="utility-page-content w-password-page w-form">
-      <div class="subtitle blue">401<br></div>
-      <h2 class="heading-account">Protected Page</h2>
-      <p class="paragraph-account">The page you are looking for requires a password.</p>
-      <a href="index.html" class="button base-button">Back to Home</a>    
-    </div>
-  </div>
-{% endblock %}
+{% block body %}
+  <header>
+    {% get_site_root as site_root %}
+    <a href="{% pageurl get_site_root %}" class="brand w-nav-brand w--current">
+      {% get_site_logo as site_logo %}
+      {% image site_logo max-50x50 loading="eager" alt=site_logo.alt class="logo" %}
+    </a>
+  </header>
 
-{% block extra_js %}{% endblock %}
+  <main>
+    <div class="utility-page-wrap">
+      <div class="utility-page-content w-password-page w-form">
+        <div class="subtitle blue">401<br></div>
+        <h2 class="heading-account">Protected Page</h2>
+        <p class="paragraph-account">The page you are looking for requires a password.</p>
+        <a href="index.html" class="button base-button">Back to Home</a>    
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <section class="section-footer">
+      <div class="content">
+        <div class="block-footer-down">
+          {% get_footer_copyright %}
+        </div>
+      </div>
+    </section>
+  </footer>
+{% endblock body %}

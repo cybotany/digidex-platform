@@ -9,6 +9,7 @@
       {% image site_logo max-50x50 loading="eager" alt=site_logo.alt class="logo" %}
     </a>
   </header>
+
   <main>
     <section class="section-full">
       <div class="content">
@@ -16,4 +17,14 @@
       </div>
     </section>
   </main>
+
+  <footer>
+    <section class="section-footer">
+      <div class="content">
+        <div class="block-footer-down">
+          {% get_footer_copyright %}
+        </div>
+      </div>
+    </section>
+  </footer>
 {% endblock body %}
