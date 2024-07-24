@@ -1,16 +1,13 @@
 {% extends "index.html" %}
+{% load wagtailcore_tags wagtailimages_tags navigation_tags %}
 
 {% block title %}Page not found{% endblock %}
 
 {% block body %}
-  <header>
-    {% get_site_root as site_root %}
-    <a href="{% pageurl get_site_root %}" class="brand w-nav-brand w--current">
-      {% get_site_logo as site_logo %}
-      {% image site_logo max-50x50 loading="eager" alt=site_logo.alt class="logo" %}
-    </a>
-  </header>
-
+  <a href="/" class="brand-center w-nav-brand">
+    {% get_site_logo as site_logo %}
+    {% image site_logo max-50x50 loading="eager" alt=site_logo.alt class="logo" %}
+  </a>
   <main>
     <div class="utility-page-wrap">
       <div class="utility-page-content">
@@ -21,14 +18,4 @@
       </div>
     </div>
   </main>
-
-  <footer>
-    <section class="section-footer">
-      <div class="content">
-        <div class="block-footer-down">
-          {% get_footer_copyright %}
-        </div>
-      </div>
-    </section>
-  </footer>
 {% endblock body %}
