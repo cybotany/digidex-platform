@@ -8,10 +8,10 @@ from wagtail.documents import get_document_model
 from wagtail.images import get_image_model
 from wagtail.admin.panels import FieldPanel
 
-from base.models import AbstractDigiDexPage
+from base.models import AbstractSitePage
 
 
-class BaseInventory(AbstractDigiDexPage):
+class BaseInventory(AbstractSitePage):
     class Meta:
         verbose_name = _('inventory')
         verbose_name_plural = _('inventories')

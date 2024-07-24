@@ -3,7 +3,7 @@ from django.urls import reverse
 
 from wagtail.models import Site
 
-from base.models import DigiDexLogo, DigiDexFooterParagraph, DigiDexFooterCopyright
+from base.models import SiteLogo, FooterParagraph, FooterCopyright
 from base.components import ButtonComponent, LinkComponent
 
 
@@ -21,7 +21,7 @@ def get_site_root(context):
 
 @register.simple_tag(takes_context=True)
 def get_site_logo(context):
-    instance = DigiDexLogo.objects.first()
+    instance = SiteLogo.objects.first()
     digidex_logo = instance.logo if instance else ""
     return digidex_logo
 
@@ -31,7 +31,7 @@ def get_footer_paragraph(context):
     footer_paragraph = context.get("footer_paragraph", "")
 
     if not footer_paragraph:
-        instance = DigiDexFooterParagraph.objects.filter(live=True).first()
+        instance = FooterParagraph.objects.filter(live=True).first()
         footer_paragraph = instance.paragraph if instance else ""
 
     return {
@@ -44,7 +44,7 @@ def get_footer_copyright(context):
     footer_copyright = context.get("footer_copyright", "")
 
     if not footer_copyright:
-        instance = DigiDexFooterCopyright.objects.filter(live=True).first()
+        instance = FooterCopyright.objects.filter(live=True).first()
         footer_copyright = instance.copyright if instance else "All rights reserved."
 
     return {
