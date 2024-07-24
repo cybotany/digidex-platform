@@ -48,13 +48,15 @@ class HeadingComponent(Component):
 class ParagraphComponent(Component):
     template_name = 'base/components/paragraph.html'
 
-    def __init__(self, text=str, style=str):
+    def __init__(self, text=str, line_break=False, style=str):
         self.text = text
+        self.line_break = line_break
         self.style = style
 
     def get_context_data(self, parent_context=None):
         return {
             "text": self.text,
+            "line_break": self.line_break,
             "style": self.style
         }
 

@@ -4,7 +4,7 @@ from django.urls import reverse
 from wagtail.models import Site
 
 from base.models import SiteLogo, FooterParagraph, FooterCopyright
-from base.components import ButtonComponent, LinkComponent
+from base.components import ParagraphComponent, ButtonComponent, LinkComponent
 
 
 register = template.Library()
@@ -26,7 +26,12 @@ def get_site_logo(context):
     return digidex_logo
 
 
-@register.inclusion_tag("base/includes/footer/paragraph.html", takes_context=True)
+@register.simple_tag(takes_context=True)
+def get_site_root(context):
+    return Site.find_for_request(context["request"]).root_page
+
+
+@register.simple_tag(takes_context=True)
 def get_footer_paragraph(context):
     footer_paragraph = context.get("footer_paragraph", "")
 
@@ -34,9 +39,11 @@ def get_footer_paragraph(context):
         instance = FooterParagraph.objects.filter(live=True).first()
         footer_paragraph = instance.paragraph if instance else ""
 
-    return {
-        "footer_paragraph": footer_paragraph,
-    }
+    return ParagraphComponent(
+        text=footer_paragraph,
+        line_break=True,
+        style='footer'
+    )
 
 
 @register.inclusion_tag("base/includes/footer/copyright.html", takes_context=True)

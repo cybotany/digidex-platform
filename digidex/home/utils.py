@@ -24,7 +24,7 @@ def create_homepage():
         hostname='digidex.tech',
         defaults={
             'port': 80,
-            'site_name': 'Digidex',
+            'site_name': 'DigiDex',
             'root_page': homepage,
             'is_default_site': True,
             }
