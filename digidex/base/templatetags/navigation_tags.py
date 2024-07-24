@@ -31,19 +31,23 @@ def get_site_root(context):
     return Site.find_for_request(context["request"]).root_page
 
 
-@register.simple_tag(takes_context=True)
+@register.inclusion_tag("base/includes/footer/paragraph.html", takes_context=True)
 def get_footer_paragraph(context):
-    footer_paragraph = context.get("footer_paragraph", "")
+    paragraph = context.get("footer_paragraph", "")
 
-    if not footer_paragraph:
+    if not paragraph:
         instance = FooterParagraph.objects.filter(live=True).first()
-        footer_paragraph = instance.paragraph if instance else ""
+        paragraph = instance.paragraph if instance else ""
 
-    return ParagraphComponent(
-        text=footer_paragraph,
+    footer_paragraph = ParagraphComponent(
+        text=paragraph,
         line_break=True,
         style='footer'
     )
+
+    return {
+        "footer_paragraph": footer_paragraph,
+    }
 
 
 @register.inclusion_tag("base/includes/footer/copyright.html", takes_context=True)
