@@ -12,4 +12,4 @@ class NearFieldCommunicationTagSerializer(serializers.ModelSerializer):
 
     def get_url(self, obj):
         request = self.context.get('request')
-        return request.build_absolute_uri(obj.get_url())
+        return request.build_absolute_uri(obj.get_mapping_url())
