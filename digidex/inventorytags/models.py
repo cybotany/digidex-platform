@@ -2,6 +2,7 @@ import uuid
 
 from django.db import models
 from django.conf import settings
+from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from django_hosts.resolvers import reverse
 from django.http import Http404
@@ -55,6 +56,15 @@ class NearFieldCommunicationTag(models.Model):
             return link
         return link
 
+    def get_owner_page(self):
+        from inventory.models import UserInventoryIndex
+        user_slug = slugify(self.owner.username)
+        try:
+            user_inventory = UserInventoryIndex.objects.get(slug=user_slug)
+            return user_inventory.url
+        except UserInventoryIndex.DoesNotExist:
+            raise Http404('Owner page not found')
+
     def get_url(self):
         return reverse('link-tag', host='link', args=[str(self.uuid)])
 
@@ -85,7 +95,8 @@ class InventoryLink(models.Model):
     def get_url(self):
         if self.inventory:
             return self.inventory.url
-        raise Http404("Inventory not found")
+        owner_page = self.tag.get_owner_page()
+        return owner_page.url
 
     @property
     def url(self):
