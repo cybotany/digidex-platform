@@ -3,6 +3,7 @@ import uuid
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django_hosts.resolvers import reverse
+from django.http import Http404
 
 from inventorytags.validators import validate_serial_number
 
@@ -78,7 +79,7 @@ class InventoryLink(models.Model):
     def get_url(self):
         if self.inventory:
             return self.inventory.url
-        return None
+        raise Http404("Inventory not found")
 
     @property
     def url(self):
