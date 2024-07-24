@@ -5,8 +5,7 @@
     {% slot title %}
     {% endslot %}
   </h2>
-  {% slot body %}
-  {% endslot %}
+  {% slot body %}{% endslot %}
   {% if slots.actions %}
     <ul>
       {% for action in slots.actions %}<li>{{ action }}</li>{% endfor %}
