@@ -12,18 +12,11 @@ from base.models import AbstractSitePage
 
 
 class BaseInventory(AbstractSitePage):
-    class Meta:
-        verbose_name = _('inventory')
-        verbose_name_plural = _('inventories')
-
-
-class UserInventoryIndex(BaseInventory):
-    parent_page_types = [
-        'home.HomePage'
-    ]
-    subpage_types = [
-        'inventory.UserInventory'
-    ]
+    """
+    Base class for inventory pages.
+    """
+    def is_asset(self):
+        return False
 
     def _create_child_collection(self, name):
         return self.collection.get_children().get_or_create(name=name)
@@ -41,11 +34,36 @@ class UserInventoryIndex(BaseInventory):
         child_inventory.save_revision().publish()
         return child_inventory
 
+    def create_child(self, name, type):
+        if self.is_asset():
+            return None
+        return self._create_child_inventory(name, type)
+
     def create_asset(self, name):
-        return self._create_child_inventory(name, 'asset')
+        inventory_asset = self.create_child(name, 'asset')
+        _ = InventoryAsset.objects.create(
+            name=name,
+            inventory=inventory_asset
+        )
+        return inventory_asset
 
     def create_category(self, name):
-        return self._create_child_inventory(name, 'category')
+        inventory_category = self.create_child(name, 'category')
+        return inventory_category
+
+
+    class Meta:
+        verbose_name = _('inventory')
+        verbose_name_plural = _('inventories')
+
+
+class UserInventoryIndex(BaseInventory):
+    parent_page_types = [
+        'home.HomePage'
+    ]
+    subpage_types = [
+        'inventory.UserInventory'
+    ]
 
     class Meta:
         verbose_name = _('user inventory index')
@@ -82,44 +100,9 @@ class UserInventory(BaseInventory):
             return images.first()
         return None
 
-    def get_assets(self):
-        return InventoryAsset.objects.filter(inventory=self)
-
-    def _create_child_collection(self, name):
-        return self.collection.get_children().get_or_create(name=name)
-
-    def _create_child_inventory(self, name, type):
-        child_collection, _ = self._create_child_collection(name)
-        child_inventory = UserInventory(
-            title=name,
-            slug=slugify(name),
-            owner=self.owner,
-            collection=child_collection,
-            type=type
-        )
-        self.add_child(instance=child_inventory)
-        child_inventory.save_revision().publish()
-        return child_inventory
-
-    def create_asset(self, name):
-        if self.is_asset():
-            return None
-        inventory, _ = self._create_child_inventory(name, 'asset')
-        asset = InventoryAsset.objects.create(
-            name=name,
-            inventory=inventory
-        )
-        return asset
-
-    def create_category(self, name):
-        if self.is_asset():
-            return None
-        category, _ = self._create_child_inventory(name, 'category')
-        return category
-
     class Meta:
         verbose_name = _('inventory page')
-        verbose_name_plural = _('inventorie pages')
+        verbose_name_plural = _('inventory pages')
 
 
 class InventoryAsset(models.Model):
