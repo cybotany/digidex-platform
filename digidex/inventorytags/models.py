@@ -1,6 +1,7 @@
 import uuid
 
 from django.db import models
+from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from django_hosts.resolvers import reverse
 from django.http import Http404
@@ -21,6 +22,11 @@ class NearFieldCommunicationTag(models.Model):
         unique=True,
         db_index=True,
         validators=[validate_serial_number]
+    )
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='tags'
     )
     active = models.BooleanField(
         default=True
