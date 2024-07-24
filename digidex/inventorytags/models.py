@@ -61,7 +61,7 @@ class NearFieldCommunicationTag(models.Model):
         user_slug = slugify(self.owner.username)
         try:
             user_inventory = UserInventoryIndex.objects.get(slug=user_slug)
-            return user_inventory.url
+            return user_inventory
         except UserInventoryIndex.DoesNotExist:
             raise Http404('Owner page not found')
 
