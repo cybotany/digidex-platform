@@ -1,11 +1,12 @@
-{% load navigation_tags %}
+{% load wagtailimages_tags navigation_tags %}
 
 <footer>
   <section class="section-footer">
     <div class="content">
       <div class="w-layout-grid grid-footer">
         <div class="block-footer">
-          <img src="{% get_site_logo %}" loading="eager" alt="DigiDex Logo" class="logo-footer">
+          {% get_site_logo as site_logo %}
+          {% image site_logo max-50x50 loading="eager" alt=site_logo.alt class="logo-footer" %}
           {% get_footer_paragraph %}
         </div>
       </div>

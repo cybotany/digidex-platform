@@ -16,7 +16,7 @@ def get_inventory(user):
 
 @register.simple_tag(takes_context=True)
 def get_site_root(context):
-    return Site.find_for_request(context["request"]).root_page.url
+    return Site.find_for_request(context["request"]).root_page
 
 
 @register.simple_tag(takes_context=True)

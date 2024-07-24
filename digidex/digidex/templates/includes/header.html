@@ -1,11 +1,13 @@
-{% load navigation_tags %}
+{% load wagtailcore_tags wagtailimages_tags navigation_tags %}
 
 <header>
   <div role="banner" class="navbar w-nav">
     <div class="nav-block">
       <div class="nav">
-        <a href="{% get_site_root %}" class="brand w-nav-brand w--current">
-          <img src="{% get_site_logo %}" loading="eager" alt="DigiDex Logo" class="logo">
+        {% get_site_root as site_root %}
+        <a href="{% pageurl site_root %}" class="brand w-nav-brand w--current">
+          {% get_site_logo as site_logo %}
+          {% image site_logo max-50x50 loading="eager" alt=site_logo.alt class="logo" %}
         </a>
         <nav role="navigation" class="nav-menu w-nav-menu">
           {% get_navigation_links %}

@@ -10,7 +10,7 @@ class BaseImage(AbstractImage):
         null=True,
         max_length=150
     )
-    alt_text = models.CharField(
+    alt = models.CharField(
         blank=True,
         null=True,
         max_length=75
@@ -18,7 +18,7 @@ class BaseImage(AbstractImage):
 
     admin_form_fields = Image.admin_form_fields + (
         'caption',
-        'alt_text',
+        'alt',
     )
 
 
