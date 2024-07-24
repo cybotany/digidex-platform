@@ -8,7 +8,7 @@ from inventory.utils import create_user_inventory, create_user_party
 User = get_user_model()
 
 @receiver(post_save, sender=User)
-def create_user_inventory(sender, instance, created, **kwargs):
+def new_user_setup(sender, instance, created, **kwargs):
     if created:        
         user_inventory = create_user_inventory(instance)
         user_party = create_user_party(user_inventory)
