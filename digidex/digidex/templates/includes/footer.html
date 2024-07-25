@@ -1,18 +1,16 @@
 {% load wagtailimages_tags navigation_tags %}
 
-<footer>
-  <section class="section-footer">
-    <div class="content">
-      <div class="w-layout-grid grid-footer">
-        <div class="block-footer">
-          {% get_site_logo as site_logo %}
-          {% image site_logo max-50x50 loading="eager" alt=site_logo.alt class="logo-footer" %}
-          {% get_footer_paragraph %}
-        </div>
-      </div>
-      <div class="block-footer-down">
-        {% get_footer_copyright %}
+<section class="section-footer">
+  <div class="content">
+    <div class="w-layout-grid grid-footer">
+      <div class="block-footer">
+        {% get_site_logo as site_logo %}
+        {% image site_logo max-50x50 loading="eager" alt=site_logo.alt class="logo-footer" %}
+        {% get_footer_paragraph %}
       </div>
     </div>
-  </section>
-</footer>
+    <div class="block-footer-down">
+      {% get_footer_copyright %}
+    </div>
+  </div>
+</section>

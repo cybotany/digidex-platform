@@ -1,29 +1,27 @@
 {% load wagtailcore_tags wagtailimages_tags navigation_tags %}
 
-<header>
-  <div role="banner" class="navbar w-nav">
-    <div class="nav-block">
-      <div class="nav">
-        {% get_site_root as site_root %}
-        <a href="{% pageurl site_root %}" class="brand w-nav-brand w--current">
-          {% get_site_logo as site_logo %}
-          {% image site_logo max-50x50 loading="eager" alt=site_logo.alt class="logo" %}
-        </a>
-        <nav role="navigation" class="nav-menu w-nav-menu">
-          {% get_navigation_links %}
-          <div class="button-mobile">
-            {% get_navigation_buttons %}
-          </div>
-        </nav>
-      </div>
-      <div class="nav">
-        <div class="button-desktop">
+<div class="navbar w-nav">
+  <div class="nav-block">
+    <div class="nav">
+      {% get_site_root as site_root %}
+      <a href="{% pageurl site_root %}" class="brand w-nav-brand w--current">
+        {% get_site_logo as site_logo %}
+        {% image site_logo max-50x50 loading="eager" alt=site_logo.alt class="logo" %}
+      </a>
+      <nav role="navigation" class="nav-menu w-nav-menu">
+        {% get_navigation_links %}
+        <div class="button-mobile">
           {% get_navigation_buttons %}
         </div>
-        <div class="menu-button w-nav-button">
-          <div class="icon-menu w-icon-nav-menu"></div>
-        </div>
+      </nav>
+    </div>
+    <div class="nav">
+      <div class="button-desktop">
+        {% get_navigation_buttons %}
+      </div>
+      <div class="menu-button w-nav-button">
+        <div class="icon-menu w-icon-nav-menu"></div>
       </div>
     </div>
   </div>
-</header>
+</div>

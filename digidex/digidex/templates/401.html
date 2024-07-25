@@ -3,11 +3,14 @@
 
 {% block title %}Protected Page{% endblock %}
 
-{% block body %}
+{% block header %}
   <a href="/" class="brand-center w-nav-brand">
     {% get_site_logo as site_logo %}
     {% image site_logo max-50x50 loading="eager" alt=site_logo.alt class="logo" %}
   </a>
+{% endblock header %}
+
+{% block body %}
   <main>
     <div class="utility-page-wrap">
       <div class="utility-page-content w-password-page w-form">
