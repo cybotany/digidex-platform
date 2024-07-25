@@ -3,22 +3,13 @@
 
 {% block title %}Page not found{% endblock %}
 
-{% block header %}
-  <a href="/" class="brand-center w-nav-brand">
-    {% get_site_logo as site_logo %}
-    {% image site_logo max-50x50 loading="eager" alt=site_logo.alt class="logo" %}
-  </a>
-{% endblock header %}
-
 {% block body %}
-  <main>
-    <div class="utility-page-wrap">
-      <div class="utility-page-content">
-        <div class="subtitle blue">404<br></div>
-        <h2 class="heading-account">Page Not Found</h2>
-        <p class="paragraph-account">The page you are looking for doesn&#x27;t exist or has been moved</p>
-        <a href="/" class="button base-button">Back to Home</a>
-      </div>
+  <div class="utility-page-wrap">
+    <div class="utility-page-content">
+      <div class="subtitle blue">404<br></div>
+      <h2 class="heading-account">Page Not Found</h2>
+      <p class="paragraph-account">The page you are looking for doesn&#x27;t exist or has been moved</p>
+      <a href="/" class="button base-button">Back to Home</a>
     </div>
-  </main>
+  </div>
 {% endblock body %}

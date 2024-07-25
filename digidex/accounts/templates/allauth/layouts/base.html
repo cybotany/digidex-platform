@@ -1,13 +1,6 @@
 {% extends "index.html" %}
 {% load wagtailcore_tags wagtailimages_tags navigation_tags %}
 
-{% block header %}
-  <a href="/" class="brand-center w-nav-brand">
-    {% get_site_logo as site_logo %}
-    {% image site_logo max-50x50 loading="eager" alt=site_logo.alt class="logo" %}
-  </a>
-{% endblock header %}
-
 {% block body %}
   <section class="section-full">
     <div class="content">

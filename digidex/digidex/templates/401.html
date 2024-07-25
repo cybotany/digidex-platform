@@ -1,24 +1,15 @@
 {% extends "index.html" %}
-{% load wagtailcore_tags wagtailimages_tags navigation_tags %}
+{% load wagtailcore_tags %}
 
 {% block title %}Protected Page{% endblock %}
 
-{% block header %}
-  <a href="/" class="brand-center w-nav-brand">
-    {% get_site_logo as site_logo %}
-    {% image site_logo max-50x50 loading="eager" alt=site_logo.alt class="logo" %}
-  </a>
-{% endblock header %}
-
 {% block body %}
-  <main>
-    <div class="utility-page-wrap">
-      <div class="utility-page-content w-password-page w-form">
-        <div class="subtitle blue">401<br></div>
-        <h2 class="heading-account">Protected Page</h2>
-        <p class="paragraph-account">The page you are looking for requires a password.</p>
-        <a href="index.html" class="button base-button">Back to Home</a>    
-      </div>
+  <div class="utility-page-wrap">
+    <div class="utility-page-content w-password-page w-form">
+      <div class="subtitle blue">401<br></div>
+      <h2 class="heading-account">Protected Page</h2>
+      <p class="paragraph-account">The page you are looking for requires a password.</p>
+      <a href="/" class="button base-button">Back to Home</a>    
     </div>
-  </main>
+  </div>
 {% endblock body %}

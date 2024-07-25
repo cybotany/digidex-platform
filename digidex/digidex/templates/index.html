@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags %}
+{% load static wagtailcore_tags wagtailimages_tags navigation_tags %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -32,13 +32,24 @@
   </head>
   <body>
     <header role="banner">
-      {% block header %}{% endblock header %}
+      {% block header %}
+        <a href="/" class="brand-center w-nav-brand">
+          {% get_site_logo as site_logo %}
+          {% image site_logo max-50x50 loading="eager" alt=site_logo.alt class="logo" %}
+        </a>
+      {% endblock header %}
     </header>
     <main>
       {% block body %}{% endblock body %}
     </main>
-    <footer role="contentinfo">
-      {% block footer %}{% endblock footer %}
+    <footer role="contentinfo" class="section-footer">
+      <div class="content">
+        {% block footer %}
+          <div class="block-footer-down">
+            <div class="text-footer-down">All rights reserved.<br></div>
+          </div>
+        {% endblock footer %}
+      </div>
     </footer>
     {% block extra_body %}{% endblock extra_body %}
   </body>
