@@ -139,12 +139,12 @@ class CollectionComponent(Component):
 class EmptyComponent(Component):
     template_name = 'base/components/empty.html'
 
-    def __init__(self, asset=str):
-        self.asset = asset
+    def __init__(self, type=str):
+        self.type = type
 
     def get_context_data(self, parent_context=None):
         return {
-            "asset": self.asset
+            "type": self.type
         }
 
 

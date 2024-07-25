@@ -34,13 +34,13 @@ class BaseInventory(AbstractSitePage):
         child_inventory.save_revision().publish()
         return child_inventory
 
-    def create_child(self, name, type):
+    def _create_child(self, name, type):
         if self.is_asset():
             return None
         return self._create_child_inventory(name, type)
 
     def create_asset(self, name):
-        inventory_asset = self.create_child(name, 'asset')
+        inventory_asset = self._create_child(name, 'asset')
         _ = InventoryAsset.objects.create(
             name=name,
             inventory=inventory_asset
@@ -48,9 +48,30 @@ class BaseInventory(AbstractSitePage):
         return inventory_asset
 
     def create_category(self, name):
-        inventory_category = self.create_child(name, 'category')
+        inventory_category = self._create_child(name, 'category')
         return inventory_category
 
+    def get_specific_children(self):
+        if self.is_asset():
+            return UserInventory.objects.none()
+        return self.get_children().specific()
+    
+    def get_categories(self):
+        children = self.get_specific_children()
+        return children.filter(type='category')
+
+    def get_assets(self):
+        children = self.get_specific_children()
+        return children.filter(type='asset')
+
+    def get_header(self):
+        from inventory.panels import InventoryHeaderPanel
+        return InventoryHeaderPanel(inventory=self)
+
+    def get_context(self, request):
+        context = super().get_context(request)
+        context['inventory_header'] = self.get_header()
+        return context
 
     class Meta:
         verbose_name = _('inventory')
@@ -99,6 +120,15 @@ class UserInventory(BaseInventory):
         if images:
             return images.first()
         return None
+
+    def get_panel_data(self):
+        if self.is_asset():
+            return {}
+        return {
+            'name': self.title,
+            'url': self.url,
+            'thumbnail': self.get_thumbnail(),
+        }
 
     class Meta:
         verbose_name = _('inventory page')

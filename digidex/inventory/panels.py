@@ -1,6 +1,5 @@
-from laces.components import Component
-
 from base.components import (
+    Component,
     SectionComponent,
     BlockComponent,
     HeadingComponent,
@@ -15,47 +14,25 @@ from base.components import (
 )
 
 
-class CategoryPanel(Component):
+class InventoryCategoryPanel(Component):
     template_name = 'inventory/panels/category_panel.html'
 
-    def __init__(self, category=dict(), current=False):
-        self.url = category.get('url')
-        self.icon_source = category.get('icon_source')
-        self.icon_alt = category.get('icon_alt')
-        self.name = category.get('name', 'No name available')
-        self.current = current
-        self.style = 'category'
-
-    def get_icon_component(self):
-        return IconComponent(
-            source=self.icon_source,
-            alt=self.icon_alt,
-            style=self.style
-        )
-
-    def get_text_component(self):
-        return TextComponent(
-            text=self.name,
-            style=self.style
-        )
+    def __init__(self, category):
+        self.category = category.get_panel_data()
 
     def get_context_data(self, parent_context=None):
         return {
-            "url": self.url,
-            "icon": self.get_icon_component() if self.icon_source else None,
-            "text": self.get_text_component(),
-            "current": self.current
+            "name": self.category.get('name', 'No name available'),
+            "url": self.category.get('url', '#'),
+            "thumbnail": self.category.get('thumbnail', None)
         }
 
 
-class CategoryCollection(Component):
+class InventoryCategoryCollection(Component):
     template_name = 'inventory/components/category_collection.html'
 
     def __init__(self, categories=list()):
         self.categories = categories
-
-    def get_current_category(self, current_category):
-        return current_category.get_component(current=True)
 
     def get_category_collection(self):
         style = 'categories'
@@ -82,6 +59,44 @@ class CategoryCollection(Component):
     def get_context_data(self, parent_context=None):
         return {
             "panel": self.set_panel()
+        }
+
+
+class InventoryHeaderPanel(Component):
+    template_name = "inventory/panels/header.html"
+
+    def __init__(self, inventory):
+        self.inventory = inventory
+        self.style = "top"
+
+    def get_heading(self):
+        return HeadingComponent(
+            text=self.inventory.title,
+            size=1,
+            style=self.style
+        )
+
+    def _get_collection(self, categories):
+        collection = []
+        for category in categories:
+            collection.append(InventoryCategoryPanel(category=category))
+        return collection
+
+    def get_categories(self):
+        STYLE = 'categories'
+        categories = self.inventory.get_categories()
+        if categories:
+            collection = self._get_collection(categories)
+            return CollectionComponent(
+                children=collection,
+                style=STYLE
+            )
+        return EmptyComponent(type=STYLE) 
+
+    def get_context_data(self, parent_context=None):
+        return {
+            "heading": self.get_heading(),
+            "categories": self.get_categories()
         }
 
 

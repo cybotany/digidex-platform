@@ -1,18 +1,12 @@
 {% extends "index.html" %}
+{% load laces %}
 
 {% block header %}
   {% include "includes/header.html" %}
+  {% component inventory_header %}
 {% endblock header %}
 
 {% block body %}
-  <section class="section-top">
-    <div class="content">
-      <div class="block-top">
-        <h1 class="heading-top">News and Updates</h1>
-        <p class="paragraph-top">Egestas ac in semper pharetra sed. In mattis dapibus aliquet tempor ut lorem adipiscing ridiculus.</p>
-      </div>
-    </div>
-  </section>
   {% block content %}{% endblock content %}
 {% endblock body %}
 

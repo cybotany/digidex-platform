@@ -1,10 +1,10 @@
-{% load laces static %}
+{% load wagtailimages_tags static %}
 
-<a href="{{ url }}" class="link-category w-inline-block {% if current %}w--current{% endif %}">
-  {% if icon %}
-    {% component icon %}
+<a href="{{ url }}" class="link-category w-inline-block">
+  {% if thumbnail %}
+    {% image thumbnail fill-30x30 class="link-category w-inline-block" %}
   {% else %}
     <img src="{% static 'base/images/nfc/directional/nfc_directional_mark_black.png' %}" alt="NFC Directional Mark" class="icon-category">
   {% endif %}
-  {% component text %}
+  <div class="text-category">{{ name }}</div>
 </a>
