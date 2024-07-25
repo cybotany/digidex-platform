@@ -27,7 +27,9 @@ class NearFieldCommunicationTag(models.Model):
     )
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
         related_name='tags'
     )
     active = models.BooleanField(
@@ -93,7 +95,7 @@ class NearFieldCommunicationTag(models.Model):
 class InventoryLink(models.Model):
     inventory = models.OneToOneField(
         "inventory.BaseInventory",
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         null=True,
         blank=True,
         related_name='+'
