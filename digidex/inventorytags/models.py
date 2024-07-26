@@ -5,7 +5,7 @@ from django.conf import settings
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from django_hosts.resolvers import reverse
-from django.http import Http404, HttpResponse
+from django.http import Http404
 
 from base.utils import build_uri
 from inventorytags.validators import validate_serial_number
@@ -35,6 +35,12 @@ class NearFieldCommunicationTag(models.Model):
     active = models.BooleanField(
         default=True
     )
+    link = models.URLField(
+        max_length=255,
+        editable=True,
+        blank=True,
+        null=True
+    )
     created_at = models.DateTimeField(
         auto_now_add=True
     )
@@ -53,20 +59,6 @@ class NearFieldCommunicationTag(models.Model):
         self.active = False
         self.save()
 
-    def create_link(self):
-        # Check if link already exists
-        link = self.get_link()
-        if not link:
-            link = InventoryLink.objects.create(tag=self)
-        return link
-
-    def get_link(self):
-        try:
-            link = InventoryLink.objects.get(tag=self)
-            return link
-        except InventoryLink.DoesNotExist:
-            return None
-
     def get_mapping_url(self):
         return reverse('link-tag', host='link', args=[str(self.uuid)])
 
@@ -79,48 +71,6 @@ class NearFieldCommunicationTag(models.Model):
         except UserInventoryIndex.DoesNotExist:
             raise Http404('Owner page not found')
 
-    def get_linked_url(self):
-        if not self.active:
-            return HttpResponse("This tag is not active.", status=403)
-        tag_link = self.get_link()
-        if tag_link and tag_link.inventory:
-            return tag_link.get_inventory_url()
-        return self.get_owner_url()
-
     class Meta:
         verbose_name = "near field communication tag"
         verbose_name_plural = "near field communication tags"
-
-
-class InventoryLink(models.Model):
-    inventory = models.OneToOneField(
-        "inventory.BaseInventory",
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name='+'
-    )
-    tag = models.OneToOneField(
-        NearFieldCommunicationTag,
-        on_delete=models.CASCADE,
-        related_name='link'
-    )
-
-    def __str__(self):
-        if self.inventory:
-            return f"{self.tag} -> {self.inventory}"
-        return str(self.tag)
-
-    def get_inventory_url(self):
-        if self.inventory:
-            return build_uri(self.inventory.slug)
-        return None
-
-    class Meta:
-        verbose_name = "inventory link"
-        verbose_name_plural = "inventory links"
-        unique_together = ('inventory', 'tag')
-        indexes = [
-            models.Index(fields=['inventory']),
-            models.Index(fields=['tag'])
-        ]
