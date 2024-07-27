@@ -66,6 +66,12 @@ class AbstractInventory(models.Model):
     def _get_parent_collection(self):
         raise NotImplementedError("Subclasses must implement _get_parent_collection method")
 
+    def _get_reserved_keywords(self):
+        raise NotImplementedError("Subclasses must implement _get_reserved_keywords method")
+
+    def set_slug(self):
+        raise NotImplementedError("Subclasses must implement set_slug method")
+
     def _create_collection(self):
         parent = self._get_parent_collection()
         uuid = str(self.uuid)
@@ -80,13 +86,11 @@ class AbstractInventory(models.Model):
     def set_collection(self):
         self.collection = self._create_collection()
 
-    def set_slug(self):
-        if self.name:
-            self.slug = slugify(self.name)
-
     def save(self, *args, **kwargs):
-        self.set_slug()
-        self.set_collection()
+        if not self.slug:
+            self.set_slug()
+        if not self.collection:
+            self.set_collection()
         super().save(*args, **kwargs)
 
     content_panels = [
@@ -106,10 +110,18 @@ class UserInventory(AbstractInventory):
     )
 
     def __str__(self):
-        return f"{self.owner}'s inventory"
+        return f"{self.owner.username.title()}'s inventory"
+
+    def save(self, *args, **kwargs):
+        if not self.name:
+            self.name = f"{self.owner.username.title()}'s Inventory"
+        super().save(*args, **kwargs)
 
     def get_url(self):
         return f"/{self.slug}"
+
+    def set_slug(self):
+        self.slug = slugify(self.owner.username)
 
     def _get_parent_collection(self):
         parent = Collection.get_first_root_node()
@@ -152,6 +164,10 @@ class InventoryCategory(AbstractInventory):
     def get_url(self):
         return f"{self.inventory.url}/{self.slug}"
 
+    def set_slug(self):
+        if self.name:
+            self.slug = slugify(self.name)
+
     def _get_parent_collection(self):
         return self.inventory.collection
 
@@ -189,6 +205,10 @@ class InventoryAsset(AbstractInventory):
         if self.category:
             return f"{self.category.url}/{self.slug}"
         return f"{self.inventory.url}/{self.slug}"
+
+    def set_slug(self):
+        if self.name:
+            self.slug = slugify(self.name)
 
     def _get_parent_collection(self):
         if self.category:
