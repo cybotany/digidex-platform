@@ -18,6 +18,10 @@ class AbstractInventory(models.Model):
         editable=False,
         db_index=True
     )
+    name = models.CharField(
+        max_length=255,
+        verbose_name=_("name")
+    )
     slug = models.SlugField(
         max_length=255,
         db_index=True
@@ -52,8 +56,7 @@ class AbstractInventory(models.Model):
         return None
 
     def get_url(self):
-        return self.slug
-
+        pass
 
     content_panels = [
         FieldPanel('collection'),
@@ -79,9 +82,18 @@ class UserInventory(AbstractInventory):
             self.slug = slugify(self.owner.username)
         super().save(*args, **kwargs)
 
+    def get_url(self):
+        return f"/{self.slug}"
+
     class Meta:
         verbose_name = _('user inventory')
         verbose_name_plural = _('user inventories')
+        constraints = [
+            models.UniqueConstraint(
+                fields=['slug'],
+                name='unique_user_inventory_slug'
+            )
+        ]
 
 
 class InventoryCategory(AbstractInventory):
@@ -115,6 +127,12 @@ class InventoryCategory(AbstractInventory):
     class Meta:
         verbose_name = _('inventory category')
         verbose_name_plural = _('inventory categories')
+        constraints = [
+            models.UniqueConstraint(
+                fields=['inventory', 'slug'],
+                name='unique_inventory_asset_slug'
+            )
+        ]
 
 
 class InventoryAsset(AbstractInventory):
@@ -151,3 +169,9 @@ class InventoryAsset(AbstractInventory):
     class Meta:
         verbose_name = _("inventory asset")
         verbose_name_plural = _("inventory assets")
+        constraints = [
+            models.UniqueConstraint(
+                fields=['inventory', 'category', 'slug'],
+                name='unique_inventory_asset_slug'
+            )
+        ]
