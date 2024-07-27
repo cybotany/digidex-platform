@@ -10,4 +10,5 @@ User = get_user_model()
 @receiver(post_save, sender=User)
 def new_user_setup(sender, instance, created, **kwargs):
     if created:        
-        user_inventory = user_setup(instance)
+        # user_inventory = user_setup(instance)
+        pass

@@ -1,5 +1,4 @@
 from django.utils.text import slugify
-from django.db import transaction
 
 from wagtail.models import Collection
 
@@ -12,14 +11,15 @@ def _create_user_inventory_collection(user_inventory):
     try:
         inventory = root_children.get(name='Inventory')
     except Collection.DoesNotExist:
-        inventory = root_children.add_child(name="Inventory")
+        inventory = root.add_child(name="Inventory")
 
     # Using the UUID as the collection name to ensure uniqueness and avoid conflicts
     inventory_uuid = str(user_inventory.uuid)
+    inventory_children = inventory.get_children()
     try:
-        collection = root_children.get(name=inventory_uuid)
+        collection = inventory_children.get(name=inventory_uuid)
     except Collection.DoesNotExist:
-        collection = root_children.add_child(name=inventory_uuid)
+        collection = inventory.add_child(name=inventory_uuid)
     return collection
 
 def _create_user_inventory(user):
@@ -31,7 +31,6 @@ def _create_user_inventory(user):
     )
     return inventory
 
-@transaction.atomic
 def user_setup(user):
     inventory = _create_user_inventory(user)
     collection = _create_user_inventory_collection(inventory)
