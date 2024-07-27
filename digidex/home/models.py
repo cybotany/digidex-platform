@@ -6,8 +6,6 @@ from wagtail.contrib.routable_page.models import RoutablePageMixin, path, re_pat
 from wagtail.models import Page, Collection
 from wagtail.admin.panels import FieldPanel
 from wagtail.fields import RichTextField
-from wagtail.documents import get_document_model
-from wagtail.images import get_image_model
 
 from inventory.models import UserInventory, InventoryCategory, InventoryAsset
 
@@ -37,21 +35,15 @@ class HomePage(RoutablePageMixin, Page):
     def __str__(self):
         return self.title
 
-    def get_documents(self):
-        return get_document_model().objects.filter(collection=self.collection)
-
-    def get_images(self):
-        return get_image_model().objects.filter(collection=self.collection)
-
-    @re_path(r'^<slug:inventory_slug>/$')
-    def inventory_index(self, request, inventory_slug):
+    @path('<slug:inventory_slug>/')
+    def user_inventory(self, request, inventory_slug):
+        template = 'inventory/user_inventory.html'
         inventory = get_object_or_404(UserInventory, slug=inventory_slug)		
-        context = {
-            'page': self,
-            'request': request,
-            'inventory': inventory,
+        context_overrides = {
+            'components': inventory
         }
-        return render(request, 'inventory/user_inventory.html', context)
+        return self.render(request, template, context_overrides)
+
 
     class Meta:
         verbose_name = _('homepage')
