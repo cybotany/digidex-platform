@@ -15,7 +15,7 @@ from base.components import (
 
 
 class InventoryCategoryPanel(Component):
-    template_name = 'inventory/panels/category_panel.html'
+    template_name = 'inventory/category_panel.html'
 
     def __init__(self, category):
         self.category = category.get_panel_data()
@@ -63,7 +63,7 @@ class InventoryCategoryCollection(Component):
 
 
 class InventoryHeaderPanel(Component):
-    template_name = "inventory/panels/header.html"
+    template_name = "inventory/header.html"
 
     def __init__(self, inventory):
         self.inventory = inventory
@@ -101,7 +101,7 @@ class InventoryHeaderPanel(Component):
 
 
 class AssetPanel(Component):
-    template_name = 'inventory/panels/asset_panel.html'
+    template_name = 'inventory/asset_panel.html'
 
     def __init__(self, asset=dict()):
         self.heading = asset.get('heading', 'No heading available')
