@@ -21,12 +21,12 @@ def create_homepage():
     homepage.save_revision().publish()
 
     Site.objects.update_or_create(
-        hostname='digidex.tech',
+        hostname='localhost',
         defaults={
-            'port': 80,
-            'site_name': 'DigiDex',
+            'port': 8000,
+            'site_name': 'DigiDex (Dev)',
             'root_page': homepage,
-            'is_default_site': True,
+            'is_default_site': False,
             }
     )
     print("HomePage created and set as the root page.")

@@ -63,12 +63,11 @@ class NearFieldCommunicationTag(models.Model):
         return reverse('link-tag', host='link', args=[str(self.uuid)])
 
     def get_owner_url(self):
-        from inventory.models import UserInventoryIndex
-        user_slug = slugify(self.owner.username)
+        from inventory.models import UserInventory
         try:
-            user_inventory = UserInventoryIndex.objects.get(slug=user_slug)
+            user_inventory = UserInventory.objects.get(owner=self.owner)
             return build_uri(user_inventory.slug)
-        except UserInventoryIndex.DoesNotExist:
+        except UserInventory.DoesNotExist:
             raise Http404('Owner page not found')
 
     class Meta:

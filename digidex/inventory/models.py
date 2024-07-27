@@ -18,20 +18,23 @@ class AbstractInventory(models.Model):
         editable=False,
         db_index=True
     )
+    slug = models.SlugField(
+        max_length=255,
+        null=True,
+        blank=True,
+        db_index=True
+    )
     name = models.CharField(
         max_length=255,
         null=True,
         blank=True,
         verbose_name=_("name")
     )
-    slug = models.SlugField(
-        max_length=255,
-        db_index=True
-    )
     collection = models.ForeignKey(
         Collection,
         on_delete=models.SET_NULL,
         null=True,
+        blank=True,
         related_name='+',
     )
     created_at = models.DateTimeField(
