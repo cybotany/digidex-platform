@@ -5,8 +5,7 @@
     <div class="nav">
       {% get_site_root as site_root %}
       <a href="{% pageurl site_root %}" class="brand w-nav-brand w--current">
-        {% get_site_logo as site_logo %}
-        {% image site_logo max-50x50 loading="eager" alt=site_logo.alt class="logo" %}
+        <img src="{% static 'base/images/logos/logo.svg' %}" alt="Digidex Logo" class="logo">
       </a>
       <nav role="navigation" class="nav-menu w-nav-menu">
         <div class="button-mobile">

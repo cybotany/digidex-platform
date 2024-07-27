@@ -34,8 +34,7 @@
     <header role="banner">
       {% block header %}
         <a href="/" class="brand-center w-nav-brand">
-          {% get_site_logo as site_logo %}
-          {% image site_logo max-50x50 loading="eager" alt=site_logo.alt class="logo" %}
+          <img src="{% static 'base/images/logos/logo.svg' %}" alt="Digidex Logo" class="logo">
         </a>
       {% endblock header %}
     </header>

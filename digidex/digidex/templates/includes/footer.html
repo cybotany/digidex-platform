@@ -5,7 +5,7 @@
     <div class="w-layout-grid grid-footer">
       <div class="block-footer">
         {% get_site_logo as site_logo %}
-        {% image site_logo max-50x50 loading="eager" alt=site_logo.alt class="logo-footer" %}
+          <img src="{% static 'base/images/logos/logo.svg' %}" alt="Digidex Logo" class="logo-footer">
         {% get_footer_paragraph %}
       </div>
     </div>
