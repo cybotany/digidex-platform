@@ -1,6 +1,6 @@
 import uuid
 
-from django.db import models
+from django.db import models, transaction
 from django.conf import settings
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
@@ -61,7 +61,33 @@ class AbstractInventory(models.Model):
         return None
 
     def get_url(self):
-        pass
+        raise NotImplementedError("Subclasses must implement get_url method")
+
+    def _get_parent_collection(self):
+        raise NotImplementedError("Subclasses must implement _get_parent_collection method")
+
+    def _create_collection(self):
+        parent = self._get_parent_collection()
+        uuid = str(self.uuid)
+        children = parent.get_children()
+        try:
+            collection = children.get(name=uuid)
+        except Collection.DoesNotExist:
+            collection = children.add_child(name=uuid)
+        return collection
+
+    @transaction.atomic
+    def set_collection(self):
+        self.collection = self._create_collection()
+
+    def set_slug(self):
+        if self.name:
+            self.slug = slugify(self.name)
+
+    def save(self, *args, **kwargs):
+        self.set_slug()
+        self.set_collection()
+        super().save(*args, **kwargs)
 
     content_panels = [
         FieldPanel('collection'),
@@ -82,13 +108,17 @@ class UserInventory(AbstractInventory):
     def __str__(self):
         return f"{self.owner}'s inventory"
 
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.owner.username)
-        super().save(*args, **kwargs)
-
     def get_url(self):
         return f"/{self.slug}"
+
+    def _get_parent_collection(self):
+        parent = Collection.get_first_root_node()
+        parent_children = parent.get_children()
+        try:
+            collection = parent_children.get(name='Inventory')
+        except Collection.DoesNotExist:
+            collection = parent.add_child(name="Inventory")
+        return collection
 
     class Meta:
         verbose_name = _('user inventory')
@@ -115,15 +145,15 @@ class InventoryCategory(AbstractInventory):
         return self.name
 
     def save(self, *args, **kwargs):
-        if self.name.lower() in self.RESERVED_KEYWORDS:
+        if self.name and self.name.lower() in self.RESERVED_KEYWORDS:
             raise ValueError(f"The name '{self.name}' is reserved and cannot be used.")
-        
-        if not self.slug:
-            self.slug = slugify(self.name)        
         super().save(*args, **kwargs)
 
     def get_url(self):
         return f"{self.inventory.url}/{self.slug}"
+
+    def _get_parent_collection(self):
+        return self.inventory.collection
 
     class Meta:
         verbose_name = _('inventory category')
@@ -148,21 +178,22 @@ class InventoryAsset(AbstractInventory):
         on_delete=models.CASCADE,
         related_name='assets',
         null=True,
+        blank=True,
         verbose_name=_("category")
     )
 
     def __str__(self):
         return self.name
 
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)        
-        super().save(*args, **kwargs)
-
     def get_url(self):
         if self.category:
             return f"{self.category.url}/{self.slug}"
         return f"{self.inventory.url}/{self.slug}"
+
+    def _get_parent_collection(self):
+        if self.category:
+            return self.category.collection
+        return self.inventory.collection
 
     class Meta:
         verbose_name = _("inventory asset")
