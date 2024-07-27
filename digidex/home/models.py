@@ -7,8 +7,6 @@ class HomePage(AbstractSitePage):
     parent_page_types = [
         'wagtailcore.Page'
     ]
-    subpage_types = [
-        'inventory.UserInventoryIndex'
-    ]
+
     class Meta:
         verbose_name = _('homepage')
