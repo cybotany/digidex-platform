@@ -79,7 +79,7 @@ class AbstractInventory(models.Model):
         try:
             collection = children.get(name=uuid)
         except Collection.DoesNotExist:
-            collection = children.add_child(name=uuid)
+            collection = parent.add_child(name=uuid)
         return collection
 
     @transaction.atomic
