@@ -42,7 +42,9 @@ class HomePage(RoutablePageMixin, Page):
             request,
             template='inventory/user_inventory_index.html',
             context_overrides={
-                'heading': inventory.name
+                'heading': inventory.name,
+                'categories': inventory.get_categories(),
+                'assets': inventory.get_assets(),
             }
         )
 

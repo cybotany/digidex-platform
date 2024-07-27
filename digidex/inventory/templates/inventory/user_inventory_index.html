@@ -8,10 +8,6 @@
       <div class="block-top">
         <h1 class="heading-top">{{ heading }}</h1>
         <div class="block-categories">
-          <a href="pricing.html" aria-current="page" class="link-category w-inline-block w--current">
-            <img src="images/switcher.svg" loading="eager" alt="" class="icon-category">
-            <div class="text-category">All</div>
-          </a>
           <div class="collection-list-wrapper-categories w-dyn-list">
             <div role="list" class="collection-list-categories w-dyn-items">
               <div role="listitem" class="collection-item-categories w-dyn-item">
@@ -22,7 +18,7 @@
               </div>
             </div>
             <div class="empty-state w-dyn-empty">
-              <div class="text-empty">No items found.</div>
+              <div class="text-empty">No categories found.</div>
             </div>
           </div>
         </div>
@@ -48,9 +44,9 @@
                 </a>
                 <p class="paragraph-post"></p>
                 <a href="#" class="link-block w-inline-block">
-                  <div class="text-link">Read more</div>
+                  <div class="text-link">View Details</div>
                   <div class="block-icon-link">
-                    <img src="images/bx-arrow-to-right_blue.svg" loading="eager" alt="" class="icon-link">
+                    <img src="{% static 'base/images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
                   </div>
                 </a>
               </div>
@@ -58,7 +54,7 @@
           </div>
         </div>
         <div class="empty-state w-dyn-empty">
-          <div class="text-empty">No items found.</div>
+          <div class="text-empty">No assets found.</div>
         </div>
       </div>
     </div>
