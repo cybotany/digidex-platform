@@ -37,12 +37,14 @@ class HomePage(RoutablePageMixin, Page):
 
     @path('<slug:inventory_slug>/')
     def user_inventory(self, request, inventory_slug):
-        template = 'inventory/user_inventory.html'
         inventory = get_object_or_404(UserInventory, slug=inventory_slug)		
-        context_overrides = {
-            'components': inventory
-        }
-        return self.render(request, template, context_overrides)
+        return self.render(
+            request,
+            template='inventory/user_inventory_index.html',
+            context_overrides={
+                'heading': inventory.name
+            }
+        )
 
 
     class Meta:

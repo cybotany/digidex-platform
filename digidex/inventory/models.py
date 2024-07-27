@@ -44,9 +44,25 @@ class AbstractInventory(models.Model):
         auto_now=True
     )
 
-    @property
-    def url(self):
-        return self.get_url()
+    def _get_parent_collection(self):
+        raise NotImplementedError("Subclasses must implement _get_parent_collection method")
+
+    def _set_slug(self):
+        raise NotImplementedError("Subclasses must implement _set_slug method")
+
+    def _create_collection(self):
+        parent = self._get_parent_collection()
+        uuid = str(self.uuid)
+        children = parent.get_children()
+        try:
+            collection = children.get(name=uuid)
+        except Collection.DoesNotExist:
+            collection = parent.add_child(name=uuid)
+        return collection
+
+    @transaction.atomic
+    def _set_collection(self):
+        self.collection = self._create_collection()
 
     def get_documents(self):
         return get_document_model().objects.filter(collection=self.collection)
@@ -63,34 +79,15 @@ class AbstractInventory(models.Model):
     def get_url(self):
         raise NotImplementedError("Subclasses must implement get_url method")
 
-    def _get_parent_collection(self):
-        raise NotImplementedError("Subclasses must implement _get_parent_collection method")
-
-    def _get_reserved_keywords(self):
-        raise NotImplementedError("Subclasses must implement _get_reserved_keywords method")
-
-    def set_slug(self):
-        raise NotImplementedError("Subclasses must implement set_slug method")
-
-    def _create_collection(self):
-        parent = self._get_parent_collection()
-        uuid = str(self.uuid)
-        children = parent.get_children()
-        try:
-            collection = children.get(name=uuid)
-        except Collection.DoesNotExist:
-            collection = parent.add_child(name=uuid)
-        return collection
-
-    @transaction.atomic
-    def set_collection(self):
-        self.collection = self._create_collection()
+    @property
+    def url(self):
+        return self.get_url()
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.set_slug()
+            self._set_slug()
         if not self.collection:
-            self.set_collection()
+            self._set_collection()
         super().save(*args, **kwargs)
 
     content_panels = [
@@ -109,18 +106,7 @@ class UserInventory(AbstractInventory):
         verbose_name=_("owner")
     )
 
-    def __str__(self):
-        return f"{self.owner.username.title()}'s inventory"
-
-    def save(self, *args, **kwargs):
-        if not self.name:
-            self.name = f"{self.owner.username.title()}'s Inventory"
-        super().save(*args, **kwargs)
-
-    def get_url(self):
-        return f"/{self.slug}"
-
-    def set_slug(self):
+    def _set_slug(self):
         self.slug = slugify(self.owner.username)
 
     def _get_parent_collection(self):
@@ -131,6 +117,23 @@ class UserInventory(AbstractInventory):
         except Collection.DoesNotExist:
             collection = parent.add_child(name="Inventory")
         return collection
+
+    def get_url(self):
+        return f"/{self.slug}"
+
+    def get_categories(self):
+        return self.categories.all()
+
+    def get_assets(self):
+        return self.assets.all()
+
+    def save(self, *args, **kwargs):
+        if not self.name:
+            self.name = f"{self.owner.username.title()}'s Inventory"
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.owner.username.title()}'s inventory"
 
     class Meta:
         verbose_name = _('user inventory')
@@ -153,23 +156,26 @@ class InventoryCategory(AbstractInventory):
 
     RESERVED_KEYWORDS = ['add', 'update', 'delete', 'admin']
 
-    def __str__(self):
-        return self.name
+    def _set_slug(self):
+        if self.name:
+            self.slug = slugify(self.name)
+
+    def _get_parent_collection(self):
+        return self.inventory.collection
+
+    def get_url(self):
+        return f"{self.inventory.url}/{self.slug}"
+
+    def get_assets(self):
+        return self.assets.all()
 
     def save(self, *args, **kwargs):
         if self.name and self.name.lower() in self.RESERVED_KEYWORDS:
             raise ValueError(f"The name '{self.name}' is reserved and cannot be used.")
         super().save(*args, **kwargs)
 
-    def get_url(self):
-        return f"{self.inventory.url}/{self.slug}"
-
-    def set_slug(self):
-        if self.name:
-            self.slug = slugify(self.name)
-
-    def _get_parent_collection(self):
-        return self.inventory.collection
+    def __str__(self):
+        return self.name
 
     class Meta:
         verbose_name = _('inventory category')
@@ -198,15 +204,7 @@ class InventoryAsset(AbstractInventory):
         verbose_name=_("category")
     )
 
-    def __str__(self):
-        return self.name
-
-    def get_url(self):
-        if self.category:
-            return f"{self.category.url}/{self.slug}"
-        return f"{self.inventory.url}/{self.slug}"
-
-    def set_slug(self):
+    def _set_slug(self):
         if self.name:
             self.slug = slugify(self.name)
 
@@ -214,6 +212,14 @@ class InventoryAsset(AbstractInventory):
         if self.category:
             return self.category.collection
         return self.inventory.collection
+
+    def get_url(self):
+        if self.category:
+            return f"{self.category.url}/{self.slug}"
+        return f"{self.inventory.url}/{self.slug}"
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         verbose_name = _("inventory asset")
