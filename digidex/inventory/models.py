@@ -44,6 +44,9 @@ class AbstractInventory(models.Model):
         auto_now=True
     )
 
+    RESERVED_KEYWORDS = ['add', 'update', 'delete', 'admin']
+
+
     def _get_parent_collection(self):
         raise NotImplementedError("Subclasses must implement _get_parent_collection method")
 
@@ -91,6 +94,8 @@ class AbstractInventory(models.Model):
             self._set_slug()
         if not self.collection:
             self._set_collection()
+        if self.name and self.name.lower() in self.RESERVED_KEYWORDS:
+            raise ValueError(f"The name '{self.name}' is reserved and cannot be used.")
         super().save(*args, **kwargs)
 
     content_panels = [
@@ -136,9 +141,12 @@ class UserInventory(AbstractInventory):
         return {
             'title': self.owner.username.title(),
             'heading': self.name,
-            'add_category_url': f"{self.url}/add",
             'categories': self.get_categories(),
-            'assets': self.get_assets()
+            'assets': self.get_assets(),
+            'add_url': f"{self.url}/add",
+            'update_url': f"{self.url}/update",
+            'delete_url': f"{self.url}/delete",
+            'detail_url': self.url,
         }
 
     def save(self, *args, **kwargs):
@@ -147,7 +155,7 @@ class UserInventory(AbstractInventory):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.owner.username.title()}'s inventory"
+        return self.name
 
     class Meta:
         verbose_name = _('user inventory')
@@ -173,8 +181,6 @@ class InventoryCategory(AbstractInventory):
         verbose_name=_("description")
     )
 
-    RESERVED_KEYWORDS = ['add', 'update', 'delete', 'admin']
-
     def _set_slug(self):
         if self.name:
             self.slug = slugify(self.name)
@@ -193,13 +199,12 @@ class InventoryCategory(AbstractInventory):
             'title': self.name,
             'heading': self.name,
             'description': self.description,
-            'assets': self.get_assets()
+            'assets': self.get_assets(),
+            'add_url': f"{self.url}/add",
+            'update_url': f"{self.url}/update",
+            'delete_url': f"{self.url}/delete",
+            'detail_url': self.url,
         }
-
-    def save(self, *args, **kwargs):
-        if self.name and self.name.lower() in self.RESERVED_KEYWORDS:
-            raise ValueError(f"The name '{self.name}' is reserved and cannot be used.")
-        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
@@ -236,8 +241,6 @@ class InventoryAsset(AbstractInventory):
         verbose_name=_("description")
     )
 
-    RESERVED_KEYWORDS = ['add', 'update', 'delete', 'admin']
-
     def _set_slug(self):
         if self.name:
             self.slug = slugify(self.name)
@@ -257,7 +260,9 @@ class InventoryAsset(AbstractInventory):
             'title': self.name,
             'heading': self.name,
             'image': self.get_thumbnail(),
-            'url': self.get_url(),
+            'update_url': f"{self.url}/update",
+            'delete_url': f"{self.url}/delete",
+            'detail_url': self.url,
         }
 
     def __str__(self):
