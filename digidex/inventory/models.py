@@ -76,6 +76,9 @@ class AbstractInventory(models.Model):
             return images.first()
         return None
 
+    def get_template_context_data(self):
+        raise NotImplementedError("Subclasses must implement get_template_context_data method")
+
     def get_url(self):
         raise NotImplementedError("Subclasses must implement get_url method")
 
@@ -127,6 +130,13 @@ class UserInventory(AbstractInventory):
     def get_assets(self):
         return self.assets.all()
 
+    def get_template_context_data(self):
+        return {
+            'inventory': self,
+            'categories': self.get_categories(),
+            'assets': self.get_assets()
+        }
+
     def save(self, *args, **kwargs):
         if not self.name:
             self.name = f"{self.owner.username.title()}'s Inventory"
@@ -173,6 +183,13 @@ class InventoryCategory(AbstractInventory):
 
     def get_assets(self):
         return self.assets.all()
+
+    def get_template_context_data(self):
+        return {
+            'inventory': self,
+            'categories': self.get_categories(),
+            'assets': self.get_assets()
+        }
 
     def save(self, *args, **kwargs):
         if self.name and self.name.lower() in self.RESERVED_KEYWORDS:
@@ -227,6 +244,13 @@ class InventoryAsset(AbstractInventory):
         if self.category:
             return f"{self.category.url}/{self.slug}"
         return f"{self.inventory.url}/{self.slug}"
+
+    def get_template_context_data(self):
+        return {
+            'inventory': self,
+            'categories': self.get_categories(),
+            'assets': self.get_assets()
+        }
 
     def __str__(self):
         return self.name

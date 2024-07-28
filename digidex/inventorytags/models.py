@@ -1,6 +1,8 @@
 import uuid
 
 from django.db import models
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 from django.conf import settings
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
@@ -73,3 +75,41 @@ class NearFieldCommunicationTag(models.Model):
     class Meta:
         verbose_name = "near field communication tag"
         verbose_name_plural = "near field communication tags"
+
+
+class InventoryLink(models.Model):
+    content_type = models.ForeignKey(
+        ContentType,
+        db_index=True,
+        on_delete=models.CASCADE
+    )
+    object_id = models.PositiveIntegerField(
+        db_index=True
+    )
+    content_object = GenericForeignKey(
+        "content_type",
+        "object_id"
+    )
+    tag = models.OneToOneField(
+        NearFieldCommunicationTag,
+        on_delete=models.CASCADE,
+        related_name='link'
+    )
+
+    def get_url(self):
+        if self.inventory:
+            return self.inventory.url
+        return None
+
+    @property
+    def url(self):
+        return self.get_url()
+
+    class Meta:
+        verbose_name = "inventory link"
+        verbose_name_plural = "inventory links"
+        unique_together = ('inventory', 'tag')
+        indexes = [
+            models.Index(fields=['inventory']),
+            models.Index(fields=['tag'])
+        ]
