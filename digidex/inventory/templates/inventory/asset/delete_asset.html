@@ -5,21 +5,27 @@
   {% trans "Delete Asset" %}
 {% endblock title %}
 
-{% block content %}
-  <h3 class="account-heading">Delete Asset</h3>
-  <!-- Render Form -->
-  <form method="post" action="" class="utility-page-form base-password-page" enctype="multipart/form-data">
-    {% csrf_token %}
-    <!-- Render Deletion Confirmation Field -->
-    <label for="{{ form.confirmation.id_for_label }}">Confirm Asset Deletion:</label>
-    {{ form.confirmation }}
-    {% if form.delete.errors %}
-      <div class="error-message">
-        <div class="text-error">{{ form.confirmation.errors|striptags }}</div>
-      </div>
-    {% endif %}
-    <!-- Render Submit Button -->
-    <input type="submit" value="Delete" class="submit-button base-button"> 
-    {{ form.non_field_errors }}
-  </form>
-{% endblock %}
+{% block body %}
+<section class="section-full">
+  <div class="content">
+    <div class="account-form">
+      <h3 class="account-heading">Delete Asset</h3>
+      <!-- Render Form -->
+      <form method="post" action="" class="utility-page-form base-password-page" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!-- Render Deletion Confirmation Field -->
+        <label for="{{ form.confirmation.id_for_label }}">Confirm Asset Deletion:</label>
+        {{ form.confirmation }}
+        {% if form.delete.errors %}
+          <div class="error-message">
+            <div class="text-error">{{ form.confirmation.errors|striptags }}</div>
+          </div>
+        {% endif %}
+        <!-- Render Submit Button -->
+        <input type="submit" value="Delete" class="submit-button base-button"> 
+        {{ form.non_field_errors }}
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock body %}

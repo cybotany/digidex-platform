@@ -50,7 +50,6 @@ class HomePage(RoutablePageMixin, Page):
             context_overrides=inventory.get_template_context_data()
         )
 
-    @login_required(login_url=settings.LOGIN_URL)
     @path('<slug:inventory_slug>/delete/')
     def delete_inventory_index(self, request, inventory_slug):
         inventory = get_object_or_404(UserInventory, slug=inventory_slug)
@@ -76,7 +75,6 @@ class HomePage(RoutablePageMixin, Page):
             context={'form': form}
         )
 
-    @login_required(login_url=settings.LOGIN_URL)
     @path('<slug:inventory_slug>/update/')
     def update_inventory_index(self, request, inventory_slug):
         inventory = get_object_or_404(UserInventory, slug=inventory_slug)
@@ -97,7 +95,6 @@ class HomePage(RoutablePageMixin, Page):
             context={'form': form}
         )
 
-    @login_required(login_url=settings.LOGIN_URL)
     @path('<slug:inventory_slug>/add/')
     def add_inventory_category(self, request, inventory_slug):
         inventory = get_object_or_404(UserInventory, slug=inventory_slug)
