@@ -153,6 +153,11 @@ class InventoryCategory(AbstractInventory):
         related_name='categories',
         verbose_name=_("inventory")
     )
+    description = models.TextField(
+        null=True,
+        blank=True,
+        verbose_name=_("description")
+    )
 
     RESERVED_KEYWORDS = ['add', 'update', 'delete', 'admin']
 
@@ -202,6 +207,11 @@ class InventoryAsset(AbstractInventory):
         null=True,
         blank=True,
         verbose_name=_("category")
+    )
+    description = models.TextField(
+        null=True,
+        blank=True,
+        verbose_name=_("description")
     )
 
     def _set_slug(self):

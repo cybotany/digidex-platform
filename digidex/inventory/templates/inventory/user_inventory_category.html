@@ -17,58 +17,63 @@
   <section class="section">
     <div class="content">
       <div class="collection-list-wrapper-posts large w-dyn-list">
-        <div role="list" class="collection-list-posts large w-dyn-items">
-          <div role="listitem" class="w-dyn-item">
-            <div class="block-post large">
-              <a href="#" class="link-post-thumbnail large w-inline-block">
-                <img alt="" loading="eager" src="" class="image-post-thumbnail large">
-              </a>
-              <div class="post large">
-                <div class="date"></div>
-                <a href="#" class="link-heading-post large w-inline-block">
-                  <h3 class="heading-post"></h3>
-                </a>
-                <p class="paragraph-post large"></p>
-                <a href="#" class="link-block w-inline-block">
-                  <div class="text-link">View Details</div>
-                  <div class="block-icon-link">
-                    <img src="{% static 'base/images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
+        {% if assets.exists %}
+          <div role="list" class="collection-list-posts large w-dyn-items">
+            {% with featured_asset as asset %}
+              <div role="listitem" class="w-dyn-item">
+                <div class="block-post large">
+                  <a href="{{ asset.url }}" class="link-post-thumbnail large w-inline-block">
+                    <img src="{{ asset.image }}" alt="" loading="eager" class="image-post-thumbnail large">
+                  </a>
+                  <div class="post large">
+                    <div class="date">{{ asset.date }}</div>
+                    <a href="{{ asset.url }}" class="link-heading-post large w-inline-block">
+                      <h3 class="heading-post">{{ asset.name }}</h3>
+                    </a>
+                    <p class="paragraph-post large"></p>
+                    <a href="{{ asset.url }}" class="link-block w-inline-block">
+                      <div class="text-link">View Details</div>
+                      <div class="block-icon-link">
+                        <img src="{% static 'base/images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
+                      </div>
+                    </a>
                   </div>
-                </a>
+                </div>
               </div>
-            </div>
+            {% endwith %}
           </div>
-        </div>
-        <div class="empty-state w-dyn-empty">
-          <div class="text-empty">No assets found.</div>
-        </div>
       </div>
       <div class="collection-list-wrapper-posts w-dyn-list">
-        <div role="list" class="collection-list-posts w-dyn-items">
-          <div role="listitem" class="w-dyn-item">
-            <div class="block-post">
-              <a href="#" class="link-post-thumbnail w-inline-block">
-                <img alt="" loading="eager" src="" class="image-post-thumbnail">
-              </a>
-              <div class="post">
-                <div class="date"></div>
-                <a href="#" class="link-heading-post w-inline-block">
-                  <h4 class="heading-post"></h4>
-                </a>
-                <p class="paragraph-post"></p>
-                <a href="#" class="link-block w-inline-block">
-                  <div class="text-link">View Details</div>
-                  <div class="block-icon-link">
-                    <img src="{% static 'base/images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
+        {% if assets.exists %}
+          <div role="list" class="collection-list-posts w-dyn-items">
+            {% for asset in assets %}
+              <div role="listitem" class="w-dyn-item">
+                <div class="block-post">
+                  <a href="{{ asset.url }}" class="link-post-thumbnail w-inline-block">
+                    <img src="{{ asset.image }}" alt="" loading="eager" class="image-post-thumbnail">
+                  </a>
+                  <div class="post">
+                    <div class="date">{{ asset.date }}</div>
+                    <a href="{{ asset.url }}" class="link-heading-post w-inline-block">
+                      <h4 class="heading-post">{{ asset.name }}</h4>
+                    </a>
+                    <p class="paragraph-post">{{ asset.description }}</p>
+                    <a href="{{ asset.url }}" class="link-block w-inline-block">
+                      <div class="text-link">View Details</div>
+                      <div class="block-icon-link">
+                        <img src="{% static 'base/images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
+                      </div>
+                    </a>
                   </div>
-                </a>
+                </div>
               </div>
-            </div>
+            {% endfor %}
           </div>
-        </div>
-        <div class="empty-state w-dyn-empty">
-          <div class="text-empty">No assets found.</div>
-        </div>
+        {% else %}
+          <div class="empty-state w-dyn-empty">
+            <div class="text-empty">No assets found.</div>
+          </div>
+        {% endif %}
       </div>
     </div>
   </section>

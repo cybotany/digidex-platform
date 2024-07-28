@@ -9,17 +9,22 @@
         <h1 class="heading-top">{{ heading }}</h1>
         <div class="block-categories">
           <div class="collection-list-wrapper-categories w-dyn-list">
-            <div role="list" class="collection-list-categories w-dyn-items">
-              <div role="listitem" class="collection-item-categories w-dyn-item">
-                <a href="#" class="link-category w-inline-block">
-                  <img alt="" loading="eager" src="" class="icon-category">
-                  <div class="text-category"></div>
-                </a>
+            {% if categories.exists %}
+              <div role="list" class="collection-list-categories w-dyn-items">
+                {% for category in categories %}
+                  <div role="listitem" class="collection-item-categories w-dyn-item">
+                    <a href="{% url 'inventory:category' category.slug %}" class="link-category w-inline-block">
+                      <img src="{{ category.image }}" alt="" loading="eager" class="icon-category">
+                      <div class="text-category">{{ category.name }}</div>
+                    </a>
+                  </div>
+                {% endfor %}
               </div>
-            </div>
-            <div class="empty-state w-dyn-empty">
-              <div class="text-empty">No categories found.</div>
-            </div>
+            {% else %}
+              <div class="empty-state w-dyn-empty">
+                <div class="text-empty">No categories found.</div>
+              </div>
+            {% endif %}
           </div>
         </div>
       </div>
@@ -31,31 +36,36 @@
   <section class="section">
     <div class="content">
       <div class="collection-list-wrapper-posts w-dyn-list">
-        <div role="list" class="collection-list-posts w-dyn-items">
-          <div role="listitem" class="w-dyn-item">
-            <div class="block-post">
-              <a href="#" class="link-post-thumbnail w-inline-block">
-                <img alt="" loading="eager" src="" class="image-post-thumbnail">
-              </a>
-              <div class="post">
-                <div class="date"></div>
-                <a href="#" class="link-heading-post w-inline-block">
-                  <h4 class="heading-post"></h4>
-                </a>
-                <p class="paragraph-post"></p>
-                <a href="#" class="link-block w-inline-block">
-                  <div class="text-link">View Details</div>
-                  <div class="block-icon-link">
-                    <img src="{% static 'base/images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
+        {% if assets.exists %}
+          <div role="list" class="collection-list-posts w-dyn-items">
+            {% for asset in assets %}
+              <div role="listitem" class="w-dyn-item">
+                <div class="block-post">
+                  <a href="{{ asset.url }}" class="link-post-thumbnail w-inline-block">
+                    <img src="" alt="" loading="eager" class="image-post-thumbnail">
+                  </a>
+                  <div class="post">
+                    <div class="date">{{ asset.date }}</div>
+                    <a href="{{ asset.url }}" class="link-heading-post w-inline-block">
+                      <h4 class="heading-post">{{ asset.name }}</h4>
+                    </a>
+                    <p class="paragraph-post">{{ asset.description }}</p>
+                    <a href="{{ asset.url }}" class="link-block w-inline-block">
+                      <div class="text-link">View Details</div>
+                      <div class="block-icon-link">
+                        <img src="{% static 'base/images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
+                      </div>
+                    </a>
                   </div>
-                </a>
+                </div>
               </div>
-            </div>
+            {% endfor %}
           </div>
-        </div>
-        <div class="empty-state w-dyn-empty">
-          <div class="text-empty">No assets found.</div>
-        </div>
+        {% else %}
+          <div class="empty-state w-dyn-empty">
+            <div class="text-empty">No assets found.</div>
+          </div>
+        {% endif %}
       </div>
     </div>
   </section>
