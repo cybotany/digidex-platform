@@ -1,5 +1,7 @@
 from django.db import models
 from django.core.exceptions import PermissionDenied
+from django.contrib.auth.decorators import login_required
+from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
 from django.http import HttpResponseRedirect
@@ -48,11 +50,12 @@ class HomePage(RoutablePageMixin, Page):
             context_overrides=inventory.get_template_context_data()
         )
 
+    @login_required(login_url=settings.LOGIN_URL)
     @path('<slug:inventory_slug>/delete/')
     def delete_inventory_index(self, request, inventory_slug):
         inventory = get_object_or_404(UserInventory, slug=inventory_slug)
         if request.user != inventory.owner:
-            return PermissionDenied
+            raise PermissionDenied
 
         if request.method == "POST":
             form = DeletionConfirmationForm(request.POST)
@@ -70,16 +73,15 @@ class HomePage(RoutablePageMixin, Page):
         return self.render(
             request,
             template='inventory/index/delete_index.html',
-            context={
-                'inventory': inventory
-            }
+            context={'form': form}
         )
 
+    @login_required(login_url=settings.LOGIN_URL)
     @path('<slug:inventory_slug>/update/')
     def update_inventory_index(self, request, inventory_slug):
         inventory = get_object_or_404(UserInventory, slug=inventory_slug)
         if request.user != inventory.owner:
-            return PermissionDenied
+            raise PermissionDenied
 
         if request.method == "POST":
             form = UserInventoryForm(request.POST, instance=inventory)
@@ -92,17 +94,15 @@ class HomePage(RoutablePageMixin, Page):
         return self.render(
             request,
             template='inventory/index/update_index.html',
-            context={
-                'form': form,
-                'inventory': inventory
-            }
+            context={'form': form}
         )
 
-    @path('<slug:inventory_slug>/add-category/')
+    @login_required(login_url=settings.LOGIN_URL)
+    @path('<slug:inventory_slug>/add/')
     def add_inventory_category(self, request, inventory_slug):
         inventory = get_object_or_404(UserInventory, slug=inventory_slug)
         if request.user != inventory.owner:
-            return PermissionDenied
+            raise PermissionDenied
 
         if request.method == "POST":
             form = InventoryCategoryForm(request.POST)

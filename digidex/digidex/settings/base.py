@@ -264,6 +264,12 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
 ACCOUNT_EMAIL_SUBJECT_PREFIX = "[DigiDex] "
 
+LOGIN_URL = '/accounts/login/'
+
+SIGNUP_URL = '/accounts/signup/'
+
+LOGOUT_URL = '/accounts/logout/'
+
 
 # Wagtail settings
 WAGTAIL_SITE_NAME = "DigiDex"

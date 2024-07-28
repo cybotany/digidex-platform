@@ -17,14 +17,6 @@
         <div class="text-error">{{ form.name.errors|striptags }}</div>
       </div>
     {% endif %}
-    <!-- Render Description Field -->
-    <label for="{{ form.description.id_for_label }}">Description:</label>
-    {{ form.description }}
-    {% if form.description.errors %}
-      <div class="error-message">
-        <div class="text-error">{{ form.description.errors|striptags }}</div>
-      </div>
-    {% endif %}
     <!-- Render Submit Button -->
     <input type="submit" value="Update" class="submit-button base-button"> 
     {{ form.non_field_errors }}

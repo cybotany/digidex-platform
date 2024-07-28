@@ -6,18 +6,12 @@ from inventory.models import UserInventory, InventoryCategory, InventoryAsset
 class UserInventoryForm(forms.ModelForm):
     class Meta:
         model = UserInventory
-        fields = ['name', 'description']
+        fields = ['name']
         widgets = {
             'name': forms.TextInput(
                 attrs={
                     'class': 'text-field base-input',
                     'placeholder': 'Enter a name for the inventory'
-                }
-            ),
-            'description': forms.Textarea(
-                attrs={
-                    'class': 'text-field textarea',
-                    'placeholder': "Enter the inventory's description"
                 }
             ),
         }
