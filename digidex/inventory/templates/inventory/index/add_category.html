@@ -1,4 +1,4 @@
-{% extends "base/utility.html" %}
+{% extends "index.html" %}
 {% load i18n %}
 
 {% block title %}
@@ -8,15 +8,7 @@
 {% block content %}
   <h3 class="account-heading">Create Category</h3>
   <form method="post" class="form">
-  {% csrf_token %}
-    <!-- Render Category Field -->
-    <label for="{{ form.category.id_for_label }}">Category:</label>
-    {{ form.category }}
-    {% if form.category.errors %}
-      <div class="error-message">
-        <div class="text-error">{{ form.category.errors|striptags }}</div>
-      </div>
-    {% endif %}
+    {% csrf_token %}
     <!-- Render Name Field -->
     <label for="{{ form.name.id_for_label }}">Name:</label>
     {{ form.name }}
