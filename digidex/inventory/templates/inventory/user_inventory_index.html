@@ -1,6 +1,10 @@
 {% extends "index.html" %}
 {% load static wagtailimages_tags %}
 
+{% block title %}
+  {{ title }}
+{% endblock title %}
+
 {% block header %}
   {% include "includes/header.html" %}
   <section class="section-top"> 
@@ -13,7 +17,7 @@
               <div role="list" class="collection-list-categories w-dyn-items">
                 {% for category in categories %}
                   <div role="listitem" class="collection-item-categories w-dyn-item">
-                    <a href="{% url 'inventory:category' category.slug %}" class="link-category w-inline-block">
+                    <a href="{{ category.url }}" class="link-category w-inline-block">
                       <img src="{{ category.image }}" alt="" loading="eager" class="icon-category">
                       <div class="text-category">{{ category.name }}</div>
                     </a>
@@ -26,6 +30,10 @@
               </div>
             {% endif %}
           </div>
+          <a href="{{ add_category_url }}" class="link-category w-inline-block">
+            <img src="{% static 'base/images/google/add-circle.svg' %}" alt="" loading="eager" class="icon-category">
+            <div class="text-category">Add Category</div>
+          </a>
         </div>
       </div>
     </div>
@@ -42,7 +50,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="block-post">
                   <a href="{{ asset.url }}" class="link-post-thumbnail w-inline-block">
-                    <img src="" alt="" loading="eager" class="image-post-thumbnail">
+                    <img src="{{ asset.image }}" alt="" loading="eager" class="image-post-thumbnail">
                   </a>
                   <div class="post">
                     <div class="date">{{ asset.date }}</div>

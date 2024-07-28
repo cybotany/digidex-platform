@@ -1,6 +1,10 @@
 {% extends "index.html" %}
 {% load static wagtailimages_tags %}
 
+{% block title %}
+  {{ title }}
+{% endblock title %}
+
 {% block header %}
   {% include "includes/header.html" %}
   <section class="section-top"> 

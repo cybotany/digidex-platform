@@ -1,6 +1,10 @@
 {% extends "index.html" %}
 {% load static wagtailimages_tags %}
 
+{% block title %}
+  {{ title }}
+{% endblock title %}
+
 {% block header %}
   {% include "includes/header.html" %}
 {% endblock header %}
@@ -14,7 +18,7 @@
             <img alt="{{ image }}" loading="eager" src="" class="icon-product">
           </div>
           <a href="{{ url }}" class="link-product w-inline-block">
-            <h3 class="heading-product"></h3>
+            <h3 class="heading-product">{{ heading }}</h3>
           </a>
           <div class="block-price">
             <div class="text-price">{{ price_1 }}</div>

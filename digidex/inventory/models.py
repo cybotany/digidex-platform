@@ -132,7 +132,8 @@ class UserInventory(AbstractInventory):
 
     def get_template_context_data(self):
         return {
-            'inventory': self,
+            'title': self.name,
+            'heading': self.name,
             'categories': self.get_categories(),
             'assets': self.get_assets()
         }
@@ -186,8 +187,9 @@ class InventoryCategory(AbstractInventory):
 
     def get_template_context_data(self):
         return {
-            'inventory': self,
-            'categories': self.get_categories(),
+            'title': self.name,
+            'heading': self.name,
+            'description': self.description,
             'assets': self.get_assets()
         }
 
@@ -247,9 +249,10 @@ class InventoryAsset(AbstractInventory):
 
     def get_template_context_data(self):
         return {
-            'inventory': self,
-            'categories': self.get_categories(),
-            'assets': self.get_assets()
+            'title': self.name,
+            'heading': self.name,
+            'image': self.get_thumbnail(),
+            'url': self.get_url(),
         }
 
     def __str__(self):

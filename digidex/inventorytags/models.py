@@ -37,12 +37,6 @@ class NearFieldCommunicationTag(models.Model):
     active = models.BooleanField(
         default=True
     )
-    link = models.URLField(
-        max_length=255,
-        editable=True,
-        blank=True,
-        null=True
-    )
     created_at = models.DateTimeField(
         auto_now_add=True
     )
@@ -61,16 +55,15 @@ class NearFieldCommunicationTag(models.Model):
         self.active = False
         self.save()
 
+    def create_link(self):
+        from inventorytags.models import InventoryLink
+        link = InventoryLink.objects.create(
+            tag=self
+        )
+        return link
+
     def get_mapping_url(self):
         return reverse('link-tag', host='link', args=[str(self.uuid)])
-
-    def get_owner_url(self):
-        from inventory.models import UserInventory
-        try:
-            user_inventory = UserInventory.objects.get(owner=self.owner)
-            return build_uri(user_inventory.slug)
-        except UserInventory.DoesNotExist:
-            raise Http404('Owner page not found')
 
     class Meta:
         verbose_name = "near field communication tag"
@@ -80,10 +73,14 @@ class NearFieldCommunicationTag(models.Model):
 class InventoryLink(models.Model):
     content_type = models.ForeignKey(
         ContentType,
+        null=True,
+        blank=True,
         db_index=True,
         on_delete=models.CASCADE
     )
     object_id = models.PositiveIntegerField(
+        null=True,
+        blank=True,
         db_index=True
     )
     content_object = GenericForeignKey(
@@ -95,11 +92,15 @@ class InventoryLink(models.Model):
         on_delete=models.CASCADE,
         related_name='link'
     )
+    link = models.URLField(
+        max_length=255,
+        editable=True,
+        blank=True,
+        null=True
+    )
 
     def get_url(self):
-        if self.inventory:
-            return self.inventory.url
-        return None
+        return self.link
 
     @property
     def url(self):
@@ -108,8 +109,8 @@ class InventoryLink(models.Model):
     class Meta:
         verbose_name = "inventory link"
         verbose_name_plural = "inventory links"
-        unique_together = ('inventory', 'tag')
         indexes = [
-            models.Index(fields=['inventory']),
+            models.Index(fields=['content_type']),
+            models.Index(fields=['object_id']),
             models.Index(fields=['tag'])
         ]
