@@ -4,7 +4,7 @@ from django.urls import include, path
 from wagtail import urls as wagtail_urls
 
 urlpatterns = [
-    path("", include('accounts.urls')),
+    path("accounts/", include('allauth.urls')),
     path("", include(wagtail_urls)),
 ]
 

@@ -41,13 +41,12 @@ class HomePage(RoutablePageMixin, Page):
         return self.render(
             request,
             template='inventory/user_inventory_index.html',
-            context_overrides={
-                'heading': inventory.name,
-                'categories': inventory.get_categories(),
-                'assets': inventory.get_assets(),
-            }
+            context_overrides=inventory.get_template_context_data()
         )
 
+    @path('<slug:inventory_slug>/add/')
+    def add_user_category(self, request, inventory_slug):
+        pass
 
     class Meta:
         verbose_name = _('homepage')

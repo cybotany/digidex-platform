@@ -109,6 +109,8 @@ class UserInventory(AbstractInventory):
         verbose_name=_("owner")
     )
 
+    RESERVED_KEYWORDS = ['add', 'update', 'delete', 'admin']
+
     def _set_slug(self):
         self.slug = slugify(self.owner.username)
 
@@ -132,8 +134,9 @@ class UserInventory(AbstractInventory):
 
     def get_template_context_data(self):
         return {
-            'title': self.name,
+            'title': self.owner.username.title(),
             'heading': self.name,
+            'add_category_url': f"{self.url}/add",
             'categories': self.get_categories(),
             'assets': self.get_assets()
         }
@@ -232,6 +235,8 @@ class InventoryAsset(AbstractInventory):
         blank=True,
         verbose_name=_("description")
     )
+
+    RESERVED_KEYWORDS = ['add', 'update', 'delete', 'admin']
 
     def _set_slug(self):
         if self.name:
