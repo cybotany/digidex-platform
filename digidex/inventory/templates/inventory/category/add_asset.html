@@ -2,13 +2,13 @@
 {% load i18n %}
 
 {% block title %}
-  {% trans "Create Digit" %}
+  {% trans "Add Asset" %}
 {% endblock title %}
 
 {% block content %}
-  <h3 class="account-heading">Create Digit</h3>
+  <h3 class="account-heading">Add Asset</h3>
   <form method="post" class="form">
-  {% csrf_token %}
+    {% csrf_token %}
     <!-- Render Category Field -->
     <label for="{{ form.category.id_for_label }}">Category:</label>
     {{ form.category }}
