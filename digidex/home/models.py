@@ -1,13 +1,10 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django.shortcuts import get_object_or_404
 
 from wagtail.contrib.routable_page.models import RoutablePageMixin, path, re_path
 from wagtail.models import Page, Collection
 from wagtail.admin.panels import FieldPanel
 from wagtail.fields import RichTextField
-
-from inventory.models import UserInventory
 
 
 class HomePage(RoutablePageMixin, Page):
@@ -37,15 +34,6 @@ class HomePage(RoutablePageMixin, Page):
 
     def __str__(self):
         return self.title
-
-    @path('<slug:inventory_slug>/')
-    def user_inventory(self, request, inventory_slug):
-        inventory = get_object_or_404(UserInventory, slug=inventory_slug)		
-        return self.render(
-            request,
-            template='inventory/index/index_page.html',
-            context_overrides=inventory.get_template_context_data()
-        )
 
     class Meta:
         verbose_name = _('homepage')

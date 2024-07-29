@@ -12,8 +12,6 @@ from wagtail.images import get_image_model
 from wagtail.documents import get_document_model
 from wagtail.models import Page, Collection, Site
 
-from inventory.forms import InventoryAssetForm, DeletionConfirmationForm
-
 
 class UserInventoryAsset(RoutablePageMixin, Page):
     parent_page_types = [
@@ -84,13 +82,14 @@ class UserInventoryAsset(RoutablePageMixin, Page):
         if request.user != self.owner:
             raise PermissionDenied
 
+        from inventory.forms import UserInventoryAssetForm
         if request.method == "POST":
-            form = InventoryAssetForm(request.POST, instance=self)
+            form = UserInventoryAssetForm(request.POST, instance=self)
             if form.is_valid():
                 form.save()
                 return HttpResponseRedirect(self.url)
         else:
-            form = InventoryAssetForm(instance=self)
+            form = UserInventoryAssetForm(instance=self)
         
         return self.render(
             request,
@@ -103,6 +102,7 @@ class UserInventoryAsset(RoutablePageMixin, Page):
         if request.user != self.owner:
             raise PermissionDenied
 
+        from inventory.forms import DeletionConfirmationForm
         if request.method == "POST":
             form = DeletionConfirmationForm(request.POST)
             if form.is_valid():
