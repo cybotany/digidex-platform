@@ -2,6 +2,7 @@ import uuid
 
 from django.db import models
 from django.conf import settings
+from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from django_hosts.resolvers import reverse
 from django.http import Http404
@@ -83,14 +84,16 @@ class InventoryLink(models.Model):
     link = models.URLField(
         max_length=255,
         editable=True,
-        default='https://digidex.tech'
+        null=True,
+        blank=True
     )
 
     def get_url(self):
         if self.link:
             return self.link
         else:
-            raise Http404(_("No linked object found."))
+            owner = slugify(self.tag.owner.username)
+            return f'https://digidex.tech/{owner}'
 
     @property
     def url(self):
