@@ -28,14 +28,20 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="block-post">
                   <a href="{{ asset.url }}" class="link-post-thumbnail w-inline-block">
-                    <img src="{{ asset.image }}" alt="" loading="eager" class="image-post-thumbnail">
+                    {% with asset.specific.get_thumbnail as thumbnail %}
+                      {% if thumbnail %}
+                        {% image thumbnail original alt="thumbnail.alt" class="image-post-thumbnail" %}
+                      {% else %}
+                        <img src="{% static 'base/images/google/plant.svg' %}" alt="Asset Thumbnail Placeholder" loading="eager" class="image-post-thumbnail">
+                      {% endif %}
+                    {% endwith %}
                   </a>
                   <div class="post">
-                    <div class="date">{{ asset.date }}</div>
+                    <div class="date">{{ asset.specific.created_at }}</div>
                     <a href="{{ asset.url }}" class="link-heading-post w-inline-block">
-                      <h4 class="heading-post">{{ asset.name }}</h4>
+                      <h4 class="heading-post">{{ asset.specific.name }}</h4>
                     </a>
-                    <p class="paragraph-post">{{ asset.description }}</p>
+                    <p class="paragraph-post">{{ asset.specific.description }}</p>
                     <a href="{{ asset.url }}" class="link-block w-inline-block">
                       <div class="text-link">View Details</div>
                       <div class="block-icon-link">

@@ -42,6 +42,11 @@ class UserInventoryAsset(RoutablePageMixin, Page):
         blank=True,
         verbose_name=_("description")
     )
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    RESERVED_KEYWORDS = ['add', 'update', 'delete', 'admin']
 
     def set_slug(self):
         if self.name:

@@ -1,8 +1,6 @@
 import uuid
 
 from django.db import models
-from django.contrib.contenttypes.fields import GenericForeignKey
-from django.contrib.contenttypes.models import ContentType
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from django_hosts.resolvers import reverse
@@ -70,42 +68,29 @@ class NearFieldCommunicationTag(models.Model):
 
 
 class InventoryLink(models.Model):
-    content_type = models.ForeignKey(
-        ContentType,
+    asset = models.ForeignKey(
+        'inventory.UserInventoryAsset',
+        on_delete=models.SET_NULL,
+        blank=True,
         null=True,
-        blank=True,
-        db_index=True,
-        on_delete=models.CASCADE
-    )
-    object_id = models.PositiveIntegerField(
-        null=True,
-        blank=True,
-        db_index=True
-    )
-    content_object = GenericForeignKey(
-        "content_type",
-        "object_id"
-    )
-    link = models.URLField(
-        max_length=255,
-        editable=True,
-        blank=True,
-        null=True
+        related_name='+'
     )
     tag = models.OneToOneField(
         NearFieldCommunicationTag,
         on_delete=models.CASCADE,
         related_name='link'
     )
+    link = models.URLField(
+        max_length=255,
+        editable=True,
+        default='https://digidex.tech'
+    )
 
     def get_url(self):
         if self.link:
             return self.link
         else:
-            if self.content_object:
-                return self.content_object.url
-            else:
-                raise Http404(_("No linked object found."))
+            raise Http404(_("No linked object found."))
 
     @property
     def url(self):
@@ -115,7 +100,6 @@ class InventoryLink(models.Model):
         verbose_name = "inventory link"
         verbose_name_plural = "inventory links"
         indexes = [
-            models.Index(fields=['content_type']),
-            models.Index(fields=['object_id']),
+            models.Index(fields=['asset']),
             models.Index(fields=['tag'])
         ]

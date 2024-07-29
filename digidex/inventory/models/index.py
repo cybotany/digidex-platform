@@ -38,6 +38,9 @@ class UserInventoryIndex(RoutablePageMixin, Page):
         blank=True,
         null=True,
     )
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
 
     def get_context(self, request):
         context = super().get_context(request)
