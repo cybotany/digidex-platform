@@ -4,6 +4,7 @@ from django.dispatch import receiver
 from django.utils.text import slugify
 
 from home.models import HomePage
+from home.utils import create_homepage
 from inventory.models import UserInventoryIndex
 
 
@@ -12,6 +13,8 @@ User = get_user_model()
 @receiver(post_save, sender=User)
 def new_user_setup(sender, instance, created, **kwargs):
     if created:
+        if not HomePage.objects.exists():
+            home_page = create_homepage()
         home_page = HomePage.objects.first()
         user_inventory_page = UserInventoryIndex(
             title=f"{instance.username.title()}'s Inventory",

@@ -13,7 +13,7 @@ def create_homepage():
 
     homepage = HomePage(
         title="Home",
-        slug="home",
+        slug="inventory",
         collection=home_collection,
     )
     root_page = Page.objects.get(id=1)
@@ -21,13 +21,14 @@ def create_homepage():
     homepage.save_revision().publish()
 
     Site.objects.update_or_create(
-        hostname='localhost',
+        hostname='digidex.tech',
         defaults={
-            'port': 8000,
-            'site_name': 'DigiDex (Dev)',
+            'port': 80,
+            'site_name': 'DigiDex',
             'root_page': homepage,
-            'is_default_site': False,
+            'is_default_site': True,
             }
     )
+
     print("HomePage created and set as the root page.")
     return homepage
