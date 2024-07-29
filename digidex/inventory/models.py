@@ -134,8 +134,14 @@ class UserInventory(AbstractInventory):
     def get_categories(self):
         return self.categories.all()
 
+    def get_category(self, category_slug):
+        return self.categories.get(slug=category_slug)
+
     def get_assets(self):
         return self.assets.all()
+
+    def get_asset(self, asset_slug):
+        return self.assets.get(slug=asset_slug)
 
     def get_template_context_data(self):
         return {
@@ -180,6 +186,14 @@ class InventoryCategory(AbstractInventory):
         blank=True,
         verbose_name=_("description")
     )
+    icon = models.ForeignKey(
+        get_image_model(),
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='+',
+        verbose_name=_("icon")
+    )
 
     def _set_slug(self):
         if self.name:
@@ -198,7 +212,7 @@ class InventoryCategory(AbstractInventory):
         return {
             'title': self.name,
             'heading': self.name,
-            'description': self.description,
+            'paragraph': self.description,
             'assets': self.get_assets(),
             'add_url': f"{self.url}/add",
             'update_url': f"{self.url}/update",

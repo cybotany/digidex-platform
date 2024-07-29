@@ -1,0 +1,31 @@
+{% extends "inventory/forms/base.html" %}
+
+{% block content %}
+  {{ form.non_field_errors }}
+  <form method="post" class="form">
+    {% csrf_token %}
+    
+    <label for="{{ form.name.id_for_label }}">Name:</label>
+    {{ form.name }}
+    {% if form.name.errors %}
+      <div class="error-message">
+        <div class="text-error">{{ form.name.errors|striptags }}</div>
+      </div>
+    {% endif %}
+    <label for="{{ form.description.id_for_label }}">Description:</label>
+    {{ form.description }}
+    {% if form.description.errors %}
+      <div class="error-message">
+        <div class="text-error">{{ form.description.errors|striptags }}</div>
+      </div>
+    {% endif %}
+    <label for="{{ form.icon.id_for_label }}">Icon:</label>
+    {{ form.icon }}
+    {% if form.icon.errors %}
+      <div class="error-message">
+        <div class="text-error">{{ form.icon.errors|striptags }}</div>
+      </div>
+    {% endif %}
+    <input type="submit" value="Create" class="submit-button base-button"> 
+  </form>       
+{% endblock body %}

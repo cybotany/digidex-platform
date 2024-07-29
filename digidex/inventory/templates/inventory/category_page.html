@@ -11,30 +11,7 @@
     <div class="content">
       <div class="block-top">
         <h1 class="heading-top">{{ heading }}</h1>
-        <div class="block-categories">
-          <div class="collection-list-wrapper-categories w-dyn-list">
-            {% if categories.exists %}
-              <div role="list" class="collection-list-categories w-dyn-items">
-                {% for category in categories %}
-                  <div role="listitem" class="collection-item-categories w-dyn-item">
-                    <a href="{{ category.url }}" class="link-category w-inline-block">
-                      <img src="{{ category.image }}" alt="" loading="eager" class="icon-category">
-                      <div class="text-category">{{ category.name }}</div>
-                    </a>
-                  </div>
-                {% endfor %}
-              </div>
-            {% else %}
-              <div class="empty-state w-dyn-empty">
-                <div class="text-empty">No categories found.</div>
-              </div>
-            {% endif %}
-          </div>
-          <a href="{{ add_url }}" class="link-category w-inline-block">
-            <img src="{% static 'base/images/google/add-circle.svg' %}" alt="" loading="eager" class="icon-category">
-            <div class="text-category">Add Category</div>
-          </a>
-        </div>
+        <p class="paragraph-top">{{ paragraph }}</p>
       </div>
     </div>
   </section>
@@ -43,6 +20,34 @@
 {% block body %}
   <section class="section">
     <div class="content">
+      <div class="collection-list-wrapper-posts large w-dyn-list">
+        {% if assets.exists %}
+          <div role="list" class="collection-list-posts large w-dyn-items">
+            {% with featured_asset as asset %}
+              <div role="listitem" class="w-dyn-item">
+                <div class="block-post large">
+                  <a href="{{ asset.url }}" class="link-post-thumbnail large w-inline-block">
+                    <img src="{{ asset.image }}" alt="" loading="eager" class="image-post-thumbnail large">
+                  </a>
+                  <div class="post large">
+                    <div class="date">{{ asset.date }}</div>
+                    <a href="{{ asset.url }}" class="link-heading-post large w-inline-block">
+                      <h3 class="heading-post">{{ asset.name }}</h3>
+                    </a>
+                    <p class="paragraph-post large"></p>
+                    <a href="{{ asset.url }}" class="link-block w-inline-block">
+                      <div class="text-link">View Details</div>
+                      <div class="block-icon-link">
+                        <img src="{% static 'base/images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            {% endwith %}
+          </div>
+        {% endif %}
+      </div>
       <div class="collection-list-wrapper-posts w-dyn-list">
         {% if assets.exists %}
           <div role="list" class="collection-list-posts w-dyn-items">

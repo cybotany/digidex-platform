@@ -21,7 +21,7 @@ class UserInventoryForm(forms.ModelForm):
 class InventoryCategoryForm(forms.ModelForm):
     class Meta:
         model = InventoryCategory
-        fields = ['name', 'description']
+        fields = ['name', 'description', 'icon']
         widgets = {
             'name': forms.TextInput(
                 attrs={
@@ -33,6 +33,12 @@ class InventoryCategoryForm(forms.ModelForm):
                 attrs={
                     'class': 'text-field textarea',
                     'placeholder': "Enter the category's description"
+                }
+            ),
+            'icon': forms.FileInput(
+                attrs={
+                    'class': 'file-field base-input',
+                    'placeholder': 'Select an icon for the category'
                 }
             ),
         }

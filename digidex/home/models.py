@@ -1,10 +1,9 @@
 from django.db import models
 from django.core.exceptions import PermissionDenied
-from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404
 
 from wagtail.contrib.routable_page.models import RoutablePageMixin, path, re_path
@@ -42,7 +41,7 @@ class HomePage(RoutablePageMixin, Page):
         return self.title
 
     @path('<slug:inventory_slug>/')
-    def inventory_index(self, request, inventory_slug):
+    def user_inventory(self, request, inventory_slug):
         inventory = get_object_or_404(UserInventory, slug=inventory_slug)		
         return self.render(
             request,
@@ -51,7 +50,7 @@ class HomePage(RoutablePageMixin, Page):
         )
 
     @path('<slug:inventory_slug>/delete/')
-    def delete_inventory_index(self, request, inventory_slug):
+    def delete_user_inventory(self, request, inventory_slug):
         inventory = get_object_or_404(UserInventory, slug=inventory_slug)
         if request.user != inventory.owner:
             raise PermissionDenied
@@ -71,12 +70,12 @@ class HomePage(RoutablePageMixin, Page):
 
         return self.render(
             request,
-            template='inventory/index/delete_index.html',
-            context={'form': form}
+            template='inventory/forms/delete_index.html',
+            context_overrides={'form': form}
         )
 
     @path('<slug:inventory_slug>/update/')
-    def update_inventory_index(self, request, inventory_slug):
+    def update_user_inventory(self, request, inventory_slug):
         inventory = get_object_or_404(UserInventory, slug=inventory_slug)
         if request.user != inventory.owner:
             raise PermissionDenied
@@ -91,11 +90,11 @@ class HomePage(RoutablePageMixin, Page):
         
         return self.render(
             request,
-            template='inventory/index/update_index.html',
-            context={'form': form}
+            template='inventory/forms/update_index.html',
+            context_overrides={'form': form}
         )
 
-    @path('<slug:inventory_slug>/add/')
+    @path('<slug:inventory_slug>/add-category/')
     def add_inventory_category(self, request, inventory_slug):
         inventory = get_object_or_404(UserInventory, slug=inventory_slug)
         if request.user != inventory.owner:
@@ -113,8 +112,48 @@ class HomePage(RoutablePageMixin, Page):
         
         return self.render(
             request,
-            template='inventory/index/add_category.html',
-            context={'form': form}
+            template='inventory/forms/add_category.html',
+            context_overrides={'form': form}
+        )
+
+    @path('<slug:inventory_slug>/add-asset/')
+    def add_inventory_asset(self, request, inventory_slug):
+        inventory = get_object_or_404(UserInventory, slug=inventory_slug)
+        if request.user != inventory.owner:
+            raise PermissionDenied
+
+        if request.method == "POST":
+            form = InventoryAssetForm(request.POST)
+            if form.is_valid():
+                asset = form.save(commit=False)
+                asset.inventory = inventory
+                asset.save()
+                return HttpResponseRedirect(inventory.get_url())
+        else:
+            form = InventoryAssetForm()
+        
+        return self.render(
+            request,
+            template='inventory/forms/add_asset.html',
+            context_overrides={'form': form}
+        )
+
+    @path('<slug:inventory_slug>/<slug:child_slug>/')
+    def inventory_child(self, request, inventory_slug, child_slug):
+        inventory = get_object_or_404(UserInventory, slug=inventory_slug)
+        try:
+            child = inventory.get_category(child_slug)
+            template = 'inventory/category/category_page.html'
+        except InventoryCategory.DoesNotExist:
+            try:
+                child = inventory.get_asset(child_slug)
+                template = 'inventory/asset/asset_page.html'
+            except InventoryAsset.DoesNotExist:
+                raise Http404
+        return self.render(
+            request,
+            template=template,
+            context_overrides=child.get_template_context_data()
         )
 
     class Meta:

@@ -1,0 +1,18 @@
+{% extends "inventory/forms/base.html" %}
+
+{% block content %}
+  <form method="post" action="" class="utility-page-form base-password-page" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    <label for="{{ form.confirmation.id_for_label }}">Confirm Deletion:</label>
+    {{ form.confirmation }}
+    {% if form.confirmation.errors %}
+      <div class="error-message">
+        <div class="text-error">{{ form.confirmation.errors|striptags }}</div>
+      </div>
+    {% endif %}
+
+    <input type="submit" value="Delete" class="submit-button base-button"> 
+  </form>
+{% endblock content %}

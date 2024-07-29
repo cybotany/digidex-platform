@@ -1,0 +1,26 @@
+{% extends "inventory/forms/base.html" %}
+
+{% block content %}
+  <form method="post" action="" class="utility-page-form base-password-page" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    <label for="{{ form.avatar.id_for_label }}">Avatar:</label>
+    {{ form.avatar }}
+    {% if form.avatar.errors %}
+      <div class="error-message">
+        <div class="text-error">{{ form.avatar.errors|striptags }}</div>
+      </div>
+    {% endif %}
+
+    <label for="{{ form.bio.id_for_label }}">Bio:</label>
+    {{ form.bio }}
+    {% if form.bio.errors %}
+      <div class="error-message">
+        <div class="text-error">{{ form.bio.errors|striptags }}</div>
+      </div>
+    {% endif %}
+
+    <input type="submit" value="Update" class="submit-button base-button"> 
+  </form>
+{% endblock content %}
