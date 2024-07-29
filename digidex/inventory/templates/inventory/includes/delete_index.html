@@ -1,18 +1,21 @@
-{% extends "inventory/forms/base.html" %}
+{% extends "inventory/includes/base.html" %}
+
+{% block title %}Delete Inventory{% endblock title %}
 
 {% block content %}
+  <h3 class="account-heading">Delete Inventory</h3>
   <form method="post" action="" class="utility-page-form base-password-page" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.non_field_errors }}
 
-    <label for="{{ form.confirmation.id_for_label }}">Confirm Category Deletion:</label>
+    <label for="{{ form.confirmation.id_for_label }}">Confirm Deletion:</label>
     {{ form.confirmation }}
-    {% if form.delete.errors %}
+    {% if form.confirmation.errors %}
       <div class="error-message">
         <div class="text-error">{{ form.confirmation.errors|striptags }}</div>
       </div>
     {% endif %}
-    
+
     <input type="submit" value="Delete" class="submit-button base-button"> 
   </form>
 {% endblock content %}

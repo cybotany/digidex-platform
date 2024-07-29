@@ -1,14 +1,11 @@
 {% extends "index.html" %}
 
-{% block title %}
-  {{ title }}
-{% endblock title %}
+{% block title %}{% endblock title %}
 
 {% block body %}
 <section class="section-full">
   <div class="content">
     <div class="account-form">
-        <h3 class="account-heading">{{ heading }}</h3>
         {% block content %}{% endblock content %}
     </div>
   </div>

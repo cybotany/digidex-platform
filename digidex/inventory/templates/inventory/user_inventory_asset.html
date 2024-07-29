@@ -1,6 +1,10 @@
 {% extends "inventory/base.html" %}
 {% load static wagtailimages_tags %}
 
+{% block header %}
+  {% include "includes/header.html" %}
+{% endblock header %}
+
 {% block body %}
   <section class="section">
     <div class="content">
@@ -31,3 +35,7 @@
     </div>
   </section>
 {% endblock body %}
+
+{% block footer %}
+  {% include "includes/footer.html" %}
+{% endblock footer %}

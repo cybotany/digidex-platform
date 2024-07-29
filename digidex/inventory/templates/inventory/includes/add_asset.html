@@ -1,7 +1,10 @@
-{% extends "inventory/forms/base.html" %}
+{% extends "inventory/includes/base.html" %}
+
+{% block title %}Add Asset{% endblock title %}
 
 {% block content %}
-  <form method="post" action="" class="utility-page-form base-password-page" enctype="multipart/form-data">
+  <h3 class="account-heading">Add Asset</h3>
+  <form method="post" class="form">
     {% csrf_token %}
     {{ form.non_field_errors }}
 
@@ -21,6 +24,6 @@
       </div>
     {% endif %}
 
-    <input type="submit" value="Update" class="submit-button base-button"> 
-  </form>
+    <input type="submit" value="Create" class="submit-button base-button"> 
+  </form>     
 {% endblock content %}

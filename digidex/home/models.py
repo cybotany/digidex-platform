@@ -1,4 +1,5 @@
 from django.db import models
+from django.shortcuts import redirect
 from django.utils.translation import gettext_lazy as _
 
 from wagtail.contrib.routable_page.models import RoutablePageMixin, path, re_path
@@ -41,7 +42,7 @@ class HomePage(RoutablePageMixin, Page):
             from inventory.models import UserInventoryIndex
             user_inventory = UserInventoryIndex.objects.filter(owner=request.user).first()
             if user_inventory:
-                return user_inventory.serve(request)
+                return redirect(user_inventory.url)
         return super().serve(request)
 
     def __str__(self):

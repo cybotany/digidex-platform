@@ -3,6 +3,7 @@ import uuid
 from django.db import models, transaction
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
@@ -37,6 +38,13 @@ class UserInventoryIndex(RoutablePageMixin, Page):
         blank=True,
         null=True,
     )
+
+    def get_context(self, request):
+        context = super().get_context(request)
+        assets = self.get_children().live().order_by('-first_published_at')
+        context['assets'] = assets
+        context['urls'] = self.get_page_urls()
+        return context
 
     def create_slug(self):
         if self.owner:
@@ -81,19 +89,39 @@ class UserInventoryIndex(RoutablePageMixin, Page):
             return images.first()
         return None
 
-    @path('update/')
-    def update_inventory(self, request):
+    def get_page_urls(self):
+        return {
+            'detail': self.url,
+            'add': self.reverse_subpage('add'),
+            'update': self.reverse_subpage('update'),
+            'delete': self.reverse_subpage('delete'),
+        }
+
+    @path('add/', name='add')
+    def add_asset(self, request):
         if request.user != self.owner:
             raise PermissionDenied
 
-        from inventory.forms import UserInventoryForm
+        from inventory.forms import UserInventoryAssetForm
+        from inventory.models import UserInventoryAsset
+
         if request.method == "POST":
-            form = UserInventoryForm(request.POST, instance=self)
+            form = UserInventoryAssetForm(request.POST)
             if form.is_valid():
-                form.save()
-                return HttpResponseRedirect(self.url)
+                name = form.cleaned_data['name']
+                description = form.cleaned_data['description']
+                asset = UserInventoryAsset(
+                    title=name,
+                    slug=slugify(name),
+                    owner=self.owner,
+                    name=name,
+                    description=description
+                )
+                self.add_child(instance=asset)
+                asset.save_revision().publish()
+                return redirect(asset.url)
         else:
-            form = UserInventoryForm(instance=self)
+            form = UserInventoryAssetForm()
         
         return self.render(
             request,
@@ -101,7 +129,28 @@ class UserInventoryIndex(RoutablePageMixin, Page):
             context_overrides={'form': form}
         )
 
-    @path('delete/')
+    @path('update/', name='update')
+    def update_inventory(self, request):
+        if request.user != self.owner:
+            raise PermissionDenied
+
+        from inventory.forms import UserInventoryForm
+        if request.method == "POST":
+            form = UserInventoryForm(request.POST)
+            if form.is_valid():
+                self.description = form.cleaned_data['description']
+                self.save()
+                return redirect(self.url)
+        else:
+            form = UserInventoryForm(initial={'description': self.description})
+        
+        return self.render(
+            request,
+            template='inventory/forms/update_index.html',
+            context_overrides={'form': form}
+        )
+
+    @path('delete/', name='delete')
     def delete_inventory(self, request):
         if request.user != self.owner:
             raise PermissionDenied
@@ -116,7 +165,7 @@ class UserInventoryIndex(RoutablePageMixin, Page):
                     home_page_url = site.root_page.url
                 else:
                     home_page_url = reverse('/')
-                return HttpResponseRedirect(home_page_url)
+                return redirect(home_page_url)
         else:
             form = DeletionConfirmationForm()
         

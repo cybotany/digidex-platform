@@ -1,6 +1,9 @@
-{% extends "inventory/forms/base.html" %}
+{% extends "inventory/includes/base.html" %}
+
+{% block title %}Delete Asset{% endblock title %}
 
 {% block content %}
+  <h3 class="account-heading">Delete Asset</h3>
   <form method="post" action="" class="utility-page-form base-password-page" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.non_field_errors }}
