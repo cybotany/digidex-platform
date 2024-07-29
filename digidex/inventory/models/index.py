@@ -125,7 +125,7 @@ class UserInventoryIndex(RoutablePageMixin, Page):
         
         return self.render(
             request,
-            template='inventory/forms/update_index.html',
+            template='inventory/includes/add_asset.html',
             context_overrides={'form': form}
         )
 
@@ -146,7 +146,7 @@ class UserInventoryIndex(RoutablePageMixin, Page):
         
         return self.render(
             request,
-            template='inventory/forms/update_index.html',
+            template='inventory/includes/update_index.html',
             context_overrides={'form': form}
         )
 
@@ -171,7 +171,7 @@ class UserInventoryIndex(RoutablePageMixin, Page):
         
         return self.render(
             request,
-            template='inventory/forms/delete_index.html',
+            template='inventory/includes/delete_index.html',
             context_overrides={'form': form}
         )
 
