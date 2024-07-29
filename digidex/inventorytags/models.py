@@ -4,7 +4,6 @@ from django.db import models
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.conf import settings
-from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from django_hosts.resolvers import reverse
 from django.http import Http404
@@ -87,20 +86,26 @@ class InventoryLink(models.Model):
         "content_type",
         "object_id"
     )
-    tag = models.OneToOneField(
-        NearFieldCommunicationTag,
-        on_delete=models.CASCADE,
-        related_name='link'
-    )
     link = models.URLField(
         max_length=255,
         editable=True,
         blank=True,
         null=True
     )
+    tag = models.OneToOneField(
+        NearFieldCommunicationTag,
+        on_delete=models.CASCADE,
+        related_name='link'
+    )
 
     def get_url(self):
-        return self.link
+        if self.link:
+            return self.link
+        else:
+            if self.content_object:
+                return self.content_object.url
+            else:
+                raise Http404(_("No linked object found."))
 
     @property
     def url(self):
