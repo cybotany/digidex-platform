@@ -6,8 +6,6 @@ HOST_SCHEME = 'http'
 
 WAGTAILADMIN_BASE_URL = f"{HOST_SCHEME}://{CMS_URL}"
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-
 SECURE_PROXY_SSL_HEADER = None
 
 SESSION_COOKIE_SECURE = False

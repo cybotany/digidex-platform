@@ -1,44 +1,12 @@
 {% extends "index.html" %}
 {% load static wagtailimages_tags %}
 
-{% block title %}
-  {{ title }}
-{% endblock title %}
-
 {% block header %}
   {% include "includes/header.html" %}
   <section class="section-top"> 
     <div class="content">
       <div class="block-top">
-        <h1 class="heading-top">{{ heading }}</h1>
-        <div class="block-categories">
-          <div class="collection-list-wrapper-categories w-dyn-list">
-            {% if categories.exists %}
-              <div role="list" class="collection-list-categories w-dyn-items">
-                {% for category in categories %}
-                  <div role="listitem" class="collection-item-categories w-dyn-item">
-                    <a href="{{ category.url }}" class="link-category w-inline-block">
-                      {% if category.icon %}
-                        {% image category.icon fill-50x50 alt="category.icon.alt" class="icon-category" %}
-                      {% else %}
-                        <img src="{% static 'base/images/nfc/directional/nfc_directional_mark_black.png' %}" alt="NFC Directional Icon" loading="eager" class="icon-category">
-                      {% endif %}
-                      <div class="text-category">{{ category.name }}</div>
-                    </a>
-                  </div>
-                {% endfor %}
-              </div>
-            {% else %}
-              <div class="empty-state w-dyn-empty">
-                <div class="text-empty">No categories found.</div>
-              </div>
-            {% endif %}
-          </div>
-          <a href="{{ add_url }}" class="link-category w-inline-block">
-            <img src="{% static 'base/images/google/add-circle.svg' %}" alt="" loading="eager" class="icon-category">
-            <div class="text-category">Add Category</div>
-          </a>
-        </div>
+        <h1 class="heading-top">{{ page.title }}</h1>
       </div>
     </div>
   </section>

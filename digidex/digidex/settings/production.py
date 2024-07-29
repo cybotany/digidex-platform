@@ -8,15 +8,6 @@ HOST_SCHEME = 'https'
 
 WAGTAILADMIN_BASE_URL = f"{HOST_SCHEME}://{CMS_URL}"
 
-if "EMAIL_HOST" in os.environ:
-    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-    EMAIL_HOST = os.getenv("EMAIL_HOST")
-    EMAIL_PORT = os.getenv("EMAIL_PORT")
-    EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS")
-    EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
-    EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
-    DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-
 SESSION_COOKIE_SECURE = True
 
 CSRF_TRUSTED_ORIGINS = os.getenv("DJANGO_CSRF_TRUSTED_ORIGINS", "").split(",")

@@ -32,6 +32,18 @@ class HomePage(RoutablePageMixin, Page):
         FieldPanel('body'),
     ]
 
+    @path('')
+    def user_inventory(self, request):
+        """
+        Display the page for the user if they are logged in
+        """
+        if request.user.is_authenticated:
+            from inventory.models import UserInventoryIndex
+            user_inventory = UserInventoryIndex.objects.filter(owner=request.user).first()
+            if user_inventory:
+                return user_inventory.serve(request)
+        return super().serve(request)
+
     def __str__(self):
         return self.title
 
