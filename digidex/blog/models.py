@@ -1,5 +1,6 @@
 from django import forms
 from django.db import models
+from django.contrib.auth import get_user_model
 
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.contrib.taggit import ClusterTaggableManager
@@ -13,9 +14,9 @@ from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.search import index
 from wagtail.snippets.models import register_snippet
 
-
-DigiDexImage = get_image_model()
-DigiDexDocument = get_document_model()
+BaseUser = get_user_model()
+BaseImage = get_image_model()
+BaseDocument = get_document_model()
 
 class BlogIndexPage(Page):
     parent_page_types = ['home.HomePage']
@@ -110,7 +111,7 @@ class BlogPageGalleryImage(Orderable):
         related_name='gallery_images'
     )
     image = models.ForeignKey(
-        DigiDexImage,
+        BaseImage,
         on_delete=models.CASCADE,
         related_name='+'
     )
@@ -122,24 +123,19 @@ class BlogPageGalleryImage(Orderable):
 
 @register_snippet
 class Author(models.Model):
-    name = models.CharField(
-        max_length=255
-    )
-    author_image = models.ForeignKey(
-        DigiDexImage,
+    user = models.ForeignKey(
+        BaseUser,
         null=True,
-        blank=True,
         on_delete=models.SET_NULL,
         related_name='+'
     )
 
     panels = [
-        FieldPanel('name'),
-        FieldPanel('author_image'),
+        FieldPanel('user'),
     ]
 
     def __str__(self):
-        return self.name
+        return self.user.username
 
     class Meta:
         verbose_name_plural = 'Authors'

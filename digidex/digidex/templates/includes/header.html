@@ -4,10 +4,16 @@
   <div class="nav-block">
     <div class="nav">
       {% get_site_root as site_root %}
-      <a href="{% pageurl site_root %}" class="brand w-nav-brand w--current">
+      <a href="{% pageurl site_root %}" class="brand w-nav-brand">
         <img src="{% static 'base/images/logos/logo.svg' %}" alt="Digidex Logo" class="logo">
       </a>
       <nav role="navigation" class="nav-menu w-nav-menu">
+        {% for menuitem in site_root.get_children.live.in_menu %}
+          <a href="{% pageurl menuitem %}" class="nav-link w-nav-link{% if menuitem.active %} w--current{% endif %}">{{ menuitem.title }}</a>
+        {% endfor %}
+        <a href="#" class="nav-link w-nav-link">Solutions</a>
+        <a href="#" class="nav-link w-nav-link">Company</a>
+        <a href="#" class="nav-link w-nav-link">Contact</a>
         <div class="button-mobile">
           {% get_navigation_buttons %}
         </div>
