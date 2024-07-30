@@ -3,34 +3,23 @@
 
 {% block header %}
   {% include "includes/header.html" %}
+  <section class="section-top padding-0">
+    <div class="content">
+      <div class="block-top">
+        <div class="date-top">{{ page.specific.created_at }}</div>
+        <h1 class="heading-top">{{ page.title }}</h1>
+        <p class="paragraph-top blog-post">{{ page.specific.description }}</p>
+      </div>
+    </div>
+  </section>
 {% endblock header %}
 
 {% block body %}
   <section class="section">
-    <div class="content">
-      <div class="w-layout-grid grid-product">
-        <div class="product-sticky">
-          <div class="block-icon-product">
-            <img alt="{{ image }}" loading="eager" src="" class="icon-product">
-          </div>
-          <a href="{{ url }}" class="link-product w-inline-block">
-            <h3 class="heading-product">{{ heading }}</h3>
-          </a>
-          <div class="block-price">
-            <div class="text-price">{{ price_1 }}</div>
-            <div class="compare-at-price">{{ price_2 }}</div>
-          </div>
-          <p class="paragraph-description"></p>
-          <div class="subtitle-product">Features<br></div>
-          <div class="block-tag-product">
-            <div class="yellow-tag-product">Most popular<br></div>
-            <div class="green-tag-product">Best Value<br></div>
-          </div>
-        </div>
-        <div id="w-node-_5363f964-1550-406b-86ab-876ba9bec06f-0e941743" class="product-content">
-          <div class="subtitle-product">More Details<br></div>
-          <div class="w-richtext"></div>
-        </div>
+    <div class="content narrow">
+      <img alt="" loading="eager" src="" class="image-main-post">
+      <div class="post-body">
+        <div class="rich-text-block w-dyn-bind-empty w-richtext"></div>
       </div>
     </div>
   </section>

@@ -2,7 +2,7 @@ import uuid
 
 from django.db import models, transaction
 from django.core.exceptions import PermissionDenied
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.text import slugify
