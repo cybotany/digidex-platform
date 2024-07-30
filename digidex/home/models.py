@@ -13,6 +13,7 @@ class HomePage(RoutablePageMixin, Page):
         'wagtailcore.Page'
     ]
     child_page_types = [
+        'blog.BlogIndexPage',
         'inventory.UserInventoryIndex'
     ]
 

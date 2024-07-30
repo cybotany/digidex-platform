@@ -9,6 +9,12 @@
         <div class="date-top">{{ page.specific.created_at }}</div>
         <h1 class="heading-top">{{ page.title }}</h1>
         <p class="paragraph-top blog-post">{{ page.specific.description }}</p>
+        <div class="block-button">
+          <a href="{{ page.get_parent.url }}" class="button-small w-button">Return to {{ page.get_parent.title }}</a>
+        </div>
+      </div>
+      <div class="block-button">
+        <a href="{{ page.get_parent.url }}" class="button-small w-button">Return to {{ page.get_parent.title }}</a>
       </div>
     </div>
   </section>
