@@ -88,6 +88,16 @@ class UserInventoryAsset(RoutablePageMixin, Page):
             return images.first()
         return None
 
+    def main_image(self):
+        gallery_item = self.gallery_images.first()
+        if gallery_item:
+            return gallery_item.image
+        else:
+            return None
+
+    def is_owner(self, user):
+        return user == self.owner
+
     @path('update/')
     def update_inventory(self, request):
         if request.user != self.owner:

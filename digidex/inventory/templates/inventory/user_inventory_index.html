@@ -10,7 +10,7 @@
         {% if is_owner %}
           <div class="block-categories">
             <a href="{{ urls.add }}" class="link-category w-inline-block w--current">
-              <img src="{% static 'base/images/google/add-circle.svg' %}" alt="" loading="eager" class="icon-category">
+              <img src="{% static 'base/images/google/add-circle.svg' %}" alt="Add Asset Icon" loading="eager" class="icon-category">
               <div class="text-category">Add Asset</div>
             </a>
           </div>
@@ -32,9 +32,9 @@
                   <a href="{{ asset.url }}" class="link-post-thumbnail w-inline-block">
                     {% with asset.specific.get_thumbnail as thumbnail %}
                       {% if thumbnail %}
-                        {% image thumbnail original alt="thumbnail.alt" class="image-post-thumbnail" %}
+                        {% image thumbnail original alt="thumbnail.alt" class="image-post-thumbnail" loading="eager" %}
                       {% else %}
-                        <img src="{% static 'base/images/google/plant.svg' %}" alt="Asset Thumbnail Placeholder" loading="eager" class="image-post-thumbnail">
+                        <img src="{% static 'base/images/google/plant.svg' %}" loading="eager" alt="Asset Thumbnail Placeholder" class="image-post-thumbnail">
                       {% endif %}
                     {% endwith %}
                   </a>
@@ -47,7 +47,7 @@
                     <a href="{{ asset.url }}" class="link-block w-inline-block">
                       <div class="text-link">View Details</div>
                       <div class="block-icon-link">
-                        <img src="{% static 'base/images/bx/arrow-green.svg' %}" loading="eager" alt="" class="icon-link">
+                        <img src="{% static 'base/images/bx/arrow-green.svg' %}" loading="eager" alt="Green Arrow Pointing Rightwards" class="icon-link">
                       </div>
                     </a>
                   </div>

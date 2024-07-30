@@ -3,43 +3,11 @@
 
 {% block header %}
   {% include "includes/header.html" %}
-  <section class="section-top padding-0">
+  <section class="section-top">
     <div class="content">
       <div class="block-top">
-        <div class="date-top">{{ page.date }}</div>
         <h1 class="heading-top">{{ page.title }}</h1>
-        <p class="paragraph-top blog-post">{{ page.intro }}</p>
-
-        {% with authors=page.authors.all %}
-          {% if authors %}
-            <h3>Posted by:</h3>
-            <ul>
-              {% for author in authors %}
-                <li style="display: inline">
-                  {% image author.author_image fill-40x60 style="vertical-align: middle" %}
-                  {{ author.name }}
-                </li>
-              {% endfor %}
-            </ul>
-          {% endif %}
-        {% endwith %}
-
-        {% with tags=page.tags.all %}
-          {% if tags %}
-            <div class="tags">
-              <h3>Tags</h3>
-              {% for tag in tags %}
-                <a href="{% slugurl 'tags' %}?tag={{ tag }}">
-                  <button type="button">{{ tag }}</button>
-                </a>
-              {% endfor %}
-            </div>
-          {% endif %}
-        {% endwith %}
-
-        <div class="block-button">
-          <a href="{{ page.get_parent.url }}" class="button-small w-button">Return to blog</a>
-        </div>
+        <p class="paragraph-top">{% if request.GET.tag %}Showing pages tagged "{{ request.GET.tag }}"{% endif %}</p>
       </div>
     </div>
   </section>
@@ -47,17 +15,22 @@
 
 {% block body %}
   <section class="section">
-    <div class="content narrow">
-      {% with page.main_image as main_image %}
-        {% image main_image original alt="main_image.alt" class="image-main-post" loading="eager" %}
-        {% if main_image.caption %}
-          <figure style="max-width:882pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image">
-            <figcaption>{{ main_image.caption }}</figcaption>
-          </figure>
-        {% endif %}
-      {% endwith %}
-      <div class="post-body">
-        <div class="rich-text-block w-dyn-bind-empty w-richtext">{{ page.body|richtext }}</div>
+    <div class="content">
+      <div class="collection-list-wrapper-posts w-dyn-list">
+        {% for blogpage in blogpages %}
+          <div role="list" class="collection-list-posts w-dyn-items">
+            <div role="listitem" class="w-dyn-item">
+              <p>
+                <strong><a href="{% pageurl blogpage %}">{{ blogpage.title }}</a></strong><br />
+                <small>Revised: {{ blogpage.latest_revision_created_at }}</small><br />
+              </p>
+            </div>
+          </div>
+        {% empty %}
+          <div class="empty-state w-dyn-empty">
+            <div class="text-empty">No pages found with that tag.</div>
+          </div>
+        {% endfor %}
       </div>
     </div>
   </section>
