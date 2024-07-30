@@ -45,6 +45,7 @@ class UserInventoryIndex(RoutablePageMixin, Page):
     def get_context(self, request):
         context = super().get_context(request)
         assets = self.get_children().live().order_by('-first_published_at')
+        context['is_owner'] = self.is_owner(request.user)
         context['assets'] = assets
         context['urls'] = self.get_page_urls()
         return context
@@ -91,6 +92,9 @@ class UserInventoryIndex(RoutablePageMixin, Page):
         if images:
             return images.first()
         return None
+
+    def is_owner(self, user):
+        return user == self.owner
 
     def get_page_urls(self):
         return {
