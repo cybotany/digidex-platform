@@ -1,3 +1,3 @@
 from .image import BaseImage, BaseRendition
-from .site import SiteLogo
+from .settings import NavigationSettings
 from .footer import FooterParagraph, FooterCopyright
