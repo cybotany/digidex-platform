@@ -1,5 +1,5 @@
 {% extends "inventory/base.html" %}
-{% load static wagtailimages_tags %}
+{% load static wagtailimages_tags wagtailcore_tags %}
 
 {% block header %}
   {% include "includes/header.html" %}
@@ -17,9 +17,15 @@
 {% block body %}
   <section class="section">
     <div class="content narrow">
-      <img alt="" loading="eager" src="" class="image-main-post">
+      {% with page.specific.get_thumbnail as thumbnail %}
+        {% if thumbnail %}
+          {% image thumbnail original loading="eager" alt="thumbnail.alt" class="image-main-post" %}
+        {% else %}
+          <img src="{% static 'base/images/google/plant.svg' %}" loading="eager" alt="Asset Thumbnail Placeholder" class="image-main-post">
+        {% endif %}
+      {% endwith %}
       <div class="post-body">
-        <div class="rich-text-block w-dyn-bind-empty w-richtext"></div>
+        <div class="rich-text-block w-dyn-bind-empty w-richtext">{{ page.specific.body|richtext }}</div>
       </div>
     </div>
   </section>

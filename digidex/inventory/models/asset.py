@@ -8,6 +8,7 @@ from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 from wagtail.contrib.routable_page.models import RoutablePageMixin, path
+from wagtail.fields import RichTextField
 from wagtail.images import get_image_model
 from wagtail.documents import get_document_model
 from wagtail.models import Page, Collection, Site
@@ -41,6 +42,11 @@ class UserInventoryAsset(RoutablePageMixin, Page):
         null=True,
         blank=True,
         verbose_name=_("description")
+    )
+    body = RichTextField(
+        null=True,
+        blank=True,
+        verbose_name=_("body")
     )
     created_at = models.DateTimeField(
         auto_now_add=True
