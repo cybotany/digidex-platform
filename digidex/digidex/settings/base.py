@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 
     "base",
     "home",
+    "blog",
     "accounts",
     "inventory",
     "inventorytags",

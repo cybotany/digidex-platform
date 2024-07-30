@@ -1,0 +1,113 @@
+{% extends "blog/base.html" %}
+{% load static wagtailcore_tags %}
+
+{% block header %}
+  {% include "includes/header.html" %}
+  <section class="section-top">
+    <div class="content">
+      <div class="block-top">
+        <h1 class="heading-top">{{ page.title }}</h1>
+        <p class="paragraph-top">{{ page.intro }}</p>
+      </div>
+    </div>
+  </section>
+{% endblock header %}
+
+{% block body %}
+  <section class="section">
+    <div class="content">
+      <div class="collection-list-wrapper-posts large w-dyn-list">
+        <div role="list" class="collection-list-posts large w-dyn-items">
+          <div role="listitem" class="w-dyn-item">
+            <div class="block-post large">
+              <a href="#" class="link-post-thumbnail large w-inline-block">
+                <img alt="" loading="eager" src="" class="image-post-thumbnail large">
+              </a>
+              <div class="post large">
+                <div class="date"></div>
+                <a href="#" class="link-heading-post large w-inline-block">
+                  <h3 class="heading-post"></h3>
+                </a>
+                <p class="paragraph-post large"></p>
+                <a href="#" class="link-block w-inline-block">
+                  <div class="text-link">Read more</div>
+                  <div class="block-icon-link">
+                    <img src="{% static 'base/images/bx/arrow-green.svg' %}" alt="Green Arrow Pointing Rightwards" loading="eager" class="icon-link">
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="empty-state w-dyn-empty">
+          <div class="text-empty">No featured blog post found.</div>
+        </div>
+      </div>
+      <div class="collection-list-wrapper-posts w-dyn-list">
+        <div role="list" class="collection-list-posts w-dyn-items">
+          <div role="listitem" class="w-dyn-item">
+            <div class="block-post">
+              <a href="#" class="link-post-thumbnail w-inline-block">
+                <img alt="" loading="eager" src="" class="image-post-thumbnail">
+            </a>
+              <div class="post">
+                <div class="date"></div>
+                <a href="#" class="link-heading-post w-inline-block">
+                  <h4 class="heading-post"></h4>
+                </a>
+                <p class="paragraph-post"></p>
+                <a href="#" class="link-block w-inline-block">
+                  <div class="text-link">Read more</div>
+                  <div class="block-icon-link">
+                    <img src="{% static 'base/images/bx/arrow-green.svg' %}" alt="Green Arrow Pointing Rightwards" loading="eager" class="icon-link">
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="empty-state w-dyn-empty">
+          <div class="text-empty">No blog posts found.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock body %}
+
+{% block footer %}
+  <section class="section">
+    <div class="content">
+      <div class="w-layout-grid grid-banner">
+        <div id="w-node-fa5a991c-5956-883f-ada3-90790b0053f4-0b0053f1" class="block-banner">
+          <div class="subtitle white">Are you ready?<br></div>
+          <h2 class="heading banner">Your digital success story begins here</h2>
+          <a data-w-id="fa5a991c-5956-883f-ada3-90790b0053fa" href="get-started.html" class="button yellow w-button">Get Started</a>
+        </div>
+        <div id="w-node-fa5a991c-5956-883f-ada3-90790b0053fc-0b0053f1" data-w-id="fa5a991c-5956-883f-ada3-90790b0053fc" class="lottie-banner">
+          <div class="lines-d1">
+            <div class="line-banner-w"></div>
+            <div class="line-banner-w"></div>
+            <div class="line-banner-w"></div>
+            <div class="line-banner-w"></div>
+            <div class="line-banner-w"></div>
+            <div class="line-banner-w"></div>
+          </div>
+          <div class="lines-d2">
+            <div class="line-banner-h"></div>
+            <div class="line-banner-h"></div>
+            <div class="line-banner-h"></div>
+            <div class="line-banner-h"></div>
+            <div class="line-banner-h"></div>
+            <div class="line-banner-h"></div>
+          </div>
+          <div class="block-lottie-banner">
+            <div data-is-ix2-target="1" class="lottie-animation-1-banner" data-w-id="fa5a991c-5956-883f-ada3-90790b00540c"  data-animation-type="lottie" data-src="{% static 'base/documents/lottie/D1-Blue.json' %}" data-loop="0" data-direction="1" data-autoplay="0" data-renderer="svg" data-default-duration="2.5" data-duration="0"></div>
+            <div data-is-ix2-target="1" class="lottie-animation-2-banner" data-w-id="fa5a991c-5956-883f-ada3-90790b00540d" data-animation-type="lottie" data-src="{% static 'base/documents/lottie/D2-Yellow.json' %}" data-loop="0" data-direction="1" data-autoplay="0" data-renderer="svg" data-default-duration="2" data-duration="0"></div>
+            <div data-is-ix2-target="1" class="lottie-animation-2-blur-banner" data-w-id="fa5a991c-5956-883f-ada3-90790b00540e" data-animation-type="lottie" data-src="{% static 'base/documents/lottie/D2-Yellow.json' %}" data-loop="0" data-direction="1" data-autoplay="0" data-renderer="svg" data-default-duration="2" data-duration="0"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% include "includes/footer.html" %}
+{% endblock footer %}

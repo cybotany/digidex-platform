@@ -1,8 +1,178 @@
 {% extends "home/base.html" %}
+{% load static %}
 
-{% block content %}
-  {% include "home/includes/hero_section.html" %}
-  {% include "home/includes/features_section.html" %}
-  {% include "home/includes/company_section.html" %}
-  {% include "home/includes/cta_section.html" %}
-{% endblock content %}
+{% block body %}
+  <section class="section-hero">
+    <div class="content">
+      <div class="w-layout-grid grid-hero">
+        <div id="hero-content" class="block-hero">
+          <h1 class="heading-hero">Transform your digital world with hosting excellence</h1>
+          <p class="paragraph-hero">Your Website Deserves the Best - Choose Hosting that Delivers Excellence Every Time!</p>
+          <div class="button-hero">
+            <a href="#" class="button w-button">Get Started</a>
+            <a href="#" class="link-button w-inline-block">
+              <img src="{% static 'base/images/bx/support.svg' %}" loading="eager" alt="" class="icon-button">
+              <div class="text-button">Support Center</div>
+            </a>
+          </div>
+        </div>
+        <div id="hero-lottie" data-id="" class="lottie">
+          <div class="lines-a1">
+            <div class="line-w"></div>
+            <div class="line-w"></div>
+            <div class="line-w"></div>
+            <div class="line-w"></div>
+            <div class="line-w"></div>
+            <div class="line-w"></div>
+          </div>
+          <div class="lines-a2">
+            <div class="line-h"></div>
+            <div class="line-h"></div>
+            <div class="line-h"></div>
+            <div class="line-h"></div>
+            <div class="line-h"></div>
+            <div class="line-h"></div>
+          </div>
+          <div class="block-lottie">
+            <div class="lottie-animation-1" data-id="" data-animation-type="lottie" data-src="{% static 'base/documents/lottie/A1-White.json' %}" data-loop="0" data-direction="1" data-autoplay="0" data-is-ix2-target="1" data-renderer="svg" data-default-duration="2.5" data-duration="0"></div>
+            <div class="lottie-animation-2" data-id="" data-animation-type="lottie" data-src="{% static 'base/documents/lottie/A2-Green.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="19.5" data-duration="0"></div>
+            <div class="lottie-animation-2-blur" data-id="" data-animation-type="lottie" data-src="{% static 'base/documents/lottie/A2-Green.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="19.5" data-duration="0"></div>
+          </div>
+          <div class="features-lottie">
+            <div data-id="lottie-feature-1" class="feature-lottie-block">
+              <img src="{% static 'base/images/bx/check-shield.svg' %}" loading="eager" alt="" class="icon-feature-lottie">
+              <div class="text-feature-lottie">Advanced Security</div>
+            </div>
+            <div data-id="lottie-feature-2" class="feature-lottie-block a2">
+              <img src="{% static 'base/images/bx/tachometer.svg' %}" loading="eager" alt="" class="icon-feature-lottie">
+              <div class="text-feature-lottie">Performance</div>
+            </div>
+            <div data-id="lottie-feature-3" class="feature-lottie-block a3">
+              <img src="{% static 'base/images/rocket.svg' %}" loading="eager" alt="" class="icon-feature-lottie">
+              <div class="text-feature-lottie">99.99% Uptime</div>
+            </div>
+            <div data-id="lottie-feature-4" class="feature-lottie-block a4">
+              <img src="{% static 'base/images/bx/cloud-snow.svg' %}" loading="eager" alt="" class="icon-feature-lottie">
+              <div class="text-feature-lottie">Unlimited Scaling</div>
+            </div>
+          </div>      
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="content">
+      <div class="block-heading center">
+        <div class="subtitle">Features<br></div>
+        <h2 class="heading">Hosting tailored to your needs</h2>
+      </div>
+      <div class="w-layout-grid grid-features">
+        <div id="home-feature-1" class="features">
+          <div class="block-heading-features">
+            <img src="{% static 'base/images/lightning.svg' %}" loading="eager" alt="" class="icon-features">
+            <h5 class="heading-features">99.99% Uptime</h5>
+          </div>
+          <p class="paragraph-features">A suspendisse volutpat tincidunt nibh ut nibh accumsan amet neque. Id nisl porttitor non sem posuere.</p>
+        </div>
+        <div id="home-feature-2" class="features">
+          <div class="block-heading-features">
+            <img src="{% static 'base/images/ibm/cloud-hyper-protect-dbaas.svg' %}" loading="eager" alt="" class="icon-features">
+            <h5 class="heading-features">Advanced Security</h5>
+          </div>
+          <p class="paragraph-features">Platea vitae venenatis turpis eu facilisis rhoncus condimentum sit urna. A pretium eget nisl pharetra.</p>
+        </div>
+        <div id="home-feature-3" class="features">
+          <div class="block-heading-features">
+            <img src="{% static 'base/images/container-registry.svg' %}" loading="eager" alt="" class="icon-features">
+            <h5 class="heading-features">Unlimited Scaling</h5>
+          </div>
+          <p class="paragraph-features">Varius ut sed vel faucibus nisl aliquam placerat facilisi felis. Elit tellus tortor quam massa. Rutrum id mauris.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="content">
+      <div class="w-layout-grid grid">
+        <div id="company-lottie" data-id="" class="lottie">
+          <div class="lines-b1">
+            <div class="line-w"></div>
+            <div class="line-w"></div>
+            <div class="line-w"></div>
+            <div class="line-w"></div>
+            <div class="line-w"></div>
+            <div class="line-w"></div>
+          </div>
+          <div class="lines-b2">
+            <div class="line-h"></div>
+            <div class="line-h"></div>
+            <div class="line-h"></div>
+            <div class="line-h"></div>
+            <div class="line-h"></div>
+            <div class="line-h"></div>
+          </div>
+          <div class="block-lottie">
+            <div class="lottie-animation-1" data-id="" data-animation-type="lottie" data-src="{% static 'base/documents/lottie/B1-White.json' %}" data-loop="0" data-direction="1" data-autoplay="0" data-is-ix2-target="1" data-renderer="svg" data-default-duration="2.5" data-duration="0"></div>
+            <div class="lottie-animation-2" data-id="" data-animation-type="lottie" data-src="{% static 'base/documents/lottie/B2-Green.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="16" data-duration="0"></div>
+            <div class="lottie-animation-2-blur" data-id="" data-animation-type="lottie" data-src="{% static 'base/documents/lottie/B2-Green.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="16" data-duration="0"></div>
+          </div>
+        </div>
+        <div id="company-content" class="block-right">
+          <div class="subtitle">Company<br></div>
+          <h2 class="heading">Real Solutions for Pros</h2>
+          <p class="paragraph">Sit venenatis mattis fringilla molestie duis sit diam enim. Sed tempor habitasse mi duis tincidunt aliquet metus at. Cursus iaculis ac enim risus quam vulputate.</p>
+          <div class="w-layout-grid grid-statistics">
+            <div id="company-statistic-1" class="statistics">
+              <img src="{% static 'base/images/app-connectivity.svg' %}" loading="eager" alt="" class="icon-statistics">
+              <h4 class="heading-statistics">3,500,000+</h4>
+              <div class="text-statistics">websites currently hosted.</div>
+            </div>
+            <div id="company-statistic-2" class="statistics blue">
+              <img src="{% static 'base/images/content-delivery-network.svg' %}" loading="eager" alt="" class="icon-statistics">
+              <h4 class="heading-statistics blue">50,000+</h4>
+              <div class="text-statistics blue">servers around the world</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock body %}
+
+{% block footer %}
+  <section class="section">
+    <div class="content">
+      <div class="w-layout-grid grid-banner">
+        <div class="block-banner">
+          <div class="subtitle white">Are you ready?<br></div>
+          <h2 class="heading banner">Your digital success story begins here</h2>
+          <a data-w-id="fa5a991c-5956-883f-ada3-90790b0053fa" href="get-started.html" class="button yellow w-button">Get Started</a>
+        </div>
+        <div data-w-id="fa5a991c-5956-883f-ada3-90790b0053fc" class="lottie-banner">
+          <div class="lines-d1">
+            <div class="line-banner-w"></div>
+            <div class="line-banner-w"></div>
+            <div class="line-banner-w"></div>
+            <div class="line-banner-w"></div>
+            <div class="line-banner-w"></div>
+            <div class="line-banner-w"></div>
+          </div>
+          <div class="lines-d2">
+            <div class="line-banner-h"></div>
+            <div class="line-banner-h"></div>
+            <div class="line-banner-h"></div>
+            <div class="line-banner-h"></div>
+            <div class="line-banner-h"></div>
+            <div class="line-banner-h"></div>
+          </div>
+          <div class="block-lottie-banner">
+            <div data-is-ix2-target="1" class="lottie-animation-1-banner" data-w-id="fa5a991c-5956-883f-ada3-90790b00540c"  data-animation-type="lottie" data-src="{% static 'base/documents/lottie/D1-Blue.json' %}" data-loop="0" data-direction="1" data-autoplay="0" data-renderer="svg" data-default-duration="2.5" data-duration="0"></div>
+            <div data-is-ix2-target="1" class="lottie-animation-2-banner" data-w-id="fa5a991c-5956-883f-ada3-90790b00540d" data-animation-type="lottie" data-src="{% static 'base/documents/lottie/D2-Yellow.json' %}" data-loop="0" data-direction="1" data-autoplay="0" data-renderer="svg" data-default-duration="2" data-duration="0"></div>
+            <div data-is-ix2-target="1" class="lottie-animation-2-blur-banner" data-w-id="fa5a991c-5956-883f-ada3-90790b00540e" data-animation-type="lottie" data-src="{% static 'base/documents/lottie/D2-Yellow.json' %}" data-loop="0" data-direction="1" data-autoplay="0" data-renderer="svg" data-default-duration="2" data-duration="0"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% include "includes/footer.html" %}
+{% endblock footer %}
