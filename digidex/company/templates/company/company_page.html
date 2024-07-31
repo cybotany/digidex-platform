@@ -7,7 +7,9 @@
     <div class="content">
       <div class="block-top">
         <h1 class="heading-top">{{ page.title }}</h1>
-        <p class="paragraph-top">{{ page.intro }}</p>
+        {% if page.specific.intro %}
+          <p class="paragraph-top">{{ page.specific.intro }}</p>
+        {% endif %}
       </div>
     </div>
   </section>
@@ -47,20 +49,20 @@
       <div class="w-layout-grid grid">
         <div id="w-node-ef8907ed-ca22-ade3-43fc-33a830f840f2-0e94173f" data-w-id="ef8907ed-ca22-ade3-43fc-33a830f840f2" class="lottie">
           <div class="lines-b1">
-            <div style="width:1px;height:0%" class="line-w"></div>
-            <div style="width:1px;height:0%" class="line-w"></div>
-            <div style="width:1px;height:0%" class="line-w"></div>
-            <div style="width:1px;height:0%" class="line-w"></div>
-            <div style="width:1px;height:0%" class="line-w"></div>
-            <div style="width:1px;height:0%" class="line-w"></div>
+            <div style="width:1px" class="line-w"></div>
+            <div style="width:1px" class="line-w"></div>
+            <div style="width:1px" class="line-w"></div>
+            <div style="width:1px" class="line-w"></div>
+            <div style="width:1px" class="line-w"></div>
+            <div style="width:1px" class="line-w"></div>
           </div>
           <div class="lines-b2">
-            <div style="width:0%;height:1px" class="line-h"></div>
-            <div style="width:0%;height:1px" class="line-h"></div>
-            <div style="width:0%;height:1px" class="line-h"></div>
-            <div style="width:0%;height:1px" class="line-h"></div>
-            <div style="width:0%;height:1px" class="line-h"></div>
-            <div style="width:0%;height:1px" class="line-h"></div>
+            <div style="height:1px" class="line-h"></div>
+            <div style="height:1px" class="line-h"></div>
+            <div style="height:1px" class="line-h"></div>
+            <div style="height:1px" class="line-h"></div>
+            <div style="height:1px" class="line-h"></div>
+            <div style="height:1px" class="line-h"></div>
           </div>
           <div class="block-lottie">
             <div class="lottie-animation-1" data-w-id="ef8907ed-ca22-ade3-43fc-33a830f84102" data-animation-type="lottie" data-src="documents/Lottie-B1-White.json" data-loop="0" data-direction="1" data-autoplay="0" data-is-ix2-target="1" data-renderer="svg" data-default-duration="2.5" data-duration="0"></div>
@@ -75,7 +77,7 @@
               <h6 class="heading-name">Tommy Yates</h6>
               <div class="text-role">Co-founder<br></div>
             </div>
-            <img src="{% static 'base/images/earth.svg' %}images/signature.svg" loading="lazy" decoding="async" alt="" class="signature">
+            <img src="{% static 'base/images/signature.svg' %}" loading="lazy" decoding="async" alt="" class="signature">
           </div>
         </div>
       </div>
@@ -85,38 +87,19 @@
   <section class="section">
     <div class="content">
       <div class="block-heading">
-        <div class="subtitle">Our Team<br></div>
-        <h2 class="heading">The heart and soul of our success story</h2>
+        <div class="subtitle"><br></div>
+          <h2 class="heading"></h2>
       </div>
       <div class="w-layout-grid grid-team">
-        <div id="w-node-_2351d0c9-a38d-c3f1-19a0-86639b9befd4-0e94173f" class="team">
-          <img src="images/team-3.svg" loading="lazy" decoding="async" alt="" class="image-team">
-          <div class="block-team">
-            <h6 class="heading-name">Tommy Yates</h6>
-            <div class="text-role">Co-founder<br></div>
+        {% for team_member in page.specific.team_members.all %}
+          <div class="team">
+            <img src="{{ team_member.image.url }}" loading="lazy" decoding="async" alt="" class="image-team">
+            <div class="block-team">
+              <h6 class="heading-name">{{ team_member.name }}</h6>
+              <div class="text-role">{{ team_member.role }}</div>
+            </div>
           </div>
-        </div>
-        <div id="w-node-_2b554ef2-66cc-1f87-36f9-dec8f5421416-0e94173f" class="team">
-          <img src="images/team-4.svg" loading="lazy" decoding="async" alt="" class="image-team">
-          <div class="block-team">
-            <h6 class="heading-name">Milo Douglas</h6>
-            <div class="text-role">Co-founder<br></div>
-          </div>
-        </div>
-        <div id="w-node-_94ac81a6-9f7e-a653-c594-3ef40ce8e7ba-0e94173f" class="team">
-          <img src="images/team-5.svg" loading="lazy" decoding="async" alt="" class="image-team">
-          <div class="block-team">
-            <h6 class="heading-name">Lesley Floyd</h6>
-            <div class="text-role">DevOps Engineer<br></div>
-          </div>
-        </div>
-        <div id="w-node-_5f12ca6a-d3d1-3d89-3c54-1984acb258fe-0e94173f" class="team">
-          <img src="images/team-7.svg" loading="lazy" decoding="async" alt="" class="image-team">
-          <div class="block-team">
-            <h6 class="heading-name">Vanessa Jarvis</h6>
-            <div class="text-role">Data Analyst<br></div>
-          </div>
-        </div>
+        {% endfor %}
       </div>
     </div>
   </section>
