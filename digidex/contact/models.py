@@ -20,6 +20,16 @@ class ContactPage(AbstractEmailForm):
     thank_you_text = RichTextField(
         blank=True
     )
+    form_subtitle = models.CharField(
+        max_length=255,
+        blank=True,
+        verbose_name='Form subtitle'
+    )
+    form_title = models.CharField(
+        max_length=255,
+        blank=True,
+        verbose_name='Form title'
+    )
 
     content_panels = AbstractEmailForm.content_panels + [
         FormSubmissionsPanel(),

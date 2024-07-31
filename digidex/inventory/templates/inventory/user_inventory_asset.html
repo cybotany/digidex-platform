@@ -22,9 +22,9 @@
     <div class="content narrow">
       {% with page.specific.get_thumbnail as thumbnail %}
         {% if thumbnail %}
-          {% image thumbnail original loading="eager" alt="thumbnail.alt" class="image-main-post" %}
+          {% image thumbnail original loading="lazy" decoding="async" alt="thumbnail.alt" class="image-main-post" %}
         {% else %}
-          <img src="{% static 'base/images/google/plant.svg' %}" loading="eager" alt="Asset Thumbnail Placeholder" class="image-main-post">
+          <img src="{% static 'base/images/google/plant.svg' %}" loading="lazy" decoding="async" alt="Asset Thumbnail Placeholder" class="image-main-post">
         {% endif %}
       {% endwith %}
       <div class="post-body">

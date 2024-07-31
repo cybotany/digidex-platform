@@ -49,7 +49,7 @@
   <section class="section">
     <div class="content narrow">
       {% with page.main_image as main_image %}
-        {% image main_image original alt="main_image.alt" class="image-main-post" loading="eager" %}
+        {% image main_image original alt="main_image.alt" class="image-main-post" loading="lazy" decoding="async" %}
         {% if main_image.caption %}
           <figure style="max-width:882pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image">
             <figcaption>{{ main_image.caption }}</figcaption>
