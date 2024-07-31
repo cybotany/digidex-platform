@@ -11,8 +11,6 @@
         {% for menuitem in site_root.get_children.live.in_menu %}
           <a href="{% pageurl menuitem %}" class="nav-link w-nav-link{% if menuitem.active %} w--current{% endif %}">{{ menuitem.title }}</a>
         {% endfor %}
-        <a href="#" class="nav-link w-nav-link">Solutions</a>
-        <a href="#" class="nav-link w-nav-link">Company</a>
         <div class="button-mobile">
           {% get_navigation_buttons %}
         </div>

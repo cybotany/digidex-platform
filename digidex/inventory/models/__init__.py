@@ -1,2 +1,3 @@
-from .index import UserInventoryIndex
-from .asset import UserInventoryAsset
+from .index import InventoryIndexPage
+from .inventory import UserInventoryPage
+from .asset import InventoryAssetPage

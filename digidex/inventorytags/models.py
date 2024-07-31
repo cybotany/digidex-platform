@@ -70,7 +70,7 @@ class NearFieldCommunicationTag(models.Model):
 
 class InventoryLink(models.Model):
     asset = models.ForeignKey(
-        'inventory.UserInventoryAsset',
+        'inventory.InventoryAssetPage',
         on_delete=models.SET_NULL,
         blank=True,
         null=True,
@@ -93,7 +93,7 @@ class InventoryLink(models.Model):
             return self.link
         else:
             owner = slugify(self.tag.owner.username)
-            return f'https://digidex.tech/{owner}'
+            return f'https://digidex.tech/inv/{owner}'
 
     @property
     def url(self):

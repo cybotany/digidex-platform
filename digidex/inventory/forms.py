@@ -12,7 +12,7 @@ class UserInventoryForm(forms.Form):
         )
     )
 
-class UserInventoryAssetForm(forms.Form):
+class InventoryAssetForm(forms.Form):
     name = forms.CharField(
         max_length=255,
         required=True,
