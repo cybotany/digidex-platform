@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     "base",
     "home",
     "blog",
-    "support",
+    "contact",
     "company",
     "accounts",
     "inventory",

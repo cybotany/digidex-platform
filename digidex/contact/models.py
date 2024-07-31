@@ -12,7 +12,7 @@ from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 from wagtail.contrib.forms.panels import FormSubmissionsPanel
 
 
-class SupportPage(AbstractEmailForm):
+class ContactPage(AbstractEmailForm):
     intro = models.CharField(
         max_length=255,
         blank=True
@@ -40,9 +40,9 @@ class SupportPage(AbstractEmailForm):
     ]
 
 
-class SupportField(AbstractFormField):
+class ContactField(AbstractFormField):
     page = ParentalKey(
-        SupportPage,
+        ContactPage,
         on_delete=models.CASCADE,
         related_name='form_fields'
     )

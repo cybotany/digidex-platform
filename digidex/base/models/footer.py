@@ -30,7 +30,7 @@ class FooterBanner(
     subtitle = models.CharField(
         max_length=50
     )
-    body = models.CharField(
+    title = models.CharField(
         max_length=100
     )
     cta_url = models.URLField(
@@ -43,7 +43,7 @@ class FooterBanner(
 
     panels = [
         FieldPanel("subtitle"),
-        FieldPanel("body"),
+        FieldPanel("title"),
         MultiFieldPanel(
             [
                 FieldPanel("cta_url"),

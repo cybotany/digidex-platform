@@ -36,3 +36,5 @@ class NavigationSettings(BaseGenericSetting):
             "Social settings",
         )
     ]
+
+
