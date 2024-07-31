@@ -7,7 +7,6 @@ from wagtail.admin.panels import (
     InlinePanel,
     MultiFieldPanel,
 )
-from wagtail.fields import RichTextField
 from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 from wagtail.contrib.forms.panels import FormSubmissionsPanel
 
@@ -15,9 +14,6 @@ from wagtail.contrib.forms.panels import FormSubmissionsPanel
 class ContactPage(AbstractEmailForm):
     intro = models.CharField(
         max_length=255,
-        blank=True
-    )
-    thank_you_text = RichTextField(
         blank=True
     )
     form_subtitle = models.CharField(
@@ -34,8 +30,14 @@ class ContactPage(AbstractEmailForm):
     content_panels = AbstractEmailForm.content_panels + [
         FormSubmissionsPanel(),
         FieldPanel('intro'),
-        InlinePanel('form_fields', label="Form fields"),
-        FieldPanel('thank_you_text'),
+        MultiFieldPanel(
+            [
+                FieldPanel('form_subtitle'),
+                FieldPanel('form_title'),
+                InlinePanel('form_fields', label="Form fields"),
+            ],
+            heading="Form"
+        ),
         MultiFieldPanel(
             [
                 FieldRowPanel(
@@ -46,7 +48,9 @@ class ContactPage(AbstractEmailForm):
                 ),
                 FieldPanel('subject'),
             ],
-            heading="Email"),
+            heading="Email"
+        ),
+
     ]
 
 

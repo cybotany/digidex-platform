@@ -81,15 +81,33 @@
         <div class="form-block w-form">
           <form class="form" action="{% pageurl page %}" method="POST">
             {% csrf_token %}
-            {{ form.as_div }}
-            <input type="submit" data-wait="Please wait..." class="submit-button w-button" value="Submit">
+
+            <label for="{{ form.name.id_for_label }}">Name:</label>
+            {{ form.name }}
+            {% if form.name.errors %}
+              <div class="error-message w-form-fail">
+                <div class="text-error">{{ form.name.errors|striptags }}</div>
+              </div>
+            {% endif %}
+
+            <label for="{{ form.email.id_for_label }}">Email:</label>
+            {{ form.email }}
+            {% if form.email.errors %}
+              <div class="error-message w-form-fail">
+                <div class="text-error">{{ form.email.errors|striptags }}</div>
+              </div>
+            {% endif %}
+
+            <label for="{{ form.message.id_for_label }}">Message:</label>
+            {{ form.message }}
+            {% if form.message.errors %}
+              <div class="error-message w-form-fail">
+                <div class="text-error">{{ form.message.errors|striptags }}</div>
+              </div>
+            {% endif %}
+
+            <input type="submit" class="submit-button w-button" value="Submit">
           </form>
-          <div class="success-message w-form-done">
-            <div class="text-success">Thank you! Your submission has been received!</div>
-          </div>
-          <div class="error-message w-form-fail">
-            <div class="text-error">Oops! Something went wrong while submitting the form.</div>
-          </div>
         </div>
       </div>
     </div>

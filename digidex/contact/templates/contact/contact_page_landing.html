@@ -1,21 +1,11 @@
 {% extends "contact/base.html" %}
 {% load wagtailcore_tags %}
 
-{% block header %}
-  {% include "includes/header.html" %}
-  <section class="section-top">
-    <div class="content">
-      <div class="block-top">
-        <h1 class="heading-top">{{ page.title }}</h1>
-      </div>
-    </div>
-  </section>
-{% endblock header %}
-
 {% block body %}
-  <div>{{ page.thank_you_text|richtext }}</div>
+  <div class="utility-page-wrap">
+    <div class="utility-page-content">
+      <p class="paragraph-account">Thank you for your message! We will respond as soon as we can.</p>
+      <a href="/" class="button base-button">Back to Home</a>
+    </div>
+  </div>
 {% endblock body %}
-
-{% block footer %}
-  {% include "includes/footer.html" %}
-{% endblock footer %}
