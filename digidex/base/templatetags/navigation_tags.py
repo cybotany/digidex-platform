@@ -80,16 +80,3 @@ def get_navigation_buttons(context):
     return {
             "buttons": buttons,
         }
-
-
-@register.inclusion_tag("base/includes/footer/banner.html", takes_context=True)
-def get_footer_copyright(context):
-    footer_copyright = context.get("footer_copyright", "")
-
-    if not footer_copyright:
-        instance = FooterCopyright.objects.filter(live=True).first()
-        footer_copyright = instance.copyright if instance else "All rights reserved."
-
-    return {
-        "footer_copyright": footer_copyright,
-    }
