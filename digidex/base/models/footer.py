@@ -46,8 +46,8 @@ class FooterBanner(
         FieldPanel("body"),
         MultiFieldPanel(
             [
-                FieldPanel("url"),
-                FieldPanel("text"),
+                FieldPanel("cta_url"),
+                FieldPanel("cta_text"),
             ],
             "Call to Action",
         )
