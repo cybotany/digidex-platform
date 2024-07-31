@@ -20,6 +20,49 @@ from wagtail.snippets.models import register_snippet
 
 
 @register_snippet
+class FooterBanner(
+    DraftStateMixin,
+    RevisionMixin,
+    PreviewableMixin,
+    TranslatableMixin,
+    models.Model,
+):
+    subtitle = models.CharField(
+        max_length=50
+    )
+    body = models.CharField(
+        max_length=100
+    )
+    cta_url = models.URLField(
+        null=True,
+        blank=True
+    )
+    cta_text = models.CharField(
+        max_length=255
+    )
+
+    panels = [
+        FieldPanel("subtitle"),
+        FieldPanel("body"),
+        MultiFieldPanel(
+            [
+                FieldPanel("url"),
+                FieldPanel("text"),
+            ],
+            "Call to Action",
+        )
+    ]
+
+    def __str__(self):
+        return self.subtitle
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=('translation_key', 'locale'), name='unique_translation_key_locale_base_footerbanner')
+        ]
+
+
+@register_snippet
 class FooterParagraph(
     DraftStateMixin,
     RevisionMixin,
