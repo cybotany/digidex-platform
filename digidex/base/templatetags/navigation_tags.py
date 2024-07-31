@@ -13,6 +13,17 @@ register = template.Library()
 def get_site_root(context):
     return Site.find_for_request(context["request"]).root_page
 
+@register.inclusion_tag('base/includes/footer/banner.html', takes_context=True)
+def footer_banner(context):
+    fbanner = FooterBanner.objects.filter(live=True).first()
+
+    return {
+        'subtitle': fbanner.subtitle if fbanner else "Are you ready",
+        'title': fbanner.title if fbanner else "Your next adventure awaits",
+        'cta_url': fbanner.cta_url if fbanner else "#",
+        'cta_text': fbanner.cta_text if fbanner else "Learn More",
+    }
+
 @register.inclusion_tag("base/includes/footer/paragraph.html", takes_context=True)
 def get_footer_paragraph(context):
     paragraph = context.get("footer_paragraph", "")
