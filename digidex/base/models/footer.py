@@ -19,7 +19,6 @@ from wagtail.admin.panels import (
 from wagtail.snippets.models import register_snippet
 
 
-@register_snippet
 class FooterBanner(
     DraftStateMixin,
     RevisionMixin,
@@ -40,18 +39,6 @@ class FooterBanner(
     cta_text = models.CharField(
         max_length=255
     )
-
-    panels = [
-        FieldPanel("subtitle"),
-        FieldPanel("title"),
-        MultiFieldPanel(
-            [
-                FieldPanel("cta_url"),
-                FieldPanel("cta_text"),
-            ],
-            "Call to Action",
-        )
-    ]
 
     def __str__(self):
         return self.subtitle
