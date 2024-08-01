@@ -1,5 +1,4 @@
-{% extends "index.html" %}
-{% load wagtailcore_tags wagtailimages_tags %}
+{% extends "base.html" %}
 
 {% block body %}
   <section class="section-full">
@@ -9,5 +8,6 @@
       </div>
     </div>
   </section>
-  {% block extra_body %}{% endblock extra_body %}
 {% endblock body %}
+
+{% block extra_body %}{% endblock extra_body %}

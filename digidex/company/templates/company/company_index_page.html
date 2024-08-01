@@ -1,15 +1,13 @@
 {% extends "company/base.html" %}
-{% load static wagtailcore_tags %}
+{% load static wagtailcore_tags wagtailimages_tags %}
 
 {% block header %}
   {% include "includes/header.html" %}
   <section class="section-top">
     <div class="content">
       <div class="block-top">
-        <h1 class="heading-top">{{ page.title }}</h1>
-        {% if page.specific.intro %}
-          <p class="paragraph-top">{{ page.specific.intro }}</p>
-        {% endif %}
+        <h1 class="heading-top">{{ header.title }}</h1>
+        <p class="paragraph-top">{{ header.intro }}</p>
       </div>
     </div>
   </section>
@@ -24,21 +22,21 @@
             <img src="{% static 'base/images/earth.svg' %}" loading="lazy" decoding="async" alt="Earth Icon" class="icon-about">
           </div>
           <h4 class="heading-about">Our Mission</h4>
-          <p class="paragraph-about">Quam varius nullam aliquet a orci consequat feugiat. Adipiscing lacus condimentum eu nullam risus neque turpis. Aliquet justo <br><br>In malesuada id nunc pharetra diam pellentesque morbi id auctor. Facilisis justo nunc at a vitae id ullamcorper arcu.</p>
+          <p class="paragraph-about">{{ about.mission }}</p>
         </div>
         <div class="about green">
           <div class="block-icon-about green">
             <img src="{% static 'base/images/cloud-mod-stack.svg' %}" loading="lazy" decoding="async" alt="Cloud Icon" class="icon-about">
           </div>
-          <h4 class="heading-about green">Our Role</h4>
-          <p class="paragraph-about green">Aenean in mauris nec sed arcu volutpat morbi risus at. Consequat purus et bibendum malesuada. <br><br>Urna ac massa morbi at sed urna cursus. Pharetra imperdiet suspendisse pharetra cras proin adipiscing. Venenatis cras sit nulla etiam pharetra.</p>
+          <h4 class="heading-about green">Our Vision</h4>
+          <p class="paragraph-about green">{{ about.vision }}</p>
         </div>
         <div class="about red">
           <div class="block-icon-about red">
             <img src="{% static 'base/images/events.svg' %}" loading="lazy" decoding="async" alt="Events Icon" class="icon-about">
           </div>
           <h4 class="heading-about red">Our Values</h4>
-          <p class="paragraph-about red">Blandit massa sodales pellentesque pellentesque in iaculis dignissim porttitor quisque. Amet dui integer ac platea viverra. Aenean facilisis fusce laoreet sit dolor. <br><br>Massa pharetra vel urna dolor non. Suspendisse dignissim quis nam iaculis. Libero commodo.</p>
+          <p class="paragraph-about red">{{ about.values }}</p>
         </div>
       </div>
     </div>
@@ -47,16 +45,22 @@
   <section class="section">
     <div class="content">
       <div class="block-heading">
-        <div class="subtitle"><br></div>
-          <h2 class="heading"></h2>
+        <div class="subtitle">{{ team.subtitle }}<br></div>
+          <h2 class="heading">{{ team.heading }}</h2>
       </div>
       <div class="w-layout-grid grid-team">
-        {% for team_member in page.specific.team_members.all %}
+        {% for member in team.members %}
           <div class="team">
-            <img src="{{ team_member.image.url }}" loading="lazy" decoding="async" alt="" class="image-team">
+            {% with member.image as profile_pic %}
+              {% if profile_pic %}
+                {% image profile_pic original loading="lazy" decoding="async" alt="profile_pic.alt" class="image-team" %}
+              {% else %}
+                <img src="{% static 'base/images/team/team-1.svg' %}" loading="lazy" decoding="async" alt="{{ member.name }}'s Photo" class="image-team">
+              {% endif %}
+            {% endwith %}
             <div class="block-team">
-              <h6 class="heading-name">{{ team_member.name }}</h6>
-              <div class="text-role">{{ team_member.role }}</div>
+              <h6 class="heading-name">{{ member.name }}</h6>
+              <div class="text-role">{{ member.role }}</div>
             </div>
           </div>
         {% endfor %}
