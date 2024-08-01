@@ -28,7 +28,7 @@ class InventoryIndexPage(Page):
     def get_body_header(self):
         return {
             'title': self.title,
-            'intro': self.intro
+            'intro': self.intro if self.intro else 'Need to add an intro'
         }
 
     def get_context(self, request):
