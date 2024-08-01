@@ -44,7 +44,7 @@ class TeamMember(models.Model):
         verbose_name_plural = 'company team members'
 
 
-class CompanyPage(Page):
+class CompanyIndexPage(Page):
     parent_page_types = ["home.HomePage"]
 
     intro = models.CharField(
