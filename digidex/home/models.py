@@ -44,15 +44,34 @@ class HomePage(Page):
         blank=True
     )
     primary_cta_text = models.CharField(
-        max_length=255
+        max_length=255,
+        null=True,
+        blank=True
     )
     secondary_cta_url = models.URLField(
         null=True,
         blank=True
     )
     secondary_cta_text = models.CharField(
-        max_length=255
+        max_length=255,
+        null=True,
+        blank=True
     )
+
+    def get_hero_content(self):
+        return {
+            'heading': self.hero_heading if self.hero_heading else 'No Heading',
+            'body': self.hero_body if self.hero_body else 'No Body',
+            'primary_url': self.primary_cta_url if self.primary_cta_url else '#',
+            'primary_text': self.primary_cta_text if self.primary_cta_text else 'Get Started',
+            'secondary_url': self.secondary_cta_url if self.secondary_cta_url else '#',
+            'secondary_text': self.secondary_cta_text if self.secondary_cta_text else 'Learn More'
+        }
+
+    def get_context(self, request):
+        context = super().get_context(request)
+        context['hero'] = self.get_hero_content()
+        return context
 
     content_panels = Page.content_panels + [
         MultiFieldPanel(

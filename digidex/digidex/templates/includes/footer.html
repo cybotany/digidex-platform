@@ -1,5 +1,9 @@
 {% load static wagtailimages_tags navigation_tags %}
 
+{% if not request.user.is_authenticated %}
+  {% footer_banner %}
+{% endif %}
+
 <section class="section-footer">
   <div class="content">
     <div class="w-layout-grid grid-footer">

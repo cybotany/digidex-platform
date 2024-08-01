@@ -6,13 +6,13 @@
     <div class="content">
       <div class="w-layout-grid grid-hero">
         <div id="hero-content" class="block-hero">
-          <h1 class="heading-hero">Transform your digital world with hosting excellence</h1>
-          <p class="paragraph-hero">Your Website Deserves the Best - Choose Hosting that Delivers Excellence Every Time!</p>
+          <h1 class="heading-hero">{{ hero.heading }}</h1>
+          <p class="paragraph-hero">{{ hero.body }}</p>
           <div class="button-hero">
-            <a href="#" class="button w-button">Get Started</a>
-            <a href="#" class="link-button w-inline-block">
+            <a href="{{ hero.primary_url }}" class="button w-button">{{ hero.primary_text }}</a>
+            <a href="{{ hero.secondary_url }}" class="link-button w-inline-block">
               <img src="{% static 'base/images/bx/support.svg' %}" loading="lazy" decoding="async" alt="" class="icon-button">
-              <div class="text-button">Support Center</div>
+              <div class="text-button">{{ hero.secondary_text }}</div>
             </a>
           </div>
         </div>
@@ -60,86 +60,4 @@
       </div>
     </div>
   </section>
-  <section class="section">
-    <div class="content">
-      <div class="block-heading center">
-        <div class="subtitle">Features<br></div>
-        <h2 class="heading">Hosting tailored to your needs</h2>
-      </div>
-      <div class="w-layout-grid grid-features">
-        <div id="home-feature-1" class="features">
-          <div class="block-heading-features">
-            <img src="{% static 'base/images/lightning.svg' %}" loading="lazy" decoding="async" alt="" class="icon-features">
-            <h5 class="heading-features">99.99% Uptime</h5>
-          </div>
-          <p class="paragraph-features">A suspendisse volutpat tincidunt nibh ut nibh accumsan amet neque. Id nisl porttitor non sem posuere.</p>
-        </div>
-        <div id="home-feature-2" class="features">
-          <div class="block-heading-features">
-            <img src="{% static 'base/images/ibm/cloud-hyper-protect-dbaas.svg' %}" loading="lazy" decoding="async" alt="" class="icon-features">
-            <h5 class="heading-features">Advanced Security</h5>
-          </div>
-          <p class="paragraph-features">Platea vitae venenatis turpis eu facilisis rhoncus condimentum sit urna. A pretium eget nisl pharetra.</p>
-        </div>
-        <div id="home-feature-3" class="features">
-          <div class="block-heading-features">
-            <img src="{% static 'base/images/container-registry.svg' %}" loading="lazy" decoding="async" alt="" class="icon-features">
-            <h5 class="heading-features">Unlimited Scaling</h5>
-          </div>
-          <p class="paragraph-features">Varius ut sed vel faucibus nisl aliquam placerat facilisi felis. Elit tellus tortor quam massa. Rutrum id mauris.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="section">
-    <div class="content">
-      <div class="w-layout-grid grid">
-        <div id="company-lottie" data-id="" class="lottie">
-          <div class="lines-b1">
-            <div style="width:1px" class="line-w"></div>
-            <div style="width:1px" class="line-w"></div>
-            <div style="width:1px" class="line-w"></div>
-            <div style="width:1px" class="line-w"></div>
-            <div style="width:1px" class="line-w"></div>
-            <div style="width:1px" class="line-w"></div>
-          </div>
-          <div class="lines-b2">
-            <div style="height:1px" class="line-h"></div>
-            <div style="height:1px" class="line-h"></div>
-            <div style="height:1px" class="line-h"></div>
-            <div style="height:1px" class="line-h"></div>
-            <div style="height:1px" class="line-h"></div>
-            <div style="height:1px" class="line-h"></div>
-          </div>
-          <div class="block-lottie">
-            <div class="lottie-animation-1" data-id="" data-animation-type="lottie" data-src="{% static 'base/documents/lottie/B1-White.json' %}" data-loop="0" data-direction="1" data-autoplay="0" data-is-ix2-target="1" data-renderer="svg" data-default-duration="2.5" data-duration="0"></div>
-            <div class="lottie-animation-2" data-id="" data-animation-type="lottie" data-src="{% static 'base/documents/lottie/B2-Green.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="16" data-duration="0"></div>
-            <div class="lottie-animation-2-blur" data-id="" data-animation-type="lottie" data-src="{% static 'base/documents/lottie/B2-Green.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="16" data-duration="0"></div>
-          </div>
-        </div>
-        <div id="company-content" class="block-right">
-          <div class="subtitle">Company<br></div>
-          <h2 class="heading">Real Solutions for Pros</h2>
-          <p class="paragraph">Sit venenatis mattis fringilla molestie duis sit diam enim. Sed tempor habitasse mi duis tincidunt aliquet metus at. Cursus iaculis ac enim risus quam vulputate.</p>
-          <div class="w-layout-grid grid-statistics">
-            <div id="company-statistic-1" class="statistics">
-              <img src="{% static 'base/images/app-connectivity.svg' %}" loading="lazy" decoding="async" class="icon-statistics">
-              <h4 class="heading-statistics">3,500,000+</h4>
-              <div class="text-statistics">websites currently hosted.</div>
-            </div>
-            <div id="company-statistic-2" class="statistics blue">
-              <img src="{% static 'base/images/content-delivery-network.svg' %}" loading="lazy" decoding="async" alt="" class="icon-statistics">
-              <h4 class="heading-statistics blue">50,000+</h4>
-              <div class="text-statistics blue">servers around the world</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 {% endblock body %}
-
-{% block footer %}
-  {% footer_banner %}
-  {% include "includes/footer.html" %}
-{% endblock footer %}
