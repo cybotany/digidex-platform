@@ -12,6 +12,16 @@ class NavigationSettings(BaseGenericSetting):
         on_delete=models.CASCADE,
         related_name='+'
     )
+    chat_link = models.URLField(
+        blank=True
+    )
+    email_address = models.EmailField(
+        blank=True
+    )
+    phone_number = models.CharField(
+        max_length=255,
+        blank=True
+    )
     twitter_url = models.URLField(
         verbose_name="Twitter URL",
         blank=True

@@ -72,12 +72,8 @@
         </div>
       </div>
       <div class="contact">
-        {% if page.specific.form_subtitle %}
-          <div class="subtitle blue">{{ page.specific.form_subtitle }}</div>
-        {% endif %}
-        {% if page.specific.form_title %}
-          <h2 class="heading">{{ page.specific.form_title }}</h2>
-        {% endif %}
+        <div class="subtitle blue">{{ info.subtitle }}</div>
+        <h2 class="heading">{{ info.title }}</h2>
         <div class="form-block w-form">
           <form class="form" action="{% pageurl page %}" method="POST">
             {% csrf_token %}

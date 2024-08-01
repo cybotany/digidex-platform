@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 from modelcluster.fields import ParentalManyToManyField
 from wagtail.models import Page
 from wagtail.images import get_image_model_string
-from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.snippets.models import register_snippet
 
 
@@ -113,8 +113,8 @@ class CompanyIndexPage(Page):
         ),
         MultiFieldPanel(
             [
-                FieldPanel('our_mission'),
-                FieldPanel('our_vision'),
+                FieldPanel('team_subtitle'),
+                FieldPanel('team_heading'),
                 FieldPanel('team_members', widget=forms.CheckboxSelectMultiple),
             ],
             heading="Our Team Section"
