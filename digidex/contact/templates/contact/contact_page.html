@@ -1,15 +1,13 @@
 {% extends "contact/base.html" %}
-{% load static wagtailcore_tags %}
+{% load static wagtailcore_tags navigation_tags %}
 
 {% block header %}
   {% include "includes/header.html" %}
   <section class="section-top">
     <div class="content">
       <div class="block-top">
-        <h1 class="heading-top">{{ page.title }}</h1>
-        {% if page.specific.intro %}
-          <p class="paragraph-top">{{ page.specific.intro }}</p>
-        {% endif %}
+        <h1 class="heading-top">{{ header.title }}</h1>
+        <p class="paragraph-top">{{ header.intro }}</p>
       </div>
     </div>
   </section>
@@ -20,35 +18,43 @@
     <div class="content">
       <div class="lottie-wrapper">
         <div class="contact-lottie">
-          <a href="#" class="contact-lottie-link w-inline-block">
-            <div class="block-icon-contact-lottie">
-              <img src="{% static 'base/images/chat-launch.svg' %}" decoding="async" loading="lazy" alt="Launch Chat Icon" class="icon-contact-lottie">
-            </div>
-            <div class="block-heading-contact-lottie">
-              <h4 class="heading-contact-lottie">Chat</h4>
-              <div class="text-contact-lottie">Live Chat</div>
-            </div>
-          </a>
-          <a href="mailto:support@digidex.tech" class="contact-lottie-link a2 w-inline-block">
-            <div class="block-icon-contact-lottie">
-              <img src="{% static 'base/images/email.svg' %}" decoding="async" loading="lazy" alt="Launch Email Icon" class="icon-contact-lottie">
-            </div>
-            <div class="block-heading-contact-lottie">
-              <h4 class="heading-contact-lottie">Email</h4>
-              <div class="text-contact-lottie">support@digidex.tech</div>
-            </div>
-          </a>
-          <a href="tel:+1(888)123-4567" class="contact-lottie-link a3 w-inline-block">
-            <div class="block-icon-contact-lottie">
-              <img src="{% static 'base/images/phone-voice.svg' %}" decoding="async" loading="lazy" alt="Launch Phone Call Icon" class="icon-contact-lottie">
-            </div>
-            <div class="block-heading-contact-lottie">
-              <h4 class="heading-contact-lottie">Call</h4>
-              <div class="text-contact-lottie">+1 (888) 123-4567</div>
-            </div>
-          </a>
+          {% with chat_link=settings.base.NavigationSettings.chat_link email_address=settings.base.NavigationSettings.email_address phone_number=settings.base.NavigationSettings.phone_number %}
+            {% if chat_link %}
+              <a href="{{ chat_link }}" class="contact-lottie-link w-inline-block">
+                <div class="block-icon-contact-lottie">
+                  <img src="{% static 'base/images/chat-launch.svg' %}" decoding="async" loading="lazy" alt="Launch Chat Icon" class="icon-contact-lottie">
+                </div>
+                <div class="block-heading-contact-lottie">
+                  <h4 class="heading-contact-lottie">Chat</h4>
+                  <div class="text-contact-lottie">Live Chat</div>
+                </div>
+              </a>
+            {% endif %}
+            {% if email_address %}
+              <a href="mailto:{{ email_address }}" class="contact-lottie-link a2 w-inline-block">
+                <div class="block-icon-contact-lottie">
+                  <img src="{% static 'base/images/email.svg' %}" decoding="async" loading="lazy" alt="Launch Email Icon" class="icon-contact-lottie">
+                </div>
+                <div class="block-heading-contact-lottie">
+                  <h4 class="heading-contact-lottie">Email</h4>
+                  <div class="text-contact-lottie">{{ email_address }}</div>
+                </div>
+              </a>
+            {% endif %}
+            {% if phone_number %}
+              <a href="tel:{{ chat_link }}" class="contact-lottie-link a3 w-inline-block">
+                <div class="block-icon-contact-lottie">
+                  <img src="{% static 'base/images/phone-voice.svg' %}" decoding="async" loading="lazy" alt="Launch Phone Call Icon" class="icon-contact-lottie">
+                </div>
+                <div class="block-heading-contact-lottie">
+                  <h4 class="heading-contact-lottie">Call</h4>
+                  <div class="text-contact-lottie">{{ chat_link }}</div>
+                </div>
+              </a>
+            {% endif %}
+          {% endwith %}
         </div>
-        <div data-w-id="ed5f1cea-daa0-5df9-8b39-55c44c0ee1e6" class="lottie">
+        <div class="lottie">
           <div class="lines-c1">
             <div style="width:1px" class="line-w"></div>
             <div style="width:1px" class="line-w"></div>
