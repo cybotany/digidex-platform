@@ -13,7 +13,7 @@ def new_user_setup(sender, instance, created, **kwargs):
     if created:
         inventory_index = InventoryIndexPage.objects.first()
         user_inventory_page = UserInventoryPage(
-            title=f"{instance.username.title()}'s Inventory",
+            title=instance.username.title(),
             slug=slugify(instance.username),
             owner=instance
         )

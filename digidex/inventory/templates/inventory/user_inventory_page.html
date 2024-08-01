@@ -30,9 +30,9 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="block-post">
                   <a href="{{ asset.url }}" class="link-post-thumbnail w-inline-block">
-                    {% with asset.specific.get_thumbnail as thumbnail %}
-                      {% if thumbnail %}
-                        {% image thumbnail original alt="thumbnail.alt" class="image-post-thumbnail" loading="lazy" decoding="async" %}
+                    {% with asset.specific.main_image as main_image %}
+                      {% if main_image %}
+                        {% image main_image original alt="main_image.alt" class="image-post-thumbnail" loading="lazy" decoding="async" %}
                       {% else %}
                         <img src="{% static 'base/images/google/plant.svg' %}" loading="lazy" decoding="async" alt="Asset Thumbnail Placeholder" class="image-post-thumbnail">
                       {% endif %}

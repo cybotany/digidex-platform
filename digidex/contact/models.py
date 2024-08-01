@@ -36,7 +36,7 @@ class ContactPage(AbstractEmailForm):
     def get_form_info(self):
         return {
             'subtitle': self.form_subtitle if self.form_subtitle else 'Contact us',
-            'heading': self.form_title if self.form_title else 'Submit your message',
+            'heading': self.form_title if self.form_title else 'Send message',
         }
 
     def get_context(self, request):

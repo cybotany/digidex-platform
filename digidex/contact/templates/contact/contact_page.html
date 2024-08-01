@@ -16,70 +16,72 @@
 {% block body %}
   <section class="section">
     <div class="content">
-      <div class="lottie-wrapper">
-        <div class="contact-lottie">
-          {% with chat_link=settings.base.NavigationSettings.chat_link email_address=settings.base.NavigationSettings.email_address phone_number=settings.base.NavigationSettings.phone_number %}
-            {% if chat_link %}
-              <a href="{{ chat_link }}" class="contact-lottie-link w-inline-block">
-                <div class="block-icon-contact-lottie">
-                  <img src="{% static 'base/images/chat-launch.svg' %}" decoding="async" loading="lazy" alt="Launch Chat Icon" class="icon-contact-lottie">
-                </div>
-                <div class="block-heading-contact-lottie">
-                  <h4 class="heading-contact-lottie">Chat</h4>
-                  <div class="text-contact-lottie">Live Chat</div>
-                </div>
-              </a>
-            {% endif %}
-            {% if email_address %}
-              <a href="mailto:{{ email_address }}" class="contact-lottie-link a2 w-inline-block">
-                <div class="block-icon-contact-lottie">
-                  <img src="{% static 'base/images/email.svg' %}" decoding="async" loading="lazy" alt="Launch Email Icon" class="icon-contact-lottie">
-                </div>
-                <div class="block-heading-contact-lottie">
-                  <h4 class="heading-contact-lottie">Email</h4>
-                  <div class="text-contact-lottie">{{ email_address }}</div>
-                </div>
-              </a>
-            {% endif %}
-            {% if phone_number %}
-              <a href="tel:{{ chat_link }}" class="contact-lottie-link a3 w-inline-block">
-                <div class="block-icon-contact-lottie">
-                  <img src="{% static 'base/images/phone-voice.svg' %}" decoding="async" loading="lazy" alt="Launch Phone Call Icon" class="icon-contact-lottie">
-                </div>
-                <div class="block-heading-contact-lottie">
-                  <h4 class="heading-contact-lottie">Call</h4>
-                  <div class="text-contact-lottie">{{ chat_link }}</div>
-                </div>
-              </a>
-            {% endif %}
-          {% endwith %}
-        </div>
-        <div class="lottie">
-          <div class="lines-c1">
-            <div style="width:1px" class="line-w"></div>
-            <div style="width:1px" class="line-w"></div>
-            <div style="width:1px" class="line-w"></div>
+      {% with chat_link=settings.base.NavigationSettings.chat_link email_address=settings.base.NavigationSettings.email_address phone_number=settings.base.NavigationSettings.phone_number %}
+        {% if chat_link or email_address or phone_number %}
+          <div class="lottie-wrapper">
+            <div class="contact-lottie">
+              {% if chat_link %}
+                <a href="{{ chat_link }}" class="contact-lottie-link w-inline-block">
+                  <div class="block-icon-contact-lottie">
+                    <img src="{% static 'base/images/chat-launch.svg' %}" decoding="async" loading="lazy" alt="Launch Chat Icon" class="icon-contact-lottie">
+                  </div>
+                  <div class="block-heading-contact-lottie">
+                    <h4 class="heading-contact-lottie">Chat</h4>
+                    <div class="text-contact-lottie">Live Chat</div>
+                  </div>
+                </a>
+              {% endif %}
+              {% if email_address %}
+                <a href="mailto:{{ email_address }}" class="contact-lottie-link a2 w-inline-block">
+                  <div class="block-icon-contact-lottie">
+                    <img src="{% static 'base/images/email.svg' %}" decoding="async" loading="lazy" alt="Launch Email Icon" class="icon-contact-lottie">
+                  </div>
+                  <div class="block-heading-contact-lottie">
+                    <h4 class="heading-contact-lottie">Email</h4>
+                    <div class="text-contact-lottie">{{ email_address }}</div>
+                  </div>
+                </a>
+              {% endif %}
+              {% if phone_number %}
+                <a href="tel:{{ chat_link }}" class="contact-lottie-link a3 w-inline-block">
+                  <div class="block-icon-contact-lottie">
+                    <img src="{% static 'base/images/phone-voice.svg' %}" decoding="async" loading="lazy" alt="Launch Phone Call Icon" class="icon-contact-lottie">
+                  </div>
+                  <div class="block-heading-contact-lottie">
+                    <h4 class="heading-contact-lottie">Call</h4>
+                    <div class="text-contact-lottie">{{ chat_link }}</div>
+                  </div>
+                </a>
+              {% endif %}
+            </div>
+            <div class="lottie">
+              <div class="lines-c1">
+                <div style="width:1px" class="line-w"></div>
+                <div style="width:1px" class="line-w"></div>
+                <div style="width:1px" class="line-w"></div>
+              </div>
+              <div class="lines-c2">
+                <div style="height:1px" class="line-h"></div>
+                <div style="height:1px" class="line-h"></div>
+                <div style="height:1px" class="line-h"></div>
+                <div style="height:1px" class="line-h"></div>
+                <div style="height:1px" class="line-h"></div>
+                <div style="height:1px" class="line-h"></div>
+                <div style="height:1px" class="line-h"></div>
+                <div style="height:1px" class="line-h"></div>
+              </div>
+              <div class="block-lottie">
+                <div class="lottie-animation-1" data-w-id="ed5f1cea-daa0-5df9-8b39-55c44c0ee1f5" data-animation-type="lottie" data-src="{% static 'base/documents/lottie/C1-White.json' %}" data-loop="0" data-direction="1" data-autoplay="0" data-is-ix2-target="1" data-renderer="svg" data-default-duration="2.5" data-duration="0"></div>
+                <div class="lottie-animation-2" data-w-id="ed5f1cea-daa0-5df9-8b39-55c44c0ee1f6" data-animation-type="lottie" data-src="{% static 'base/documents/lottie/C2-Green.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="12.5" data-duration="0"></div>
+                <div class="lottie-animation-2-blur" data-w-id="ed5f1cea-daa0-5df9-8b39-55c44c0ee1f7" data-animation-type="lottie" data-src="{% static 'base/documents/lottie/C2-Green.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="12.5" data-duration="0"></div>
+              </div>
+            </div>
           </div>
-          <div class="lines-c2">
-            <div style="height:1px" class="line-h"></div>
-            <div style="height:1px" class="line-h"></div>
-            <div style="height:1px" class="line-h"></div>
-            <div style="height:1px" class="line-h"></div>
-            <div style="height:1px" class="line-h"></div>
-            <div style="height:1px" class="line-h"></div>
-            <div style="height:1px" class="line-h"></div>
-            <div style="height:1px" class="line-h"></div>
-          </div>
-          <div class="block-lottie">
-            <div class="lottie-animation-1" data-w-id="ed5f1cea-daa0-5df9-8b39-55c44c0ee1f5" data-animation-type="lottie" data-src="{% static 'base/documents/lottie/C1-White.json' %}" data-loop="0" data-direction="1" data-autoplay="0" data-is-ix2-target="1" data-renderer="svg" data-default-duration="2.5" data-duration="0"></div>
-            <div class="lottie-animation-2" data-w-id="ed5f1cea-daa0-5df9-8b39-55c44c0ee1f6" data-animation-type="lottie" data-src="{% static 'base/documents/lottie/C2-Green.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="12.5" data-duration="0"></div>
-            <div class="lottie-animation-2-blur" data-w-id="ed5f1cea-daa0-5df9-8b39-55c44c0ee1f7" data-animation-type="lottie" data-src="{% static 'base/documents/lottie/C2-Green.json' %}" data-loop="1" data-direction="1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="12.5" data-duration="0"></div>
-          </div>
-        </div>
-      </div>
+        {% endif %}
+      {% endwith %}
       <div class="contact">
         <div class="subtitle blue">{{ info.subtitle }}</div>
-        <h2 class="heading">{{ info.title }}</h2>
+        <h2 class="heading">{{ info.heading }}</h2>
         <div class="form-block w-form">
           <form class="form" action="{% pageurl page %}" method="POST">
             {% csrf_token %}

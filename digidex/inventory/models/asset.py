@@ -82,18 +82,12 @@ class InventoryAssetPage(RoutablePageMixin, Page):
     def get_images(self):
         return get_image_model().objects.filter(collection=self.collection)
 
-    def get_thumbnail(self):
+    @property
+    def main_image(self):
         images = self.get_images()
         if images:
             return images.first()
         return None
-
-    def main_image(self):
-        gallery_item = self.gallery_images.first()
-        if gallery_item:
-            return gallery_item.image
-        else:
-            return None
 
     def is_owner(self, user):
         return user == self.owner

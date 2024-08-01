@@ -3,7 +3,6 @@ from django.utils.translation import gettext_lazy as _
 
 from wagtail.models import Page, Collection
 from wagtail.admin.panels import FieldPanel
-from wagtail.fields import RichTextField
 
 
 class InventoryIndexPage(Page):
@@ -20,15 +19,29 @@ class InventoryIndexPage(Page):
         null=True,
         related_name='+',
     )
-    body = RichTextField(
+    intro = models.CharField(
+        max_length=250,
         blank=True,
-        null=True,
-        verbose_name=_("body")
+        null=True
     )
+
+    def get_body_header(self):
+        return {
+            'title': self.title,
+            'intro': self.intro
+        }
+
+    def get_context(self, request):
+        context = super().get_context(request)
+        userpages = self.get_children().live().order_by('-first_published_at')
+        context['header'] = self.get_body_header()
+        context['userpages'] = userpages
+
+        return context
 
     content_panels = Page.content_panels + [
         FieldPanel('collection'),
-        FieldPanel('body'),
+        FieldPanel('intro')
     ]
 
     def __str__(self):
