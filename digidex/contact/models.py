@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import widgets
 
 from modelcluster.fields import ParentalKey
 from wagtail.admin.panels import (
@@ -38,6 +39,15 @@ class ContactPage(AbstractEmailForm):
             'subtitle': self.form_subtitle if self.form_subtitle else 'Contact us',
             'heading': self.form_title if self.form_title else 'Send message',
         }
+
+    def get_form(self, *args, **kwargs):
+        form = super().get_form(*args, **kwargs)
+        for name, field in form.fields.items():
+            if isinstance(field.widget, widgets.Input):
+                field.widget.attrs.update({'class': 'text-field base-input'})
+            if isinstance(field.widget, widgets.Textarea):
+                field.widget.attrs.update({'class': 'text-field textarea'})       
+        return form
 
     def get_context(self, request):
         context = super().get_context(request)
