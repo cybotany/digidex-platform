@@ -55,7 +55,7 @@
               {% if profile_pic %}
                 {% image profile_pic original loading="lazy" decoding="async" alt="profile_pic.alt" class="image-team" %}
               {% else %}
-                <img src="{% static 'base/images/team/team-1.svg' %}" loading="lazy" decoding="async" alt="{{ member.name }}'s Photo" class="image-team">
+                <img src="{% static 'base/images/placeholders/team-1.svg' %}" loading="lazy" decoding="async" alt="{{ member.name }}'s Photo" class="image-team">
               {% endif %}
             {% endwith %}
             <div class="block-team">
