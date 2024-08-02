@@ -11,12 +11,6 @@ from wagtail.models import (
     TranslatableMixin,
     Orderable,
 )
-from wagtail.admin.panels import (
-    FieldPanel,
-    MultiFieldPanel,
-    PublishingPanel,
-)
-from wagtail.snippets.models import register_snippet
 
 
 class FooterBanner(
@@ -49,7 +43,6 @@ class FooterBanner(
         ]
 
 
-@register_snippet
 class FooterParagraph(
     DraftStateMixin,
     RevisionMixin,
@@ -60,10 +53,6 @@ class FooterParagraph(
     paragraph = models.TextField(
         max_length=100
     )
-
-    panels = [
-        FieldPanel("paragraph"),
-    ]
 
     def __str__(self):
         return "Footer Text"
@@ -79,7 +68,6 @@ class FooterParagraph(
         verbose_name_plural = "Footer Paragraphs"
 
 
-@register_snippet
 class FooterCopyright(
     DraftStateMixin,
     RevisionMixin,
@@ -90,11 +78,6 @@ class FooterCopyright(
     copyright = models.TextField(
         max_length=100
     )
-
-    panels = [
-        FieldPanel("copyright"),
-        PublishingPanel(),
-    ]
 
     def __str__(self):
         return "Footer Copyright"
