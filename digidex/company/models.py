@@ -2,8 +2,8 @@ from django import forms
 from django.db import models
 from django.contrib.auth import get_user_model
 
-from modelcluster.fields import ParentalManyToManyField
-from wagtail.models import Page
+from modelcluster.fields import ParentalKey, ParentalManyToManyField
+from wagtail.models import Page, Orderable
 from wagtail.images import get_image_model_string
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.snippets.models import register_snippet
@@ -88,10 +88,18 @@ class CompanyIndexPage(Page):
         }
 
     def get_our_team(self):
+        members = []
+        for member in self.team_members.all():
+            user = member.user
+            members.append({
+                'name': f'{user.first_name} {user.last_name}',
+                'role': member.role,
+                'image': member.image,
+            })
         return {
             'subtitle': self.team_subtitle if self.team_subtitle else 'The Team',
             'heading': self.team_heading if self.team_heading else 'Meet the people behind the company',
-            'members': self.team_members.all()
+            'members': members,
         }
 
     def get_context(self, request):
