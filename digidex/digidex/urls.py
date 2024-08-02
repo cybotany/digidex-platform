@@ -1,10 +1,16 @@
 from django.conf import settings
 from django.urls import include, path
 
+from search.views import search
 from wagtail import urls as wagtail_urls
 
 urlpatterns = [
+    path("search/", search, name="search"),
+]
+
+urlpatterns = [
     path("accounts/", include('allauth.urls')),
+    path("search/", search, name="search"),
     path("", include(wagtail_urls)),
 ]
 
