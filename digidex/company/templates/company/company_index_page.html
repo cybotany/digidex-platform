@@ -45,15 +45,15 @@
   <section class="section">
     <div class="content">
       <div class="block-heading">
-        <div class="subtitle">{{ team.subtitle }}<br></div>
-          <h2 class="heading">{{ team.heading }}</h2>
+        <div class="subtitle">The Team<br></div>
+          <h2 class="heading">Learn more about us</h2>
       </div>
       <div class="w-layout-grid grid-team">
         {% for member in team.members %}
           <div class="team">
             {% with member.image as profile_pic %}
               {% if profile_pic %}
-                {% image profile_pic max-200x200 loading="lazy" decoding="async" alt="profile_pic.alt" class="image-team" %}
+                {% image profile_pic fill-250x250 loading="lazy" alt="profile_pic.alt" class="image-team" %}
               {% else %}
                 <img src="{% static 'base/images/placeholders/team-1.svg' %}" loading="lazy" decoding="async" alt="{{ member.name }}'s Photo" class="image-team">
               {% endif %}

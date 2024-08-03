@@ -87,6 +87,7 @@ class Team(ClusterableModel):
 
 class CompanyIndexPage(Page):
     parent_page_types = ["home.HomePage"]
+    subpage_types = []
 
     intro = models.CharField(
         max_length=255,
@@ -99,14 +100,6 @@ class CompanyIndexPage(Page):
         blank=True
     )
     our_values = models.TextField(
-        blank=True
-    )
-    team_subtitle = models.CharField(
-        max_length=255,
-        blank=True
-    )
-    team_heading = models.CharField(
-        max_length=255,
         blank=True
     )
     team = models.ForeignKey(
@@ -132,16 +125,16 @@ class CompanyIndexPage(Page):
 
     def get_our_team(self):
         members = []
-        # for member in self.team_members.all():
-        #     user = member.user
-        #     members.append({
-        #         'name': f'{user.first_name} {user.last_name}',
-        #         'role': member.role,
-        #         'image': member.image,
-        #     })
+        for member in self.team.members.all():
+            user = member.user
+            role = member.role
+
+            members.append({
+                'name': f'{user.first_name} {user.last_name}',
+                'role': role.name,
+                'image': member.image,
+            })
         return {
-            'subtitle': self.team_subtitle if self.team_subtitle else 'The Team',
-            'heading': self.team_heading if self.team_heading else 'Meet the people behind the company',
             'members': members,
         }
 
@@ -162,12 +155,5 @@ class CompanyIndexPage(Page):
             ],
             heading="About Us Section"
         ),
-        MultiFieldPanel(
-            [
-                FieldPanel('team_subtitle'),
-                FieldPanel('team_heading'),
-                # FieldPanel('team_members', widget=forms.CheckboxSelectMultiple),
-            ],
-            heading="Our Team Section"
-        ),
+        FieldPanel('team'),
     ]

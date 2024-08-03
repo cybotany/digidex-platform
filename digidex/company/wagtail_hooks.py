@@ -4,7 +4,7 @@ from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel, Publi
 from wagtail.snippets.views.snippets import SnippetViewSet, SnippetViewSetGroup
 from wagtail.snippets.models import register_snippet
 
-from company.models import TeamMemberRole, Team
+from company.models import TeamMemberRole, TeamMember, Team
 
 @hooks.register("register_icons")
 def register_icons(icons):
@@ -21,6 +21,18 @@ class TeamMemberRoleViewSet(SnippetViewSet):
         FieldPanel('description'),
     ]
 
+class TeamMemberViewSet(SnippetViewSet):
+    model = TeamMember
+    icon = "clipboard-list"
+    menu_label = "Staff"
+    menu_name = "Staff"
+
+    panels = [
+        FieldPanel('user'),
+        FieldPanel('role'),
+        FieldPanel('image'),
+    ]
+
 
 class TeamViewSet(SnippetViewSet):
     model = Team
@@ -31,12 +43,12 @@ class TeamViewSet(SnippetViewSet):
     panels = [
         FieldPanel('name'),
         FieldPanel('description'),
-        InlinePanel('members', label="Members"),
+        InlinePanel('members', label="Member"),
     ]
 
 
 class CompanyStaffViewSetGroup(SnippetViewSetGroup):
-    items = (TeamMemberRoleViewSet, TeamViewSet)
+    items = (TeamMemberViewSet, TeamMemberRoleViewSet, TeamViewSet)
     menu_icon = "globe"
     menu_label = "Staff"
     menu_name = "staff"

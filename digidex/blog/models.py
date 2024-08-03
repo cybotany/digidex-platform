@@ -76,7 +76,7 @@ class BlogPage(Page):
         blank=True
     )
     authors = ParentalManyToManyField(
-        'blog.Author',
+        'company.TeamMember',
         blank=True
     )
 
@@ -126,23 +126,3 @@ class BlogPageGalleryImage(Orderable):
     panels = [
         FieldPanel('image'),
     ]
-
-
-@register_snippet
-class Author(models.Model):
-    user = models.ForeignKey(
-        BaseUser,
-        null=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-
-    panels = [
-        FieldPanel('user'),
-    ]
-
-    def __str__(self):
-        return self.user.username
-
-    class Meta:
-        verbose_name_plural = 'Authors'
