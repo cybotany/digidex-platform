@@ -2,29 +2,31 @@ from django import forms
 from django.db import models
 from django.contrib.auth import get_user_model
 
-from modelcluster.fields import ParentalKey, ParentalManyToManyField
+from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
 from wagtail.models import Page, Orderable
 from wagtail.images import get_image_model_string
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
-from wagtail.snippets.models import register_snippet
 
 
 BaseUser = get_user_model()
-
 
 class TeamMemberRole(models.Model):
     name = models.CharField(
         max_length=255,
         unique=True,
     )
+    description = models.TextField(
+        blank=True,
+        null=True
+    )
 
     def __str__(self):
         return self.name
 
     class Meta:
-        verbose_name = 'member role'
-        verbose_name_plural = 'member roles'
+        verbose_name = 'role'
+        verbose_name_plural = 'roles'
 
 
 class TeamMember(Orderable):
@@ -61,8 +63,8 @@ class TeamMember(Orderable):
         return self.user.username
 
     class Meta:
-        verbose_name = 'team member'
-        verbose_name_plural = 'team members'
+        verbose_name = 'member'
+        verbose_name_plural = 'members'
 
 
 class Team(ClusterableModel):
@@ -79,8 +81,8 @@ class Team(ClusterableModel):
         return self.name
 
     class Meta:
-        verbose_name = 'company team'
-        verbose_name_plural = 'company teams'
+        verbose_name = 'team'
+        verbose_name_plural = 'teams'
 
 
 class CompanyIndexPage(Page):
