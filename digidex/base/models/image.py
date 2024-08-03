@@ -5,11 +5,6 @@ from wagtail.images.models import Image, AbstractImage, AbstractRendition
 
 
 class BaseImage(AbstractImage):
-    caption = models.TextField(
-        blank=True,
-        null=True,
-        max_length=150
-    )
     alt = models.CharField(
         blank=True,
         null=True,
@@ -17,7 +12,6 @@ class BaseImage(AbstractImage):
     )
 
     admin_form_fields = Image.admin_form_fields + (
-        'caption',
         'alt',
     )
 

@@ -13,16 +13,42 @@ BaseUser = get_user_model()
 
 
 @register_snippet
+class TeamMemberRole(models.Model):
+    TEAM_MEMBER_ROLE_CHOICES = [
+        ('founder', 'Founder'),
+        ('other', 'Other'),
+    ]
+
+    role_title = models.CharField(
+        max_length=20,
+        choices=TEAM_MEMBER_ROLE_CHOICES,
+        default='other'
+    )
+
+    panels = [
+        FieldPanel('role_title'),
+    ]
+
+    def __str__(self):
+        return self.role_title
+
+    class Meta:
+        verbose_name = 'company role'
+        verbose_name_plural = 'company roles'
+
+
+@register_snippet
 class TeamMember(models.Model):
-    user = models.ForeignKey(
+    user = models.OneToOneField(
         BaseUser,
+        on_delete=models.CASCADE,
+        related_name='company_profile',
+    )
+    role = models.ForeignKey(
+        TeamMemberRole,
         null=True,
         on_delete=models.SET_NULL,
-        related_name='+'
-    )
-    role = models.CharField(
-        max_length=255,
-        blank=True
+        related_name='+',
     )
     image = models.ForeignKey(
         get_image_model_string(),
@@ -42,6 +68,7 @@ class TeamMember(models.Model):
         return self.user.username
 
     class Meta:
+        verbose_name = 'company team member'
         verbose_name_plural = 'company team members'
 
 
