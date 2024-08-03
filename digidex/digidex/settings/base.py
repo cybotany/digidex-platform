@@ -165,9 +165,13 @@ LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = "UTC"
 
+USE_L10N = True
+
 USE_I18N = True
 
 USE_TZ = True
+
+WAGTAIL_I18N_ENABLED = True
 
 # Default storage settings
 AWS_STORAGE_BUCKET_NAME = os.getenv("SPACES_BUCKET_NAME")

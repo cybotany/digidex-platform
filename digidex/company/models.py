@@ -4,14 +4,14 @@ from django.contrib.auth import get_user_model
 
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
-from wagtail.models import Page, Orderable
+from wagtail.models import Page, Orderable, PreviewableMixin, RevisionMixin, TranslatableMixin
 from wagtail.images import get_image_model_string
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 
 
 BaseUser = get_user_model()
 
-class TeamMemberRole(models.Model):
+class TeamMemberRole(RevisionMixin, models.Model):
     name = models.CharField(
         max_length=255,
         unique=True,
@@ -67,7 +67,7 @@ class TeamMember(Orderable):
         verbose_name_plural = 'members'
 
 
-class Team(ClusterableModel):
+class Team(RevisionMixin, PreviewableMixin, TranslatableMixin, ClusterableModel):
     name = models.CharField(
         max_length=255,
         unique=True
@@ -80,7 +80,10 @@ class Team(ClusterableModel):
     def __str__(self):
         return self.name
 
-    class Meta:
+    def get_preview_template(self, request, mode_name):
+        return "company/previews/team.html"
+
+    class Meta(TranslatableMixin.Meta):
         verbose_name = 'team'
         verbose_name_plural = 'teams'
 

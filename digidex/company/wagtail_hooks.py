@@ -8,7 +8,20 @@ from company.models import TeamMemberRole, TeamMember, Team
 
 @hooks.register("register_icons")
 def register_icons(icons):
-    return icons + ['company/team.svg']
+    return icons + ['company/team.svg', 'company/badge.svg']
+
+class TeamMemberViewSet(SnippetViewSet):
+    model = TeamMember
+    icon = "badge"
+    menu_label = "Employees"
+    menu_name = "employees"
+
+    panels = [
+        FieldPanel('user'),
+        FieldPanel('role'),
+        FieldPanel('image'),
+    ]
+
 
 class TeamMemberRoleViewSet(SnippetViewSet):
     model = TeamMemberRole
@@ -19,18 +32,6 @@ class TeamMemberRoleViewSet(SnippetViewSet):
     panels = [
         FieldPanel('name'),
         FieldPanel('description'),
-    ]
-
-class TeamMemberViewSet(SnippetViewSet):
-    model = TeamMember
-    icon = "clipboard-list"
-    menu_label = "Staff"
-    menu_name = "Staff"
-
-    panels = [
-        FieldPanel('user'),
-        FieldPanel('role'),
-        FieldPanel('image'),
     ]
 
 
