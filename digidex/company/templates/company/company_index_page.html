@@ -53,7 +53,7 @@
           <div class="team">
             {% with member.image as profile_pic %}
               {% if profile_pic %}
-                {% image profile_pic original loading="lazy" decoding="async" alt="profile_pic.alt" class="image-team" %}
+                {% image profile_pic max-200x200 loading="lazy" decoding="async" alt="profile_pic.alt" class="image-team" %}
               {% else %}
                 <img src="{% static 'base/images/placeholders/team-1.svg' %}" loading="lazy" decoding="async" alt="{{ member.name }}'s Photo" class="image-team">
               {% endif %}

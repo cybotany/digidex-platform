@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
+from modelcluster.models import ClusterableModel
 from wagtail.models import Page, Orderable
 from wagtail.images import get_image_model_string
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
@@ -12,71 +13,81 @@ from wagtail.snippets.models import register_snippet
 BaseUser = get_user_model()
 
 
-@register_snippet
 class TeamMemberRole(models.Model):
-    TEAM_MEMBER_ROLE_CHOICES = [
-        ('founder', 'Founder'),
-        ('other', 'Other'),
-    ]
-
-    role_title = models.CharField(
-        max_length=20,
-        choices=TEAM_MEMBER_ROLE_CHOICES,
-        default='other'
+    name = models.CharField(
+        max_length=255,
+        unique=True,
     )
 
-    panels = [
-        FieldPanel('role_title'),
-    ]
-
     def __str__(self):
-        return self.role_title
+        return self.name
 
     class Meta:
-        verbose_name = 'company role'
-        verbose_name_plural = 'company roles'
+        verbose_name = 'member role'
+        verbose_name_plural = 'member roles'
 
 
-@register_snippet
-class TeamMember(models.Model):
+class TeamMember(Orderable):
+    team = ParentalKey(
+        "company.Team",
+        null=True,
+        blank=True,
+        related_name='members',
+        on_delete=models.CASCADE
+    )
     user = models.OneToOneField(
         BaseUser,
-        on_delete=models.CASCADE,
-        related_name='company_profile',
+        null=True,
+        blank=True,
+        related_name='team_profile',
+        on_delete=models.CASCADE
     )
     role = models.ForeignKey(
         TeamMemberRole,
         null=True,
-        on_delete=models.SET_NULL,
-        related_name='+',
+        blank=True,
+        related_name='team_members',
+        on_delete=models.SET_NULL
     )
     image = models.ForeignKey(
         get_image_model_string(),
         null=True,
         blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
+        related_name='+',
+        on_delete=models.SET_NULL
     )
-
-    panels = [
-        FieldPanel('user'),
-        FieldPanel('role'),
-        FieldPanel('image'),
-    ]
 
     def __str__(self):
         return self.user.username
 
     class Meta:
-        verbose_name = 'company team member'
-        verbose_name_plural = 'company team members'
+        verbose_name = 'team member'
+        verbose_name_plural = 'team members'
+
+
+class Team(ClusterableModel):
+    name = models.CharField(
+        max_length=255,
+        unique=True
+    )
+    description = models.TextField(
+        blank=True,
+        null=True
+    )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'company team'
+        verbose_name_plural = 'company teams'
 
 
 class CompanyIndexPage(Page):
     parent_page_types = ["home.HomePage"]
 
     intro = models.CharField(
-        max_length=250,
+        max_length=255,
         blank=True
     )
     our_mission = models.TextField(
@@ -96,9 +107,12 @@ class CompanyIndexPage(Page):
         max_length=255,
         blank=True
     )
-    team_members = ParentalManyToManyField(
-        TeamMember,
-        blank=True
+    team = models.ForeignKey(
+        Team,
+        null=True,
+        blank=True,
+        related_name='+',
+        on_delete=models.SET_NULL
     )
 
     def get_body_header(self):
@@ -116,13 +130,13 @@ class CompanyIndexPage(Page):
 
     def get_our_team(self):
         members = []
-        for member in self.team_members.all():
-            user = member.user
-            members.append({
-                'name': f'{user.first_name} {user.last_name}',
-                'role': member.role,
-                'image': member.image,
-            })
+        # for member in self.team_members.all():
+        #     user = member.user
+        #     members.append({
+        #         'name': f'{user.first_name} {user.last_name}',
+        #         'role': member.role,
+        #         'image': member.image,
+        #     })
         return {
             'subtitle': self.team_subtitle if self.team_subtitle else 'The Team',
             'heading': self.team_heading if self.team_heading else 'Meet the people behind the company',
@@ -150,7 +164,7 @@ class CompanyIndexPage(Page):
             [
                 FieldPanel('team_subtitle'),
                 FieldPanel('team_heading'),
-                FieldPanel('team_members', widget=forms.CheckboxSelectMultiple),
+                # FieldPanel('team_members', widget=forms.CheckboxSelectMultiple),
             ],
             heading="Our Team Section"
         ),
