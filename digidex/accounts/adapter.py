@@ -11,7 +11,7 @@ class DigidexAccountAdapter(DefaultAccountAdapter):
         Note that URLs passed explicitly (e.g. by passing along a next GET parameter)
         take precedence over the value returned here.
         """
-        return f"/{slugify(request.user.username)}/" 
+        return f"/inv/{slugify(request.user.username)}/" 
 
     def is_open_for_signup(self, request):
         """
