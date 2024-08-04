@@ -8,5 +8,5 @@ def link(request, uuid):
         NearFieldCommunicationTag.objects.select_related('link'),
         uuid=uuid
     )
-    tag_url = nfc_tag.link.get_url(for_owner=True)
+    tag_url = nfc_tag.link.get_url(user=request.user)
     return redirect(tag_url)
