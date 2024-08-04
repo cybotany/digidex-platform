@@ -2,10 +2,8 @@ import uuid
 
 from django.db import models
 from django.conf import settings
-from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from django_hosts.resolvers import reverse
-from django.http import Http404
 
 from inventorytags.validators import validate_serial_number
 
@@ -60,7 +58,7 @@ class NearFieldCommunicationTag(models.Model):
         return link
 
     def get_mapping_url(self):
-        return reverse('link-tag', host='link', args=[str(self.uuid)])
+        return reverse('link-tag', host='default', args=[str(self.uuid)])
 
     class Meta:
         verbose_name = "near field communication tag"
@@ -86,24 +84,6 @@ class InventoryLink(models.Model):
         null=True,
         blank=True
     )
-
-    def get_url(self, user):
-        if self.url:
-            return self.url
-
-        base_url = 'https://digidex.tech/inv'
-        if self.tag.owner:
-            owner = self.tag.owner
-            owner_slug = slugify(owner.username)
-
-            if user == owner:
-                return f'{base_url}/{owner_slug}/ntag/{self.tag.uuid}'
-            
-            if self.asset:
-                return f'{base_url}/{owner_slug}/{self.asset.slug}'
-
-            return f'{base_url}/{owner_slug}'
-        return base_url
 
     class Meta:
         verbose_name = "inventory link"
