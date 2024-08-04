@@ -1,13 +1,8 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from wagtail.models import Page, Collection
-from wagtail.admin.panels import (
-    FieldPanel,
-    FieldRowPanel,
-    InlinePanel,
-    MultiFieldPanel,
-)
+from wagtail.models import Page
+from wagtail.admin.panels import FieldPanel, FieldRowPanel, MultiFieldPanel
 
 
 class HomePage(Page):
@@ -21,12 +16,6 @@ class HomePage(Page):
         'inventory.UserInventoryIndex'
     ]
 
-    collection = models.ForeignKey(
-        Collection,
-        on_delete=models.SET_NULL,
-        null=True,
-        related_name='+',
-    )
     hero_heading = models.CharField(
         max_length=255,
         blank=True,
@@ -93,7 +82,6 @@ class HomePage(Page):
             ],
             heading="Hero Body"
         ),
-        FieldPanel('collection'),
     ]
 
     def __str__(self):

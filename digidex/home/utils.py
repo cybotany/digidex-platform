@@ -1,4 +1,4 @@
-from wagtail.models import Page, Site, Collection
+from wagtail.models import Page, Site
 
 from home.models import HomePage
 
@@ -8,13 +8,9 @@ def create_homepage():
         print("HomePage already exists. No action taken.")
         return
 
-    root_collection = Collection.get_first_root_node()
-    home_collection = root_collection.add_child(name="Home")
-
     homepage = HomePage(
         title="Home",
-        slug="inventory",
-        collection=home_collection,
+        slug="inventory"
     )
     root_page = Page.objects.get(id=1)
     root_page.add_child(instance=homepage)
