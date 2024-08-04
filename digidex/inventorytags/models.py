@@ -86,23 +86,23 @@ class InventoryLink(models.Model):
         blank=True
     )
 
-    def get_url(self, for_owner=False):
+    def get_url(self, user):
         if self.link:
             return self.link
 
         base_url = 'https://digidex.tech/inv'
         if self.tag.owner:
-            owner = slugify(self.tag.owner.username)
-            if self.asset:
-                return f'{base_url}/{owner}/{self.asset.slug}'
-            if for_owner:
-                return f'{base_url}/{owner}/ntag/{self.tag.uuid}'
-            return f'{base_url}/{owner}'
-        return base_url
+            owner = self.tag.owner
+            owner_slug = slugify(owner.username)
 
-    @property
-    def url(self):
-        return self.get_url()
+            if user and user == owner:
+                return f'{base_url}/{owner_slug}/ntag/{self.tag.uuid}'
+            
+            if self.asset:
+                return f'{base_url}/{owner_slug}/{self.asset.slug}'
+
+            return f'{base_url}/{owner_slug}'
+        return base_url
 
     class Meta:
         verbose_name = "inventory link"
