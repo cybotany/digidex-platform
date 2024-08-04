@@ -55,9 +55,7 @@ class NearFieldCommunicationTag(models.Model):
 
     def create_link(self):
         from inventorytags.models import InventoryLink
-        link = InventoryLink.objects.create(
-            tag=self
-        )
+        link = InventoryLink.objects.create(tag=self)
         return link
 
     def get_mapping_url(self):
@@ -91,9 +89,14 @@ class InventoryLink(models.Model):
     def get_url(self):
         if self.link:
             return self.link
-        else:
+
+        base_url = 'https://digidex.tech/inv'
+        if self.tag.owner:
             owner = slugify(self.tag.owner.username)
-            return f'https://digidex.tech/inv/{owner}'
+            if self.asset:
+                return f'{base_url}/{owner}/{self.asset.slug}'
+            return f'{base_url}/{owner}'
+        return base_url
 
     @property
     def url(self):
