@@ -22,10 +22,6 @@ class BlogIndexPage(Page):
     parent_page_types = ['home.HomePage']
     child_page_types = ['blog.BlogPage']
 
-    intro = models.CharField(
-        max_length=250
-    )
-
     def get_context(self, request):
         context = super().get_context(request)
         
@@ -39,9 +35,7 @@ class BlogIndexPage(Page):
 
         return context
 
-    content_panels = Page.content_panels + [
-        FieldPanel('intro')
-    ]
+    content_panels = Page.content_panels
 
 
 class BlogPageTag(TaggedItemBase):
