@@ -11,6 +11,7 @@ urlpatterns = [
 urlpatterns = [
     path("accounts/", include('allauth.urls')),
     path("search/", search, name="search"),
+    path("link/", include('inventorytags.urls')),
     path("", include(wagtail_urls)),
 ]
 

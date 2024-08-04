@@ -24,7 +24,7 @@ LOGGING = {
         },
     },
     'loggers': {
-        'inventory': {
+        'inventorytags': {
             'handlers': ['console'],
             'level': 'DEBUG',
             'propagate': False,

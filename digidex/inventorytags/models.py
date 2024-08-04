@@ -80,7 +80,7 @@ class InventoryLink(models.Model):
         on_delete=models.CASCADE,
         related_name='link'
     )
-    link = models.URLField(
+    url = models.URLField(
         max_length=255,
         editable=True,
         null=True,
@@ -88,8 +88,8 @@ class InventoryLink(models.Model):
     )
 
     def get_url(self, user):
-        if self.link:
-            return self.link
+        if self.url:
+            return self.url
 
         base_url = 'https://digidex.tech/inv'
         if self.tag.owner:

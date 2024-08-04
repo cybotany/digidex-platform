@@ -16,11 +16,11 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 ROOT_HOSTCONF = 'digidex.hosts'
 
-ROOT_URLCONF = "digidex.urls"
-
 DEFAULT_HOST = 'default'
 
 PARENT_HOST = os.getenv('PARENT_HOST')
+
+ROOT_URLCONF = "digidex.urls"
 
 API_URL = f"api.{PARENT_HOST}"
 ADMIN_URL = f"admin.{PARENT_HOST}"
