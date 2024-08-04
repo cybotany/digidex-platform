@@ -13,59 +13,10 @@ from wagtail.contrib.forms.panels import FormSubmissionsPanel
 
 
 class ContactPage(AbstractEmailForm):
-    intro = models.CharField(
-        max_length=255,
-        blank=True
-    )
-    form_subtitle = models.CharField(
-        max_length=255,
-        blank=True,
-        verbose_name='Form subtitle'
-    )
-    form_title = models.CharField(
-        max_length=255,
-        blank=True,
-        verbose_name='Form title'
-    )
-
-    def get_body_header(self):
-        return {
-            'title': self.title,
-            'intro': self.intro if self.intro else 'Needs to be defined'
-        }
-
-    def get_form_info(self):
-        return {
-            'subtitle': self.form_subtitle if self.form_subtitle else 'Contact us',
-            'heading': self.form_title if self.form_title else 'Send message',
-        }
-
-    def get_form(self, *args, **kwargs):
-        form = super().get_form(*args, **kwargs)
-        for name, field in form.fields.items():
-            if isinstance(field.widget, widgets.Input):
-                field.widget.attrs.update({'class': 'text-field base-input'})
-            if isinstance(field.widget, widgets.Textarea):
-                field.widget.attrs.update({'class': 'text-field textarea'})       
-        return form
-
-    def get_context(self, request):
-        context = super().get_context(request)
-        context['header'] = self.get_body_header()
-        context['info'] = self.get_form_info()
-        return context
 
     content_panels = AbstractEmailForm.content_panels + [
         FormSubmissionsPanel(),
-        FieldPanel('intro'),
-        MultiFieldPanel(
-            [
-                FieldPanel('form_subtitle'),
-                FieldPanel('form_title'),
-                InlinePanel('form_fields', label="Form fields"),
-            ],
-            heading="Form"
-        ),
+        InlinePanel('form_fields', label="Form fields"),
         MultiFieldPanel(
             [
                 FieldRowPanel(
@@ -78,8 +29,16 @@ class ContactPage(AbstractEmailForm):
             ],
             heading="Email"
         ),
-
     ]
+
+    def get_form(self, *args, **kwargs):
+        form = super().get_form(*args, **kwargs)
+        for name, field in form.fields.items():
+            if isinstance(field.widget, widgets.Input):
+                field.widget.attrs.update({'class': 'text-field base-input'})
+            if isinstance(field.widget, widgets.Textarea):
+                field.widget.attrs.update({'class': 'text-field textarea'})       
+        return form
 
 
 class ContactField(AbstractFormField):

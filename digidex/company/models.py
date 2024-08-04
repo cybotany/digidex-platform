@@ -92,10 +92,6 @@ class CompanyIndexPage(Page):
     parent_page_types = ["home.HomePage"]
     subpage_types = []
 
-    intro = models.CharField(
-        max_length=255,
-        blank=True
-    )
     our_mission = models.TextField(
         blank=True
     )
@@ -113,11 +109,20 @@ class CompanyIndexPage(Page):
         on_delete=models.SET_NULL
     )
 
-    def get_body_header(self):
-        return {
-            'title': self.title,
-            'intro': self.intro if self.intro else 'Needs to be defined'
-        }
+    content_panels = Page.content_panels + [
+        MultiFieldPanel(
+            [
+                FieldPanel('our_mission'),
+                FieldPanel('our_vision'),
+                FieldPanel('our_values'),
+            ],
+            heading="About Us Section"
+        ),
+        FieldPanel('team'),
+    ]
+
+    def __str__(self):
+        return 'Company Index Page'
 
     def get_about_us(self):
         return {
@@ -143,20 +148,6 @@ class CompanyIndexPage(Page):
 
     def get_context(self, request):
         context = super().get_context(request)
-        context['header'] = self.get_body_header()
         context['about'] = self.get_about_us()
         context['team'] = self.get_our_team()
         return context
-
-    content_panels = Page.content_panels + [
-        FieldPanel('intro'),
-        MultiFieldPanel(
-            [
-                FieldPanel('our_mission'),
-                FieldPanel('our_vision'),
-                FieldPanel('our_values'),
-            ],
-            heading="About Us Section"
-        ),
-        FieldPanel('team'),
-    ]
