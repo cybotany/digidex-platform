@@ -95,7 +95,7 @@ class InventoryLink(models.Model):
             owner = self.tag.owner
             owner_slug = slugify(owner.username)
 
-            if user and user == owner:
+            if user == owner:
                 return f'{base_url}/{owner_slug}/ntag/{self.tag.uuid}'
             
             if self.asset:
