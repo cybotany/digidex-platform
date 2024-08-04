@@ -1,5 +1,6 @@
 from django import template
 from django.urls import reverse
+from django.utils.text import slugify
 
 from wagtail.models import Site
 
@@ -58,10 +59,11 @@ def get_footer_copyright(context):
 def get_navigation_buttons(context):
     request = context["request"]
     if request.user.is_authenticated:
+        user_slug = slugify(request.user.username)
         buttons = [
             ButtonComponent(
                 text=request.user.username,
-                url=reverse("account_email"),
+                url=f"/inv/{user_slug}",
                 style='nav-button-outline'
             ),
             ButtonComponent(
