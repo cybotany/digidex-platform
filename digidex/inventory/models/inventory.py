@@ -2,7 +2,7 @@ import uuid
 
 from django.db import models, transaction
 from django.core.exceptions import PermissionDenied
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
@@ -181,6 +181,32 @@ class UserInventoryPage(RoutablePageMixin, Page):
             template='inventory/includes/delete_index.html',
             context_overrides={'form': form}
         )
+
+    @path('ntag/<uuid:uuid>/', name='nfc_tag')
+    def update_nfc_tag(self, request, uuid):
+        if request.user != self.owner:
+            raise PermissionDenied
+
+        from inventorytags.models import NearFieldCommunicationTag, InventoryLink
+        from inventorytags.forms import AssociateNtagForm
+
+        nfc_tag = get_object_or_404(NearFieldCommunicationTag, uuid=uuid)
+        inventory_link, created = InventoryLink.objects.get_or_create(tag=nfc_tag)
+
+        if request.method == "POST":
+            form = AssociateNtagForm(request.POST, instance=inventory_link, user_inventory=self)
+            if form.is_valid():
+                form.save()
+                return redirect(self.url)
+        else:
+            form = AssociateNtagForm(instance=inventory_link, user_inventory=self)
+
+        return self.render(
+            request,
+            template='inventory/includes/update_nfc_tag.html',
+            context_overrides={'form': form}
+        )
+
 
     def save(self, *args, **kwargs):
         if not self.slug:

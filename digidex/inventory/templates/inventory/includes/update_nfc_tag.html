@@ -1,18 +1,18 @@
 {% extends "inventory/includes/base.html" %}
 
-{% block title %}Update Inventory{% endblock title %}
+{% block title %}Update NFC Tag{% endblock title %}
 
 {% block content %}
-  <h3 class="account-heading">Update Inventory</h3>
+  <h3 class="account-heading">Update NFC Tag</h3>
   <form method="post" class="utility-page-form base-password-page" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.non_field_errors }}
-
-    <label class="field-label" for="{{ form.description.id_for_label }}">Description:</label>
-    {{ form.description }}
-    {% if form.description.errors %}
+    
+    <label class="field-label" for="{{ form.asset.id_for_label }}">Asset:</label>
+    {{ form.asset }}
+    {% if form.asset.errors %}
       <div class="error-message">
-        <div class="text-error">{{ form.description.errors|striptags }}</div>
+        <div class="text-error">{{ form.asset.errors|striptags }}</div>
       </div>
     {% endif %}
 

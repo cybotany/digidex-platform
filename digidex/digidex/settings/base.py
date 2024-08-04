@@ -229,7 +229,7 @@ SIMPLE_JWT = {
 # allauth settings
 AUTH_USER_MODEL = 'accounts.DigiDexUser'
 
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
 
 ACCOUNT_ADAPTER = 'accounts.adapter.DigidexAccountAdapter'
 

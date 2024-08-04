@@ -6,7 +6,7 @@ class UserInventoryForm(forms.Form):
         required=False,
         widget=forms.TextInput(
             attrs={
-                'class': 'text-field base-input',
+                'class': 'text-field w-input',
                 'placeholder': 'Enter a description'
             }
         )
@@ -18,7 +18,7 @@ class InventoryAssetForm(forms.Form):
         required=True,
         widget=forms.TextInput(
             attrs={
-                'class': 'text-field base-input',
+                'class': 'text-field w-input',
                 'placeholder': 'Enter a name for the asset'
             }
         )
@@ -38,7 +38,7 @@ class DeletionConfirmationForm(forms.Form):
         required=True,
         widget=forms.CheckboxInput(
             attrs={
-                'class': 'base-radio',
+                'class': 'w-radio',
             }
         )
     )

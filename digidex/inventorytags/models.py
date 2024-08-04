@@ -86,7 +86,7 @@ class InventoryLink(models.Model):
         blank=True
     )
 
-    def get_url(self):
+    def get_url(self, for_owner=False):
         if self.link:
             return self.link
 
@@ -95,6 +95,8 @@ class InventoryLink(models.Model):
             owner = slugify(self.tag.owner.username)
             if self.asset:
                 return f'{base_url}/{owner}/{self.asset.slug}'
+            if for_owner:
+                return f'{base_url}/{owner}/ntag/{self.tag.uuid}'
             return f'{base_url}/{owner}'
         return base_url
 

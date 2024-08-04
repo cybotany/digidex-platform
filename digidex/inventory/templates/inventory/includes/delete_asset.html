@@ -4,11 +4,11 @@
 
 {% block content %}
   <h3 class="account-heading">Delete Asset</h3>
-  <form method="post" action="" class="utility-page-form base-password-page" enctype="multipart/form-data">
+  <form method="post" class="utility-page-form base-password-page" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.non_field_errors }}
 
-    <label for="{{ form.confirmation.id_for_label }}">Confirm Asset Deletion:</label>
+    <label class="field-label" for="{{ form.confirmation.id_for_label }}">Confirm Asset Deletion:</label>
     {{ form.confirmation }}
     {% if form.delete.errors %}
       <div class="error-message">
