@@ -5,13 +5,9 @@ from search.views import search
 from wagtail import urls as wagtail_urls
 
 urlpatterns = [
-    path("search/", search, name="search"),
-]
-
-urlpatterns = [
     path("accounts/", include('allauth.urls')),
     path("search/", search, name="search"),
-    path("link/", include('inventorytags.urls')),
+    path("link/", include('inventory.urls')),
     path("", include(wagtail_urls)),
 ]
 

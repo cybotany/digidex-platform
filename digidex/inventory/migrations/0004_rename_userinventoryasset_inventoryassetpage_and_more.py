@@ -9,7 +9,6 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('inventory', '0003_userinventoryasset_body'),
-        ('inventorytags', '0003_alter_inventorylink_link'),
         ('wagtailcore', '0093_uploadedfile'),
     ]
 

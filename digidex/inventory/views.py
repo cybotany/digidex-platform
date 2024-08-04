@@ -4,7 +4,7 @@ from django.shortcuts import redirect, get_object_or_404
 from django.utils.text import slugify
 from django.views.decorators.http import require_http_methods
 
-from inventorytags.models import NearFieldCommunicationTag
+from inventory.models import NearFieldCommunicationTag
 
 logger = logging.getLogger(__name__)
 

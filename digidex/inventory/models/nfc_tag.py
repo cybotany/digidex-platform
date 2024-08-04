@@ -5,7 +5,7 @@ from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from django_hosts.resolvers import reverse
 
-from inventorytags.validators import validate_serial_number
+from inventory.validators import validate_serial_number
 
 
 class NearFieldCommunicationTag(models.Model):
@@ -51,7 +51,6 @@ class NearFieldCommunicationTag(models.Model):
         self.save()
 
     def create_link(self):
-        from inventorytags.models import InventoryLink
         if hasattr(self, 'link'):
             raise ValueError("An InventoryLink already exists for this tag.")
         link = InventoryLink.objects.create(tag=self)

@@ -25,7 +25,6 @@ ROOT_URLCONF = "digidex.urls"
 API_URL = f"api.{PARENT_HOST}"
 ADMIN_URL = f"admin.{PARENT_HOST}"
 CMS_URL = f"cms.{PARENT_HOST}"
-LINK_URL = f"link.{PARENT_HOST}"
 WWW_URL = f"www.{PARENT_HOST}"
 
 ALLOWED_HOSTS = [
@@ -34,7 +33,6 @@ ALLOWED_HOSTS = [
     API_URL,
     ADMIN_URL,
     CMS_URL,
-    LINK_URL,
     WWW_URL,
 ]
 
@@ -52,7 +50,6 @@ INSTALLED_APPS = [
     "company",
     "accounts",
     "inventory",
-    "inventorytags",
     "search",
     "api",
     "storages",

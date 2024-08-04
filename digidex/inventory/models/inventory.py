@@ -187,8 +187,8 @@ class UserInventoryPage(RoutablePageMixin, Page):
         if request.user != self.owner:
             raise PermissionDenied
 
-        from inventorytags.models import NearFieldCommunicationTag, InventoryLink
-        from inventorytags.forms import AssociateNtagForm
+        from inventory.models import NearFieldCommunicationTag, InventoryLink
+        from inventory.forms import AssociateNtagForm
 
         nfc_tag = get_object_or_404(NearFieldCommunicationTag, uuid=uuid)
         inventory_link, created = InventoryLink.objects.get_or_create(tag=nfc_tag)
