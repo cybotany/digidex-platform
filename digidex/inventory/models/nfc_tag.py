@@ -69,18 +69,16 @@ class NearFieldCommunicationTag(models.Model):
 
 
 class InventoryLink(models.Model):
-    asset = models.ForeignKey(
+    asset = models.OneToOneField(
         'inventory.InventoryAssetPage',
         on_delete=models.SET_NULL,
         blank=True,
         null=True,
-        db_index=True,
-        related_name='+'
+        related_name='linked_tag'
     )
     tag = models.OneToOneField(
         NearFieldCommunicationTag,
         on_delete=models.CASCADE,
-        db_index=True,
         related_name='link'
     )
 
