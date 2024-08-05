@@ -8,7 +8,7 @@ from company.models import TeamMemberRole, TeamMember, Team
 
 @hooks.register("register_icons")
 def register_icons(icons):
-    return icons + ['company/team.svg', 'company/badge.svg']
+    return icons + ['company/icons/team.svg', 'company/icons/badge.svg']
 
 class TeamMemberViewSet(SnippetViewSet):
     model = TeamMember

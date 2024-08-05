@@ -53,6 +53,7 @@ def manage(request, uuid):
         form = nfc_tag_form(request.POST, instance=nfc_tag.link, user_inventory=user_inventory)
         if form.is_valid():
             form.save()
+            messages.success(request, _('Tag successfully linked.'))
             return redirect(user_inventory.url)
     else:
         form = nfc_tag_form(instance=nfc_tag.link, user_inventory=user_inventory)

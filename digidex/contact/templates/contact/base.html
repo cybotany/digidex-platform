@@ -1,16 +1,1 @@
-{% extends "base.html" %}
-{% load navigation_tags %}
-
-{% block header %}
-  {% include "includes/header.html" %}
-{% endblock header %}
-
-{% block body %}{% endblock body %}
-
-{% block footer %}
-  {% if not request.user.is_authenticated %}
-    {% footer_banner %}
-  {% endif %}
-
-  {% include "includes/footer.html" %}
-{% endblock footer %}
+{% extends "home/base.html" %}

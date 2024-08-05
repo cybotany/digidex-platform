@@ -31,19 +31,11 @@
     <link rel="stylesheet" type="text/css" href="{% static 'base/css/digidex.css' %}">
   </head>
   <body>
-    <header role="banner">
-      {% block header %}
-        <a href="/" class="brand-center w-nav-brand">
-          <img src="{% static 'base/images/logos/logo.svg' %}" alt="Digidex Logo" class="logo">
-        </a>
-      {% endblock header %}
-    </header>
-    <main>
-      {% block body %}{% endblock body %}
-    </main>
-    <footer role="contentinfo">
-      {% block footer %}{% endblock footer %}
-    </footer>
-    {% block extra_body %}{% endblock extra_body %}
+    {% block body %}
+      <a href="/" class="brand-center w-nav-brand">
+        <img src="{% static 'base/images/logos/logo.svg' %}" alt="Digidex Logo" class="logo">
+      </a>
+      {% block content %}{% endblock content %}
+    {% endblock body %}    
   </body>
 </html>

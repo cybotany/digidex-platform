@@ -1,16 +1,9 @@
 {% extends "base.html" %}
-{% load navigation_tags %}
 
-{% block header %}
+{% block body %}
   {% include "includes/header.html" %}
-{% endblock header %}
-
-{% block body %}{% endblock body %}
-
-{% block footer %}
-  {% if not request.user.is_authenticated %}
-    {% footer_banner %}
-  {% endif %}
-
+  <main role="main">
+    {% block content %}{% endblock content %}
+  </main>
   {% include "includes/footer.html" %}
-{% endblock footer %}
+{% endblock body %}
