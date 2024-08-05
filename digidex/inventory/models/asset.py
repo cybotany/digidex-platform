@@ -109,7 +109,6 @@ class InventoryAssetPage(RoutablePageMixin, Page):
             context_overrides={'form': form}
         )
 
-    @path('delete/')
     def delete_asset(self, request):
         if request.user != self.owner:
             raise PermissionDenied

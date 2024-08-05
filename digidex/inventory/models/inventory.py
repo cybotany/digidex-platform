@@ -93,6 +93,7 @@ class UserInventoryPage(RoutablePageMixin, Page):
             return images.first()
         return None
 
+    @property
     def is_owner(self, user):
         return user == self.owner
 
@@ -157,7 +158,39 @@ class UserInventoryPage(RoutablePageMixin, Page):
             context_overrides={'form': form}
         )
 
-    @path('delete/', name='delete')
+    @path('ntag/<uuid:uuid>/', name='nfc_tag')
+    def manage_nfc_tag(self, request, uuid):
+        if request.user != self.owner:
+            raise PermissionDenied
+
+        from inventory.models import NearFieldCommunicationTag, InventoryLink
+        from inventory.forms import NearFieldCommunicationLinkedTagForm as nfc_tag_form
+
+        nfc_tag = get_object_or_404(NearFieldCommunicationTag, uuid=uuid)
+        inventory_link, created = InventoryLink.objects.get_or_create(tag=nfc_tag)
+
+        if request.method == "POST":
+            form = nfc_tag_form(request.POST, instance=inventory_link, user_inventory=self)
+            if form.is_valid():
+                form.save()
+                return redirect(self.url)
+        else:
+            form = nfc_tag_form(instance=inventory_link, user_inventory=self)
+
+        asset = inventory_link.asset if inventory_link.asset else None
+
+        context = {
+            'form': form,
+            'asset': asset
+        }
+
+        return self.render(
+            request,
+            template='inventory/includes/manage_nfc_tag.html',
+            context_overrides=context
+        )
+
+    """
     def delete_inventory(self, request):
         if request.user != self.owner:
             raise PermissionDenied
@@ -181,39 +214,7 @@ class UserInventoryPage(RoutablePageMixin, Page):
             template='inventory/includes/delete_inventory.html',
             context_overrides={'form': form}
         )
-
-    @path('ntag/<uuid:uuid>/', name='nfc_tag')
-    def update_nfc_tag(self, request, uuid):
-        if request.user != self.owner:
-            raise PermissionDenied
-
-        from inventory.models import NearFieldCommunicationTag, InventoryLink
-        from inventory.forms import AssociateNtagForm
-
-        nfc_tag = get_object_or_404(NearFieldCommunicationTag, uuid=uuid)
-        inventory_link, created = InventoryLink.objects.get_or_create(tag=nfc_tag)
-
-        if request.method == "POST":
-            form = AssociateNtagForm(request.POST, instance=inventory_link, user_inventory=self)
-            if form.is_valid():
-                form.save()
-                return redirect(self.url)
-        else:
-            form = AssociateNtagForm(instance=inventory_link, user_inventory=self)
-
-        asset = inventory_link.asset if inventory_link.asset else None
-
-        context = {
-            'form': form,
-            'asset': asset
-        }
-
-        return self.render(
-            request,
-            template='inventory/includes/manage_nfc_tag.html',
-            context_overrides=context
-        )
-
+    """
 
     def save(self, *args, **kwargs):
         if not self.slug:

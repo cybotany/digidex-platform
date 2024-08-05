@@ -1,6 +1,6 @@
 import uuid
 
-from django.db import models
+from django.db import models, transaction
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from django_hosts.resolvers import reverse
@@ -42,11 +42,13 @@ class NearFieldCommunicationTag(models.Model):
     def __str__(self):
         return f"NFC Tag: {self.serial_number}"
 
+    @transaction.atomic
     def activate_tag(self, user):
         self.owner = user
         self.active = True
         self.save()
 
+    @transaction.atomic
     def deactivate_tag(self):
         self.owner = None
         self.active = False
@@ -72,18 +74,16 @@ class InventoryLink(models.Model):
         on_delete=models.SET_NULL,
         blank=True,
         null=True,
+        db_index=True,
         related_name='+'
     )
     tag = models.OneToOneField(
         NearFieldCommunicationTag,
         on_delete=models.CASCADE,
+        db_index=True,
         related_name='link'
     )
 
     class Meta:
         verbose_name = "inventory link"
         verbose_name_plural = "inventory links"
-        indexes = [
-            models.Index(fields=['asset']),
-            models.Index(fields=['tag'])
-        ]

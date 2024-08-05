@@ -37,7 +37,7 @@ class InventoryAssetForm(forms.ModelForm):
         }
 
 
-class AssociateNtagForm(forms.ModelForm):
+class NearFieldCommunicationLinkedTagForm(forms.ModelForm):
     release = forms.BooleanField(
         required=True,
         widget=forms.CheckboxInput(
