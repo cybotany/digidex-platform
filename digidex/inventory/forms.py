@@ -65,14 +65,6 @@ class InventoryAssetForm(forms.ModelForm):
 
 
 class NearFieldCommunicationLinkedTagForm(forms.ModelForm):
-    release = forms.BooleanField(
-        required=True,
-        widget=forms.CheckboxInput(
-            attrs={
-                'class': 'w-radio',
-            }
-        )
-    )
 
     class Meta:
         model = InventoryLink
@@ -83,9 +75,14 @@ class NearFieldCommunicationLinkedTagForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         
         if user_inventory:
-            # linked_assets = InventoryLink.objects.values_list('asset_id', flat=True)
-            self.fields['asset'].queryset = InventoryAssetPage.objects.child_of(user_inventory)# .exclude(id__in=linked_assets)
+            linked_assets = InventoryLink.objects.filter(asset__isnull=False).values_list('asset_id', flat=True)
+            self.fields['asset'].queryset = InventoryAssetPage.objects.child_of(user_inventory).exclude(id__in=linked_assets)
             # self.fields['asset'].widget.attrs.update({'class': 'custom-dropdown-class'})
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        if commit:
+            instance.save()
 
 
 class DeletionConfirmationForm(forms.Form):
