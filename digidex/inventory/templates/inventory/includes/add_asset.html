@@ -24,14 +24,6 @@
       </div>
     {% endif %}
 
-    <label class="field-label" for="{{ form.body.id_for_label }}">Body:</label>
-    {{ form.body }}
-    {% if form.body.errors %}
-      <div class="error-message">
-        <div class="text-error">{{ form.body.errors|striptags }}</div>
-      </div>
-    {% endif %}
-
     <input type="submit" value="Create" class="submit-button base-button"> 
   </form>     
 {% endblock content %}

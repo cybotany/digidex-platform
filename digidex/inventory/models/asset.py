@@ -2,13 +2,12 @@ import uuid
 
 from django.db import models, transaction
 from django.core.exceptions import PermissionDenied
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 from wagtail.contrib.routable_page.models import RoutablePageMixin, path
-from wagtail.fields import RichTextField
 from wagtail.images import get_image_model
 from wagtail.documents import get_document_model
 from wagtail.models import Page, Collection, Site
@@ -25,12 +24,6 @@ class InventoryAssetPage(RoutablePageMixin, Page):
         editable=False,
         db_index=True
     )
-    name = models.CharField(
-        max_length=255,
-        null=True,
-        blank=True,
-        verbose_name=_("name")
-    )
     collection = models.ForeignKey(
         Collection,
         on_delete=models.SET_NULL,
@@ -38,15 +31,16 @@ class InventoryAssetPage(RoutablePageMixin, Page):
         blank=True,
         related_name='+',
     )
+    name = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+        verbose_name=_("name")
+    )
     description = models.TextField(
         null=True,
         blank=True,
         verbose_name=_("description")
-    )
-    body = RichTextField(
-        null=True,
-        blank=True,
-        verbose_name=_("body")
     )
     created_at = models.DateTimeField(
         auto_now_add=True
@@ -96,7 +90,7 @@ class InventoryAssetPage(RoutablePageMixin, Page):
         return user == self.owner
 
     @path('update/')
-    def update_inventory(self, request):
+    def update_asset(self, request):
         if request.user != self.owner:
             raise PermissionDenied
 
@@ -116,7 +110,7 @@ class InventoryAssetPage(RoutablePageMixin, Page):
         )
 
     @path('delete/')
-    def delete_inventory(self, request):
+    def delete_asset(self, request):
         if request.user != self.owner:
             raise PermissionDenied
 
