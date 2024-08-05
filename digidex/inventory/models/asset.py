@@ -56,7 +56,7 @@ class InventoryAssetPage(RoutablePageMixin, Page):
         context['is_owner'] = self.is_owner(request.user)
         context['asset'] = self
         context['parent'] = self.get_parent()
-        context['urls'] = self.get_page_urls()
+        context['edit_url'] = self.reverse_subpage('edit')
         return context
 
     def set_slug(self):
@@ -97,14 +97,8 @@ class InventoryAssetPage(RoutablePageMixin, Page):
     def is_owner(self, user):
         return user == self.owner
 
-    def get_page_urls(self):
-        return {
-            'detail': self.url,
-            'edit': self.reverse_subpage('edit'),
-        }
-
-    @path('edit/')
-    def edit_asset(self, request):
+    @path('edit/', name='edit')
+    def edit(self, request):
         if request.user != self.owner:
             raise PermissionDenied
 
@@ -120,7 +114,10 @@ class InventoryAssetPage(RoutablePageMixin, Page):
         return self.render(
             request,
             template='inventory/includes/edit_asset.html',
-            context_overrides={'form': form}
+            context_overrides={
+                'form': form,
+                'show_decoupling_checkbox': hasattr(self, 'linked_tag')
+            }
         )
 
     def save(self, *args, **kwargs):

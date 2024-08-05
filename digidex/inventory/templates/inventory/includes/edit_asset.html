@@ -23,6 +23,16 @@
         <div class="text-error">{{ form.description.errors|striptags }}</div>
       </div>
     {% endif %}
+  
+    {% if show_decoupling_checkbox %}
+      <label class="field-label" for="{{ form.decouple_nfc_tag.id_for_label }}">Decouple NFC TAG:</label>
+      {{ form.decouple_nfc_tag }}
+      {% if form.decouple_nfc_tag.errors %}
+        <div class="error-message">
+          <div class="text-error">{{ form.decouple_nfc_tag.errors|striptags }}</div>
+        </div>
+      {% endif %}
+    {% endif %}
 
     <input type="submit" value="Submit" class="submit-button base-button"> 
   </form>
