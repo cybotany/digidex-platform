@@ -2,10 +2,9 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.http import require_http_methods
-
-from django_hosts.resolvers import reverse
 
 from inventory.models import NearFieldCommunicationTag, UserInventoryPage
 from inventory.forms import NearFieldCommunicationLinkedTagForm as nfc_tag_form 
@@ -25,7 +24,7 @@ def link(request, uuid):
 
     if nfc_tag.link and nfc_tag.link.asset:
         return redirect(nfc_tag.link.asset.url)
-    return redirect(reverse('manage-tag', host='default', args=[str(uuid)]))
+    return redirect(reverse('manage-tag', args=[str(uuid)]))
 
 
 @login_required
@@ -58,8 +57,4 @@ def manage(request, uuid):
     else:
         form = nfc_tag_form(instance=nfc_tag.link, user_inventory=user_inventory)
 
-    return render(
-        request,
-        template='inventory/includes/manage_nfc_tag.html',
-        context={'form': form}
-    )
+    return render(request, 'inventory/includes/manage_nfc_tag.html', {'form': form})
