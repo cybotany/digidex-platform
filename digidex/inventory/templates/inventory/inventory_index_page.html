@@ -1,8 +1,7 @@
 {% extends "inventory/base.html" %}
 {% load static wagtailimages_tags wagtailcore_tags %}
 
-{% block header %}
-  {% include "includes/header.html" %}
+{% block content %}
   <section class="section-top">
     <div class="content">
       <div class="block-top">
@@ -11,45 +10,42 @@
       </div>
     </div>
   </section>
-{% endblock header %}
-
-{% block body %}
-<section class="section">
-  <div class="content">
-    <div class="collection-list-wrapper-posts w-dyn-list">
-      {% for user in userpages %}
-        {% with userpage=user.specific %}
-          <div role="list" class="collection-list-posts w-dyn-items">
-            <div role="listitem" class="w-dyn-item">
-              <div class="block-post">
-                <a href="{% pageurl userpage %}" class="link-post-thumbnail w-inline-block">
-                  {% with userpage.main_image as main_image %}
-                    {% image main_image original alt="main_image.alt" class="image-post-thumbnail" loading="lazy" decoding="async" %}
-                  {% endwith %}
-                </a>
-                <div class="post">
-                  <div class="date">{{ userpage.date }}</div>
-                  <a href="{% pageurl userpage %}" class="link-heading-post w-inline-block">
-                    <h4 class="heading-post">{{ userpage.title }}</h4>
+  <section class="section">
+    <div class="content">
+      <div class="collection-list-wrapper-posts w-dyn-list">
+        {% for user in userpages %}
+          {% with userpage=user.specific %}
+            <div role="list" class="collection-list-posts w-dyn-items">
+              <div role="listitem" class="w-dyn-item">
+                <div class="block-post">
+                  <a href="{% pageurl userpage %}" class="link-post-thumbnail w-inline-block">
+                    {% with userpage.main_image as main_image %}
+                      {% image main_image original alt="main_image.alt" class="image-post-thumbnail" loading="lazy" decoding="async" %}
+                    {% endwith %}
                   </a>
-                  <p class="paragraph-post">{{ userpage.intro }}</p>
-                  <a href="{% pageurl userpage %}" class="link-block w-inline-block">
-                    <div class="text-link">Read more</div>
-                    <div class="block-icon-link">
-                      <img src="{% static 'base/images/bx/arrow-green.svg' %}" alt="Green Arrow Pointing Rightwards" loading="lazy" decoding="async" class="icon-link">
-                    </div>
-                  </a>
+                  <div class="post">
+                    <div class="date">{{ userpage.date }}</div>
+                    <a href="{% pageurl userpage %}" class="link-heading-post w-inline-block">
+                      <h4 class="heading-post">{{ userpage.title }}</h4>
+                    </a>
+                    <p class="paragraph-post">{{ userpage.intro }}</p>
+                    <a href="{% pageurl userpage %}" class="link-block w-inline-block">
+                      <div class="text-link">Read more</div>
+                      <div class="block-icon-link">
+                        <img src="{% static 'base/images/bx/arrow-green.svg' %}" alt="Green Arrow Pointing Rightwards" loading="lazy" decoding="async" class="icon-link">
+                      </div>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
+          {% endwith %}
+        {% empty %}
+          <div class="empty-state w-dyn-empty">
+            <div class="text-empty">No user pages found</div>
           </div>
-        {% endwith %}
-      {% empty %}
-        <div class="empty-state w-dyn-empty">
-          <div class="text-empty">No user pages found</div>
-        </div>
-      {% endfor %}
+        {% endfor %}
+      </div>
     </div>
-  </div>
-</section>
-{% endblock body %}
+  </section>
+{% endblock content %}

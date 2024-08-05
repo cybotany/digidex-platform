@@ -1,8 +1,7 @@
 {% extends "company/base.html" %}
 {% load static wagtailcore_tags wagtailimages_tags %}
 
-{% block header %}
-  {% include "includes/header.html" %}
+{% block content %}
   <section class="section-top">
     <div class="content">
       <div class="block-top">
@@ -10,9 +9,6 @@
       </div>
     </div>
   </section>
-{% endblock header %}
-
-{% block body %}
   <section class="section">
     <div class="content">
       <div class="w-layout-grid grid-about">
@@ -66,4 +62,4 @@
       </div>
     </div>
   </section>
-{% endblock body %}
+{% endblock content %}

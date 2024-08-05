@@ -1,8 +1,7 @@
 {% extends "inventory/base.html" %}
 {% load static wagtailimages_tags wagtailcore_tags %}
 
-{% block header %}
-  {% include "includes/header.html" %}
+{% block content %}
   <section class="section-top padding-0">
     <div class="content">
       <div class="block-top">
@@ -18,9 +17,6 @@
       </div>
     </div>
   </section>
-{% endblock header %}
-
-{% block body %}
   <section class="section">
     <div class="content narrow">
       {% with asset.main_image as main_image %}
@@ -35,8 +31,4 @@
       </div>
     </div>
   </section>
-{% endblock body %}
-
-{% block footer %}
-  {% include "includes/footer.html" %}
-{% endblock footer %}
+{% endblock content %}
