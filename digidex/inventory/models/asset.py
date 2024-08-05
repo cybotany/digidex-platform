@@ -89,8 +89,8 @@ class InventoryAssetPage(RoutablePageMixin, Page):
     def is_owner(self, user):
         return user == self.owner
 
-    @path('update/')
-    def update_asset(self, request):
+    @path('edit/')
+    def edit_asset(self, request):
         if request.user != self.owner:
             raise PermissionDenied
 
@@ -105,31 +105,7 @@ class InventoryAssetPage(RoutablePageMixin, Page):
         
         return self.render(
             request,
-            template='inventory/includes/update_asset.html',
-            context_overrides={'form': form}
-        )
-
-    def delete_asset(self, request):
-        if request.user != self.owner:
-            raise PermissionDenied
-
-        from inventory.forms import DeletionConfirmationForm
-        if request.method == "POST":
-            form = DeletionConfirmationForm(request.POST)
-            if form.is_valid():
-                self.delete()
-                site = Site.find_for_request(request)
-                if site is not None:
-                    home_page_url = site.root_page.url
-                else:
-                    home_page_url = reverse('/')
-                return HttpResponseRedirect(home_page_url)
-        else:
-            form = DeletionConfirmationForm()
-        
-        return self.render(
-            request,
-            template='inventory/includes/delete_asset.html',
+            template='inventory/includes/edit_asset.html',
             context_overrides={'form': form}
         )
 

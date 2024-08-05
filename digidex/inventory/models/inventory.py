@@ -93,7 +93,6 @@ class UserInventoryPage(RoutablePageMixin, Page):
             return images.first()
         return None
 
-    @property
     def is_owner(self, user):
         return user == self.owner
 
@@ -101,8 +100,7 @@ class UserInventoryPage(RoutablePageMixin, Page):
         return {
             'detail': self.url,
             'add': self.reverse_subpage('add'),
-            'update': self.reverse_subpage('update'),
-            'delete': self.reverse_subpage('delete'),
+            'edit': self.reverse_subpage('edit'),
         }
 
     @path('add/', name='add')
@@ -137,8 +135,8 @@ class UserInventoryPage(RoutablePageMixin, Page):
             context_overrides={'form': form}
         )
 
-    @path('update/', name='update')
-    def update_inventory(self, request):
+    @path('edit/', name='edit')
+    def edit_inventory(self, request):
         if request.user != self.owner:
             raise PermissionDenied
 
@@ -154,7 +152,7 @@ class UserInventoryPage(RoutablePageMixin, Page):
         
         return self.render(
             request,
-            template='inventory/includes/update_inventory.html',
+            template='inventory/includes/edit_inventory.html',
             context_overrides={'form': form}
         )
 
@@ -189,32 +187,6 @@ class UserInventoryPage(RoutablePageMixin, Page):
             template='inventory/includes/manage_nfc_tag.html',
             context_overrides=context
         )
-
-    """
-    def delete_inventory(self, request):
-        if request.user != self.owner:
-            raise PermissionDenied
-
-        from inventory.forms import DeletionConfirmationForm
-        if request.method == "POST":
-            form = DeletionConfirmationForm(request.POST)
-            if form.is_valid():
-                self.delete()
-                site = Site.find_for_request(request)
-                if site is not None:
-                    home_page_url = site.root_page.url
-                else:
-                    home_page_url = reverse('/')
-                return redirect(home_page_url)
-        else:
-            form = DeletionConfirmationForm()
-        
-        return self.render(
-            request,
-            template='inventory/includes/delete_inventory.html',
-            context_overrides={'form': form}
-        )
-    """
 
     def save(self, *args, **kwargs):
         if not self.slug:
