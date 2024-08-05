@@ -17,9 +17,7 @@
     {% endif %}
 
     {% if asset %}
-      <div class="text-account">
-        {% blocktrans %}View linked asset: <a href="{{ asset.url }}" class="link-account">{{ asset.title }}</a>{% endblocktrans %}
-      </div>
+      <div class="text-account">View linked asset: <a href="{{ asset.url }}" class="link-account">{{ asset.title }}</a></div>
     {% endif %}
 
     <input type="submit" value="Submit" class="submit-button base-button"> 

@@ -83,8 +83,8 @@ class NearFieldCommunicationLinkedTagForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         
         if user_inventory:
-            linked_assets = InventoryLink.objects.values_list('asset_id', flat=True)
-            self.fields['asset'].queryset = InventoryAssetPage.objects.child_of(user_inventory).exclude(id__in=linked_assets)
+            # linked_assets = InventoryLink.objects.values_list('asset_id', flat=True)
+            self.fields['asset'].queryset = InventoryAssetPage.objects.child_of(user_inventory)# .exclude(id__in=linked_assets)
             # self.fields['asset'].widget.attrs.update({'class': 'custom-dropdown-class'})
 
 
