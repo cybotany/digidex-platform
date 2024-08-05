@@ -51,6 +51,14 @@ class InventoryAssetPage(RoutablePageMixin, Page):
 
     RESERVED_KEYWORDS = ['add', 'update', 'delete', 'admin']
 
+    def get_context(self, request):
+        context = super().get_context(request)
+        context['is_owner'] = self.is_owner(request.user)
+        context['asset'] = self
+        context['parent'] = self.get_parent()
+        context['urls'] = self.get_page_urls()
+        return context
+
     def set_slug(self):
         if self.name:
             self.slug = slugify(self.name)
@@ -88,6 +96,12 @@ class InventoryAssetPage(RoutablePageMixin, Page):
 
     def is_owner(self, user):
         return user == self.owner
+
+    def get_page_urls(self):
+        return {
+            'detail': self.url,
+            'edit': self.reverse_subpage('edit'),
+        }
 
     @path('edit/')
     def edit_asset(self, request):
