@@ -153,7 +153,7 @@ class UserInventoryPage(RoutablePageMixin, Page):
         
         return self.render(
             request,
-            template='inventory/includes/update_index.html',
+            template='inventory/includes/update_inventory.html',
             context_overrides={'form': form}
         )
 
@@ -178,7 +178,7 @@ class UserInventoryPage(RoutablePageMixin, Page):
         
         return self.render(
             request,
-            template='inventory/includes/delete_index.html',
+            template='inventory/includes/delete_inventory.html',
             context_overrides={'form': form}
         )
 

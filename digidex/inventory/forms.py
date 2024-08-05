@@ -1,8 +1,7 @@
 from django import forms
-from django.conf import settings
+from wagtail.admin.rich_text import DraftailRichTextArea
 
 from inventory.models import InventoryLink
-
 
 
 class UserInventoryForm(forms.Form):
@@ -35,6 +34,9 @@ class InventoryAssetForm(forms.Form):
                 'placeholder': "Enter the asset's description"
             }
         )
+    )
+    body = forms.CharField(
+        widget=DraftailRichTextArea(features=None)
     )
 
 
