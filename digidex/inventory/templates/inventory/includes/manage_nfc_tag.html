@@ -1,9 +1,9 @@
 {% extends "inventory/includes/base.html" %}
 
-{% block title %}Update NFC Tag{% endblock title %}
+{% block title %}Manage NFC Tag{% endblock title %}
 
 {% block content %}
-  <h3 class="account-heading">Update NFC Tag</h3>
+  <h3 class="account-heading">Manage NFC Tag</h3>
   <form method="post" class="utility-page-form base-password-page" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.non_field_errors }}
@@ -13,6 +13,12 @@
     {% if form.asset.errors %}
       <div class="error-message">
         <div class="text-error">{{ form.asset.errors|striptags }}</div>
+      </div>
+    {% endif %}
+
+    {% if asset %}
+      <div class="text-account">
+        {% blocktrans %}View linked asset: <a href="{{ asset.url }}" class="link-account">{{ asset.title }}</a>{% endblocktrans %}
       </div>
     {% endif %}
 

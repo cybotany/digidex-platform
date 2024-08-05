@@ -42,11 +42,13 @@ class NearFieldCommunicationTag(models.Model):
     def __str__(self):
         return f"NFC Tag: {self.serial_number}"
 
-    def activate_tag(self):
+    def activate_tag(self, user):
+        self.owner = user
         self.active = True
         self.save()
 
     def deactivate_tag(self):
+        self.owner = None
         self.active = False
         self.save()
 
@@ -76,12 +78,6 @@ class InventoryLink(models.Model):
         NearFieldCommunicationTag,
         on_delete=models.CASCADE,
         related_name='link'
-    )
-    url = models.URLField(
-        max_length=255,
-        editable=True,
-        null=True,
-        blank=True
     )
 
     class Meta:

@@ -201,10 +201,17 @@ class UserInventoryPage(RoutablePageMixin, Page):
         else:
             form = AssociateNtagForm(instance=inventory_link, user_inventory=self)
 
+        asset = inventory_link.asset if inventory_link.asset else None
+
+        context = {
+            'form': form,
+            'asset': asset
+        }
+
         return self.render(
             request,
-            template='inventory/includes/update_nfc_tag.html',
-            context_overrides={'form': form}
+            template='inventory/includes/manage_nfc_tag.html',
+            context_overrides=context
         )
 
 
