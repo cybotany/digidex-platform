@@ -2,15 +2,14 @@ import uuid
 
 from django.db import models, transaction
 from django.core.exceptions import PermissionDenied
-from django.shortcuts import redirect, get_object_or_404
-from django.urls import reverse
+from django.shortcuts import redirect
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 from wagtail.contrib.routable_page.models import RoutablePageMixin, path
 from wagtail.images import get_image_model
 from wagtail.documents import get_document_model
-from wagtail.models import Page, Collection, Site
+from wagtail.models import Page, Collection
 
 
 class UserInventoryPage(RoutablePageMixin, Page):
@@ -154,38 +153,6 @@ class UserInventoryPage(RoutablePageMixin, Page):
             request,
             template='inventory/includes/edit_inventory.html',
             context_overrides={'form': form}
-        )
-
-    @path('ntag/<uuid:uuid>/', name='nfc_tag')
-    def manage_nfc_tag(self, request, uuid):
-        if request.user != self.owner:
-            raise PermissionDenied
-
-        from inventory.models import NearFieldCommunicationTag, InventoryLink
-        from inventory.forms import NearFieldCommunicationLinkedTagForm as nfc_tag_form
-
-        nfc_tag = get_object_or_404(NearFieldCommunicationTag, uuid=uuid)
-        inventory_link, created = InventoryLink.objects.get_or_create(tag=nfc_tag)
-
-        if request.method == "POST":
-            form = nfc_tag_form(request.POST, instance=inventory_link, user_inventory=self)
-            if form.is_valid():
-                form.save()
-                return redirect(self.url)
-        else:
-            form = nfc_tag_form(instance=inventory_link, user_inventory=self)
-
-        asset = inventory_link.asset if inventory_link.asset else None
-
-        context = {
-            'form': form,
-            'asset': asset
-        }
-
-        return self.render(
-            request,
-            template='inventory/includes/manage_nfc_tag.html',
-            context_overrides=context
         )
 
     def save(self, *args, **kwargs):

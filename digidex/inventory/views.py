@@ -1,37 +1,65 @@
 from django.conf import settings
-from django.shortcuts import redirect, get_object_or_404
-from django.utils.text import slugify
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, get_object_or_404
+from django.utils.translation import gettext_lazy as _
 from django.views.decorators.http import require_http_methods
 
-from inventory.models import NearFieldCommunicationTag
+from django_hosts.resolvers import reverse
 
+from inventory.models import NearFieldCommunicationTag, UserInventoryPage
+from inventory.forms import NearFieldCommunicationLinkedTagForm as nfc_tag_form 
 
 @require_http_methods(["GET"])
 def link(request, uuid):
+    """
+    Sends request.user to the asset page if it exists.
+    If it doesn't exist they will be redirected
+    to the NFC tag management page.
+    """
 
-    # Fetch the NFC tag with related link and owner
     nfc_tag = get_object_or_404(
-        NearFieldCommunicationTag.objects.select_related('link', 'owner'),
+        NearFieldCommunicationTag.objects.select_related('link__asset'),
         uuid=uuid
     )
 
-    # Define base URL based on the environment
-    base_url = 'http://localhost:8000/inv' if settings.DEBUG else 'https://digidex.tech/inv'
+    if nfc_tag.link and nfc_tag.link.asset:
+        return redirect(nfc_tag.link.asset.url)
+    return redirect(reverse('manage-tag', host='default', args=[str(uuid)]))
 
-    # If the NFC Tag has no owner, redirect to the base URL
-    if nfc_tag.owner is None:
+
+@login_required
+def manage(request, uuid):
+    nfc_tag = get_object_or_404(
+        NearFieldCommunicationTag.objects.select_related('owner', 'link'),
+        uuid=uuid
+    )
+
+    base_url = 'http://localhost:8000/' if settings.DEBUG else 'https://digidex.tech/'
+    if not nfc_tag.owner:
+        messages.error(request, _('Tag not registered.'))
+        return redirect(base_url)    
+
+    if request.user != nfc_tag.owner:
+        messages.error(request, _('Tag registered by another user.'))
         return redirect(base_url)
 
-    # Generate the default URL to redirect to the owner's profile
-    linked_url = f'{base_url}/{slugify(nfc_tag.owner.username)}'
+    if not hasattr(nfc_tag, 'link'):
+        messages.error(request, _('Tag improperly configured.'))
+        return redirect(base_url)
 
-    # Redirect to the asset page if it exists
-    if nfc_tag.link and nfc_tag.link.asset:
-        return redirect(f'{linked_url}/{nfc_tag.link.asset.slug}')
+    user_inventory = get_object_or_404(UserInventoryPage, owner=request.user)
 
-    # If the request user is the owner, redirect to the NFC tag management page
-    if request.user == nfc_tag.owner:
-        return redirect(f'{linked_url}/ntag/{nfc_tag.uuid}')
+    if request.method == "POST":
+        form = nfc_tag_form(request.POST, instance=nfc_tag.link, user_inventory=user_inventory)
+        if form.is_valid():
+            form.save()
+            return redirect(user_inventory.url)
+    else:
+        form = nfc_tag_form(instance=nfc_tag.link, user_inventory=user_inventory)
 
-    # Fallback to redirect to the owner's profile
-    return redirect(linked_url)
+    return render(
+        request,
+        template='inventory/includes/manage_nfc_tag.html',
+        context={'form': form}
+    )

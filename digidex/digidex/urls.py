@@ -7,7 +7,7 @@ from wagtail import urls as wagtail_urls
 urlpatterns = [
     path("accounts/", include('allauth.urls')),
     path("search/", search, name="search"),
-    path("link/", include('inventory.urls')),
+    path("", include('inventory.urls')),
     path("", include(wagtail_urls)),
 ]
 
