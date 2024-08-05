@@ -40,7 +40,7 @@ class InventoryAssetForm(forms.Form):
 class AssociateNtagForm(forms.ModelForm):
     class Meta:
         model = InventoryLink
-        fields = ['asset']
+        fields = ['asset', 'url']
 
     def __init__(self, *args, **kwargs):
         user_inventory = kwargs.pop('user_inventory', None)
@@ -49,6 +49,7 @@ class AssociateNtagForm(forms.ModelForm):
             from inventory.models import InventoryAssetPage
             self.fields['asset'].queryset = InventoryAssetPage.objects.child_of(user_inventory)
             self.fields['asset'].widget.attrs.update({'class': 'custom-dropdown-class'})
+        self.fields['url'].widget.attrs.update({'class': 'text-field w-input'})
 
 
 class DeletionConfirmationForm(forms.Form):
