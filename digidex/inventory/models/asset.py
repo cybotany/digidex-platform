@@ -6,11 +6,7 @@ from django.http import HttpResponseRedirect
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
-from modelcluster.models import ClusterableModel
-from modelcluster.fields import ParentalKey
-
-from wagtail.models import Page, Collection, Orderable
-from wagtail.fields import RichTextField
+from wagtail.models import Page, Collection
 from wagtail.images import get_image_model
 from wagtail.documents import get_document_model
 from wagtail.search import index
@@ -68,13 +64,18 @@ class InventoryAssetPage(RoutablePageMixin, Page):
 
     def get_context(self, request):
         context = super().get_context(request)
-        journal_entries = self.journal_entries.all().order_by('-created_at')
-        context['journal_entries'] = journal_entries
+        entries = self.journal_entries.all().order_by('-created_at')
+        context['entries'] = entries
         context['is_owner'] = self.is_owner(request.user)
         context['asset'] = self
-        context['parent'] = self.get_parent()
-        context['edit_url'] = self.reverse_subpage('edit')
+        context['urls'] = self.get_urls()
         return context
+
+    def get_urls(self):
+        return {
+            'edit': self.reverse_subpage('edit'),
+            'parent': self.get_parent().url,
+        }
 
     def set_slug(self):
         if self.name:
@@ -153,63 +154,3 @@ class InventoryAssetPage(RoutablePageMixin, Page):
         verbose_name = _("user inventory asset")
         verbose_name_plural = _("user inventory assets")
 
-
-class JournalEntry(ClusterableModel):
-    page = ParentalKey(
-        InventoryAssetPage,
-        on_delete=models.deletion.CASCADE,
-        related_name='journal_entries'
-    )
-    note = RichTextField(
-        blank=True,
-        null=True
-    )
-    created_at = models.DateTimeField(
-        auto_now_add=True
-    )
-    last_modified = models.DateTimeField(
-        auto_now=True
-    )
-
-    panels = [
-        FieldPanel('note'),
-        InlinePanel('gallery_documents', label="Document"),
-        InlinePanel('gallery_images', label="Image"),
-    ]
-
-    def is_modified(self):
-        return self.created_at != self.last_modified
-
-
-class JournalGalleryDocument(Orderable):
-    journal_entry = ParentalKey(
-        JournalEntry,
-        on_delete=models.deletion.CASCADE,
-        related_name='gallery_documents'
-    )
-    document = models.ForeignKey(
-        get_document_model(),
-        on_delete=models.deletion.CASCADE,
-        related_name='+'
-    )
-
-    panels = [
-        FieldPanel('document'),
-    ]
-
-
-class JournalGalleryImage(Orderable):
-    journal_entry = ParentalKey(
-        JournalEntry,
-        on_delete=models.deletion.CASCADE,
-        related_name='gallery_images'
-    )
-    image = models.ForeignKey(
-        get_image_model(),
-        on_delete=models.deletion.CASCADE,
-        related_name='+'
-    )
-
-    panels = [
-        FieldPanel('image'),
-    ]

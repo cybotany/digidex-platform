@@ -32,7 +32,7 @@
                     {% endwith %}
                   </a>
                   <div class="post">
-                    <div class="date">{{ asset.specific.created_at }}</div>
+                    <div class="date">{{ asset.specific.created_at|date:"F j, Y" }}</div>
                     <a href="{{ asset.url }}" class="link-heading-post w-inline-block">
                       <h4 class="heading-post">{{ asset.specific.name }}</h4>
                     </a>

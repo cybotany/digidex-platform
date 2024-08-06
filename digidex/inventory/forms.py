@@ -1,6 +1,6 @@
 from django import forms
 
-from inventory.models import UserInventoryPage, InventoryAssetPage, InventoryLink
+from inventory.models import UserInventoryPage, InventoryAssetPage, InventoryLink, JournalEntry
 
 
 class UserInventoryForm(forms.ModelForm):

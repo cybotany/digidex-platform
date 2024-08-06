@@ -8,34 +8,46 @@
         <h1 class="heading-top">{{ asset.title }}</h1>
         <p class="paragraph-top blog-post">{{ asset.description }}</p>
         <div class="block-button">
-          <a href="{{ parent.url }}" class="button-small w-button">Parent page</a>
+          <a href="{{ urls.parent }}" class="button-small w-button">Parent page</a>
           {% if is_owner %}
-            <a href="{{ edit_url }}" class="button-outline-small w-button">Edit</a>
+            <a href="{{ urls.edit }}" class="button-outline-small w-button">Edit</a>
           {% endif %}
         </div>
       </div>
     </div>
   </section>
   <section class="section">
-    <div class="content narrow">
-      {% with asset.main_image as main_image %}
-        {% if main_image %}
-          {% image main_image original loading="lazy" decoding="async" alt="main_image.alt" class="image-main-post" %}
-        {% endif %}
-      {% endwith %}
-      <div class="page-body">
-        {% for entry in journal_entry %}
-          <ol>
-            <li>
-              <h3 class="heading-template">{{ entry.created_at }}</h3>
-              {% if entry.is_modified %}
-                <p class="paragraph-template"><strong>Modified: {{ entry.last_modified }}</strong><br></p>
-              {% endif %}
-            </li>
-          </ol>
-        {% empty %}
-          <p class="paragraph-template">No journal entries have been added yet.</p>
-        {% endfor %}
+    <div class="content">
+      <div class="collection-list-wrapper-posts large w-dyn-list">
+        <div role="list" class="collection-list-posts large w-dyn-items">
+          <div role="listitem" class="w-dyn-item">
+            <div class="block-post large">
+              {% with asset.main_image as main_image %}
+                {% if main_image %}
+                  {% image main_image original loading="lazy" decoding="async" alt="main_image.alt" class="image-post-thumbnail large" %}
+                {% endif %}
+              {% endwith %}
+              <div class="post large">
+                {% for entry in entries %}
+                  <ol role="list">
+                    <li role="listitem">
+                      <h4 class="heading-post">{{ entry.created_at|date:"F j, Y" }}</h4>
+                      <p class="paragraph-post">{{ entry.note|richtext }}</p>
+                    </li>
+                  </ol>
+                {% empty %}
+                  <p class="paragraph-post">No journal entries have been added yet.</p>
+                {% endfor %}
+                <a href="#" class="link-block w-inline-block">
+                  <div class="text-link">Add Entry</div>
+                  <div class="block-icon-link">
+                    <img src="{% static 'base/images/bx/arrow-green.svg' %}" alt="Green Arrow Pointing Rightwards" loading="lazy" decoding="async" class="icon-link">
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
