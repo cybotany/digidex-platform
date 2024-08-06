@@ -1,23 +1,18 @@
 from django import forms
 
-from inventory.models import UserInventoryPage, InventoryAssetPage, InventoryLink, JournalEntry
-
-
-class UserInventoryForm(forms.ModelForm):
-    class Meta:
-        model = UserInventoryPage
-        fields = ['description']
-        widgets = {
-            'description': forms.TextInput(
-                attrs={
-                    'class': 'text-field w-input',
-                    'placeholder': 'Enter a description'
-                }
-            )
-        }
+from inventory.models import InventoryAssetPage, InventoryLink
 
 
 class InventoryAssetForm(forms.ModelForm):
+    taxon_id = forms.CharField(
+        widget=forms.HiddenInput(),
+        required=False
+    )
+    species = forms.CharField(
+        max_length=255,
+        required=False,
+        label='Species'
+    )
     decouple_nfc_tag = forms.BooleanField(
         required=False,
         label="Decouple NFC TAG"
@@ -25,7 +20,7 @@ class InventoryAssetForm(forms.ModelForm):
 
     class Meta:
         model = InventoryAssetPage
-        fields = ['name', 'description']
+        fields = ['name', 'description', 'species', 'taxon_id']
         widgets = {
             'name': forms.TextInput(
                 attrs={
@@ -66,33 +61,11 @@ class InventoryAssetForm(forms.ModelForm):
             instance.save()
         return instance
 
+    def clean_species_name(self):
+        return self.cleaned_data['species']
 
-class NearFieldCommunicationTagForm(forms.ModelForm):
-
-    class Meta:
-        model = InventoryLink
-        fields = ['asset']
-
-    def __init__(self, *args, **kwargs):
-        user_inventory = kwargs.pop('user_inventory', None)
-        super().__init__(*args, **kwargs)
-        
-        if user_inventory:
-            linked_assets = InventoryLink.objects.filter(asset__isnull=False).values_list('asset_id', flat=True)
-            self.fields['asset'].queryset = InventoryAssetPage.objects.child_of(user_inventory).exclude(id__in=linked_assets)
-
-    def save(self, commit=True):
-        instance = super().save(commit=False)
-        if commit:
-            instance.save()
-
-
-class DeletionConfirmationForm(forms.Form):
-    confirmation = forms.BooleanField(
-        required=True,
-        widget=forms.CheckboxInput(
-            attrs={
-                'class': 'w-radio',
-            }
-        )
-    )
+    def clean_taxon_id(self):
+        taxon_id = self.cleaned_data['taxon_id']
+        if not taxon_id:
+            raise forms.ValidationError("You must select a valid species from the suggestions.")
+        return taxon_id

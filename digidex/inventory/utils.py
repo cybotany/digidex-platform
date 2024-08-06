@@ -5,7 +5,7 @@ from inventory.models import InventoryIndexPage
 
 def create_inventory_index():
     if InventoryIndexPage.objects.exists():
-        print("HomePage already exists. No action taken.")
+        print("InventoryIndexPage already exists. No action taken.")
         return
 
     root_collection = Collection.get_first_root_node()

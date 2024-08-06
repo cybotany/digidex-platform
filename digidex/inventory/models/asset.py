@@ -15,10 +15,10 @@ from wagtail.contrib.routable_page.models import RoutablePageMixin, path
 
 
 class InventoryAssetPage(RoutablePageMixin, Page):
-    RESERVED_KEYWORDS = ['add', 'update', 'delete', 'admin']
+    RESERVED_KEYWORDS = ['add', 'edit', 'delete', 'admin']
 
     parent_page_types = ['inventory.UserInventoryPage']
-    child_page_types = ['inventory.AssetFormPage']
+    child_page_types = []
 
     uuid = models.UUIDField(
         default=uuid.uuid4,
@@ -43,6 +43,12 @@ class InventoryAssetPage(RoutablePageMixin, Page):
         null=True,
         blank=True,
         verbose_name=_("description")
+    )
+    taxon_id = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+        verbose_name=_("Taxonomy Identifier")
     )
     created_at = models.DateTimeField(
         auto_now_add=True

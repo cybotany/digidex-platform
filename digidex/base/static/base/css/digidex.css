@@ -5314,6 +5314,22 @@ figcaption {
   font-weight: 500;
 }
 
+.suggestions {
+  border: 1px solid #ccc;
+  max-height: 150px;
+  overflow-y: auto;
+  position: absolute;
+  background: var(--background);
+  z-index: 1000;
+}
+.suggestion-item {
+  padding: 10px;
+  cursor: pointer;
+}
+.suggestion-item:hover {
+  background: #f0f0f0;
+}
+
 #hero-content,
 #hero-lottie,
 #lottie-feature-1,
