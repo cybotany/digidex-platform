@@ -10,6 +10,7 @@ from modelcluster.models import ClusterableModel
 from modelcluster.fields import ParentalKey
 
 from wagtail.models import Page, Collection, Orderable
+from wagtail.fields import RichTextField
 from wagtail.images import get_image_model
 from wagtail.documents import get_document_model
 from wagtail.search import index
@@ -156,8 +157,13 @@ class AssetJournalEntry(ClusterableModel):
         on_delete=models.deletion.CASCADE,
         related_name='+'
     )
-    date = models.DateField("Journal Entry Date")
-    note = models.TextField()
+    date = models.DateField(
+        verbose_name="Journal Entry Date"
+    )
+    note = RichTextField(
+        blank=True,
+        null=True
+    )
     created_at = models.DateTimeField(
         auto_now_add=True
     )
