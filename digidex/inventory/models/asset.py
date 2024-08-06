@@ -63,10 +63,13 @@ class InventoryAssetPage(RoutablePageMixin, Page):
     content_panels = Page.content_panels + [
         FieldPanel('name'),
         FieldPanel('description'),
+        InlinePanel('journal_entries', label="Journal entries"),
     ]
 
     def get_context(self, request):
         context = super().get_context(request)
+        journal_entries = self.journal_entries.all().order_by('-created_at')
+        context['journal_entries'] = journal_entries
         context['is_owner'] = self.is_owner(request.user)
         context['asset'] = self
         context['parent'] = self.get_parent()
@@ -151,14 +154,11 @@ class InventoryAssetPage(RoutablePageMixin, Page):
         verbose_name_plural = _("user inventory assets")
 
 
-class AssetJournalEntry(ClusterableModel):
-    page = models.ForeignKey(
+class JournalEntry(ClusterableModel):
+    page = ParentalKey(
         InventoryAssetPage,
         on_delete=models.deletion.CASCADE,
-        related_name='+'
-    )
-    date = models.DateField(
-        verbose_name="Journal Entry Date"
+        related_name='journal_entries'
     )
     note = RichTextField(
         blank=True,
@@ -171,17 +171,19 @@ class AssetJournalEntry(ClusterableModel):
         auto_now=True
     )
 
-    content_panels = Page.content_panels + [
-        FieldPanel('date'),
+    panels = [
         FieldPanel('note'),
-        InlinePanel('gallery_documents', label="Gallery documents"),
-        InlinePanel('gallery_images', label="Gallery images"),
+        InlinePanel('gallery_documents', label="Document"),
+        InlinePanel('gallery_images', label="Image"),
     ]
+
+    def is_modified(self):
+        return self.created_at != self.last_modified
 
 
 class JournalGalleryDocument(Orderable):
     journal_entry = ParentalKey(
-        AssetJournalEntry,
+        JournalEntry,
         on_delete=models.deletion.CASCADE,
         related_name='gallery_documents'
     )
@@ -198,7 +200,7 @@ class JournalGalleryDocument(Orderable):
 
 class JournalGalleryImage(Orderable):
     journal_entry = ParentalKey(
-        AssetJournalEntry,
+        JournalEntry,
         on_delete=models.deletion.CASCADE,
         related_name='gallery_images'
     )

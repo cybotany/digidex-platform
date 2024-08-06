@@ -5,7 +5,6 @@
   <section class="section-top padding-0">
     <div class="content">
       <div class="block-top">
-        <div class="date-top">{{ asset.created_at }}</div>
         <h1 class="heading-top">{{ asset.title }}</h1>
         <p class="paragraph-top blog-post">{{ asset.description }}</p>
         <div class="block-button">
@@ -22,12 +21,21 @@
       {% with asset.main_image as main_image %}
         {% if main_image %}
           {% image main_image original loading="lazy" decoding="async" alt="main_image.alt" class="image-main-post" %}
-        {% else %}
-          <img src="{% static 'base/images/google/plant.svg' %}" loading="lazy" decoding="async" alt="Asset Thumbnail Placeholder" class="image-main-post">
         {% endif %}
       {% endwith %}
-      <div class="post-body">
-        <div class="rich-text-block w-dyn-bind-empty w-richtext"></div>
+      <div class="page-body">
+        {% for entry in journal_entry %}
+          <ol>
+            <li>
+              <h3 class="heading-template">{{ entry.created_at }}</h3>
+              {% if entry.is_modified %}
+                <p class="paragraph-template"><strong>Modified: {{ entry.last_modified }}</strong><br></p>
+              {% endif %}
+            </li>
+          </ol>
+        {% empty %}
+          <p class="paragraph-template">No journal entries have been added yet.</p>
+        {% endfor %}
       </div>
     </div>
   </section>
