@@ -35,7 +35,7 @@ class ContactPage(AbstractEmailForm):
         form = super().get_form(*args, **kwargs)
         for name, field in form.fields.items():
             if isinstance(field.widget, widgets.Input):
-                field.widget.attrs.update({'class': 'text-field base-input'})
+                field.widget.attrs.update({'class': 'text-field w-input'})
             if isinstance(field.widget, widgets.Textarea):
                 field.widget.attrs.update({'class': 'text-field textarea'})       
         return form

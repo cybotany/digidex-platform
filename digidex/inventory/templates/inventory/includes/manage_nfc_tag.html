@@ -4,11 +4,11 @@
 
 {% block content %}
   <h3 class="account-heading">Manage NFC Tag</h3>
-  <form method="post" class="utility-page-form base-password-page" enctype="multipart/form-data">
+  <form method="post" class="utility-page-form w-password-page" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.non_field_errors }}
     
-    <label class="field-label" for="{{ form.asset.id_for_label }}">Asset:</label>
+    <label for="{{ form.asset.id_for_label }}">Asset:</label>
     {{ form.asset }}
     {% if form.asset.errors %}
       <div class="error-message">
@@ -20,6 +20,6 @@
       <div class="text-account">View linked asset: <a href="{{ asset.url }}" class="link-account">{{ asset.title }}</a></div>
     {% endif %}
 
-    <input type="submit" value="Submit" class="submit-button base-button"> 
+    <input type="submit" value="Submit" class="submit-button w-button"> 
   </form>
 {% endblock content %}

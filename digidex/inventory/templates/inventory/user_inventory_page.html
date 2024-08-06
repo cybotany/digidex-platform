@@ -7,11 +7,8 @@
       <div class="block-top">
         <h1 class="heading-top">{{ page.title }}</h1>
         {% if is_owner %}
-          <div class="block-categories">
-            <a href="{{ urls.add }}" class="link-category w-inline-block w--current">
-              <img src="{% static 'base/images/google/add-circle.svg' %}" alt="Add Asset Icon" loading="lazy" decoding="async" class="icon-category">
-              <div class="text-category">Add Asset</div>
-            </a>
+          <div class="block-button">
+            <a href="{{ edit_url }}" class="button-outline-small w-button">Edit</a>
           </div>
         {% endif %}
       </div>

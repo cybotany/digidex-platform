@@ -4,11 +4,11 @@
 
 {% block content %}
   <h3 class="account-heading">Edit Asset</h3>
-  <form method="post" class="utility-page-form base-password-page" enctype="multipart/form-data">
+  <form method="post" class="utility-page-form w-password-page" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.non_field_errors }}
     
-    <label class="field-label" for="{{ form.name.id_for_label }}">Name:</label>
+    <label for="{{ form.name.id_for_label }}">Name:</label>
     {{ form.name }}
     {% if form.name.errors %}
       <div class="error-message">
@@ -16,24 +16,28 @@
       </div>
     {% endif %}
 
-    <label class="field-label" for="{{ form.description.id_for_label }}">Description:</label>
+    <label for="{{ form.description.id_for_label }}">Description</label>
     {{ form.description }}
     {% if form.description.errors %}
       <div class="error-message">
         <div class="text-error">{{ form.description.errors|striptags }}</div>
       </div>
     {% endif %}
+
+    <input type="submit" value="Submit" class="submit-button w-button">
   
     {% if show_decoupling_checkbox %}
-      <label class="field-label" for="{{ form.decouple_nfc_tag.id_for_label }}">Decouple NFC TAG:</label>
-      {{ form.decouple_nfc_tag }}
+      <div class="w-commerce-commercecheckoutbillingaddresstogglewrapper billing-address-toggle">
+        <div class="w-commerce-commercecheckoutbillingaddresstogglewrapper billing-address-toggle">
+          {{ form.decouple_nfc_tag }}
+        </div>
+        <label class="w-commerce-commercecheckoutbillingaddresstogglelabel" for="{{ form.decouple_nfc_tag.id_for_label }}">Decouple NFC TAG</label>
+      </div>
       {% if form.decouple_nfc_tag.errors %}
         <div class="error-message">
           <div class="text-error">{{ form.decouple_nfc_tag.errors|striptags }}</div>
         </div>
       {% endif %}
     {% endif %}
-
-    <input type="submit" value="Submit" class="submit-button base-button"> 
   </form>
 {% endblock content %}

@@ -18,7 +18,7 @@
           <form class="form" action="{% pageurl page %}" method="POST">
             {% csrf_token %}
 
-            <label class="field-label" for="{{ form.name.id_for_label }}">Name</label>
+            <label for="{{ form.name.id_for_label }}">Name</label>
             {{ form.name }}
             {% if form.name.errors %}
               <div class="error-message w-form-fail">
@@ -26,7 +26,7 @@
               </div>
             {% endif %}
 
-            <label class="field-label" for="{{ form.email.id_for_label }}">Email</label>
+            <label for="{{ form.email.id_for_label }}">Email</label>
             {{ form.email }}
             {% if form.email.errors %}
               <div class="error-message w-form-fail">
@@ -34,7 +34,7 @@
               </div>
             {% endif %}
 
-            <label class="field-label" for="{{ form.message.id_for_label }}">Message</label>
+            <label for="{{ form.message.id_for_label }}">Message</label>
             {{ form.message }}
             {% if form.message.errors %}
               <div class="error-message w-form-fail">

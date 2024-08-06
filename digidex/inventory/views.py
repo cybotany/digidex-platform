@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views.decorators.http import require_http_methods
 
 from inventory.models import NearFieldCommunicationTag, UserInventoryPage
-from inventory.forms import NearFieldCommunicationLinkedTagForm as nfc_tag_form 
+from inventory.forms import NearFieldCommunicationTagForm as nfc_tag_form 
 
 @require_http_methods(["GET"])
 def link(request, uuid):

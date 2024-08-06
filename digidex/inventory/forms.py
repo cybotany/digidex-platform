@@ -48,6 +48,9 @@ class InventoryAssetForm(forms.ModelForm):
                 required=False,
                 label="Decouple NFC TAG"
             )
+            self.fields['decouple_nfc_tag'].widget.attrs.update(
+                {'class': 'w-commerce-commercecheckoutbillingaddresstogglecheckbox'}
+            )
 
     def save(self, commit=True):
         instance = super().save(commit=False)
@@ -64,7 +67,7 @@ class InventoryAssetForm(forms.ModelForm):
         return instance
 
 
-class NearFieldCommunicationLinkedTagForm(forms.ModelForm):
+class NearFieldCommunicationTagForm(forms.ModelForm):
 
     class Meta:
         model = InventoryLink
@@ -77,7 +80,6 @@ class NearFieldCommunicationLinkedTagForm(forms.ModelForm):
         if user_inventory:
             linked_assets = InventoryLink.objects.filter(asset__isnull=False).values_list('asset_id', flat=True)
             self.fields['asset'].queryset = InventoryAssetPage.objects.child_of(user_inventory).exclude(id__in=linked_assets)
-            # self.fields['asset'].widget.attrs.update({'class': 'custom-dropdown-class'})
 
     def save(self, commit=True):
         instance = super().save(commit=False)
