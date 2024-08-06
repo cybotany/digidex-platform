@@ -3,20 +3,25 @@ import uuid
 from django.db import models, transaction
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect
-from django.urls import reverse
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
-from wagtail.contrib.routable_page.models import RoutablePageMixin, path
+from modelcluster.models import ClusterableModel
+from modelcluster.fields import ParentalKey
+
+from wagtail.models import Page, Collection, Orderable
 from wagtail.images import get_image_model
 from wagtail.documents import get_document_model
-from wagtail.models import Page, Collection, Site
+from wagtail.search import index
+from wagtail.admin.panels import FieldPanel, InlinePanel
+from wagtail.contrib.routable_page.models import RoutablePageMixin, path
 
 
 class InventoryAssetPage(RoutablePageMixin, Page):
-    parent_page_types = [
-        'inventory.UserInventoryPage'
-    ]
+    RESERVED_KEYWORDS = ['add', 'update', 'delete', 'admin']
+
+    parent_page_types = ['inventory.UserInventoryPage']
+    child_page_types = ['inventory.AssetFormPage']
 
     uuid = models.UUIDField(
         default=uuid.uuid4,
@@ -49,7 +54,15 @@ class InventoryAssetPage(RoutablePageMixin, Page):
         auto_now=True
     )
 
-    RESERVED_KEYWORDS = ['add', 'update', 'delete', 'admin']
+    search_fields = Page.search_fields + [
+        index.SearchField('name'),
+        index.SearchField('description'),
+    ]
+
+    content_panels = Page.content_panels + [
+        FieldPanel('name'),
+        FieldPanel('description'),
+    ]
 
     def get_context(self, request):
         context = super().get_context(request)
@@ -135,3 +148,60 @@ class InventoryAssetPage(RoutablePageMixin, Page):
     class Meta:
         verbose_name = _("user inventory asset")
         verbose_name_plural = _("user inventory assets")
+
+
+class AssetJournalEntry(ClusterableModel):
+    page = models.ForeignKey(
+        InventoryAssetPage,
+        on_delete=models.deletion.CASCADE,
+        related_name='+'
+    )
+    date = models.DateField("Journal Entry Date")
+    note = models.TextField()
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+    last_modified = models.DateTimeField(
+        auto_now=True
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel('date'),
+        FieldPanel('note'),
+        InlinePanel('gallery_documents', label="Gallery documents"),
+        InlinePanel('gallery_images', label="Gallery images"),
+    ]
+
+
+class JournalGalleryDocument(Orderable):
+    journal_entry = ParentalKey(
+        AssetJournalEntry,
+        on_delete=models.deletion.CASCADE,
+        related_name='gallery_documents'
+    )
+    document = models.ForeignKey(
+        get_document_model(),
+        on_delete=models.deletion.CASCADE,
+        related_name='+'
+    )
+
+    panels = [
+        FieldPanel('document'),
+    ]
+
+
+class JournalGalleryImage(Orderable):
+    journal_entry = ParentalKey(
+        AssetJournalEntry,
+        on_delete=models.deletion.CASCADE,
+        related_name='gallery_images'
+    )
+    image = models.ForeignKey(
+        get_image_model(),
+        on_delete=models.deletion.CASCADE,
+        related_name='+'
+    )
+
+    panels = [
+        FieldPanel('image'),
+    ]

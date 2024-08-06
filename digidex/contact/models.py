@@ -2,21 +2,18 @@ from django.db import models
 from django.forms import widgets
 
 from modelcluster.fields import ParentalKey
-from wagtail.admin.panels import (
-    FieldPanel,
-    FieldRowPanel,
-    InlinePanel,
-    MultiFieldPanel,
-)
+from wagtail.admin.panels import FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel
 from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 from wagtail.contrib.forms.panels import FormSubmissionsPanel
 
 
 class ContactPage(AbstractEmailForm):
+    parent_page_types = ['home.HomePage']
+    child_page_types = []
 
     content_panels = AbstractEmailForm.content_panels + [
         FormSubmissionsPanel(),
-        InlinePanel('form_fields', label="Form fields"),
+        InlinePanel('contact_form_fields', label="Form fields"),
         MultiFieldPanel(
             [
                 FieldRowPanel(
@@ -40,10 +37,13 @@ class ContactPage(AbstractEmailForm):
                 field.widget.attrs.update({'class': 'text-field textarea'})       
         return form
 
+    def get_form_fields(self):
+        return self.contact_form_fields.all()
+
 
 class ContactField(AbstractFormField):
     page = ParentalKey(
         ContactPage,
         on_delete=models.CASCADE,
-        related_name='form_fields'
+        related_name='contact_form_fields'
     )

@@ -39,6 +39,7 @@ class BlogIndexPage(Page):
 
 
 class BlogPageTag(TaggedItemBase):
+
     content_object = ParentalKey(
         'BlogPage',
         related_name='tagged_items',
@@ -47,6 +48,8 @@ class BlogPageTag(TaggedItemBase):
 
 
 class BlogTagIndexPage(Page):
+    parent_page_types = ['home.HomePage']
+    child_page_types = []
 
     def get_context(self, request):
         tag = request.GET.get('tag')
