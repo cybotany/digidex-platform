@@ -53,7 +53,6 @@ INSTALLED_APPS = [
     "search",
     "api",
     "storages",
-    "whitenoise.runserver_nostatic",
 
     "wagtail.contrib.settings",
     "wagtail.contrib.forms",
@@ -92,7 +91,6 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
     "allauth.account.middleware.AccountMiddleware",
     "django_hosts.middleware.HostsResponseMiddleware",
@@ -185,7 +183,7 @@ AWS_S3_FILE_OVERWRITE = False
 
 MEDIA_URL = '{}/media/'.format(AWS_S3_CUSTOM_DOMAIN)
 STATIC_URL = '{}/static/'.format(AWS_S3_CUSTOM_DOMAIN)
-STATIC_HOST = AWS_S3_CUSTOM_DOMAIN
+
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 STATICFILES_FINDERS = [
@@ -197,7 +195,7 @@ STORAGES = {
         "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
     },
 }
 
