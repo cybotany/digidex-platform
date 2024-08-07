@@ -41,6 +41,7 @@ STORAGES = {
             'region_name': AWS_S3_REGION_NAME,
             'bucket_name': AWS_STORAGE_BUCKET_NAME_MEDIA,
             'endpoint_url': AWS_S3_ENDPOINT_URL,
+            'location': 'media',
             'default_acl': 'private',
             'querystring_auth': True,
             'file_overwrite': True,
@@ -57,6 +58,7 @@ STORAGES = {
             'region_name': AWS_S3_REGION_NAME,
             'bucket_name': AWS_STORAGE_BUCKET_NAME_STATIC,
             'endpoint_url': AWS_S3_ENDPOINT_URL,
+            'location': 'static',
             'default_acl': 'public-read',
             'querystring_auth': False,
             'file_overwrite': True,
@@ -70,6 +72,8 @@ STORAGES = {
 MEDIA_URL = f'https://{AWS_STORAGE_BUCKET_NAME_MEDIA}.{AWS_S3_ENDPOINT_URL}/'
 
 STATIC_URL = f'{AWS_S3_CUSTOM_DOMAIN}/'
+
+STATIC_ROOT = 'static/'
 
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
