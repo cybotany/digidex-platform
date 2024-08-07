@@ -288,7 +288,7 @@ WAGTAIL_SITE_NAME = "DigiDex"
 
 WAGTAILIMAGES_IMAGE_MODEL = 'base.BaseImage'
 
-WAGTAILIMAGES_EXTENSIONS = ['gif', 'jpg', 'jpeg', 'png', 'webp', 'svg']
+WAGTAILIMAGES_EXTENSIONS = ['gif', 'jpg', 'jpeg', 'png', 'webp']
 
 WAGTAILSEARCH_BACKENDS = {
     "default": {
