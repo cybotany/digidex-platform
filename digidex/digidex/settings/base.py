@@ -14,32 +14,8 @@ PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
-ROOT_HOSTCONF = 'digidex.hosts'
-
-DEFAULT_HOST = 'default'
-
-PARENT_HOST = os.getenv('PARENT_HOST')
-
-ROOT_URLCONF = "digidex.urls"
-
-API_URL = f"api.{PARENT_HOST}"
-ADMIN_URL = f"admin.{PARENT_HOST}"
-CMS_URL = f"cms.{PARENT_HOST}"
-WWW_URL = f"www.{PARENT_HOST}"
-
-ALLOWED_HOSTS = [
-    PARENT_HOST,
-
-    API_URL,
-    ADMIN_URL,
-    CMS_URL,
-    WWW_URL,
-]
-
 INSTALLED_APPS = [
-    "django_hosts",
     "laces",
-    "treebeard",
     "modelcluster",
     "taggit",
 
@@ -83,7 +59,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    "django_hosts.middleware.HostsRequestMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -93,7 +68,6 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
     "allauth.account.middleware.AccountMiddleware",
-    "django_hosts.middleware.HostsResponseMiddleware",
 ]
 
 TEMPLATES = [

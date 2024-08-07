@@ -3,8 +3,7 @@ import uuid
 from django.db import models, transaction
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
-from django_hosts.resolvers import reverse
-
+from django.urls import reverse
 from inventory.validators import validate_serial_number
 
 
@@ -61,7 +60,7 @@ class NearFieldCommunicationTag(models.Model):
         return link
 
     def get_mapping_url(self):
-        return reverse('link-tag', host='default', args=[str(self.uuid)])
+        return reverse('link-tag', args=[str(self.uuid)])
 
     class Meta:
         verbose_name = "near field communication tag"

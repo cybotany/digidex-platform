@@ -1,13 +1,17 @@
 from django.conf import settings
 from django.urls import include, path
 
-from search.views import search
-from wagtail import urls as wagtail_urls
+from wagtail.admin import urls as cms_urls
 from wagtail.documents import urls as wagtaildocs_urls
+from wagtail import urls as wagtail_urls
+
+from search.views import search
 
 urlpatterns = [
+    path("api/", include('api.urls')),
     path("accounts/", include('allauth.urls')),
     path("search/", search, name="search"),
+    path("admin/", include(cms_urls)),
     path('documents/', include(wagtaildocs_urls)),
     path("", include('inventory.urls')),
     path("", include(wagtail_urls)),
