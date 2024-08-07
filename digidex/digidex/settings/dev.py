@@ -2,6 +2,8 @@ from .base import *
 
 DEBUG = True
 
+INSTALLED_APPS.append("whitenoise.runserver_nostatic")
+
 HOST_SCHEME = 'http'
 
 HOSTNAME = "localhost"
@@ -12,6 +14,21 @@ ALLOWED_HOSTS = [
 ]
 
 WAGTAILADMIN_BASE_URL = f"{HOST_SCHEME}://{HOSTNAME}"
+
+STORAGES = {
+    'default': {
+        'BACKEND': 'django.core.files.storage.FileSystemStorage'
+    },
+    'staticfiles': {
+        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    }
+}
+
+MIDDLEWARE.append("whitenoise.middleware.WhiteNoiseMiddleware")
+
+MEDIA_URL = '/media/'
+
+STATIC_URL = '/static/'
 
 SECURE_PROXY_SSL_HEADER = None
 
