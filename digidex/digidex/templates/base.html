@@ -36,6 +36,7 @@
         <img src="{% static 'base/images/logos/logo.svg' %}" alt="Digidex Logo" class="logo">
       </a>
       {% block content %}{% endblock content %}
-    {% endblock body %}    
+    {% endblock body %}
+    {% block extra_body %}{% endblock extra_body %}
   </body>
 </html>

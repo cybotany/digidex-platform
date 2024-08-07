@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const speciesInput = document.querySelector('input[name="species"]');
-    const taxonInput = document.querySelector('input[name="taxon_id"]');
+    const speciesInput = document.getElementById('id_species');
+    const taxonInput = document.getElementById('id_taxon_id');
     const suggestionsContainer = document.createElement('div');
     suggestionsContainer.classList.add('suggestions');
     document.body.appendChild(suggestionsContainer);

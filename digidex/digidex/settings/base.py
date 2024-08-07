@@ -185,7 +185,7 @@ AWS_S3_FILE_OVERWRITE = False
 
 MEDIA_URL = '{}/media/'.format(AWS_S3_CUSTOM_DOMAIN)
 STATIC_URL = '{}/static/'.format(AWS_S3_CUSTOM_DOMAIN)
-
+STATIC_HOST = AWS_S3_CUSTOM_DOMAIN
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 STATICFILES_FINDERS = [
