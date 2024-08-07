@@ -3,10 +3,14 @@ from django.http import JsonResponse
 from inventory.models import GBIFSpecies
 
 
-def species_autocomplete(request):
-    query = request.GET.get('query', '')
+def species_name_suggestion(request):
+    query = request.GET.get('q', '')
     if query:
-        response = GBIFSpecies.name_suggest(q=query, limit=10)
-        suggestions = [{'taxon_id': item['key'], 'name': item['scientificName']} for item in response]
-        return JsonResponse(suggestions, safe=False)
-    return JsonResponse([], safe=False)
+        results = GBIFSpecies.name_suggest(q=query, limit=20)
+        suggestions = [
+            {'id': result['key'], 'text': result['scientificName']}
+            for result in results
+        ]
+    else:
+        suggestions = []
+    return JsonResponse({'results': suggestions})
