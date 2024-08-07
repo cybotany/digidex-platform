@@ -1,37 +1,25 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const speciesInput = document.getElementById('id_species');
-    const taxonInput = document.getElementById('id_taxon_id');
-    const suggestionsContainer = document.createElement('div');
-    suggestionsContainer.classList.add('suggestions');
-    document.body.appendChild(suggestionsContainer);
-
-    speciesInput.addEventListener('input', function() {
-        const query = speciesInput.value;
-        if (query.length > 2) {
-            fetch(`/species-autocomplete/?query=${query}`)
-                .then(response => response.json())
-                .then(data => {
-                    suggestionsContainer.innerHTML = '';
-                    data.forEach(item => {
-                        const suggestionItem = document.createElement('div');
-                        suggestionItem.classList.add('suggestion-item');
-                        suggestionItem.textContent = item.name;
-                        suggestionItem.addEventListener('click', () => {
-                            speciesInput.value = item.name;
-                            taxonInput.value = item.taxon_id;
-                            suggestionsContainer.innerHTML = '';
-                        });
-                        suggestionsContainer.appendChild(suggestionItem);
-                    });
-                });
-        } else {
-            suggestionsContainer.innerHTML = '';
-        }
-    });
-
-    document.addEventListener('click', (event) => {
-        if (!suggestionsContainer.contains(event.target) && event.target !== speciesInput) {
-            suggestionsContainer.innerHTML = '';
-        }
+$(document).ready(function() {
+    $('#species-select').select2({
+        ajax: {
+            url: '/species-autocomplete/',
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                return {
+                    q: params.term, // search term
+                };
+            },
+            processResults: function (data) {
+                return {
+                    results: data.results
+                };
+            },
+            cache: true
+        },
+        minimumInputLength: 2,
+        placeholder: 'Search for a species',
+    }).on('select2:select', function (e) {
+        var data = e.params.data;
+        $('#id_taxon_id').val(data.id);
     });
 });

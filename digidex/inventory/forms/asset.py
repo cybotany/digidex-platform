@@ -61,11 +61,9 @@ class InventoryAssetForm(forms.ModelForm):
             instance.save()
         return instance
 
-    def clean_species_name(self):
-        return self.cleaned_data['species']
-
-    def clean_taxon_id(self):
-        taxon_id = self.cleaned_data['taxon_id']
+    def clean(self):
+        cleaned_data = super().clean()
+        taxon_id = cleaned_data.get('taxon_id')
         if not taxon_id:
             raise forms.ValidationError("You must select a valid species from the suggestions.")
-        return taxon_id
+        return cleaned_data

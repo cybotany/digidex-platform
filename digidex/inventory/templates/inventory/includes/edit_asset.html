@@ -32,6 +32,9 @@
         <div class="text-error">{{ form.species.errors|striptags }}</div>
       </div>
     {% endif %}
+
+    <select id="species-select" name="species" style="width: 300px;">
+    </select>
   
     {{ form.taxon_id }}
     <input type="submit" value="Submit" class="submit-button w-button">
