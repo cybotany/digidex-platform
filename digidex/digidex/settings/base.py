@@ -168,37 +168,64 @@ USE_TZ = True
 
 WAGTAIL_I18N_ENABLED = True
 
-# Default storage settings
-AWS_STORAGE_BUCKET_NAME = os.getenv("SPACES_BUCKET_NAME")
-AWS_S3_REGION_NAME = os.getenv("SPACES_REGION_NAME")
-AWS_S3_ENDPOINT_URL = os.getenv("SPACES_ENDPOINT_URL")
-AWS_S3_CUSTOM_DOMAIN = os.getenv('SPACES_CUSTOM_DOMAIN')
+# Common S3 settings
 AWS_ACCESS_KEY_ID = os.getenv("SPACES_ACCESS_KEY")
 AWS_SECRET_ACCESS_KEY = os.getenv("SPACES_SECRET_KEY")
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
+AWS_S3_REGION_NAME = os.getenv("SPACES_REGION_NAME")
+AWS_S3_ENDPOINT_URL = f'https://{AWS_S3_REGION_NAME}.digitaloceanspaces.com'
+
+# Media Files S3 Configuration
+AWS_STORAGE_BUCKET_NAME_MEDIA = os.getenv("MEDIA_SPACES_BUCKET_NAME")
+
+# Static Files S3 Configuration
+AWS_STORAGE_BUCKET_NAME_STATIC = os.getenv("STATIC_SPACES_BUCKET_NAME")
+
+# CDN Configuration
+AWS_S3_CUSTOM_DOMAIN = 'cdn.digidex.tech'
+
+STORAGES = {
+    'default': {
+        'BACKEND': 'storages.backends.s3boto3.S3Boto3Storage',
+        'OPTIONS': {
+            'access_key': AWS_ACCESS_KEY_ID,
+            'secret_key': AWS_SECRET_ACCESS_KEY,
+            'region_name': AWS_S3_REGION_NAME,
+            'bucket_name': AWS_STORAGE_BUCKET_NAME_MEDIA,
+            'endpoint_url': AWS_S3_ENDPOINT_URL,
+            'default_acl': 'private',
+            'querystring_auth': True,
+            'file_overwrite': True,
+            'object_parameters': {
+                'CacheControl': 'max-age=86400',
+            },
+        }
+    },
+    'staticfiles': {
+        'BACKEND': 'storages.backends.s3boto3.S3Boto3Storage',
+        'OPTIONS': {
+            'access_key': AWS_ACCESS_KEY_ID,
+            'secret_key': AWS_SECRET_ACCESS_KEY,
+            'region_name': AWS_S3_REGION_NAME,
+            'bucket_name': AWS_STORAGE_BUCKET_NAME_STATIC,
+            'endpoint_url': AWS_S3_ENDPOINT_URL,
+            'default_acl': 'public-read',
+            'querystring_auth': False,
+            'file_overwrite': True,
+            'object_parameters': {
+                'CacheControl': 'max-age=86400',
+            },
+        }
+    }
 }
-AWS_DEFAULT_ACL = 'public-read'
 
-AWS_S3_FILE_OVERWRITE = False
-
-MEDIA_URL = '{}/media/'.format(AWS_S3_CUSTOM_DOMAIN)
-STATIC_URL = '{}/static/'.format(AWS_S3_CUSTOM_DOMAIN)
+MEDIA_URL = f'https://{AWS_STORAGE_BUCKET_NAME_MEDIA}.{AWS_S3_ENDPOINT_URL}/'
+STATIC_URL = f'{AWS_S3_CUSTOM_DOMAIN}/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
-
-STORAGES = {
-    "default": {
-        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
-    },
-    "staticfiles": {
-        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
-    },
-}
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (

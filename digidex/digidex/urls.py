@@ -3,10 +3,12 @@ from django.urls import include, path
 
 from search.views import search
 from wagtail import urls as wagtail_urls
+from wagtail.documents import urls as wagtaildocs_urls
 
 urlpatterns = [
     path("accounts/", include('allauth.urls')),
     path("search/", search, name="search"),
+    path('documents/', include(wagtaildocs_urls)),
     path("", include('inventory.urls')),
     path("", include(wagtail_urls)),
 ]
