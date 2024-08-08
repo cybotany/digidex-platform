@@ -7,7 +7,7 @@ def species_name_suggestion(request):
     if query:
         results = Species.name_suggest(q=query, limit=20)
         suggestions = [
-            {'id': result['key'], 'text': result['scientificName']} for result in results
+            {'id': result['taxonID'], 'text': result['vernacularName']} for result in results
         ]
     else:
         suggestions = []
@@ -18,7 +18,7 @@ def species_name_lookup(request):
     if query:
         results = Species.name_lookup(q=query, limit=10)
         suggestions = [
-            {'id': result.get('canonicalName', ''), 'text': result.get('canonicalName', '')} for result in results.get('results', [])
+            {'id': result.get('taxonID', ''), 'text': result.get('vernacularName', '')} for result in results.get('results', [])
         ]
     else:
         suggestions = []

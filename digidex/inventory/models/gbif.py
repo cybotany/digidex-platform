@@ -1,12 +1,30 @@
 from queryish.rest import APIModel
+from queryish.rest import APIQuerySet
 
 from pygbif import species
 
+class SpeciesAPIQuerySet(APIQuerySet):
+    
+    def run_count(self):
+        response_json = self.get_response_json()
+        count = response_json.get("count")
+        
+        if count is None:
+            count = len(response_json.get("results", []))
+        
+        self._count = count
+        return count
 
 class Species(APIModel):
+    base_query_class = SpeciesAPIQuerySet
+
     class Meta:
         base_url = "https://api.gbif.org/v1/species/"
-        fields = ["key", "scientificName", "rank", "status", "kingdom", "phylum", "class", "order", "family", "genus"]
+        fields = [
+            "taxonID", "kingdom", "kingdomKey",
+            "scientificName", "canonicalName", "vernacularName",
+            "nameType", "rank", "taxonomicStatus",
+        ]
         pagination_style = "offset-limit"
         limit_query_param = "limit"
         offset_query_param = "offset"
