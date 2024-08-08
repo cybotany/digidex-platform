@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.contrib.auth.models import Group, Permission
 from django.contrib.auth import get_user_model
 from django.db.models.signals import post_save
@@ -33,12 +34,13 @@ def new_user_setup(sender, instance, created, **kwargs):
 
         # Fetch all necessary permissions once
         permissions = Permission.objects.filter(
-            codename__in=[
+            Q(codename__in=[
                 'add_trainerinventorypage', 'change_trainerinventorypage', 'delete_trainerinventorypage', 'publish_trainerinventorypage',
                 'add_document', 'change_document', 'choose_document',
                 'add_image', 'change_image', 'choose_image',
                 'add_collection', 'change_collection', 'delete_collection'
-            ]
+            ]) |
+            Q(name='Can access Wagtail admin')
         )
 
         # Assign permissions to the group

@@ -1,12 +1,12 @@
 $(document).ready(function() {
     $('#species-select').select2({
         ajax: {
-            url: '/species-lookup/',  // Ensure the URL matches your view URL configuration
+            url: 'ajax//species-lookup/',
             dataType: 'json',
             delay: 250,
             data: function (params) {
                 return {
-                    term: params.term,  // Updated to match the expected parameter name
+                    term: params.term,
                 };
             },
             processResults: function (data) {

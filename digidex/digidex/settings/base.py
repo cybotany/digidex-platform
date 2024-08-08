@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     "laces",
     "modelcluster",
     "taggit",
+    "queryish",
 
     "base",
     "home",

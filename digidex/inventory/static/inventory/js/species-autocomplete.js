@@ -1,12 +1,12 @@
 $(document).ready(function() {
     $('#species-select').select2({
         ajax: {
-            url: '/species-autocomplete/',
+            url: 'ajax//species-autocomplete/',
             dataType: 'json',
             delay: 250,
             data: function (params) {
                 return {
-                    q: params.term, // search term
+                    q: params.term,
                 };
             },
             processResults: function (data) {
