@@ -11,7 +11,7 @@ urlpatterns = [
     path("api/", include('api.urls')),
     path("accounts/", include('allauth.urls')),
     path("search/", search, name="search"),
-    path("admin/", include(cms_urls)),
+    path("cms/", include(cms_urls)),
     path('documents/', include(wagtaildocs_urls)),
     path("", include('inventory.urls')),
     path("", include(wagtail_urls)),

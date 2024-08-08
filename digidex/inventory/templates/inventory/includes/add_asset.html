@@ -1,4 +1,5 @@
 {% extends "inventory/includes/base.html" %}
+{% load static %}
 
 {% block title %}Add Asset{% endblock title %}
 
@@ -24,6 +25,15 @@
       </div>
     {% endif %}
 
+    <select id="species-select" name="species" class="text-field w-input">
+    </select>
+   
+    {{ form.taxon_id }}
+
     <input type="submit" value="Create" class="submit-button w-button"> 
   </form>     
 {% endblock content %}
+
+{% block extra_body %}
+  <script src="{% static 'inventory/js/species-autocomplete.js' %}"></script>
+{% endblock extra_body %}
