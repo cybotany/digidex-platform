@@ -9,6 +9,7 @@ class NearFieldCommunicationTagViewSet(SnippetViewSet):
 
     panels = [
         MultiFieldPanel([
+            FieldPanel("label"),
             FieldPanel("type"),
             FieldPanel("form"),
         ], heading="NFC Tag Information"),
