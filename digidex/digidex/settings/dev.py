@@ -4,8 +4,6 @@ DEBUG = True
 
 INSTALLED_APPS.append("whitenoise.runserver_nostatic")
 
-HOST_SCHEME = 'http'
-
 HOSTNAME = "localhost"
 
 ALLOWED_HOSTS = [
@@ -13,7 +11,7 @@ ALLOWED_HOSTS = [
     f'www.{HOSTNAME}',
 ]
 
-WAGTAILADMIN_BASE_URL = f"{HOST_SCHEME}://{HOSTNAME}"
+WAGTAILADMIN_BASE_URL = f"http://{HOSTNAME}"
 
 STORAGES = {
     'default': {
