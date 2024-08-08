@@ -34,6 +34,11 @@ class NearFieldCommunicationTag(ClusterableModel):
         blank=True,
         related_name='tags'
     )
+    label = models.CharField(
+        max_length=255,
+        blank=True,
+        null=True
+    )
     type = models.CharField(
         max_length=32,
         blank=True,
@@ -55,6 +60,8 @@ class NearFieldCommunicationTag(ClusterableModel):
     )
 
     def __str__(self):
+        if self.label:
+            return f"NFC Tag: {self.label}"
         return f"NFC Tag: {self.serial_number}"
 
     @transaction.atomic
