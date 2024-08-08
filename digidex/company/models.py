@@ -9,7 +9,7 @@ from wagtail.images import get_image_model_string
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 
 
-BaseUser = get_user_model()
+User = get_user_model()
 
 class TeamMemberRole(RevisionMixin, models.Model):
     name = models.CharField(
@@ -38,7 +38,7 @@ class TeamMember(Orderable):
         on_delete=models.CASCADE
     )
     user = models.OneToOneField(
-        BaseUser,
+        User,
         null=True,
         blank=True,
         related_name='team_profile',

@@ -11,8 +11,17 @@ class DigiDexUser(AbstractUser):
         unique=True,
         editable=False,
         db_index=True,
-        verbose_name="User UUID"
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+    last_modified = models.DateTimeField(
+        auto_now=True
     )
 
     def __str__(self):
-        return f"DigiDex User: {self.username}"
+        return f"{self.first_name} {self.last_name} ({self.username})"
+
+    class Meta:
+        verbose_name = _('trainer')
+        verbose_name_plural = _('trainers')

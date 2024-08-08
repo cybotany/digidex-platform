@@ -8,42 +8,13 @@ from django.utils.translation import gettext_lazy as _
 from wagtail.images import get_image_model
 from wagtail.documents import get_document_model
 from wagtail.models import Page, Collection
+from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
-
-
-class Trainer(models.Model):
-    uuid = models.UUIDField(
-        default=uuid.uuid4,
-        unique=True,
-        editable=False,
-        db_index=True
-    )
-    user = models.OneToOneField(
-        get_user_model(),
-        on_delete=models.CASCADE
-    )
-    description = models.TextField(
-        blank=True,
-        null=True,
-    )
-    created_at = models.DateTimeField(
-        auto_now_add=True
-    )
-    last_modified = models.DateTimeField(
-        auto_now=True
-    )
-
-    def __str__(self):
-        return f"{self.user.first_name} {self.user.last_name} ({self.user.username})"
-
-    class Meta:
-        verbose_name = _('trainer')
-        verbose_name_plural = _('trainers')
 
 
 class TrainerIndexPage(Page):
     trainer = models.OneToOneField(
-        Trainer,
+        get_user_model(),
         on_delete=models.SET_NULL,
         null=True,
         related_name='page'
@@ -54,14 +25,19 @@ class TrainerIndexPage(Page):
         null=True,
         related_name='+'
     )
+    description = RichTextField(
+        blank=True,
+        null=True,
+    )
 
     content_panels = Page.content_panels + [
         FieldPanel('trainer'),
         FieldPanel('collection'),
+        FieldPanel('description'),
     ]
 
     def create_slug(self):
-        return slugify(self.trainer.user.username)
+        return slugify(self.trainer.username)
 
     def set_slug(self):
         self.slug = self.create_slug()
@@ -93,7 +69,7 @@ class TrainerIndexPage(Page):
         return get_image_model().objects.filter(collection=self.collection)
 
     def is_owner(self, user):
-        return user == self.trainer.user
+        return user == self.trainer
 
     def save(self, *args, **kwargs):
         if not self.slug:
