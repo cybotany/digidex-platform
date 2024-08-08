@@ -16,7 +16,6 @@ class NearFieldCommunicationTagViewSet(SnippetViewSet):
     list_filter = {
         "label": ["icontains"],
         "type": ["exact"],
-        "form": ["exact"]
     }
 
     panels = [
@@ -24,7 +23,6 @@ class NearFieldCommunicationTagViewSet(SnippetViewSet):
             FieldPanel("owner"),
             FieldPanel("label"),
             FieldPanel("type"),
-            FieldPanel("form"),
         ], heading="NFC Tag Information"),
         InlinePanel("records", label="NFC Tag Records"),
     ]

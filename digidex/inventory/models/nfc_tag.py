@@ -39,15 +39,12 @@ class NearFieldCommunicationTag(ClusterableModel):
         blank=True,
         null=True
     )
-    type = models.CharField(
-        max_length=32,
+    type = models.ForeignKey(
+        'inventory.NearFieldCommunicationTagType',
+        on_delete=models.SET_NULL,
         blank=True,
-        null=True
-    )
-    form = models.CharField(
-        max_length=32,
-        blank=True,
-        null=True
+        null=True,
+        related_name='+'
     )
     active = models.BooleanField(
         default=True
@@ -87,6 +84,28 @@ class NearFieldCommunicationTag(ClusterableModel):
         verbose_name = "near field communication tag"
         verbose_name_plural = "near field communication tags"
 
+
+class NearFieldCommunicationTagType(models.Model):
+    name = models.CharField(
+        max_length=255,
+        unique=True
+    )
+    description = models.TextField(
+        blank=True,
+        null=True
+    )
+    form = models.CharField(
+        max_length=32,
+        blank=True,
+        null=True
+    )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "near field communication tag type"
+        verbose_name_plural = "near field communication tag types"
 
 class NearFieldCommunicationRecord(Orderable):
     tag = ParentalKey(
