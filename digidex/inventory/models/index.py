@@ -10,6 +10,7 @@ class InventoryIndexPage(Page):
         'home.HomePage'
     ]
     child_page_types = [
+        'inventory.TrainerIndexPage',
         'inventory.UserInventoryPage'
     ]
 
