@@ -58,8 +58,6 @@ INSTALLED_APPS = [
     "allauth.account",
 ]
 
-ROOT_URLCONF = "digidex.urls"
-
 MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -71,6 +69,8 @@ MIDDLEWARE = [
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
     "allauth.account.middleware.AccountMiddleware",
 ]
+
+ROOT_URLCONF = "digidex.urls"
 
 TEMPLATES = [
     {
