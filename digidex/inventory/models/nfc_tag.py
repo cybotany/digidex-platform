@@ -4,10 +4,16 @@ from django.db import models, transaction
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
+
+from modelcluster.fields import ParentalKey
+from modelcluster.models import ClusterableModel
+
+from wagtail.models import Orderable
+
 from inventory.validators import validate_serial_number
 
 
-class NearFieldCommunicationTag(models.Model):
+class NearFieldCommunicationTag(ClusterableModel):
     uuid = models.UUIDField(
         default=uuid.uuid4,
         editable=False,
@@ -27,6 +33,16 @@ class NearFieldCommunicationTag(models.Model):
         null=True,
         blank=True,
         related_name='tags'
+    )
+    type = models.CharField(
+        max_length=32,
+        blank=True,
+        null=True
+    )
+    form = models.CharField(
+        max_length=32,
+        blank=True,
+        null=True
     )
     active = models.BooleanField(
         default=True
@@ -53,11 +69,9 @@ class NearFieldCommunicationTag(models.Model):
         self.active = False
         self.save()
 
-    def create_link(self):
-        if hasattr(self, 'link'):
-            raise ValueError("An InventoryLink already exists for this tag.")
-        link = InventoryLink.objects.create(tag=self)
-        return link
+    def create_record(self):
+        record = NearFieldCommunicationRecord.objects.create(tag=self)
+        return record
 
     def get_mapping_url(self):
         return reverse('link-tag', args=[str(self.uuid)])
@@ -67,7 +81,12 @@ class NearFieldCommunicationTag(models.Model):
         verbose_name_plural = "near field communication tags"
 
 
-class InventoryLink(models.Model):
+class NearFieldCommunicationRecord(Orderable):
+    tag = ParentalKey(
+        NearFieldCommunicationTag,
+        on_delete=models.CASCADE,
+        related_name='records'
+    )
     asset = models.OneToOneField(
         'inventory.InventoryAssetPage',
         on_delete=models.SET_NULL,
@@ -75,12 +94,8 @@ class InventoryLink(models.Model):
         null=True,
         related_name='linked_tag'
     )
-    tag = models.OneToOneField(
-        NearFieldCommunicationTag,
-        on_delete=models.CASCADE,
-        related_name='link'
-    )
 
     class Meta:
-        verbose_name = "inventory link"
-        verbose_name_plural = "inventory links"
+        verbose_name = _("near field communication record")
+        verbose_name_plural = _("near field communication records")
+
