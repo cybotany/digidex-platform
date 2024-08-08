@@ -6,14 +6,14 @@ DEBUG = False
 
 INSTALLED_APPS.append("storages")
 
-HOSTNAME = "digidex.tech"
-
 ALLOWED_HOSTS = [
-    HOSTNAME,
-    f'www.{HOSTNAME}',
+    "digidex.tech",
+    "www.digidex.tech",
 ]
 
-WAGTAILADMIN_BASE_URL = f"https://{HOSTNAME}"
+WAGTAIL_SITE_NAME = "DigiDex"
+
+WAGTAILADMIN_BASE_URL = f"https://digidex.tech"
 
 # Common S3 settings
 AWS_ACCESS_KEY_ID = os.getenv("SPACES_ACCESS_KEY")

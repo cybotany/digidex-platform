@@ -4,14 +4,14 @@ DEBUG = True
 
 INSTALLED_APPS.append("whitenoise.runserver_nostatic")
 
-HOSTNAME = "localhost"
-
 ALLOWED_HOSTS = [
-    HOSTNAME,
-    f'www.{HOSTNAME}',
+    'localhost',
+    'www.localhost',
 ]
 
-WAGTAILADMIN_BASE_URL = f"http://{HOSTNAME}"
+WAGTAIL_SITE_NAME = "DigiDex [DEV]"
+
+WAGTAILADMIN_BASE_URL = "http://localhost"
 
 STORAGES = {
     'default': {

@@ -3,6 +3,7 @@ Django settings for digidex project.
 """
 import os
 from datetime import timedelta
+from django.utils.translation import gettext_lazy as _
 
 from dotenv import load_dotenv
 
@@ -133,6 +134,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Internationalization
 LANGUAGE_CODE = "en-us"
 
+LANGUAGES = [
+    ('en', _("English (United Kingdom)")),
+    ('en-us', _("English (United States)")),
+    ('es', _("Spanish (Spain)")),
+    ('es-mx', _("Spanish (Mexico)")),
+]
+
 TIME_ZONE = "UTC"
 
 USE_L10N = True
@@ -228,7 +236,10 @@ else:
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 # Wagtail settings
-WAGTAIL_SITE_NAME = "DigiDex"
+WAGTAIL_CONTENT_LANGUAGES = [
+    ('en', _("English")),
+    ('es', _("Spanish")),
+]
 
 WAGTAILIMAGES_IMAGE_MODEL = 'base.BaseImage'
 
@@ -239,3 +250,11 @@ WAGTAILSEARCH_BACKENDS = {
         "BACKEND": "wagtail.search.backends.database",
     }
 }
+
+WAGTAIL_ALLOW_UNICODE_SLUGS = False
+
+WAGTAIL_PASSWORD_REQUIRED_TEMPLATE = 'digidex/password_required.html'
+
+TAGGIT_CASE_INSENSITIVE = True
+
+TAG_SPACES_ALLOWED = False
