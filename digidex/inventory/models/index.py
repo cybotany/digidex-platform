@@ -11,7 +11,7 @@ class InventoryIndexPage(Page):
     ]
     child_page_types = [
         'inventory.TrainerIndexPage',
-        'inventory.UserInventoryPage'
+        'inventory.TrainerInventoryPage'
     ]
 
     collection = models.ForeignKey(

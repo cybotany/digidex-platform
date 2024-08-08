@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.http import require_http_methods
 
-from inventory.models import NearFieldCommunicationTag, UserInventoryPage
+from inventory.models import NearFieldCommunicationTag, TrainerInventoryPage
 from inventory.forms import NearFieldCommunicationTagForm as nfc_tag_form 
 
 @require_http_methods(["GET"])
@@ -47,7 +47,7 @@ def manage(request, uuid):
         messages.error(request, _('Tag improperly configured.'))
         return redirect(base_url)
 
-    user_inventory = get_object_or_404(UserInventoryPage, owner=request.user)
+    user_inventory = get_object_or_404(TrainerInventoryPage, owner=request.user)
 
     if request.method == "POST":
         form = nfc_tag_form(request.POST, instance=nfc_tag.link, user_inventory=user_inventory)

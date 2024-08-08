@@ -3,6 +3,7 @@ import uuid
 from django.db import models, transaction
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect
+from django.contrib.auth import get_user_model
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
@@ -10,9 +11,11 @@ from wagtail.contrib.routable_page.models import RoutablePageMixin, path
 from wagtail.images import get_image_model
 from wagtail.documents import get_document_model
 from wagtail.models import Page, Collection
+from wagtail.fields import RichTextField
+from wagtail.admin.panels import FieldPanel
 
 
-class UserInventoryPage(RoutablePageMixin, Page):
+class TrainerInventoryPage(RoutablePageMixin, Page):
     parent_page_types = [
         'inventory.InventoryIndexPage'
     ]
@@ -20,25 +23,28 @@ class UserInventoryPage(RoutablePageMixin, Page):
         'inventory.InventoryAssetPage'
     ]
 
-    uuid = models.UUIDField(
-        default=uuid.uuid4,
-        unique=True,
-        editable=False,
-        db_index=True
+    trainer = models.OneToOneField(
+        get_user_model(),
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='page'
     )
-    collection = models.ForeignKey(
+    collection = models.OneToOneField(
         Collection,
         on_delete=models.SET_NULL,
         null=True,
-        related_name='+',
+        related_name='+'
     )
-    description = models.TextField(
+    description = RichTextField(
         blank=True,
         null=True,
     )
-    created_at = models.DateTimeField(
-        auto_now_add=True
-    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel('trainer'),
+        FieldPanel('collection'),
+        FieldPanel('description'),
+    ]
 
     def get_context(self, request):
         context = super().get_context(request)
@@ -49,9 +55,7 @@ class UserInventoryPage(RoutablePageMixin, Page):
         return context
 
     def create_slug(self):
-        if self.owner:
-            return slugify(self.owner.username)
-        return slugify(self.title)
+        return slugify(self.trainer.username)
 
     def set_slug(self):
         self.slug = self.create_slug()
@@ -60,24 +64,21 @@ class UserInventoryPage(RoutablePageMixin, Page):
         parent = Collection.get_first_root_node()
         parent_children = parent.get_children()
         try:
-            collection = parent_children.get(name='Inventory')
+            collection = parent_children.get(name='Trainers')
         except Collection.DoesNotExist:
-            collection = parent.add_child(name="Inventory")
-        return collection
-
-    def create_collection(self):
-        parent = self.get_parent_collection()
-        uuid = str(self.uuid)
-        children = parent.get_children()
-        try:
-            collection = children.get(name=uuid)
-        except Collection.DoesNotExist:
-            collection = parent.add_child(name=uuid)
+            collection = parent.add_child(name="Trainers")
         return collection
 
     @transaction.atomic
-    def set_collection(self):
-        self.collection = self.create_collection()
+    def create_collection(self):
+        parent = self.get_parent_collection()
+        uuid = str(self.trainer.uuid)
+        children = parent.get_children()
+        try:
+            trainer_collection = children.get(name=uuid)
+        except Collection.DoesNotExist:
+            trainer_collection = parent.add_child(name=uuid)
+        return trainer_collection
 
     def get_documents(self):
         return get_document_model().objects.filter(collection=self.collection)
@@ -93,7 +94,7 @@ class UserInventoryPage(RoutablePageMixin, Page):
         return None
 
     def is_owner(self, user):
-        return user == self.owner
+        return user == self.trainer
 
     def get_page_urls(self):
         return {
@@ -139,15 +140,15 @@ class UserInventoryPage(RoutablePageMixin, Page):
         if request.user != self.owner:
             raise PermissionDenied
 
-        from inventory.forms import UserInventoryForm
+        from inventory.forms import TrainerInventoryForm
         if request.method == "POST":
-            form = UserInventoryForm(request.POST)
+            form = TrainerInventoryForm(request.POST)
             if form.is_valid():
                 self.description = form.cleaned_data['description']
                 self.save()
                 return redirect(self.url)
         else:
-            form = UserInventoryForm(initial={'description': self.description})
+            form = TrainerInventoryForm(initial={'description': self.description})
         
         return self.render(
             request,
@@ -159,11 +160,13 @@ class UserInventoryPage(RoutablePageMixin, Page):
         if not self.slug:
             self.set_slug()
         if not self.collection:
-            self.set_collection()
+            self.collection = self.create_collection()
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.title
+        return f"{self.trainer.__str__()}'s page"
 
     class Meta:
-        verbose_name = _('user inventory')
+        verbose_name = _('trainer page')
+        verbose_name_plural = _('trainer pages')
+

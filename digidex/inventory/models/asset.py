@@ -17,7 +17,7 @@ from wagtail.contrib.routable_page.models import RoutablePageMixin, path
 class InventoryAssetPage(RoutablePageMixin, Page):
     RESERVED_KEYWORDS = ['add', 'edit', 'delete', 'admin']
 
-    parent_page_types = ['inventory.UserInventoryPage']
+    parent_page_types = ['inventory.TrainerInventoryPage']
     child_page_types = []
 
     uuid = models.UUIDField(

@@ -1,11 +1,11 @@
 from django import forms
 
-from inventory.models import UserInventoryPage
+from inventory.models import TrainerInventoryPage
 
 
-class UserInventoryForm(forms.ModelForm):
+class TrainerInventoryForm(forms.ModelForm):
     class Meta:
-        model = UserInventoryPage
+        model = TrainerInventoryPage
         fields = ['description']
         widgets = {
             'description': forms.TextInput(
