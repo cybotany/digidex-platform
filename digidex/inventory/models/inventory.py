@@ -35,15 +35,10 @@ class TrainerInventoryPage(RoutablePageMixin, Page):
         null=True,
         related_name='+'
     )
-    description = RichTextField(
-        blank=True,
-        null=True,
-    )
 
     content_panels = Page.content_panels + [
         FieldPanel('trainer'),
         FieldPanel('collection'),
-        FieldPanel('description'),
     ]
 
     def get_context(self, request):
@@ -100,7 +95,6 @@ class TrainerInventoryPage(RoutablePageMixin, Page):
         return {
             'detail': self.url,
             'add': self.reverse_subpage('add'),
-            'edit': self.reverse_subpage('edit'),
         }
 
     @path('add/', name='add')
@@ -132,27 +126,6 @@ class TrainerInventoryPage(RoutablePageMixin, Page):
         return self.render(
             request,
             template='inventory/includes/add_asset.html',
-            context_overrides={'form': form}
-        )
-
-    @path('edit/', name='edit')
-    def edit_inventory(self, request):
-        if request.user != self.owner:
-            raise PermissionDenied
-
-        from inventory.forms import TrainerInventoryForm
-        if request.method == "POST":
-            form = TrainerInventoryForm(request.POST)
-            if form.is_valid():
-                self.description = form.cleaned_data['description']
-                self.save()
-                return redirect(self.url)
-        else:
-            form = TrainerInventoryForm(initial={'description': self.description})
-        
-        return self.render(
-            request,
-            template='inventory/includes/edit_inventory.html',
             context_overrides={'form': form}
         )
 

@@ -1,6 +1,5 @@
 from django.forms import Form, BooleanField, CheckboxInput
 
-from .inventory import TrainerInventoryForm
 from .asset import InventoryAssetForm
 from .nfc_tag import NearFieldCommunicationTagForm
 

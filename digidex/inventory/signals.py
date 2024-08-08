@@ -35,10 +35,9 @@ def new_user_setup(sender, instance, created, **kwargs):
         # Fetch all necessary permissions once
         permissions = Permission.objects.filter(
             Q(codename__in=[
-                'add_trainerinventorypage', 'change_trainerinventorypage', 'delete_trainerinventorypage', 'publish_trainerinventorypage',
+                'add_trainerinventorypage', 'publish_trainerinventorypage',
                 'add_document', 'change_document', 'choose_document',
                 'add_image', 'change_image', 'choose_image',
-                'add_collection', 'change_collection', 'delete_collection'
             ]) |
             Q(name='Can access Wagtail admin')
         )
