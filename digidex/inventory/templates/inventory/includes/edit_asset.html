@@ -24,16 +24,8 @@
         <div class="text-error">{{ form.description.errors|striptags }}</div>
       </div>
     {% endif %}
-  
-    <label for="{{ form.species.id_for_label }}">Species Name:</label>
-    {{ form.species }}
-    {% if form.species.errors %}
-      <div class="error-message">
-        <div class="text-error">{{ form.species.errors|striptags }}</div>
-      </div>
-    {% endif %}
 
-    <select id="species-select" name="species" style="width: 300px;">
+    <select id="species-select" name="species" class="text-field w-input">
     </select>
   
     {{ form.taxon_id }}
@@ -56,5 +48,5 @@
 {% endblock content %}
 
 {% block extra_body %}
-  <script>src="{% static 'inventory/js/species-autocomplete.js' %}"</script>
+  <script src="{% static 'inventory/js/species-autocomplete.js' %}"></script>
 {% endblock extra_body %}

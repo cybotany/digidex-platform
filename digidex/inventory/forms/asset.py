@@ -8,11 +8,6 @@ class InventoryAssetForm(forms.ModelForm):
         widget=forms.HiddenInput(),
         required=False
     )
-    species = forms.CharField(
-        max_length=255,
-        required=False,
-        label='Species'
-    )
     decouple_nfc_tag = forms.BooleanField(
         required=False,
         label="Decouple NFC TAG"
@@ -20,7 +15,7 @@ class InventoryAssetForm(forms.ModelForm):
 
     class Meta:
         model = InventoryAssetPage
-        fields = ['name', 'description', 'species', 'taxon_id']
+        fields = ['name', 'description', 'taxon_id']
         widgets = {
             'name': forms.TextInput(
                 attrs={

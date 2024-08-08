@@ -8,8 +8,7 @@ def species_name_suggestion(request):
     if query:
         results = GBIFSpecies.name_suggest(q=query, limit=20)
         suggestions = [
-            {'id': result['key'], 'text': result['scientificName']}
-            for result in results
+            {'id': result['key'], 'text': result['scientificName']} for result in results
         ]
     else:
         suggestions = []
