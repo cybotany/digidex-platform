@@ -27,44 +27,25 @@ def new_user_setup(sender, instance, created, **kwargs):
         trainer_uuid = instance.uuid
         trainer_group = Group.objects.create(name=str(trainer_uuid))
 
-        # Assign page permissions to the group
+        # Create a group for the trainer
+        trainer_uuid = instance.uuid
+        trainer_group = Group.objects.create(name=str(trainer_uuid))
+
+        # Fetch all necessary permissions once
         permissions = Permission.objects.filter(
             codename__in=[
-                'add_trainerinventorypage',
-                'change_trainerinventorypage',
-                'delete_trainerinventorypage',
-                'publish_trainerinventorypage'
+                'add_trainerinventorypage', 'change_trainerinventorypage', 'delete_trainerinventorypage', 'publish_trainerinventorypage',
+                'add_document', 'change_document', 'choose_document',
+                'add_image', 'change_image', 'choose_image',
+                'add_collection', 'change_collection', 'delete_collection'
             ]
         )
-        for permission in permissions:
-            trainer_group.permissions.add(permission)
 
-        # Assign document and image permissions to the group
-        permissions = Permission.objects.filter(
-            codename__in=[
-                'add_document',
-                'change_document',
-                'choose_document',
-                'add_image',
-                'change_image',
-                'choose_image'
-            ]
-        )
-        for permission in permissions:
-            trainer_group.permissions.add(permission)
+        # Assign permissions to the group
+        trainer_group.permissions.add(*permissions)
 
-        # Assign collection management permissions to the group
-        permissions = Permission.objects.filter(
-            codename__in=[
-                'add_collection',
-                'change_collection',
-                'delete_collection'
-            ]
-        )
-        for permission in permissions:
-            trainer_group.permissions.add(permission)
-
-        # Assign the trainer to their group
+        # Save the group and assign the trainer to their group
+        trainer_group.save()
         instance.groups.add(trainer_group)
 
 
