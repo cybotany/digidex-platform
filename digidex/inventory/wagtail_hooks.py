@@ -10,8 +10,7 @@ class NearFieldCommunicationTagViewSet(SnippetViewSet):
     menu_label = "NFC Tags"
     menu_name = "ntags"
     menu_order = 300
-    url_namespace = "ntag_views"
-    url_prefix = "ntags"
+    name = "nfc-tags"
     add_to_admin_menu = True
     list_filter = {
         "label": ["icontains"],
