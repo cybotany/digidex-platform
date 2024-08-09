@@ -36,5 +36,7 @@ def link(request, uuid):
         messages.error(request, _('Tag registered by another user.'))
         return redirect(base_url)
 
-    url = reverse('wagtailsnippets_inventory_ntags:edit', args=[nfc_tag.id])
+    viewset = nfc_tag.snippet_viewset
+    url_name = viewset.get_url_name('edit')
+    url = reverse(url_name, args=[nfc_tag.id])
     return redirect(url)

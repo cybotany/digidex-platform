@@ -1,8 +1,10 @@
 from wagtail.snippets.models import register_snippet
+from django.utils.translation import gettext_lazy as _
 from wagtail.snippets.views.snippets import SnippetViewSet
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel
 
 from inventory.models import NearFieldCommunicationTag
+
 
 class NearFieldCommunicationTagViewSet(SnippetViewSet):
     model = NearFieldCommunicationTag
@@ -34,6 +36,5 @@ class NearFieldCommunicationTagViewSet(SnippetViewSet):
         if qs is None:
             qs = self.model.objects.all()
         return qs.filter(owner=request.user)
-
 
 register_snippet(NearFieldCommunicationTagViewSet)
