@@ -5,15 +5,10 @@ from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
 
-from modelcluster.fields import ParentalKey
-from modelcluster.models import ClusterableModel
-
-from wagtail.models import Orderable
-
 from inventory.validators import validate_serial_number
 
 
-class NearFieldCommunicationTag(ClusterableModel):
+class NearFieldCommunicationTag(models.Model):
     uuid = models.UUIDField(
         default=uuid.uuid4,
         editable=False,
@@ -73,9 +68,9 @@ class NearFieldCommunicationTag(ClusterableModel):
         self.active = False
         self.save()
 
-    def create_record(self):
-        record = NearFieldCommunicationRecord.objects.create(tag=self)
-        return record
+    def create_link(self):
+        link = NearFieldCommunicationLink.objects.create(tag=self)
+        return link
 
     def get_mapping_url(self):
         return reverse('link-tag', args=[str(self.uuid)])
@@ -107,11 +102,11 @@ class NearFieldCommunicationTagType(models.Model):
         verbose_name = "near field communication tag type"
         verbose_name_plural = "near field communication tag types"
 
-class NearFieldCommunicationRecord(Orderable):
-    tag = ParentalKey(
+class NearFieldCommunicationLink(models.Model):
+    tag = models.OneToOneField(
         NearFieldCommunicationTag,
         on_delete=models.CASCADE,
-        related_name='records'
+        related_name='link'
     )
     asset = models.OneToOneField(
         'inventory.InventoryAssetPage',
@@ -122,6 +117,6 @@ class NearFieldCommunicationRecord(Orderable):
     )
 
     class Meta:
-        verbose_name = _("near field communication record")
-        verbose_name_plural = _("near field communication records")
+        verbose_name = _("near field communication link")
+        verbose_name_plural = _("near field communication links")
 

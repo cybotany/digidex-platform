@@ -18,19 +18,19 @@ def link(request, uuid):
     """
 
     nfc_tag = get_object_or_404(
-        NearFieldCommunicationTag.objects.prefetch_related('records__asset'),
+        NearFieldCommunicationTag.objects.select_related('link__asset'),
         uuid=uuid
     )
 
-    nfc_record = nfc_tag.records.first()
-    if nfc_record and nfc_record.asset:
-        return redirect(nfc_record.asset.url)
+    if nfc_tag.link and nfc_tag.link.asset:
+        return redirect(nfc_tag.link.asset.url)
     return redirect(reverse('manage-tag', args=[str(uuid)]))
+
 
 @login_required
 def manage(request, uuid):
     nfc_tag = get_object_or_404(
-        NearFieldCommunicationTag.objects.select_related('owner').prefetch_related('records'),
+        NearFieldCommunicationTag.objects.select_related('owner', 'link'),
         uuid=uuid
     )
 
@@ -43,21 +43,19 @@ def manage(request, uuid):
         messages.error(request, _('Tag registered by another user.'))
         return redirect(base_url)
 
-    if not nfc_tag.records.exists():
+    if not hasattr(nfc_tag, 'link'):
         messages.error(request, _('Tag improperly configured.'))
         return redirect(base_url)
 
     user_inventory = get_object_or_404(TrainerInventoryPage, owner=request.user)
 
     if request.method == "POST":
-        nfc_record = nfc_tag.records.first()
-        form = nfc_tag_form(request.POST, instance=nfc_record, user_inventory=user_inventory)
+        form = nfc_tag_form(request.POST, instance=nfc_tag.link, user_inventory=user_inventory)
         if form.is_valid():
             form.save()
             messages.success(request, _('Tag successfully linked.'))
             return redirect(user_inventory.url)
     else:
-        nfc_record = nfc_tag.records.first()
-        form = nfc_tag_form(instance=nfc_record, user_inventory=user_inventory)
+        form = nfc_tag_form(instance=nfc_tag.link, user_inventory=user_inventory)
 
     return render(request, 'inventory/includes/manage_nfc_tag.html', {'form': form})

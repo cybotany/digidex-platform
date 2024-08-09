@@ -1,6 +1,6 @@
 from django import forms
 
-from inventory.models import InventoryAssetPage, NearFieldCommunicationRecord
+from inventory.models import InventoryAssetPage, NearFieldCommunicationLink
 
 
 class InventoryAssetForm(forms.ModelForm):
@@ -49,7 +49,7 @@ class InventoryAssetForm(forms.ModelForm):
                 link = instance.linked_tag
                 link.asset = None
                 link.save()
-            except NearFieldCommunicationRecord.DoesNotExist:
+            except NearFieldCommunicationLink.DoesNotExist:
                 pass
 
         if commit:

@@ -24,7 +24,6 @@ class NearFieldCommunicationTagViewSet(SnippetViewSet):
             FieldPanel("label"),
             FieldPanel("type"),
         ], heading="NFC Tag Information"),
-        InlinePanel("records", label="NFC Tag Records"),
     ]
 
     def get_queryset(self, request):
