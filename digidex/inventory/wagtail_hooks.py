@@ -1,18 +1,14 @@
 from wagtail.snippets.models import register_snippet
-from wagtail.snippets.views.snippets import SnippetViewSet
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel
+from wagtail.snippets.views.snippets import SnippetViewSet, SnippetViewSetGroup
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 
-from inventory.models import NearFieldCommunicationTag
+from inventory.models import NearFieldCommunicationTag, NearFieldCommunicationLink
 
 class NearFieldCommunicationTagViewSet(SnippetViewSet):
     model = NearFieldCommunicationTag
     icon = "tag"
     menu_label = "NFC Tags"
-    menu_name = "ntags"
-    menu_order = 300
-    url_namespace = "ntag_views"
-    url_prefix = "ntags"
-    add_to_admin_menu = True
+    menu_name = "nfc-tags"
     list_filter = {
         "label": ["icontains"],
         "type": ["exact"],
@@ -36,4 +32,22 @@ class NearFieldCommunicationTagViewSet(SnippetViewSet):
         return qs.filter(owner=request.user)
 
 
-register_snippet(NearFieldCommunicationTagViewSet)
+class NearFieldCommunicationLinkViewSet(SnippetViewSet):
+    model = NearFieldCommunicationLink
+    icon = "link"
+    menu_label = "NFC Tag Links"
+    menu_name = "nfc-links"
+
+    panels = [
+        FieldPanel("asset"),
+    ]
+
+
+class NearFieldCommunicationViewSetGroup(SnippetViewSetGroup):
+    items = (NearFieldCommunicationTagViewSet, NearFieldCommunicationLinkViewSet)
+    menu_icon = "table"
+    menu_label = "NFC"
+    menu_name = "nfc"
+
+
+register_snippet(NearFieldCommunicationViewSetGroup)
