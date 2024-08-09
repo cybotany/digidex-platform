@@ -1,6 +1,6 @@
 from wagtail.snippets.models import register_snippet
 from wagtail.snippets.views.snippets import SnippetViewSet
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel
 
 from inventory.models import NearFieldCommunicationTag
 
@@ -8,7 +8,11 @@ class NearFieldCommunicationTagViewSet(SnippetViewSet):
     model = NearFieldCommunicationTag
     icon = "tag"
     menu_label = "NFC Tags"
-    menu_name = "nfc-tags"
+    menu_name = "ntags"
+    menu_order = 300
+    url_namespace = "ntag_views"
+    url_prefix = "ntags"
+    add_to_admin_menu = True
     list_filter = {
         "label": ["icontains"],
         "type": ["exact"],
@@ -20,6 +24,7 @@ class NearFieldCommunicationTagViewSet(SnippetViewSet):
             FieldPanel("label"),
             FieldPanel("type"),
         ], heading="NFC Tag Information"),
+        InlinePanel("records", label="NFC Tag Records", min_num=0, max_num=1),
     ]
 
     def get_queryset(self, request):
