@@ -1,8 +1,8 @@
 from wagtail.snippets.models import register_snippet
-from wagtail.snippets.views.snippets import SnippetViewSet, SnippetViewSetGroup
+from wagtail.snippets.views.snippets import SnippetViewSet
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 
-from inventory.models import NearFieldCommunicationTag, NearFieldCommunicationLink
+from inventory.models import NearFieldCommunicationTag
 
 class NearFieldCommunicationTagViewSet(SnippetViewSet):
     model = NearFieldCommunicationTag
@@ -32,22 +32,4 @@ class NearFieldCommunicationTagViewSet(SnippetViewSet):
         return qs.filter(owner=request.user)
 
 
-class NearFieldCommunicationLinkViewSet(SnippetViewSet):
-    model = NearFieldCommunicationLink
-    icon = "link"
-    menu_label = "NFC Tag Links"
-    menu_name = "nfc-links"
-
-    panels = [
-        FieldPanel("asset"),
-    ]
-
-
-class NearFieldCommunicationViewSetGroup(SnippetViewSetGroup):
-    items = (NearFieldCommunicationTagViewSet, NearFieldCommunicationLinkViewSet)
-    menu_icon = "table"
-    menu_label = "NFC"
-    menu_name = "nfc"
-
-
-register_snippet(NearFieldCommunicationViewSetGroup)
+register_snippet(NearFieldCommunicationTagViewSet)

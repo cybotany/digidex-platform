@@ -51,6 +51,6 @@ def new_user_setup(sender, instance, created, **kwargs):
 
 
 @receiver(post_save, sender=NearFieldCommunicationTag)
-def create_initial_nfc_tag_link(sender, instance, created, **kwargs):
+def create_initial_nfc_tag_record(sender, instance, created, **kwargs):
     if created:
-        instance.create_link()
+        instance.create_record()

@@ -1,12 +1,12 @@
 from django import forms
 
-from inventory.models import InventoryAssetPage, NearFieldCommunicationLink
+from inventory.models import InventoryAssetPage, NearFieldCommunicationRecord
 
 
 class NearFieldCommunicationTagForm(forms.ModelForm):
 
     class Meta:
-        model = NearFieldCommunicationLink
+        model = NearFieldCommunicationRecord
         fields = ['asset']
 
     def __init__(self, *args, **kwargs):
@@ -14,7 +14,7 @@ class NearFieldCommunicationTagForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         
         if user_inventory:
-            linked_assets = NearFieldCommunicationLink.objects.filter(asset__isnull=False).values_list('asset_id', flat=True)
+            linked_assets = NearFieldCommunicationRecord.objects.filter(asset__isnull=False).values_list('asset_id', flat=True)
             self.fields['asset'].queryset = InventoryAssetPage.objects.child_of(user_inventory).exclude(id__in=linked_assets)
 
     def save(self, commit=True):
